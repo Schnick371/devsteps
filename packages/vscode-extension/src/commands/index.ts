@@ -11,12 +11,29 @@ import { DashboardPanel } from '../webview/dashboardPanel.js';
 import { logger } from '../outputChannel.js';
 
 /**
+ * Check if DevCrumbs is initialized in workspace
+ */
+function checkDevCrumbsInitialized(treeDataProvider: DevCrumbsTreeDataProvider | null): boolean {
+  if (!treeDataProvider) {
+    logger.warn('Command invoked but DevCrumbs not initialized (treeDataProvider is null)');
+    vscode.window.showWarningMessage(
+      'DevCrumbs not initialized. Please run "DevCrumbs: Initialize Project" first.'
+    );
+    return false;
+  }
+  return true;
+}
+
+/**
  * Register all extension commands
  */
 export function registerCommands(
   context: vscode.ExtensionContext,
-  treeDataProvider: DevCrumbsTreeDataProvider,
+  treeDataProvider: DevCrumbsTreeDataProvider | null,
 ): void {
+  const initialSubscriptionsCount = context.subscriptions.length;
+  logger.info(`Registering commands (treeDataProvider: ${treeDataProvider ? 'initialized' : 'null'})...`);
+  
   // Show Dashboard
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.showDashboard', () => {
@@ -27,6 +44,7 @@ export function registerCommands(
   // Refresh work items
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.refreshItems', () => {
+      if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.refresh();
       vscode.window.showInformationMessage('DevCrumbs work items refreshed');
     }),
@@ -35,21 +53,28 @@ export function registerCommands(
   // View mode switching
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.viewMode.flat', () => {
+      logger.debug('Command: devcrumbs.viewMode.flat invoked');
+      if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setViewMode('flat');
       vscode.window.showInformationMessage('Switched to Flat View');
+      logger.info('View mode switched to flat');
     }),
   );
 
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.viewMode.hierarchical', () => {
+      logger.debug('Command: devcrumbs.viewMode.hierarchical invoked');
+      if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setViewMode('hierarchical');
       vscode.window.showInformationMessage('Switched to Hierarchical View');
+      logger.info('View mode switched to hierarchical');
     }),
   );
 
   // Hierarchy type switching
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.hierarchy.scrum', () => {
+      if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('scrum');
       vscode.window.showInformationMessage('Showing Scrum Hierarchy');
     }),
@@ -57,6 +82,7 @@ export function registerCommands(
 
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.hierarchy.waterfall', () => {
+      if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('waterfall');
       vscode.window.showInformationMessage('Showing Waterfall Hierarchy');
     }),
@@ -64,6 +90,7 @@ export function registerCommands(
 
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.hierarchy.both', () => {
+      if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('both');
       vscode.window.showInformationMessage('Showing Both Hierarchies');
     }),
@@ -147,7 +174,9 @@ export function registerCommands(
           priority: priority.value as any,
         });
 
-        treeDataProvider.refresh();
+        if (treeDataProvider) {
+          treeDataProvider.refresh();
+        }
         vscode.window.showInformationMessage(`✅ Created ${itemType.label}: ${title}`);
         
         // Optionally open the created item
@@ -661,7 +690,9 @@ ${Object.entries(byType)
         if (Object.keys(updatePayload).length > 1) {
           const devcrumbsPath = path.join(workspaceFolder.uri.fsPath, '.devcrumbs');
           await updateItem(devcrumbsPath, updatePayload);
-          treeDataProvider.refresh();
+          if (treeDataProvider) {
+            treeDataProvider.refresh();
+          }
           vscode.window.showInformationMessage(`✅ Updated ${itemId}`);
         }
       } catch (error) {
@@ -693,6 +724,7 @@ ${Object.entries(byType)
       );
 
       if (selected) {
+        if (!checkDevCrumbsInitialized(treeDataProvider)) return;
         treeDataProvider.setStatusFilter(selected.map((s) => s.value));
         vscode.window.showInformationMessage(`Filtered by status: ${selected.map((s) => s.label).join(', ')}`);
       }
@@ -716,6 +748,7 @@ ${Object.entries(byType)
       );
 
       if (selected) {
+        if (!checkDevCrumbsInitialized(treeDataProvider)) return;
         treeDataProvider.setPriorityFilter(selected.map((s) => s.value));
         vscode.window.showInformationMessage(`Filtered by priority: ${selected.map((s) => s.label).join(', ')}`);
       }
@@ -743,6 +776,7 @@ ${Object.entries(byType)
       );
 
       if (selected) {
+        if (!checkDevCrumbsInitialized(treeDataProvider)) return;
         treeDataProvider.setTypeFilter(selected.map((s) => s.value));
         vscode.window.showInformationMessage(`Filtered by type: ${selected.map((s) => s.label).join(', ')}`);
       }
@@ -752,6 +786,7 @@ ${Object.entries(byType)
   // Clear all filters
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.clearFilters', () => {
+      if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.clearFilters();
       vscode.window.showInformationMessage('✨ All filters cleared');
     }),
@@ -760,8 +795,11 @@ ${Object.entries(byType)
   // Toggle Hide Done Items
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.toggleHideDone', () => {
+      logger.debug('Command: devcrumbs.toggleHideDone invoked');
+      if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.toggleHideDone();
       const isHidden = treeDataProvider.getHideDoneState();
+      logger.info(`Hide done toggled: ${isHidden ? 'hidden' : 'visible'}`);
       vscode.window.showInformationMessage(
         isHidden ? '👁️ Completed items hidden' : '👁️ Completed items visible'
       );
@@ -799,6 +837,7 @@ ${Object.entries(byType)
 
       if (!sortOrder) return;
 
+      if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setSortOptions(
         sortBy.value as any,
         sortOrder.value as 'asc' | 'desc',
@@ -819,4 +858,7 @@ ${Object.entries(byType)
       logger.clear();
     }),
   );
+  
+  const commandsRegistered = context.subscriptions.length - initialSubscriptionsCount;
+  logger.info(`✓ Successfully registered ${commandsRegistered} commands`);
 }
