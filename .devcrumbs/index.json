@@ -3,8 +3,8 @@
   "counters": {
     "epic": 4,
     "story": 4,
-    "task": 33,
-    "bug": 6,
+    "task": 35,
+    "bug": 7,
     "spike": 2,
     "feature": 4,
     "requirement": 1
@@ -490,15 +490,39 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-11-24T12:59:41.113Z"
+    },
+    {
+      "id": "TASK-034",
+      "type": "task",
+      "title": "TreeView: Add description badge for filter count (X/Y)",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T13:02:04.397Z"
+    },
+    {
+      "id": "TASK-035",
+      "type": "task",
+      "title": "Toolbar: Redesign with primary + hover buttons pattern",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T13:02:36.765Z"
+    },
+    {
+      "id": "BUG-007",
+      "type": "bug",
+      "title": "Fix: Flat view expanded state resets on filter toggle",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T13:03:10.806Z"
     }
   ],
   "stats": {
-    "total": 54,
+    "total": 57,
     "by_type": {
       "epic": 4,
       "story": 4,
-      "task": 33,
-      "bug": 6,
+      "task": 35,
+      "bug": 7,
       "spike": 2,
       "feature": 4,
       "requirement": 1
@@ -506,10 +530,10 @@
     "by_status": {
       "in-progress": 3,
       "done": 41,
-      "draft": 9,
+      "draft": 12,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T12:59:41.113Z"
+  "last_updated": "2025-11-24T13:03:10.806Z"
 }

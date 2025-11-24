@@ -1,31 +1,27 @@
 {
   "id": "TASK-035",
   "type": "task",
-  "category": "vscode",
-  "title": "Reorganize view toolbar - Move view mode buttons to submenu",
-  "status": "done",
-  "priority": "medium",
-  "eisenhower": "not-urgent-important",
-  "created": "2025-11-24T10:53:47.169Z",
-  "updated": "2025-11-24T11:14:31.717Z",
+  "category": "VS Code Extension",
+  "title": "Toolbar: Redesign with primary + hover buttons pattern",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-24T13:02:36.765Z",
+  "updated": "2025-11-24T13:02:36.765Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
-    "packages/vscode-extension/package.json"
+    "packages/vscode-extension/package.json",
+    "packages/vscode-extension/src/commands/index.ts",
+    "packages/vscode-extension/src/treeView/devcrumbsTreeDataProvider.ts"
   ],
   "linked_items": {
-    "implements": [
-      "STORY-004"
-    ],
+    "implements": [],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [
-      "TASK-002",
-      "TASK-010",
-      "TASK-031"
-    ],
+    "relates-to": [],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
@@ -34,8 +30,9 @@
   "tags": [
     "ux",
     "toolbar",
-    "submenu",
-    "view-organization"
+    "hover",
+    "redesign",
+    "buttons"
   ],
   "commits": [],
   "metadata": {}

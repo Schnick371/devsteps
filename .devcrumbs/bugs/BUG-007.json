@@ -1,16 +1,15 @@
 {
-  "id": "TASK-034",
-  "type": "task",
+  "id": "BUG-007",
+  "type": "bug",
   "category": "VS Code Extension",
-  "title": "TreeView: Add description badge for filter count (X/Y)",
+  "title": "Fix: Flat view expanded state resets on filter toggle",
   "status": "draft",
   "priority": "high",
   "eisenhower": "urgent-important",
-  "created": "2025-11-24T13:02:04.397Z",
-  "updated": "2025-11-24T13:02:04.397Z",
+  "created": "2025-11-24T13:03:10.806Z",
+  "updated": "2025-11-24T13:03:10.806Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
-    "packages/vscode-extension/src/extension.ts",
     "packages/vscode-extension/src/treeView/devcrumbsTreeDataProvider.ts"
   ],
   "linked_items": {
@@ -27,11 +26,12 @@
     "superseded-by": []
   },
   "tags": [
-    "ux",
-    "treeview",
-    "filter",
-    "visibility",
-    "badge"
+    "bug",
+    "flat-view",
+    "state",
+    "expand",
+    "collapse",
+    "ux"
   ],
   "commits": [],
   "metadata": {}

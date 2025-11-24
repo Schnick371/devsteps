@@ -1,286 +1,138 @@
-# Add User Setting for Work Item Editor Open Behavior
+# TreeView Description Badge for Filter Count
 
-## Overview
-Enhance TASK-033's preview editor implementation by adding a **user-configurable setting** that controls how work items open when clicked in TreeView, dashboard, or search results.
+## Problem
+Users cannot see if filters are active or how many items are currently visible. No visual feedback when toggling "Hide Done" or applying other filters.
 
-## Current State (TASK-033)
-Currently hardcoded to `preview: true` (temporary tab):
+**Current:** No indication of active filters
+**Desired:** Badge showing `(12/47)` = "12 filtered / 47 total"
+
+## Solution: TreeView.description API
+
+VS Code TreeView API provides `description` property to show badges next to view title.
+
+### Implementation
+
+**1. Create TreeView instance (not just register provider):**
 ```typescript
-// packages/vscode-extension/src/commands/index.ts:218
-await vscode.window.showTextDocument(doc, {
-  preview: true,  // ← Hardcoded
-  viewColumn: vscode.ViewColumn.One,
+// In extension.ts activate()
+const treeView = vscode.window.createTreeView('devcrumbs.itemsView', {
+  treeDataProvider: treeDataProvider
 });
+
+// Pass treeView to provider
+treeDataProvider.setTreeView(treeView);
 ```
 
-## Desired State
-User-configurable setting with three options:
-1. **Markdown Preview** - Rendered markdown (read-only)
-2. **Preview Editor** - Editable markdown, temporary tab (DEFAULT)
-3. **Permanent Editor** - Editable markdown, permanent tab
+**2. Update description on filter changes:**
+```typescript
+// In DevCrumbsTreeDataProvider
+private treeView?: vscode.TreeView<TreeNode>;
 
-## Implementation Plan
+setTreeView(treeView: vscode.TreeView<TreeNode>): void {
+  this.treeView = treeView;
+  this.updateDescription();
+}
 
-### 1. Add Configuration to package.json
-
-Add to `contributes.configuration.properties`:
-
-```json
-{
-  "devcrumbs.workItems.openBehavior": {
-    "type": "string",
-    "enum": ["markdown-preview", "preview", "permanent"],
-    "enumDescriptions": [
-      "Open as rendered Markdown preview (read-only, best for reading)",
-      "Open as temporary editor (italic tab, replaced by next click - VS Code standard)",
-      "Open as permanent editor (always stays open, must close manually)"
-    ],
-    "default": "preview",
-    "markdownDescription": "Controls how work item files open when clicked in TreeView, dashboard, or search results.\n\n**Tip:** Double-click always opens permanent editor regardless of this setting.",
-    "order": 5,
-    "scope": "resource"
+private updateDescription(): void {
+  if (!this.treeView) return;
+  
+  const totalCount = this.getTotalItemCount();
+  const filteredCount = this.getFilteredItemCount();
+  
+  // Show badge only when filtering
+  if (filteredCount < totalCount) {
+    this.treeView.description = `(${filteredCount}/${totalCount})`;
+  } else {
+    this.treeView.description = undefined; // No badge when showing all
   }
+}
+
+// Call updateDescription() after every filter change
+toggleHideDone(): void {
+  this.filterState.hideDone = !this.filterState.hideDone;
+  this.refresh();
+  this.updateDescription(); // ← ADD THIS
+}
+
+setStatusFilter(statuses: string[]): void {
+  this.filterState.statuses = statuses;
+  this.refresh();
+  this.updateDescription(); // ← ADD THIS
+}
+// ... repeat for all filter methods
+```
+
+**3. Count methods:**
+```typescript
+private getTotalItemCount(): number {
+  // Read index.json and return total items count
+  const index = this.loadIndex();
+  return index.items.length;
+}
+
+private getFilteredItemCount(): number {
+  // Return count after applying current filters
+  const allItems = this.loadAllItems();
+  const filtered = this.applyFilters(allItems);
+  return filtered.length;
 }
 ```
 
-### 2. Update devcrumbs.openItem Command
+## Example Display
 
-Replace hardcoded `preview: true` with setting-based behavior:
-
-```typescript
-// packages/vscode-extension/src/commands/index.ts
-
-// Add at top of file
-function getOpenBehavior(): 'markdown-preview' | 'preview' | 'permanent' {
-  const config = vscode.workspace.getConfiguration('devcrumbs');
-  return config.get<'markdown-preview' | 'preview' | 'permanent'>(
-    'workItems.openBehavior',
-    'preview'
-  );
-}
-
-// Update devcrumbs.openItem command registration
-context.subscriptions.push(
-  vscode.commands.registerCommand('devcrumbs.openItem', async (itemId: string, forceMode?: 'permanent') => {
-    try {
-      const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
-      if (!workspaceFolder) {
-        vscode.window.showErrorMessage('No workspace folder open');
-        return;
-      }
-
-      // Get item metadata to determine file path
-      const { get } = await import('@devcrumbs/shared');
-      const itemResult = await get(workspaceFolder.uri.fsPath, itemId);
-
-      if (!itemResult.metadata) {
-        vscode.window.showErrorMessage(\`Item \${itemId} not found\`);
-        return;
-      }
-
-      const item = itemResult.metadata;
-      const itemTypeFolder = \`\${item.type}s\`;
-      const mdPath = path.join(
-        workspaceFolder.uri.fsPath,
-        '.devcrumbs',
-        itemTypeFolder,
-        \`\${itemId}.md\`,
-      );
-
-      const mdUri = vscode.Uri.file(mdPath);
-      
-      // Determine open behavior (forceMode overrides setting for double-click)
-      const behavior = forceMode || getOpenBehavior();
-
-      switch (behavior) {
-        case 'markdown-preview':
-          // Open as rendered markdown preview (read-only)
-          await vscode.commands.executeCommand('markdown.showPreview', mdUri);
-          break;
-
-        case 'preview':
-          // Open as temporary editor (VS Code standard)
-          const previewDoc = await vscode.workspace.openTextDocument(mdUri);
-          await vscode.window.showTextDocument(previewDoc, {
-            preview: true,
-            viewColumn: vscode.ViewColumn.One,
-          });
-          break;
-
-        case 'permanent':
-          // Open as permanent editor
-          const permanentDoc = await vscode.workspace.openTextDocument(mdUri);
-          await vscode.window.showTextDocument(permanentDoc, {
-            preview: false,
-            viewColumn: vscode.ViewColumn.One,
-          });
-          break;
-      }
-    } catch (error) {
-      vscode.window.showErrorMessage(
-        \`Error opening item: \${error instanceof Error ? error.message : 'Unknown error'}\`,
-      );
-    }
-  }),
-);
+**Before filtering:**
+```
+📋 Work Items                    ← No badge
+  ├─ EPICS (4)
+  ├─ TASKS (31)
+  └─ BUGS (6)
 ```
 
-### 3. Update TreeView Click Handlers
-
-Ensure TreeView supports double-click for permanent editor:
-
-```typescript
-// In devcrumbsTreeDataProvider.ts or similar
-
-// Single-click (uses user setting)
-treeView.onDidChangeSelection(async (e) => {
-  if (e.selection.length === 1) {
-    const node = e.selection[0];
-    if (node.item?.id) {
-      await vscode.commands.executeCommand('devcrumbs.openItem', node.item.id);
-    }
-  }
-});
-
-// Double-click (always permanent)
-treeView.onDidDoubleClick?.(async (e) => {
-  if (e.element?.item?.id) {
-    await vscode.commands.executeCommand('devcrumbs.openItem', e.element.item.id, 'permanent');
-  }
-});
+**After "Hide Done" toggle:**
+```
+📋 Work Items (12/47)            ← Badge shows filtering!
+  ├─ EPICS (2)                   ← Only non-done items
+  ├─ TASKS (8)
+  └─ BUGS (2)
 ```
 
-**Note:** If `onDidDoubleClick` is not available, use alternative pattern with click tracking.
-
-### 4. VS Code API Reference
-
-**Three Opening Modes:**
-
-1. **Markdown Preview (Read-Only):**
-   ```typescript
-   vscode.commands.executeCommand('markdown.showPreview', uri);
-   ```
-
-2. **Preview Editor (Temporary):**
-   ```typescript
-   vscode.window.showTextDocument(doc, { preview: true });
-   ```
-
-3. **Permanent Editor:**
-   ```typescript
-   vscode.window.showTextDocument(doc, { preview: false });
-   ```
-
-**Configuration API:**
-```typescript
-vscode.workspace.getConfiguration('devcrumbs').get('workItems.openBehavior', 'preview');
+**After status filter (show only "in-progress"):**
 ```
-
-## User Experience
-
-### Settings UI Display
-Users will see in VS Code Settings (search "devcrumbs"):
-
+📋 Work Items (5/47)             ← Even fewer items
+  ├─ TASKS (3)
+  └─ BUGS (2)
 ```
-DevCrumbs › Work Items: Open Behavior
-Controls how work item files open when clicked in TreeView, dashboard, or search results.
-
-[Dropdown: Preview Editor ▼]
-├─ Markdown Preview (read-only, best for reading)
-├─ Preview Editor (temporary tab - VS Code standard) ← DEFAULT
-└─ Permanent Editor (always stays open)
-
-💡 Tip: Double-click always opens permanent editor regardless of this setting.
-```
-
-### Behavior Matrix
-
-| Action | Setting | Result |
-|--------|---------|--------|
-| Single-click | markdown-preview | Rendered markdown (read-only) |
-| Single-click | preview | Editable markdown (temporary tab, italic) |
-| Single-click | permanent | Editable markdown (regular tab) |
-| **Double-click** | **ANY** | **Editable markdown (permanent)** |
-
-## Testing Checklist
-
-### Configuration Testing
-- ✅ Setting appears in VS Code Settings UI under "DevCrumbs"
-- ✅ Dropdown shows three options with descriptions
-- ✅ Default value is "preview"
-- ✅ Setting persists across VS Code restarts
-
-### Behavior Testing - TreeView
-- ✅ Single-click with "markdown-preview" → rendered preview
-- ✅ Single-click with "preview" → temporary editor (italic tab)
-- ✅ Single-click with "permanent" → permanent editor (regular tab)
-- ✅ Double-click with any setting → permanent editor
-- ✅ Preview mode: next single-click replaces previous tab
-
-### Behavior Testing - Dashboard
-- ✅ "View Details" button respects setting
-- ✅ Works for all item types (epics, stories, tasks, etc.)
-
-### Behavior Testing - Search
-- ✅ "Open" command in search results respects setting
-
-### Edge Cases
-- ✅ Invalid setting value falls back to "preview" default
-- ✅ Markdown preview works for items with complex markdown (tables, code blocks, images)
-- ✅ No errors when switching between modes rapidly
-
-## Validation Steps
-
-1. **Build:** `npm run build` succeeds
-2. **TypeScript:** No type errors
-3. **Linting:** `npm run lint` passes
-4. **Manual Test:** Install extension, test all three modes
-5. **Regression:** Ensure TASK-033 functionality still works
 
 ## Benefits
-
-**User Control:**
-- Power users can choose permanent editors (old behavior)
-- Readers can use markdown preview for better readability
-- Default matches VS Code standard (temporary tabs)
-
-**Flexibility:**
-- Double-click override maintains VS Code conventions
-- Applies to all work item opening commands (TreeView, dashboard, search)
-- Non-breaking: default matches current TASK-033 behavior
-
-**UX Polish:**
-- Setting includes helpful descriptions and tips
-- Respects VS Code's design patterns
-- Clear visual feedback (italic vs regular tabs)
-
-## Related Work Items
-- **TASK-033**: Implements base preview editor support (enhances this)
-- **TASK-012**: General settings infrastructure (demonstrates pattern)
-- **STORY-004**: TreeView implementation (benefits from this)
+- **Instant feedback** - User sees filter is active
+- **Transparency** - Shows how many items hidden
+- **Standard UX** - Same pattern as VS Code Problems view
+- **No extra clicks** - Always visible
 
 ## Acceptance Criteria
-- ✅ Setting `devcrumbs.workItems.openBehavior` added to package.json
-- ✅ Three enum options: markdown-preview, preview, permanent
-- ✅ Default value: "preview"
-- ✅ Command `devcrumbs.openItem` reads setting and applies behavior
-- ✅ Double-click always opens permanent editor
-- ✅ All three modes tested and working
-- ✅ No TypeScript/linting errors
-- ✅ Extension builds successfully
-- ✅ Documentation updated in TASK-033.md (reference new setting)
+- [ ] TreeView created with `window.createTreeView()` (not just `registerTreeDataProvider`)
+- [ ] Description badge shows `(filtered/total)` when any filter active
+- [ ] Badge disappears when showing all items (no filters)
+- [ ] Badge updates immediately on filter toggle
+- [ ] Works in both flat and hierarchical view modes
+- [ ] Count is accurate (matches visible items)
 
-## Implementation Notes
+## Implementation Steps
+1. Change `registerTreeDataProvider` to `createTreeView` in extension.ts
+2. Add `setTreeView()` method to DevCrumbsTreeDataProvider
+3. Implement `getTotalItemCount()` and `getFilteredItemCount()` methods
+4. Implement `updateDescription()` with badge logic
+5. Call `updateDescription()` in all filter/toggle methods
+6. Test with various filter combinations
 
-**Estimated Effort:** 2-3 hours
-- 30 min: Add configuration to package.json
-- 60 min: Update command logic with three modes
-- 30 min: Add double-click handling (if needed)
-- 60 min: Testing all modes and edge cases
+## Testing
+- Toggle "Hide Done" → Badge appears `(X/47)`
+- Apply status filter → Badge updates `(Y/47)`
+- Clear all filters → Badge disappears
+- Switch view modes → Badge persists correctly
+- Edge case: All items filtered out → Badge shows `(0/47)`
 
-**Risk Level:** Low
-- Small, focused change
-- Non-breaking (default matches current behavior)
-- Well-defined VS Code APIs
-
-**Dependencies:** None (builds on TASK-033 completion)
+## Related
+- BUG-006 (Hide Done in hierarchical view)
+- TASK-031 (Hide Done toggle implementation)
+- TASK-010 (Filtering system)

@@ -1,327 +1,205 @@
-# Reorganize View Toolbar - Move View Mode to Submenu
+# Smart Toolbar Redesign with Hover Buttons
 
 ## Problem
-Currently, the DevCrumbs view toolbar shows **6 inline buttons**, cluttering the interface:
-- Flat view mode
-- Hierarchical view mode  
-- Refresh
-- Add item
-- Search
-- Dashboard
+Current toolbar has too many visible buttons (6+), causing clutter. VS Code best practice: Primary actions always visible, secondary actions on hover.
 
-**VS Code UX Guidelines:**
-- Use `group: "navigation"` for **primary inline actions only**
-- Group related view/sort/filter actions in **submenus** for cleaner UI
-- Keep frequently used actions inline
-
-**Reference:** VS Code Explorer has "View & Sort" submenu for view mode options.
-
-## Desired State
-
-**Toolbar (inline buttons):**
-- 👁️ Hide Done Items (TASK-031 - toggle filter)
-- 🔄 Refresh
-- ➕ Add Item
-- 🔍 Search
-- 📊 Dashboard
-- **[...]** menu → View & Sort submenu
-
-**Submenu "View & Sort" (in ... menu):**
-- 📋 View as Flat
-- 🌳 View as Hierarchical  
-- ─────────────────
-- 🔷 Show Scrum Hierarchy (only when hierarchical)
-- 🔶 Show Waterfall Hierarchy (only when hierarchical)
-- 🔹 Show Both Hierarchies (only when hierarchical)
-- ─────────────────
-- 📊 Sort Items
-- ─────────────────
-- 🎯 Filter by Status
-- ⚡ Filter by Priority
-- 📁 Filter by Type
-- ❌ Clear Filters
-
-## Implementation Plan
-
-### 1. Define Submenu in package.json
-
-Add to `contributes.submenus`:
-
-```json
-{
-  "contributes": {
-    "submenus": [
-      {
-        "id": "devcrumbs.viewAndSort",
-        "label": "View & Sort",
-        "icon": "$(list-tree)"
-      }
-    ]
-  }
-}
+**Current Toolbar (cluttered):**
+```
+[🔄 Refresh] [👁️ Flat] [🌲 Hierarchical] [👁️ Hide Done] [🎯 Filter] [📊 Dashboard] [...]
 ```
 
-### 2. Reorganize View Toolbar Menu
-
-Update `contributes.menus.view/title`:
-
-```json
-{
-  "menus": {
-    "view/title": [
-      // PRIMARY INLINE ACTIONS (always visible buttons)
-      {
-        "command": "devcrumbs.toggleHideDone",
-        "when": "view == devcrumbs.itemsView",
-        "group": "navigation@1"
-      },
-      {
-        "command": "devcrumbs.refreshItems",
-        "when": "view == devcrumbs.itemsView",
-        "group": "navigation@2"
-      },
-      {
-        "command": "devcrumbs.addItem",
-        "when": "view == devcrumbs.itemsView",
-        "group": "navigation@3"
-      },
-      {
-        "command": "devcrumbs.searchItems",
-        "when": "view == devcrumbs.itemsView",
-        "group": "navigation@4"
-      },
-      {
-        "command": "devcrumbs.showDashboard",
-        "when": "view == devcrumbs.itemsView",
-        "group": "navigation@5"
-      },
-      
-      // SUBMENU in ... overflow menu
-      {
-        "submenu": "devcrumbs.viewAndSort",
-        "when": "view == devcrumbs.itemsView",
-        "group": "1_viewSort"
-      }
-    ]
-  }
-}
+**Desired Toolbar (clean + hover):**
+```
+Primary (always):    [🔄 Refresh] [📊 Dashboard] [🔍 Search]
+Hover (on mouseover): [📁 Collapse All] [👁️ Hide Done] [↔️ View Mode] [⚙️ More...]
 ```
 
-### 3. Define Submenu Content
+## Solution: VS Code Menu Groups
 
-Add submenu items to `contributes.menus.devcrumbs.viewAndSort`:
+### Group Strategy
+- `"navigation"` = Always visible (primary actions)
+- Without `"navigation"` = Hover-only (secondary actions)
+- Higher group numbers = Overflow menu
+
+### Implementation
+
+**package.json changes:**
 
 ```json
-{
-  "menus": {
-    "devcrumbs.viewAndSort": [
-      // VIEW MODE
-      {
-        "command": "devcrumbs.viewMode.flat",
-        "group": "1_view@1"
-      },
-      {
-        "command": "devcrumbs.viewMode.hierarchical",
-        "group": "1_view@2"
-      },
-      
-      // HIERARCHY FILTERS (only in hierarchical mode)
-      {
-        "command": "devcrumbs.hierarchy.scrum",
-        "group": "2_hierarchy@1",
-        "when": "devcrumbs.viewMode == hierarchical"
-      },
-      {
-        "command": "devcrumbs.hierarchy.waterfall",
-        "group": "2_hierarchy@2",
-        "when": "devcrumbs.viewMode == hierarchical"
-      },
-      {
-        "command": "devcrumbs.hierarchy.both",
-        "group": "2_hierarchy@3",
-        "when": "devcrumbs.viewMode == hierarchical"
-      },
-      
-      // SORT
-      {
-        "command": "devcrumbs.sort",
-        "group": "3_sort@1"
-      },
-      
-      // FILTERS
-      {
-        "command": "devcrumbs.filterByStatus",
-        "group": "4_filter@1"
-      },
-      {
-        "command": "devcrumbs.filterByPriority",
-        "group": "4_filter@2"
-      },
-      {
-        "command": "devcrumbs.filterByType",
-        "group": "4_filter@3"
-      },
-      {
-        "command": "devcrumbs.clearFilters",
-        "group": "4_filter@4"
-      }
-    ]
+"commands": [
+  // Existing commands
+  { "command": "devcrumbs.refreshItems", "title": "Refresh", "icon": "$(refresh)" },
+  { "command": "devcrumbs.openDashboard", "title": "Dashboard", "icon": "$(dashboard)" },
+  
+  // NEW commands
+  { 
+    "command": "devcrumbs.searchItems", 
+    "title": "Search Items", 
+    "icon": "$(search)" 
+  },
+  { 
+    "command": "devcrumbs.collapseAll", 
+    "title": "Collapse All", 
+    "icon": "$(collapse-all)" 
+  },
+  { 
+    "command": "devcrumbs.viewMode.toggle", 
+    "title": "Toggle View Mode", 
+    "icon": "$(list-tree)" 
   }
-}
-```
+],
 
-### 4. Update Command Titles
-
-Ensure clear menu text in `contributes.commands`:
-
-```json
-{
-  "commands": [
+"menus": {
+  "view/title": [
+    // PRIMARY BUTTONS (always visible - group: "navigation")
     {
-      "command": "devcrumbs.viewMode.flat",
-      "title": "View as Flat",
-      "category": "DevCrumbs",
-      "icon": "$(list-flat)"
+      "command": "devcrumbs.refreshItems",
+      "when": "view == devcrumbs.itemsView",
+      "group": "navigation@1"
     },
     {
-      "command": "devcrumbs.viewMode.hierarchical",
-      "title": "View as Hierarchical",
-      "category": "DevCrumbs",
-      "icon": "$(list-tree)"
+      "command": "devcrumbs.openDashboard",
+      "when": "view == devcrumbs.itemsView",
+      "group": "navigation@2"
     },
     {
-      "command": "devcrumbs.hierarchy.scrum",
-      "title": "Show Scrum Hierarchy Only",
-      "category": "DevCrumbs"
+      "command": "devcrumbs.searchItems",
+      "when": "view == devcrumbs.itemsView",
+      "group": "navigation@3"
+    },
+    
+    // HOVER BUTTONS (visible on hover - no "navigation")
+    {
+      "command": "devcrumbs.collapseAll",
+      "when": "view == devcrumbs.itemsView",
+      "group": "1_view@1"
     },
     {
-      "command": "devcrumbs.hierarchy.waterfall",
-      "title": "Show Waterfall Hierarchy Only",
-      "category": "DevCrumbs"
+      "command": "devcrumbs.toggleHideDone",
+      "when": "view == devcrumbs.itemsView",
+      "group": "2_filter@1"
     },
     {
-      "command": "devcrumbs.hierarchy.both",
-      "title": "Show Both Hierarchies",
-      "category": "DevCrumbs"
+      "command": "devcrumbs.viewMode.toggle",
+      "when": "view == devcrumbs.itemsView",
+      "group": "3_mode@1"
+    },
+    
+    // MORE MENU (overflow "..." - higher group numbers)
+    {
+      "command": "devcrumbs.filterByStatus",
+      "when": "view == devcrumbs.itemsView",
+      "group": "4_advanced@1"
+    },
+    {
+      "command": "devcrumbs.filterByPriority",
+      "when": "view == devcrumbs.itemsView",
+      "group": "4_advanced@2"
+    },
+    {
+      "command": "devcrumbs.sortBy",
+      "when": "view == devcrumbs.itemsView",
+      "group": "5_sort@1"
     }
   ]
 }
 ```
 
-## Visual Layout
+### New Commands Implementation
 
-**Before (6 inline buttons):**
-```
-[Flat] [Hierarchical] [Refresh] [Add] [Search] [Dashboard]
+**1. devcrumbs.searchItems**
+```typescript
+vscode.commands.registerCommand('devcrumbs.searchItems', async () => {
+  const query = await vscode.window.showInputBox({
+    placeHolder: 'Search work items by title, ID, or tags...',
+    prompt: 'Enter search query'
+  });
+  
+  if (query) {
+    treeDataProvider.setSearchQuery(query);
+    vscode.window.showInformationMessage(`🔍 Searching: "${query}"`);
+  }
+});
 ```
 
-**After (5 inline buttons + submenu):**
+**2. devcrumbs.collapseAll**
+```typescript
+vscode.commands.registerCommand('devcrumbs.collapseAll', () => {
+  // TreeView API provides this
+  if (treeView) {
+    treeView.reveal(undefined, { select: false, focus: false });
+  }
+  vscode.window.showInformationMessage('📁 All items collapsed');
+});
 ```
-[👁️ Hide Done] [🔄] [➕] [🔍] [📊] [...]
-                                      └─ View & Sort ▶
-                                           ├─ View as Flat
-                                           ├─ View as Hierarchical
-                                           ├─────────────────
-                                           ├─ Show Scrum Hierarchy
-                                           ├─ Show Waterfall Hierarchy
-                                           ├─ Show Both Hierarchies
-                                           ├─────────────────
-                                           ├─ Sort Items
-                                           ├─────────────────
-                                           ├─ Filter by Status
-                                           ├─ Filter by Priority
-                                           ├─ Filter by Type
-                                           └─ Clear Filters
+
+**3. devcrumbs.viewMode.toggle**
+```typescript
+vscode.commands.registerCommand('devcrumbs.viewMode.toggle', () => {
+  const currentMode = treeDataProvider.getViewMode();
+  const newMode = currentMode === 'flat' ? 'hierarchical' : 'flat';
+  treeDataProvider.setViewMode(newMode);
+  
+  const icon = newMode === 'flat' ? '👁️' : '🌲';
+  vscode.window.showInformationMessage(`${icon} Switched to ${newMode} view`);
+});
 ```
+
+**4. Add getViewMode() to TreeDataProvider:**
+```typescript
+getViewMode(): ViewMode {
+  return this.viewMode;
+}
+```
+
+## Button Organization Logic
+
+**Primary (Navigation Group):**
+- **Refresh** - Most frequently used, data reload
+- **Dashboard** - Main visualization feature
+- **Search** - Quick item lookup
+
+**Hover (Secondary Groups):**
+- **Collapse All** - Occasional use, view organization
+- **Hide Done** - Toggle filter (medium frequency)
+- **View Mode Toggle** - Switch flat/hierarchical (replaces 2 buttons!)
+
+**Overflow Menu (...):**
+- **Advanced Filters** - Status, Priority, Type, Tags
+- **Sort Options** - Multi-field sorting
 
 ## Benefits
-
-**Cleaner Organization:**
-- Primary actions inline (filter done, refresh, add, search, dashboard)
-- View/sort/filter options in submenu
-- Reduces visual clutter while keeping frequent actions accessible
-
-**Better UX:**
-- Matches VS Code Explorer pattern
-- Logical grouping (view modes + sorting + filtering together)
-- Hide Done toggle prominently placed (TASK-031)
-
-**Keyboard Shortcuts Preserved:**
-- All existing shortcuts still work
-- `Ctrl+Shift+V F` → Flat view
-- `Ctrl+Shift+V H` → Hierarchical view
-- `F5` → Refresh
-
-## Dependencies
-
-- **TASK-031**: "Hide Done Items" toggle button (should be implemented first or simultaneously)
-- This task only reorganizes menu structure, doesn't add new functionality
-
-## Testing Checklist
-
-### Visual Tests
-- ✅ 5 inline buttons visible: Hide Done, Refresh, Add, Search, Dashboard
-- ✅ `...` menu appears at end of toolbar
-- ✅ "View & Sort" submenu appears in `...` menu with tree icon
-- ✅ Submenu items properly grouped with separators
-
-### Functional Tests
-- ✅ All inline buttons work (Hide Done from TASK-031, others existing)
-- ✅ View mode switching works from submenu
-- ✅ Hierarchy filters appear only in hierarchical mode
-- ✅ Sort/filter commands work from submenu
-
-### Keyboard Shortcuts
-- ✅ All existing shortcuts functional
-- ✅ `Ctrl+Shift+V F` → Flat view
-- ✅ `Ctrl+Shift+V H` → Hierarchical view
-- ✅ `F5` → Refresh
-
-### Regression Tests
-- ✅ Commands work from Command Palette
-- ✅ Context menu unaffected
-- ✅ No build/lint errors
-
-## Implementation Notes
-
-**Estimated Effort:** 1 hour
-- 30 min: Update package.json (submenu + menu reorganization)
-- 30 min: Testing all paths
-
-**Risk Level:** Low
-- Configuration-only change
-- Non-breaking (all commands still accessible)
-- Easy to revert
-
-**Coordination with TASK-031:**
-- TASK-031 adds "Hide Done" command + functionality
-- This task (TASK-035) positions it in toolbar
-- Can be implemented in parallel or sequentially
-
-## VS Code API References
-
-**Submenu Contribution:**
-- [contributes.submenus](https://code.visualstudio.com/api/references/contribution-points#contributes.submenus)
-- [contributes.menus](https://code.visualstudio.com/api/references/contribution-points#contributes.menus)
-
-**Menu Groups:**
-- `navigation@order` - Inline toolbar buttons (left to right)
-- `1_group@order` - First section in `...` menu
-- `2_group@order` - Second section (separator before)
+- **Cleaner UI** - 3 primary buttons instead of 6+
+- **Standard UX** - Matches VS Code patterns (Explorer, Source Control)
+- **Hover Discovery** - Users find secondary actions naturally
+- **One-click toggle** - View mode toggle replaces 2 separate buttons
+- **Progressive disclosure** - Advanced features in overflow menu
 
 ## Acceptance Criteria
+- [ ] Only 3 buttons visible by default (Refresh, Dashboard, Search)
+- [ ] 3 buttons appear on hover (Collapse All, Hide Done, View Mode)
+- [ ] Advanced filters moved to "..." overflow menu
+- [ ] Collapse All collapses all tree nodes
+- [ ] View Mode Toggle switches between flat/hierarchical
+- [ ] Search opens input box and filters tree
+- [ ] Button order logical (frequency of use)
+- [ ] Icons appropriate and consistent
 
-- ✅ Submenu "View & Sort" defined in `contributes.submenus`
-- ✅ 5 inline buttons: Hide Done, Refresh, Add, Search, Dashboard
-- ✅ View mode commands in submenu (not inline)
-- ✅ Filter/sort commands accessible in submenu
-- ✅ All functionality preserved
-- ✅ Keyboard shortcuts unchanged
-- ✅ No build/lint errors
+## Testing
+- Default view: Only 3 buttons visible
+- Hover over view: 3 more buttons appear
+- Click Collapse All: All nodes collapse
+- Click View Mode: Toggle between flat/hierarchical
+- Click Search: Input box opens, filtering works
+- Click "...": Advanced menu opens with filters/sort
 
-## Related Work Items
+## Migration Notes
+**Remove these old commands from toolbar:**
+- `devcrumbs.viewMode.flat` (replaced by toggle)
+- `devcrumbs.viewMode.hierarchical` (replaced by toggle)
+- Keep commands registered for Command Palette access
 
-- **TASK-031**: Hide Done Items Toggle (adds the toggle button functionality)
-- **TASK-002**: TreeView Provider (uses view modes from submenu)
-- **TASK-010**: TreeView Filtering (filter commands in submenu)
-- **STORY-004**: VS Code Extension (toolbar organization)
+## Related
+- TASK-034 (Description badge)
+- TASK-031 (Hide Done toggle)
+- TASK-010 (Filtering system)
