@@ -3,7 +3,7 @@
   "counters": {
     "epic": 6,
     "story": 9,
-    "task": 47,
+    "task": 48,
     "bug": 8,
     "spike": 3,
     "feature": 4,
@@ -682,14 +682,22 @@
       "status": "draft",
       "priority": "low",
       "updated": "2025-11-24T20:59:45.418Z"
+    },
+    {
+      "id": "TASK-048",
+      "type": "task",
+      "title": "TreeView: Add methodology sections in flat view",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T21:12:14.592Z"
     }
   ],
   "stats": {
-    "total": 78,
+    "total": 79,
     "by_type": {
       "epic": 6,
       "story": 9,
-      "task": 47,
+      "task": 48,
       "bug": 8,
       "spike": 3,
       "feature": 4,
@@ -698,10 +706,10 @@
     "by_status": {
       "in-progress": 0,
       "done": 50,
-      "draft": 27,
+      "draft": 28,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T20:59:45.418Z"
+  "last_updated": "2025-11-24T21:12:14.592Z"
 }
