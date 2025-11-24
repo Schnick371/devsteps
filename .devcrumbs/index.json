@@ -473,7 +473,7 @@
       "title": "Command Registration Failure - Commands Not Found After Extension Load",
       "status": "done",
       "priority": "critical",
-      "updated": "2025-11-24T12:00:27.946Z"
+      "updated": "2025-11-24T12:22:01.750Z"
     },
     {
       "id": "BUG-005",
@@ -503,5 +503,5 @@
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T12:12:40.057Z"
+  "last_updated": "2025-11-24T12:22:01.750Z"
 }

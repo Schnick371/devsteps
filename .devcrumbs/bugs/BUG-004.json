@@ -7,7 +7,7 @@
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-24T11:56:42.058Z",
-  "updated": "2025-11-24T12:00:57.000Z",
+  "updated": "2025-11-24T12:22:01.750Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/src/extension.ts",
