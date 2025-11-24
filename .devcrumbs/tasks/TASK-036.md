@@ -1,57 +1,26 @@
 # Remove Unnecessary Success Notifications
 
 ## Problem
-Commands like "Switch to Flat View", "Switch to Hierarchical View", "Show Scrum/Waterfall Hierarchy" display information messages that are unnecessary and annoying.
+Commands display information messages that are unnecessary because the user can SEE the change immediately in the TreeView.
 
-**Current behavior:**
-```typescript
-// Line 59
-vscode.window.showInformationMessage('Switched to Flat View');
+## Notifications to Remove
 
-// Line 69
-vscode.window.showInformationMessage('Switched to Hierarchical View');
+### View Mode Commands (DONE ✅)
+- ~~`devcrumbs.refresh`~~ - line 49
+- ~~`devcrumbs.viewMode.flat`~~ - line 59  
+- ~~`devcrumbs.viewMode.hierarchical`~~ - line 69
+- ~~`devcrumbs.hierarchyType.scrum`~~ - line 79
+- ~~`devcrumbs.hierarchyType.waterfall`~~ - line 87
+- ~~`devcrumbs.hierarchyType.both`~~ - line 95
 
-// Line 79
-vscode.window.showInformationMessage('Showing Scrum Hierarchy');
+### Additional Notifications Found (TODO)
+- **Line 690**: `✅ Updated ${itemId}` - Remove (TreeView refreshes automatically)
+- **Line 798-799**: `👁️ Completed items hidden/visible` - Remove (visual change is obvious)
 
-// Line 87
-vscode.window.showInformationMessage('Showing Waterfall Hierarchy');
+### Keep These (User Needs Feedback)
+- ✅ `📋 Copied ${itemId} to clipboard` (line 514) - No other visual feedback
+- ✅ `✅ Created ${itemType}` (line 174) - Important operation confirmation
+- ✅ Error messages - Always keep
 
-// Line 95
-vscode.window.showInformationMessage('Showing Both Hierarchies');
-
-// Line 49
-vscode.window.showInformationMessage('DevCrumbs work items refreshed');
-```
-
-**Why this is bad:**
-- User can SEE the view change immediately in the TreeView
-- Success messages are redundant (visual feedback already present)
-- Interrupts workflow with popup that requires dismissal
-- VS Code best practice: Only show messages for non-obvious operations
-
-**Exceptions (KEEP these messages):**
-- ✅ Error messages (user needs to know something failed)
-- ✅ "Created item X" messages (operation not immediately visible)
-- ✅ "Copied to clipboard" messages (no visual feedback otherwise)
-
-## Solution
-
-Remove `showInformationMessage` calls for:
-1. `devcrumbs.refresh` (line 49)
-2. `devcrumbs.viewMode.flat` (line 59)
-3. `devcrumbs.viewMode.hierarchical` (line 69)
-4. `devcrumbs.hierarchyType.scrum` (line 79)
-5. `devcrumbs.hierarchyType.waterfall` (line 87)
-6. `devcrumbs.hierarchyType.both` (line 95)
-
-Keep only the `treeDataProvider` method calls - the visual update IS the feedback.
-
-## Benefits
-- Cleaner UX - no popup spam
-- Faster workflow - no need to dismiss messages
-- Matches VS Code best practices (Problems view doesn't say "Switched to tree view")
-- User sees immediate visual feedback in TreeView
-
-## Implementation
-Simple: Delete the `showInformationMessage` lines from these 6 commands in `packages/vscode-extension/src/commands/index.ts`
+## Rationale
+VS Code best practice: Only show notifications for non-obvious operations or when visual feedback is absent. TreeView updates provide immediate visual feedback.

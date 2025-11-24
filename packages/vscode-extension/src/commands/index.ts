@@ -687,7 +687,6 @@ ${Object.entries(byType)
           if (treeDataProvider) {
             treeDataProvider.refresh();
           }
-          vscode.window.showInformationMessage(`✅ Updated ${itemId}`);
         }
       } catch (error) {
         vscode.window.showErrorMessage(
@@ -794,9 +793,6 @@ ${Object.entries(byType)
       treeDataProvider.toggleHideDone();
       const isHidden = treeDataProvider.getHideDoneState();
       logger.info(`Hide done toggled: ${isHidden ? 'hidden' : 'visible'}`);
-      vscode.window.showInformationMessage(
-        isHidden ? '👁️ Completed items hidden' : '👁️ Completed items visible'
-      );
     }),
   );
 
