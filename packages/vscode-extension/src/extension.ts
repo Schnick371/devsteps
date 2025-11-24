@@ -22,39 +22,45 @@ export async function activate(context: vscode.ExtensionContext) {
   const workspaceFolders = vscode.workspace.workspaceFolders;
   if (!workspaceFolders || workspaceFolders.length === 0) {
     logger.warn('No workspace folder open');
+    // Still register commands even without workspace to avoid "command not found" errors
+    registerCommands(context, null);
+    logger.info('Commands registered (no workspace mode)');
     return;
   }
 
   const workspaceRoot = workspaceFolders[0].uri;
 
   // Check for .devcrumbs directory
+  let hasDevCrumbs = false;
   try {
     await vscode.workspace.fs.stat(vscode.Uri.joinPath(workspaceRoot, '.devcrumbs'));
+    hasDevCrumbs = true;
     logger.info('.devcrumbs directory found in workspace');
   } catch (error) {
     logger.warn('No .devcrumbs directory found in workspace');
-    // Extension remains inactive until .devcrumbs is initialized
-    return;
   }
 
-  // Initialize TreeView for work items
-  const treeDataProvider = new DevCrumbsTreeDataProvider(workspaceRoot);
-  const treeView = vscode.window.createTreeView('devcrumbs.itemsView', {
-    treeDataProvider,
-    showCollapseAll: true,
-  });
+  // Initialize TreeView and commands even if .devcrumbs doesn't exist yet
+  // This prevents "command not found" errors from toolbar buttons
+  const treeDataProvider = hasDevCrumbs ? new DevCrumbsTreeDataProvider(workspaceRoot) : null;
+  
+  if (treeDataProvider) {
+    const treeView = vscode.window.createTreeView('devcrumbs.itemsView', {
+      treeDataProvider,
+      showCollapseAll: true,
+    });
+    context.subscriptions.push(treeView);
+    logger.info('TreeView registered successfully');
 
-  context.subscriptions.push(treeView);
-  logger.info('TreeView registered successfully');
+    // Register FileDecorationProvider for status badges
+    const decorationProvider = new DevCrumbsDecorationProvider();
+    context.subscriptions.push(
+      vscode.window.registerFileDecorationProvider(decorationProvider)
+    );
+    logger.info('FileDecorationProvider registered');
+  }
 
-  // Register FileDecorationProvider for status badges
-  const decorationProvider = new DevCrumbsDecorationProvider();
-  context.subscriptions.push(
-    vscode.window.registerFileDecorationProvider(decorationProvider)
-  );
-  logger.info('FileDecorationProvider registered');
-
-  // Register all commands
+  // Always register commands to avoid "command not found" errors
   registerCommands(context, treeDataProvider);
   logger.info('Commands registered');
 

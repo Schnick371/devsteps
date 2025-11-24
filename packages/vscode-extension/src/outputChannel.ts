@@ -13,11 +13,12 @@ type LogLevel = 'error' | 'warn' | 'info' | 'debug';
  */
 export class DevCrumbsLogger {
   private static instance: DevCrumbsLogger;
-  private outputChannel: vscode.OutputChannel;
+  private outputChannel: vscode.LogOutputChannel;
   private logLevel: LogLevel;
 
   private constructor() {
-    this.outputChannel = vscode.window.createOutputChannel('DevCrumbs');
+    // Use LogOutputChannel with log: true to make it appear in output dropdown
+    this.outputChannel = vscode.window.createOutputChannel('DevCrumbs', { log: true });
     this.logLevel = this.getConfiguredLogLevel();
   }
 

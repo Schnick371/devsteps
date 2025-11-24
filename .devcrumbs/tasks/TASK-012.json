@@ -7,7 +7,7 @@
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T16:23:17.409Z",
-  "updated": "2025-11-23T16:23:25.826Z",
+  "updated": "2025-11-24T11:57:18.105Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/package.json",
@@ -22,7 +22,9 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "BUG-005"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],

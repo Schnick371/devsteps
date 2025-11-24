@@ -3,11 +3,11 @@
   "type": "task",
   "category": "VS Code Extension",
   "title": "TreeView: Add Hide Done Items Toggle Filter",
-  "status": "draft",
+  "status": "done",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T09:38:35.440Z",
-  "updated": "2025-11-24T09:38:41.019Z",
+  "updated": "2025-11-24T11:14:31.719Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/src/treeView/devcrumbsTreeDataProvider.ts",

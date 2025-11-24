@@ -24,7 +24,7 @@
     "onStartupFinished",
     "workspaceContains:.devcrumbs"
   ],
-  "main": "./dist/extension.cjs",
+  "main": "./dist/extension.js",
   "contributes": {
     "viewsContainers": {
       "activitybar": [

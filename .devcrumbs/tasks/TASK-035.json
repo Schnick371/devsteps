@@ -7,7 +7,7 @@
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T10:53:47.169Z",
-  "updated": "2025-11-24T11:01:07.796Z",
+  "updated": "2025-11-24T11:14:31.717Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/package.json"

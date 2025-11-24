@@ -7,7 +7,7 @@
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T16:23:17.414Z",
-  "updated": "2025-11-24T10:13:37.885Z",
+  "updated": "2025-11-24T11:57:18.000Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/src/outputChannel.ts"
@@ -23,7 +23,8 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "TASK-004"
+      "TASK-004",
+      "BUG-005"
     ],
     "depends-on": [],
     "required-by": [],
