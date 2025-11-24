@@ -7,7 +7,7 @@
   "priority": "critical",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T15:33:22.968Z",
-  "updated": "2025-11-24T20:59:51.259Z",
+  "updated": "2025-11-24T21:17:01.683Z",
   "author": "thomas.hantke@devcrumbs.dev",
   "affected_paths": [],
   "linked_items": {
@@ -16,7 +16,8 @@
       "STORY-003",
       "EPIC-003",
       "STORY-001",
-      "STORY-002"
+      "STORY-002",
+      "TASK-049"
     ],
     "tested-by": [],
     "tests": [],

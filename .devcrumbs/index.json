@@ -3,7 +3,7 @@
   "counters": {
     "epic": 6,
     "story": 9,
-    "task": 48,
+    "task": 49,
     "bug": 8,
     "spike": 3,
     "feature": 4,
@@ -690,14 +690,22 @@
       "status": "draft",
       "priority": "high",
       "updated": "2025-11-24T21:12:14.592Z"
+    },
+    {
+      "id": "TASK-049",
+      "type": "task",
+      "title": "Add research-first principle to planning prompt",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T21:16:51.404Z"
     }
   ],
   "stats": {
-    "total": 79,
+    "total": 80,
     "by_type": {
       "epic": 6,
       "story": 9,
-      "task": 48,
+      "task": 49,
       "bug": 8,
       "spike": 3,
       "feature": 4,
@@ -706,10 +714,10 @@
     "by_status": {
       "in-progress": 0,
       "done": 50,
-      "draft": 28,
+      "draft": 29,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T21:12:14.592Z"
+  "last_updated": "2025-11-24T21:16:51.404Z"
 }
