@@ -607,9 +607,9 @@
       "id": "STORY-005",
       "type": "story",
       "title": "Relationship Validation & Methodology Enforcement",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-24T20:36:20.552Z"
+      "updated": "2025-11-24T20:50:55.266Z"
     }
   ],
   "stats": {
@@ -625,11 +625,11 @@
     },
     "by_status": {
       "in-progress": 1,
-      "done": 48,
-      "draft": 19,
+      "done": 49,
+      "draft": 18,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T20:50:12.952Z"
+  "last_updated": "2025-11-24T20:50:55.266Z"
 }
