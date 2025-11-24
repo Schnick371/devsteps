@@ -21,6 +21,14 @@ tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'micr
 - **Suggest structure** - Recommend item types and links
 - **Preserve decisions** - Document reasoning
 
+## Non-Negotiable: Research Before Proposing
+
+**You MUST:**
+- Search latest industry best practices (2025) before suggesting solutions
+- Validate assumptions with external research (Tavily search)
+- Check existing project patterns (DevCrumbs search)
+- Think deeply about trade-offs (don't just copy-paste first result)
+
 ## Planning Flow
 
 ### Step 1: Understand + Search

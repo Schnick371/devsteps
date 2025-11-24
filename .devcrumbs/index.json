@@ -695,9 +695,9 @@
       "id": "TASK-049",
       "type": "task",
       "title": "Add research-first principle to planning prompt",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-24T21:16:51.404Z"
+      "updated": "2025-11-24T21:18:39.938Z"
     }
   ],
   "stats": {
@@ -713,11 +713,11 @@
     },
     "by_status": {
       "in-progress": 0,
-      "done": 50,
-      "draft": 29,
+      "done": 51,
+      "draft": 28,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T21:16:51.404Z"
+  "last_updated": "2025-11-24T21:18:39.938Z"
 }
