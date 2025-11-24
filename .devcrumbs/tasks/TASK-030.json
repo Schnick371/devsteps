@@ -3,11 +3,11 @@
   "type": "task",
   "category": "DevOps",
   "title": "Push initial commit to GitHub with clean history",
-  "status": "draft",
+  "status": "blocked",
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T21:59:39.039Z",
-  "updated": "2025-11-23T21:59:47.149Z",
+  "updated": "2025-11-24T10:19:50+01:00",
   "author": "the@devcrumbs.dev",
   "affected_paths": [],
   "linked_items": {

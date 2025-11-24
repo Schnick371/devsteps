@@ -1,45 +1,41 @@
 {
-  "id": "TASK-010",
+  "id": "TASK-031",
   "type": "task",
-  "category": "vscode",
-  "title": "TreeView Filtering and Sorting - Advanced Item Navigation",
-  "status": "done",
-  "priority": "high",
+  "category": "VS Code Extension",
+  "title": "TreeView: Add Hide Done Items Toggle Filter",
+  "status": "draft",
+  "priority": "medium",
   "eisenhower": "not-urgent-important",
-  "created": "2025-11-23T16:20:30.935Z",
-  "updated": "2025-11-24T09:38:41.020Z",
+  "created": "2025-11-24T09:38:35.440Z",
+  "updated": "2025-11-24T09:38:41.019Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/src/treeView/devcrumbsTreeDataProvider.ts",
-    "packages/vscode-extension/src/commands.ts"
+    "packages/vscode-extension/src/extension.ts",
+    "packages/vscode-extension/package.json"
   ],
   "linked_items": {
-    "implements": [
-      "EPIC-003",
-      "STORY-004"
-    ],
+    "implements": [],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "TASK-011",
-      "TASK-031"
+      "TASK-002",
+      "TASK-010"
     ],
-    "depends-on": [
-      "TASK-002"
-    ],
+    "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "vscode",
+    "ui",
     "treeview",
-    "filtering",
-    "sorting",
-    "ui"
+    "filter",
+    "usability",
+    "toggle"
   ],
   "commits": [],
   "metadata": {}

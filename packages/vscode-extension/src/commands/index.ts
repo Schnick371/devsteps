@@ -215,12 +215,17 @@ export function registerCommands(
 
   // Update status
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.updateStatus', async (itemId?: string) => {
+    vscode.commands.registerCommand('devcrumbs.updateStatus', async (itemIdOrNode?: string | any) => {
       const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
       if (!workspaceFolder) {
         vscode.window.showErrorMessage('No workspace folder open');
         return;
       }
+
+      // Extract ID from TreeItem/node or use string directly
+      const itemId = typeof itemIdOrNode === 'string' 
+        ? itemIdOrNode 
+        : itemIdOrNode?.label?.split(':')[0]?.trim();
 
       // If no itemId provided, let user search/select
       let targetItemId = itemId;
@@ -431,20 +436,30 @@ ${Object.entries(byType)
 
   // Copy item ID to clipboard
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.copyId', async (itemId?: string) => {
+    vscode.commands.registerCommand('devcrumbs.copyId', async (itemIdOrNode?: string | any) => {
+      // Extract ID from TreeItem/node or use string directly
+      const itemId = typeof itemIdOrNode === 'string' 
+        ? itemIdOrNode 
+        : itemIdOrNode?.label?.split(':')[0]?.trim();
+      
       if (!itemId) {
         vscode.window.showErrorMessage('No item ID provided');
         return;
       }
 
-      await vscode.env.clipboard.writeText(itemId);
+      vscode.env.clipboard.writeText(itemId);
       vscode.window.showInformationMessage(`📋 Copied ${itemId} to clipboard`);
     }),
   );
 
   // Show item in file explorer
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.revealInExplorer', async (itemId?: string) => {
+    vscode.commands.registerCommand('devcrumbs.revealInExplorer', async (itemIdOrNode?: string | any) => {
+      // Extract ID from TreeItem/node or use string directly
+      const itemId = typeof itemIdOrNode === 'string' 
+        ? itemIdOrNode 
+        : itemIdOrNode?.label?.split(':')[0]?.trim();
+      
       if (!itemId) {
         vscode.window.showErrorMessage('No item ID provided');
         return;
@@ -485,7 +500,12 @@ ${Object.entries(byType)
 
   // Edit item properties (quick edit)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.editProperties', async (itemId?: string) => {
+    vscode.commands.registerCommand('devcrumbs.editProperties', async (itemIdOrNode?: string | any) => {
+      // Extract ID from TreeItem/node or use string directly
+      const itemId = typeof itemIdOrNode === 'string' 
+        ? itemIdOrNode 
+        : itemIdOrNode?.label?.split(':')[0]?.trim();
+      
       if (!itemId) {
         vscode.window.showErrorMessage('No item ID provided');
         return;

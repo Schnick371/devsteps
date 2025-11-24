@@ -54,59 +54,50 @@ export class DevCrumbsDecorationProvider implements vscode.FileDecorationProvide
     status: string,
     priority: string | null,
   ): vscode.FileDecoration {
-    // Status-based decorations
+    // Status-based decorations (badges only, no label coloring)
+    // Icons are colored via ThemeIcon in TreeDataProvider (TASK-007)
     const statusDecorations: Record<string, vscode.FileDecoration> = {
       draft: {
         badge: '○',
         tooltip: 'Draft - Not Started',
-        color: new vscode.ThemeColor('charts.gray'),
       },
       planned: {
         badge: '◷',
         tooltip: 'Planned - Scheduled',
-        color: new vscode.ThemeColor('charts.blue'),
       },
       'in-progress': {
         badge: '●',
         tooltip: 'In Progress - Active Work',
-        color: new vscode.ThemeColor('charts.orange'),
       },
       review: {
         badge: '◎',
         tooltip: 'In Review',
-        color: new vscode.ThemeColor('charts.purple'),
       },
       done: {
         badge: '✓',
         tooltip: 'Done - Completed',
-        color: new vscode.ThemeColor('charts.green'),
       },
       blocked: {
         badge: '✖',
         tooltip: 'Blocked - Cannot Proceed',
-        color: new vscode.ThemeColor('charts.red'),
       },
       cancelled: {
         badge: '−',
         tooltip: 'Cancelled',
-        color: new vscode.ThemeColor('charts.gray'),
       },
       obsolete: {
         badge: '⊗',
         tooltip: 'Obsolete - No Longer Relevant',
-        color: new vscode.ThemeColor('disabledForeground'),
       },
     };
 
     const decoration = statusDecorations[status] || {
       badge: '?',
       tooltip: `Unknown Status: ${status}`,
-      color: new vscode.ThemeColor('foreground'),
     };
 
-    // Override color based on critical priority
+    // Add priority indicator to tooltip (color already on icon)
     if (priority === 'critical') {
-      decoration.color = new vscode.ThemeColor('errorForeground');
       decoration.tooltip += ' [CRITICAL]';
     }
 

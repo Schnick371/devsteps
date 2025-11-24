@@ -359,33 +359,50 @@
       "status": "draft",
       "priority": "critical",
       "updated": "2025-11-23T21:59:39.039Z"
+    },
+    {
+      "id": "TASK-031",
+      "type": "task",
+      "title": "TreeView: Add Hide Done Items Toggle Filter",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-24T09:38:35.440Z"
+    },
+    {
+      "id": "BUG-001",
+      "type": "bug",
+      "title": "Fix VS Code extension command errors and missing implementations",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-11-24T09:49:16.429Z"
     }
   ],
-  "last_updated": "2025-11-23T21:59:39.039Z",
+  "last_updated": "2025-11-24T09:49:16.429Z",
   "counters": {
     "epic": 4,
     "story": 4,
     "requirement": 1,
     "feature": 4,
-    "task": 30,
-    "bug": 0,
+    "task": 31,
+    "bug": 1,
     "spike": 2,
     "test": 0
   },
   "archived_items": [],
   "stats": {
-    "total": 45,
+    "total": 47,
     "by_type": {
       "epic": 4,
       "story": 4,
-      "task": 30,
+      "task": 31,
       "requirement": 1,
       "feature": 4,
-      "spike": 2
+      "spike": 2,
+      "bug": 1
     },
     "by_status": {
-      "draft": 12,
-      "done": 33,
+      "draft": 13,
+      "done": 34,
       "in-progress": 0
     },
     "archived": 0

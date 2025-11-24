@@ -7,7 +7,7 @@
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T15:34:45.800Z",
-  "updated": "2025-11-23T17:39:10.156Z",
+  "updated": "2025-11-24T09:38:41.019Z",
   "author": "thomas.hantke@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/src/treeView/devcrumbsTreeDataProvider.ts"
@@ -24,7 +24,8 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "TASK-009"
+      "TASK-009",
+      "TASK-031"
     ],
     "depends-on": [
       "TASK-001"
