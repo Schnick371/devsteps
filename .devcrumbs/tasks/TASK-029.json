@@ -3,11 +3,11 @@
   "type": "task",
   "category": "DevOps",
   "title": "Prepare clean Git repository for GitHub publication",
-  "status": "in-progress",
+  "status": "done",
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T21:59:11.351Z",
-  "updated": "2025-11-24T08:44:36+01:00",
+  "updated": "2025-11-24T10:09:12+01:00",
   "author": "the@devcrumbs.dev",
   "affected_paths": [],
   "linked_items": {
