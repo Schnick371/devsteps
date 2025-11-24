@@ -17,6 +17,11 @@ tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'micr
 
 ### Step 1: Understand Context
 
+**Think about the intent:**
+- Why is this work needed now?
+- What does success look like?
+- Minimum Viable Product (MVP) scope?
+
 **Dialog with user to grasp their need:**
 - Ask "why" before "what"
 - Surface dependencies early
@@ -24,8 +29,6 @@ tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'micr
 - Identify related existing work
 
 ### Step 2: Research First - MANDATORY
-
-**Before proposing ANY solution:**
 
 1. **Search the internet** for latest best practices (2025):
    ```
@@ -46,15 +49,6 @@ tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'micr
    - Synthesize into coherent recommendation
 
 **Core principle:** Research first = Evidence-based proposals, not premature solutions
-
-**Think about the intent:**
-- Why is this work needed now?
-- What does success look like?
-- Minimum Viable Product (MVP) scope?
-
-**Ask developer:**
-- What are you trying to achieve? (business value)
-- Related to existing work?
 
 ### Step 3: Structure Work
 
