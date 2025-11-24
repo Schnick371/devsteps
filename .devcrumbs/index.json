@@ -511,9 +511,9 @@
       "id": "BUG-007",
       "type": "bug",
       "title": "Fix: Flat view expanded state resets on filter toggle",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-24T13:03:10.806Z"
+      "updated": "2025-11-24T13:14:27.920Z"
     }
   ],
   "stats": {
@@ -529,11 +529,11 @@
     },
     "by_status": {
       "in-progress": 3,
-      "done": 42,
-      "draft": 11,
+      "done": 43,
+      "draft": 10,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T13:09:01.315Z"
+  "last_updated": "2025-11-24T13:14:27.920Z"
 }

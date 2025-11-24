@@ -3,11 +3,11 @@
   "type": "bug",
   "category": "VS Code Extension",
   "title": "Fix: Flat view expanded state resets on filter toggle",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-24T13:03:10.806Z",
-  "updated": "2025-11-24T13:03:10.806Z",
+  "updated": "2025-11-24T13:14:27.920Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/src/treeView/devcrumbsTreeDataProvider.ts"

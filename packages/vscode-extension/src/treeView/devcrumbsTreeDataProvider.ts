@@ -138,6 +138,13 @@ class TypeGroupNode extends TreeNode {
   async getChildren(_workspaceRoot: vscode.Uri, _filterState?: FilterState): Promise<TreeNode[]> {
     return this.items.map((item) => new WorkItemNode(item, false));
   }
+
+  /**
+   * Get the type identifier for state tracking
+   */
+  getType(): string {
+    return this.type;
+  }
 }
 
 /**
@@ -291,15 +298,29 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
     order: 'asc',
   };
   private treeView?: vscode.TreeView<TreeNode>;
+  private expandedGroups = new Set<string>();
 
   constructor(private workspaceRoot: vscode.Uri) {}
 
   /**
-   * Set TreeView instance for description badge updates
+   * Set TreeView instance for description badge updates and state tracking
    */
   setTreeView(treeView: vscode.TreeView<TreeNode>): void {
     this.treeView = treeView;
     this.updateDescription();
+
+    // Track expanded state of type groups in flat view
+    this.treeView.onDidExpandElement((e) => {
+      if (e.element instanceof TypeGroupNode) {
+        this.expandedGroups.add(e.element.getType());
+      }
+    });
+
+    this.treeView.onDidCollapseElement((e) => {
+      if (e.element instanceof TypeGroupNode) {
+        this.expandedGroups.delete(e.element.getType());
+      }
+    });
   }
 
   /**
@@ -308,6 +329,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setViewMode(mode: ViewMode): void {
     this.viewMode = mode;
     this.refresh();
+    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -318,6 +340,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
     this.hierarchyType = type;
     if (this.viewMode === 'hierarchical') {
       this.refresh();
+      this.restoreExpandedGroups();
     }
   }
 
@@ -334,6 +357,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setStatusFilter(statuses: string[]): void {
     this.filterState.statuses = statuses;
     this.refresh();
+    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -343,6 +367,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setPriorityFilter(priorities: string[]): void {
     this.filterState.priorities = priorities;
     this.refresh();
+    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -352,6 +377,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setTypeFilter(types: string[]): void {
     this.filterState.types = types;
     this.refresh();
+    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -361,6 +387,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setTagFilter(tags: string[]): void {
     this.filterState.tags = tags;
     this.refresh();
+    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -370,6 +397,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setSearchQuery(query: string): void {
     this.filterState.searchQuery = query;
     this.refresh();
+    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -386,6 +414,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
       hideDone: false,
     };
     this.refresh();
+    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -395,6 +424,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   toggleHideDone(): void {
     this.filterState.hideDone = !this.filterState.hideDone;
     this.refresh();
+    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -462,11 +492,36 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   }
 
   /**
+   * Restore expanded state of type groups after tree refresh (flat view only)
+   */
+  private async restoreExpandedGroups(): Promise<void> {
+    if (!this.treeView || this.viewMode !== 'flat') return;
+
+    // Wait for tree to rebuild
+    await new Promise((resolve) => setTimeout(resolve, 50));
+
+    // Get current root nodes
+    const rootNodes = await this.getChildren();
+
+    // Re-expand groups that were expanded before
+    for (const node of rootNodes) {
+      if (node instanceof TypeGroupNode && this.expandedGroups.has(node.getType())) {
+        await this.treeView.reveal(node, {
+          select: false,
+          focus: false,
+          expand: 1, // Expand one level
+        });
+      }
+    }
+  }
+
+  /**
    * Set sort options
    */
   setSortOptions(by: SortState['by'], order: SortState['order']): void {
     this.sortState = { by, order };
     this.refresh();
+    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
