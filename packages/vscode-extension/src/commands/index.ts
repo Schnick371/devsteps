@@ -757,6 +757,17 @@ ${Object.entries(byType)
     }),
   );
 
+  // Toggle Hide Done Items
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devcrumbs.toggleHideDone', () => {
+      treeDataProvider.toggleHideDone();
+      const isHidden = treeDataProvider.getHideDoneState();
+      vscode.window.showInformationMessage(
+        isHidden ? '👁️ Completed items hidden' : '👁️ Completed items visible'
+      );
+    }),
+  );
+
   // Sort options
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.sort', async () => {

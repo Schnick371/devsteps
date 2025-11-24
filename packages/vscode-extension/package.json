@@ -35,6 +35,13 @@
         }
       ]
     },
+    "submenus": [
+      {
+        "id": "devcrumbs.viewAndSort",
+        "label": "View & Sort",
+        "icon": "$(ellipsis)"
+      }
+    ],
     "views": {
       "devcrumbs-explorer": [
         {
@@ -177,6 +184,12 @@
         "title": "Clear Output Channel",
         "category": "DevCrumbs",
         "icon": "$(clear-all)"
+      },
+      {
+        "command": "devcrumbs.toggleHideDone",
+        "title": "Toggle Hide Completed Items",
+        "category": "DevCrumbs",
+        "icon": "$(eye)"
       }
     ],
     "keybindings": [
@@ -276,34 +289,76 @@
     "menus": {
       "view/title": [
         {
-          "command": "devcrumbs.viewMode.flat",
+          "command": "devcrumbs.toggleHideDone",
           "when": "view == devcrumbs.itemsView",
           "group": "navigation@1"
         },
         {
-          "command": "devcrumbs.viewMode.hierarchical",
+          "command": "devcrumbs.refreshItems",
           "when": "view == devcrumbs.itemsView",
           "group": "navigation@2"
         },
         {
-          "command": "devcrumbs.refreshItems",
+          "command": "devcrumbs.addItem",
           "when": "view == devcrumbs.itemsView",
           "group": "navigation@3"
         },
         {
-          "command": "devcrumbs.addItem",
+          "command": "devcrumbs.searchItems",
           "when": "view == devcrumbs.itemsView",
           "group": "navigation@4"
         },
         {
-          "command": "devcrumbs.searchItems",
+          "command": "devcrumbs.showDashboard",
           "when": "view == devcrumbs.itemsView",
           "group": "navigation@5"
         },
         {
-          "command": "devcrumbs.showDashboard",
+          "submenu": "devcrumbs.viewAndSort",
           "when": "view == devcrumbs.itemsView",
-          "group": "navigation@6"
+          "group": "1_viewsort"
+        }
+      ],
+      "devcrumbs.viewAndSort": [
+        {
+          "command": "devcrumbs.viewMode.flat",
+          "group": "1_view@1"
+        },
+        {
+          "command": "devcrumbs.viewMode.hierarchical",
+          "group": "1_view@2"
+        },
+        {
+          "command": "devcrumbs.hierarchy.scrum",
+          "group": "2_hierarchy@1"
+        },
+        {
+          "command": "devcrumbs.hierarchy.waterfall",
+          "group": "2_hierarchy@2"
+        },
+        {
+          "command": "devcrumbs.hierarchy.both",
+          "group": "2_hierarchy@3"
+        },
+        {
+          "command": "devcrumbs.sort",
+          "group": "3_sort@1"
+        },
+        {
+          "command": "devcrumbs.filterByStatus",
+          "group": "4_filter@1"
+        },
+        {
+          "command": "devcrumbs.filterByPriority",
+          "group": "4_filter@2"
+        },
+        {
+          "command": "devcrumbs.filterByType",
+          "group": "4_filter@3"
+        },
+        {
+          "command": "devcrumbs.clearFilters",
+          "group": "4_filter@4"
         }
       ],
       "view/item/context": [

@@ -1,0 +1,42 @@
+{
+  "id": "TASK-035",
+  "type": "task",
+  "category": "vscode",
+  "title": "Reorganize view toolbar - Move view mode buttons to submenu",
+  "status": "done",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-24T10:53:47.169Z",
+  "updated": "2025-11-24T11:01:07.796Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [
+    "packages/vscode-extension/package.json"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-004"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-002",
+      "TASK-010",
+      "TASK-031"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ux",
+    "toolbar",
+    "submenu",
+    "view-organization"
+  ],
+  "commits": [],
+  "metadata": {}
+}

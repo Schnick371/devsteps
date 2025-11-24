@@ -1,0 +1,41 @@
+{
+  "id": "TASK-034",
+  "type": "task",
+  "category": "vscode",
+  "title": "Add user setting for work item editor open behavior",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-24T10:45:30.672Z",
+  "updated": "2025-11-24T10:45:37.280Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [
+    "packages/vscode-extension/package.json",
+    "packages/vscode-extension/src/commands/index.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-033",
+      "TASK-012"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ux",
+    "settings",
+    "editor-behavior",
+    "vscode-api",
+    "configuration"
+  ],
+  "commits": [],
+  "metadata": {}
+}

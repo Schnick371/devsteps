@@ -82,6 +82,7 @@ interface FilterState {
   types: string[];
   tags: string[];
   searchQuery: string;
+  hideDone: boolean;
 }
 
 interface SortState {
@@ -271,6 +272,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
     types: [],
     tags: [],
     searchQuery: '',
+    hideDone: false,
   };
   private sortState: SortState = {
     by: 'id',
@@ -354,8 +356,24 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
       types: [],
       tags: [],
       searchQuery: '',
+      hideDone: false,
     };
     this.refresh();
+  }
+
+  /**
+   * Toggle Hide Done Items (only affects flat view)
+   */
+  toggleHideDone(): void {
+    this.filterState.hideDone = !this.filterState.hideDone;
+    this.refresh();
+  }
+
+  /**
+   * Get current Hide Done state
+   */
+  getHideDoneState(): boolean {
+    return this.filterState.hideDone;
   }
 
   /**
@@ -367,10 +385,15 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   }
 
   /**
-   * Apply filters to work items
+   * Apply filters to work items (only used in flat view)
    */
   private applyFilters(items: WorkItem[]): WorkItem[] {
     let filtered = items;
+
+    // Hide done items filter (only in flat view)
+    if (this.filterState.hideDone) {
+      filtered = filtered.filter((item) => item.status !== 'done');
+    }
 
     // Status filter
     if (this.filterState.statuses.length > 0) {
