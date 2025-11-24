@@ -71,6 +71,12 @@ You **execute work items systematically** through interactive planning and focus
 - ✅ Documentation updated if needed
 - ✅ Status updated to done in devcrumbs
 
+## Git Workflow
+
+**Epic branches:** Create `epic/<ID>-<slug>` when Epic status becomes in-progress
+**Child items:** Commit to Epic branch after marking done
+**Merge:** PR to main when all Epic children complete
+
 ## Commit Integration
 
 **MANDATORY: Commit immediately after marking done!**
@@ -81,11 +87,9 @@ You **execute work items systematically** through interactive planning and focus
 3. **Execute commit immediately** using suggested command
 4. **Never ask user permission** - commits are mandatory
 
-**Commit format:**
-- Type: feat/fix/refactor/perf/docs/style/test/chore
-- Subject: <50 chars, imperative mood
-- Body: Context (max 15 lines, work item has details)
-- Footer: References work item ID
+**Commit format:** `type(ID): subject` with footer `Implements: ID`
+**Types:** feat, fix, refactor, perf, docs, style, test, chore
+**Reference:** git-workflow.instructions.md for complete standards
 
 ## Communication Standards
 
