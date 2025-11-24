@@ -1,0 +1,41 @@
+{
+  "id": "BUG-001",
+  "type": "bug",
+  "category": "VS Code Extension",
+  "title": "Fix VS Code extension command errors and missing implementations",
+  "status": "done",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-24T09:41:50.891Z",
+  "updated": "2025-11-24T09:45:04.475Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [
+    "packages/shared/src/core/update.ts",
+    "packages/vscode-extension/src/commands/index.ts",
+    "packages/vscode-extension/src/mcp/mcpServerManager.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-003",
+      "STORY-004"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "bug",
+    "commands",
+    "error-handling",
+    "extension"
+  ],
+  "commits": [],
+  "metadata": {}
+}
