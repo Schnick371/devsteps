@@ -2,8 +2,7 @@
   "name": "devcrumbs-vscode",
   "displayName": "DevCrumbs",
   "description": "Never Code Alone. Team Up With Your AI.",
-  "version": "0.4.1",
-  "type": "module",
+  "version": "0.4.4",
   "publisher": "devcrumbs",
   "license": "Apache-2.0",
   "author": "Thomas Hertel (the@devcrumbs.dev)",
@@ -26,6 +25,12 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "mcpServerDefinitionProviders": [
+      {
+        "id": "devcrumbs-mcp",
+        "label": "DevCrumbs MCP Server"
+      }
+    ],
     "viewsContainers": {
       "activitybar": [
         {

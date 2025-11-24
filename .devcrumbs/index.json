@@ -4,7 +4,7 @@
     "epic": 4,
     "story": 4,
     "task": 33,
-    "bug": 5,
+    "bug": 6,
     "spike": 2,
     "feature": 4,
     "requirement": 1
@@ -482,26 +482,34 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-11-24T12:12:40.057Z"
+    },
+    {
+      "id": "BUG-006",
+      "type": "bug",
+      "title": "Hide Done toggle not working in hierarchical view",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-11-24T12:59:41.113Z"
     }
   ],
   "stats": {
-    "total": 53,
+    "total": 54,
     "by_type": {
       "epic": 4,
       "story": 4,
       "task": 33,
-      "bug": 5,
+      "bug": 6,
       "spike": 2,
       "feature": 4,
       "requirement": 1
     },
     "by_status": {
       "in-progress": 3,
-      "done": 40,
+      "done": 41,
       "draft": 9,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T12:22:01.750Z"
+  "last_updated": "2025-11-24T12:59:41.113Z"
 }

@@ -7,7 +7,7 @@
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T09:38:35.440Z",
-  "updated": "2025-11-24T11:14:31.719Z",
+  "updated": "2025-11-24T12:47:33.608Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/src/treeView/devcrumbsTreeDataProvider.ts",
@@ -23,7 +23,8 @@
     "blocked-by": [],
     "relates-to": [
       "TASK-002",
-      "TASK-010"
+      "TASK-010",
+      "BUG-006"
     ],
     "depends-on": [],
     "required-by": [],

@@ -110,7 +110,7 @@ interface WorkItem {
  */
 abstract class TreeNode {
   abstract toTreeItem(): vscode.TreeItem;
-  abstract getChildren(workspaceRoot: vscode.Uri): Promise<TreeNode[]>;
+  abstract getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState): Promise<TreeNode[]>;
 }
 
 /**
@@ -135,7 +135,7 @@ class TypeGroupNode extends TreeNode {
     return item;
   }
 
-  async getChildren(_workspaceRoot: vscode.Uri): Promise<TreeNode[]> {
+  async getChildren(_workspaceRoot: vscode.Uri, _filterState?: FilterState): Promise<TreeNode[]> {
     return this.items.map((item) => new WorkItemNode(item, false));
   }
 }
@@ -158,7 +158,7 @@ class HierarchyRootNode extends TreeNode {
     return item;
   }
 
-  async getChildren(workspaceRoot: vscode.Uri): Promise<TreeNode[]> {
+  async getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState): Promise<TreeNode[]> {
     try {
       const indexPath = vscode.Uri.joinPath(workspaceRoot, '.devcrumbs', 'index.json');
       const indexData = await vscode.workspace.fs.readFile(indexPath);
@@ -171,13 +171,18 @@ class HierarchyRootNode extends TreeNode {
         .map((meta: any) => meta.id);
 
       // Load full items with linked_items for hierarchical view
-      const items: WorkItem[] = [];
+      let items: WorkItem[] = [];
       for (const itemId of itemIds) {
         const item = await loadItemWithLinks(workspaceRoot, itemId);
         if (item) items.push(item);
       }
 
-      return items.map((item) => new WorkItemNode(item, true));
+      // Apply hideDone filter in hierarchical view
+      if (filterState?.hideDone) {
+        items = items.filter((item) => item.status !== 'done');
+      }
+
+      return items.map((item) => new WorkItemNode(item, true, filterState));
     } catch (error) {
       console.error('Failed to load hierarchy items:', error);
       return [];
@@ -192,6 +197,7 @@ class WorkItemNode extends TreeNode {
   constructor(
     private item: WorkItem,
     private hierarchical: boolean = false,
+    private filterState?: FilterState,
   ) {
     super();
   }
@@ -221,20 +227,26 @@ class WorkItemNode extends TreeNode {
     return treeItem;
   }
 
-  async getChildren(workspaceRoot: vscode.Uri): Promise<TreeNode[]> {
+  async getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState): Promise<TreeNode[]> {
     if (!this.hierarchical) return [];
 
     try {
       const implementedBy = this.item.linked_items?.['implemented-by'] || [];
       
       // Load full child items with linked_items for hierarchical display
-      const children: WorkItem[] = [];
+      let children: WorkItem[] = [];
       for (const childId of implementedBy) {
         const child = await loadItemWithLinks(workspaceRoot, childId);
         if (child) children.push(child);
       }
 
-      return children.map((item) => new WorkItemNode(item, true));
+      // Apply hideDone filter in hierarchical view
+      const effectiveFilter = filterState || this.filterState;
+      if (effectiveFilter?.hideDone) {
+        children = children.filter((item) => item.status !== 'done');
+      }
+
+      return children.map((item) => new WorkItemNode(item, true, effectiveFilter));
     } catch (error) {
       console.error('Failed to load child items:', error);
       return [];
@@ -500,8 +512,16 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
       return this.getHierarchicalRootNodes();
     }
 
-    // Child nodes
-    return element.getChildren(this.workspaceRoot);
+    // Root nodes
+    if (!element) {
+      if (this.viewMode === 'flat') {
+        return this.getFlatRootNodes();
+      }
+      return this.getHierarchicalRootNodes();
+    }
+
+    // Child nodes - pass filterState for hierarchical view filtering
+    return element.getChildren(this.workspaceRoot, this.filterState);
   }
 
   /**
