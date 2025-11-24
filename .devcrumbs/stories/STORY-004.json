@@ -7,7 +7,7 @@
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T15:42:52.573Z",
-  "updated": "2025-11-24T09:41:57.285Z",
+  "updated": "2025-11-24T10:21:34.418Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/"
@@ -26,7 +26,8 @@
       "TASK-007",
       "TASK-008",
       "TASK-009",
-      "TASK-010"
+      "TASK-010",
+      "TASK-013"
     ],
     "tested-by": [],
     "tests": [],
@@ -34,7 +35,8 @@
     "blocked-by": [],
     "relates-to": [
       "FEAT-004",
-      "BUG-001"
+      "BUG-001",
+      "BUG-002"
     ],
     "depends-on": [
       "STORY-001"

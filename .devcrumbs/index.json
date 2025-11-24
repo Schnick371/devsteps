@@ -1,12 +1,23 @@
 {
+  "version": "1.0.0",
+  "counters": {
+    "epic": 4,
+    "story": 4,
+    "task": 32,
+    "bug": 2,
+    "spike": 2,
+    "feature": 4,
+    "requirement": 1
+  },
   "items": [
     {
       "id": "EPIC-001",
       "type": "epic",
       "title": "DevCrumbs Platform - AI-First Development Workflow System",
-      "status": "draft",
+      "status": "in-progress",
       "priority": "critical",
-      "updated": "2025-11-23T15:33:22.968Z"
+      "created": "2025-11-23T15:33:22.968Z",
+      "updated": "2025-11-24T10:14:23.540Z"
     },
     {
       "id": "EPIC-002",
@@ -14,7 +25,26 @@
       "title": "Monorepo Infrastructure - Build System and Package Management",
       "status": "done",
       "priority": "high",
-      "updated": "2025-11-23T15:38:54.401Z"
+      "created": "2025-11-23T15:33:22.968Z",
+      "updated": "2025-11-24T10:15:02.472Z"
+    },
+    {
+      "id": "EPIC-003",
+      "type": "epic",
+      "title": "VS Code Extension - Complete IDE Integration",
+      "status": "in-progress",
+      "priority": "critical",
+      "created": "2025-11-23T15:34:16.783Z",
+      "updated": "2025-11-24T10:21:34.419Z"
+    },
+    {
+      "id": "EPIC-004",
+      "type": "epic",
+      "title": "GitHub Publication Preparation - Legal Compliance and Repository Setup",
+      "status": "in-progress",
+      "priority": "medium",
+      "created": "2025-11-23T16:40:59.062Z",
+      "updated": "2025-11-24T10:23:02.792Z"
     },
     {
       "id": "STORY-001",
@@ -22,7 +52,8 @@
       "title": "Shared Package - Core Business Logic and Type Definitions",
       "status": "done",
       "priority": "critical",
-      "updated": "2025-11-23T15:38:54.398Z"
+      "created": "2025-11-23T15:33:47.334Z",
+      "updated": "2025-11-24T10:13:37.884Z"
     },
     {
       "id": "STORY-002",
@@ -30,7 +61,8 @@
       "title": "CLI Package - Command-Line Interface for Developers",
       "status": "done",
       "priority": "high",
-      "updated": "2025-11-23T15:38:54.400Z"
+      "created": "2025-11-23T15:33:47.334Z",
+      "updated": "2025-11-24T10:21:56.070Z"
     },
     {
       "id": "STORY-003",
@@ -38,15 +70,17 @@
       "title": "MCP Server Package - AI Integration via Model Context Protocol",
       "status": "done",
       "priority": "critical",
-      "updated": "2025-11-23T15:38:54.400Z"
+      "created": "2025-11-23T15:33:47.339Z",
+      "updated": "2025-11-24T10:13:37.885Z"
     },
     {
-      "id": "EPIC-003",
-      "type": "epic",
-      "title": "VS Code Extension - Complete IDE Integration",
-      "status": "draft",
+      "id": "STORY-004",
+      "type": "story",
+      "title": "VS Code Extension Package - Complete Implementation",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-11-23T16:02:37.843Z"
+      "created": "2025-11-23T15:42:52.573Z",
+      "updated": "2025-11-24T10:21:34.418Z"
     },
     {
       "id": "TASK-001",
@@ -54,7 +88,8 @@
       "title": "Extension Scaffolding - Basic Structure and Activation",
       "status": "done",
       "priority": "critical",
-      "updated": "2025-11-23T17:36:44.188Z"
+      "created": "2025-11-23T15:34:16.786Z",
+      "updated": "2025-11-24T10:13:37.884Z"
     },
     {
       "id": "TASK-002",
@@ -62,7 +97,8 @@
       "title": "TreeView Provider - Display Work Items in Sidebar",
       "status": "done",
       "priority": "critical",
-      "updated": "2025-11-23T17:39:10.156Z"
+      "created": "2025-11-23T15:34:45.800Z",
+      "updated": "2025-11-24T10:21:34.417Z"
     },
     {
       "id": "TASK-003",
@@ -70,7 +106,8 @@
       "title": "Command Registration - User Interaction Handlers",
       "status": "done",
       "priority": "high",
-      "updated": "2025-11-23T18:05:31.972Z"
+      "created": "2025-11-23T15:34:45.801Z",
+      "updated": "2025-11-24T10:13:37.884Z"
     },
     {
       "id": "TASK-004",
@@ -78,7 +115,8 @@
       "title": "MCP Server Manager - Automatic Startup and Configuration",
       "status": "done",
       "priority": "critical",
-      "updated": "2025-11-23T17:41:10.333Z"
+      "created": "2025-11-23T15:35:22.305Z",
+      "updated": "2025-11-24T10:13:37.885Z"
     },
     {
       "id": "TASK-005",
@@ -86,7 +124,8 @@
       "title": "WebView Dashboard - Project Statistics and Visualization",
       "status": "done",
       "priority": "high",
-      "updated": "2025-11-23T19:19:39.103Z"
+      "created": "2025-11-23T15:35:22.310Z",
+      "updated": "2025-11-24T10:15:02.472Z"
     },
     {
       "id": "TASK-006",
@@ -94,7 +133,8 @@
       "title": "Context Menus - Quick Actions and User Interactions",
       "status": "done",
       "priority": "high",
-      "updated": "2025-11-23T18:07:55.921Z"
+      "created": "2025-11-23T15:39:31.433Z",
+      "updated": "2025-11-24T10:15:02.473Z"
     },
     {
       "id": "TASK-007",
@@ -102,6 +142,7 @@
       "title": "Icons and Theming - Visual Design and Theme Integration",
       "status": "done",
       "priority": "medium",
+      "created": "2025-11-23T15:39:31.434Z",
       "updated": "2025-11-23T19:52:56.706Z"
     },
     {
@@ -110,71 +151,8 @@
       "title": "Extension Packaging - Marketplace Distribution Preparation",
       "status": "done",
       "priority": "medium",
-      "updated": "2025-11-23T19:35:43.366Z"
-    },
-    {
-      "id": "STORY-004",
-      "type": "story",
-      "title": "VS Code Extension Package - Complete Implementation",
-      "status": "done",
-      "priority": "critical",
-      "updated": "2025-11-23T19:53:12.382Z"
-    },
-    {
-      "id": "REQ-001",
-      "type": "requirement",
-      "title": "DevCrumbs Platform - System Requirements",
-      "status": "draft",
-      "priority": "critical",
-      "updated": "2025-11-23T15:49:23.356Z"
-    },
-    {
-      "id": "FEAT-001",
-      "type": "feature",
-      "title": "Shared Package - Core Business Logic",
-      "status": "done",
-      "priority": "critical",
-      "updated": "2025-11-23T15:49:48.860Z"
-    },
-    {
-      "id": "FEAT-002",
-      "type": "feature",
-      "title": "CLI Package - Command-Line Interface",
-      "status": "done",
-      "priority": "critical",
-      "updated": "2025-11-23T15:49:48.861Z"
-    },
-    {
-      "id": "FEAT-003",
-      "type": "feature",
-      "title": "MCP Server - AI Integration Protocol",
-      "status": "done",
-      "priority": "critical",
-      "updated": "2025-11-23T15:49:48.862Z"
-    },
-    {
-      "id": "FEAT-004",
-      "type": "feature",
-      "title": "VS Code Extension - IDE Integration",
-      "status": "done",
-      "priority": "critical",
-      "updated": "2025-11-23T19:53:12.384Z"
-    },
-    {
-      "id": "SPIKE-001",
-      "type": "spike",
-      "title": "MCP Server Architecture Research",
-      "status": "done",
-      "priority": "high",
-      "updated": "2025-11-23T19:22:40.614Z"
-    },
-    {
-      "id": "SPIKE-002",
-      "type": "spike",
-      "title": "WebView Performance Optimization Research",
-      "status": "done",
-      "priority": "high",
-      "updated": "2025-11-23T19:27:12.414Z"
+      "created": "2025-11-23T15:39:31.435Z",
+      "updated": "2025-11-24T10:13:37.885Z"
     },
     {
       "id": "TASK-009",
@@ -182,6 +160,7 @@
       "title": "FileDecorationProvider - Status Color Badges for TreeView Items",
       "status": "done",
       "priority": "high",
+      "created": "2025-11-23T16:19:31.869Z",
       "updated": "2025-11-23T18:10:50.333Z"
     },
     {
@@ -190,7 +169,8 @@
       "title": "TreeView Filtering and Sorting - Advanced Item Navigation",
       "status": "done",
       "priority": "high",
-      "updated": "2025-11-23T18:14:24.848Z"
+      "created": "2025-11-23T16:20:30.935Z",
+      "updated": "2025-11-24T09:38:41.020Z"
     },
     {
       "id": "TASK-011",
@@ -198,6 +178,7 @@
       "title": "Keyboard Shortcuts - Fast Navigation and Actions",
       "status": "done",
       "priority": "medium",
+      "created": "2025-11-23T16:21:29.239Z",
       "updated": "2025-11-23T19:54:25.594Z"
     },
     {
@@ -206,7 +187,8 @@
       "title": "Settings UI - Configurable Extension Behavior",
       "status": "draft",
       "priority": "medium",
-      "updated": "2025-11-23T16:23:17.409Z"
+      "created": "2025-11-23T16:23:17.409Z",
+      "updated": "2025-11-23T16:23:25.826Z"
     },
     {
       "id": "TASK-013",
@@ -214,7 +196,8 @@
       "title": "Welcome View - Onboarding and Getting Started",
       "status": "draft",
       "priority": "medium",
-      "updated": "2025-11-23T16:23:17.413Z"
+      "created": "2025-11-23T16:23:17.413Z",
+      "updated": "2025-11-24T10:15:02.473Z"
     },
     {
       "id": "TASK-014",
@@ -222,7 +205,8 @@
       "title": "Status Bar Integration - Quick Project Stats",
       "status": "draft",
       "priority": "low",
-      "updated": "2025-11-23T16:23:17.413Z"
+      "created": "2025-11-23T16:23:17.413Z",
+      "updated": "2025-11-23T16:23:25.828Z"
     },
     {
       "id": "TASK-015",
@@ -230,15 +214,8 @@
       "title": "Output Channel Logging - Debugging and Diagnostics",
       "status": "done",
       "priority": "medium",
-      "updated": "2025-11-23T19:57:34.595Z"
-    },
-    {
-      "id": "EPIC-004",
-      "type": "epic",
-      "title": "GitHub Publication Preparation - Legal Compliance and Repository Setup",
-      "status": "draft",
-      "priority": "critical",
-      "updated": "2025-11-23T16:40:59.062Z"
+      "created": "2025-11-23T16:23:17.414Z",
+      "updated": "2025-11-24T10:13:37.885Z"
     },
     {
       "id": "TASK-016",
@@ -246,7 +223,8 @@
       "title": "LICENSE Consistency Fix - Apache 2.0 Across All Packages",
       "status": "done",
       "priority": "critical",
-      "updated": "2025-11-23T16:54:11.438Z"
+      "created": "2025-11-23T16:42:18.041Z",
+      "updated": "2025-11-24T10:13:37.886Z"
     },
     {
       "id": "TASK-017",
@@ -254,6 +232,7 @@
       "title": "README.md Enhancement - Legal Compliance and Attribution",
       "status": "done",
       "priority": "high",
+      "created": "2025-11-23T16:42:18.041Z",
       "updated": "2025-11-23T17:44:16.121Z"
     },
     {
@@ -262,6 +241,7 @@
       "title": "CODE_OF_CONDUCT.md Creation - Community Standards",
       "status": "done",
       "priority": "high",
+      "created": "2025-11-23T16:42:18.046Z",
       "updated": "2025-11-23T17:42:12.836Z"
     },
     {
@@ -270,6 +250,7 @@
       "title": "CONTRIBUTING.md Creation - Contribution Guidelines and DCO",
       "status": "done",
       "priority": "high",
+      "created": "2025-11-23T16:42:18.046Z",
       "updated": "2025-11-23T17:42:45.611Z"
     },
     {
@@ -278,6 +259,7 @@
       "title": "SECURITY.md Creation - Vulnerability Disclosure Process",
       "status": "done",
       "priority": "high",
+      "created": "2025-11-23T16:42:18.046Z",
       "updated": "2025-11-23T17:43:18.075Z"
     },
     {
@@ -286,6 +268,7 @@
       "title": "Project Safety Audit - Security and Legal Risk Assessment",
       "status": "done",
       "priority": "critical",
+      "created": "2025-11-23T16:43:55.416Z",
       "updated": "2025-11-23T17:31:19.709Z"
     },
     {
@@ -294,7 +277,8 @@
       "title": "Copyright and Trademark Protection Strategy",
       "status": "draft",
       "priority": "medium",
-      "updated": "2025-11-23T16:43:55.423Z"
+      "created": "2025-11-23T16:43:55.423Z",
+      "updated": "2025-11-23T16:44:06.407Z"
     },
     {
       "id": "TASK-023",
@@ -302,7 +286,8 @@
       "title": "GitHub Templates Creation - Issue and PR Templates",
       "status": "draft",
       "priority": "medium",
-      "updated": "2025-11-23T16:43:55.423Z"
+      "created": "2025-11-23T16:43:55.423Z",
+      "updated": "2025-11-23T16:44:06.407Z"
     },
     {
       "id": "TASK-024",
@@ -310,6 +295,7 @@
       "title": "GitHub Repository Setup and Configuration",
       "status": "done",
       "priority": "high",
+      "created": "2025-11-23T16:43:55.424Z",
       "updated": "2025-11-23T17:48:58.348Z"
     },
     {
@@ -318,6 +304,7 @@
       "title": "Dashboard Single-Load Optimization - Eliminate 5× Redundant File Reads",
       "status": "done",
       "priority": "high",
+      "created": "2025-11-23T19:27:33.181Z",
       "updated": "2025-11-23T19:29:47.661Z"
     },
     {
@@ -326,6 +313,7 @@
       "title": "Traceability Graph Node Limiting - Fix O(n²) Performance Bottleneck",
       "status": "done",
       "priority": "medium",
+      "created": "2025-11-23T19:27:59.279Z",
       "updated": "2025-11-23T19:32:00.877Z"
     },
     {
@@ -334,6 +322,7 @@
       "title": "Fix Extension Commands API Compatibility",
       "status": "done",
       "priority": "critical",
+      "created": "2025-11-23T19:42:48.508Z",
       "updated": "2025-11-23T19:50:24.421Z"
     },
     {
@@ -342,23 +331,26 @@
       "title": "Sync branding & links across GitHub, npm, and devcrumbs.dev",
       "status": "draft",
       "priority": "medium",
-      "updated": "2025-11-23T21:51:57.562Z"
+      "created": "2025-11-23T21:51:57.562Z",
+      "updated": "2025-11-23T21:59:47.149Z"
     },
     {
       "id": "TASK-029",
       "type": "task",
       "title": "Prepare clean Git repository for GitHub publication",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-11-23T21:59:11.351Z"
+      "created": "2025-11-23T21:59:11.351Z",
+      "updated": "2025-11-24T10:09:12+01:00"
     },
     {
       "id": "TASK-030",
       "type": "task",
       "title": "Push initial commit to GitHub with clean history",
-      "status": "draft",
+      "status": "blocked",
       "priority": "critical",
-      "updated": "2025-11-23T21:59:39.039Z"
+      "created": "2025-11-23T21:59:39.039Z",
+      "updated": "2025-11-24T10:19:50+01:00"
     },
     {
       "id": "TASK-031",
@@ -366,7 +358,17 @@
       "title": "TreeView: Add Hide Done Items Toggle Filter",
       "status": "draft",
       "priority": "medium",
-      "updated": "2025-11-24T09:38:35.440Z"
+      "created": "2025-11-24T09:38:35.440Z",
+      "updated": "2025-11-24T09:38:41.019Z"
+    },
+    {
+      "id": "TASK-032",
+      "type": "task",
+      "title": "Add CLI command to rebuild minimal index.json from item files",
+      "status": "draft",
+      "priority": "medium",
+      "created": "2025-11-24T10:21:50.188Z",
+      "updated": "2025-11-24T10:21:56.069Z"
     },
     {
       "id": "BUG-001",
@@ -374,37 +376,100 @@
       "title": "Fix VS Code extension command errors and missing implementations",
       "status": "done",
       "priority": "critical",
+      "created": "2025-11-24T09:41:50.891Z",
       "updated": "2025-11-24T09:49:16.429Z"
+    },
+    {
+      "id": "BUG-002",
+      "type": "bug",
+      "title": "TreeView hierarchical mode broken after minimal index refactoring",
+      "status": "done",
+      "priority": "critical",
+      "created": "2025-11-24T10:21:26.835Z",
+      "updated": "2025-11-24T10:25:52.721Z"
+    },
+    {
+      "id": "SPIKE-001",
+      "type": "spike",
+      "title": "MCP Server Architecture Research",
+      "status": "done",
+      "priority": "high",
+      "created": "2025-11-23T15:52:14.408Z",
+      "updated": "2025-11-23T19:22:40.614Z"
+    },
+    {
+      "id": "SPIKE-002",
+      "type": "spike",
+      "title": "WebView Performance Optimization Research",
+      "status": "done",
+      "priority": "high",
+      "created": "2025-11-23T15:52:14.408Z",
+      "updated": "2025-11-23T19:27:12.414Z"
+    },
+    {
+      "id": "FEAT-001",
+      "type": "feature",
+      "title": "Shared Package - Core Business Logic",
+      "status": "done",
+      "priority": "critical",
+      "created": "2025-11-23T15:49:23.356Z",
+      "updated": "2025-11-23T15:49:48.860Z"
+    },
+    {
+      "id": "FEAT-002",
+      "type": "feature",
+      "title": "CLI Package - Command-Line Interface",
+      "status": "done",
+      "priority": "critical",
+      "created": "2025-11-23T15:49:23.358Z",
+      "updated": "2025-11-23T15:49:48.861Z"
+    },
+    {
+      "id": "FEAT-003",
+      "type": "feature",
+      "title": "MCP Server - AI Integration Protocol",
+      "status": "done",
+      "priority": "critical",
+      "created": "2025-11-23T15:49:23.358Z",
+      "updated": "2025-11-23T15:49:48.862Z"
+    },
+    {
+      "id": "FEAT-004",
+      "type": "feature",
+      "title": "VS Code Extension - IDE Integration",
+      "status": "done",
+      "priority": "critical",
+      "created": "2025-11-23T15:49:23.364Z",
+      "updated": "2025-11-23T19:53:12.384Z"
+    },
+    {
+      "id": "REQ-001",
+      "type": "requirement",
+      "title": "DevCrumbs Platform - System Requirements",
+      "status": "draft",
+      "priority": "critical",
+      "created": "2025-11-23T15:49:23.356Z",
+      "updated": "2025-11-23T15:49:33.095Z"
     }
   ],
-  "last_updated": "2025-11-24T09:49:16.429Z",
-  "counters": {
-    "epic": 4,
-    "story": 4,
-    "requirement": 1,
-    "feature": 4,
-    "task": 31,
-    "bug": 1,
-    "spike": 2,
-    "test": 0
-  },
-  "archived_items": [],
   "stats": {
-    "total": 47,
+    "total": 49,
     "by_type": {
       "epic": 4,
       "story": 4,
-      "task": 31,
-      "requirement": 1,
-      "feature": 4,
+      "task": 32,
+      "bug": 2,
       "spike": 2,
-      "bug": 1
+      "feature": 4,
+      "requirement": 1
     },
     "by_status": {
-      "draft": 13,
-      "done": 34,
-      "in-progress": 0
-    },
-    "archived": 0
-  }
+      "in-progress": 3,
+      "done": 36,
+      "draft": 9,
+      "blocked": 1
+    }
+  },
+  "archived_items": [],
+  "last_updated": "2025-11-24T10:25:52.721Z"
 }

@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T15:35:22.310Z",
-  "updated": "2025-11-23T19:19:39.103Z",
+  "updated": "2025-11-24T10:15:02.472Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/src/webview/dashboardPanel.ts",
@@ -17,7 +17,8 @@
     "implements": [
       "EPIC-003",
       "STORY-004",
-      "FEAT-004"
+      "FEAT-004",
+      "EPIC-002"
     ],
     "implemented-by": [],
     "tested-by": [],

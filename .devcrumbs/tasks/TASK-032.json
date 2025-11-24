@@ -1,39 +1,40 @@
 {
-  "id": "TASK-013",
+  "id": "TASK-032",
   "type": "task",
-  "category": "vscode",
-  "title": "Welcome View - Onboarding and Getting Started",
+  "category": "general",
+  "title": "Add CLI command to rebuild minimal index.json from item files",
   "status": "draft",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
-  "created": "2025-11-23T16:23:17.413Z",
-  "updated": "2025-11-24T10:15:02.473Z",
+  "created": "2025-11-24T10:21:50.188Z",
+  "updated": "2025-11-24T10:21:56.069Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
-    "packages/vscode-extension/package.json",
-    "packages/vscode-extension/src/welcomeView.ts"
+    "packages/cli/src/commands/doctor.ts",
+    "packages/shared/src/core/index.ts"
   ],
   "linked_items": {
     "implements": [
-      "EPIC-003",
-      "STORY-004"
+      "STORY-002"
     ],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "BUG-002"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "vscode",
-    "welcome",
-    "onboarding",
-    "tutorial"
+    "cli",
+    "index",
+    "maintenance",
+    "tools"
   ],
   "commits": [],
   "metadata": {}

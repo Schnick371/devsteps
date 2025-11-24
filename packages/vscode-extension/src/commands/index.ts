@@ -166,9 +166,22 @@ export function registerCommands(
     }),
   );
 
-  // Open work item
+  // Open work item (markdown file)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.openItem', async (itemId: string) => {
+    vscode.commands.registerCommand('devcrumbs.openItem', async (node?: any) => {
+      // Extract ID from different possible structures
+      let itemId: string | undefined;
+      
+      if (typeof node === 'string') {
+        itemId = node;
+      } else if (node?.item?.id) {
+        // WorkItemNode has item property
+        itemId = node.item.id;
+      } else if (node?.label) {
+        // TreeItem has label property
+        itemId = node.label.split(':')[0]?.trim();
+      }
+      
       if (!itemId) {
         vscode.window.showErrorMessage('No item ID provided');
         return;
@@ -215,17 +228,25 @@ export function registerCommands(
 
   // Update status
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.updateStatus', async (itemIdOrNode?: string | any) => {
+    vscode.commands.registerCommand('devcrumbs.updateStatus', async (node?: any) => {
       const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
       if (!workspaceFolder) {
         vscode.window.showErrorMessage('No workspace folder open');
         return;
       }
 
-      // Extract ID from TreeItem/node or use string directly
-      const itemId = typeof itemIdOrNode === 'string' 
-        ? itemIdOrNode 
-        : itemIdOrNode?.label?.split(':')[0]?.trim();
+      // Extract ID from different possible structures
+      let itemId: string | undefined;
+      
+      if (typeof node === 'string') {
+        itemId = node;
+      } else if (node?.item?.id) {
+        // WorkItemNode has item property
+        itemId = node.item.id;
+      } else if (node?.label) {
+        // TreeItem has label property
+        itemId = node.label.split(':')[0]?.trim();
+      }
 
       // If no itemId provided, let user search/select
       let targetItemId = itemId;
@@ -436,17 +457,36 @@ ${Object.entries(byType)
 
   // Copy item ID to clipboard
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.copyId', async (itemIdOrNode?: string | any) => {
-      // Extract ID from TreeItem/node or use string directly
-      const itemId = typeof itemIdOrNode === 'string' 
-        ? itemIdOrNode 
-        : itemIdOrNode?.label?.split(':')[0]?.trim();
+    vscode.commands.registerCommand('devcrumbs.copyId', async (node?: any) => {
+      logger.debug('copyId command invoked', {
+        nodeType: typeof node,
+        constructor: node?.constructor?.name,
+        hasItem: !!node?.item,
+        hasLabel: !!node?.label,
+        label: node?.label,
+        itemId: node?.item?.id
+      });
+      
+      // Extract ID from different possible structures
+      let itemId: string | undefined;
+      
+      if (typeof node === 'string') {
+        itemId = node;
+      } else if (node?.item?.id) {
+        // WorkItemNode has item property
+        itemId = node.item.id;
+      } else if (node?.label) {
+        // TreeItem has label property
+        itemId = node.label.split(':')[0]?.trim();
+      }
       
       if (!itemId) {
+        logger.error('copyId: Could not extract item ID from node', node);
         vscode.window.showErrorMessage('No item ID provided');
         return;
       }
 
+      logger.info(`Copied item ID to clipboard: ${itemId}`);
       vscode.env.clipboard.writeText(itemId);
       vscode.window.showInformationMessage(`📋 Copied ${itemId} to clipboard`);
     }),
@@ -454,11 +494,19 @@ ${Object.entries(byType)
 
   // Show item in file explorer
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.revealInExplorer', async (itemIdOrNode?: string | any) => {
-      // Extract ID from TreeItem/node or use string directly
-      const itemId = typeof itemIdOrNode === 'string' 
-        ? itemIdOrNode 
-        : itemIdOrNode?.label?.split(':')[0]?.trim();
+    vscode.commands.registerCommand('devcrumbs.revealInExplorer', async (node?: any) => {
+      // Extract ID from different possible structures
+      let itemId: string | undefined;
+      
+      if (typeof node === 'string') {
+        itemId = node;
+      } else if (node?.item?.id) {
+        // WorkItemNode has item property
+        itemId = node.item.id;
+      } else if (node?.label) {
+        // TreeItem has label property
+        itemId = node.label.split(':')[0]?.trim();
+      }
       
       if (!itemId) {
         vscode.window.showErrorMessage('No item ID provided');
@@ -500,11 +548,19 @@ ${Object.entries(byType)
 
   // Edit item properties (quick edit)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.editProperties', async (itemIdOrNode?: string | any) => {
-      // Extract ID from TreeItem/node or use string directly
-      const itemId = typeof itemIdOrNode === 'string' 
-        ? itemIdOrNode 
-        : itemIdOrNode?.label?.split(':')[0]?.trim();
+    vscode.commands.registerCommand('devcrumbs.editProperties', async (node?: any) => {
+      // Extract ID from different possible structures
+      let itemId: string | undefined;
+      
+      if (typeof node === 'string') {
+        itemId = node;
+      } else if (node?.item?.id) {
+        // WorkItemNode has item property
+        itemId = node.item.id;
+      } else if (node?.label) {
+        // TreeItem has label property
+        itemId = node.label.split(':')[0]?.trim();
+      }
       
       if (!itemId) {
         vscode.window.showErrorMessage('No item ID provided');

@@ -7,16 +7,19 @@
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T15:33:47.334Z",
-  "updated": "2025-11-23T15:49:33.096Z",
+  "updated": "2025-11-24T10:13:37.884Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "packages/shared/src/"
   ],
   "linked_items": {
     "implements": [
-      "EPIC-002"
+      "EPIC-002",
+      "EPIC-001"
     ],
-    "implemented-by": [],
+    "implemented-by": [
+      "TASK-001"
+    ],
     "tested-by": [],
     "tests": [],
     "blocks": [],

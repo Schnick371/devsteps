@@ -15,6 +15,67 @@ import type { ItemType, Priority } from '@devcrumbs/shared';
 type ViewMode = 'flat' | 'hierarchical';
 type HierarchyType = 'scrum' | 'waterfall' | 'both';
 
+/**
+ * Map item types to their directory names
+ */
+const TYPE_TO_DIRECTORY: Record<string, string> = {
+  epic: 'epics',
+  story: 'stories',
+  task: 'tasks',
+  requirement: 'requirements',
+  feature: 'features',
+  bug: 'bugs',
+  spike: 'spikes',
+  test: 'tests',
+};
+
+/**
+ * Load full item data from individual JSON file (includes linked_items)
+ * Used for hierarchical view to get relationship data
+ */
+async function loadItemWithLinks(
+  workspaceRoot: vscode.Uri,
+  itemId: string
+): Promise<WorkItem | null> {
+  try {
+    // Parse item type from ID (e.g., "EPIC-001" -> "epic")
+    const match = itemId.match(/^(EPIC|STORY|TASK|REQ|FEAT|BUG|SPIKE|TEST)-(\d+)$/);
+    if (!match) return null;
+
+    const typeMap: Record<string, string> = {
+      EPIC: 'epic',
+      STORY: 'story',
+      TASK: 'task',
+      REQ: 'requirement',
+      FEAT: 'feature',
+      BUG: 'bug',
+      SPIKE: 'spike',
+      TEST: 'test',
+    };
+
+    const itemType = typeMap[match[1]];
+    if (!itemType) return null;
+
+    const typeDir = TYPE_TO_DIRECTORY[itemType];
+    if (!typeDir) return null;
+
+    // Read full JSON file
+    const itemPath = vscode.Uri.joinPath(
+      workspaceRoot,
+      '.devcrumbs',
+      typeDir,
+      `${itemId}.json`
+    );
+    const itemData = await vscode.workspace.fs.readFile(itemPath);
+    const item = JSON.parse(Buffer.from(itemData).toString('utf-8'));
+
+    return item as WorkItem;
+  } catch (error) {
+    console.error(`Failed to load item ${itemId}:`, error);
+    return null;
+  }
+}
+
 interface FilterState {
   statuses: string[];
   priorities: string[];
@@ -104,9 +165,16 @@ class HierarchyRootNode extends TreeNode {
 
       // Get top-level items (Epics for Scrum, Requirements for Waterfall)
       const topLevelType = this.hierarchy === 'scrum' ? 'epic' : 'requirement';
-      const items = Object.entries<any>(index.items || {})
-        .filter(([_, meta]) => meta.type === topLevelType)
-        .map(([id, meta]) => ({ id, ...meta }) as WorkItem);
+      const itemIds = index.items
+        .filter((meta: any) => meta.type === topLevelType)
+        .map((meta: any) => meta.id);
+
+      // Load full items with linked_items for hierarchical view
+      const items: WorkItem[] = [];
+      for (const itemId of itemIds) {
+        const item = await loadItemWithLinks(workspaceRoot, itemId);
+        if (item) items.push(item);
+      }
 
       return items.map((item) => new WorkItemNode(item, true));
     } catch (error) {
@@ -156,21 +224,16 @@ class WorkItemNode extends TreeNode {
     if (!this.hierarchical) return [];
 
     try {
-      const indexPath = vscode.Uri.joinPath(workspaceRoot, '.devcrumbs', 'index.json');
-      const indexData = await vscode.workspace.fs.readFile(indexPath);
-      const index = JSON.parse(Buffer.from(indexData).toString('utf-8'));
-
       const implementedBy = this.item.linked_items?.['implemented-by'] || [];
-      const children = implementedBy
-        .map((childId) => {
-          const childMeta = index.items[childId];
-          if (!childMeta) return null;
-          return { id: childId, ...childMeta } as WorkItem;
-        })
-        .filter((item): item is WorkItem => item !== null)
-        .map((item) => new WorkItemNode(item, true));
+      
+      // Load full child items with linked_items for hierarchical display
+      const children: WorkItem[] = [];
+      for (const childId of implementedBy) {
+        const child = await loadItemWithLinks(workspaceRoot, childId);
+        if (child) children.push(child);
+      }
 
-      return children;
+      return children.map((item) => new WorkItemNode(item, true));
     } catch (error) {
       console.error('Failed to load child items:', error);
       return [];

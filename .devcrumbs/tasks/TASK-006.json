@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T15:39:31.433Z",
-  "updated": "2025-11-23T18:07:55.921Z",
+  "updated": "2025-11-24T10:15:02.473Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/package.json"
@@ -16,7 +16,8 @@
     "implements": [
       "EPIC-003",
       "STORY-004",
-      "FEAT-004"
+      "FEAT-004",
+      "EPIC-002"
     ],
     "implemented-by": [],
     "tested-by": [],

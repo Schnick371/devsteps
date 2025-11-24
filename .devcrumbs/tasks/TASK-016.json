@@ -7,7 +7,7 @@
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T16:42:18.041Z",
-  "updated": "2025-11-23T16:54:11.438Z",
+  "updated": "2025-11-24T10:13:37.886Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "LICENSE.md",
@@ -18,7 +18,8 @@
   ],
   "linked_items": {
     "implements": [
-      "EPIC-004"
+      "EPIC-004",
+      "STORY-003"
     ],
     "implemented-by": [],
     "tested-by": [],

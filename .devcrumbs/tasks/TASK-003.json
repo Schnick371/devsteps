@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T15:34:45.801Z",
-  "updated": "2025-11-24T09:41:57.284Z",
+  "updated": "2025-11-24T10:13:37.884Z",
   "author": "thomas.hantke@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/src/commands.ts"
@@ -16,7 +16,8 @@
     "implements": [
       "EPIC-003",
       "STORY-004",
-      "FEAT-004"
+      "FEAT-004",
+      "STORY-002"
     ],
     "implemented-by": [],
     "tested-by": [],

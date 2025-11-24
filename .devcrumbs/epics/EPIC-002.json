@@ -7,14 +7,16 @@
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T15:33:22.968Z",
-  "updated": "2025-11-23T15:38:54.401Z",
+  "updated": "2025-11-24T10:15:02.472Z",
   "author": "thomas.hantke@devcrumbs.dev",
   "affected_paths": [],
   "linked_items": {
     "implements": [],
     "implemented-by": [
       "STORY-001",
-      "STORY-002"
+      "STORY-002",
+      "TASK-005",
+      "TASK-006"
     ],
     "tested-by": [],
     "tests": [],
