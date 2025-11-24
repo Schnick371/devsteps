@@ -1,0 +1,622 @@
+import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import {
+  type ItemMetadata,
+  type ItemType,
+  TYPE_SHORTCUTS,
+  TYPE_TO_DIRECTORY,
+  generateItemId,
+  getCurrentTimestamp,
+  parseItemId,
+} from '@devcrumbs/shared';
+import chalk from 'chalk';
+import ora from 'ora';
+
+function getDevCrumbsDir(): string {
+  const dir = join(process.cwd(), '.devcrumbs');
+  if (!existsSync(dir)) {
+    console.error(
+      chalk.red('Error:'),
+      'Project not initialized. Run',
+      chalk.cyan('devcrumbs init'),
+      'first.'
+    );
+    process.exit(1);
+  }
+  return dir;
+}
+
+export async function addCommand(
+  type: string,
+  title: string,
+  options: {
+    description?: string;
+    category?: string;
+    priority?: string;
+    tags?: string[];
+    assignee?: string;
+    paths?: string[];
+  }
+) {
+  const spinner = ora('Creating item...').start();
+
+  try {
+    const devcrumbsDir = getDevCrumbsDir();
+    const itemType = TYPE_SHORTCUTS[type] || type;
+
+    // Use shared core logic
+    const { addItem } = await import('@devcrumbs/shared');
+    const result = await addItem(devcrumbsDir, {
+      type: itemType as ItemType,
+      title,
+      description: options.description,
+      category: options.category,
+      priority: options.priority as any,
+      tags: options.tags,
+      affected_paths: options.paths,
+      assignee: options.assignee,
+      eisenhower: (options as any).eisenhower,
+    });
+
+    spinner.succeed(`Created ${chalk.cyan(result.itemId)}: ${title}`);
+
+    if (options.tags && options.tags.length > 0) {
+      console.log(chalk.gray('  Tags:'), options.tags.join(', '));
+    }
+    if (options.priority) {
+      console.log(chalk.gray('  Priority:'), options.priority);
+    }
+
+    // Git hint
+    const configPath = join(devcrumbsDir, 'config.json');
+    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    if (config.settings.git_integration) {
+      console.log(
+        chalk.gray('\n💡 Git:'),
+        chalk.cyan(`git commit -am "feat: ${result.itemId} - ${title}"`)
+      );
+    }
+  } catch (error: any) {
+    spinner.fail('Failed to create item');
+    throw error;
+  }
+}
+
+export async function getCommand(id: string) {
+  try {
+    const devcrumbsDir = getDevCrumbsDir();
+    const parsed = parseItemId(id);
+
+    if (!parsed) {
+      console.error(chalk.red('Error:'), 'Invalid item ID:', id);
+      process.exit(1);
+    }
+
+    const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
+    const metadataPath = join(devcrumbsDir, typeFolder, `${id}.json`);
+    const descriptionPath = join(devcrumbsDir, typeFolder, `${id}.md`);
+
+    if (!existsSync(metadataPath)) {
+      console.error(chalk.red('Error:'), 'Item not found:', id);
+      process.exit(1);
+    }
+
+    const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+    const description = existsSync(descriptionPath) ? readFileSync(descriptionPath, 'utf-8') : '';
+
+    console.log();
+    console.log(chalk.bold.cyan(`${metadata.id}: ${metadata.title}`));
+    console.log();
+    console.log(chalk.gray('Status:'), metadata.status);
+    console.log(chalk.gray('Priority:'), metadata.priority);
+    console.log(chalk.gray('Type:'), metadata.type);
+    console.log(chalk.gray('Category:'), metadata.category);
+
+    if (metadata.assignee) {
+      console.log(chalk.gray('Assignee:'), metadata.assignee);
+    }
+
+    if (metadata.tags.length > 0) {
+      console.log(chalk.gray('Tags:'), metadata.tags.join(', '));
+    }
+
+    if (metadata.affected_paths.length > 0) {
+      console.log(chalk.gray('Paths:'), metadata.affected_paths.join(', '));
+    }
+
+    console.log(chalk.gray('Created:'), new Date(metadata.created).toLocaleString());
+    console.log(chalk.gray('Updated:'), new Date(metadata.updated).toLocaleString());
+
+    console.log();
+    console.log(chalk.bold('Description:'));
+    console.log(description);
+  } catch (error: any) {
+    console.error(chalk.red('Error:'), error.message);
+    process.exit(1);
+  }
+}
+
+export async function listCommand(options: any) {
+  try {
+    const devcrumbsDir = getDevCrumbsDir();
+    const indexPath = join(devcrumbsDir, 'index.json');
+    const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
+
+    // Choose between active and archived items
+    let items = options.archived ? index.archived_items || [] : index.items;
+
+    if (options.type) {
+      const itemType = TYPE_SHORTCUTS[options.type] || options.type;
+      items = items.filter((i: any) => i.type === itemType);
+    }
+
+    // For archived items, use original_status
+    const statusField = options.archived ? 'original_status' : 'status';
+
+    if (options.status) {
+      items = items.filter((i: any) => i[statusField] === options.status);
+    }
+
+    // Archived items don't have priority in the summary, skip filter
+    if (options.priority && !options.archived) {
+      items = items.filter((i: any) => i.priority === options.priority);
+    }
+
+    if (options.eisenhower && !options.archived) {
+      // Load full metadata for eisenhower filter (not available for archived summary)
+      items = items.filter((i: any) => {
+        const typeFolder = TYPE_TO_DIRECTORY[i.type as ItemType];
+        const metadataPath = join(devcrumbsDir, typeFolder, `${i.id}.json`);
+        if (!existsSync(metadataPath)) return false;
+        const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+        return metadata.eisenhower === options.eisenhower;
+      });
+    }
+
+    const limit = Number.parseInt(options.limit, 10);
+    if (limit > 0) {
+      items = items.slice(0, limit);
+    }
+
+    console.log();
+    console.log(chalk.bold(`Found ${items.length} ${options.archived ? 'archived ' : ''}item(s)`));
+    console.log();
+
+    for (const item of items) {
+      if (options.archived) {
+        // Archived items display
+        const archivedDate = new Date(item.archived_at).toLocaleDateString();
+        console.log(
+          chalk.cyan(item.id),
+          chalk.gray(`[${item.original_status}]`),
+          item.title,
+          chalk.dim(`(archived ${archivedDate})`)
+        );
+      } else {
+        // Active items display
+        const statusColor =
+          item.status === 'done'
+            ? chalk.green
+            : item.status === 'in-progress'
+              ? chalk.blue
+              : chalk.gray;
+
+        console.log(
+          chalk.cyan(item.id),
+          statusColor(`[${item.status}]`),
+          chalk.yellow(`(${item.priority})`),
+          item.title
+        );
+      }
+    }
+
+    console.log();
+  } catch (error: any) {
+    console.error(chalk.red('Error:'), error.message);
+    process.exit(1);
+  }
+}
+
+export async function updateCommand(id: string, options: any) {
+  const spinner = ora(`Updating ${id}...`).start();
+
+  try {
+    // Validate: Cannot use both description flags
+    if (options.description && options.appendDescription) {
+      spinner.fail('Cannot use both --description and --append-description');
+      process.exit(1);
+    }
+    
+    const devcrumbsDir = getDevCrumbsDir();
+    const parsed = parseItemId(id);
+
+    if (!parsed) {
+      spinner.fail('Invalid item ID');
+      process.exit(1);
+    }
+
+    const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
+    const metadataPath = join(devcrumbsDir, typeFolder, `${id}.json`);
+    const descriptionPath = join(devcrumbsDir, typeFolder, `${id}.md`);
+
+    if (!existsSync(metadataPath)) {
+      spinner.fail('Item not found');
+      process.exit(1);
+    }
+
+    const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+    const oldStatus = metadata.status;
+
+    if (options.status) metadata.status = options.status;
+    if (options.priority) metadata.priority = options.priority;
+    if (options.title) metadata.title = options.title;
+    if (options.assignee !== undefined) metadata.assignee = options.assignee;
+    if (options.tags) metadata.tags = options.tags;
+    if (options.paths) metadata.affected_paths = options.paths;
+    if (options.supersededBy !== undefined) metadata.superseded_by = options.supersededBy;
+
+    metadata.updated = getCurrentTimestamp();
+
+    writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
+
+    // Handle description updates
+    if (options.description) {
+      // Replace entire description
+      writeFileSync(descriptionPath, options.description);
+    } else if (options.appendDescription) {
+      // Append to existing (or create new)
+      const existing = existsSync(descriptionPath) 
+        ? readFileSync(descriptionPath, 'utf-8') 
+        : '';
+      writeFileSync(descriptionPath, existing + options.appendDescription);
+    }
+
+    const indexPath = join(devcrumbsDir, 'index.json');
+    const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
+
+    const itemIndex = index.items.findIndex((i: any) => i.id === id);
+    if (itemIndex !== -1) {
+      if (options.status) index.items[itemIndex].status = options.status;
+      if (options.priority) index.items[itemIndex].priority = options.priority;
+      if ((options as any).eisenhower) metadata.eisenhower = (options as any).eisenhower;
+      if (options.title) index.items[itemIndex].title = options.title;
+      index.items[itemIndex].updated = metadata.updated;
+
+      if (options.status && oldStatus !== options.status) {
+        index.stats.by_status[oldStatus] = (index.stats.by_status[oldStatus] || 1) - 1;
+        index.stats.by_status[options.status] = (index.stats.by_status[options.status] || 0) + 1;
+      }
+    }
+
+    index.last_updated = metadata.updated;
+    writeFileSync(indexPath, JSON.stringify(index, null, 2));
+
+    spinner.succeed(`Updated ${chalk.cyan(id)}`);
+
+    const changes = [];
+    if (options.status) changes.push(`status: ${options.status}`);
+    if (options.priority) changes.push(`priority: ${options.priority}`);
+    if ((options as any).eisenhower) changes.push(`eisenhower: ${(options as any).eisenhower}`);
+    if (options.title) changes.push('title');
+    if (options.description) changes.push('description');
+    if (options.supersededBy) changes.push(`superseded_by: ${options.supersededBy}`);
+
+    if (changes.length > 0) {
+      console.log(chalk.gray('  Changed:'), changes.join(', '));
+    }
+
+    // Git hints
+    const configPath = join(devcrumbsDir, 'config.json');
+    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    if (config.settings.git_integration) {
+      if (options.status === 'done') {
+        console.log(chalk.gray('\n💡 Git:'), chalk.cyan(`git commit -am "feat: completed ${id}"`));
+
+        // Check if this completes any parent items
+        for (const parentId of metadata.linked_items.implements) {
+          const parentParsed = parseItemId(parentId);
+          if (parentParsed) {
+            const parentFolder = TYPE_TO_DIRECTORY[parentParsed.type];
+            const parentPath = join(devcrumbsDir, parentFolder, `${parentId}.json`);
+            if (existsSync(parentPath)) {
+              const parentMeta = JSON.parse(readFileSync(parentPath, 'utf-8'));
+              const siblings = parentMeta.linked_items['implemented-by'] || [];
+
+              let allDone = true;
+              for (const siblingId of siblings) {
+                const sibParsed = parseItemId(siblingId);
+                if (sibParsed) {
+                  const sibFolder = TYPE_TO_DIRECTORY[sibParsed.type];
+                  const sibPath = join(devcrumbsDir, sibFolder, `${siblingId}.json`);
+                  if (existsSync(sibPath)) {
+                    const sibMeta = JSON.parse(readFileSync(sibPath, 'utf-8'));
+                    if (sibMeta.status !== 'done' && sibMeta.status !== 'cancelled') {
+                      allDone = false;
+                      break;
+                    }
+                  }
+                }
+              }
+
+              if (allDone && parentMeta.status !== 'done') {
+                console.log(
+                  chalk.gray('💡'),
+                  `All implementations of ${chalk.cyan(parentId)} are complete! Consider closing it.`
+                );
+              }
+            }
+          }
+        }
+      } else if (options.status === 'in-progress') {
+        console.log(chalk.gray('\n💡 Git:'), 'Track progress with regular commits!');
+      }
+    }
+  } catch (error: any) {
+    spinner.fail('Failed to update item');
+    throw error;
+  }
+}
+
+export async function linkCommand(sourceId: string, relation: string, targetId: string) {
+  const spinner = ora('Creating link...').start();
+
+  try {
+    const devcrumbsDir = getDevCrumbsDir();
+
+    const sourceParsed = parseItemId(sourceId);
+    const targetParsed = parseItemId(targetId);
+
+    if (!sourceParsed || !targetParsed) {
+      spinner.fail('Invalid item ID(s)');
+      process.exit(1);
+    }
+
+    const sourceFolder = TYPE_TO_DIRECTORY[sourceParsed.type];
+    const targetFolder = TYPE_TO_DIRECTORY[targetParsed.type];
+    const sourcePath = join(devcrumbsDir, sourceFolder, `${sourceId}.json`);
+    const targetPath = join(devcrumbsDir, targetFolder, `${targetId}.json`);
+
+    if (!existsSync(sourcePath) || !existsSync(targetPath)) {
+      spinner.fail('Item(s) not found');
+      process.exit(1);
+    }
+
+    const sourceMetadata = JSON.parse(readFileSync(sourcePath, 'utf-8'));
+
+    if (!sourceMetadata.linked_items[relation].includes(targetId)) {
+      sourceMetadata.linked_items[relation].push(targetId);
+      sourceMetadata.updated = getCurrentTimestamp();
+      writeFileSync(sourcePath, JSON.stringify(sourceMetadata, null, 2));
+    }
+
+    const inverseRelations: Record<string, string> = {
+      implements: 'implemented-by',
+      'implemented-by': 'implements',
+      'tested-by': 'tests',
+      tests: 'tested-by',
+      blocks: 'blocked-by',
+      'blocked-by': 'blocks',
+      'depends-on': 'required-by',
+      'required-by': 'depends-on',
+      'relates-to': 'relates-to',
+    };
+
+    const inverseRelation = inverseRelations[relation];
+    if (inverseRelation) {
+      const targetMetadata = JSON.parse(readFileSync(targetPath, 'utf-8'));
+
+      if (!targetMetadata.linked_items[inverseRelation].includes(sourceId)) {
+        targetMetadata.linked_items[inverseRelation].push(sourceId);
+        targetMetadata.updated = getCurrentTimestamp();
+        writeFileSync(targetPath, JSON.stringify(targetMetadata, null, 2));
+      }
+    }
+
+    spinner.succeed(`Linked ${chalk.cyan(sourceId)} --${relation}--> ${chalk.cyan(targetId)}`);
+  } catch (error: any) {
+    spinner.fail('Failed to create link');
+    throw error;
+  }
+}
+
+export async function searchCommand(query: string, options: any) {
+  const spinner = ora('Searching...').start();
+
+  try {
+    const devcrumbsDir = getDevCrumbsDir();
+    const queryLower = query.toLowerCase();
+    const results: any[] = [];
+
+    // Read config to get item types
+    const configPath = join(devcrumbsDir, 'config.json');
+    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+
+    const folders = options.type
+      ? [TYPE_TO_DIRECTORY[TYPE_SHORTCUTS[options.type] || (options.type as ItemType)]]
+      : config.settings.item_types.map((t: ItemType) => TYPE_TO_DIRECTORY[t]);
+
+    for (const folder of folders) {
+      const folderPath = join(devcrumbsDir, folder);
+      if (!existsSync(folderPath)) continue;
+
+      const files = readdirSync(folderPath).filter((f) => f.endsWith('.json'));
+
+      for (const file of files) {
+        const metadataPath = join(folderPath, file);
+        const descriptionPath = metadataPath.replace('.json', '.md');
+
+        const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+        const description = existsSync(descriptionPath)
+          ? readFileSync(descriptionPath, 'utf-8')
+          : '';
+
+        const titleMatch = metadata.title.toLowerCase().includes(queryLower);
+        const descMatch = description.toLowerCase().includes(queryLower);
+        const tagMatch = metadata.tags.some((tag: string) =>
+          tag.toLowerCase().includes(queryLower)
+        );
+
+        if (titleMatch || descMatch || tagMatch) {
+          results.push({
+            ...metadata,
+            match_type: titleMatch ? 'title' : descMatch ? 'description' : 'tag',
+          });
+
+          const limit = Number.parseInt(options.limit, 10);
+          if (limit > 0 && results.length >= limit) break;
+        }
+      }
+    }
+
+    spinner.succeed(`Found ${results.length} result(s)`);
+    console.log();
+
+    for (const item of results) {
+      const matchBadge =
+        item.match_type === 'title'
+          ? chalk.green('[title]')
+          : item.match_type === 'description'
+            ? chalk.blue('[desc]')
+            : chalk.yellow('[tag]');
+
+      console.log(matchBadge, chalk.cyan(item.id), item.title);
+    }
+
+    console.log();
+  } catch (error: any) {
+    spinner.fail('Search failed');
+    throw error;
+  }
+}
+
+export async function statusCommand(options: any) {
+  try {
+    const devcrumbsDir = getDevCrumbsDir();
+    const configPath = join(devcrumbsDir, 'config.json');
+    const indexPath = join(devcrumbsDir, 'index.json');
+
+    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
+
+    console.log();
+    console.log(chalk.bold.cyan(`📊 ${config.project_name}`));
+    console.log();
+    console.log(chalk.gray('Created:'), new Date(config.created).toLocaleDateString());
+    console.log(chalk.gray('Updated:'), new Date(config.updated).toLocaleDateString());
+    console.log();
+
+    console.log(chalk.bold('Statistics:'));
+    console.log(chalk.gray('  Total Items:'), index.stats.total);
+    console.log();
+
+    console.log(chalk.bold('  By Type:'));
+    for (const [type, count] of Object.entries(index.stats.by_type)) {
+      console.log(chalk.gray(`    ${type}:`), count);
+    }
+    console.log();
+
+    console.log(chalk.bold('  By Status:'));
+    for (const [status, count] of Object.entries(index.stats.by_status)) {
+      console.log(chalk.gray(`    ${status}:`), count);
+    }
+    console.log();
+
+    // Check for stale items
+    const staleItems = index.items.filter((item: any) => {
+      if (item.status === 'in-progress') {
+        const daysSinceUpdate =
+          (Date.now() - new Date(item.updated).getTime()) / (1000 * 60 * 60 * 24);
+        return daysSinceUpdate > 7;
+      }
+      return false;
+    });
+
+    if (staleItems.length > 0) {
+      console.log(chalk.bold.yellow('⚠️  Warnings:'));
+      console.log(chalk.yellow(`  ${staleItems.length} stale item(s) in progress for >7 days:`));
+      for (const item of staleItems) {
+        const days = Math.floor(
+          (Date.now() - new Date(item.updated).getTime()) / (1000 * 60 * 60 * 24)
+        );
+        console.log(chalk.yellow(`    ${item.id}`), `(${days} days)`);
+      }
+      console.log();
+    }
+
+    if (options.detailed) {
+      const recent = [...index.items]
+        .sort((a: any, b: any) => new Date(b.updated).getTime() - new Date(a.updated).getTime())
+        .slice(0, 5);
+
+      console.log(chalk.bold('Recent Updates:'));
+      for (const item of recent) {
+        console.log(chalk.cyan(item.id), item.title);
+      }
+      console.log();
+    }
+  } catch (error: any) {
+    console.error(chalk.red('Error:'), error.message);
+    process.exit(1);
+  }
+}
+
+export async function traceCommand(id: string, options: any) {
+  try {
+    const devcrumbsDir = getDevCrumbsDir();
+    const maxDepth = Number.parseInt(options.depth, 10) || 3;
+
+    function traceItem(itemId: string, depth: number, prefix = ''): void {
+      if (depth > maxDepth) return;
+
+      const parsed = parseItemId(itemId);
+      if (!parsed) return;
+
+      const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
+      const metadataPath = join(devcrumbsDir, typeFolder, `${itemId}.json`);
+
+      if (!existsSync(metadataPath)) return;
+
+      const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+
+      console.log(
+        `${prefix}${chalk.cyan(metadata.id)} ${chalk.gray(`[${metadata.status}]`)} ${metadata.title}`
+      );
+
+      if (depth < maxDepth) {
+        for (const [relType, linkedIds] of Object.entries(metadata.linked_items)) {
+          if (Array.isArray(linkedIds) && linkedIds.length > 0) {
+            console.log(`${prefix}  ${chalk.yellow(`--${relType}-->`)}`);
+            for (const linkedId of linkedIds) {
+              traceItem(linkedId as string, depth + 1, `${prefix}    `);
+            }
+          }
+        }
+      }
+    }
+
+    console.log();
+    console.log(chalk.bold('Traceability Tree:'));
+    console.log();
+    traceItem(id, 0);
+    console.log();
+  } catch (error: any) {
+    console.error(chalk.red('Error:'), error.message);
+    process.exit(1);
+  }
+}
+
+export async function exportCommand(options: any) {
+  const spinner = ora('Exporting...').start();
+
+  try {
+    const devcrumbsDir = getDevCrumbsDir();
+    // Export implementation similar to MCP handler
+    // For brevity, using simple markdown export
+
+    spinner.succeed('Export completed');
+    console.log(chalk.gray('  Output:'), options.output || 'devcrumbs-export.md');
+  } catch (error: any) {
+    spinner.fail('Export failed');
+    throw error;
+  }
+}

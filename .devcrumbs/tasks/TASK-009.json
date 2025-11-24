@@ -1,0 +1,43 @@
+{
+  "id": "TASK-009",
+  "type": "task",
+  "category": "vscode",
+  "title": "FileDecorationProvider - Status Color Badges for TreeView Items",
+  "status": "done",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-23T16:19:31.869Z",
+  "updated": "2025-11-23T18:10:50.333Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [
+    "packages/vscode-extension/src/decorationProvider.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003",
+      "STORY-004",
+      "FEAT-004"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-002",
+      "TASK-007"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "decorations",
+    "ui",
+    "status"
+  ],
+  "commits": [],
+  "metadata": {}
+}

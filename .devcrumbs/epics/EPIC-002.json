@@ -1,0 +1,36 @@
+{
+  "id": "EPIC-002",
+  "type": "epic",
+  "category": "infrastructure",
+  "title": "Monorepo Infrastructure - Build System and Package Management",
+  "status": "done",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-23T15:33:22.968Z",
+  "updated": "2025-11-23T15:38:54.401Z",
+  "author": "thomas.hantke@devcrumbs.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-001",
+      "STORY-002"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "monorepo",
+    "build-system",
+    "typescript"
+  ],
+  "commits": [],
+  "metadata": {}
+}

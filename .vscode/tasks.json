@@ -1,0 +1,206 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build All",
+      "type": "shell",
+      "command": "npm run build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Package: All Distribution Files",
+      "type": "shell",
+      "command": "npm run package:all",
+      "group": "build",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Watch All",
+      "type": "shell",
+      "command": "npm run dev",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "typescript",
+        "fileLocation": "relative",
+        "pattern": {
+          "regexp": "^([^\\s].*)\\((\\d+|\\d+,\\d+|\\d+,\\d+,\\d+,\\d+)\\):\\s+(error|warning|info)\\s+(TS\\d+)\\s*:\\s*(.*)$",
+          "file": 1,
+          "location": 2,
+          "severity": 3,
+          "code": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting compilation",
+          "endsPattern": "(Compilation complete|Found \\d+ errors)"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Test",
+      "type": "shell",
+      "command": "npm test",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Lint",
+      "type": "shell",
+      "command": "npm run lint",
+      "problemMatcher": {
+        "owner": "biome",
+        "fileLocation": "relative",
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "Format",
+      "type": "shell",
+      "command": "npm run format",
+      "problemMatcher": []
+    },
+    {
+      "label": "Clean",
+      "type": "shell",
+      "command": "npm run clean",
+      "problemMatcher": []
+    },
+    {
+      "label": "CLI: Init Project",
+      "type": "shell",
+      "command": "node packages/cli/dist/index.js init test-project",
+      "dependsOn": [
+        "Build All"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "CLI: Status",
+      "type": "shell",
+      "command": "node packages/cli/dist/index.js status",
+      "dependsOn": [
+        "Build All"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "MCP: Start Server",
+      "type": "shell",
+      "command": "node packages/mcp-server/dist/index.js",
+      "dependsOn": [
+        "Build All"
+      ],
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^(.*)$",
+          "file": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*",
+          "endsPattern": "DevCrumbs MCP Server running"
+        }
+      }
+    },
+    {
+      "label": "Install Dependencies",
+      "type": "shell",
+      "command": "npm install",
+      "problemMatcher": []
+    },
+    {
+      "label": "Type Check",
+      "type": "shell",
+      "command": "npm run typecheck",
+      "problemMatcher": [
+        "$tsc"
+      ]
+    },
+    {
+      "label": "DevCrumbs: List Open Stories",
+      "type": "shell",
+      "command": "node packages/cli/dist/index.js list --type story --status draft",
+      "dependsOn": [
+        "Build All"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "DevCrumbs: List High Priority Items",
+      "type": "shell",
+      "command": "node packages/cli/dist/index.js list --priority high",
+      "dependsOn": [
+        "Build All"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "DevCrumbs: List Q1 Tasks (Urgent & Important)",
+      "type": "shell",
+      "command": "node packages/cli/dist/index.js list --eisenhower urgent-important --status draft",
+      "dependsOn": [
+        "Build All"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "DevCrumbs: Full Status Report",
+      "type": "shell",
+      "command": "node packages/cli/dist/index.js status",
+      "dependsOn": [
+        "Build All"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    }
+  ]
+}

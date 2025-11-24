@@ -1,0 +1,43 @@
+{
+  "id": "STORY-001",
+  "type": "story",
+  "category": "core",
+  "title": "Shared Package - Core Business Logic and Type Definitions",
+  "status": "done",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-23T15:33:47.334Z",
+  "updated": "2025-11-23T15:49:33.096Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [
+    "packages/shared/src/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-002"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "FEAT-001"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "EPIC-003",
+      "STORY-004"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "types",
+    "validation",
+    "core-logic"
+  ],
+  "commits": [],
+  "metadata": {}
+}

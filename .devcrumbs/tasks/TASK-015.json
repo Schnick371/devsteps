@@ -1,0 +1,39 @@
+{
+  "id": "TASK-015",
+  "type": "task",
+  "category": "vscode",
+  "title": "Output Channel Logging - Debugging and Diagnostics",
+  "status": "done",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-23T16:23:17.414Z",
+  "updated": "2025-11-23T19:57:34.595Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [
+    "packages/vscode-extension/src/outputChannel.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-004"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "logging",
+    "debugging"
+  ],
+  "commits": [],
+  "metadata": {}
+}

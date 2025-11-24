@@ -1,0 +1,41 @@
+{
+  "id": "TASK-006",
+  "type": "task",
+  "category": "vscode",
+  "title": "Context Menus - Quick Actions and User Interactions",
+  "status": "done",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-23T15:39:31.433Z",
+  "updated": "2025-11-23T18:07:55.921Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [
+    "packages/vscode-extension/package.json"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003",
+      "STORY-004",
+      "FEAT-004"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-003"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "context-menu",
+    "ux"
+  ],
+  "commits": [],
+  "metadata": {}
+}

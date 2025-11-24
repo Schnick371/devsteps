@@ -1,0 +1,40 @@
+{
+  "id": "STORY-002",
+  "type": "story",
+  "category": "cli",
+  "title": "CLI Package - Command-Line Interface for Developers",
+  "status": "done",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-23T15:33:47.334Z",
+  "updated": "2025-11-23T15:49:33.096Z",
+  "author": "thomas.hantke@devcrumbs.dev",
+  "affected_paths": [
+    "packages/cli/src/",
+    "packages/cli/bin/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-002"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "FEAT-002"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cli",
+    "developer-tools",
+    "terminal"
+  ],
+  "commits": [],
+  "metadata": {}
+}

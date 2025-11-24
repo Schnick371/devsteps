@@ -1,0 +1,35 @@
+{
+  "id": "TASK-019",
+  "type": "task",
+  "category": "general",
+  "title": "CONTRIBUTING.md Creation - Contribution Guidelines and DCO",
+  "status": "done",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-23T16:42:18.046Z",
+  "updated": "2025-11-23T17:42:45.611Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [
+    "CONTRIBUTING.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-004"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-017"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

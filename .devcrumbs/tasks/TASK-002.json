@@ -1,0 +1,46 @@
+{
+  "id": "TASK-002",
+  "type": "task",
+  "category": "vscode",
+  "title": "TreeView Provider - Display Work Items in Sidebar",
+  "status": "done",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-23T15:34:45.800Z",
+  "updated": "2025-11-23T17:39:10.156Z",
+  "author": "thomas.hantke@devcrumbs.dev",
+  "affected_paths": [
+    "packages/vscode-extension/src/treeView/devcrumbsTreeDataProvider.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003",
+      "STORY-004",
+      "FEAT-004"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-009"
+    ],
+    "depends-on": [
+      "TASK-001"
+    ],
+    "required-by": [
+      "TASK-003",
+      "TASK-010"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "treeview",
+    "ui"
+  ],
+  "commits": [],
+  "metadata": {}
+}

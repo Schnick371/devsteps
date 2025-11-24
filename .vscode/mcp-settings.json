@@ -1,0 +1,12 @@
+{
+  "mcp.servers": {
+    "devcrumbs-embedded": {
+      "type": "stdio",
+      "command": "/home/th/.vscode-server/extensions/devcrumbs.devcrumbs-vscode-0.3.0/runtime/linux-x64/node",
+      "args": [
+        "/home/th/.vscode-server/extensions/devcrumbs.devcrumbs-vscode-0.3.0/server/mcp-server/index.js"
+      ],
+      "description": "DevCrumbs MCP Server (self-contained with bundled Node.js v22.11.0)"
+    }
+  }
+}

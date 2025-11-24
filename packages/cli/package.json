@@ -1,0 +1,26 @@
+{
+  "name": "@devcrumbs/cli",
+  "version": "0.4.0",
+  "license": "Apache-2.0",
+  "description": "Never Code Alone. CLI for AI-assisted developer task tracking.",
+  "type": "module",
+  "bin": {
+    "devcrumbs": "./dist/index.js",
+    "devcrumbs-tsx": "./bin/devcrumbs-tsx.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@devcrumbs/shared": "file:../shared",
+    "@inquirer/prompts": "^7.2.0",
+    "ora": "^8.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "typescript": "latest"
+  }
+}

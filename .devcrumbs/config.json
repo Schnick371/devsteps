@@ -1,0 +1,139 @@
+{
+  "version": "0.1.0",
+  "project_name": "DevCrumbs - Structured Development System",
+  "project_id": "devcrumbs-1763911978067",
+  "created": "2025-11-23T15:32:58.067Z",
+  "updated": "2025-11-23T15:32:58.071Z",
+  "settings": {
+    "methodology": "hybrid",
+    "auto_increment": true,
+    "git_integration": true,
+    "default_author": "the@devcrumbs.dev",
+    "item_types": [
+      "epic",
+      "story",
+      "requirement",
+      "feature",
+      "task",
+      "bug",
+      "spike",
+      "test"
+    ],
+    "item_prefixes": {
+      "epic": "EPIC",
+      "story": "STORY",
+      "requirement": "REQ",
+      "feature": "FEAT",
+      "task": "TASK",
+      "bug": "BUG",
+      "spike": "SPIKE",
+      "test": "TEST"
+    },
+    "hierarchies": {
+      "scrum": {
+        "name": "Agile/Scrum",
+        "description": "Iterative development with user stories",
+        "root_types": ["epic"],
+        "levels": [
+          {
+            "level": 1,
+            "types": ["epic"],
+            "description": "Large initiatives spanning multiple sprints",
+            "can_contain": ["story", "spike", "bug"]
+          },
+          {
+            "level": 2,
+            "types": ["story", "spike", "bug"],
+            "description": "User stories (features), research spikes (time-boxed investigations), and defects",
+            "can_contain": ["task"],
+            "note": "Spike is SAME LEVEL as Story, not under Story!"
+          },
+          {
+            "level": 3,
+            "types": ["task"],
+            "description": "Individual atomic work items for implementation",
+            "can_contain": []
+          }
+        ],
+        "validation_rules": {
+          "allowed_links": [
+            { "from": "epic", "relation": "implemented-by", "to": ["story", "spike", "bug"] },
+            { "from": "story", "relation": "implements", "to": ["epic"] },
+            { "from": "story", "relation": "implemented-by", "to": ["task"] },
+            { "from": "spike", "relation": "implements", "to": ["epic"] },
+            { "from": "spike", "relation": "relates-to", "to": ["story", "task"] },
+            { "from": "spike", "relation": "required-by", "to": ["task"] },
+            { "from": "bug", "relation": "implements", "to": ["epic"] },
+            { "from": "task", "relation": "implements", "to": ["story", "spike", "bug"] }
+          ],
+          "forbidden_links": [
+            { "from": "spike", "relation": "implements", "to": ["story"], "reason": "Spike is same level as Story, not under it!" },
+            { "from": "task", "relation": "implements", "to": ["epic"], "reason": "Task must go through Story/Spike/Bug" },
+            { "from": "epic", "relation": "implemented-by", "to": ["task"], "reason": "Epic cannot contain Tasks directly" }
+          ]
+        }
+      },
+      "waterfall": {
+        "name": "Waterfall/Sequential",
+        "description": "Linear phase-based development",
+        "root_types": ["requirement"],
+        "levels": [
+          {
+            "level": 1,
+            "types": ["requirement"],
+            "description": "System requirements and specifications",
+            "can_contain": ["feature"]
+          },
+          {
+            "level": 2,
+            "types": ["feature"],
+            "description": "Features to be implemented in design/implementation phases",
+            "can_contain": ["task", "spike", "bug"],
+            "note": "Spike used for research before implementation"
+          },
+          {
+            "level": 3,
+            "types": ["task", "spike", "bug"],
+            "description": "Individual work items, research spikes, and defects",
+            "can_contain": []
+          }
+        ],
+        "validation_rules": {
+          "allowed_links": [
+            { "from": "requirement", "relation": "implemented-by", "to": ["feature"] },
+            { "from": "feature", "relation": "implements", "to": ["requirement"] },
+            { "from": "feature", "relation": "implemented-by", "to": ["task"] },
+            { "from": "feature", "relation": "relates-to", "to": ["spike"] },
+            { "from": "spike", "relation": "implements", "to": ["requirement", "feature"] },
+            { "from": "task", "relation": "implements", "to": ["feature"] }
+          ],
+          "forbidden_links": [
+            { "from": "task", "relation": "implements", "to": ["requirement"], "reason": "Task must go through Feature" }
+          ]
+        }
+      },
+      "visualization": {
+        "default_view": "both",
+        "show_completed_by_default": true,
+        "grouping_options": ["type", "status", "priority", "eisenhower"],
+        "filter_options": {
+          "status": ["draft", "planned", "in-progress", "review", "done", "blocked", "cancelled", "obsolete"],
+          "priority": ["critical", "high", "medium", "low"],
+          "eisenhower": ["urgent-important", "not-urgent-important", "urgent-not-important", "not-urgent-not-important"]
+        },
+        "tree_display": {
+          "scrum": {
+            "root": "Epic",
+            "show_cross_links": true,
+            "collapse_done": false
+          },
+          "waterfall": {
+            "root": "Requirement",
+            "show_cross_links": true,
+            "collapse_done": false
+          }
+        }
+      }
+    }
+  }
+}

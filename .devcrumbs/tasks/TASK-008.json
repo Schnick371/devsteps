@@ -1,0 +1,41 @@
+{
+  "id": "TASK-008",
+  "type": "task",
+  "category": "vscode",
+  "title": "Extension Packaging - Marketplace Distribution Preparation",
+  "status": "done",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-23T15:39:31.435Z",
+  "updated": "2025-11-23T19:35:43.366Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [
+    "packages/vscode-extension/package.json",
+    "packages/vscode-extension/.vscodeignore"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003",
+      "STORY-004",
+      "FEAT-004"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "packaging",
+    "marketplace",
+    "distribution"
+  ],
+  "commits": [],
+  "metadata": {}
+}

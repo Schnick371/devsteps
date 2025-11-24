@@ -1,0 +1,52 @@
+services:
+  devcrumbs-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: devcrumbs-mcp-server
+    image: devcrumbs-mcp:latest
+
+    ports:
+      - "3100:3100"
+
+    volumes:
+      # Mount user home directory for access to all WSL2 projects
+      # Windows users: Docker Desktop shares WSL2 filesystem
+      - ${HOME}:/home/node:ro
+
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=info
+      - MCP_TRANSPORT=http
+      - MCP_PORT=3100
+      # Suppress npm warnings in logs
+      - npm_config_loglevel=silent
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+    # Security: Run as non-root user
+    user: "1001:1001"
+
+    # Resource limits (optional but recommended)
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+        reservations:
+          cpus: "0.1"
+          memory: 128M
+
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

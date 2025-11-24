@@ -1,0 +1,51 @@
+{
+  "id": "EPIC-003",
+  "type": "epic",
+  "category": "vscode",
+  "title": "VS Code Extension - Complete IDE Integration",
+  "status": "draft",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-23T15:34:16.783Z",
+  "updated": "2025-11-23T16:23:25.827Z",
+  "author": "thomas.hantke@devcrumbs.dev",
+  "affected_paths": [
+    "packages/vscode-extension/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-001"
+    ],
+    "implemented-by": [
+      "STORY-004",
+      "SPIKE-001",
+      "SPIKE-002",
+      "TASK-009",
+      "TASK-010",
+      "TASK-011",
+      "TASK-012",
+      "TASK-013",
+      "TASK-014",
+      "TASK-015"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-001"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "extension",
+    "ide",
+    "ui"
+  ],
+  "commits": [],
+  "metadata": {}
+}

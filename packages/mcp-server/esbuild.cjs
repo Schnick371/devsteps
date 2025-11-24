@@ -1,0 +1,52 @@
+#!/usr/bin/env node
+const esbuild = require('esbuild');
+const path = require('path');
+
+const production = process.argv.includes('--production');
+const watch = process.argv.includes('--watch');
+
+/**
+ * @type {import('esbuild').BuildOptions}
+ */
+const buildOptions = {
+  entryPoints: ['src/index.ts'],
+  bundle: true,
+  outfile: 'dist/index.bundled.mjs', // .mjs extension for ESM
+  format: 'esm', // ESM needed for top-level await
+  platform: 'node',
+  target: 'node18',
+  sourcemap: !production,
+  minify: production,
+  external: [
+    // ONLY keep Node.js built-in modules external
+    // Everything else (npm packages + workspace packages) gets bundled
+    'node:*',
+  ],
+  banner: {
+    js: '// DevCrumbs MCP Server - bundled for VS Code Extension Host',
+  },
+  // Ignore dynamic require warnings - we only use static imports
+  logOverride: {
+    'indirect-require': 'silent',
+  },
+  logLevel: 'info',
+};
+
+async function main() {
+  const ctx = await esbuild.context(buildOptions);
+
+  if (watch) {
+    console.log('[watch] build started');
+    await ctx.watch();
+  } else {
+    console.log('[build] build started');
+    await ctx.rebuild();
+    await ctx.dispose();
+    console.log('[build] build finished');
+  }
+}
+
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

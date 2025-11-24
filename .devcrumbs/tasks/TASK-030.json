@@ -1,0 +1,40 @@
+{
+  "id": "TASK-030",
+  "type": "task",
+  "category": "DevOps",
+  "title": "Push initial commit to GitHub with clean history",
+  "status": "draft",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-23T21:59:39.039Z",
+  "updated": "2025-11-23T21:59:47.149Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-004",
+      "TASK-028"
+    ],
+    "depends-on": [
+      "TASK-029"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "git",
+    "github",
+    "initial-commit",
+    "publication",
+    "deployment"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,29 @@
+# Build files
+src/
+esbuild.js
+tsconfig.json
+.vscode/
+
+# Dependencies
+node_modules/
+
+# Development files
+*.map
+.eslintrc.json
+.prettierrc
+
+# Documentation
+*.md
+!README.md
+!LICENSE.md
+
+# Git
+.git/
+.gitignore
+
+# Parent directories (monorepo structure)
+../../**
+!../../packages/vscode-extension/**
+../shared/**
+../cli/**
+../mcp-server/**
