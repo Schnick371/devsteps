@@ -228,8 +228,8 @@
       },
       {
         "command": "devcrumbs.filterByPriority",
-        "key": "ctrl+shift+p",
-        "mac": "cmd+shift+p",
+        "key": "ctrl+k p",
+        "mac": "cmd+k p",
         "when": "focusedView == devcrumbs.itemsView"
       },
       {

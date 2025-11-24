@@ -4,7 +4,7 @@
     "epic": 4,
     "story": 4,
     "task": 36,
-    "bug": 7,
+    "bug": 8,
     "spike": 2,
     "feature": 4,
     "requirement": 1
@@ -386,7 +386,7 @@
       "status": "done",
       "priority": "critical",
       "created": "2025-11-24T10:21:26.835Z",
-      "updated": "2025-11-24T10:25:52.721Z"
+      "updated": "2025-11-24T14:28:36.648Z"
     },
     {
       "id": "SPIKE-001",
@@ -522,26 +522,34 @@
       "status": "done",
       "priority": "medium",
       "updated": "2025-11-24T14:24:43.108Z"
+    },
+    {
+      "id": "BUG-008",
+      "type": "bug",
+      "title": "Fix: Priority filter shortcut conflicts with VS Code Command Palette",
+      "status": "done",
+      "priority": "medium",
+      "updated": "2025-11-24T16:07:31.126Z"
     }
   ],
   "stats": {
-    "total": 58,
+    "total": 59,
     "by_type": {
       "epic": 4,
       "story": 4,
       "task": 36,
-      "bug": 7,
+      "bug": 8,
       "spike": 2,
       "feature": 4,
       "requirement": 1
     },
     "by_status": {
       "in-progress": 0,
-      "done": 44,
+      "done": 45,
       "draft": 13,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T14:24:43.108Z"
+  "last_updated": "2025-11-24T16:07:31.126Z"
 }
