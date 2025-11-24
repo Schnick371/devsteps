@@ -1,0 +1,41 @@
+{
+  "id": "TASK-040",
+  "type": "task",
+  "category": "MCP Server",
+  "title": "MCP: Enforce relationship validation with AI-friendly errors",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-24T19:34:50.476Z",
+  "updated": "2025-11-24T20:36:51.436Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/devcrumbs-add.ts",
+    "packages/mcp-server/src/handlers/devcrumbs-link.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-005"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-038"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "validation",
+    "ai",
+    "ux"
+  ],
+  "commits": [],
+  "metadata": {}
+}

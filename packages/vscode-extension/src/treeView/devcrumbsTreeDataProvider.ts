@@ -121,14 +121,19 @@ class TypeGroupNode extends TreeNode {
     private type: string,
     private count: number,
     private items: WorkItem[],
+    private isExpanded: boolean = false,
   ) {
     super();
   }
 
   toTreeItem(): vscode.TreeItem {
+    const collapsibleState = this.isExpanded
+      ? vscode.TreeItemCollapsibleState.Expanded
+      : vscode.TreeItemCollapsibleState.Collapsed;
+
     const item = new vscode.TreeItem(
       `${this.type.toUpperCase()}S (${this.count})`,
-      vscode.TreeItemCollapsibleState.Collapsed,
+      collapsibleState,
     );
     item.contextValue = 'typeGroup';
     item.iconPath = new vscode.ThemeIcon('folder');
@@ -329,7 +334,6 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setViewMode(mode: ViewMode): void {
     this.viewMode = mode;
     this.refresh();
-    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -340,7 +344,6 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
     this.hierarchyType = type;
     if (this.viewMode === 'hierarchical') {
       this.refresh();
-      this.restoreExpandedGroups();
     }
   }
 
@@ -357,7 +360,6 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setStatusFilter(statuses: string[]): void {
     this.filterState.statuses = statuses;
     this.refresh();
-    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -367,7 +369,6 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setPriorityFilter(priorities: string[]): void {
     this.filterState.priorities = priorities;
     this.refresh();
-    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -377,7 +378,6 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setTypeFilter(types: string[]): void {
     this.filterState.types = types;
     this.refresh();
-    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -387,7 +387,6 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setTagFilter(tags: string[]): void {
     this.filterState.tags = tags;
     this.refresh();
-    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -397,7 +396,6 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setSearchQuery(query: string): void {
     this.filterState.searchQuery = query;
     this.refresh();
-    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -414,7 +412,6 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
       hideDone: false,
     };
     this.refresh();
-    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -424,7 +421,6 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   toggleHideDone(): void {
     this.filterState.hideDone = !this.filterState.hideDone;
     this.refresh();
-    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -492,45 +488,11 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   }
 
   /**
-   * Restore expanded state of type groups after tree refresh (flat view only)
-   */
-  private restoreExpandedGroups(): void {
-    if (!this.treeView || this.viewMode !== 'flat' || this.expandedGroups.size === 0) {
-      return;
-    }
-
-    // Schedule restore after tree rebuild completes
-    setTimeout(async () => {
-      if (!this.treeView) return;
-
-      // Get current root nodes
-      const rootNodes = await this.getChildren();
-
-      // Re-expand groups that were expanded before
-      for (const node of rootNodes) {
-        if (node instanceof TypeGroupNode && this.expandedGroups.has(node.getType())) {
-          try {
-            await this.treeView.reveal(node, {
-              select: false,
-              focus: false,
-              expand: 1, // Expand one level
-            });
-          } catch (error) {
-            // Silently ignore reveal errors (node might not exist anymore)
-            console.debug('Could not restore expanded state for', node.getType(), error);
-          }
-        }
-      }
-    }, 100); // Increased delay to ensure tree is fully rebuilt
-  }
-
-  /**
    * Set sort options
    */
   setSortOptions(by: SortState['by'], order: SortState['order']): void {
     this.sortState = { by, order };
     this.refresh();
-    this.restoreExpandedGroups();
     this.updateDescription();
   }
 
@@ -697,10 +659,13 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
         {} as Record<string, WorkItem[]>,
       );
 
-      // Create type group nodes
+      // Create type group nodes with preserved expanded state
       return Object.entries(typeGroups)
         .sort(([typeA], [typeB]) => typeA.localeCompare(typeB))
-        .map(([type, items]) => new TypeGroupNode(type, items.length, items));
+        .map(([type, items]) => {
+          const isExpanded = this.expandedGroups.has(type);
+          return new TypeGroupNode(type, items.length, items, isExpanded);
+        });
     } catch (error) {
       console.error('Failed to load flat view:', error);
       vscode.window.showErrorMessage('Failed to load DevCrumbs work items');

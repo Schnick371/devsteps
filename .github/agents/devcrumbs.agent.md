@@ -90,6 +90,9 @@ You **execute work items systematically** through interactive planning and focus
 **Commit format:** `type(ID): subject` with footer `Implements: ID`
 **Types:** feat, fix, refactor, perf, docs, style, test, chore
 **Reference:** git-workflow.instructions.md for complete standards
+- Subject: <50 chars, imperative mood
+- Body: Context (max 12 lines, work item has details)
+- Footer: References work item ID
 
 ## Communication Standards
 

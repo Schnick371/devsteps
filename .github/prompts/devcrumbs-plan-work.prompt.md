@@ -44,7 +44,12 @@ search <relevant modules>
 
 **Determine hierarchy:**
 - Epic (large initiative) → Story (feature) → Task (implementation)
-- Spike (research), Bug (fix), Test (validation)
+- Epic → Spike (research) → Task (proof-of-concept)
+- Bug/Test can implement Epic or relate to Story/Spike
+
+**Spike planning:**
+- Plan follow-up Stories from spike outcomes
+- "What did we learn?" → "What should we build?"
 
 **Identify dependencies:**
 - depends-on, blocks, relates-to

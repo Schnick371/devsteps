@@ -28,6 +28,13 @@ description: "DevCrumbs workflow and work item tracking"
 
 **NEVER skip status updates** - Tracking mandatory for traceability.
 
+## Item Hierarchy
+
+**Scrum:** Epic → Story|Spike → Task (Bug/Test implement Epic or relate to Story/Spike)
+**Waterfall:** Requirement → Feature|Spike → Task (Bug/Test implement Requirement or relate to Feature/Spike)
+**Relations:** "relates-to" allowed between ANY items
+**Spike completion:** Create Stories from findings, link to same Epic
+
 ## Git Workflow
 
 **Epic branches:** Manual creation as `epic/<ID>-<slug>` when Epic starts

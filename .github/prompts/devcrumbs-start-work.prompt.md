@@ -73,6 +73,14 @@ tools: ['runCommands', 'runTasks', 'edit', 'search', 'github/github-mcp-server/*
 git commit -m "type(scope): subject\n\nRefs: <ID>"
 ```
 
+## Step 6.5: Spike Post-Processing
+
+**If completing SPIKE:**
+- Review findings in description
+- Create Stories from research insights: `#mcp_devcrumbs_devcrumbs-add story "<title>" --description "<from spike findings>"`
+- Link to Epic: `#mcp_devcrumbs_devcrumbs-link STORY-X implements EPIC-Y`
+- Estimate Stories with confidence from spike learnings
+
 ## Step 7: Next
 
 "Great work! What's next?" → Show status, highlight unblocked items, continue Step 1

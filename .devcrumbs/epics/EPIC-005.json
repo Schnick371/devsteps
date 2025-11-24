@@ -1,0 +1,52 @@
+{
+  "id": "EPIC-005",
+  "type": "epic",
+  "category": "Platform",
+  "title": "Workflow Governance & Git Integration",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-24T19:33:36.249Z",
+  "updated": "2025-11-24T20:36:51.434Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [
+    "packages/shared/src/core/",
+    "packages/cli/src/commands/",
+    "packages/mcp-server/src/handlers/",
+    "packages/vscode-extension/src/treeView/",
+    ".github/instructions/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "SPIKE-003",
+      "TASK-038",
+      "TASK-039",
+      "TASK-040",
+      "TASK-041",
+      "TASK-042",
+      "TASK-043",
+      "STORY-005"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-001"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "workflow",
+    "git",
+    "validation",
+    "methodology",
+    "governance"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,45 @@
+{
+  "id": "STORY-005",
+  "type": "story",
+  "category": "Platform",
+  "title": "Relationship Validation & Methodology Enforcement",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-24T20:36:20.552Z",
+  "updated": "2025-11-24T20:36:51.436Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [
+    "packages/shared/src/core/validation.ts",
+    "packages/cli/src/commands/",
+    "packages/mcp-server/src/handlers/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-005"
+    ],
+    "implemented-by": [
+      "TASK-038",
+      "TASK-039",
+      "TASK-040"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "validation",
+    "scrum",
+    "waterfall",
+    "hierarchy",
+    "governance"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
   "counters": {
-    "epic": 4,
-    "story": 4,
-    "task": 36,
+    "epic": 5,
+    "story": 5,
+    "task": 43,
     "bug": 8,
-    "spike": 2,
+    "spike": 3,
     "feature": 4,
     "requirement": 1
   },
@@ -511,9 +511,9 @@
       "id": "BUG-007",
       "type": "bug",
       "title": "Fix: Flat view expanded state resets on filter toggle",
-      "status": "done",
+      "status": "in-progress",
       "priority": "high",
-      "updated": "2025-11-24T13:14:27.920Z"
+      "updated": "2025-11-24T17:31:36.240Z"
     },
     {
       "id": "TASK-036",
@@ -530,26 +530,106 @@
       "status": "done",
       "priority": "medium",
       "updated": "2025-11-24T16:07:31.126Z"
+    },
+    {
+      "id": "TASK-037",
+      "type": "task",
+      "title": "TreeView: Persist state across VS Code sessions",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T17:39:41.001Z"
+    },
+    {
+      "id": "EPIC-005",
+      "type": "epic",
+      "title": "Workflow Governance & Git Integration",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T19:33:36.249Z"
+    },
+    {
+      "id": "SPIKE-003",
+      "type": "spike",
+      "title": "Research: Git Branching Strategies for Epic-Based Development",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-11-24T20:07:33.747Z"
+    },
+    {
+      "id": "TASK-038",
+      "type": "task",
+      "title": "Shared: Implement relationship validation engine",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T19:34:12.433Z"
+    },
+    {
+      "id": "TASK-039",
+      "type": "task",
+      "title": "CLI: Enforce relationship validation in link command",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T19:34:50.473Z"
+    },
+    {
+      "id": "TASK-040",
+      "type": "task",
+      "title": "MCP: Enforce relationship validation with AI-friendly errors",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T19:34:50.476Z"
+    },
+    {
+      "id": "TASK-041",
+      "type": "task",
+      "title": "Git Workflow: Document and implement Epic branch management",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-24T19:36:06.264Z"
+    },
+    {
+      "id": "TASK-042",
+      "type": "task",
+      "title": "Copilot Instructions: Document mandatory commit workflow",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-24T19:36:06.268Z"
+    },
+    {
+      "id": "TASK-043",
+      "type": "task",
+      "title": "TreeView: Add toggle to show/hide related items",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-24T19:36:06.270Z"
+    },
+    {
+      "id": "STORY-005",
+      "type": "story",
+      "title": "Relationship Validation & Methodology Enforcement",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T20:36:20.552Z"
     }
   ],
   "stats": {
-    "total": 59,
+    "total": 69,
     "by_type": {
-      "epic": 4,
-      "story": 4,
-      "task": 36,
+      "epic": 5,
+      "story": 5,
+      "task": 43,
       "bug": 8,
-      "spike": 2,
+      "spike": 3,
       "feature": 4,
       "requirement": 1
     },
     "by_status": {
-      "in-progress": 0,
+      "in-progress": 1,
       "done": 45,
-      "draft": 13,
+      "draft": 22,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T16:07:31.126Z"
+  "last_updated": "2025-11-24T20:36:20.552Z"
 }

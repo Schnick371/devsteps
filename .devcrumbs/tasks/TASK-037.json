@@ -1,39 +1,45 @@
 {
-  "id": "TASK-034",
+  "id": "TASK-037",
   "type": "task",
   "category": "VS Code Extension",
-  "title": "TreeView: Add description badge for filter count (X/Y)",
-  "status": "done",
+  "title": "TreeView: Persist state across VS Code sessions",
+  "status": "draft",
   "priority": "high",
   "eisenhower": "urgent-important",
-  "created": "2025-11-24T13:02:04.397Z",
-  "updated": "2025-11-24T17:39:59.278Z",
+  "created": "2025-11-24T17:39:41.001Z",
+  "updated": "2025-11-24T19:36:26.033Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
+    "packages/vscode-extension/src/treeView/devcrumbsTreeDataProvider.ts",
     "packages/vscode-extension/src/extension.ts",
-    "packages/vscode-extension/src/treeView/devcrumbsTreeDataProvider.ts"
+    "packages/vscode-extension/src/utils/stateManager.ts"
   ],
   "linked_items": {
-    "implements": [],
+    "implements": [
+      "EPIC-003"
+    ],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "TASK-037"
+      "BUG-007",
+      "TASK-034"
     ],
     "depends-on": [],
-    "required-by": [],
+    "required-by": [
+      "TASK-043"
+    ],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
     "ux",
     "treeview",
-    "filter",
-    "visibility",
-    "badge"
+    "persistence",
+    "state-management",
+    "memento"
   ],
   "commits": [],
   "metadata": {}
