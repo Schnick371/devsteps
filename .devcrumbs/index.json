@@ -3,7 +3,7 @@
   "counters": {
     "epic": 4,
     "story": 4,
-    "task": 32,
+    "task": 33,
     "bug": 2,
     "spike": 2,
     "feature": 4,
@@ -450,14 +450,22 @@
       "priority": "critical",
       "created": "2025-11-23T15:49:23.356Z",
       "updated": "2025-11-23T15:49:33.095Z"
+    },
+    {
+      "id": "TASK-033",
+      "type": "task",
+      "title": "Enable preview editors for TreeView clicks",
+      "status": "done",
+      "priority": "medium",
+      "updated": "2025-11-24T10:34:19.375Z"
     }
   ],
   "stats": {
-    "total": 49,
+    "total": 50,
     "by_type": {
       "epic": 4,
       "story": 4,
-      "task": 32,
+      "task": 33,
       "bug": 2,
       "spike": 2,
       "feature": 4,
@@ -465,11 +473,11 @@
     },
     "by_status": {
       "in-progress": 3,
-      "done": 36,
+      "done": 37,
       "draft": 9,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T10:25:52.721Z"
+  "last_updated": "2025-11-24T10:34:19.375Z"
 }

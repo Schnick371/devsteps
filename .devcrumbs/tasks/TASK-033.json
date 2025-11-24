@@ -1,0 +1,36 @@
+{
+  "id": "TASK-033",
+  "type": "task",
+  "category": "general",
+  "title": "Enable preview editors for TreeView clicks",
+  "status": "done",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-24T10:33:36.837Z",
+  "updated": "2025-11-24T10:34:19.375Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [
+    "packages/vscode-extension/src/commands/index.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ux",
+    "preview-editor",
+    "treeview",
+    "vscode-api"
+  ],
+  "commits": [],
+  "metadata": {}
+}

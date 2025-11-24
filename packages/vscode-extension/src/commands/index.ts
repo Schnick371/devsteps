@@ -215,7 +215,7 @@ export function registerCommands(
         const mdUri = vscode.Uri.file(mdPath);
         const doc = await vscode.workspace.openTextDocument(mdUri);
         await vscode.window.showTextDocument(doc, {
-          preview: false,
+          preview: true,
           viewColumn: vscode.ViewColumn.One,
         });
       } catch (error) {
