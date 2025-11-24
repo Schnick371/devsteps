@@ -13,42 +13,50 @@ tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'micr
 
 **This is conversation, not execution.**
 
-## Core Behaviors
-
-- **Ask "why"** before "what" - Understand business value
-- **Search first** - Use `#mcp_devcrumbs_devcrumbs-search` to find existing items (MANDATORY)
-- **Surface dependencies** - Identify relationships
-- **Suggest structure** - Recommend item types and links
-- **Preserve decisions** - Document reasoning
-
-## Non-Negotiable: Research Before Proposing
-
-**You MUST:**
-- Search latest industry best practices (2025) before suggesting solutions
-- Validate assumptions with external research (Tavily search)
-- Check existing project patterns (DevCrumbs search)
-- Think deeply about trade-offs (don't just copy-paste first result)
-
 ## Planning Flow
 
-### Step 1: Understand + Search
+### Step 1: Understand Context
+
+**Dialog with user to grasp their need:**
+- Ask "why" before "what"
+- Surface dependencies early
+- Clarify scope and constraints
+- Identify related existing work
+
+### Step 2: Research First - MANDATORY
+
+**Before proposing ANY solution:**
+
+1. **Search the internet** for latest best practices (2025):
+   ```
+   #mcp_tavily_tavily-search "[topic] best practices 2025"
+   #mcp_tavily_tavily-crawl <url>  # Deep dive
+   ```
+
+2. **Search existing project** for related patterns:
+   ```
+   #mcp_devcrumbs_devcrumbs-search <keywords>
+   search <relevant modules>
+   ```
+
+3. **Think deeply** about findings:
+   - Compare multiple approaches
+   - Identify trade-offs (performance vs complexity, etc.)
+   - Challenge assumptions with evidence
+   - Synthesize into coherent recommendation
+
+**Core principle:** Research first = Evidence-based proposals, not premature solutions
+
+**Think about the intent:**
+- Why is this work needed now?
+- What does success look like?
+- Minimum Viable Product (MVP) scope?
 
 **Ask developer:**
 - What are you trying to achieve? (business value)
 - Related to existing work?
 
-**MANDATORY - Search existing items:**
-```
-#mcp_devcrumbs_devcrumbs-search <keywords>
-#mcp_devcrumbs_devcrumbs-list --status draft
-```
-
-**Then check codebase:**
-```
-search <relevant modules>
-```
-
-### Step 2: Structure Work
+### Step 3: Structure Work
 
 **Determine hierarchy:**
 - Epic (large initiative) → Story (feature) → Task (implementation)
@@ -62,7 +70,7 @@ search <relevant modules>
 **Identify dependencies:**
 - depends-on, blocks, relates-to
 
-### Step 3: Create Items
+### Step 4: Create Items
 
 **Define:**
 - Type (epic/story/task/bug/spike/test)
@@ -75,7 +83,7 @@ search <relevant modules>
 #mcp_devcrumbs_devcrumbs-add <type> "<title>" --priority <p> --eisenhower <q> --tags <t>
 ```
 
-### Step 4: Link Relationships
+### Step 5: Link Relationships
 
 ```
 #mcp_devcrumbs_devcrumbs-link <ID1> implements|depends-on|tested-by <ID2>
@@ -83,7 +91,7 @@ search <relevant modules>
 
 **Ensure:** Hierarchies clear, dependencies explicit, tests linked
 
-### Step 5: Validate
+### Step 6: Validate
 
 - Clear purpose + scope?
 - Priorities aligned?
@@ -100,8 +108,8 @@ search <relevant modules>
 
 ## When Complete
 
-"Planning done! Use `start-work.prompt.md` to begin."
+"Planning done! Use `devcrumbs-start-work.prompt.md` to begin."
 
 ---
 
-**See `devcrumbs.agent.md` for mentor role. See `start-work.prompt.md` for implementation kickoff.**
+**See `devcrumbs.agent.md` for mentor role. See `devcrumbs-start-work.prompt.md` for implementation kickoff.**
