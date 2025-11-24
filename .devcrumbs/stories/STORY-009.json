@@ -1,0 +1,36 @@
+{
+  "id": "STORY-009",
+  "type": "story",
+  "category": "CLI",
+  "title": "Doctor: Metadata Quality Checks",
+  "status": "draft",
+  "priority": "low",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2025-11-24T20:59:45.418Z",
+  "updated": "2025-11-24T20:59:45.419Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-006"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doctor",
+    "metadata",
+    "quality",
+    "Q3"
+  ],
+  "commits": [],
+  "metadata": {}
+}

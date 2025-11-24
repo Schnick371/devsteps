@@ -1,0 +1,41 @@
+{
+  "id": "STORY-006",
+  "type": "story",
+  "category": "CLI",
+  "title": "Doctor: Relationship Validation & Integrity Checks",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-24T20:55:50.309Z",
+  "updated": "2025-11-24T20:58:56.427Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-006"
+    ],
+    "implemented-by": [
+      "TASK-044",
+      "TASK-045",
+      "TASK-046",
+      "TASK-047"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doctor",
+    "validation",
+    "relationships",
+    "integrity"
+  ],
+  "commits": [],
+  "metadata": {}
+}

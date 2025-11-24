@@ -1,9 +1,9 @@
 {
   "version": "1.0.0",
   "counters": {
-    "epic": 5,
-    "story": 5,
-    "task": 43,
+    "epic": 6,
+    "story": 9,
+    "task": 47,
     "bug": 8,
     "spike": 3,
     "feature": 4,
@@ -511,9 +511,9 @@
       "id": "BUG-007",
       "type": "bug",
       "title": "Fix: Flat view expanded state resets on filter toggle",
-      "status": "in-progress",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-24T17:31:36.240Z"
+      "updated": "2025-11-24T20:52:11.415Z"
     },
     {
       "id": "TASK-036",
@@ -610,26 +610,98 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-11-24T20:50:55.266Z"
+    },
+    {
+      "id": "EPIC-006",
+      "type": "epic",
+      "title": "Project Health & Data Integrity",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T20:55:24.977Z"
+    },
+    {
+      "id": "STORY-006",
+      "type": "story",
+      "title": "Doctor: Relationship Validation & Integrity Checks",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T20:55:50.309Z"
+    },
+    {
+      "id": "TASK-044",
+      "type": "task",
+      "title": "Doctor: Invalid relationship detection",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T20:56:06.069Z"
+    },
+    {
+      "id": "TASK-045",
+      "type": "task",
+      "title": "Doctor: Orphaned items detection",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T20:56:20.254Z"
+    },
+    {
+      "id": "TASK-046",
+      "type": "task",
+      "title": "Doctor: Broken reference detection",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T20:56:34.013Z"
+    },
+    {
+      "id": "TASK-047",
+      "type": "task",
+      "title": "Doctor: Asymmetric link detection",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-24T20:58:56.427Z"
+    },
+    {
+      "id": "STORY-007",
+      "type": "story",
+      "title": "Doctor: Index Consistency & Repair",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-24T20:59:12.419Z"
+    },
+    {
+      "id": "STORY-008",
+      "type": "story",
+      "title": "Doctor: Status & Workflow Logic",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-24T20:59:29.234Z"
+    },
+    {
+      "id": "STORY-009",
+      "type": "story",
+      "title": "Doctor: Metadata Quality Checks",
+      "status": "draft",
+      "priority": "low",
+      "updated": "2025-11-24T20:59:45.418Z"
     }
   ],
   "stats": {
-    "total": 69,
+    "total": 78,
     "by_type": {
-      "epic": 5,
-      "story": 5,
-      "task": 43,
+      "epic": 6,
+      "story": 9,
+      "task": 47,
       "bug": 8,
       "spike": 3,
       "feature": 4,
       "requirement": 1
     },
     "by_status": {
-      "in-progress": 1,
-      "done": 49,
-      "draft": 18,
+      "in-progress": 0,
+      "done": 50,
+      "draft": 27,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T20:50:55.266Z"
+  "last_updated": "2025-11-24T20:59:45.418Z"
 }

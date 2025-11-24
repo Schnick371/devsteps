@@ -1,22 +1,22 @@
 {
-  "id": "EPIC-001",
+  "id": "EPIC-006",
   "type": "epic",
-  "category": "platform",
-  "title": "DevCrumbs Platform - AI-First Development Workflow System",
+  "category": "Platform",
+  "title": "Project Health & Data Integrity",
   "status": "draft",
-  "priority": "critical",
+  "priority": "high",
   "eisenhower": "not-urgent-important",
-  "created": "2025-11-23T15:33:22.968Z",
+  "created": "2025-11-24T20:55:24.977Z",
   "updated": "2025-11-24T20:59:51.259Z",
-  "author": "thomas.hantke@devcrumbs.dev",
+  "author": "the@devcrumbs.dev",
   "affected_paths": [],
   "linked_items": {
     "implements": [],
     "implemented-by": [
-      "STORY-003",
-      "EPIC-003",
-      "STORY-001",
-      "STORY-002"
+      "STORY-006",
+      "STORY-007",
+      "STORY-008",
+      "STORY-009"
     ],
     "tested-by": [],
     "tests": [],
@@ -24,8 +24,7 @@
     "blocked-by": [],
     "relates-to": [
       "EPIC-005",
-      "TASK-042",
-      "EPIC-006"
+      "EPIC-001"
     ],
     "depends-on": [],
     "required-by": [],
@@ -33,10 +32,11 @@
     "superseded-by": []
   },
   "tags": [
-    "vision",
-    "epic",
-    "platform",
-    "ai-integration"
+    "health",
+    "validation",
+    "integrity",
+    "doctor",
+    "quality"
   ],
   "commits": [],
   "metadata": {}

@@ -1,0 +1,36 @@
+{
+  "id": "STORY-008",
+  "type": "story",
+  "category": "CLI",
+  "title": "Doctor: Status & Workflow Logic",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-24T20:59:29.234Z",
+  "updated": "2025-11-24T20:59:29.235Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-006"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doctor",
+    "status",
+    "workflow",
+    "Q2"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-24T19:34:12.433Z",
-  "updated": "2025-11-24T20:43:35.279Z",
+  "updated": "2025-11-24T20:56:06.072Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "packages/shared/src/core/validation.ts",
@@ -29,7 +29,8 @@
     ],
     "required-by": [
       "TASK-039",
-      "TASK-040"
+      "TASK-040",
+      "TASK-044"
     ],
     "supersedes": [],
     "superseded-by": []
