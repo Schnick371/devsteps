@@ -495,9 +495,9 @@
       "id": "TASK-034",
       "type": "task",
       "title": "TreeView: Add description badge for filter count (X/Y)",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-24T13:02:04.397Z"
+      "updated": "2025-11-24T13:09:01.315Z"
     },
     {
       "id": "TASK-035",
@@ -529,11 +529,11 @@
     },
     "by_status": {
       "in-progress": 3,
-      "done": 41,
-      "draft": 12,
+      "done": 42,
+      "draft": 11,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T13:03:10.806Z"
+  "last_updated": "2025-11-24T13:09:01.315Z"
 }

@@ -290,8 +290,17 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
     by: 'id',
     order: 'asc',
   };
+  private treeView?: vscode.TreeView<TreeNode>;
 
   constructor(private workspaceRoot: vscode.Uri) {}
+
+  /**
+   * Set TreeView instance for description badge updates
+   */
+  setTreeView(treeView: vscode.TreeView<TreeNode>): void {
+    this.treeView = treeView;
+    this.updateDescription();
+  }
 
   /**
    * Set view mode and refresh
@@ -299,6 +308,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setViewMode(mode: ViewMode): void {
     this.viewMode = mode;
     this.refresh();
+    this.updateDescription();
   }
 
   /**
@@ -324,6 +334,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setStatusFilter(statuses: string[]): void {
     this.filterState.statuses = statuses;
     this.refresh();
+    this.updateDescription();
   }
 
   /**
@@ -332,6 +343,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setPriorityFilter(priorities: string[]): void {
     this.filterState.priorities = priorities;
     this.refresh();
+    this.updateDescription();
   }
 
   /**
@@ -340,6 +352,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setTypeFilter(types: string[]): void {
     this.filterState.types = types;
     this.refresh();
+    this.updateDescription();
   }
 
   /**
@@ -348,6 +361,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setTagFilter(tags: string[]): void {
     this.filterState.tags = tags;
     this.refresh();
+    this.updateDescription();
   }
 
   /**
@@ -356,6 +370,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   setSearchQuery(query: string): void {
     this.filterState.searchQuery = query;
     this.refresh();
+    this.updateDescription();
   }
 
   /**
@@ -371,6 +386,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
       hideDone: false,
     };
     this.refresh();
+    this.updateDescription();
   }
 
   /**
@@ -379,6 +395,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   toggleHideDone(): void {
     this.filterState.hideDone = !this.filterState.hideDone;
     this.refresh();
+    this.updateDescription();
   }
 
   /**
@@ -389,11 +406,68 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   }
 
   /**
+   * Update TreeView description badge with filter count
+   */
+  private updateDescription(): void {
+    if (!this.treeView) return;
+
+    try {
+      const totalCount = this.getTotalItemCount();
+      const filteredCount = this.getFilteredItemCount();
+
+      // Show badge only when filtering is active
+      if (filteredCount < totalCount) {
+        this.treeView.description = `(${filteredCount}/${totalCount})`;
+      } else {
+        this.treeView.description = undefined; // Clear badge when showing all
+      }
+    } catch (error) {
+      // Silently fail if counts cannot be determined
+      this.treeView.description = undefined;
+    }
+  }
+
+  /**
+   * Get total count of all work items
+   */
+  private getTotalItemCount(): number {
+    try {
+      const indexPath = vscode.Uri.joinPath(this.workspaceRoot, '.devcrumbs', 'index.json');
+      const indexData = vscode.workspace.fs.readFile(indexPath);
+      // Synchronous operation not available, use cached count or estimate
+      // For now, return from last loaded data
+      return this.lastTotalCount || 0;
+    } catch {
+      return 0;
+    }
+  }
+
+  private lastTotalCount = 0;
+  private lastFilteredCount = 0;
+
+  /**
+   * Get count of filtered items (visible items)
+   */
+  private getFilteredItemCount(): number {
+    return this.lastFilteredCount;
+  }
+
+  /**
+   * Update item counts (called during tree building)
+   */
+  private updateCounts(total: number, filtered: number): void {
+    this.lastTotalCount = total;
+    this.lastFilteredCount = filtered;
+    this.updateDescription();
+  }
+
+  /**
    * Set sort options
    */
   setSortOptions(by: SortState['by'], order: SortState['order']): void {
     this.sortState = { by, order };
     this.refresh();
+    this.updateDescription();
   }
 
   /**
@@ -537,9 +611,15 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
         ([id, meta]) => ({ id, ...meta }) as WorkItem,
       );
 
+      // Track counts for badge
+      const totalCount = items.length;
+
       // Apply filters and sorting
       items = this.applyFilters(items);
       items = this.applySorting(items);
+
+      // Update badge with counts
+      this.updateCounts(totalCount, items.length);
 
       // Group by type
       const typeGroups = items.reduce(

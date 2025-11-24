@@ -50,6 +50,10 @@ export async function activate(context: vscode.ExtensionContext) {
       showCollapseAll: true,
     });
     context.subscriptions.push(treeView);
+    
+    // Pass TreeView to provider for description badge updates
+    treeDataProvider.setTreeView(treeView);
+    
     logger.info('TreeView registered successfully');
 
     // Register FileDecorationProvider for status badges

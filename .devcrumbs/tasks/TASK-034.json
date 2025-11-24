@@ -3,11 +3,11 @@
   "type": "task",
   "category": "VS Code Extension",
   "title": "TreeView: Add description badge for filter count (X/Y)",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-24T13:02:04.397Z",
-  "updated": "2025-11-24T13:02:04.397Z",
+  "updated": "2025-11-24T13:09:01.315Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/src/extension.ts",
