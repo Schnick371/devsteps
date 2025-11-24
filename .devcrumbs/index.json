@@ -3,7 +3,7 @@
   "counters": {
     "epic": 4,
     "story": 4,
-    "task": 35,
+    "task": 36,
     "bug": 7,
     "spike": 2,
     "feature": 4,
@@ -14,10 +14,10 @@
       "id": "EPIC-001",
       "type": "epic",
       "title": "DevCrumbs Platform - AI-First Development Workflow System",
-      "status": "in-progress",
+      "status": "draft",
       "priority": "critical",
       "created": "2025-11-23T15:33:22.968Z",
-      "updated": "2025-11-24T10:14:23.540Z"
+      "updated": "2025-11-24T14:07:20.242Z"
     },
     {
       "id": "EPIC-002",
@@ -32,19 +32,19 @@
       "id": "EPIC-003",
       "type": "epic",
       "title": "VS Code Extension - Complete IDE Integration",
-      "status": "in-progress",
+      "status": "draft",
       "priority": "critical",
       "created": "2025-11-23T15:34:16.783Z",
-      "updated": "2025-11-24T10:21:34.419Z"
+      "updated": "2025-11-24T14:07:24.442Z"
     },
     {
       "id": "EPIC-004",
       "type": "epic",
       "title": "GitHub Publication Preparation - Legal Compliance and Repository Setup",
-      "status": "in-progress",
+      "status": "draft",
       "priority": "medium",
       "created": "2025-11-23T16:40:59.062Z",
-      "updated": "2025-11-24T10:23:02.792Z"
+      "updated": "2025-11-24T14:07:31.740Z"
     },
     {
       "id": "STORY-001",
@@ -514,26 +514,34 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-11-24T13:14:27.920Z"
+    },
+    {
+      "id": "TASK-036",
+      "type": "task",
+      "title": "Remove unnecessary success notifications from view mode commands",
+      "status": "done",
+      "priority": "medium",
+      "updated": "2025-11-24T14:16:23.748Z"
     }
   ],
   "stats": {
-    "total": 57,
+    "total": 58,
     "by_type": {
       "epic": 4,
       "story": 4,
-      "task": 35,
+      "task": 36,
       "bug": 7,
       "spike": 2,
       "feature": 4,
       "requirement": 1
     },
     "by_status": {
-      "in-progress": 3,
-      "done": 43,
-      "draft": 10,
+      "in-progress": 0,
+      "done": 44,
+      "draft": 13,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T13:14:27.920Z"
+  "last_updated": "2025-11-24T14:16:23.748Z"
 }

@@ -3,11 +3,11 @@
   "type": "epic",
   "category": "general",
   "title": "GitHub Publication Preparation - Legal Compliance and Repository Setup",
-  "status": "in-progress",
+  "status": "draft",
   "priority": "medium",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T16:40:59.062Z",
-  "updated": "2025-11-24T10:23:02.792Z",
+  "updated": "2025-11-24T14:07:31.740Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [],
   "linked_items": {

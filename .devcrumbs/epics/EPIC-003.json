@@ -3,11 +3,11 @@
   "type": "epic",
   "category": "vscode",
   "title": "VS Code Extension - Complete IDE Integration",
-  "status": "in-progress",
+  "status": "draft",
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T15:34:16.783Z",
-  "updated": "2025-11-24T11:57:17.899Z",
+  "updated": "2025-11-24T14:07:24.442Z",
   "author": "thomas.hantke@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/"

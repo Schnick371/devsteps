@@ -46,7 +46,6 @@ export function registerCommands(
     vscode.commands.registerCommand('devcrumbs.refreshItems', () => {
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.refresh();
-      vscode.window.showInformationMessage('DevCrumbs work items refreshed');
     }),
   );
 
@@ -56,7 +55,6 @@ export function registerCommands(
       logger.debug('Command: devcrumbs.viewMode.flat invoked');
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setViewMode('flat');
-      vscode.window.showInformationMessage('Switched to Flat View');
       logger.info('View mode switched to flat');
     }),
   );
@@ -66,7 +64,6 @@ export function registerCommands(
       logger.debug('Command: devcrumbs.viewMode.hierarchical invoked');
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setViewMode('hierarchical');
-      vscode.window.showInformationMessage('Switched to Hierarchical View');
       logger.info('View mode switched to hierarchical');
     }),
   );
@@ -76,7 +73,6 @@ export function registerCommands(
     vscode.commands.registerCommand('devcrumbs.hierarchy.scrum', () => {
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('scrum');
-      vscode.window.showInformationMessage('Showing Scrum Hierarchy');
     }),
   );
 
@@ -84,7 +80,6 @@ export function registerCommands(
     vscode.commands.registerCommand('devcrumbs.hierarchy.waterfall', () => {
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('waterfall');
-      vscode.window.showInformationMessage('Showing Waterfall Hierarchy');
     }),
   );
 
@@ -92,7 +87,6 @@ export function registerCommands(
     vscode.commands.registerCommand('devcrumbs.hierarchy.both', () => {
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('both');
-      vscode.window.showInformationMessage('Showing Both Hierarchies');
     }),
   );
 

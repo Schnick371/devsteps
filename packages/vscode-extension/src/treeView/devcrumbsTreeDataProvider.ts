@@ -494,25 +494,34 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   /**
    * Restore expanded state of type groups after tree refresh (flat view only)
    */
-  private async restoreExpandedGroups(): Promise<void> {
-    if (!this.treeView || this.viewMode !== 'flat') return;
-
-    // Wait for tree to rebuild
-    await new Promise((resolve) => setTimeout(resolve, 50));
-
-    // Get current root nodes
-    const rootNodes = await this.getChildren();
-
-    // Re-expand groups that were expanded before
-    for (const node of rootNodes) {
-      if (node instanceof TypeGroupNode && this.expandedGroups.has(node.getType())) {
-        await this.treeView.reveal(node, {
-          select: false,
-          focus: false,
-          expand: 1, // Expand one level
-        });
-      }
+  private restoreExpandedGroups(): void {
+    if (!this.treeView || this.viewMode !== 'flat' || this.expandedGroups.size === 0) {
+      return;
     }
+
+    // Schedule restore after tree rebuild completes
+    setTimeout(async () => {
+      if (!this.treeView) return;
+
+      // Get current root nodes
+      const rootNodes = await this.getChildren();
+
+      // Re-expand groups that were expanded before
+      for (const node of rootNodes) {
+        if (node instanceof TypeGroupNode && this.expandedGroups.has(node.getType())) {
+          try {
+            await this.treeView.reveal(node, {
+              select: false,
+              focus: false,
+              expand: 1, // Expand one level
+            });
+          } catch (error) {
+            // Silently ignore reveal errors (node might not exist anymore)
+            console.debug('Could not restore expanded state for', node.getType(), error);
+          }
+        }
+      }
+    }, 100); // Increased delay to ensure tree is fully rebuilt
   }
 
   /**
