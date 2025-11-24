@@ -7,7 +7,7 @@
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T19:36:06.268Z",
-  "updated": "2025-11-24T19:36:26.032Z",
+  "updated": "2025-11-24T20:49:03.282Z",
   "author": "the@devcrumbs.dev",
   "affected_paths": [
     ".github/instructions/devcrumbs.instructions.md",
@@ -22,7 +22,9 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "EPIC-001"
+    ],
     "depends-on": [
       "TASK-041"
     ],

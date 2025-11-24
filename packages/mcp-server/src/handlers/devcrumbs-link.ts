@@ -1,10 +1,12 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
+  type Methodology,
   type RelationType,
   TYPE_TO_DIRECTORY,
   getCurrentTimestamp,
   parseItemId,
+  validateRelationship,
 } from '@devcrumbs/shared';
 
 /**
@@ -42,9 +44,37 @@ export default async function linkHandler(args: {
     throw new Error(`Target item not found: ${args.target_id}`);
   }
 
-  // Update source item
+  // Load items
   const sourceMetadata = JSON.parse(readFileSync(sourcePath, 'utf-8'));
+  const targetMetadata = JSON.parse(readFileSync(targetPath, 'utf-8'));
 
+  // Load project config for methodology
+  const configPath = join(devcrumbsDir, 'config.json');
+  const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+  const methodology: Methodology = config.settings?.methodology || 'hybrid';
+
+  // Validate relationship
+  const validation = validateRelationship(
+    { id: sourceMetadata.id, type: sourceMetadata.type },
+    { id: targetMetadata.id, type: targetMetadata.type },
+    args.relation_type,
+    methodology
+  );
+
+  if (!validation.valid) {
+    return {
+      success: false,
+      error: validation.error,
+      suggestion: validation.suggestion,
+      validation_failed: true,
+      source_type: sourceMetadata.type,
+      target_type: targetMetadata.type,
+      relation: args.relation_type,
+      methodology: methodology,
+    };
+  }
+
+  // Update source item
   if (!sourceMetadata.linked_items[args.relation_type].includes(args.target_id)) {
     sourceMetadata.linked_items[args.relation_type].push(args.target_id);
     sourceMetadata.updated = getCurrentTimestamp();
@@ -62,12 +92,12 @@ export default async function linkHandler(args: {
     'depends-on': 'required-by',
     'required-by': 'depends-on',
     'relates-to': 'relates-to',
+    supersedes: 'superseded-by',
+    'superseded-by': 'supersedes',
   };
 
   const inverseRelation = inverseRelations[args.relation_type];
   if (inverseRelation) {
-    const targetMetadata = JSON.parse(readFileSync(targetPath, 'utf-8'));
-
     if (!targetMetadata.linked_items[inverseRelation].includes(args.source_id)) {
       targetMetadata.linked_items[inverseRelation].push(args.source_id);
       targetMetadata.updated = getCurrentTimestamp();

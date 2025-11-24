@@ -3,11 +3,13 @@ import { join } from 'node:path';
 import {
   type ItemMetadata,
   type ItemType,
+  type Methodology,
   TYPE_SHORTCUTS,
   TYPE_TO_DIRECTORY,
   generateItemId,
   getCurrentTimestamp,
   parseItemId,
+  validateRelationship,
 } from '@devcrumbs/shared';
 import chalk from 'chalk';
 import ora from 'ora';
@@ -357,7 +359,12 @@ export async function updateCommand(id: string, options: any) {
   }
 }
 
-export async function linkCommand(sourceId: string, relation: string, targetId: string) {
+export async function linkCommand(
+  sourceId: string,
+  relation: string,
+  targetId: string,
+  options: { force?: boolean } = {}
+) {
   const spinner = ora('Creating link...').start();
 
   try {
@@ -382,6 +389,34 @@ export async function linkCommand(sourceId: string, relation: string, targetId: 
     }
 
     const sourceMetadata = JSON.parse(readFileSync(sourcePath, 'utf-8'));
+    const targetMetadata = JSON.parse(readFileSync(targetPath, 'utf-8'));
+
+    // Load project config for methodology
+    const configPath = join(devcrumbsDir, 'config.json');
+    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    const methodology: Methodology = config.settings?.methodology || 'hybrid';
+
+    // Validate relationship (unless --force)
+    if (!options.force) {
+      const validation = validateRelationship(
+        { id: sourceMetadata.id, type: sourceMetadata.type },
+        { id: targetMetadata.id, type: targetMetadata.type },
+        relation,
+        methodology
+      );
+
+      if (!validation.valid) {
+        spinner.fail('Validation failed');
+        console.error(chalk.red('✗'), validation.error);
+        if (validation.suggestion) {
+          console.log(chalk.yellow('💡'), validation.suggestion);
+        }
+        console.log(chalk.gray('\nUse --force to override validation'));
+        process.exit(1);
+      }
+    } else {
+      spinner.text = 'Creating link (validation overridden)...';
+    }
 
     if (!sourceMetadata.linked_items[relation].includes(targetId)) {
       sourceMetadata.linked_items[relation].push(targetId);
@@ -403,8 +438,6 @@ export async function linkCommand(sourceId: string, relation: string, targetId: 
 
     const inverseRelation = inverseRelations[relation];
     if (inverseRelation) {
-      const targetMetadata = JSON.parse(readFileSync(targetPath, 'utf-8'));
-
       if (!targetMetadata.linked_items[inverseRelation].includes(sourceId)) {
         targetMetadata.linked_items[inverseRelation].push(sourceId);
         targetMetadata.updated = getCurrentTimestamp();
@@ -412,7 +445,10 @@ export async function linkCommand(sourceId: string, relation: string, targetId: 
       }
     }
 
-    spinner.succeed(`Linked ${chalk.cyan(sourceId)} --${relation}--> ${chalk.cyan(targetId)}`);
+    const successMsg = options.force
+      ? `Linked ${chalk.cyan(sourceId)} --${relation}--> ${chalk.cyan(targetId)} ${chalk.yellow('(forced)')}`
+      : `Linked ${chalk.cyan(sourceId)} --${relation}--> ${chalk.cyan(targetId)}`;
+    spinner.succeed(successMsg);
   } catch (error: any) {
     spinner.fail('Failed to create link');
     throw error;

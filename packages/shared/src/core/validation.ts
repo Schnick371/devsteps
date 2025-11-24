@@ -50,18 +50,29 @@ export function validateRelationship(
   }
 
   // Validate based on methodology
-  if (methodology === 'scrum' || methodology === 'hybrid') {
-    const scrumResult = validateScrumHierarchy(source, target);
-    if (scrumResult.valid || methodology === 'scrum') {
-      return scrumResult;
-    }
+  if (methodology === 'scrum') {
+    return validateScrumHierarchy(source, target);
   }
 
-  if (methodology === 'waterfall' || methodology === 'hybrid') {
+  if (methodology === 'waterfall') {
+    return validateWaterfallHierarchy(source, target);
+  }
+
+  if (methodology === 'hybrid') {
+    // Try Scrum rules first
+    const scrumResult = validateScrumHierarchy(source, target);
+    if (scrumResult.valid) {
+      return scrumResult;
+    }
+
+    // Try Waterfall rules
     const waterfallResult = validateWaterfallHierarchy(source, target);
-    if (waterfallResult.valid || methodology === 'waterfall') {
+    if (waterfallResult.valid) {
       return waterfallResult;
     }
+
+    // Neither worked - return Scrum error (more common)
+    return scrumResult;
   }
 
   return {

@@ -567,17 +567,17 @@
       "id": "TASK-039",
       "type": "task",
       "title": "CLI: Enforce relationship validation in link command",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-24T19:34:50.473Z"
+      "updated": "2025-11-24T20:50:12.949Z"
     },
     {
       "id": "TASK-040",
       "type": "task",
       "title": "MCP: Enforce relationship validation with AI-friendly errors",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-24T19:34:50.476Z"
+      "updated": "2025-11-24T20:50:12.952Z"
     },
     {
       "id": "TASK-041",
@@ -625,11 +625,11 @@
     },
     "by_status": {
       "in-progress": 1,
-      "done": 46,
-      "draft": 21,
+      "done": 48,
+      "draft": 19,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T20:43:35.279Z"
+  "last_updated": "2025-11-24T20:50:12.952Z"
 }

@@ -7,7 +7,7 @@
   "priority": "critical",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T15:33:22.968Z",
-  "updated": "2025-11-24T19:36:26.034Z",
+  "updated": "2025-11-24T20:49:03.282Z",
   "author": "thomas.hantke@devcrumbs.dev",
   "affected_paths": [],
   "linked_items": {
@@ -23,7 +23,8 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "EPIC-005"
+      "EPIC-005",
+      "TASK-042"
     ],
     "depends-on": [],
     "required-by": [],

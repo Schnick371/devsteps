@@ -46,7 +46,7 @@ const tests = [
 
   // Scrum: Invalid cases
   {
-    name: 'Scrum: Task → Epic (invalid - missing Story)',
+    name: 'Scrum: Task trying to implement Epic directly (invalid - needs Story)',
     source: { id: 'TASK-001', type: 'task' },
     target: { id: 'EPIC-001', type: 'epic' },
     relation: 'implements',
@@ -54,7 +54,7 @@ const tests = [
     expected: false,
   },
   {
-    name: 'Scrum: Epic → Story (invalid - wrong direction)',
+    name: 'Scrum: Epic trying to implement Story (invalid - Epics are top-level)',
     source: { id: 'EPIC-001', type: 'epic' },
     target: { id: 'STORY-001', type: 'story' },
     relation: 'implements',
