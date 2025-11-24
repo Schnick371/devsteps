@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 // Re-export project context schemas
 export * from './project.js';
+export * from './relationships.js';
 
 /**
  * Methodology types

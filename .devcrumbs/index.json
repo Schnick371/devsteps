@@ -559,9 +559,9 @@
       "id": "TASK-038",
       "type": "task",
       "title": "Shared: Implement relationship validation engine",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-24T19:34:12.433Z"
+      "updated": "2025-11-24T20:43:35.279Z"
     },
     {
       "id": "TASK-039",
@@ -625,11 +625,11 @@
     },
     "by_status": {
       "in-progress": 1,
-      "done": 45,
-      "draft": 22,
+      "done": 46,
+      "draft": 21,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T20:36:20.552Z"
+  "last_updated": "2025-11-24T20:43:35.279Z"
 }
