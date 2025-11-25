@@ -4,7 +4,7 @@
     "epic": 6,
     "story": 9,
     "task": 50,
-    "bug": 8,
+    "bug": 9,
     "spike": 4,
     "feature": 4,
     "requirement": 1
@@ -714,26 +714,34 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-11-25T09:31:24.997Z"
+    },
+    {
+      "id": "BUG-009",
+      "type": "bug",
+      "title": "TreeView does not auto-refresh when .devcrumbs files change",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-11-25T11:16:35.872Z"
     }
   ],
   "stats": {
-    "total": 82,
+    "total": 83,
     "by_type": {
       "epic": 6,
       "story": 9,
       "task": 50,
-      "bug": 8,
+      "bug": 9,
       "spike": 4,
       "feature": 4,
       "requirement": 1
     },
     "by_status": {
       "in-progress": 0,
-      "done": 53,
+      "done": 54,
       "draft": 28,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-25T09:31:24.997Z"
+  "last_updated": "2025-11-25T11:16:35.872Z"
 }

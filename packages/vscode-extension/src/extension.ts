@@ -62,6 +62,29 @@ export async function activate(context: vscode.ExtensionContext) {
       vscode.window.registerFileDecorationProvider(decorationProvider)
     );
     logger.info('FileDecorationProvider registered');
+
+    // Register FileSystemWatcher for automatic TreeView refresh
+    const watcher = vscode.workspace.createFileSystemWatcher(
+      new vscode.RelativePattern(workspaceRoot, '.devcrumbs/**/*.json')
+    );
+    
+    watcher.onDidCreate(() => {
+      logger.info('File created in .devcrumbs/, refreshing TreeView');
+      treeDataProvider.refresh();
+    });
+    
+    watcher.onDidChange(() => {
+      logger.info('File changed in .devcrumbs/, refreshing TreeView');
+      treeDataProvider.refresh();
+    });
+    
+    watcher.onDidDelete(() => {
+      logger.info('File deleted in .devcrumbs/, refreshing TreeView');
+      treeDataProvider.refresh();
+    });
+    
+    context.subscriptions.push(watcher);
+    logger.info('FileSystemWatcher registered for .devcrumbs/**/*.json');
   }
 
   // Always register commands to avoid "command not found" errors

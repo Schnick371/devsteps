@@ -1,0 +1,42 @@
+{
+  "id": "BUG-009",
+  "type": "bug",
+  "category": "VS Code Extension",
+  "title": "TreeView does not auto-refresh when .devcrumbs files change",
+  "status": "done",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-25T11:16:18.037Z",
+  "updated": "2025-11-25T11:16:35.872Z",
+  "author": "the@devcrumbs.dev",
+  "affected_paths": [
+    "packages/vscode-extension/src/extension.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-002"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "treeview",
+    "file-watcher",
+    "ux",
+    "auto-refresh",
+    "fixed"
+  ],
+  "commits": [],
+  "metadata": {}
+}
