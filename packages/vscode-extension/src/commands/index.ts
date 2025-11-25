@@ -13,7 +13,7 @@ import { logger } from '../outputChannel.js';
 /**
  * Check if DevCrumbs is initialized in workspace
  */
-function checkDevCrumbsInitialized(treeDataProvider: DevCrumbsTreeDataProvider | null): boolean {
+function checkDevCrumbsInitialized(treeDataProvider: DevCrumbsTreeDataProvider | null): treeDataProvider is DevCrumbsTreeDataProvider {
   if (!treeDataProvider) {
     logger.warn('Command invoked but DevCrumbs not initialized (treeDataProvider is null)');
     vscode.window.showWarningMessage(
@@ -31,9 +31,68 @@ export function registerCommands(
   context: vscode.ExtensionContext,
   treeDataProvider: DevCrumbsTreeDataProvider | null,
 ): void {
-  const initialSubscriptionsCount = context.subscriptions.length;
-  logger.info(`Registering commands (treeDataProvider: ${treeDataProvider ? 'initialized' : 'null'})...`);
-  
+  // Initialize DevCrumbs Project
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devcrumbs.initProject', async () => {
+      const workspaceFolders = vscode.workspace.workspaceFolders;
+      if (!workspaceFolders || workspaceFolders.length === 0) {
+        vscode.window.showErrorMessage('No workspace folder open. Please open a folder first.');
+        return;
+      }
+
+      const projectName = await vscode.window.showInputBox({
+        prompt: 'Enter project name',
+        value: path.basename(workspaceFolders[0].uri.fsPath),
+        validateInput: (value) => {
+          if (!value || value.trim().length === 0) {
+            return 'Project name cannot be empty';
+          }
+          return undefined;
+        },
+      });
+
+      if (!projectName) return;
+
+      const methodology = await vscode.window.showQuickPick(
+        [
+          { label: 'Scrum', value: 'scrum', description: 'Epics → Stories → Tasks' },
+          { label: 'Waterfall', value: 'waterfall', description: 'Requirements → Features → Tasks' },
+          { label: 'Hybrid', value: 'hybrid', description: 'Both Scrum and Waterfall' },
+        ],
+        {
+          placeHolder: 'Select project methodology',
+        },
+      );
+
+      if (!methodology) return;
+
+      // Show initialization options
+      const choice = await vscode.window.showInformationMessage(
+        `Initialize DevCrumbs project "${projectName}" with ${methodology.label} methodology?`,
+        { modal: true },
+        'Use Copilot Chat',
+        'Use CLI',
+        'Cancel',
+      );
+
+      if (choice === 'Use Copilot Chat') {
+        // Open Copilot Chat with init command
+        await vscode.commands.executeCommand('workbench.action.chat.open', {
+          query: `@devcrumbs #mcp_devcrumbs_devcrumbs-init ${projectName} --methodology ${methodology.value}`,
+        });
+      } else if (choice === 'Use CLI') {
+        // Open terminal and run CLI command
+        const terminal = vscode.window.createTerminal('DevCrumbs Init');
+        terminal.show();
+        terminal.sendText(`devcrumbs init ${projectName} --methodology ${methodology.value}`);
+        
+        vscode.window.showInformationMessage(
+          'Run the command in the terminal to initialize the project.',
+        );
+      }
+    }),
+  );
+
   // Show Dashboard
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.showDashboard', () => {
@@ -52,21 +111,17 @@ export function registerCommands(
   // View mode switching
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.viewMode.flat', async () => {
-      logger.debug('Command: devcrumbs.viewMode.flat invoked');
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setViewMode('flat');
       await vscode.commands.executeCommand('setContext', 'devcrumbs.viewMode', 'flat');
-      logger.info('View mode switched to flat');
     }),
   );
 
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.viewMode.hierarchical', async () => {
-      logger.debug('Command: devcrumbs.viewMode.hierarchical invoked');
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setViewMode('hierarchical');
       await vscode.commands.executeCommand('setContext', 'devcrumbs.viewMode', 'hierarchical');
-      logger.info('View mode switched to hierarchical');
     }),
   );
 
@@ -257,6 +312,8 @@ export function registerCommands(
   // Update status
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.updateStatus', async (node?: any) => {
+      if (!checkDevCrumbsInitialized(treeDataProvider)) return;
+      
       const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
       if (!workspaceFolder) {
         vscode.window.showErrorMessage('No workspace folder open');
@@ -486,15 +543,6 @@ ${Object.entries(byType)
   // Copy item ID to clipboard
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.copyId', async (node?: any) => {
-      logger.debug('copyId command invoked', {
-        nodeType: typeof node,
-        constructor: node?.constructor?.name,
-        hasItem: !!node?.item,
-        hasLabel: !!node?.label,
-        label: node?.label,
-        itemId: node?.item?.id
-      });
-      
       // Extract ID from different possible structures
       let itemId: string | undefined;
       
@@ -509,12 +557,10 @@ ${Object.entries(byType)
       }
       
       if (!itemId) {
-        logger.error('copyId: Could not extract item ID from node', node);
         vscode.window.showErrorMessage('No item ID provided');
         return;
       }
 
-      logger.info(`Copied item ID to clipboard: ${itemId}`);
       vscode.env.clipboard.writeText(itemId);
       vscode.window.showInformationMessage(`📋 Copied ${itemId} to clipboard`);
     }),
@@ -793,12 +839,10 @@ ${Object.entries(byType)
   // Toggle Hide Done Items
   context.subscriptions.push(
     vscode.commands.registerCommand('devcrumbs.toggleHideDone', async () => {
-      logger.debug('Command: devcrumbs.toggleHideDone invoked');
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.toggleHideDone();
       const isHidden = treeDataProvider.getHideDoneState();
       await vscode.commands.executeCommand('setContext', 'devcrumbs.hideDone', isHidden);
-      logger.info(`Hide done toggled: ${isHidden ? 'hidden' : 'visible'}`);
     }),
   );
 
@@ -854,7 +898,4 @@ ${Object.entries(byType)
       logger.clear();
     }),
   );
-  
-  const commandsRegistered = context.subscriptions.length - initialSubscriptionsCount;
-  logger.info(`✓ Successfully registered ${commandsRegistered} commands`);
 }

@@ -56,7 +56,20 @@
         }
       ]
     },
+    "viewsWelcome": [
+      {
+        "view": "devcrumbs.itemsView",
+        "contents": "No DevCrumbs project found in this workspace.\n\n[Initialize DevCrumbs Project](command:devcrumbs.initProject)\n\nOr use the Command Palette:\n• Run 'DevCrumbs: Initialize Project'\n• Use the CLI: `devcrumbs init`\n\nDevCrumbs helps you track work items, features, bugs, and requirements directly in your repository.\n\n[Learn More](https://github.com/devcrumbs/devcrumbs)",
+        "when": "!devcrumbs.initialized"
+      }
+    ],
     "commands": [
+      {
+        "command": "devcrumbs.initProject",
+        "title": "Initialize Project",
+        "category": "DevCrumbs",
+        "icon": "$(rocket)"
+      },
       {
         "command": "devcrumbs.refreshItems",
         "title": "Refresh Work Items",

@@ -31,12 +31,17 @@ export async function activate(context: vscode.ExtensionContext) {
   const workspaceRoot = workspaceFolders[0].uri;
 
   // Check for .devcrumbs directory
+  let hasDevCrumbs = false;
   try {
     await vscode.workspace.fs.stat(vscode.Uri.joinPath(workspaceRoot, '.devcrumbs'));
+    hasDevCrumbs = true;
     logger.info('.devcrumbs directory found in workspace');
   } catch (error) {
-    logger.warn('No .devcrumbs directory found in workspace - TreeView will show empty state');
+    logger.warn('No .devcrumbs directory found in workspace - TreeView will show welcome view');
   }
+
+  // Set context key for welcome view
+  await vscode.commands.executeCommand('setContext', 'devcrumbs.initialized', hasDevCrumbs);
 
   // Initialize TreeView - always create provider to avoid "no data provider" error
   // Provider will show empty state if .devcrumbs doesn't exist
@@ -73,8 +78,9 @@ export async function activate(context: vscode.ExtensionContext) {
     new vscode.RelativePattern(workspaceRoot, '.devcrumbs')
   );
   
-  devcrumbsDirWatcher.onDidCreate(() => {
-    logger.info('.devcrumbs directory created - refreshing TreeView');
+  devcrumbsDirWatcher.onDidCreate(async () => {
+    logger.info('.devcrumbs directory created - refreshing TreeView and updating context');
+    await vscode.commands.executeCommand('setContext', 'devcrumbs.initialized', true);
     treeDataProvider.refresh();
   });
   

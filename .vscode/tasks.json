@@ -201,6 +201,20 @@
         "reveal": "always",
         "panel": "dedicated"
       }
+    },
+    {
+      "label": "Build Extension (Debug)",
+      "type": "shell",
+      "command": "node esbuild.js",
+      "options": {
+        "cwd": "${workspaceFolder}/packages/vscode-extension"
+      },
+      "group": "build",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
     }
   ]
 }

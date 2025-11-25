@@ -1,0 +1,140 @@
+{
+  "name": "view-toggle-example",
+  "displayName": "View Toggle Example",
+  "description": "Tree/List toggle with toolbar icons and checkmark menu",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "viewToggleExplorer",
+          "name": "View Toggle Demo"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "viewToggle.setListView.active",
+        "title": "$(check) View as List",
+        "icon": "$(list-tree)",
+        "enablement": "false"
+      },
+      {
+        "command": "viewToggle.setListView.inactive",
+        "title": "View as List",
+        "icon": "$(list-unordered)"
+      },
+      {
+        "command": "viewToggle.setTreeView.active",
+        "title": "$(check) View as Tree",
+        "icon": "$(list-flat)",
+        "enablement": "false"
+      },
+      {
+        "command": "viewToggle.setTreeView.inactive",
+        "title": "View as Tree",
+        "icon": "$(folder)"
+      },
+      {
+        "command": "viewToggle.toggleListView",
+        "title": "Toggle List View",
+        "icon": "$(list-tree)"
+      },
+      {
+        "command": "viewToggle.toggleTreeView",
+        "title": "Toggle Tree View",
+        "icon": "$(list-flat)"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "viewToggle.viewSort",
+        "label": "View & Sort"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "viewToggle.toggleListView",
+          "when": "view == viewToggleExplorer && viewToggle.viewMode == list",
+          "group": "navigation@1"
+        },
+        {
+          "command": "viewToggle.toggleTreeView",
+          "when": "view == viewToggleExplorer && viewToggle.viewMode == tree",
+          "group": "navigation@1"
+        },
+        {
+          "submenu": "viewToggle.viewSort",
+          "when": "view == viewToggleExplorer",
+          "group": "0_view",
+          "order": 2
+        }
+      ],
+      "viewToggle.viewSort": [
+        {
+          "command": "viewToggle.setListView.active",
+          "group": "1_viewmode@1",
+          "when": "viewToggle.viewMode == list"
+        },
+        {
+          "command": "viewToggle.setListView.inactive",
+          "group": "1_viewmode@1",
+          "when": "viewToggle.viewMode == tree"
+        },
+        {
+          "command": "viewToggle.setTreeView.active",
+          "group": "1_viewmode@2",
+          "when": "viewToggle.viewMode == tree"
+        },
+        {
+          "command": "viewToggle.setTreeView.inactive",
+          "group": "1_viewmode@2",
+          "when": "viewToggle.viewMode == list"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "viewToggle.setListView.active",
+          "when": "false"
+        },
+        {
+          "command": "viewToggle.setListView.inactive",
+          "when": "false"
+        },
+        {
+          "command": "viewToggle.setTreeView.active",
+          "when": "false"
+        },
+        {
+          "command": "viewToggle.setTreeView.inactive",
+          "when": "false"
+        },
+        {
+          "command": "viewToggle.toggleListView",
+          "when": "false"
+        },
+        {
+          "command": "viewToggle.toggleTreeView",
+          "when": "false"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^18.x",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}

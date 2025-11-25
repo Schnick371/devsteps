@@ -4,7 +4,7 @@
     "epic": 6,
     "story": 9,
     "task": 50,
-    "bug": 9,
+    "bug": 11,
     "spike": 4,
     "feature": 4,
     "requirement": 1
@@ -722,26 +722,42 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-11-25T11:16:35.872Z"
+    },
+    {
+      "id": "BUG-010",
+      "type": "bug",
+      "title": "Test FileSystemWatcher Auto-Refresh",
+      "status": "draft",
+      "priority": "low",
+      "updated": "2025-11-25T11:18:55.191Z"
+    },
+    {
+      "id": "BUG-011",
+      "type": "bug",
+      "title": "CLI init missing workflow prompts and instructions deployment",
+      "status": "done",
+      "priority": "medium",
+      "updated": "2025-11-25T13:36:06.547Z"
     }
   ],
   "stats": {
-    "total": 83,
+    "total": 85,
     "by_type": {
       "epic": 6,
       "story": 9,
       "task": 50,
-      "bug": 9,
+      "bug": 11,
       "spike": 4,
       "feature": 4,
       "requirement": 1
     },
     "by_status": {
       "in-progress": 0,
-      "done": 54,
-      "draft": 28,
+      "done": 55,
+      "draft": 29,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-25T11:16:35.872Z"
+  "last_updated": "2025-11-25T13:36:06.547Z"
 }
