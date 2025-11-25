@@ -51,42 +51,47 @@ export function registerCommands(
 
   // View mode switching
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.viewMode.flat', () => {
+    vscode.commands.registerCommand('devcrumbs.viewMode.flat', async () => {
       logger.debug('Command: devcrumbs.viewMode.flat invoked');
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setViewMode('flat');
+      await vscode.commands.executeCommand('setContext', 'devcrumbs.viewMode', 'flat');
       logger.info('View mode switched to flat');
     }),
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.viewMode.hierarchical', () => {
+    vscode.commands.registerCommand('devcrumbs.viewMode.hierarchical', async () => {
       logger.debug('Command: devcrumbs.viewMode.hierarchical invoked');
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setViewMode('hierarchical');
+      await vscode.commands.executeCommand('setContext', 'devcrumbs.viewMode', 'hierarchical');
       logger.info('View mode switched to hierarchical');
     }),
   );
 
   // Hierarchy type switching
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.hierarchy.scrum', () => {
+    vscode.commands.registerCommand('devcrumbs.hierarchy.scrum', async () => {
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('scrum');
+      await vscode.commands.executeCommand('setContext', 'devcrumbs.hierarchy', 'scrum');
     }),
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.hierarchy.waterfall', () => {
+    vscode.commands.registerCommand('devcrumbs.hierarchy.waterfall', async () => {
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('waterfall');
+      await vscode.commands.executeCommand('setContext', 'devcrumbs.hierarchy', 'waterfall');
     }),
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.hierarchy.both', () => {
+    vscode.commands.registerCommand('devcrumbs.hierarchy.both', async () => {
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('both');
+      await vscode.commands.executeCommand('setContext', 'devcrumbs.hierarchy', 'both');
     }),
   );
 
@@ -787,11 +792,12 @@ ${Object.entries(byType)
 
   // Toggle Hide Done Items
   context.subscriptions.push(
-    vscode.commands.registerCommand('devcrumbs.toggleHideDone', () => {
+    vscode.commands.registerCommand('devcrumbs.toggleHideDone', async () => {
       logger.debug('Command: devcrumbs.toggleHideDone invoked');
       if (!checkDevCrumbsInitialized(treeDataProvider)) return;
       treeDataProvider.toggleHideDone();
       const isHidden = treeDataProvider.getHideDoneState();
+      await vscode.commands.executeCommand('setContext', 'devcrumbs.hideDone', isHidden);
       logger.info(`Hide done toggled: ${isHidden ? 'hidden' : 'visible'}`);
     }),
   );

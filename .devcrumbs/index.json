@@ -3,9 +3,9 @@
   "counters": {
     "epic": 6,
     "story": 9,
-    "task": 49,
+    "task": 50,
     "bug": 8,
-    "spike": 3,
+    "spike": 4,
     "feature": 4,
     "requirement": 1
   },
@@ -465,7 +465,7 @@
       "title": "Menu Items Missing Visual Checkmarks for Current State",
       "status": "draft",
       "priority": "high",
-      "updated": "2025-11-24T11:56:42.054Z"
+      "updated": "2025-11-25T08:47:13.850Z"
     },
     {
       "id": "BUG-004",
@@ -687,9 +687,9 @@
       "id": "TASK-048",
       "type": "task",
       "title": "TreeView: Add methodology sections in flat view",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-24T21:12:14.592Z"
+      "updated": "2025-11-25T08:30:59.839Z"
     },
     {
       "id": "TASK-049",
@@ -698,26 +698,42 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-11-24T21:18:39.938Z"
+    },
+    {
+      "id": "SPIKE-004",
+      "type": "spike",
+      "title": "Test Menu Checkmarks Implementation - Multiple Approaches",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-25T09:19:34.391Z"
+    },
+    {
+      "id": "TASK-050",
+      "type": "task",
+      "title": "Implement Menu Checkmarks using native toggled property",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-11-25T09:31:24.997Z"
     }
   ],
   "stats": {
-    "total": 80,
+    "total": 82,
     "by_type": {
       "epic": 6,
       "story": 9,
-      "task": 49,
+      "task": 50,
       "bug": 8,
-      "spike": 3,
+      "spike": 4,
       "feature": 4,
       "requirement": 1
     },
     "by_status": {
       "in-progress": 0,
-      "done": 51,
+      "done": 53,
       "draft": 28,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-24T21:18:39.938Z"
+  "last_updated": "2025-11-25T09:31:24.997Z"
 }

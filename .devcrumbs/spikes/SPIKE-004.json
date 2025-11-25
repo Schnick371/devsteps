@@ -1,29 +1,25 @@
 {
-  "id": "BUG-003",
-  "type": "bug",
+  "id": "SPIKE-004",
+  "type": "spike",
   "category": "general",
-  "title": "Menu Items Missing Visual Checkmarks for Current State",
+  "title": "Test Menu Checkmarks Implementation - Multiple Approaches",
   "status": "draft",
   "priority": "high",
-  "eisenhower": "urgent-important",
-  "created": "2025-11-24T11:56:42.054Z",
-  "updated": "2025-11-25T09:22:16.437Z",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-25T08:55:15.662Z",
+  "updated": "2025-11-25T09:22:10.440Z",
   "author": "the@devcrumbs.dev",
-  "affected_paths": [
-    "packages/vscode-extension/src/commands/index.ts",
-    "packages/vscode-extension/package.json"
-  ],
+  "affected_paths": [],
   "linked_items": {
-    "implements": [
-      "EPIC-003"
-    ],
+    "implements": [],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "SPIKE-004",
+      "BUG-003",
+      "EPIC-003",
       "TASK-050"
     ],
     "depends-on": [],
@@ -32,10 +28,11 @@
     "superseded-by": []
   },
   "tags": [
+    "spike",
     "vscode",
-    "ui",
     "menu",
-    "usability"
+    "ui",
+    "research"
   ],
   "commits": [],
   "metadata": {}

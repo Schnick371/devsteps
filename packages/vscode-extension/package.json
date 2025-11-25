@@ -67,28 +67,33 @@
         "command": "devcrumbs.viewMode.flat",
         "title": "Switch to Flat View",
         "category": "DevCrumbs",
-        "icon": "$(list-flat)"
+        "icon": "$(list-flat)",
+        "toggled": "devcrumbs.viewMode == 'flat'"
       },
       {
         "command": "devcrumbs.viewMode.hierarchical",
         "title": "Switch to Hierarchical View",
         "category": "DevCrumbs",
-        "icon": "$(list-tree)"
+        "icon": "$(list-tree)",
+        "toggled": "devcrumbs.viewMode == 'hierarchical'"
       },
       {
         "command": "devcrumbs.hierarchy.scrum",
         "title": "Show Scrum Hierarchy Only",
-        "category": "DevCrumbs"
+        "category": "DevCrumbs",
+        "toggled": "devcrumbs.hierarchy == 'scrum'"
       },
       {
         "command": "devcrumbs.hierarchy.waterfall",
         "title": "Show Waterfall Hierarchy Only",
-        "category": "DevCrumbs"
+        "category": "DevCrumbs",
+        "toggled": "devcrumbs.hierarchy == 'waterfall'"
       },
       {
         "command": "devcrumbs.hierarchy.both",
         "title": "Show Both Hierarchies",
-        "category": "DevCrumbs"
+        "category": "DevCrumbs",
+        "toggled": "devcrumbs.hierarchy == 'both'"
       },
       {
         "command": "devcrumbs.addItem",
@@ -192,9 +197,10 @@
       },
       {
         "command": "devcrumbs.toggleHideDone",
-        "title": "Toggle Hide Completed Items",
+        "title": "Hide Completed Items",
         "category": "DevCrumbs",
-        "icon": "$(eye)"
+        "icon": "$(eye)",
+        "toggled": "devcrumbs.hideDone"
       }
     ],
     "keybindings": [

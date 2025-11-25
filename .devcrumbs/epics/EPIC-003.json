@@ -7,7 +7,7 @@
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T15:34:16.783Z",
-  "updated": "2025-11-24T21:12:21.398Z",
+  "updated": "2025-11-25T09:22:10.441Z",
   "author": "thomas.hantke@devcrumbs.dev",
   "affected_paths": [
     "packages/vscode-extension/"
@@ -38,7 +38,9 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "BUG-002"
+      "BUG-002",
+      "SPIKE-004",
+      "TASK-050"
     ],
     "depends-on": [
       "STORY-001"

@@ -68,6 +68,12 @@ export async function activate(context: vscode.ExtensionContext) {
   registerCommands(context, treeDataProvider);
   logger.info('Commands registered');
 
+  // Initialize context keys for menu checkmarks
+  await vscode.commands.executeCommand('setContext', 'devcrumbs.viewMode', 'flat');
+  await vscode.commands.executeCommand('setContext', 'devcrumbs.hierarchy', 'both');
+  await vscode.commands.executeCommand('setContext', 'devcrumbs.hideDone', false);
+  logger.info('Context keys initialized');
+
   // Listen for configuration changes
   context.subscriptions.push(
     vscode.workspace.onDidChangeConfiguration((e) => {

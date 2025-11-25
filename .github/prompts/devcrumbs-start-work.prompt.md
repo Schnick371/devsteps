@@ -2,7 +2,7 @@
 agent: 'devcrumbs'
 model: 'Claude Sonnet 4.5'
 description: 'Begin implementation work - review planned items, select next task, and start structured development'
-tools: ['runCommands', 'runTasks', 'edit', 'search', 'github/github-mcp-server/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'devcrumbs/*', 'usages', 'problems', 'changes', 'testFailure', 'fetch', 'todos', 'runSubagent']
+tools: ['runCommands', 'runTasks', 'edit', 'search', 'GitKraken/*', 'tavily/*', 'devcrumbs/*', 'usages', 'problems', 'changes', 'testFailure', 'todos', 'runSubagent']
 ---
 
 # 🚀 Start Work - Begin Implementation

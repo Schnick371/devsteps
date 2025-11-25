@@ -3,13 +3,15 @@
   "type": "task",
   "category": "VS Code Extension",
   "title": "TreeView: Add methodology sections in flat view",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T21:12:14.592Z",
-  "updated": "2025-11-24T21:12:21.398Z",
+  "updated": "2025-11-25T08:30:59.839Z",
   "author": "the@devcrumbs.dev",
-  "affected_paths": [],
+  "affected_paths": [
+    "packages/vscode-extension/src/treeView/devcrumbsTreeDataProvider.ts"
+  ],
   "linked_items": {
     "implements": [
       "EPIC-003"
