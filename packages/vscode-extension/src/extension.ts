@@ -31,71 +31,62 @@ export async function activate(context: vscode.ExtensionContext) {
   const workspaceRoot = workspaceFolders[0].uri;
 
   // Check for .devcrumbs directory
-  let hasDevCrumbs = false;
   try {
     await vscode.workspace.fs.stat(vscode.Uri.joinPath(workspaceRoot, '.devcrumbs'));
-    hasDevCrumbs = true;
     logger.info('.devcrumbs directory found in workspace');
   } catch (error) {
-    logger.warn('No .devcrumbs directory found in workspace');
+    logger.warn('No .devcrumbs directory found in workspace - TreeView will show empty state');
   }
 
-  // Initialize TreeView and commands even if .devcrumbs doesn't exist yet
-  // This prevents "command not found" errors from toolbar buttons
-  const treeDataProvider = hasDevCrumbs ? new DevCrumbsTreeDataProvider(workspaceRoot) : null;
+  // Initialize TreeView - always create provider to avoid "no data provider" error
+  // Provider will show empty state if .devcrumbs doesn't exist
+  const treeDataProvider = new DevCrumbsTreeDataProvider(workspaceRoot);
   
-  if (treeDataProvider) {
-    const treeView = vscode.window.createTreeView('devcrumbs.itemsView', {
-      treeDataProvider,
-      showCollapseAll: true,
-    });
-    context.subscriptions.push(treeView);
-    
-    // Pass TreeView to provider for description badge updates
-    treeDataProvider.setTreeView(treeView);
-    
-    logger.info('TreeView registered successfully');
+  const treeView = vscode.window.createTreeView('devcrumbs.itemsView', {
+    treeDataProvider,
+    showCollapseAll: true,
+  });
+  context.subscriptions.push(treeView);
+  
+  // Pass TreeView to provider for description badge updates
+  treeDataProvider.setTreeView(treeView);
+  
+  // Register FileDecorationProvider for status badges
+  const decorationProvider = new DevCrumbsDecorationProvider();
+  context.subscriptions.push(
+    vscode.window.registerFileDecorationProvider(decorationProvider)
+  );
 
-    // Register FileDecorationProvider for status badges
-    const decorationProvider = new DevCrumbsDecorationProvider();
-    context.subscriptions.push(
-      vscode.window.registerFileDecorationProvider(decorationProvider)
-    );
-    logger.info('FileDecorationProvider registered');
-
-    // Register FileSystemWatcher for automatic TreeView refresh
-    const watcher = vscode.workspace.createFileSystemWatcher(
-      new vscode.RelativePattern(workspaceRoot, '.devcrumbs/**/*.json')
-    );
-    
-    watcher.onDidCreate(() => {
-      logger.info('File created in .devcrumbs/, refreshing TreeView');
-      treeDataProvider.refresh();
-    });
-    
-    watcher.onDidChange(() => {
-      logger.info('File changed in .devcrumbs/, refreshing TreeView');
-      treeDataProvider.refresh();
-    });
-    
-    watcher.onDidDelete(() => {
-      logger.info('File deleted in .devcrumbs/, refreshing TreeView');
-      treeDataProvider.refresh();
-    });
-    
-    context.subscriptions.push(watcher);
-    logger.info('FileSystemWatcher registered for .devcrumbs/**/*.json');
-  }
+  // Register FileSystemWatcher for automatic TreeView refresh
+  const watcher = vscode.workspace.createFileSystemWatcher(
+    new vscode.RelativePattern(workspaceRoot, '.devcrumbs/**/*.json')
+  );
+  
+  watcher.onDidCreate(() => treeDataProvider.refresh());
+  watcher.onDidChange(() => treeDataProvider.refresh());
+  watcher.onDidDelete(() => treeDataProvider.refresh());
+  
+  context.subscriptions.push(watcher);
+  
+  // Watch for .devcrumbs directory creation to initialize TreeView
+  const devcrumbsDirWatcher = vscode.workspace.createFileSystemWatcher(
+    new vscode.RelativePattern(workspaceRoot, '.devcrumbs')
+  );
+  
+  devcrumbsDirWatcher.onDidCreate(() => {
+    logger.info('.devcrumbs directory created - refreshing TreeView');
+    treeDataProvider.refresh();
+  });
+  
+  context.subscriptions.push(devcrumbsDirWatcher);
 
   // Always register commands to avoid "command not found" errors
   registerCommands(context, treeDataProvider);
-  logger.info('Commands registered');
 
   // Initialize context keys for menu checkmarks
   await vscode.commands.executeCommand('setContext', 'devcrumbs.viewMode', 'flat');
   await vscode.commands.executeCommand('setContext', 'devcrumbs.hierarchy', 'both');
   await vscode.commands.executeCommand('setContext', 'devcrumbs.hideDone', false);
-  logger.info('Context keys initialized');
 
   // Listen for configuration changes
   context.subscriptions.push(

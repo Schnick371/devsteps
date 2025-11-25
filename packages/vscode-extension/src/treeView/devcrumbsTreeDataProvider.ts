@@ -729,6 +729,14 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
    */
   private async getFlatRootNodes(): Promise<TreeNode[]> {
     try {
+      // Check if .devcrumbs directory exists
+      try {
+        await vscode.workspace.fs.stat(vscode.Uri.joinPath(this.workspaceRoot, '.devcrumbs'));
+      } catch {
+        // .devcrumbs doesn't exist yet - return empty state
+        return [];
+      }
+
       // Load config to get methodology
       const configPath = vscode.Uri.joinPath(this.workspaceRoot, '.devcrumbs', 'config.json');
       const configData = await vscode.workspace.fs.readFile(configPath);
