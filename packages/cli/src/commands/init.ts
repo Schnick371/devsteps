@@ -341,12 +341,13 @@ For issues and questions:
     mkdirSync(githubInstructionsDir, { recursive: true });
     mkdirSync(githubPromptsDir, { recursive: true });
 
-    // Determine package root to access source files
+    // Determine monorepo root to access source files
+    // From dist/commands/init.js -> ../../.. -> packages/ -> .. -> monorepo root
     const currentFileUrl = import.meta.url;
     const currentFilePath = fileURLToPath(currentFileUrl);
     const currentDir = dirname(currentFilePath);
-    const packageRoot = join(currentDir, '..', '..', '..');
-    const sourceGithubDir = join(packageRoot, '.github');
+    const monorepoRoot = join(currentDir, '..', '..', '..', '..');
+    const sourceGithubDir = join(monorepoRoot, '.github');
 
     const devcrumbsAgent = `---
 name: devcrumbs
