@@ -217,10 +217,13 @@ The devcrumbs system integrates with:
   writeFileSync(join(githubAgentsDir, 'devcrumbs.agent.md'), devcrumbsAgentContent);
 
   // Copy devcrumbs instructions
-  const devcrumbsInstructionsSource = join(sourceGithubDir, 'instructions', 'devcrumbs.instructions.md');
-  if (existsSync(devcrumbsInstructionsSource)) {
-    const devcrumbsInstructionsContent = readFileSync(devcrumbsInstructionsSource, 'utf8');
-    writeFileSync(join(githubInstructionsDir, 'devcrumbs.instructions.md'), devcrumbsInstructionsContent);
+  const instructionFiles = ['devcrumbs.instructions.md', 'devcrumbs-code-standards.instructions.md'];
+  for (const instructionFile of instructionFiles) {
+    const instructionSource = join(sourceGithubDir, 'instructions', instructionFile);
+    if (existsSync(instructionSource)) {
+      const instructionContent = readFileSync(instructionSource, 'utf8');
+      writeFileSync(join(githubInstructionsDir, instructionFile), instructionContent);
+    }
   }
 
   // Copy devcrumbs prompts
@@ -240,6 +243,7 @@ The devcrumbs system integrates with:
   message += '✓ Copilot files created:\n';
   message += '  - .github/agents/devcrumbs.agent.md\n';
   message += '  - .github/instructions/devcrumbs.instructions.md\n';
+  message += '  - .github/instructions/devcrumbs-code-standards.instructions.md\n';
   message += '  - .github/prompts/devcrumbs-plan-work.prompt.md\n';
   message += '  - .github/prompts/devcrumbs-start-work.prompt.md\n';
   message += '  - .github/prompts/devcrumbs-workflow.prompt.md';

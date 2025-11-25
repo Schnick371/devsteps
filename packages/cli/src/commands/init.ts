@@ -1,5 +1,6 @@
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { type Methodology, getCurrentTimestamp, getMethodologyConfig } from '@devcrumbs/shared';
 import type { DevCrumbsConfig } from '@devcrumbs/shared';
 import chalk from 'chalk';
@@ -331,9 +332,21 @@ For issues and questions:
 
     writeFileSync(join(vscodeDir, 'tasks.json'), JSON.stringify(tasks, null, 2));
 
-    // Create .github/agents directory and devcrumbs agent
+    // Create .github directory structure
     const githubAgentsDir = join(projectPath, '.github', 'agents');
+    const githubInstructionsDir = join(projectPath, '.github', 'instructions');
+    const githubPromptsDir = join(projectPath, '.github', 'prompts');
+    
     mkdirSync(githubAgentsDir, { recursive: true });
+    mkdirSync(githubInstructionsDir, { recursive: true });
+    mkdirSync(githubPromptsDir, { recursive: true });
+
+    // Determine package root to access source files
+    const currentFileUrl = import.meta.url;
+    const currentFilePath = fileURLToPath(currentFileUrl);
+    const currentDir = dirname(currentFilePath);
+    const packageRoot = join(currentDir, '..', '..', '..');
+    const sourceGithubDir = join(packageRoot, '.github');
 
     const devcrumbsAgent = `---
 name: devcrumbs
@@ -449,6 +462,26 @@ The devcrumbs system integrates with:
 
     writeFileSync(join(githubAgentsDir, 'devcrumbs.agent.md'), devcrumbsAgent);
 
+    // Copy devcrumbs instructions
+    const instructionFiles = ['devcrumbs.instructions.md', 'devcrumbs-code-standards.instructions.md'];
+    for (const instructionFile of instructionFiles) {
+      const instructionSource = join(sourceGithubDir, 'instructions', instructionFile);
+      if (existsSync(instructionSource)) {
+        const instructionContent = readFileSync(instructionSource, 'utf8');
+        writeFileSync(join(githubInstructionsDir, instructionFile), instructionContent);
+      }
+    }
+
+    // Copy devcrumbs prompts
+    const promptFiles = ['devcrumbs-plan-work.prompt.md', 'devcrumbs-start-work.prompt.md', 'devcrumbs-workflow.prompt.md'];
+    for (const promptFile of promptFiles) {
+      const promptSource = join(sourceGithubDir, 'prompts', promptFile);
+      if (existsSync(promptSource)) {
+        const promptContent = readFileSync(promptSource, 'utf8');
+        writeFileSync(join(githubPromptsDir, promptFile), promptContent);
+      }
+    }
+
     spinner.succeed('Project initialized successfully!');
 
     console.log();
@@ -460,7 +493,13 @@ The devcrumbs system integrates with:
       chalk.cyan(options.git ? 'enabled' : 'disabled')
     );
     console.log(chalk.green('✓'), 'VS Code tasks:', chalk.cyan('.vscode/tasks.json'));
-    console.log(chalk.green('✓'), 'AI agent:', chalk.cyan('.github/agents/devcrumbs.agent.md'));
+    console.log(chalk.green('✓'), 'Copilot files:');
+    console.log('      ', chalk.cyan('.github/agents/devcrumbs.agent.md'));
+    console.log('      ', chalk.cyan('.github/instructions/devcrumbs.instructions.md'));
+    console.log('      ', chalk.cyan('.github/instructions/devcrumbs-code-standards.instructions.md'));
+    console.log('      ', chalk.cyan('.github/prompts/devcrumbs-plan-work.prompt.md'));
+    console.log('      ', chalk.cyan('.github/prompts/devcrumbs-start-work.prompt.md'));
+    console.log('      ', chalk.cyan('.github/prompts/devcrumbs-workflow.prompt.md'));
 
     if (options.author) {
       console.log(chalk.green('✓'), 'Default author:', chalk.cyan(options.author));
