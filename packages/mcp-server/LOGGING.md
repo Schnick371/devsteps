@@ -61,7 +61,7 @@ pnpm start:trace
 {
   "level": 30,
   "time": 1700000000000,
-  "service": "devcrumbs-mcp-server",
+  "service": "devsteps-mcp-server",
   "version": "0.1.0",
   "tool_count": 13,
   "msg": "Tools registered successfully"
@@ -73,10 +73,10 @@ pnpm start:trace
 {
   "level": 30,
   "time": 1700000000000,
-  "service": "devcrumbs-mcp-server",
+  "service": "devsteps-mcp-server",
   "version": "0.1.0",
   "request_id": "req_1700000000000",
-  "tool_name": "devcrumbs-status",
+  "tool_name": "devsteps-status",
   "duration_ms": 42,
   "status": "success",
   "msg": "Tool executed successfully"
@@ -88,10 +88,10 @@ pnpm start:trace
 {
   "level": 50,
   "time": 1700000000000,
-  "service": "devcrumbs-mcp-server",
+  "service": "devsteps-mcp-server",
   "version": "0.1.0",
   "request_id": "req_1700000000000",
-  "tool_name": "devcrumbs-add",
+  "tool_name": "devsteps-add",
   "duration_ms": 15,
   "status": "error",
   "error": {
@@ -150,7 +150,7 @@ try {
 import { createRequestLogger } from './logger.js';
 
 // Create request-specific logger
-const requestLogger = createRequestLogger('req_12345', 'devcrumbs-status');
+const requestLogger = createRequestLogger('req_12345', 'devsteps-status');
 
 // All logs will include request_id and tool_name
 requestLogger.debug({ args }, 'Processing request');
@@ -200,7 +200,7 @@ metadata:
 spec:
   containers:
   - name: mcp-server
-    image: devcrumbs-mcp:latest
+    image: devsteps-mcp:latest
     env:
     - name: LOG_LEVEL
       value: "info"

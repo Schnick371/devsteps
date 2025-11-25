@@ -132,7 +132,7 @@
         "background": {
           "activeOnStart": true,
           "beginsPattern": ".*",
-          "endsPattern": "DevCrumbs MCP Server running"
+          "endsPattern": "DevSteps MCP Server running"
         }
       }
     },
@@ -151,7 +151,7 @@
       ]
     },
     {
-      "label": "DevCrumbs: List Open Stories",
+      "label": "DevSteps: List Open Stories",
       "type": "shell",
       "command": "node packages/cli/dist/index.js list --type story --status draft",
       "dependsOn": [
@@ -164,7 +164,7 @@
       }
     },
     {
-      "label": "DevCrumbs: List High Priority Items",
+      "label": "DevSteps: List High Priority Items",
       "type": "shell",
       "command": "node packages/cli/dist/index.js list --priority high",
       "dependsOn": [
@@ -177,7 +177,7 @@
       }
     },
     {
-      "label": "DevCrumbs: List Q1 Tasks (Urgent & Important)",
+      "label": "DevSteps: List Q1 Tasks (Urgent & Important)",
       "type": "shell",
       "command": "node packages/cli/dist/index.js list --eisenhower urgent-important --status draft",
       "dependsOn": [
@@ -190,7 +190,7 @@
       }
     },
     {
-      "label": "DevCrumbs: Full Status Report",
+      "label": "DevSteps: Full Status Report",
       "type": "shell",
       "command": "node packages/cli/dist/index.js status",
       "dependsOn": [
@@ -207,7 +207,7 @@
       "type": "shell",
       "command": "node esbuild.js",
       "options": {
-        "cwd": "${workspaceFolder}/packages/vscode-extension"
+        "cwd": "${workspaceFolder}/packages/extension"
       },
       "group": "build",
       "problemMatcher": [],

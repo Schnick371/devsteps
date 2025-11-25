@@ -21,9 +21,9 @@ cd packages/shared && pnpm build && cd ../..
 
 # Build rest in parallel
 echo "  Building packages..."
-pnpm --filter '@devcrumbs/cli' build &
-pnpm --filter '@devcrumbs/mcp-server' build &
-pnpm --filter 'devcrumbs-vscode' build &
+pnpm --filter '@devsteps/cli' build &
+pnpm --filter '@devsteps/mcp-server' build &
+pnpm --filter 'devsteps-vscode' build &
 wait
 
 # Step 2: Package MCP Server
@@ -32,7 +32,7 @@ echo "📦 Step 2/4: Package MCP Server..."
 cd packages/mcp-server
 pnpm pack --pack-destination ../../dist/mcp
 cd ../..
-echo "✅ MCP Server packaged: dist/mcp/devcrumbs-mcp-server-*.tgz"
+echo "✅ MCP Server packaged: dist/mcp/devsteps-mcp-server-*.tgz"
 
 # Step 3: Package VS Code Extension
 echo ""
@@ -43,14 +43,14 @@ cd packages/vscode-extension
 # VSCE uses npm list internally which doesn't understand pnpm workspace: protocol
 npm exec @vscode/vsce -- package --no-dependencies --allow-missing-repository --out ../../dist/vscode
 cd ../..
-echo "✅ VSIX packaged: dist/vscode/devcrumbs-vscode-*.vsix"
+echo "✅ VSIX packaged: dist/vscode/devsteps-vscode-*.vsix"
 
 # Step 4: Create installation documentation
 echo ""
 echo "📦 Step 4/4: Generate installation guide..."
 mkdir -p dist/docs
 cat > dist/docs/INSTALL.md << 'EOF'
-# DevCrumbs Installation Guide
+# DevSteps Installation Guide
 
 ## Quick Install
 
@@ -58,7 +58,7 @@ cat > dist/docs/INSTALL.md << 'EOF'
 
 1. Install the VSIX file:
    \`\`\`bash
-   code --install-extension devcrumbs-vscode-0.1.0.vsix
+   code --install-extension devsteps-vscode-0.1.0.vsix
    \`\`\`
 
 2. Reload VS Code
@@ -67,15 +67,15 @@ cat > dist/docs/INSTALL.md << 'EOF'
 
 1. Install the MCP server globally:
    \`\`\`bash
-   npm install -g devcrumbs-mcp-server-0.1.0.tgz
+   npm install -g devsteps-mcp-server-0.1.0.tgz
    \`\`\`
 
 2. Configure Claude Desktop (`~/Library/Application Support/Claude/claude_desktop_config.json`):
    \`\`\`json
    {
      "mcpServers": {
-       "devcrumbs": {
-         "command": "devcrumbs-mcp",
+       "devsteps": {
+         "command": "devsteps-mcp",
          "args": []
        }
      }
@@ -91,13 +91,13 @@ cat > dist/docs/INSTALL.md << 'EOF'
 1. Open VS Code
 2. Press \`Ctrl+Shift+P\` (or \`Cmd+Shift+P\` on Mac)
 3. Type "Extensions: Install from VSIX"
-4. Select the \`devcrumbs-vscode-0.1.0.vsix\` file
+4. Select the \`devsteps-vscode-0.1.0.vsix\` file
 
 ### MCP Server
 
 1. Extract the tarball:
    \`\`\`bash
-   tar -xzf devcrumbs-mcp-server-0.1.0.tgz
+   tar -xzf devsteps-mcp-server-0.1.0.tgz
    \`\`\`
 
 2. Install dependencies:
@@ -111,7 +111,7 @@ cat > dist/docs/INSTALL.md << 'EOF'
 
 ### VS Code Extension
 
-- **Extension not loading**: Check Output > DevCrumbs for errors
+- **Extension not loading**: Check Output > DevSteps for errors
 - **Commands not available**: Reload VS Code window
 
 ### MCP Server
@@ -128,7 +128,7 @@ cat > dist/docs/INSTALL.md << 'EOF'
 ### VS Code Extension
 
 1. Open Command Palette (\`Ctrl+Shift+P\`)
-2. Type "DevCrumbs: Status"
+2. Type "DevSteps: Status"
 3. Should show project overview
 
 ### MCP Server

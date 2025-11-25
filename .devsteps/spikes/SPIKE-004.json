@@ -1,0 +1,39 @@
+{
+  "id": "SPIKE-004",
+  "type": "spike",
+  "category": "general",
+  "title": "Test Menu Checkmarks Implementation - Multiple Approaches",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-25T08:55:15.662Z",
+  "updated": "2025-11-25T09:22:10.440Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "BUG-003",
+      "EPIC-003",
+      "TASK-050"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spike",
+    "vscode",
+    "menu",
+    "ui",
+    "research"
+  ],
+  "commits": [],
+  "metadata": {}
+}

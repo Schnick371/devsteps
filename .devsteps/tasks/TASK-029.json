@@ -1,0 +1,39 @@
+{
+  "id": "TASK-029",
+  "type": "task",
+  "category": "DevOps",
+  "title": "Prepare clean Git repository for GitHub publication",
+  "status": "done",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-23T21:59:11.351Z",
+  "updated": "2025-11-24T10:09:12+01:00",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-004"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "TASK-030"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "git",
+    "github",
+    "repository-setup",
+    "devops",
+    "publication"
+  ],
+  "commits": [],
+  "metadata": {}
+}

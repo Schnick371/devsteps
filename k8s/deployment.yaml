@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: devcrumbs-mcp-server
+  name: devsteps-mcp-server
   labels:
-    app: devcrumbs-mcp-server
+    app: devsteps-mcp-server
     version: v1
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: devcrumbs-mcp-server
+      app: devsteps-mcp-server
   template:
     metadata:
       labels:
-        app: devcrumbs-mcp-server
+        app: devsteps-mcp-server
         version: v1
       annotations:
         prometheus.io/scrape: "true"
@@ -31,12 +31,12 @@ spec:
                 - key: app
                   operator: In
                   values:
-                  - devcrumbs-mcp-server
+                  - devsteps-mcp-server
               topologyKey: kubernetes.io/hostname
       
       containers:
       - name: mcp-server
-        image: devcrumbs-mcp-server:latest
+        image: devsteps-mcp-server:latest
         imagePullPolicy: Always
         
         # Resource limits and requests
@@ -103,16 +103,16 @@ spec:
             drop:
             - ALL
         
-        # Volume mounts (if needed for .devcrumbs data)
+        # Volume mounts (if needed for .devsteps data)
         volumeMounts:
-        - name: devcrumbs-data
-          mountPath: /app/.devcrumbs
+        - name: devsteps-data
+          mountPath: /app/.devsteps
       
       # Volumes
       volumes:
-      - name: devcrumbs-data
+      - name: devsteps-data
         persistentVolumeClaim:
-          claimName: devcrumbs-data-pvc
+          claimName: devsteps-data-pvc
       
       # Security context for pod
       securityContext:

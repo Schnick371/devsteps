@@ -1,4 +1,4 @@
-# 🚀 DevCrumbs - Developer Task Tracking System
+# 🚀 DevSteps - Developer Task Tracking System
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE.md)
 [![Version](https://img.shields.io/badge/version-0.4.0-green.svg)](package.json)
@@ -14,13 +14,13 @@
 - 🔍 **Smart Search** - Find items by tags, status, assignee, or full-text
 - 📊 **Reports & Stats** - Generate reports, changelogs, and roadmaps
 - 🔄 **Git Integration** - Track commits per item automatically
-- 💾 **Local First** - All data stored locally in `.devcrumbs/` directory
+- 💾 **Local First** - All data stored locally in `.devsteps/` directory
 - 🎯 **Multi-Methodology Support** - Scrum, Waterfall, or Hybrid approaches
 - 📊 **Eisenhower Matrix** - Prioritize tasks by urgency and importance
 
 ## 🎯 Methodologies & Item Types
 
-DevCrumbs supports three project methodologies, each with tailored item types:
+DevSteps supports three project methodologies, each with tailored item types:
 
 ### 🏃 Scrum (Agile)
 **Best for**: Iterative development, sprints, user stories
@@ -35,10 +35,10 @@ DevCrumbs supports three project methodologies, each with tailored item types:
 
 **Example Workflow**:
 ```bash
-devcrumbs init my-project --methodology scrum
-devcrumbs add epic "User Management System"
-devcrumbs add story "As a user, I want to login" --links EPIC-001
-devcrumbs add task "Implement login API endpoint" --links STORY-001
+devsteps init my-project --methodology scrum
+devsteps add epic "User Management System"
+devsteps add story "As a user, I want to login" --links EPIC-001
+devsteps add task "Implement login API endpoint" --links STORY-001
 ```
 
 ### 🏢 Waterfall (Traditional)
@@ -53,10 +53,10 @@ devcrumbs add task "Implement login API endpoint" --links STORY-001
 
 **Example Workflow**:
 ```bash
-devcrumbs init my-project --methodology waterfall
-devcrumbs add requirement "System shall authenticate users"
-devcrumbs add feature "Login functionality" --links REQ-001
-devcrumbs add test "Verify login with valid credentials" --links FEAT-001
+devsteps init my-project --methodology waterfall
+devsteps add requirement "System shall authenticate users"
+devsteps add feature "Login functionality" --links REQ-001
+devsteps add test "Verify login with valid credentials" --links FEAT-001
 ```
 
 ### 🔀 Hybrid (Best of Both)
@@ -66,15 +66,15 @@ devcrumbs add test "Verify login with valid credentials" --links FEAT-001
 
 **Example Workflow**:
 ```bash
-devcrumbs init my-project --methodology hybrid
-devcrumbs add requirement "Performance SLA: <200ms response"
-devcrumbs add story "As a user, I want fast search results"
-devcrumbs add spike "Investigate ElasticSearch vs PostgreSQL FTS"
+devsteps init my-project --methodology hybrid
+devsteps add requirement "Performance SLA: <200ms response"
+devsteps add story "As a user, I want fast search results"
+devsteps add spike "Investigate ElasticSearch vs PostgreSQL FTS"
 ```
 
 ## 📊 Eisenhower Matrix Integration
 
-DevCrumbs includes built-in support for the **Eisenhower Matrix** to help prioritize tasks effectively:
+DevSteps includes built-in support for the **Eisenhower Matrix** to help prioritize tasks effectively:
 
 ### Quadrants
 
@@ -89,13 +89,13 @@ DevCrumbs includes built-in support for the **Eisenhower Matrix** to help priori
 
 ```bash
 # Create high-priority tasks in different quadrants
-devcrumbs add task "Fix production bug" --priority critical --eisenhower urgent-important
-devcrumbs add task "Refactor authentication module" --eisenhower not-urgent-important
-devcrumbs add task "Update meeting notes" --eisenhower urgent-not-important
+devsteps add task "Fix production bug" --priority critical --eisenhower urgent-important
+devsteps add task "Refactor authentication module" --eisenhower not-urgent-important
+devsteps add task "Update meeting notes" --eisenhower urgent-not-important
 
 # List tasks by quadrant
-devcrumbs list --eisenhower urgent-important        # Q1 - Do First
-devcrumbs list --eisenhower not-urgent-important    # Q2 - Schedule
+devsteps list --eisenhower urgent-important        # Q1 - Do First
+devsteps list --eisenhower not-urgent-important    # Q2 - Schedule
 ```
 
 ### Priority vs Eisenhower
@@ -105,7 +105,7 @@ devcrumbs list --eisenhower not-urgent-important    # Q2 - Schedule
 
 Use both together for comprehensive task management:
 ```bash
-devcrumbs add bug "Memory leak in user service" \
+devsteps add bug "Memory leak in user service" \
   --priority critical \
   --eisenhower urgent-important
 ```
@@ -129,12 +129,12 @@ Install [Bun](https://bun.sh):
 curl -fsSL https://bun.sh/install | bash
 ```
 
-### Install DevCrumbs
+### Install DevSteps
 
 ```bash
 # Clone and build
 git clone <repository-url>
-cd devcrumbs
+cd devsteps
 bun install
 bun run build
 
@@ -148,35 +148,35 @@ bun link
 ### Initialize a Project
 
 ```bash
-devcrumbs init my-project
+devsteps init my-project
 ```
 
 ### Add Items
 
 ```bash
 # Add a requirement
-devcrumbs add req "User authentication system"
+devsteps add req "User authentication system"
 
 # Add a feature
-devcrumbs add feat "Login form with email/password"
+devsteps add feat "Login form with email/password"
 
 # Add a test
-devcrumbs add test "Test login with valid credentials"
+devsteps add test "Test login with valid credentials"
 ```
 
 ### Link Items
 
 ```bash
-devcrumbs link REQ-001 implements FEAT-001
-devcrumbs link FEAT-001 tested-by TEST-001
+devsteps link REQ-001 implements FEAT-001
+devsteps link FEAT-001 tested-by TEST-001
 ```
 
 ### View Status
 
 ```bash
-devcrumbs status
-devcrumbs list --status=in-progress
-devcrumbs trace REQ-001
+devsteps status
+devsteps list --status=in-progress
+devsteps trace REQ-001
 ```
 
 ## 🚀 Quick Start
@@ -186,7 +186,7 @@ devcrumbs trace REQ-001
 **From Marketplace** (Recommended):
 1. Open VS Code
 2. Go to Extensions (`Ctrl+Shift+X`)
-3. Search: `devcrumbs`
+3. Search: `devsteps`
 4. Click **Install**
 5. Reload window
 
@@ -200,12 +200,12 @@ devcrumbs trace REQ-001
 
 Open any workspace and use Copilot Chat:
 ```
-@workspace Initialize devcrumbs with Scrum methodology
+@workspace Initialize devsteps with Scrum methodology
 ```
 
 Or use CLI (if installed separately):
 ```bash
-devcrumbs init my-project --methodology scrum
+devsteps init my-project --methodology scrum
 ```
 
 ### 3. Start Using
@@ -218,7 +218,7 @@ devcrumbs init my-project --methodology scrum
 ```
 
 **With TreeView:**
-- Click DevCrumbs icon in Activity Bar
+- Click DevSteps icon in Activity Bar
 - Browse hierarchical structure
 - Click items to open/edit
 - Use toolbar filters
@@ -233,12 +233,12 @@ devcrumbs init my-project --methodology scrum
 ## 🏗️ Project Structure
 
 ```
-devcrumbs/
+devsteps/
 ├── packages/
 │   ├── mcp-server/     # MCP server for AI integration
 │   ├── cli/            # CLI tool for developers
 │   └── shared/         # Shared types, schemas, and utilities
-├── .devcrumbs/            # Example project data
+├── .devsteps/            # Example project data
 ├── docs/               # Documentation
 └── README.md
 ```
@@ -269,8 +269,8 @@ bun run typecheck
 ## 👤 Author
 
 **Thomas Hertel**
-- Email: [the@devcrumbs.dev](mailto:the@devcrumbs.dev)
-- GitHub: [@devcrumbs](https://github.com/devcrumbs)
+- Email: [the@devsteps.dev](mailto:the@devsteps.dev)
+- GitHub: [@devsteps](https://github.com/devsteps)
 
 ## 🤝 Contributing
 
@@ -284,8 +284,8 @@ We welcome contributions! Please read our guidelines before submitting pull requ
 
 ```bash
 # Fork and clone
-git clone https://github.com/YOUR_USERNAME/devcrumbs.git
-cd devcrumbs
+git clone https://github.com/YOUR_USERNAME/devsteps.git
+cd devsteps
 
 # Install and build
 npm install
@@ -303,7 +303,7 @@ All contributions require:
 
 ## 📄 License
 
-**Copyright © 2025 Thomas Hertel (the@devcrumbs.dev)**
+**Copyright © 2025 Thomas Hertel (the@devsteps.dev)**
 
 This project is licensed under the **Apache License 2.0** - see the [LICENSE.md](LICENSE.md) file for details.
 
@@ -312,24 +312,24 @@ This project is licensed under the **Apache License 2.0** - see the [LICENSE.md]
 - ✅ **Free to use** - Commercial and private use allowed
 - ✅ **Modify and distribute** - Create derivatives under same license
 - ✅ **Patent protection** - Contributors grant patent rights
-- ⚠️ **Trademark** - "DevCrumbs" name is protected (see below)
+- ⚠️ **Trademark** - "DevSteps" name is protected (see below)
 - ⚠️ **No warranty** - Provided "AS IS" without guarantees
 
 ## ™ Trademark Policy
 
-**"DevCrumbs" is a trademark of Thomas Hertel.** The Apache 2.0 license does NOT grant permission to use the "DevCrumbs" name or logo without authorization.
+**"DevSteps" is a trademark of Thomas Hertel.** The Apache 2.0 license does NOT grant permission to use the "DevSteps" name or logo without authorization.
 
 **You MAY:**
-- Use DevCrumbs software as-is or modified for any purpose
-- Redistribute DevCrumbs under Apache 2.0 terms
-- Reference DevCrumbs in documentation or comparisons
+- Use DevSteps software as-is or modified for any purpose
+- Redistribute DevSteps under Apache 2.0 terms
+- Reference DevSteps in documentation or comparisons
 
 **You MAY NOT:**
-- Use "DevCrumbs" name for derivative products without permission
-- Imply official endorsement by using "DevCrumbs" trademark
-- Register "DevCrumbs" or similar marks
+- Use "DevSteps" name for derivative products without permission
+- Imply official endorsement by using "DevSteps" trademark
+- Register "DevSteps" or similar marks
 
-For trademark usage inquiries: [the@devcrumbs.dev](mailto:the@devcrumbs.dev)
+For trademark usage inquiries: [the@devsteps.dev](mailto:the@devsteps.dev)
 
 ## ⚠️ Disclaimer
 
@@ -345,4 +345,4 @@ Inspired by:
 
 ---
 
-**Made with ❤️ by the DevCrumbs Community**
+**Made with ❤️ by the DevSteps Community**

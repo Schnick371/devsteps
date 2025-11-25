@@ -2,7 +2,7 @@
 
 /**
  * Simple MCP Client Test
- * Tests the DevCrumbs MCP Server via stdio
+ * Tests the DevSteps MCP Server via stdio
  */
 
 import { spawn } from 'child_process';
@@ -83,10 +83,10 @@ setTimeout(() => {
     sendRequest('tools/list');
   }, 1000);
   
-  // Test 3: Call devcrumbs-status tool
+  // Test 3: Call devsteps-status tool
   setTimeout(() => {
     sendRequest('tools/call', {
-      name: 'devcrumbs-status',
+      name: 'devsteps-status',
       arguments: {},
     });
   }, 2000);
@@ -94,7 +94,7 @@ setTimeout(() => {
   // Test 4: List items
   setTimeout(() => {
     sendRequest('tools/call', {
-      name: 'devcrumbs-list',
+      name: 'devsteps-list',
       arguments: {
         status: 'draft',
       },

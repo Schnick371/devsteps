@@ -153,9 +153,9 @@ export const ItemMetadata = z.object({
 export type ItemMetadata = z.infer<typeof ItemMetadata>;
 
 /**
- * Configuration schema for .devcrumbs/config.json
+ * Configuration schema for .devsteps/config.json
  */
-export const DevCrumbsConfig = z.object({
+export const DevStepsConfig = z.object({
   version: z.string().default('0.1.0'),
   project_name: z.string(),
   project_id: z.string(),
@@ -185,12 +185,12 @@ export const DevCrumbsConfig = z.object({
       },
     }),
 });
-export type DevCrumbsConfig = z.infer<typeof DevCrumbsConfig>;
+export type DevStepsConfig = z.infer<typeof DevStepsConfig>;
 
 /**
- * Index schema for .devcrumbs/index.json
+ * Index schema for .devsteps/index.json
  */
-export const DevCrumbsIndex = z.object({
+export const DevStepsIndex = z.object({
   items: z.array(
     z.object({
       id: z.string(),
@@ -223,4 +223,4 @@ export const DevCrumbsIndex = z.object({
     })
     .optional(),
 });
-export type DevCrumbsIndex = z.infer<typeof DevCrumbsIndex>;
+export type DevStepsIndex = z.infer<typeof DevStepsIndex>;

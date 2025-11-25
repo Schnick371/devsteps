@@ -7,7 +7,7 @@ import {
   ListToolsRequestSchema,
   type Tool,
 } from '@modelcontextprotocol/sdk/types.js';
-import { trackRequestError, trackRequestSuccess } from './handlers/devcrumbs-health.js';
+import { trackRequestError, trackRequestSuccess } from './handlers/devsteps-health.js';
 import { configureLogger, createRequestLogger, getLogger } from './logger.js';
 import { activeConnections, recordError, recordSuccess } from './metrics.js';
 import { registerShutdownHandlers, shutdownManager } from './shutdown.js';
@@ -68,61 +68,61 @@ function generateToolSummary(toolName: string, args: any, result: any, duration:
   const durationStr = `(${duration}ms)`;
 
   switch (toolName) {
-    case 'devcrumbs-add':
-      return `[devcrumbs-add] Created ${result.itemId}: "${args.title}" → success ${durationStr}`;
+    case 'devsteps-add':
+      return `[devsteps-add] Created ${result.itemId}: "${args.title}" → success ${durationStr}`;
 
-    case 'devcrumbs-update':
+    case 'devsteps-update':
       const changes = Object.keys(args).filter((k) => k !== 'id');
-      return `[devcrumbs-update] ${args.id} [${changes.join(', ')}] → success ${durationStr}`;
+      return `[devsteps-update] ${args.id} [${changes.join(', ')}] → success ${durationStr}`;
 
-    case 'devcrumbs-get':
-      return `[devcrumbs-get] ${args.id} → success ${durationStr}`;
+    case 'devsteps-get':
+      return `[devsteps-get] ${args.id} → success ${durationStr}`;
 
-    case 'devcrumbs-search':
+    case 'devsteps-search':
       const count = result.count || result.items?.length || 0;
-      return `[devcrumbs-search] "${args.query}" → ${count} results ${durationStr}`;
+      return `[devsteps-search] "${args.query}" → ${count} results ${durationStr}`;
 
-    case 'devcrumbs-list':
+    case 'devsteps-list':
       const itemCount = result.count || result.items?.length || 0;
       const filters = [];
       if (args.status) filters.push(`status=${args.status}`);
       if (args.type) filters.push(`type=${args.type}`);
       if (args.priority) filters.push(`priority=${args.priority}`);
       const filterStr = filters.length > 0 ? ` [${filters.join(', ')}]` : '';
-      return `[devcrumbs-list]${filterStr} → ${itemCount} items ${durationStr}`;
+      return `[devsteps-list]${filterStr} → ${itemCount} items ${durationStr}`;
 
-    case 'devcrumbs-link':
-      return `[devcrumbs-link] ${args.source_id} --${args.relation_type}--> ${args.target_id} → success ${durationStr}`;
+    case 'devsteps-link':
+      return `[devsteps-link] ${args.source_id} --${args.relation_type}--> ${args.target_id} → success ${durationStr}`;
 
-    case 'devcrumbs-status':
+    case 'devsteps-status':
       const total = result.stats?.total || 0;
-      return `[devcrumbs-status] → ${total} items ${durationStr}`;
+      return `[devsteps-status] → ${total} items ${durationStr}`;
 
-    case 'devcrumbs-trace':
-      return `[devcrumbs-trace] ${args.id} → traced ${durationStr}`;
+    case 'devsteps-trace':
+      return `[devsteps-trace] ${args.id} → traced ${durationStr}`;
 
-    case 'devcrumbs-archive':
-      return `[devcrumbs-archive] ${args.id} → archived ${durationStr}`;
+    case 'devsteps-archive':
+      return `[devsteps-archive] ${args.id} → archived ${durationStr}`;
 
-    case 'devcrumbs-purge':
+    case 'devsteps-purge':
       const purgeCount = result.count || 0;
-      return `[devcrumbs-purge] → ${purgeCount} items archived ${durationStr}`;
+      return `[devsteps-purge] → ${purgeCount} items archived ${durationStr}`;
 
-    case 'devcrumbs-init':
-      return `[devcrumbs-init] "${args.project_name}" → initialized ${durationStr}`;
+    case 'devsteps-init':
+      return `[devsteps-init] "${args.project_name}" → initialized ${durationStr}`;
 
-    case 'devcrumbs-export':
-      return `[devcrumbs-export] format=${args.format} → exported ${durationStr}`;
+    case 'devsteps-export':
+      return `[devsteps-export] format=${args.format} → exported ${durationStr}`;
 
-    case 'devcrumbs-context':
+    case 'devsteps-context':
       const level = args.level || 'quick';
-      return `[devcrumbs-context] level=${level} → generated ${durationStr}`;
+      return `[devsteps-context] level=${level} → generated ${durationStr}`;
 
-    case 'devcrumbs-health':
-      return `[devcrumbs-health] → ${result.status} ${durationStr}`;
+    case 'devsteps-health':
+      return `[devsteps-health] → ${result.status} ${durationStr}`;
 
-    case 'devcrumbs-metrics':
-      return `[devcrumbs-metrics] → collected ${durationStr}`;
+    case 'devsteps-metrics':
+      return `[devsteps-metrics] → collected ${durationStr}`;
 
     default:
       return `[${toolName}] → success ${durationStr}`;
@@ -130,10 +130,10 @@ function generateToolSummary(toolName: string, args: any, result: any, duration:
 }
 
 /**
- * DevCrumbs MCP Server
+ * DevSteps MCP Server
  * Provides AI-powered task tracking for developers
  */
-class DevCrumbsServer {
+class DevStepsServer {
   private server: Server;
   private tools: Map<string, Tool>;
   private startTime: number;
@@ -155,7 +155,7 @@ class DevCrumbsServer {
 
     this.server = new Server(
       {
-        name: 'devcrumbs-mcp-server',
+        name: 'devsteps-mcp-server',
         version: '0.1.0',
       },
       {
@@ -235,7 +235,7 @@ class DevCrumbsServer {
       try {
         // Tool handlers are implemented in separate files
         const handler = await import(`./handlers/${toolName}.js`);
-        const handlerFn = handler.default || handler[`${toolName.replace('devcrumbs-', '')}Handler`];
+        const handlerFn = handler.default || handler[`${toolName.replace('devsteps-', '')}Handler`];
 
         // Track operation for graceful shutdown
         const operation = handlerFn(request.params.arguments);
@@ -327,8 +327,8 @@ class DevCrumbsServer {
 // Parse CLI options
 const program = new Command();
 program
-  .name('devcrumbs-mcp-server')
-  .description('MCP server for DevCrumbs task tracking')
+  .name('devsteps-mcp-server')
+  .description('MCP server for DevSteps task tracking')
   .version('0.1.0')
   .option('--log-level <level>', 'Log level: debug|info|warn|error', 'info')
   .option('--heartbeat-interval <seconds>', 'Health heartbeat interval (0=disabled)', '0')
@@ -384,7 +384,7 @@ if (transport === 'http') {
   }
 } else {
   // STDIO transport for local development
-  const server = new DevCrumbsServer();
+  const server = new DevStepsServer();
   server.run().catch((error) => {
     getLogger().fatal({ error, transport: 'stdio' }, 'Fatal server error');
     process.exit(1);

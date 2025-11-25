@@ -5,7 +5,7 @@
 
 ## Context
 
-DevCrumbs requires a git branching strategy that:
+DevSteps requires a git branching strategy that:
 1. Provides clear traceability from commits to Epics
 2. Supports structured development (Scrum/Waterfall)
 3. Enables safe collaboration on large features
@@ -106,7 +106,7 @@ develop
 **Cons:**
 - Too complex (develop + release branches)
 - No Epic concept (generic features)
-- Overkill for DevCrumbs
+- Overkill for DevSteps
 - Merge overhead
 
 **Verdict:** ❌ Rejected - Too heavyweight
@@ -320,7 +320,7 @@ Commit → Task → Epic → Business Goal
    - GitHub Pull Requests extension integrates with branch workflow
    - Source Control view shows all branches
 
-4. **DevCrumbs Specific:**
+4. **DevSteps Specific:**
    - Aligns with Epic → Story → Task hierarchy
    - Supports both Scrum and Waterfall methodologies
    - Integrates with work item tracking

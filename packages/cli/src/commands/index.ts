@@ -10,12 +10,12 @@ import {
   getCurrentTimestamp,
   parseItemId,
   validateRelationship,
-} from '@devcrumbs/shared';
+} from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 import ora from 'ora';
 
-function getDevCrumbsDir(): string {
-  const dir = join(process.cwd(), '.devcrumbs');
+function getDevStepsDir(): string {
+  const dir = join(process.cwd(), '.devsteps');
   if (!existsSync(dir)) {
     console.error(
       chalk.red('Error:'),
@@ -43,11 +43,11 @@ export async function addCommand(
   const spinner = ora('Creating item...').start();
 
   try {
-    const devcrumbsDir = getDevCrumbsDir();
+    const devcrumbsDir = getDevStepsDir();
     const itemType = TYPE_SHORTCUTS[type] || type;
 
     // Use shared core logic
-    const { addItem } = await import('@devcrumbs/shared');
+    const { addItem } = await import('@schnick371/devsteps-shared');
     const result = await addItem(devcrumbsDir, {
       type: itemType as ItemType,
       title,
@@ -86,7 +86,7 @@ export async function addCommand(
 
 export async function getCommand(id: string) {
   try {
-    const devcrumbsDir = getDevCrumbsDir();
+    const devcrumbsDir = getDevStepsDir();
     const parsed = parseItemId(id);
 
     if (!parsed) {
@@ -140,7 +140,7 @@ export async function getCommand(id: string) {
 
 export async function listCommand(options: any) {
   try {
-    const devcrumbsDir = getDevCrumbsDir();
+    const devcrumbsDir = getDevStepsDir();
     const indexPath = join(devcrumbsDir, 'index.json');
     const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
@@ -229,7 +229,7 @@ export async function updateCommand(id: string, options: any) {
       process.exit(1);
     }
     
-    const devcrumbsDir = getDevCrumbsDir();
+    const devcrumbsDir = getDevStepsDir();
     const parsed = parseItemId(id);
 
     if (!parsed) {
@@ -368,7 +368,7 @@ export async function linkCommand(
   const spinner = ora('Creating link...').start();
 
   try {
-    const devcrumbsDir = getDevCrumbsDir();
+    const devcrumbsDir = getDevStepsDir();
 
     const sourceParsed = parseItemId(sourceId);
     const targetParsed = parseItemId(targetId);
@@ -459,7 +459,7 @@ export async function searchCommand(query: string, options: any) {
   const spinner = ora('Searching...').start();
 
   try {
-    const devcrumbsDir = getDevCrumbsDir();
+    const devcrumbsDir = getDevStepsDir();
     const queryLower = query.toLowerCase();
     const results: any[] = [];
 
@@ -527,7 +527,7 @@ export async function searchCommand(query: string, options: any) {
 
 export async function statusCommand(options: any) {
   try {
-    const devcrumbsDir = getDevCrumbsDir();
+    const devcrumbsDir = getDevStepsDir();
     const configPath = join(devcrumbsDir, 'config.json');
     const indexPath = join(devcrumbsDir, 'index.json');
 
@@ -598,7 +598,7 @@ export async function statusCommand(options: any) {
 
 export async function traceCommand(id: string, options: any) {
   try {
-    const devcrumbsDir = getDevCrumbsDir();
+    const devcrumbsDir = getDevStepsDir();
     const maxDepth = Number.parseInt(options.depth, 10) || 3;
 
     function traceItem(itemId: string, depth: number, prefix = ''): void {
@@ -645,12 +645,12 @@ export async function exportCommand(options: any) {
   const spinner = ora('Exporting...').start();
 
   try {
-    const devcrumbsDir = getDevCrumbsDir();
+    const devcrumbsDir = getDevStepsDir();
     // Export implementation similar to MCP handler
     // For brevity, using simple markdown export
 
     spinner.succeed('Export completed');
-    console.log(chalk.gray('  Output:'), options.output || 'devcrumbs-export.md');
+    console.log(chalk.gray('  Output:'), options.output || 'devsteps-export.md');
   } catch (error: any) {
     spinner.fail('Export failed');
     throw error;

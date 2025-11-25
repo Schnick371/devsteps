@@ -1,11 +1,11 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { archiveItem, purgeItems } from '@devcrumbs/shared';
+import { archiveItem, purgeItems } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 import ora from 'ora';
 
-function getDevCrumbsDir(): string {
-  const dir = join(process.cwd(), '.devcrumbs');
+function getDevStepsDir(): string {
+  const dir = join(process.cwd(), '.devsteps');
   if (!existsSync(dir)) {
     console.error(
       chalk.red('Error:'),
@@ -22,13 +22,13 @@ export async function archiveCommand(id: string) {
   const spinner = ora(`Archiving ${id}...`).start();
 
   try {
-    const devcrumbsDir = getDevCrumbsDir();
+    const devcrumbsDir = getDevStepsDir();
     const result = await archiveItem(devcrumbsDir, id);
 
     spinner.succeed(
       `Archived ${chalk.cyan(result.itemId)} (was ${chalk.gray(result.originalStatus)})`
     );
-    console.log(chalk.gray('  Moved to:'), '.devcrumbs/archive/');
+    console.log(chalk.gray('  Moved to:'), '.devsteps/archive/');
     console.log(chalk.gray('  Archived at:'), new Date(result.archivedAt).toLocaleString());
   } catch (error: unknown) {
     spinner.fail('Failed to archive item');
@@ -43,7 +43,7 @@ export async function purgeCommand(options: { status?: string[]; type?: string }
   const spinner = ora('Finding items to archive...').start();
 
   try {
-    const devcrumbsDir = getDevCrumbsDir();
+    const devcrumbsDir = getDevStepsDir();
 
     const result = await purgeItems(devcrumbsDir, {
       status: options.status as

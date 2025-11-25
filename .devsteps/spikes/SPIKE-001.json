@@ -1,0 +1,38 @@
+{
+  "id": "SPIKE-001",
+  "type": "spike",
+  "category": "general",
+  "title": "MCP Server Architecture Research",
+  "status": "done",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-23T15:52:14.408Z",
+  "updated": "2025-11-23T19:22:40.614Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-003"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-004"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spike",
+    "research",
+    "vscode-extension",
+    "mcp-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

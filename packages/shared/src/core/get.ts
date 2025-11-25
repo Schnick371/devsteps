@@ -13,7 +13,7 @@ export interface GetItemResult {
  */
 export async function getItem(devcrumbsDir: string, itemId: string): Promise<GetItemResult> {
   if (!existsSync(devcrumbsDir)) {
-    throw new Error('Project not initialized. Run devcrumbs-init first.');
+    throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
   const parsed = parseItemId(itemId);

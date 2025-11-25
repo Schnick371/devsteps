@@ -1,12 +1,12 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: devcrumbs-mcp-server-hpa
+  name: devsteps-mcp-server-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: devcrumbs-mcp-server
+    name: devsteps-mcp-server
   minReplicas: 3
   maxReplicas: 10
   metrics:

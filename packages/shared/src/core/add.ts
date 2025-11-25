@@ -1,8 +1,8 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type {
-  DevCrumbsConfig,
-  DevCrumbsIndex,
+  DevStepsConfig,
+  DevStepsIndex,
   EisenhowerQuadrant,
   ItemMetadata,
   ItemType,
@@ -25,7 +25,7 @@ export interface AddItemArgs {
 export interface AddItemResult {
   itemId: string;
   metadata: ItemMetadata;
-  config: DevCrumbsConfig;
+  config: DevStepsConfig;
 }
 
 /**
@@ -35,15 +35,15 @@ export interface AddItemResult {
 export async function addItem(devcrumbsDir: string, args: AddItemArgs): Promise<AddItemResult> {
   // Check if initialized
   if (!existsSync(devcrumbsDir)) {
-    throw new Error('Project not initialized. Run devcrumbs-init first.');
+    throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
   // Read config and index
   const configPath = join(devcrumbsDir, 'config.json');
   const indexPath = join(devcrumbsDir, 'index.json');
 
-  const config: DevCrumbsConfig = JSON.parse(readFileSync(configPath, 'utf-8'));
-  const index: DevCrumbsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
+  const config: DevStepsConfig = JSON.parse(readFileSync(configPath, 'utf-8'));
+  const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
   // Migration: Initialize counters if missing (for legacy projects)
   if (!index.counters) {
@@ -67,7 +67,7 @@ export async function addItem(devcrumbsDir: string, args: AddItemArgs): Promise<
   const existingIds = index.items.map((i) => i.id);
   if (existingIds.includes(itemId)) {
     throw new Error(
-      `Duplicate ID detected: ${itemId}. Index may be corrupted or counter was reset. Please check .devcrumbs/index.json`
+      `Duplicate ID detected: ${itemId}. Index may be corrupted or counter was reset. Please check .devsteps/index.json`
     );
   }
 

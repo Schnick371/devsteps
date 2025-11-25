@@ -6,8 +6,8 @@ export type {
   LinkedItems,
   GitCommit,
   ItemMetadata,
-  DevCrumbsConfig,
-  DevCrumbsIndex,
+  DevStepsConfig,
+  DevStepsIndex,
 } from '../schemas/index.js';
 
 export * from './commands.js';

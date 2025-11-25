@@ -1,6 +1,6 @@
 # GitHub Repository Setup Guide
 
-This guide provides step-by-step instructions for setting up the DevCrumbs GitHub repository for public release.
+This guide provides step-by-step instructions for setting up the DevSteps GitHub repository for public release.
 
 ## Prerequisites ✅
 
@@ -19,10 +19,10 @@ All required tasks completed:
 
 ### Option A: GitHub CLI (Recommended)
 ```bash
-gh repo create devcrumbs/devcrumbs \
+gh repo create devsteps/devsteps \
   --public \
   --description "Never Code Alone. AI-assisted developer task tracking system with MCP protocol integration." \
-  --homepage "https://devcrumbs.dev" \
+  --homepage "https://devsteps.dev" \
   --disable-wiki \
   --enable-issues \
   --source=. \
@@ -32,7 +32,7 @@ gh repo create devcrumbs/devcrumbs \
 
 ### Option B: GitHub Web Interface
 1. Go to https://github.com/new
-2. Repository name: `devcrumbs`
+2. Repository name: `devsteps`
 3. Description: `Never Code Alone. AI-assisted developer task tracking system with MCP protocol integration.`
 4. Visibility: **Public**
 5. Do NOT initialize with README, .gitignore, or license (already exists)
@@ -44,9 +44,9 @@ curl -X POST https://api.github.com/user/repos \
   -H "Authorization: token YOUR_GITHUB_TOKEN" \
   -H "Accept: application/vnd.github.v3+json" \
   -d '{
-    "name": "devcrumbs",
+    "name": "devsteps",
     "description": "Never Code Alone. AI-assisted developer task tracking system with MCP protocol integration.",
-    "homepage": "https://devcrumbs.dev",
+    "homepage": "https://devsteps.dev",
     "private": false,
     "has_issues": true,
     "has_projects": true,
@@ -61,7 +61,7 @@ curl -X POST https://api.github.com/user/repos \
 
 ```bash
 # Add remote (if not already added)
-git remote add origin https://github.com/Schnick371/devcrumbs.git
+git remote add origin https://github.com/Schnick371/devsteps.git
 
 # Verify all changes are committed
 git status
@@ -79,7 +79,7 @@ git push --tags
 Navigate to: `Settings → General`
 
 **Repository Details:**
-- Website: `https://devcrumbs.dev`
+- Website: `https://devsteps.dev`
 - Topics: Add tags for discoverability
   - `task-tracking`
   - `ai-tools`
@@ -151,7 +151,7 @@ Navigate to: `Settings → Security`
 
 ### Private vulnerability reporting
 - ✅ Enable private vulnerability reporting
-  - Contact: `the@devcrumbs.dev`
+  - Contact: `the@devsteps.dev`
   - Policy: See SECURITY.md
 
 ## Step 5: Repository Labels
@@ -216,7 +216,7 @@ Navigate to: `Settings → General → Features → Discussions → Set up discu
    - Format: Announcement
 
 4. **💬 General**
-   - Description: "Chat about anything related to DevCrumbs"
+   - Description: "Chat about anything related to DevSteps"
    - Format: Discussion
 
 5. **🐛 Bug Reports**
@@ -224,7 +224,7 @@ Navigate to: `Settings → General → Features → Discussions → Set up discu
    - Link to: Issues
 
 6. **🎯 Show and Tell**
-   - Description: "Share what you've built with DevCrumbs"
+   - Description: "Share what you've built with DevSteps"
    - Format: Show and tell
 
 ## Step 7: Community Health Files
@@ -249,7 +249,7 @@ Navigate to: `Settings → General → Social preview`
 **Recommended Dimensions:** 1280×640px
 
 **Content Suggestions:**
-- DevCrumbs logo/wordmark
+- DevSteps logo/wordmark
 - Tagline: "Never Code Alone"
 - Key technology badges: TypeScript, Node.js, MCP Protocol
 - Dark theme background matching brand colors
@@ -269,7 +269,7 @@ Navigate to: `Settings → Pages`
 - Or: GitHub Actions workflow
 
 **Custom Domain (if configured):**
-- Domain: `docs.devcrumbs.dev`
+- Domain: `docs.devsteps.dev`
 - Enforce HTTPS: ✅
 
 ## Step 10: First Release
@@ -278,13 +278,13 @@ Navigate to: `Releases → Create a new release`
 
 **Tag:** `v0.4.0`
 **Target:** `main`
-**Release title:** `DevCrumbs v0.4.0 - Initial Public Release 🎉`
+**Release title:** `DevSteps v0.4.0 - Initial Public Release 🎉`
 
 **Description:**
 ```markdown
-# DevCrumbs v0.4.0 - Initial Public Release
+# DevSteps v0.4.0 - Initial Public Release
 
-Never Code Alone! We're excited to release DevCrumbs, an AI-assisted developer task tracking system with MCP protocol integration.
+Never Code Alone! We're excited to release DevSteps, an AI-assisted developer task tracking system with MCP protocol integration.
 
 ## 🚀 Features
 
@@ -310,22 +310,22 @@ Never Code Alone! We're excited to release DevCrumbs, an AI-assisted developer t
 
 ### CLI
 \`\`\`bash
-npm install -g @devcrumbs/cli
-devcrumbs init my-project
+npm install -g @devsteps/cli
+devsteps init my-project
 \`\`\`
 
 ### MCP Server
 \`\`\`bash
-npm install -g @devcrumbs/mcp-server
-devcrumbs-mcp
+npm install -g @devsteps/mcp-server
+devsteps-mcp
 \`\`\`
 
 ### VS Code Extension
-Install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=devcrumbs.devcrumbs) or download `.vsix` from release assets.
+Install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=devsteps.devsteps) or download `.vsix` from release assets.
 
 ## 📚 Documentation
 
-- [README](https://github.com/Schnick371/devcrumbs#readme)
+- [README](https://github.com/Schnick371/devsteps#readme)
 - [Contributing Guide](CONTRIBUTING.md)
 - [Security Policy](SECURITY.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
@@ -352,7 +352,7 @@ Apache License 2.0 - See [LICENSE](LICENSE.md)
 
 ### Immediate Actions
 - [ ] Verify repository is public and accessible
-- [ ] Test clone: `git clone https://github.com/Schnick371/devcrumbs.git`
+- [ ] Test clone: `git clone https://github.com/Schnick371/devsteps.git`
 - [ ] Verify all documentation renders correctly
 - [ ] Check Community Profile shows 100%
 - [ ] Test issue template functionality
@@ -378,7 +378,7 @@ Apache License 2.0 - See [LICENSE](LICENSE.md)
 
 ### Social Media Announcement
 ```markdown
-🎉 Introducing DevCrumbs v0.4.0!
+🎉 Introducing DevSteps v0.4.0!
 
 Never Code Alone. AI-assisted developer task tracking with MCP protocol integration.
 
@@ -388,15 +388,15 @@ Never Code Alone. AI-assisted developer task tracking with MCP protocol integrat
 - VS Code extension
 - Multi-methodology support
 
-🔗 https://github.com/Schnick371/devcrumbs
+🔗 https://github.com/Schnick371/devsteps
 
 #DevTools #TypeScript #AI #MCP
 ```
 
 ### Community Channels
-- [ ] Post on Dev.to: "Introducing DevCrumbs: Never Code Alone"
+- [ ] Post on Dev.to: "Introducing DevSteps: Never Code Alone"
 - [ ] Reddit: r/programming, r/devtools, r/typescript
-- [ ] Hacker News: "Show HN: DevCrumbs – AI-assisted task tracking"
+- [ ] Hacker News: "Show HN: DevSteps – AI-assisted task tracking"
 - [ ] LinkedIn: Professional network announcement
 - [ ] Twitter/X: Thread with key features
 - [ ] Product Hunt: Launch post
@@ -438,10 +438,10 @@ git remote -v
 git tag -l
 
 # Test issue template (after push)
-# Go to: https://github.com/Schnick371/devcrumbs/issues/new/choose
+# Go to: https://github.com/Schnick371/devsteps/issues/new/choose
 
 # Check Dependabot config
-# Go to: https://github.com/Schnick371/devcrumbs/network/updates
+# Go to: https://github.com/Schnick371/devsteps/network/updates
 ```
 
 ## Troubleshooting
@@ -471,8 +471,8 @@ git tag -l
 ## Support
 
 For questions or issues:
-- GitHub Discussions: https://github.com/Schnick371/devcrumbs/discussions
-- Email: the@devcrumbs.dev
+- GitHub Discussions: https://github.com/Schnick371/devsteps/discussions
+- Email: the@devsteps.dev
 - Security: See SECURITY.md
 
 ---

@@ -139,12 +139,12 @@ function checkGit(): CheckResult {
 /**
  * Check devcrumbs project structure
  */
-function checkDevCrumbsProject(): CheckResult {
-  const devcrumbsDir = join(process.cwd(), '.devcrumbs');
+function checkDevStepsProject(): CheckResult {
+  const devcrumbsDir = join(process.cwd(), '.devsteps');
 
   if (!existsSync(devcrumbsDir)) {
     return {
-      name: 'DevCrumbs Project',
+      name: 'DevSteps Project',
       status: 'fail',
       message: 'Not initialized',
       fix: 'Run: devcrumbs init <project-name>',
@@ -156,15 +156,15 @@ function checkDevCrumbsProject(): CheckResult {
 
   if (!existsSync(configPath) || !existsSync(indexPath)) {
     return {
-      name: 'DevCrumbs Project',
+      name: 'DevSteps Project',
       status: 'fail',
       message: 'Corrupt project structure',
-      fix: 'Reinitialize: rm -rf .devcrumbs && devcrumbs init',
+      fix: 'Reinitialize: rm -rf .devsteps && devcrumbs init',
     };
   }
 
   return {
-    name: 'DevCrumbs Project',
+    name: 'DevSteps Project',
     status: 'pass',
     message: 'Initialized and healthy',
   };
@@ -268,7 +268,7 @@ function checkMCPConfig(): CheckResult {
  */
 export async function doctorCommand() {
   console.log();
-  console.log(chalk.bold.cyan('🏥 DevCrumbs Health Check'));
+  console.log(chalk.bold.cyan('🏥 DevSteps Health Check'));
   console.log();
 
   const spinner = ora('Running diagnostics...').start();
@@ -279,7 +279,7 @@ export async function doctorCommand() {
     checkGit(),
     checkTypeScript(),
     checkDependencies(),
-    checkDevCrumbsProject(),
+    checkDevStepsProject(),
     checkMCPConfig(),
   ];
 

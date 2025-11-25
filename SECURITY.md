@@ -19,7 +19,7 @@ We release security updates for the following versions:
 
 Please report security vulnerabilities via email to:
 
-**the@devcrumbs.dev**
+**the@devsteps.dev**
 
 Include in your report:
 - Type of issue (e.g., XSS, SQL injection, path traversal, command injection)
@@ -49,12 +49,12 @@ Include in your report:
 
 ## Security Best Practices for Users
 
-### Running DevCrumbs
+### Running DevSteps
 
-- ✅ Keep DevCrumbs updated to latest version
-- ✅ Review `.devcrumbs/` permissions (should NOT be world-readable)
+- ✅ Keep DevSteps updated to latest version
+- ✅ Review `.devsteps/` permissions (should NOT be world-readable)
 - ✅ Use environment variables for sensitive configuration
-- ⚠️ Do NOT commit `.devcrumbs/` to public repositories (use `.gitignore`)
+- ⚠️ Do NOT commit `.devsteps/` to public repositories (use `.gitignore`)
 
 ### Contributing Code
 
@@ -75,12 +75,12 @@ Include in your report:
 
 ### Local File System Access
 
-DevCrumbs stores data in `.devcrumbs/` directory with local file system access. Ensure appropriate file permissions:
+DevSteps stores data in `.devsteps/` directory with local file system access. Ensure appropriate file permissions:
 
 ```bash
 # Recommended permissions
-chmod 700 .devcrumbs/
-chmod 600 .devcrumbs/**/*.json
+chmod 700 .devsteps/
+chmod 600 .devsteps/**/*.json
 ```
 
 ### MCP Server HTTP Mode
@@ -103,12 +103,12 @@ This project uses automated dependency scanning:
 Security updates are published:
 - GitHub Security Advisories
 - Release notes with `[SECURITY]` prefix
-- Email notification to security@devcrumbs.dev subscribers (planned)
+- Email notification to security@devsteps.dev subscribers (planned)
 
 ## Contact
 
-For security concerns: **the@devcrumbs.dev**
+For security concerns: **the@devsteps.dev**
 
 ---
 
-**Thank you for helping keep DevCrumbs secure!**
+**Thank you for helping keep DevSteps secure!**

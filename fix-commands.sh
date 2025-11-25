@@ -7,7 +7,7 @@ FILE="packages/vscode-extension/src/commands/index.ts"
 echo "🔧 Fixing API calls in $FILE..."
 
 # Fix listItems calls - change from object parameter to devcrumbsPath string
-sed -i 's/await listItems({ *path: workspaceFolder\.uri\.fsPath *})/await listItems(path.join(workspaceFolder.uri.fsPath, '"'"'.devcrumbs'"'"'))/g' "$FILE"
+sed -i 's/await listItems({ *path: workspaceFolder\.uri\.fsPath *})/await listItems(path.join(workspaceFolder.uri.fsPath, '"'"'.devsteps'"'"'))/g' "$FILE"
 
 # Fix result checks - remove .success checks for listItems
 sed -i 's/if (!allItems\.success || !allItems\.items/if (!allItems.items/g' "$FILE"
@@ -19,7 +19,7 @@ sed -i 's/if (!itemResult\.success || !itemResult\.item)/if (!itemResult.metadat
 sed -i 's/itemResult\.item/itemResult.metadata/g' "$FILE"
 
 # Fix updateItem calls - add devcrumbsPath parameter
-sed -i 's/await updateItem({/const devcrumbsPath = path.join(workspaceFolder.uri.fsPath, '"'"'.devcrumbs'"'"');\n        const result = await updateItem(devcrumbsPath, {/g' "$FILE"
+sed -i 's/await updateItem({/const devcrumbsPath = path.join(workspaceFolder.uri.fsPath, '"'"'.devsteps'"'"');\n        const result = await updateItem(devcrumbsPath, {/g' "$FILE"
 
 # Fix updateItem result checks - remove .success/.error 
 sed -i 's/if (result\.success)/if (result.metadata)/g' "$FILE"

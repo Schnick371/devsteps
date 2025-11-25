@@ -1,0 +1,42 @@
+{
+  "id": "TASK-007",
+  "type": "task",
+  "category": "vscode",
+  "title": "Icons and Theming - Visual Design and Theme Integration",
+  "status": "done",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-23T15:39:31.434Z",
+  "updated": "2025-11-23T19:52:56.706Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/vscode-extension/resources/icons/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003",
+      "STORY-004",
+      "FEAT-004"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-009"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "icons",
+    "theming",
+    "design"
+  ],
+  "commits": [],
+  "metadata": {}
+}

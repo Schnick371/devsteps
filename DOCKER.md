@@ -10,7 +10,7 @@ docker-compose up -d
 
 ```bash
 # View logs
-docker-compose logs -f devcrumbs-mcp
+docker-compose logs -f devsteps-mcp
 
 # Check health status
 curl http://localhost:3100/health
@@ -45,12 +45,12 @@ ports:
 
 ### View Container Logs
 ```bash
-docker logs devcrumbs-mcp-server
+docker logs devsteps-mcp-server
 ```
 
 ### Access Container Shell
 ```bash
-docker exec -it devcrumbs-mcp-server sh
+docker exec -it devsteps-mcp-server sh
 ```
 
 ## Environment Variables

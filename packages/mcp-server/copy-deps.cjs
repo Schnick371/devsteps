@@ -13,7 +13,7 @@ const localNodeModules = path.join(__dirname, 'node_modules');
 
 // Get list of runtime dependencies
 const dependencies = Object.keys(packageJson.dependencies || {}).filter(
-  dep => !dep.startsWith('@devcrumbs/') // Exclude workspace dependencies
+  dep => !dep.startsWith('@devsteps/') // Exclude workspace dependencies
 );
 
 console.log(`📦 Copying ${dependencies.length} dependencies to local node_modules...`);

@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type {
-  DevCrumbsIndex,
+  DevStepsIndex,
   EisenhowerQuadrant,
   ItemMetadata,
   ItemStatus,
@@ -36,7 +36,7 @@ export async function updateItem(
   args: UpdateItemArgs
 ): Promise<UpdateItemResult> {
   if (!existsSync(devcrumbsDir)) {
-    throw new Error('Project not initialized. Run devcrumbs-init first.');
+    throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
   const parsed = parseItemId(args.id);
@@ -127,7 +127,7 @@ export async function updateItem(
 
   // Update index
   const indexPath = join(devcrumbsDir, 'index.json');
-  const index: DevCrumbsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
+  const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
   const itemIndex = index.items.findIndex((i) => i.id === args.id);
   if (itemIndex !== -1) {

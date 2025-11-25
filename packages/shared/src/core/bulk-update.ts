@@ -12,7 +12,7 @@ export interface BulkUpdateResult {
 
 /**
  * Bulk update multiple items at once
- * @param devcrumbsDir Path to .devcrumbs directory
+ * @param devcrumbsDir Path to .devsteps directory
  * @param itemIds Array of item IDs to update
  * @param updates Partial item metadata to apply to all items
  * @returns Result with success and failure lists
@@ -48,7 +48,7 @@ export async function bulkUpdateItems(
 
 /**
  * Bulk add tags to multiple items
- * @param devcrumbsDir Path to .devcrumbs directory
+ * @param devcrumbsDir Path to .devsteps directory
  * @param itemIds Array of item IDs
  * @param tagsToAdd Tags to add
  * @returns Result with success and failure lists
@@ -117,7 +117,7 @@ export async function bulkAddTags(
 
 /**
  * Bulk remove tags from multiple items
- * @param devcrumbsDir Path to .devcrumbs directory
+ * @param devcrumbsDir Path to .devsteps directory
  * @param itemIds Array of item IDs
  * @param tagsToRemove Tags to remove
  * @returns Result with success and failure lists

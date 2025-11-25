@@ -41,7 +41,7 @@ export class McpServerManager {
       const mcpServerPath = this.findMcpServerPath();
       if (!mcpServerPath) {
         vscode.window.showWarningMessage(
-          'DevCrumbs MCP server not found. Please install @devcrumbs/mcp-server.',
+          'DevCrumbs MCP server not found. Please install @schnick371/devcrumbs-mcp-server.',
         );
         return;
       }
@@ -108,7 +108,7 @@ export class McpServerManager {
     try {
       const { execSync } = require('node:child_process');
       const npmRoot = execSync('npm root -g', { encoding: 'utf-8' }).trim();
-      const globalPath = path.join(npmRoot, '@devcrumbs', 'mcp-server', 'dist', 'index.js');
+      const globalPath = path.join(npmRoot, '@schnick371', 'devcrumbs-mcp-server', 'dist', 'index.js');
 
       const fs = require('node:fs');
       if (fs.existsSync(globalPath)) {

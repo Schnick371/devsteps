@@ -1,10 +1,10 @@
 services:
-  devcrumbs-mcp:
+  devsteps-mcp:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: devcrumbs-mcp-server
-    image: devcrumbs-mcp:latest
+    container_name: devsteps-mcp-server
+    image: devsteps-mcp:latest
 
     ports:
       - "3100:3100"

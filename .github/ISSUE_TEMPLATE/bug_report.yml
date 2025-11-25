@@ -50,8 +50,8 @@ body:
   - type: input
     id: version
     attributes:
-      label: DevCrumbs Version
-      description: What version of DevCrumbs are you using?
+      label: DevSteps Version
+      description: What version of DevSteps are you using?
       placeholder: "e.g., 0.4.0"
     validations:
       required: true

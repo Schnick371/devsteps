@@ -1,8 +1,8 @@
 ---
-agent: 'devcrumbs'
+agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Interactive planning session - work with developer to define and structure work items before implementation'
-tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'GitKraken/*', 'devcrumbs/*', 'usages', 'problems', 'changes', 'testFailure', 'fetch', 'todos', 'runSubagent']
+tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'GitKraken/*', 'devsteps/*', 'usages', 'problems', 'changes', 'testFailure', 'fetch', 'todos', 'runSubagent']
 ---
 
 # 🎯 Plan Work - Interactive Planning Session
@@ -38,7 +38,7 @@ tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'micr
 
 2. **Search existing project** for related patterns:
    ```
-   #mcp_devcrumbs_devcrumbs-search <keywords>
+   #mcp_devsteps_devsteps-search <keywords>
    search <relevant modules>
    ```
 
@@ -74,13 +74,13 @@ tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'micr
 
 **Create:**
 ```
-#mcp_devcrumbs_devcrumbs-add <type> "<title>" --priority <p> --eisenhower <q> --tags <t>
+#mcp_devsteps_devsteps-add <type> "<title>" --priority <p> --eisenhower <q> --tags <t>
 ```
 
 ### Step 5: Link Relationships
 
 ```
-#mcp_devcrumbs_devcrumbs-link <ID1> implements|depends-on|tested-by <ID2>
+#mcp_devsteps_devsteps-link <ID1> implements|depends-on|tested-by <ID2>
 ```
 
 **Ensure:** Hierarchies clear, dependencies explicit, tests linked
@@ -92,7 +92,7 @@ tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'micr
 - Dependencies identified?
 
 ```
-#mcp_devcrumbs_devcrumbs-status --detailed
+#mcp_devsteps_devsteps-status --detailed
 ```
 
 ## Key Questions
@@ -102,8 +102,8 @@ tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'micr
 
 ## When Complete
 
-"Planning done! Use `devcrumbs-start-work.prompt.md` to begin."
+"Planning done! Use `devsteps-start-work.prompt.md` to begin."
 
 ---
 
-**See `devcrumbs.agent.md` for mentor role. See `devcrumbs-start-work.prompt.md` for implementation kickoff.**
+**See `devsteps.agent.md` for mentor role. See `devsteps-start-work.prompt.md` for implementation kickoff.**

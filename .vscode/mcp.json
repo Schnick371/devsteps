@@ -1,6 +1,6 @@
 {
 	"servers": {
-		"devcrumbs": {
+		"devsteps": {
 			"type": "stdio",
 			"command": "node",
 			"args": [

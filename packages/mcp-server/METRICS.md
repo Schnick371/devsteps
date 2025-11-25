@@ -54,7 +54,7 @@ The MCP server exposes detailed metrics in Prometheus format, enabling:
 
 ```json
 {
-  "tool": "devcrumbs-metrics",
+  "tool": "devsteps-metrics",
   "arguments": {
     "format": "prometheus"  // or "json" for JSON format
   }
@@ -66,21 +66,21 @@ The MCP server exposes detailed metrics in Prometheus format, enabling:
 ```
 # HELP mcp_tool_requests_total Total number of MCP tool requests
 # TYPE mcp_tool_requests_total counter
-mcp_tool_requests_total{tool="devcrumbs-add",status="success",service="devcrumbs-mcp-server",version="0.1.0"} 42
-mcp_tool_requests_total{tool="devcrumbs-list",status="success",service="devcrumbs-mcp-server",version="0.1.0"} 15
+mcp_tool_requests_total{tool="devsteps-add",status="success",service="devsteps-mcp-server",version="0.1.0"} 42
+mcp_tool_requests_total{tool="devsteps-list",status="success",service="devsteps-mcp-server",version="0.1.0"} 15
 
 # HELP mcp_tool_duration_seconds Duration of MCP tool executions in seconds
 # TYPE mcp_tool_duration_seconds histogram
-mcp_tool_duration_seconds_bucket{le="0.01",tool="devcrumbs-add"} 5
-mcp_tool_duration_seconds_bucket{le="0.05",tool="devcrumbs-add"} 30
-mcp_tool_duration_seconds_bucket{le="+Inf",tool="devcrumbs-add"} 42
-mcp_tool_duration_seconds_sum{tool="devcrumbs-add"} 2.5
-mcp_tool_duration_seconds_count{tool="devcrumbs-add"} 42
+mcp_tool_duration_seconds_bucket{le="0.01",tool="devsteps-add"} 5
+mcp_tool_duration_seconds_bucket{le="0.05",tool="devsteps-add"} 30
+mcp_tool_duration_seconds_bucket{le="+Inf",tool="devsteps-add"} 42
+mcp_tool_duration_seconds_sum{tool="devsteps-add"} 2.5
+mcp_tool_duration_seconds_count{tool="devsteps-add"} 42
 
 # HELP mcp_memory_bytes Memory usage in bytes
 # TYPE mcp_memory_bytes gauge
-mcp_memory_bytes{type="heap_used",service="devcrumbs-mcp-server"} 45678912
-mcp_memory_bytes{type="rss",service="devcrumbs-mcp-server"} 78912345
+mcp_memory_bytes{type="heap_used",service="devsteps-mcp-server"} 45678912
+mcp_memory_bytes{type="rss",service="devsteps-mcp-server"} 78912345
 ```
 
 ## Integration Patterns
@@ -108,7 +108,7 @@ global:
   evaluation_interval: 15s
 
 scrape_configs:
-  - job_name: 'devcrumbs-mcp-server'
+  - job_name: 'devsteps-mcp-server'
     static_configs:
       - targets: ['mcp-server:9090']
     relabel_configs:
@@ -124,12 +124,12 @@ scrape_configs:
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: devcrumbs-mcp-server
+  name: devsteps-mcp-server
   namespace: monitoring
 spec:
   selector:
     matchLabels:
-      app: devcrumbs-mcp-server
+      app: devsteps-mcp-server
   endpoints:
   - port: metrics
     interval: 15s
@@ -221,7 +221,7 @@ import { PrometheusExporter } from '@opentelemetry/exporter-prometheus';
 
 const sdk = new NodeSDK({
   metricReader: new PrometheusExporter({ port: 9090 }),
-  serviceName: 'devcrumbs-mcp-server',
+  serviceName: 'devsteps-mcp-server',
 });
 
 sdk.start();
@@ -269,7 +269,7 @@ Metrics collection overhead:
 **Metrics Not Updating**:
 - Check if prom-client is installed: `pnpm list prom-client`
 - Verify metrics handler is registered: check logs for "Tools registered"
-- Test metrics endpoint: call `devcrumbs-metrics` tool
+- Test metrics endpoint: call `devsteps-metrics` tool
 
 **High Memory Usage**:
 - Check metric cardinality: `await getMetricsJSON()` and count series

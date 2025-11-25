@@ -1,0 +1,35 @@
+{
+  "id": "TASK-047",
+  "type": "task",
+  "category": "CLI",
+  "title": "Doctor: Asymmetric link detection",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-24T20:58:56.427Z",
+  "updated": "2025-11-24T20:58:56.427Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-006"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doctor",
+    "link-symmetry",
+    "integrity"
+  ],
+  "commits": [],
+  "metadata": {}
+}

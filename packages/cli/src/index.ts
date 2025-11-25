@@ -16,7 +16,7 @@ import { initCommand } from './commands/init.js';
 
 const program = new Command();
 
-program.name('devcrumbs').description('AI-powered developer task tracking system').version('0.1.0');
+program.name('devsteps').description('AI-powered developer task tracking system').version('0.1.0');
 
 // Initialize project
 program
@@ -131,7 +131,7 @@ program
 // Archive item
 program
   .command('archive')
-  .description('Archive a single item (moves to .devcrumbs/archive/)')
+  .description('Archive a single item (moves to .devsteps/archive/)')
   .argument('<id>', 'Item ID to archive')
   .action(async (id: string) => {
     const { archiveCommand } = await import('./commands/archive.js');

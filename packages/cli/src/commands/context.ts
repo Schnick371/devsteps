@@ -1,10 +1,10 @@
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { getCache } from '@devcrumbs/shared';
+import { getCache } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 
-function getDevCrumbsDir(): string {
-  const dir = join(process.cwd(), '.devcrumbs');
+function getDevStepsDir(): string {
+  const dir = join(process.cwd(), '.devsteps');
   if (!existsSync(dir)) {
     console.error(
       chalk.red('Error:'),
@@ -21,7 +21,7 @@ function getDevCrumbsDir(): string {
  * Context stats command - Show cache metrics
  */
 export async function contextStatsCommand() {
-  const devcrumbsDir = getDevCrumbsDir();
+  const devcrumbsDir = getDevStepsDir();
   const cache = getCache();
   const stats = cache.stats();
 
@@ -91,7 +91,7 @@ export async function contextStatsCommand() {
  * Context validate command - Check for drift
  */
 export async function contextValidateCommand() {
-  const devcrumbsDir = getDevCrumbsDir();
+  const devcrumbsDir = getDevStepsDir();
 
   console.log();
   console.log(chalk.bold.cyan('🔍 Context Validation'));

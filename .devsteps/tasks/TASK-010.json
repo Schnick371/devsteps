@@ -1,0 +1,46 @@
+{
+  "id": "TASK-010",
+  "type": "task",
+  "category": "vscode",
+  "title": "TreeView Filtering and Sorting - Advanced Item Navigation",
+  "status": "done",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-23T16:20:30.935Z",
+  "updated": "2025-11-24T09:38:41.020Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/vscode-extension/src/treeView/devstepsTreeDataProvider.ts",
+    "packages/vscode-extension/src/commands.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003",
+      "STORY-004"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-011",
+      "TASK-031"
+    ],
+    "depends-on": [
+      "TASK-002"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "treeview",
+    "filtering",
+    "sorting",
+    "ui"
+  ],
+  "commits": [],
+  "metadata": {}
+}

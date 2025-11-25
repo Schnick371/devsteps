@@ -255,7 +255,7 @@ export async function getQuickContext(
   // Add suggestions
   const suggestions: string[] = [];
   if (!staticContext) {
-    suggestions.push('Consider creating .devcrumbs/PROJECT.md for static context');
+    suggestions.push('Consider creating .devsteps/PROJECT.md for static context');
   }
   if (activeItems.by_status.blocked > 0) {
     suggestions.push(`${activeItems.by_status.blocked} blocked items need attention`);

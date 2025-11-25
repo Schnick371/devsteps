@@ -1,4 +1,4 @@
-# Testing Guide - DevCrumbs VS Code Extension mit Embedded MCP
+# Testing Guide - DevSteps VS Code Extension mit Embedded MCP
 
 ## 🚀 Quick Test (F5 Development Host)
 
@@ -6,12 +6,12 @@
 
 1. **Start Extension Development Host:**
    ```bash
-   # Im devcrumbs Projekt-Ordner
+   # Im devsteps Projekt-Ordner
    code .
    ```
 
 2. **In VS Code:**
-   - Öffne `packages/vscode-extension/src/extension.ts`
+   - Öffne `packages/extension/src/extension.ts`
    - Drücke `F5` (oder Run → Start Debugging)
    - Neue VS Code Fenster öffnet sich: **Extension Development Host**
 
@@ -21,9 +21,9 @@
    - Debug Console zeigt Logs
 
 4. **Verify in Development Host:**
-   - Status Bar (rechts unten) → `✓ DevCrumbs MCP: Running`
-   - Extensions View (`Ctrl+Shift+X`) → Search `@mcp` → "devcrumbs-embedded" sichtbar
-   - Output Panel (`Ctrl+Shift+U`) → "DevCrumbs MCP Server" auswählen → Logs checken
+   - Status Bar (rechts unten) → `✓ DevSteps MCP: Running`
+   - Extensions View (`Ctrl+Shift+X`) → Search `@mcp` → "devsteps-embedded" sichtbar
+   - Output Panel (`Ctrl+Shift+U`) → "DevSteps MCP Server" auswählen → Logs checken
 
 ---
 
@@ -33,7 +33,7 @@
 
 1. **Install Extension:**
    ```bash
-   code --install-extension dist/vscode/devcrumbs-vscode-0.1.0.vsix
+   code --install-extension dist/vscode/devsteps-vscode-0.1.0.vsix
    ```
 
 2. **Reload VS Code:**
@@ -43,13 +43,13 @@
 
 3. **Verify Installation:**
    ```bash
-   code --list-extensions | grep devcrumbs
-   # Should show: devcrumbs.devcrumbs-vscode
+   code --list-extensions | grep devsteps
+   # Should show: devsteps.devsteps-vscode
    ```
 
 4. **Uninstall after testing:**
    ```bash
-   code --uninstall-extension devcrumbs.devcrumbs-vscode
+   code --uninstall-extension devsteps.devsteps-vscode
    ```
 
 ---
@@ -57,15 +57,15 @@
 ## ✅ Test Checklist
 
 ### Extension Basics
-- [ ] Activity Bar: DevCrumbs icon erscheint
-- [ ] TreeView: Shows devcrumbs items (wenn `.devcrumbs/` existiert)
-- [ ] Commands: `Ctrl+Shift+P` → Type "DevCrumbs" → Commands sichtbar
+- [ ] Activity Bar: DevSteps icon erscheint
+- [ ] TreeView: Shows devsteps items (wenn `.devsteps/` existiert)
+- [ ] Commands: `Ctrl+Shift+P` → Type "DevSteps" → Commands sichtbar
 
 ### MCP Server Status
-- [ ] **Status Bar** (bottom right): Shows `✓ DevCrumbs MCP: Running`
-- [ ] Click Status Bar → Opens Settings to `devcrumbs.mcp`
-- [ ] **Extensions View**: Search `@mcp` → "devcrumbs-embedded" in MCP SERVERS section
-- [ ] **Output Panel**: `Ctrl+Shift+U` → Select "DevCrumbs MCP Server" → See startup logs
+- [ ] **Status Bar** (bottom right): Shows `✓ DevSteps MCP: Running`
+- [ ] Click Status Bar → Opens Settings to `devsteps.mcp`
+- [ ] **Extensions View**: Search `@mcp` → "devsteps-embedded" in MCP SERVERS section
+- [ ] **Output Panel**: `Ctrl+Shift+U` → Select "DevSteps MCP Server" → See startup logs
 
 ### MCP Server Functionality
 
@@ -94,43 +94,43 @@ curl -X POST http://localhost:3098/mcp \
 
 2. **Test Commands:**
    ```
-   @workspace Initialize a devcrumbs project
+   @workspace Initialize a devsteps project
    ```
-   - Copilot sollte devcrumbs-init tool verwenden
+   - Copilot sollte devsteps-init tool verwenden
    - Response: Project initialization steps
 
    ```
-   @workspace List my devcrumbs tasks
+   @workspace List my devsteps tasks
    ```
-   - Copilot sollte devcrumbs-list tool verwenden
+   - Copilot sollte devsteps-list tool verwenden
    - Response: Current tasks
 
    ```
-   @workspace Show devcrumbs status
+   @workspace Show devsteps status
    ```
-   - Copilot sollte devcrumbs-status tool verwenden
+   - Copilot sollte devsteps-status tool verwenden
    - Response: Project statistics
 
 3. **Verify Tool Usage:**
-   - Check Output Panel → DevCrumbs MCP Server
+   - Check Output Panel → DevSteps MCP Server
    - Should show: "Tool executed successfully" logs
 
 ### Settings
 
-**Open Settings:** `Ctrl+,` → Search "devcrumbs.mcp"
+**Open Settings:** `Ctrl+,` → Search "devsteps.mcp"
 
 Check these settings exist:
-- [ ] `devcrumbs.mcp.autoStart` = `true` (default)
-- [ ] `devcrumbs.mcp.port` = `3098` (default)
+- [ ] `devsteps.mcp.autoStart` = `true` (default)
+- [ ] `devsteps.mcp.port` = `3098` (default)
 
 **Test Auto-Start Disable:**
-1. Set `devcrumbs.mcp.autoStart` = `false`
+1. Set `devsteps.mcp.autoStart` = `false`
 2. Reload Window: `Ctrl+Shift+P` → "Developer: Reload Window"
-3. Status Bar should show: `⊘ DevCrumbs MCP: Stopped`
+3. Status Bar should show: `⊘ DevSteps MCP: Stopped`
 4. Re-enable and reload
 
 **Test Port Change:**
-1. Set `devcrumbs.mcp.port` = `3099`
+1. Set `devsteps.mcp.port` = `3099`
 2. Reload Window
 3. Status Bar tooltip should show new port
 4. Test: `curl http://localhost:3099/health`
@@ -155,12 +155,12 @@ Check these settings exist:
 
 **Extension Logs:**
 ```
-Developer Tools → Console → Filter: "DevCrumbs"
+Developer Tools → Console → Filter: "DevSteps"
 ```
 
 **MCP Server Logs:**
 ```
-Output Panel → Select "DevCrumbs MCP Server"
+Output Panel → Select "DevSteps MCP Server"
 ```
 
 **VS Code Logs:**
@@ -173,16 +173,16 @@ Help → Toggle Developer Tools → Console
 **Issue: MCP Server doesn't start**
 - Check Output Panel for errors
 - Verify port 3098 is free: `lsof -i :3098`
-- Check Settings: `devcrumbs.mcp.autoStart` = true
+- Check Settings: `devsteps.mcp.autoStart` = true
 
 **Issue: Copilot doesn't see MCP tools**
-- Verify in Extensions: `@mcp` shows "devcrumbs-embedded"
+- Verify in Extensions: `@mcp` shows "devsteps-embedded"
 - Check `curl http://localhost:3098/health`
 - Restart VS Code completely
 
 **Issue: Status Bar shows error**
 - Click status bar → See error details
-- Check Output Panel → DevCrumbs MCP Server
+- Check Output Panel → DevSteps MCP Server
 - Verify dependencies: `cd packages/mcp-server && pnpm install`
 
 ---
@@ -191,12 +191,12 @@ Help → Toggle Developer Tools → Console
 
 Extension is working correctly when:
 
-✅ Status Bar shows: `✓ DevCrumbs MCP: Running`
-✅ Extensions View shows "devcrumbs-embedded" under MCP SERVERS
+✅ Status Bar shows: `✓ DevSteps MCP: Running`
+✅ Extensions View shows "devsteps-embedded" under MCP SERVERS
 ✅ `curl http://localhost:3098/health` returns `{"status":"ok"}`
-✅ GitHub Copilot can execute devcrumbs commands
+✅ GitHub Copilot can execute devsteps commands
 ✅ Output Panel shows MCP server logs
-✅ Settings page shows devcrumbs.mcp.* options
+✅ Settings page shows devsteps.mcp.* options
 
 ---
 
@@ -206,14 +206,14 @@ Extension is working correctly when:
 
 1. **Edit Extension Code:**
    ```
-   packages/vscode-extension/src/*.ts
+   packages/extension/src/*.ts
    ```
 
 2. **Rebuild:**
    ```bash
    pnpm build
    # Or watch mode:
-   cd packages/vscode-extension && pnpm watch
+   cd packages/extension && pnpm watch
    ```
 
 3. **In Extension Development Host:**
@@ -231,7 +231,7 @@ Extension is working correctly when:
 
 **Watch Mode (Terminal 1):**
 ```bash
-cd packages/vscode-extension
+cd packages/extension
 pnpm watch
 ```
 
@@ -247,8 +247,8 @@ pnpm watch
 | Test | Method | Expected Result |
 |------|--------|----------------|
 | Extension loads | F5 | Development Host opens |
-| MCP starts | Check Status Bar | "✓ DevCrumbs MCP: Running" |
-| MCP visible | Extensions View | "devcrumbs-embedded" shown |
+| MCP starts | Check Status Bar | "✓ DevSteps MCP: Running" |
+| MCP visible | Extensions View | "devsteps-embedded" shown |
 | HTTP endpoint | curl health | {"status":"ok"} |
 | Copilot integration | Chat command | Tool executed |
 | Auto-start setting | Toggle & reload | Starts/stops accordingly |
@@ -262,7 +262,7 @@ pnpm watch
 1. **Document Issues:** Create tasks for any bugs found
 2. **Update INSTALL.md:** Add troubleshooting from test findings
 3. **Create Test Cases:** Automated tests for CI/CD
-4. **Performance Test:** Test with large devcrumbs projects
+4. **Performance Test:** Test with large devsteps projects
 5. **User Acceptance:** Beta test with real users
 
 ---

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: devcrumbs-mcp-config
+  name: devsteps-mcp-config
 data:
   # Server configuration
   NODE_ENV: "production"

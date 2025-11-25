@@ -1,8 +1,8 @@
 ---
-agent: 'devcrumbs'
+agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Structured development workflow - preserve decisions and maintain context continuity'
-tools: ['runCommands', 'runTasks', 'edit', 'search', 'github/github-mcp-server/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'devcrumbs/*', 'usages', 'problems', 'changes', 'fetch', 'todos', 'runSubagent']
+tools: ['runCommands', 'runTasks', 'edit', 'search', 'github/github-mcp-server/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'devsteps/*', 'usages', 'problems', 'changes', 'fetch', 'todos', 'runSubagent']
 ---
 
 # 🧭 Structured Development Workflow
@@ -43,4 +43,4 @@ Every change traceable. No decision forgotten. No relationship lost.
 
 ---
 
-**See `devcrumbs.agent.md` for mentor role. See `devcrumbs.instructions.md` for full methodology.**
+**See `devsteps.agent.md` for mentor role. See `devsteps.instructions.md` for full methodology.**

@@ -1,4 +1,4 @@
-# DevCrumbs Project - Structured Development System
+# DevSteps Project - Structured Development System
 
 Monorepo for systematic software development with task tracking and traceability.
 
@@ -14,7 +14,7 @@ Monorepo for systematic software development with task tracking and traceability
 - `shared` - Source of Truth for Types/Schemas/Utils
 - `mcp-server` - MCP Protocol Handler
 - `cli` - Command-line Interface
-- `vscode-extension` - Editor Integration
+- `extension` - Editor Integration
 
 ## Quality Principles
 
@@ -25,4 +25,4 @@ Monorepo for systematic software development with task tracking and traceability
 
 ---
 
-**Note:** General development workflows see `agents/devcrumbs.agent.md` and `instructions/devcrumbs.instructions.md`
+**Note:** General development workflows see `agents/devsteps.agent.md` and `instructions/devsteps.instructions.md`

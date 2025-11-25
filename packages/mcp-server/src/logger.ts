@@ -37,7 +37,7 @@ export function configureLogger(options: { level?: string; file?: string } = {})
 
     // Base fields for all log entries
     base: {
-      service: 'devcrumbs-mcp-server',
+      service: 'devsteps-mcp-server',
       version: '0.1.0',
     },
 

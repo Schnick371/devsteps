@@ -1,4 +1,4 @@
-# Contributing to DevCrumbs
+# Contributing to DevSteps
 
 Thank you for your interest in contributing! We welcome contributions from everyone.
 
@@ -41,8 +41,8 @@ Thank you for your interest in contributing! We welcome contributions from every
 ### Installation
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR_USERNAME/devcrumbs.git
-cd devcrumbs
+git clone https://github.com/YOUR_USERNAME/devsteps.git
+cd devsteps
 
 # Install dependencies
 npm install
@@ -58,7 +58,7 @@ npm test
 - `packages/shared` - Core types, schemas, business logic
 - `packages/cli` - Command-line interface
 - `packages/mcp-server` - MCP protocol server for AI integration
-- `packages/vscode-extension` - VS Code extension
+- `packages/extension` - VS Code extension
 
 ## Pull Request Process
 
@@ -137,9 +137,9 @@ Signed-off-by: Your Name <your.email@example.com>
 ## Questions?
 
 - **General Questions**: Open a GitHub Discussion
-- **Security Issues**: Email the@devcrumbs.dev (see [SECURITY.md](SECURITY.md))
+- **Security Issues**: Email the@devsteps.dev (see [SECURITY.md](SECURITY.md))
 - **Code of Conduct**: See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 ---
 
-Thank you for contributing to DevCrumbs! 🚀
+Thank you for contributing to DevSteps! 🚀

@@ -1,0 +1,47 @@
+{
+  "id": "TASK-038",
+  "type": "task",
+  "category": "Core",
+  "title": "Shared: Implement relationship validation engine",
+  "status": "done",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-24T19:34:12.433Z",
+  "updated": "2025-11-24T20:56:06.072Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/validation.ts",
+    "packages/shared/src/schemas/relationships.ts",
+    "packages/shared/src/types/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-005"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "SPIKE-003"
+    ],
+    "required-by": [
+      "TASK-039",
+      "TASK-040",
+      "TASK-044"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "validation",
+    "shared",
+    "scrum",
+    "waterfall",
+    "relationships"
+  ],
+  "commits": [],
+  "metadata": {}
+}

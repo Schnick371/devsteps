@@ -1,0 +1,42 @@
+{
+  "id": "EPIC-004",
+  "type": "epic",
+  "category": "general",
+  "title": "GitHub Publication Preparation - Legal Compliance and Repository Setup",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-23T16:40:59.062Z",
+  "updated": "2025-11-24T14:07:31.740Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-016",
+      "TASK-017",
+      "TASK-018",
+      "TASK-019",
+      "TASK-020",
+      "TASK-021",
+      "TASK-022",
+      "TASK-023",
+      "TASK-024"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-029",
+      "TASK-030"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

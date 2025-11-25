@@ -23,7 +23,7 @@ const buildOptions = {
     'node:*',
   ],
   banner: {
-    js: '// DevCrumbs MCP Server - bundled for VS Code Extension Host',
+    js: '// DevSteps MCP Server - bundled for VS Code Extension Host',
   },
   // Ignore dynamic require warnings - we only use static imports
   logOverride: {

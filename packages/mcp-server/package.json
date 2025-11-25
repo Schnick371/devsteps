@@ -1,17 +1,17 @@
 {
-  "name": "@schnick371/devcrumbs-mcp-server",
-  "version": "0.4.1",
+  "name": "@schnick371/devsteps-mcp-server",
+  "version": "0.5.0",
   "type": "module",
   "description": "Never Code Alone. MCP server for AI-assisted developer task tracking - team up with your AI.",
-  "author": "devcrumbs.com",
+  "author": "devsteps.dev",
   "license": "Apache-2.0",
-  "homepage": "https://devcrumbs.dev",
+  "homepage": "https://devsteps.dev",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Schnick371/devcrumbs.git"
+    "url": "git+https://github.com/Schnick371/devsteps.git"
   },
   "bugs": {
-    "url": "https://github.com/Schnick371/devcrumbs/issues"
+    "url": "https://github.com/Schnick371/devsteps/issues"
   },
   "keywords": [
     "mcp",
@@ -29,8 +29,8 @@
   ],
   "main": "./dist/index.js",
   "bin": {
-    "devcrumbs-mcp": "bin/devcrumbs-mcp-tsx.js",
-    "devcrumbs-mcp-tsx": "bin/devcrumbs-mcp-tsx.js"
+    "devsteps-mcp": "bin/devsteps-mcp-tsx.js",
+    "devsteps-mcp-tsx": "bin/devsteps-mcp-tsx.js"
   },
   "files": [
     "dist",
@@ -55,9 +55,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@devcrumbs/shared": "file:../shared",
+    "@schnick371/devsteps-shared": "file:../shared",
     "@modelcontextprotocol/sdk": "latest",
-    "@schnick371/devcrumbs-mcp-server": "^0.4.0",
     "commander": "^14.0.2",
     "express": "^4.19.2",
     "pino": "^10.1.0",

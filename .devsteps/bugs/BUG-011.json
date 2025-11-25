@@ -1,0 +1,38 @@
+{
+  "id": "BUG-011",
+  "type": "bug",
+  "category": "general",
+  "title": "CLI init missing workflow prompts and instructions deployment",
+  "status": "done",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-25T13:32:53.189Z",
+  "updated": "2025-11-25T13:36:06.547Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/init.ts",
+    "packages/mcp-server/src/handlers/devsteps-init.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cli",
+    "init",
+    "deployment",
+    "consistency",
+    "documentation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

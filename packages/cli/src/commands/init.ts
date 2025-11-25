@@ -1,8 +1,8 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { type Methodology, getCurrentTimestamp, getMethodologyConfig } from '@devcrumbs/shared';
-import type { DevCrumbsConfig } from '@devcrumbs/shared';
+import { type Methodology, getCurrentTimestamp, getMethodologyConfig } from '@schnick371/devsteps-shared';
+import type { DevStepsConfig } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 import ora from 'ora';
 
@@ -19,8 +19,8 @@ export async function initCommand(
 
   try {
     const projectPath = options.path || process.cwd();
-    const name = projectName || 'devcrumbs-project';
-    const devcrumbsDir = join(projectPath, '.devcrumbs');
+    const name = projectName || 'devsteps-project';
+    const devcrumbsDir = join(projectPath, '.devsteps');
     const methodology = options.methodology || 'scrum';
 
     // Check if already initialized
@@ -44,10 +44,10 @@ export async function initCommand(
     }
 
     // Create config
-    const config: DevCrumbsConfig = {
+    const config: DevStepsConfig = {
       version: '0.1.0',
       project_name: name,
-      project_id: `devcrumbs-${Date.now()}`,
+      project_id: `devsteps-${Date.now()}`,
       created: getCurrentTimestamp(),
       updated: getCurrentTimestamp(),
       settings: {
@@ -76,7 +76,7 @@ export async function initCommand(
     writeFileSync(join(devcrumbsDir, 'index.json'), JSON.stringify(index, null, 2));
 
     // Create .gitignore
-    const gitignore = `.devcrumbs/
+    const gitignore = `.devsteps/
 node_modules/
 dist/
 *.log
@@ -126,7 +126,7 @@ This checks:
 - Git availability
 - TypeScript (if used)
 - Dependencies installation
-- DevCrumbs project structure
+- DevSteps project structure
 - MCP configuration
 
 ### MCP Setup (AI Integration)
@@ -148,13 +148,13 @@ devcrumbs setup --global
 After setup:
 1. Restart your IDE completely
 2. Open Copilot/AI Chat
-3. Use devcrumbs tools: \`#devcrumbs-init\`, \`#devcrumbs-add\`, etc.
+3. Use devcrumbs tools: \`#devsteps-init\`, \`#devsteps-add\`, etc.
 
 ## Project Structure
 
 \`\`\`
 ${name}/
-├── .devcrumbs/          # DevCrumbs data directory
+├── .devsteps/          # DevSteps data directory
 │   ├── config.json   # Project configuration
 │   ├── index.json    # Master index
 │   ├── epics/        # Epic items
@@ -291,7 +291,7 @@ For issues and questions:
           },
         },
         {
-          label: 'DevCrumbs: List Open Items',
+          label: 'DevSteps: List Open Items',
           type: 'shell',
           command: 'node packages/cli/dist/index.js list --status draft,in-progress',
           presentation: {
@@ -300,7 +300,7 @@ For issues and questions:
           },
         },
         {
-          label: 'DevCrumbs: List High Priority Items',
+          label: 'DevSteps: List High Priority Items',
           type: 'shell',
           command: 'node packages/cli/dist/index.js list --priority high',
           presentation: {
@@ -309,7 +309,7 @@ For issues and questions:
           },
         },
         {
-          label: 'DevCrumbs: List Q1 Tasks (Urgent & Important)',
+          label: 'DevSteps: List Q1 Tasks (Urgent & Important)',
           type: 'shell',
           command:
             'node packages/cli/dist/index.js list --eisenhower urgent-important --status draft',
@@ -319,7 +319,7 @@ For issues and questions:
           },
         },
         {
-          label: 'DevCrumbs: Full Status Report',
+          label: 'DevSteps: Full Status Report',
           type: 'shell',
           command: 'node packages/cli/dist/index.js status',
           presentation: {
@@ -354,7 +354,7 @@ name: devcrumbs
 description: Task tracking with devcrumbs system - enforces structured documentation
 ---
 
-# 📋 DevCrumbs Task Tracking Mode
+# 📋 DevSteps Task Tracking Mode
 
 You are a **task management assistant** that helps users work with the devcrumbs system.
 
@@ -371,11 +371,11 @@ The devcrumbs system is a **lightweight, git-based task tracking system** design
 When in devcrumbs mode, you:
 
 ✅ **ALWAYS use devcrumbs tools** for task management:
-- Use \`#mcp_devcrumbs_devcrumbs-add\` to create new tasks
-- Use \`#mcp_devcrumbs_devcrumbs-update\` to modify existing tasks
-- Use \`#mcp_devcrumbs_devcrumbs-list\` to show tasks
-- Use \`#mcp_devcrumbs_devcrumbs-get\` to view task details
-- Use \`#mcp_devcrumbs_devcrumbs-status\` to show project overview
+- Use \`#mcp_devcrumbs_devsteps-add\` to create new tasks
+- Use \`#mcp_devcrumbs_devsteps-update\` to modify existing tasks
+- Use \`#mcp_devcrumbs_devsteps-list\` to show tasks
+- Use \`#mcp_devcrumbs_devsteps-get\` to view task details
+- Use \`#mcp_devcrumbs_devsteps-status\` to show project overview
 
 ✅ **Enforce structured task creation**:
 - Always ask for: title, type (task/bug/feature/story), priority
@@ -383,7 +383,7 @@ When in devcrumbs mode, you:
 - Suggest: Eisenhower quadrant classification for prioritization
 
 ✅ **Guide best practices**:
-- Link related tasks using \`#mcp_devcrumbs_devcrumbs-link\`
+- Link related tasks using \`#mcp_devcrumbs_devsteps-link\`
 - Keep tasks focused and atomic
 - Update task status as work progresses
 - Document decisions in task descriptions
@@ -399,7 +399,7 @@ When in devcrumbs mode, you:
 ### Creating a New Task
 \`\`\`
 User: "We need to add authentication"
-You: Use #mcp_devcrumbs_devcrumbs-add with:
+You: Use #mcp_devcrumbs_devsteps-add with:
 - title: "Implement user authentication"
 - type: "feature"
 - priority: "high"
@@ -410,7 +410,7 @@ You: Use #mcp_devcrumbs_devcrumbs-add with:
 ### Checking Current Work
 \`\`\`
 User: "What should I work on?"
-You: Use #mcp_devcrumbs_devcrumbs-list with filters:
+You: Use #mcp_devcrumbs_devsteps-list with filters:
 - status: "draft" or "planned"
 - priority: "high" or "critical"
 - Show tasks in priority order with context
@@ -419,7 +419,7 @@ You: Use #mcp_devcrumbs_devcrumbs-list with filters:
 ### Updating Progress
 \`\`\`
 User: "I finished the login feature"
-You: Use #mcp_devcrumbs_devcrumbs-update to:
+You: Use #mcp_devcrumbs_devsteps-update to:
 - Change status to "done"
 - Add completion notes
 - Suggest linking to related tasks
@@ -464,7 +464,7 @@ The devcrumbs system integrates with:
     writeFileSync(join(githubAgentsDir, 'devcrumbs.agent.md'), devcrumbsAgent);
 
     // Copy devcrumbs instructions
-    const instructionFiles = ['devcrumbs.instructions.md', 'devcrumbs-code-standards.instructions.md'];
+    const instructionFiles = ['devcrumbs.instructions.md', 'devsteps-code-standards.instructions.md'];
     for (const instructionFile of instructionFiles) {
       const instructionSource = join(sourceGithubDir, 'instructions', instructionFile);
       if (existsSync(instructionSource)) {
@@ -474,7 +474,7 @@ The devcrumbs system integrates with:
     }
 
     // Copy devcrumbs prompts
-    const promptFiles = ['devcrumbs-plan-work.prompt.md', 'devcrumbs-start-work.prompt.md', 'devcrumbs-workflow.prompt.md'];
+    const promptFiles = ['devsteps-plan-work.prompt.md', 'devsteps-start-work.prompt.md', 'devsteps-workflow.prompt.md'];
     for (const promptFile of promptFiles) {
       const promptSource = join(sourceGithubDir, 'prompts', promptFile);
       if (existsSync(promptSource)) {
@@ -497,10 +497,10 @@ The devcrumbs system integrates with:
     console.log(chalk.green('✓'), 'Copilot files:');
     console.log('      ', chalk.cyan('.github/agents/devcrumbs.agent.md'));
     console.log('      ', chalk.cyan('.github/instructions/devcrumbs.instructions.md'));
-    console.log('      ', chalk.cyan('.github/instructions/devcrumbs-code-standards.instructions.md'));
-    console.log('      ', chalk.cyan('.github/prompts/devcrumbs-plan-work.prompt.md'));
-    console.log('      ', chalk.cyan('.github/prompts/devcrumbs-start-work.prompt.md'));
-    console.log('      ', chalk.cyan('.github/prompts/devcrumbs-workflow.prompt.md'));
+    console.log('      ', chalk.cyan('.github/instructions/devsteps-code-standards.instructions.md'));
+    console.log('      ', chalk.cyan('.github/prompts/devsteps-plan-work.prompt.md'));
+    console.log('      ', chalk.cyan('.github/prompts/devsteps-start-work.prompt.md'));
+    console.log('      ', chalk.cyan('.github/prompts/devsteps-workflow.prompt.md'));
 
     if (options.author) {
       console.log(chalk.green('✓'), 'Default author:', chalk.cyan(options.author));

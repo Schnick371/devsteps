@@ -1,0 +1,47 @@
+{
+  "id": "TASK-037",
+  "type": "task",
+  "category": "VS Code Extension",
+  "title": "TreeView: Persist state across VS Code sessions",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-24T17:39:41.001Z",
+  "updated": "2025-11-24T21:12:21.400Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/vscode-extension/src/treeView/devstepsTreeDataProvider.ts",
+    "packages/vscode-extension/src/extension.ts",
+    "packages/vscode-extension/src/utils/stateManager.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "BUG-007",
+      "TASK-034",
+      "TASK-048"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "TASK-043"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ux",
+    "treeview",
+    "persistence",
+    "state-management",
+    "memento"
+  ],
+  "commits": [],
+  "metadata": {}
+}

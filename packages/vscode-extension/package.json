@@ -1,11 +1,11 @@
 {
-  "name": "devcrumbs-vscode",
-  "displayName": "DevCrumbs",
+  "name": "devsteps-vscode",
+  "displayName": "DevSteps",
   "description": "Never Code Alone. Team Up With Your AI.",
   "version": "0.4.4",
-  "publisher": "devcrumbs",
+  "publisher": "devsteps",
   "license": "Apache-2.0",
-  "author": "Thomas Hertel (the@devcrumbs.dev)",
+  "author": "Thomas Hertel (the@devsteps.dev)",
   "engines": {
     "vscode": "^1.95.0"
   },
@@ -27,8 +27,8 @@
   "contributes": {
     "mcpServerDefinitionProviders": [
       {
-        "id": "devcrumbs-mcp",
-        "label": "DevCrumbs MCP Server"
+        "id": "devsteps-mcp",
+        "label": "DevSteps MCP Server"
       }
     ],
     "viewsContainers": {
@@ -443,7 +443,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@devcrumbs/shared": "file:../shared",
+    "@schnick371/devcrumbs-shared": "file:../shared",
     "chart.js": "^4.5.1",
     "d3": "^7.9.0"
   },

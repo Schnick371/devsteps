@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import type { DevCrumbsIndex, ItemStatus } from '../schemas/index.js';
+import type { DevStepsIndex, ItemStatus } from '../schemas/index.js';
 import { TYPE_TO_DIRECTORY, getCurrentTimestamp, parseItemId } from '../utils/index.js';
 
 export interface ArchiveItemResult {
@@ -14,7 +14,7 @@ export interface ArchiveItemResult {
  */
 export async function archiveItem(devcrumbsDir: string, itemId: string): Promise<ArchiveItemResult> {
   if (!existsSync(devcrumbsDir)) {
-    throw new Error('Project not initialized. Run devcrumbs-init first.');
+    throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
   const parsed = parseItemId(itemId);
@@ -49,7 +49,7 @@ export async function archiveItem(devcrumbsDir: string, itemId: string): Promise
 
   // Update index
   const indexPath = join(devcrumbsDir, 'index.json');
-  const index: DevCrumbsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
+  const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
   // Remove from items
   const itemIndex = index.items.findIndex((i) => i.id === itemId);
@@ -107,11 +107,11 @@ export async function purgeItems(
   args: PurgeItemsArgs = {}
 ): Promise<PurgeItemsResult> {
   if (!existsSync(devcrumbsDir)) {
-    throw new Error('Project not initialized. Run devcrumbs-init first.');
+    throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
   const indexPath = join(devcrumbsDir, 'index.json');
-  const index: DevCrumbsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
+  const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
   // Find items to archive
   let itemsToArchive = [...index.items];

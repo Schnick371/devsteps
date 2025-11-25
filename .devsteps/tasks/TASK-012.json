@@ -1,0 +1,41 @@
+{
+  "id": "TASK-012",
+  "type": "task",
+  "category": "vscode",
+  "title": "Settings UI - Configurable Extension Behavior",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-23T16:23:17.409Z",
+  "updated": "2025-11-24T11:57:18.105Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/vscode-extension/package.json",
+    "packages/vscode-extension/src/settings.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "BUG-005"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "settings",
+    "configuration",
+    "ui"
+  ],
+  "commits": [],
+  "metadata": {}
+}

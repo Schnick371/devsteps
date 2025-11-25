@@ -5,7 +5,7 @@
 
 import * as vscode from 'vscode';
 import * as path from 'node:path';
-import { addItem, getItem, updateItem, listItems } from '@devcrumbs/shared';
+import { addItem, getItem, updateItem, listItems } from '@schnick371/devcrumbs-shared';
 import type { DevCrumbsTreeDataProvider } from '../treeView/devcrumbsTreeDataProvider.js';
 import { DashboardPanel } from '../webview/dashboardPanel.js';
 import { logger } from '../outputChannel.js';
@@ -71,8 +71,7 @@ export function registerCommands(
         `Initialize DevCrumbs project "${projectName}" with ${methodology.label} methodology?`,
         { modal: true },
         'Use Copilot Chat',
-        'Use CLI',
-        'Cancel',
+        'Use CLI'
       );
 
       if (choice === 'Use Copilot Chat') {
@@ -81,14 +80,19 @@ export function registerCommands(
           query: `@devcrumbs #mcp_devcrumbs_devcrumbs-init ${projectName} --methodology ${methodology.value}`,
         });
       } else if (choice === 'Use CLI') {
-        // Open terminal and run CLI command
+        // Check if CLI is installed
         const terminal = vscode.window.createTerminal('DevCrumbs Init');
         terminal.show();
-        terminal.sendText(`devcrumbs init ${projectName} --methodology ${methodology.value}`);
         
-        vscode.window.showInformationMessage(
-          'Run the command in the terminal to initialize the project.',
-        );
+        // Try to detect CLI: global install or workspace
+        terminal.sendText('if command -v devcrumbs &> /dev/null; then');
+        terminal.sendText(`  devcrumbs init ${projectName} --methodology ${methodology.value}`);
+        terminal.sendText('else');
+        terminal.sendText('  echo "📦 DevCrumbs CLI not found. Installing globally..."');
+        terminal.sendText('  npm install -g @schnick371/devcrumbs-cli');
+        terminal.sendText('  echo "✅ Installation complete. Running init..."');
+        terminal.sendText(`  devcrumbs init ${projectName} --methodology ${methodology.value}`);
+        terminal.sendText('fi');
       }
     }),
   );

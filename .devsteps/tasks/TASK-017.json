@@ -1,0 +1,40 @@
+{
+  "id": "TASK-017",
+  "type": "task",
+  "category": "general",
+  "title": "README.md Enhancement - Legal Compliance and Attribution",
+  "status": "done",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-23T16:42:18.041Z",
+  "updated": "2025-11-23T17:44:16.121Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "README.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-004"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "TASK-024"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-016",
+      "TASK-018",
+      "TASK-019",
+      "TASK-020"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

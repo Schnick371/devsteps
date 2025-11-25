@@ -1,16 +1,16 @@
 ---
 applyTo: "**"
-description: "DevCrumbs workflow and work item tracking"
+description: "DevSteps workflow and work item tracking"
 ---
 
-# DevCrumbs Workflow Standards
+# DevSteps Workflow Standards
 
-## DevCrumbs File Protection
+## DevSteps File Protection
 
-**NEVER edit `.devcrumbs/` files directly:**
-- ❌ Manual JSON/MD edits in `.devcrumbs/` directory
-- ✅ Use devcrumbs CLI: `devcrumbs add`, `devcrumbs update`, `devcrumbs link`
-- ✅ Use MCP tools: `#mcp_devcrumbs_devcrumbs-add`, `#mcp_devcrumbs_devcrumbs-update`
+**NEVER edit `.devsteps/` files directly:**
+- ❌ Manual JSON/MD edits in `.devsteps/` directory
+- ✅ Use devsteps CLI: `devsteps add`, `devsteps update`, `devsteps link`
+- ✅ Use MCP tools: `#mcp_devsteps_devsteps-add`, `#mcp_devsteps_devsteps-update`
 
 **Why:** Ensures index consistency, maintains traceability, prevents corruption.
 
@@ -18,12 +18,12 @@ description: "DevCrumbs workflow and work item tracking"
 
 **Before starting work:**
 ```
-#mcp_devcrumbs_devcrumbs-update <ID> --status in-progress
+#mcp_devsteps_devsteps-update <ID> --status in-progress
 ```
 
 **After validation/testing:**
 ```
-#mcp_devcrumbs_devcrumbs-update <ID> --status done
+#mcp_devsteps_devsteps-update <ID> --status done
 ```
 
 **NEVER skip status updates** - Tracking mandatory for traceability.
@@ -54,7 +54,7 @@ description: "DevCrumbs workflow and work item tracking"
 ## Prohibited Practices
 
 **Never:**
-- Edit `.devcrumbs/` files manually (use CLI/MCP only)
+- Edit `.devsteps/` files manually (use CLI/MCP only)
 - Skip status updates (in-progress/done tracking)
 - Proceed with failing tests or errors
 - Batch multiple work items in one commit
@@ -62,4 +62,4 @@ description: "DevCrumbs workflow and work item tracking"
 
 ---
 
-**Workflow:** See `devcrumbs-start-work.prompt.md` for implementation steps.
+**Workflow:** See `devsteps-start-work.prompt.md` for implementation steps.

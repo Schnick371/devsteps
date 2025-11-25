@@ -5,13 +5,13 @@ import {
   bulkAddTags,
   bulkRemoveTags,
   bulkUpdateItems,
-} from '@devcrumbs/shared';
-import type { ItemMetadata } from '@devcrumbs/shared';
+} from '@schnick371/devsteps-shared';
+import type { ItemMetadata } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 import ora from 'ora';
 
-function getDevCrumbsDir(): string {
-  const dir = join(process.cwd(), '.devcrumbs');
+function getDevStepsDir(): string {
+  const dir = join(process.cwd(), '.devsteps');
   if (!existsSync(dir)) {
     console.error(
       chalk.red('Error:'),
@@ -56,7 +56,7 @@ export async function bulkUpdateCommand(itemIds: string[], options: any) {
   const spinner = ora(`Updating ${itemIds.length} item(s)...`).start();
 
   try {
-    const devcrumbsDir = getDevCrumbsDir();
+    const devcrumbsDir = getDevStepsDir();
 
     const updates: Partial<ItemMetadata> = {};
     if (options.status) updates.status = options.status;
@@ -84,7 +84,7 @@ export async function bulkTagAddCommand(itemIds: string[], tags: string[]) {
   const spinner = ora(`Adding tags to ${itemIds.length} item(s)...`).start();
 
   try {
-    const devcrumbsDir = getDevCrumbsDir();
+    const devcrumbsDir = getDevStepsDir();
     const result = await bulkAddTags(devcrumbsDir, itemIds, tags);
 
     spinner.stop();
@@ -105,7 +105,7 @@ export async function bulkTagRemoveCommand(itemIds: string[], tags: string[]) {
   const spinner = ora(`Removing tags from ${itemIds.length} item(s)...`).start();
 
   try {
-    const devcrumbsDir = getDevCrumbsDir();
+    const devcrumbsDir = getDevStepsDir();
     const result = await bulkRemoveTags(devcrumbsDir, itemIds, tags);
 
     spinner.stop();

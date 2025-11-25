@@ -1,4 +1,4 @@
-# DevCrumbs MCP Server
+# DevSteps MCP Server
 
 > **Never Code Alone - Team Up With Your AI**
 
@@ -24,11 +24,11 @@ No installation required - use directly with `npx`:
 ```json
 {
   "mcpServers": {
-    "devcrumbs": {
+    "devsteps": {
       "command": "npx",
       "args": [
         "-y",
-        "@schnick371/devcrumbs-mcp-server"
+        "@schnick371/devsteps-mcp-server"
       ]
     }
   }
@@ -38,7 +38,7 @@ No installation required - use directly with `npx`:
 ### Global Installation
 
 ```bash
-npm install -g @schnick371/devcrumbs-mcp-server
+npm install -g @schnick371/devsteps-mcp-server
 ```
 
 ## Usage with Claude Desktop
@@ -52,11 +52,11 @@ Add this configuration to your `claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {
-    "devcrumbs": {
+    "devsteps": {
       "command": "npx",
       "args": [
         "-y",
-        "@schnick371/devcrumbs-mcp-server"
+        "@schnick371/devsteps-mcp-server"
       ]
     }
   }
@@ -66,7 +66,7 @@ Add this configuration to your `claude_desktop_config.json`:
 After adding the configuration:
 1. Restart Claude Desktop
 2. Look for the 🔌 icon in the chat interface
-3. Click to see available DevCrumbs tools
+3. Click to see available DevSteps tools
 
 ## Usage with VS Code (Copilot)
 
@@ -81,11 +81,11 @@ Create `.vscode/mcp.json` in your workspace
 ```json
 {
   "servers": {
-    "devcrumbs": {
+    "devsteps": {
       "command": "npx",
       "args": [
         "-y",
-        "@schnick371/devcrumbs-mcp-server"
+        "@schnick371/devsteps-mcp-server"
       ]
     }
   }
@@ -97,46 +97,46 @@ Create `.vscode/mcp.json` in your workspace
 The MCP server provides these tools to AI assistants:
 
 ### Work Item Management
-- `devcrumbs-init` - Initialize a new DevCrumbs project
-- `devcrumbs-add` - Create new work items (epic/story/task/bug/spike/test)
-- `devcrumbs-update` - Update work item status, priority, assignee, etc.
-- `devcrumbs-get` - Retrieve detailed work item information
-- `devcrumbs-list` - List work items with filters
-- `devcrumbs-search` - Full-text search across all items
+- `devsteps-init` - Initialize a new DevSteps project
+- `devsteps-add` - Create new work items (epic/story/task/bug/spike/test)
+- `devsteps-update` - Update work item status, priority, assignee, etc.
+- `devsteps-get` - Retrieve detailed work item information
+- `devsteps-list` - List work items with filters
+- `devsteps-search` - Full-text search across all items
 
 ### Traceability & Relationships
-- `devcrumbs-link` - Create relationships between items
-- `devcrumbs-trace` - Show complete traceability tree
+- `devsteps-link` - Create relationships between items
+- `devsteps-trace` - Show complete traceability tree
 
 ### Project Management
-- `devcrumbs-status` - Get project overview with statistics
-- `devcrumbs-context` - Generate AI-optimized project context
-- `devcrumbs-export` - Export project data (Markdown/JSON/HTML)
+- `devsteps-status` - Get project overview with statistics
+- `devsteps-context` - Generate AI-optimized project context
+- `devsteps-export` - Export project data (Markdown/JSON/HTML)
 
 ### Archival & Maintenance
-- `devcrumbs-archive` - Archive single items
-- `devcrumbs-purge` - Bulk archive completed items
+- `devsteps-archive` - Archive single items
+- `devsteps-purge` - Bulk archive completed items
 
 ### Monitoring
-- `devcrumbs-health` - Server health status
-- `devcrumbs-metrics` - Prometheus metrics
+- `devsteps-health` - Server health status
+- `devsteps-metrics` - Prometheus metrics
 
 ## Quick Start Example
 
 After connecting your AI assistant:
 
 ```
-You: Initialize a new DevCrumbs project called "MyApp"
+You: Initialize a new DevSteps project called "MyApp"
 
-AI: [Uses devcrumbs-init to create project]
+AI: [Uses devsteps-init to create project]
 
 You: Create a story for implementing user authentication
 
-AI: [Uses devcrumbs-add to create STORY-001]
+AI: [Uses devsteps-add to create STORY-001]
 
 You: What's our project status?
 
-AI: [Uses devcrumbs-status to show overview]
+AI: [Uses devsteps-status to show overview]
 ```
 
 ## Work Item Types
@@ -165,7 +165,7 @@ AI: [Uses devcrumbs-status to show overview]
 ## Project Structure
 
 ```
-.devcrumbs/
+.devsteps/
 ├── config.json              # Project configuration
 ├── index.json               # Work item index
 ├── items/                   # Work items (JSON + MD)
@@ -181,7 +181,7 @@ AI: [Uses devcrumbs-status to show overview]
 For advanced use cases, run as HTTP server:
 
 ```bash
-npx @schnick371/devcrumbs-mcp-server --http --port 3000
+npx @schnick371/devsteps-mcp-server --http --port 3000
 ```
 
 Access health endpoint: `http://localhost:3000/health`  
@@ -189,7 +189,7 @@ Access metrics endpoint: `http://localhost:3000/metrics`
 
 ## Configuration
 
-The server reads from `.devcrumbs/config.json`:
+The server reads from `.devsteps/config.json`:
 
 ```json
 {
@@ -222,7 +222,7 @@ The server reads from `.devcrumbs/config.json`:
 
 ### Permission errors
 
-Ensure the server has write access to the `.devcrumbs/` directory.
+Ensure the server has write access to the `.devsteps/` directory.
 
 ### Network issues
 
@@ -234,10 +234,10 @@ Apache-2.0
 
 ## Links
 
-- **Website**: [devcrumbs.dev](https://devcrumbs.dev)
-- **GitHub**: [github.com/Schnick371/devcrumbs](https://github.com/Schnick371/devcrumbs)
-- **Issues**: [github.com/Schnick371/devcrumbs/issues](https://github.com/Schnick371/devcrumbs/issues)
-- **npm Package**: [@schnick371/devcrumbs-mcp-server](https://www.npmjs.com/package/@schnick371/devcrumbs-mcp-server)
+- **Website**: [devsteps.dev](https://devsteps.dev)
+- **GitHub**: [github.com/Schnick371/devsteps](https://github.com/Schnick371/devsteps)
+- **Issues**: [github.com/Schnick371/devsteps/issues](https://github.com/Schnick371/devsteps/issues)
+- **npm Package**: [@schnick371/devsteps-mcp-server](https://www.npmjs.com/package/@schnick371/devsteps-mcp-server)
 
 ## Contributing
 

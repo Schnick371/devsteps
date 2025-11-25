@@ -1,6 +1,6 @@
 # Production Deployment Guide
 
-Comprehensive guide for deploying the DevCrumbs MCP server to production environments using Docker and Kubernetes.
+Comprehensive guide for deploying the DevSteps MCP server to production environments using Docker and Kubernetes.
 
 ## Table of Contents
 
@@ -32,7 +32,7 @@ Comprehensive guide for deploying the DevCrumbs MCP server to production environ
 
 **Multi-stage build for optimized production image:**
 ```bash
-docker build -t devcrumbs-mcp-server:latest .
+docker build -t devsteps-mcp-server:latest .
 ```
 
 **With build arguments:**
@@ -40,7 +40,7 @@ docker build -t devcrumbs-mcp-server:latest .
 docker build \
   --build-arg NODE_VERSION=22 \
   --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
-  -t devcrumbs-mcp-server:v1.0.0 \
+  -t devsteps-mcp-server:v1.0.0 \
   .
 ```
 
@@ -56,16 +56,16 @@ docker build \
 docker run --rm -it \
   -e NODE_ENV=production \
   -e LOG_LEVEL=info \
-  devcrumbs-mcp-server:latest
+  devsteps-mcp-server:latest
 ```
 
 **With volume mount for data persistence:**
 ```bash
 docker run --rm -it \
-  -v $(pwd)/.devcrumbs:/app/.devcrumbs \
+  -v $(pwd)/.devsteps:/app/.devsteps \
   -e NODE_ENV=production \
   -e LOG_LEVEL=debug \
-  devcrumbs-mcp-server:latest
+  devsteps-mcp-server:latest
 ```
 
 **With resource limits:**
@@ -74,7 +74,7 @@ docker run --rm -it \
   --memory="512m" \
   --cpus="0.5" \
   -e NODE_ENV=production \
-  devcrumbs-mcp-server:latest
+  devsteps-mcp-server:latest
 ```
 
 ### Docker Compose
@@ -82,14 +82,14 @@ docker run --rm -it \
 ```yaml
 services:
   mcp-server:
-    image: devcrumbs-mcp-server:latest
-    container_name: devcrumbs-mcp
+    image: devsteps-mcp-server:latest
+    container_name: devsteps-mcp
     restart: unless-stopped
     environment:
       NODE_ENV: production
       LOG_LEVEL: info
     volumes:
-      - ./data:/app/.devcrumbs
+      - ./data:/app/.devsteps
     deploy:
       resources:
         limits:
@@ -109,15 +109,15 @@ services:
 
 **Docker Hub:**
 ```bash
-docker tag devcrumbs-mcp-server:latest username/devcrumbs-mcp-server:v1.0.0
-docker push username/devcrumbs-mcp-server:v1.0.0
+docker tag devsteps-mcp-server:latest username/devsteps-mcp-server:v1.0.0
+docker push username/devsteps-mcp-server:v1.0.0
 ```
 
 **GitHub Container Registry:**
 ```bash
-docker tag devcrumbs-mcp-server:latest ghcr.io/username/devcrumbs-mcp-server:v1.0.0
+docker tag devsteps-mcp-server:latest ghcr.io/username/devsteps-mcp-server:v1.0.0
 echo $GITHUB_TOKEN | docker login ghcr.io -u username --password-stdin
-docker push ghcr.io/username/devcrumbs-mcp-server:v1.0.0
+docker push ghcr.io/username/devsteps-mcp-server:v1.0.0
 ```
 
 ## Kubernetes Deployment
@@ -126,8 +126,8 @@ docker push ghcr.io/username/devcrumbs-mcp-server:v1.0.0
 
 **1. Create namespace:**
 ```bash
-kubectl create namespace devcrumbs
-kubectl config set-context --current --namespace=devcrumbs
+kubectl create namespace devsteps
+kubectl config set-context --current --namespace=devsteps
 ```
 
 **2. Apply manifests:**
@@ -205,8 +205,8 @@ limits:
 
 **View HPA status:**
 ```bash
-kubectl get hpa devcrumbs-mcp-server-hpa
-kubectl describe hpa devcrumbs-mcp-server-hpa
+kubectl get hpa devsteps-mcp-server-hpa
+kubectl describe hpa devsteps-mcp-server-hpa
 ```
 
 ### Persistent Storage
@@ -221,7 +221,7 @@ kubectl describe hpa devcrumbs-mcp-server-hpa
 **Check storage:**
 ```bash
 kubectl get pvc
-kubectl describe pvc devcrumbs-data-pvc
+kubectl describe pvc devsteps-data-pvc
 ```
 
 ## Configuration
@@ -239,19 +239,19 @@ kubectl describe pvc devcrumbs-data-pvc
 
 **Update configuration:**
 ```bash
-kubectl edit configmap devcrumbs-mcp-config
+kubectl edit configmap devsteps-mcp-config
 ```
 
 **Apply changes** (requires pod restart):
 ```bash
-kubectl rollout restart deployment/devcrumbs-mcp-server
+kubectl rollout restart deployment/devsteps-mcp-server
 ```
 
 ### Secrets Management
 
 For sensitive data (API keys, credentials):
 ```bash
-kubectl create secret generic devcrumbs-secrets \
+kubectl create secret generic devsteps-secrets \
   --from-literal=api-key=your-secret-key
 ```
 
@@ -261,7 +261,7 @@ env:
 - name: API_KEY
   valueFrom:
     secretKeyRef:
-      name: devcrumbs-secrets
+      name: devsteps-secrets
       key: api-key
 ```
 
@@ -277,15 +277,15 @@ env:
 **Manual Prometheus config:**
 ```yaml
 scrape_configs:
-- job_name: 'devcrumbs-mcp-server'
+- job_name: 'devsteps-mcp-server'
   kubernetes_sd_configs:
   - role: pod
     namespaces:
       names:
-      - devcrumbs
+      - devsteps
   relabel_configs:
   - source_labels: [__meta_kubernetes_pod_label_app]
-    regex: devcrumbs-mcp-server
+    regex: devsteps-mcp-server
     action: keep
 ```
 
@@ -306,13 +306,13 @@ scrape_configs:
 **View logs:**
 ```bash
 # All pods
-kubectl logs -l app=devcrumbs-mcp-server --tail=100 -f
+kubectl logs -l app=devsteps-mcp-server --tail=100 -f
 
 # Specific pod
-kubectl logs devcrumbs-mcp-server-xxxxx-yyyyy -f
+kubectl logs devsteps-mcp-server-xxxxx-yyyyy -f
 
 # Previous container (after crash)
-kubectl logs devcrumbs-mcp-server-xxxxx-yyyyy --previous
+kubectl logs devsteps-mcp-server-xxxxx-yyyyy --previous
 ```
 
 **Centralized logging:**
@@ -327,12 +327,12 @@ kubectl logs devcrumbs-mcp-server-xxxxx-yyyyy --previous
 
 **Scale deployment:**
 ```bash
-kubectl scale deployment devcrumbs-mcp-server --replicas=5
+kubectl scale deployment devsteps-mcp-server --replicas=5
 ```
 
 **Scale HPA range:**
 ```bash
-kubectl patch hpa devcrumbs-mcp-server-hpa --patch '{"spec":{"maxReplicas":15}}'
+kubectl patch hpa devsteps-mcp-server-hpa --patch '{"spec":{"maxReplicas":15}}'
 ```
 
 ### Autoscaling Best Practices
@@ -360,7 +360,7 @@ export let options = {
 export default function () {
   // Call MCP server via kubectl exec
   const result = exec.command('kubectl', [
-    'exec', 'deployment/devcrumbs-mcp-server', '--',
+    'exec', 'deployment/devsteps-mcp-server', '--',
     'node', '-e', 'console.log("test")'
   ]);
   
@@ -379,7 +379,7 @@ export default function () {
 **Check pod status:**
 ```bash
 kubectl get pods
-kubectl describe pod devcrumbs-mcp-server-xxxxx-yyyyy
+kubectl describe pod devsteps-mcp-server-xxxxx-yyyyy
 ```
 
 **Common causes:**
@@ -407,24 +407,24 @@ kubectl top pods
 ```bash
 kubectl run -it --rm debug --image=alpine --restart=Never -- sh
 # Inside pod:
-wget -O- http://devcrumbs-mcp-server:8080/health
+wget -O- http://devsteps-mcp-server:8080/health
 ```
 
 **Check service endpoints:**
 ```bash
-kubectl get endpoints devcrumbs-mcp-server
+kubectl get endpoints devsteps-mcp-server
 ```
 
 ### Debugging Tools
 
 **Interactive shell in pod:**
 ```bash
-kubectl exec -it devcrumbs-mcp-server-xxxxx-yyyyy -- sh
+kubectl exec -it devsteps-mcp-server-xxxxx-yyyyy -- sh
 ```
 
 **Port forwarding:**
 ```bash
-kubectl port-forward deployment/devcrumbs-mcp-server 8080:8080
+kubectl port-forward deployment/devsteps-mcp-server 8080:8080
 ```
 
 **Event monitoring:**
@@ -436,15 +436,15 @@ kubectl get events --sort-by='.lastTimestamp'
 
 **Manual health check:**
 ```bash
-kubectl exec deployment/devcrumbs-mcp-server -- node -e "
-  const handler = require('./dist/handlers/devcrumbs-health.js');
+kubectl exec deployment/devsteps-mcp-server -- node -e "
+  const handler = require('./dist/handlers/devsteps-health.js');
   handler.healthHandler().then(console.log);
 "
 ```
 
 **Metrics check:**
 ```bash
-kubectl exec deployment/devcrumbs-mcp-server -- node -e "
+kubectl exec deployment/devsteps-mcp-server -- node -e "
   const metrics = require('./dist/metrics.js');
   metrics.getMetricsJSON().then(m => console.log(JSON.stringify(m, null, 2)));
 "
@@ -466,11 +466,11 @@ kubectl exec deployment/devcrumbs-mcp-server -- node -e "
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: devcrumbs-mcp-server-netpol
+  name: devsteps-mcp-server-netpol
 spec:
   podSelector:
     matchLabels:
-      app: devcrumbs-mcp-server
+      app: devsteps-mcp-server
   policyTypes:
   - Ingress
   ingress:
@@ -490,12 +490,12 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: devcrumbs-mcp-server-sa
+  name: devsteps-mcp-server-sa
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: devcrumbs-mcp-server-role
+  name: devsteps-mcp-server-role
 rules:
 - apiGroups: [""]
   resources: ["configmaps"]
@@ -504,14 +504,14 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: devcrumbs-mcp-server-rolebinding
+  name: devsteps-mcp-server-rolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: devcrumbs-mcp-server-role
+  name: devsteps-mcp-server-role
 subjects:
 - kind: ServiceAccount
-  name: devcrumbs-mcp-server-sa
+  name: devsteps-mcp-server-sa
 ```
 
 ## CI/CD Integration
@@ -532,19 +532,19 @@ jobs:
     - uses: actions/checkout@v4
     
     - name: Build Docker image
-      run: docker build -t devcrumbs-mcp-server:${{ github.sha }} .
+      run: docker build -t devsteps-mcp-server:${{ github.sha }} .
     
     - name: Push to registry
       run: |
         echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-        docker tag devcrumbs-mcp-server:${{ github.sha }} ghcr.io/${{ github.repository }}:${{ github.sha }}
+        docker tag devsteps-mcp-server:${{ github.sha }} ghcr.io/${{ github.repository }}:${{ github.sha }}
         docker push ghcr.io/${{ github.repository }}:${{ github.sha }}
     
     - name: Deploy to Kubernetes
       run: |
-        kubectl set image deployment/devcrumbs-mcp-server \
+        kubectl set image deployment/devsteps-mcp-server \
           mcp-server=ghcr.io/${{ github.repository }}:${{ github.sha }}
-        kubectl rollout status deployment/devcrumbs-mcp-server
+        kubectl rollout status deployment/devsteps-mcp-server
 ```
 
 ## Performance Tuning

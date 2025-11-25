@@ -157,7 +157,7 @@ export async function setupCommand(options: { tool?: string; global?: boolean })
     if (ide === 'vscode') {
       console.log('  1. Restart VS Code completely (Cmd/Ctrl+Q, then reopen)');
       console.log('  2. Open Copilot Chat (Cmd/Ctrl+Shift+I)');
-      console.log('  3. Use devcrumbs tools: @workspace #devcrumbs-init');
+      console.log('  3. Use devcrumbs tools: @workspace #devsteps-init');
     } else if (ide === 'cursor') {
       console.log('  1. Restart Cursor completely');
       console.log('  2. Open AI Chat');

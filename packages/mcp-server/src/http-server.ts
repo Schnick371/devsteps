@@ -1,12 +1,12 @@
 /**
  * HTTP Server for MCP - Simplified implementation
- * Reuses existing DevCrumbsServer from index.ts with HTTP wrapper
+ * Reuses existing DevStepsServer from index.ts with HTTP wrapper
  */
 
 import type { Request, Response } from 'express';
 import { logger } from './logger.js';
 
-// We'll import the DevCrumbsServer class after refactoring index.ts
+// We'll import the DevStepsServer class after refactoring index.ts
 // For now, create a minimal HTTP wrapper
 
 interface McpJsonRpcRequest {
@@ -69,38 +69,38 @@ export async function startHttpMcpServer(
   const tools = await import('./tools/index.js');
   
   // Import handlers directly
-  const initHandler = (await import('./handlers/devcrumbs-init.js')).default;
-  const addHandler = (await import('./handlers/devcrumbs-add.js')).default;
-  const updateHandler = (await import('./handlers/devcrumbs-update.js')).default;
-  const listHandler = (await import('./handlers/devcrumbs-list.js')).default;
-  const getHandler = (await import('./handlers/devcrumbs-get.js')).default;
-  const searchHandler = (await import('./handlers/devcrumbs-search.js')).default;
-  const statusHandler = (await import('./handlers/devcrumbs-status.js')).default;
-  const linkHandler = (await import('./handlers/devcrumbs-link.js')).default;
-  const archiveHandler = (await import('./handlers/devcrumbs-archive.js')).default;
-  const exportHandler = (await import('./handlers/devcrumbs-export.js')).default;
-  const purgeHandler = (await import('./handlers/devcrumbs-purge.js')).default;
-  const traceHandler = (await import('./handlers/devcrumbs-trace.js')).default;
-  const contextHandler = (await import('./handlers/devcrumbs-context.js')).default;
-  const metricsHandler = (await import('./handlers/devcrumbs-metrics.js')).default;
-  const healthHandler = (await import('./handlers/devcrumbs-health.js')).default;
+  const initHandler = (await import('./handlers/devsteps-init.js')).default;
+  const addHandler = (await import('./handlers/devsteps-add.js')).default;
+  const updateHandler = (await import('./handlers/devsteps-update.js')).default;
+  const listHandler = (await import('./handlers/devsteps-list.js')).default;
+  const getHandler = (await import('./handlers/devsteps-get.js')).default;
+  const searchHandler = (await import('./handlers/devsteps-search.js')).default;
+  const statusHandler = (await import('./handlers/devsteps-status.js')).default;
+  const linkHandler = (await import('./handlers/devsteps-link.js')).default;
+  const archiveHandler = (await import('./handlers/devsteps-archive.js')).default;
+  const exportHandler = (await import('./handlers/devsteps-export.js')).default;
+  const purgeHandler = (await import('./handlers/devsteps-purge.js')).default;
+  const traceHandler = (await import('./handlers/devsteps-trace.js')).default;
+  const contextHandler = (await import('./handlers/devsteps-context.js')).default;
+  const metricsHandler = (await import('./handlers/devsteps-metrics.js')).default;
+  const healthHandler = (await import('./handlers/devsteps-health.js')).default;
 
   // Map of tool name to handler
   const toolHandlers = new Map<string, (args: any) => Promise<any>>([
-    ['devcrumbs-init', initHandler],
-    ['devcrumbs-add', addHandler],
-    ['devcrumbs-update', updateHandler],
-    ['devcrumbs-list', listHandler],
-    ['devcrumbs-get', getHandler],
-    ['devcrumbs-search', searchHandler],
-    ['devcrumbs-status', statusHandler],
-    ['devcrumbs-link', linkHandler],
-    ['devcrumbs-archive', archiveHandler],
-    ['devcrumbs-export', exportHandler],
-    ['devcrumbs-purge', purgeHandler],
-    ['devcrumbs-trace', traceHandler],
-    ['devcrumbs-context', contextHandler],
-    ['devcrumbs-metrics', metricsHandler],
+    ['devsteps-init', initHandler],
+    ['devsteps-add', addHandler],
+    ['devsteps-update', updateHandler],
+    ['devsteps-list', listHandler],
+    ['devsteps-get', getHandler],
+    ['devsteps-search', searchHandler],
+    ['devsteps-status', statusHandler],
+    ['devsteps-link', linkHandler],
+    ['devsteps-archive', archiveHandler],
+    ['devsteps-export', exportHandler],
+    ['devsteps-purge', purgeHandler],
+    ['devsteps-trace', traceHandler],
+    ['devsteps-context', contextHandler],
+    ['devsteps-metrics', metricsHandler],
     ['health-check', healthHandler],
   ]);
 
@@ -143,7 +143,7 @@ export async function startHttpMcpServer(
               tools: {},
             },
             serverInfo: {
-              name: 'devcrumbs-mcp-server',
+              name: 'devsteps-mcp-server',
               version: '0.1.0',
             },
           },

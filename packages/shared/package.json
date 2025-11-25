@@ -1,8 +1,26 @@
 {
-  "name": "@devcrumbs/shared",
-  "version": "0.4.0",
+  "name": "@schnick371/devsteps-shared",
+  "version": "0.5.0",
   "license": "Apache-2.0",
-  "description": "Never Code Alone. Shared types, schemas, and utilities for DevCrumbs task tracking.",
+  "description": "Never Code Alone. Shared types, schemas, and utilities for DevSteps task tracking.",
+  "author": "Thomas Hertel <thomas.hantke@devsteps.dev>",
+  "homepage": "https://devsteps.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Schnick371/devsteps.git",
+    "directory": "packages/shared"
+  },
+  "bugs": {
+    "url": "https://github.com/Schnick371/devsteps/issues"
+  },
+  "keywords": [
+    "devsteps",
+    "task-tracking",
+    "project-management",
+    "agile",
+    "scrum",
+    "waterfall"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -20,7 +38,12 @@
       "default": "./dist/types/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE.md"
+  ],
   "publishConfig": {
     "access": "public"
   },

@@ -15,7 +15,7 @@ export const register = new Registry();
 
 // Default labels for all metrics
 register.setDefaultLabels({
-  service: 'devcrumbs-mcp-server',
+  service: 'devsteps-mcp-server',
   version: '0.1.0',
 });
 
