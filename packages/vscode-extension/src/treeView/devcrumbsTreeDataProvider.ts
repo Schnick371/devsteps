@@ -76,6 +76,34 @@ async function loadItemWithLinks(
   }
 }
 
+/**
+ * Detect methodology for a work item based on its type and parent relationships
+ */
+function getItemMethodology(item: WorkItem, allItems: Map<string, WorkItem>): 'scrum' | 'waterfall' {
+  // Scrum-only types
+  if (['epic', 'story', 'spike'].includes(item.type)) {
+    return 'scrum';
+  }
+
+  // Waterfall-only types
+  if (['requirement', 'feature'].includes(item.type)) {
+    return 'waterfall';
+  }
+
+  // Shared types (task, bug, test) - check parent
+  const parent = item.linked_items?.implements?.[0];
+  if (parent) {
+    const parentItem = allItems.get(parent);
+    if (parentItem) {
+      // Recursive check parent's methodology
+      return getItemMethodology(parentItem, allItems);
+    }
+  }
+
+  // Default: Assign to Scrum (most common)
+  return 'scrum';
+}
+
 interface FilterState {
   statuses: string[];
   priorities: string[];
@@ -114,6 +142,59 @@ abstract class TreeNode {
 }
 
 /**
+ * Methodology section node for flat view (e.g., "🌲 Scrum Items (45)")
+ */
+class MethodologySectionNode extends TreeNode {
+  constructor(
+    private methodology: 'scrum' | 'waterfall',
+    private itemsByType: Record<string, WorkItem[]>,
+    private isExpanded: boolean = true,
+    private expandedGroups: Set<string>,
+  ) {
+    super();
+  }
+
+  toTreeItem(): vscode.TreeItem {
+    const totalCount = Object.values(this.itemsByType).reduce(
+      (sum, items) => sum + items.length,
+      0,
+    );
+
+    const icon = this.methodology === 'scrum' ? '🌲' : '🏗️';
+    const label = this.methodology === 'scrum' ? 'Scrum Items' : 'Waterfall Items';
+
+    const treeItem = new vscode.TreeItem(
+      `${icon} ${label} (${totalCount})`,
+      this.isExpanded
+        ? vscode.TreeItemCollapsibleState.Expanded
+        : vscode.TreeItemCollapsibleState.Collapsed,
+    );
+
+    treeItem.contextValue = 'methodologySection';
+    treeItem.id = `methodology-${this.methodology}`;
+
+    return treeItem;
+  }
+
+  async getChildren(_workspaceRoot: vscode.Uri, _filterState?: FilterState): Promise<TreeNode[]> {
+    // Return TypeGroupNode for each item type
+    return Object.entries(this.itemsByType)
+      .sort(([typeA], [typeB]) => typeA.localeCompare(typeB))
+      .map(([type, items]) => {
+        const isExpanded = this.expandedGroups.has(`${this.methodology}-${type}`);
+        return new TypeGroupNode(type, items.length, items, isExpanded, this.methodology);
+      });
+  }
+
+  /**
+   * Get methodology identifier for state tracking
+   */
+  getMethodology(): 'scrum' | 'waterfall' {
+    return this.methodology;
+  }
+}
+
+/**
  * Type group node for flat view (e.g., "EPICS (3)")
  */
 class TypeGroupNode extends TreeNode {
@@ -122,6 +203,7 @@ class TypeGroupNode extends TreeNode {
     private count: number,
     private items: WorkItem[],
     private isExpanded: boolean = false,
+    private parentMethodology?: 'scrum' | 'waterfall',
   ) {
     super();
   }
@@ -137,6 +219,12 @@ class TypeGroupNode extends TreeNode {
     );
     item.contextValue = 'typeGroup';
     item.iconPath = new vscode.ThemeIcon('folder');
+    
+    // Make ID unique per methodology section
+    if (this.parentMethodology) {
+      item.id = `type-${this.parentMethodology}-${this.type}`;
+    }
+    
     return item;
   }
 
@@ -149,6 +237,13 @@ class TypeGroupNode extends TreeNode {
    */
   getType(): string {
     return this.type;
+  }
+
+  /**
+   * Get full tracking key including methodology
+   */
+  getTrackingKey(): string {
+    return this.parentMethodology ? `${this.parentMethodology}-${this.type}` : this.type;
   }
 }
 
@@ -304,6 +399,7 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   };
   private treeView?: vscode.TreeView<TreeNode>;
   private expandedGroups = new Set<string>();
+  private expandedSections = new Set<string>(['scrum', 'waterfall']); // Both expanded by default
 
   constructor(private workspaceRoot: vscode.Uri) {}
 
@@ -314,16 +410,20 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
     this.treeView = treeView;
     this.updateDescription();
 
-    // Track expanded state of type groups in flat view
+    // Track expanded state of methodology sections in flat view
     this.treeView.onDidExpandElement((e) => {
-      if (e.element instanceof TypeGroupNode) {
-        this.expandedGroups.add(e.element.getType());
+      if (e.element instanceof MethodologySectionNode) {
+        this.expandedSections.add(e.element.getMethodology());
+      } else if (e.element instanceof TypeGroupNode) {
+        this.expandedGroups.add(e.element.getTrackingKey());
       }
     });
 
     this.treeView.onDidCollapseElement((e) => {
-      if (e.element instanceof TypeGroupNode) {
-        this.expandedGroups.delete(e.element.getType());
+      if (e.element instanceof MethodologySectionNode) {
+        this.expandedSections.delete(e.element.getMethodology());
+      } else if (e.element instanceof TypeGroupNode) {
+        this.expandedGroups.delete(e.element.getTrackingKey());
       }
     });
   }
@@ -625,10 +725,16 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   }
 
   /**
-   * Flat view: Group items by type
+   * Flat view: Group items by methodology, then by type
    */
   private async getFlatRootNodes(): Promise<TreeNode[]> {
     try {
+      // Load config to get methodology
+      const configPath = vscode.Uri.joinPath(this.workspaceRoot, '.devcrumbs', 'config.json');
+      const configData = await vscode.workspace.fs.readFile(configPath);
+      const config = JSON.parse(Buffer.from(configData).toString('utf-8'));
+
+      // Load items
       const indexPath = vscode.Uri.joinPath(this.workspaceRoot, '.devcrumbs', 'index.json');
       const indexData = await vscode.workspace.fs.readFile(indexPath);
       const index = JSON.parse(Buffer.from(indexData).toString('utf-8'));
@@ -647,30 +753,68 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
       // Update badge with counts
       this.updateCounts(totalCount, items.length);
 
-      // Group by type
-      const typeGroups = items.reduce(
-        (acc, item) => {
-          if (!acc[item.type]) {
-            acc[item.type] = [];
-          }
-          acc[item.type].push(item);
-          return acc;
-        },
-        {} as Record<string, WorkItem[]>,
-      );
+      // Group by methodology
+      const itemsMap = new Map(items.map((item) => [item.id, item]));
+      const scrumItems: WorkItem[] = [];
+      const waterfallItems: WorkItem[] = [];
 
-      // Create type group nodes with preserved expanded state
-      return Object.entries(typeGroups)
-        .sort(([typeA], [typeB]) => typeA.localeCompare(typeB))
-        .map(([type, items]) => {
-          const isExpanded = this.expandedGroups.has(type);
-          return new TypeGroupNode(type, items.length, items, isExpanded);
-        });
+      for (const item of items) {
+        const methodology = getItemMethodology(item, itemsMap);
+        if (methodology === 'scrum') {
+          scrumItems.push(item);
+        } else {
+          waterfallItems.push(item);
+        }
+      }
+
+      // Group each methodology's items by type
+      const scrumByType = this.groupByType(scrumItems);
+      const waterfallByType = this.groupByType(waterfallItems);
+
+      // Create section nodes (always show both, even if empty)
+      const sections: TreeNode[] = [];
+
+      if (scrumItems.length > 0 || config.methodology !== 'waterfall') {
+        const isScrumExpanded = this.expandedSections.has('scrum');
+        sections.push(
+          new MethodologySectionNode('scrum', scrumByType, isScrumExpanded, this.expandedGroups),
+        );
+      }
+
+      if (waterfallItems.length > 0 || config.methodology !== 'scrum') {
+        const isWaterfallExpanded = this.expandedSections.has('waterfall');
+        sections.push(
+          new MethodologySectionNode(
+            'waterfall',
+            waterfallByType,
+            isWaterfallExpanded,
+            this.expandedGroups,
+          ),
+        );
+      }
+
+      return sections;
     } catch (error) {
-      console.error('Failed to load flat view:', error);
+      console.error('Failed to load flat view with methodology sections:', error);
       vscode.window.showErrorMessage('Failed to load DevCrumbs work items');
       return [];
     }
+  }
+
+  /**
+   * Group items by type
+   */
+  private groupByType(items: WorkItem[]): Record<string, WorkItem[]> {
+    return items.reduce(
+      (acc, item) => {
+        if (!acc[item.type]) {
+          acc[item.type] = [];
+        }
+        acc[item.type].push(item);
+        return acc;
+      },
+      {} as Record<string, WorkItem[]>,
+    );
   }
 
   /**
