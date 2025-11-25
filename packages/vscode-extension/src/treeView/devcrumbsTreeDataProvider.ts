@@ -712,14 +712,6 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
       return this.getHierarchicalRootNodes();
     }
 
-    // Root nodes
-    if (!element) {
-      if (this.viewMode === 'flat') {
-        return this.getFlatRootNodes();
-      }
-      return this.getHierarchicalRootNodes();
-    }
-
     // Child nodes - pass filterState for hierarchical view filtering
     return element.getChildren(this.workspaceRoot, this.filterState);
   }
@@ -828,7 +820,15 @@ export class DevCrumbsTreeDataProvider implements vscode.TreeDataProvider<TreeNo
   /**
    * Hierarchical view: Show parent-child relationships
    */
-  private getHierarchicalRootNodes(): TreeNode[] {
+  private async getHierarchicalRootNodes(): Promise<TreeNode[]> {
+    // Check if .devcrumbs directory exists
+    try {
+      await vscode.workspace.fs.stat(vscode.Uri.joinPath(this.workspaceRoot, '.devcrumbs'));
+    } catch {
+      // .devcrumbs doesn't exist yet - return empty state
+      return [];
+    }
+
     const roots: TreeNode[] = [];
 
     if (this.hierarchyType === 'both' || this.hierarchyType === 'scrum') {
