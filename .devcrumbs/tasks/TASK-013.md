@@ -186,7 +186,7 @@ vscode.commands.registerCommand('devcrumbs.openDocs', () => {
 });
 
 vscode.commands.registerCommand('devcrumbs.reportIssue', () => {
-  vscode.env.openExternal(vscode.Uri.parse('https://github.com/devcrumbs/devcrumbs/issues/new'));
+  vscode.env.openExternal(vscode.Uri.parse('https://github.com/Schnick371/devcrumbs/issues/new'));
 });
 ```
 

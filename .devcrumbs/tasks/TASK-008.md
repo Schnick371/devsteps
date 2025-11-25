@@ -17,10 +17,10 @@ Prepare the VS Code extension for distribution via VS Code Marketplace.
   "icon": "resources/icons/devcrumbs-marketplace.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/devcrumbs/devcrumbs"
+    "url": "https://github.com/Schnick371/devcrumbs"
   },
   "bugs": {
-    "url": "https://github.com/devcrumbs/devcrumbs/issues"
+    "url": "https://github.com/Schnick371/devcrumbs/issues"
   },
   "homepage": "https://devcrumbs.dev",
   "categories": ["Other", "Project Management"],

@@ -61,7 +61,7 @@ curl -X POST https://api.github.com/user/repos \
 
 ```bash
 # Add remote (if not already added)
-git remote add origin https://github.com/devcrumbs/devcrumbs.git
+git remote add origin https://github.com/Schnick371/devcrumbs.git
 
 # Verify all changes are committed
 git status
@@ -325,7 +325,7 @@ Install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?it
 
 ## 📚 Documentation
 
-- [README](https://github.com/devcrumbs/devcrumbs#readme)
+- [README](https://github.com/Schnick371/devcrumbs#readme)
 - [Contributing Guide](CONTRIBUTING.md)
 - [Security Policy](SECURITY.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
@@ -352,7 +352,7 @@ Apache License 2.0 - See [LICENSE](LICENSE.md)
 
 ### Immediate Actions
 - [ ] Verify repository is public and accessible
-- [ ] Test clone: `git clone https://github.com/devcrumbs/devcrumbs.git`
+- [ ] Test clone: `git clone https://github.com/Schnick371/devcrumbs.git`
 - [ ] Verify all documentation renders correctly
 - [ ] Check Community Profile shows 100%
 - [ ] Test issue template functionality
@@ -388,7 +388,7 @@ Never Code Alone. AI-assisted developer task tracking with MCP protocol integrat
 - VS Code extension
 - Multi-methodology support
 
-🔗 https://github.com/devcrumbs/devcrumbs
+🔗 https://github.com/Schnick371/devcrumbs
 
 #DevTools #TypeScript #AI #MCP
 ```
@@ -438,10 +438,10 @@ git remote -v
 git tag -l
 
 # Test issue template (after push)
-# Go to: https://github.com/devcrumbs/devcrumbs/issues/new/choose
+# Go to: https://github.com/Schnick371/devcrumbs/issues/new/choose
 
 # Check Dependabot config
-# Go to: https://github.com/devcrumbs/devcrumbs/network/updates
+# Go to: https://github.com/Schnick371/devcrumbs/network/updates
 ```
 
 ## Troubleshooting
@@ -471,7 +471,7 @@ git tag -l
 ## Support
 
 For questions or issues:
-- GitHub Discussions: https://github.com/devcrumbs/devcrumbs/discussions
+- GitHub Discussions: https://github.com/Schnick371/devcrumbs/discussions
 - Email: the@devcrumbs.dev
 - Security: See SECURITY.md
 

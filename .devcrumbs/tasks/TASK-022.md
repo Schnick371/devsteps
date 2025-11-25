@@ -99,7 +99,7 @@ When distributing DevCrumbs or derivative works, you MUST:
 
 2. **Acknowledge Origin:**
    - State "based on DevCrumbs by Thomas Hertel"
-   - Link to original project: https://github.com/devcrumbs/devcrumbs
+   - Link to original project: https://github.com/Schnick371/devcrumbs
 
 3. **Distinguish Your Work:**
    - Use a different name for your derivative

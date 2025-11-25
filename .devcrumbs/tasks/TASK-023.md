@@ -126,7 +126,7 @@ Signed-off-by: [Your Name] <your.email@example.com>
 blank_issues_enabled: false
 contact_links:
   - name: 💬 Discussions
-    url: https://github.com/devcrumbs/devcrumbs/discussions
+    url: https://github.com/Schnick371/devcrumbs/discussions
     about: Ask questions, share ideas, or chat with the community
   - name: 🔒 Security Vulnerability
     url: mailto:the@devcrumbs.dev

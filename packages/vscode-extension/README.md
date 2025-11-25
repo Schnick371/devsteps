@@ -37,7 +37,7 @@
 Search for "DevCrumbs" in the VS Code Extensions view and click Install.
 
 ### From VSIX (Current)
-1. Download `devcrumbs-vscode-0.4.0.vsix` from [Releases](https://github.com/devcrumbs/devcrumbs/releases)
+1. Download `devcrumbs-vscode-0.4.0.vsix` from [Releases](https://github.com/Schnick371/devcrumbs/releases)
 2. In VS Code: `Extensions` → `...` → `Install from VSIX...`
 3. Select the downloaded `.vsix` file
 
@@ -142,7 +142,7 @@ DevCrumbs is open source! Contributions welcome:
 4. Push to branch: `git push origin feature/amazing-feature`
 5. Open Pull Request
 
-See [CONTRIBUTING.md](https://github.com/devcrumbs/devcrumbs/blob/main/CONTRIBUTING.md) for guidelines.
+See [CONTRIBUTING.md](https://github.com/Schnick371/devcrumbs/blob/main/CONTRIBUTING.md) for guidelines.
 
 ## 📄 License
 
@@ -150,10 +150,10 @@ Apache-2.0 - see [LICENSE](./LICENSE.md)
 
 ## 🔗 Links
 
-- **Documentation**: [github.com/devcrumbs/devcrumbs](https://github.com/devcrumbs/devcrumbs)
-- **Report Issues**: [github.com/devcrumbs/devcrumbs/issues](https://github.com/devcrumbs/devcrumbs/issues)
+- **Documentation**: [github.com/Schnick371/devcrumbs](https://github.com/Schnick371/devcrumbs)
+- **Report Issues**: [github.com/Schnick371/devcrumbs/issues](https://github.com/Schnick371/devcrumbs/issues)
 - **Changelog**: [CHANGELOG.md](./CHANGELOG.md)
-- **MCP Integration**: [docs/mcp-integration.md](https://github.com/devcrumbs/devcrumbs/blob/main/docs/mcp-integration.md)
+- **MCP Integration**: [docs/mcp-integration.md](https://github.com/Schnick371/devcrumbs/blob/main/docs/mcp-integration.md)
 
 ---
 
