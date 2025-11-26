@@ -767,9 +767,9 @@
       "id": "STORY-012",
       "type": "story",
       "title": "Migrate Express 4 → 5 with codemods",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-25T22:06:24.059Z"
+      "updated": "2025-11-26T06:18:46.411Z"
     },
     {
       "id": "STORY-013",
@@ -801,11 +801,11 @@
     },
     "by_status": {
       "in-progress": 0,
-      "done": 58,
-      "draft": 32,
+      "done": 59,
+      "draft": 31,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-26T06:15:45.008Z"
+  "last_updated": "2025-11-26T06:18:46.411Z"
 }
