@@ -10,8 +10,11 @@
   "updated": "2025-11-26T08:28:24.384Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/extension/resources/icons/",
-    "docs/branding/concept-1/"
+    "packages/extension/resources/icons/concept-1/Variant-A-Bold-Glasses-3-Clear-Lanes.svg",
+    "packages/extension/resources/icons/concept-1/Variant-B-Subtle-Glasses-4-Lanes-Dots.svg",
+    "packages/extension/resources/icons/concept-1/Variant-C-Angled-Glasses-Cards-Movement.svg",
+    "packages/extension/resources/icons/concept-1/Variant-D-Monochrome-Theme-Compatible.svg",
+    "packages/extension/resources/icons/concept-1/README.md"
   ],
   "linked_items": {
     "implements": [
