@@ -3,11 +3,11 @@
   "type": "task",
   "category": "vscode",
   "title": "Refactor devstepsTreeDataProvider.ts - Split 843-line file",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-26T06:26:07.892Z",
-  "updated": "2025-11-26T06:27:48.921Z",
+  "updated": "2025-11-26T06:44:08.013Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/treeView/devstepsTreeDataProvider.ts"

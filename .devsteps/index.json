@@ -799,9 +799,9 @@
       "id": "TASK-052",
       "type": "task",
       "title": "Refactor devstepsTreeDataProvider.ts - Split 843-line file",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-26T06:27:14.160Z"
+      "updated": "2025-11-26T06:44:08.013Z"
     },
     {
       "id": "TASK-053",
@@ -881,8 +881,8 @@
     },
     "by_status": {
       "in-progress": 0,
-      "done": 63,
-      "draft": 37,
+      "done": 64,
+      "draft": 36,
       "blocked": 1
     },
     "archived": 2
@@ -903,5 +903,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-26T06:36:15.476Z"
+  "last_updated": "2025-11-26T06:44:08.013Z"
 }

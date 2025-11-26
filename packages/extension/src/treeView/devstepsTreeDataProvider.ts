@@ -8,371 +8,20 @@
  */
 
 import * as vscode from 'vscode';
-import { createItemUri } from '../decorationProvider.js';
-import { getItemIconWithPriority } from '../utils/icons.js';
-import type { ItemType, Priority } from '@schnick371/devsteps-shared';
-
-type ViewMode = 'flat' | 'hierarchical';
-type HierarchyType = 'scrum' | 'waterfall' | 'both';
-
-/**
- * Map item types to their directory names
- */
-const TYPE_TO_DIRECTORY: Record<string, string> = {
-  epic: 'epics',
-  story: 'stories',
-  task: 'tasks',
-  requirement: 'requirements',
-  feature: 'features',
-  bug: 'bugs',
-  spike: 'spikes',
-  test: 'tests',
-};
-
-/**
- * Load full item data from individual JSON file (includes linked_items)
- * Used for hierarchical view to get relationship data
- */
-async function loadItemWithLinks(
-  workspaceRoot: vscode.Uri,
-  itemId: string
-): Promise<WorkItem | null> {
-  try {
-    // Parse item type from ID (e.g., "EPIC-001" -> "epic")
-    const match = itemId.match(/^(EPIC|STORY|TASK|REQ|FEAT|BUG|SPIKE|TEST)-(\d+)$/);
-    if (!match) return null;
-
-    const typeMap: Record<string, string> = {
-      EPIC: 'epic',
-      STORY: 'story',
-      TASK: 'task',
-      REQ: 'requirement',
-      FEAT: 'feature',
-      BUG: 'bug',
-      SPIKE: 'spike',
-      TEST: 'test',
-    };
-
-    const itemType = typeMap[match[1]];
-    if (!itemType) return null;
-
-    const typeDir = TYPE_TO_DIRECTORY[itemType];
-    if (!typeDir) return null;
-
-    // Read full JSON file
-    const itemPath = vscode.Uri.joinPath(
-      workspaceRoot,
-      '.devsteps',
-      typeDir,
-      `${itemId}.json`
-    );
-    const itemData = await vscode.workspace.fs.readFile(itemPath);
-    const item = JSON.parse(Buffer.from(itemData).toString('utf-8'));
-
-    return item as WorkItem;
-  } catch (error) {
-    console.error(`Failed to load item ${itemId}:`, error);
-    return null;
-  }
-}
-
-/**
- * Detect methodology for a work item based on its type and parent relationships
- */
-function getItemMethodology(item: WorkItem, allItems: Map<string, WorkItem>): 'scrum' | 'waterfall' {
-  // Scrum-only types
-  if (['epic', 'story', 'spike'].includes(item.type)) {
-    return 'scrum';
-  }
-
-  // Waterfall-only types
-  if (['requirement', 'feature'].includes(item.type)) {
-    return 'waterfall';
-  }
-
-  // Shared types (task, bug, test) - check parent
-  const parent = item.linked_items?.implements?.[0];
-  if (parent) {
-    const parentItem = allItems.get(parent);
-    if (parentItem) {
-      // Recursive check parent's methodology
-      return getItemMethodology(parentItem, allItems);
-    }
-  }
-
-  // Default: Assign to Scrum (most common)
-  return 'scrum';
-}
-
-interface FilterState {
-  statuses: string[];
-  priorities: string[];
-  types: string[];
-  tags: string[];
-  searchQuery: string;
-  hideDone: boolean;
-}
-
-interface SortState {
-  by: 'id' | 'title' | 'created' | 'updated' | 'priority' | 'status';
-  order: 'asc' | 'desc';
-}
-
-interface WorkItem {
-  id: string;
-  type: string;
-  title: string;
-  status: string;
-  priority: string;
-  created?: string;
-  updated?: string;
-  tags?: string[];
-  linked_items?: {
-    'implemented-by'?: string[];
-    [key: string]: string[] | undefined;
-  };
-}
-
-/**
- * Abstract base class for all tree nodes
- */
-abstract class TreeNode {
-  abstract toTreeItem(): vscode.TreeItem;
-  abstract getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState): Promise<TreeNode[]>;
-}
-
-/**
- * Methodology section node for flat view (e.g., "🌲 Scrum Items (45)")
- */
-class MethodologySectionNode extends TreeNode {
-  constructor(
-    private methodology: 'scrum' | 'waterfall',
-    private itemsByType: Record<string, WorkItem[]>,
-    private isExpanded: boolean = true,
-    private expandedGroups: Set<string>,
-  ) {
-    super();
-  }
-
-  toTreeItem(): vscode.TreeItem {
-    const totalCount = Object.values(this.itemsByType).reduce(
-      (sum, items) => sum + items.length,
-      0,
-    );
-
-    const icon = this.methodology === 'scrum' ? '🌲' : '🏗️';
-    const label = this.methodology === 'scrum' ? 'Scrum Items' : 'Waterfall Items';
-
-    const treeItem = new vscode.TreeItem(
-      `${icon} ${label} (${totalCount})`,
-      this.isExpanded
-        ? vscode.TreeItemCollapsibleState.Expanded
-        : vscode.TreeItemCollapsibleState.Collapsed,
-    );
-
-    treeItem.contextValue = 'methodologySection';
-    treeItem.id = `methodology-${this.methodology}`;
-
-    return treeItem;
-  }
-
-  async getChildren(_workspaceRoot: vscode.Uri, _filterState?: FilterState): Promise<TreeNode[]> {
-    // Return TypeGroupNode for each item type
-    return Object.entries(this.itemsByType)
-      .sort(([typeA], [typeB]) => typeA.localeCompare(typeB))
-      .map(([type, items]) => {
-        const isExpanded = this.expandedGroups.has(`${this.methodology}-${type}`);
-        return new TypeGroupNode(type, items.length, items, isExpanded, this.methodology);
-      });
-  }
-
-  /**
-   * Get methodology identifier for state tracking
-   */
-  getMethodology(): 'scrum' | 'waterfall' {
-    return this.methodology;
-  }
-}
-
-/**
- * Type group node for flat view (e.g., "EPICS (3)")
- */
-class TypeGroupNode extends TreeNode {
-  constructor(
-    private type: string,
-    private count: number,
-    private items: WorkItem[],
-    private isExpanded: boolean = false,
-    private parentMethodology?: 'scrum' | 'waterfall',
-  ) {
-    super();
-  }
-
-  toTreeItem(): vscode.TreeItem {
-    const collapsibleState = this.isExpanded
-      ? vscode.TreeItemCollapsibleState.Expanded
-      : vscode.TreeItemCollapsibleState.Collapsed;
-
-    const item = new vscode.TreeItem(
-      `${this.type.toUpperCase()}S (${this.count})`,
-      collapsibleState,
-    );
-    item.contextValue = 'typeGroup';
-    item.iconPath = new vscode.ThemeIcon('folder');
-    
-    // Make ID unique per methodology section
-    if (this.parentMethodology) {
-      item.id = `type-${this.parentMethodology}-${this.type}`;
-    }
-    
-    return item;
-  }
-
-  async getChildren(_workspaceRoot: vscode.Uri, _filterState?: FilterState): Promise<TreeNode[]> {
-    return this.items.map((item) => new WorkItemNode(item, false));
-  }
-
-  /**
-   * Get the type identifier for state tracking
-   */
-  getType(): string {
-    return this.type;
-  }
-
-  /**
-   * Get full tracking key including methodology
-   */
-  getTrackingKey(): string {
-    return this.parentMethodology ? `${this.parentMethodology}-${this.type}` : this.type;
-  }
-}
-
-/**
- * Hierarchy root node (Scrum/Waterfall separator)
- */
-class HierarchyRootNode extends TreeNode {
-  constructor(
-    private hierarchy: 'scrum' | 'waterfall',
-    private label: string,
-  ) {
-    super();
-  }
-
-  toTreeItem(): vscode.TreeItem {
-    const item = new vscode.TreeItem(this.label, vscode.TreeItemCollapsibleState.Expanded);
-    item.contextValue = 'hierarchyRoot';
-    item.iconPath = new vscode.ThemeIcon('symbol-namespace');
-    return item;
-  }
-
-  async getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState): Promise<TreeNode[]> {
-    try {
-      const indexPath = vscode.Uri.joinPath(workspaceRoot, '.devsteps', 'index.json');
-      const indexData = await vscode.workspace.fs.readFile(indexPath);
-      const index = JSON.parse(Buffer.from(indexData).toString('utf-8'));
-
-      // Get top-level items (Epics for Scrum, Requirements for Waterfall)
-      const topLevelType = this.hierarchy === 'scrum' ? 'epic' : 'requirement';
-      const itemIds = index.items
-        .filter((meta: any) => meta.type === topLevelType)
-        .map((meta: any) => meta.id);
-
-      // Load full items with linked_items for hierarchical view
-      let items: WorkItem[] = [];
-      for (const itemId of itemIds) {
-        const item = await loadItemWithLinks(workspaceRoot, itemId);
-        if (item) items.push(item);
-      }
-
-      // Apply hideDone filter in hierarchical view
-      if (filterState?.hideDone) {
-        items = items.filter((item) => item.status !== 'done');
-      }
-
-      return items.map((item) => new WorkItemNode(item, true, filterState));
-    } catch (error) {
-      console.error('Failed to load hierarchy items:', error);
-      return [];
-    }
-  }
-}
-
-/**
- * Work item node (actual DevSteps items)
- */
-class WorkItemNode extends TreeNode {
-  constructor(
-    private item: WorkItem,
-    private hierarchical: boolean = false,
-    private filterState?: FilterState,
-  ) {
-    super();
-  }
-
-  toTreeItem(): vscode.TreeItem {
-    const hasChildren = this.hierarchical && this.hasImplementedByLinks();
-
-    const treeItem = new vscode.TreeItem(
-      `${this.item.id}: ${this.item.title}`,
-      hasChildren ? vscode.TreeItemCollapsibleState.Collapsed : vscode.TreeItemCollapsibleState.None,
-    );
-
-    treeItem.contextValue = 'workItem';
-    treeItem.iconPath = this.getIcon();
-    treeItem.description = this.item.status;
-    treeItem.tooltip = `${this.item.type.toUpperCase()} | ${this.item.status} | Priority: ${this.item.priority}`;
-
-    // Set resourceUri for FileDecorationProvider
-    treeItem.resourceUri = createItemUri(this.item.id, this.item.status, this.item.priority);
-
-    treeItem.command = {
-      command: 'devsteps.openItem',
-      title: 'Open Item',
-      arguments: [this.item.id],
-    };
-
-    return treeItem;
-  }
-
-  async getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState): Promise<TreeNode[]> {
-    if (!this.hierarchical) return [];
-
-    try {
-      const implementedBy = this.item.linked_items?.['implemented-by'] || [];
-      
-      // Load full child items with linked_items for hierarchical display
-      let children: WorkItem[] = [];
-      for (const childId of implementedBy) {
-        const child = await loadItemWithLinks(workspaceRoot, childId);
-        if (child) children.push(child);
-      }
-
-      // Apply hideDone filter in hierarchical view
-      const effectiveFilter = filterState || this.filterState;
-      if (effectiveFilter?.hideDone) {
-        children = children.filter((item) => item.status !== 'done');
-      }
-
-      return children.map((item) => new WorkItemNode(item, true, effectiveFilter));
-    } catch (error) {
-      console.error('Failed to load child items:', error);
-      return [];
-    }
-  }
-
-  private hasImplementedByLinks(): boolean {
-    const links = this.item.linked_items?.['implemented-by'] || [];
-    return links.length > 0;
-  }
-
-  private getIcon(): vscode.ThemeIcon {
-    // Use centralized icon system with priority-based coloring
-    return getItemIconWithPriority(
-      this.item.type as ItemType,
-      this.item.priority as Priority
-    );
-  }
-}
+import {
+  TreeNode,
+  type ViewMode,
+  type HierarchyType,
+  type FilterState,
+  type SortState,
+  type WorkItem,
+} from './types.js';
+import {
+  MethodologySectionNode,
+  TypeGroupNode,
+  HierarchyRootNode,
+} from './nodes/index.js';
+import { getItemMethodology } from './utils/methodologyDetector.js';
 
 /**
  * TreeDataProvider with switchable view modes (flat vs hierarchical)
@@ -400,6 +49,8 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   private treeView?: vscode.TreeView<TreeNode>;
   private expandedGroups = new Set<string>();
   private expandedSections = new Set<string>(['scrum', 'waterfall']); // Both expanded by default
+  private lastTotalCount = 0;
+  private lastFilteredCount = 0;
 
   constructor(private workspaceRoot: vscode.Uri) {}
 
@@ -500,6 +151,15 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   }
 
   /**
+   * Toggle hide done items filter
+   */
+  toggleHideDone(): void {
+    this.filterState.hideDone = !this.filterState.hideDone;
+    this.refresh();
+    this.updateDescription();
+  }
+
+  /**
    * Clear all filters
    */
   clearFilters(): void {
@@ -509,30 +169,14 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       types: [],
       tags: [],
       searchQuery: '',
-      hideDone: false,
+      hideDone: this.filterState.hideDone, // Preserve hide done toggle
     };
     this.refresh();
     this.updateDescription();
   }
 
   /**
-   * Toggle Hide Done Items (only affects flat view)
-   */
-  toggleHideDone(): void {
-    this.filterState.hideDone = !this.filterState.hideDone;
-    this.refresh();
-    this.updateDescription();
-  }
-
-  /**
-   * Get current Hide Done state
-   */
-  getHideDoneState(): boolean {
-    return this.filterState.hideDone;
-  }
-
-  /**
-   * Update TreeView description badge with filter count
+   * Update TreeView description badge (shows filtered count)
    */
   private updateDescription(): void {
     if (!this.treeView) return;
@@ -565,9 +209,6 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       return 0;
     }
   }
-
-  private lastTotalCount = 0;
-  private lastFilteredCount = 0;
 
   /**
    * Get count of filtered items (visible items)
