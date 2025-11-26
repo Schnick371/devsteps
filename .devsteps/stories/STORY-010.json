@@ -1,0 +1,37 @@
+{
+  "id": "STORY-010",
+  "type": "story",
+  "category": "general",
+  "title": "Update safe minor/patch versions",
+  "status": "done",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-25T22:06:24.055Z",
+  "updated": "2025-11-26T06:14:50.867Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "package.json",
+    "packages/*/package.json"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-007"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "dependencies",
+    "safe-update"
+  ],
+  "commits": [],
+  "metadata": {}
+}

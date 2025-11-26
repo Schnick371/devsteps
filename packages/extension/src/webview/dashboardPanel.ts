@@ -62,7 +62,7 @@ export class DashboardPanel {
     }
 
     const panel = vscode.window.createWebviewPanel(
-      'devcrumbsDashboard',
+      'devstepsashboard',
       'DevSteps Dashboard',
       column || vscode.ViewColumn.One,
       {
@@ -117,8 +117,8 @@ export class DashboardPanel {
       return { allItems: [], tasks: [] };
     }
 
-    const devcrumbsPath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
-    const result = await listItems(devcrumbsPath);
+    const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
+    const result = await listItems(devstepsath);
     const allItems = result.items;
     const tasks = allItems.filter((item: any) => item.type === 'task');
 
@@ -239,7 +239,7 @@ export class DashboardPanel {
     }
 
     // PERFORMANCE OPTIMIZATION: Limit nodes for large projects
-    const MAX_NODES = 50; // Configurable in settings (future: devcrumbs.dashboard.traceabilityMaxNodes)
+    const MAX_NODES = 50; // Configurable in settings (future: devstepsdashboard.traceabilityMaxNodes)
     
     // Calculate connection score for each item (total # of links)
     const itemsWithScores = items.map((item: any) => {
@@ -723,7 +723,7 @@ export class DashboardPanel {
   private async handleMessage(message: any) {
     switch (message.command) {
       case 'openItem':
-        vscode.commands.executeCommand('devcrumbs.openItem', message.itemId);
+        vscode.commands.executeCommand('devstepsopenItem', message.itemId);
         break;
     }
   }

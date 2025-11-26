@@ -12,8 +12,8 @@ export interface ArchiveItemResult {
 /**
  * Core business logic for archiving a single item
  */
-export async function archiveItem(devcrumbsDir: string, itemId: string): Promise<ArchiveItemResult> {
-  if (!existsSync(devcrumbsDir)) {
+export async function archiveItem(devstepsir: string, itemId: string): Promise<ArchiveItemResult> {
+  if (!existsSync(devstepsir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
@@ -23,8 +23,8 @@ export async function archiveItem(devcrumbsDir: string, itemId: string): Promise
   }
 
   const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
-  const metadataPath = join(devcrumbsDir, typeFolder, `${itemId}.json`);
-  const descriptionPath = join(devcrumbsDir, typeFolder, `${itemId}.md`);
+  const metadataPath = join(devstepsir, typeFolder, `${itemId}.json`);
+  const descriptionPath = join(devstepsir, typeFolder, `${itemId}.md`);
 
   if (!existsSync(metadataPath)) {
     throw new Error(`Item not found: ${itemId}`);
@@ -35,7 +35,7 @@ export async function archiveItem(devcrumbsDir: string, itemId: string): Promise
   const originalStatus = metadata.status;
 
   // Create archive directory if not exists
-  const archiveDir = join(devcrumbsDir, 'archive', typeFolder);
+  const archiveDir = join(devstepsir, 'archive', typeFolder);
   mkdirSync(archiveDir, { recursive: true });
 
   // Move files to archive
@@ -48,7 +48,7 @@ export async function archiveItem(devcrumbsDir: string, itemId: string): Promise
   }
 
   // Update index
-  const indexPath = join(devcrumbsDir, 'index.json');
+  const indexPath = join(devstepsir, 'index.json');
   const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
   // Remove from items
@@ -103,14 +103,14 @@ export interface PurgeItemsResult {
  * Core business logic for bulk archiving items
  */
 export async function purgeItems(
-  devcrumbsDir: string,
+  devstepsir: string,
   args: PurgeItemsArgs = {}
 ): Promise<PurgeItemsResult> {
-  if (!existsSync(devcrumbsDir)) {
+  if (!existsSync(devstepsir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
-  const indexPath = join(devcrumbsDir, 'index.json');
+  const indexPath = join(devstepsir, 'index.json');
   const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
   // Find items to archive
@@ -138,7 +138,7 @@ export async function purgeItems(
   const archivedIds: string[] = [];
   for (const item of itemsToArchive) {
     try {
-      await archiveItem(devcrumbsDir, item.id);
+      await archiveItem(devstepsir, item.id);
       archivedIds.push(item.id);
     } catch (error) {
       // Continue with next item on error

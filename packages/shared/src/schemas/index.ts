@@ -11,7 +11,7 @@ export const Methodology = z.enum(['scrum', 'waterfall', 'hybrid']);
 export type Methodology = z.infer<typeof Methodology>;
 
 /**
- * Item types in devcrumbs system
+ * Item types in devstepssystem
  * Scrum: epic, story, task, bug, spike, test
  * Waterfall: requirement, feature, task, bug, test
  * Hybrid: all of the above

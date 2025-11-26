@@ -5,8 +5,8 @@ import { archiveItem } from '@schnick371/devsteps-shared';
  * Archive a single item (MCP wrapper)
  */
 export default async function archiveHandler(args: { id: string }) {
-  const devcrumbsDir = join(process.cwd(), '.devsteps');
-  const result = await archiveItem(devcrumbsDir, args.id);
+  const devstepsDir = join(process.cwd(), '.devsteps');
+  const result = await archiveItem(devstepsDir, args.id);
 
   return {
     success: true,

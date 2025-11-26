@@ -7,7 +7,7 @@ import {
   ListToolsRequestSchema,
   type Tool,
 } from '@modelcontextprotocol/sdk/types.js';
-import { trackRequestError, trackRequestSuccess } from './handlers/devsteps-health.js';
+import { trackRequestError, trackRequestSuccess } from './handlers/health.js';
 import { configureLogger, createRequestLogger, getLogger } from './logger.js';
 import { activeConnections, recordError, recordSuccess } from './metrics.js';
 import { registerShutdownHandlers, shutdownManager } from './shutdown.js';
@@ -68,61 +68,61 @@ function generateToolSummary(toolName: string, args: any, result: any, duration:
   const durationStr = `(${duration}ms)`;
 
   switch (toolName) {
-    case 'devsteps-add':
-      return `[devsteps-add] Created ${result.itemId}: "${args.title}" → success ${durationStr}`;
+    case 'add':
+      return `[add] Created ${result.itemId}: "${args.title}" → success ${durationStr}`;
 
-    case 'devsteps-update':
+    case 'update':
       const changes = Object.keys(args).filter((k) => k !== 'id');
-      return `[devsteps-update] ${args.id} [${changes.join(', ')}] → success ${durationStr}`;
+      return `[update] ${args.id} [${changes.join(', ')}] → success ${durationStr}`;
 
-    case 'devsteps-get':
-      return `[devsteps-get] ${args.id} → success ${durationStr}`;
+    case 'get':
+      return `[get] ${args.id} → success ${durationStr}`;
 
-    case 'devsteps-search':
+    case 'search':
       const count = result.count || result.items?.length || 0;
-      return `[devsteps-search] "${args.query}" → ${count} results ${durationStr}`;
+      return `[search] "${args.query}" → ${count} results ${durationStr}`;
 
-    case 'devsteps-list':
+    case 'list':
       const itemCount = result.count || result.items?.length || 0;
       const filters = [];
       if (args.status) filters.push(`status=${args.status}`);
       if (args.type) filters.push(`type=${args.type}`);
       if (args.priority) filters.push(`priority=${args.priority}`);
       const filterStr = filters.length > 0 ? ` [${filters.join(', ')}]` : '';
-      return `[devsteps-list]${filterStr} → ${itemCount} items ${durationStr}`;
+      return `[list]${filterStr} → ${itemCount} items ${durationStr}`;
 
-    case 'devsteps-link':
-      return `[devsteps-link] ${args.source_id} --${args.relation_type}--> ${args.target_id} → success ${durationStr}`;
+    case 'link':
+      return `[link] ${args.source_id} --${args.relation_type}--> ${args.target_id} → success ${durationStr}`;
 
-    case 'devsteps-status':
+    case 'status':
       const total = result.stats?.total || 0;
-      return `[devsteps-status] → ${total} items ${durationStr}`;
+      return `[status] → ${total} items ${durationStr}`;
 
-    case 'devsteps-trace':
-      return `[devsteps-trace] ${args.id} → traced ${durationStr}`;
+    case 'trace':
+      return `[trace] ${args.id} → traced ${durationStr}`;
 
-    case 'devsteps-archive':
-      return `[devsteps-archive] ${args.id} → archived ${durationStr}`;
+    case 'archive':
+      return `[archive] ${args.id} → archived ${durationStr}`;
 
-    case 'devsteps-purge':
+    case 'purge':
       const purgeCount = result.count || 0;
-      return `[devsteps-purge] → ${purgeCount} items archived ${durationStr}`;
+      return `[purge] → ${purgeCount} items archived ${durationStr}`;
 
-    case 'devsteps-init':
-      return `[devsteps-init] "${args.project_name}" → initialized ${durationStr}`;
+    case 'init':
+      return `[init] "${args.project_name}" → initialized ${durationStr}`;
 
-    case 'devsteps-export':
-      return `[devsteps-export] format=${args.format} → exported ${durationStr}`;
+    case 'export':
+      return `[export] format=${args.format} → exported ${durationStr}`;
 
-    case 'devsteps-context':
+    case 'context':
       const level = args.level || 'quick';
-      return `[devsteps-context] level=${level} → generated ${durationStr}`;
+      return `[context] level=${level} → generated ${durationStr}`;
 
-    case 'devsteps-health':
-      return `[devsteps-health] → ${result.status} ${durationStr}`;
+    case 'health':
+      return `[health] → ${result.status} ${durationStr}`;
 
-    case 'devsteps-metrics':
-      return `[devsteps-metrics] → collected ${durationStr}`;
+    case 'metrics':
+      return `[metrics] → collected ${durationStr}`;
 
     default:
       return `[${toolName}] → success ${durationStr}`;
@@ -155,7 +155,7 @@ class DevStepsServer {
 
     this.server = new Server(
       {
-        name: 'devsteps-mcp-server',
+        name: 'mcp-server',
         version: '0.1.0',
       },
       {
@@ -235,7 +235,7 @@ class DevStepsServer {
       try {
         // Tool handlers are implemented in separate files
         const handler = await import(`./handlers/${toolName}.js`);
-        const handlerFn = handler.default || handler[`${toolName.replace('devsteps-', '')}Handler`];
+        const handlerFn = handler.default || handler[`${toolName.replace('', '')}Handler`];
 
         // Track operation for graceful shutdown
         const operation = handlerFn(request.params.arguments);
@@ -327,7 +327,7 @@ class DevStepsServer {
 // Parse CLI options
 const program = new Command();
 program
-  .name('devsteps-mcp-server')
+  .name('mcp-server')
   .description('MCP server for DevSteps task tracking')
   .version('0.1.0')
   .option('--log-level <level>', 'Log level: debug|info|warn|error', 'info')

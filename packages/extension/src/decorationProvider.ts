@@ -9,7 +9,7 @@ import * as vscode from 'vscode';
  * DevSteps File Decoration Provider
  * 
  * Adds status badges and colors to work items in TreeView using VS Code's
- * native FileDecorationProvider API. Uses custom URI scheme (devcrumbs://)
+ * native FileDecorationProvider API. Uses custom URI scheme (devsteps//)
  * to identify work items.
  */
 export class DevStepsDecorationProvider implements vscode.FileDecorationProvider {
@@ -27,13 +27,13 @@ export class DevStepsDecorationProvider implements vscode.FileDecorationProvider
     uri: vscode.Uri,
     _token: vscode.CancellationToken,
   ): vscode.ProviderResult<vscode.FileDecoration> {
-    // Only handle devcrumbs:// scheme
+    // Only handle devsteps// scheme
     if (uri.scheme !== 'devsteps') {
       return undefined;
     }
 
     try {
-      // Parse URI: devcrumbs://item/<ID>?status=<status>&priority=<priority>
+      // Parse URI: devsteps//item/<ID>?status=<status>&priority=<priority>
       const params = new URLSearchParams(uri.query);
       const status = params.get('status');
       const priority = params.get('priority');
@@ -106,8 +106,8 @@ export class DevStepsDecorationProvider implements vscode.FileDecorationProvider
 }
 
 /**
- * Create devcrumbs:// URI for work item decoration
+ * Create devsteps// URI for work item decoration
  */
 export function createItemUri(itemId: string, status: string, priority: string): vscode.Uri {
-  return vscode.Uri.parse(`devcrumbs://item/${itemId}?status=${status}&priority=${priority}`);
+  return vscode.Uri.parse(`devsteps//item/${itemId}?status=${status}&priority=${priority}`);
 }

@@ -16,12 +16,12 @@ Document mandatory commit workflow in `.github/instructions/devsteps.instruction
 
 **Before starting work:**
 \`\`\`
-#mcp_devsteps_devsteps-update <ID> --status in-progress
+#mcp_devsteps_update <ID> --status in-progress
 \`\`\`
 
 **After validation/testing:**
 \`\`\`
-#mcp_devsteps_devsteps-update <ID> --status done
+#mcp_devsteps_update <ID> --status done
 \`\`\`
 
 **MANDATORY: Commit immediately after marking done:**

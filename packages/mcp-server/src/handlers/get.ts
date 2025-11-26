@@ -5,8 +5,8 @@ import { getItem } from '@schnick371/devsteps-shared';
  * Get detailed information about an item (MCP wrapper)
  */
 export default async function getHandler(args: { id: string }) {
-  const devcrumbsDir = join(process.cwd(), '.devsteps');
-  const result = await getItem(devcrumbsDir, args.id);
+  const devstepsDir = join(process.cwd(), '.devsteps');
+  const result = await getItem(devstepsDir, args.id);
 
   return {
     success: true,

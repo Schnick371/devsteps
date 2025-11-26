@@ -17,9 +17,9 @@ export default async function linkHandler(args: {
   relation_type: RelationType;
   target_id: string;
 }) {
-  const devcrumbsDir = join(process.cwd(), '.devsteps');
+  const devstepsDir = join(process.cwd(), '.devsteps');
 
-  if (!existsSync(devcrumbsDir)) {
+  if (!existsSync(devstepsDir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
@@ -34,8 +34,8 @@ export default async function linkHandler(args: {
   // Get file paths
   const sourceFolder = TYPE_TO_DIRECTORY[sourceParsed.type];
   const targetFolder = TYPE_TO_DIRECTORY[targetParsed.type];
-  const sourcePath = join(devcrumbsDir, sourceFolder, `${args.source_id}.json`);
-  const targetPath = join(devcrumbsDir, targetFolder, `${args.target_id}.json`);
+  const sourcePath = join(devstepsDir, sourceFolder, `${args.source_id}.json`);
+  const targetPath = join(devstepsDir, targetFolder, `${args.target_id}.json`);
 
   if (!existsSync(sourcePath)) {
     throw new Error(`Source item not found: ${args.source_id}`);
@@ -49,7 +49,7 @@ export default async function linkHandler(args: {
   const targetMetadata = JSON.parse(readFileSync(targetPath, 'utf-8'));
 
   // Load project config for methodology
-  const configPath = join(devcrumbsDir, 'config.json');
+  const configPath = join(devstepsDir, 'config.json');
   const config = JSON.parse(readFileSync(configPath, 'utf-8'));
   const methodology: Methodology = config.settings?.methodology || 'hybrid';
 

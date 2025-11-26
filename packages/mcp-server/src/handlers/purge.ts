@@ -5,8 +5,8 @@ import { type PurgeItemsArgs, purgeItems } from '@schnick371/devsteps-shared';
  * Bulk archive items (MCP wrapper)
  */
 export default async function purgeHandler(args: PurgeItemsArgs) {
-  const devcrumbsDir = join(process.cwd(), '.devsteps');
-  const result = await purgeItems(devcrumbsDir, args);
+  const devstepsDir = join(process.cwd(), '.devsteps');
+  const result = await purgeItems(devstepsDir, args);
 
   return {
     success: true,

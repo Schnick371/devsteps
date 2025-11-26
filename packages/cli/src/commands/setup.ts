@@ -47,14 +47,14 @@ function getMCPConfigPath(ide: string, isGlobal: boolean): string {
 }
 
 /**
- * Create MCP configuration for devcrumbs
+ * Create MCP configuration for devsteps
  */
 function createMCPConfig(projectRoot: string): MCPConfig {
   const distPath = join(projectRoot, 'packages', 'mcp-server', 'dist', 'index.js');
 
   return {
     servers: {
-      devcrumbs: {
+      devsteps: {
         type: 'stdio',
         command: 'node',
         args: [distPath],
@@ -91,7 +91,7 @@ function mergeWithExisting(existingPath: string, newConfig: MCPConfig): MCPConfi
  * Setup command - Configure MCP for IDE
  */
 export async function setupCommand(options: { tool?: string; global?: boolean }) {
-  const spinner = ora('Setting up devcrumbs MCP server...').start();
+  const spinner = ora('Setting up devstepsMCP server...').start();
 
   try {
     // Detect IDE if not specified
@@ -157,17 +157,17 @@ export async function setupCommand(options: { tool?: string; global?: boolean })
     if (ide === 'vscode') {
       console.log('  1. Restart VS Code completely (Cmd/Ctrl+Q, then reopen)');
       console.log('  2. Open Copilot Chat (Cmd/Ctrl+Shift+I)');
-      console.log('  3. Use devcrumbs tools: @workspace #devsteps-init');
+      console.log('  3. Use devstepstools: @workspace #devsteps-init');
     } else if (ide === 'cursor') {
       console.log('  1. Restart Cursor completely');
       console.log('  2. Open AI Chat');
-      console.log('  3. Use devcrumbs tools');
+      console.log('  3. Use devstepstools');
     }
 
     console.log();
     console.log(chalk.gray('Test the setup:'));
-    console.log(chalk.cyan('  devcrumbs init test-project'));
-    console.log(chalk.cyan('  devcrumbs status'));
+    console.log(chalk.cyan('  devstepsinit test-project'));
+    console.log(chalk.cyan('  devstepsstatus'));
   } catch (error: unknown) {
     spinner.fail('Setup failed');
     if (error instanceof Error) {

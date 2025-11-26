@@ -134,8 +134,8 @@ cat > dist/docs/INSTALL.md << 'EOF'
 ### MCP Server
 
 1. In Claude Desktop, create new conversation
-2. Ask: "List devcrumbs items"
-3. Should show available devcrumbs commands
+2. Ask: "List devstepsitems"
+3. Should show available devstepscommands
 EOF
 
 echo "✅ Installation guide created: dist/docs/INSTALL.md"

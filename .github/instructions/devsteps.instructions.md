@@ -10,7 +10,7 @@ description: "DevSteps workflow and work item tracking"
 **NEVER edit `.devsteps/` files directly:**
 - ❌ Manual JSON/MD edits in `.devsteps/` directory
 - ✅ Use devsteps CLI: `devsteps add`, `devsteps update`, `devsteps link`
-- ✅ Use MCP tools: `#mcp_devsteps_devsteps-add`, `#mcp_devsteps_devsteps-update`
+- ✅ Use MCP tools: `#mcp_devsteps_add`, `#mcp_devsteps_update`
 
 **Why:** Ensures index consistency, maintains traceability, prevents corruption.
 
@@ -18,12 +18,12 @@ description: "DevSteps workflow and work item tracking"
 
 **Before starting work:**
 ```
-#mcp_devsteps_devsteps-update <ID> --status in-progress
+#mcp_devsteps_update <ID> --status in-progress
 ```
 
 **After validation/testing:**
 ```
-#mcp_devsteps_devsteps-update <ID> --status done
+#mcp_devsteps_update <ID> --status done
 ```
 
 **NEVER skip status updates** - Tracking mandatory for traceability.

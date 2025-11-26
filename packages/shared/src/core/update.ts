@@ -32,10 +32,10 @@ export interface UpdateItemResult {
  * Core business logic for updating an item
  */
 export async function updateItem(
-  devcrumbsDir: string,
+  devstepsir: string,
   args: UpdateItemArgs
 ): Promise<UpdateItemResult> {
-  if (!existsSync(devcrumbsDir)) {
+  if (!existsSync(devstepsir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
@@ -45,8 +45,8 @@ export async function updateItem(
   }
 
   const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
-  const metadataPath = join(devcrumbsDir, typeFolder, `${args.id}.json`);
-  const descriptionPath = join(devcrumbsDir, typeFolder, `${args.id}.md`);
+  const metadataPath = join(devstepsir, typeFolder, `${args.id}.json`);
+  const descriptionPath = join(devstepsir, typeFolder, `${args.id}.md`);
 
   if (!existsSync(metadataPath)) {
     throw new Error(`Item not found: ${args.id}`);
@@ -67,7 +67,7 @@ export async function updateItem(
           const childParsed = parseItemId(childId);
           if (childParsed) {
             const childFolder = TYPE_TO_DIRECTORY[childParsed.type];
-            const childPath = join(devcrumbsDir, childFolder, `${childId}.json`);
+            const childPath = join(devstepsir, childFolder, `${childId}.json`);
             if (existsSync(childPath)) {
               const childMeta: ItemMetadata = JSON.parse(readFileSync(childPath, 'utf-8'));
               if (childMeta.status !== 'done' && childMeta.status !== 'cancelled' && childMeta.status !== 'obsolete') {
@@ -126,7 +126,7 @@ export async function updateItem(
   }
 
   // Update index
-  const indexPath = join(devcrumbsDir, 'index.json');
+  const indexPath = join(devstepsir, 'index.json');
   const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
   const itemIndex = index.items.findIndex((i) => i.id === args.id);

@@ -9,7 +9,7 @@ function getDevStepsDir(): string {
     console.error(
       chalk.red('Error:'),
       'Project not initialized. Run',
-      chalk.cyan('devcrumbs init'),
+      chalk.cyan('devstepsinit'),
       'first.'
     );
     process.exit(1);
@@ -21,7 +21,7 @@ function getDevStepsDir(): string {
  * Context stats command - Show cache metrics
  */
 export async function contextStatsCommand() {
-  const devcrumbsDir = getDevStepsDir();
+  const devstepsir = getDevStepsDir();
   const cache = getCache();
   const stats = cache.stats();
 
@@ -42,7 +42,7 @@ export async function contextStatsCommand() {
   );
 
   // PROJECT.md status
-  const projectMdPath = join(devcrumbsDir, 'PROJECT.md');
+  const projectMdPath = join(devstepsir, 'PROJECT.md');
   if (existsSync(projectMdPath)) {
     const projectStat = statSync(projectMdPath);
     const daysSinceUpdate = Math.floor((Date.now() - projectStat.mtimeMs) / (1000 * 60 * 60 * 24));
@@ -62,7 +62,7 @@ export async function contextStatsCommand() {
   }
 
   // Config info
-  const configPath = join(devcrumbsDir, 'config.json');
+  const configPath = join(devstepsir, 'config.json');
   if (existsSync(configPath)) {
     const config = JSON.parse(readFileSync(configPath, 'utf-8'));
     const daysSinceInit = Math.floor(
@@ -91,7 +91,7 @@ export async function contextStatsCommand() {
  * Context validate command - Check for drift
  */
 export async function contextValidateCommand() {
-  const devcrumbsDir = getDevStepsDir();
+  const devstepsir = getDevStepsDir();
 
   console.log();
   console.log(chalk.bold.cyan('🔍 Context Validation'));
@@ -100,7 +100,7 @@ export async function contextValidateCommand() {
   let hasIssues = false;
 
   // Check PROJECT.md exists
-  const projectMdPath = join(devcrumbsDir, 'PROJECT.md');
+  const projectMdPath = join(devstepsir, 'PROJECT.md');
   if (!existsSync(projectMdPath)) {
     console.log(chalk.yellow('⚠'), 'PROJECT.md not found');
     console.log(chalk.gray('  Create one to provide static context for AI'));
@@ -123,19 +123,19 @@ export async function contextValidateCommand() {
   }
 
   // Check config
-  const configPath = join(devcrumbsDir, 'config.json');
+  const configPath = join(devstepsir, 'config.json');
   if (existsSync(configPath)) {
     console.log(chalk.green('✓'), 'Configuration valid');
     console.log();
   } else {
     console.log(chalk.red('✗'), 'Configuration missing');
-    console.log(chalk.gray('  Run: devcrumbs init to reinitialize'));
+    console.log(chalk.gray('  Run: devstepsinit to reinitialize'));
     hasIssues = true;
     console.log();
   }
 
   // Check index
-  const indexPath = join(devcrumbsDir, 'index.json');
+  const indexPath = join(devstepsir, 'index.json');
   if (existsSync(indexPath)) {
     const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
     console.log(chalk.green('✓'), `Index valid (${index.items.length} items)`);

@@ -22,7 +22,7 @@ export class McpServerManager {
       vscode.StatusBarAlignment.Right,
       100,
     );
-    this.statusBarItem.command = 'devcrumbs.mcp.showStatus';
+    this.statusBarItem.command = 'devsteps.mcp.showStatus';
     this.context.subscriptions.push(this.statusBarItem);
   }
 
@@ -131,11 +131,11 @@ export class McpServerManager {
 
     vscode.window.showInformationMessage(message, 'Open Documentation', 'Copy Config').then((selection) => {
       if (selection === 'Open Documentation') {
-        vscode.env.openExternal(vscode.Uri.parse('https://github.com/devcrumbs/devcrumbs#mcp-setup'));
+        vscode.env.openExternal(vscode.Uri.parse('https://github.com/devsteps/devsteps#mcp-setup'));
       } else if (selection === 'Copy Config') {
         const config = {
           servers: {
-            devcrumbs: {
+            devsteps: {
               type: 'stdio',
               command: 'node',
               args: ['${workspaceFolder}/packages/mcp-server/dist/index.js'],
@@ -165,7 +165,7 @@ export class McpServerManager {
    */
   registerCommands(): void {
     this.context.subscriptions.push(
-      vscode.commands.registerCommand('devcrumbs.mcp.showStatus', () => {
+      vscode.commands.registerCommand('devsteps.mcp.showStatus', () => {
         const message = this.provider
           ? 'DevSteps MCP Server is registered and available in Copilot Chat.'
           : 'DevSteps MCP Server requires manual configuration.';

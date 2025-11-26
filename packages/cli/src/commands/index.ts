@@ -20,7 +20,7 @@ function getDevStepsDir(): string {
     console.error(
       chalk.red('Error:'),
       'Project not initialized. Run',
-      chalk.cyan('devcrumbs init'),
+      chalk.cyan('devstepsinit'),
       'first.'
     );
     process.exit(1);
@@ -43,12 +43,12 @@ export async function addCommand(
   const spinner = ora('Creating item...').start();
 
   try {
-    const devcrumbsDir = getDevStepsDir();
+    const devstepsir = getDevStepsDir();
     const itemType = TYPE_SHORTCUTS[type] || type;
 
     // Use shared core logic
     const { addItem } = await import('@schnick371/devsteps-shared');
-    const result = await addItem(devcrumbsDir, {
+    const result = await addItem(devstepsir, {
       type: itemType as ItemType,
       title,
       description: options.description,
@@ -70,7 +70,7 @@ export async function addCommand(
     }
 
     // Git hint
-    const configPath = join(devcrumbsDir, 'config.json');
+    const configPath = join(devstepsir, 'config.json');
     const config = JSON.parse(readFileSync(configPath, 'utf-8'));
     if (config.settings.git_integration) {
       console.log(
@@ -86,7 +86,7 @@ export async function addCommand(
 
 export async function getCommand(id: string) {
   try {
-    const devcrumbsDir = getDevStepsDir();
+    const devstepsir = getDevStepsDir();
     const parsed = parseItemId(id);
 
     if (!parsed) {
@@ -95,8 +95,8 @@ export async function getCommand(id: string) {
     }
 
     const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
-    const metadataPath = join(devcrumbsDir, typeFolder, `${id}.json`);
-    const descriptionPath = join(devcrumbsDir, typeFolder, `${id}.md`);
+    const metadataPath = join(devstepsir, typeFolder, `${id}.json`);
+    const descriptionPath = join(devstepsir, typeFolder, `${id}.md`);
 
     if (!existsSync(metadataPath)) {
       console.error(chalk.red('Error:'), 'Item not found:', id);
@@ -140,8 +140,8 @@ export async function getCommand(id: string) {
 
 export async function listCommand(options: any) {
   try {
-    const devcrumbsDir = getDevStepsDir();
-    const indexPath = join(devcrumbsDir, 'index.json');
+    const devstepsir = getDevStepsDir();
+    const indexPath = join(devstepsir, 'index.json');
     const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
     // Choose between active and archived items
@@ -168,7 +168,7 @@ export async function listCommand(options: any) {
       // Load full metadata for eisenhower filter (not available for archived summary)
       items = items.filter((i: any) => {
         const typeFolder = TYPE_TO_DIRECTORY[i.type as ItemType];
-        const metadataPath = join(devcrumbsDir, typeFolder, `${i.id}.json`);
+        const metadataPath = join(devstepsir, typeFolder, `${i.id}.json`);
         if (!existsSync(metadataPath)) return false;
         const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
         return metadata.eisenhower === options.eisenhower;
@@ -229,7 +229,7 @@ export async function updateCommand(id: string, options: any) {
       process.exit(1);
     }
     
-    const devcrumbsDir = getDevStepsDir();
+    const devstepsir = getDevStepsDir();
     const parsed = parseItemId(id);
 
     if (!parsed) {
@@ -238,8 +238,8 @@ export async function updateCommand(id: string, options: any) {
     }
 
     const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
-    const metadataPath = join(devcrumbsDir, typeFolder, `${id}.json`);
-    const descriptionPath = join(devcrumbsDir, typeFolder, `${id}.md`);
+    const metadataPath = join(devstepsir, typeFolder, `${id}.json`);
+    const descriptionPath = join(devstepsir, typeFolder, `${id}.md`);
 
     if (!existsSync(metadataPath)) {
       spinner.fail('Item not found');
@@ -273,7 +273,7 @@ export async function updateCommand(id: string, options: any) {
       writeFileSync(descriptionPath, existing + options.appendDescription);
     }
 
-    const indexPath = join(devcrumbsDir, 'index.json');
+    const indexPath = join(devstepsir, 'index.json');
     const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
     const itemIndex = index.items.findIndex((i: any) => i.id === id);
@@ -308,7 +308,7 @@ export async function updateCommand(id: string, options: any) {
     }
 
     // Git hints
-    const configPath = join(devcrumbsDir, 'config.json');
+    const configPath = join(devstepsir, 'config.json');
     const config = JSON.parse(readFileSync(configPath, 'utf-8'));
     if (config.settings.git_integration) {
       if (options.status === 'done') {
@@ -319,7 +319,7 @@ export async function updateCommand(id: string, options: any) {
           const parentParsed = parseItemId(parentId);
           if (parentParsed) {
             const parentFolder = TYPE_TO_DIRECTORY[parentParsed.type];
-            const parentPath = join(devcrumbsDir, parentFolder, `${parentId}.json`);
+            const parentPath = join(devstepsir, parentFolder, `${parentId}.json`);
             if (existsSync(parentPath)) {
               const parentMeta = JSON.parse(readFileSync(parentPath, 'utf-8'));
               const siblings = parentMeta.linked_items['implemented-by'] || [];
@@ -329,7 +329,7 @@ export async function updateCommand(id: string, options: any) {
                 const sibParsed = parseItemId(siblingId);
                 if (sibParsed) {
                   const sibFolder = TYPE_TO_DIRECTORY[sibParsed.type];
-                  const sibPath = join(devcrumbsDir, sibFolder, `${siblingId}.json`);
+                  const sibPath = join(devstepsir, sibFolder, `${siblingId}.json`);
                   if (existsSync(sibPath)) {
                     const sibMeta = JSON.parse(readFileSync(sibPath, 'utf-8'));
                     if (sibMeta.status !== 'done' && sibMeta.status !== 'cancelled') {
@@ -368,7 +368,7 @@ export async function linkCommand(
   const spinner = ora('Creating link...').start();
 
   try {
-    const devcrumbsDir = getDevStepsDir();
+    const devstepsir = getDevStepsDir();
 
     const sourceParsed = parseItemId(sourceId);
     const targetParsed = parseItemId(targetId);
@@ -380,8 +380,8 @@ export async function linkCommand(
 
     const sourceFolder = TYPE_TO_DIRECTORY[sourceParsed.type];
     const targetFolder = TYPE_TO_DIRECTORY[targetParsed.type];
-    const sourcePath = join(devcrumbsDir, sourceFolder, `${sourceId}.json`);
-    const targetPath = join(devcrumbsDir, targetFolder, `${targetId}.json`);
+    const sourcePath = join(devstepsir, sourceFolder, `${sourceId}.json`);
+    const targetPath = join(devstepsir, targetFolder, `${targetId}.json`);
 
     if (!existsSync(sourcePath) || !existsSync(targetPath)) {
       spinner.fail('Item(s) not found');
@@ -392,7 +392,7 @@ export async function linkCommand(
     const targetMetadata = JSON.parse(readFileSync(targetPath, 'utf-8'));
 
     // Load project config for methodology
-    const configPath = join(devcrumbsDir, 'config.json');
+    const configPath = join(devstepsir, 'config.json');
     const config = JSON.parse(readFileSync(configPath, 'utf-8'));
     const methodology: Methodology = config.settings?.methodology || 'hybrid';
 
@@ -459,12 +459,12 @@ export async function searchCommand(query: string, options: any) {
   const spinner = ora('Searching...').start();
 
   try {
-    const devcrumbsDir = getDevStepsDir();
+    const devstepsir = getDevStepsDir();
     const queryLower = query.toLowerCase();
     const results: any[] = [];
 
     // Read config to get item types
-    const configPath = join(devcrumbsDir, 'config.json');
+    const configPath = join(devstepsir, 'config.json');
     const config = JSON.parse(readFileSync(configPath, 'utf-8'));
 
     const folders = options.type
@@ -472,7 +472,7 @@ export async function searchCommand(query: string, options: any) {
       : config.settings.item_types.map((t: ItemType) => TYPE_TO_DIRECTORY[t]);
 
     for (const folder of folders) {
-      const folderPath = join(devcrumbsDir, folder);
+      const folderPath = join(devstepsir, folder);
       if (!existsSync(folderPath)) continue;
 
       const files = readdirSync(folderPath).filter((f) => f.endsWith('.json'));
@@ -527,9 +527,9 @@ export async function searchCommand(query: string, options: any) {
 
 export async function statusCommand(options: any) {
   try {
-    const devcrumbsDir = getDevStepsDir();
-    const configPath = join(devcrumbsDir, 'config.json');
-    const indexPath = join(devcrumbsDir, 'index.json');
+    const devstepsir = getDevStepsDir();
+    const configPath = join(devstepsir, 'config.json');
+    const indexPath = join(devstepsir, 'index.json');
 
     const config = JSON.parse(readFileSync(configPath, 'utf-8'));
     const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
@@ -598,7 +598,7 @@ export async function statusCommand(options: any) {
 
 export async function traceCommand(id: string, options: any) {
   try {
-    const devcrumbsDir = getDevStepsDir();
+    const devstepsir = getDevStepsDir();
     const maxDepth = Number.parseInt(options.depth, 10) || 3;
 
     function traceItem(itemId: string, depth: number, prefix = ''): void {
@@ -608,7 +608,7 @@ export async function traceCommand(id: string, options: any) {
       if (!parsed) return;
 
       const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
-      const metadataPath = join(devcrumbsDir, typeFolder, `${itemId}.json`);
+      const metadataPath = join(devstepsir, typeFolder, `${itemId}.json`);
 
       if (!existsSync(metadataPath)) return;
 
@@ -645,7 +645,7 @@ export async function exportCommand(options: any) {
   const spinner = ora('Exporting...').start();
 
   try {
-    const devcrumbsDir = getDevStepsDir();
+    const devstepsir = getDevStepsDir();
     // Export implementation similar to MCP handler
     // For brevity, using simple markdown export
 

@@ -42,7 +42,7 @@
     },
     "submenus": [
       {
-        "id": "devcrumbs.viewAndSort",
+        "id": "devsteps.viewAndSort",
         "label": "View & Sort",
         "icon": "$(ellipsis)"
       }
@@ -50,7 +50,7 @@
     "views": {
       "devsteps-explorer": [
         {
-          "id": "devcrumbs.itemsView",
+          "id": "devsteps.itemsView",
           "name": "Work Items",
           "contextualTitle": "DevSteps Work Items"
         }
@@ -58,240 +58,240 @@
     },
     "viewsWelcome": [
       {
-        "view": "devcrumbs.itemsView",
-        "contents": "No DevSteps project found in this workspace.\n\n[Initialize DevSteps Project](command:devcrumbs.initProject)\n\nOr use the Command Palette:\n• Run 'DevSteps: Initialize Project'\n• Use the CLI: `devcrumbs init`\n\nDevSteps helps you track work items, features, bugs, and requirements directly in your repository.\n\n[Learn More](https://github.com/Schnick371/devsteps)",
-        "when": "!devcrumbs.initialized"
+        "view": "devsteps.itemsView",
+        "contents": "No DevSteps project found in this workspace.\n\n[Initialize DevSteps Project](command:devsteps.initProject)\n\nOr use the Command Palette:\n• Run 'DevSteps: Initialize Project'\n• Use the CLI: `devsteps init`\n\nDevSteps helps you track work items, features, bugs, and requirements directly in your repository.\n\n[Learn More](https://github.com/Schnick371/devsteps)",
+        "when": "!devsteps.initialized"
       }
     ],
     "commands": [
       {
-        "command": "devcrumbs.initProject",
+        "command": "devsteps.initProject",
         "title": "Initialize Project",
         "category": "DevSteps",
         "icon": "$(rocket)"
       },
       {
-        "command": "devcrumbs.refreshItems",
+        "command": "devsteps.refreshItems",
         "title": "Refresh Work Items",
         "category": "DevSteps",
         "icon": "$(refresh)"
       },
       {
-        "command": "devcrumbs.viewMode.flat",
+        "command": "devsteps.viewMode.flat",
         "title": "Switch to Flat View",
         "category": "DevSteps",
         "icon": "$(list-flat)",
-        "toggled": "devcrumbs.viewMode == 'flat'"
+        "toggled": "devsteps.viewMode == 'flat'"
       },
       {
-        "command": "devcrumbs.viewMode.hierarchical",
+        "command": "devsteps.viewMode.hierarchical",
         "title": "Switch to Hierarchical View",
         "category": "DevSteps",
         "icon": "$(list-tree)",
-        "toggled": "devcrumbs.viewMode == 'hierarchical'"
+        "toggled": "devsteps.viewMode == 'hierarchical'"
       },
       {
-        "command": "devcrumbs.hierarchy.scrum",
+        "command": "devsteps.hierarchy.scrum",
         "title": "Show Scrum Hierarchy Only",
         "category": "DevSteps",
-        "toggled": "devcrumbs.hierarchy == 'scrum'"
+        "toggled": "devsteps.hierarchy == 'scrum'"
       },
       {
-        "command": "devcrumbs.hierarchy.waterfall",
+        "command": "devsteps.hierarchy.waterfall",
         "title": "Show Waterfall Hierarchy Only",
         "category": "DevSteps",
-        "toggled": "devcrumbs.hierarchy == 'waterfall'"
+        "toggled": "devsteps.hierarchy == 'waterfall'"
       },
       {
-        "command": "devcrumbs.hierarchy.both",
+        "command": "devsteps.hierarchy.both",
         "title": "Show Both Hierarchies",
         "category": "DevSteps",
-        "toggled": "devcrumbs.hierarchy == 'both'"
+        "toggled": "devsteps.hierarchy == 'both'"
       },
       {
-        "command": "devcrumbs.addItem",
+        "command": "devsteps.addItem",
         "title": "Add Work Item",
         "category": "DevSteps",
         "icon": "$(add)"
       },
       {
-        "command": "devcrumbs.openItem",
+        "command": "devsteps.openItem",
         "title": "Open Work Item",
         "category": "DevSteps"
       },
       {
-        "command": "devcrumbs.updateStatus",
+        "command": "devsteps.updateStatus",
         "title": "Update Status",
         "category": "DevSteps",
         "icon": "$(edit)"
       },
       {
-        "command": "devcrumbs.searchItems",
+        "command": "devsteps.searchItems",
         "title": "Search Work Items",
         "category": "DevSteps",
         "icon": "$(search)"
       },
       {
-        "command": "devcrumbs.showStatus",
+        "command": "devsteps.showStatus",
         "title": "Show Project Status",
         "category": "DevSteps",
         "icon": "$(graph)"
       },
       {
-        "command": "devcrumbs.showDashboard",
+        "command": "devsteps.showDashboard",
         "title": "Show Dashboard",
         "category": "DevSteps",
         "icon": "$(dashboard)"
       },
       {
-        "command": "devcrumbs.copyId",
+        "command": "devsteps.copyId",
         "title": "Copy Item ID",
         "category": "DevSteps",
         "icon": "$(copy)"
       },
       {
-        "command": "devcrumbs.revealInExplorer",
+        "command": "devsteps.revealInExplorer",
         "title": "Reveal in Explorer",
         "category": "DevSteps",
         "icon": "$(file-directory)"
       },
       {
-        "command": "devcrumbs.editProperties",
+        "command": "devsteps.editProperties",
         "title": "Edit Properties",
         "category": "DevSteps",
         "icon": "$(settings-gear)"
       },
       {
-        "command": "devcrumbs.filterByStatus",
+        "command": "devsteps.filterByStatus",
         "title": "Filter by Status",
         "category": "DevSteps",
         "icon": "$(filter)"
       },
       {
-        "command": "devcrumbs.filterByPriority",
+        "command": "devsteps.filterByPriority",
         "title": "Filter by Priority",
         "category": "DevSteps",
         "icon": "$(filter)"
       },
       {
-        "command": "devcrumbs.filterByType",
+        "command": "devsteps.filterByType",
         "title": "Filter by Type",
         "category": "DevSteps",
         "icon": "$(filter)"
       },
       {
-        "command": "devcrumbs.clearFilters",
+        "command": "devsteps.clearFilters",
         "title": "Clear All Filters",
         "category": "DevSteps",
         "icon": "$(clear-all)"
       },
       {
-        "command": "devcrumbs.sort",
+        "command": "devsteps.sort",
         "title": "Sort Items",
         "category": "DevSteps",
         "icon": "$(arrow-both)"
       },
       {
-        "command": "devcrumbs.mcp.showStatus",
+        "command": "devsteps.mcp.showStatus",
         "title": "Show MCP Server Status",
         "category": "DevSteps"
       },
       {
-        "command": "devcrumbs.showOutput",
+        "command": "devsteps.showOutput",
         "title": "Show Output Channel",
         "category": "DevSteps",
         "icon": "$(output)"
       },
       {
-        "command": "devcrumbs.clearOutput",
+        "command": "devsteps.clearOutput",
         "title": "Clear Output Channel",
         "category": "DevSteps",
         "icon": "$(clear-all)"
       },
       {
-        "command": "devcrumbs.toggleHideDone",
+        "command": "devsteps.toggleHideDone",
         "title": "Hide Completed Items",
         "category": "DevSteps",
         "icon": "$(eye)",
-        "toggled": "devcrumbs.hideDone"
+        "toggled": "devsteps.hideDone"
       }
     ],
     "keybindings": [
       {
-        "command": "devcrumbs.refreshItems",
+        "command": "devsteps.refreshItems",
         "key": "f5",
-        "when": "focusedView == devcrumbs.itemsView"
+        "when": "focusedView == devsteps.itemsView"
       },
       {
-        "command": "devcrumbs.openItem",
+        "command": "devsteps.openItem",
         "key": "enter",
-        "when": "focusedView == devcrumbs.itemsView && viewItem == workItem"
+        "when": "focusedView == devsteps.itemsView && viewItem == workItem"
       },
       {
-        "command": "devcrumbs.searchItems",
+        "command": "devsteps.searchItems",
         "key": "ctrl+shift+f",
         "mac": "cmd+shift+f",
-        "when": "focusedView == devcrumbs.itemsView"
+        "when": "focusedView == devsteps.itemsView"
       },
       {
-        "command": "devcrumbs.clearFilters",
+        "command": "devsteps.clearFilters",
         "key": "ctrl+shift+c",
         "mac": "cmd+shift+c",
-        "when": "focusedView == devcrumbs.itemsView"
+        "when": "focusedView == devsteps.itemsView"
       },
       {
-        "command": "devcrumbs.filterByStatus",
+        "command": "devsteps.filterByStatus",
         "key": "ctrl+shift+s",
         "mac": "cmd+shift+s",
-        "when": "focusedView == devcrumbs.itemsView"
+        "when": "focusedView == devsteps.itemsView"
       },
       {
-        "command": "devcrumbs.filterByPriority",
+        "command": "devsteps.filterByPriority",
         "key": "ctrl+shift+e",
         "mac": "cmd+shift+e",
-        "when": "focusedView == devcrumbs.itemsView"
+        "when": "focusedView == devsteps.itemsView"
       },
       {
-        "command": "devcrumbs.viewMode.hierarchical",
+        "command": "devsteps.viewMode.hierarchical",
         "key": "ctrl+shift+v h",
         "mac": "cmd+shift+v h",
-        "when": "focusedView == devcrumbs.itemsView"
+        "when": "focusedView == devsteps.itemsView"
       },
       {
-        "command": "devcrumbs.viewMode.flat",
+        "command": "devsteps.viewMode.flat",
         "key": "ctrl+shift+v f",
         "mac": "cmd+shift+v f",
-        "when": "focusedView == devcrumbs.itemsView"
+        "when": "focusedView == devsteps.itemsView"
       },
       {
-        "command": "devcrumbs.showDashboard",
+        "command": "devsteps.showDashboard",
         "key": "ctrl+shift+d d",
         "mac": "cmd+shift+d d",
         "when": "workspaceFolderCount > 0"
       },
       {
-        "command": "devcrumbs.addItem",
+        "command": "devsteps.addItem",
         "key": "ctrl+shift+n",
         "mac": "cmd+shift+n",
-        "when": "focusedView == devcrumbs.itemsView"
+        "when": "focusedView == devsteps.itemsView"
       },
       {
-        "command": "devcrumbs.updateStatus",
+        "command": "devsteps.updateStatus",
         "key": "ctrl+u",
         "mac": "cmd+u",
-        "when": "focusedView == devcrumbs.itemsView && viewItem == workItem"
+        "when": "focusedView == devsteps.itemsView && viewItem == workItem"
       },
       {
-        "command": "devcrumbs.editProperties",
+        "command": "devsteps.editProperties",
         "key": "ctrl+e",
         "mac": "cmd+e",
-        "when": "focusedView == devcrumbs.itemsView && viewItem == workItem"
+        "when": "focusedView == devsteps.itemsView && viewItem == workItem"
       }
     ],
     "configuration": {
       "title": "DevSteps",
       "properties": {
-        "devcrumbs.logging.level": {
+        "devsteps.logging.level": {
           "type": "string",
           "enum": ["error", "warn", "info", "debug"],
           "default": "info",
@@ -303,7 +303,7 @@
             "All messages including debug"
           ]
         },
-        "devcrumbs.logging.showOutputOnError": {
+        "devsteps.logging.showOutputOnError": {
           "type": "boolean",
           "default": true,
           "description": "Automatically show output channel when errors occur"
@@ -313,120 +313,120 @@
     "menus": {
       "view/title": [
         {
-          "command": "devcrumbs.toggleHideDone",
-          "when": "view == devcrumbs.itemsView",
+          "command": "devsteps.toggleHideDone",
+          "when": "view == devsteps.itemsView",
           "group": "navigation@1"
         },
         {
-          "command": "devcrumbs.refreshItems",
-          "when": "view == devcrumbs.itemsView",
+          "command": "devsteps.refreshItems",
+          "when": "view == devsteps.itemsView",
           "group": "navigation@2"
         },
         {
-          "command": "devcrumbs.addItem",
-          "when": "view == devcrumbs.itemsView",
+          "command": "devsteps.addItem",
+          "when": "view == devsteps.itemsView",
           "group": "navigation@3"
         },
         {
-          "command": "devcrumbs.searchItems",
-          "when": "view == devcrumbs.itemsView",
+          "command": "devsteps.searchItems",
+          "when": "view == devsteps.itemsView",
           "group": "navigation@4"
         },
         {
-          "command": "devcrumbs.showDashboard",
-          "when": "view == devcrumbs.itemsView",
+          "command": "devsteps.showDashboard",
+          "when": "view == devsteps.itemsView",
           "group": "navigation@5"
         },
         {
-          "submenu": "devcrumbs.viewAndSort",
-          "when": "view == devcrumbs.itemsView",
+          "submenu": "devsteps.viewAndSort",
+          "when": "view == devsteps.itemsView",
           "group": "1_viewsort"
         }
       ],
-      "devcrumbs.viewAndSort": [
+      "devsteps.viewAndSort": [
         {
-          "command": "devcrumbs.viewMode.flat",
+          "command": "devsteps.viewMode.flat",
           "group": "1_view@1"
         },
         {
-          "command": "devcrumbs.viewMode.hierarchical",
+          "command": "devsteps.viewMode.hierarchical",
           "group": "1_view@2"
         },
         {
-          "command": "devcrumbs.hierarchy.scrum",
+          "command": "devsteps.hierarchy.scrum",
           "group": "2_hierarchy@1"
         },
         {
-          "command": "devcrumbs.hierarchy.waterfall",
+          "command": "devsteps.hierarchy.waterfall",
           "group": "2_hierarchy@2"
         },
         {
-          "command": "devcrumbs.hierarchy.both",
+          "command": "devsteps.hierarchy.both",
           "group": "2_hierarchy@3"
         },
         {
-          "command": "devcrumbs.sort",
+          "command": "devsteps.sort",
           "group": "3_sort@1"
         },
         {
-          "command": "devcrumbs.filterByStatus",
+          "command": "devsteps.filterByStatus",
           "group": "4_filter@1"
         },
         {
-          "command": "devcrumbs.filterByPriority",
+          "command": "devsteps.filterByPriority",
           "group": "4_filter@2"
         },
         {
-          "command": "devcrumbs.filterByType",
+          "command": "devsteps.filterByType",
           "group": "4_filter@3"
         },
         {
-          "command": "devcrumbs.clearFilters",
+          "command": "devsteps.clearFilters",
           "group": "4_filter@4"
         }
       ],
       "view/item/context": [
         {
-          "command": "devcrumbs.openItem",
-          "when": "view == devcrumbs.itemsView && viewItem == workItem",
+          "command": "devsteps.openItem",
+          "when": "view == devsteps.itemsView && viewItem == workItem",
           "group": "1_navigation@1"
         },
         {
-          "command": "devcrumbs.revealInExplorer",
-          "when": "view == devcrumbs.itemsView && viewItem == workItem",
+          "command": "devsteps.revealInExplorer",
+          "when": "view == devsteps.itemsView && viewItem == workItem",
           "group": "1_navigation@2"
         },
         {
-          "command": "devcrumbs.updateStatus",
-          "when": "view == devcrumbs.itemsView && viewItem == workItem",
+          "command": "devsteps.updateStatus",
+          "when": "view == devsteps.itemsView && viewItem == workItem",
           "group": "2_modify@1"
         },
         {
-          "command": "devcrumbs.editProperties",
-          "when": "view == devcrumbs.itemsView && viewItem == workItem",
+          "command": "devsteps.editProperties",
+          "when": "view == devsteps.itemsView && viewItem == workItem",
           "group": "2_modify@2"
         },
         {
-          "command": "devcrumbs.copyId",
-          "when": "view == devcrumbs.itemsView && viewItem == workItem",
+          "command": "devsteps.copyId",
+          "when": "view == devsteps.itemsView && viewItem == workItem",
           "group": "9_utilities@1"
         }
       ],
       "commandPalette": [
         {
-          "command": "devcrumbs.openItem",
+          "command": "devsteps.openItem",
           "when": "false"
         },
         {
-          "command": "devcrumbs.copyId",
+          "command": "devsteps.copyId",
           "when": "false"
         },
         {
-          "command": "devcrumbs.revealInExplorer",
+          "command": "devsteps.revealInExplorer",
           "when": "false"
         },
         {
-          "command": "devcrumbs.editProperties",
+          "command": "devsteps.editProperties",
           "when": "false"
         }
       ]
@@ -450,8 +450,8 @@
   "devDependencies": {
     "@types/node": "^24.10.1",
     "@types/vscode": "^1.95.0",
-    "@vscode/vsce": "^3.2.1",
-    "esbuild": "^0.24.2",
+    "@vscode/vsce": "^3.7.1",
+    "esbuild": "^0.27.0",
     "typescript": "^5.9.3"
   },
   "repository": {

@@ -14,7 +14,7 @@ export async function contextHandler(
 ): Promise<{ success: boolean; context?: unknown; message?: string; error?: string }> {
   const level = args.level || 'quick';
   const cwd = process.cwd();
-  const devcrumbsDir = path.join(cwd, '.devsteps');
+  const devstepsDir = path.join(cwd, '.devsteps');
 
   try {
     // Currently only quick level is implemented
@@ -25,7 +25,7 @@ export async function contextHandler(
       };
     }
 
-    const context = await getQuickContext(cwd, devcrumbsDir);
+    const context = await getQuickContext(cwd, devstepsDir);
 
     return {
       success: true,

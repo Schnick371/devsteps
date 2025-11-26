@@ -14,8 +14,8 @@ tools: ['runCommands', 'runTasks', 'edit', 'search', 'GitKraken/*', 'tavily/*', 
 ## Step 1: Review
 
 ```
-#mcp_devsteps_devsteps-status --detailed
-#mcp_devsteps_devsteps-list --status draft --eisenhower urgent-important
+#mcp_devsteps_status --detailed
+#mcp_devsteps_list --status draft --eisenhower urgent-important
 ```
 
 **Show Q1 items first, highlight blockers, discuss priorities.**
@@ -26,13 +26,13 @@ tools: ['runCommands', 'runTasks', 'edit', 'search', 'GitKraken/*', 'tavily/*', 
 
 **Default: START IMMEDIATELY with highest priority**
 - "Starting <ID> because <reason>"
-- Check dependencies: `#mcp_devsteps_devsteps-trace <ID>`
+- Check dependencies: `#mcp_devsteps_trace <ID>`
 - Verify not blocked
 
 ## Step 3: Understand
 
 ```
-#mcp_devsteps_devsteps-get <ID>
+#mcp_devsteps_get <ID>
 ```
 
 **Review:** Parent items, dependencies, tests needed
@@ -47,7 +47,7 @@ tools: ['runCommands', 'runTasks', 'edit', 'search', 'GitKraken/*', 'tavily/*', 
 ## Step 4: Begin
 
 ```
-#mcp_devsteps_devsteps-update <ID> --status in-progress
+#mcp_devsteps_update <ID> --status in-progress
 ```
 
 **During work:** Document decisions, link items, tests in parallel, check `problems`
@@ -69,7 +69,7 @@ tools: ['runCommands', 'runTasks', 'edit', 'search', 'GitKraken/*', 'tavily/*', 
 
 **Mark done + commit:**
 ```
-#mcp_devsteps_devsteps-update <ID> --status done --description "<summary + decisions>"
+#mcp_devsteps_update <ID> --status done --description "<summary + decisions>"
 git commit -m "type(scope): subject\n\nRefs: <ID>"
 ```
 
@@ -77,8 +77,8 @@ git commit -m "type(scope): subject\n\nRefs: <ID>"
 
 **If completing SPIKE:**
 - Review findings in description
-- Create Stories from research insights: `#mcp_devsteps_devsteps-add story "<title>" --description "<from spike findings>"`
-- Link to Epic: `#mcp_devsteps_devsteps-link STORY-X implements EPIC-Y`
+- Create Stories from research insights: `#mcp_devsteps_add story "<title>" --description "<from spike findings>"`
+- Link to Epic: `#mcp_devsteps_link STORY-X implements EPIC-Y`
 - Estimate Stories with confidence from spike learnings
 
 ## Step 7: Next

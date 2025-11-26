@@ -137,29 +137,29 @@ function checkGit(): CheckResult {
 }
 
 /**
- * Check devcrumbs project structure
+ * Check devstepsproject structure
  */
 function checkDevStepsProject(): CheckResult {
-  const devcrumbsDir = join(process.cwd(), '.devsteps');
+  const devstepsir = join(process.cwd(), '.devsteps');
 
-  if (!existsSync(devcrumbsDir)) {
+  if (!existsSync(devstepsir)) {
     return {
       name: 'DevSteps Project',
       status: 'fail',
       message: 'Not initialized',
-      fix: 'Run: devcrumbs init <project-name>',
+      fix: 'Run: devstepsinit <project-name>',
     };
   }
 
-  const configPath = join(devcrumbsDir, 'config.json');
-  const indexPath = join(devcrumbsDir, 'index.json');
+  const configPath = join(devstepsir, 'config.json');
+  const indexPath = join(devstepsir, 'index.json');
 
   if (!existsSync(configPath) || !existsSync(indexPath)) {
     return {
       name: 'DevSteps Project',
       status: 'fail',
       message: 'Corrupt project structure',
-      fix: 'Reinitialize: rm -rf .devsteps && devcrumbs init',
+      fix: 'Reinitialize: rm -rf .devsteps && devstepsinit',
     };
   }
 
@@ -259,7 +259,7 @@ function checkMCPConfig(): CheckResult {
     name: 'MCP Configuration',
     status: 'warn',
     message: 'Not configured',
-    fix: 'Run: devcrumbs setup',
+    fix: 'Run: devstepssetup',
   };
 }
 

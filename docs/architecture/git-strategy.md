@@ -366,7 +366,7 @@ Commit → Task → Epic → Business Goal
 
 ```bash
 # 1. Mark Epic in-progress
-devcrumbs update EPIC-005 --status in-progress
+devsteps update EPIC-005 --status in-progress
 
 # 2. Create branch
 git checkout -b epic/EPIC-005-workflow-governance
@@ -375,7 +375,7 @@ git checkout -b epic/EPIC-005-workflow-governance
 git push -u origin epic/EPIC-005-workflow-governance
 
 # 4. Start implementing tasks
-devcrumbs list --implements EPIC-005
+devsteps list --implements EPIC-005
 ```
 
 ### Daily Development
@@ -388,7 +388,7 @@ git checkout epic/EPIC-005-workflow-governance
 git pull
 
 # 3. Work on task
-devcrumbs update TASK-038 --status in-progress
+devsteps update TASK-038 --status in-progress
 # ... code changes ...
 
 # 4. Commit
@@ -407,7 +407,7 @@ git push
 
 ```bash
 # 1. Verify all tasks done
-devcrumbs list --implements EPIC-005 --status done
+devsteps list --implements EPIC-005 --status done
 
 # 2. Merge main (get latest)
 git checkout epic/EPIC-005-workflow-governance
@@ -439,7 +439,7 @@ Adds relationship validation and git workflow documentation.
 git checkout main
 git pull
 git branch -d epic/EPIC-005-workflow-governance
-devcrumbs update EPIC-005 --status done
+devsteps update EPIC-005 --status done
 ```
 
 ## Version History

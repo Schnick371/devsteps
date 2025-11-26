@@ -326,7 +326,7 @@ class WorkItemNode extends TreeNode {
     treeItem.resourceUri = createItemUri(this.item.id, this.item.status, this.item.priority);
 
     treeItem.command = {
-      command: 'devcrumbs.openItem',
+      command: 'devsteps.openItem',
       title: 'Open Item',
       arguments: [this.item.id],
     };
@@ -558,8 +558,6 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    */
   private getTotalItemCount(): number {
     try {
-      const indexPath = vscode.Uri.joinPath(this.workspaceRoot, '.devsteps', 'index.json');
-      const indexData = vscode.workspace.fs.readFile(indexPath);
       // Synchronous operation not available, use cached count or estimate
       // For now, return from last loaded data
       return this.lastTotalCount || 0;

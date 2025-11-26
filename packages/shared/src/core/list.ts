@@ -28,14 +28,14 @@ export interface ListItemsResult {
  * Core business logic for listing items with filters
  */
 export async function listItems(
-  devcrumbsDir: string,
+  devstepsir: string,
   args: ListItemsArgs = {}
 ): Promise<ListItemsResult> {
-  if (!existsSync(devcrumbsDir)) {
+  if (!existsSync(devstepsir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
-  const indexPath = join(devcrumbsDir, 'index.json');
+  const indexPath = join(devstepsir, 'index.json');
   const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
   let items = [...index.items];
@@ -56,7 +56,7 @@ export async function listItems(
   if (args.assignee) {
     // Load full metadata for assignee filter
     items = items.filter((i) => {
-      const metadataPath = join(devcrumbsDir, TYPE_TO_DIRECTORY[i.type], `${i.id}.json`);
+      const metadataPath = join(devstepsir, TYPE_TO_DIRECTORY[i.type], `${i.id}.json`);
       if (!existsSync(metadataPath)) return false;
       const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
       return metadata.assignee === args.assignee;
@@ -67,7 +67,7 @@ export async function listItems(
     // Load full metadata for tags filter
     const filterTags = args.tags;
     items = items.filter((i) => {
-      const metadataPath = join(devcrumbsDir, TYPE_TO_DIRECTORY[i.type], `${i.id}.json`);
+      const metadataPath = join(devstepsir, TYPE_TO_DIRECTORY[i.type], `${i.id}.json`);
       if (!existsSync(metadataPath)) return false;
       const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
       return filterTags.every((tag) => metadata.tags.includes(tag));
@@ -77,7 +77,7 @@ export async function listItems(
   if (args.eisenhower) {
     // Load full metadata for eisenhower filter
     items = items.filter((i) => {
-      const metadataPath = join(devcrumbsDir, TYPE_TO_DIRECTORY[i.type], `${i.id}.json`);
+      const metadataPath = join(devstepsir, TYPE_TO_DIRECTORY[i.type], `${i.id}.json`);
       if (!existsSync(metadataPath)) return false;
       const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
       return metadata.eisenhower === args.eisenhower;

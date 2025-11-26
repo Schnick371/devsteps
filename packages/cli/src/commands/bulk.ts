@@ -16,7 +16,7 @@ function getDevStepsDir(): string {
     console.error(
       chalk.red('Error:'),
       'Project not initialized. Run',
-      chalk.cyan('devcrumbs init'),
+      chalk.cyan('devstepsinit'),
       'first.'
     );
     process.exit(1);
@@ -56,7 +56,7 @@ export async function bulkUpdateCommand(itemIds: string[], options: any) {
   const spinner = ora(`Updating ${itemIds.length} item(s)...`).start();
 
   try {
-    const devcrumbsDir = getDevStepsDir();
+    const devstepsir = getDevStepsDir();
 
     const updates: Partial<ItemMetadata> = {};
     if (options.status) updates.status = options.status;
@@ -64,7 +64,7 @@ export async function bulkUpdateCommand(itemIds: string[], options: any) {
     if (options.assignee) updates.assignee = options.assignee;
     if (options.category) updates.category = options.category;
 
-    const result = await bulkUpdateItems(devcrumbsDir, itemIds, updates);
+    const result = await bulkUpdateItems(devstepsir, itemIds, updates);
 
     spinner.stop();
     displayBulkResult(result, 'Updated');
@@ -84,8 +84,8 @@ export async function bulkTagAddCommand(itemIds: string[], tags: string[]) {
   const spinner = ora(`Adding tags to ${itemIds.length} item(s)...`).start();
 
   try {
-    const devcrumbsDir = getDevStepsDir();
-    const result = await bulkAddTags(devcrumbsDir, itemIds, tags);
+    const devstepsir = getDevStepsDir();
+    const result = await bulkAddTags(devstepsir, itemIds, tags);
 
     spinner.stop();
     displayBulkResult(result, `Added tags: ${tags.join(', ')}`);
@@ -105,8 +105,8 @@ export async function bulkTagRemoveCommand(itemIds: string[], tags: string[]) {
   const spinner = ora(`Removing tags from ${itemIds.length} item(s)...`).start();
 
   try {
-    const devcrumbsDir = getDevStepsDir();
-    const result = await bulkRemoveTags(devcrumbsDir, itemIds, tags);
+    const devstepsir = getDevStepsDir();
+    const result = await bulkRemoveTags(devstepsir, itemIds, tags);
 
     spinner.stop();
     displayBulkResult(result, `Removed tags: ${tags.join(', ')}`);

@@ -11,8 +11,8 @@ export interface GetItemResult {
 /**
  * Core business logic for getting an item
  */
-export async function getItem(devcrumbsDir: string, itemId: string): Promise<GetItemResult> {
-  if (!existsSync(devcrumbsDir)) {
+export async function getItem(devstepsir: string, itemId: string): Promise<GetItemResult> {
+  if (!existsSync(devstepsir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
@@ -22,8 +22,8 @@ export async function getItem(devcrumbsDir: string, itemId: string): Promise<Get
   }
 
   const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
-  const metadataPath = join(devcrumbsDir, typeFolder, `${itemId}.json`);
-  const descriptionPath = join(devcrumbsDir, typeFolder, `${itemId}.md`);
+  const metadataPath = join(devstepsir, typeFolder, `${itemId}.json`);
+  const descriptionPath = join(devstepsir, typeFolder, `${itemId}.md`);
 
   if (!existsSync(metadataPath)) {
     throw new Error(`Item not found: ${itemId}`);

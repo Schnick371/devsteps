@@ -83,10 +83,10 @@ export async function analyzePackages(projectDir: string): Promise<PackageInfo[]
 /**
  * Get item counts from index (with caching)
  */
-export async function getItemCounts(devcrumbsDir: string): Promise<ItemCounts> {
+export async function getItemCounts(devstepsir: string): Promise<ItemCounts> {
   const cache = getCache();
-  const cacheKey = `item_counts:${devcrumbsDir}`;
-  const indexPath = path.join(devcrumbsDir, 'index.json');
+  const cacheKey = `item_counts:${devstepsir}`;
+  const indexPath = path.join(devstepsir, 'index.json');
 
   // Try cache first
   const cached = cache.get<ItemCounts>(cacheKey, CACHE_CONFIG.ITEM_COUNTS_TTL, indexPath);
@@ -121,10 +121,10 @@ export async function getItemCounts(devcrumbsDir: string): Promise<ItemCounts> {
 /**
  * Get recent updates (last N days) (with caching)
  */
-export async function getRecentUpdates(devcrumbsDir: string, days: number): Promise<RecentUpdate[]> {
+export async function getRecentUpdates(devstepsir: string, days: number): Promise<RecentUpdate[]> {
   const cache = getCache();
-  const cacheKey = `recent_updates:${devcrumbsDir}:${days}`;
-  const indexPath = path.join(devcrumbsDir, 'index.json');
+  const cacheKey = `recent_updates:${devstepsir}:${days}`;
+  const indexPath = path.join(devstepsir, 'index.json');
 
   // Try cache first
   const cached = cache.get<RecentUpdate[]>(cacheKey, CACHE_CONFIG.RECENT_UPDATES_TTL, indexPath);
@@ -164,10 +164,10 @@ export async function getRecentUpdates(devcrumbsDir: string, days: number): Prom
 /**
  * Read PROJECT.md if exists (with caching)
  */
-export async function readProjectMd(devcrumbsDir: string): Promise<QuickContext | null> {
+export async function readProjectMd(devstepsir: string): Promise<QuickContext | null> {
   const cache = getCache();
-  const cacheKey = `project_md:${devcrumbsDir}`;
-  const projectPath = path.join(devcrumbsDir, 'PROJECT.md');
+  const cacheKey = `project_md:${devstepsir}`;
+  const projectPath = path.join(devstepsir, 'PROJECT.md');
 
   // Try cache first
   const cached = cache.get<QuickContext | null>(cacheKey, CACHE_CONFIG.PROJECT_MD_TTL, projectPath);
@@ -229,12 +229,12 @@ export function estimateTokens(obj: unknown): number {
  */
 export async function getQuickContext(
   projectDir: string,
-  devcrumbsDir: string
+  devstepsir: string
 ): Promise<ContextResponse> {
   const packages = await analyzePackages(projectDir);
-  const activeItems = await getItemCounts(devcrumbsDir);
-  const recentUpdates = await getRecentUpdates(devcrumbsDir, 7);
-  const staticContext = await readProjectMd(devcrumbsDir);
+  const activeItems = await getItemCounts(devstepsir);
+  const recentUpdates = await getRecentUpdates(devstepsir, 7);
+  const staticContext = await readProjectMd(devstepsir);
 
   const response: ContextResponse = {
     context_level: 'quick',

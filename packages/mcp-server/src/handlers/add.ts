@@ -3,13 +3,13 @@ import { type AddItemArgs, addItem } from '@schnick371/devsteps-shared';
 import simpleGit from 'simple-git';
 
 /**
- * Add a new item to devcrumbs (MCP wrapper)
+ * Add a new item to devsteps (MCP wrapper)
  */
 export default async function addHandler(args: AddItemArgs) {
-  const devcrumbsDir = join(process.cwd(), '.devsteps');
+  const devstepsDir = join(process.cwd(), '.devsteps');
 
   // Use shared core logic
-  const result = await addItem(devcrumbsDir, args);
+  const result = await addItem(devstepsDir, args);
 
   // Git hints (MCP-specific presentation)
   let gitHint = '';

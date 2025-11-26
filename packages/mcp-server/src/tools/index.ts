@@ -1,9 +1,9 @@
 import type { Tool } from '@modelcontextprotocol/sdk/types.js';
 
 export const initTool: Tool = {
-  name: 'devsteps-init',
+  name: 'init',
   description:
-    'Initialize a new devcrumbs project. Creates .devsteps directory structure with config and index files. Supports Scrum, Waterfall, or Hybrid methodologies.',
+    'Initialize a new devsteps project. Creates .devsteps directory structure with config and index files. Supports Scrum, Waterfall, or Hybrid methodologies.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -35,9 +35,9 @@ export const initTool: Tool = {
 };
 
 export const addTool: Tool = {
-  name: 'devsteps-add',
+  name: 'add',
   description:
-    'Add a new item to the devcrumbs. Item types depend on methodology: Scrum (epic/story/task/bug/spike/test), Waterfall (requirement/feature/task/bug/test), Hybrid (all types). Creates both JSON metadata and Markdown description files.',
+    'Add a new item to the devsteps. Item types depend on methodology: Scrum (epic/story/task/bug/spike/test), Waterfall (requirement/feature/task/bug/test), Hybrid (all types). Creates both JSON metadata and Markdown description files.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -94,7 +94,7 @@ export const addTool: Tool = {
 };
 
 export const getTool: Tool = {
-  name: 'devsteps-get',
+  name: 'get',
   description:
     'Get detailed information about a specific item including metadata and full description.',
   inputSchema: {
@@ -110,7 +110,7 @@ export const getTool: Tool = {
 };
 
 export const listTool: Tool = {
-  name: 'devsteps-list',
+  name: 'list',
   description: 'List items with optional filtering by type, status, priority, assignee, or tags.',
   inputSchema: {
     type: 'object',
@@ -157,7 +157,7 @@ export const listTool: Tool = {
 };
 
 export const updateTool: Tool = {
-  name: 'devsteps-update',
+  name: 'update',
   description:
     'Update an existing item. Can update any field including status, priority, assignee, description, etc.',
   inputSchema: {
@@ -228,7 +228,7 @@ export const updateTool: Tool = {
 };
 
 export const linkTool: Tool = {
-  name: 'devsteps-link',
+  name: 'link',
   description:
     'Create a relationship between two items. Supports: implements, tested-by, blocks, relates-to, depends-on.',
   inputSchema: {
@@ -265,7 +265,7 @@ export const linkTool: Tool = {
 };
 
 export const searchTool: Tool = {
-  name: 'devsteps-search',
+  name: 'search',
   description: 'Full-text search across all items (titles and descriptions). Supports wildcards (*), multi-word queries (AND logic), and substring matching.',
   inputSchema: {
     type: 'object',
@@ -289,7 +289,7 @@ export const searchTool: Tool = {
 };
 
 export const statusTool: Tool = {
-  name: 'devsteps-status',
+  name: 'status',
   description:
     'Get project overview with statistics: total items, breakdown by type/status/priority, recent updates.',
   inputSchema: {
@@ -304,7 +304,7 @@ export const statusTool: Tool = {
 };
 
 export const traceTool: Tool = {
-  name: 'devsteps-trace',
+  name: 'trace',
   description:
     'Show traceability tree for an item: all related items (requirements, features, tests) with relationship types.',
   inputSchema: {
@@ -324,7 +324,7 @@ export const traceTool: Tool = {
 };
 
 export const exportTool: Tool = {
-  name: 'devsteps-export',
+  name: 'export',
   description: 'Export project data as formatted report (Markdown, JSON, or HTML).',
   inputSchema: {
     type: 'object',
@@ -352,7 +352,7 @@ export const exportTool: Tool = {
 };
 
 export const archiveTool: Tool = {
-  name: 'devsteps-archive',
+  name: 'archive',
   description:
     'Archive a single item by moving it to .devsteps/archive/. Archived items are removed from active index but remain readable.',
   inputSchema: {
@@ -368,7 +368,7 @@ export const archiveTool: Tool = {
 };
 
 export const purgeTool: Tool = {
-  name: 'devsteps-purge',
+  name: 'purge',
   description:
     'Bulk archive items with filters. Default: archives all done/cancelled items. Items are moved to .devsteps/archive/.',
   inputSchema: {
@@ -401,7 +401,7 @@ export const purgeTool: Tool = {
 };
 
 export const contextTool: Tool = {
-  name: 'devsteps-context',
+  name: 'context',
   description:
     'Get project context for AI-assisted development. Returns curated project information combining static documentation (PROJECT.md) with dynamic analysis (packages, active items, recent updates). Reduces token usage by 70%+ compared to manual code analysis. Three levels available: quick (< 5K tokens, default), standard (< 20K tokens), deep (< 50K tokens).',
   inputSchema: {
@@ -417,7 +417,7 @@ export const contextTool: Tool = {
 };
 
 export const healthCheckTool: Tool = {
-  name: 'devsteps-health',
+  name: 'health',
   description:
     'Get server health status with comprehensive metrics. Returns: status (healthy/degraded/unhealthy), uptime, memory usage, request counts, error rate, average response time. Essential for monitoring and production deployments.',
   inputSchema: {
@@ -427,7 +427,7 @@ export const healthCheckTool: Tool = {
 };
 
 export const metricsTool: Tool = {
-  name: 'devsteps-metrics',
+  name: 'metrics',
   description:
     'Export Prometheus metrics for monitoring and observability. Returns metrics in Prometheus text format (default) or JSON. Includes: request counters, duration histograms, error rates, memory usage, uptime. Use format parameter to specify output format.',
   inputSchema: {

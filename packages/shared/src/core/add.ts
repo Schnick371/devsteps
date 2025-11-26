@@ -29,18 +29,18 @@ export interface AddItemResult {
 }
 
 /**
- * Core business logic for adding a new item to devcrumbs
+ * Core business logic for adding a new item to devsteps
  * Pure function that handles all file I/O and validation
  */
-export async function addItem(devcrumbsDir: string, args: AddItemArgs): Promise<AddItemResult> {
+export async function addItem(devstepsir: string, args: AddItemArgs): Promise<AddItemResult> {
   // Check if initialized
-  if (!existsSync(devcrumbsDir)) {
+  if (!existsSync(devstepsir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
   // Read config and index
-  const configPath = join(devcrumbsDir, 'config.json');
-  const indexPath = join(devcrumbsDir, 'index.json');
+  const configPath = join(devstepsir, 'config.json');
+  const indexPath = join(devstepsir, 'index.json');
 
   const config: DevStepsConfig = JSON.parse(readFileSync(configPath, 'utf-8'));
   const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
@@ -108,7 +108,7 @@ export async function addItem(devcrumbsDir: string, args: AddItemArgs): Promise<
   };
 
   // Save metadata
-  const itemDir = join(devcrumbsDir, typeFolder);
+  const itemDir = join(devstepsir, typeFolder);
   const metadataPath = join(itemDir, `${itemId}.json`);
   const descriptionPath = join(itemDir, `${itemId}.md`);
 

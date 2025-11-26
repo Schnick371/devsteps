@@ -11,9 +11,9 @@ export default async function searchHandler(args: {
   type?: ItemType;
   limit?: number;
 }) {
-  const devcrumbsDir = join(process.cwd(), '.devsteps');
+  const devstepsDir = join(process.cwd(), '.devsteps');
 
-  if (!existsSync(devcrumbsDir)) {
+  if (!existsSync(devstepsDir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
@@ -42,8 +42,8 @@ export default async function searchHandler(args: {
   };
 
   // Read config to get available item types
-  const configPath = join(devcrumbsDir, 'config.json');
-  const indexPath = join(devcrumbsDir, 'index.json');
+  const configPath = join(devstepsDir, 'config.json');
+  const indexPath = join(devstepsDir, 'index.json');
 
   const config = JSON.parse(readFileSync(configPath, 'utf-8'));
   const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
@@ -56,7 +56,7 @@ export default async function searchHandler(args: {
     : config.settings.item_types.map((t: ItemType) => TYPE_TO_DIRECTORY[t]);
 
   for (const folder of folders) {
-    const folderPath = join(devcrumbsDir, folder);
+    const folderPath = join(devstepsDir, folder);
     if (!existsSync(folderPath)) continue;
 
     const files = readdirSync(folderPath).filter((f) => f.endsWith('.json'));

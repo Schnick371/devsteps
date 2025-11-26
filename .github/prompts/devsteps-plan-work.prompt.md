@@ -38,7 +38,7 @@ tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'micr
 
 2. **Search existing project** for related patterns:
    ```
-   #mcp_devsteps_devsteps-search <keywords>
+   #mcp_devsteps_search <keywords>
    search <relevant modules>
    ```
 
@@ -74,13 +74,13 @@ tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'micr
 
 **Create:**
 ```
-#mcp_devsteps_devsteps-add <type> "<title>" --priority <p> --eisenhower <q> --tags <t>
+#mcp_devsteps_add <type> "<title>" --priority <p> --eisenhower <q> --tags <t>
 ```
 
 ### Step 5: Link Relationships
 
 ```
-#mcp_devsteps_devsteps-link <ID1> implements|depends-on|tested-by <ID2>
+#mcp_devsteps_link <ID1> implements|depends-on|tested-by <ID2>
 ```
 
 **Ensure:** Hierarchies clear, dependencies explicit, tests linked
@@ -92,7 +92,7 @@ tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'micr
 - Dependencies identified?
 
 ```
-#mcp_devsteps_devsteps-status --detailed
+#mcp_devsteps_status --detailed
 ```
 
 ## Key Questions

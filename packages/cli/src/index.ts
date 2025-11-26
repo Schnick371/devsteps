@@ -21,7 +21,7 @@ program.name('devsteps').description('AI-powered developer task tracking system'
 // Initialize project
 program
   .command('init')
-  .description('Initialize a new devcrumbs project')
+  .description('Initialize a new devstepsproject')
   .argument('[project-name]', 'Project name')
   .option('-p, --path <path>', 'Project path (default: current directory)')
   .option('-a, --author <email>', 'Default author email')

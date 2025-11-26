@@ -5,14 +5,14 @@ import { join } from 'node:path';
  * Get project status and statistics
  */
 export default async function statusHandler(args: { detailed?: boolean }) {
-  const devcrumbsDir = join(process.cwd(), '.devsteps');
+  const devstepsDir = join(process.cwd(), '.devsteps');
 
-  if (!existsSync(devcrumbsDir)) {
+  if (!existsSync(devstepsDir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
-  const configPath = join(devcrumbsDir, 'config.json');
-  const indexPath = join(devcrumbsDir, 'index.json');
+  const configPath = join(devstepsDir, 'config.json');
+  const indexPath = join(devstepsDir, 'index.json');
 
   const config = JSON.parse(readFileSync(configPath, 'utf-8'));
   const index = JSON.parse(readFileSync(indexPath, 'utf-8'));

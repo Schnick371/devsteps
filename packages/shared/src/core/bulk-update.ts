@@ -12,13 +12,13 @@ export interface BulkUpdateResult {
 
 /**
  * Bulk update multiple items at once
- * @param devcrumbsDir Path to .devsteps directory
+ * @param devstepsir Path to .devsteps directory
  * @param itemIds Array of item IDs to update
  * @param updates Partial item metadata to apply to all items
  * @returns Result with success and failure lists
  */
 export async function bulkUpdateItems(
-  devcrumbsDir: string,
+  devstepsir: string,
   itemIds: string[],
   updates: Partial<ItemMetadata>
 ): Promise<BulkUpdateResult> {
@@ -30,7 +30,7 @@ export async function bulkUpdateItems(
 
   for (const id of itemIds) {
     try {
-      await updateItem(devcrumbsDir, {
+      await updateItem(devstepsir, {
         id,
         ...updates,
       });
@@ -48,13 +48,13 @@ export async function bulkUpdateItems(
 
 /**
  * Bulk add tags to multiple items
- * @param devcrumbsDir Path to .devsteps directory
+ * @param devstepsir Path to .devsteps directory
  * @param itemIds Array of item IDs
  * @param tagsToAdd Tags to add
  * @returns Result with success and failure lists
  */
 export async function bulkAddTags(
-  devcrumbsDir: string,
+  devstepsir: string,
   itemIds: string[],
   tagsToAdd: string[]
 ): Promise<BulkUpdateResult> {
@@ -75,7 +75,7 @@ export async function bulkAddTags(
         throw new Error(`Invalid item ID: ${id}`);
       }
 
-      const metadataPath = join(devcrumbsDir, folder, `${id}.json`);
+      const metadataPath = join(devstepsir, folder, `${id}.json`);
       if (!existsSync(metadataPath)) {
         throw new Error(`Item ${id} not found`);
       }
@@ -94,7 +94,7 @@ export async function bulkAddTags(
       writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
 
       // Update index
-      const indexPath = join(devcrumbsDir, 'index.json');
+      const indexPath = join(devstepsir, 'index.json');
       const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
       const itemIndex = index.items.findIndex((i: { id: string }) => i.id === id);
       if (itemIndex >= 0) {
@@ -117,13 +117,13 @@ export async function bulkAddTags(
 
 /**
  * Bulk remove tags from multiple items
- * @param devcrumbsDir Path to .devsteps directory
+ * @param devstepsir Path to .devsteps directory
  * @param itemIds Array of item IDs
  * @param tagsToRemove Tags to remove
  * @returns Result with success and failure lists
  */
 export async function bulkRemoveTags(
-  devcrumbsDir: string,
+  devstepsir: string,
   itemIds: string[],
   tagsToRemove: string[]
 ): Promise<BulkUpdateResult> {
@@ -144,7 +144,7 @@ export async function bulkRemoveTags(
         throw new Error(`Invalid item ID: ${id}`);
       }
 
-      const metadataPath = join(devcrumbsDir, folder, `${id}.json`);
+      const metadataPath = join(devstepsir, folder, `${id}.json`);
       if (!existsSync(metadataPath)) {
         throw new Error(`Item ${id} not found`);
       }
@@ -158,7 +158,7 @@ export async function bulkRemoveTags(
       writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
 
       // Update index
-      const indexPath = join(devcrumbsDir, 'index.json');
+      const indexPath = join(devstepsir, 'index.json');
       const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
       const itemIndex = index.items.findIndex((i: { id: string }) => i.id === id);
       if (itemIndex >= 0) {

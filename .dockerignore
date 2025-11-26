@@ -4,7 +4,7 @@ node_modules/
 *.log
 
 # Ignore development files
-.devcrumbs/
+.devsteps
 .vscode/
 .idea/
 

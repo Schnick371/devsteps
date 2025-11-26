@@ -2,16 +2,16 @@
 # https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
 
 # Uncomment and configure preferred funding platforms
-# github: [devcrumbs]
-# patreon: devcrumbs
-# open_collective: devcrumbs
-# ko_fi: devcrumbs
-# tidelift: npm/devcrumbs
-# community_bridge: devcrumbs
-# liberapay: devcrumbs
-# issuehunt: devcrumbs
-# lfx_crowdfunding: devcrumbs
-# polar: devcrumbs
-# buy_me_a_coffee: devcrumbs
-# thanks_dev: devcrumbs
-# custom: ['https://devcrumbs.dev/sponsor']
+# github: [devsteps
+# patreon: devsteps
+# open_collective: devsteps
+# ko_fi: devsteps
+# tidelift: npm/devsteps
+# community_bridge: devsteps
+# liberapay: devsteps
+# issuehunt: devsteps
+# lfx_crowdfunding: devsteps
+# polar: devsteps
+# buy_me_a_coffee: devsteps
+# thanks_dev: devsteps
+# custom: ['https://devstepsdev/sponsor']

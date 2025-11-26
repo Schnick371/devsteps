@@ -5,7 +5,7 @@
  */
 
 import * as vscode from 'vscode';
-import { DevStepsTreeDataProvider } from './treeView/devcrumbsTreeDataProvider.js';
+import { DevStepsTreeDataProvider } from './treeView/devstepsTreeDataProvider.js';
 import { registerCommands } from './commands/index.js';
 import { McpServerManager } from './mcpServerManager.js';
 import { DevStepsDecorationProvider } from './decorationProvider.js';
@@ -41,13 +41,13 @@ export async function activate(context: vscode.ExtensionContext) {
   }
 
   // Set context key for welcome view
-  await vscode.commands.executeCommand('setContext', 'devcrumbs.initialized', hasDevSteps);
+  await vscode.commands.executeCommand('setContext', 'devstepsinitialized', hasDevSteps);
 
   // Initialize TreeView - always create provider to avoid "no data provider" error
   // Provider will show empty state if .devsteps doesn't exist
   const treeDataProvider = new DevStepsTreeDataProvider(workspaceRoot);
   
-  const treeView = vscode.window.createTreeView('devcrumbs.itemsView', {
+  const treeView = vscode.window.createTreeView('devstepsitemsView', {
     treeDataProvider,
     showCollapseAll: true,
   });
@@ -74,30 +74,30 @@ export async function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(watcher);
   
   // Watch for .devsteps directory creation to initialize TreeView
-  const devcrumbsDirWatcher = vscode.workspace.createFileSystemWatcher(
+  const devstepsirWatcher = vscode.workspace.createFileSystemWatcher(
     new vscode.RelativePattern(workspaceRoot, '.devsteps')
   );
   
-  devcrumbsDirWatcher.onDidCreate(async () => {
+  devstepsirWatcher.onDidCreate(async () => {
     logger.info('.devsteps directory created - refreshing TreeView and updating context');
-    await vscode.commands.executeCommand('setContext', 'devcrumbs.initialized', true);
+    await vscode.commands.executeCommand('setContext', 'devstepsinitialized', true);
     treeDataProvider.refresh();
   });
   
-  context.subscriptions.push(devcrumbsDirWatcher);
+  context.subscriptions.push(devstepsirWatcher);
 
   // Always register commands to avoid "command not found" errors
   registerCommands(context, treeDataProvider);
 
   // Initialize context keys for menu checkmarks
-  await vscode.commands.executeCommand('setContext', 'devcrumbs.viewMode', 'flat');
-  await vscode.commands.executeCommand('setContext', 'devcrumbs.hierarchy', 'both');
-  await vscode.commands.executeCommand('setContext', 'devcrumbs.hideDone', false);
+  await vscode.commands.executeCommand('setContext', 'devstepsviewMode', 'flat');
+  await vscode.commands.executeCommand('setContext', 'devstepshierarchy', 'both');
+  await vscode.commands.executeCommand('setContext', 'devstepshideDone', false);
 
   // Listen for configuration changes
   context.subscriptions.push(
     vscode.workspace.onDidChangeConfiguration((e) => {
-      if (e.affectsConfiguration('devcrumbs.logging')) {
+      if (e.affectsConfiguration('devstepslogging')) {
         logger.updateLoggingLevel();
       }
     })

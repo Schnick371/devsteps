@@ -1,5 +1,5 @@
 # Multi-stage Docker build for production MCP server
-FROM node:22-alpine AS builder
+FROM node:22.21.1-alpine3.22 AS builder
 
 # Install build dependencies
 RUN apk add --no-cache python3 make g++
@@ -23,11 +23,11 @@ COPY packages/shared ./packages/shared
 COPY tsconfig.json ./
 
 # Build packages
-RUN pnpm --filter @devcrumbs/shared build
-RUN pnpm --filter @devcrumbs/mcp-server build
+RUN pnpm --filter @schnick371/devsteps-shared build
+RUN pnpm --filter @schnick371/devsteps-mcp-server build
 
 # Production stage
-FROM node:22-alpine
+FROM node:22.21.1-alpine3.22
 
 # Install dumb-init for proper signal handling
 RUN apk add --no-cache dumb-init

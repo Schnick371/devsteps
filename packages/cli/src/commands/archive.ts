@@ -10,7 +10,7 @@ function getDevStepsDir(): string {
     console.error(
       chalk.red('Error:'),
       'Project not initialized. Run',
-      chalk.cyan('devcrumbs init'),
+      chalk.cyan('devstepsinit'),
       'first.'
     );
     process.exit(1);
@@ -22,8 +22,8 @@ export async function archiveCommand(id: string) {
   const spinner = ora(`Archiving ${id}...`).start();
 
   try {
-    const devcrumbsDir = getDevStepsDir();
-    const result = await archiveItem(devcrumbsDir, id);
+    const devstepsir = getDevStepsDir();
+    const result = await archiveItem(devstepsir, id);
 
     spinner.succeed(
       `Archived ${chalk.cyan(result.itemId)} (was ${chalk.gray(result.originalStatus)})`
@@ -43,9 +43,9 @@ export async function purgeCommand(options: { status?: string[]; type?: string }
   const spinner = ora('Finding items to archive...').start();
 
   try {
-    const devcrumbsDir = getDevStepsDir();
+    const devstepsir = getDevStepsDir();
 
-    const result = await purgeItems(devcrumbsDir, {
+    const result = await purgeItems(devstepsir, {
       status: options.status as
         | ('draft' | 'planned' | 'in-progress' | 'review' | 'done' | 'blocked' | 'cancelled')[]
         | undefined,

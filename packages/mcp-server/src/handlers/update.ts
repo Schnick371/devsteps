@@ -11,8 +11,8 @@ export default async function updateHandler(args: UpdateItemArgs) {
     throw new Error('Cannot specify both description and append_description simultaneously');
   }
   
-  const devcrumbsDir = join(process.cwd(), '.devsteps');
-  const result = await updateItem(devcrumbsDir, args);
+  const devstepsDir = join(process.cwd(), '.devsteps');
+  const result = await updateItem(devstepsDir, args);
 
   // Git hints (MCP-specific presentation)
   let gitHint = '';
@@ -31,7 +31,7 @@ export default async function updateHandler(args: UpdateItemArgs) {
         const parsed = parseItemId(parentId);
         if (parsed) {
           const parentFolder = TYPE_TO_DIRECTORY[parsed.type];
-          const parentPath = join(devcrumbsDir, parentFolder, `${parentId}.json`);
+          const parentPath = join(devstepsDir, parentFolder, `${parentId}.json`);
           if (existsSync(parentPath)) {
             const parentMeta = JSON.parse(readFileSync(parentPath, 'utf-8'));
             const siblings = parentMeta.linked_items['implemented-by'] || [];
@@ -42,7 +42,7 @@ export default async function updateHandler(args: UpdateItemArgs) {
               const sibParsed = parseItemId(siblingId);
               if (sibParsed) {
                 const sibFolder = TYPE_TO_DIRECTORY[sibParsed.type];
-                const sibPath = join(devcrumbsDir, sibFolder, `${siblingId}.json`);
+                const sibPath = join(devstepsDir, sibFolder, `${siblingId}.json`);
                 if (existsSync(sibPath)) {
                   const sibMeta = JSON.parse(readFileSync(sibPath, 'utf-8'));
                   if (sibMeta.status !== 'done' && sibMeta.status !== 'cancelled') {

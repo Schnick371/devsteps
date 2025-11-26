@@ -15,20 +15,20 @@ export async function initCommand(
     methodology?: Methodology;
   }
 ) {
-  const spinner = ora('Initializing devcrumbs project...').start();
+  const spinner = ora('Initializing devsteps project...').start();
 
   try {
     const projectPath = options.path || process.cwd();
     const name = projectName || 'devsteps-project';
-    const devcrumbsDir = join(projectPath, '.devsteps');
+    const devstepsDir = join(projectPath, '.devsteps');
     const methodology = options.methodology || 'scrum';
 
     // Check if already initialized
-    if (existsSync(devcrumbsDir)) {
+    if (existsSync(devstepsDir)) {
       spinner.fail('Project already initialized');
       console.log(
         chalk.yellow('\nUse'),
-        chalk.cyan('devcrumbs status'),
+        chalk.cyan('devsteps status'),
         chalk.yellow('to view project info')
       );
       return;
@@ -38,9 +38,9 @@ export async function initCommand(
     const methodologyConfig = getMethodologyConfig(methodology);
 
     // Create directory structure
-    mkdirSync(devcrumbsDir, { recursive: true });
+    mkdirSync(devstepsDir, { recursive: true });
     for (const dir of methodologyConfig.directories) {
-      mkdirSync(join(devcrumbsDir, dir), { recursive: true });
+      mkdirSync(join(devstepsDir, dir), { recursive: true });
     }
 
     // Create config
@@ -60,7 +60,7 @@ export async function initCommand(
       },
     };
 
-    writeFileSync(join(devcrumbsDir, 'config.json'), JSON.stringify(config, null, 2));
+    writeFileSync(join(devstepsDir, 'config.json'), JSON.stringify(config, null, 2));
 
     // Create index
     const index = {
@@ -73,7 +73,7 @@ export async function initCommand(
       },
     };
 
-    writeFileSync(join(devcrumbsDir, 'index.json'), JSON.stringify(index, null, 2));
+    writeFileSync(join(devstepsDir, 'index.json'), JSON.stringify(index, null, 2));
 
     // Create .gitignore
     const gitignore = `.devsteps/
@@ -101,13 +101,13 @@ dist/
 pnpm install  # or: npm install
 
 # 2. Verify setup
-devcrumbs doctor
+devsteps doctor
 
 # 3. Check project status
-devcrumbs status
+devsteps status
 
 # 4. Add your first item
-devcrumbs add req "Your first requirement"
+devsteps add req "Your first requirement"
 \`\`\`
 
 ## Development Environment
@@ -117,7 +117,7 @@ devcrumbs add req "Your first requirement"
 Run diagnostics to verify your setup:
 
 \`\`\`bash
-devcrumbs doctor
+devsteps doctor
 \`\`\`
 
 This checks:
@@ -131,24 +131,24 @@ This checks:
 
 ### MCP Setup (AI Integration)
 
-Configure devcrumbs for your IDE:
+Configure devsteps for your IDE:
 
 \`\`\`bash
 # For VS Code or Cursor (auto-detect)
-devcrumbs setup
+devsteps setup
 
 # Explicit IDE selection
-devcrumbs setup --tool vscode
-devcrumbs setup --tool cursor
+devsteps setup --tool vscode
+devsteps setup --tool cursor
 
 # Global installation (all projects)
-devcrumbs setup --global
+devsteps setup --global
 \`\`\`
 
 After setup:
 1. Restart your IDE completely
 2. Open Copilot/AI Chat
-3. Use devcrumbs tools: \`#devsteps-init\`, \`#devsteps-add\`, etc.
+3. Use devsteps tools: \`#devsteps-init\`, \`#devsteps-add\`, etc.
 
 ## Project Structure
 
@@ -176,77 +176,77 @@ ${name}/
 
 \`\`\`bash
 # Add items
-devcrumbs add story "Implement feature X"
-devcrumbs add task "Fix bug in component Y"
-devcrumbs add bug "Error on page load"
+devsteps add story "Implement feature X"
+devsteps add task "Fix bug in component Y"
+devsteps add bug "Error on page load"
 
 # List items
-devcrumbs list --status draft
-devcrumbs list --type story --priority high
+devsteps list --status draft
+devsteps list --type story --priority high
 
 # Update items
-devcrumbs update STORY-001 --status in-progress
-devcrumbs update TASK-005 --priority high
+devsteps update STORY-001 --status in-progress
+devsteps update TASK-005 --priority high
 
 # Get item details
-devcrumbs get STORY-001
+devsteps get STORY-001
 \`\`\`
 
 ### Project Status
 
 \`\`\`bash
 # Show overview
-devcrumbs status
+devsteps status
 
 # Full details
-devcrumbs status --detailed
+devsteps status --detailed
 \`\`\`
 
 ### Search & Filter
 
 \`\`\`bash
 # Search across all items
-devcrumbs search "authentication"
+devsteps search "authentication"
 
 # List with filters
-devcrumbs list --assignee user@example.com
-devcrumbs list --tags feature,urgent
+devsteps list --assignee user@example.com
+devsteps list --tags feature,urgent
 \`\`\`
 
 ### Relationships
 
 \`\`\`bash
 # Link items
-devcrumbs link TASK-001 implements STORY-005
-devcrumbs link TEST-003 tests FEAT-010
+devsteps link TASK-001 implements STORY-005
+devsteps link TEST-003 tests FEAT-010
 
 # Show traceability
-devcrumbs trace STORY-005
+devsteps trace STORY-005
 \`\`\`
 
 ### Maintenance
 
 \`\`\`bash
 # Archive single item
-devcrumbs archive STORY-001
+devsteps archive STORY-001
 
 # Bulk archive (done/cancelled)
-devcrumbs purge
+devsteps purge
 
 # Bulk archive by filter
-devcrumbs purge --status done --type story
+devsteps purge --status done --type story
 \`\`\`
 
 ## Troubleshooting
 
 ### "Project not initialized"
-Run \`devcrumbs init\` in your project directory.
+Run \`devsteps init\` in your project directory.
 
 ### "Node.js version too old"
 Upgrade to Node.js v18 or higher from [nodejs.org](https://nodejs.org).
 
 ### "MCP server not found"
-1. Run \`devcrumbs setup\` to configure
+1. Run \`devsteps setup\` to configure
 2. Restart your IDE completely
 3. Check the configuration file exists
 
@@ -255,20 +255,20 @@ Run \`pnpm install\` (or \`npm install\`) to install dependencies.
 
 ## Next Steps
 
-1. Run \`devcrumbs doctor\` to verify setup
-2. Add your first items: \`devcrumbs add req "Your requirement"\`
-3. Configure MCP for AI assistance: \`devcrumbs setup\`
+1. Run \`devsteps doctor\` to verify setup
+2. Add your first items: \`devsteps add req "Your requirement"\`
+3. Configure MCP for AI assistance: \`devsteps setup\`
 4. Check out the documentation in \`docs/\` (if available)
 
 ## Support
 
 For issues and questions:
 - Check documentation: [GitHub Repository]
-- Run health check: \`devcrumbs doctor\`
-- Review project status: \`devcrumbs status\`
+- Run health check: \`devsteps doctor\`
+- Review project status: \`devsteps status\`
 `;
 
-    writeFileSync(join(devcrumbsDir, 'SETUP.md'), setupMd);
+    writeFileSync(join(devstepsDir, 'SETUP.md'), setupMd);
 
     // Create VS Code tasks
     const vscodeDir = join(projectPath, '.vscode');
@@ -349,18 +349,18 @@ For issues and questions:
     const monorepoRoot = join(currentDir, '..', '..', '..', '..');
     const sourceGithubDir = join(monorepoRoot, '.github');
 
-    const devcrumbsAgent = `---
-name: devcrumbs
-description: Task tracking with devcrumbs system - enforces structured documentation
+    const devstepsAgent = `---
+name: devsteps
+description: Task tracking with devsteps system - enforces structured documentation
 ---
 
 # 📋 DevSteps Task Tracking Mode
 
-You are a **task management assistant** that helps users work with the devcrumbs system.
+You are a **task management assistant** that helps users work with the devsteps system.
 
 ## Core Principles
 
-The devcrumbs system is a **lightweight, git-based task tracking system** designed for developers who want to:
+The devsteps system is a **lightweight, git-based task tracking system** designed for developers who want to:
 - Track tasks, features, bugs, and requirements **directly in their repository**
 - Use **simple text files** (JSON + Markdown) instead of external tools
 - Keep **project history in git** alongside code changes
@@ -368,14 +368,14 @@ The devcrumbs system is a **lightweight, git-based task tracking system** design
 
 ## Your Role
 
-When in devcrumbs mode, you:
+When in devsteps mode, you:
 
-✅ **ALWAYS use devcrumbs tools** for task management:
-- Use \`#mcp_devcrumbs_devsteps-add\` to create new tasks
-- Use \`#mcp_devcrumbs_devsteps-update\` to modify existing tasks
-- Use \`#mcp_devcrumbs_devsteps-list\` to show tasks
-- Use \`#mcp_devcrumbs_devsteps-get\` to view task details
-- Use \`#mcp_devcrumbs_devsteps-status\` to show project overview
+✅ **ALWAYS use devsteps tools** for task management:
+- Use \`#mcp_devsteps_add\` to create new tasks
+- Use \`#mcp_devsteps_update\` to modify existing tasks
+- Use \`#mcp_devsteps_list\` to show tasks
+- Use \`#mcp_devsteps_get\` to view task details
+- Use \`#mcp_devsteps_status\` to show project overview
 
 ✅ **Enforce structured task creation**:
 - Always ask for: title, type (task/bug/feature/story), priority
@@ -383,13 +383,13 @@ When in devcrumbs mode, you:
 - Suggest: Eisenhower quadrant classification for prioritization
 
 ✅ **Guide best practices**:
-- Link related tasks using \`#mcp_devcrumbs_devsteps-link\`
+- Link related tasks using \`#mcp_devsteps_link\`
 - Keep tasks focused and atomic
 - Update task status as work progresses
 - Document decisions in task descriptions
 
 ❌ **DON'T**:
-- Create tasks manually without using devcrumbs tools
+- Create tasks manually without using devsteps tools
 - Skip task metadata (it enables better filtering and context)
 - Forget to update task status when work is done
 - Mix multiple concerns in a single task
@@ -399,7 +399,7 @@ When in devcrumbs mode, you:
 ### Creating a New Task
 \`\`\`
 User: "We need to add authentication"
-You: Use #mcp_devcrumbs_devsteps-add with:
+You: Use #mcp_devsteps_add with:
 - title: "Implement user authentication"
 - type: "feature"
 - priority: "high"
@@ -410,7 +410,7 @@ You: Use #mcp_devcrumbs_devsteps-add with:
 ### Checking Current Work
 \`\`\`
 User: "What should I work on?"
-You: Use #mcp_devcrumbs_devsteps-list with filters:
+You: Use #mcp_devsteps_list with filters:
 - status: "draft" or "planned"
 - priority: "high" or "critical"
 - Show tasks in priority order with context
@@ -419,7 +419,7 @@ You: Use #mcp_devcrumbs_devsteps-list with filters:
 ### Updating Progress
 \`\`\`
 User: "I finished the login feature"
-You: Use #mcp_devcrumbs_devsteps-update to:
+You: Use #mcp_devsteps_update to:
 - Change status to "done"
 - Add completion notes
 - Suggest linking to related tasks
@@ -442,7 +442,7 @@ draft → planned → in-progress → review → done
 
 ## Integration with Development
 
-The devcrumbs system integrates with:
+The devsteps system integrates with:
 - **Git commits**: Reference task IDs in commit messages
 - **MCP/AI tools**: Provide context for AI-assisted development
 - **VS Code**: Extension for visual task management
@@ -458,13 +458,13 @@ The devcrumbs system integrates with:
 
 ---
 
-**Remember**: The devcrumbs is not just a todo list—it's a **living knowledge base** that grows with your project and helps both humans and AI understand what needs to be done.
+**Remember**: The devsteps is not just a todo list—it's a **living knowledge base** that grows with your project and helps both humans and AI understand what needs to be done.
 `;
 
-    writeFileSync(join(githubAgentsDir, 'devcrumbs.agent.md'), devcrumbsAgent);
+    writeFileSync(join(githubAgentsDir, 'devsteps.agent.md'), devstepsAgent);
 
-    // Copy devcrumbs instructions
-    const instructionFiles = ['devcrumbs.instructions.md', 'devsteps-code-standards.instructions.md'];
+    // Copy devsteps instructions
+    const instructionFiles = ['devsteps.instructions.md', 'devsteps-code-standards.instructions.md'];
     for (const instructionFile of instructionFiles) {
       const instructionSource = join(sourceGithubDir, 'instructions', instructionFile);
       if (existsSync(instructionSource)) {
@@ -473,7 +473,7 @@ The devcrumbs system integrates with:
       }
     }
 
-    // Copy devcrumbs prompts
+    // Copy devsteps prompts
     const promptFiles = ['devsteps-plan-work.prompt.md', 'devsteps-start-work.prompt.md', 'devsteps-workflow.prompt.md'];
     for (const promptFile of promptFiles) {
       const promptSource = join(sourceGithubDir, 'prompts', promptFile);
@@ -487,7 +487,7 @@ The devcrumbs system integrates with:
 
     console.log();
     console.log(chalk.green('✓'), 'Project:', chalk.cyan(name));
-    console.log(chalk.green('✓'), 'Location:', chalk.cyan(devcrumbsDir));
+    console.log(chalk.green('✓'), 'Location:', chalk.cyan(devstepsDir));
     console.log(
       chalk.green('✓'),
       'Git integration:',
@@ -495,8 +495,8 @@ The devcrumbs system integrates with:
     );
     console.log(chalk.green('✓'), 'VS Code tasks:', chalk.cyan('.vscode/tasks.json'));
     console.log(chalk.green('✓'), 'Copilot files:');
-    console.log('      ', chalk.cyan('.github/agents/devcrumbs.agent.md'));
-    console.log('      ', chalk.cyan('.github/instructions/devcrumbs.instructions.md'));
+    console.log('      ', chalk.cyan('.github/agents/devsteps.agent.md'));
+    console.log('      ', chalk.cyan('.github/instructions/devsteps.instructions.md'));
     console.log('      ', chalk.cyan('.github/instructions/devsteps-code-standards.instructions.md'));
     console.log('      ', chalk.cyan('.github/prompts/devsteps-plan-work.prompt.md'));
     console.log('      ', chalk.cyan('.github/prompts/devsteps-start-work.prompt.md'));
@@ -508,8 +508,8 @@ The devcrumbs system integrates with:
 
     console.log();
     console.log(chalk.yellow('Next steps:'));
-    console.log('  ', chalk.cyan('devcrumbs add req "Your first requirement"'));
-    console.log('  ', chalk.cyan('devcrumbs status'));
+    console.log('  ', chalk.cyan('devsteps add req "Your first requirement"'));
+    console.log('  ', chalk.cyan('devsteps status'));
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     spinner.fail('Initialization failed');

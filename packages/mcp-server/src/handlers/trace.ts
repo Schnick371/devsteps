@@ -15,10 +15,10 @@ interface TraceNode {
 }
 
 export default async function traceHandler(args: { id: string; depth?: number }) {
-  const devcrumbsDir = join(process.cwd(), '.devsteps');
+  const devstepsDir = join(process.cwd(), '.devsteps');
   const maxDepth = args.depth || 3;
 
-  if (!existsSync(devcrumbsDir)) {
+  if (!existsSync(devstepsDir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
@@ -35,7 +35,7 @@ export default async function traceHandler(args: { id: string; depth?: number })
     if (!parsed) return null;
 
     const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
-    const metadataPath = join(devcrumbsDir, typeFolder, `${itemId}.json`);
+    const metadataPath = join(devstepsDir, typeFolder, `${itemId}.json`);
 
     if (!existsSync(metadataPath)) return null;
 

@@ -69,38 +69,38 @@ export async function startHttpMcpServer(
   const tools = await import('./tools/index.js');
   
   // Import handlers directly
-  const initHandler = (await import('./handlers/devsteps-init.js')).default;
-  const addHandler = (await import('./handlers/devsteps-add.js')).default;
-  const updateHandler = (await import('./handlers/devsteps-update.js')).default;
-  const listHandler = (await import('./handlers/devsteps-list.js')).default;
-  const getHandler = (await import('./handlers/devsteps-get.js')).default;
-  const searchHandler = (await import('./handlers/devsteps-search.js')).default;
-  const statusHandler = (await import('./handlers/devsteps-status.js')).default;
-  const linkHandler = (await import('./handlers/devsteps-link.js')).default;
-  const archiveHandler = (await import('./handlers/devsteps-archive.js')).default;
-  const exportHandler = (await import('./handlers/devsteps-export.js')).default;
-  const purgeHandler = (await import('./handlers/devsteps-purge.js')).default;
-  const traceHandler = (await import('./handlers/devsteps-trace.js')).default;
-  const contextHandler = (await import('./handlers/devsteps-context.js')).default;
-  const metricsHandler = (await import('./handlers/devsteps-metrics.js')).default;
-  const healthHandler = (await import('./handlers/devsteps-health.js')).default;
+  const initHandler = (await import('./handlers/init.js')).default;
+  const addHandler = (await import('./handlers/add.js')).default;
+  const updateHandler = (await import('./handlers/update.js')).default;
+  const listHandler = (await import('./handlers/list.js')).default;
+  const getHandler = (await import('./handlers/get.js')).default;
+  const searchHandler = (await import('./handlers/search.js')).default;
+  const statusHandler = (await import('./handlers/status.js')).default;
+  const linkHandler = (await import('./handlers/link.js')).default;
+  const archiveHandler = (await import('./handlers/archive.js')).default;
+  const exportHandler = (await import('./handlers/export.js')).default;
+  const purgeHandler = (await import('./handlers/purge.js')).default;
+  const traceHandler = (await import('./handlers/trace.js')).default;
+  const contextHandler = (await import('./handlers/context.js')).default;
+  const metricsHandler = (await import('./handlers/metrics.js')).default;
+  const healthHandler = (await import('./handlers/health.js')).default;
 
   // Map of tool name to handler
   const toolHandlers = new Map<string, (args: any) => Promise<any>>([
-    ['devsteps-init', initHandler],
-    ['devsteps-add', addHandler],
-    ['devsteps-update', updateHandler],
-    ['devsteps-list', listHandler],
-    ['devsteps-get', getHandler],
-    ['devsteps-search', searchHandler],
-    ['devsteps-status', statusHandler],
-    ['devsteps-link', linkHandler],
-    ['devsteps-archive', archiveHandler],
-    ['devsteps-export', exportHandler],
-    ['devsteps-purge', purgeHandler],
-    ['devsteps-trace', traceHandler],
-    ['devsteps-context', contextHandler],
-    ['devsteps-metrics', metricsHandler],
+    ['init', initHandler],
+    ['add', addHandler],
+    ['update', updateHandler],
+    ['list', listHandler],
+    ['get', getHandler],
+    ['search', searchHandler],
+    ['status', statusHandler],
+    ['link', linkHandler],
+    ['archive', archiveHandler],
+    ['export', exportHandler],
+    ['purge', purgeHandler],
+    ['trace', traceHandler],
+    ['context', contextHandler],
+    ['metrics', metricsHandler],
     ['health-check', healthHandler],
   ]);
 

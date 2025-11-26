@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
   "counters": {
-    "epic": 6,
-    "story": 9,
+    "epic": 7,
+    "story": 14,
     "task": 50,
     "bug": 11,
     "spike": 4,
@@ -738,13 +738,61 @@
       "status": "done",
       "priority": "medium",
       "updated": "2025-11-25T13:36:06.547Z"
+    },
+    {
+      "id": "EPIC-007",
+      "type": "epic",
+      "title": "Update all npm dependencies to latest versions",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-25T22:06:01.650Z"
+    },
+    {
+      "id": "STORY-010",
+      "type": "story",
+      "title": "Update safe minor/patch versions",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-11-26T06:14:50.867Z"
+    },
+    {
+      "id": "STORY-011",
+      "type": "story",
+      "title": "Migrate Chalk 4 → 5 (ESM-only)",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-25T22:06:24.055Z"
+    },
+    {
+      "id": "STORY-012",
+      "type": "story",
+      "title": "Migrate Express 4 → 5 with codemods",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-25T22:06:24.059Z"
+    },
+    {
+      "id": "STORY-013",
+      "type": "story",
+      "title": "Update Ora 8 → 9 and esbuild 0.24 → 0.27",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-25T22:06:24.060Z"
+    },
+    {
+      "id": "STORY-014",
+      "type": "story",
+      "title": "Verify builds and tests after updates",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-11-25T22:06:33.412Z"
     }
   ],
   "stats": {
-    "total": 85,
+    "total": 91,
     "by_type": {
-      "epic": 6,
-      "story": 9,
+      "epic": 7,
+      "story": 14,
       "task": 50,
       "bug": 11,
       "spike": 4,
@@ -753,11 +801,11 @@
     },
     "by_status": {
       "in-progress": 0,
-      "done": 56,
-      "draft": 28,
+      "done": 57,
+      "draft": 33,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-25T13:59:48.765Z"
+  "last_updated": "2025-11-26T06:14:50.867Z"
 }
