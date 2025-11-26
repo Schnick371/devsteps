@@ -743,9 +743,9 @@
       "id": "EPIC-007",
       "type": "epic",
       "title": "Update all npm dependencies to latest versions",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-25T22:06:01.650Z"
+      "updated": "2025-11-26T06:20:42.552Z"
     },
     {
       "id": "STORY-010",
@@ -783,9 +783,9 @@
       "id": "STORY-014",
       "type": "story",
       "title": "Verify builds and tests after updates",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-11-25T22:06:33.412Z"
+      "updated": "2025-11-26T06:20:42.433Z"
     },
     {
       "id": "TASK-051",
@@ -809,11 +809,11 @@
     },
     "by_status": {
       "in-progress": 0,
-      "done": 60,
-      "draft": 31,
+      "done": 62,
+      "draft": 29,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-26T06:19:24.693Z"
+  "last_updated": "2025-11-26T06:20:42.552Z"
 }

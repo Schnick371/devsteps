@@ -3,11 +3,11 @@
   "type": "epic",
   "category": "general",
   "title": "Update all npm dependencies to latest versions",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-25T22:06:01.650Z",
-  "updated": "2025-11-25T22:07:01.240Z",
+  "updated": "2025-11-26T06:20:42.552Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

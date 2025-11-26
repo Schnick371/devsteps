@@ -3,11 +3,11 @@
   "type": "story",
   "category": "general",
   "title": "Verify builds and tests after updates",
-  "status": "draft",
+  "status": "done",
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-25T22:06:33.412Z",
-  "updated": "2025-11-25T22:07:01.240Z",
+  "updated": "2025-11-26T06:20:42.433Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
