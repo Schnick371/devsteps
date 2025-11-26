@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-26T06:26:07.894Z",
-  "updated": "2025-11-26T06:27:49.036Z",
+  "updated": "2025-11-26T06:53:30.141Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/webview/dashboardPanel.ts"
@@ -21,7 +21,10 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "STORY-017",
+      "STORY-018"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],

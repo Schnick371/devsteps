@@ -7,7 +7,7 @@
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-26T06:30:19.240Z",
-  "updated": "2025-11-26T06:30:37.776Z",
+  "updated": "2025-11-26T06:53:30.141Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/webview/dashboardPanel.ts",
@@ -16,7 +16,8 @@
   ],
   "linked_items": {
     "implements": [
-      "EPIC-003"
+      "EPIC-003",
+      "EPIC-008"
     ],
     "implemented-by": [],
     "tested-by": [],
@@ -28,7 +29,9 @@
       "TASK-005"
     ],
     "depends-on": [],
-    "required-by": [],
+    "required-by": [
+      "TASK-056"
+    ],
     "supersedes": [],
     "superseded-by": []
   },

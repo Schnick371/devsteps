@@ -1,10 +1,10 @@
 {
   "version": "1.0.0",
   "counters": {
-    "epic": 7,
-    "story": 16,
-    "task": 55,
-    "bug": 14,
+    "epic": 9,
+    "story": 20,
+    "task": 71,
+    "bug": 15,
     "spike": 5,
     "feature": 5,
     "requirement": 1
@@ -866,23 +866,207 @@
       "status": "done",
       "priority": "critical",
       "updated": "2025-11-26T06:36:15.476Z"
+    },
+    {
+      "id": "EPIC-008",
+      "type": "epic",
+      "title": "Reporting & Analytics Suite - Timeline Visualization and Export Features",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T06:51:55.615Z"
+    },
+    {
+      "id": "STORY-017",
+      "type": "story",
+      "title": "Advanced Timeline Visualization - Velocity, Gantt, Lifecycle Tracking",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T06:52:06.319Z"
+    },
+    {
+      "id": "STORY-018",
+      "type": "story",
+      "title": "Export & Reporting Features - PDF, HTML, CSV Dashboard Export",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-26T06:52:15.717Z"
+    },
+    {
+      "id": "TASK-056",
+      "type": "task",
+      "title": "Implement Velocity Chart - Story Points per Sprint Visualization",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T06:52:25.157Z"
+    },
+    {
+      "id": "TASK-057",
+      "type": "task",
+      "title": "Implement Gantt-Style Project Timeline - Epics and Stories Overview",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T06:52:34.947Z"
+    },
+    {
+      "id": "TASK-058",
+      "type": "task",
+      "title": "Implement Item Lifecycle Tracking - Status Transition Timeline",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-26T06:52:44.370Z"
+    },
+    {
+      "id": "TASK-059",
+      "type": "task",
+      "title": "Enhance Activity Timeline - Filters, Search, Pagination",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-26T06:52:54.529Z"
+    },
+    {
+      "id": "TASK-060",
+      "type": "task",
+      "title": "Implement PDF Export - Dashboard Report with Visualizations",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-26T06:53:04.818Z"
+    },
+    {
+      "id": "TASK-061",
+      "type": "task",
+      "title": "Implement HTML Export - Self-Contained Shareable Dashboard",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-26T06:53:14.530Z"
+    },
+    {
+      "id": "TASK-062",
+      "type": "task",
+      "title": "Implement CSV Export - Structured Data for Analysis",
+      "status": "draft",
+      "priority": "low",
+      "updated": "2025-11-26T06:53:23.777Z"
+    },
+    {
+      "id": "BUG-015",
+      "type": "bug",
+      "title": "Extension Not Loading - TreeView Registration and Icon Display Failures",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-11-26T07:12:01.589Z"
+    },
+    {
+      "id": "TASK-063",
+      "type": "task",
+      "title": "Fix TreeView ID Mismatch - Change devstepsitemsView to devsteps.itemsView",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-11-26T07:11:00.959Z"
+    },
+    {
+      "id": "TASK-064",
+      "type": "task",
+      "title": "Fix Activity Bar Icon Reference - Rename or Update package.json Path",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-11-26T07:11:47.692Z"
+    },
+    {
+      "id": "EPIC-009",
+      "type": "epic",
+      "title": "Brand Identity & Visual Design System - Professional DevSteps Branding",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T07:00:30.849Z"
+    },
+    {
+      "id": "STORY-019",
+      "type": "story",
+      "title": "DevSteps Icon Design - Activity Bar, Marketplace, and Theme Variants",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T07:00:41.240Z"
+    },
+    {
+      "id": "STORY-020",
+      "type": "story",
+      "title": "Corporate Identity Guidelines - Brand Style Guide and Design System",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-26T07:00:52.182Z"
+    },
+    {
+      "id": "TASK-065",
+      "type": "task",
+      "title": "Design DevSteps Logo Concept - Icon-Only and Full Logo Variations",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T07:01:04.353Z"
+    },
+    {
+      "id": "TASK-066",
+      "type": "task",
+      "title": "Create Activity Bar Icon - 28x28 SVG with Theme Compatibility",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T07:01:15.413Z"
+    },
+    {
+      "id": "TASK-067",
+      "type": "task",
+      "title": "Create Marketplace Icon - 128x128 PNG for Extension Listing",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-26T07:01:28.058Z"
+    },
+    {
+      "id": "TASK-068",
+      "type": "task",
+      "title": "Implement Icon Variants for Light and Dark Themes",
+      "status": "draft",
+      "priority": "low",
+      "updated": "2025-11-26T07:01:39.983Z"
+    },
+    {
+      "id": "TASK-069",
+      "type": "task",
+      "title": "Define Brand Color Palette and Typography Standards",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-26T07:01:52.643Z"
+    },
+    {
+      "id": "TASK-070",
+      "type": "task",
+      "title": "Create Brand Style Guide Document - Comprehensive CI Guidelines",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-26T07:02:04.466Z"
+    },
+    {
+      "id": "TASK-071",
+      "type": "task",
+      "title": "Design Icon Library for Extension UI - Consistent Visual Language",
+      "status": "draft",
+      "priority": "low",
+      "updated": "2025-11-26T07:02:16.987Z"
     }
   ],
   "stats": {
-    "total": 101,
+    "total": 124,
     "by_type": {
-      "epic": 7,
-      "story": 16,
-      "task": 55,
-      "bug": 14,
+      "epic": 9,
+      "story": 20,
+      "task": 71,
+      "bug": 15,
       "spike": 5,
       "feature": 5,
       "requirement": 1
     },
     "by_status": {
       "in-progress": 0,
-      "done": 64,
-      "draft": 36,
+      "done": 67,
+      "draft": 56,
       "blocked": 1
     },
     "archived": 2
@@ -903,5 +1087,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-26T06:44:08.013Z"
+  "last_updated": "2025-11-26T07:12:01.589Z"
 }
