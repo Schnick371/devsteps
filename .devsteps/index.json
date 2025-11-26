@@ -3,7 +3,7 @@
   "counters": {
     "epic": 7,
     "story": 14,
-    "task": 50,
+    "task": 51,
     "bug": 11,
     "spike": 4,
     "feature": 4,
@@ -775,9 +775,9 @@
       "id": "STORY-013",
       "type": "story",
       "title": "Update Ora 8 → 9 and esbuild 0.24 → 0.27",
-      "status": "draft",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-11-25T22:06:24.060Z"
+      "updated": "2025-11-26T06:19:24.693Z"
     },
     {
       "id": "STORY-014",
@@ -786,14 +786,22 @@
       "status": "draft",
       "priority": "critical",
       "updated": "2025-11-25T22:06:33.412Z"
+    },
+    {
+      "id": "TASK-051",
+      "type": "task",
+      "title": "Test Ora 9 Spinner",
+      "status": "draft",
+      "priority": "low",
+      "updated": "2025-11-26T06:19:16.873Z"
     }
   ],
   "stats": {
-    "total": 91,
+    "total": 92,
     "by_type": {
       "epic": 7,
       "story": 14,
-      "task": 50,
+      "task": 51,
       "bug": 11,
       "spike": 4,
       "feature": 4,
@@ -801,11 +809,11 @@
     },
     "by_status": {
       "in-progress": 0,
-      "done": 59,
+      "done": 60,
       "draft": 31,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-26T06:18:46.411Z"
+  "last_updated": "2025-11-26T06:19:24.693Z"
 }

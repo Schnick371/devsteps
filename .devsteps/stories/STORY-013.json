@@ -3,11 +3,11 @@
   "type": "story",
   "category": "general",
   "title": "Update Ora 8 → 9 and esbuild 0.24 → 0.27",
-  "status": "draft",
+  "status": "done",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-25T22:06:24.060Z",
-  "updated": "2025-11-25T22:07:01.135Z",
+  "updated": "2025-11-26T06:19:24.693Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/cli/package.json",
