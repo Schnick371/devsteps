@@ -807,9 +807,9 @@
       "id": "TASK-053",
       "type": "task",
       "title": "Refactor dashboardPanel.ts - Split 739-line file",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-26T06:26:07.894Z"
+      "updated": "2025-11-26T07:53:50.283Z"
     },
     {
       "id": "BUG-013",
@@ -1065,8 +1065,8 @@
     },
     "by_status": {
       "in-progress": 0,
-      "done": 67,
-      "draft": 56,
+      "done": 68,
+      "draft": 55,
       "blocked": 1
     },
     "archived": 2
@@ -1087,5 +1087,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-26T07:12:01.589Z"
+  "last_updated": "2025-11-26T07:53:50.283Z"
 }

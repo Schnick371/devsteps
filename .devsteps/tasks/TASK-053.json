@@ -3,14 +3,25 @@
   "type": "task",
   "category": "vscode",
   "title": "Refactor dashboardPanel.ts - Split 739-line file",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-26T06:26:07.894Z",
-  "updated": "2025-11-26T06:53:30.141Z",
+  "updated": "2025-11-26T07:53:50.283Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/extension/src/webview/dashboardPanel.ts"
+    "packages/extension/src/webview/dashboardPanel.ts",
+    "packages/extension/src/webview/dataProviders/statsProvider.ts",
+    "packages/extension/src/webview/dataProviders/eisenhowerProvider.ts",
+    "packages/extension/src/webview/dataProviders/burndownProvider.ts",
+    "packages/extension/src/webview/dataProviders/traceabilityProvider.ts",
+    "packages/extension/src/webview/dataProviders/timelineProvider.ts",
+    "packages/extension/src/webview/renderers/statsRenderer.ts",
+    "packages/extension/src/webview/renderers/eisenhowerRenderer.ts",
+    "packages/extension/src/webview/renderers/timelineRenderer.ts",
+    "packages/extension/src/webview/renderers/burndownRenderer.ts",
+    "packages/extension/src/webview/renderers/traceabilityRenderer.ts",
+    "packages/extension/src/webview/utils/htmlHelpers.ts"
   ],
   "linked_items": {
     "implements": [
