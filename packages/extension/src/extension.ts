@@ -47,7 +47,7 @@ export async function activate(context: vscode.ExtensionContext) {
   // Provider will show empty state if .devsteps doesn't exist
   const treeDataProvider = new DevStepsTreeDataProvider(workspaceRoot);
   
-  const treeView = vscode.window.createTreeView('devstepsitemsView', {
+  const treeView = vscode.window.createTreeView('devsteps.itemsView', {
     treeDataProvider,
     showCollapseAll: true,
   });
