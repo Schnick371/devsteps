@@ -759,9 +759,9 @@
       "id": "STORY-011",
       "type": "story",
       "title": "Migrate Chalk 4 → 5 (ESM-only)",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-25T22:06:24.055Z"
+      "updated": "2025-11-26T06:15:45.008Z"
     },
     {
       "id": "STORY-012",
@@ -801,11 +801,11 @@
     },
     "by_status": {
       "in-progress": 0,
-      "done": 57,
-      "draft": 33,
+      "done": 58,
+      "draft": 32,
       "blocked": 1
     }
   },
   "archived_items": [],
-  "last_updated": "2025-11-26T06:14:50.867Z"
+  "last_updated": "2025-11-26T06:15:45.008Z"
 }
