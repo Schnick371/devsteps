@@ -3,11 +3,11 @@
   "type": "task",
   "category": "general",
   "title": "Design Concept 1: \"Copilot's View of Sprint\" - Scrum Board Through Glasses",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-26T08:14:53.167Z",
-  "updated": "2025-11-26T08:15:39.869Z",
+  "updated": "2025-11-26T08:28:24.384Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/resources/icons/",

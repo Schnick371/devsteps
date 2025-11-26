@@ -1055,9 +1055,9 @@
       "id": "TASK-072",
       "type": "task",
       "title": "Design Concept 1: \"Copilot's View of Sprint\" - Scrum Board Through Glasses",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-26T08:14:53.167Z"
+      "updated": "2025-11-26T08:28:24.384Z"
     },
     {
       "id": "TASK-073",
@@ -1097,8 +1097,8 @@
     },
     "by_status": {
       "in-progress": 0,
-      "done": 68,
-      "draft": 59,
+      "done": 69,
+      "draft": 58,
       "blocked": 1
     },
     "archived": 2
@@ -1119,5 +1119,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-26T08:15:13.020Z"
+  "last_updated": "2025-11-26T08:28:24.384Z"
 }

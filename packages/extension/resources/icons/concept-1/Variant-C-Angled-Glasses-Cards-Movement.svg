@@ -1,0 +1,45 @@
+<svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <!-- Concept 1 Variant C: Angled Glasses, Cards with Movement -->
+  <!-- DevSteps Logo - Copilot's View of Sprint (Dynamic) -->
+  
+  <!-- Circle Base -->
+  <circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="2" opacity="0.8"/>
+  
+  <!-- Kanban Lanes (3 lanes) -->
+  <g id="lanes" fill="currentColor">
+    <rect x="5" y="8" width="2.5" height="9" opacity="0.3" rx="0.5"/>
+    <rect x="10.5" y="8" width="2.5" height="9" opacity="0.5" rx="0.5"/>
+    <rect x="16" y="8" width="2.5" height="9" opacity="0.2" rx="0.5"/>
+  </g>
+  
+  <!-- Cards (rectangles showing movement) -->
+  <g id="cards" stroke="currentColor" stroke-width="1" fill="none">
+    <!-- Todo -->
+    <rect x="5.5" y="9" width="1.5" height="2" rx="0.3" opacity="0.6"/>
+    <rect x="5.5" y="12" width="1.5" height="2" rx="0.3" opacity="0.6"/>
+    
+    <!-- In Progress (larger, focused) -->
+    <rect x="11" y="10" width="1.5" height="2.5" rx="0.3" opacity="0.9"/>
+    
+    <!-- Done -->
+    <rect x="16.5" y="14" width="1.5" height="1.5" rx="0.3" opacity="0.4"/>
+  </g>
+  
+  <!-- Angled Glasses (dynamic perspective) -->
+  <g id="glasses" stroke="currentColor" stroke-width="2" fill="none">
+    <!-- Left Lens (slightly rotated) -->
+    <ellipse cx="8" cy="11" rx="3.5" ry="3" transform="rotate(-5 8 11)" opacity="0.9"/>
+    
+    <!-- Bridge -->
+    <path d="M 11.2 10.8 Q 12 10.5 12.8 10.8" opacity="0.8"/>
+    
+    <!-- Right Lens (slightly rotated) -->
+    <ellipse cx="16" cy="11" rx="3.5" ry="3" transform="rotate(5 16 11)" opacity="0.9"/>
+    
+    <!-- Left Temple (extending, curved) -->
+    <path d="M 4.5 11 Q 2 11 1 13" stroke-linecap="round" opacity="0.7"/>
+    
+    <!-- Right Temple (extending, curved) -->
+    <path d="M 19.5 11 Q 22 11 23 13" stroke-linecap="round" opacity="0.7"/>
+  </g>
+</svg>
