@@ -1,0 +1,38 @@
+{
+  "id": "TASK-058",
+  "type": "task",
+  "category": "vscode",
+  "title": "Implement Item Lifecycle Tracking - Status Transition Timeline",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-26T06:52:44.370Z",
+  "updated": "2025-11-26T06:52:54.141Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/dashboardPanel.ts",
+    "packages/shared/src/types/devsteps.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-017"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "lifecycle",
+    "tracking",
+    "status"
+  ],
+  "commits": [],
+  "metadata": {}
+}
