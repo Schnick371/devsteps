@@ -1,0 +1,41 @@
+{
+  "id": "TASK-067",
+  "type": "task",
+  "category": "design",
+  "title": "Create Marketplace Icon - 128x128 PNG for Extension Listing",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-26T07:01:28.058Z",
+  "updated": "2025-11-26T07:01:39.420Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/resources/marketplace-icon.png",
+    "packages/extension/package.json"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-019"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-065"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "marketplace",
+    "icon",
+    "png",
+    "branding"
+  ],
+  "commits": [],
+  "metadata": {}
+}

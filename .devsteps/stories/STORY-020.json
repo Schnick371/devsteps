@@ -1,0 +1,42 @@
+{
+  "id": "STORY-020",
+  "type": "story",
+  "category": "design",
+  "title": "Corporate Identity Guidelines - Brand Style Guide and Design System",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-26T07:00:52.182Z",
+  "updated": "2025-11-26T07:02:29.055Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "docs/branding/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-009"
+    ],
+    "implemented-by": [
+      "TASK-069",
+      "TASK-070",
+      "TASK-071"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "branding",
+    "guidelines",
+    "styleguide",
+    "documentation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,40 @@
+{
+  "id": "TASK-070",
+  "type": "task",
+  "category": "design",
+  "title": "Create Brand Style Guide Document - Comprehensive CI Guidelines",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-26T07:02:04.466Z",
+  "updated": "2025-11-26T07:02:29.056Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "docs/branding/style-guide.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-020"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-069",
+      "TASK-071"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "styleguide",
+    "documentation",
+    "branding"
+  ],
+  "commits": [],
+  "metadata": {}
+}
