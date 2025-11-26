@@ -1,43 +1,39 @@
 {
-  "id": "EPIC-009",
-  "type": "epic",
-  "category": "design",
-  "title": "Brand Identity & Visual Design System - Professional DevSteps Branding",
+  "id": "TASK-074",
+  "type": "task",
+  "category": "general",
+  "title": "Design Concept 3: \"Step Dots Through Lens\" - Progress Path with AI Focus",
   "status": "draft",
   "priority": "high",
   "eisenhower": "not-urgent-important",
-  "created": "2025-11-26T07:00:30.849Z",
-  "updated": "2025-11-26T08:15:40.214Z",
+  "created": "2025-11-26T08:14:53.170Z",
+  "updated": "2025-11-26T08:15:40.098Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/resources/icons/",
-    "docs/branding/"
+    "docs/branding/concept-3/"
   ],
   "linked_items": {
-    "implements": [],
-    "implemented-by": [
-      "STORY-019",
-      "STORY-020",
+    "implements": [
       "STORY-021"
     ],
+    "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [
-      "EPIC-003"
-    ],
+    "relates-to": [],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "branding",
     "design",
-    "identity",
     "icon",
-    "CI"
+    "logo",
+    "concept-3",
+    "minimalist"
   ],
   "commits": [],
   "metadata": {}

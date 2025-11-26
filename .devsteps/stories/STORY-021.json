@@ -1,43 +1,47 @@
 {
-  "id": "EPIC-009",
-  "type": "epic",
-  "category": "design",
-  "title": "Brand Identity & Visual Design System - Professional DevSteps Branding",
+  "id": "STORY-021",
+  "type": "story",
+  "category": "general",
+  "title": "Logo Design Workshop - Create & Compare 3 Concepts with Multiple Variations",
   "status": "draft",
   "priority": "high",
   "eisenhower": "not-urgent-important",
-  "created": "2025-11-26T07:00:30.849Z",
-  "updated": "2025-11-26T08:15:40.214Z",
+  "created": "2025-11-26T08:15:13.020Z",
+  "updated": "2025-11-26T08:15:40.458Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/resources/icons/",
     "docs/branding/"
   ],
   "linked_items": {
-    "implements": [],
+    "implements": [
+      "EPIC-009"
+    ],
     "implemented-by": [
-      "STORY-019",
-      "STORY-020",
-      "STORY-021"
+      "TASK-072",
+      "TASK-073",
+      "TASK-074"
     ],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "EPIC-003"
+      "STORY-019"
     ],
     "depends-on": [],
     "required-by": [],
-    "supersedes": [],
+    "supersedes": [
+      "TASK-065"
+    ],
     "superseded-by": []
   },
   "tags": [
-    "branding",
     "design",
-    "identity",
     "icon",
-    "CI"
+    "logo",
+    "workshop",
+    "user-testing"
   ],
   "commits": [],
   "metadata": {}

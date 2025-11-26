@@ -1,43 +1,39 @@
 {
-  "id": "EPIC-009",
-  "type": "epic",
-  "category": "design",
-  "title": "Brand Identity & Visual Design System - Professional DevSteps Branding",
+  "id": "TASK-073",
+  "type": "task",
+  "category": "general",
+  "title": "Design Concept 2: \"Footsteps + Glasses Hybrid\" - Human & AI Walking Together",
   "status": "draft",
   "priority": "high",
   "eisenhower": "not-urgent-important",
-  "created": "2025-11-26T07:00:30.849Z",
-  "updated": "2025-11-26T08:15:40.214Z",
+  "created": "2025-11-26T08:14:53.169Z",
+  "updated": "2025-11-26T08:15:39.985Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/resources/icons/",
-    "docs/branding/"
+    "docs/branding/concept-2/"
   ],
   "linked_items": {
-    "implements": [],
-    "implemented-by": [
-      "STORY-019",
-      "STORY-020",
+    "implements": [
       "STORY-021"
     ],
+    "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [
-      "EPIC-003"
-    ],
+    "relates-to": [],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "branding",
     "design",
-    "identity",
     "icon",
-    "CI"
+    "logo",
+    "concept-2",
+    "footsteps-metaphor"
   ],
   "commits": [],
   "metadata": {}

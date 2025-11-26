@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 9,
-    "story": 20,
-    "task": 71,
+    "story": 21,
+    "task": 74,
     "bug": 15,
     "spike": 5,
     "feature": 5,
@@ -1050,14 +1050,46 @@
       "status": "draft",
       "priority": "low",
       "updated": "2025-11-26T07:02:16.987Z"
+    },
+    {
+      "id": "TASK-072",
+      "type": "task",
+      "title": "Design Concept 1: \"Copilot's View of Sprint\" - Scrum Board Through Glasses",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T08:14:53.167Z"
+    },
+    {
+      "id": "TASK-073",
+      "type": "task",
+      "title": "Design Concept 2: \"Footsteps + Glasses Hybrid\" - Human & AI Walking Together",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T08:14:53.169Z"
+    },
+    {
+      "id": "TASK-074",
+      "type": "task",
+      "title": "Design Concept 3: \"Step Dots Through Lens\" - Progress Path with AI Focus",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T08:14:53.170Z"
+    },
+    {
+      "id": "STORY-021",
+      "type": "story",
+      "title": "Logo Design Workshop - Create & Compare 3 Concepts with Multiple Variations",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T08:15:13.020Z"
     }
   ],
   "stats": {
-    "total": 124,
+    "total": 128,
     "by_type": {
       "epic": 9,
-      "story": 20,
-      "task": 71,
+      "story": 21,
+      "task": 74,
       "bug": 15,
       "spike": 5,
       "feature": 5,
@@ -1066,7 +1098,7 @@
     "by_status": {
       "in-progress": 0,
       "done": 68,
-      "draft": 55,
+      "draft": 59,
       "blocked": 1
     },
     "archived": 2
@@ -1087,5 +1119,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-26T07:53:50.283Z"
+  "last_updated": "2025-11-26T08:15:13.020Z"
 }
