@@ -233,7 +233,9 @@ class DevStepsServer {
       }
 
       try {
-        // Tool handlers are implemented in separate files
+        // Dynamic import for modular handler architecture
+        // Note: esbuild warns about empty-glob (suppressed in esbuild.cjs)
+        // This is intentional - handlers are resolved at runtime, not build-time
         const handler = await import(`./handlers/${toolName}.js`);
         const handlerFn = handler.default || handler[`${toolName.replace('', '')}Handler`];
 

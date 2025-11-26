@@ -25,9 +25,10 @@ const buildOptions = {
   banner: {
     js: '// DevSteps MCP Server - bundled for VS Code Extension Host',
   },
-  // Ignore dynamic require warnings - we only use static imports
+  // Ignore warnings for intentional patterns
   logOverride: {
-    'indirect-require': 'silent',
+    'indirect-require': 'silent', // We use static imports only
+    'empty-glob': 'silent', // Dynamic handler imports are runtime-resolved, not build-time
   },
   logLevel: 'info',
 };

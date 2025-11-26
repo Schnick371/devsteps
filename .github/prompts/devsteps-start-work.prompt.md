@@ -2,7 +2,7 @@
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Begin implementation work - review planned items, select next task, and start structured development'
-tools: ['runCommands', 'runTasks', 'edit', 'search', 'GitKraken/*', 'tavily/*', 'devsteps/*', 'usages', 'problems', 'changes', 'testFailure', 'todos', 'runSubagent']
+tools: ['edit', 'search', 'runCommands', 'runTasks', 'GitKraken/*', 'tavily/*', 'devsteps/*', 'usages', 'problems', 'changes', 'testFailure', 'todos', 'runSubagent']
 ---
 
 # 🚀 Start Work - Begin Implementation
