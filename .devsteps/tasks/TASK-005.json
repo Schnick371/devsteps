@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T15:35:22.310Z",
-  "updated": "2025-11-24T10:15:02.472Z",
+  "updated": "2025-11-26T06:30:37.776Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/vscode-extension/src/webview/dashboardPanel.ts",
@@ -26,7 +26,8 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "TASK-014"
+      "TASK-014",
+      "SPIKE-005"
     ],
     "depends-on": [
       "SPIKE-002"

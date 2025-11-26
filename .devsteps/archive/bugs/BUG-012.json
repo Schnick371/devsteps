@@ -1,0 +1,38 @@
+{
+  "id": "BUG-012",
+  "type": "bug",
+  "category": "vscode",
+  "title": "Remove unused chart.js and d3 dependencies from package.json",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "urgent-not-important",
+  "created": "2025-11-26T06:26:07.896Z",
+  "updated": "2025-11-26T06:27:49.147Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/package.json",
+    "packages/extension/src/webview/dashboardPanel.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-015"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "dependencies",
+    "cleanup",
+    "bundle-size"
+  ],
+  "commits": [],
+  "metadata": {}
+}

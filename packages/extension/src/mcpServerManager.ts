@@ -3,6 +3,10 @@
  * Licensed under the Apache License, Version 2.0
  * 
  * MCP Server Manager - Automatic startup and configuration
+ * 
+ * **Requires VS Code 1.99.0+** (March 2025)
+ * - registerMcpServerDefinitionProvider API introduced in 1.99
+ * - Fallback to manual configuration for older versions
  * Uses VS Code's official registerMcpServerDefinitionProvider API (2025)
  */
 

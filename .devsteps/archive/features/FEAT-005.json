@@ -1,0 +1,36 @@
+{
+  "id": "FEAT-005",
+  "type": "feature",
+  "category": "vscode",
+  "title": "Implement lazy loading for TreeView (100+ items performance)",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-26T06:26:43.824Z",
+  "updated": "2025-11-26T06:26:43.824Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/treeView/devstepsTreeDataProvider.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "performance",
+    "lazy-loading",
+    "treeview",
+    "optimization"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,38 @@
+{
+  "id": "TASK-053",
+  "type": "task",
+  "category": "vscode",
+  "title": "Refactor dashboardPanel.ts - Split 739-line file",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-26T06:26:07.894Z",
+  "updated": "2025-11-26T06:27:49.036Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/dashboardPanel.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-015"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "refactoring",
+    "code-quality",
+    "file-size",
+    "webview"
+  ],
+  "commits": [],
+  "metadata": {}
+}

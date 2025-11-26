@@ -97,7 +97,7 @@ DevSteps extension follows **VS Code theme colors** automatically:
 
 ### Extension Not Activating?
 - Ensure `.devsteps/` directory exists in workspace root
-- Check VS Code version (requires 1.95.0+)
+- Check VS Code version (requires 1.99.0+ (March 2025 or later for MCP support))
 - Reload window: `Cmd/Ctrl+Shift+P` → `Developer: Reload Window`
 
 ### Dashboard Not Loading?

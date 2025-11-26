@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.4.0] - 2025-11-23
 
+## [Unreleased]
+
+### Fixed
+- **Minimum VS Code version**: Corrected from 1.95.0 to 1.99.0 (BUG-014)
+  - VS Code 1.99.0 (March 2025) required for MCP API support
+  - `registerMcpServerDefinitionProvider` API introduced in 1.99
+  - Previous versions (1.95-1.98) lack MCP auto-registration capability
+
 ### Added
 
 **Dashboard Features:**

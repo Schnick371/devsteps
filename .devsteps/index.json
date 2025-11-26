@@ -2,11 +2,11 @@
   "version": "1.0.0",
   "counters": {
     "epic": 7,
-    "story": 14,
-    "task": 51,
-    "bug": 11,
-    "spike": 4,
-    "feature": 4,
+    "story": 16,
+    "task": 55,
+    "bug": 14,
+    "spike": 5,
+    "feature": 5,
     "requirement": 1
   },
   "items": [
@@ -794,26 +794,114 @@
       "status": "draft",
       "priority": "low",
       "updated": "2025-11-26T06:19:16.873Z"
+    },
+    {
+      "id": "TASK-052",
+      "type": "task",
+      "title": "Refactor devstepsTreeDataProvider.ts - Split 843-line file",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T06:27:14.160Z"
+    },
+    {
+      "id": "TASK-053",
+      "type": "task",
+      "title": "Refactor dashboardPanel.ts - Split 739-line file",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T06:26:07.894Z"
+    },
+    {
+      "id": "BUG-013",
+      "type": "bug",
+      "title": "Add error handling with user notifications for async methods",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-26T06:26:43.827Z"
+    },
+    {
+      "id": "TASK-054",
+      "type": "task",
+      "title": "Replace any[] with proper TypeScript types for type safety",
+      "status": "draft",
+      "priority": "low",
+      "updated": "2025-11-26T06:27:06.637Z"
+    },
+    {
+      "id": "STORY-015",
+      "type": "story",
+      "title": "Code Quality Improvements - Refactor Oversized Files and Dependencies",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-26T06:30:37.314Z"
+    },
+    {
+      "id": "STORY-016",
+      "type": "story",
+      "title": "Performance and Robustness Enhancements",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-26T06:27:41.347Z"
+    },
+    {
+      "id": "TASK-055",
+      "type": "task",
+      "title": "Implement lazy loading for TreeView (100+ items performance)",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-26T06:28:08.916Z"
+    },
+    {
+      "id": "SPIKE-005",
+      "type": "spike",
+      "title": "Dashboard Visualization Strategy - Custom vs Chart.js/D3 Libraries",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-26T06:30:19.240Z"
+    },
+    {
+      "id": "BUG-014",
+      "type": "bug",
+      "title": "Correct minimum VS Code version from 1.95.0 to 1.99.0 (MCP API requirement)",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-11-26T06:36:15.476Z"
     }
   ],
   "stats": {
-    "total": 92,
+    "total": 101,
     "by_type": {
       "epic": 7,
-      "story": 14,
-      "task": 51,
-      "bug": 11,
-      "spike": 4,
-      "feature": 4,
+      "story": 16,
+      "task": 55,
+      "bug": 14,
+      "spike": 5,
+      "feature": 5,
       "requirement": 1
     },
     "by_status": {
       "in-progress": 0,
-      "done": 62,
-      "draft": 29,
+      "done": 63,
+      "draft": 37,
       "blocked": 1
-    }
+    },
+    "archived": 2
   },
-  "archived_items": [],
-  "last_updated": "2025-11-26T06:20:42.552Z"
+  "archived_items": [
+    {
+      "id": "FEAT-005",
+      "type": "feature",
+      "title": "Implement lazy loading for TreeView (100+ items performance)",
+      "archived_at": "2025-11-26T06:28:09.313Z",
+      "original_status": "draft"
+    },
+    {
+      "id": "BUG-012",
+      "type": "bug",
+      "title": "Remove unused chart.js and d3 dependencies from package.json",
+      "archived_at": "2025-11-26T06:30:19.520Z",
+      "original_status": "draft"
+    }
+  ],
+  "last_updated": "2025-11-26T06:36:15.476Z"
 }

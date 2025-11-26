@@ -1,0 +1,38 @@
+{
+  "id": "STORY-016",
+  "type": "story",
+  "category": "vscode",
+  "title": "Performance and Robustness Enhancements",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-26T06:27:41.347Z",
+  "updated": "2025-11-26T06:28:14.998Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-003"
+    ],
+    "implemented-by": [
+      "TASK-055",
+      "BUG-013"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "performance",
+    "error-handling",
+    "robustness"
+  ],
+  "commits": [],
+  "metadata": {}
+}
