@@ -1,13 +1,13 @@
 {
-  "id": "STORY-035",
-  "type": "story",
-  "category": "general",
-  "title": "Fix Welcome View flash - Activate extension before UI registration",
+  "id": "TASK-076",
+  "type": "task",
+  "category": "vscode",
+  "title": "Fix context key race condition - Set devsteps.showWelcome explicitly",
   "status": "done",
   "priority": "high",
   "eisenhower": "urgent-important",
-  "created": "2025-11-27T17:12:46.374Z",
-  "updated": "2025-11-27T19:06:07.274Z",
+  "created": "2025-11-27T19:05:58.660Z",
+  "updated": "2025-11-27T19:06:12.462Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/package.json",
@@ -15,11 +15,9 @@
   ],
   "linked_items": {
     "implements": [
-      "EPIC-003"
+      "STORY-035"
     ],
-    "implemented-by": [
-      "TASK-076"
-    ],
+    "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
@@ -31,10 +29,10 @@
     "superseded-by": []
   },
   "tags": [
-    "ux",
-    "activation",
+    "context-keys",
+    "race-condition",
     "welcome-view",
-    "extension-lifecycle"
+    "bug-fix"
   ],
   "commits": [],
   "metadata": {}

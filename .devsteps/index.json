@@ -3,7 +3,7 @@
   "counters": {
     "epic": 10,
     "story": 35,
-    "task": 75,
+    "task": 76,
     "bug": 18,
     "spike": 5,
     "feature": 5,
@@ -1233,15 +1233,23 @@
       "title": "Fix Welcome View flash - Activate extension before UI registration",
       "status": "done",
       "priority": "high",
-      "updated": "2025-11-27T17:15:18.106Z"
+      "updated": "2025-11-27T19:04:17.669Z"
+    },
+    {
+      "id": "TASK-076",
+      "type": "task",
+      "title": "Fix context key race condition - Set devsteps.showWelcome explicitly",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-11-27T19:06:12.462Z"
     }
   ],
   "stats": {
-    "total": 147,
+    "total": 148,
     "by_type": {
       "epic": 10,
       "story": 35,
-      "task": 75,
+      "task": 76,
       "bug": 18,
       "spike": 5,
       "feature": 5,
@@ -1249,7 +1257,7 @@
     },
     "by_status": {
       "in-progress": 1,
-      "done": 73,
+      "done": 74,
       "draft": 69,
       "blocked": 1,
       "obsolete": 3
@@ -1272,5 +1280,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-27T17:15:18.106Z"
+  "last_updated": "2025-11-27T19:06:12.462Z"
 }
