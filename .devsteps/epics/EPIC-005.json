@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T19:33:36.249Z",
-  "updated": "2025-11-24T20:59:51.258Z",
+  "updated": "2025-11-27T19:28:43.820Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/",
@@ -21,7 +21,8 @@
     "implemented-by": [
       "SPIKE-003",
       "STORY-005",
-      "TASK-041"
+      "TASK-041",
+      "STORY-036"
     ],
     "tested-by": [],
     "tests": [],

@@ -7,7 +7,7 @@
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T19:36:06.264Z",
-  "updated": "2025-11-24T19:36:26.032Z",
+  "updated": "2025-11-27T19:28:56.923Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/instructions/git-workflow.instructions.md",
@@ -30,7 +30,9 @@
       "TASK-042"
     ],
     "supersedes": [],
-    "superseded-by": []
+    "superseded-by": [
+      "STORY-036"
+    ]
   },
   "tags": [
     "git",

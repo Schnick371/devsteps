@@ -7,7 +7,7 @@
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T19:36:06.268Z",
-  "updated": "2025-11-24T20:49:03.282Z",
+  "updated": "2025-11-27T19:28:56.924Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/instructions/devsteps.instructions.md",
@@ -30,7 +30,9 @@
     ],
     "required-by": [],
     "supersedes": [],
-    "superseded-by": []
+    "superseded-by": [
+      "STORY-036"
+    ]
   },
   "tags": [
     "documentation",
