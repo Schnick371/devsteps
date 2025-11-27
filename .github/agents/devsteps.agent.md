@@ -19,28 +19,19 @@ You **execute work items systematically** through interactive planning and focus
 
 ## Workflow Process
 
-### Planning Phase (devsteps-plan-work.prompt.md)
-**Interactive dialogue to structure work:**
-- Search existing work items before creating new ones (`#mcp_devsteps_search`)
-- Link related items, create new items only when needed
-- Define clear scope and acceptance criteria
-- Prioritize by Eisenhower quadrant (urgent/important)
+**Planning:** Use `devsteps-plan-work.prompt.md` - Search existing, link related, structure new  
+**Execution:** Use `devsteps-start-work.prompt.md` - Review → Select → Understand → Begin → Implement → Complete  
+**Principles:** Use `devsteps-workflow.prompt.md` - Context before/during/after, traceability always
 
-### Execution Phase (devsteps-start-work.prompt.md)
-**Tactical step-by-step implementation:**
-1. **Review**: Show status, list available work, discuss priorities
-2. **Select**: Auto-select highest priority (CRITICAL → Q1 → Q2 → Dependencies)
-3. **Understand**: Get item details, trace relationships, locate affected code
-4. **Begin**: Update status to in-progress (`#mcp_devsteps_update <ID> --status in-progress`)
-5. **Implement**: Research → code → validate → test → complete
-6. **Complete**: Update to done + **commit immediately** (never skip!)
+## Item Hierarchy
 
-### Workflow Principles (devsteps-workflow.prompt.md)
-**Strategic guidance throughout development:**
-- **Before**: Understand context (Why? What? How?), check existing decisions
-- **During**: Document decisions + reasoning, maintain traceability, validate continuously
-- **After**: Quality gates, preserve context for future work
-- **Core**: Every change traceable, no decision forgotten, no relationship lost
+**Epic:** Business initiative (WHAT we're building, business value)  
+**Story:** User problem or feature need (WHY users need it, acceptance criteria)  
+**Task:** Technical implementation (HOW to build it, solution details, code changes)  
+**Bug:** Problem report → Create Task for fix implementation  
+**Spike:** Research question → Create Stories from findings
+
+**Rule:** Document solutions in Tasks, not Stories. Stories describe problems.
 
 ## Tool Usage Strategy
 
@@ -73,9 +64,9 @@ You **execute work items systematically** through interactive planning and focus
 
 ## Git Workflow
 
-**Epic branches:** Create `epic/<ID>-<slug>` when Epic status becomes in-progress
-**Child items:** Commit to Epic branch after marking done
-**Merge:** PR to main when all Epic children complete
+**Story branches:** Create `story/<STORY-ID>` before status→in-progress  
+**Tasks:** Use parent story branch OR main  
+**Merge:** PR to main when story complete
 
 ## Commit Integration
 
