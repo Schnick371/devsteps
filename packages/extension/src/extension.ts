@@ -12,8 +12,20 @@ import { DevStepsDecorationProvider } from './decorationProvider.js';
 import { logger } from './outputChannel.js';
 
 /**
+ * Check if .devsteps directory exists in workspace
+ */
+async function checkDevStepsDirectory(workspaceRoot: vscode.Uri): Promise<boolean> {
+  try {
+    await vscode.workspace.fs.stat(vscode.Uri.joinPath(workspaceRoot, '.devsteps'));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Extension activation - called when extension is activated
- * Activation events: onStartupFinished, workspaceContains:.devsteps
+ * Activation event: onStartupFinished (activates after VS Code fully loaded)
  */
 export async function activate(context: vscode.ExtensionContext) {
   logger.info('DevSteps extension activating...');
@@ -30,17 +42,18 @@ export async function activate(context: vscode.ExtensionContext) {
 
   const workspaceRoot = workspaceFolders[0].uri;
 
-  // Check for .devsteps directory
-  let hasDevSteps = false;
-  try {
-    await vscode.workspace.fs.stat(vscode.Uri.joinPath(workspaceRoot, '.devsteps'));
-    hasDevSteps = true;
+  // CRITICAL: Check for .devsteps directory BEFORE any UI registration
+  // This prevents Welcome View flash when project already exists
+  const hasDevSteps = await checkDevStepsDirectory(workspaceRoot);
+  
+  if (hasDevSteps) {
     logger.info('.devsteps directory found in workspace');
-  } catch (error) {
+  } else {
     logger.warn('No .devsteps directory found in workspace - TreeView will show welcome view');
   }
 
-  // Set context key for welcome view
+  // Set context key IMMEDIATELY (before view creation)
+  // This ensures Welcome View only shows when truly needed
   await vscode.commands.executeCommand('setContext', 'devsteps.initialized', hasDevSteps);
 
   // Initialize TreeView - always create provider to avoid "no data provider" error
@@ -53,14 +66,15 @@ export async function activate(context: vscode.ExtensionContext) {
   });
   context.subscriptions.push(treeView);
   
-  // Pass TreeView to provider for description badge updates
-  treeDataProvider.setTreeView(treeView);
-  
-  // Register FileDecorationProvider for status badges
+  // Register FileDecorationProvider for colored status badges
   const decorationProvider = new DevStepsDecorationProvider();
   context.subscriptions.push(
     vscode.window.registerFileDecorationProvider(decorationProvider)
   );
+  
+  // Connect providers - tree refresh triggers decoration refresh
+  treeDataProvider.setDecorationProvider(decorationProvider);
+  treeDataProvider.setTreeView(treeView);
 
   // Register FileSystemWatcher for automatic TreeView refresh
   const watcher = vscode.workspace.createFileSystemWatcher(

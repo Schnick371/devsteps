@@ -20,7 +20,7 @@
     "requirements traceability"
   ],
   "activationEvents": [
-    "workspaceContains:.devsteps"
+    "onStartupFinished"
   ],
   "main": "./dist/extension.js",
   "contributes": {
