@@ -3,14 +3,14 @@
   "type": "task",
   "category": "design",
   "title": "Create Activity Bar Icon - 28x28 SVG with Theme Compatibility",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-26T07:01:15.413Z",
-  "updated": "2025-11-26T07:02:29.057Z",
+  "updated": "2025-11-26T13:32:10.545Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/extension/resources/icons/devsteps-activitybar.svg",
+    "packages/extension/resources/icons/devsteps-icon.svg",
     "packages/extension/package.json"
   ],
   "linked_items": {

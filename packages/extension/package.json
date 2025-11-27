@@ -36,7 +36,7 @@
         {
           "id": "devsteps-explorer",
           "title": "DevSteps",
-          "icon": "resources/icons/devsteps-activitybar.svg"
+          "icon": "resources/icons/devsteps-icon.svg"
         }
       ]
     },

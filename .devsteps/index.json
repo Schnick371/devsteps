@@ -1007,9 +1007,9 @@
       "id": "TASK-066",
       "type": "task",
       "title": "Create Activity Bar Icon - 28x28 SVG with Theme Compatibility",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-26T07:01:15.413Z"
+      "updated": "2025-11-26T13:32:10.545Z"
     },
     {
       "id": "TASK-067",
@@ -1063,17 +1063,17 @@
       "id": "TASK-073",
       "type": "task",
       "title": "Design Concept 2: \"Footsteps + Glasses Hybrid\" - Human & AI Walking Together",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-26T08:14:53.169Z"
+      "updated": "2025-11-26T12:19:55.603Z"
     },
     {
       "id": "TASK-074",
       "type": "task",
       "title": "Design Concept 3: \"Step Dots Through Lens\" - Progress Path with AI Focus",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-26T08:14:53.170Z"
+      "updated": "2025-11-26T12:21:39.163Z"
     },
     {
       "id": "STORY-021",
@@ -1097,8 +1097,8 @@
     },
     "by_status": {
       "in-progress": 0,
-      "done": 69,
-      "draft": 58,
+      "done": 72,
+      "draft": 55,
       "blocked": 1
     },
     "archived": 2
@@ -1119,5 +1119,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-26T08:28:24.384Z"
+  "last_updated": "2025-11-26T13:32:10.545Z"
 }
