@@ -7,7 +7,7 @@
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T15:39:31.434Z",
-  "updated": "2025-11-23T19:52:56.706Z",
+  "updated": "2025-11-27T16:35:36.511Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/vscode-extension/resources/icons/"
@@ -24,7 +24,8 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "TASK-009"
+      "TASK-009",
+      "BUG-018"
     ],
     "depends-on": [],
     "required-by": [],

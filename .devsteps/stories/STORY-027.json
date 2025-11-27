@@ -1,0 +1,40 @@
+{
+  "id": "STORY-027",
+  "type": "story",
+  "category": "general",
+  "title": "Dashboard Knowledge Base section with search",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-27T16:50:50.186Z",
+  "updated": "2025-11-27T16:52:22.051Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/dashboardPanel.ts",
+    "packages/extension/media/dashboard.css"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-010"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-028"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "knowledge-management",
+    "dashboard",
+    "ui"
+  ],
+  "commits": [],
+  "metadata": {}
+}

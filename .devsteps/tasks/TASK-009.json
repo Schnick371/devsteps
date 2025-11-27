@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T16:19:31.869Z",
-  "updated": "2025-11-23T18:10:50.333Z",
+  "updated": "2025-11-27T16:35:42.294Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/vscode-extension/src/decorationProvider.ts"
@@ -25,7 +25,9 @@
     "blocked-by": [],
     "relates-to": [
       "TASK-002",
-      "TASK-007"
+      "TASK-007",
+      "BUG-016",
+      "BUG-018"
     ],
     "depends-on": [],
     "required-by": [],

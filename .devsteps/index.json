@@ -1,10 +1,10 @@
 {
   "version": "1.0.0",
   "counters": {
-    "epic": 9,
-    "story": 21,
-    "task": 74,
-    "bug": 15,
+    "epic": 10,
+    "story": 35,
+    "task": 75,
+    "bug": 18,
     "spike": 5,
     "feature": 5,
     "requirement": 1
@@ -1082,24 +1082,177 @@
       "status": "draft",
       "priority": "high",
       "updated": "2025-11-26T08:15:13.020Z"
+    },
+    {
+      "id": "BUG-016",
+      "type": "bug",
+      "title": "TreeView badges not appearing - DecorationProvider refresh missing",
+      "status": "obsolete",
+      "priority": "critical",
+      "updated": "2025-11-27T16:15:06.195Z"
+    },
+    {
+      "id": "TASK-075",
+      "type": "task",
+      "title": "TreeView badges via TreeItem.description property",
+      "status": "obsolete",
+      "priority": "critical",
+      "updated": "2025-11-27T16:15:06.196Z"
+    },
+    {
+      "id": "BUG-017",
+      "type": "bug",
+      "title": "Restore original FileDecorationProvider badge implementation",
+      "status": "in-progress",
+      "priority": "critical",
+      "updated": "2025-11-27T16:15:20.340Z"
+    },
+    {
+      "id": "BUG-018",
+      "type": "bug",
+      "title": "Verify all 8 status badges are correctly implemented",
+      "status": "obsolete",
+      "priority": "critical",
+      "updated": "2025-11-27T16:37:39.906Z"
+    },
+    {
+      "id": "EPIC-010",
+      "type": "epic",
+      "title": "Knowledge Management & Organizational Learning System",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-27T16:50:03.926Z"
+    },
+    {
+      "id": "STORY-022",
+      "type": "story",
+      "title": "Add lesson/pattern/antipattern/decision item types",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-11-27T16:50:50.179Z"
+    },
+    {
+      "id": "STORY-023",
+      "type": "story",
+      "title": "Interactive lesson capture on work item completion",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-27T16:50:50.183Z"
+    },
+    {
+      "id": "STORY-024",
+      "type": "story",
+      "title": "Pattern library with extractable code examples",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-27T16:50:50.183Z"
+    },
+    {
+      "id": "STORY-025",
+      "type": "story",
+      "title": "Anti-pattern registry to prevent repeated mistakes",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-27T16:50:50.184Z"
+    },
+    {
+      "id": "STORY-026",
+      "type": "story",
+      "title": "Architecture Decision Log (ADR-style records)",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-27T16:50:50.185Z"
+    },
+    {
+      "id": "STORY-027",
+      "type": "story",
+      "title": "Dashboard Knowledge Base section with search",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-27T16:50:50.186Z"
+    },
+    {
+      "id": "STORY-028",
+      "type": "story",
+      "title": "Advanced knowledge search with smart suggestions",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-27T16:51:30.042Z"
+    },
+    {
+      "id": "STORY-029",
+      "type": "story",
+      "title": "Export knowledge base as shareable documentation",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-27T16:51:30.043Z"
+    },
+    {
+      "id": "STORY-030",
+      "type": "story",
+      "title": "Cross-project knowledge import/export",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-27T16:51:30.044Z"
+    },
+    {
+      "id": "STORY-031",
+      "type": "story",
+      "title": "Central Knowledge Repository (Community Platform)",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-27T16:51:30.044Z"
+    },
+    {
+      "id": "STORY-032",
+      "type": "story",
+      "title": "Knowledge aging tracking & maintenance workflow",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-27T16:51:58.713Z"
+    },
+    {
+      "id": "STORY-033",
+      "type": "story",
+      "title": "Knowledge impact metrics & analytics dashboard",
+      "status": "draft",
+      "priority": "low",
+      "updated": "2025-11-27T16:51:58.714Z"
+    },
+    {
+      "id": "STORY-034",
+      "type": "story",
+      "title": "Customizable knowledge item templates",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-27T16:51:58.715Z"
+    },
+    {
+      "id": "STORY-035",
+      "type": "story",
+      "title": "Fix Welcome View flash - Activate extension before UI registration",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-11-27T17:15:18.106Z"
     }
   ],
   "stats": {
-    "total": 128,
+    "total": 147,
     "by_type": {
-      "epic": 9,
-      "story": 21,
-      "task": 74,
-      "bug": 15,
+      "epic": 10,
+      "story": 35,
+      "task": 75,
+      "bug": 18,
       "spike": 5,
       "feature": 5,
       "requirement": 1
     },
     "by_status": {
-      "in-progress": 0,
-      "done": 72,
-      "draft": 55,
-      "blocked": 1
+      "in-progress": 1,
+      "done": 73,
+      "draft": 69,
+      "blocked": 1,
+      "obsolete": 3
     },
     "archived": 2
   },
@@ -1119,5 +1272,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-26T13:32:10.545Z"
+  "last_updated": "2025-11-27T17:15:18.106Z"
 }

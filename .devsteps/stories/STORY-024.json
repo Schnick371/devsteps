@@ -1,0 +1,42 @@
+{
+  "id": "STORY-024",
+  "type": "story",
+  "category": "general",
+  "title": "Pattern library with extractable code examples",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-27T16:50:50.183Z",
+  "updated": "2025-11-27T16:52:22.052Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/knowledge.ts",
+    "packages/mcp-server/src/handlers/knowledge.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-010"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-025"
+    ],
+    "depends-on": [
+      "STORY-022"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "knowledge-management",
+    "patterns",
+    "code-examples"
+  ],
+  "commits": [],
+  "metadata": {}
+}
