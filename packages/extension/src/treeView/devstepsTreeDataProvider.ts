@@ -51,16 +51,8 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   private expandedSections = new Set<string>(['scrum', 'waterfall']); // Both expanded by default
   private lastTotalCount = 0;
   private lastFilteredCount = 0;
-  private decorationProvider?: { refresh: (uris?: vscode.Uri | vscode.Uri[]) => void };
 
   constructor(private workspaceRoot: vscode.Uri) {}
-
-  /**
-   * Set decoration provider for badge refresh
-   */
-  setDecorationProvider(provider: { refresh: (uris?: vscode.Uri | vscode.Uri[]) => void }): void {
-    this.decorationProvider = provider;
-  }
 
   /**
    * Set TreeView instance for description badge updates and state tracking
@@ -111,8 +103,6 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    */
   refresh(): void {
     this._onDidChangeTreeData.fire();
-    // Refresh decorations (badges) for all items
-    this.decorationProvider?.refresh();
   }
 
   /**

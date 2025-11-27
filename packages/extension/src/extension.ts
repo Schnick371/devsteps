@@ -53,15 +53,14 @@ export async function activate(context: vscode.ExtensionContext) {
   });
   context.subscriptions.push(treeView);
   
+  // Pass TreeView to provider for description badge updates
+  treeDataProvider.setTreeView(treeView);
+  
   // Register FileDecorationProvider for status badges
   const decorationProvider = new DevStepsDecorationProvider();
   context.subscriptions.push(
     vscode.window.registerFileDecorationProvider(decorationProvider)
   );
-  
-  // Connect providers - tree refresh triggers decoration refresh for badges
-  treeDataProvider.setDecorationProvider(decorationProvider);
-  treeDataProvider.setTreeView(treeView);
 
   // Register FileSystemWatcher for automatic TreeView refresh
   const watcher = vscode.workspace.createFileSystemWatcher(
