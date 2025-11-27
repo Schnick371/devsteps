@@ -11,6 +11,24 @@ tools: ['edit', 'search', 'runCommands', 'runTasks', 'GitKraken/*', 'tavily/*', 
 
 **Start implementation** - review planned work, select highest priority, begin structured development.
 
+## Step 0: Prepare
+
+**Check working tree:**
+- Uncommitted changes? Commit or stash before proceeding
+- Another story in-progress? ⚠️ Warning: Multiple story branches allowed
+
+**Create story branch (for Story/Spike only):**
+```
+git checkout -b story/<STORY-ID>
+```
+
+**Branch rules:**
+- Story/Spike → New branch: `story/<ID>`
+- Task → Use parent story branch OR main
+- Bug → Use related story branch OR main
+
+**Skip if:** Task implements current in-progress story on same branch
+
 ## Step 1: Review
 
 ```

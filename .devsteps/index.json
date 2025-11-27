@@ -1263,9 +1263,9 @@
       "id": "TASK-078",
       "type": "task",
       "title": "Add story branch workflow to start-work prompt",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-27T19:28:26.651Z"
+      "updated": "2025-11-27T19:32:55.330Z"
     },
     {
       "id": "TASK-079",
@@ -1289,8 +1289,8 @@
     },
     "by_status": {
       "in-progress": 2,
-      "done": 75,
-      "draft": 71,
+      "done": 76,
+      "draft": 70,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1312,5 +1312,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-27T19:32:17.958Z"
+  "last_updated": "2025-11-27T19:32:55.330Z"
 }
