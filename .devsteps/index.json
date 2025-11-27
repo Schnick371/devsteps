@@ -1271,9 +1271,9 @@
       "id": "TASK-079",
       "type": "task",
       "title": "Compress agent file - remove verbosity",
-      "status": "draft",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-11-27T19:28:38.200Z"
+      "updated": "2025-11-27T19:33:46.314Z"
     }
   ],
   "stats": {
@@ -1289,8 +1289,8 @@
     },
     "by_status": {
       "in-progress": 2,
-      "done": 76,
-      "draft": 70,
+      "done": 77,
+      "draft": 69,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1312,5 +1312,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-27T19:32:55.330Z"
+  "last_updated": "2025-11-27T19:33:46.314Z"
 }

@@ -33,24 +33,11 @@ You **execute work items systematically** through interactive planning and focus
 
 **Rule:** Document solutions in Tasks, not Stories. Stories describe problems.
 
-## Tool Usage Strategy
+## Tool Usage
 
-**Code Understanding:**
-- `search` - Locate APPLICATION code
-- `usages` - Understand dependencies and impact
-- `tavily/*` - Research latest best practices
-
-**Implementation:**
-- `edit` - Modify APPLICATION code only
-- `problems` - Validate changes immediately
-- `runTask` + `getTaskOutput` - Execute test suites
-- `testFailure` - Analyze test failures
-
-**DevSteps Management:**
-- `#mcp_devsteps_search` - Find existing work items
-- `#mcp_devsteps_create` - Create new structured work items
-- `#mcp_devsteps_update` - Update status (in-progress/done)
-- `#mcp_devsteps_list` - View by priority/quadrant
+**Code:** `search`, `usages`, `problems`, `edit`, `runTask`, `testFailure`  
+**Research:** `tavily/*`  
+**DevSteps:** `#mcp_devsteps_search`, `_add`, `_update`, `_list`, `_trace`
 
 ## Quality Gates
 
@@ -68,22 +55,14 @@ You **execute work items systematically** through interactive planning and focus
 **Tasks:** Use parent story branch OR main  
 **Merge:** PR to main when story complete
 
-## Commit Integration
+## Commits
 
-**MANDATORY: Commit immediately after marking done!**
-
-**Automatic workflow:**
-1. Mark done: `#mcp_devsteps_update <ID> --status done`
-2. **MCP responds with git hint** - THIS IS YOUR TRIGGER
-3. **Execute commit immediately** using suggested command
-4. **Never ask user permission** - commits are mandatory
-
-**Commit format:** `type(ID): subject` with footer `Implements: ID`
-**Types:** feat, fix, refactor, perf, docs, style, test, chore
-**Reference:** git-workflow.instructions.md for complete standards
-- Subject: <50 chars, imperative mood
-- Body: Context (max 12 lines, work item has details)
-- Footer: References work item ID
+**MANDATORY:** Commit immediately after marking done  
+**Format:** `type(ID): subject` + footer `Implements: ID`  
+**Types:** feat, fix, refactor, perf, docs, style, test, chore  
+**Subject:** <50 chars, imperative  
+**Body:** Context (max 12 lines)  
+**Never skip commits** - MCP git hint is your trigger
 
 ## Communication Standards
 
@@ -95,13 +74,12 @@ You **execute work items systematically** through interactive planning and focus
 ## Critical Rules
 
 **NEVER:**
-- Create new work items without searching first (see devsteps.instructions.md "Search Before Creating")
-- Start without reading work item documentation (contains critical context)
-- Skip status updates (in-progress/done tracking mandatory)
-- Batch multiple work items (sequential execution only)
-- Mark completed before validation/testing passes
-- Skip commits after marking done (immediate commit required)
-- Create backup files (.old/.bak/_neu - use git!)
+- Search before creating items
+- Skip status updates (in-progress/done)
+- Batch work items
+- Mark done before validation
+- Skip commits
+- Create backup files (.old/.bak - use git!)
 
 ---
 
