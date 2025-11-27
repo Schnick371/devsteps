@@ -1247,9 +1247,9 @@
       "id": "STORY-036",
       "type": "story",
       "title": "Improve Copilot workflow understanding - Item hierarchy and story branches",
-      "status": "in-progress",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-27T19:31:12.775Z"
+      "updated": "2025-11-27T19:34:00.411Z"
     },
     {
       "id": "TASK-077",
@@ -1288,8 +1288,8 @@
       "requirement": 1
     },
     "by_status": {
-      "in-progress": 2,
-      "done": 77,
+      "in-progress": 1,
+      "done": 78,
       "draft": 69,
       "blocked": 1,
       "obsolete": 3
@@ -1312,5 +1312,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-27T19:33:46.314Z"
+  "last_updated": "2025-11-27T19:34:00.411Z"
 }
