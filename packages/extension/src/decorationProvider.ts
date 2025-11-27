@@ -27,37 +27,24 @@ export class DevStepsDecorationProvider implements vscode.FileDecorationProvider
     uri: vscode.Uri,
     _token: vscode.CancellationToken,
   ): vscode.ProviderResult<vscode.FileDecoration> {
-    // DEBUG: Log every call
-    console.log('🔍 provideFileDecoration called with URI:', uri.toString());
-    console.log('  - scheme:', uri.scheme);
-    console.log('  - path:', uri.path);
-    console.log('  - query:', uri.query);
-    
-    // Only handle devsteps// scheme
+    // Only handle devsteps:// scheme
     if (uri.scheme !== 'devsteps') {
-      console.log('  ❌ Wrong scheme, returning undefined');
       return undefined;
     }
 
     try {
-      // Parse URI: devsteps//item/<ID>?status=<status>&priority=<priority>
+      // Parse URI: devsteps://item/<ID>?status=<status>&priority=<priority>
       const params = new URLSearchParams(uri.query);
       const status = params.get('status');
       const priority = params.get('priority');
 
-      console.log('  - status:', status);
-      console.log('  - priority:', priority);
-
       if (!status) {
-        console.log('  ❌ No status, returning undefined');
         return undefined;
       }
 
-      const decoration = this.getDecorationForStatus(status, priority);
-      console.log('  ✅ Returning decoration:', decoration);
-      return decoration;
+      return this.getDecorationForStatus(status, priority);
     } catch (error) {
-      console.error('  ❌ Error providing file decoration:', error);
+      console.error('DevSteps: Error providing file decoration:', error);
       return undefined;
     }
   }

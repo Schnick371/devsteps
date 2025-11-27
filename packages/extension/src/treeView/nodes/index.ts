@@ -9,3 +9,4 @@ export { WorkItemNode } from './workItemNode.js';
 export { TypeGroupNode } from './typeGroupNode.js';
 export { HierarchyRootNode } from './hierarchyRootNode.js';
 export { MethodologySectionNode } from './methodologySectionNode.js';
+export { LoadingNode } from './loadingNode.js';

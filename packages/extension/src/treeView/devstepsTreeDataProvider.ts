@@ -20,6 +20,7 @@ import {
   MethodologySectionNode,
   TypeGroupNode,
   HierarchyRootNode,
+  LoadingNode,
 } from './nodes/index.js';
 import { getItemMethodology } from './utils/methodologyDetector.js';
 
@@ -52,8 +53,23 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   private lastTotalCount = 0;
   private lastFilteredCount = 0;
   private decorationProvider?: { refresh: (uris?: vscode.Uri | vscode.Uri[]) => void };
+  private initialized = false;
+  private cachedRootNodes: TreeNode[] | null = null;
 
   constructor(private workspaceRoot: vscode.Uri) {}
+
+  /**
+   * Initialize data provider - pre-load root nodes to avoid "no data provider" flash
+   * MUST be called before createTreeView() to ensure data is ready
+   */
+  async initialize(): Promise<void> {
+    if (this.initialized) return;
+    
+    // Pre-load root nodes to populate cache
+    const nodes = await (this.viewMode === 'flat' ? this.getFlatRootNodes() : this.getHierarchicalRootNodes());
+    this.cachedRootNodes = nodes;
+    this.initialized = true;
+  }
 
   /**
    * Set decoration provider for badge refresh
@@ -107,9 +123,11 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   }
 
   /**
-   * Refresh the tree view
+   * Refresh the tree view - clears cache to force reload
    */
   refresh(): void {
+    this.cachedRootNodes = null; // Clear cache to force reload
+    this.initialized = false;
     this._onDidChangeTreeData.fire();
     // Refresh decorations (colored badges) for all items
     this.decorationProvider?.refresh();
@@ -351,18 +369,50 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
 
   /**
    * Get children of a tree item
+   * CRITICAL: Returns SYNCHRONOUSLY with loading placeholder to prevent Welcome View flash
+   * 
+   * Strategy: Show "Loading..." node while data loads
+   * - View is NOT empty → VS Code doesn't show Welcome View
+   * - User sees feedback instead of blank view
+   * - Once data loads, refresh replaces loading node with real data
    */
-  async getChildren(element?: TreeNode): Promise<TreeNode[]> {
+  getChildren(element?: TreeNode): TreeNode[] | Promise<TreeNode[]> {
     if (!element) {
-      // Root level
-      if (this.viewMode === 'flat') {
-        return this.getFlatRootNodes();
+      // Root level - return SYNCHRONOUSLY if data available
+      if (this.cachedRootNodes !== null) {
+        return this.cachedRootNodes; // Real data - SYNCHRONOUS return
       }
-      return this.getHierarchicalRootNodes();
+      
+      // Data not loaded yet - show loading placeholder and trigger async load
+      if (!this.initialized) {
+        this.loadAndCacheRootNodes(); // Start loading in background
+        
+        // Return loading placeholder node - View is NOT empty → no Welcome View!
+        return [new LoadingNode()]; // SYNCHRONOUS return with proper TreeNode
+      }
+      
+      return []; // Fallback (should never reach here)
     }
 
     // Child nodes - pass filterState for hierarchical view filtering
     return element.getChildren(this.workspaceRoot, this.filterState);
+  }
+
+  /**
+   * Load root nodes asynchronously and cache, then refresh view
+   */
+  private async loadAndCacheRootNodes(): Promise<void> {
+    if (this.initialized) return; // Already loading
+    this.initialized = true; // Mark as loading
+    
+    const nodes = this.viewMode === 'flat' 
+      ? await this.getFlatRootNodes() 
+      : await this.getHierarchicalRootNodes();
+    
+    this.cachedRootNodes = nodes;
+    
+    // Trigger refresh to display loaded data
+    this._onDidChangeTreeData.fire();
   }
 
   /**
