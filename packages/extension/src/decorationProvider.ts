@@ -27,8 +27,15 @@ export class DevStepsDecorationProvider implements vscode.FileDecorationProvider
     uri: vscode.Uri,
     _token: vscode.CancellationToken,
   ): vscode.ProviderResult<vscode.FileDecoration> {
+    // DEBUG: Log every call
+    console.log('🔍 provideFileDecoration called with URI:', uri.toString());
+    console.log('  - scheme:', uri.scheme);
+    console.log('  - path:', uri.path);
+    console.log('  - query:', uri.query);
+    
     // Only handle devsteps// scheme
     if (uri.scheme !== 'devsteps') {
+      console.log('  ❌ Wrong scheme, returning undefined');
       return undefined;
     }
 
@@ -38,11 +45,19 @@ export class DevStepsDecorationProvider implements vscode.FileDecorationProvider
       const status = params.get('status');
       const priority = params.get('priority');
 
-      if (!status) return undefined;
+      console.log('  - status:', status);
+      console.log('  - priority:', priority);
 
-      return this.getDecorationForStatus(status, priority);
+      if (!status) {
+        console.log('  ❌ No status, returning undefined');
+        return undefined;
+      }
+
+      const decoration = this.getDecorationForStatus(status, priority);
+      console.log('  ✅ Returning decoration:', decoration);
+      return decoration;
     } catch (error) {
-      console.error('Error providing file decoration:', error);
+      console.error('  ❌ Error providing file decoration:', error);
       return undefined;
     }
   }
@@ -106,8 +121,13 @@ export class DevStepsDecorationProvider implements vscode.FileDecorationProvider
 }
 
 /**
- * Create devsteps// URI for work item decoration
+ * Create devsteps:// URI for work item decoration
+ * Use Uri.from() to properly create custom scheme URIs
  */
 export function createItemUri(itemId: string, status: string, priority: string): vscode.Uri {
-  return vscode.Uri.parse(`devsteps//item/${itemId}?status=${status}&priority=${priority}`);
+  return vscode.Uri.from({
+    scheme: 'devsteps',
+    path: `/item/${itemId}`,
+    query: `status=${status}&priority=${priority}`
+  });
 }

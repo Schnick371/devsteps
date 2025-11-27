@@ -28,6 +28,11 @@ async function checkDevStepsDirectory(workspaceRoot: vscode.Uri): Promise<boolea
  * Activation event: onStartupFinished (activates after VS Code fully loaded)
  */
 export async function activate(context: vscode.ExtensionContext) {
+  // CRITICAL: Set default context IMMEDIATELY before ANY other code
+  // VS Code loads views from package.json BEFORE activate() runs
+  // We must set context synchronously to prevent Welcome View flash
+  await vscode.commands.executeCommand('setContext', 'devsteps.initialized', false);
+  
   logger.info('DevSteps extension activating...');
 
   // Check for workspace
@@ -42,19 +47,17 @@ export async function activate(context: vscode.ExtensionContext) {
 
   const workspaceRoot = workspaceFolders[0].uri;
 
-  // CRITICAL: Check for .devsteps directory BEFORE any UI registration
-  // This prevents Welcome View flash when project already exists
+  // Check for .devsteps directory and update context
   const hasDevSteps = await checkDevStepsDirectory(workspaceRoot);
   
   if (hasDevSteps) {
     logger.info('.devsteps directory found in workspace');
+    // Update context to TRUE immediately
+    await vscode.commands.executeCommand('setContext', 'devsteps.initialized', true);
   } else {
     logger.warn('No .devsteps directory found in workspace - TreeView will show welcome view');
+    // Context already false from above
   }
-
-  // Set context key IMMEDIATELY (before view creation)
-  // This ensures Welcome View only shows when truly needed
-  await vscode.commands.executeCommand('setContext', 'devsteps.initialized', hasDevSteps);
 
   // Initialize TreeView - always create provider to avoid "no data provider" error
   // Provider will show empty state if .devsteps doesn't exist

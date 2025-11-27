@@ -6,6 +6,7 @@
  */
 
 import * as vscode from 'vscode';
+import { createItemUri } from '../../decorationProvider.js';
 import { getItemIconWithPriority } from '../../utils/icons.js';
 import type { ItemType, Priority } from '@schnick371/devsteps-shared';
 import { TreeNode, type FilterState, type WorkItem } from '../types.js';
@@ -30,8 +31,11 @@ export class WorkItemNode extends TreeNode {
 
     treeItem.contextValue = 'workItem';
     treeItem.iconPath = this.getIcon();
-    treeItem.description = this.getStatusBadge(this.item.status);
+    treeItem.description = undefined;
     treeItem.tooltip = `${this.item.type.toUpperCase()} | ${this.item.status} | Priority: ${this.item.priority}`;
+
+    // Set resourceUri for FileDecorationProvider (colored badges in separate column!)
+    treeItem.resourceUri = createItemUri(this.item.id, this.item.status, this.item.priority);
 
     treeItem.command = {
       command: 'devsteps.openItem',
@@ -40,20 +44,6 @@ export class WorkItemNode extends TreeNode {
     };
 
     return treeItem;
-  }
-
-  private getStatusBadge(status: string): string {
-    const badges: Record<string, string> = {
-      'draft': '○',
-      'planned': '◷',
-      'in-progress': '●',
-      'review': '◎',
-      'done': '✓',
-      'blocked': '✖',
-      'cancelled': '−',
-      'obsolete': '⊗'
-    };
-    return badges[status] || '?';
   }
 
   async getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState): Promise<TreeNode[]> {
