@@ -1,5 +1,5 @@
 ---
-applyTo: "**"
+applyTo: ".devsteps/**/*.md"
 description: "DevSteps workflow and work item tracking"
 ---
 
@@ -55,10 +55,6 @@ description: "DevSteps workflow and work item tracking"
 
 **Never:**
 - Edit `.devsteps/` files manually (use CLI/MCP only)
-- Skip status updates (in-progress/done tracking)
-- Proceed with failing tests or errors
-- Batch multiple work items in one commit
-- Create backup files: `.old`, `.bak`, `_neu` (use git!)
 
 ---
 

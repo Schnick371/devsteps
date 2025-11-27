@@ -17,17 +17,11 @@ tools: ['edit', 'search', 'runCommands', 'runTasks', 'GitKraken/*', 'tavily/*', 
 - Uncommitted changes? Commit or stash before proceeding
 - Another story in-progress? ⚠️ Warning: Multiple story branches allowed
 
-**Create story branch (for Story/Spike only):**
-```
-git checkout -b story/<STORY-ID>
-```
+**Create story branch (Story/Spike only):**  
+Branch: `story/<STORY-ID>` before status→in-progress
 
-**Branch rules:**
-- Story/Spike → New branch: `story/<ID>`
-- Task → Use parent story branch OR main
-- Bug → Use related story branch OR main
-
-**Skip if:** Task implements current in-progress story on same branch
+**Tasks/Bugs:** Use parent story branch OR main  
+**Skip if:** Task on current story branch
 
 ## Step 1: Review
 
