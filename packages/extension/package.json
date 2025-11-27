@@ -2,7 +2,7 @@
   "name": "devsteps",
   "displayName": "DevSteps",
   "description": "Never Code Alone. Team Up With Your AI.",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "publisher": "devsteps",
   "license": "Apache-2.0",
   "author": "Thomas Hertel (the@devsteps.dev)",
@@ -20,7 +20,6 @@
     "requirements traceability"
   ],
   "activationEvents": [
-    "onStartupFinished",
     "workspaceContains:.devsteps"
   ],
   "main": "./dist/extension.js",
@@ -267,7 +266,7 @@
         "command": "devsteps.showDashboard",
         "key": "ctrl+shift+d d",
         "mac": "cmd+shift+d d",
-        "when": "workspaceFolderCount > 0"
+        "when": "workspaceFolderCount > 0 && devsteps.initialized"
       },
       {
         "command": "devsteps.addItem",
@@ -293,7 +292,12 @@
       "properties": {
         "devsteps.logging.level": {
           "type": "string",
-          "enum": ["error", "warn", "info", "debug"],
+          "enum": [
+            "error",
+            "warn",
+            "info",
+            "debug"
+          ],
           "default": "info",
           "description": "Logging level for DevSteps output channel",
           "enumDescriptions": [
@@ -314,32 +318,32 @@
       "view/title": [
         {
           "command": "devsteps.toggleHideDone",
-          "when": "view == devsteps.itemsView",
+          "when": "view == devsteps.itemsView && devsteps.initialized",
           "group": "navigation@1"
         },
         {
           "command": "devsteps.refreshItems",
-          "when": "view == devsteps.itemsView",
+          "when": "view == devsteps.itemsView && devsteps.initialized",
           "group": "navigation@2"
         },
         {
           "command": "devsteps.addItem",
-          "when": "view == devsteps.itemsView",
+          "when": "view == devsteps.itemsView && devsteps.initialized",
           "group": "navigation@3"
         },
         {
           "command": "devsteps.searchItems",
-          "when": "view == devsteps.itemsView",
+          "when": "view == devsteps.itemsView && devsteps.initialized",
           "group": "navigation@4"
         },
         {
           "command": "devsteps.showDashboard",
-          "when": "view == devsteps.itemsView",
+          "when": "view == devsteps.itemsView && devsteps.initialized",
           "group": "navigation@5"
         },
         {
           "submenu": "devsteps.viewAndSort",
-          "when": "view == devsteps.itemsView",
+          "when": "view == devsteps.itemsView && devsteps.initialized",
           "group": "1_viewsort"
         }
       ],
@@ -434,8 +438,8 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run build",
-    "build": "node esbuild.js --production",
-    "dev": "node esbuild.js --watch",
+    "build": "node esbuild.mjs --production",
+    "dev": "node esbuild.mjs --watch",
     "typecheck": "tsc --noEmit",
     "lint": "biome check .",
     "format": "biome format --write .",
