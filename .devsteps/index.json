@@ -1247,33 +1247,33 @@
       "id": "STORY-036",
       "type": "story",
       "title": "Improve Copilot workflow understanding - Item hierarchy and story branches",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-27T19:28:05.182Z"
+      "updated": "2025-11-27T19:34:00.411Z"
     },
     {
       "id": "TASK-077",
       "type": "task",
       "title": "Add item hierarchy rules to agent file",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-27T19:28:16.785Z"
+      "updated": "2025-11-27T19:32:17.958Z"
     },
     {
       "id": "TASK-078",
       "type": "task",
       "title": "Add story branch workflow to start-work prompt",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-27T19:28:26.651Z"
+      "updated": "2025-11-27T19:32:55.330Z"
     },
     {
       "id": "TASK-079",
       "type": "task",
       "title": "Compress agent file - remove verbosity",
-      "status": "draft",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-11-27T19:28:38.200Z"
+      "updated": "2025-11-27T19:33:46.314Z"
     }
   ],
   "stats": {
@@ -1289,8 +1289,8 @@
     },
     "by_status": {
       "in-progress": 1,
-      "done": 74,
-      "draft": 73,
+      "done": 78,
+      "draft": 69,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1312,5 +1312,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-27T19:28:38.200Z"
+  "last_updated": "2025-11-27T19:34:00.411Z"
 }

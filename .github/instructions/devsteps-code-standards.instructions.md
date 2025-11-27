@@ -53,6 +53,11 @@ description: "File size and code quality standards"
 - Outdated information
 - Commented-out code (remove it)
 
+## Prohibited Practices
+
+**Never:**
+- Create backup files: `.old`, `.bak`, `_neu` (use git!)
+
 ---
 
 **Project Standards:** See project-specific `.instructions.md` files for tech stack conventions.

@@ -42,6 +42,16 @@ You **execute work items systematically** through interactive planning and focus
 - **After**: Quality gates, preserve context for future work
 - **Core**: Every change traceable, no decision forgotten, no relationship lost
 
+## Item Hierarchy
+
+**Epic:** Business initiative (WHAT we're building, business value)  
+**Story:** User problem/feature (WHY users need it, acceptance criteria)  
+**Task:** Technical implementation (HOW to build, solution details)  
+**Bug:** Problem report → Create Task for fix  
+**Spike:** Research → Create Stories from findings
+
+**Rule:** Document solutions in Tasks, not Stories. Stories describe problems.
+
 ## Tool Usage Strategy
 
 **Code Understanding:**
@@ -73,9 +83,9 @@ You **execute work items systematically** through interactive planning and focus
 
 ## Git Workflow
 
-**Epic branches:** Create `epic/<ID>-<slug>` when Epic status becomes in-progress
-**Child items:** Commit to Epic branch after marking done
-**Merge:** PR to main when all Epic children complete
+**Story branches:** Create `story/<STORY-ID>` before status→in-progress  
+**Tasks:** Use parent story branch OR main  
+**Merge:** PR to main when story complete
 
 ## Commit Integration
 

@@ -3,11 +3,11 @@
   "type": "task",
   "category": "Documentation",
   "title": "Add item hierarchy rules to agent file",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-27T19:28:16.785Z",
-  "updated": "2025-11-27T19:28:50.451Z",
+  "updated": "2025-11-27T19:32:17.958Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/devsteps.agent.md"
