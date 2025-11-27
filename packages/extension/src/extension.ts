@@ -12,33 +12,23 @@ import { DevStepsDecorationProvider } from './decorationProvider.js';
 import { logger } from './outputChannel.js';
 
 /**
- * Check if .devsteps directory exists in workspace
- */
-async function checkDevStepsDirectory(workspaceRoot: vscode.Uri): Promise<boolean> {
-  try {
-    await vscode.workspace.fs.stat(vscode.Uri.joinPath(workspaceRoot, '.devsteps'));
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-/**
  * Extension activation - called when extension is activated
- * Activation event: onStartupFinished (activates after VS Code fully loaded)
+ * Activation event: "*" (activates immediately on VS Code startup)
+ * 
+ * This prevents Welcome View flash by ensuring extension loads before view renders.
+ * We check for .devsteps directory and set context accordingly.
  */
 export async function activate(context: vscode.ExtensionContext) {
-  // CRITICAL: Set default context IMMEDIATELY before ANY other code
-  // VS Code loads views from package.json BEFORE activate() runs
-  // We must set context synchronously to prevent Welcome View flash
-  await vscode.commands.executeCommand('setContext', 'devsteps.initialized', false);
-  
   logger.info('DevSteps extension activating...');
 
   // Check for workspace
   const workspaceFolders = vscode.workspace.workspaceFolders;
   if (!workspaceFolders || workspaceFolders.length === 0) {
     logger.warn('No workspace folder open');
+    // Set context keys IMMEDIATELY to prevent Welcome View flash
+    await vscode.commands.executeCommand('setContext', 'devsteps.showWelcome', true);
+    await vscode.commands.executeCommand('setContext', 'devsteps.hasProject', false);
+    await vscode.commands.executeCommand('setContext', 'devsteps.initialized', false);
     // Still register commands even without workspace to avoid "command not found" errors
     registerCommands(context, null);
     logger.info('Commands registered (no workspace mode)');
@@ -46,23 +36,40 @@ export async function activate(context: vscode.ExtensionContext) {
   }
 
   const workspaceRoot = workspaceFolders[0].uri;
-
-  // Check for .devsteps directory and update context
-  const hasDevSteps = await checkDevStepsDirectory(workspaceRoot);
   
-  if (hasDevSteps) {
-    logger.info('.devsteps directory found in workspace');
-    // Update context to TRUE immediately
-    await vscode.commands.executeCommand('setContext', 'devsteps.initialized', true);
-  } else {
-    logger.warn('No .devsteps directory found in workspace - TreeView will show welcome view');
-    // Context already false from above
+  // Check if .devsteps directory exists
+  const devstepsPath = vscode.Uri.joinPath(workspaceRoot, '.devsteps');
+  let hasDevSteps = false;
+  try {
+    await vscode.workspace.fs.stat(devstepsPath);
+    hasDevSteps = true;
+  } catch {
+    hasDevSteps = false;
+  }
+  
+  // CRITICAL: Set context keys IMMEDIATELY - BEFORE any UI operations!
+  // This prevents Welcome View from appearing even briefly
+  // devsteps.showWelcome controls viewsWelcome visibility in package.json
+  await vscode.commands.executeCommand('setContext', 'devsteps.showWelcome', !hasDevSteps);
+  await vscode.commands.executeCommand('setContext', 'devsteps.hasProject', hasDevSteps);
+  await vscode.commands.executeCommand('setContext', 'devsteps.initialized', hasDevSteps);
+  
+  if (!hasDevSteps) {
+    logger.info('No .devsteps directory found - showing welcome view');
+    // Still register commands so "Initialize Project" button works
+    registerCommands(context, null);
+    return;
   }
 
-  // Initialize TreeView - always create provider to avoid "no data provider" error
-  // Provider will show empty state if .devsteps doesn't exist
+  // Create TreeDataProvider and pre-initialize to avoid "no data provider" flash
   const treeDataProvider = new DevStepsTreeDataProvider(workspaceRoot);
+  logger.info('TreeDataProvider created, initializing...');
   
+  // CRITICAL: Initialize BEFORE creating TreeView to populate data cache
+  await treeDataProvider.initialize();
+  logger.info('TreeDataProvider initialized with data');
+
+  // Create TreeView AFTER initialization - data is ready, no flash
   const treeView = vscode.window.createTreeView('devsteps.itemsView', {
     treeDataProvider,
     showCollapseAll: true,
@@ -90,18 +97,27 @@ export async function activate(context: vscode.ExtensionContext) {
   
   context.subscriptions.push(watcher);
   
-  // Watch for .devsteps directory creation to initialize TreeView
-  const devstepsirWatcher = vscode.workspace.createFileSystemWatcher(
+  // Watch for .devsteps directory creation (for "Initialize Project" command)
+  const devstepsWatcher = vscode.workspace.createFileSystemWatcher(
     new vscode.RelativePattern(workspaceRoot, '.devsteps')
   );
   
-  devstepsirWatcher.onDidCreate(async () => {
-    logger.info('.devsteps directory created - refreshing TreeView and updating context');
+  devstepsWatcher.onDidCreate(async () => {
+    logger.info('.devsteps directory created - updating context');
+    await vscode.commands.executeCommand('setContext', 'devsteps.showWelcome', false);
+    await vscode.commands.executeCommand('setContext', 'devsteps.hasProject', true);
     await vscode.commands.executeCommand('setContext', 'devsteps.initialized', true);
-    treeDataProvider.refresh();
+    // Reload window to properly initialize extension with new project
+    const reload = await vscode.window.showInformationMessage(
+      'DevSteps project initialized! Reload window to activate extension.',
+      'Reload Window'
+    );
+    if (reload) {
+      await vscode.commands.executeCommand('workbench.action.reloadWindow');
+    }
   });
   
-  context.subscriptions.push(devstepsirWatcher);
+  context.subscriptions.push(devstepsWatcher)
 
   // Always register commands to avoid "command not found" errors
   registerCommands(context, treeDataProvider);
