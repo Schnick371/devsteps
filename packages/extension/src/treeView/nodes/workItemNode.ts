@@ -31,7 +31,7 @@ export class WorkItemNode extends TreeNode {
 
     treeItem.contextValue = 'workItem';
     treeItem.iconPath = this.getIcon();
-    treeItem.description = this.item.status;
+    treeItem.description = undefined; // Status shown via FileDecorationProvider badge
     treeItem.tooltip = `${this.item.type.toUpperCase()} | ${this.item.status} | Priority: ${this.item.priority}`;
 
     // Set resourceUri for FileDecorationProvider

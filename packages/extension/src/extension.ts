@@ -41,7 +41,7 @@ export async function activate(context: vscode.ExtensionContext) {
   }
 
   // Set context key for welcome view
-  await vscode.commands.executeCommand('setContext', 'devstepsinitialized', hasDevSteps);
+  await vscode.commands.executeCommand('setContext', 'devsteps.initialized', hasDevSteps);
 
   // Initialize TreeView - always create provider to avoid "no data provider" error
   // Provider will show empty state if .devsteps doesn't exist
@@ -80,7 +80,7 @@ export async function activate(context: vscode.ExtensionContext) {
   
   devstepsirWatcher.onDidCreate(async () => {
     logger.info('.devsteps directory created - refreshing TreeView and updating context');
-    await vscode.commands.executeCommand('setContext', 'devstepsinitialized', true);
+    await vscode.commands.executeCommand('setContext', 'devsteps.initialized', true);
     treeDataProvider.refresh();
   });
   
@@ -90,9 +90,9 @@ export async function activate(context: vscode.ExtensionContext) {
   registerCommands(context, treeDataProvider);
 
   // Initialize context keys for menu checkmarks
-  await vscode.commands.executeCommand('setContext', 'devstepsviewMode', 'flat');
-  await vscode.commands.executeCommand('setContext', 'devstepshierarchy', 'both');
-  await vscode.commands.executeCommand('setContext', 'devstepshideDone', false);
+  await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', 'flat');
+  await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', 'both');
+  await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', false);
 
   // Listen for configuration changes
   context.subscriptions.push(

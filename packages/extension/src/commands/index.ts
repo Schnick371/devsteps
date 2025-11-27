@@ -33,7 +33,7 @@ export function registerCommands(
 ): void {
   // Initialize DevSteps Project
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsinitProject', async () => {
+    vscode.commands.registerCommand('devsteps.initProject', async () => {
       const workspaceFolders = vscode.workspace.workspaceFolders;
       if (!workspaceFolders || workspaceFolders.length === 0) {
         vscode.window.showErrorMessage('No workspace folder open. Please open a folder first.');
@@ -99,14 +99,14 @@ export function registerCommands(
 
   // Show Dashboard
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsshowDashboard', () => {
+    vscode.commands.registerCommand('devsteps.showDashboard', () => {
       DashboardPanel.createOrShow(context.extensionUri);
     }),
   );
 
   // Refresh work items
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsrefreshItems', () => {
+    vscode.commands.registerCommand('devsteps.refreshItems', () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.refresh();
     }),
@@ -114,49 +114,49 @@ export function registerCommands(
 
   // View mode switching
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsviewMode.flat', async () => {
+    vscode.commands.registerCommand('devsteps.viewMode.flat', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setViewMode('flat');
-      await vscode.commands.executeCommand('setContext', 'devstepsviewMode', 'flat');
+      await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', 'flat');
     }),
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsviewMode.hierarchical', async () => {
+    vscode.commands.registerCommand('devsteps.viewMode.hierarchical', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setViewMode('hierarchical');
-      await vscode.commands.executeCommand('setContext', 'devstepsviewMode', 'hierarchical');
+      await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', 'hierarchical');
     }),
   );
 
   // Hierarchy type switching
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepshierarchy.scrum', async () => {
+    vscode.commands.registerCommand('devsteps.hierarchy.scrum', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('scrum');
-      await vscode.commands.executeCommand('setContext', 'devstepshierarchy', 'scrum');
+      await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', 'scrum');
     }),
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepshierarchy.waterfall', async () => {
+    vscode.commands.registerCommand('devsteps.hierarchy.waterfall', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('waterfall');
-      await vscode.commands.executeCommand('setContext', 'devstepshierarchy', 'waterfall');
+      await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', 'waterfall');
     }),
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepshierarchy.both', async () => {
+    vscode.commands.registerCommand('devsteps.hierarchy.both', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('both');
-      await vscode.commands.executeCommand('setContext', 'devstepshierarchy', 'both');
+      await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', 'both');
     }),
   );
 
   // Add work item
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsaddItem', async () => {
+    vscode.commands.registerCommand('devsteps.addItem', async () => {
       const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
       if (!workspaceFolder) {
         vscode.window.showErrorMessage('No workspace folder open');
@@ -255,7 +255,7 @@ export function registerCommands(
 
   // Open work item (markdown file)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsopenItem', async (node?: any) => {
+    vscode.commands.registerCommand('devsteps.openItem', async (node?: any) => {
       // Extract ID from different possible structures
       let itemId: string | undefined;
       
@@ -315,7 +315,7 @@ export function registerCommands(
 
   // Update status
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsupdateStatus', async (node?: any) => {
+    vscode.commands.registerCommand('devsteps.updateStatus', async (node?: any) => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       
       const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
@@ -419,7 +419,7 @@ export function registerCommands(
 
   // Search work items
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepssearchItems', async () => {
+    vscode.commands.registerCommand('devsteps.searchItems', async () => {
       const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
       if (!workspaceFolder) {
         vscode.window.showErrorMessage('No workspace folder open');
@@ -481,7 +481,7 @@ export function registerCommands(
 
   // Show project status
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsshowStatus', async () => {
+    vscode.commands.registerCommand('devsteps.showStatus', async () => {
       const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
       if (!workspaceFolder) {
         vscode.window.showErrorMessage('No workspace folder open');
@@ -546,7 +546,7 @@ ${Object.entries(byType)
 
   // Copy item ID to clipboard
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepscopyId', async (node?: any) => {
+    vscode.commands.registerCommand('devsteps.copyId', async (node?: any) => {
       // Extract ID from different possible structures
       let itemId: string | undefined;
       
@@ -572,7 +572,7 @@ ${Object.entries(byType)
 
   // Show item in file explorer
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsrevealInExplorer', async (node?: any) => {
+    vscode.commands.registerCommand('devsteps.revealInExplorer', async (node?: any) => {
       // Extract ID from different possible structures
       let itemId: string | undefined;
       
@@ -626,7 +626,7 @@ ${Object.entries(byType)
 
   // Edit item properties (quick edit)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepseditProperties', async (node?: any) => {
+    vscode.commands.registerCommand('devsteps.editProperties', async (node?: any) => {
       // Extract ID from different possible structures
       let itemId: string | undefined;
       
@@ -753,7 +753,7 @@ ${Object.entries(byType)
 
   // Filter by status
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsfilterByStatus', async () => {
+    vscode.commands.registerCommand('devsteps.filterByStatus', async () => {
       const selected = await vscode.window.showQuickPick(
         [
           { label: '📝 Draft', value: 'draft' },
@@ -781,7 +781,7 @@ ${Object.entries(byType)
 
   // Filter by priority
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsfilterByPriority', async () => {
+    vscode.commands.registerCommand('devsteps.filterByPriority', async () => {
       const selected = await vscode.window.showQuickPick(
         [
           { label: '🔴 Critical', value: 'critical' },
@@ -805,7 +805,7 @@ ${Object.entries(byType)
 
   // Filter by type
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsfilterByType', async () => {
+    vscode.commands.registerCommand('devsteps.filterByType', async () => {
       const selected = await vscode.window.showQuickPick(
         [
           { label: 'Epic', value: 'epic' },
@@ -833,7 +833,7 @@ ${Object.entries(byType)
 
   // Clear all filters
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsclearFilters', () => {
+    vscode.commands.registerCommand('devsteps.clearFilters', () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.clearFilters();
       vscode.window.showInformationMessage('✨ All filters cleared');
@@ -842,17 +842,17 @@ ${Object.entries(byType)
 
   // Toggle Hide Done Items
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepstoggleHideDone', async () => {
+    vscode.commands.registerCommand('devsteps.toggleHideDone', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.toggleHideDone();
       const isHidden = treeDataProvider.getHideDoneState();
-      await vscode.commands.executeCommand('setContext', 'devstepshideDone', isHidden);
+      await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', isHidden);
     }),
   );
 
   // Sort options
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepssort', async () => {
+    vscode.commands.registerCommand('devsteps.sort', async () => {
       const sortBy = await vscode.window.showQuickPick(
         [
           { label: '🔢 ID', value: 'id' },
@@ -892,13 +892,13 @@ ${Object.entries(byType)
 
   // Output Channel Commands
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsshowOutput', () => {
+    vscode.commands.registerCommand('devsteps.showOutput', () => {
       logger.show();
     }),
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('devstepsclearOutput', () => {
+    vscode.commands.registerCommand('devsteps.clearOutput', () => {
       logger.clear();
     }),
   );
