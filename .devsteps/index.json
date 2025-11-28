@@ -4,7 +4,7 @@
     "epic": 10,
     "story": 36,
     "task": 79,
-    "bug": 20,
+    "bug": 22,
     "spike": 5,
     "feature": 5,
     "requirement": 2
@@ -1286,10 +1286,10 @@
     {
       "id": "REQ-002",
       "type": "requirement",
-      "title": "Test-req",
+      "title": "Test-req-neu",
       "status": "draft",
       "priority": "low",
-      "updated": "2025-11-28T08:35:02.014Z"
+      "updated": "2025-11-28T08:53:25.411Z"
     },
     {
       "id": "BUG-020",
@@ -1298,15 +1298,31 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-11-28T08:45:22.320Z"
+    },
+    {
+      "id": "BUG-021",
+      "type": "bug",
+      "title": "Hide Done Button wird deaktiviert statt als Toggle verfügbar zu bleiben",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-28T08:50:12.416Z"
+    },
+    {
+      "id": "BUG-022",
+      "type": "bug",
+      "title": "Command Name Typos - devstepsopenItem und devstepsupdateStatus missing dots",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-11-28T08:53:24.123Z"
     }
   ],
   "stats": {
-    "total": 155,
+    "total": 157,
     "by_type": {
       "epic": 10,
       "story": 36,
       "task": 79,
-      "bug": 20,
+      "bug": 22,
       "spike": 5,
       "feature": 5,
       "requirement": 2
@@ -1314,7 +1330,7 @@
     "by_status": {
       "in-progress": 0,
       "done": 83,
-      "draft": 68,
+      "draft": 70,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1336,5 +1352,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-28T08:45:22.320Z"
+  "last_updated": "2025-11-28T08:53:25.411Z"
 }

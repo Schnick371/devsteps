@@ -1,17 +1,17 @@
 {
-  "id": "BUG-003",
+  "id": "BUG-022",
   "type": "bug",
   "category": "general",
-  "title": "Menu Items Missing Visual Checkmarks for Current State - RESOLVED",
-  "status": "done",
-  "priority": "high",
+  "title": "Command Name Typos - devstepsopenItem und devstepsupdateStatus missing dots",
+  "status": "draft",
+  "priority": "critical",
   "eisenhower": "urgent-important",
-  "created": "2025-11-24T11:56:42.054Z",
-  "updated": "2025-11-28T08:50:36.253Z",
+  "created": "2025-11-28T08:53:24.123Z",
+  "updated": "2025-11-28T08:53:30.605Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/vscode-extension/src/commands/index.ts",
-    "packages/vscode-extension/package.json"
+    "packages/extension/src/commands/index.ts",
+    "packages/extension/src/webview/dashboardPanel.ts"
   ],
   "linked_items": {
     "implements": [
@@ -22,21 +22,17 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [
-      "SPIKE-004",
-      "TASK-050",
-      "BUG-021"
-    ],
+    "relates-to": [],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "vscode",
-    "ui",
-    "menu",
-    "usability"
+    "command-typos",
+    "executeCommand",
+    "core-functionality",
+    "search-bug"
   ],
   "commits": [],
   "metadata": {}

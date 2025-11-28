@@ -1,31 +1,28 @@
 {
-  "id": "BUG-003",
+  "id": "BUG-021",
   "type": "bug",
   "category": "general",
-  "title": "Menu Items Missing Visual Checkmarks for Current State - RESOLVED",
-  "status": "done",
+  "title": "Hide Done Button wird deaktiviert statt als Toggle verfügbar zu bleiben",
+  "status": "draft",
   "priority": "high",
   "eisenhower": "urgent-important",
-  "created": "2025-11-24T11:56:42.054Z",
-  "updated": "2025-11-28T08:50:36.253Z",
+  "created": "2025-11-28T08:50:12.416Z",
+  "updated": "2025-11-28T08:50:56.592Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/vscode-extension/src/commands/index.ts",
-    "packages/vscode-extension/package.json"
+    "packages/extension/package.json"
   ],
   "linked_items": {
-    "implements": [
-      "EPIC-003"
-    ],
+    "implements": [],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "SPIKE-004",
+      "BUG-003",
       "TASK-050",
-      "BUG-021"
+      "SPIKE-004"
     ],
     "depends-on": [],
     "required-by": [],
@@ -33,10 +30,10 @@
     "superseded-by": []
   },
   "tags": [
-    "vscode",
-    "ui",
-    "menu",
-    "usability"
+    "toggle-button",
+    "ux-bug",
+    "enablement",
+    "menu-commands"
   ],
   "commits": [],
   "metadata": {}

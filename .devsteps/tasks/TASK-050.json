@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-25T09:22:03.294Z",
-  "updated": "2025-11-25T09:31:24.997Z",
+  "updated": "2025-11-28T08:50:40.493Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/vscode-extension/src/extension.ts",
@@ -24,7 +24,8 @@
     "relates-to": [
       "SPIKE-004",
       "EPIC-003",
-      "BUG-003"
+      "BUG-003",
+      "BUG-021"
     ],
     "depends-on": [],
     "required-by": [],
