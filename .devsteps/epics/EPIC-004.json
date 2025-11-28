@@ -7,7 +7,7 @@
   "priority": "medium",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T16:40:59.062Z",
-  "updated": "2025-11-24T14:07:31.740Z",
+  "updated": "2025-11-28T10:27:57.018Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -21,7 +21,8 @@
       "TASK-021",
       "TASK-022",
       "TASK-023",
-      "TASK-024"
+      "TASK-024",
+      "STORY-038"
     ],
     "tested-by": [],
     "tests": [],

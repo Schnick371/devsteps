@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 11,
-    "story": 37,
-    "task": 82,
+    "story": 38,
+    "task": 88,
     "bug": 24,
     "spike": 5,
     "feature": 5,
@@ -1370,14 +1370,70 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-11-28T09:57:37.567Z"
+    },
+    {
+      "id": "STORY-038",
+      "type": "story",
+      "title": "Production Publication Pipeline - npm + Marketplace + GitHub Docs",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-11-28T10:25:11.196Z"
+    },
+    {
+      "id": "TASK-083",
+      "type": "task",
+      "title": "Prepare npm packages for publication (CLI + MCP)",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-11-28T10:27:39.026Z"
+    },
+    {
+      "id": "TASK-084",
+      "type": "task",
+      "title": "Implement auto-download mechanism in extension",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-11-28T10:27:39.026Z"
+    },
+    {
+      "id": "TASK-085",
+      "type": "task",
+      "title": "Create docs-only GitHub repository",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-28T10:27:39.027Z"
+    },
+    {
+      "id": "TASK-086",
+      "type": "task",
+      "title": "Publish packages to npm registry",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-11-28T10:26:08.718Z"
+    },
+    {
+      "id": "TASK-087",
+      "type": "task",
+      "title": "Publish extension to VS Code Marketplace",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-11-28T10:27:39.028Z"
+    },
+    {
+      "id": "TASK-088",
+      "type": "task",
+      "title": "Cleanup devsteps work items (archive completed)",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-28T10:26:36.267Z"
     }
   ],
   "stats": {
-    "total": 164,
+    "total": 171,
     "by_type": {
       "epic": 11,
-      "story": 37,
-      "task": 82,
+      "story": 38,
+      "task": 88,
       "bug": 24,
       "spike": 5,
       "feature": 5,
@@ -1386,7 +1442,7 @@
     "by_status": {
       "in-progress": 0,
       "done": 89,
-      "draft": 71,
+      "draft": 78,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1408,5 +1464,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-28T09:57:37.567Z"
+  "last_updated": "2025-11-28T10:27:39.028Z"
 }
