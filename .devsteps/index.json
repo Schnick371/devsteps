@@ -4,10 +4,10 @@
     "epic": 10,
     "story": 36,
     "task": 79,
-    "bug": 19,
+    "bug": 20,
     "spike": 5,
     "feature": 5,
-    "requirement": 1
+    "requirement": 2
   },
   "items": [
     {
@@ -1282,23 +1282,39 @@
       "status": "done",
       "priority": "critical",
       "updated": "2025-11-28T07:46:07.586Z"
+    },
+    {
+      "id": "REQ-002",
+      "type": "requirement",
+      "title": "Test-req",
+      "status": "draft",
+      "priority": "low",
+      "updated": "2025-11-28T08:35:02.014Z"
+    },
+    {
+      "id": "BUG-020",
+      "type": "bug",
+      "title": "Context Keys nicht mit persistiertem State synchronisiert - Menu Checkmarks falsch",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-28T08:41:49.546Z"
     }
   ],
   "stats": {
-    "total": 153,
+    "total": 155,
     "by_type": {
       "epic": 10,
       "story": 36,
       "task": 79,
-      "bug": 19,
+      "bug": 20,
       "spike": 5,
       "feature": 5,
-      "requirement": 1
+      "requirement": 2
     },
     "by_status": {
       "in-progress": 0,
       "done": 82,
-      "draft": 67,
+      "draft": 69,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1320,5 +1336,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-28T08:24:45.444Z"
+  "last_updated": "2025-11-28T08:41:49.546Z"
 }

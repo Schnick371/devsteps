@@ -1,0 +1,36 @@
+{
+  "id": "BUG-020",
+  "type": "bug",
+  "category": "general",
+  "title": "Context Keys nicht mit persistiertem State synchronisiert - Menu Checkmarks falsch",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-28T08:41:49.546Z",
+  "updated": "2025-11-28T08:41:49.546Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/extension.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "context-keys",
+    "state-persistence",
+    "menu-checkmarks",
+    "ux-bug"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -16,7 +16,8 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "clean": "npm run clean --workspaces --if-present",
     "package:mcp": "mkdir -p dist/mcp && cd packages/mcp-server && npm pack --pack-destination ../../dist/mcp",
-    "package:all": "npm run build && npm run package:mcp && mkdir -p dist && cp INSTALL.md dist/ && cp README.md dist/ && echo '✅ Distribution packages ready in dist/'"
+    "package:extension": "mkdir -p dist/extension && cd packages/extension && npm run package && mv *.vsix ../../dist/extension/",
+    "package:all": "npm run build && npm run package:mcp && npm run package:extension && mkdir -p dist && cp INSTALL.md dist/ && cp README.md dist/ && echo '✅ Distribution packages ready in dist/'"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.7",
