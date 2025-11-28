@@ -112,9 +112,22 @@ export function registerCommands(
     }),
   );
 
-  // View mode switching
+  // View mode switching - Active commands (no-op, already active)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.viewMode.flat', async () => {
+    vscode.commands.registerCommand('devsteps.viewMode.flat.active', () => {
+      // No-op - already active
+    }),
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.viewMode.hierarchical.active', () => {
+      // No-op - already active
+    }),
+  );
+
+  // View mode switching - Inactive commands (perform action)
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.viewMode.flat.inactive', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setViewMode('flat');
       await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', 'flat');
@@ -122,16 +135,35 @@ export function registerCommands(
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.viewMode.hierarchical', async () => {
+    vscode.commands.registerCommand('devsteps.viewMode.hierarchical.inactive', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setViewMode('hierarchical');
       await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', 'hierarchical');
     }),
   );
 
-  // Hierarchy type switching
+  // Hierarchy type switching - Active commands (no-op, already active)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.hierarchy.scrum', async () => {
+    vscode.commands.registerCommand('devsteps.hierarchy.scrum.active', () => {
+      // No-op - already active
+    }),
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.hierarchy.waterfall.active', () => {
+      // No-op - already active
+    }),
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.hierarchy.both.active', () => {
+      // No-op - already active
+    }),
+  );
+
+  // Hierarchy type switching - Inactive commands (perform action)
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.hierarchy.scrum.inactive', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('scrum');
       await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', 'scrum');
@@ -139,7 +171,7 @@ export function registerCommands(
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.hierarchy.waterfall', async () => {
+    vscode.commands.registerCommand('devsteps.hierarchy.waterfall.inactive', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('waterfall');
       await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', 'waterfall');
@@ -147,7 +179,7 @@ export function registerCommands(
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.hierarchy.both', async () => {
+    vscode.commands.registerCommand('devsteps.hierarchy.both.inactive', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('both');
       await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', 'both');
@@ -840,9 +872,16 @@ ${Object.entries(byType)
     }),
   );
 
-  // Toggle Hide Done Items
+  // Toggle Hide Done Items - Active command (no-op, already active)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.toggleHideDone', async () => {
+    vscode.commands.registerCommand('devsteps.hideDone.active', () => {
+      // No-op - already active (hiding done items)
+    }),
+  );
+
+  // Toggle Hide Done Items - Inactive command (perform action)
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.hideDone.inactive', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.toggleHideDone();
       const isHidden = treeDataProvider.getHideDoneState();

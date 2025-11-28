@@ -465,7 +465,7 @@
       "title": "Menu Items Missing Visual Checkmarks for Current State - RESOLVED",
       "status": "done",
       "priority": "high",
-      "updated": "2025-11-28T07:53:20.487Z"
+      "updated": "2025-11-28T08:14:45.847Z"
     },
     {
       "id": "BUG-004",
@@ -1320,5 +1320,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-28T07:53:20.487Z"
+  "last_updated": "2025-11-28T08:14:45.847Z"
 }

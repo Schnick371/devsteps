@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-24T11:56:42.054Z",
-  "updated": "2025-11-28T07:53:20.487Z",
+  "updated": "2025-11-28T08:14:45.847Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/vscode-extension/src/commands/index.ts",

@@ -77,36 +77,63 @@
         "icon": "$(refresh)"
       },
       {
-        "command": "devsteps.viewMode.flat",
-        "title": "Switch to Flat View",
+        "command": "devsteps.viewMode.flat.active",
+        "title": "$(check) Flat View",
         "category": "DevSteps",
         "icon": "$(list-flat)",
-        "toggled": "devsteps.viewMode == 'flat'"
+        "enablement": "false"
       },
       {
-        "command": "devsteps.viewMode.hierarchical",
-        "title": "Switch to Hierarchical View",
+        "command": "devsteps.viewMode.flat.inactive",
+        "title": "Flat View",
+        "category": "DevSteps",
+        "icon": "$(list-flat)"
+      },
+      {
+        "command": "devsteps.viewMode.hierarchical.active",
+        "title": "$(check) Hierarchical View",
         "category": "DevSteps",
         "icon": "$(list-tree)",
-        "toggled": "devsteps.viewMode == 'hierarchical'"
+        "enablement": "false"
       },
       {
-        "command": "devsteps.hierarchy.scrum",
-        "title": "Show Scrum Hierarchy Only",
+        "command": "devsteps.viewMode.hierarchical.inactive",
+        "title": "Hierarchical View",
         "category": "DevSteps",
-        "toggled": "devsteps.hierarchy == 'scrum'"
+        "icon": "$(list-tree)"
       },
       {
-        "command": "devsteps.hierarchy.waterfall",
-        "title": "Show Waterfall Hierarchy Only",
+        "command": "devsteps.hierarchy.scrum.active",
+        "title": "$(check) Scrum Hierarchy Only",
         "category": "DevSteps",
-        "toggled": "devsteps.hierarchy == 'waterfall'"
+        "enablement": "false"
       },
       {
-        "command": "devsteps.hierarchy.both",
+        "command": "devsteps.hierarchy.scrum.inactive",
+        "title": "Scrum Hierarchy Only",
+        "category": "DevSteps"
+      },
+      {
+        "command": "devsteps.hierarchy.waterfall.active",
+        "title": "$(check) Waterfall Hierarchy Only",
+        "category": "DevSteps",
+        "enablement": "false"
+      },
+      {
+        "command": "devsteps.hierarchy.waterfall.inactive",
+        "title": "Waterfall Hierarchy Only",
+        "category": "DevSteps"
+      },
+      {
+        "command": "devsteps.hierarchy.both.active",
+        "title": "$(check) Show Both Hierarchies",
+        "category": "DevSteps",
+        "enablement": "false"
+      },
+      {
+        "command": "devsteps.hierarchy.both.inactive",
         "title": "Show Both Hierarchies",
-        "category": "DevSteps",
-        "toggled": "devsteps.hierarchy == 'both'"
+        "category": "DevSteps"
       },
       {
         "command": "devsteps.addItem",
@@ -209,11 +236,17 @@
         "icon": "$(clear-all)"
       },
       {
-        "command": "devsteps.toggleHideDone",
+        "command": "devsteps.hideDone.active",
+        "title": "$(check) Hide Completed Items",
+        "category": "DevSteps",
+        "icon": "$(eye-closed)",
+        "enablement": "false"
+      },
+      {
+        "command": "devsteps.hideDone.inactive",
         "title": "Hide Completed Items",
         "category": "DevSteps",
-        "icon": "$(eye)",
-        "toggled": "devsteps.hideDone"
+        "icon": "$(eye)"
       }
     ],
     "keybindings": [
@@ -318,8 +351,13 @@
     "menus": {
       "view/title": [
         {
-          "command": "devsteps.toggleHideDone",
-          "when": "view == devsteps.itemsView && devsteps.initialized",
+          "command": "devsteps.hideDone.active",
+          "when": "view == devsteps.itemsView && devsteps.initialized && devsteps.hideDone",
+          "group": "navigation@1"
+        },
+        {
+          "command": "devsteps.hideDone.inactive",
+          "when": "view == devsteps.itemsView && devsteps.initialized && !devsteps.hideDone",
           "group": "navigation@1"
         },
         {
@@ -350,24 +388,54 @@
       ],
       "devsteps.viewAndSort": [
         {
-          "command": "devsteps.viewMode.flat",
-          "group": "1_view@1"
+          "command": "devsteps.viewMode.flat.active",
+          "group": "1_view@1",
+          "when": "devsteps.viewMode == 'flat'"
         },
         {
-          "command": "devsteps.viewMode.hierarchical",
-          "group": "1_view@2"
+          "command": "devsteps.viewMode.flat.inactive",
+          "group": "1_view@1",
+          "when": "devsteps.viewMode == 'hierarchical'"
         },
         {
-          "command": "devsteps.hierarchy.scrum",
-          "group": "2_hierarchy@1"
+          "command": "devsteps.viewMode.hierarchical.active",
+          "group": "1_view@2",
+          "when": "devsteps.viewMode == 'hierarchical'"
         },
         {
-          "command": "devsteps.hierarchy.waterfall",
-          "group": "2_hierarchy@2"
+          "command": "devsteps.viewMode.hierarchical.inactive",
+          "group": "1_view@2",
+          "when": "devsteps.viewMode == 'flat'"
         },
         {
-          "command": "devsteps.hierarchy.both",
-          "group": "2_hierarchy@3"
+          "command": "devsteps.hierarchy.scrum.active",
+          "group": "2_hierarchy@1",
+          "when": "devsteps.hierarchy == 'scrum'"
+        },
+        {
+          "command": "devsteps.hierarchy.scrum.inactive",
+          "group": "2_hierarchy@1",
+          "when": "devsteps.hierarchy != 'scrum'"
+        },
+        {
+          "command": "devsteps.hierarchy.waterfall.active",
+          "group": "2_hierarchy@2",
+          "when": "devsteps.hierarchy == 'waterfall'"
+        },
+        {
+          "command": "devsteps.hierarchy.waterfall.inactive",
+          "group": "2_hierarchy@2",
+          "when": "devsteps.hierarchy != 'waterfall'"
+        },
+        {
+          "command": "devsteps.hierarchy.both.active",
+          "group": "2_hierarchy@3",
+          "when": "devsteps.hierarchy == 'both'"
+        },
+        {
+          "command": "devsteps.hierarchy.both.inactive",
+          "group": "2_hierarchy@3",
+          "when": "devsteps.hierarchy != 'both'"
         },
         {
           "command": "devsteps.sort",
@@ -432,6 +500,54 @@
         },
         {
           "command": "devsteps.editProperties",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.viewMode.flat.active",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.viewMode.flat.inactive",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.viewMode.hierarchical.active",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.viewMode.hierarchical.inactive",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.hierarchy.scrum.active",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.hierarchy.scrum.inactive",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.hierarchy.waterfall.active",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.hierarchy.waterfall.inactive",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.hierarchy.both.active",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.hierarchy.both.inactive",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.hideDone.active",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.hideDone.inactive",
           "when": "false"
         }
       ]
