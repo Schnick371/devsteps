@@ -23,6 +23,7 @@ import {
   LoadingNode,
 } from './nodes/index.js';
 import { getItemMethodology } from './utils/methodologyDetector.js';
+import type { TreeViewStateManager } from '../utils/stateManager.js';
 
 /**
  * TreeDataProvider with switchable view modes (flat vs hierarchical)
@@ -56,7 +57,20 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   private initialized = false;
   private cachedRootNodes: TreeNode[] | null = null;
 
-  constructor(private workspaceRoot: vscode.Uri) {}
+  constructor(
+    private workspaceRoot: vscode.Uri,
+    private stateManager?: TreeViewStateManager,
+  ) {
+    // Load persisted state if stateManager is provided
+    if (stateManager) {
+      this.viewMode = stateManager.loadViewMode();
+      this.hierarchyType = stateManager.loadHierarchyType();
+      this.filterState = stateManager.loadFilterState();
+      this.sortState = stateManager.loadSortState();
+      this.expandedGroups = stateManager.loadExpandedGroups();
+      this.expandedSections = stateManager.loadExpandedSections();
+    }
+  }
 
   /**
    * Initialize data provider - pre-load root nodes to avoid "no data provider" flash
@@ -89,16 +103,20 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     this.treeView.onDidExpandElement((e) => {
       if (e.element instanceof MethodologySectionNode) {
         this.expandedSections.add(e.element.getMethodology());
+        this.stateManager?.saveExpandedSections(this.expandedSections);
       } else if (e.element instanceof TypeGroupNode) {
         this.expandedGroups.add(e.element.getTrackingKey());
+        this.stateManager?.saveExpandedGroups(this.expandedGroups);
       }
     });
 
     this.treeView.onDidCollapseElement((e) => {
       if (e.element instanceof MethodologySectionNode) {
         this.expandedSections.delete(e.element.getMethodology());
+        this.stateManager?.saveExpandedSections(this.expandedSections);
       } else if (e.element instanceof TypeGroupNode) {
         this.expandedGroups.delete(e.element.getTrackingKey());
+        this.stateManager?.saveExpandedGroups(this.expandedGroups);
       }
     });
   }
@@ -108,6 +126,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    */
   setViewMode(mode: ViewMode): void {
     this.viewMode = mode;
+    this.stateManager?.saveViewMode(mode);
     this.refresh();
     this.updateDescription();
   }
@@ -117,6 +136,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    */
   setHierarchyType(type: HierarchyType): void {
     this.hierarchyType = type;
+    this.stateManager?.saveHierarchyType(type);
     if (this.viewMode === 'hierarchical') {
       this.refresh();
     }
@@ -138,6 +158,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    */
   setStatusFilter(statuses: string[]): void {
     this.filterState.statuses = statuses;
+    this.stateManager?.saveFilterState(this.filterState);
     this.refresh();
     this.updateDescription();
   }
@@ -147,6 +168,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    */
   setPriorityFilter(priorities: string[]): void {
     this.filterState.priorities = priorities;
+    this.stateManager?.saveFilterState(this.filterState);
     this.refresh();
     this.updateDescription();
   }
@@ -156,6 +178,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    */
   setTypeFilter(types: string[]): void {
     this.filterState.types = types;
+    this.stateManager?.saveFilterState(this.filterState);
     this.refresh();
     this.updateDescription();
   }
@@ -165,6 +188,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    */
   setTagFilter(tags: string[]): void {
     this.filterState.tags = tags;
+    this.stateManager?.saveFilterState(this.filterState);
     this.refresh();
     this.updateDescription();
   }
@@ -174,6 +198,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    */
   setSearchQuery(query: string): void {
     this.filterState.searchQuery = query;
+    this.stateManager?.saveFilterState(this.filterState);
     this.refresh();
     this.updateDescription();
   }
@@ -183,6 +208,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    */
   toggleHideDone(): void {
     this.filterState.hideDone = !this.filterState.hideDone;
+    this.stateManager?.saveFilterState(this.filterState);
     this.refresh();
     this.updateDescription();
   }
@@ -199,6 +225,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       searchQuery: '',
       hideDone: this.filterState.hideDone, // Preserve hide done toggle
     };
+    this.stateManager?.saveFilterState(this.filterState);
     this.refresh();
     this.updateDescription();
   }
@@ -259,8 +286,44 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    */
   setSortOptions(by: SortState['by'], order: SortState['order']): void {
     this.sortState = { by, order };
+    this.stateManager?.saveSortState(this.sortState);
     this.refresh();
     this.updateDescription();
+  }
+
+  /**
+   * Get current view mode
+   */
+  getViewMode(): ViewMode {
+    return this.viewMode;
+  }
+
+  /**
+   * Get current hierarchy type
+   */
+  getHierarchyType(): HierarchyType {
+    return this.hierarchyType;
+  }
+
+  /**
+   * Get current filter state
+   */
+  getFilterState(): FilterState {
+    return { ...this.filterState }; // Return a copy
+  }
+
+  /**
+   * Get current sort state
+   */
+  getSortState(): SortState {
+    return { ...this.sortState }; // Return a copy
+  }
+
+  /**
+   * Get hide done state
+   */
+  getHideDoneState(): boolean {
+    return this.filterState.hideDone;
   }
 
   /**

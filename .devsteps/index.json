@@ -535,9 +535,9 @@
       "id": "TASK-037",
       "type": "task",
       "title": "TreeView: Persist state across VS Code sessions",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-24T17:39:41.001Z"
+      "updated": "2025-11-28T08:24:45.444Z"
     },
     {
       "id": "EPIC-005",
@@ -1297,8 +1297,8 @@
     },
     "by_status": {
       "in-progress": 0,
-      "done": 81,
-      "draft": 68,
+      "done": 82,
+      "draft": 67,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1320,5 +1320,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-28T08:14:45.847Z"
+  "last_updated": "2025-11-28T08:24:45.444Z"
 }

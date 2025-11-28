@@ -3,11 +3,11 @@
   "type": "task",
   "category": "VS Code Extension",
   "title": "TreeView: Persist state across VS Code sessions",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-24T17:39:41.001Z",
-  "updated": "2025-11-24T21:12:21.400Z",
+  "updated": "2025-11-28T08:24:45.444Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/vscode-extension/src/treeView/devstepsTreeDataProvider.ts",

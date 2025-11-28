@@ -6,6 +6,7 @@
 
 import * as vscode from 'vscode';
 import { DevStepsTreeDataProvider } from './treeView/devstepsTreeDataProvider.js';
+import { TreeViewStateManager } from './utils/stateManager.js';
 import { registerCommands } from './commands/index.js';
 import { McpServerManager } from './mcpServerManager.js';
 import { DevStepsDecorationProvider } from './decorationProvider.js';
@@ -61,9 +62,10 @@ export async function activate(context: vscode.ExtensionContext) {
     return;
   }
 
-  // Create TreeDataProvider and pre-initialize to avoid "no data provider" flash
-  const treeDataProvider = new DevStepsTreeDataProvider(workspaceRoot);
-  logger.info('TreeDataProvider created, initializing...');
+  // Create TreeDataProvider with StateManager and pre-initialize to avoid "no data provider" flash
+  const stateManager = new TreeViewStateManager(context.workspaceState);
+  const treeDataProvider = new DevStepsTreeDataProvider(workspaceRoot, stateManager);
+  logger.info('TreeDataProvider created with state persistence, initializing...');
   
   // CRITICAL: Initialize BEFORE creating TreeView to populate data cache
   await treeDataProvider.initialize();
