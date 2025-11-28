@@ -124,10 +124,14 @@ export async function activate(context: vscode.ExtensionContext) {
   // Always register commands to avoid "command not found" errors
   registerCommands(context, treeDataProvider);
 
-  // Initialize context keys for menu checkmarks
-  await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', 'flat');
-  await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', 'both');
-  await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', false);
+  // Sync context keys with actual persisted state (not static defaults)
+  const actualViewMode = treeDataProvider.getViewMode();
+  const actualHierarchy = treeDataProvider.getHierarchyType();
+  const actualHideDone = treeDataProvider.getHideDoneState();
+  
+  await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', actualViewMode);
+  await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', actualHierarchy);
+  await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', actualHideDone);
 
   // Listen for configuration changes
   context.subscriptions.push(

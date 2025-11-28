@@ -1295,9 +1295,9 @@
       "id": "BUG-020",
       "type": "bug",
       "title": "Context Keys nicht mit persistiertem State synchronisiert - Menu Checkmarks falsch",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-28T08:41:49.546Z"
+      "updated": "2025-11-28T08:45:22.320Z"
     }
   ],
   "stats": {
@@ -1313,8 +1313,8 @@
     },
     "by_status": {
       "in-progress": 0,
-      "done": 82,
-      "draft": 69,
+      "done": 83,
+      "draft": 68,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1336,5 +1336,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-28T08:41:49.546Z"
+  "last_updated": "2025-11-28T08:45:22.320Z"
 }
