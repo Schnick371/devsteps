@@ -872,10 +872,13 @@ ${Object.entries(byType)
     }),
   );
 
-  // Toggle Hide Done Items - Active command (no-op, already active)
+  // Toggle Hide Done Items - Active command (perform action)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.hideDone.active', () => {
-      // No-op - already active (hiding done items)
+    vscode.commands.registerCommand('devsteps.hideDone.active', async () => {
+      if (!checkDevStepsInitialized(treeDataProvider)) return;
+      treeDataProvider.toggleHideDone();
+      const isHidden = treeDataProvider.getHideDoneState();
+      await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', isHidden);
     }),
   );
 
