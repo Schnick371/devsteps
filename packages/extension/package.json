@@ -240,8 +240,7 @@
         "command": "devsteps.hideDone.active",
         "title": "$(check) Hide Completed Items",
         "category": "DevSteps",
-        "icon": "$(eye-closed)",
-        "enablement": "false"
+        "icon": "$(eye-closed)"
       },
       {
         "command": "devsteps.hideDone.inactive",
