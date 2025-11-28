@@ -1,0 +1,17 @@
+# Source files - keep only compiled dist/
+src/
+tsconfig.json
+*.ts
+!*.d.ts
+
+# Dependencies
+node_modules/
+
+# Git
+.git/
+.gitignore
+
+# Development files
+*.log
+*.swp
+.DS_Store

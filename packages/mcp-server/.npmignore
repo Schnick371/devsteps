@@ -1,0 +1,21 @@
+# Source files
+src/
+tsconfig.json
+esbuild.cjs
+copy-deps.cjs
+*.ts
+!*.d.ts
+
+# Dependencies
+node_modules/
+
+# Git
+.git/
+.gitignore
+
+# Development files
+*.log
+*.swp
+.DS_Store
+LOGGING.md
+METRICS.md

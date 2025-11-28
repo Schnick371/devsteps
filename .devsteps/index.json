@@ -1383,9 +1383,9 @@
       "id": "TASK-083",
       "type": "task",
       "title": "Prepare npm packages for publication (CLI + MCP)",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-11-28T10:27:39.026Z"
+      "updated": "2025-11-28T10:31:29.635Z"
     },
     {
       "id": "TASK-084",
@@ -1441,8 +1441,8 @@
     },
     "by_status": {
       "in-progress": 0,
-      "done": 89,
-      "draft": 78,
+      "done": 90,
+      "draft": 77,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1464,5 +1464,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-28T10:27:39.028Z"
+  "last_updated": "2025-11-28T10:31:29.635Z"
 }
