@@ -1,21 +1,20 @@
 {
-  "id": "BUG-022",
-  "type": "bug",
-  "category": "general",
-  "title": "Command Name Typos - devstepsopenItem und devstepsupdateStatus missing dots",
+  "id": "TASK-080",
+  "type": "task",
+  "category": "vscode",
+  "title": "Update activationEvents - Remove Star, Add Conditional",
   "status": "done",
   "priority": "critical",
   "eisenhower": "urgent-important",
-  "created": "2025-11-28T08:53:24.123Z",
-  "updated": "2025-11-28T08:57:25.079Z",
+  "created": "2025-11-28T09:04:24.075Z",
+  "updated": "2025-11-28T09:07:48.135Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/extension/src/commands/index.ts",
-    "packages/extension/src/webview/dashboardPanel.ts"
+    "packages/extension/package.json"
   ],
   "linked_items": {
     "implements": [
-      "EPIC-003"
+      "STORY-037"
     ],
     "implemented-by": [],
     "tested-by": [],
@@ -29,10 +28,9 @@
     "superseded-by": []
   },
   "tags": [
-    "command-typos",
-    "executeCommand",
-    "core-functionality",
-    "search-bug"
+    "package-json",
+    "activation-events",
+    "performance-fix"
   ],
   "commits": [],
   "metadata": {}

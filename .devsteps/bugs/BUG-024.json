@@ -1,17 +1,16 @@
 {
-  "id": "BUG-022",
+  "id": "BUG-024",
   "type": "bug",
   "category": "general",
-  "title": "Command Name Typos - devstepsopenItem und devstepsupdateStatus missing dots",
+  "title": "Fix story file path - openItem uses naive pluralization",
   "status": "done",
-  "priority": "critical",
+  "priority": "high",
   "eisenhower": "urgent-important",
-  "created": "2025-11-28T08:53:24.123Z",
-  "updated": "2025-11-28T08:57:25.079Z",
+  "created": "2025-11-28T09:55:18.230Z",
+  "updated": "2025-11-28T09:57:37.567Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/extension/src/commands/index.ts",
-    "packages/extension/src/webview/dashboardPanel.ts"
+    "packages/extension/src/commands/index.ts"
   ],
   "linked_items": {
     "implements": [
@@ -22,17 +21,19 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "TASK-033"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "command-typos",
-    "executeCommand",
-    "core-functionality",
-    "search-bug"
+    "extension",
+    "file-path",
+    "pluralization",
+    "story-items"
   ],
   "commits": [],
   "metadata": {}

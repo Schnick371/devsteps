@@ -7,7 +7,7 @@
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T10:33:36.837Z",
-  "updated": "2025-11-24T10:34:19.375Z",
+  "updated": "2025-11-28T09:55:41.175Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/vscode-extension/src/commands/index.ts"
@@ -19,7 +19,9 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "BUG-024"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],

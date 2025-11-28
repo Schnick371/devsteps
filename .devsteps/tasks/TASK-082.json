@@ -1,0 +1,43 @@
+{
+  "id": "TASK-082",
+  "type": "task",
+  "category": "general",
+  "title": "Fix hierarchical view collapse on filter - add expanded state tracking",
+  "status": "done",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-28T09:37:37.562Z",
+  "updated": "2025-11-28T09:47:01.976Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/treeView/devstepsTreeDataProvider.ts",
+    "packages/extension/src/treeView/nodes/hierarchyRootNode.ts",
+    "packages/extension/src/treeView/nodes/workItemNode.ts",
+    "packages/extension/src/utils/stateManager.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "BUG-023",
+      "TASK-037"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "treeview",
+    "ux",
+    "expanded-state",
+    "hierarchical-view",
+    "filter-refresh"
+  ],
+  "commits": [],
+  "metadata": {}
+}

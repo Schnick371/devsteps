@@ -1,12 +1,12 @@
 {
-  "id": "STORY-035",
-  "type": "story",
-  "category": "general",
-  "title": "Fix Welcome View flash - Activate extension before UI registration",
-  "status": "done",
+  "id": "EPIC-011",
+  "type": "epic",
+  "category": "vscode",
+  "title": "Extension Activation Performance Optimization",
+  "status": "draft",
   "priority": "high",
-  "eisenhower": "urgent-important",
-  "created": "2025-11-27T17:12:46.374Z",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-28T09:04:04.214Z",
   "updated": "2025-11-28T09:04:58.035Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
@@ -14,18 +14,16 @@
     "packages/extension/src/extension.ts"
   ],
   "linked_items": {
-    "implements": [
-      "EPIC-003"
-    ],
+    "implements": [],
     "implemented-by": [
-      "TASK-076"
+      "STORY-037"
     ],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "EPIC-011"
+      "STORY-035"
     ],
     "depends-on": [],
     "required-by": [],
@@ -33,10 +31,10 @@
     "superseded-by": []
   },
   "tags": [
-    "ux",
-    "activation",
-    "welcome-view",
-    "extension-lifecycle"
+    "performance",
+    "activation-events",
+    "vs-code-optimization",
+    "user-experience"
   ],
   "commits": [],
   "metadata": {}

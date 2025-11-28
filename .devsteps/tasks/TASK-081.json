@@ -1,0 +1,37 @@
+{
+  "id": "TASK-081",
+  "type": "task",
+  "category": "vscode",
+  "title": "Update Extension Activation Logic - Handle Conditional Loading",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-28T09:04:34.773Z",
+  "updated": "2025-11-28T09:04:54.232Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/extension.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-037"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension-ts",
+    "activation-logic",
+    "context-keys"
+  ],
+  "commits": [],
+  "metadata": {}
+}

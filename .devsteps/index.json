@@ -1,10 +1,10 @@
 {
   "version": "1.0.0",
   "counters": {
-    "epic": 10,
-    "story": 36,
-    "task": 79,
-    "bug": 22,
+    "epic": 11,
+    "story": 37,
+    "task": 82,
+    "bug": 24,
     "spike": 5,
     "feature": 5,
     "requirement": 2
@@ -1303,34 +1303,90 @@
       "id": "BUG-021",
       "type": "bug",
       "title": "Hide Done Button wird deaktiviert statt als Toggle verfügbar zu bleiben",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-28T08:50:12.416Z"
+      "updated": "2025-11-28T09:16:18.202Z"
     },
     {
       "id": "BUG-022",
       "type": "bug",
       "title": "Command Name Typos - devstepsopenItem und devstepsupdateStatus missing dots",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-11-28T08:53:24.123Z"
+      "updated": "2025-11-28T08:57:25.079Z"
+    },
+    {
+      "id": "EPIC-011",
+      "type": "epic",
+      "title": "Extension Activation Performance Optimization",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-28T09:04:04.214Z"
+    },
+    {
+      "id": "STORY-037",
+      "type": "story",
+      "title": "Smart Activation Strategy - Replace Star Event",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-28T09:04:14.878Z"
+    },
+    {
+      "id": "TASK-080",
+      "type": "task",
+      "title": "Update activationEvents - Remove Star, Add Conditional",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-11-28T09:07:48.135Z"
+    },
+    {
+      "id": "TASK-081",
+      "type": "task",
+      "title": "Update Extension Activation Logic - Handle Conditional Loading",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-28T09:04:34.773Z"
+    },
+    {
+      "id": "BUG-023",
+      "type": "bug",
+      "title": "Hide Done Button Functionality Broken - Toggle Logic Not Working",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-11-28T09:33:13.094Z"
+    },
+    {
+      "id": "TASK-082",
+      "type": "task",
+      "title": "Fix hierarchical view collapse on filter - add expanded state tracking",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-11-28T09:47:01.976Z"
+    },
+    {
+      "id": "BUG-024",
+      "type": "bug",
+      "title": "Fix story file path - openItem uses naive pluralization",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-11-28T09:57:37.567Z"
     }
   ],
   "stats": {
-    "total": 157,
+    "total": 164,
     "by_type": {
-      "epic": 10,
-      "story": 36,
-      "task": 79,
-      "bug": 22,
+      "epic": 11,
+      "story": 37,
+      "task": 82,
+      "bug": 24,
       "spike": 5,
       "feature": 5,
       "requirement": 2
     },
     "by_status": {
       "in-progress": 0,
-      "done": 83,
-      "draft": 70,
+      "done": 89,
+      "draft": 71,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1352,5 +1408,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-28T08:53:25.411Z"
+  "last_updated": "2025-11-28T09:57:37.567Z"
 }
