@@ -20,7 +20,8 @@
     "requirements traceability"
   ],
   "activationEvents": [
-    "*"
+    "workspaceContains:.devsteps",
+    "onCommand:devsteps.initProject"
   ],
   "main": "./dist/extension.js",
   "contributes": {
