@@ -34,7 +34,8 @@
   },
   "files": [
     "dist",
-    "bin"
+    "bin",
+    ".github"
   ],
   "scripts": {
     "build": "tsc && node esbuild.cjs --production",

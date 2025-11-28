@@ -342,12 +342,14 @@ For issues and questions:
     mkdirSync(githubPromptsDir, { recursive: true });
 
     // Determine monorepo root to access source files
-    // From dist/commands/init.js -> ../../.. -> packages/ -> .. -> monorepo root
+    // Read source Copilot files from package
+    // In development: 4 levels up to repo root
+    // After npm install: 2 levels up to package root (where .github was copied)
     const currentFileUrl = import.meta.url;
     const currentFilePath = fileURLToPath(currentFileUrl);
     const currentDir = dirname(currentFilePath);
-    const monorepoRoot = join(currentDir, '..', '..', '..', '..');
-    const sourceGithubDir = join(monorepoRoot, '.github');
+    const packageRoot = join(currentDir, '..', '..');
+    const sourceGithubDir = join(packageRoot, '.github');
 
     const devstepsAgent = `---
 name: devsteps

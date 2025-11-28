@@ -1,11 +1,16 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   type DevStepsConfig,
   type Methodology,
   getCurrentTimestamp,
   getMethodologyConfig,
 } from '@schnick371/devsteps-shared';
+
+// ESM equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * Initialize a new devsteps project
@@ -95,7 +100,9 @@ dist/
   mkdirSync(githubPromptsDir, { recursive: true });
 
   // Read source Copilot files from package
-  const packageRoot = join(__dirname, '..', '..', '..');
+  // In development: 3 levels up to repo root
+  // After npm install: 2 levels up to package root (where .github was copied)
+  const packageRoot = join(__dirname, '..', '..');
   const sourceGithubDir = join(packageRoot, '.github');
 
   // Copy devsteps agent
