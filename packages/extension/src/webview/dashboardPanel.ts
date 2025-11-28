@@ -209,7 +209,7 @@ export class DashboardPanel {
   private async handleMessage(message: any) {
     switch (message.command) {
       case 'openItem':
-        vscode.commands.executeCommand('devstepsopenItem', message.itemId);
+        vscode.commands.executeCommand('devsteps.openItem', message.itemId);
         break;
     }
   }

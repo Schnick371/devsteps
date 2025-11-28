@@ -277,7 +277,7 @@ export function registerCommands(
         );
         
         if (openItem === 'Open') {
-          await vscode.commands.executeCommand('devstepsopenItem', result.itemId);
+          await vscode.commands.executeCommand('devsteps.openItem', result.itemId);
         }
       } catch (error) {
         vscode.window.showErrorMessage(`Error creating item: ${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -501,7 +501,7 @@ export function registerCommands(
         );
 
         if (selectedItem) {
-          await vscode.commands.executeCommand('devstepsopenItem', selectedItem.value);
+          await vscode.commands.executeCommand('devsteps.openItem', selectedItem.value);
         }
       } catch (error) {
         vscode.window.showErrorMessage(
@@ -739,7 +739,7 @@ ${Object.entries(byType)
             break;
           }
           case 'status': {
-            await vscode.commands.executeCommand('devstepsupdateStatus', itemId);
+            await vscode.commands.executeCommand('devsteps.updateStatus', itemId);
             return; // Status update handled by separate command
           }
           case 'tags': {
