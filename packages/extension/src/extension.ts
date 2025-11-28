@@ -11,6 +11,7 @@ import { registerCommands } from './commands/index.js';
 import { McpServerManager } from './mcpServerManager.js';
 import { DevStepsDecorationProvider } from './decorationProvider.js';
 import { logger } from './outputChannel.js';
+import { PackageInstaller } from './utils/packageInstaller.js';
 
 /**
  * Extension activation - called when extension is activated
@@ -21,6 +22,17 @@ import { logger } from './outputChannel.js';
  */
 export async function activate(context: vscode.ExtensionContext) {
   logger.info('DevSteps extension activating...');
+
+  // Auto-install packages from npm if needed
+  try {
+    const installer = new PackageInstaller();
+    await installer.ensurePackagesInstalled();
+  } catch (error) {
+    logger.error('Failed to install DevSteps packages', error);
+    vscode.window.showErrorMessage(
+      `DevSteps: Failed to install packages - ${error instanceof Error ? error.message : 'Unknown error'}`
+    );
+  }
 
   // Check for workspace
   const workspaceFolders = vscode.workspace.workspaceFolders;

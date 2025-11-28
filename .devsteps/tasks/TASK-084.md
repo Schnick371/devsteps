@@ -110,3 +110,29 @@ export async function activate(context: vscode.ExtensionContext) {
 - ✅ Shows progress notification
 - ✅ Handles errors gracefully
 - ✅ Skips download if already installed
+
+## Implementation Notes
+
+**Platform Detection:**
+- `vscode.env.remoteName === 'wsl'` - Detects WSL2 remote
+- `process.platform === 'win32'` - Detects Windows native
+- Auto-adapts commands for each platform
+
+**Installation Strategy:**
+- Global npm installation (not extension storage)
+- WSL2: `wsl.exe -e bash -c "npm install -g..."`
+- Windows/Linux: Direct `npm install -g...`
+
+**MCP Configuration:**
+- WSL2: `wsl.exe -e /path/to/devsteps-mcp`
+- Windows: `node C:\path\to\devsteps-mcp.cmd`
+- Linux: `node /path/to/devsteps-mcp`
+
+**Path Resolution:**
+- Uses `npm bin -g` to find global bin directory
+- Platform-specific executables (.cmd on Windows)
+
+**Error Handling:**
+- Non-blocking installation (extension continues on failure)
+- Logs errors to output channel
+- Shows user-friendly error messages
