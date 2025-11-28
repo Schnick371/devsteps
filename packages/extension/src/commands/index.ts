@@ -5,7 +5,7 @@
 
 import * as vscode from 'vscode';
 import * as path from 'node:path';
-import { addItem, getItem, updateItem, listItems } from '@schnick371/devsteps-shared';
+import { addItem, getItem, updateItem, listItems, TYPE_TO_DIRECTORY } from '@schnick371/devsteps-shared';
 import type { DevStepsTreeDataProvider } from '../treeView/devstepsTreeDataProvider.js';
 import { DashboardPanel } from '../webview/dashboardPanel.js';
 import { logger } from '../outputChannel.js';
@@ -322,7 +322,7 @@ export function registerCommands(
         }
 
         const item = itemResult.metadata;
-        const itemTypeFolder = `${item.type}s`; // e.g., 'tasks', 'stories'
+        const itemTypeFolder = TYPE_TO_DIRECTORY[item.type as keyof typeof TYPE_TO_DIRECTORY];
         const mdPath = path.join(
           workspaceFolder.uri.fsPath,
           '.devsteps',
@@ -638,7 +638,7 @@ ${Object.entries(byType)
         }
 
         const item = itemResult.metadata;
-        const itemTypeFolder = `${item.type}s`;
+        const itemTypeFolder = TYPE_TO_DIRECTORY[item.type as keyof typeof TYPE_TO_DIRECTORY];
         const mdPath = path.join(
           workspaceFolder.uri.fsPath,
           '.devsteps',
