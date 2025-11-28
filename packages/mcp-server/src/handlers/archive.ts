@@ -1,11 +1,11 @@
-import { join } from 'node:path';
 import { archiveItem } from '@schnick371/devsteps-shared';
+import { getDevStepsDir } from '../workspace.js';
 
 /**
  * Archive a single item (MCP wrapper)
  */
 export default async function archiveHandler(args: { id: string }) {
-  const devstepsDir = join(process.cwd(), '.devsteps');
+  const devstepsDir = getDevStepsDir();
   const result = await archiveItem(devstepsDir, args.id);
 
   return {

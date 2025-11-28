@@ -1,6 +1,6 @@
-import path from 'node:path';
 import { getQuickContext } from '@schnick371/devsteps-shared';
 import type { ContextLevel } from '@schnick371/devsteps-shared';
+import { getDevStepsDir, getWorkspaceRoot } from '../workspace.js';
 
 interface ContextArgs {
   level?: ContextLevel;
@@ -13,8 +13,8 @@ export async function contextHandler(
   args: ContextArgs = {}
 ): Promise<{ success: boolean; context?: unknown; message?: string; error?: string }> {
   const level = args.level || 'quick';
-  const cwd = process.cwd();
-  const devstepsDir = path.join(cwd, '.devsteps');
+  const cwd = getWorkspaceRoot();
+  const devstepsDir = getDevStepsDir();
 
   try {
     // Currently only quick level is implemented

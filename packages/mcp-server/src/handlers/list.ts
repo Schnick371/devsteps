@@ -1,11 +1,11 @@
-import { join } from 'node:path';
-import { type ListItemsArgs, listItems } from '@schnick371/devsteps-shared';
+import { listItems } from '@schnick371/devsteps-shared';
+import { getDevStepsDir } from '../workspace.js';
 
 /**
  * List items with optional filtering (MCP wrapper)
  */
-export default async function listHandler(args: ListItemsArgs) {
-  const devstepsDir = join(process.cwd(), '.devsteps');
+export default async function listHandler(args: any) {
+  const devstepsDir = getDevStepsDir();
   const result = await listItems(devstepsDir, args);
 
   return {

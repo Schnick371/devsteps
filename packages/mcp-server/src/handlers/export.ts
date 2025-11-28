@@ -2,6 +2,7 @@ import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { ItemType } from '@schnick371/devsteps-shared';
 import { TYPE_TO_DIRECTORY } from '@schnick371/devsteps-shared';
+import { getDevStepsDir, getWorkspaceRoot } from '../workspace.js';
 
 /**
  * Export project data
@@ -11,7 +12,7 @@ export default async function exportHandler(args: {
   output_path?: string;
   include_types?: ItemType[];
 }) {
-  const devstepsDir = join(process.cwd(), '.devsteps');
+  const devstepsDir = getDevStepsDir();
 
   if (!existsSync(devstepsDir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
@@ -55,7 +56,7 @@ export default async function exportHandler(args: {
     filename = args.output_path || 'devsteps-export.json';
   }
 
-  const outputPath = join(process.cwd(), filename);
+  const outputPath = join(getWorkspaceRoot(), filename);
   writeFileSync(outputPath, output);
 
   return {
