@@ -17,18 +17,32 @@ export class WorkItemNode extends TreeNode {
     private item: WorkItem,
     private hierarchical: boolean = false,
     private filterState?: FilterState,
+    private isExpanded?: boolean,
   ) {
     super();
+  }
+
+  getId(): string {
+    return this.item.id;
   }
 
   toTreeItem(): vscode.TreeItem {
     const hasChildren = this.hierarchical && this.hasImplementedByLinks();
 
-    const treeItem = new vscode.TreeItem(
-      `${this.item.id}: ${this.item.title}`,
-      hasChildren ? vscode.TreeItemCollapsibleState.Collapsed : vscode.TreeItemCollapsibleState.None,
-    );
+    let collapsibleState = vscode.TreeItemCollapsibleState.None;
+    if (hasChildren) {
+      if (this.isExpanded !== undefined) {
+        collapsibleState = this.isExpanded 
+          ? vscode.TreeItemCollapsibleState.Expanded 
+          : vscode.TreeItemCollapsibleState.Collapsed;
+      } else {
+        collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
+      }
+    }
 
+    const treeItem = new vscode.TreeItem(`${this.item.id}: ${this.item.title}`, collapsibleState);
+
+    treeItem.id = this.item.id;
     treeItem.contextValue = 'workItem';
     treeItem.iconPath = this.getIcon();
     treeItem.description = undefined;
@@ -46,7 +60,7 @@ export class WorkItemNode extends TreeNode {
     return treeItem;
   }
 
-  async getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState): Promise<TreeNode[]> {
+  async getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState, expandedHierarchyItems?: Set<string>): Promise<TreeNode[]> {
     if (!this.hierarchical) return [];
 
     try {
@@ -65,7 +79,10 @@ export class WorkItemNode extends TreeNode {
         children = children.filter((item) => item.status !== 'done');
       }
 
-      return children.map((item) => new WorkItemNode(item, true, effectiveFilter));
+      return children.map((item) => {
+        const isExpanded = expandedHierarchyItems?.has(item.id);
+        return new WorkItemNode(item, true, effectiveFilter, isExpanded);
+      });
     } catch (error) {
       console.error('Failed to load child items:', error);
       return [];

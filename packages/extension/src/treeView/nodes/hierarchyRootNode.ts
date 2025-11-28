@@ -11,21 +11,33 @@ import { loadItemWithLinks } from '../utils/itemLoader.js';
 import { WorkItemNode } from './workItemNode.js';
 
 export class HierarchyRootNode extends TreeNode {
+  private id: string;
+
   constructor(
     private hierarchy: 'scrum' | 'waterfall',
     private label: string,
+    private isExpanded: boolean = true,
   ) {
     super();
+    this.id = `hierarchy-${hierarchy}`;
+  }
+
+  getId(): string {
+    return this.id;
   }
 
   toTreeItem(): vscode.TreeItem {
-    const item = new vscode.TreeItem(this.label, vscode.TreeItemCollapsibleState.Expanded);
+    const collapsibleState = this.isExpanded 
+      ? vscode.TreeItemCollapsibleState.Expanded 
+      : vscode.TreeItemCollapsibleState.Collapsed;
+    const item = new vscode.TreeItem(this.label, collapsibleState);
+    item.id = this.id;
     item.contextValue = 'hierarchyRoot';
     item.iconPath = new vscode.ThemeIcon('symbol-namespace');
     return item;
   }
 
-  async getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState): Promise<TreeNode[]> {
+  async getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState, expandedHierarchyItems?: Set<string>): Promise<TreeNode[]> {
     try {
       const indexPath = vscode.Uri.joinPath(workspaceRoot, '.devsteps', 'index.json');
       const indexData = await vscode.workspace.fs.readFile(indexPath);
@@ -49,7 +61,10 @@ export class HierarchyRootNode extends TreeNode {
         items = items.filter((item) => item.status !== 'done');
       }
 
-      return items.map((item) => new WorkItemNode(item, true, filterState));
+      return items.map((item) => {
+        const isExpanded = expandedHierarchyItems?.has(item.id);
+        return new WorkItemNode(item, true, filterState, isExpanded);
+      });
     } catch (error) {
       console.error('Failed to load hierarchy items:', error);
       return [];

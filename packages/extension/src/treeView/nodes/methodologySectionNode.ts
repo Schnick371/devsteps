@@ -41,7 +41,7 @@ export class MethodologySectionNode extends TreeNode {
     return treeItem;
   }
 
-  async getChildren(_workspaceRoot: vscode.Uri, _filterState?: FilterState): Promise<TreeNode[]> {
+  async getChildren(_workspaceRoot: vscode.Uri, _filterState?: FilterState, _expandedHierarchyItems?: Set<string>): Promise<TreeNode[]> {
     // Return TypeGroupNode for each item type
     return Object.entries(this.itemsByType)
       .sort(([typeA], [typeB]) => typeA.localeCompare(typeB))

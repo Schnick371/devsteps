@@ -24,7 +24,7 @@ export class LoadingNode extends TreeNode {
     return item;
   }
 
-  async getChildren(_workspaceRoot: vscode.Uri, _filterState?: FilterState): Promise<TreeNode[]> {
+  async getChildren(_workspaceRoot: vscode.Uri, _filterState?: FilterState, _expandedHierarchyItems?: Set<string>): Promise<TreeNode[]> {
     // Loading node has no children
     return [];
   }

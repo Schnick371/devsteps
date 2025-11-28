@@ -58,5 +58,13 @@ export interface WorkItem {
  */
 export abstract class TreeNode {
   abstract toTreeItem(): vscode.TreeItem;
-  abstract getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState): Promise<TreeNode[]>;
+  abstract getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState, expandedHierarchyItems?: Set<string>): Promise<TreeNode[]>;
+  
+  /**
+   * Get unique ID for this node (used for expansion tracking)
+   * Returns empty string for nodes that don't need tracking
+   */
+  getId(): string {
+    return '';
+  }
 }

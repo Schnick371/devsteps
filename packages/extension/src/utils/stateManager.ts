@@ -16,6 +16,7 @@ export class TreeViewStateManager {
     SORT_STATE: 'devsteps.treeView.sortState',
     EXPANDED_GROUPS: 'devsteps.treeView.expandedGroups',
     EXPANDED_SECTIONS: 'devsteps.treeView.expandedSections',
+    EXPANDED_HIERARCHY_ITEMS: 'devsteps.treeView.expandedHierarchyItems',
   };
 
   constructor(private workspaceState: vscode.Memento) {}
@@ -57,6 +58,11 @@ export class TreeViewStateManager {
     return new Set(array);
   }
 
+  loadExpandedHierarchyItems(): Set<string> {
+    const array = this.workspaceState.get<string[]>(TreeViewStateManager.KEYS.EXPANDED_HIERARCHY_ITEMS, []);
+    return new Set(array);
+  }
+
   // Save state (called on every setter method)
   async saveViewMode(mode: ViewMode): Promise<void> {
     await this.workspaceState.update(TreeViewStateManager.KEYS.VIEW_MODE, mode);
@@ -80,5 +86,9 @@ export class TreeViewStateManager {
 
   async saveExpandedSections(sections: Set<string>): Promise<void> {
     await this.workspaceState.update(TreeViewStateManager.KEYS.EXPANDED_SECTIONS, Array.from(sections));
+  }
+
+  async saveExpandedHierarchyItems(items: Set<string>): Promise<void> {
+    await this.workspaceState.update(TreeViewStateManager.KEYS.EXPANDED_HIERARCHY_ITEMS, Array.from(items));
   }
 }

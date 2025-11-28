@@ -51,6 +51,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   private treeView?: vscode.TreeView<TreeNode>;
   private expandedGroups = new Set<string>();
   private expandedSections = new Set<string>(['scrum', 'waterfall']); // Both expanded by default
+  private expandedHierarchyItems = new Set<string>();
   private lastTotalCount = 0;
   private lastFilteredCount = 0;
   private decorationProvider?: { refresh: (uris?: vscode.Uri | vscode.Uri[]) => void };
@@ -69,6 +70,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       this.sortState = stateManager.loadSortState();
       this.expandedGroups = stateManager.loadExpandedGroups();
       this.expandedSections = stateManager.loadExpandedSections();
+      this.expandedHierarchyItems = stateManager.loadExpandedHierarchyItems();
     }
   }
 
@@ -99,7 +101,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     this.treeView = treeView;
     this.updateDescription();
 
-    // Track expanded state of methodology sections in flat view
+    // Track expanded state of methodology sections in flat view and hierarchical nodes
     this.treeView.onDidExpandElement((e) => {
       if (e.element instanceof MethodologySectionNode) {
         this.expandedSections.add(e.element.getMethodology());
@@ -107,6 +109,16 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       } else if (e.element instanceof TypeGroupNode) {
         this.expandedGroups.add(e.element.getTrackingKey());
         this.stateManager?.saveExpandedGroups(this.expandedGroups);
+      } else if (e.element instanceof HierarchyRootNode) {
+        this.expandedHierarchyItems.add(e.element.getId());
+        this.stateManager?.saveExpandedHierarchyItems(this.expandedHierarchyItems);
+      } else {
+        // WorkItemNode in hierarchical view
+        const id = e.element.getId();
+        if (id && this.viewMode === 'hierarchical') {
+          this.expandedHierarchyItems.add(id);
+          this.stateManager?.saveExpandedHierarchyItems(this.expandedHierarchyItems);
+        }
       }
     });
 
@@ -117,6 +129,16 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       } else if (e.element instanceof TypeGroupNode) {
         this.expandedGroups.delete(e.element.getTrackingKey());
         this.stateManager?.saveExpandedGroups(this.expandedGroups);
+      } else if (e.element instanceof HierarchyRootNode) {
+        this.expandedHierarchyItems.delete(e.element.getId());
+        this.stateManager?.saveExpandedHierarchyItems(this.expandedHierarchyItems);
+      } else {
+        // WorkItemNode in hierarchical view
+        const id = e.element.getId();
+        if (id && this.viewMode === 'hierarchical') {
+          this.expandedHierarchyItems.delete(id);
+          this.stateManager?.saveExpandedHierarchyItems(this.expandedHierarchyItems);
+        }
       }
     });
   }
@@ -457,8 +479,8 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       return []; // Fallback (should never reach here)
     }
 
-    // Child nodes - pass filterState for hierarchical view filtering
-    return element.getChildren(this.workspaceRoot, this.filterState);
+    // Child nodes - pass filterState and expandedHierarchyItems for hierarchical view
+    return element.getChildren(this.workspaceRoot, this.filterState, this.expandedHierarchyItems);
   }
 
   /**
@@ -594,11 +616,13 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     const roots: TreeNode[] = [];
 
     if (this.hierarchyType === 'both' || this.hierarchyType === 'scrum') {
-      roots.push(new HierarchyRootNode('scrum', '🌲 Scrum Hierarchy'));
+      const isExpanded = this.expandedHierarchyItems.has('hierarchy-scrum');
+      roots.push(new HierarchyRootNode('scrum', '🌲 Scrum Hierarchy', isExpanded));
     }
 
     if (this.hierarchyType === 'both' || this.hierarchyType === 'waterfall') {
-      roots.push(new HierarchyRootNode('waterfall', '🌲 Waterfall Hierarchy'));
+      const isExpanded = this.expandedHierarchyItems.has('hierarchy-waterfall');
+      roots.push(new HierarchyRootNode('waterfall', '🌲 Waterfall Hierarchy', isExpanded));
     }
 
     return roots;

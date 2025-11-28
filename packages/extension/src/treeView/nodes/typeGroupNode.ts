@@ -41,7 +41,7 @@ export class TypeGroupNode extends TreeNode {
     return item;
   }
 
-  async getChildren(_workspaceRoot: vscode.Uri, _filterState?: FilterState): Promise<TreeNode[]> {
+  async getChildren(_workspaceRoot: vscode.Uri, _filterState?: FilterState, _expandedHierarchyItems?: Set<string>): Promise<TreeNode[]> {
     return this.items.map((item) => new WorkItemNode(item, false));
   }
 
