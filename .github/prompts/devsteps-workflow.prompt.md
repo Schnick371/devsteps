@@ -1,6 +1,6 @@
 ---
 agent: 'devsteps'
-model: 'Auto'
+model: 'Grok Code Fast 1'
 description: 'Structured development workflow - preserve decisions and maintain context continuity'
 tools: ['runCommands', 'runTasks', 'edit', 'search', 'github/github-mcp-server/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'devsteps/*', 'usages', 'problems', 'changes', 'fetch', 'todos', 'runSubagent']
 ---
