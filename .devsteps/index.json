@@ -462,10 +462,10 @@
     {
       "id": "BUG-003",
       "type": "bug",
-      "title": "Menu Items Missing Visual Checkmarks for Current State",
-      "status": "draft",
+      "title": "Menu Items Missing Visual Checkmarks for Current State - RESOLVED",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-25T08:47:13.850Z"
+      "updated": "2025-11-28T07:53:20.487Z"
     },
     {
       "id": "BUG-004",
@@ -1297,8 +1297,8 @@
     },
     "by_status": {
       "in-progress": 0,
-      "done": 80,
-      "draft": 69,
+      "done": 81,
+      "draft": 68,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1320,5 +1320,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-28T07:46:07.586Z"
+  "last_updated": "2025-11-28T07:53:20.487Z"
 }
