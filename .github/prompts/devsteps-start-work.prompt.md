@@ -1,6 +1,6 @@
 ---
 agent: 'devsteps'
-model: 'Grok Code Fast 1'
+model: 'Claude Sonnet 4'
 description: 'Begin implementation work - review planned items, select next task, and start structured development'
 tools: ['edit', 'search', 'runCommands', 'runTasks', 'GitKraken/*', 'tavily/*', 'devsteps/*', 'usages', 'problems', 'changes', 'testFailure', 'todos', 'runSubagent']
 ---

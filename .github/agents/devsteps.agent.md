@@ -1,6 +1,6 @@
 ---
 description: 'Structured implementation specialist - executes work items from devsteps with systematic testing and validation'
-model: 'Grok Code Fast 1'
+model: 'Claude Sonnet 4'
 tools: ['runCommands/getTerminalOutput', 'runCommands/runInTerminal', 'runTasks/runTask', 'runTasks/getTaskOutput', 'edit/createFile', 'edit/createDirectory', 'edit/editNotebook', 'edit/editFiles', 'search', 'github/github-mcp-server/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'GitKraken/*', 'devsteps/*', 'usages', 'problems', 'testFailure', 'fetch', 'todos']
 ---
 
