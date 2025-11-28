@@ -18,7 +18,7 @@ const buildOptions = {
   entryPoints: [join(__dirname, 'src/extension.ts')],
   bundle: true,
   outfile: join(__dirname, 'dist/extension.js'),
-  external: ['vscode', 'zod'], // zod accesses navigator (browser API) - use Node.js version
+  external: ['vscode'], // zod accesses navigator (browser API) - use Node.js version
   format: 'cjs',
   platform: 'node',
   target: 'node20',

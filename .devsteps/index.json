@@ -4,7 +4,7 @@
     "epic": 10,
     "story": 36,
     "task": 79,
-    "bug": 18,
+    "bug": 19,
     "spike": 5,
     "feature": 5,
     "requirement": 1
@@ -1103,9 +1103,9 @@
       "id": "BUG-017",
       "type": "bug",
       "title": "Restore original FileDecorationProvider badge implementation",
-      "status": "in-progress",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-11-27T16:15:20.340Z"
+      "updated": "2025-11-28T07:05:16.534Z"
     },
     {
       "id": "BUG-018",
@@ -1274,22 +1274,30 @@
       "status": "done",
       "priority": "medium",
       "updated": "2025-11-27T19:33:46.314Z"
+    },
+    {
+      "id": "BUG-019",
+      "type": "bug",
+      "title": "Extension VSIX Installation - TreeView Provider Registration Failure",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-11-28T07:46:07.586Z"
     }
   ],
   "stats": {
-    "total": 152,
+    "total": 153,
     "by_type": {
       "epic": 10,
       "story": 36,
       "task": 79,
-      "bug": 18,
+      "bug": 19,
       "spike": 5,
       "feature": 5,
       "requirement": 1
     },
     "by_status": {
-      "in-progress": 1,
-      "done": 78,
+      "in-progress": 0,
+      "done": 80,
       "draft": 69,
       "blocked": 1,
       "obsolete": 3
@@ -1312,5 +1320,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-27T19:34:00.411Z"
+  "last_updated": "2025-11-28T07:46:07.586Z"
 }
