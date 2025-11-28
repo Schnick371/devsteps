@@ -8,7 +8,6 @@ import {
   parseItemId,
   validateRelationship,
 } from '@schnick371/devsteps-shared';
-import { getDevStepsDir } from '../workspace.js';
 
 /**
  * Link two items together
@@ -18,7 +17,7 @@ export default async function linkHandler(args: {
   relation_type: RelationType;
   target_id: string;
 }) {
-  const devstepsDir = getDevStepsDir();
+  const devstepsDir = join(process.cwd(), '.devsteps');
 
   if (!existsSync(devstepsDir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');

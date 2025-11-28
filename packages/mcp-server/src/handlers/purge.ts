@@ -1,11 +1,11 @@
+import { join } from 'node:path';
 import { type PurgeItemsArgs, purgeItems } from '@schnick371/devsteps-shared';
-import { getDevStepsDir } from '../workspace.js';
 
 /**
- * Bulk archive items with filters (MCP wrapper)
+ * Bulk archive items (MCP wrapper)
  */
 export default async function purgeHandler(args: PurgeItemsArgs) {
-  const devstepsDir = getDevStepsDir();
+  const devstepsDir = join(process.cwd(), '.devsteps');
   const result = await purgeItems(devstepsDir, args);
 
   return {

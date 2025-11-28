@@ -138,25 +138,13 @@ export class PackageInstaller {
         console.log('[DevSteps] Creating new mcp.json');
       }
 
-      // Get workspace folder path for DEVSTEPS_WORKSPACE env var
-      const workspaceFolders = vscode.workspace.workspaceFolders;
-      const workspacePath = workspaceFolders && workspaceFolders.length > 0
-        ? workspaceFolders[0].uri.fsPath
-        : undefined;
-
       // Add devsteps server configuration
       if (this.isWSL) {
         // WSL2: Use wsl.exe with absolute Linux path
-        // Convert Windows path to WSL2 path if needed
-        const wslWorkspacePath = workspacePath
-          ? workspacePath.replace(/^([A-Z]):\\/, (_, drive) => `/mnt/${drive.toLowerCase()}/`).replace(/\\/g, '/')
-          : undefined;
-
         config.servers.devsteps = {
           type: 'stdio',
           command: 'wsl.exe',
           args: ['-e', mcpPath],
-          env: wslWorkspacePath ? { DEVSTEPS_WORKSPACE: wslWorkspacePath } : {},
         };
       } else {
         // Windows/Linux: Use node with absolute path
@@ -164,7 +152,6 @@ export class PackageInstaller {
           type: 'stdio',
           command: 'node',
           args: [mcpPath],
-          env: workspacePath ? { DEVSTEPS_WORKSPACE: workspacePath } : {},
         };
       }
 
