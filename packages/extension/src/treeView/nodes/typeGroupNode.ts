@@ -32,10 +32,11 @@ export class TypeGroupNode extends TreeNode {
     item.contextValue = 'typeGroup';
     item.iconPath = new vscode.ThemeIcon('folder');
     
-    // Make ID unique per methodology section
-    if (this.parentMethodology) {
-      item.id = `type-${this.parentMethodology}-${this.type}`;
-    }
+    // Ensure consistent ID for expanded state preservation
+    // Use methodology prefix if available, otherwise use plain type
+    item.id = this.parentMethodology 
+      ? `type-${this.parentMethodology}-${this.type}`
+      : `type-${this.type}`;
     
     return item;
   }
