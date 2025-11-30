@@ -55,6 +55,17 @@ export async function activate(context: vscode.ExtensionContext) {
   await vscode.commands.executeCommand('setContext', 'devsteps.hasProject', hasDevSteps);
   await vscode.commands.executeCommand('setContext', 'devsteps.initialized', hasDevSteps);
   
+  // Initialize and start MCP server ALWAYS (even without .devsteps)
+  // MCP tools work globally and can initialize projects
+  try {
+    const mcpManager = new McpServerManager(context);
+    mcpManager.registerCommands();
+    await mcpManager.start();
+    logger.info('MCP Server initialized');
+  } catch (error) {
+    logger.error('Failed to initialize MCP Server', error);
+  }
+
   if (!hasDevSteps) {
     logger.info('No .devsteps directory found - showing welcome view');
     // Still register commands so "Initialize Project" button works
@@ -141,16 +152,6 @@ export async function activate(context: vscode.ExtensionContext) {
       }
     })
   );
-
-  // Initialize and start MCP server
-  try {
-    const mcpManager = new McpServerManager(context);
-    mcpManager.registerCommands();
-    await mcpManager.start();
-    logger.info('MCP Server initialized');
-  } catch (error) {
-    logger.error('Failed to initialize MCP Server', error);
-  }
 
   // Show welcome message
   vscode.window.showInformationMessage('DevSteps extension activated');
