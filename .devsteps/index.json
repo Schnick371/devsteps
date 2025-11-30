@@ -1479,9 +1479,9 @@
       "id": "TASK-094",
       "type": "task",
       "title": "Test Complete Deployment Flow",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-11-30T11:25:27.866Z"
+      "updated": "2025-11-30T11:38:48.182Z"
     }
   ],
   "stats": {
@@ -1497,8 +1497,8 @@
     },
     "by_status": {
       "in-progress": 3,
-      "done": 95,
-      "draft": 76,
+      "done": 96,
+      "draft": 75,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1520,5 +1520,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T11:37:20.554Z"
+  "last_updated": "2025-11-30T11:38:48.182Z"
 }
