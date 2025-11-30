@@ -3,11 +3,11 @@
   "type": "task",
   "category": "general",
   "title": "Integrate PackageInstaller in Extension Activation",
-  "status": "draft",
+  "status": "done",
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-30T11:24:55.436Z",
-  "updated": "2025-11-30T11:25:41.252Z",
+  "updated": "2025-11-30T11:36:11.356Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

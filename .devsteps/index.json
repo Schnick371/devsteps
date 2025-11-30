@@ -1455,9 +1455,9 @@
       "id": "TASK-091",
       "type": "task",
       "title": "Integrate PackageInstaller in Extension Activation",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-11-30T11:24:55.436Z"
+      "updated": "2025-11-30T11:36:11.356Z"
     },
     {
       "id": "TASK-092",
@@ -1497,8 +1497,8 @@
     },
     "by_status": {
       "in-progress": 3,
-      "done": 93,
-      "draft": 78,
+      "done": 94,
+      "draft": 77,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1520,5 +1520,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T11:35:45.130Z"
+  "last_updated": "2025-11-30T11:36:11.356Z"
 }
