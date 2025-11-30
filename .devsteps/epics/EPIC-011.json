@@ -3,11 +3,11 @@
   "type": "epic",
   "category": "vscode",
   "title": "Extension Activation Performance Optimization",
-  "status": "draft",
+  "status": "in-progress",
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-28T09:04:04.214Z",
-  "updated": "2025-11-28T09:04:58.035Z",
+  "updated": "2025-11-30T11:13:02.951Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/package.json",

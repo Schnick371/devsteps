@@ -3,8 +3,8 @@
   "counters": {
     "epic": 11,
     "story": 38,
-    "task": 88,
-    "bug": 24,
+    "task": 94,
+    "bug": 25,
     "spike": 5,
     "feature": 5,
     "requirement": 2
@@ -1319,17 +1319,17 @@
       "id": "EPIC-011",
       "type": "epic",
       "title": "Extension Activation Performance Optimization",
-      "status": "draft",
+      "status": "in-progress",
       "priority": "high",
-      "updated": "2025-11-28T09:04:04.214Z"
+      "updated": "2025-11-30T11:13:02.951Z"
     },
     {
       "id": "STORY-037",
       "type": "story",
       "title": "Smart Activation Strategy - Replace Star Event",
-      "status": "draft",
+      "status": "in-progress",
       "priority": "high",
-      "updated": "2025-11-28T09:04:14.878Z"
+      "updated": "2025-11-30T11:13:07.581Z"
     },
     {
       "id": "TASK-080",
@@ -1343,9 +1343,9 @@
       "id": "TASK-081",
       "type": "task",
       "title": "Update Extension Activation Logic - Handle Conditional Loading",
-      "status": "draft",
+      "status": "in-progress",
       "priority": "high",
-      "updated": "2025-11-28T09:04:34.773Z"
+      "updated": "2025-11-30T11:13:12.533Z"
     },
     {
       "id": "BUG-023",
@@ -1426,23 +1426,79 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-11-28T10:26:36.267Z"
+    },
+    {
+      "id": "BUG-025",
+      "type": "bug",
+      "title": "Extension Deployment - MCP Server Missing Dependencies",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-11-30T11:24:18.704Z"
+    },
+    {
+      "id": "TASK-089",
+      "type": "task",
+      "title": "Remove MCP Server Bundling from Extension",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-11-30T11:24:35.990Z"
+    },
+    {
+      "id": "TASK-090",
+      "type": "task",
+      "title": "Update mcpServerManager to Use npm Global Installation",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-11-30T11:24:45.852Z"
+    },
+    {
+      "id": "TASK-091",
+      "type": "task",
+      "title": "Integrate PackageInstaller in Extension Activation",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-11-30T11:24:55.436Z"
+    },
+    {
+      "id": "TASK-092",
+      "type": "task",
+      "title": "Publish Shared Package to npm",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-30T11:25:05.798Z"
+    },
+    {
+      "id": "TASK-093",
+      "type": "task",
+      "title": "Update PackageInstaller to Include Shared Package",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-30T11:25:15.490Z"
+    },
+    {
+      "id": "TASK-094",
+      "type": "task",
+      "title": "Test Complete Deployment Flow",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-11-30T11:25:27.866Z"
     }
   ],
   "stats": {
-    "total": 171,
+    "total": 178,
     "by_type": {
       "epic": 11,
       "story": 38,
-      "task": 88,
-      "bug": 24,
+      "task": 94,
+      "bug": 25,
       "spike": 5,
       "feature": 5,
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 0,
+      "in-progress": 3,
       "done": 90,
-      "draft": 77,
+      "draft": 81,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1464,5 +1520,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-28T10:31:29.635Z"
+  "last_updated": "2025-11-30T11:25:27.866Z"
 }

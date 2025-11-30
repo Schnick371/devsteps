@@ -1,0 +1,38 @@
+{
+  "id": "BUG-025",
+  "type": "bug",
+  "category": "general",
+  "title": "Extension Deployment - MCP Server Missing Dependencies",
+  "status": "draft",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-30T11:24:18.704Z",
+  "updated": "2025-11-30T11:25:41.606Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-089",
+      "TASK-090",
+      "TASK-091",
+      "TASK-092",
+      "TASK-093",
+      "TASK-094"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "deployment,mcp-server,npm,packaging,critical"
+  ],
+  "commits": [],
+  "metadata": {}
+}
