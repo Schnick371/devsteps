@@ -14,8 +14,10 @@
 **Note:** Packages were symlinked to local workspace (development mode)
 
 ### 2. VS Code Extension
-- ✅ No extension installed in `~/.vscode/extensions/`
-- Extension was never installed via .vsix in this environment
+- ⚠️  **INITIAL CLEANUP INCOMPLETE** - Extension deinstallation was missed!
+- Must run: `code --uninstall-extension schnick371.devsteps`
+- Must also check: `~/.vscode/extensions/` for manual removal
+- **Corrected script:** `scripts/complete-cleanup.sh`
 
 ### 3. Configuration Files
 
@@ -74,11 +76,36 @@ cat ~/.config/Code/User/mcp.json
 3. ✅ VS Code restart required
 4. ✅ Fresh .vsix ready: `devsteps-0.4.5.vsix` (239 KB)
 
+## IMPORTANT: Extension Deinstallation Missing! ⚠️
+
+**CRITICAL:** Die VS Code Extension muss auch deinstalliert werden!
+
+### Complete Cleanup Commands:
+
+```bash
+# 1. Prüfe installierte Extensions
+code --list-extensions | grep -iE "schnick|devsteps"
+
+# 2. Deinstalliere DevSteps Extension (falls vorhanden)
+code --uninstall-extension schnick371.devsteps
+
+# 3. Nochmal alle npm Pakete entfernen
+npm uninstall -g @schnick371/devsteps-shared @schnick371/devsteps-cli @schnick371/devsteps-mcp-server
+
+# 4. MCP Configs leeren
+> ~/.config/Code/User/mcp.json
+> .vscode/mcp.json
+
+# 5. npm Cache bereinigen
+npm cache clean --force
+```
+
 ## Next Steps
 
 1. **Close VS Code completely** (all windows)
-2. **Restart VS Code**
-3. **Install extension:**
+2. **Run cleanup commands above**
+3. **Restart VS Code**
+4. **Install extension:**
    ```bash
    code --install-extension packages/extension/devsteps-0.4.5.vsix
    ```

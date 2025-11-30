@@ -92,11 +92,25 @@ All packages contain changes since last 0.5.0 publication (Nov 25):
 
 ### 1. Clean Installation Test
 ```bash
-# Uninstall existing DevSteps packages
+# IMPORTANT: Complete cleanup including extension!
+
+# 1. Uninstall VS Code extension (if installed)
+code --uninstall-extension schnick371.devsteps
+
+# 2. Uninstall global npm packages
 npm uninstall -g @schnick371/devsteps-shared @schnick371/devsteps-cli @schnick371/devsteps-mcp-server
 
-# Install extension
-code --install-extension devsteps-0.4.5.vsix
+# 3. Clean MCP configs
+> ~/.config/Code/User/mcp.json
+> .vscode/mcp.json
+
+# 4. Clean npm cache
+npm cache clean --force
+
+# 5. Close ALL VS Code windows and restart
+
+# 6. Install fresh extension
+code --install-extension packages/extension/devsteps-0.4.5.vsix
 
 # Open VS Code and check:
 # 1. Output panel (DevSteps) for installation logs
