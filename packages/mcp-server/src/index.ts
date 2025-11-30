@@ -11,6 +11,23 @@ import { trackRequestError, trackRequestSuccess } from './handlers/health.js';
 import { configureLogger, createRequestLogger, getLogger } from './logger.js';
 import { activeConnections, recordError, recordSuccess } from './metrics.js';
 import { registerShutdownHandlers, shutdownManager } from './shutdown.js';
+
+// Global unhandled rejection handler - prevents server crash on legitimate errors
+process.on('unhandledRejection', (reason, promise) => {
+  const logger = getLogger();
+  logger.error(
+    {
+      reason: reason instanceof Error ? {
+        message: reason.message,
+        stack: reason.stack,
+        name: reason.name,
+      } : reason,
+      promise: String(promise),
+    },
+    '⚠️  Unhandled Promise Rejection - Server continues running'
+  );
+  // DO NOT exit - legitimate errors like "Project not initialized" should not crash server
+});
 import {
   addTool,
   archiveTool,
@@ -240,6 +257,7 @@ class DevStepsServer {
         const handlerFn = handler.default || handler[`${toolName.replace('', '')}Handler`];
 
         // Track operation for graceful shutdown
+        // CRITICAL: Immediately await to catch rejections in try-catch
         const operation = handlerFn(request.params.arguments);
         const result = await shutdownManager.trackOperation(operation);
 
