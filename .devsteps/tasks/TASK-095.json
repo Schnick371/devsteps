@@ -1,0 +1,36 @@
+{
+  "id": "TASK-095",
+  "type": "task",
+  "category": "general",
+  "title": "Welcome Screen: Add Claude Sonnet 4+ recommendation",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-30T19:56:25.481Z",
+  "updated": "2025-11-30T19:56:50.340Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/package.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ux",
+    "welcome-screen",
+    "model-recommendation",
+    "documentation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

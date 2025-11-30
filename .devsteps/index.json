@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 12,
-    "story": 45,
-    "task": 94,
+    "story": 46,
+    "task": 95,
     "bug": 26,
     "spike": 6,
     "feature": 5,
@@ -1562,14 +1562,30 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-11-30T19:46:59.928Z"
+    },
+    {
+      "id": "TASK-095",
+      "type": "task",
+      "title": "Welcome Screen: Add Claude Sonnet 4+ recommendation",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-30T19:56:50.340Z"
+    },
+    {
+      "id": "STORY-046",
+      "type": "story",
+      "title": "Welcome Screen Content Enhancement - Model Recommendations & User Guidance",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-30T19:56:50.340Z"
     }
   ],
   "stats": {
-    "total": 188,
+    "total": 190,
     "by_type": {
       "epic": 12,
-      "story": 45,
-      "task": 94,
+      "story": 46,
+      "task": 95,
       "bug": 26,
       "spike": 6,
       "feature": 5,
@@ -1578,7 +1594,7 @@
     "by_status": {
       "in-progress": 3,
       "done": 98,
-      "draft": 83,
+      "draft": 85,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1600,5 +1616,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T19:46:59.928Z"
+  "last_updated": "2025-11-30T19:56:50.340Z"
 }
