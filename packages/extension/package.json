@@ -556,9 +556,8 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run build",
-    "build": "node esbuild.mjs --production && npm run copy-mcp-server",
+    "build": "node esbuild.mjs --production",
     "dev": "node esbuild.mjs --watch",
-    "copy-mcp-server": "mkdir -p dist/mcp-server && cp -r ../mcp-server/dist/* dist/mcp-server/",
     "typecheck": "tsc --noEmit",
     "lint": "biome check .",
     "format": "biome format --write .",
