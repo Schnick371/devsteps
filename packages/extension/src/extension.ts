@@ -116,18 +116,18 @@ export async function activate(context: vscode.ExtensionContext) {
   );
   
   devstepsWatcher.onDidCreate(async () => {
-    logger.info('.devsteps directory created - updating context');
+    logger.info('.devsteps directory created - reloading extension');
     await vscode.commands.executeCommand('setContext', 'devsteps.showWelcome', false);
     await vscode.commands.executeCommand('setContext', 'devsteps.hasProject', true);
     await vscode.commands.executeCommand('setContext', 'devsteps.initialized', true);
-    // Reload window to properly initialize extension with new project
-    const reload = await vscode.window.showInformationMessage(
-      'DevSteps project initialized! Reload window to activate extension.',
-      'Reload Window'
+    
+    // Show notification WITHOUT awaiting user choice - automatic reload
+    vscode.window.showInformationMessage(
+      'DevSteps project initialized! Reloading window...'
     );
-    if (reload) {
-      await vscode.commands.executeCommand('workbench.action.reloadWindow');
-    }
+    
+    // Immediate reload - no user interaction needed
+    await vscode.commands.executeCommand('workbench.action.reloadWindow');
   });
   
   context.subscriptions.push(devstepsWatcher)

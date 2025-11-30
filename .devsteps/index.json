@@ -1559,9 +1559,9 @@
       "id": "BUG-026",
       "type": "bug",
       "title": "Welcome View bleibt nach MCP Init - Automatic Reload fehlt",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-30T19:44:09.236Z"
+      "updated": "2025-11-30T19:46:59.928Z"
     }
   ],
   "stats": {
@@ -1577,8 +1577,8 @@
     },
     "by_status": {
       "in-progress": 3,
-      "done": 97,
-      "draft": 84,
+      "done": 98,
+      "draft": 83,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1600,5 +1600,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T19:44:09.236Z"
+  "last_updated": "2025-11-30T19:46:59.928Z"
 }

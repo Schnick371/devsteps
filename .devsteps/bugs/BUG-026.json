@@ -3,11 +3,11 @@
   "type": "bug",
   "category": "general",
   "title": "Welcome View bleibt nach MCP Init - Automatic Reload fehlt",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-30T19:44:09.236Z",
-  "updated": "2025-11-30T19:44:09.236Z",
+  "updated": "2025-11-30T19:46:59.928Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/extension.ts"
