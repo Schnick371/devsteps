@@ -12,16 +12,18 @@ interface MetricsArguments {
   format?: 'prometheus' | 'json';
 }
 
-export async function metricsHandler(args?: MetricsArguments): Promise<string> {
-  const format = args?.format || 'prometheus';
-
-  if (format === 'json') {
-    const metrics = await getMetricsJSON();
-    return JSON.stringify(metrics, null, 2);
+export default async function metricsHandler(args: { format?: 'prometheus' | 'json' }) {
+  try {
+    const metrics = args.format === 'json' ? getMetricsJSON() : getMetrics();
+    return {
+      success: true,
+      format: args.format || 'prometheus',
+      metrics,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : String(error),
+    };
   }
-
-  // Default: Prometheus text format
-  return await getMetrics();
 }
-
-export default metricsHandler;

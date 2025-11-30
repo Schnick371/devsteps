@@ -23,8 +23,9 @@ export default async function initHandler(args: {
   git_integration?: boolean;
   methodology?: Methodology;
 }) {
-  const projectPath = args.path || getWorkspacePath();
-  const devstepsDir = join(projectPath, '.devsteps');
+  try {
+    const projectPath = args.path || getWorkspacePath();
+    const devstepsDir = join(projectPath, '.devsteps');
   const methodology = args.methodology || 'scrum';
 
   // Check if already initialized
@@ -263,12 +264,18 @@ The devsteps system integrates with:
     }
   }
 
-  return {
-    success: true,
-    message,
-    path: devstepsDir,
-    config,
-  };
+    return {
+      success: true,
+      message,
+      path: devstepsDir,
+      config,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : String(error),
+    };
+  }
 }
 
 /**

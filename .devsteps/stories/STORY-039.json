@@ -1,0 +1,45 @@
+{
+  "id": "STORY-039",
+  "type": "story",
+  "category": "general",
+  "title": "Centralize Relationship Management in Shared Core",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-30T19:26:19.901Z",
+  "updated": "2025-11-30T19:27:56.130Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/relationships.ts",
+    "packages/mcp-server/src/handlers/link.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-012"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-043"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "SPIKE-006"
+    ],
+    "required-by": [
+      "STORY-044"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "relationships",
+    "refactor",
+    "deduplication"
+  ],
+  "commits": [],
+  "metadata": {}
+}

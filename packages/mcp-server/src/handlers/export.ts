@@ -12,7 +12,8 @@ export default async function exportHandler(args: {
   output_path?: string;
   include_types?: ItemType[];
 }) {
-  const devstepsDir = join(getWorkspacePath(), '.devsteps');
+  try {
+    const devstepsDir = join(getWorkspacePath(), '.devsteps');
 
   if (!existsSync(devstepsDir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
@@ -59,13 +60,19 @@ export default async function exportHandler(args: {
   const outputPath = join(getWorkspacePath(), filename);
   writeFileSync(outputPath, output);
 
-  return {
-    success: true,
-    message: `Exported ${fullItems.length} items to ${filename}`,
-    format: args.format,
-    path: outputPath,
-    item_count: fullItems.length,
-  };
+    return {
+      success: true,
+      message: `Exported ${fullItems.length} items to ${filename}`,
+      format: args.format,
+      path: outputPath,
+      item_count: fullItems.length,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : String(error),
+    };
+  }
 }
 
 function generateMarkdown(config: any, stats: any, items: any[]): string {

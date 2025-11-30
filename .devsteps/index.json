@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
   "counters": {
-    "epic": 11,
-    "story": 38,
+    "epic": 12,
+    "story": 45,
     "task": 94,
-    "bug": 25,
-    "spike": 5,
+    "bug": 26,
+    "spike": 6,
     "feature": 5,
     "requirement": 2
   },
@@ -1482,23 +1482,103 @@
       "status": "done",
       "priority": "critical",
       "updated": "2025-11-30T11:38:48.182Z"
+    },
+    {
+      "id": "EPIC-012",
+      "type": "epic",
+      "title": "Shared Core Consistency & I/O Architecture",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-30T19:24:54.872Z"
+    },
+    {
+      "id": "SPIKE-006",
+      "type": "spike",
+      "title": "I/O Strategy Decision: Sync vs Async for DevSteps Scale",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-30T19:26:01.615Z"
+    },
+    {
+      "id": "STORY-039",
+      "type": "story",
+      "title": "Centralize Relationship Management in Shared Core",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-30T19:26:19.901Z"
+    },
+    {
+      "id": "STORY-040",
+      "type": "story",
+      "title": "Repository Pattern for Index/Config Access",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-30T19:26:39.503Z"
+    },
+    {
+      "id": "STORY-041",
+      "type": "story",
+      "title": "Move Search Logic to Shared Core",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-30T19:26:57.074Z"
+    },
+    {
+      "id": "STORY-042",
+      "type": "story",
+      "title": "Move Export/Reporting to Shared Core",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-30T19:27:12.951Z"
+    },
+    {
+      "id": "STORY-043",
+      "type": "story",
+      "title": "Fix Async/Sync Declaration Mismatch in Shared Core",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-30T19:27:32.769Z"
+    },
+    {
+      "id": "STORY-044",
+      "type": "story",
+      "title": "Move Trace/Traversal Logic to Shared Core",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-30T19:27:50.171Z"
+    },
+    {
+      "id": "STORY-045",
+      "type": "story",
+      "title": "Move Status Calculation to Shared Core",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-11-30T19:28:14.654Z"
+    },
+    {
+      "id": "BUG-026",
+      "type": "bug",
+      "title": "Welcome View bleibt nach MCP Init - Automatic Reload fehlt",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-30T19:44:09.236Z"
     }
   ],
   "stats": {
-    "total": 178,
+    "total": 188,
     "by_type": {
-      "epic": 11,
-      "story": 38,
+      "epic": 12,
+      "story": 45,
       "task": 94,
-      "bug": 25,
-      "spike": 5,
+      "bug": 26,
+      "spike": 6,
       "feature": 5,
       "requirement": 2
     },
     "by_status": {
       "in-progress": 3,
       "done": 97,
-      "draft": 74,
+      "draft": 84,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1520,5 +1600,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T17:31:23.907Z"
+  "last_updated": "2025-11-30T19:44:09.236Z"
 }

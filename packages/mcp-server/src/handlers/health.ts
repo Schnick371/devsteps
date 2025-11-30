@@ -1,5 +1,6 @@
-/**
 import { getWorkspacePath } from '../workspace.js';
+
+/**
  * Health Check Handler
  *
  * Returns comprehensive server health status including:
@@ -78,23 +79,38 @@ function calculateHealthStatus(
 /**
  * Health check handler
  */
-export default async function healthHandler(): Promise<HealthMetrics> {
-  const memUsage = process.memoryUsage();
-  const errorRate = requestCount > 0 ? errorCount / requestCount : 0;
-  const avgResponseMs =
-    responseTimes.length > 0 ? responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length : 0;
+export default async function healthHandler() {
+  try {
+    const uptime = Math.floor((Date.now() - START_TIME) / 1000);
+    const mem = process.memoryUsage();
+    const memoryMB = Math.round(mem.heapUsed / 1024 / 1024);
 
-  const status = calculateHealthStatus(errorRate, avgResponseMs);
+    const errorRate = requestCount > 0 ? errorCount / requestCount : 0;
+    const avgResponseMs =
+      responseTimes.length > 0
+        ? responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length
+        : 0;
 
-  return {
-    status,
-    timestamp: new Date().toISOString(),
-    uptime_seconds: Math.floor((Date.now() - START_TIME) / 1000),
-    memory_mb: Math.round(memUsage.heapUsed / 1024 / 1024),
-    request_count: requestCount,
-    error_count: errorCount,
-    error_rate: Number(errorRate.toFixed(4)),
-    avg_response_ms: Math.round(avgResponseMs),
-    connections: 1, // stdio = 1 connection, will be dynamic for network transports
-  };
+    const status = calculateHealthStatus(errorRate, avgResponseMs);
+
+    return {
+      success: true,
+      health: {
+        status,
+        timestamp: new Date().toISOString(),
+        uptime_seconds: uptime,
+        memory_mb: memoryMB,
+        request_count: requestCount,
+        error_count: errorCount,
+        error_rate: errorRate,
+        avg_response_ms: avgResponseMs,
+        connections: 0, // Not implemented for stdio
+      },
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : String(error),
+    };
+  }
 }

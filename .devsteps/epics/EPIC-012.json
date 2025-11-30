@@ -1,0 +1,47 @@
+{
+  "id": "EPIC-012",
+  "type": "epic",
+  "category": "general",
+  "title": "Shared Core Consistency & I/O Architecture",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-30T19:24:54.872Z",
+  "updated": "2025-11-30T19:28:20.660Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core",
+    "packages/mcp-server/src/handlers"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "SPIKE-006",
+      "STORY-039",
+      "STORY-040",
+      "STORY-041",
+      "STORY-042",
+      "STORY-043",
+      "STORY-044",
+      "STORY-045"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "architecture",
+    "io",
+    "refactor",
+    "consistency"
+  ],
+  "commits": [],
+  "metadata": {}
+}

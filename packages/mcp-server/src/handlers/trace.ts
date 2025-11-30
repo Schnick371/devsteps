@@ -16,54 +16,55 @@ interface TraceNode {
 }
 
 export default async function traceHandler(args: { id: string; depth?: number }) {
-  const devstepsDir = join(getWorkspacePath(), '.devsteps');
-  const maxDepth = args.depth || 3;
+  try {
+    const devstepsDir = join(getWorkspacePath(), '.devsteps');
+    const maxDepth = args.depth || 3;
 
-  if (!existsSync(devstepsDir)) {
-    throw new Error('Project not initialized. Run devsteps-init first.');
-  }
-
-  const visited = new Set<string>();
-
-  function traceItem(itemId: string, currentDepth: number): TraceNode | null {
-    if (currentDepth > maxDepth || visited.has(itemId)) {
-      return null;
+    if (!existsSync(devstepsDir)) {
+      throw new Error('Project not initialized. Run devsteps-init first.');
     }
 
-    visited.add(itemId);
+    const visited = new Set<string>();
 
-    const parsed = parseItemId(itemId);
-    if (!parsed) return null;
+    function traceItem(itemId: string, currentDepth: number): TraceNode | null {
+      if (currentDepth > maxDepth || visited.has(itemId)) {
+        return null;
+      }
 
-    const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
-    const metadataPath = join(devstepsDir, typeFolder, `${itemId}.json`);
+      visited.add(itemId);
 
-    if (!existsSync(metadataPath)) return null;
+      const parsed = parseItemId(itemId);
+      if (!parsed) return null;
 
-    const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+      const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
+      const metadataPath = join(devstepsDir, typeFolder, `${itemId}.json`);
 
-    const node: TraceNode = {
-      id: metadata.id,
-      type: metadata.type,
-      title: metadata.title,
-      status: metadata.status,
-      priority: metadata.priority,
-      relationships: {},
-    };
+      if (!existsSync(metadataPath)) return null;
 
-    // Trace linked items
-    if (currentDepth < maxDepth) {
-      for (const [relType, linkedIds] of Object.entries(metadata.linked_items)) {
-        if (Array.isArray(linkedIds) && linkedIds.length > 0) {
-          node.relationships[relType] = linkedIds
-            .map((id: string) => traceItem(id, currentDepth + 1))
-            .filter((item): item is TraceNode => item !== null);
+      const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+
+      const node: TraceNode = {
+        id: metadata.id,
+        type: metadata.type,
+        title: metadata.title,
+        status: metadata.status,
+        priority: metadata.priority,
+        relationships: {},
+      };
+
+      // Trace linked items
+      if (currentDepth < maxDepth) {
+        for (const [relType, linkedIds] of Object.entries(metadata.linked_items)) {
+          if (Array.isArray(linkedIds) && linkedIds.length > 0) {
+            node.relationships[relType] = linkedIds
+              .map((id: string) => traceItem(id, currentDepth + 1))
+              .filter((item): item is TraceNode => item !== null);
+          }
         }
       }
-    }
 
-    return node;
-  }
+      return node;
+    }
 
   const tree = traceItem(args.id, 0);
 
@@ -77,4 +78,10 @@ export default async function traceHandler(args: { id: string; depth?: number })
     max_depth: maxDepth,
     tree,
   };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : String(error),
+    };
+  }
 }

@@ -12,57 +12,58 @@ export default async function searchHandler(args: {
   type?: ItemType;
   limit?: number;
 }) {
-  const devstepsDir = join(getWorkspacePath(), '.devsteps');
+  try {
+    const devstepsDir = join(getWorkspacePath(), '.devsteps');
 
-  if (!existsSync(devstepsDir)) {
-    throw new Error('Project not initialized. Run devsteps-init first.');
-  }
-
-  const query = args.query.toLowerCase();
-
-  // Convert wildcards (*) to regex pattern
-  const hasWildcard = query.includes('*');
-  const regexPattern = hasWildcard
-    ? new RegExp(query.replace(/\*/g, '.*'), 'i')
-    : null;
-
-  // Tokenize multi-word queries for OR matching
-  const tokens = query.split(/\s+/).filter(t => t.length > 0);
-
-  // Helper: Check if text matches query (substring, wildcard, or tokens)
-  const matches = (text: string): boolean => {
-    const lowerText = text.toLowerCase();
-    if (regexPattern) {
-      return regexPattern.test(lowerText);
+    if (!existsSync(devstepsDir)) {
+      throw new Error('Project not initialized. Run devsteps-init first.');
     }
-    if (tokens.length > 1) {
-      // Multi-word: all tokens must match (AND logic)
-      return tokens.every(token => lowerText.includes(token));
-    }
-    return lowerText.includes(query);
-  };
 
-  // Read config to get available item types
-  const configPath = join(devstepsDir, 'config.json');
-  const indexPath = join(devstepsDir, 'index.json');
+    const query = args.query.toLowerCase();
 
-  const config = JSON.parse(readFileSync(configPath, 'utf-8'));
-  const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
+    // Convert wildcards (*) to regex pattern
+    const hasWildcard = query.includes('*');
+    const regexPattern = hasWildcard
+      ? new RegExp(query.replace(/\*/g, '.*'), 'i')
+      : null;
 
-  const results: any[] = [];
+    // Tokenize multi-word queries for OR matching
+    const tokens = query.split(/\s+/).filter(t => t.length > 0);    
+    
+    // Helper: Check if text matches query (substring, wildcard, or tokens)
+    const matches = (text: string): boolean => {
+      const lowerText = text.toLowerCase();
+      if (regexPattern) {
+        return regexPattern.test(lowerText);
+      }
+      if (tokens.length > 1) {
+        // Multi-word: all tokens must match (AND logic)
+        return tokens.every(token => lowerText.includes(token));
+      }
+      return lowerText.includes(query);
+    };    
+    
+    // Read config to get available item types
+    const configPath = join(devstepsDir, 'config.json');
+    const indexPath = join(devstepsDir, 'index.json');
 
-  // Determine folders to search
-  const folders = args.type
-    ? [TYPE_TO_DIRECTORY[args.type]]
-    : config.settings.item_types.map((t: ItemType) => TYPE_TO_DIRECTORY[t]);
+    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
-  for (const folder of folders) {
-    const folderPath = join(devstepsDir, folder);
-    if (!existsSync(folderPath)) continue;
+    const results: any[] = [];    
+    
+    // Determine folders to search
+    const folders = args.type
+      ? [TYPE_TO_DIRECTORY[args.type]]
+      : config.settings.item_types.map((t: ItemType) => TYPE_TO_DIRECTORY[t]);
 
-    const files = readdirSync(folderPath).filter((f) => f.endsWith('.json'));
+    for (const folder of folders) {
+      const folderPath = join(devstepsDir, folder);
+      if (!existsSync(folderPath)) continue;
 
-    for (const file of files) {
+      const files = readdirSync(folderPath).filter((f) => f.endsWith('.json'));
+
+      for (const file of files) {
       const metadataPath = join(folderPath, file);
       const descriptionPath = metadataPath.replace('.json', '.md');
 
@@ -98,4 +99,10 @@ export default async function searchHandler(args: {
     count: results.length,
     results,
   };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : String(error),
+    };
+  }
 }
