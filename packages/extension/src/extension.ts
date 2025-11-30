@@ -67,24 +67,64 @@ export async function activate(context: vscode.ExtensionContext) {
   }
 
   // Watch for .devsteps directory creation BEFORE early return
-  // This ensures MCP init triggers automatic reload even when project doesn't exist yet
+  // This ensures MCP init triggers smooth activation even when project doesn't exist yet
   const devstepsWatcher = vscode.workspace.createFileSystemWatcher(
     new vscode.RelativePattern(workspaceRoot, '.devsteps')
   );
   
   devstepsWatcher.onDidCreate(async () => {
-    logger.info('.devsteps directory created - reloading extension');
+    logger.info('.devsteps directory created - initializing TreeView');
+    
+    // Update context keys to hide Welcome View and show TreeView
     await vscode.commands.executeCommand('setContext', 'devsteps.showWelcome', false);
     await vscode.commands.executeCommand('setContext', 'devsteps.hasProject', true);
     await vscode.commands.executeCommand('setContext', 'devsteps.initialized', true);
     
-    // Show notification WITHOUT awaiting user choice - automatic reload
-    vscode.window.showInformationMessage(
-      'DevSteps project initialized! Reloading window...'
+    // Create and initialize TreeDataProvider
+    const stateManager = new TreeViewStateManager(context.workspaceState);
+    const treeDataProvider = new DevStepsTreeDataProvider(workspaceRoot, stateManager);
+    await treeDataProvider.initialize();
+    
+    // Create TreeView
+    const treeView = vscode.window.createTreeView('devsteps.itemsView', {
+      treeDataProvider,
+      showCollapseAll: true,
+    });
+    context.subscriptions.push(treeView);
+    
+    // Register FileDecorationProvider
+    const decorationProvider = new DevStepsDecorationProvider();
+    context.subscriptions.push(
+      vscode.window.registerFileDecorationProvider(decorationProvider)
     );
     
-    // Immediate reload - no user interaction needed
-    await vscode.commands.executeCommand('workbench.action.reloadWindow');
+    // Connect providers
+    treeDataProvider.setDecorationProvider(decorationProvider);
+    treeDataProvider.setTreeView(treeView);
+    
+    // Register FileSystemWatcher for TreeView refresh
+    const itemsWatcher = vscode.workspace.createFileSystemWatcher(
+      new vscode.RelativePattern(workspaceRoot, '.devsteps/**/*.json')
+    );
+    itemsWatcher.onDidCreate(() => treeDataProvider.refresh());
+    itemsWatcher.onDidChange(() => treeDataProvider.refresh());
+    itemsWatcher.onDidDelete(() => treeDataProvider.refresh());
+    context.subscriptions.push(itemsWatcher);
+    
+    // Register commands with TreeDataProvider
+    registerCommands(context, treeDataProvider);
+    
+    // Sync context keys
+    const actualViewMode = treeDataProvider.getViewMode();
+    const actualHierarchy = treeDataProvider.getHierarchyType();
+    const actualHideDone = treeDataProvider.getHideDoneState();
+    await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', actualViewMode);
+    await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', actualHierarchy);
+    await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', actualHideDone);
+    
+    // Show success notification
+    vscode.window.showInformationMessage('✅ DevSteps project initialized!');
+    logger.info('DevSteps project initialized successfully');
   });
   
   context.subscriptions.push(devstepsWatcher);
