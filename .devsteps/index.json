@@ -4,7 +4,7 @@
     "epic": 12,
     "story": 46,
     "task": 96,
-    "bug": 26,
+    "bug": 27,
     "spike": 6,
     "feature": 5,
     "requirement": 2
@@ -1586,22 +1586,30 @@
       "status": "draft",
       "priority": "high",
       "updated": "2025-11-30T20:01:20.125Z"
+    },
+    {
+      "id": "BUG-027",
+      "type": "bug",
+      "title": "Fix FileSystemWatcher - Must exist before early return",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-11-30T20:04:29.431Z"
     }
   ],
   "stats": {
-    "total": 191,
+    "total": 192,
     "by_type": {
       "epic": 12,
       "story": 46,
       "task": 96,
-      "bug": 26,
+      "bug": 27,
       "spike": 6,
       "feature": 5,
       "requirement": 2
     },
     "by_status": {
       "in-progress": 3,
-      "done": 99,
+      "done": 100,
       "draft": 85,
       "blocked": 1,
       "obsolete": 3
@@ -1624,5 +1632,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T20:01:20.125Z"
+  "last_updated": "2025-11-30T20:04:29.431Z"
 }

@@ -66,6 +66,29 @@ export async function activate(context: vscode.ExtensionContext) {
     logger.error('Failed to initialize MCP Server', error);
   }
 
+  // Watch for .devsteps directory creation BEFORE early return
+  // This ensures MCP init triggers automatic reload even when project doesn't exist yet
+  const devstepsWatcher = vscode.workspace.createFileSystemWatcher(
+    new vscode.RelativePattern(workspaceRoot, '.devsteps')
+  );
+  
+  devstepsWatcher.onDidCreate(async () => {
+    logger.info('.devsteps directory created - reloading extension');
+    await vscode.commands.executeCommand('setContext', 'devsteps.showWelcome', false);
+    await vscode.commands.executeCommand('setContext', 'devsteps.hasProject', true);
+    await vscode.commands.executeCommand('setContext', 'devsteps.initialized', true);
+    
+    // Show notification WITHOUT awaiting user choice - automatic reload
+    vscode.window.showInformationMessage(
+      'DevSteps project initialized! Reloading window...'
+    );
+    
+    // Immediate reload - no user interaction needed
+    await vscode.commands.executeCommand('workbench.action.reloadWindow');
+  });
+  
+  context.subscriptions.push(devstepsWatcher);
+
   if (!hasDevSteps) {
     logger.info('No .devsteps directory found - showing welcome view');
     // Still register commands so "Initialize Project" button works
@@ -109,28 +132,6 @@ export async function activate(context: vscode.ExtensionContext) {
   watcher.onDidDelete(() => treeDataProvider.refresh());
   
   context.subscriptions.push(watcher);
-  
-  // Watch for .devsteps directory creation (for "Initialize Project" command)
-  const devstepsWatcher = vscode.workspace.createFileSystemWatcher(
-    new vscode.RelativePattern(workspaceRoot, '.devsteps')
-  );
-  
-  devstepsWatcher.onDidCreate(async () => {
-    logger.info('.devsteps directory created - reloading extension');
-    await vscode.commands.executeCommand('setContext', 'devsteps.showWelcome', false);
-    await vscode.commands.executeCommand('setContext', 'devsteps.hasProject', true);
-    await vscode.commands.executeCommand('setContext', 'devsteps.initialized', true);
-    
-    // Show notification WITHOUT awaiting user choice - automatic reload
-    vscode.window.showInformationMessage(
-      'DevSteps project initialized! Reloading window...'
-    );
-    
-    // Immediate reload - no user interaction needed
-    await vscode.commands.executeCommand('workbench.action.reloadWindow');
-  });
-  
-  context.subscriptions.push(devstepsWatcher)
 
   // Always register commands to avoid "command not found" errors
   registerCommands(context, treeDataProvider);
