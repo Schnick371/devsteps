@@ -73,6 +73,7 @@ export class McpServerManager {
         // Provide MCP server definitions
         provideMcpServerDefinitions: async () => {
           const workspacePath = workspaceFolders?.[0]?.uri;
+          const workspaceDir = workspacePath?.fsPath;
           
           // Create server definition using NPX
           // NPX auto-downloads to user cache (~/.npm/_npx/) - NO SUDO REQUIRED!
@@ -80,14 +81,14 @@ export class McpServerManager {
             'devsteps',                                      // label
             'npx',                                          // command: npx (not node!)
             ['-y', '--package=@schnick371/devsteps-mcp-server', 'devsteps-mcp'],  // args: package + bin name
-            workspacePath ? {                               // options
-              cwd: workspacePath                           // Set cwd in options object
+            workspaceDir ? {                                // options
+              cwd: workspaceDir                            // Set cwd to fsPath (string, not URI!)
             } : {},
             '1.0.0'                                        // version
           );
           
-          if (workspacePath) {
-            logger.info(`📂 MCP server configured with cwd: ${workspacePath.fsPath}`);
+          if (workspaceDir) {
+            logger.info(`📂 MCP server configured with cwd: ${workspaceDir}`);
           } else {
             logger.warn('⚠️  No workspace folder found - MCP server may not find project');
           }
