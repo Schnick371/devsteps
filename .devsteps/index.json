@@ -1567,9 +1567,9 @@
       "id": "TASK-095",
       "type": "task",
       "title": "Welcome Screen: Add Claude Sonnet 4+ recommendation",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-30T19:56:50.340Z"
+      "updated": "2025-11-30T19:58:26.125Z"
     },
     {
       "id": "STORY-046",
@@ -1593,8 +1593,8 @@
     },
     "by_status": {
       "in-progress": 3,
-      "done": 98,
-      "draft": 85,
+      "done": 99,
+      "draft": 84,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1616,5 +1616,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T19:56:50.340Z"
+  "last_updated": "2025-11-30T19:58:26.125Z"
 }
