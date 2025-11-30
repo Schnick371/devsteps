@@ -79,7 +79,7 @@ export class McpServerManager {
           const serverDef = new (vscode as any).McpStdioServerDefinition(
             'devsteps',                                      // label
             'npx',                                          // command: npx (not node!)
-            ['-y', 'devsteps-mcp'],                        // args: -y flag + bin name (not package name!)
+            ['-y', '--package=@schnick371/devsteps-mcp-server', 'devsteps-mcp'],  // args: package + bin name
             workspacePath ? {                               // options
               cwd: workspacePath                           // Set cwd in options object
             } : {},
