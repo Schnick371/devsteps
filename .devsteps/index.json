@@ -1415,9 +1415,9 @@
       "id": "TASK-087",
       "type": "task",
       "title": "Publish extension to VS Code Marketplace",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-11-28T10:27:39.028Z"
+      "updated": "2025-11-30T20:25:56.270Z"
     },
     {
       "id": "TASK-088",
@@ -1609,8 +1609,8 @@
     },
     "by_status": {
       "in-progress": 3,
-      "done": 100,
-      "draft": 85,
+      "done": 101,
+      "draft": 84,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1632,5 +1632,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T20:04:29.431Z"
+  "last_updated": "2025-11-30T20:25:56.270Z"
 }
