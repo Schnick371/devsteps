@@ -77,12 +77,13 @@ export class McpServerManager {
           
           // Create server definition using NPX
           // NPX auto-downloads to user cache (~/.npm/_npx/) - NO SUDO REQUIRED!
+          // The 'cwd' option sets process.cwd() for the spawned MCP server
           const serverDef = new (vscode as any).McpStdioServerDefinition(
             'devsteps',                                      // label
             'npx',                                          // command: npx (not node!)
-            ['-y', '--package=@schnick371/devsteps-mcp-server', 'devsteps-mcp', workspaceDir || '.'],  // args: package + bin + workspace path
+            ['-y', '--package=@schnick371/devsteps-mcp-server', 'devsteps-mcp'],  // args: package + bin
             workspaceDir ? {                                // options
-              cwd: workspaceDir                            // Set cwd to fsPath (string, not URI!)
+              cwd: workspaceDir                            // Sets process.cwd() for MCP server
             } : {},
             '1.0.0'                                        // version
           );

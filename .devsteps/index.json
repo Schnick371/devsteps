@@ -1433,7 +1433,7 @@
       "title": "Extension Deployment - MCP Server Missing Dependencies",
       "status": "done",
       "priority": "critical",
-      "updated": "2025-11-30T11:39:12.076Z"
+      "updated": "2025-11-30T17:31:23.907Z"
     },
     {
       "id": "TASK-089",
@@ -1520,5 +1520,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T11:39:12.076Z"
+  "last_updated": "2025-11-30T17:31:23.907Z"
 }
