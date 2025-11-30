@@ -3,11 +3,11 @@
   "type": "bug",
   "category": "general",
   "title": "Extension Deployment - MCP Server Missing Dependencies",
-  "status": "draft",
+  "status": "done",
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-30T11:24:18.704Z",
-  "updated": "2025-11-30T11:25:41.606Z",
+  "updated": "2025-11-30T11:39:12.076Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

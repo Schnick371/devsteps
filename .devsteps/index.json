@@ -1431,9 +1431,9 @@
       "id": "BUG-025",
       "type": "bug",
       "title": "Extension Deployment - MCP Server Missing Dependencies",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-11-30T11:24:18.704Z"
+      "updated": "2025-11-30T11:39:12.076Z"
     },
     {
       "id": "TASK-089",
@@ -1497,8 +1497,8 @@
     },
     "by_status": {
       "in-progress": 3,
-      "done": 96,
-      "draft": 75,
+      "done": 97,
+      "draft": 74,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1520,5 +1520,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T11:38:48.182Z"
+  "last_updated": "2025-11-30T11:39:12.076Z"
 }
