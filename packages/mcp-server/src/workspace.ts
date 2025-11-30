@@ -8,9 +8,11 @@
 /**
  * Get the workspace root directory
  * 
- * Returns process.cwd() which is set by VS Code when spawning the MCP server.
- * The 'cwd' option in McpStdioServerDefinition ensures correct working directory.
+ * First checks CLI argument (process.argv[2]) as this is the standard MCP pattern.
+ * Falls back to process.cwd() if no argument provided.
  */
 export function getWorkspacePath(): string {
-  return process.cwd();
+  // CLI argument takes precedence (Standard MCP pattern)
+  const workspaceArg = process.argv[2];
+  return workspaceArg || process.cwd();
 }
