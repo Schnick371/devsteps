@@ -2,11 +2,11 @@
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
  * 
- * MCP Server Manager - NPM Installation Architecture
+ * MCP Server Manager - NPX Zero-Configuration Architecture
  * 
  * **Requires VS Code 1.99.0+** (March 2025)
  * - Uses registerMcpServerDefinitionProvider API
- * - NPM-based: Packages auto-installed from npm registry on activation
+ * - NPX-based: Auto-downloads from npm registry (no sudo required!)
  * - One MCP server process per VS Code instance
  * - Automatic workspace detection via VS Code roots
  * - No environment variables needed - VS Code provides workspace context
@@ -18,8 +18,8 @@ import { logger } from './outputChannel.js';
 
 /**
  * Manages the DevSteps MCP server lifecycle
- * Uses npm-installed packages for proper multi-workspace support
- * Packages auto-installed by PackageInstaller during extension activation
+ * Uses npx for zero-configuration execution (no installation required!)
+ * npx auto-downloads to user cache (~/.npm/_npx/) - no sudo needed
  */
 export class McpServerManager {
   private statusBarItem: vscode.StatusBarItem;
@@ -40,9 +40,9 @@ export class McpServerManager {
   }
 
   /**
-   * Start the MCP server using npm-installed packages
+   * Start the MCP server using npx (zero-configuration!)
    * VS Code automatically provides workspace roots - no environment variables needed!
-   * Assumes PackageInstaller has already installed packages during activation
+   * npx downloads package to user cache on first run - no sudo required
    */
   async start(): Promise<void> {
     try {
@@ -63,19 +63,9 @@ export class McpServerManager {
         logger.warn('No workspace folder detected - MCP server may not function correctly');
       }
 
-      // Find the MCP server executable
-      const mcpServerPath = this.findMcpServerPath();
-      if (!mcpServerPath) {
-        logger.error('MCP server executable not found');
-        vscode.window.showWarningMessage(
-          'DevSteps MCP server not found. Please ensure the extension is built correctly.',
-        );
-        return;
-      }
+      logger.info('🚀 Starting MCP server via npx (zero-configuration)');
 
-      logger.info(`✅ Found MCP server at: ${mcpServerPath}`);
-
-      // Register MCP server with VS Code using extension-bundled architecture
+      // Register MCP server with VS Code using NPX architecture
       this.provider = (vscode as any).lm.registerMcpServerDefinitionProvider('devsteps-mcp', {
         // Event fired when server definitions change
         onDidChangeMcpServerDefinitions: this.changeEmitter.event,
@@ -84,16 +74,16 @@ export class McpServerManager {
         provideMcpServerDefinitions: async () => {
           const workspacePath = workspaceFolders?.[0]?.uri;
           
-          // Create server definition with cwd option
-          // IMPORTANT: cwd must be set in constructor options, not as property
+          // Create server definition using NPX
+          // NPX auto-downloads to user cache (~/.npm/_npx/) - NO SUDO REQUIRED!
           const serverDef = new (vscode as any).McpStdioServerDefinition(
-            'devsteps',                    // label
-            'node',                        // command
-            [mcpServerPath],              // args
-            workspacePath ? {             // options (CORRECT WAY!)
-              cwd: workspacePath          // Set cwd in options object
+            'devsteps',                                      // label
+            'npx',                                          // command: npx (not node!)
+            ['@schnick371/devsteps-mcp-server'],           // args: package name
+            workspacePath ? {                               // options
+              cwd: workspacePath                           // Set cwd in options object
             } : {},
-            '1.0.0'                       // version
+            '1.0.0'                                        // version
           );
           
           if (workspacePath) {
@@ -129,11 +119,12 @@ export class McpServerManager {
 
       // Update status bar
       this.statusBarItem.text = '$(check) DevSteps MCP';
-      this.statusBarItem.tooltip = 'DevSteps MCP Server registered (npm-installed)';
+      this.statusBarItem.tooltip = 'DevSteps MCP Server registered (npx zero-config)';
       this.statusBarItem.show();
 
       logger.info('✅ DevSteps MCP Server registered successfully');
-      logger.info('   Architecture: NPM-installed (one server per VS Code instance)');
+      logger.info('   Architecture: NPX zero-configuration (one server per VS Code instance)');
+      logger.info('   Installation: Auto-download to user cache - no sudo required');
       logger.info('   Workspace detection: Automatic via VS Code roots protocol');
     } catch (error) {
       logger.error('Failed to register MCP server', error);
@@ -141,52 +132,7 @@ export class McpServerManager {
     }
   }
 
-  /**
-   * Find the MCP server executable path
-   * Priority: 1) Global npm installation, 2) Workspace packages/mcp-server (development)
-   * Bundled distribution removed - using npm packages instead
-   */
-  private findMcpServerPath(): string | null {
-    const fs = require('node:fs');
-    
-    // 1. Check global npm installation (production)
-    try {
-      const { execSync } = require('node:child_process');
-      const npmRoot = execSync('npm root -g', { encoding: 'utf-8' }).trim();
-      const globalPath = path.join(npmRoot, '@schnick371', 'devsteps-mcp-server', 'dist', 'index.js');
 
-      if (fs.existsSync(globalPath)) {
-        logger.info(`Found MCP server globally: ${globalPath}`);
-        return globalPath;
-      }
-    } catch (error) {
-      logger.warn('Failed to check global npm installation', error);
-    }
-    
-    // 2. Check workspace packages/mcp-server (monorepo development)
-    const workspaceFolders = vscode.workspace.workspaceFolders;
-    if (workspaceFolders && workspaceFolders.length > 0) {
-      const workspaceRoot = workspaceFolders[0].uri.fsPath;
-      const localPath = path.join(
-        workspaceRoot,
-        'packages',
-        'mcp-server',
-        'dist',
-        'index.js',
-      );
-
-      if (fs.existsSync(localPath)) {
-        logger.info(`Found MCP server in workspace: ${localPath}`);
-        return localPath;
-      }
-    }
-
-    logger.error('MCP server not found in any location');
-    logger.error('Expected locations:');
-    logger.error('1. Global npm: npm root -g → @schnick371/devsteps-mcp-server/dist/index.js');
-    logger.error('2. Workspace: packages/mcp-server/dist/index.js');
-    return null;
-  }
 
   /**
    * Show fallback instructions for manual configuration
@@ -195,7 +141,7 @@ export class McpServerManager {
     logger.warn('VS Code MCP API not available - showing fallback configuration');
     
     const message =
-      'DevSteps MCP Server requires VS Code 1.99+ for automatic setup. ' +
+      'DevSteps MCP Server requires VS Code 1.99+ for automatic setup via npx. ' +
       'You can configure it manually or upgrade VS Code.';
 
     vscode.window.showInformationMessage(message, 'Open Documentation', 'Copy Config').then((selection) => {

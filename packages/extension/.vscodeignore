@@ -26,6 +26,7 @@ node_modules/
 !../../packages/vscode-extension/**
 ../shared/**
 ../cli/**
+../mcp-server/**
 
-# MCP server - installed from npm, not bundled
-dist/mcp-server/
+# MCP server - NPX downloads from npm registry (zero-configuration)
+# No bundling needed!

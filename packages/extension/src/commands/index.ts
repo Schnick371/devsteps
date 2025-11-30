@@ -84,15 +84,9 @@ export function registerCommands(
         const terminal = vscode.window.createTerminal('DevSteps Init');
         terminal.show();
         
-        // Try to detect CLI: global install or workspace
-        terminal.sendText('if command -v devsteps&> /dev/null; then');
-        terminal.sendText(`  devstepsinit ${projectName} --methodology ${methodology.value}`);
-        terminal.sendText('else');
-        terminal.sendText('  echo "📦 DevSteps CLI not found. Installing globally..."');
-        terminal.sendText('  npm install -g @schnick371/devsteps-cli');
-        terminal.sendText('  echo "✅ Installation complete. Running init..."');
-        terminal.sendText(`  devstepsinit ${projectName} --methodology ${methodology.value}`);
-        terminal.sendText('fi');
+        // Use npx for zero-configuration CLI execution (no installation needed!)
+        terminal.sendText('echo "🚀 Running DevSteps CLI via npx (zero-configuration)..."');
+        terminal.sendText(`npx @schnick371/devsteps-cli init ${projectName} --methodology ${methodology.value}`);
       }
     }),
   );
