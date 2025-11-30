@@ -3,11 +3,11 @@
   "type": "task",
   "category": "general",
   "title": "Update mcpServerManager to Use npm Global Installation",
-  "status": "draft",
+  "status": "done",
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-30T11:24:45.852Z",
-  "updated": "2025-11-30T11:25:41.126Z",
+  "updated": "2025-11-30T11:37:20.554Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

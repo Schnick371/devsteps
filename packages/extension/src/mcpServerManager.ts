@@ -2,11 +2,12 @@
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
  * 
- * MCP Server Manager - Extension-Bundled Architecture
+ * MCP Server Manager - NPM Installation Architecture
  * 
  * **Requires VS Code 1.99.0+** (March 2025)
  * - Uses registerMcpServerDefinitionProvider API
- * - Extension-bundled: One MCP server process per VS Code instance
+ * - NPM-based: Packages auto-installed from npm registry on activation
+ * - One MCP server process per VS Code instance
  * - Automatic workspace detection via VS Code roots
  * - No environment variables needed - VS Code provides workspace context
  */
@@ -17,7 +18,8 @@ import { logger } from './outputChannel.js';
 
 /**
  * Manages the DevSteps MCP server lifecycle
- * Uses extension-bundled architecture for proper multi-workspace support
+ * Uses npm-installed packages for proper multi-workspace support
+ * Packages auto-installed by PackageInstaller during extension activation
  */
 export class McpServerManager {
   private statusBarItem: vscode.StatusBarItem;
@@ -38,8 +40,9 @@ export class McpServerManager {
   }
 
   /**
-   * Start the MCP server using VS Code's extension-bundled architecture
+   * Start the MCP server using npm-installed packages
    * VS Code automatically provides workspace roots - no environment variables needed!
+   * Assumes PackageInstaller has already installed packages during activation
    */
   async start(): Promise<void> {
     try {
@@ -126,11 +129,11 @@ export class McpServerManager {
 
       // Update status bar
       this.statusBarItem.text = '$(check) DevSteps MCP';
-      this.statusBarItem.tooltip = 'DevSteps MCP Server registered (extension-bundled)';
+      this.statusBarItem.tooltip = 'DevSteps MCP Server registered (npm-installed)';
       this.statusBarItem.show();
 
       logger.info('✅ DevSteps MCP Server registered successfully');
-      logger.info('   Architecture: Extension-bundled (one server per VS Code instance)');
+      logger.info('   Architecture: NPM-installed (one server per VS Code instance)');
       logger.info('   Workspace detection: Automatic via VS Code roots protocol');
     } catch (error) {
       logger.error('Failed to register MCP server', error);
@@ -140,25 +143,27 @@ export class McpServerManager {
 
   /**
    * Find the MCP server executable path
-   * Priority: 1) Bundled with extension, 2) Workspace packages/mcp-server, 3) Global npm installation
+   * Priority: 1) Global npm installation, 2) Workspace packages/mcp-server (development)
+   * Bundled distribution removed - using npm packages instead
    */
   private findMcpServerPath(): string | null {
     const fs = require('node:fs');
     
-    // 1. Check bundled MCP server (for distributed extension)
-    const bundledPath = path.join(
-      this.context.extensionPath,
-      'dist',
-      'mcp-server',
-      'index.js',
-    );
-    
-    if (fs.existsSync(bundledPath)) {
-      logger.info(`Found bundled MCP server: ${bundledPath}`);
-      return bundledPath;
+    // 1. Check global npm installation (production)
+    try {
+      const { execSync } = require('node:child_process');
+      const npmRoot = execSync('npm root -g', { encoding: 'utf-8' }).trim();
+      const globalPath = path.join(npmRoot, '@schnick371', 'devsteps-mcp-server', 'dist', 'index.js');
+
+      if (fs.existsSync(globalPath)) {
+        logger.info(`Found MCP server globally: ${globalPath}`);
+        return globalPath;
+      }
+    } catch (error) {
+      logger.warn('Failed to check global npm installation', error);
     }
     
-    // 2. Check workspace packages/mcp-server (for monorepo development)
+    // 2. Check workspace packages/mcp-server (monorepo development)
     const workspaceFolders = vscode.workspace.workspaceFolders;
     if (workspaceFolders && workspaceFolders.length > 0) {
       const workspaceRoot = workspaceFolders[0].uri.fsPath;
@@ -176,21 +181,10 @@ export class McpServerManager {
       }
     }
 
-    // 3. Check global npm installation
-    try {
-      const { execSync } = require('node:child_process');
-      const npmRoot = execSync('npm root -g', { encoding: 'utf-8' }).trim();
-      const globalPath = path.join(npmRoot, '@schnick371', 'devsteps-mcp-server', 'dist', 'index.js');
-
-      if (fs.existsSync(globalPath)) {
-        logger.info(`Found MCP server globally: ${globalPath}`);
-        return globalPath;
-      }
-    } catch {
-      // Global installation not found
-    }
-
     logger.error('MCP server not found in any location');
+    logger.error('Expected locations:');
+    logger.error('1. Global npm: npm root -g → @schnick371/devsteps-mcp-server/dist/index.js');
+    logger.error('2. Workspace: packages/mcp-server/dist/index.js');
     return null;
   }
 
