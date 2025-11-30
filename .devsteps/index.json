@@ -3,7 +3,7 @@
   "counters": {
     "epic": 12,
     "story": 46,
-    "task": 95,
+    "task": 96,
     "bug": 26,
     "spike": 6,
     "feature": 5,
@@ -1578,14 +1578,22 @@
       "status": "draft",
       "priority": "high",
       "updated": "2025-11-30T19:56:50.340Z"
+    },
+    {
+      "id": "TASK-096",
+      "type": "task",
+      "title": "Enable GitHub Discussions for community feedback",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-11-30T20:01:20.125Z"
     }
   ],
   "stats": {
-    "total": 190,
+    "total": 191,
     "by_type": {
       "epic": 12,
       "story": 46,
-      "task": 95,
+      "task": 96,
       "bug": 26,
       "spike": 6,
       "feature": 5,
@@ -1594,7 +1602,7 @@
     "by_status": {
       "in-progress": 3,
       "done": 99,
-      "draft": 84,
+      "draft": 85,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1616,5 +1624,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T19:58:26.125Z"
+  "last_updated": "2025-11-30T20:01:20.125Z"
 }
