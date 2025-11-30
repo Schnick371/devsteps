@@ -2,12 +2,14 @@
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
  * 
- * Package Installer - Auto-download CLI and MCP packages from npm
+ * Package Installer - Auto-download shared, CLI and MCP packages from npm
  * 
  * Platform-aware installation:
  * - Windows: Installs to global npm (native Windows Node)
  * - WSL2: Installs to WSL2 global npm via wsl.exe
  * - Linux: Installs to global npm (native Linux Node)
+ * 
+ * Always installs @latest versions from npm registry
  */
 
 import * as vscode from 'vscode';
@@ -17,10 +19,11 @@ import * as util from 'node:util';
 const execAsync = util.promisify(child_process.exec);
 
 /**
- * Auto-installer for DevSteps CLI and MCP Server packages
+ * Auto-installer for DevSteps shared, CLI and MCP Server packages
  * 
  * Detects platform (Windows/WSL2/Linux) and installs packages globally
  * Updates VS Code MCP configuration automatically
+ * Always uses @latest versions from npm
  */
 export class PackageInstaller {
   private readonly isWSL: boolean;
@@ -71,13 +74,13 @@ export class PackageInstaller {
   }
 
   /**
-   * Check if CLI and MCP packages are installed globally
+   * Check if shared, CLI and MCP packages are installed globally
    */
   private async arePackagesInstalled(): Promise<boolean> {
     try {
       const command = this.isWSL
-        ? 'wsl.exe -e bash -c "npm list -g @schnick371/devsteps-cli @schnick371/devsteps-mcp-server"'
-        : 'npm list -g @schnick371/devsteps-cli @schnick371/devsteps-mcp-server';
+        ? 'wsl.exe -e bash -c "npm list -g @schnick371/devsteps-shared @schnick371/devsteps-cli @schnick371/devsteps-mcp-server"'
+        : 'npm list -g @schnick371/devsteps-shared @schnick371/devsteps-cli @schnick371/devsteps-mcp-server';
 
       await execAsync(command);
       return true;
@@ -90,9 +93,10 @@ export class PackageInstaller {
   /**
    * Install packages globally via npm
    * Platform-specific command execution
+   * Always uses @latest to get newest versions
    */
   private async installPackages(): Promise<void> {
-    const packages = '@schnick371/devsteps-cli @schnick371/devsteps-mcp-server';
+    const packages = '@schnick371/devsteps-shared@latest @schnick371/devsteps-cli@latest @schnick371/devsteps-mcp-server@latest';
     
     const command = this.isWSL
       ? `wsl.exe -e bash -c "npm install -g ${packages}"`

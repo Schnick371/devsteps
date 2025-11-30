@@ -3,11 +3,11 @@
   "type": "task",
   "category": "general",
   "title": "Update PackageInstaller to Include Shared Package",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-30T11:25:15.490Z",
-  "updated": "2025-11-30T11:25:41.487Z",
+  "updated": "2025-11-30T11:34:52.330Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

@@ -1471,9 +1471,9 @@
       "id": "TASK-093",
       "type": "task",
       "title": "Update PackageInstaller to Include Shared Package",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-30T11:25:15.490Z"
+      "updated": "2025-11-30T11:34:52.330Z"
     },
     {
       "id": "TASK-094",
@@ -1497,8 +1497,8 @@
     },
     "by_status": {
       "in-progress": 3,
-      "done": 91,
-      "draft": 80,
+      "done": 92,
+      "draft": 79,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1520,5 +1520,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T11:33:55.147Z"
+  "last_updated": "2025-11-30T11:34:52.330Z"
 }
