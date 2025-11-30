@@ -1,7 +1,7 @@
 ---
 description: 'Structured implementation specialist - executes work items from devsteps with systematic testing and validation'
 model: 'Claude Sonnet 4.5'
-tools: ['edit/createFile', 'edit/createDirectory', 'edit/editNotebook', 'edit/editFiles', 'search', 'runCommands', 'runTasks/runTask', 'runTasks/getTaskOutput', 'devsteps/add', 'devsteps/archive', 'devsteps/context', 'devsteps/export', 'devsteps/get', 'devsteps/health', 'devsteps/init', 'devsteps/link', 'devsteps/list', 'devsteps/metrics', 'devsteps/purge', 'devsteps/search', 'devsteps/status', 'devsteps/trace', 'devsteps/update', 'GitKraken/*', 'github/github-mcp-server/*', 'tavily/*', 'usages', 'problems', 'testFailure', 'fetch']
+tools: ['edit/createFile', 'edit/createDirectory', 'edit/editNotebook', 'edit/editFiles', 'search', 'runCommands', 'runTasks/runTask', 'runTasks/getTaskOutput', 'devsteps/*', 'GitKraken/*', 'github/github-mcp-server/*', 'tavily/*', 'usages', 'problems', 'testFailure', 'fetch']
 ---
 
 # 🔧 Planning, Implementation, and Testing Agent
