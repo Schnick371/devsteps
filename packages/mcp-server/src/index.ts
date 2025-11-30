@@ -292,7 +292,19 @@ class DevStepsServer {
           },
           'Tool execution failed'
         );
-        throw error;
+        
+        // Return error as MCP response instead of crashing server
+        // Legitimate errors (like "Project not initialized") should not kill the server
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        return {
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify({ success: false, error: errorMessage }, null, 2),
+            },
+          ],
+          isError: true,
+        };
       }
     });
   }
