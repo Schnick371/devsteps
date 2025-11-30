@@ -79,16 +79,30 @@ export class McpServerManager {
         
         // Provide MCP server definitions
         provideMcpServerDefinitions: async () => {
-          const definitions = [
-            new (vscode as any).McpStdioServerDefinition(
-              'devsteps',                    // label
-              'node',                        // command
-              [mcpServerPath],              // args
-            ),
-          ];
+          const workspacePath = workspaceFolders?.[0]?.uri;
+          
+          // Create server definition with cwd option
+          // IMPORTANT: cwd must be set in constructor options, not as property
+          const serverDef = new (vscode as any).McpStdioServerDefinition(
+            'devsteps',                    // label
+            'node',                        // command
+            [mcpServerPath],              // args
+            workspacePath ? {             // options (CORRECT WAY!)
+              cwd: workspacePath          // Set cwd in options object
+            } : {},
+            '1.0.0'                       // version
+          );
+          
+          if (workspacePath) {
+            logger.info(`📂 MCP server configured with cwd: ${workspacePath.fsPath}`);
+          } else {
+            logger.warn('⚠️  No workspace folder found - MCP server may not find project');
+          }
+          
+          const definitions = [serverDef];
           
           logger.info('🚀 MCP server definitions provided to VS Code');
-          logger.info('   VS Code will automatically set workspace roots for this server');
+          logger.info('   Server will start in workspace directory');
           
           return definitions;
         },
@@ -126,10 +140,25 @@ export class McpServerManager {
 
   /**
    * Find the MCP server executable path
-   * Priority: 1) Workspace packages/mcp-server, 2) Global installation
+   * Priority: 1) Bundled with extension, 2) Workspace packages/mcp-server, 3) Global npm installation
    */
   private findMcpServerPath(): string | null {
-    // Check workspace node_modules first (for monorepo development)
+    const fs = require('node:fs');
+    
+    // 1. Check bundled MCP server (for distributed extension)
+    const bundledPath = path.join(
+      this.context.extensionPath,
+      'dist',
+      'mcp-server',
+      'index.js',
+    );
+    
+    if (fs.existsSync(bundledPath)) {
+      logger.info(`Found bundled MCP server: ${bundledPath}`);
+      return bundledPath;
+    }
+    
+    // 2. Check workspace packages/mcp-server (for monorepo development)
     const workspaceFolders = vscode.workspace.workspaceFolders;
     if (workspaceFolders && workspaceFolders.length > 0) {
       const workspaceRoot = workspaceFolders[0].uri.fsPath;
@@ -141,24 +170,18 @@ export class McpServerManager {
         'index.js',
       );
 
-      try {
-        const fs = require('node:fs');
-        if (fs.existsSync(localPath)) {
-          logger.info(`Found MCP server in workspace: ${localPath}`);
-          return localPath;
-        }
-      } catch {
-        // Fall through to global check
+      if (fs.existsSync(localPath)) {
+        logger.info(`Found MCP server in workspace: ${localPath}`);
+        return localPath;
       }
     }
 
-    // Check global installation
+    // 3. Check global npm installation
     try {
       const { execSync } = require('node:child_process');
       const npmRoot = execSync('npm root -g', { encoding: 'utf-8' }).trim();
       const globalPath = path.join(npmRoot, '@schnick371', 'devsteps-mcp-server', 'dist', 'index.js');
 
-      const fs = require('node:fs');
       if (fs.existsSync(globalPath)) {
         logger.info(`Found MCP server globally: ${globalPath}`);
         return globalPath;
@@ -167,6 +190,7 @@ export class McpServerManager {
       // Global installation not found
     }
 
+    logger.error('MCP server not found in any location');
     return null;
   }
 

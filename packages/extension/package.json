@@ -556,16 +556,17 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run build",
-    "build": "node esbuild.mjs --production",
+    "build": "node esbuild.mjs --production && npm run copy-mcp-server",
     "dev": "node esbuild.mjs --watch",
+    "copy-mcp-server": "mkdir -p dist/mcp-server && cp -r ../mcp-server/dist/* dist/mcp-server/",
     "typecheck": "tsc --noEmit",
     "lint": "biome check .",
     "format": "biome format --write .",
-    "package": "vsce package",
+    "package": "npm run build && vsce package --no-dependencies",
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@schnick371/devsteps-shared": "file:../shared",
+    "@schnick371/devsteps-shared": "^0.5.1",
     "chart.js": "^4.5.1",
     "d3": "^7.9.0"
   },

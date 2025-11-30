@@ -26,4 +26,5 @@ node_modules/
 !../../packages/vscode-extension/**
 ../shared/**
 ../cli/**
-../mcp-server/**
+# NOTE: mcp-server is manually copied to dist/mcp-server during build
+# See package.json "package" script

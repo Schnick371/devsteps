@@ -1463,9 +1463,9 @@
       "id": "TASK-092",
       "type": "task",
       "title": "Publish Shared Package to npm",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-11-30T11:25:05.798Z"
+      "updated": "2025-11-30T11:33:55.147Z"
     },
     {
       "id": "TASK-093",
@@ -1497,8 +1497,8 @@
     },
     "by_status": {
       "in-progress": 3,
-      "done": 90,
-      "draft": 81,
+      "done": 91,
+      "draft": 80,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1520,5 +1520,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T11:25:27.866Z"
+  "last_updated": "2025-11-30T11:33:55.147Z"
 }
