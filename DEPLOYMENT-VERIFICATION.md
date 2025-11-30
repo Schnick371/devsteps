@@ -34,10 +34,16 @@ Priority order:
 
 ## Published Packages ✅
 
-### @schnick371/devsteps-shared v0.5.1
-- ✅ Published to npm registry (2025-11-30)
-- ✅ Contains core types, schemas, utilities
-- ✅ Used by CLI, MCP server, and extension
+### All packages synchronized at v0.5.1
+- ✅ **@schnick371/devsteps-shared@0.5.1** - Core types, schemas, utilities (published 2025-11-30)
+- ✅ **@schnick371/devsteps-cli@0.5.1** - Command-line interface (published 2025-11-30)
+- ✅ **@schnick371/devsteps-mcp-server@0.5.1** - MCP protocol server (published 2025-11-30)
+
+All packages contain changes since last 0.5.0 publication (Nov 25):
+- Dependency updates (Ora 9, Chalk 5, Express 5)
+- Shared package integration
+- DevCrumbs → DevSteps rebranding
+- Workspace detection improvements
 
 ### Installation Flow
 1. Extension activates
