@@ -1,4 +1,5 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
 import type { ItemType } from '@schnick371/devsteps-shared';
 import { TYPE_TO_DIRECTORY } from '@schnick371/devsteps-shared';
@@ -11,7 +12,7 @@ export default async function searchHandler(args: {
   type?: ItemType;
   limit?: number;
 }) {
-  const devstepsDir = join(process.cwd(), '.devsteps');
+  const devstepsDir = join(getWorkspacePath(), '.devsteps');
 
   if (!existsSync(devstepsDir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');

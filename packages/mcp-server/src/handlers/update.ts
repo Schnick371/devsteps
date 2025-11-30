@@ -1,4 +1,5 @@
 import { join } from 'node:path';
+import { getWorkspacePath } from '../workspace.js';
 import { type UpdateItemArgs, updateItem } from '@schnick371/devsteps-shared';
 import simpleGit from 'simple-git';
 
@@ -11,13 +12,13 @@ export default async function updateHandler(args: UpdateItemArgs) {
     throw new Error('Cannot specify both description and append_description simultaneously');
   }
   
-  const devstepsDir = join(process.cwd(), '.devsteps');
+  const devstepsDir = join(getWorkspacePath(), '.devsteps');
   const result = await updateItem(devstepsDir, args);
 
   // Git hints (MCP-specific presentation)
   let gitHint = '';
   try {
-    const git = simpleGit(process.cwd());
+    const git = simpleGit(getWorkspacePath());
     const isRepo = await git.checkIsRepo();
 
     if (isRepo && args.status === 'done') {

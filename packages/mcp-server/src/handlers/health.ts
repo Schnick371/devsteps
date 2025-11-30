@@ -1,4 +1,5 @@
 /**
+import { getWorkspacePath } from '../workspace.js';
  * Health Check Handler
  *
  * Returns comprehensive server health status including:

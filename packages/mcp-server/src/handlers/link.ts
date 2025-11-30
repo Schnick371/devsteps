@@ -1,4 +1,5 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
 import {
   type Methodology,
@@ -17,7 +18,7 @@ export default async function linkHandler(args: {
   relation_type: RelationType;
   target_id: string;
 }) {
-  const devstepsDir = join(process.cwd(), '.devsteps');
+  const devstepsDir = join(getWorkspacePath(), '.devsteps');
 
   if (!existsSync(devstepsDir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');

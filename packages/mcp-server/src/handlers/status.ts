@@ -1,11 +1,12 @@
 import { existsSync, readFileSync } from 'node:fs';
+import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
 
 /**
  * Get project status and statistics
  */
 export default async function statusHandler(args: { detailed?: boolean }) {
-  const devstepsDir = join(process.cwd(), '.devsteps');
+  const devstepsDir = join(getWorkspacePath(), '.devsteps');
 
   if (!existsSync(devstepsDir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');

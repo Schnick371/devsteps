@@ -82,7 +82,11 @@ export class McpServerManager {
             'npx',                                          // command: npx (not node!)
             ['-y', '--package=@schnick371/devsteps-mcp-server', 'devsteps-mcp'],  // args: package + bin name
             workspaceDir ? {                                // options
-              cwd: workspaceDir                            // Set cwd to fsPath (string, not URI!)
+              cwd: workspaceDir,                           // Set cwd to fsPath (string, not URI!)
+              env: {                                       // Environment variables
+                ...process.env,                            // Preserve existing env
+                DEVSTEPS_WORKSPACE: workspaceDir           // Pass workspace path
+              }
             } : {},
             '1.0.0'                                        // version
           );

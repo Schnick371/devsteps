@@ -1,4 +1,5 @@
 import { join } from 'node:path';
+import { getWorkspacePath } from '../workspace.js';
 import { type AddItemArgs, addItem } from '@schnick371/devsteps-shared';
 import simpleGit from 'simple-git';
 
@@ -6,7 +7,7 @@ import simpleGit from 'simple-git';
  * Add a new item to devsteps (MCP wrapper)
  */
 export default async function addHandler(args: AddItemArgs) {
-  const devstepsDir = join(process.cwd(), '.devsteps');
+  const devstepsDir = join(getWorkspacePath(), '.devsteps');
 
   // Use shared core logic
   const result = await addItem(devstepsDir, args);
@@ -15,7 +16,7 @@ export default async function addHandler(args: AddItemArgs) {
   let gitHint = '';
   if (result.config.settings.git_integration) {
     try {
-      const projectRoot = process.cwd();
+      const projectRoot = getWorkspacePath();
       const git = simpleGit(projectRoot);
 
       if (await git.checkIsRepo()) {

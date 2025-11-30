@@ -1,4 +1,5 @@
 import { getMetrics, getMetricsJSON } from '../metrics.js';
+import { getWorkspacePath } from '../workspace.js';
 
 /**
  * Prometheus Metrics Handler

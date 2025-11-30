@@ -1,4 +1,5 @@
 import path from 'node:path';
+import { getWorkspacePath } from '../workspace.js';
 import { getQuickContext } from '@schnick371/devsteps-shared';
 import type { ContextLevel } from '@schnick371/devsteps-shared';
 
@@ -13,7 +14,7 @@ export async function contextHandler(
   args: ContextArgs = {}
 ): Promise<{ success: boolean; context?: unknown; message?: string; error?: string }> {
   const level = args.level || 'quick';
-  const cwd = process.cwd();
+  const cwd = getWorkspacePath();
   const devstepsDir = path.join(cwd, '.devsteps');
 
   try {

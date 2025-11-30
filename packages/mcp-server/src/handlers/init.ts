@@ -1,4 +1,5 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { getWorkspacePath } from '../workspace.js';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -22,7 +23,7 @@ export default async function initHandler(args: {
   git_integration?: boolean;
   methodology?: Methodology;
 }) {
-  const projectPath = args.path || process.cwd();
+  const projectPath = args.path || getWorkspacePath();
   const devstepsDir = join(projectPath, '.devsteps');
   const methodology = args.methodology || 'scrum';
 

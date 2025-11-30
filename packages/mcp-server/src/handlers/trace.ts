@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
+import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
 import { TYPE_TO_DIRECTORY, parseItemId } from '@schnick371/devsteps-shared';
 
@@ -15,7 +16,7 @@ interface TraceNode {
 }
 
 export default async function traceHandler(args: { id: string; depth?: number }) {
-  const devstepsDir = join(process.cwd(), '.devsteps');
+  const devstepsDir = join(getWorkspacePath(), '.devsteps');
   const maxDepth = args.depth || 3;
 
   if (!existsSync(devstepsDir)) {
