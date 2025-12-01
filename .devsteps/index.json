@@ -1647,9 +1647,9 @@
       "id": "STORY-048",
       "type": "story",
       "title": "Extension UX Polish - Non-Intrusive User Experience",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-01T10:53:08.828Z"
+      "updated": "2025-12-01T11:01:35.437Z"
     }
   ],
   "stats": {
@@ -1665,8 +1665,8 @@
     },
     "by_status": {
       "in-progress": 4,
-      "done": 102,
-      "draft": 89,
+      "done": 103,
+      "draft": 88,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1688,5 +1688,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-01T11:01:07.874Z"
+  "last_updated": "2025-12-01T11:01:35.437Z"
 }
