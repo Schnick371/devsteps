@@ -3,7 +3,7 @@
   "counters": {
     "epic": 12,
     "story": 47,
-    "task": 100,
+    "task": 101,
     "bug": 27,
     "spike": 6,
     "feature": 5,
@@ -1634,14 +1634,22 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-01T10:27:02.550Z"
+    },
+    {
+      "id": "TASK-101",
+      "type": "task",
+      "title": "Remove unnecessary notification popups - UX improvement",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-01T10:50:29.508Z"
     }
   ],
   "stats": {
-    "total": 197,
+    "total": 198,
     "by_type": {
       "epic": 12,
       "story": 47,
-      "task": 100,
+      "task": 101,
       "bug": 27,
       "spike": 6,
       "feature": 5,
@@ -1650,7 +1658,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 101,
-      "draft": 88,
+      "draft": 89,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1672,5 +1680,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-01T10:48:00.567Z"
+  "last_updated": "2025-12-01T10:50:29.508Z"
 }

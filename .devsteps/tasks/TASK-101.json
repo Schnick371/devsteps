@@ -1,0 +1,38 @@
+{
+  "id": "TASK-101",
+  "type": "task",
+  "category": "Extension",
+  "title": "Remove unnecessary notification popups - UX improvement",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-01T10:50:29.508Z",
+  "updated": "2025-12-01T10:50:29.508Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/extension.ts",
+    "packages/extension/src/commands/index.ts",
+    "packages/extension/src/mcpServerManager.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ux",
+    "notifications",
+    "cleanup",
+    "polish"
+  ],
+  "commits": [],
+  "metadata": {}
+}
