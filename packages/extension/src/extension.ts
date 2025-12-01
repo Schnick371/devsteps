@@ -122,8 +122,6 @@ export async function activate(context: vscode.ExtensionContext) {
     await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', actualHierarchy);
     await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', actualHideDone);
     
-    // Show success notification
-    vscode.window.showInformationMessage('✅ DevSteps project initialized!');
     logger.info('DevSteps project initialized successfully');
   });
   
@@ -194,8 +192,6 @@ export async function activate(context: vscode.ExtensionContext) {
     })
   );
 
-  // Show welcome message
-  vscode.window.showInformationMessage('DevSteps extension activated');
   logger.info('DevSteps extension activated successfully');
 }
 

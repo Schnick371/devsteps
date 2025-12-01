@@ -165,7 +165,7 @@ export class McpServerManager {
           },
         };
         vscode.env.clipboard.writeText(JSON.stringify(config, null, 2));
-        vscode.window.showInformationMessage('MCP configuration copied to clipboard');
+        logger.info('MCP configuration copied to clipboard');
         logger.info('Manual MCP configuration copied to clipboard');
       }
     });

@@ -1639,9 +1639,9 @@
       "id": "TASK-101",
       "type": "task",
       "title": "Remove unnecessary notification popups - UX improvement",
-      "status": "draft",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-12-01T10:50:29.508Z"
+      "updated": "2025-12-01T11:01:07.874Z"
     },
     {
       "id": "STORY-048",
@@ -1665,8 +1665,8 @@
     },
     "by_status": {
       "in-progress": 4,
-      "done": 101,
-      "draft": 90,
+      "done": 102,
+      "draft": 89,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1688,5 +1688,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-01T10:53:08.828Z"
+  "last_updated": "2025-12-01T11:01:07.874Z"
 }
