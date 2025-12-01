@@ -3,7 +3,7 @@
   "counters": {
     "epic": 12,
     "story": 47,
-    "task": 99,
+    "task": 100,
     "bug": 27,
     "spike": 6,
     "feature": 5,
@@ -1606,10 +1606,10 @@
     {
       "id": "TASK-097",
       "type": "task",
-      "title": "Add circular reference validation to prevent redundant links",
+      "title": "Prevent conflicting relation types to same target",
       "status": "draft",
       "priority": "high",
-      "updated": "2025-12-01T10:08:29.279Z"
+      "updated": "2025-12-01T10:27:02.546Z"
     },
     {
       "id": "TASK-098",
@@ -1626,14 +1626,22 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-12-01T10:13:38.138Z"
+    },
+    {
+      "id": "TASK-100",
+      "type": "task",
+      "title": "Doctor: Detect dependency cycles (warning only)",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-01T10:27:02.550Z"
     }
   ],
   "stats": {
-    "total": 196,
+    "total": 197,
     "by_type": {
       "epic": 12,
       "story": 47,
-      "task": 99,
+      "task": 100,
       "bug": 27,
       "spike": 6,
       "feature": 5,
@@ -1642,7 +1650,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 101,
-      "draft": 87,
+      "draft": 88,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1664,5 +1672,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-01T10:13:38.138Z"
+  "last_updated": "2025-12-01T10:27:02.550Z"
 }
