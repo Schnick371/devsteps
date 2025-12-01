@@ -1,0 +1,39 @@
+{
+  "id": "TASK-097",
+  "type": "task",
+  "category": "Validation",
+  "title": "Add circular reference validation to prevent redundant links",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-01T10:08:29.279Z",
+  "updated": "2025-12-01T10:08:36.673Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/validation.ts",
+    "packages/cli/src/commands/link.ts",
+    "packages/mcp-server/src/handlers/link.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-047"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "validation",
+    "circular-reference",
+    "data-quality"
+  ],
+  "commits": [],
+  "metadata": {}
+}

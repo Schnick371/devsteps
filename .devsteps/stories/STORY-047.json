@@ -1,0 +1,40 @@
+{
+  "id": "STORY-047",
+  "type": "story",
+  "category": "Documentation",
+  "title": "Improve Copilot Hierarchy Guidance - Prevent Common Mistakes",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-01T10:07:40.525Z",
+  "updated": "2025-12-01T10:08:36.673Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-005"
+    ],
+    "implemented-by": [
+      "TASK-097",
+      "TASK-098",
+      "TASK-099"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "copilot",
+    "hierarchy",
+    "documentation",
+    "validation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

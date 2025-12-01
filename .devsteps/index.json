@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 12,
-    "story": 46,
-    "task": 96,
+    "story": 47,
+    "task": 99,
     "bug": 27,
     "spike": 6,
     "feature": 5,
@@ -1415,9 +1415,9 @@
       "id": "TASK-087",
       "type": "task",
       "title": "Publish extension to VS Code Marketplace",
-      "status": "done",
+      "status": "in-progress",
       "priority": "critical",
-      "updated": "2025-11-30T20:25:56.270Z"
+      "updated": "2025-11-30T20:29:56.218Z"
     },
     {
       "id": "TASK-088",
@@ -1594,23 +1594,55 @@
       "status": "done",
       "priority": "critical",
       "updated": "2025-11-30T20:04:29.431Z"
+    },
+    {
+      "id": "STORY-047",
+      "type": "story",
+      "title": "Improve Copilot Hierarchy Guidance - Prevent Common Mistakes",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-01T10:07:40.525Z"
+    },
+    {
+      "id": "TASK-097",
+      "type": "task",
+      "title": "Add circular reference validation to prevent redundant links",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-01T10:08:29.279Z"
+    },
+    {
+      "id": "TASK-098",
+      "type": "task",
+      "title": "Update Copilot guidance - Bug→Task uses implemented-by",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-01T10:08:29.284Z"
+    },
+    {
+      "id": "TASK-099",
+      "type": "task",
+      "title": "Deploy HIERARCHY.md + AI-GUIDE.md to .devsteps/ on init",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-01T10:08:29.285Z"
     }
   ],
   "stats": {
-    "total": 192,
+    "total": 196,
     "by_type": {
       "epic": 12,
-      "story": 46,
-      "task": 96,
+      "story": 47,
+      "task": 99,
       "bug": 27,
       "spike": 6,
       "feature": 5,
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 3,
-      "done": 101,
-      "draft": 84,
+      "in-progress": 4,
+      "done": 100,
+      "draft": 88,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1632,5 +1664,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T20:25:56.270Z"
+  "last_updated": "2025-12-01T10:08:29.285Z"
 }
