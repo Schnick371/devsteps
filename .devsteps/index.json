@@ -3,7 +3,7 @@
   "counters": {
     "epic": 12,
     "story": 48,
-    "task": 101,
+    "task": 102,
     "bug": 27,
     "spike": 6,
     "feature": 5,
@@ -1650,14 +1650,22 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-12-01T11:01:35.437Z"
+    },
+    {
+      "id": "TASK-102",
+      "type": "task",
+      "title": "Doctor: Check Copilot instruction files exist",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-01T11:10:11.175Z"
     }
   ],
   "stats": {
-    "total": 199,
+    "total": 200,
     "by_type": {
       "epic": 12,
       "story": 48,
-      "task": 101,
+      "task": 102,
       "bug": 27,
       "spike": 6,
       "feature": 5,
@@ -1666,7 +1674,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 103,
-      "draft": 88,
+      "draft": 89,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1688,5 +1696,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-01T11:01:35.437Z"
+  "last_updated": "2025-12-01T11:10:11.175Z"
 }
