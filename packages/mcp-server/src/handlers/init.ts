@@ -245,6 +245,20 @@ The devsteps system integrates with:
     }
   }
 
+  // Copy HIERARCHY.md
+  const hierarchySource = join(packageRoot, '.devsteps', 'HIERARCHY.md');
+  if (existsSync(hierarchySource)) {
+    const hierarchyContent = readFileSync(hierarchySource, 'utf8');
+    writeFileSync(join(devstepsDir, 'HIERARCHY.md'), hierarchyContent);
+  }
+
+  // Copy AI-GUIDE.md
+  const aiGuideSource = join(packageRoot, '.devsteps', 'AI-GUIDE.md');
+  if (existsSync(aiGuideSource)) {
+    const aiGuideContent = readFileSync(aiGuideSource, 'utf8');
+    writeFileSync(join(devstepsDir, 'AI-GUIDE.md'), aiGuideContent);
+  }
+
   // Extend existing agent files with devsteps tools
   const extendedFiles = extendExistingAgents(projectPath);
 
@@ -255,7 +269,10 @@ The devsteps system integrates with:
   message += '  - .github/instructions/devsteps-code-standards.instructions.md\n';
   message += '  - .github/prompts/devsteps-plan-work.prompt.md\n';
   message += '  - .github/prompts/devsteps-start-work.prompt.md\n';
-  message += '  - .github/prompts/devsteps-workflow.prompt.md';
+  message += '  - .github/prompts/devsteps-workflow.prompt.md\n';
+  message += '\n✓ Documentation:\n';
+  message += '  - .devsteps/HIERARCHY.md\n';
+  message += '  - .devsteps/AI-GUIDE.md';
 
   if (extendedFiles.length > 0) {
     message += `\n\n✓ Extended ${extendedFiles.length} existing agent/chatmode file(s) with devsteps tools:`;

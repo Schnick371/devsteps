@@ -32,6 +32,7 @@
     "dist",
     "bin",
     ".github",
+    ".devsteps",
     "README.md",
     "LICENSE.md"
   ],
@@ -39,10 +40,11 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run copy:docs",
+    "copy:docs": "mkdir -p .devsteps && cp ../../.devsteps/HIERARCHY.md ../../.devsteps/AI-GUIDE.md .devsteps/",
     "dev": "tsc --watch",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist .devsteps"
   },
   "dependencies": {
     "@inquirer/prompts": "^8.0.1",
