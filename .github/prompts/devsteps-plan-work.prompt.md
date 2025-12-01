@@ -2,7 +2,7 @@
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Interactive planning session - work with developer to define and structure work items before implementation'
-tools: ['search', 'devsteps/add', 'devsteps/archive', 'devsteps/context', 'devsteps/export', 'devsteps/get', 'devsteps/health', 'devsteps/init', 'devsteps/link', 'devsteps/list', 'devsteps/metrics', 'devsteps/purge', 'devsteps/search', 'devsteps/status', 'devsteps/trace', 'devsteps/update', 'GitKraken/git_add_or_commit', 'GitKraken/git_blame', 'GitKraken/git_branch', 'GitKraken/git_checkout', 'GitKraken/git_log_or_diff', 'GitKraken/git_push', 'GitKraken/git_stash', 'GitKraken/git_status', 'GitKraken/git_worktree', 'GitKraken/gitkraken_workspace_list', 'GitKraken/issues_add_comment', 'GitKraken/issues_assigned_to_me', 'GitKraken/issues_get_detail', 'GitKraken/pull_request_assigned_to_me', 'GitKraken/pull_request_create', 'GitKraken/pull_request_create_review', 'GitKraken/pull_request_get_comments', 'GitKraken/pull_request_get_detail', 'GitKraken/repository_get_file_content', 'devsteps/*', 'GitKraken/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'testFailure', 'fetch', 'todos', 'runSubagent']
+tools: ['search', 'devsteps/*', 'GitKraken/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'testFailure', 'fetch', 'todos', 'runSubagent']
 ---
 
 # 🎯 Plan Work - Interactive Planning Session
