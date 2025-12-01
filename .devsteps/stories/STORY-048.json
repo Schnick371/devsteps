@@ -1,24 +1,24 @@
 {
-  "id": "TASK-101",
-  "type": "task",
+  "id": "STORY-048",
+  "type": "story",
   "category": "Extension",
-  "title": "Remove unnecessary notification popups - UX improvement",
+  "title": "Extension UX Polish - Non-Intrusive User Experience",
   "status": "draft",
-  "priority": "medium",
+  "priority": "high",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-01T10:50:29.508Z",
+  "created": "2025-12-01T10:53:08.828Z",
   "updated": "2025-12-01T10:53:23.303Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/extension/src/extension.ts",
-    "packages/extension/src/commands/index.ts",
-    "packages/extension/src/mcpServerManager.ts"
+    "packages/extension/src/**"
   ],
   "linked_items": {
     "implements": [
-      "STORY-048"
+      "EPIC-003"
     ],
-    "implemented-by": [],
+    "implemented-by": [
+      "TASK-101"
+    ],
     "tested-by": [],
     "tests": [],
     "blocks": [],
@@ -31,9 +31,9 @@
   },
   "tags": [
     "ux",
-    "notifications",
-    "cleanup",
-    "polish"
+    "user-experience",
+    "polish",
+    "notifications"
   ],
   "commits": [],
   "metadata": {}

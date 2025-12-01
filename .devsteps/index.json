@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "counters": {
     "epic": 12,
-    "story": 47,
+    "story": 48,
     "task": 101,
     "bug": 27,
     "spike": 6,
@@ -1642,13 +1642,21 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-01T10:50:29.508Z"
+    },
+    {
+      "id": "STORY-048",
+      "type": "story",
+      "title": "Extension UX Polish - Non-Intrusive User Experience",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-01T10:53:08.828Z"
     }
   ],
   "stats": {
-    "total": 198,
+    "total": 199,
     "by_type": {
       "epic": 12,
-      "story": 47,
+      "story": 48,
       "task": 101,
       "bug": 27,
       "spike": 6,
@@ -1658,7 +1666,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 101,
-      "draft": 89,
+      "draft": 90,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1680,5 +1688,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-01T10:50:29.508Z"
+  "last_updated": "2025-12-01T10:53:08.828Z"
 }
