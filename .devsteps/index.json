@@ -1679,9 +1679,9 @@
       "id": "TASK-104",
       "type": "task",
       "title": "Validation: Allow Bug → Epic/Requirement via relates-to + affects",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-02T11:38:11.598Z"
+      "updated": "2025-12-02T11:57:28.814Z"
     },
     {
       "id": "TASK-105",
@@ -1705,8 +1705,8 @@
     },
     "by_status": {
       "in-progress": 4,
-      "done": 104,
-      "draft": 92,
+      "done": 105,
+      "draft": 91,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1728,5 +1728,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-02T11:46:33.416Z"
+  "last_updated": "2025-12-02T11:57:28.814Z"
 }
