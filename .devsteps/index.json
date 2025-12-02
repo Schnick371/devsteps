@@ -1671,9 +1671,9 @@
       "id": "TASK-103",
       "type": "task",
       "title": "Shared: Add 'affects/affected-by' relationship type",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-02T11:37:58.432Z"
+      "updated": "2025-12-02T11:46:33.416Z"
     },
     {
       "id": "TASK-104",
@@ -1705,8 +1705,8 @@
     },
     "by_status": {
       "in-progress": 4,
-      "done": 103,
-      "draft": 93,
+      "done": 104,
+      "draft": 92,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1728,5 +1728,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-02T11:38:51.130Z"
+  "last_updated": "2025-12-02T11:46:33.416Z"
 }

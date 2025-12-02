@@ -3,13 +3,17 @@
   "type": "task",
   "category": "general",
   "title": "Shared: Add 'affects/affected-by' relationship type",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-12-02T11:37:58.432Z",
-  "updated": "2025-12-02T11:38:26.613Z",
+  "updated": "2025-12-02T11:46:33.416Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [],
+  "affected_paths": [
+    "packages/shared/src/schemas/relationships.ts",
+    "packages/shared/dist/schemas/relationships.js",
+    "packages/shared/dist/schemas/relationships.d.ts"
+  ],
   "linked_items": {
     "implements": [
       "STORY-049"
