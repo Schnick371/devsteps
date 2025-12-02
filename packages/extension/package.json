@@ -259,19 +259,19 @@
         "command": "devsteps.hideRelatesTo.inactive",
         "title": "Hide 'relates-to' Links",
         "category": "DevSteps",
-        "icon": "$(link)"
+        "icon": "$(link-external)"
       },
       {
         "command": "devsteps.hideAffects.active",
         "title": "$(check) Hide 'affects' Links",
         "category": "DevSteps",
-        "icon": "$(warning)"
+        "icon": "$(shield)"
       },
       {
         "command": "devsteps.hideAffects.inactive",
         "title": "Hide 'affects' Links",
         "category": "DevSteps",
-        "icon": "$(warning)"
+        "icon": "$(shield)"
       }
     ],
     "keybindings": [
