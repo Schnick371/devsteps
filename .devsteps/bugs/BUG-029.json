@@ -1,0 +1,43 @@
+{
+  "id": "BUG-029",
+  "type": "bug",
+  "category": "general",
+  "title": "AI-GUIDE.md ist auf Deutsch - internationale Pakete betroffen",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-02T16:10:12.159Z",
+  "updated": "2025-12-02T16:11:07.323Z",
+  "author": "the@devsteps.dev",
+  "assignee": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/AI-GUIDE.md"
+  ],
+  "linked_items": {
+    "implements": ["EPIC-004"],
+    "implemented-by": [
+      "TASK-117"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "documentation",
+    "translation",
+    "internationalization",
+    "ai-guide",
+    "npm-packages",
+    "publication"
+  ],
+  "commits": [],
+  "metadata": {}
+}

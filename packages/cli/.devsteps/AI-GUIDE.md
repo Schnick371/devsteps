@@ -1,74 +1,74 @@
-# AI Assistant Guide für DevSteps
+# AI Assistant Guide for DevSteps
 
-## 🎯 Kern-Prinzip: Hybrid Methodology verstehen
+## 🎯 Core Principle: Understanding Hybrid Methodology
 
-DevSteps unterstützt **zwei parallele Hierarchien**:
+DevSteps supports **two parallel hierarchies**:
 1. **Scrum/Agile**: Epic → [Story | Spike | Bug] → Task
 2. **Waterfall**: Requirement → Feature → [Task | Spike | Bug]
 
-**KRITISCH**: Beide Hierarchien existieren gleichzeitig im selben Projekt!
+**CRITICAL**: Both hierarchies exist simultaneously in the same project!
 
 ---
 
-## 🚨 Häufigste Fehler vermeiden
+## 🚨 Avoiding Common Mistakes
 
-### ❌ FALSCH: Spike unter Story
+### ❌ WRONG: Spike under Story
 ```json
-// NIEMALS SO!
+// NEVER DO THIS!
 {
   "id": "SPIKE-001",
   "linked_items": {
-    "implements": ["STORY-004"]  // ❌ FALSCH!
+    "implements": ["STORY-004"]  // ❌ WRONG!
   }
 }
 ```
 
-### ✅ RICHTIG: Spike unter Epic
+### ✅ CORRECT: Spike under Epic
 ```json
 {
   "id": "SPIKE-001",
   "linked_items": {
-    "implements": ["EPIC-003"],  // ✅ RICHTIG!
-    "required-by": ["TASK-004"]  // Optional: Spike blockiert Task
+    "implements": ["EPIC-003"],  // ✅ CORRECT!
+    "required-by": ["TASK-004"]  // Optional: Spike blocks Task
   }
 }
 ```
 
-**Grund**: Spike ist auf **gleicher Ebene** wie Story, nicht darunter!
+**Reason**: Spike is at the **same level** as Story, not below it!
 
 ---
 
-## 📋 Vollständige Hierarchie-Regeln
+## 📋 Complete Hierarchy Rules
 
-### Scrum/Agile-Baum
+### Scrum/Agile Tree
 
 ```
-Theme (optional, strategisch)
+Theme (optional, strategic)
 └── Initiative (optional)
     └── Epic (Level 1)
         ├── Story (Level 2)
         │   └── Task (Level 3)
-        ├── Spike (Level 2) - GLEICHE EBENE WIE STORY!
+        ├── Spike (Level 2) - SAME LEVEL AS STORY!
         │   └── Task (Level 3, optional)
         └── Bug (Level 2)
             └── Task (Level 3)
 ```
 
-**Erlaubte Links:**
+**Allowed Links:**
 - `Epic → Story` (implemented-by)
 - `Epic → Spike` (implemented-by)
 - `Epic → Bug` (implemented-by)
 - `Story → Task` (implemented-by)
 - `Spike → Task` (implemented-by, optional)
-- `Spike → Story` (relates-to) - Spike informiert Story
-- `Spike → Task` (required-by) - Spike blockiert Task
+- `Spike → Story` (relates-to) - Spike informs Story
+- `Spike → Task` (required-by) - Spike blocks Task
 
-**Verbotene Links:**
-- ❌ `Epic → Task` (direct, muss über Story/Spike/Bug)
-- ❌ `Spike → Story` (implements) - Spike ist NICHT unter Story!
-- ❌ `Task → Epic` (implements) - nur über Story/Spike/Bug
+**Forbidden Links:**
+- ❌ `Epic → Task` (direct, must go through Story/Spike/Bug)
+- ❌ `Spike → Story` (implements) - Spike is NOT under Story!
+- ❌ `Task → Epic` (implements) - only through Story/Spike/Bug
 
-### Waterfall-Baum
+### Waterfall Tree
 
 ```
 Requirement (Level 1)
@@ -78,50 +78,50 @@ Requirement (Level 1)
     └── Bug (Level 2.5 - defects)
 ```
 
-**Erlaubte Links:**
+**Allowed Links:**
 - `Requirement → Feature` (implemented-by)
 - `Feature → Task` (implemented-by)
 - `Feature → Spike` (relates-to) - optional research
-- `Spike → Requirement` (implements) - falls Spike auf Req-Ebene
+- `Spike → Requirement` (implements) - if Spike at Req level
 
 ---
 
 ## 🛠️ MCP Tool Usage Patterns
 
-### Spike erstellen (RICHTIG)
+### Create Spike (CORRECT)
 
 ```typescript
-// 1. Spike erstellen
+// 1. Create spike
 devsteps-add --type spike --title "Architecture Research" --priority high
 
-// 2. Mit Epic verlinken (NICHT mit Story!)
+// 2. Link to Epic (NOT to Story!)
 devsteps-link --source SPIKE-001 --relation implements --target EPIC-003
 
-// 3. Optional: Task-Dependency erstellen
+// 3. Optional: Create task dependency
 devsteps-link --source SPIKE-001 --relation required-by --target TASK-004
 
-// 4. Optional: Story informieren
+// 4. Optional: Inform story
 devsteps-link --source SPIKE-001 --relation relates-to --target STORY-004
 ```
 
-### Story erstellen (Standard)
+### Create Story (Standard)
 
 ```typescript
-// 1. Story erstellen
+// 1. Create story
 devsteps-add --type story --title "Feature Implementation"
 
-// 2. Mit Epic verlinken
+// 2. Link to Epic
 devsteps-link --source STORY-001 --relation implements --target EPIC-001
 
-// 3. Tasks verlinken
+// 3. Link tasks
 devsteps-link --source TASK-001 --relation implements --target STORY-001
 devsteps-link --source TASK-002 --relation implements --target STORY-001
 ```
 
-### Link-Validierung (vor jedem devsteps-link!)
+### Link Validation (before every devsteps-link!)
 
 ```typescript
-// Prüfe ob Link erlaubt ist:
+// Check if link is allowed:
 if (source.type === 'spike' && relation === 'implements') {
   if (target.type === 'story') {
     throw Error('❌ Spike cannot implement Story! Use Epic or Feature.');
@@ -143,71 +143,68 @@ if (source.type === 'task' && relation === 'implements') {
 
 ---
 
-## 🔍 Trace & Visualisierung
+## 🔍 Trace & Visualization
 
-### devsteps-trace verwenden
+### Using devsteps-trace
 
 ```bash
-# Vollständiger Baum (alle Ebenen, auch done items!)
+# Complete tree (all levels, including done items!)
 devsteps-trace EPIC-003 --depth 4
 
-# Zeigt:
+# Shows:
 EPIC-003
 ├── STORY-004
 │   ├── TASK-001
 │   ├── TASK-002
 │   └── ...
-├── SPIKE-001 (gleiche Ebene wie STORY!)
-│   └── required-by: TASK-004
-└── SPIKE-002
-    └── required-by: TASK-005
+├── SPIKE-001 (same level as STORY!)
 ```
 
-### Wichtige Filter (für TreeView/Dashboard)
+### Important Filters (for TreeView/Dashboard)
 
-1. **Hierarchie-Ansicht** (Standard):
-   - Zeige beide Bäume (Scrum + Waterfall) parallel
-   - Gruppierung nach item_type
-   - Alle Ebenen sichtbar (auch done!)
+1. **Hierarchy View** (Default):
+   - Show both trees (Scrum + Waterfall) in parallel
+   - Grouping by item_type
+   - All levels visible (including done!)
 
-2. **Status-Filter**:
+2. **Status Filters**:
    - Draft, In-Progress, Done, Blocked
    - Toggle "Show Completed" (default: ON!)
 
-3. **Eisenhower-Matrix**:
-   - Q1 (urgent-important): Zuerst anzeigen
-   - Q2 (not-urgent-important): Spikes oft hier!
+3. **Eisenhower Matrix**:
+   - Q1 (urgent-important): Show first
+   - Q2 (not-urgent-important): Spikes often here!
 
-4. **Historische Ansicht**:
-   - **KRITISCH**: Auch erledigte Items müssen sichtbar sein!
-   - User will sehen was schon definiert/gemacht wurde
-   - Toggle optional, aber default: Show ALL
+4. **Historical View**:
+   - **CRITICAL**: Completed items must stay visible!
+   - User wants to see what was already defined/done
+   - Toggle optional, but default: Show ALL
 
 ---
 
-## 🧠 Mental Model für AI
+## 🧠 AI Mental Model
 
-### Spike vs Story - Wann was?
+### Spike vs Story - When to Use?
 
-**Story** (Feature-Entwicklung):
-- "Implementiere Feature X"
-- Liefert Produkt-Wert
-- User kann Ergebnis nutzen
-- Beispiel: "VS Code Extension Package"
+**Story** (Feature Development):
+- "Implement Feature X"
+- Delivers product value
+- User can use the result
+- Example: "VS Code Extension Package"
 
 **Spike** (Research/Investigation):
-- "Untersuche Ansatz Y"
-- Liefert **Wissen**, nicht Features
-- Time-boxed (1-3 Tage)
-- Informiert Stories/Tasks
-- Beispiel: "MCP Architecture Research"
+- "Investigate Approach Y"
+- Delivers **knowledge**, not features
+- Time-boxed (1-3 days)
+- Informs Stories/Tasks
+- Example: "MCP Architecture Research"
 
-**Beziehung**:
+**Relationship**:
 ```
 EPIC: VS Code Extension
-├── STORY: Extension Implementation ← wird umgesetzt
-└── SPIKE: Architecture Research   ← informiert Story
-    └── required-by: TASK-004      ← blockiert Task
+├── STORY: Extension Implementation ← gets implemented
+└── SPIKE: Architecture Research   ← informs Story
+    └── required-by: TASK-004      ← blocks Task
 ```
 
 ### Cross-Methodology Links
@@ -215,10 +212,10 @@ EPIC: VS Code Extension
 **Scrum ↔ Waterfall**:
 - Story ↔ Feature (relates-to)
 - Epic ↔ Requirement (relates-to, optional)
-- Tasks werden geteilt!
-- Spikes werden geteilt!
+- Tasks are shared!
+- Spikes are shared!
 
-**Beispiel**:
+**Example**:
 ```
 EPIC-003 (Scrum)
 └── STORY-004 ← relates-to → FEAT-004 (Waterfall)
@@ -228,67 +225,67 @@ EPIC-003 (Scrum)
 
 ---
 
-## 📝 Checkliste vor jedem Link-Create
+## 📝 Checklist Before Every Link Creation
 
-Bevor du `devsteps-link` aufrufst, prüfe:
+Before calling `devsteps-link`, check:
 
-1. ✅ Ist source.type + relation + target.type erlaubt?
-   - Siehe Tabelle in HIERARCHY.md
+1. ✅ Is source.type + relation + target.type allowed?
+   - See table in HIERARCHY.md
 
-2. ✅ Spike-Sonderfall?
-   - Spike MUSS Epic/Feature implementieren
-   - Spike KANN Story relates-to haben
-   - Spike KANN Task required-by haben
+2. ✅ Spike special case?
+   - Spike MUST implement Epic/Feature
+   - Spike CAN have relates-to with Story
+   - Spike CAN have required-by with Task
 
-3. ✅ Gibt es schon einen Link?
-   - `devsteps-get <ID>` → prüfe linked_items
-   - Keine Duplikate erstellen!
+3. ✅ Does link already exist?
+   - `devsteps-get <ID>` → check linked_items
+   - Don't create duplicates!
 
-4. ✅ Ist die Richtung korrekt?
-   - "implements" = "ist Teil von"
-   - "required-by" = "blockiert"
-   - "relates-to" = "informiert"
+4. ✅ Is direction correct?
+   - "implements" = "is part of"
+   - "required-by" = "blocks"
+   - "relates-to" = "informs"
 
 ---
 
 ## 🎓 Learning from Mistakes
 
-### Fehler #1: Direkter File-Edit statt MCP
-**Problem**: Ich habe EPIC-003.json direkt editiert
-**Lösung**: IMMER `devsteps-update` oder `devsteps-link` verwenden
-**Warum**: Index-Konsistenz, bidirektionale Links, Validierung
+### Error #1: Direct File Edit Instead of MCP
+**Problem**: I edited EPIC-003.json directly
+**Solution**: ALWAYS use `devsteps-update` or `devsteps-link`
+**Why**: Index consistency, bidirectional links, validation
 
-### Fehler #2: Spike unter Story gelinkt
+### Error #2: Spike Linked Under Story
 **Problem**: `SPIKE-001 --implements--> STORY-004`
-**Korrektur**: `SPIKE-001 --implements--> EPIC-003`
-**Regel**: Spike ist Geschwister von Story, nicht Kind!
+**Correction**: `SPIKE-001 --implements--> EPIC-003`
+**Rule**: Spike is sibling of Story, not child!
 
-### Fehler #3: Keine Link-Löschung möglich
-**Problem**: Es gibt kein `devsteps-unlink` Tool!
-**Workaround**: Script mit jq (siehe scripts/fix-spike-links.sh)
-**TODO**: Feature-Request für `unlinkItem()` in shared/core/
-
----
-
-## 🔮 Best Practices für AI Assistants
-
-1. **Vor Link-Erstellung**: Recherchiere Hierarchie-Regeln
-2. **Nach Link-Erstellung**: Validiere mit `devsteps-trace`
-3. **Bei Unsicherheit**: Lies HIERARCHY.md
-4. **Spike-Check**: Immer prüfen ob Spike richtig gelinkt ist
-5. **Historische Daten**: Zeige IMMER alle Items (auch done)
-6. **Fehler-Korrektur**: Script schreiben statt manuell editieren
-7. **Dokumentation**: In HIERARCHY.md nachschlagen, nicht raten
+### Error #3: No Link Deletion Possible
+**Problem**: There's no `devsteps-unlink` tool!
+**Workaround**: Script with jq (see scripts/fix-spike-links.sh)
+**TODO**: Feature request for `unlinkItem()` in shared/core/
 
 ---
 
-## 📚 Weitere Ressourcen
+## 🔮 Best Practices for AI Assistants
 
-- `.devsteps/HIERARCHY.md` - Vollständige Hierarchie-Definition
-- `.devsteps/config.json` - Projekt-Konfiguration mit hierarchies
-- `scripts/fix-spike-links.sh` - Beispiel für Link-Korrektur
-- `packages/shared/src/core/` - Verfügbare Core-Funktionen
+1. **Before Link Creation**: Research hierarchy rules
+2. **After Link Creation**: Validate with `devsteps-trace`
+3. **When Uncertain**: Read HIERARCHY.md
+4. **Spike Check**: Always verify Spike is linked correctly
+5. **Historical Data**: ALWAYS show all items (including done)
+6. **Error Correction**: Write scripts instead of manual editing
+7. **Documentation**: Look up HIERARCHY.md, don't guess
 
 ---
 
-**REMEMBER**: DevSteps ist ein **Traceability-System**. Jeder Link hat Bedeutung. Falsche Links = Falsche Traceability = Chaos!
+## 📚 Additional Resources
+
+- `.devsteps/HIERARCHY.md` - Complete hierarchy definition
+- `.devsteps/config.json` - Project configuration with hierarchies
+- `scripts/fix-spike-links.sh` - Example for link correction
+- `packages/shared/src/core/` - Available core functions
+
+---
+
+**REMEMBER**: DevSteps is a **traceability system**. Every link has meaning. Wrong links = Wrong traceability = Chaos!

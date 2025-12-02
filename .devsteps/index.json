@@ -3,8 +3,8 @@
   "counters": {
     "epic": 13,
     "story": 52,
-    "task": 115,
-    "bug": 27,
+    "task": 117,
+    "bug": 29,
     "spike": 6,
     "feature": 5,
     "requirement": 2
@@ -1802,23 +1802,55 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-02T14:57:53.551Z"
+    },
+    {
+      "id": "BUG-028",
+      "type": "bug",
+      "title": "Init überschreibt .gitignore - zerstört existierende Regeln",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-02T15:55:34.243Z"
+    },
+    {
+      "id": "TASK-116",
+      "type": "task",
+      "title": "Refactor Init: Append-only .gitignore handling",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-02T15:56:41.874Z"
+    },
+    {
+      "id": "BUG-029",
+      "type": "bug",
+      "title": "AI-GUIDE.md ist auf Deutsch - internationale Pakete betroffen",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-02T16:10:12.159Z"
+    },
+    {
+      "id": "TASK-117",
+      "type": "task",
+      "title": "Translate AI-GUIDE.md to English for international publication",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-12-02T16:23:13.036Z"
     }
   ],
   "stats": {
-    "total": 218,
+    "total": 222,
     "by_type": {
       "epic": 13,
       "story": 52,
-      "task": 115,
-      "bug": 27,
+      "task": 117,
+      "bug": 29,
       "spike": 6,
       "feature": 5,
       "requirement": 2
     },
     "by_status": {
       "in-progress": 4,
-      "done": 108,
-      "draft": 102,
+      "done": 109,
+      "draft": 105,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1840,5 +1872,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-02T15:20:49.831Z"
+  "last_updated": "2025-12-02T16:23:13.036Z"
 }

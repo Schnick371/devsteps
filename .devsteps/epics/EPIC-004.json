@@ -7,7 +7,7 @@
   "priority": "medium",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T16:40:59.062Z",
-  "updated": "2025-11-28T10:27:57.018Z",
+  "updated": "2025-12-02T16:11:07.324Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -22,7 +22,8 @@
       "TASK-022",
       "TASK-023",
       "TASK-024",
-      "STORY-038"
+      "STORY-038",
+      "BUG-029"
     ],
     "tested-by": [],
     "tests": [],
@@ -30,7 +31,8 @@
     "blocked-by": [],
     "relates-to": [
       "TASK-029",
-      "TASK-030"
+      "TASK-030",
+      "BUG-029"
     ],
     "depends-on": [],
     "required-by": [],

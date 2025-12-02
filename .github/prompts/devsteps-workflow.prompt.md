@@ -1,6 +1,6 @@
 ---
 agent: 'devsteps'
-model: 'Claude Sonnet 4.5'
+model: 'Claude Sonnet 4'
 description: 'Structured development workflow - preserve decisions and maintain context continuity'
 tools: ['edit', 'search', 'devsteps/*', 'GitKraken/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'fetch', 'todos', 'runSubagent']
 ---

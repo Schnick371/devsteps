@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T19:33:36.249Z",
-  "updated": "2025-12-02T11:37:58.439Z",
+  "updated": "2025-12-02T15:57:05.525Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/",
@@ -32,7 +32,8 @@
     "blocked-by": [],
     "relates-to": [
       "EPIC-001",
-      "EPIC-006"
+      "EPIC-006",
+      "BUG-028"
     ],
     "depends-on": [],
     "required-by": [],
