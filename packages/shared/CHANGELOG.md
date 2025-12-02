@@ -20,9 +20,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced validation error messages with clearer guidance on correct relationships
 - Test suite updated to reflect corrected Bug workflow patterns
 
-## [0.6.0] - 2025-11-XX
+## [0.6.0] - 2025-11-23
 
 ### Added
-- Initial release with core schemas, types, and validation logic
-- Support for Scrum, Waterfall, and Hybrid methodologies
-- Comprehensive relationship validation system
+- **Published to npm**: `@schnick371/devsteps-shared@0.6.0` publicly available
+- **Core Schemas**: Zod-based validation for all work item types
+  - ItemMetadata, ProjectConfig, RelationType
+  - Support for 8 item types: epic, story, task, requirement, feature, bug, spike, test
+  - 9 relationship types: implements, relates-to, blocks, depends-on, tested-by, supersedes, etc.
+- **Methodology Support**: 
+  - **Scrum**: Epic → Story/Spike → Task hierarchy
+  - **Waterfall**: Requirement → Feature/Spike → Task hierarchy
+  - **Hybrid**: Combined Scrum + Waterfall
+- **Validation System**: Comprehensive relationship validation
+  - Hierarchy validation (implements/implemented-by)
+  - Flexible relationships (relates-to, blocks, depends-on, etc.)
+  - Methodology-aware rules with detailed error messages
+- **Utility Functions**:
+  - `parseItemId()` - Parse work item IDs (e.g., EPIC-001)
+  - `generateItemId()` - Generate next sequential ID
+  - `getCurrentTimestamp()` - ISO 8601 timestamps
+  - `getMethodologyDefaults()` - Methodology configuration
+- **TypeScript Types**: Full type safety for all operations
+- **ESM Support**: Pure ES modules with proper exports
+
+### Changed
+- Package scope: `@schnick371/devsteps-shared`
+- License: Apache-2.0
+- Module system: Pure ESM (type: "module")

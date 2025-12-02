@@ -16,9 +16,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated `@schnick371/devsteps-shared` to 0.6.1 with corrected validation logic
 
-## [0.6.0] - 2025-11-XX
+## [0.6.0] - 2025-11-23
 
 ### Added
-- Initial release with full MCP server functionality
-- AI-assisted task tracking via Model Context Protocol
-- Support for all DevSteps work item types and relationships
+- **Published to npm**: `@schnick371/devsteps-mcp-server@0.6.0` publicly available
+- **NPX Support**: Run directly via `npx @schnick371/devsteps-mcp-server`
+- **MCP Protocol Implementation**: Full Model Context Protocol support
+  - 15+ MCP tools for AI-assisted development
+  - `init`, `add`, `update`, `list`, `get`, `link`, `trace`
+  - `search`, `status`, `context`, `archive`, `purge`
+  - `export`, `metrics`, `health`
+- **Workspace Path Handling**: Accepts workspace path as CLI argument
+- **Error Handling**: Global unhandled rejection handler
+- **HTTP Server**: Optional HTTP endpoint for health checks and metrics
+- **Production Binary**: Bundled single-file distribution (2.5MB)
+
+### Fixed
+- MCP server starts reliably even without existing `.devsteps` directory
+- Workspace path passed via CLI argument (standard MCP pattern)
+- Error responses instead of crashes on validation failures
+
+### Changed
+- Package scope: `@schnick371/devsteps-mcp-server`
+- License: Apache-2.0
+- Dependencies: Uses `@schnick371/devsteps-shared@0.6.0`
+- Architecture: Production-ready with bundled dependencies
