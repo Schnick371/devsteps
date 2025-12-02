@@ -901,25 +901,7 @@ ${Object.entries(byType)
     }),
   );
 
-  // Toggle Hide Affects - Active command (perform action)
-  context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.hideAffects.active', async () => {
-      if (!checkDevStepsInitialized(treeDataProvider)) return;
-      treeDataProvider.toggleHideAffects();
-      const isHidden = treeDataProvider.getHideAffectsState();
-      await vscode.commands.executeCommand('setContext', 'devsteps.hideAffects', isHidden);
-    }),
-  );
 
-  // Toggle Hide Affects - Inactive command (perform action)
-  context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.hideAffects.inactive', async () => {
-      if (!checkDevStepsInitialized(treeDataProvider)) return;
-      treeDataProvider.toggleHideAffects();
-      const isHidden = treeDataProvider.getHideAffectsState();
-      await vscode.commands.executeCommand('setContext', 'devsteps.hideAffects', isHidden);
-    }),
-  );
 
   // Sort options
   context.subscriptions.push(

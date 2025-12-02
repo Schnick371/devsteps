@@ -258,20 +258,7 @@
       {
         "command": "devsteps.hideRelatesTo.inactive",
         "title": "Hide 'relates-to' Links",
-        "category": "DevSteps",
-        "icon": "$(link-external)"
-      },
-      {
-        "command": "devsteps.hideAffects.active",
-        "title": "$(check) Hide 'affects' Links",
-        "category": "DevSteps",
-        "icon": "$(shield)"
-      },
-      {
-        "command": "devsteps.hideAffects.inactive",
-        "title": "Hide 'affects' Links",
-        "category": "DevSteps",
-        "icon": "$(shield)"
+        "category": "DevSteps"
       }
     ],
     "keybindings": [
@@ -386,26 +373,6 @@
           "group": "navigation@1"
         },
         {
-          "command": "devsteps.hideRelatesTo.active",
-          "when": "view == devsteps.itemsView && devsteps.initialized && devsteps.hideRelatesTo",
-          "group": "navigation@1"
-        },
-        {
-          "command": "devsteps.hideRelatesTo.inactive",
-          "when": "view == devsteps.itemsView && devsteps.initialized && !devsteps.hideRelatesTo",
-          "group": "navigation@1"
-        },
-        {
-          "command": "devsteps.hideAffects.active",
-          "when": "view == devsteps.itemsView && devsteps.initialized && devsteps.hideAffects",
-          "group": "navigation@1"
-        },
-        {
-          "command": "devsteps.hideAffects.inactive",
-          "when": "view == devsteps.itemsView && devsteps.initialized && !devsteps.hideAffects",
-          "group": "navigation@1"
-        },
-        {
           "command": "devsteps.refreshItems",
           "when": "view == devsteps.itemsView && devsteps.initialized",
           "group": "navigation@2"
@@ -451,6 +418,16 @@
           "command": "devsteps.viewMode.hierarchical.inactive",
           "group": "1_view@2",
           "when": "devsteps.viewMode == 'flat'"
+        },
+        {
+          "command": "devsteps.hideRelatesTo.active",
+          "group": "1_view@3",
+          "when": "devsteps.hideRelatesTo"
+        },
+        {
+          "command": "devsteps.hideRelatesTo.inactive",
+          "group": "1_view@3",
+          "when": "!devsteps.hideRelatesTo"
         },
         {
           "command": "devsteps.hierarchy.scrum.active",
@@ -601,14 +578,6 @@
         },
         {
           "command": "devsteps.hideRelatesTo.inactive",
-          "when": "false"
-        },
-        {
-          "command": "devsteps.hideAffects.active",
-          "when": "false"
-        },
-        {
-          "command": "devsteps.hideAffects.inactive",
           "when": "false"
         }
       ]

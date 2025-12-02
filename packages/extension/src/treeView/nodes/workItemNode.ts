@@ -79,11 +79,9 @@ export class WorkItemNode extends TreeNode {
         childIds.push(...relatesTo);
       }
       
-      // Include affects if not hidden
-      if (!effectiveFilter?.hideAffects) {
-        const affects = this.item.linked_items?.['affects'] || [];
-        childIds.push(...affects);
-      }
+      // affects relationships always visible
+      const affects = this.item.linked_items?.['affects'] || [];
+      childIds.push(...affects);
       
       // Load full child items with linked_items for hierarchical display
       let children: WorkItem[] = [];
