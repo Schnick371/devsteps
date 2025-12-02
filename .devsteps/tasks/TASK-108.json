@@ -1,0 +1,41 @@
+{
+  "id": "TASK-108",
+  "type": "task",
+  "category": "Testing",
+  "title": "CLI BATS Test: Complete Waterfall Hierarchy",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-02T14:57:02.506Z",
+  "updated": "2025-12-02T14:58:19.924Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "tests/integration/cli/waterfall-hierarchy.bats"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-050"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-106"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "testing",
+    "cli",
+    "bats",
+    "waterfall",
+    "hierarchy"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -36,12 +36,12 @@ const tests = [
     expected: true,
   },
   {
-    name: 'Scrum: Bug → Epic (valid - traceability)',
+    name: 'Scrum: Bug → Epic via implements (invalid - use relates-to or affects)',
     source: { id: 'BUG-001', type: 'bug' },
     target: { id: 'EPIC-001', type: 'epic' },
     relation: 'implements',
     methodology: 'scrum',
-    expected: true,
+    expected: false,
   },
   {
     name: 'Scrum: Task → Bug (valid - Task implements fix)',
@@ -89,6 +89,22 @@ const tests = [
   },
 
   // Flexible relationships (always valid)
+  {
+    name: 'Bug → Epic via relates-to (valid - context)',
+    source: { id: 'BUG-001', type: 'bug' },
+    target: { id: 'EPIC-001', type: 'epic' },
+    relation: 'relates-to',
+    methodology: 'scrum',
+    expected: true,
+  },
+  {
+    name: 'Bug → Epic via affects (valid - impact)',
+    source: { id: 'BUG-001', type: 'bug' },
+    target: { id: 'EPIC-001', type: 'epic' },
+    relation: 'affects',
+    methodology: 'scrum',
+    expected: true,
+  },
   {
     name: 'relates-to always valid (any types)',
     source: { id: 'TASK-001', type: 'task' },

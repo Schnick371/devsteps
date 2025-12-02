@@ -20,11 +20,7 @@ You **execute work items systematically** through interactive planning and focus
 ## Workflow Process
 
 ### Planning Phase (devsteps-plan-work.prompt.md)
-**Interactive dialogue to structure work:**
-- Search existing work items before creating new ones (`#mcp_devsteps_search`)
-- Link related items, create new items only when needed
-- Define clear scope and acceptance criteria
-- Prioritize by Eisenhower quadrant (urgent/important)
+Search existing items (`#mcp_devsteps_search`), link related items, define scope, prioritize by Eisenhower.
 
 ### Execution Phase (devsteps-start-work.prompt.md)
 **Tactical step-by-step implementation:**
@@ -36,11 +32,7 @@ You **execute work items systematically** through interactive planning and focus
 6. **Complete**: Update to done + **commit immediately** (never skip!)
 
 ### Workflow Principles (devsteps-workflow.prompt.md)
-**Strategic guidance throughout development:**
-- **Before**: Understand context (Why? What? How?), check existing decisions
-- **During**: Document decisions + reasoning, maintain traceability, validate continuously
-- **After**: Quality gates, preserve context for future work
-- **Core**: Every change traceable, no decision forgotten, no relationship lost
+Understand context before/during/after. Document decisions. Maintain traceability. Every change traceable.
 
 ## Item Hierarchy & Relationships
 
@@ -55,14 +47,24 @@ You **execute work items systematically** through interactive planning and focus
 **Bug:** Problem description ONLY (document symptoms, reproduction steps, impact)  
 **Spike:** Research (creates Stories/Features from findings, links to Epic/Requirement)  
 
+**CRITICAL - Bug vs Task Separation:**
+- **Bug = Problem ONLY**: What's broken, how to reproduce, impact, affected files
+- **Task = Solution ONLY**: How to fix, implementation approach, code changes
+- **Never mix**: Bug items must NEVER contain solution code or fix instructions
+- **Workflow**: Bug → Task(s) → Implementation
+
 **Bug Workflow (MANDATORY):**
 1. Create Bug with problem description (what's broken, how to reproduce)
-2. Bug `implements` Epic/Requirement (traces to business initiative)
+2. Bug uses `relates-to` (context) OR `affects` (impact) to Epic/Requirement
 3. Create Task(s) for solution implementation (how to fix)
 4. Task `implements` Bug (solution fixes the reported problem) *
-5. Implement solution in Task, NOT in Bug item!
+5. **Implement solution in Task, NOT in Bug item!**
 
 * Note: Due to MCP validation constraints, use `Bug implemented-by Task` relation
+
+**When to use Bug relationships:**
+- **`relates-to`**: Bug is part of Epic scope (e.g., "Auth Bug" relates to "Auth Epic")
+- **`affects`**: Bug impacts deliverables (e.g., "Performance Bug" affects "Dashboard Epic")
 
 ### Relationship Rules (CRITICAL - Prevents Common Mistakes!)
 
@@ -70,10 +72,14 @@ You **execute work items systematically** through interactive planning and focus
 - ✅ Task `implements` Story/Feature
 - ✅ Task `implements` Bug (fixes the reported problem) *
 - ✅ Story/Feature `implements` Epic/Requirement  
-- ✅ Bug `implements` Epic/Requirement (fixes defect in business initiative)
+- ❌ Bug `implements` Epic/Requirement (use relates-to or affects!)
 - ✅ Test `implements` Epic/Requirement (validates business requirement)
 
 * Note: MCP currently requires using reverse relation `Bug implemented-by Task`
+
+**Bug → Epic/Requirement (Context/Impact):**
+- ✅ Bug `relates-to` Epic/Requirement (general context)
+- ✅ Bug `affects` Epic/Requirement (impact traceability)
 
 **relates-to** - Horizontal connections (same level):
 - ✅ Story ↔ Story, Feature ↔ Feature, Task ↔ Task
@@ -96,26 +102,11 @@ You **execute work items systematically** through interactive planning and focus
 - ❌ Parent `draft` → Child `in-progress` = WRONG! Update parent first!
 - **Action:** Always check parent status, update if needed before linking child
 
-**Rule:** Document solutions in Tasks, not Stories. Stories describe problems.
-
 ## Tool Usage Strategy
 
-**Code Understanding:**
-- `search` - Locate APPLICATION code
-- `usages` - Understand dependencies and impact
-- `tavily/*` - Research latest best practices
-
-**Implementation:**
-- `edit` - Modify APPLICATION code only
-- `problems` - Validate changes immediately
-- `runTask` + `getTaskOutput` - Execute test suites
-- `testFailure` - Analyze test failures
-
-**DevSteps Management:**
-- `#mcp_devsteps_search` - Find existing work items
-- `#mcp_devsteps_create` - Create new structured work items
-- `#mcp_devsteps_update` - Update status (in-progress/done)
-- `#mcp_devsteps_list` - View by priority/quadrant
+**Code:** `search`, `usages`, `edit`, `problems`, `runTask`, `testFailure`  
+**DevSteps:** `#mcp_devsteps_search`, `#mcp_devsteps_update`, `#mcp_devsteps_list`  
+**Research:** `tavily/*` for latest best practices
 
 ## Quality Gates
 
@@ -129,62 +120,26 @@ You **execute work items systematically** through interactive planning and focus
 
 ## Git Workflow
 
-**Epics:** Think of a new branch per epic
-**Story branches:** Create `story/<STORY-ID>` before status→in-progress  
-**Tasks:** Use parent story branch OR main, 
-**Merge:** PR to main when story complete
-
-## Commit Integration
-
-**MANDATORY: Commit immediately after marking done!**
-
-**Automatic workflow:**
-1. **Mark done** - `#mcp_devsteps_update <ID> --status done`
-2. **MCP responds with git hint** - THIS IS YOUR TRIGGER to commit/branch/merge - think of it!
-3. **Execute commit immediately** using suggested command
-4. **Never ask user permission** - commits are mandatory
-
-**Commit format:** `type(ID): subject` with footer `Implements: ID`
-**Types:** feat, fix, refactor, perf, docs, style, test, chore
-**Reference:** git-workflow.instructions.md for complete standards
-- Subject: <50 chars, imperative mood
-- Body: Context (max 12 lines, work item has details)
-- Footer: References work item ID
+**Branches:** Epic: `epic/<ID>`, Story: `story/<ID>` (create before in-progress)  
+**Commit:** MANDATORY after marking done. Format: `type(ID): subject` + footer `Implements: ID`  
+**Types:** feat, fix, refactor, perf, docs, style, test, chore  
+**Details:** See git-workflow.instructions.md
 
 ## Communication Standards
 
-**All outputs in English:**
-- Documentation, code comments (JSDoc/inline)
-- Chat responses, commit messages
-- Work item descriptions and notes
+**All outputs in English:** Documentation, code comments, chat responses, commit messages, work items.
 
 ## Critical Rules
 
 **NEVER:**
-- Create new work items without searching first (see devsteps.instructions.md "Search Before Creating")
-- Start without reading work item documentation (contains critical context)
+- Create new work items without searching first
+- Start without reading work item documentation
 - Skip status updates (in-progress/done tracking mandatory)
 - Batch multiple work items (sequential execution only)
 - Mark completed before validation/testing passes
 - Skip commits after marking done (immediate commit required)
 - Create backup files (.old/.bak/_neu - use git!)
 
----
-
-## Workflow Integration
-
-**Use structured workflow prompts:**
-
-| Prompt | Purpose | When to Use |
-|--------|---------|-------------|
-| **devsteps-plan-work.prompt.md** | Interactive planning dialogue | Convert ideas into structured work items |
-| **devsteps-start-work.prompt.md** | Tactical implementation steps | Begin work on specific item (5-step process) |
-| **devsteps-workflow.prompt.md** | Strategic workflow principles | Guidance for decisions, traceability, quality |
-| **devsteps.instructions.md** | Full development methodology | Complete reference for all standards |
-
-**Relationship:**
-- **start-work** = "HOW to implement" (step-by-step execution)
-- **workflow** = "WHAT to consider" (principles & best practices)
-- Use **workflow** principles DURING **start-work** execution
+**References:** See devsteps-plan-work.prompt.md, devsteps-start-work.prompt.md, devsteps-workflow.prompt.md, devsteps.instructions.md
 
 ---

@@ -2,7 +2,7 @@
   "name": "devsteps",
   "displayName": "DevSteps",
   "description": "Never Code Alone. AI-first development workflow - track tasks, epics, stories with your AI copilot.",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "publisher": "devsteps",
   "license": "Apache-2.0",
   "author": "Thomas Hertel (the@devsteps.dev)",
@@ -248,6 +248,28 @@
         "title": "Hide Completed Items",
         "category": "DevSteps",
         "icon": "$(eye)"
+      },
+      {
+        "command": "devsteps.showRelatesTo.active",
+        "title": "$(check) Show 'relates-to' Links",
+        "category": "DevSteps",
+        "enablement": "false"
+      },
+      {
+        "command": "devsteps.showRelatesTo.inactive",
+        "title": "Show 'relates-to' Links",
+        "category": "DevSteps"
+      },
+      {
+        "command": "devsteps.hideRelatesTo.active",
+        "title": "$(check) Hide 'relates-to' Links",
+        "category": "DevSteps",
+        "enablement": "false"
+      },
+      {
+        "command": "devsteps.hideRelatesTo.inactive",
+        "title": "Hide 'relates-to' Links",
+        "category": "DevSteps"
       }
     ],
     "keybindings": [
@@ -409,6 +431,26 @@
           "when": "devsteps.viewMode == 'flat'"
         },
         {
+          "command": "devsteps.showRelatesTo.active",
+          "group": "1_relatesTo@1",
+          "when": "!devsteps.hideRelatesTo"
+        },
+        {
+          "command": "devsteps.showRelatesTo.inactive",
+          "group": "1_relatesTo@1",
+          "when": "devsteps.hideRelatesTo"
+        },
+        {
+          "command": "devsteps.hideRelatesTo.active",
+          "group": "1_relatesTo@2",
+          "when": "devsteps.hideRelatesTo"
+        },
+        {
+          "command": "devsteps.hideRelatesTo.inactive",
+          "group": "1_relatesTo@2",
+          "when": "!devsteps.hideRelatesTo"
+        },
+        {
           "command": "devsteps.hierarchy.scrum.active",
           "group": "2_hierarchy@1",
           "when": "devsteps.hierarchy == 'scrum'"
@@ -549,6 +591,22 @@
         },
         {
           "command": "devsteps.hideDone.inactive",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.showRelatesTo.active",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.showRelatesTo.inactive",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.hideRelatesTo.active",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.hideRelatesTo.inactive",
           "when": "false"
         }
       ]

@@ -126,15 +126,12 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
     };
   }
 
-  // Bug → Epic only (traceability to business initiative)
+  // Bug cannot use "implements" - must use flexible relationships
   if (sourceType === 'bug') {
-    if (targetType === 'epic') {
-      return { valid: true };
-    }
     return {
       valid: false,
-      error: 'Bugs can only implement Epics in Scrum (traceability to business initiative)',
-      suggestion: `Link Bug → Epic to trace defect to business initiative. Use Task to implement the fix.`,
+      error: 'Bugs cannot use "implements" relationship',
+      suggestion: `Use "relates-to" (context) or "affects" (impact) to link Bug → Epic. Use Task to implement the fix (Task implements Bug).`,
     };
   }
 
@@ -211,15 +208,12 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
     };
   }
 
-  // Bug → Requirement only (traceability to business requirement)
+  // Bug cannot use "implements" - must use flexible relationships
   if (sourceType === 'bug') {
-    if (targetType === 'requirement') {
-      return { valid: true };
-    }
     return {
       valid: false,
-      error: 'Bugs can only implement Requirements in Waterfall (traceability to business requirement)',
-      suggestion: `Link Bug → Requirement to trace defect to business requirement. Use Task to implement the fix.`,
+      error: 'Bugs cannot use "implements" relationship',
+      suggestion: `Use "relates-to" (context) or "affects" (impact) to link Bug → Requirement. Use Task to implement the fix (Task implements Bug).`,
     };
   }
 

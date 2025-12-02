@@ -64,17 +64,33 @@ export class WorkItemNode extends TreeNode {
     if (!this.hierarchical) return [];
 
     try {
+      const effectiveFilter = filterState || this.filterState;
+      
+      // Collect child IDs from different relationship types
+      const childIds: string[] = [];
+      
+      // Always include hierarchy relationships (implemented-by)
       const implementedBy = this.item.linked_items?.['implemented-by'] || [];
+      childIds.push(...implementedBy);
+      
+      // Include relates-to if not hidden
+      if (!effectiveFilter?.hideRelatesTo) {
+        const relatesTo = this.item.linked_items?.['relates-to'] || [];
+        childIds.push(...relatesTo);
+      }
+      
+      // affects relationships always visible
+      const affects = this.item.linked_items?.['affects'] || [];
+      childIds.push(...affects);
       
       // Load full child items with linked_items for hierarchical display
       let children: WorkItem[] = [];
-      for (const childId of implementedBy) {
+      for (const childId of childIds) {
         const child = await loadItemWithLinks(workspaceRoot, childId);
         if (child) children.push(child);
       }
 
       // Apply hideDone filter in hierarchical view
-      const effectiveFilter = filterState || this.filterState;
       if (effectiveFilter?.hideDone) {
         children = children.filter((item) => item.status !== 'done');
       }

@@ -118,11 +118,15 @@ export async function activate(context: vscode.ExtensionContext) {
     const actualViewMode = treeDataProvider.getViewMode();
     const actualHierarchy = treeDataProvider.getHierarchyType();
     const actualHideDone = treeDataProvider.getHideDoneState();
-    await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', actualViewMode);
-    await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', actualHierarchy);
-    await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', actualHideDone);
-    
-    logger.info('DevSteps project initialized successfully');
+    const actualHideRelatesTo = treeDataProvider.getHideRelatesToState();
+  logger.info(
+    `TreeDataProvider initialized, setting context keys: viewMode=${actualViewMode}, hierarchy=${actualHierarchy}, hideDone=${actualHideDone}, hideRelatesTo=${actualHideRelatesTo}`,
+  );
+
+  await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', actualViewMode);
+  await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', actualHierarchy);
+  await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', actualHideDone);
+  await vscode.commands.executeCommand('setContext', 'devsteps.hideRelatesTo', actualHideRelatesTo);    logger.info('DevSteps project initialized successfully');
   });
   
   context.subscriptions.push(devstepsWatcher);
@@ -178,10 +182,12 @@ export async function activate(context: vscode.ExtensionContext) {
   const actualViewMode = treeDataProvider.getViewMode();
   const actualHierarchy = treeDataProvider.getHierarchyType();
   const actualHideDone = treeDataProvider.getHideDoneState();
+  const actualHideRelatesTo = treeDataProvider.getHideRelatesToState();
   
   await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', actualViewMode);
   await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', actualHierarchy);
   await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', actualHideDone);
+  await vscode.commands.executeCommand('setContext', 'devsteps.hideRelatesTo', actualHideRelatesTo);
 
   // Listen for configuration changes
   context.subscriptions.push(

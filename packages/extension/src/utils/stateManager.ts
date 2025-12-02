@@ -38,6 +38,7 @@ export class TreeViewStateManager {
       tags: [],
       searchQuery: '',
       hideDone: false,
+      hideRelatesTo: false,
     });
   }
 

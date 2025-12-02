@@ -881,6 +881,46 @@ ${Object.entries(byType)
     }),
   );
 
+  // Show RelatesTo - Active command (no-op, already showing)
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.showRelatesTo.active', () => {
+      // No-op - already active
+    }),
+  );
+
+  // Show RelatesTo - Inactive command (perform action to show)
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.showRelatesTo.inactive', async () => {
+      if (!checkDevStepsInitialized(treeDataProvider)) return;
+      // Only toggle if currently hidden
+      if (treeDataProvider.getHideRelatesToState()) {
+        treeDataProvider.toggleHideRelatesTo();
+      }
+      await vscode.commands.executeCommand('setContext', 'devsteps.hideRelatesTo', false);
+    }),
+  );
+
+  // Hide RelatesTo - Active command (no-op, already hiding)
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.hideRelatesTo.active', () => {
+      // No-op - already active
+    }),
+  );
+
+  // Hide RelatesTo - Inactive command (perform action to hide)
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.hideRelatesTo.inactive', async () => {
+      if (!checkDevStepsInitialized(treeDataProvider)) return;
+      // Only toggle if currently showing
+      if (!treeDataProvider.getHideRelatesToState()) {
+        treeDataProvider.toggleHideRelatesTo();
+      }
+      await vscode.commands.executeCommand('setContext', 'devsteps.hideRelatesTo', true);
+    }),
+  );
+
+
+
   // Sort options
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.sort', async () => {

@@ -43,6 +43,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     tags: [],
     searchQuery: '',
     hideDone: false,
+    hideRelatesTo: false,
   };
   private sortState: SortState = {
     by: 'id',
@@ -236,6 +237,18 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   }
 
   /**
+   * Toggle hide relates-to relationships filter
+   */
+  toggleHideRelatesTo(): void {
+    this.filterState.hideRelatesTo = !this.filterState.hideRelatesTo;
+    this.stateManager?.saveFilterState(this.filterState);
+    this.refresh();
+    this.updateDescription();
+  }
+
+
+
+  /**
    * Clear all filters
    */
   clearFilters(): void {
@@ -246,6 +259,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       tags: [],
       searchQuery: '',
       hideDone: this.filterState.hideDone, // Preserve hide done toggle
+      hideRelatesTo: this.filterState.hideRelatesTo, // Preserve relates-to toggle
     };
     this.stateManager?.saveFilterState(this.filterState);
     this.refresh();
@@ -347,6 +361,12 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   getHideDoneState(): boolean {
     return this.filterState.hideDone;
   }
+
+  getHideRelatesToState(): boolean {
+    return this.filterState.hideRelatesTo;
+  }
+
+
 
   /**
    * Apply filters to work items (only used in flat view)
