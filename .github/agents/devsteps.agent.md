@@ -55,12 +55,16 @@ Understand context before/during/after. Document decisions. Maintain traceabilit
 
 **Bug Workflow (MANDATORY):**
 1. Create Bug with problem description (what's broken, how to reproduce)
-2. Bug `implements` Epic/Requirement (traces to business initiative)
+2. Bug uses `relates-to` (context) OR `affects` (impact) to Epic/Requirement
 3. Create Task(s) for solution implementation (how to fix)
 4. Task `implements` Bug (solution fixes the reported problem) *
 5. **Implement solution in Task, NOT in Bug item!**
 
 * Note: Due to MCP validation constraints, use `Bug implemented-by Task` relation
+
+**When to use Bug relationships:**
+- **`relates-to`**: Bug is part of Epic scope (e.g., "Auth Bug" relates to "Auth Epic")
+- **`affects`**: Bug impacts deliverables (e.g., "Performance Bug" affects "Dashboard Epic")
 
 ### Relationship Rules (CRITICAL - Prevents Common Mistakes!)
 
@@ -68,10 +72,14 @@ Understand context before/during/after. Document decisions. Maintain traceabilit
 - ✅ Task `implements` Story/Feature
 - ✅ Task `implements` Bug (fixes the reported problem) *
 - ✅ Story/Feature `implements` Epic/Requirement  
-- ✅ Bug `implements` Epic/Requirement (fixes defect in business initiative)
+- ❌ Bug `implements` Epic/Requirement (use relates-to or affects!)
 - ✅ Test `implements` Epic/Requirement (validates business requirement)
 
 * Note: MCP currently requires using reverse relation `Bug implemented-by Task`
+
+**Bug → Epic/Requirement (Context/Impact):**
+- ✅ Bug `relates-to` Epic/Requirement (general context)
+- ✅ Bug `affects` Epic/Requirement (impact traceability)
 
 **relates-to** - Horizontal connections (same level):
 - ✅ Story ↔ Story, Feature ↔ Feature, Task ↔ Task
