@@ -4,10 +4,10 @@
   "category": "VS Code Extension",
   "title": "TreeView: Add toggle to show/hide related items",
   "status": "draft",
-  "priority": "medium",
+  "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T19:36:06.270Z",
-  "updated": "2025-11-24T19:36:26.033Z",
+  "updated": "2025-12-02T11:38:57.009Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/vscode-extension/src/treeView/devstepsTreeDataProvider.ts",
@@ -15,7 +15,8 @@
   ],
   "linked_items": {
     "implements": [
-      "EPIC-005"
+      "EPIC-005",
+      "STORY-049"
     ],
     "implemented-by": [],
     "tested-by": [],
@@ -24,7 +25,8 @@
     "blocked-by": [],
     "relates-to": [],
     "depends-on": [
-      "TASK-037"
+      "TASK-037",
+      "TASK-104"
     ],
     "required-by": [],
     "supersedes": [],
@@ -34,7 +36,9 @@
     "treeview",
     "ui",
     "relationships",
-    "ux"
+    "ux",
+    "filter",
+    "toggle"
   ],
   "commits": [],
   "metadata": {}

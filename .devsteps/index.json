@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 12,
-    "story": 48,
-    "task": 102,
+    "story": 49,
+    "task": 105,
     "bug": 27,
     "spike": 6,
     "feature": 5,
@@ -600,8 +600,8 @@
       "type": "task",
       "title": "TreeView: Add toggle to show/hide related items",
       "status": "draft",
-      "priority": "medium",
-      "updated": "2025-11-24T19:36:06.270Z"
+      "priority": "high",
+      "updated": "2025-12-02T11:38:51.130Z"
     },
     {
       "id": "STORY-005",
@@ -1658,14 +1658,46 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-01T11:10:11.175Z"
+    },
+    {
+      "id": "STORY-049",
+      "type": "story",
+      "title": "Flexible Bug Relationship Types - affects + relates-to",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-02T11:37:47.290Z"
+    },
+    {
+      "id": "TASK-103",
+      "type": "task",
+      "title": "Shared: Add 'affects/affected-by' relationship type",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-02T11:37:58.432Z"
+    },
+    {
+      "id": "TASK-104",
+      "type": "task",
+      "title": "Validation: Allow Bug → Epic/Requirement via relates-to + affects",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-02T11:38:11.598Z"
+    },
+    {
+      "id": "TASK-105",
+      "type": "task",
+      "title": "Agent.md: Update Bug Workflow for relates-to + affects",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-02T11:38:26.614Z"
     }
   ],
   "stats": {
-    "total": 200,
+    "total": 204,
     "by_type": {
       "epic": 12,
-      "story": 48,
-      "task": 102,
+      "story": 49,
+      "task": 105,
       "bug": 27,
       "spike": 6,
       "feature": 5,
@@ -1674,7 +1706,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 103,
-      "draft": 89,
+      "draft": 93,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1696,5 +1728,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-01T11:10:11.175Z"
+  "last_updated": "2025-12-02T11:38:51.130Z"
 }
