@@ -250,10 +250,21 @@
         "icon": "$(eye)"
       },
       {
+        "command": "devsteps.showRelatesTo.active",
+        "title": "$(check) Show 'relates-to' Links",
+        "category": "DevSteps",
+        "enablement": "false"
+      },
+      {
+        "command": "devsteps.showRelatesTo.inactive",
+        "title": "Show 'relates-to' Links",
+        "category": "DevSteps"
+      },
+      {
         "command": "devsteps.hideRelatesTo.active",
         "title": "$(check) Hide 'relates-to' Links",
         "category": "DevSteps",
-        "icon": "$(link)"
+        "enablement": "false"
       },
       {
         "command": "devsteps.hideRelatesTo.inactive",
@@ -420,13 +431,23 @@
           "when": "devsteps.viewMode == 'flat'"
         },
         {
+          "command": "devsteps.showRelatesTo.active",
+          "group": "1_relatesTo@1",
+          "when": "!devsteps.hideRelatesTo"
+        },
+        {
+          "command": "devsteps.showRelatesTo.inactive",
+          "group": "1_relatesTo@1",
+          "when": "devsteps.hideRelatesTo"
+        },
+        {
           "command": "devsteps.hideRelatesTo.active",
-          "group": "1_view@3",
+          "group": "1_relatesTo@2",
           "when": "devsteps.hideRelatesTo"
         },
         {
           "command": "devsteps.hideRelatesTo.inactive",
-          "group": "1_view@3",
+          "group": "1_relatesTo@2",
           "when": "!devsteps.hideRelatesTo"
         },
         {
@@ -570,6 +591,14 @@
         },
         {
           "command": "devsteps.hideDone.inactive",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.showRelatesTo.active",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.showRelatesTo.inactive",
           "when": "false"
         },
         {

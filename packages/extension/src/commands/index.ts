@@ -881,23 +881,41 @@ ${Object.entries(byType)
     }),
   );
 
-  // Toggle Hide RelatesTo - Active command (perform action)
+  // Show RelatesTo - Active command (no-op, already showing)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.hideRelatesTo.active', async () => {
-      if (!checkDevStepsInitialized(treeDataProvider)) return;
-      treeDataProvider.toggleHideRelatesTo();
-      const isHidden = treeDataProvider.getHideRelatesToState();
-      await vscode.commands.executeCommand('setContext', 'devsteps.hideRelatesTo', isHidden);
+    vscode.commands.registerCommand('devsteps.showRelatesTo.active', () => {
+      // No-op - already active
     }),
   );
 
-  // Toggle Hide RelatesTo - Inactive command (perform action)
+  // Show RelatesTo - Inactive command (perform action to show)
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.showRelatesTo.inactive', async () => {
+      if (!checkDevStepsInitialized(treeDataProvider)) return;
+      // Only toggle if currently hidden
+      if (treeDataProvider.getHideRelatesToState()) {
+        treeDataProvider.toggleHideRelatesTo();
+      }
+      await vscode.commands.executeCommand('setContext', 'devsteps.hideRelatesTo', false);
+    }),
+  );
+
+  // Hide RelatesTo - Active command (no-op, already hiding)
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.hideRelatesTo.active', () => {
+      // No-op - already active
+    }),
+  );
+
+  // Hide RelatesTo - Inactive command (perform action to hide)
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.hideRelatesTo.inactive', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
-      treeDataProvider.toggleHideRelatesTo();
-      const isHidden = treeDataProvider.getHideRelatesToState();
-      await vscode.commands.executeCommand('setContext', 'devsteps.hideRelatesTo', isHidden);
+      // Only toggle if currently showing
+      if (!treeDataProvider.getHideRelatesToState()) {
+        treeDataProvider.toggleHideRelatesTo();
+      }
+      await vscode.commands.executeCommand('setContext', 'devsteps.hideRelatesTo', true);
     }),
   );
 

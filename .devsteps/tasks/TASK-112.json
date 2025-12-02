@@ -1,0 +1,41 @@
+{
+  "id": "TASK-112",
+  "type": "task",
+  "category": "Testing",
+  "title": "MCP Node.js Test: Complete Waterfall Hierarchy",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-02T14:57:34.684Z",
+  "updated": "2025-12-02T14:58:19.925Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "tests/integration/mcp/waterfall-hierarchy.test.js"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-051"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-110"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "testing",
+    "mcp",
+    "nodejs",
+    "waterfall",
+    "hierarchy"
+  ],
+  "commits": [],
+  "metadata": {}
+}
