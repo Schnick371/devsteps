@@ -5,7 +5,9 @@
 
 /**
  * Hierarchy relationships enforce parent-child rules
- * - implements/implemented-by: Epic → Story → Task structure
+ * - implements/implemented-by: Enforces proper parent-child hierarchy
+ *   Scrum: Epic → Story/Spike → Task, Bug → Epic, Task → Bug
+ *   Waterfall: Requirement → Feature/Spike → Task, Bug → Requirement, Task → Bug
  */
 export const HIERARCHY_RELATIONSHIPS = ['implements', 'implemented-by'] as const;
 

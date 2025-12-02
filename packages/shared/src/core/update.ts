@@ -85,8 +85,8 @@ export async function updateItem(
       }
     };
 
-    // Validate implemented-by children (Scrum: Epic→Story, Story→Task; Waterfall: Requirement→Feature, Feature→Task)
-    if (['epic', 'story', 'requirement', 'feature'].includes(metadata.type)) {
+    // Validate implemented-by children (Scrum: Epic→Story/Spike, Story→Task, Bug→Task; Waterfall: Requirement→Feature/Spike, Feature→Task, Bug→Task)
+    if (['epic', 'story', 'requirement', 'feature', 'bug'].includes(metadata.type)) {
       validateChildren('implemented-by');
     }
 

@@ -90,15 +90,15 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
   const { type: sourceType } = source;
   const { type: targetType } = target;
 
-  // Task → Story or Spike
+  // Task → Story, Spike, or Bug
   if (sourceType === 'task') {
-    if (targetType === 'story' || targetType === 'spike') {
+    if (targetType === 'story' || targetType === 'spike' || targetType === 'bug') {
       return { valid: true };
     }
     return {
       valid: false,
-      error: 'Tasks can only implement Stories or Spikes in Scrum',
-      suggestion: `Change ${target.id} to a Story or create a Story first, then link Task → Story`,
+      error: 'Tasks can only implement Stories, Spikes, or Bugs in Scrum',
+      suggestion: `Change ${target.id} to a Story/Bug or create one first, then link Task → Story/Bug`,
     };
   }
 
@@ -126,15 +126,15 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
     };
   }
 
-  // Bug → Epic or Story (flexible)
+  // Bug → Epic only (traceability to business initiative)
   if (sourceType === 'bug') {
-    if (targetType === 'epic' || targetType === 'story') {
+    if (targetType === 'epic') {
       return { valid: true };
     }
     return {
       valid: false,
-      error: 'Bugs can only implement Epics or Stories in Scrum',
-      suggestion: `Use "relates-to" for Bug → ${targetType} relationships, or create Epic/Story first`,
+      error: 'Bugs can only implement Epics in Scrum (traceability to business initiative)',
+      suggestion: `Link Bug → Epic to trace defect to business initiative. Use Task to implement the fix.`,
     };
   }
 
@@ -175,15 +175,15 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
   const { type: sourceType } = source;
   const { type: targetType } = target;
 
-  // Task → Feature or Spike
+  // Task → Feature, Spike, or Bug
   if (sourceType === 'task') {
-    if (targetType === 'feature' || targetType === 'spike') {
+    if (targetType === 'feature' || targetType === 'spike' || targetType === 'bug') {
       return { valid: true };
     }
     return {
       valid: false,
-      error: 'Tasks can only implement Features or Spikes in Waterfall',
-      suggestion: `Change ${target.id} to a Feature or create a Feature first, then link Task → Feature`,
+      error: 'Tasks can only implement Features, Spikes, or Bugs in Waterfall',
+      suggestion: `Change ${target.id} to a Feature/Bug or create one first, then link Task → Feature/Bug`,
     };
   }
 
@@ -211,15 +211,15 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
     };
   }
 
-  // Bug → Requirement or Feature (flexible)
+  // Bug → Requirement only (traceability to business requirement)
   if (sourceType === 'bug') {
-    if (targetType === 'requirement' || targetType === 'feature') {
+    if (targetType === 'requirement') {
       return { valid: true };
     }
     return {
       valid: false,
-      error: 'Bugs can only implement Requirements or Features in Waterfall',
-      suggestion: `Use "relates-to" for Bug → ${targetType} relationships, or create Requirement/Feature first`,
+      error: 'Bugs can only implement Requirements in Waterfall (traceability to business requirement)',
+      suggestion: `Link Bug → Requirement to trace defect to business requirement. Use Task to implement the fix.`,
     };
   }
 
