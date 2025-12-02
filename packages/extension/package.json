@@ -248,6 +248,30 @@
         "title": "Hide Completed Items",
         "category": "DevSteps",
         "icon": "$(eye)"
+      },
+      {
+        "command": "devsteps.hideRelatesTo.active",
+        "title": "$(check) Hide 'relates-to' Links",
+        "category": "DevSteps",
+        "icon": "$(link)"
+      },
+      {
+        "command": "devsteps.hideRelatesTo.inactive",
+        "title": "Hide 'relates-to' Links",
+        "category": "DevSteps",
+        "icon": "$(link)"
+      },
+      {
+        "command": "devsteps.hideAffects.active",
+        "title": "$(check) Hide 'affects' Links",
+        "category": "DevSteps",
+        "icon": "$(warning)"
+      },
+      {
+        "command": "devsteps.hideAffects.inactive",
+        "title": "Hide 'affects' Links",
+        "category": "DevSteps",
+        "icon": "$(warning)"
       }
     ],
     "keybindings": [
@@ -359,6 +383,26 @@
         {
           "command": "devsteps.hideDone.inactive",
           "when": "view == devsteps.itemsView && devsteps.initialized && !devsteps.hideDone",
+          "group": "navigation@1"
+        },
+        {
+          "command": "devsteps.hideRelatesTo.active",
+          "when": "view == devsteps.itemsView && devsteps.initialized && devsteps.hideRelatesTo",
+          "group": "navigation@1"
+        },
+        {
+          "command": "devsteps.hideRelatesTo.inactive",
+          "when": "view == devsteps.itemsView && devsteps.initialized && !devsteps.hideRelatesTo",
+          "group": "navigation@1"
+        },
+        {
+          "command": "devsteps.hideAffects.active",
+          "when": "view == devsteps.itemsView && devsteps.initialized && devsteps.hideAffects",
+          "group": "navigation@1"
+        },
+        {
+          "command": "devsteps.hideAffects.inactive",
+          "when": "view == devsteps.itemsView && devsteps.initialized && !devsteps.hideAffects",
           "group": "navigation@1"
         },
         {
@@ -549,6 +593,22 @@
         },
         {
           "command": "devsteps.hideDone.inactive",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.hideRelatesTo.active",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.hideRelatesTo.inactive",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.hideAffects.active",
+          "when": "false"
+        },
+        {
+          "command": "devsteps.hideAffects.inactive",
           "when": "false"
         }
       ]

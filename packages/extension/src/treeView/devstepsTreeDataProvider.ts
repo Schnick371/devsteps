@@ -43,6 +43,8 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     tags: [],
     searchQuery: '',
     hideDone: false,
+    hideRelatesTo: false,
+    hideAffects: false,
   };
   private sortState: SortState = {
     by: 'id',
@@ -236,6 +238,26 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   }
 
   /**
+   * Toggle hide relates-to relationships filter
+   */
+  toggleHideRelatesTo(): void {
+    this.filterState.hideRelatesTo = !this.filterState.hideRelatesTo;
+    this.stateManager?.saveFilterState(this.filterState);
+    this.refresh();
+    this.updateDescription();
+  }
+
+  /**
+   * Toggle hide affects relationships filter
+   */
+  toggleHideAffects(): void {
+    this.filterState.hideAffects = !this.filterState.hideAffects;
+    this.stateManager?.saveFilterState(this.filterState);
+    this.refresh();
+    this.updateDescription();
+  }
+
+  /**
    * Clear all filters
    */
   clearFilters(): void {
@@ -246,6 +268,8 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       tags: [],
       searchQuery: '',
       hideDone: this.filterState.hideDone, // Preserve hide done toggle
+      hideRelatesTo: this.filterState.hideRelatesTo, // Preserve relates-to toggle
+      hideAffects: this.filterState.hideAffects, // Preserve affects toggle
     };
     this.stateManager?.saveFilterState(this.filterState);
     this.refresh();
@@ -346,6 +370,14 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    */
   getHideDoneState(): boolean {
     return this.filterState.hideDone;
+  }
+
+  getHideRelatesToState(): boolean {
+    return this.filterState.hideRelatesTo;
+  }
+
+  getHideAffectsState(): boolean {
+    return this.filterState.hideAffects;
   }
 
   /**

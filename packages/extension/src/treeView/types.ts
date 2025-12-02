@@ -31,6 +31,8 @@ export interface FilterState {
   tags: string[];
   searchQuery: string;
   hideDone: boolean;
+  hideRelatesTo: boolean;
+  hideAffects: boolean;
 }
 
 export interface SortState {
