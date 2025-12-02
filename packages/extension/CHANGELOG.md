@@ -5,6 +5,22 @@ All notable changes to the "DevSteps" extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.2] - 2025-12-02
+
+### Added
+- **TreeView relationship toggles**: New visibility controls for `relates-to` and `affects` relationships (TASK-043)
+  - `relates-to` toggle in 'View & Sort' submenu (horizontal connections)
+  - `affects` relationships always visible (critical impact information)
+  - Semantically meaningful toggle icons (`link-external`, `shield`)
+  - Proper toggle pattern with `enablement: false` for active state
+
+### Changed
+- **Toolbar reorganization**: Simplified UI for better usability
+  - Removed `hideAffects` toggle (affects always visible)
+  - Moved `hideRelatesTo` from toolbar to 'View & Sort' submenu
+  - Cleaner navigation with only essential `hideDone` toggle in toolbar
+- Updated `@schnick371/devsteps-shared` to 0.6.2 with flexible Bug relationships
+
 ## [0.6.1] - 2025-12-02
 
 ### Fixed

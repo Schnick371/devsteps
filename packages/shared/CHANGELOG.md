@@ -5,6 +5,21 @@ All notable changes to `@schnick371/devsteps-shared` will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.2] - 2025-12-02
+
+### Added
+- **Flexible Bug relationships**: New `affects`/`affected-by` relationship types (STORY-049, TASK-103)
+  - Bugs can now use `relates-to` or `affects` for Epic/Requirement connections
+  - `relates-to`: General context/scope relationship
+  - `affects`: Impact/deliverable relationship
+  - Validation rejects `Bug implements Epic/Requirement` (TASK-104)
+
+### Changed
+- **Bug workflow**: Updated to support flexible relationship types
+  - Bug items focus on problem description only
+  - Task items implement solutions (Bug implemented-by Task)
+  - Documentation updated with new Bug workflow (TASK-105)
+
 ## [0.6.1] - 2025-12-02
 
 ### Fixed
