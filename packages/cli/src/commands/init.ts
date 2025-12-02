@@ -485,6 +485,20 @@ The devsteps system integrates with:
       }
     }
 
+    // Copy HIERARCHY.md
+    const hierarchySource = join(packageRoot, '.devsteps', 'HIERARCHY.md');
+    if (existsSync(hierarchySource)) {
+      const hierarchyContent = readFileSync(hierarchySource, 'utf8');
+      writeFileSync(join(devstepsDir, 'HIERARCHY.md'), hierarchyContent);
+    }
+
+    // Copy AI-GUIDE.md
+    const aiGuideSource = join(packageRoot, '.devsteps', 'AI-GUIDE.md');
+    if (existsSync(aiGuideSource)) {
+      const aiGuideContent = readFileSync(aiGuideSource, 'utf8');
+      writeFileSync(join(devstepsDir, 'AI-GUIDE.md'), aiGuideContent);
+    }
+
     spinner.succeed('Project initialized successfully!');
 
     console.log();
@@ -503,6 +517,9 @@ The devsteps system integrates with:
     console.log('      ', chalk.cyan('.github/prompts/devsteps-plan-work.prompt.md'));
     console.log('      ', chalk.cyan('.github/prompts/devsteps-start-work.prompt.md'));
     console.log('      ', chalk.cyan('.github/prompts/devsteps-workflow.prompt.md'));
+    console.log(chalk.green('✓'), 'Documentation:');
+    console.log('      ', chalk.cyan('.devsteps/HIERARCHY.md'));
+    console.log('      ', chalk.cyan('.devsteps/AI-GUIDE.md'));
 
     if (options.author) {
       console.log(chalk.green('✓'), 'Default author:', chalk.cyan(options.author));

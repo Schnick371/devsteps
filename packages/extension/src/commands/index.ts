@@ -261,7 +261,6 @@ export function registerCommands(
         if (treeDataProvider) {
           treeDataProvider.refresh();
         }
-        vscode.window.showInformationMessage(`✅ Created ${itemType.label}: ${title}`);
         
         // Optionally open the created item
         const openItem = await vscode.window.showInformationMessage(
@@ -592,7 +591,7 @@ ${Object.entries(byType)
       }
 
       vscode.env.clipboard.writeText(itemId);
-      vscode.window.showInformationMessage(`📋 Copied ${itemId} to clipboard`);
+      logger.info(`Copied ${itemId} to clipboard`);
     }),
   );
 
@@ -800,7 +799,6 @@ ${Object.entries(byType)
       if (selected) {
         if (!checkDevStepsInitialized(treeDataProvider)) return;
         treeDataProvider.setStatusFilter(selected.map((s) => s.value));
-        vscode.window.showInformationMessage(`Filtered by status: ${selected.map((s) => s.label).join(', ')}`);
       }
     }),
   );
@@ -824,7 +822,6 @@ ${Object.entries(byType)
       if (selected) {
         if (!checkDevStepsInitialized(treeDataProvider)) return;
         treeDataProvider.setPriorityFilter(selected.map((s) => s.value));
-        vscode.window.showInformationMessage(`Filtered by priority: ${selected.map((s) => s.label).join(', ')}`);
       }
     }),
   );
@@ -852,7 +849,6 @@ ${Object.entries(byType)
       if (selected) {
         if (!checkDevStepsInitialized(treeDataProvider)) return;
         treeDataProvider.setTypeFilter(selected.map((s) => s.value));
-        vscode.window.showInformationMessage(`Filtered by type: ${selected.map((s) => s.label).join(', ')}`);
       }
     }),
   );
@@ -862,7 +858,6 @@ ${Object.entries(byType)
     vscode.commands.registerCommand('devsteps.clearFilters', () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.clearFilters();
-      vscode.window.showInformationMessage('✨ All filters cleared');
     }),
   );
 
@@ -922,7 +917,6 @@ ${Object.entries(byType)
         sortBy.value as any,
         sortOrder.value as 'asc' | 'desc',
       );
-      vscode.window.showInformationMessage(`Sorted by ${sortBy.label} (${sortOrder.label})`);
     }),
   );
 

@@ -5,6 +5,47 @@ All notable changes to the "DevSteps" extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.1] - 2025-12-02
+
+### Fixed
+- **Bug validation rules**: Fixed hierarchy relationship validation
+  - Task can now implement Bug (Task = solution for Bug defect)
+  - Bug only implements Epic/Requirement (proper traceability to business initiative)
+  - Updated validation prevents incorrect `Bug relates-to Epic` relationships
+  - Ensures consistent parent-child status when linking items
+
+### Changed
+- Updated `@schnick371/devsteps-shared` to 0.6.1 with corrected validation logic
+
+## [0.6.0] - 2025-11-23
+
+### Added
+- **NPX Zero-Configuration Architecture**: MCP server runs via `npx` (no manual install needed)
+- **Automatic MCP Registration**: Extension auto-registers MCP server with Claude Desktop
+- **Welcome Screen**: Interactive first-run experience with model recommendations
+  - Claude Sonnet 4+ recommended for optimal DevSteps experience
+  - Automatic reload after MCP initialization
+- **Smooth TreeView Initialization**: No window reload required after setup
+- **Production Deployment**: Published to VS Code Marketplace
+
+### Fixed
+- **MCP Server Stability**: Global unhandled rejection handler prevents crashes
+- **Workspace Path Handling**: Passed as CLI argument (standard MCP pattern)
+- **Extension Bundling**: Fixed CommonJS/ESM compatibility issues
+- **FileSystemWatcher**: Created after validation checks (prevents early return issues)
+- **Commander Package**: Resolved deployment error in bundled extension
+
+### Changed
+- **Architecture**: Migrated from manual install to NPX-based MCP server
+- **MCP Server Package**: Published to npm as `@schnick371/devsteps-mcp-server@0.6.0`
+- **CLI Package**: Published to npm as `@schnick371/devsteps-cli@0.6.0`
+- **Shared Package**: Published to npm as `@schnick371/devsteps-shared@0.6.0`
+- **Minimum VS Code**: 1.99.0 (for MCP API support)
+
+### Performance
+- MCP server starts reliably even without existing `.devsteps` directory
+- Extension activation < 100ms
+
 ## [0.4.0] - 2025-11-23
 
 ## [Unreleased]

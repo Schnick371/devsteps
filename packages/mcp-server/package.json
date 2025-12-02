@@ -1,6 +1,6 @@
 {
   "name": "@schnick371/devsteps-mcp-server",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "type": "module",
   "description": "Never Code Alone. MCP server for AI-assisted developer task tracking - team up with your AI.",
   "author": "devsteps.dev",
@@ -35,17 +35,19 @@
   "files": [
     "dist",
     "bin",
-    ".github"
+    ".github",
+    ".devsteps"
   ],
   "scripts": {
-    "build": "tsc && node esbuild.cjs --production",
+    "build": "tsc && node esbuild.cjs --production && npm run copy:docs",
     "dev": "tsc --watch",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist .devsteps",
     "start": "node dist/index.js",
     "start:debug": "LOG_LEVEL=debug node dist/index.js",
     "start:trace": "LOG_LEVEL=trace node dist/index.js",
-    "bundle": "node esbuild.cjs --production"
+    "bundle": "node esbuild.cjs --production",
+    "copy:docs": "mkdir -p .devsteps && cp ../../.devsteps/HIERARCHY.md ../../.devsteps/AI-GUIDE.md .devsteps/"
   },
   "exports": {
     ".": "./dist/index.js",

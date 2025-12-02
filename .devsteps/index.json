@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 12,
-    "story": 46,
-    "task": 96,
+    "story": 48,
+    "task": 102,
     "bug": 27,
     "spike": 6,
     "feature": 5,
@@ -1369,7 +1369,7 @@
       "title": "Fix story file path - openItem uses naive pluralization",
       "status": "done",
       "priority": "high",
-      "updated": "2025-11-28T09:57:37.567Z"
+      "updated": "2025-12-01T10:48:00.567Z"
     },
     {
       "id": "STORY-038",
@@ -1415,9 +1415,9 @@
       "id": "TASK-087",
       "type": "task",
       "title": "Publish extension to VS Code Marketplace",
-      "status": "draft",
+      "status": "in-progress",
       "priority": "critical",
-      "updated": "2025-11-28T10:27:39.028Z"
+      "updated": "2025-11-30T20:29:56.218Z"
     },
     {
       "id": "TASK-088",
@@ -1594,23 +1594,87 @@
       "status": "done",
       "priority": "critical",
       "updated": "2025-11-30T20:04:29.431Z"
+    },
+    {
+      "id": "STORY-047",
+      "type": "story",
+      "title": "Improve Copilot Hierarchy Guidance - Prevent Common Mistakes",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-01T10:07:40.525Z"
+    },
+    {
+      "id": "TASK-097",
+      "type": "task",
+      "title": "Prevent conflicting relation types to same target",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-01T10:27:02.546Z"
+    },
+    {
+      "id": "TASK-098",
+      "type": "task",
+      "title": "Update Copilot guidance - Bug→Task uses implemented-by",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-01T10:08:29.284Z"
+    },
+    {
+      "id": "TASK-099",
+      "type": "task",
+      "title": "Deploy HIERARCHY.md + AI-GUIDE.md to .devsteps/ on init",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-12-01T10:13:38.138Z"
+    },
+    {
+      "id": "TASK-100",
+      "type": "task",
+      "title": "Doctor: Detect dependency cycles (warning only)",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-01T10:27:02.550Z"
+    },
+    {
+      "id": "TASK-101",
+      "type": "task",
+      "title": "Remove unnecessary notification popups - UX improvement",
+      "status": "done",
+      "priority": "medium",
+      "updated": "2025-12-01T11:01:07.874Z"
+    },
+    {
+      "id": "STORY-048",
+      "type": "story",
+      "title": "Extension UX Polish - Non-Intrusive User Experience",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-12-01T11:01:35.437Z"
+    },
+    {
+      "id": "TASK-102",
+      "type": "task",
+      "title": "Doctor: Check Copilot instruction files exist",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-01T11:10:11.175Z"
     }
   ],
   "stats": {
-    "total": 192,
+    "total": 200,
     "by_type": {
       "epic": 12,
-      "story": 46,
-      "task": 96,
+      "story": 48,
+      "task": 102,
       "bug": 27,
       "spike": 6,
       "feature": 5,
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 3,
-      "done": 100,
-      "draft": 85,
+      "in-progress": 4,
+      "done": 103,
+      "draft": 89,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1632,5 +1696,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-11-30T20:04:29.431Z"
+  "last_updated": "2025-12-01T11:10:11.175Z"
 }

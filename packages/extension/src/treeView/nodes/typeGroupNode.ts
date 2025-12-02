@@ -2,11 +2,11 @@
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
  * 
- * Type Group Node - Groups items by type in flat view (e.g., "EPICS (3)")
+ * Type Group Node - Groups items by type in flat view (e.g., "STORIES (4)")
  */
 
 import * as vscode from 'vscode';
-import { TreeNode, type FilterState, type WorkItem } from '../types.js';
+import { TreeNode, TYPE_TO_DIRECTORY, type FilterState, type WorkItem } from '../types.js';
 import { WorkItemNode } from './workItemNode.js';
 
 export class TypeGroupNode extends TreeNode {
@@ -25,8 +25,11 @@ export class TypeGroupNode extends TreeNode {
       ? vscode.TreeItemCollapsibleState.Expanded
       : vscode.TreeItemCollapsibleState.Collapsed;
 
+    // Use TYPE_TO_DIRECTORY for correct pluralization (story → stories, not storys)
+    const pluralLabel = TYPE_TO_DIRECTORY[this.type] || `${this.type}s`;
+    
     const item = new vscode.TreeItem(
-      `${this.type.toUpperCase()}S (${this.count})`,
+      `${pluralLabel.toUpperCase()} (${this.count})`,
       collapsibleState,
     );
     item.contextValue = 'typeGroup';
@@ -48,14 +51,9 @@ export class TypeGroupNode extends TreeNode {
   /**
    * Get the type identifier for state tracking
    */
-  getType(): string {
-    return this.type;
-  }
-
-  /**
-   * Get full tracking key including methodology
-   */
-  getTrackingKey(): string {
-    return this.parentMethodology ? `${this.parentMethodology}-${this.type}` : this.type;
+  getTypeId(): string {
+    return this.parentMethodology 
+      ? `${this.parentMethodology}-${this.type}`
+      : this.type;
   }
 }

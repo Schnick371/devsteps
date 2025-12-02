@@ -2,7 +2,7 @@
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Interactive planning session - work with developer to define and structure work items before implementation'
-tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'GitKraken/*', 'devsteps/*', 'usages', 'problems', 'changes', 'testFailure', 'fetch', 'todos', 'runSubagent']
+tools: ['search', 'devsteps/*', 'GitKraken/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'testFailure', 'fetch', 'todos', 'runSubagent']
 ---
 
 # 🎯 Plan Work - Interactive Planning Session
