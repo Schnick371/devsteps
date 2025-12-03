@@ -1,42 +1,33 @@
 ## Objective
 
-Update AI-GUIDE-COMPACT.md to explain Jira blocks semantics (hierarchy + flexible).
+Update AI-GUIDE-COMPACT.md to explain Jira 2025 blocks dual nature semantics.
 
-## Changes
+## Implementation Complete ✅
+
+**Changes Made:**
 
 **File: .devsteps/AI-GUIDE-COMPACT.md**
 
-**Section "Relation Types" - Lines ~80-115:**
+1. **MCP Tools List** (line ~3):
+   - Removed "affects" from devsteps-link relationships list
+   - Updated to: implements/relates-to/blocks/depends-on/tested-by/supersedes
 
-**Update implements section:**
-```markdown
-**implements (strict hierarchy):**
-- Parent-child relationships only
-- Scrum: Epic→Story|Spike, Story→Task, Bug→Task
-- Waterfall: Requirement→Feature|Spike, Feature→Task, Bug→Task
-```
+2. **Bug Handling Section** (lines ~39-42):
+   - Changed from "Use implements relation (NOT affects)"
+   - Updated to: "Use implements for hierarchy OR blocks for blocking impact"
+   - Reflects dual-purpose nature of blocks for Bug
 
-**Update blocks section (currently line ~95):**
-```markdown
-**blocks/blocked-by (dual purpose - Jira 2025):**
-- **Hierarchy mode**: Bug blocks Epic/Story/Requirement/Feature (parent-child + blocking)
-- **Flexible mode**: Story→Story, Task→Task, etc. (sequencing/dependencies, no validation)
-- Jira semantics: One issue prevents another from progressing
-- Use for Bug when it both belongs to AND prevents completion of Epic/Story
-```
+3. **Relation Types Section** (lines ~78-95):
+   - **relates-to**: Clarified as "without hierarchy or blocking", informational links
+   - **affects**: Completely removed (3 lines eliminated)
+   - **blocks/blocked-by**: Extensive update to explain dual nature:
+     * Hierarchy mode: Bug blocks Epic/Story/Requirement/Feature (validated)
+     * Flexible mode: Story→Story, Task→Task (no validation)
+     * Added Jira semantics explanation
+     * Usage guidance for Bug blocking scenarios
 
-**Remove affects section entirely (lines ~87-94)**
-
-**Update relates-to section:**
-```markdown
-**relates-to (flexible):**
-- Cross-references without hierarchy or blocking
-- Use for general context, informational links
-- Spike informs Story/Feature via relates-to
-```
-
-## Validation
-
-- Line count stays ≤130 lines (currently 123)
-- Explains dual nature of blocks clearly
-- No mention of affects/affected-by
+**Impact:**
+- Document now accurately reflects TASK-124/TASK-125 implementation
+- Clear guidance for AI agents on when to use blocks hierarchy vs flexible
+- Affects completely removed per STORY-053
+- Line count: 121 lines (within 130 limit)

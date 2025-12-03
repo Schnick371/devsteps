@@ -1855,9 +1855,9 @@
       "id": "STORY-054",
       "type": "story",
       "title": "Move blocks/blocked-by to Hierarchy Relations",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-12-03T08:58:40.541Z"
+      "updated": "2025-12-03T09:27:21.538Z"
     },
     {
       "id": "TASK-118",
@@ -1935,9 +1935,9 @@
       "id": "TASK-127",
       "type": "task",
       "title": "AI-GUIDE-COMPACT: Update for blocks dual nature",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-03T09:00:18.238Z"
+      "updated": "2025-12-03T09:27:21.536Z"
     }
   ],
   "stats": {
@@ -1953,8 +1953,8 @@
     },
     "by_status": {
       "in-progress": 5,
-      "done": 121,
-      "draft": 105,
+      "done": 123,
+      "draft": 103,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1976,5 +1976,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T09:26:28.694Z"
+  "last_updated": "2025-12-03T09:27:21.538Z"
 }

@@ -3,11 +3,11 @@
   "type": "task",
   "category": "Documentation",
   "title": "AI-GUIDE-COMPACT: Update for blocks dual nature",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T09:00:18.238Z",
-  "updated": "2025-12-03T09:00:39.488Z",
+  "updated": "2025-12-03T09:27:21.536Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".devsteps/AI-GUIDE-COMPACT.md"
