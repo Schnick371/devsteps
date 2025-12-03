@@ -1943,9 +1943,9 @@
       "id": "BUG-030",
       "type": "bug",
       "title": "Extension TreeView missing blocks/blocked-by relationship display",
-      "status": "in-progress",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-12-03T09:54:35.649Z"
+      "updated": "2025-12-03T09:55:21.321Z"
     }
   ],
   "stats": {
@@ -1960,8 +1960,8 @@
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 5,
-      "done": 124,
+      "in-progress": 4,
+      "done": 125,
       "draft": 103,
       "blocked": 1,
       "obsolete": 3
@@ -1984,5 +1984,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T09:54:35.649Z"
+  "last_updated": "2025-12-03T09:55:21.321Z"
 }
