@@ -190,4 +190,109 @@ Package now contains:
 - Versions 0.6.4-0.6.13: ALL broken (never worked via npm)
 - Version 0.6.1: Worked by accident (had tsc --watch running)
 - Version 0.5.10: Worked by accident
-- CLI package: Uses Node16 resolution (works correctly)
+- CLI package: SAME ISSUE DISCOVERED (see CLI Analysis section below)
+
+---
+
+## CLI Package Analysis (Dec 3, 2025)
+
+### Current CLI Configuration
+**packages/cli/tsconfig.json:**
+- ✅ `"module": "Node16"` (correct)
+- ✅ `"moduleResolution": "Node16"` (correct)
+
+**packages/cli/package.json:**
+- ❌ NO `"type": "module"` field
+- ✅ `"bin": { "devsteps": "./dist/index.cjs" }` (points to bundled version)
+
+### The Problem
+When `"module": "Node16"` is used WITHOUT `"type": "module"` in package.json:
+- TypeScript generates **ESM code** (import/export)
+- Node.js interprets files as **CommonJS** (because no type field)
+- Result: **"The current file is a CommonJS module whose imports will produce 'require' calls; however, the referenced file is an ECMAScript module"**
+
+### Why CLI 0.6.11 Works
+CLI was built BEFORE the shared package had `"type": "module"`. The old build succeeded and the bundled `index.cjs` was published. Now:
+- ✅ Published version 0.6.11 works (has old bundled index.cjs)
+- ❌ **Local rebuild FAILS** (22 TypeScript errors)
+- ❌ **Cannot be rebuilt from source!**
+
+### Testing Results
+```bash
+# Published version works:
+npx @schnick371/devsteps-cli@0.6.11 --version
+# Output: 0.1.0 ✅
+
+# Local rebuild fails:
+npm run build
+# ERROR: TS1479: The current file is a CommonJS module... ❌
+```
+
+### CLI vs MCP Comparison
+
+| Aspect | MCP Server | CLI |
+|--------|-----------|-----|
+| **tsconfig module** | ~~"Bundler"~~ → "Node16" ✅ | "Node16" ✅ |
+| **package.json type** | ✅ "module" | ❌ Missing |
+| **bin target** | `dist/index.js` (tsc output) | `dist/index.cjs` (esbuild bundle) |
+| **Build strategy** | tsc + esbuild (dual) | tsc + esbuild (bundle only) |
+| **Current status** | ✅ Fixed in 0.6.14 | ⚠️ Published works, rebuild fails |
+
+### Root Cause
+**Shared package added `"type": "module"` but CLI package.json doesn't have it!**
+
+When CLI imports from `@schnick371/devsteps-shared`:
+- Shared is ESM (has "type": "module")
+- CLI is CommonJS (no "type" field)
+- TypeScript detects mismatch → 22 errors
+
+### Solution for CLI
+Add `"type": "module"` to `packages/cli/package.json`:
+
+```json
+{
+  "name": "@schnick371/devsteps-cli",
+  "version": "0.6.11",
+  "type": "module",  // ← ADD THIS
+  // ... rest
+}
+```
+
+### Impact Assessment
+1. ✅ Published CLI 0.6.11 still works (bundled binary)
+2. ❌ Cannot rebuild 0.6.11 from source
+3. ⚠️ All future CLI development blocked until fixed
+4. 🔧 Simple fix: Add "type": "module" + rebuild
+
+### Files to Modify (COMPLETED)
+- ✅ `packages/cli/package.json` (added "type": "module")
+- ✅ `packages/cli/package.json` (bumped to 0.6.12)
+
+### Results - CLI 0.6.12
+✅ **Local rebuild now works!** (was failing with 22 TypeScript errors)
+✅ **Published and tested via npm:** `npx @schnick371/devsteps-cli@0.6.12` works
+✅ **All .js files generated correctly**
+✅ **index.cjs bundled successfully** (867KB)
+✅ **Package size reduced:** 325KB → 182KB (due to proper tree-shaking with ESM)
+
+### CLI Testing
+```bash
+# Build test:
+npm run build
+# Result: SUCCESS (was failing before) ✅
+
+# Local test:
+node dist/index.cjs --version
+# Output: 0.1.0 ✅
+
+# npm test:
+npx @schnick371/devsteps-cli@0.6.12 devsteps --version
+# Output: 0.1.0 ✅
+```
+
+### Prevention
+**CRITICAL: When using ESM in monorepo:**
+- ✅ ALL packages must have `"type": "module"` in package.json
+- ✅ Root package.json should also have `"type": "module"`
+- ✅ Test local rebuild before publishing
+- ✅ If shared is ESM, ALL consumers must be ESM
