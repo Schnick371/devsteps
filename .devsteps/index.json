@@ -1839,9 +1839,9 @@
       "id": "EPIC-014",
       "type": "epic",
       "title": "Jira 2025 Link Semantics Alignment",
-      "status": "draft",
+      "status": "in-progress",
       "priority": "high",
-      "updated": "2025-12-03T08:58:08.397Z"
+      "updated": "2025-12-03T09:13:33.194Z"
     },
     {
       "id": "STORY-053",
@@ -1871,9 +1871,9 @@
       "id": "TASK-119",
       "type": "task",
       "title": "relationships.ts: Remove affects/affected-by",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-12-03T08:59:34.152Z"
+      "updated": "2025-12-03T09:13:44.157Z"
     },
     {
       "id": "TASK-120",
@@ -1952,9 +1952,9 @@
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 4,
-      "done": 111,
-      "draft": 116,
+      "in-progress": 5,
+      "done": 112,
+      "draft": 114,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1976,5 +1976,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T09:00:18.238Z"
+  "last_updated": "2025-12-03T09:13:44.157Z"
 }

@@ -14,16 +14,13 @@ export const HIERARCHY_RELATIONSHIPS = ['implements', 'implemented-by'] as const
 /**
  * Flexible relationships allow connections between any item types
  * - relates-to: Generic association
- * - affects/affected-by: Impact relationships (Bug affects Epic/Requirement)
- * - blocks/blocked-by: Blocking dependencies
+ * - blocks/blocked-by: Blocking dependencies (will move to hierarchy)
  * - depends-on/required-by: Technical dependencies
  * - tested-by/tests: Testing relationships
  * - supersedes/superseded-by: Version/replacement tracking
  */
 export const FLEXIBLE_RELATIONSHIPS = [
   'relates-to',
-  'affects',
-  'affected-by',
   'blocks',
   'blocked-by',
   'depends-on',

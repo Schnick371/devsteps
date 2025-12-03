@@ -2,39 +2,22 @@
 
 Remove `affects/affected-by` from FLEXIBLE_RELATIONSHIPS array and update TypeScript types.
 
-## Changes
+## Implementation Complete ✅
+
+**Changes Made:**
 
 **File: packages/shared/src/schemas/relationships.ts**
+- Removed `'affects'` and `'affected-by'` from FLEXIBLE_RELATIONSHIPS array
+- Updated JSDoc comment to remove affects/affected-by reference
+- Added note: "blocks/blocked-by: Blocking dependencies (will move to hierarchy)"
 
-```typescript
-export const FLEXIBLE_RELATIONSHIPS = [
-  'relates-to',
-  // REMOVE: 'affects', 'affected-by',
-  'blocks',
-  'blocked-by',
-  'depends-on',
-  'required-by',
-  'tested-by',
-  'tests',
-  'supersedes',
-  'superseded-by',
-] as const;
-```
+**Validation Results:**
+- ✅ TypeScript compilation successful (`npm run build`)
+- ✅ No errors in shared package
+- ✅ Generated types in `dist/schemas/relationships.d.ts` correct
+- ✅ `FlexibleRelation` type excludes 'affects' and 'affected-by'
+- ✅ `FLEXIBLE_RELATIONSHIPS` array now: `["relates-to", "blocks", "blocked-by", "depends-on", "required-by", "tested-by", "tests", "supersedes", "superseded-by"]`
 
-**Update JSDoc comment:**
-```typescript
-/**
- * Flexible relationships allow connections between any item types
- * - relates-to: Generic association
- * - blocks/blocked-by: Blocking dependencies (will move to hierarchy)
- * - depends-on/required-by: Technical dependencies
- * - tested-by/tests: Testing relationships
- * - supersedes/superseded-by: Version/replacement tracking
- */
-```
-
-## Validation
-
-- Run `npm run build`
-- Verify TypeScript compilation succeeds
-- Check `FlexibleRelation` type no longer includes 'affects'
+**Impact:**
+- Breaking change - consumers must be updated (TASK-120, TASK-121, TASK-122, TASK-123)
+- TASK-120 now unblocked (depends-on this task)
