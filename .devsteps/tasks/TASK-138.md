@@ -1,5 +1,15 @@
 # Fix MCP Server bin Configuration - TypeScript Bundler Resolution Issue
 
+**Status:** ✅ COMPLETED  
+**Version:** 0.6.14 published and working  
+**Date:** Dec 3, 2025
+
+## Summary
+
+MCP server versions 0.6.4-0.6.13 ALL failed when installed from npm. Root cause: TypeScript `"moduleResolution": "Bundler"` doesn't emit `.js` files (designed for Vite/Bun, not Node.js).
+
+**Solution:** Changed to `"Node16"` resolution → tsc now emits `.js` files → npm package works!
+
 ## Root Cause Analysis (Dec 3, 2025)
 
 ### The REAL Problem
