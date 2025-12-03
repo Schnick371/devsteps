@@ -3,11 +3,11 @@
   "type": "task",
   "category": "CLI",
   "title": "CLI: Remove affects from commands",
-  "status": "draft",
+  "status": "done",
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T08:59:34.160Z",
-  "updated": "2025-12-03T09:00:39.486Z",
+  "updated": "2025-12-03T09:17:07.237Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/cli/src/commands/index.ts",

@@ -88,9 +88,9 @@ program
 // Link items
 program
   .command('link')
-  .description('Create a relationship between two items. HIERARCHY (implements): Scrum: Epic→Story|Spike|Bug, Story→Task|Bug, Bug→Task. Waterfall: Requirement→Feature|Spike|Bug, Feature→Task|Bug, Bug→Task. FLEXIBLE: relates-to, affects, blocks, depends-on, tested-by, supersedes.')
+  .description('Create a relationship between two items. HIERARCHY (implements): Scrum: Epic→Story|Spike|Bug, Story→Task|Bug, Bug→Task. Waterfall: Requirement→Feature|Spike|Bug, Feature→Task|Bug, Bug→Task. FLEXIBLE: relates-to, blocks, depends-on, tested-by, supersedes.')
   .argument('<source-id>', 'Source item ID')
-  .argument('<relation-type>', 'Relation type: implements|tested-by|blocks|relates-to|affects|depends-on|supersedes')
+  .argument('<relation-type>', 'Relation type: implements|tested-by|blocks|relates-to|depends-on|supersedes')
   .argument('<target-id>', 'Target item ID')
   .option('-f, --force', 'Override validation rules (use with caution)')
   .action(linkCommand);

@@ -1895,9 +1895,9 @@
       "id": "TASK-122",
       "type": "task",
       "title": "CLI: Remove affects from commands",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-12-03T08:59:34.160Z"
+      "updated": "2025-12-03T09:17:07.237Z"
     },
     {
       "id": "TASK-123",
@@ -1953,8 +1953,8 @@
     },
     "by_status": {
       "in-progress": 5,
-      "done": 114,
-      "draft": 112,
+      "done": 115,
+      "draft": 111,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1976,5 +1976,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T09:16:19.874Z"
+  "last_updated": "2025-12-03T09:17:07.237Z"
 }

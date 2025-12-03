@@ -434,8 +434,6 @@ export async function linkCommand(
       'depends-on': 'required-by',
       'required-by': 'depends-on',
       'relates-to': 'relates-to',
-      affects: 'affected-by',
-      'affected-by': 'affects',
       supersedes: 'superseded-by',
       'superseded-by': 'supersedes',
     };
