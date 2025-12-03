@@ -5,6 +5,18 @@ All notable changes to `@schnick371/devsteps-mcp-server` will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.3] - 2025-12-03
+
+### Breaking Changes ⚠️
+- **REMOVED**: `affects`/`affected-by` from link handlers (STORY-053, TASK-121)
+  - Removed from tool schema and descriptions
+  - AI agents must use `relates-to` or `blocks` instead
+
+### Changed
+- Updated to use `@schnick371/devsteps-shared@0.6.3`
+- Link validation enforces Bug `blocks` hierarchy
+- Documentation updated for Jira 2025 standard
+
 ## [0.6.1] - 2025-12-02
 
 ### Fixed

@@ -1,59 +1,41 @@
-## Business Value
+## Objective
 
-Align DevSteps relationship semantics with **Jira 2025 standard** instead of Azure DevOps mix.
+Align DevSteps with Jira 2025 link semantics by removing Azure DevOps-specific relations and migrating blocks to hierarchy.
 
-## Current Problem
+## Implementation Complete ✅
 
-- `affects/affected-by` is **Azure DevOps CMMI only** (NOT Jira!)
-- `blocks/blocked-by` currently in FLEXIBLE, but Jira uses it for hierarchy
-- Bug→Epic relationship unclear (implements vs blocks vs affects)
-- Documentation references "Azure DevOps/Jira 2025" inconsistently
+**Two Stories Completed:**
 
-## Jira 2025 Standard
+### STORY-053: Remove Azure DevOps affects/affected-by Relations
+1. ✅ TASK-118: Corrected STORY-049 documentation
+2. ✅ TASK-119: Removed affects from relationships.ts
+3. ✅ TASK-120: Removed affects from schema types + add.ts
+4. ✅ TASK-121: Removed affects from MCP handlers/tools
+5. ✅ TASK-122: Removed affects from CLI commands
+6. ✅ TASK-123: Removed affects from Extension TreeView
 
-**Core Link Types:**
-- `relates to` - Flexible cross-references
-- `blocks/is blocked by` - Hierarchy + Blocking (Bug blocks Epic)
-- `duplicates/is duplicated by` - Duplicate tracking
-- `clones/is cloned by` - Clone tracking
-- **NO "affects"** - Does not exist in Jira!
-
-## Solution Architecture
-
-**Move to HIERARCHY_RELATIONSHIPS:**
-```typescript
-HIERARCHY_RELATIONSHIPS = ['implements', 'implemented-by', 'blocks', 'blocked-by']
-```
-
-**Remove from FLEXIBLE_RELATIONSHIPS:**
-```typescript
-// REMOVE: affects, affected-by (Azure DevOps CMMI only!)
-FLEXIBLE_RELATIONSHIPS = ['relates-to', 'depends-on', 'required-by', 'tested-by', 'tests', 'supersedes', 'superseded-by']
-```
-
-**Bug Workflow (Jira-compliant):**
-1. Bug `blocks` Epic/Story/Requirement/Feature (hierarchy)
-2. Task `implements` Bug (fix solution)
-3. Bug can use `relates-to` for context (flexible)
-
-## Success Criteria
-
-- ✅ `blocks/blocked-by` in HIERARCHY_RELATIONSHIPS with validation
-- ✅ `affects/affected-by` removed from all code/docs
-- ✅ validation.ts updated for Bug→Epic via blocks
-- ✅ All docs reference Jira 2025 only (no Azure DevOps)
-- ✅ STORY-049 corrected (was based on wrong Azure DevOps research)
-- ✅ CLI/MCP descriptions updated
-- ✅ Tests pass with new semantics
-
-## Impact
+### STORY-054: Move blocks/blocked-by to Hierarchy Relations
+7. ✅ TASK-125: Added Bug blocks validation rules
+8. ✅ TASK-124: Moved blocks to HIERARCHY_RELATIONSHIPS
+9. ✅ TASK-126: Updated HIERARCHY-COMPACT.md
+10. ✅ TASK-127: Updated AI-GUIDE-COMPACT.md
 
 **Breaking Changes:**
-- Existing `affects` links must migrate to `blocks` or `relates-to`
-- CLI/MCP will reject `affects` relation type
-- Documentation examples updated
+- `affects/affected-by` completely removed from codebase
+- `blocks/blocked-by` now hierarchy for Bug, flexible for others
+- Bug blocks Epic/Story (Scrum) or Requirement/Feature (Waterfall) validated
 
-**Benefits:**
-- Industry standard compliance (Jira 2025)
-- Semantic clarity (blocks = hierarchy + impediment)
-- AI-friendly (no Azure DevOps confusion)
+**Jira 2025 Standard Achieved:**
+- ✅ implements/implemented-by: Standard hierarchy
+- ✅ blocks/blocked-by: Hierarchy for Bug, flexible for others
+- ✅ relates-to: Flexible cross-references
+- ✅ depends-on, tested-by, supersedes: Flexible
+- ❌ affects: Removed (Azure DevOps CMMI only)
+
+**Validation:**
+- All packages build successfully
+- TypeScript compilation clean
+- Documentation updated
+- 10 commits with full traceability
+
+**Supersedes:** STORY-049 (affects implementation based on incomplete research)

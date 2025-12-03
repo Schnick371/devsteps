@@ -1,6 +1,6 @@
 {
   "name": "@schnick371/devsteps-cli",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "license": "Apache-2.0",
   "description": "Never Code Alone. CLI for AI-assisted developer task tracking.",
   "author": "Thomas Hertel <thomas.hantke@devsteps.dev>",

@@ -2,7 +2,7 @@
 
 ## Scrum/Agile Hierarchy
 
-**Industry Standard (Azure DevOps/Jira 2025):**
+**Industry Standard (Jira 2025):**
 
 ```
 Theme (strategic, optional)
@@ -18,20 +18,21 @@ Theme (strategic, optional)
             └── Task (Level 3) - fix
 ```
 
-**Allowed Links (implements):**
-- Epic → Story|Spike|Bug
-- Story → Task|Bug
-- Bug → Task (fix)
-- Spike → Task (optional)
+**Allowed Links (hierarchy):**
+- **implements**: Epic→Story|Spike|Bug, Story→Task|Bug, Bug→Task (fix), Spike→Task
+- **blocks**: Bug→Epic|Story (Jira hierarchy + blocking)
 
 **Flexible Relations (any to any):**
-- relates-to, affects, blocks, depends-on, tested-by, supersedes
+- relates-to, depends-on, tested-by, supersedes
+- blocks (non-Bug: Story→Story, Task→Task flexible)
+
+**Note:** blocks is hierarchy for Bug, flexible for other types.
 
 ---
 
 ## Waterfall Hierarchy
 
-**Industry Standard (Azure DevOps/Jira 2025):**
+**Industry Standard (Jira 2025):**
 
 ```
 Requirement (Level 1)
@@ -45,11 +46,12 @@ Requirement (Level 1)
     └── Task (Level 3) - fix
 ```
 
-**Allowed Links (implements):**
-- Requirement → Feature|Spike|Bug
-- Feature → Task|Bug
-- Bug → Task (fix)
-- Spike → Task (optional)
+**Allowed Links (hierarchy):**
+- **implements**: Requirement→Feature|Spike|Bug, Feature→Task|Bug, Bug→Task (fix), Spike→Task
+- **blocks**: Bug→Requirement|Feature (Jira hierarchy + blocking)
 
 **Flexible Relations (any to any):**
-- relates-to, affects, blocks, depends-on, tested-by, supersedes
+- relates-to, depends-on, tested-by, supersedes
+- blocks (non-Bug: Story→Story, Task→Task flexible)
+
+**Note:** blocks is hierarchy for Bug, flexible for other types.

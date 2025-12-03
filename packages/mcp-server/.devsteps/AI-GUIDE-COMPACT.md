@@ -4,7 +4,7 @@
 
 **devsteps-init** - Initialize project with methodology (scrum/waterfall/hybrid)  
 **devsteps-add** - Create work items (epic/story/feature/task/bug/spike)  
-**devsteps-link** - Create relationships (implements/relates-to/affects/blocks/depends-on/tested-by/supersedes)  
+**devsteps-link** - Create relationships (implements/relates-to/blocks/depends-on/tested-by/supersedes)  
 **devsteps-update** - Modify work item properties (status/priority/assignee/description)  
 **devsteps-list** - Query work items with filters (type/status/priority/assignee/tags)  
 **devsteps-get** - Retrieve complete work item details  
@@ -40,7 +40,7 @@
 
 **5. Bug Handling**
 - Bug is child of Epic/Story/Requirement/Feature
-- Use `implements` relation (NOT `affects`)
+- Use `implements` for hierarchy OR `blocks` for blocking impact
 - Create fix Task implementing Bug
 - Choose level based on impact scope
 
@@ -84,19 +84,15 @@
 - Waterfall: Requirement→Feature|Spike|Bug, Feature→Task|Bug, Bug→Task, Spike→Task
 
 **relates-to (flexible):**
-- Cross-references without hierarchy
-- Spike informs Story/Feature
-- Context and information flow
+- Cross-references without hierarchy or blocking
+- Use for general context, informational links
+- Spike informs Story/Feature via relates-to
 
-**affects (flexible):**
-- Impact relationships
-- Bug affects multiple items
-- Cross-cutting concerns
-
-**blocks/blocked-by (flexible):**
-- Dependency blocking
-- Spike blocks Task until complete
-- Sequential work ordering
+**blocks/blocked-by (dual purpose - Jira 2025):**
+- **Hierarchy mode**: Bug blocks Epic/Story/Requirement/Feature (parent-child + blocking)
+- **Flexible mode**: Story→Story, Task→Task, etc. (sequencing/dependencies, no validation)
+- Jira semantics: One issue prevents another from progressing
+- Use for Bug when it both belongs to AND prevents completion of Epic/Story
 
 **depends-on/required-by (flexible):**
 - Technical dependencies

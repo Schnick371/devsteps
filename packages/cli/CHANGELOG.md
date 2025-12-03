@@ -5,6 +5,17 @@ All notable changes to `@schnick371/devsteps-cli` will be documented in this fil
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.3] - 2025-12-03
+
+### Breaking Changes ⚠️
+- **REMOVED**: `affects`/`affected-by` from `link` command (STORY-053, TASK-122)
+  - No longer valid relationship type
+  - Use `relates-to` or `blocks` instead
+
+### Changed
+- Updated to use `@schnick371/devsteps-shared@0.6.3`
+- Link validation now enforces Bug `blocks` hierarchy
+
 ## [0.6.1] - 2025-12-02
 
 ### Fixed

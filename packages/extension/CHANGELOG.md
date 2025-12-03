@@ -5,6 +5,17 @@ All notable changes to the "DevSteps" extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.3] - 2025-12-03
+
+### Breaking Changes ⚠️
+- **REMOVED**: `affects`/`affected-by` from TreeView (STORY-053, TASK-123)
+  - Relationship type no longer available in UI
+  - Use `relates-to` or `blocks` for Bug relationships
+
+### Changed
+- Updated to use `@schnick371/devsteps-shared@0.6.3`
+- TreeView reflects new hierarchy validation rules
+
 ## [0.6.2] - 2025-12-02
 
 ### Added

@@ -5,6 +5,27 @@ All notable changes to `@schnick371/devsteps-shared` will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.3] - 2025-12-03
+
+### Breaking Changes ⚠️
+- **REMOVED**: `affects`/`affected-by` relationship types (STORY-053, EPIC-014)
+  - Azure DevOps CMMI-only feature incorrectly implemented
+  - Use `relates-to` for context or `blocks` for blocking impact
+  - Migration: Replace `affects` with `relates-to` or `blocks`
+
+### Changed
+- **blocks/blocked-by**: Moved to HIERARCHY_RELATIONSHIPS (STORY-054, TASK-124)
+  - Bug `blocks` Epic/Story/Requirement/Feature validated as hierarchy
+  - Other item types: `blocks` remains flexible (bypass validation)
+  - Dual-mode validation supports both use cases
+- **Bug validation**: Updated to enforce `blocks` hierarchy (TASK-125)
+  - Bug can block parent items (blocking + hierarchy)
+  - Bug cannot use `implements` to Epic/Requirement (use `blocks` instead)
+
+### Removed
+- `affects`/`affected-by` from FLEXIBLE_RELATIONSHIPS (TASK-119)
+- `affects` from schema types and exports (TASK-120)
+
 ## [0.6.2] - 2025-12-02
 
 ### Added
