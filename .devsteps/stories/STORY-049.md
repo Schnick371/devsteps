@@ -1,11 +1,30 @@
 # Flexible Bug Relationship Types
 
+---
+
+## ⚠️ SUPERSEDED by STORY-053 + STORY-054
+
+**Research Update (2025-12-03):**
+
+Initial research incorrectly identified "affects" as Jira standard. Comprehensive analysis revealed:
+- **Jira 2025**: NO "affects" link type exists. Uses `blocks/is blocked by` for hierarchy + impact.
+- **Azure DevOps**: `affects/affected-by` is CMMI process ONLY (Microsoft.VSTS.Common.Affects), not standard.
+
+**Correct Solution:**
+- Bug → Epic: Use `blocks` (Jira standard for hierarchy + blocking)
+- Bug context: Use `relates-to` (flexible cross-reference)
+- Remove `affects/affected-by` entirely (see STORY-053)
+
+See **EPIC-014** for complete Jira 2025 alignment.
+
+---
+
 ## Problem
 Bug → Epic uses "implements" which is semantically incorrect. A Bug doesn't "implement" an Epic, it affects or relates to it.
 
-## Industry Research (2025)
-- **Jira Standard**: "relates to" for general context, "affects" for impact traceability
-- **Azure DevOps**: Bugs configurable at Story/Task level, NO fixed hierarchy with "implements"
+## Industry Research (2025) - INCORRECT
+- **Jira Standard**: ~~"relates to" for general context, "affects" for impact traceability~~ **[FALSE: Jira has NO "affects"]**
+- **Azure DevOps**: ~~Bugs configurable at Story/Task level, NO fixed hierarchy with "implements"~~ **[INCOMPLETE: CMMI only]**
 - **ALM Traceability**: Uses "links back to" for Defects → Requirements, NOT "implements"
 
 ## Solution

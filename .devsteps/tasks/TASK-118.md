@@ -1,37 +1,23 @@
-## Problem
+## Objective
 
-STORY-049 documented `affects/affected-by` as "Jira Standard", but research revealed this is **Azure DevOps CMMI only**.
+Add superseded notice to STORY-049.md correcting Azure DevOps "affects" misinformation.
 
-## Correction Needed
+## Implementation Complete ✅
 
-**Original (INCORRECT):**
-> - **Jira Standard**: "relates to" for general context, "affects" for impact traceability
+**Changes Made:**
 
-**Corrected:**
-> - **Jira 2025**: Uses "relates to" for context, "blocks" for hierarchy/impact (NO "affects"!)
-> - **Azure DevOps**: "Affects/Affected By" in CMMI process only (Microsoft.VSTS.Common.Affects)
+**File: .devsteps/stories/STORY-049.md**
+- Added prominent superseded notice at top of file
+- Corrected industry research claims with factual annotations
+- Referenced correct solution: STORY-053 (remove affects) + STORY-054 (blocks hierarchy)
+- Linked to EPIC-014 for complete Jira 2025 alignment
 
-## Actions
+**Key Corrections:**
+1. **Jira Standard**: NO "affects" link type exists (CMMI-only in Azure DevOps)
+2. **Correct approach**: Use `blocks` for hierarchy/impact, `relates-to` for context
+3. **Historical context**: Original research was incomplete, not intentionally wrong
 
-1. Add superseded note to STORY-049.md
-2. Reference STORY-053 (removes affects) and STORY-054 (blocks as hierarchy)
-3. Update description with correct Jira 2025 findings
-4. Keep status "done" (was valid at the time, learned better later)
-
-## Content
-
-```markdown
-## SUPERSEDED by STORY-053 + STORY-054
-
-**Research Update (2025-12-03):**
-Initial research incorrectly identified "affects" as Jira standard. Comprehensive analysis revealed:
-- **Jira 2025**: NO "affects" link type exists. Uses `blocks/is blocked by` for hierarchy + impact.
-- **Azure DevOps**: `affects/affected-by` is CMMI process ONLY (Microsoft.VSTS.Common.Affects).
-
-**Correct Solution:**
-- Bug → Epic: Use `blocks` (Jira standard for hierarchy + blocking)
-- Bug context: Use `relates-to` (flexible cross-reference)
-- Remove `affects/affected-by` entirely (see STORY-053)
-
-See EPIC-014 for complete Jira 2025 alignment.
-```
+**Impact:**
+- Future readers understand why affects was removed
+- Clear path to correct implementation via EPIC-014
+- Maintains done status (was valid based on available info at time)

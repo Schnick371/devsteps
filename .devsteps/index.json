@@ -1847,9 +1847,9 @@
       "id": "STORY-053",
       "type": "story",
       "title": "Remove Azure DevOps affects/affected-by Relations",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-12-03T08:58:25.631Z"
+      "updated": "2025-12-03T09:20:43.947Z"
     },
     {
       "id": "STORY-054",
@@ -1863,9 +1863,9 @@
       "id": "TASK-118",
       "type": "task",
       "title": "Correct STORY-049 Azure DevOps Misinformation",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-03T08:58:54.147Z"
+      "updated": "2025-12-03T09:20:43.946Z"
     },
     {
       "id": "TASK-119",
@@ -1953,8 +1953,8 @@
     },
     "by_status": {
       "in-progress": 5,
-      "done": 116,
-      "draft": 110,
+      "done": 118,
+      "draft": 108,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1976,5 +1976,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T09:17:42.271Z"
+  "last_updated": "2025-12-03T09:20:43.947Z"
 }

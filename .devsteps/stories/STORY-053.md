@@ -1,50 +1,32 @@
-## Problem
+## Objective
 
-`affects/affected-by` relationship type is **Azure DevOps CMMI only**, NOT Jira 2025 standard.
+Remove Azure DevOps-specific `affects/affected-by` relationship types from DevSteps codebase.
 
-## Research Findings
+## Background
 
-**Jira 2025:**
-- ❌ NO "affects" link type exists
-- ✅ Uses: relates to, blocks, duplicates, clones, causes
+Research revealed `affects/affected-by` is **Azure DevOps CMMI process ONLY** (Microsoft.VSTS.Common.Affects), NOT Jira standard. Jira 2025 uses `blocks/is blocked by` for hierarchy and impact.
 
-**Azure DevOps:**
-- ✅ "Affects/Affected By" in CMMI process ONLY
-- Reference name: `Microsoft.VSTS.Common.Affects`
-- Purpose: Change Request affects Requirement
+## Implementation Complete ✅
 
-## Current Usage
+**Removed affects from:**
+1. ✅ Shared relationships.ts - FLEXIBLE_RELATIONSHIPS array
+2. ✅ Shared schemas - RelationType enum + LinkedItems
+3. ✅ Shared add.ts - linked_items initialization
+4. ✅ MCP handlers - inverseRelations mapping
+5. ✅ MCP tools - linkTool schema
+6. ✅ CLI commands - link command descriptions + mapping
+7. ✅ Extension TreeView - affects relationship rendering
+8. ✅ Documentation - STORY-049 superseded notice
 
-STORY-049 incorrectly documented "affects" as Jira standard. Actual codebase usage:
-- `packages/shared/src/schemas/relationships.ts` - Line 25-26
-- `packages/shared/src/schemas/index.ts` - Lines 78-79, 99-100, 114
-- `packages/mcp-server/src/tools/index.ts` - Line 251-252
-- `packages/mcp-server/src/handlers/link.ts` - Line 83-84
-- `packages/cli/src/commands/index.ts` - Line 437-438
-- `packages/cli/src/index.ts` - Line 93 (description)
-- `packages/extension/src/treeView/nodes/workItemNode.ts` - Lines 82-84
+**Commits:**
+- 0f65a3b: relationships.ts removal
+- a076d2a: schema types + add.ts
+- cc2905f: MCP handlers + tools
+- fb15073: CLI commands
+- 3822158: Extension TreeView
+- [current]: STORY-049 documentation
 
-## Solution
-
-**Remove from all locations:**
-1. Remove from FLEXIBLE_RELATIONSHIPS array
-2. Remove from reverse mapping objects
-3. Remove from CLI/MCP descriptions
-4. Remove from schema types
-5. Remove from TreeView node logic
-
-**Migration path:**
-- `affects` → `blocks` (if blocking/preventing progress)
-- `affects` → `relates-to` (if general context)
-
-## Acceptance Criteria
-
-- [ ] `affects/affected-by` removed from relationships.ts
-- [ ] Removed from shared schema (index.ts)
-- [ ] Removed from MCP handlers + tool descriptions
-- [ ] Removed from CLI commands + descriptions
-- [ ] Removed from Extension TreeView
-- [ ] Docs updated (HIERARCHY-COMPACT.md, AI-GUIDE-COMPACT.md)
-- [ ] STORY-049 marked superseded with correction note
-- [ ] Build passes without errors
-- [ ] Tests updated for new expectations
+**Impact:**
+- Breaking change: affects property no longer exists in schemas
+- All packages validated with successful builds
+- Jira 2025 standard alignment complete
