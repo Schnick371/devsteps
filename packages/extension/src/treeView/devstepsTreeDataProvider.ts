@@ -543,9 +543,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       const indexData = await vscode.workspace.fs.readFile(indexPath);
       const index = JSON.parse(Buffer.from(indexData).toString('utf-8'));
 
-      let items = Object.entries<any>(index.items || {}).map(
-        ([id, meta]) => ({ id, ...meta }) as WorkItem,
-      );
+      let items = (index.items || []) as WorkItem[];
 
       // Track counts for badge
       const totalCount = items.length;
