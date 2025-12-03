@@ -5,6 +5,23 @@ All notable changes to the "DevSteps" extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.11] - 2025-12-03
+
+### Changed
+- Updated to use `@schnick371/devsteps-shared@0.6.11`
+- No functional changes to VS Code extension
+
+### Note
+- CLI now uses bundled distribution for improved global installation
+
+## [0.6.6] - 2025-12-03
+
+### Fixed
+- Package build and VSIX generation validation
+
+### Changed
+- Updated to use `@schnick371/devsteps-shared@0.6.6`
+
 ## [0.6.3] - 2025-12-03
 
 ### Breaking Changes ⚠️

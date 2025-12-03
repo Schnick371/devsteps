@@ -1,9 +1,9 @@
 {
   "name": "@schnick371/devsteps-cli",
-  "version": "0.6.3",
+  "version": "0.6.11",
   "license": "Apache-2.0",
   "description": "Never Code Alone. CLI for AI-assisted developer task tracking.",
-  "author": "Thomas Hertel <thomas.hantke@devsteps.dev>",
+  "author": "Thomas Hertel <thomas.hertel@devsteps.dev>",
   "homepage": "https://devsteps.dev",
   "repository": {
     "type": "git",
@@ -23,9 +23,8 @@
     "waterfall",
     "development-tools"
   ],
-  "type": "module",
   "bin": {
-    "devsteps": "./dist/index.js",
+    "devsteps": "./dist/index.cjs",
     "devsteps-tsx": "./bin/devsteps-tsx.js"
   },
   "files": [
@@ -40,7 +39,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc && npm run copy:docs",
+    "build": "tsc && node esbuild.mjs && npm run copy:docs",
     "copy:docs": "mkdir -p .devsteps && cp ../../.devsteps/HIERARCHY.md ../../.devsteps/AI-GUIDE.md .devsteps/",
     "dev": "tsc --watch",
     "typecheck": "tsc --noEmit",
@@ -48,12 +47,14 @@
   },
   "dependencies": {
     "@inquirer/prompts": "^8.0.1",
-    "@schnick371/devsteps-shared": "^0.5.1",
+    "@schnick371/devsteps-shared": "^0.6.10",
     "chalk": "^5.6.2",
+    "commander": "^12.1.0",
     "ora": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "latest",
+    "esbuild": "^0.27.0",
     "typescript": "latest"
   }
 }

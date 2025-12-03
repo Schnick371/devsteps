@@ -8,7 +8,7 @@
   "eisenhower": "urgent-important",
   "created": "2025-11-23T15:33:47.334Z",
   "updated": "2025-11-24T10:21:56.070Z",
-  "author": "thomas.hantke@devsteps.dev",
+  "author": "thomas.hertel@devsteps.dev",
   "affected_paths": [
     "packages/cli/src/",
     "packages/cli/bin/"

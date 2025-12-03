@@ -8,7 +8,7 @@
   "eisenhower": "urgent-important",
   "created": "2025-11-23T15:34:45.800Z",
   "updated": "2025-11-25T11:16:30.560Z",
-  "author": "thomas.hantke@devsteps.dev",
+  "author": "thomas.hertel@devsteps.dev",
   "affected_paths": [
     "packages/vscode-extension/src/treeView/devstepsTreeDataProvider.ts"
   ],

@@ -5,6 +5,26 @@ All notable changes to `@schnick371/devsteps-mcp-server` will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.11] - 2025-12-03
+
+### Changed
+- Updated to use `@schnick371/devsteps-shared@0.6.11`
+- No changes to MCP server functionality (already uses bundling)
+
+### Deprecated
+- Versions 0.6.6, 0.6.7, 0.6.8 were broken and removed from npm registry
+
+## [0.6.6] - 2025-12-03
+
+### Fixed
+- MCP server startup and protocol handling
+- Bundled distribution (index.bundled.mjs) validation
+- STDIO transport communication
+
+### Changed
+- Updated to use `@schnick371/devsteps-shared@0.6.6`
+- Improved error handling for legitimate errors (no server crash)
+
 ## [0.6.3] - 2025-12-03
 
 ### Breaking Changes ⚠️

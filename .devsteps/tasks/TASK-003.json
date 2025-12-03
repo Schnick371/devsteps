@@ -8,7 +8,7 @@
   "eisenhower": "urgent-important",
   "created": "2025-11-23T15:34:45.801Z",
   "updated": "2025-11-24T10:13:37.884Z",
-  "author": "thomas.hantke@devsteps.dev",
+  "author": "thomas.hertel@devsteps.dev",
   "affected_paths": [
     "packages/vscode-extension/src/commands.ts"
   ],

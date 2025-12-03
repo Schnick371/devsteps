@@ -229,13 +229,15 @@ bulkCmd
 // Error handling
 program.exitOverride();
 
-try {
-  await program.parseAsync(process.argv);
-} catch (error) {
-  const err = error as { code?: string; message?: string };
-  if (err.code !== 'commander.help' && err.code !== 'commander.version') {
-    const message = err.message || String(error);
-    console.error(chalk.red('Error:'), message);
-    process.exit(1);
+(async () => {
+  try {
+    await program.parseAsync(process.argv);
+  } catch (error) {
+    const err = error as { code?: string; message?: string };
+    if (err.code !== 'commander.help' && err.code !== 'commander.version') {
+      const message = err.message || String(error);
+      console.error(chalk.red('Error:'), message);
+      process.exit(1);
+    }
   }
-}
+})();

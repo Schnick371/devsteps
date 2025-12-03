@@ -5,6 +5,21 @@ All notable changes to `@schnick371/devsteps-shared` will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.11] - 2025-12-03
+
+### Changed
+- Updated for CLI bundling support
+- No breaking changes to shared types or schemas
+
+### Deprecated
+- Versions 0.6.6, 0.6.7, 0.6.8 marked as deprecated (broken releases)
+
+## [0.6.6] - 2025-12-03
+
+### Fixed
+- Package build and distribution validation
+- TypeScript compilation consistency
+
 ## [0.6.3] - 2025-12-03
 
 ### Breaking Changes ⚠️

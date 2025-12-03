@@ -5,6 +5,38 @@ All notable changes to `@schnick371/devsteps-cli` will be documented in this fil
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.11] - 2025-12-03
+
+### Fixed
+- **Global npm installation now works correctly** - Implemented esbuild bundling to create standalone executable
+- Resolved "Cannot find package 'commander'" error when installing globally
+- CLI dependencies now bundled into single `dist/index.cjs` file (861KB)
+
+### Changed
+- **Build system**: Added esbuild bundling step to create CommonJS executable
+- **Entry point**: Changed bin from `dist/index.js` to `dist/index.cjs`
+- **Dependencies**: Added `commander@^12.1.0` and `esbuild@^0.27.0`
+- **Source code**: Wrapped async code in IIFE for CommonJS compatibility
+- Updated to use `@schnick371/devsteps-shared@0.6.11`
+
+### Technical Details
+- Created `esbuild.mjs` for bundling configuration
+- Platform: Node.js, Target: node20, Format: CommonJS
+- Bundle includes all dependencies except native Node.js modules
+- Follows same approach as npm CLI, Next.js, and Vercel tools
+
+### Deprecated
+- Versions 0.6.6, 0.6.7, 0.6.8 were broken and removed from npm registry
+
+## [0.6.6] - 2025-12-03
+
+### Fixed
+- Package build and distribution validation
+- CLI commands tested and verified
+
+### Changed
+- Updated to use `@schnick371/devsteps-shared@0.6.6`
+
 ## [0.6.3] - 2025-12-03
 
 ### Breaking Changes ⚠️
