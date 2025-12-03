@@ -7,7 +7,7 @@
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-26T06:52:15.717Z",
-  "updated": "2025-11-26T06:53:30.140Z",
+  "updated": "2025-12-03T10:01:33.156Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/webview/dashboardPanel.ts"
@@ -26,7 +26,8 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "TASK-053"
+      "TASK-053",
+      "TASK-128"
     ],
     "depends-on": [],
     "required-by": [],

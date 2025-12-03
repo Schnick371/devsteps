@@ -53,7 +53,8 @@ export interface WorkItem {
     'blocks'?: string[];
     'blocked-by'?: string[];
     'relates-to'?: string[];
-    [key: string]: string[] | undefined;
+    'tested-by'?: string[];
+    'required-by'?: string[];
   };
 }
 

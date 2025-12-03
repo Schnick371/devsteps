@@ -69,12 +69,18 @@ export class WorkItemNode extends TreeNode {
       // Collect child IDs from different relationship types
       const childIds: string[] = [];
       
-      // Always include hierarchy relationships (implemented-by, blocked-by)
+      // Always include hierarchy and critical relationships
       const implementedBy = this.item.linked_items?.['implemented-by'] || [];
       childIds.push(...implementedBy);
       
       const blockedBy = this.item.linked_items?.['blocked-by'] || [];
       childIds.push(...blockedBy);
+      
+      const testedBy = this.item.linked_items?.['tested-by'] || [];
+      childIds.push(...testedBy);
+      
+      const requiredBy = this.item.linked_items?.['required-by'] || [];
+      childIds.push(...requiredBy);
       
       // Include relates-to if not hidden
       if (!effectiveFilter?.hideRelatesTo) {
@@ -105,9 +111,16 @@ export class WorkItemNode extends TreeNode {
   }
 
   private hasImplementedByLinks(): boolean {
-    const implementedBy = this.item.linked_items?.['implemented-by'] || [];
-    const blockedBy = this.item.linked_items?.['blocked-by'] || [];
-    return implementedBy.length > 0 || blockedBy.length > 0;
+    const implementedBy = this.item.linked_items?.['implemented-by'];
+    const blockedBy = this.item.linked_items?.['blocked-by'];
+    const testedBy = this.item.linked_items?.['tested-by'];
+    const requiredBy = this.item.linked_items?.['required-by'];
+    return (
+      (Array.isArray(implementedBy) && implementedBy.length > 0) ||
+      (Array.isArray(blockedBy) && blockedBy.length > 0) ||
+      (Array.isArray(testedBy) && testedBy.length > 0) ||
+      (Array.isArray(requiredBy) && requiredBy.length > 0)
+    );
   }
 
   private getIcon(): vscode.ThemeIcon {

@@ -3,7 +3,7 @@
   "counters": {
     "epic": 14,
     "story": 54,
-    "task": 127,
+    "task": 128,
     "bug": 30,
     "spike": 6,
     "feature": 5,
@@ -889,7 +889,7 @@
       "title": "Export & Reporting Features - PDF, HTML, CSV Dashboard Export",
       "status": "draft",
       "priority": "medium",
-      "updated": "2025-11-26T06:52:15.717Z"
+      "updated": "2025-12-03T10:01:08.968Z"
     },
     {
       "id": "TASK-056",
@@ -1946,14 +1946,22 @@
       "status": "done",
       "priority": "critical",
       "updated": "2025-12-03T09:55:21.321Z"
+    },
+    {
+      "id": "TASK-128",
+      "type": "task",
+      "title": "Implement tested-by/required-by display in TreeView",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-12-03T10:02:48.770Z"
     }
   ],
   "stats": {
-    "total": 236,
+    "total": 237,
     "by_type": {
       "epic": 14,
       "story": 54,
-      "task": 127,
+      "task": 128,
       "bug": 30,
       "spike": 6,
       "feature": 5,
@@ -1961,7 +1969,7 @@
     },
     "by_status": {
       "in-progress": 4,
-      "done": 125,
+      "done": 126,
       "draft": 103,
       "blocked": 1,
       "obsolete": 3
@@ -1984,5 +1992,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T09:55:21.321Z"
+  "last_updated": "2025-12-03T10:02:48.770Z"
 }
