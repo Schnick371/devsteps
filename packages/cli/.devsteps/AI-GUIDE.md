@@ -43,10 +43,12 @@ Theme (optional, strategic)
 ```
 Requirement (Level 1)
 └── Feature (Level 2)
-    ├── Task (Level 3)
-    └── Spike (Level 2.5 - research)
+    └── Task (Level 3)
 
-Bug (Level 2) - NOT a child, uses affects/relates-to
+Bug (Level 2) - sibling of Feature, NOT a child
+└── Task (Level 3) - fix implementation
+
+Spike (Level 2.5) - research
 ```
 
 **Allowed Links:**
@@ -54,9 +56,24 @@ Bug (Level 2) - NOT a child, uses affects/relates-to
 - `Feature → Task` (implemented-by)
 - `Bug → Requirement` (affects, relates-to) - discovered defect impacts requirement
 - `Bug → Feature` (affects, relates-to) - discovered defect impacts feature
-- `Task → Bug` (implements) - fix implementation
+- `Bug → Task` (implemented-by) - fix implementation
+- `Task → Bug` (implements) - solution fixes the problem
 - `Feature → Spike` (relates-to) - optional research
 - `Spike → Requirement` (implements) - if Spike at Req level
+
+**Bug Workflow Example:**
+```
+REQ-001: User Authentication
+└── FEAT-002: Email Registration
+
+BUG-010: Email validation fails for aliases
+├── affects → REQ-001 (impacts authentication requirement)
+├── relates-to → FEAT-002 (context: email registration feature)
+└── implemented-by → TASK-050 (fix implementation)
+
+TASK-050: Fix email regex validation
+└── implements → BUG-010 (solution fixes the reported bug)
+```
 
 ---
 
@@ -90,6 +107,30 @@ devsteps-link --source STORY-001 --relation implements --target EPIC-001
 // 3. Link tasks
 devsteps-link --source TASK-001 --relation implements --target STORY-001
 devsteps-link --source TASK-002 --relation implements --target STORY-001
+```
+
+### Create Bug + Fix (CRITICAL PATTERN)
+
+```typescript
+// 1. Create Bug (PROBLEM ONLY - no solution!)
+devsteps-add --type bug --title "Email validation fails for aliases" \
+  --description "Users cannot register with + or . in email" \
+  --priority high
+
+// 2. Link Bug to affected Epic/Requirement (impact traceability)
+devsteps-link --source BUG-010 --relation affects --target EPIC-003
+// OR use relates-to for general context
+devsteps-link --source BUG-010 --relation relates-to --target FEAT-002
+
+// 3. Create Task for fix (SOLUTION ONLY - how to fix!)
+devsteps-add --type task --title "Fix email regex validation" \
+  --description "Update validateEmail() to support + and . characters"
+
+// 4. Link Task implements Bug (solution fixes problem)
+devsteps-link --source TASK-050 --relation implements --target BUG-010
+
+// 5. Implement fix in Task, NOT in Bug!
+// Bug = problem documentation, Task = solution implementation
 ```
 
 ### Link Validation (before every devsteps-link!)
