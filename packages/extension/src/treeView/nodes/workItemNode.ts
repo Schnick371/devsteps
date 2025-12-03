@@ -69,9 +69,12 @@ export class WorkItemNode extends TreeNode {
       // Collect child IDs from different relationship types
       const childIds: string[] = [];
       
-      // Always include hierarchy relationships (implemented-by)
+      // Always include hierarchy relationships (implemented-by, blocked-by)
       const implementedBy = this.item.linked_items?.['implemented-by'] || [];
       childIds.push(...implementedBy);
+      
+      const blockedBy = this.item.linked_items?.['blocked-by'] || [];
+      childIds.push(...blockedBy);
       
       // Include relates-to if not hidden
       if (!effectiveFilter?.hideRelatesTo) {
@@ -102,8 +105,9 @@ export class WorkItemNode extends TreeNode {
   }
 
   private hasImplementedByLinks(): boolean {
-    const links = this.item.linked_items?.['implemented-by'] || [];
-    return links.length > 0;
+    const implementedBy = this.item.linked_items?.['implemented-by'] || [];
+    const blockedBy = this.item.linked_items?.['blocked-by'] || [];
+    return implementedBy.length > 0 || blockedBy.length > 0;
   }
 
   private getIcon(): vscode.ThemeIcon {

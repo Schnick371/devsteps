@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T08:58:08.397Z",
-  "updated": "2025-12-03T09:27:38.439Z",
+  "updated": "2025-12-03T09:54:29.253Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -19,7 +19,9 @@
     "tested-by": [],
     "tests": [],
     "blocks": [],
-    "blocked-by": [],
+    "blocked-by": [
+      "BUG-030"
+    ],
     "relates-to": [],
     "depends-on": [],
     "required-by": [],

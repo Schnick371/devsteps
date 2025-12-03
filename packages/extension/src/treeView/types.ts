@@ -50,6 +50,9 @@ export interface WorkItem {
   tags?: string[];
   linked_items?: {
     'implemented-by'?: string[];
+    'blocks'?: string[];
+    'blocked-by'?: string[];
+    'relates-to'?: string[];
     [key: string]: string[] | undefined;
   };
 }

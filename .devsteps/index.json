@@ -4,7 +4,7 @@
     "epic": 14,
     "story": 54,
     "task": 127,
-    "bug": 29,
+    "bug": 30,
     "spike": 6,
     "feature": 5,
     "requirement": 2
@@ -1938,21 +1938,29 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-12-03T09:27:21.536Z"
+    },
+    {
+      "id": "BUG-030",
+      "type": "bug",
+      "title": "Extension TreeView missing blocks/blocked-by relationship display",
+      "status": "in-progress",
+      "priority": "critical",
+      "updated": "2025-12-03T09:54:35.649Z"
     }
   ],
   "stats": {
-    "total": 235,
+    "total": 236,
     "by_type": {
       "epic": 14,
       "story": 54,
       "task": 127,
-      "bug": 29,
+      "bug": 30,
       "spike": 6,
       "feature": 5,
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 4,
+      "in-progress": 5,
       "done": 124,
       "draft": 103,
       "blocked": 1,
@@ -1976,5 +1984,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T09:27:38.439Z"
+  "last_updated": "2025-12-03T09:54:35.649Z"
 }
