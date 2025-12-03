@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import { getWorkspacePath } from '../workspace.js';
 import { type AddItemArgs, addItem } from '@schnick371/devsteps-shared';
-import simpleGit from 'simple-git';
+import { simpleGit } from 'simple-git';
 
 /**
  * Add a new item to devsteps (MCP wrapper)

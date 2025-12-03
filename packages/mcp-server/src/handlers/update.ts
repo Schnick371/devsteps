@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import { getWorkspacePath } from '../workspace.js';
 import { type UpdateItemArgs, updateItem } from '@schnick371/devsteps-shared';
-import simpleGit from 'simple-git';
+import { simpleGit } from 'simple-git';
 
 /**
  * Update an existing item (MCP wrapper)
