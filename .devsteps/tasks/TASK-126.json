@@ -3,11 +3,11 @@
   "type": "task",
   "category": "Documentation",
   "title": "HIERARCHY-COMPACT: Update for blocks hierarchy",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T09:00:18.237Z",
-  "updated": "2025-12-03T09:00:39.487Z",
+  "updated": "2025-12-03T09:26:28.694Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".devsteps/HIERARCHY-COMPACT.md"
