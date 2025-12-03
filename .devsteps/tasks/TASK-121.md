@@ -2,44 +2,23 @@
 
 Remove `affects/affected-by` from MCP server handlers and tool descriptions.
 
-## Changes
+## Implementation Complete ✅
 
-**File: packages/mcp-server/src/handlers/link.ts (lines ~83-84)**
+**Changes Made:**
 
-Remove from reverse mapping:
-```typescript
-const REVERSE_RELATIONS: Record<string, string> = {
-  // ... existing
-  blocks: 'blocked-by',
-  'blocked-by': 'blocks',
-  // REMOVE: affects: 'affected-by',
-  // REMOVE: 'affected-by': 'affects',
-  // ...
-};
-```
+**File: packages/mcp-server/src/handlers/link.ts**
+- Removed `affects: 'affected-by'` and `'affected-by': 'affects'` from inverseRelations mapping (lines ~83-84)
 
-**File: packages/mcp-server/src/tools/index.ts (line ~233)**
+**File: packages/mcp-server/src/tools/index.ts**
+- Updated linkTool description: Removed "affects" from FLEXIBLE list (line ~233)
+- Removed `'affects'` and `'affected-by'` from relation_type enum (lines ~251-252)
 
-Update description:
-```typescript
-description: 'Create a relationship between two items. HIERARCHY RULES (implements): Scrum: Epic→Story|Spike|Bug, Story→Task|Bug, Bug→Task. Waterfall: Requirement→Feature|Spike|Bug, Feature→Task|Bug, Bug→Task. FLEXIBLE (always allowed): relates-to, blocks, depends-on, tested-by, supersedes.',
-```
+**Validation Results:**
+- ✅ TypeScript compilation successful
+- ✅ MCP server builds without errors
+- ✅ Tool schema now rejects affects/affected-by relation types
+- ✅ AI will receive validation error when attempting affects link
 
-**Remove from enum (lines ~251-252):**
-```typescript
-enum: [
-  // ... existing
-  'blocks',
-  'blocked-by',
-  // REMOVE: 'affects',
-  // REMOVE: 'affected-by',
-  'relates-to',
-  // ...
-]
-```
-
-## Validation
-
-- Run `npm run build`
-- Test MCP link tool accepts blocks/relates-to
-- Test MCP link tool rejects affects
+**Impact:**
+- MCP link tool now only accepts Jira 2025 standard relations
+- Attempts to use affects will fail with enum validation error

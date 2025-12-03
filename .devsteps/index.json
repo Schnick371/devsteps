@@ -1887,9 +1887,9 @@
       "id": "TASK-121",
       "type": "task",
       "title": "MCP: Remove affects handlers and descriptions",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-12-03T08:59:34.159Z"
+      "updated": "2025-12-03T09:16:19.874Z"
     },
     {
       "id": "TASK-122",
@@ -1953,8 +1953,8 @@
     },
     "by_status": {
       "in-progress": 5,
-      "done": 113,
-      "draft": 113,
+      "done": 114,
+      "draft": 112,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1976,5 +1976,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T09:14:59.186Z"
+  "last_updated": "2025-12-03T09:16:19.874Z"
 }
