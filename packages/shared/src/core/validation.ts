@@ -126,12 +126,15 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
     };
   }
 
-  // Bug cannot use "implements" - must use flexible relationships
+  // Bug → Epic or Story (configurable in Azure DevOps/Jira 2025)
   if (sourceType === 'bug') {
+    if (targetType === 'epic' || targetType === 'story') {
+      return { valid: true };
+    }
     return {
       valid: false,
-      error: 'Bugs cannot use "implements" relationship',
-      suggestion: `Use "relates-to" (context) or "affects" (impact) to link Bug → Epic. Use Task to implement the fix (Task implements Bug).`,
+      error: 'Bugs can only implement Epics or Stories in Scrum',
+      suggestion: `Link Bug → Epic (epic-level defect) or Bug → Story (story-level defect). Use Task to implement the fix (Task implements Bug).`,
     };
   }
 
@@ -208,12 +211,15 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
     };
   }
 
-  // Bug cannot use "implements" - must use flexible relationships
+  // Bug → Requirement or Feature (configurable in Azure DevOps/Jira 2025)
   if (sourceType === 'bug') {
+    if (targetType === 'requirement' || targetType === 'feature') {
+      return { valid: true };
+    }
     return {
       valid: false,
-      error: 'Bugs cannot use "implements" relationship',
-      suggestion: `Use "relates-to" (context) or "affects" (impact) to link Bug → Requirement. Use Task to implement the fix (Task implements Bug).`,
+      error: 'Bugs can only implement Requirements or Features in Waterfall',
+      suggestion: `Link Bug → Requirement (requirement-level defect) or Bug → Feature (feature-level defect). Use Task to implement the fix (Task implements Bug).`,
     };
   }
 

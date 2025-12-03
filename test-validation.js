@@ -36,12 +36,20 @@ const tests = [
     expected: true,
   },
   {
-    name: 'Scrum: Bug → Epic via implements (invalid - use relates-to or affects)',
+    name: 'Scrum: Bug → Epic via implements (valid - epic-level defect)',
     source: { id: 'BUG-001', type: 'bug' },
     target: { id: 'EPIC-001', type: 'epic' },
     relation: 'implements',
     methodology: 'scrum',
-    expected: false,
+    expected: true,
+  },
+  {
+    name: 'Scrum: Bug → Story via implements (valid - story-level defect)',
+    source: { id: 'BUG-002', type: 'bug' },
+    target: { id: 'STORY-001', type: 'story' },
+    relation: 'implements',
+    methodology: 'scrum',
+    expected: true,
   },
   {
     name: 'Scrum: Task → Bug (valid - Task implements fix)',

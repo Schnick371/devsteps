@@ -2,46 +2,58 @@
 
 ## Validierte Scrum/Agile Hierarchie
 
+**Industry Standard (Azure DevOps/Jira 2025):**
+
 ```
 Theme (strategisch, optional)
 └── Initiative (optional)
     └── Epic (Level 1)
-        ├── Story (Level 2) → Task (Level 3)
-        ├── Spike (Level 2) → Task (Level 3, optional)
-        └── Bug (Level 2) → Task (Level 3, optional)
+        ├── Story (Level 2)
+        │   ├── Task (Level 3)
+        │   └── Bug (Level 2.5 - story-level defect)
+        │       └── Task (Level 3) - fix
+        ├── Spike (Level 2 - research)
+        │   └── Task (Level 3, optional)
+        └── Bug (Level 2 - epic-level defect)
+            └── Task (Level 3) - fix
 ```
 
 ### Regeln für Scrum-Hierarchie
 
 **Epic (Level 1)**
-- Contains: Stories, Spikes, Bugs (NOT Tasks directly!)
+- Contains: Stories, Spikes, Bugs (epic-level)
 - Relationships: `implemented-by` → Stories, Spikes, Bugs
 - Duration: Multiple sprints (months)
 - Example: "VS Code Extension - Complete IDE Integration"
 
 **Story (Level 2)**
-- Contains: Tasks
+- Contains: Tasks, Bugs (story-level)
 - Relationships: 
   - `implements` → Epic
-  - `implemented-by` → Tasks
+  - `implemented-by` → Tasks, Bugs
   - `relates-to` → Spikes (for dependencies)
 - Duration: 1 sprint
 - Example: "VS Code Extension Package - Complete Implementation"
 
-**Spike (Level 2 - same level as Story!)**
+**Spike (Level 2 - research)**
 - Contains: Tasks (optional, for research breakdown)
 - Relationships:
-  - `implements` → Epic (NOT Story!)
+  - `implements` → Epic (Spike is child of Epic)
+  - `implemented-by` → Tasks (optional)
+  - `relates-to` → Stories (Spike informs Story development)
   - `required-by` → Tasks or Stories (blocks implementation)
-  - `relates-to` → Stories (informs development)
 - Duration: Time-boxed (1-3 days)
 - Example: "MCP Server Architecture Research"
 
-**Bug (Level 2 - same level as Story!)**
+**Bug (Level 2 or 2.5 - configurable)**
 - Contains: Tasks (fixes)
+- Parent Options:
+  - **Option 1**: Bug → Story (story-level defect, most common)
+  - **Option 2**: Bug → Epic (epic-level defect, impacts multiple stories)
 - Relationships:
-  - `affects` → Epic (discovered defect impacts epic)
-  - `relates-to` → Epic/Story (general context)
+  - `implements` → Story OR Epic (Bug is child)
+  - `affects` → Story (when Bug impacts other stories)
+  - `relates-to` → Epic/Story (additional context)
   - `implemented-by` → Tasks (fix implementation)
 - Duration: 1 sprint or less
 - Example: "Login Validation Fails for Special Characters"
@@ -59,16 +71,16 @@ Theme (strategisch, optional)
 **Hierarchie (implements/implemented-by):**
 - `Epic → Story` (implemented-by)
 - `Epic → Spike` (implemented-by)
+- `Epic → Bug` (implemented-by) - epic-level defect
 - `Story → Task` (implemented-by)
+- `Story → Bug` (implemented-by) - story-level defect
 - `Spike → Task` (implemented-by, optional)
-- `Bug → Task` (implemented-by)
-
-**Bug-Beziehungen (Bug Relationships):**
-- `Bug → Epic` (affects, relates-to) - NOT implements!
-- `Bug → Story` (affects, relates-to) - discovered defect
+- `Bug → Task` (implemented-by) - fix implementation
 - `Task → Bug` (implements) - solution fixes problem
 
-**Flexible Beziehungen:**
+**Flexible Beziehungen (affects/relates-to):**
+- `Bug → Story` (affects) - Bug impacts other stories
+- `Bug → Epic` (affects) - Bug impacts other epics
 - `Spike → Story` (relates-to) - Spike informs Story
 - `Spike → Task` (required-by) - Spike blocks Task
 - `Task → Task` (depends-on, blocks)
@@ -76,56 +88,67 @@ Theme (strategisch, optional)
 ### Verbotene Scrum-Links (Forbidden Links)
 
 - ❌ `Epic → Task` (direct) - must go through Story/Spike/Bug
-- ❌ `Bug → Epic` (implements) - use affects or relates-to!
-- ❌ `Spike → Story` (implements) - Spike is NOT under Story!
-- ❌ `Task → Epic` (implements) - only through Story/Spike/Bug
+- ❌ `Spike → Story` (implements) - Spike is sibling of Story, not child
+- ❌ `Task → Epic` (implements) - must go through Story/Spike/Bug
+- ❌ `Bug → Bug` (implements) - no nested Bugs
+- ❌ `Spike → Spike` (implements) - no nested Spikes
 
 ---
 
 ## Validierte Waterfall Hierarchie
 
+**Industry Standard (Azure DevOps/Jira 2025):**
+
 ```
 Requirement (Level 1)
-└── Feature (Level 2)
-    ├── Task (Level 3)
-    └── Spike (Level 2.5 - research before implementation)
-
-Bug (Level 2 - NOT a child, uses affects/relates-to)
+├── Feature (Level 2)
+│   ├── Task (Level 3)
+│   └── Bug (Level 2.5 - feature-level defect)
+│       └── Task (Level 3) - fix
+├── Spike (Level 2 - research)
+│   └── Task (Level 3, optional)
+└── Bug (Level 2 - requirement-level defect)
+    └── Task (Level 3) - fix
 ```
 
 ### Regeln für Waterfall-Hierarchie
 
 **Requirement (Level 1)**
-- Contains: Features
-- Relationships: `implemented-by` → Features
+- Contains: Features, Spikes, Bugs (requirement-level)
+- Relationships: `implemented-by` → Features, Spikes, Bugs
 - Phase: Requirements Analysis
 - Example: "DevSteps Platform - System Requirements"
 
 **Feature (Level 2)**
-- Contains: Tasks, Spikes
+- Contains: Tasks, Bugs (feature-level)
 - Relationships:
   - `implements` → Requirement
-  - `implemented-by` → Tasks
+  - `implemented-by` → Tasks, Bugs
   - `relates-to` → Stories (cross-methodology)
 - Phase: Design → Implementation
 - Example: "VS Code Extension - IDE Integration"
 
-**Bug (Level 2 - same level as Feature!)**
-- Contains: Tasks (fixes)
+**Spike (Level 2 - research)**
+- Contains: Optional Tasks
 - Relationships:
-  - `affects` → Requirement (discovered defect impacts requirement)
-  - `affects` → Feature (discovered defect impacts feature)
-  - `relates-to` → Requirement/Feature (general context)
+  - `implements` → Requirement (Spike is child of Requirement)
+  - `implemented-by` → Tasks (optional)
+  - `relates-to` → Feature (Spike informs Feature design)
+- Phase: Design/Investigation
+- Example: "Architecture Research - MCP Protocol"
+
+**Bug (Level 2 or 2.5 - configurable)**
+- Contains: Tasks (fixes)
+- Parent Options:
+  - **Option 1**: Bug → Feature (feature-level defect, most common)
+  - **Option 2**: Bug → Requirement (requirement-level defect, impacts multiple features)
+- Relationships:
+  - `implements` → Feature OR Requirement (Bug is child)
+  - `affects` → Feature (when Bug impacts other features)
+  - `relates-to` → Requirement/Feature (additional context)
   - `implemented-by` → Tasks (fix implementation)
 - Phase: Testing/Maintenance
 - Example: "Login Validation Fails for Edge Cases"
-
-**Spike (Level 2.5 - research)**
-- Contains: Optional Tasks
-- Relationships:
-  - `implements` → Feature (NOT nested under Feature)
-  - `required-by` → Tasks
-- Phase: Design/Investigation
 
 **Task (Level 3)**
 - Contains: Nothing (atomic work unit)
@@ -141,26 +164,27 @@ Bug (Level 2 - NOT a child, uses affects/relates-to)
 **Hierarchie (implements/implemented-by):**
 - `Requirement → Feature` (implemented-by)
 - `Requirement → Spike` (implemented-by)
+- `Requirement → Bug` (implemented-by) - requirement-level defect
 - `Feature → Task` (implemented-by)
+- `Feature → Bug` (implemented-by) - feature-level defect
 - `Spike → Task` (implemented-by, optional)
-- `Bug → Task` (implemented-by)
-
-**Bug-Beziehungen (Bug Relationships):**
-- `Bug → Requirement` (affects, relates-to) - NOT implements!
-- `Bug → Feature` (affects, relates-to) - discovered defect
+- `Bug → Task` (implemented-by) - fix implementation
 - `Task → Bug` (implements) - solution fixes problem
 
-**Flexible Beziehungen:**
-- `Spike → Feature` (relates-to) - Spike informs Feature
+**Flexible Beziehungen (affects/relates-to):**
+- `Bug → Feature` (affects) - Bug impacts other features
+- `Bug → Requirement` (affects) - Bug impacts other requirements
+- `Spike → Feature` (relates-to) - Spike informs Feature design
 - `Spike → Task` (required-by) - Spike blocks Task
 - `Task → Task` (depends-on, blocks)
 
 ### Verbotene Waterfall-Links (Forbidden Links)
 
 - ❌ `Requirement → Task` (direct) - must go through Feature/Spike/Bug
-- ❌ `Bug → Requirement` (implements) - use affects or relates-to!
-- ❌ `Spike → Feature` (implements) - Spike is NOT under Feature!
-- ❌ `Task → Requirement` (implements) - only through Feature/Spike/Bug
+- ❌ `Task → Requirement` (implements) - must go through Feature/Spike/Bug
+- ❌ `Spike → Feature` (implements) - Spike is sibling of Feature, not child
+- ❌ `Bug → Bug` (implements) - no nested Bugs
+- ❌ `Spike → Spike` (implements) - no nested Spikes
 
 ---
 

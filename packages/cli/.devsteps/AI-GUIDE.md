@@ -17,72 +17,101 @@ Theme (optional, strategic)
 └── Initiative (optional)
     └── Epic (Level 1)
         ├── Story (Level 2)
-        │   └── Task (Level 3)
-        ├── Spike (Level 2)
+        │   ├── Task (Level 3)
+        │   └── Bug (Level 2.5 - configurable)
+        │       └── Task (Level 3) - fix implementation
+        ├── Spike (Level 2 - research)
         │   └── Task (Level 3, optional)
-        └── Bug (Level 2)
-            └── Task (Level 3)
+        └── Bug (Level 2 - epic-level defect)
+            └── Task (Level 3) - fix implementation
 ```
+
+**Industry Standard (Azure DevOps/Jira 2025):**
+- **Option 1**: Bug as child of Story (story-level defect, most common)
+- **Option 2**: Bug as child of Epic (epic-level defect, impacts multiple stories)
+- **Spike**: Always child of Epic (research before Story implementation)
 
 **Scrum/Agile Allowed Links:**
 - `Epic → Story` (implemented-by)
-- `Epic → Spike` (implemented-by)
-- `Bug → Epic` (affects, relates-to) - discovered defect impacts epic
-- `Bug → Story` (affects, relates-to) - discovered defect impacts story
-- `Bug → Task` (implemented-by) - fix implementation
+- `Epic → Spike` (implemented-by) - research
+- `Epic → Bug` (implemented-by) - epic-level defect
 - `Story → Task` (implemented-by)
-- `Spike → Task` (implemented-by, optional)
+- `Story → Bug` (implemented-by) - story-level defect
+- `Bug → Task` (implemented-by) - fix implementation
+- `Spike → Task` (implemented-by, optional) - research tasks
 - `Spike → Story` (relates-to) - Spike informs Story
-- `Spike → Task` (required-by) - Spike blocks Task
 - `Task → Bug` (implements) - solution fixes the problem
 
 **Scrum/Agile Forbidden Links:**
 - ❌ `Epic → Task` (direct, must go through Story/Spike/Bug)
-- ❌ `Bug → Epic` (implements) - use affects or relates-to instead!
-- ❌ `Spike → Story` (implements) - Spike is NOT under Story!
-- ❌ `Task → Epic` (implements) - only through Story/Spike/Bug
+- ❌ `Spike → Story` (implements, Spike is sibling of Story, not child)
+- ❌ `Task → Epic` (implements, must go through Story/Spike/Bug)
+- ❌ `Bug → Bug` (implements, no nested Bugs)
+- ❌ `Spike → Spike` (implements, no nested Spikes)
 
 ### Waterfall Tree
 
 ```
 Requirement (Level 1)
-└── Feature (Level 2)
-    └── Task (Level 3)
-
-Bug (Level 2) - sibling of Feature, NOT a child
-└── Task (Level 3) - fix implementation
-
-Spike (Level 2.5) - research
+├── Feature (Level 2)
+│   ├── Task (Level 3)
+│   └── Bug (Level 2.5 - configurable)
+│       └── Task (Level 3) - fix implementation
+├── Spike (Level 2 - research)
+│   └── Task (Level 3, optional)
+└── Bug (Level 2 - requirement-level defect)
+    └── Task (Level 3) - fix implementation
 ```
+
+**Industry Standard (Azure DevOps/Jira 2025):**
+- **Option 1**: Bug as child of Feature (feature-level defect)
+- **Option 2**: Bug as child of Requirement (requirement-level defect)
+- **Spike**: Always child of Requirement (research before Feature implementation)
 
 **Waterfall Allowed Links:**
 - `Requirement → Feature` (implemented-by)
+- `Requirement → Spike` (implemented-by) - research
+- `Requirement → Bug` (implemented-by) - requirement-level defect
 - `Feature → Task` (implemented-by)
-- `Bug → Requirement` (affects, relates-to) - discovered defect impacts requirement
-- `Bug → Feature` (affects, relates-to) - discovered defect impacts feature
+- `Feature → Bug` (implemented-by) - feature-level defect
 - `Bug → Task` (implemented-by) - fix implementation
+- `Spike → Task` (implemented-by, optional) - research tasks
 - `Task → Bug` (implements) - solution fixes the problem
-- `Feature → Spike` (relates-to) - optional research
-- `Spike → Requirement` (implements) - if Spike at Req level
+- `Spike → Feature` (relates-to) - Spike informs Feature design
 
 **Waterfall Forbidden Links:**
-- ❌ `Requirement → Task` (direct, must go through Feature)
-- ❌ `Bug → Requirement` (implements) - use affects or relates-to instead!
-- ❌ `Bug → Feature` (implements) - use affects or relates-to instead!
-- ❌ `Task → Requirement` (implements) - only through Feature/Bug
+- ❌ `Requirement → Task` (direct, must go through Feature/Spike/Bug)
+- ❌ `Task → Requirement` (implements, must go through Feature/Spike/Bug)
+- ❌ `Spike → Spike` (implements, no nested Spikes)
+- ❌ `Bug → Bug` (implements, no nested Bugs)
 
-**Waterfall Bug Workflow Example:**
+**Waterfall Bug Workflow Examples:**
+
+**Pattern 1: Feature-Level Bug (most common)**
 ```
 REQ-001: User Authentication
 └── FEAT-002: Email Registration
+    └── BUG-010: Email validation fails for aliases
+        └── TASK-050: Fix email regex validation
 
-BUG-010: Email validation fails for aliases
-├── affects → REQ-001 (impacts authentication requirement)
-├── relates-to → FEAT-002 (context: email registration feature)
-└── implemented-by → TASK-050 (fix implementation)
+# Links:
+BUG-010 --implements--> FEAT-002 (Bug is child of Feature)
+TASK-050 --implements--> BUG-010 (Task fixes Bug)
+```
 
-TASK-050: Fix email regex validation
-└── implements → BUG-010 (solution fixes the reported bug)
+**Pattern 2: Requirement-Level Bug (impacts multiple features)**
+```
+REQ-001: User Authentication
+├── FEAT-002: Email Registration
+├── FEAT-003: OAuth Login
+└── BUG-011: Session timeout too short
+    └── TASK-051: Increase session timeout to 30min
+
+# Links:
+BUG-011 --implements--> REQ-001 (Bug is child of Requirement)
+BUG-011 --affects--> FEAT-002 (Bug impacts Email Registration)
+BUG-011 --affects--> FEAT-003 (Bug impacts OAuth Login)
+TASK-051 --implements--> BUG-011 (Task fixes Bug)
 ```
 
 ---
