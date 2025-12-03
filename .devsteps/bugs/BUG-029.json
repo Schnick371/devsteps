@@ -7,14 +7,14 @@
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-12-02T16:10:12.159Z",
-  "updated": "2025-12-02T16:11:07.323Z",
+  "updated": "2025-12-03T10:12:00.391Z",
   "author": "the@devsteps.dev",
   "assignee": "the@devsteps.dev",
   "affected_paths": [
     ".devsteps/AI-GUIDE.md"
   ],
   "linked_items": {
-    "implements": ["EPIC-004"],
+    "implements": [],
     "implemented-by": [
       "TASK-117"
     ],
@@ -23,7 +23,7 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      
+      "EPIC-004"
     ],
     "depends-on": [],
     "required-by": [],
