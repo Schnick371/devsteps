@@ -1903,9 +1903,9 @@
       "id": "TASK-123",
       "type": "task",
       "title": "Extension: Remove affects from TreeView",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-03T08:59:34.161Z"
+      "updated": "2025-12-03T09:17:42.271Z"
     },
     {
       "id": "TASK-124",
@@ -1953,8 +1953,8 @@
     },
     "by_status": {
       "in-progress": 5,
-      "done": 115,
-      "draft": 111,
+      "done": 116,
+      "draft": 110,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1976,5 +1976,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T09:17:07.237Z"
+  "last_updated": "2025-12-03T09:17:42.271Z"
 }
