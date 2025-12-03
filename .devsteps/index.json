@@ -1665,7 +1665,7 @@
       "title": "Flexible Bug Relationship Types - affects + relates-to",
       "status": "done",
       "priority": "high",
-      "updated": "2025-12-02T14:09:32.884Z"
+      "updated": "2025-12-03T07:43:32.513Z"
     },
     {
       "id": "TASK-103",
@@ -1689,7 +1689,7 @@
       "title": "Agent.md: Update Bug Workflow for relates-to + affects",
       "status": "done",
       "priority": "high",
-      "updated": "2025-12-03T07:23:42.901Z"
+      "updated": "2025-12-03T07:43:08.413Z"
     },
     {
       "id": "EPIC-013",
@@ -1849,8 +1849,8 @@
     },
     "by_status": {
       "in-progress": 4,
-      "done": 110,
-      "draft": 104,
+      "done": 111,
+      "draft": 103,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1872,5 +1872,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T07:23:42.901Z"
+  "last_updated": "2025-12-03T07:43:32.513Z"
 }

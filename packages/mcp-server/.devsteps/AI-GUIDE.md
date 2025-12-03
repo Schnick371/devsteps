@@ -24,17 +24,21 @@ Theme (optional, strategic)
             └── Task (Level 3)
 ```
 
-**Allowed Links:**
+**Scrum/Agile Allowed Links:**
 - `Epic → Story` (implemented-by)
 - `Epic → Spike` (implemented-by)
-- `Bug → Epic` (affects, relates-to)
+- `Bug → Epic` (affects, relates-to) - discovered defect impacts epic
+- `Bug → Story` (affects, relates-to) - discovered defect impacts story
+- `Bug → Task` (implemented-by) - fix implementation
 - `Story → Task` (implemented-by)
 - `Spike → Task` (implemented-by, optional)
 - `Spike → Story` (relates-to) - Spike informs Story
 - `Spike → Task` (required-by) - Spike blocks Task
+- `Task → Bug` (implements) - solution fixes the problem
 
-**Forbidden Links:**
+**Scrum/Agile Forbidden Links:**
 - ❌ `Epic → Task` (direct, must go through Story/Spike/Bug)
+- ❌ `Bug → Epic` (implements) - use affects or relates-to instead!
 - ❌ `Spike → Story` (implements) - Spike is NOT under Story!
 - ❌ `Task → Epic` (implements) - only through Story/Spike/Bug
 
@@ -51,7 +55,7 @@ Bug (Level 2) - sibling of Feature, NOT a child
 Spike (Level 2.5) - research
 ```
 
-**Allowed Links:**
+**Waterfall Allowed Links:**
 - `Requirement → Feature` (implemented-by)
 - `Feature → Task` (implemented-by)
 - `Bug → Requirement` (affects, relates-to) - discovered defect impacts requirement
@@ -61,7 +65,13 @@ Spike (Level 2.5) - research
 - `Feature → Spike` (relates-to) - optional research
 - `Spike → Requirement` (implements) - if Spike at Req level
 
-**Bug Workflow Example:**
+**Waterfall Forbidden Links:**
+- ❌ `Requirement → Task` (direct, must go through Feature)
+- ❌ `Bug → Requirement` (implements) - use affects or relates-to instead!
+- ❌ `Bug → Feature` (implements) - use affects or relates-to instead!
+- ❌ `Task → Requirement` (implements) - only through Feature/Bug
+
+**Waterfall Bug Workflow Example:**
 ```
 REQ-001: User Authentication
 └── FEAT-002: Email Registration
