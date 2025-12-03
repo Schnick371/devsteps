@@ -1,54 +1,39 @@
 ## Objective
 
-Move `blocks/blocked-by` from FLEXIBLE_RELATIONSHIPS to HIERARCHY_RELATIONSHIPS.
+Move `blocks/blocked-by` from FLEXIBLE_RELATIONSHIPS to HIERARCHY_RELATIONSHIPS array.
 
-## Changes
+## Implementation Complete ✅
+
+**Changes Made:**
 
 **File: packages/shared/src/schemas/relationships.ts**
 
-```typescript
-/**
- * Hierarchy relationships enforce parent-child rules
- * - implements/implemented-by: Standard hierarchy (Epic→Story→Task, etc.)
- * - blocks/blocked-by: Jira-style hierarchy for Bug (Bug blocks Epic/Story)
- *   Note: Other types (Story→Story, Task→Task) use blocks flexibly via bypass
- */
-export const HIERARCHY_RELATIONSHIPS = [
-  'implements',
-  'implemented-by',
-  'blocks',         // NEW: Jira hierarchy for Bug
-  'blocked-by'      // NEW: Reverse relation
-] as const;
-```
+1. **Added blocks/blocked-by to HIERARCHY_RELATIONSHIPS**:
+   ```typescript
+   export const HIERARCHY_RELATIONSHIPS = [
+     'implements',
+     'implemented-by',
+     'blocks',        // NEW
+     'blocked-by',    // NEW
+   ] as const;
+   ```
 
-**Remove from FLEXIBLE_RELATIONSHIPS:**
-```typescript
-export const FLEXIBLE_RELATIONSHIPS = [
-  'relates-to',
-  // REMOVE: 'blocks', 'blocked-by',
-  'depends-on',
-  'required-by',
-  'tested-by',
-  'tests',
-  'supersedes',
-  'superseded-by',
-] as const;
-```
+2. **Removed blocks/blocked-by from FLEXIBLE_RELATIONSHIPS**:
+   - Array reduced from 9 to 7 items
+   - Removed 'blocks', 'blocked-by'
 
-**Update JSDoc for FLEXIBLE:**
-```typescript
-/**
- * Flexible relationships allow connections between any item types
- * Note: blocks/blocked-by moved to HIERARCHY for Bug validation (Jira 2025)
- * - relates-to: Generic association
- * - depends-on/required-by: Technical dependencies
- * - tested-by/tests: Testing relationships
- * - supersedes/superseded-by: Version/replacement tracking
- */
-```
+3. **Updated JSDoc comments**:
+   - HIERARCHY: Added explanation of blocks dual nature (Bug=hierarchy, others=flexible)
+   - FLEXIBLE: Added note about blocks/blocked-by relocation
 
-## Validation
+**Validation Results:**
+- ✅ TypeScript compilation successful
+- ✅ All packages build without errors
+- ✅ TASK-125 validation rules now active
+- ✅ HierarchyRelation type now includes blocks/blocked-by
+- ✅ FlexibleRelation type no longer includes blocks/blocked-by
 
-- Run `npm run build`
-- Verify `HierarchyRelation` includes 'blocks' and 'blocked-by'
-- Verify `FlexibleRelation` excludes them
+**Impact:**
+- Breaking change: blocks/blocked-by now enforce Bug→Epic/Story/Requirement/Feature hierarchy
+- Non-Bug blocks (Story→Story, Task→Task) bypass via TASK-125 validation logic
+- Jira 2025 alignment complete

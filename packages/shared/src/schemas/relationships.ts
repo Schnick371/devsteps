@@ -5,24 +5,28 @@
 
 /**
  * Hierarchy relationships enforce parent-child rules
- * - implements/implemented-by: Enforces proper parent-child hierarchy
- *   Scrum: Epic → Story/Spike → Task, Bug → Epic, Task → Bug
- *   Waterfall: Requirement → Feature/Spike → Task, Bug → Requirement, Task → Bug
+ * - implements/implemented-by: Standard hierarchy (Epic→Story→Task)
+ * - blocks/blocked-by: Jira 2025 hierarchy for Bug (Bug blocks Epic/Story)
+ *   Note: Other types (Story→Story, Task→Task) bypass validation (flexible)
+ *   Scrum: Bug blocks Epic/Story | Waterfall: Bug blocks Requirement/Feature
  */
-export const HIERARCHY_RELATIONSHIPS = ['implements', 'implemented-by'] as const;
+export const HIERARCHY_RELATIONSHIPS = [
+  'implements',
+  'implemented-by',
+  'blocks',
+  'blocked-by',
+] as const;
 
 /**
  * Flexible relationships allow connections between any item types
+ * Note: blocks/blocked-by moved to HIERARCHY for Bug validation (Jira 2025)
  * - relates-to: Generic association
- * - blocks/blocked-by: Blocking dependencies (will move to hierarchy)
  * - depends-on/required-by: Technical dependencies
  * - tested-by/tests: Testing relationships
  * - supersedes/superseded-by: Version/replacement tracking
  */
 export const FLEXIBLE_RELATIONSHIPS = [
   'relates-to',
-  'blocks',
-  'blocked-by',
   'depends-on',
   'required-by',
   'tested-by',

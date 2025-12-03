@@ -3,11 +3,11 @@
   "type": "task",
   "category": "Shared",
   "title": "relationships.ts: Move blocks to HIERARCHY",
-  "status": "draft",
+  "status": "done",
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T09:00:18.234Z",
-  "updated": "2025-12-03T09:00:39.487Z",
+  "updated": "2025-12-03T09:25:29.192Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/schemas/relationships.ts"
