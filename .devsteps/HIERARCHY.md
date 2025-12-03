@@ -58,8 +58,9 @@ Theme (strategisch, optional)
 Requirement (Level 1)
 └── Feature (Level 2)
     ├── Task (Level 3)
-    ├── Spike (Level 2.5 - research before implementation)
-    └── Bug (Level 2.5 - defects)
+    └── Spike (Level 2.5 - research before implementation)
+
+Bug (Level 2 - NOT a child, uses affects/relates-to)
 ```
 
 ### Regeln für Waterfall-Hierarchie
@@ -71,13 +72,23 @@ Requirement (Level 1)
 - Example: "DevSteps Platform - System Requirements"
 
 **Feature (Level 2)**
-- Contains: Tasks, Spikes, Bugs
+- Contains: Tasks, Spikes
 - Relationships:
   - `implements` → Requirement
   - `implemented-by` → Tasks
   - `relates-to` → Stories (cross-methodology)
 - Phase: Design → Implementation
 - Example: "VS Code Extension - IDE Integration"
+
+**Bug (Level 2 - same level as Feature!)**
+- Contains: Tasks (fixes)
+- Relationships:
+  - `affects` → Requirement (discovered defect impacts requirement)
+  - `affects` → Feature (discovered defect impacts feature)
+  - `relates-to` → Requirement/Feature (general context)
+  - `implemented-by` → Tasks (fix implementation)
+- Phase: Testing/Maintenance
+- Example: "Login Validation Fails for Edge Cases"
 
 **Spike (Level 2.5 - research)**
 - Contains: Optional Tasks

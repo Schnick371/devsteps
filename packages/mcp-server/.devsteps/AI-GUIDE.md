@@ -44,13 +44,17 @@ Theme (optional, strategic)
 Requirement (Level 1)
 └── Feature (Level 2)
     ├── Task (Level 3)
-    ├── Spike (Level 2.5 - research)
-    └── Bug (Level 2.5 - defects)
+    └── Spike (Level 2.5 - research)
+
+Bug (Level 2) - NOT a child, uses affects/relates-to
 ```
 
 **Allowed Links:**
 - `Requirement → Feature` (implemented-by)
 - `Feature → Task` (implemented-by)
+- `Bug → Requirement` (affects, relates-to) - discovered defect impacts requirement
+- `Bug → Feature` (affects, relates-to) - discovered defect impacts feature
+- `Task → Bug` (implements) - fix implementation
 - `Feature → Spike` (relates-to) - optional research
 - `Spike → Requirement` (implements) - if Spike at Req level
 
