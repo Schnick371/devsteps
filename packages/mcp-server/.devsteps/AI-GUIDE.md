@@ -57,7 +57,7 @@ Theme (optional, strategic)
 **Allowed Links:**
 - `Epic → Story` (implemented-by)
 - `Epic → Spike` (implemented-by)
-- `Epic → Bug` (implemented-by)
+- `Bug → Epic` (affects, relates-to)
 - `Story → Task` (implemented-by)
 - `Spike → Task` (implemented-by, optional)
 - `Spike → Story` (relates-to) - Spike informs Story

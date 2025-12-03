@@ -1,6 +1,6 @@
 ---
 agent: 'devsteps'
-model: 'Claude Sonnet 4'
+model: 'Claude Sonnet 4.5'
 description: 'Interactive planning session - work with developer to define and structure work items before implementation'
 tools: ['search', 'devsteps/*', 'GitKraken/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'testFailure', 'fetch', 'todos', 'runSubagent']
 ---
@@ -55,7 +55,7 @@ tools: ['search', 'devsteps/*', 'GitKraken/*', 'microsoft/playwright-mcp/*', 'ta
 **Determine hierarchy:**
 - Epic (large initiative) → Story (feature) → Task (implementation)
 - Epic → Spike (research) → Task (proof-of-concept)
-- Bug/Test can implement Epic or relate to Story/Spike
+- Bug uses affects/relates-to to Epic/Requirement, Task implements Bug
 
 **Spike planning:**
 - Plan follow-up Stories from spike outcomes

@@ -1689,7 +1689,7 @@
       "title": "Agent.md: Update Bug Workflow for relates-to + affects",
       "status": "done",
       "priority": "high",
-      "updated": "2025-12-02T12:01:37.502Z"
+      "updated": "2025-12-03T07:23:42.901Z"
     },
     {
       "id": "EPIC-013",
@@ -1849,8 +1849,8 @@
     },
     "by_status": {
       "in-progress": 4,
-      "done": 109,
-      "draft": 105,
+      "done": 110,
+      "draft": 104,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1872,5 +1872,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-02T16:23:13.036Z"
+  "last_updated": "2025-12-03T07:23:42.901Z"
 }

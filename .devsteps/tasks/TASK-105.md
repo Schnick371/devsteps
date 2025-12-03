@@ -9,10 +9,11 @@ Update Copilot agent instructions to reflect new flexible Bug relationship types
 ```markdown
 **Bug Workflow (MANDATORY):**
 1. Create Bug with problem description (what's broken, how to reproduce)
-2. Bug uses "relates-to" (context) OR "affects" (impact) to Epic/Requirement
-3. Create Task(s) for solution implementation (how to fix)
-4. Task `implements` Bug (solution fixes the reported problem) *
-5. **Implement solution in Task, NOT in Bug item!**
+2. Bug uses "affects" (impact) to Epic/Requirement
+3. Bug uses optional "relates-to" (context) to other Epic/Requirement then its own Epic
+4. Create Task(s) for solution implementation (how to fix)
+5. Task `implements` Bug (solution fixes the reported problem) *
+6. **Implement solution in Task, NOT in Bug item!**
 ```
 
 ### 2. Update "Relationship Rules" Section
