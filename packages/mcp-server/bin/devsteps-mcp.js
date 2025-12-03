@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-import '../dist/index.bundled.mjs';
+import '../dist/index.js';
