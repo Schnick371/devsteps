@@ -1,0 +1,39 @@
+{
+  "id": "TASK-124",
+  "type": "task",
+  "category": "Shared",
+  "title": "relationships.ts: Move blocks to HIERARCHY",
+  "status": "draft",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-03T09:00:18.234Z",
+  "updated": "2025-12-03T09:00:39.487Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/relationships.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-054"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-125"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "relationships",
+    "hierarchy"
+  ],
+  "commits": [],
+  "metadata": {}
+}

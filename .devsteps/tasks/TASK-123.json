@@ -1,0 +1,39 @@
+{
+  "id": "TASK-123",
+  "type": "task",
+  "category": "Extension",
+  "title": "Extension: Remove affects from TreeView",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-03T08:59:34.161Z",
+  "updated": "2025-12-03T09:00:39.487Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/treeView/nodes/workItemNode.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-053"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-120"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "treeview",
+    "breaking-change"
+  ],
+  "commits": [],
+  "metadata": {}
+}

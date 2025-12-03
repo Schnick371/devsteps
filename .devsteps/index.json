@@ -1,9 +1,9 @@
 {
   "version": "1.0.0",
   "counters": {
-    "epic": 13,
-    "story": 52,
-    "task": 117,
+    "epic": 14,
+    "story": 54,
+    "task": 127,
     "bug": 29,
     "spike": 6,
     "feature": 5,
@@ -1834,14 +1834,118 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-12-02T16:23:13.036Z"
+    },
+    {
+      "id": "EPIC-014",
+      "type": "epic",
+      "title": "Jira 2025 Link Semantics Alignment",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T08:58:08.397Z"
+    },
+    {
+      "id": "STORY-053",
+      "type": "story",
+      "title": "Remove Azure DevOps affects/affected-by Relations",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T08:58:25.631Z"
+    },
+    {
+      "id": "STORY-054",
+      "type": "story",
+      "title": "Move blocks/blocked-by to Hierarchy Relations",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T08:58:40.541Z"
+    },
+    {
+      "id": "TASK-118",
+      "type": "task",
+      "title": "Correct STORY-049 Azure DevOps Misinformation",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T08:58:54.147Z"
+    },
+    {
+      "id": "TASK-119",
+      "type": "task",
+      "title": "relationships.ts: Remove affects/affected-by",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T08:59:34.152Z"
+    },
+    {
+      "id": "TASK-120",
+      "type": "task",
+      "title": "index.ts: Remove affects from schema types",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T08:59:34.154Z"
+    },
+    {
+      "id": "TASK-121",
+      "type": "task",
+      "title": "MCP: Remove affects handlers and descriptions",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T08:59:34.159Z"
+    },
+    {
+      "id": "TASK-122",
+      "type": "task",
+      "title": "CLI: Remove affects from commands",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T08:59:34.160Z"
+    },
+    {
+      "id": "TASK-123",
+      "type": "task",
+      "title": "Extension: Remove affects from TreeView",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T08:59:34.161Z"
+    },
+    {
+      "id": "TASK-124",
+      "type": "task",
+      "title": "relationships.ts: Move blocks to HIERARCHY",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T09:00:18.234Z"
+    },
+    {
+      "id": "TASK-125",
+      "type": "task",
+      "title": "validation.ts: Add Bug blocks hierarchy rules",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T09:00:18.236Z"
+    },
+    {
+      "id": "TASK-126",
+      "type": "task",
+      "title": "HIERARCHY-COMPACT: Update for blocks hierarchy",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T09:00:18.237Z"
+    },
+    {
+      "id": "TASK-127",
+      "type": "task",
+      "title": "AI-GUIDE-COMPACT: Update for blocks dual nature",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T09:00:18.238Z"
     }
   ],
   "stats": {
-    "total": 222,
+    "total": 235,
     "by_type": {
-      "epic": 13,
-      "story": 52,
-      "task": 117,
+      "epic": 14,
+      "story": 54,
+      "task": 127,
       "bug": 29,
       "spike": 6,
       "feature": 5,
@@ -1850,7 +1954,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 111,
-      "draft": 103,
+      "draft": 116,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1872,5 +1976,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T07:43:32.513Z"
+  "last_updated": "2025-12-03T09:00:18.238Z"
 }

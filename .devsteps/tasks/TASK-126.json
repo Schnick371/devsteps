@@ -1,0 +1,39 @@
+{
+  "id": "TASK-126",
+  "type": "task",
+  "category": "Documentation",
+  "title": "HIERARCHY-COMPACT: Update for blocks hierarchy",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-03T09:00:18.237Z",
+  "updated": "2025-12-03T09:00:39.487Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/HIERARCHY-COMPACT.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-054"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-125"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "documentation",
+    "hierarchy",
+    "jira"
+  ],
+  "commits": [],
+  "metadata": {}
+}

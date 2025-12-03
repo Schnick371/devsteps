@@ -1,0 +1,39 @@
+{
+  "id": "TASK-119",
+  "type": "task",
+  "category": "Shared",
+  "title": "relationships.ts: Remove affects/affected-by",
+  "status": "draft",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-03T08:59:34.152Z",
+  "updated": "2025-12-03T09:00:39.484Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/relationships.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-053"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-120"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "relationships",
+    "breaking-change"
+  ],
+  "commits": [],
+  "metadata": {}
+}

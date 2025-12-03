@@ -245,13 +245,13 @@ class DevStepsServer {
           {
             uri: 'devsteps://docs/hierarchy',
             name: 'Hierarchy Rules',
-            description: 'Complete hierarchy rules for Scrum and Waterfall methodologies including allowed Bug/Spike relationships',
+            description: 'Work item hierarchy for Scrum (Epic→Story|Spike|Bug→Task) and Waterfall (Requirement→Feature|Spike|Bug→Task) based on Azure DevOps/Jira 2025 standards',
             mimeType: 'text/markdown',
           },
           {
             uri: 'devsteps://docs/ai-guide',
-            name: 'AI Assistant Guide',
-            description: 'Comprehensive guide for AI assistants with workflow patterns and MCP usage examples',
+            name: 'MCP Tools Usage Guide',
+            description: 'Quick reference for Bug workflow, Spike workflow, link validation rules, and common mistakes',
             mimeType: 'text/markdown',
           },
         ],
@@ -274,9 +274,9 @@ class DevStepsServer {
 
         let content = '';
         if (uri === 'devsteps://docs/hierarchy') {
-          content = readFileSync(join(devstepsDir, 'HIERARCHY.md'), 'utf-8');
+          content = readFileSync(join(devstepsDir, 'HIERARCHY-COMPACT.md'), 'utf-8');
         } else if (uri === 'devsteps://docs/ai-guide') {
-          content = readFileSync(join(devstepsDir, 'AI-GUIDE.md'), 'utf-8');
+          content = readFileSync(join(devstepsDir, 'AI-GUIDE-COMPACT.md'), 'utf-8');
         } else {
           throw new Error(`Unknown resource URI: ${uri}`);
         }

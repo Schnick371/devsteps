@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-12-02T11:37:47.290Z",
-  "updated": "2025-12-03T07:43:32.513Z",
+  "updated": "2025-12-03T08:59:01.729Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -28,7 +28,10 @@
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
-    "superseded-by": []
+    "superseded-by": [
+      "STORY-053",
+      "STORY-054"
+    ]
   },
   "tags": [
     "relationships",

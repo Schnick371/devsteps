@@ -47,7 +47,7 @@
     "start:debug": "LOG_LEVEL=debug node dist/index.js",
     "start:trace": "LOG_LEVEL=trace node dist/index.js",
     "bundle": "node esbuild.cjs --production",
-    "copy:docs": "mkdir -p .devsteps && cp ../../.devsteps/HIERARCHY.md ../../.devsteps/AI-GUIDE.md .devsteps/"
+    "copy:docs": "mkdir -p .devsteps && cp ../../.devsteps/HIERARCHY-COMPACT.md .devsteps/HIERARCHY-COMPACT.md && cp ../../.devsteps/AI-GUIDE-COMPACT.md .devsteps/AI-GUIDE-COMPACT.md"
   },
   "exports": {
     ".": "./dist/index.js",

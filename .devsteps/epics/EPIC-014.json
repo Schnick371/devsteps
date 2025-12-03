@@ -1,0 +1,37 @@
+{
+  "id": "EPIC-014",
+  "type": "epic",
+  "category": "Architecture",
+  "title": "Jira 2025 Link Semantics Alignment",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-03T08:58:08.397Z",
+  "updated": "2025-12-03T08:59:01.727Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-053",
+      "STORY-054"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "relationships",
+    "jira",
+    "standards",
+    "breaking-change"
+  ],
+  "commits": [],
+  "metadata": {}
+}

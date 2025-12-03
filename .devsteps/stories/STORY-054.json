@@ -1,0 +1,52 @@
+{
+  "id": "STORY-054",
+  "type": "story",
+  "category": "Architecture",
+  "title": "Move blocks/blocked-by to Hierarchy Relations",
+  "status": "draft",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-03T08:58:40.541Z",
+  "updated": "2025-12-03T09:00:39.488Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/relationships.ts",
+    "packages/shared/src/core/validation.ts",
+    "packages/mcp-server/src/tools/index.ts",
+    "packages/cli/src/index.ts",
+    ".devsteps/HIERARCHY-COMPACT.md",
+    ".devsteps/AI-GUIDE-COMPACT.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-014"
+    ],
+    "implemented-by": [
+      "TASK-124",
+      "TASK-125",
+      "TASK-126",
+      "TASK-127"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-053"
+    ],
+    "required-by": [],
+    "supersedes": [
+      "STORY-049"
+    ],
+    "superseded-by": []
+  },
+  "tags": [
+    "relationships",
+    "jira",
+    "validation",
+    "hierarchy"
+  ],
+  "commits": [],
+  "metadata": {}
+}
