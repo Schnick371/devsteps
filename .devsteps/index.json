@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
   "counters": {
-    "epic": 14,
-    "story": 55,
+    "epic": 15,
+    "story": 60,
     "task": 132,
     "bug": 30,
-    "spike": 6,
+    "spike": 7,
     "feature": 5,
     "requirement": 2
   },
@@ -1994,23 +1994,79 @@
       "status": "done",
       "priority": "critical",
       "updated": "2025-12-03T16:22:36.571Z"
+    },
+    {
+      "id": "EPIC-015",
+      "type": "epic",
+      "title": "Transform MCP Server Bundling - GitLens Architecture Model",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T16:29:37.594Z"
+    },
+    {
+      "id": "SPIKE-007",
+      "type": "spike",
+      "title": "Research GitLens/GitKraken MCP Bundling Implementation",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T16:31:06.933Z"
+    },
+    {
+      "id": "STORY-056",
+      "type": "story",
+      "title": "Transform Build System for Dual-Target MCP Bundling",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T16:31:06.936Z"
+    },
+    {
+      "id": "STORY-057",
+      "type": "story",
+      "title": "Implement VS Code Native MCP Registration API",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T16:31:48.137Z"
+    },
+    {
+      "id": "STORY-058",
+      "type": "story",
+      "title": "Migrate MCP Server Code to Extension Package",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T16:31:48.140Z"
+    },
+    {
+      "id": "STORY-059",
+      "type": "story",
+      "title": "Add Fallback Support for Non-Bundled IDEs",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T16:32:44.403Z"
+    },
+    {
+      "id": "STORY-060",
+      "type": "story",
+      "title": "Update Extension Packaging and Distribution",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T16:32:44.405Z"
     }
   ],
   "stats": {
-    "total": 242,
+    "total": 249,
     "by_type": {
-      "epic": 14,
-      "story": 55,
+      "epic": 15,
+      "story": 60,
       "task": 132,
       "bug": 30,
-      "spike": 6,
+      "spike": 7,
       "feature": 5,
       "requirement": 2
     },
     "by_status": {
       "in-progress": 4,
       "done": 127,
-      "draft": 107,
+      "draft": 114,
       "blocked": 1,
       "obsolete": 3
     },
@@ -2032,5 +2088,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T16:22:36.571Z"
+  "last_updated": "2025-12-03T16:32:44.405Z"
 }
