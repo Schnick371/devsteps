@@ -3,7 +3,7 @@
   "counters": {
     "epic": 14,
     "story": 55,
-    "task": 130,
+    "task": 132,
     "bug": 30,
     "spike": 6,
     "feature": 5,
@@ -1978,14 +1978,30 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-03T10:33:33.159Z"
+    },
+    {
+      "id": "TASK-131",
+      "type": "task",
+      "title": "Verify Extension 0.6.11 Integration with Fixed npm Packages",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T15:19:18.046Z"
+    },
+    {
+      "id": "TASK-132",
+      "type": "task",
+      "title": "Fix MCP Server & CLI TypeScript Build Configuration",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-12-03T16:22:36.571Z"
     }
   ],
   "stats": {
-    "total": 240,
+    "total": 242,
     "by_type": {
       "epic": 14,
       "story": 55,
-      "task": 130,
+      "task": 132,
       "bug": 30,
       "spike": 6,
       "feature": 5,
@@ -1993,8 +2009,8 @@
     },
     "by_status": {
       "in-progress": 4,
-      "done": 126,
-      "draft": 106,
+      "done": 127,
+      "draft": 107,
       "blocked": 1,
       "obsolete": 3
     },
@@ -2016,5 +2032,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T10:33:33.159Z"
+  "last_updated": "2025-12-03T16:22:36.571Z"
 }

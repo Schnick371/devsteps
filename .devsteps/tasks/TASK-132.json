@@ -1,19 +1,20 @@
 {
-  "id": "TASK-083",
+  "id": "TASK-132",
   "type": "task",
-  "category": "general",
-  "title": "Prepare npm packages for publication (CLI + MCP)",
+  "category": "devops",
+  "title": "Fix MCP Server & CLI TypeScript Build Configuration",
   "status": "done",
   "priority": "critical",
   "eisenhower": "urgent-important",
-  "created": "2025-11-28T10:25:23.416Z",
-  "updated": "2025-12-03T16:22:36.569Z",
+  "created": "2025-12-03T16:22:27.621Z",
+  "updated": "2025-12-03T16:22:36.571Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
+    "packages/mcp-server/tsconfig.json",
+    "packages/mcp-server/src/handlers/add.ts",
+    "packages/mcp-server/src/handlers/update.ts",
     "packages/cli/package.json",
-    "packages/mcp-server/package.json",
-    "packages/shared/package.json",
-    ".npmignore"
+    ".devsteps/tasks/TASK-138.md"
   ],
   "linked_items": {
     "implements": [
@@ -25,20 +26,23 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "TASK-132"
+      "TASK-083",
+      "TASK-084"
     ],
     "depends-on": [],
     "required-by": [
-      "TASK-084"
+      "TASK-131"
     ],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "npm",
-    "cli",
     "mcp-server",
-    "publication"
+    "cli",
+    "typescript",
+    "build",
+    "npm",
+    "critical-fix"
   ],
   "commits": [],
   "metadata": {}
