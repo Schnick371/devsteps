@@ -38,9 +38,13 @@ Theme (strategisch, optional)
 - Example: "MCP Server Architecture Research"
 
 **Bug (Level 2 - same level as Story!)**
-- Contains: Tasks
-- Relationships: Same as Story
+- Contains: Tasks (fixes)
+- Relationships:
+  - `affects` → Epic (discovered defect impacts epic)
+  - `relates-to` → Epic/Story (general context)
+  - `implemented-by` → Tasks (fix implementation)
 - Duration: 1 sprint or less
+- Example: "Login Validation Fails for Special Characters"
 
 **Task (Level 3)**
 - Contains: Nothing (atomic work unit)
@@ -49,6 +53,32 @@ Theme (strategisch, optional)
   - `depends-on` → Other Tasks, Spikes
 - Duration: Hours to days
 - Example: "Extension Scaffolding - Basic Structure"
+
+### Erlaubte Scrum-Links (Allowed Links)
+
+**Hierarchie (implements/implemented-by):**
+- `Epic → Story` (implemented-by)
+- `Epic → Spike` (implemented-by)
+- `Story → Task` (implemented-by)
+- `Spike → Task` (implemented-by, optional)
+- `Bug → Task` (implemented-by)
+
+**Bug-Beziehungen (Bug Relationships):**
+- `Bug → Epic` (affects, relates-to) - NOT implements!
+- `Bug → Story` (affects, relates-to) - discovered defect
+- `Task → Bug` (implements) - solution fixes problem
+
+**Flexible Beziehungen:**
+- `Spike → Story` (relates-to) - Spike informs Story
+- `Spike → Task` (required-by) - Spike blocks Task
+- `Task → Task` (depends-on, blocks)
+
+### Verbotene Scrum-Links (Forbidden Links)
+
+- ❌ `Epic → Task` (direct) - must go through Story/Spike/Bug
+- ❌ `Bug → Epic` (implements) - use affects or relates-to!
+- ❌ `Spike → Story` (implements) - Spike is NOT under Story!
+- ❌ `Task → Epic` (implements) - only through Story/Spike/Bug
 
 ---
 
@@ -98,27 +128,39 @@ Bug (Level 2 - NOT a child, uses affects/relates-to)
 - Phase: Design/Investigation
 
 **Task (Level 3)**
-- Same as Scrum
+- Contains: Nothing (atomic work unit)
+- Relationships:
+  - `implements` → Feature, Spike, or Bug
+  - `depends-on` → Other Tasks, Spikes
+- Duration: Hours to days
+- Phase: Implementation
+- Example: "Database Schema - User Tables"
 
----
+### Erlaubte Waterfall-Links (Allowed Links)
 
-## Verbotene Verbindungen (Validation Rules)
+**Hierarchie (implements/implemented-by):**
+- `Requirement → Feature` (implemented-by)
+- `Requirement → Spike` (implemented-by)
+- `Feature → Task` (implemented-by)
+- `Spike → Task` (implemented-by, optional)
+- `Bug → Task` (implemented-by)
 
-### ❌ NICHT erlaubt:
-1. `Epic → Task` (direct) - MUSS über Story/Spike/Bug gehen
-2. `Spike → Story` (implements) - Spike ist NICHT unter Story!
-3. `Task → Epic` (implements) - MUSS über Story gehen
-4. `Requirement → Task` (direct) - MUSS über Feature gehen
+**Bug-Beziehungen (Bug Relationships):**
+- `Bug → Requirement` (affects, relates-to) - NOT implements!
+- `Bug → Feature` (affects, relates-to) - discovered defect
+- `Task → Bug` (implements) - solution fixes problem
 
-### ✅ Erlaubt:
-1. `Epic → Story` (implemented-by)
-2. `Epic → Spike` (implemented-by)
-3. `Story → Task` (implemented-by)
-4. `Spike → Epic` (implements)
-5. `Spike → Task` (required-by) - Spike blockiert Task
-6. `Story → Spike` (relates-to) - Story benötigt Spike-Ergebnisse
-7. `Requirement → Feature` (implemented-by)
-8. `Feature → Task` (implemented-by)
+**Flexible Beziehungen:**
+- `Spike → Feature` (relates-to) - Spike informs Feature
+- `Spike → Task` (required-by) - Spike blocks Task
+- `Task → Task` (depends-on, blocks)
+
+### Verbotene Waterfall-Links (Forbidden Links)
+
+- ❌ `Requirement → Task` (direct) - must go through Feature/Spike/Bug
+- ❌ `Bug → Requirement` (implements) - use affects or relates-to!
+- ❌ `Spike → Feature` (implements) - Spike is NOT under Feature!
+- ❌ `Task → Requirement` (implements) - only through Feature/Spike/Bug
 
 ---
 
