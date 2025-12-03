@@ -31,6 +31,17 @@ export function getItemMethodology(item: WorkItem, allItems: Map<string, WorkIte
     }
   }
 
+  // Bug-specific: check relates-to or affects for context
+  if (item.type === 'bug') {
+    const relatedItem = item.linked_items?.['relates-to']?.[0];
+    if (relatedItem) {
+      const relatedItemData = allItems.get(relatedItem);
+      if (relatedItemData) {
+        return getItemMethodology(relatedItemData, allItems);
+      }
+    }
+  }
+
   // Default to scrum if no parent found
   return 'scrum';
 }
