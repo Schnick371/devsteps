@@ -3,11 +3,11 @@
   "type": "task",
   "category": "Shared",
   "title": "index.ts: Remove affects from schema types",
-  "status": "draft",
+  "status": "done",
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T08:59:34.154Z",
-  "updated": "2025-12-03T09:00:39.487Z",
+  "updated": "2025-12-03T09:14:59.186Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/schemas/index.ts"
