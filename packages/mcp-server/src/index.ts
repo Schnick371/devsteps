@@ -4,6 +4,8 @@ import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import {
   CallToolRequestSchema,
+  ListResourcesRequestSchema,
+  ReadResourceRequestSchema,
   ListToolsRequestSchema,
   type Tool,
 } from '@modelcontextprotocol/sdk/types.js';
@@ -178,6 +180,7 @@ class DevStepsServer {
       {
         capabilities: {
           tools: {},
+          resources: {},
         },
       }
     );
@@ -231,6 +234,67 @@ class DevStepsServer {
       return {
         tools: Array.from(this.tools.values()),
       };
+    });
+
+    // List available resources (hierarchy documentation)
+    this.server.setRequestHandler(ListResourcesRequestSchema, async () => {
+      const logger = getLogger();
+      logger.info('Listing available resources');
+      return {
+        resources: [
+          {
+            uri: 'devsteps://docs/hierarchy',
+            name: 'Hierarchy Rules',
+            description: 'Complete hierarchy rules for Scrum and Waterfall methodologies including allowed Bug/Spike relationships',
+            mimeType: 'text/markdown',
+          },
+          {
+            uri: 'devsteps://docs/ai-guide',
+            name: 'AI Assistant Guide',
+            description: 'Comprehensive guide for AI assistants with workflow patterns and MCP usage examples',
+            mimeType: 'text/markdown',
+          },
+        ],
+      };
+    });
+
+    // Read resource content
+    this.server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
+      const logger = getLogger();
+      const { uri } = request.params;
+      logger.info({ uri }, 'Reading resource');
+
+      try {
+        const { readFileSync } = await import('fs');
+        const { join } = await import('path');
+        const { getWorkspacePath } = await import('./workspace.js');
+
+        const workspacePath = getWorkspacePath();
+        const devstepsDir = join(workspacePath, '.devsteps');
+
+        let content = '';
+        if (uri === 'devsteps://docs/hierarchy') {
+          content = readFileSync(join(devstepsDir, 'HIERARCHY.md'), 'utf-8');
+        } else if (uri === 'devsteps://docs/ai-guide') {
+          content = readFileSync(join(devstepsDir, 'AI-GUIDE.md'), 'utf-8');
+        } else {
+          throw new Error(`Unknown resource URI: ${uri}`);
+        }
+
+        return {
+          contents: [
+            {
+              uri,
+              mimeType: 'text/markdown',
+              text: content,
+            },
+          ],
+        };
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        logger.error({ uri, error: errorMessage }, 'Failed to read resource');
+        throw error;
+      }
     });
 
     // Handle tool calls

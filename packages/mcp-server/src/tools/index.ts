@@ -230,7 +230,7 @@ export const updateTool: Tool = {
 export const linkTool: Tool = {
   name: 'link',
   description:
-    'Create a relationship between two items. Supports: implements, tested-by, blocks, relates-to, affects, depends-on, supersedes.',
+    'Create a relationship between two items. HIERARCHY RULES (implements): Scrum: Epic→Story|Spike|Bug, Story→Task|Bug, Bug→Task, Spike→Task. Waterfall: Requirement→Feature|Spike|Bug, Feature→Task|Bug, Bug→Task, Spike→Task. FLEXIBLE (always allowed): relates-to, affects, blocks, depends-on, tested-by, supersedes.',
   inputSchema: {
     type: 'object',
     properties: {
