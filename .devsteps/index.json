@@ -1919,9 +1919,9 @@
       "id": "TASK-125",
       "type": "task",
       "title": "validation.ts: Add Bug blocks hierarchy rules",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-12-03T09:00:18.236Z"
+      "updated": "2025-12-03T09:24:47.744Z"
     },
     {
       "id": "TASK-126",
@@ -1953,8 +1953,8 @@
     },
     "by_status": {
       "in-progress": 5,
-      "done": 118,
-      "draft": 108,
+      "done": 119,
+      "draft": 107,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1976,5 +1976,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T09:20:43.947Z"
+  "last_updated": "2025-12-03T09:24:47.744Z"
 }

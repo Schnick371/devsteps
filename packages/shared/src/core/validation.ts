@@ -39,13 +39,23 @@ export function validateRelationship(
     return { valid: true };
   }
 
-  // Only validate hierarchy relationships
+    // Only validate hierarchy relationships
   if (!isHierarchyRelation(relationType)) {
     return { valid: false, error: `Unknown relationship type: ${relationType}` };
   }
 
-  // Only validate "implements" direction (implemented-by is automatic reverse)
-  if (relationType === 'implemented-by') {
+  // Special case: blocks relation (Jira 2025 - hybrid flexible/hierarchy)
+  // Non-Bug blocks: Flexible (Story→Story, Task→Task allowed)
+  // Bug blocks: Hierarchy validation (Bug→Epic/Story/Requirement/Feature only)
+  if (relationType === 'blocks') {
+    if (source.type !== 'bug') {
+      return { valid: true }; // Flexible for non-Bug types
+    }
+    // Bug blocks: validate as hierarchy below
+  }
+
+  // Only validate "implements" direction (implemented-by, blocked-by are automatic reverse)
+  if (relationType === 'implemented-by' || relationType === 'blocked-by') {
     return { valid: true }; // Reverse relationships auto-created, no validation needed
   }
 
@@ -126,17 +136,19 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
     };
   }
 
-  // Bug → Epic or Story (configurable in Azure DevOps/Jira 2025)
+  // Bug → Epic or Story via implements/blocks (Jira 2025)
   if (sourceType === 'bug') {
     if (targetType === 'epic' || targetType === 'story') {
       return { valid: true };
     }
     return {
       valid: false,
-      error: 'Bugs can only implement Epics or Stories in Scrum',
+      error: 'Bugs can only implement/block Epics or Stories in Scrum',
       suggestion: `Link Bug → Epic (epic-level defect) or Bug → Story (story-level defect). Use Task to implement the fix (Task implements Bug).`,
     };
   }
+
+
 
   // Test → Epic or Story (flexible)
   if (sourceType === 'test') {
@@ -211,17 +223,19 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
     };
   }
 
-  // Bug → Requirement or Feature (configurable in Azure DevOps/Jira 2025)
+  // Bug → Requirement or Feature via implements/blocks (Jira 2025)
   if (sourceType === 'bug') {
     if (targetType === 'requirement' || targetType === 'feature') {
       return { valid: true };
     }
     return {
       valid: false,
-      error: 'Bugs can only implement Requirements or Features in Waterfall',
+      error: 'Bugs can only implement/block Requirements or Features in Waterfall',
       suggestion: `Link Bug → Requirement (requirement-level defect) or Bug → Feature (feature-level defect). Use Task to implement the fix (Task implements Bug).`,
     };
   }
+
+
 
   // Test → Requirement or Feature (flexible)
   if (sourceType === 'test') {
