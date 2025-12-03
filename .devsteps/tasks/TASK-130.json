@@ -1,0 +1,33 @@
+{
+  "id": "TASK-130",
+  "type": "task",
+  "category": "extension",
+  "title": "Improve TreeView Description Badge - Add 'filtered' Context",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-03T10:33:33.159Z",
+  "updated": "2025-12-03T10:33:40.083Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-055"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "treeview,filter,ux,description"
+  ],
+  "commits": [],
+  "metadata": {}
+}

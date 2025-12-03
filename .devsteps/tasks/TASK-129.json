@@ -1,0 +1,33 @@
+{
+  "id": "TASK-129",
+  "type": "task",
+  "category": "extension",
+  "title": "Implement Filter Status Button - Icon Toggle with Badge",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-03T10:33:20.947Z",
+  "updated": "2025-12-03T10:33:39.958Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-055"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "treeview,filter,toolbar,button"
+  ],
+  "commits": [],
+  "metadata": {}
+}

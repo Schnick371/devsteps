@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 14,
-    "story": 54,
-    "task": 128,
+    "story": 55,
+    "task": 130,
     "bug": 30,
     "spike": 6,
     "feature": 5,
@@ -1954,14 +1954,38 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-12-03T10:02:48.770Z"
+    },
+    {
+      "id": "STORY-055",
+      "type": "story",
+      "title": "Filter Status Indicator - Visual Feedback for Active Filters",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T10:32:54.512Z"
+    },
+    {
+      "id": "TASK-129",
+      "type": "task",
+      "title": "Implement Filter Status Button - Icon Toggle with Badge",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T10:33:20.947Z"
+    },
+    {
+      "id": "TASK-130",
+      "type": "task",
+      "title": "Improve TreeView Description Badge - Add 'filtered' Context",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-03T10:33:33.159Z"
     }
   ],
   "stats": {
-    "total": 237,
+    "total": 240,
     "by_type": {
       "epic": 14,
-      "story": 54,
-      "task": 128,
+      "story": 55,
+      "task": 130,
       "bug": 30,
       "spike": 6,
       "feature": 5,
@@ -1970,7 +1994,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 126,
-      "draft": 103,
+      "draft": 106,
       "blocked": 1,
       "obsolete": 3
     },
@@ -1992,5 +2016,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T10:02:48.770Z"
+  "last_updated": "2025-12-03T10:33:33.159Z"
 }
