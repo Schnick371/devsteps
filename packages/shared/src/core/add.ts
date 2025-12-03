@@ -97,6 +97,8 @@ export async function addItem(devstepsir: string, args: AddItemArgs): Promise<Ad
       blocks: [],
       'blocked-by': [],
       'relates-to': [],
+      affects: [],
+      'affected-by': [],
       'depends-on': [],
       'required-by': [],
       supersedes: [],

@@ -8,36 +8,6 @@ DevSteps supports **two parallel hierarchies**:
 
 **CRITICAL**: Both hierarchies exist simultaneously in the same project!
 
----
-
-## 🚨 Avoiding Common Mistakes
-
-### ❌ WRONG: Spike under Story
-```json
-// NEVER DO THIS!
-{
-  "id": "SPIKE-001",
-  "linked_items": {
-    "implements": ["STORY-004"]  // ❌ WRONG!
-  }
-}
-```
-
-### ✅ CORRECT: Spike under Epic
-```json
-{
-  "id": "SPIKE-001",
-  "linked_items": {
-    "implements": ["EPIC-003"],  // ✅ CORRECT!
-    "required-by": ["TASK-004"]  // Optional: Spike blocks Task
-  }
-}
-```
-
-**Reason**: Spike is at the **same level** as Story, not below it!
-
----
-
 ## 📋 Complete Hierarchy Rules
 
 ### Scrum/Agile Tree
@@ -48,7 +18,7 @@ Theme (optional, strategic)
     └── Epic (Level 1)
         ├── Story (Level 2)
         │   └── Task (Level 3)
-        ├── Spike (Level 2) - SAME LEVEL AS STORY!
+        ├── Spike (Level 2)
         │   └── Task (Level 3, optional)
         └── Bug (Level 2)
             └── Task (Level 3)

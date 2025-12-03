@@ -90,7 +90,7 @@ program
   .command('link')
   .description('Create a relationship between two items')
   .argument('<source-id>', 'Source item ID')
-  .argument('<relation-type>', 'Relation type: implements|tested-by|blocks|relates-to|depends-on')
+  .argument('<relation-type>', 'Relation type: implements|tested-by|blocks|relates-to|affects|depends-on')
   .argument('<target-id>', 'Target item ID')
   .option('-f, --force', 'Override validation rules (use with caution)')
   .action(linkCommand);

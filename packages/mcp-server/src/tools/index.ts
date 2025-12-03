@@ -230,7 +230,7 @@ export const updateTool: Tool = {
 export const linkTool: Tool = {
   name: 'link',
   description:
-    'Create a relationship between two items. Supports: implements, tested-by, blocks, relates-to, depends-on.',
+    'Create a relationship between two items. Supports: implements, tested-by, blocks, relates-to, affects, depends-on, supersedes.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -248,6 +248,8 @@ export const linkTool: Tool = {
           'blocks',
           'blocked-by',
           'relates-to',
+          'affects',
+          'affected-by',
           'depends-on',
           'required-by',
           'supersedes',
