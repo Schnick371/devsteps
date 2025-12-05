@@ -61,9 +61,14 @@ export async function activate(context: vscode.ExtensionContext) {
     const mcpManager = new McpServerManager(context);
     mcpManager.registerCommands();
     await mcpManager.start();
-    logger.info('MCP Server initialized');
+    logger.info('MCP Server initialization attempted');
+    // Note: mcpServerManager.start() handles all user-facing errors internally
+    // including "Node.js not found" notifications with actionable buttons
   } catch (error) {
-    logger.error('Failed to initialize MCP Server', error);
+    logger.error('Fatal error during MCP Server initialization', error);
+    // Log error but don't show notification on extension activation
+    // User can diagnose via "DevSteps: Check Prerequisites" command
+    // This follows VS Code UX guidelines: non-intrusive error handling
   }
 
   // Watch for .devsteps directory creation BEFORE early return

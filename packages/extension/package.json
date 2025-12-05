@@ -3,6 +3,7 @@
   "displayName": "DevSteps",
   "description": "Never Code Alone. AI-first development workflow - track tasks, epics, stories with your AI copilot.",
   "version": "0.6.11",
+  "type": "module",
   "publisher": "devsteps",
   "license": "Apache-2.0",
   "author": "Thomas Hertel (the@devsteps.dev)",
@@ -62,7 +63,7 @@
       {
         "view": "devsteps.itemsView",
         "when": "devsteps.showWelcome",
-        "contents": "No DevSteps project found in this workspace.\n\nℹ️ **Recommended: Claude Sonnet 4+** for best tool integration and instruction following.\nOther Copilot models may struggle with DevSteps' MCP tools.\n\n[Initialize DevSteps Project](command:devsteps.initProject)\n\nOr use the Command Palette:\n• Run 'DevSteps: Initialize Project'\n• Use the CLI: `devsteps init`\n\nDevSteps helps you track work items, features, bugs, and requirements directly in your repository.\n\n[Share Model Testing Feedback](https://github.com/Schnick371/devsteps/discussions) | [Learn More](https://github.com/Schnick371/devsteps)"
+        "contents": "No DevSteps project found in this workspace.\n\n⚠️ **Prerequisites:** Node.js (≥18) required for MCP tools.\n[Check Prerequisites](command:devsteps.checkPrerequisites)\n\nℹ️ **Recommended: Claude Sonnet 4+** for best tool integration and instruction following.\nOther Copilot models may struggle with DevSteps' MCP tools.\n\n[Initialize DevSteps Project](command:devsteps.initProject)\n\nOr use the Command Palette:\n• Run 'DevSteps: Initialize Project'\n• Use the CLI: `devsteps init`\n\nDevSteps helps you track work items, features, bugs, and requirements directly in your repository.\n\n[Share Model Testing Feedback](https://github.com/Schnick371/devsteps/discussions) | [Learn More](https://github.com/Schnick371/devsteps)"
       }
     ],
     "commands": [
@@ -224,6 +225,12 @@
         "command": "devsteps.mcp.showStatus",
         "title": "Show MCP Server Status",
         "category": "DevSteps"
+      },
+      {
+        "command": "devsteps.checkPrerequisites",
+        "title": "Check Prerequisites",
+        "category": "DevSteps",
+        "icon": "$(checklist)"
       },
       {
         "command": "devsteps.showOutput",
@@ -614,8 +621,11 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run build",
-    "build": "node esbuild.mjs --production",
-    "dev": "node esbuild.mjs --watch",
+    "build": "node esbuild.js --production",
+    "build:extension": "node esbuild.js --production",
+    "build:mcp": "node esbuild.js --production",
+    "dev": "node esbuild.js --watch",
+    "watch": "npm run dev",
     "typecheck": "tsc --noEmit",
     "lint": "biome check .",
     "format": "biome format --write .",

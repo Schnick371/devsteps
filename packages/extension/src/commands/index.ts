@@ -9,6 +9,7 @@ import { addItem, getItem, updateItem, listItems, TYPE_TO_DIRECTORY } from '@sch
 import type { DevStepsTreeDataProvider } from '../treeView/devstepsTreeDataProvider.js';
 import { DashboardPanel } from '../webview/dashboardPanel.js';
 import { logger } from '../outputChannel.js';
+import { detectMcpRuntime, formatDiagnostics } from '../utils/runtimeDetector.js';
 
 /**
  * Check if DevSteps is initialized in workspace
@@ -95,6 +96,119 @@ export function registerCommands(
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.showDashboard', () => {
       DashboardPanel.createOrShow(context.extensionUri);
+    }),
+  );
+
+  // Check Prerequisites
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.checkPrerequisites', async () => {
+      logger.info('=== DevSteps Prerequisites Check ===');
+      logger.info('');
+      
+      // Show progress indicator
+      await vscode.window.withProgress(
+        {
+          location: vscode.ProgressLocation.Notification,
+          title: 'Checking DevSteps prerequisites...',
+          cancellable: false,
+        },
+        async (progress) => {
+          progress.report({ increment: 0, message: 'Detecting Node.js runtime...' });
+          
+          // Detect runtime
+          const bundledServerPath = path.join(context.extensionPath, 'dist', 'mcp-server.js');
+          const runtimeConfig = await detectMcpRuntime(bundledServerPath);
+          
+          progress.report({ increment: 50, message: 'Analyzing results...' });
+          
+          // Log full diagnostics
+          logger.info(formatDiagnostics(runtimeConfig.diagnostics));
+          
+          // Determine overall status
+          const { node, npm, npx } = runtimeConfig.diagnostics;
+          const allAvailable = node.available && npm.available && npx.available;
+          const partialAvailable = node.available || npm.available;
+          
+          // Build result message
+          const resultLines: string[] = [];
+          resultLines.push('**Prerequisites Check Results:**');
+          resultLines.push('');
+          
+          // Node.js
+          if (node.available) {
+            resultLines.push(`✅ Node.js: ${node.version}`);
+            resultLines.push(`   Path: ${node.path}`);
+          } else {
+            resultLines.push('❌ Node.js: Not found');
+          }
+          
+          // npm
+          if (npm.available) {
+            resultLines.push(`✅ npm: ${npm.version}`);
+          } else {
+            resultLines.push('❌ npm: Not found');
+          }
+          
+          // npx
+          if (npx.available) {
+            resultLines.push(`✅ npx: ${npx.version}`);
+          } else {
+            resultLines.push('❌ npx: Not found');
+          }
+          
+          resultLines.push('');
+          
+          // MCP Runtime Strategy
+          resultLines.push('**MCP Server Strategy:**');
+          if (runtimeConfig.strategy === 'npx') {
+            resultLines.push('✅ Will use npx (auto-install from npm registry)');
+          } else if (runtimeConfig.strategy === 'node') {
+            resultLines.push('⚠️  Will use node + bundled server (npx unavailable)');
+          } else {
+            resultLines.push('❌ No compatible runtime available');
+          }
+          
+          progress.report({ increment: 100 });
+          
+          // Show results
+          logger.info(resultLines.join('\n'));
+          logger.info('');
+          logger.info('Check complete!');
+          logger.show();
+          
+          // Show appropriate message
+          if (allAvailable) {
+            vscode.window.showInformationMessage(
+              '✅ All prerequisites satisfied! DevSteps MCP Server will use npx.',
+              'OK'
+            );
+          } else if (partialAvailable) {
+            vscode.window.showWarningMessage(
+              '⚠️ Some prerequisites missing. Check output for details.',
+              'Show Output',
+              'Install Node.js'
+            ).then((selection) => {
+              if (selection === 'Show Output') {
+                logger.show();
+              } else if (selection === 'Install Node.js') {
+                vscode.env.openExternal(vscode.Uri.parse('https://nodejs.org/'));
+              }
+            });
+          } else {
+            vscode.window.showErrorMessage(
+              '❌ Node.js not found. DevSteps MCP Server requires Node.js.',
+              'Install Node.js',
+              'Show Output'
+            ).then((selection) => {
+              if (selection === 'Install Node.js') {
+                vscode.env.openExternal(vscode.Uri.parse('https://nodejs.org/'));
+              } else if (selection === 'Show Output') {
+                logger.show();
+              }
+            });
+          }
+        }
+      );
     }),
   );
 

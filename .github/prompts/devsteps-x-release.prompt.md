@@ -120,16 +120,20 @@ npm run build
 npm test
 ```
 
-**Package validation:**
+**Dual-target extension build validation:**
 ```bash
 cd packages/extension
+npm run build  # Builds both extension.js + mcp-server/index.js
 npm run package
 ```
 
 **Verify outputs:**
 - ✅ All TypeScript compiled
 - ✅ No errors in dist/
-- ✅ VSIX created successfully
+- ✅ Extension bundle: dist/extension.js (~340 KB)
+- ✅ MCP server bundle: dist/mcp-server/index.js (~500 KB)
+- ✅ MCP server is executable (chmod 755)
+- ✅ VSIX created successfully (<10 MB target)
 - ✅ Tests passing
 
 ## Step 5: npm Publishing
@@ -148,11 +152,16 @@ cd packages/cli
 npm publish --access public
 ```
 
-### 5.3 MCP Server
+### 5.3 MCP Server (for non-VS Code IDEs)
 ```bash
 cd packages/mcp-server
 npm publish --access public
 ```
+
+**⚠️ Architecture Note:**
+- **VS Code users**: MCP server bundled in extension (zero-config)
+- **Other IDEs** (Cursor, Windsurf, Claude Desktop): Use npm package
+- **Both must have same version** for consistency
 
 **Verify on npm:**
 ```bash
@@ -161,15 +170,33 @@ npm view @schnick371/devsteps-cli version
 npm view @schnick371/devsteps-mcp-server version
 ```
 
+**All versions must match X.Y.Z!**
+
 ## Step 6: Extension Package
 
-**Create VSIX:**
+**Create VSIX with bundled MCP server:**
 ```bash
 cd packages/extension
+npm run build  # CRITICAL: Must build dual-target bundles first!
 vsce package
 ```
 
 **Output:** `devsteps-X.Y.Z.vsix`
+
+**Verify VSIX contents:**
+```bash
+unzip -l devsteps-X.Y.Z.vsix | grep -E "(extension.js|mcp-server)"
+```
+
+**Expected:**
+- ✅ `extension/dist/extension.js` (~340 KB)
+- ✅ `extension/dist/mcp-server/index.js` (~500 KB, executable)
+- ✅ Total VSIX size <10 MB
+
+**⚠️ New Architecture:**
+- **Bundled MCP server** for VS Code users (zero-config)
+- **Native registration** via `vscode.lm.registerMcpServerDefinitionProvider`
+- **No npx dependency** - instant startup
 
 **⏸️ Manual Upload Required:**
 - VS Code Marketplace: https://marketplace.visualstudio.com/manage
@@ -251,12 +278,36 @@ git push origin --delete dev/X.Y.Z
 npm install -g @schnick371/devsteps-cli@X.Y.Z
 devsteps --version
 
-# Global MCP
+# Global MCP (for non-VS Code IDEs)
 npm install -g @schnick371/devsteps-mcp-server@X.Y.Z
 devsteps-mcp --version
 
-# VS Code Extension
+# VS Code Extension (bundled MCP server)
 code --install-extension devsteps-X.Y.Z.vsix
+```
+
+**Verify bundled MCP server in VS Code:**
+```bash
+# After extension installation
+code --list-extensions --show-versions | grep devsteps
+# Should show: schnick371.devsteps@X.Y.Z
+```
+
+**Test MCP server startup:**
+- Open VS Code
+- Check DevSteps output channel for "MCP server started"
+- Verify no npx download delays
+- Confirm instant startup (<1 second)
+
+**Version consistency check:**
+```bash
+# All must report X.Y.Z
+devsteps --version
+devsteps-mcp --version
+code --list-extensions --show-versions | grep devsteps
+npm view @schnick371/devsteps-shared version
+npm view @schnick371/devsteps-cli version
+npm view @schnick371/devsteps-mcp-server version
 ```
 
 **Check npm pages:**
@@ -298,19 +349,28 @@ git push origin main
 
 1. ✅ Dev branch created from main
 2. ✅ All commits cherry-picked/included
-3. ✅ Versions bumped in all packages
+3. ✅ Versions bumped in all packages (shared, cli, mcp-server, extension)
 4. ✅ CHANGELOGs updated with format compliance
 5. ✅ Build successful (clean + build + test)
-6. ✅ npm packages published (shared → cli → mcp)
-7. ✅ VSIX created (manual upload pending)
-8. ✅ Squash merge to main (clean history)
-9. ✅ Git tag created and pushed
-10. ✅ Installation verification passed
+6. ✅ **Dual-target extension build** (extension.js + mcp-server/index.js)
+7. ✅ npm packages published (shared → cli → mcp-server)
+8. ✅ **VSIX <10 MB** with bundled MCP server
+9. ✅ VSIX created (manual upload pending)
+10. ✅ Squash merge to main (clean history)
+11. ✅ Git tag created and pushed
+12. ✅ **Version consistency** verified across all packages
+13. ✅ Installation verification passed (bundled + npm)
+
+**Architecture Verification:**
+- ✅ Extension contains dist/mcp-server/index.js
+- ✅ MCP server executable (chmod 755)
+- ✅ No npx dependencies in extension
+- ✅ Standalone npm package still works for other IDEs
 
 **Documentation:**
 - Release notes in CHANGELOG
-- Breaking changes highlighted
-- Migration guide (if needed)
+- Breaking changes highlighted (if upgrading from v1.x)
+- Migration guide (bundled vs npm architecture)
 - GitHub Release created (optional)
 
 ## Common Issues
@@ -334,6 +394,42 @@ npm run clean
 rm -rf node_modules package-lock.json
 npm install
 npm run build
+```
+
+**Extension dual-target build fails:**
+```bash
+cd packages/extension
+npm run clean
+npm run build
+# Check both bundles exist:
+ls -lh dist/extension.js dist/mcp-server/index.js
+```
+
+**MCP server bundle not executable:**
+```bash
+cd packages/extension
+chmod +x dist/mcp-server/index.js
+# Test execution:
+./dist/mcp-server/index.js
+```
+
+**VSIX size >10 MB:**
+```bash
+# Check what's included
+unzip -l devsteps-X.Y.Z.vsix | sort -k4 -n
+# Verify .vscodeignore excludes dev files
+cat .vscodeignore
+```
+
+**Version mismatch between packages:**
+```bash
+# Verify all match
+grep '"version"' packages/*/package.json
+# Update all to match:
+# packages/shared/package.json
+# packages/cli/package.json
+# packages/mcp-server/package.json
+# packages/extension/package.json
 ```
 
 **Cherry-pick conflicts:**
@@ -364,6 +460,20 @@ git cherry-pick --continue
 - MAJOR: Breaking changes
 - MINOR: New features (backward compatible)
 - PATCH: Bug fixes only
+
+**Dual Architecture Strategy (EPIC-015):**
+- **VS Code Extension**: Bundles MCP server internally
+  - Zero-config installation
+  - Instant startup via native VS Code API
+  - Users never see MCP server details
+- **npm Package**: Standalone MCP server for other IDEs
+  - Cursor, Windsurf, Claude Desktop compatibility
+  - Manual configuration required
+  - Same codebase, different distribution
+- **Version Synchronization**: All packages must have identical version
+  - Ensures compatibility across deployment scenarios
+  - Simplifies support and debugging
+  - Single source of truth for capabilities
 
 ---
 

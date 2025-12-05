@@ -2,29 +2,34 @@
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
  * 
- * MCP Server Manager - NPX Zero-Configuration Architecture
+ * MCP Server Manager - Hybrid Runtime Detection Architecture
  * 
- * **Requires VS Code 1.99.0+** (March 2025)
- * - Uses registerMcpServerDefinitionProvider API
- * - NPX-based: Auto-downloads from npm registry (no sudo required!)
- * - One MCP server process per VS Code instance
- * - Automatic workspace detection via VS Code roots
- * - No environment variables needed - VS Code provides workspace context
+ * **Fallback Chain:**
+ * 1. npx (preferred) - Auto-downloads from npm registry
+ * 2. node (fallback) - Uses bundled MCP server
+ * 3. error (guidance) - Shows installation instructions
+ * 
+ * **Requires VS Code 1.99.0+** for MCP API support
  */
 
 import * as vscode from 'vscode';
 import * as path from 'node:path';
 import { logger } from './outputChannel.js';
+import { detectMcpRuntime, formatDiagnostics, type McpRuntimeConfig } from './utils/runtimeDetector.js';
 
 /**
  * Manages the DevSteps MCP server lifecycle
- * Uses npx for zero-configuration execution (no installation required!)
- * npx auto-downloads to user cache (~/.npm/_npx/) - no sudo needed
+ * 
+ * Implements intelligent runtime detection:
+ * 1. Tries npx (preferred - auto-installs from npm)
+ * 2. Falls back to node + bundled server
+ * 3. Shows helpful error if neither available
  */
 export class McpServerManager {
   private statusBarItem: vscode.StatusBarItem;
   private provider?: vscode.Disposable;
   private changeEmitter: vscode.EventEmitter<void>;
+  private runtimeConfig?: McpRuntimeConfig;
 
   constructor(private context: vscode.ExtensionContext) {
     this.statusBarItem = vscode.window.createStatusBarItem(
@@ -40,9 +45,12 @@ export class McpServerManager {
   }
 
   /**
-   * Start the MCP server using npx (zero-configuration!)
-   * VS Code automatically provides workspace roots - no environment variables needed!
-   * npx downloads package to user cache on first run - no sudo required
+   * Start the MCP server with intelligent runtime detection
+   * 
+   * Fallback chain:
+   * 1. npx → Auto-installs from npm registry
+   * 2. node → Uses bundled MCP server
+   * 3. error → Shows installation guide
    */
   async start(): Promise<void> {
     try {
@@ -58,39 +66,62 @@ export class McpServerManager {
       if (workspaceFolders && workspaceFolders.length > 0) {
         const workspacePath = workspaceFolders[0].uri.fsPath;
         logger.info(`🗂️  Detected workspace: ${workspacePath}`);
-        logger.info(`📁 MCP server will use this workspace automatically (via VS Code roots)`);
       } else {
         logger.warn('No workspace folder detected - MCP server may not function correctly');
       }
 
-      logger.info('🚀 Starting MCP server via npx (zero-configuration)');
+      logger.info('🔍 Detecting Node.js runtime...');
+      
+      // Detect available runtime (with optional bundled server path)
+      const bundledServerPath = path.join(this.context.extensionPath, 'dist', 'mcp-server.js');
+      this.runtimeConfig = await detectMcpRuntime(bundledServerPath);
+      
+      // Log diagnostics
+      logger.info(formatDiagnostics(this.runtimeConfig.diagnostics));
+      
+      // Check if we have a working runtime
+      if (this.runtimeConfig.strategy === 'none') {
+        logger.error('No compatible Node.js runtime found');
+        logger.error(this.runtimeConfig.error || 'Unknown error');
+        this.showNoRuntimeError(this.runtimeConfig.error || 'Node.js not found');
+        return;
+      }
+      
+      logger.info(`✅ Using runtime strategy: ${this.runtimeConfig.strategy}`);
+      logger.info(`   Command: ${this.runtimeConfig.command} ${this.runtimeConfig.args?.join(' ') || ''}`);
+      logger.info('🚀 Starting MCP server...');
 
-      // Register MCP server with VS Code using NPX architecture
+      // Register MCP server with VS Code using detected runtime
       this.provider = (vscode as any).lm.registerMcpServerDefinitionProvider('devsteps-mcp', {
         // Event fired when server definitions change
         onDidChangeMcpServerDefinitions: this.changeEmitter.event,
         
         // Provide MCP server definitions
         provideMcpServerDefinitions: async () => {
+          if (!this.runtimeConfig || this.runtimeConfig.strategy === 'none') {
+            logger.error('Cannot provide MCP server definition - no runtime available');
+            return [];
+          }
+          
           const workspacePath = workspaceFolders?.[0]?.uri;
           const workspaceDir = workspacePath?.fsPath;
           
-          // Create server definition using NPX
-          // NPX auto-downloads to user cache (~/.npm/_npx/) - NO SUDO REQUIRED!
-          // Workspace path passed as CLI argument (Standard MCP pattern)
-          const args = ['-y', '--package=@schnick371/devsteps-mcp-server', 'devsteps-mcp'];
+          // Build args based on detected strategy
+          const args = [...(this.runtimeConfig.args || [])];
+          
+          // Add workspace path for both strategies
           if (workspaceDir) {
             args.push(workspaceDir);  // Pass workspace as positional argument
           }
           
           const serverDef = new (vscode as any).McpStdioServerDefinition(
             'devsteps',                                      // label
-            'npx',                                          // command: npx (not node!)
-            args,                                           // args: package + bin + workspace
-            workspaceDir ? {                                // options
-              cwd: workspaceDir                            // Sets process.cwd() for spawned process
+            this.runtimeConfig.command!,                     // command: npx or node
+            args,                                            // args: based on strategy
+            workspaceDir ? {                                 // options
+              cwd: workspaceDir                             // Sets process.cwd() for spawned process
             } : {},
-            '1.0.0'                                        // version
+            '1.0.0'                                         // version
           );
           
           if (workspaceDir) {
@@ -102,6 +133,7 @@ export class McpServerManager {
           const definitions = [serverDef];
           
           logger.info('🚀 MCP server definitions provided to VS Code');
+          logger.info(`   Strategy: ${this.runtimeConfig.strategy}`);
           logger.info('   Server will start in workspace directory');
           
           return definitions;
@@ -126,13 +158,12 @@ export class McpServerManager {
 
       // Update status bar
       this.statusBarItem.text = '$(check) DevSteps MCP';
-      this.statusBarItem.tooltip = 'DevSteps MCP Server registered (npx zero-config)';
+      this.statusBarItem.tooltip = `DevSteps MCP Server registered (${this.runtimeConfig.strategy})`;
       this.statusBarItem.show();
 
       logger.info('✅ DevSteps MCP Server registered successfully');
-      logger.info('   Architecture: NPX zero-configuration (one server per VS Code instance)');
-      logger.info('   Installation: Auto-download to user cache - no sudo required');
-      logger.info('   Workspace detection: Automatic via VS Code roots protocol');
+      logger.info(`   Runtime: ${this.runtimeConfig.strategy}`);
+      logger.info(`   Command: ${this.runtimeConfig.command}`);
     } catch (error) {
       logger.error('Failed to register MCP server', error);
       this.showFallbackConfiguration();
@@ -142,13 +173,41 @@ export class McpServerManager {
 
 
   /**
+   * Show error when no Node.js runtime is available
+   */
+  private showNoRuntimeError(errorMessage: string): void {
+    logger.error('No Node.js runtime available');
+    
+    const message = 'DevSteps requires Node.js to be installed. Install Node.js and restart VS Code.';
+
+    vscode.window.showErrorMessage(
+      message,
+      'Install Node.js',
+      'Check Prerequisites',
+      'Show Details'
+    ).then((selection) => {
+      if (selection === 'Install Node.js') {
+        vscode.env.openExternal(vscode.Uri.parse('https://nodejs.org/'));
+      } else if (selection === 'Check Prerequisites') {
+        vscode.commands.executeCommand('devsteps.checkPrerequisites');
+      } else if (selection === 'Show Details') {
+        logger.show();
+      }
+    });
+
+    this.statusBarItem.text = '$(error) DevSteps MCP';
+    this.statusBarItem.tooltip = 'DevSteps MCP Server requires Node.js';
+    this.statusBarItem.show();
+  }
+
+  /**
    * Show fallback instructions for manual configuration
    */
   private showFallbackConfiguration(): void {
     logger.warn('VS Code MCP API not available - showing fallback configuration');
     
     const message =
-      'DevSteps MCP Server requires VS Code 1.99+ for automatic setup via npx. ' +
+      'DevSteps MCP Server requires VS Code 1.99+ for automatic setup. ' +
       'You can configure it manually or upgrade VS Code.';
 
     vscode.window.showInformationMessage(message, 'Open Documentation', 'Copy Config').then((selection) => {
@@ -159,14 +218,13 @@ export class McpServerManager {
           servers: {
             devsteps: {
               type: 'stdio',
-              command: 'node',
-              args: ['${workspaceFolder}/packages/mcp-server/dist/index.js'],
+              command: 'npx',
+              args: ['-y', '--package=@schnick371/devsteps-mcp-server', 'devsteps-mcp'],
             },
           },
         };
         vscode.env.clipboard.writeText(JSON.stringify(config, null, 2));
         logger.info('MCP configuration copied to clipboard');
-        logger.info('Manual MCP configuration copied to clipboard');
       }
     });
 
@@ -195,16 +253,22 @@ export class McpServerManager {
         
         logger.info('=== DevSteps MCP Server Status ===');
         logger.info(`Workspace: ${workspacePath}`);
-        logger.info('Architecture: Extension-bundled (one server per VS Code instance)');
+        if (this.runtimeConfig) {
+          logger.info(`Runtime: ${this.runtimeConfig.strategy}`);
+          logger.info(`Command: ${this.runtimeConfig.command || 'none'}`);
+          logger.info(formatDiagnostics(this.runtimeConfig.diagnostics));
+        }
         logger.info(`Status: ${this.provider ? 'Registered with VS Code' : 'Not registered'}`);
         
         const message = this.provider
-          ? `DevSteps MCP Server running for workspace: ${workspacePath}`
-          : 'DevSteps MCP Server requires manual configuration.';
+          ? `DevSteps MCP Server running (${this.runtimeConfig?.strategy || 'unknown'})`
+          : 'DevSteps MCP Server not registered.';
 
-        vscode.window.showInformationMessage(message, 'Show Output').then((selection) => {
+        vscode.window.showInformationMessage(message, 'Show Output', 'Check Prerequisites').then((selection) => {
           if (selection === 'Show Output') {
             logger.show();
+          } else if (selection === 'Check Prerequisites') {
+            vscode.commands.executeCommand('devsteps.checkPrerequisites');
           }
         });
       }),

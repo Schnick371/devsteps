@@ -1,25 +1,31 @@
-# Build files
+# Build files - Keep compiled bundles only
 src/
 esbuild.js
+esbuild.mjs
 tsconfig.json
 .vscode/
 
-# Dependencies
+# Dependencies (bundled into dist/)
 node_modules/
 
 # Development files
 *.map
 .eslintrc.json
 .prettierrc
+biome.json
 
 # Documentation
 *.md
 !README.md
 !LICENSE.md
+!CHANGELOG.md
 
 # Git
 .git/
 .gitignore
+
+# Test files
+test-persistence-manual.md
 
 # Parent directories (monorepo structure)
 ../../**
@@ -27,6 +33,9 @@ node_modules/
 ../shared/**
 ../cli/**
 ../mcp-server/**
+
+# IMPORTANT: Include compiled MCP server bundle
+!dist/mcp-server/**
 
 # MCP server - NPX downloads from npm registry (zero-configuration)
 # No bundling needed!

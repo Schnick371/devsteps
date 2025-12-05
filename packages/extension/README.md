@@ -41,6 +41,93 @@ Search for "DevSteps" in the VS Code Extensions view and click Install.
 2. In VS Code: `Extensions` → `...` → `Install from VSIX...`
 3. Select the downloaded `.vsix` file
 
+## ⚙️ Prerequisites
+
+**Required:**
+- **Node.js** ≥ 18.0 (includes npm and npx)
+- **VS Code** ≥ 1.99.0 (March 2025 or later for MCP support)
+
+### Why Node.js?
+DevSteps uses the **Model Context Protocol (MCP)** to integrate with AI assistants like GitHub Copilot. The MCP server requires Node.js to run.
+
+### Installing Node.js
+
+<details>
+<summary><strong>Windows</strong></summary>
+
+**Option 1: Official Installer (Recommended)**
+1. Download from [nodejs.org](https://nodejs.org/)
+2. Run installer (installs Node.js, npm, and npx)
+3. Restart VS Code after installation
+
+**Option 2: winget (Windows Package Manager)**
+```powershell
+winget install OpenJS.NodeJS
+```
+
+</details>
+
+<details>
+<summary><strong>macOS</strong></summary>
+
+**Option 1: Official Installer**
+1. Download from [nodejs.org](https://nodejs.org/)
+2. Run `.pkg` installer
+3. Restart VS Code after installation
+
+**Option 2: Homebrew (Recommended for developers)**
+```bash
+brew install node
+```
+
+</details>
+
+<details>
+<summary><strong>Linux</strong></summary>
+
+**Debian/Ubuntu:**
+```bash
+sudo apt update
+sudo apt install nodejs npm
+```
+
+**Fedora/RHEL:**
+```bash
+sudo dnf install nodejs npm
+```
+
+**Arch Linux:**
+```bash
+sudo pacman -S nodejs npm
+```
+
+**Other distributions:** See [nodejs.org/download](https://nodejs.org/en/download/package-manager)
+
+</details>
+
+### Verify Installation
+
+After installing Node.js, verify the installation:
+
+```bash
+node --version   # Should show v18.0.0 or higher
+npm --version    # Should show npm version
+npx --version    # Should show npx version
+```
+
+### Check DevSteps Prerequisites
+
+DevSteps includes a built-in prerequisites checker:
+
+1. Open Command Palette (`Cmd/Ctrl+Shift+P`)
+2. Run **DevSteps: Check Prerequisites**
+3. Review results in Output Channel
+
+The command will show:
+- ✅ Node.js, npm, npx detected versions and paths
+- ⚠️ Missing components with installation instructions
+- 🔧 Selected MCP server strategy (npx or node)
+
 ## 🚀 Getting Started
 
 ### Initialize a DevSteps Project
@@ -95,18 +182,65 @@ DevSteps extension follows **VS Code theme colors** automatically:
 
 ## 🔧 Troubleshooting
 
+### MCP Server Not Starting?
+
+**Symptom:** "DevSteps MCP Server requires Node.js" error or MCP tools not working in Copilot
+
+**Solutions:**
+1. **Run Prerequisites Check**
+   - Command Palette → `DevSteps: Check Prerequisites`
+   - Review Output Channel for detailed diagnostics
+   
+2. **Install Node.js** (if missing)
+   - See [Prerequisites](#prerequisites) section above
+   - Restart VS Code after installation
+   
+3. **Verify PATH Configuration**
+   - Open terminal in VS Code
+   - Run `node --version` and `npx --version`
+   - If commands not found: Node.js not in PATH
+   - Fix: Reinstall Node.js or add to PATH manually
+
+4. **Check MCP Server Status**
+   - Command Palette → `DevSteps: Show MCP Server Status`
+   - Shows runtime strategy (npx/node) and detected versions
+
+**Common Causes:**
+- Node.js not installed
+- Node.js installed but VS Code terminal doesn't see it (PATH issue)
+- VS Code started before Node.js installation (restart needed)
+
 ### Extension Not Activating?
-- Ensure `.devsteps/` directory exists in workspace root
-- Check VS Code version (requires 1.99.0+ (March 2025 or later for MCP support))
+- Ensure `.devsteps/` directory exists in workspace root OR
+- Extension activates even without project (for MCP tools)
+- Check VS Code version (requires 1.99.0+, March 2025 or later)
 - Reload window: `Cmd/Ctrl+Shift+P` → `Developer: Reload Window`
 
 ### Dashboard Not Loading?
 - Check DevTools console: `Help` → `Toggle Developer Tools`
 - Verify `.devsteps/index.json` file exists and is valid JSON
+- Try `DevSteps: Show Dashboard` command again
 
 ### TreeView Empty?
 - Run `DevSteps: Refresh Work Items` command
 - Ensure work items exist (`devsteps list` in terminal)
+- Check `.devsteps/*.json` files for corruption
+
+### Copilot Can't Use DevSteps Tools?
+1. Verify MCP server is running (status bar shows "DevSteps MCP")
+2. Check prerequisites (`DevSteps: Check Prerequisites`)
+3. Try asking Copilot: "@devsteps #mcp_devsteps_devsteps-list"
+4. If still not working: Restart VS Code
+
+### "npx: command not found" Error?
+This means npx is not installed or not in PATH.
+
+**Fix:**
+1. Install Node.js (includes npx): See [Prerequisites](#prerequisites)
+2. Restart VS Code
+3. Run `DevSteps: Check Prerequisites` to verify
+
+**Alternative:** Extension will automatically fall back to bundled MCP server if npx unavailable
 
 ## 🐛 Known Issues
 
