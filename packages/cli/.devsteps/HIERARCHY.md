@@ -10,27 +10,26 @@ Theme (strategisch, optional)
     └── Epic (Level 1)
         ├── Story (Level 2)
         │   ├── Task (Level 3)
-        │   └── Bug (Level 2.5 - story-level defect)
-        │       └── Task (Level 3) - fix
-        ├── Spike (Level 2 - research)
-        │   └── Task (Level 3, optional)
-        └── Bug (Level 2 - epic-level defect)
-            └── Task (Level 3) - fix
+        │   └── Bug (Level 3) - blocks
+        │       └── Task (Level 4) - fix
+        └── Spike (Level 2 - research)
+            └── Task (Level 3, optional)
 ```
 
 ### Regeln für Scrum-Hierarchie
 
 **Epic (Level 1)**
-- Contains: Stories, Spikes, Bugs (epic-level)
-- Relationships: `implemented-by` → Stories, Spikes, Bugs
+- Contains: Stories, Spikes (only)
+- Relationships: `implemented-by` → Stories, Spikes
 - Duration: Multiple sprints (months)
 - Example: "VS Code Extension - Complete IDE Integration"
 
 **Story (Level 2)**
-- Contains: Tasks, Bugs (story-level)
+- Contains: Tasks, Bugs
 - Relationships: 
   - `implements` → Epic
-  - `implemented-by` → Tasks, Bugs
+  - `implemented-by` → Tasks
+  - `blocked-by` → Bugs
   - `relates-to` → Spikes (for dependencies)
 - Duration: 1 sprint
 - Example: "VS Code Extension Package - Complete Implementation"
@@ -45,14 +44,11 @@ Theme (strategisch, optional)
 - Duration: Time-boxed (1-3 days)
 - Example: "MCP Server Architecture Research"
 
-**Bug (Level 2 or 2.5 - configurable)**
+**Bug (Level 3)**
 - Contains: Tasks (fixes)
-- Parent Options:
-  - **Option 1**: Bug → Story (story-level defect, most common)
-  - **Option 2**: Bug → Epic (epic-level defect, impacts multiple stories)
+- Parent: ALWAYS Story (never Epic)
 - Relationships:
-  - `implements` → Story OR Epic (Bug is child)
-  - `affects` → Story (when Bug impacts other stories)
+  - `blocks` → Story (parent only)
   - `relates-to` → Epic/Story (additional context)
   - `implemented-by` → Tasks (fix implementation)
 - Duration: 1 sprint or less
@@ -71,16 +67,14 @@ Theme (strategisch, optional)
 **Hierarchie (implements/implemented-by):**
 - `Epic → Story` (implemented-by)
 - `Epic → Spike` (implemented-by)
-- `Epic → Bug` (implemented-by) - epic-level defect
 - `Story → Task` (implemented-by)
-- `Story → Bug` (implemented-by) - story-level defect
+- `Story → Bug` (blocks) - Bug blocks parent Story
 - `Spike → Task` (implemented-by, optional)
 - `Bug → Task` (implemented-by) - fix implementation
 - `Task → Bug` (implements) - solution fixes problem
 
-**Flexible Beziehungen (affects/relates-to):**
-- `Bug → Story` (affects) - Bug impacts other stories
-- `Bug → Epic` (affects) - Bug impacts other epics
+**Flexible Beziehungen (relates-to):**
+- `Bug → Epic/Story` (relates-to) - Bug context
 - `Spike → Story` (relates-to) - Spike informs Story
 - `Spike → Task` (required-by) - Spike blocks Task
 - `Task → Task` (depends-on, blocks)
@@ -103,27 +97,26 @@ Theme (strategisch, optional)
 Requirement (Level 1)
 ├── Feature (Level 2)
 │   ├── Task (Level 3)
-│   └── Bug (Level 2.5 - feature-level defect)
-│       └── Task (Level 3) - fix
-├── Spike (Level 2 - research)
-│   └── Task (Level 3, optional)
-└── Bug (Level 2 - requirement-level defect)
-    └── Task (Level 3) - fix
+│   └── Bug (Level 3) - blocks
+│       └── Task (Level 4) - fix
+└── Spike (Level 2 - research)
+    └── Task (Level 3, optional)
 ```
 
 ### Regeln für Waterfall-Hierarchie
 
 **Requirement (Level 1)**
-- Contains: Features, Spikes, Bugs (requirement-level)
-- Relationships: `implemented-by` → Features, Spikes, Bugs
+- Contains: Features, Spikes (only)
+- Relationships: `implemented-by` → Features, Spikes
 - Phase: Requirements Analysis
 - Example: "DevSteps Platform - System Requirements"
 
 **Feature (Level 2)**
-- Contains: Tasks, Bugs (feature-level)
+- Contains: Tasks, Bugs
 - Relationships:
   - `implements` → Requirement
-  - `implemented-by` → Tasks, Bugs
+  - `implemented-by` → Tasks
+  - `blocked-by` → Bugs
   - `relates-to` → Stories (cross-methodology)
 - Phase: Design → Implementation
 - Example: "VS Code Extension - IDE Integration"
@@ -137,14 +130,11 @@ Requirement (Level 1)
 - Phase: Design/Investigation
 - Example: "Architecture Research - MCP Protocol"
 
-**Bug (Level 2 or 2.5 - configurable)**
+**Bug (Level 3)**
 - Contains: Tasks (fixes)
-- Parent Options:
-  - **Option 1**: Bug → Feature (feature-level defect, most common)
-  - **Option 2**: Bug → Requirement (requirement-level defect, impacts multiple features)
+- Parent: ALWAYS Feature (never Requirement)
 - Relationships:
-  - `implements` → Feature OR Requirement (Bug is child)
-  - `affects` → Feature (when Bug impacts other features)
+  - `blocks` → Feature (parent only)
   - `relates-to` → Requirement/Feature (additional context)
   - `implemented-by` → Tasks (fix implementation)
 - Phase: Testing/Maintenance

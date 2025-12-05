@@ -30,8 +30,9 @@ description: "DevSteps workflow and work item tracking"
 
 ## Item Hierarchy
 
-**Scrum:** Epic → Story|Spike → Task (Bug/Test implement Epic or relate to Story/Spike)
-**Waterfall:** Requirement → Feature|Spike → Task (Bug/Test implement Requirement or relate to Feature/Spike)
+**Scrum:** Epic → Story → Bug (optional) → Task | Epic → Spike → Task
+**Waterfall:** Requirement → Feature → Bug (optional) → Task | Requirement → Spike → Task
+**Bug blocking:** Bug blocks Story/Feature (parent only), uses relates-to for Epic/Requirement context
 **Relations:** "relates-to" allowed between ANY items
 **Spike completion:** Create Stories from findings, link to same Epic
 

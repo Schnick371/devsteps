@@ -9,99 +9,89 @@ tools: ['edit', 'search', 'devsteps/*', 'GitKraken/*', 'tavily/*', 'runCommands'
 
 ## Mission
 
-**Start implementation** - review planned work, select highest priority, begin structured development.
+Review planned work, select highest priority, begin structured development.
 
-## Step 0: Prepare
+**Branch Strategy:** Work items in `main`, implementation in feature branch, commits to feature branch ONLY.
 
-**Check working tree:**
-- Uncommitted changes? Commit or stash before proceeding
-- Another story in-progress? ⚠️ Warning: Multiple story branches allowed
+**Critical Rule:** Work items and code live in different branches until final merge.
 
-**Create story branch (Story/Spike only):**  
-Branch: `story/<STORY-ID>` before status→in-progress
+## Implementation Protocol
 
-**Tasks/Bugs:** Use parent story branch OR main  
-**Skip if:** Task on current story branch
+### 0. Branch Strategy (MANDATORY)
 
-## Step 1: Review
+**Phase 1: Verify DevSteps Work Items in Main**
+**Phase 2: Create/Checkout Feature Branch**
+- Branch naming: `story/<ID>`, `epic/<ID>`
+- Check existing branches before creating new
+- **Principle:** Feature branch for CODE ONLY
 
-```
-#mcp_devsteps_status --detailed
-#mcp_devsteps_list --status draft --eisenhower urgent-important
-```
+**Phase 3: Verify Clean State**
+- Commit or stash before proceeding
 
-**Show Q1 items first, highlight blockers, discuss priorities.**
+### 1. Review
+- Show Q1 items (urgent-important)
+- Highlight blockers
+- Discuss priorities
 
-## Step 2: Select
+### 2. Select
+- Priority order: CRITICAL bugs → Q1 → Q2 → Dependencies → Quick wins
+- Start immediately with highest priority
+- Check dependencies and verify not blocked
 
-**Priority order:** CRITICAL bugs → Q1 → Q2 → Dependencies → Quick wins
+### 3. Understand
+- Get item details via devsteps
+- Review parent items and dependencies
+- Locate code via search and usages
+- Check existing problems
 
-**Default: START IMMEDIATELY with highest priority**
-- "Starting <ID> because <reason>"
-- Check dependencies: `#mcp_devsteps_trace <ID>`
-- Verify not blocked
+### 4. Begin
+- Mark item in-progress
+- Document decisions during work
+- Link items as discovered
+- Write tests in parallel
 
-## Step 3: Understand
+### 5. Guide
+- Stuck? → Create spike or mark blocked
+- Scope grows? → Break down into new task
+- Dependencies found? → Link items
+- Decisions made? → Document why
 
-```
-#mcp_devsteps_get <ID>
-```
+### 6. Complete
 
-**Review:** Parent items, dependencies, tests needed
+**Quality Gates:**
+- Tests pass, build OK, no problems
+- Patterns followed, docs updated
+- Description updated, paths complete
+- Links set, decisions captured
 
-**Locate code:**
-- `search` - Find files
-- `usages` - Check dependencies
-- `problems` - Existing issues
+**Commit Workflow:**
+- Mark item done via devsteps
+- Commit to feature branch with conventional format
+- **Prohibition:** No merge to main yet
+- Push feature branch for testing
+- Squash merge happens later (manual/PR)
 
-**Confirm:** "Understand what needs done? Questions?"
+**Status Sync:**
+- Status changes stored in `.devsteps/` on feature branch
+- Synced to main during final merge
+- Temporary divergence expected
 
-## Step 4: Begin
+### 6.5. Spike Post-Processing
+- Review findings
+- Create Stories from insights
+- Link Stories to Epic
+- Estimate with confidence from learnings
 
-```
-#mcp_devsteps_update <ID> --status in-progress
-```
-
-**During work:** Document decisions, link items, tests in parallel, check `problems`
-
-## Step 5: Guide
-
-**If stuck:** Create spike? Mark blocked?
-**If scope grows:** Break down? New task?
-**If dependencies found:** Link items
-**If decisions made:** Document why
-
-## Step 6: Complete
-
-**Verify quality gates:**
-✅ Tests pass ✅ Build OK ✅ No problems ✅ Patterns followed ✅ Docs updated
-
-**Verify traceability:**
-✅ Description updated ✅ Paths complete ✅ Links set ✅ Decisions captured
-
-**Mark done + commit:**
-```
-#mcp_devsteps_update <ID> --status done --description "<summary + decisions>"
-git commit -m "type(scope): subject\n\nRefs: <ID>"
-```
-
-## Step 6.5: Spike Post-Processing
-
-**If completing SPIKE:**
-- Review findings in description
-- Create Stories from research insights: `#mcp_devsteps_add story "<title>" --description "<from spike findings>"`
-- Link to Epic: `#mcp_devsteps_link STORY-X implements EPIC-Y`
-- Estimate Stories with confidence from spike learnings
-
-## Step 7: Next
-
-"Great work! What's next?" → Show status, highlight unblocked items, continue Step 1
+### 7. Next
+- Show status
+- Highlight unblocked items
+- Continue with Step 1
 
 ## Red Flags
 
-**Watch for:** Task jumping, ignoring patterns, skipping tests, breaking changes, missing docs
+**Watch:** Task jumping, ignoring patterns, skipping tests, breaking changes, missing docs
 
-**Redirect gently:** "Finish this first" / "Follow pattern because X" / "Write test now" / "Update dependents"
+**Redirect:** Finish first, follow patterns, write tests now, update dependents
 
 ---
 

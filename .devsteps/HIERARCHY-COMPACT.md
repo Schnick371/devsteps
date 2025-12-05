@@ -10,23 +10,25 @@ Theme (strategic, optional)
     └── Epic (Level 1)
         ├── Story (Level 2)
         │   ├── Task (Level 3)
-        │   └── Bug (Level 2.5 - story-level defect)
-        │       └── Task (Level 3) - fix
-        ├── Spike (Level 2 - research)
-        │   └── Task (Level 3, optional)
-        └── Bug (Level 2 - epic-level defect)
-            └── Task (Level 3) - fix
+        │   └── Bug (Level 3) - blocks
+        │       └── Task (Level 4) - fix
+        └── Spike (Level 2 - research)
+            └── Task (Level 3, optional)
+
 ```
 
-**Allowed Links (hierarchy):**
-- **implements**: Epic→Story|Spike|Bug, Story→Task|Bug, Bug→Task (fix), Spike→Task
-- **blocks**: Bug→Epic|Story (Jira hierarchy + blocking)
+**Hierarchy Links (strict validation):**
+- **implements/implemented-by**: Epic→Story|Spike, Story→Task, Spike→Task, Bug→Task (fix)
+- **blocks/blocked-by**: Bug→Story (hierarchy for Bug only)
 
-**Flexible Relations (any to any):**
-- relates-to, depends-on, tested-by, supersedes
-- blocks (non-Bug: Story→Story, Task→Task flexible)
+**Flexible Relations (any to any, no validation):**
+- relates-to, depends-on/required-by, tested-by/tests, supersedes/superseded-by
+- blocks (non-Bug: Story→Story, Task→Task bypass validation)
 
-**Note:** blocks is hierarchy for Bug, flexible for other types.
+**Bug Relationships:**
+- Bug uses **blocks** Story (hierarchy, parent only)
+- Bug uses **relates-to** Epic/Story (additional context)
+- Task **implements** Bug (fix implementation)
 
 ---
 
@@ -38,20 +40,37 @@ Theme (strategic, optional)
 Requirement (Level 1)
 ├── Feature (Level 2)
 │   ├── Task (Level 3)
-│   └── Bug (Level 2.5 - feature-level defect)
-│       └── Task (Level 3) - fix
-├── Spike (Level 2 - research)
-│   └── Task (Level 3, optional)
-└── Bug (Level 2 - requirement-level defect)
-    └── Task (Level 3) - fix
+│   └── Bug (Level 3) - blocks
+│       └── Task (Level 4) - fix
+└── Spike (Level 2 - research)
+    └── Task (Level 3, optional)
+
 ```
 
-**Allowed Links (hierarchy):**
-- **implements**: Requirement→Feature|Spike|Bug, Feature→Task|Bug, Bug→Task (fix), Spike→Task
-- **blocks**: Bug→Requirement|Feature (Jira hierarchy + blocking)
+**Hierarchy Links (strict validation):**
+- **implements/implemented-by**: Requirement→Feature|Spike, Feature→Task, Spike→Task, Bug→Task (fix)
+- **blocks/blocked-by**: Bug→Requirement|Feature (hierarchy for Bug only)
 
-**Flexible Relations (any to any):**
-- relates-to, depends-on, tested-by, supersedes
-- blocks (non-Bug: Story→Story, Task→Task flexible)
+**Flexible Relations (any to any, no validation):**
+- relates-to, depends-on/required-by, tested-by/tests, supersedes/superseded-by
+- blocks (non-Bug: Feature→Feature, Task→Task bypass validation)
 
-**Note:** blocks is hierarchy for Bug, flexible for other types.
+**Bug Relationships:**
+- Bug uses **relates-to** to Requirement/Feature (context)
+- Bug uses **blocks** Requirement/Feature (hierarchy, Jira 2025)
+- Task **implements** Bug (fix implementation)
+
+---
+
+## Status Types
+
+- 📝 **draft** - Initial state, not yet planned
+- 📋 **planned** - Scheduled for implementation
+- 🔄 **in-progress** - Currently being worked on
+- 👀 **review** - Implementation complete, awaiting review
+- ✅ **done** - Completed and verified
+- 🚫 **obsolete** - No longer relevant or superseded
+- ❌ **blocked** - Cannot proceed due to dependency
+- 🔴 **cancelled** - Abandoned, will not be implemented
+
+````

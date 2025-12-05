@@ -136,15 +136,15 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
     };
   }
 
-  // Bug → Epic or Story via implements/blocks (Jira 2025)
+  // Bug → Story only (Jira 2025)
   if (sourceType === 'bug') {
-    if (targetType === 'epic' || targetType === 'story') {
+    if (targetType === 'story') {
       return { valid: true };
     }
     return {
       valid: false,
-      error: 'Bugs can only implement/block Epics or Stories in Scrum',
-      suggestion: `Link Bug → Epic (epic-level defect) or Bug → Story (story-level defect). Use Task to implement the fix (Task implements Bug).`,
+      error: 'Bugs can only implement/block Stories in Scrum',
+      suggestion: `Link Bug → Story. Bug is always a child of Story, never Epic. Use Task to implement the fix (Task implements Bug).`,
     };
   }
 
@@ -223,9 +223,9 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
     };
   }
 
-  // Bug → Requirement or Feature via implements/blocks (Jira 2025)
+  // Bug → Feature only (Jira 2025)
   if (sourceType === 'bug') {
-    if (targetType === 'requirement' || targetType === 'feature') {
+    if (targetType === 'feature') {
       return { valid: true };
     }
     return {

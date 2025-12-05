@@ -6,9 +6,9 @@
 /**
  * Hierarchy relationships enforce parent-child rules
  * - implements/implemented-by: Standard hierarchy (Epic→Story→Task)
- * - blocks/blocked-by: Jira 2025 hierarchy for Bug (Bug blocks Epic/Story)
+ * - blocks/blocked-by: Jira 2025 hierarchy for Bug (Bug blocks Story)
  *   Note: Other types (Story→Story, Task→Task) bypass validation (flexible)
- *   Scrum: Bug blocks Epic/Story | Waterfall: Bug blocks Requirement/Feature
+ *   Scrum: Bug blocks Story | Waterfall: Bug blocks Feature
  */
 export const HIERARCHY_RELATIONSHIPS = [
   'implements',
