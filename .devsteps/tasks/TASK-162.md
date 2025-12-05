@@ -1,26 +1,57 @@
+# Update CLI Hints for Status Progression
+
 ## Objective
+Update CLI command hints to guide users through review/testing phase before marking done.
 
-Update `linkTool` description in Extension's embedded MCP server tools.
+## Changes Required
 
-## Files
+### packages/cli/src/commands/index.ts
 
-- `packages/extension/src/mcp-server/tools/index.ts` (line ~233)
-
-## Changes
-
-Same as MCP Server package - update linkTool description to show Bug as child of Story/Feature only.
-
-**Current:**
-```
-Epic→Story|Spike|Bug, Story→Task|Bug, Bug→Task
+**Current Hints (update command):**
+```typescript
+💡 Git: git commit -am "feat: completed TASK-XXX"
+💡 All implementations of BUG-XXX are complete! Consider closing it.
 ```
 
-**Correct:**
-```
-Epic→Story|Spike, Story→Task, Bug→Task. Story→Bug (blocks)
+**New Hints:**
+
+**When marking in-progress:**
+```typescript
+💡 Next: After implementation, mark as 'review' to start testing phase
 ```
 
-## Validation
+**When marking review:**
+```typescript
+💡 Testing Phase:
+  • Run tests: npm test
+  • Verify build: npm run build
+  • Manual testing if applicable
+  • When all pass: devsteps update <ID> --status done
+```
 
-- Extension builds successfully
-- No TypeScript errors in extension package
+**When marking done:**
+```typescript
+✅ Quality gates passed!
+💡 Git: git commit -am "feat: completed <ID>"
+```
+
+**When parent has all children done:**
+```typescript
+💡 All implementations of <PARENT-ID> are complete! Consider reviewing parent.
+```
+
+### packages/cli/src/commands/bulk.ts
+
+Add hint for bulk status updates to review.
+
+## Implementation
+- Update hint generation logic
+- Add context-aware messages based on status transition
+- Include testing commands in review hint
+- Emphasize quality gates
+
+## Success Criteria
+- CLI guides status progression
+- Testing phase clearly explained
+- Users understand review requirements
+- Hints are actionable

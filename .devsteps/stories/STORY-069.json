@@ -1,23 +1,28 @@
 {
-  "id": "TASK-161",
-  "type": "task",
+  "id": "STORY-069",
+  "type": "story",
   "category": "workflow",
-  "title": "Update Workflow Prompts - Add Review/Testing Phase",
+  "title": "Add Review/Testing Phase to Status Workflow",
   "status": "draft",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-05T17:18:08.361Z",
-  "updated": "2025-12-05T17:18:37.663Z",
+  "created": "2025-12-05T17:17:52.236Z",
+  "updated": "2025-12-05T17:18:48.837Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/prompts/devsteps-start-work.prompt.md",
-    ".github/prompts/devsteps-workflow.prompt.md"
+    ".github/prompts/devsteps-workflow.prompt.md",
+    ".github/instructions/devsteps.instructions.md",
+    "packages/cli/src/commands/index.ts",
+    "packages/mcp-server/src/tools/"
   ],
   "linked_items": {
-    "implements": [
-      "STORY-069"
+    "implements": [],
+    "implemented-by": [
+      "TASK-161",
+      "TASK-162",
+      "TASK-163"
     ],
-    "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
@@ -29,8 +34,9 @@
     "superseded-by": []
   },
   "tags": [
-    "prompts",
     "workflow",
+    "quality",
+    "testing",
     "documentation"
   ],
   "commits": [],

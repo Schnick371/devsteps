@@ -1,19 +1,22 @@
 {
   "id": "TASK-163",
   "type": "task",
-  "category": "general",
-  "title": "Update CLI link command description",
+  "category": "mcp",
+  "title": "Update MCP Tool Descriptions for Status Workflow",
   "status": "draft",
-  "priority": "high",
-  "created": "2025-12-05T15:53:29.961Z",
-  "updated": "2025-12-05T16:03:01.020Z",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-05T17:18:32.030Z",
+  "updated": "2025-12-05T17:18:48.837Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/cli/src/index.ts"
+    "packages/mcp-server/src/tools/add.ts",
+    "packages/mcp-server/src/tools/update.ts",
+    "packages/mcp-server/README.md"
   ],
   "linked_items": {
     "implements": [
-      "STORY-063"
+      "STORY-069"
     ],
     "implemented-by": [],
     "tested-by": [],
@@ -27,8 +30,9 @@
     "superseded-by": []
   },
   "tags": [
-    "cli",
-    "bug-hierarchy"
+    "mcp",
+    "documentation",
+    "tools"
   ],
   "commits": [],
   "metadata": {}

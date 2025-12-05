@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 17,
-    "story": 68,
-    "task": 160,
+    "story": 69,
+    "task": 163,
     "bug": 32,
     "spike": 7,
     "feature": 5,
@@ -2370,14 +2370,46 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-05T17:12:20.785Z"
+    },
+    {
+      "id": "STORY-069",
+      "type": "story",
+      "title": "Add Review/Testing Phase to Status Workflow",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-05T17:17:52.236Z"
+    },
+    {
+      "id": "TASK-161",
+      "type": "task",
+      "title": "Update Workflow Prompts - Add Review/Testing Phase",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-05T17:18:08.361Z"
+    },
+    {
+      "id": "TASK-162",
+      "type": "task",
+      "title": "Update CLI Hints for Review/Testing Phase",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-05T17:18:20.685Z"
+    },
+    {
+      "id": "TASK-163",
+      "type": "task",
+      "title": "Update MCP Tool Descriptions for Status Workflow",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-05T17:18:32.030Z"
     }
   ],
   "stats": {
-    "total": 289,
+    "total": 293,
     "by_type": {
       "epic": 17,
-      "story": 68,
-      "task": 160,
+      "story": 69,
+      "task": 163,
       "bug": 32,
       "spike": 7,
       "feature": 5,
@@ -2386,7 +2418,7 @@
     "by_status": {
       "in-progress": 5,
       "done": 144,
-      "draft": 135,
+      "draft": 139,
       "blocked": 2,
       "obsolete": 3
     },
@@ -2408,5 +2440,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-05T17:12:20.785Z"
+  "last_updated": "2025-12-05T17:18:32.030Z"
 }

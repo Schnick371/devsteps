@@ -1,20 +1,21 @@
 {
   "id": "TASK-162",
   "type": "task",
-  "category": "general",
-  "title": "Update Extension MCP tool descriptions",
+  "category": "cli",
+  "title": "Update CLI Hints for Review/Testing Phase",
   "status": "draft",
-  "priority": "high",
-  "created": "2025-12-05T15:53:29.960Z",
-  "updated": "2025-12-05T16:03:01.020Z",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-05T17:18:20.685Z",
+  "updated": "2025-12-05T17:18:43.088Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/extension/src/mcp-server/tools/index.ts",
-    "packages/extension/src/mcp-server/index.ts"
+    "packages/cli/src/commands/index.ts",
+    "packages/cli/src/commands/bulk.ts"
   ],
   "linked_items": {
     "implements": [
-      "STORY-063"
+      "STORY-069"
     ],
     "implemented-by": [],
     "tested-by": [],
@@ -28,8 +29,9 @@
     "superseded-by": []
   },
   "tags": [
-    "extension",
-    "bug-hierarchy"
+    "cli",
+    "ux",
+    "hints"
   ],
   "commits": [],
   "metadata": {}

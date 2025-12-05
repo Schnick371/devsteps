@@ -1,25 +1,56 @@
+# Update MCP Tool Descriptions for Status Workflow
+
 ## Objective
+Update MCP tool descriptions and documentation to include review/testing phase in status progression.
 
-Update CLI `link` command description to reflect correct Bug hierarchy.
+## Changes Required
 
-## Files
-
-- `packages/cli/src/index.ts` (line ~91)
-
-## Changes
-
-**Current:**
+### Tool: devsteps_update
+**Current Description:**
 ```
-HIERARCHY (implements): Scrum: Epic→Story|Spike|Bug, Story→Task|Bug, Bug→Task. Waterfall: Requirement→Feature|Spike|Bug, Feature→Task|Bug, Bug→Task.
+Update an existing item. Can update status, eisenhower, assignee, etc.
 ```
 
-**Correct:**
+**Enhanced Description:**
 ```
-HIERARCHY (implements): Scrum: Epic→Story|Spike, Story→Task, Bug→Task. Story→Bug (blocks). Waterfall: Requirement→Feature|Spike, Feature→Task, Bug→Task. Feature→Bug (blocks).
+Update an existing item. Can update status, eisenhower, assignee, etc.
+
+Status Progression: draft → planned → in-progress → review → done
+- Use 'review' status when testing/validating before marking done
+- Mark 'done' only after all quality gates pass
 ```
 
-## Validation
+### Tool: devsteps_add
+**Add to Description:**
+```
+Status defaults to 'draft'. Standard progression:
+draft → planned → in-progress → review → done
+```
 
-- CLI builds successfully
-- Help text shows correct hierarchy: `devsteps link --help`
-- No TypeScript errors
+### packages/mcp-server/README.md
+Add section on status workflow:
+
+```markdown
+## Status Workflow
+
+### Standard Progression
+1. **draft**: Item created, not started
+2. **planned**: Ready to implement, dependencies clear
+3. **in-progress**: Active development
+4. **review**: Testing/validation phase
+5. **done**: All quality gates passed
+
+### Quality Gates (Review Phase)
+Before marking 'done':
+- Tests pass (unit, integration, E2E when applicable)
+- Build succeeds with no errors
+- Manual testing complete
+- Documentation updated
+- No regressions detected
+```
+
+## Success Criteria
+- MCP tools mention review phase
+- Status progression documented
+- Quality gates clear
+- AI agents understand testing requirement
