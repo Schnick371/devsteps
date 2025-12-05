@@ -1,0 +1,34 @@
+{
+  "id": "TASK-162",
+  "type": "task",
+  "category": "general",
+  "title": "Update Extension MCP tool descriptions",
+  "status": "draft",
+  "priority": "high",
+  "created": "2025-12-05T15:53:29.960Z",
+  "updated": "2025-12-05T15:53:29.960Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/mcp-server/tools/index.ts",
+    "packages/extension/src/mcp-server/index.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "bug-hierarchy"
+  ],
+  "commits": [],
+  "metadata": {}
+}
