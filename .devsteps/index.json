@@ -2287,9 +2287,9 @@
       "id": "EPIC-016",
       "type": "epic",
       "title": "Workflow Branch Strategy: Separate Work Items from Code",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-05T10:56:33.764Z"
+      "updated": "2025-12-05T16:21:22.705Z"
     },
     {
       "id": "STORY-062",
@@ -2321,8 +2321,8 @@
     },
     "by_status": {
       "in-progress": 5,
-      "done": 143,
-      "draft": 128,
+      "done": 144,
+      "draft": 127,
       "blocked": 2,
       "obsolete": 3
     },
@@ -2344,5 +2344,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-05T16:20:16.961Z"
+  "last_updated": "2025-12-05T16:21:22.705Z"
 }
