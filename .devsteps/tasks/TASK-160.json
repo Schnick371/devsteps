@@ -3,11 +3,11 @@
   "type": "task",
   "category": "vscode",
   "title": "Change esbuild Extension Output from CommonJS to ESM",
-  "status": "draft",
+  "status": "in-progress",
   "priority": "medium",
   "eisenhower": "urgent-important",
   "created": "2025-12-05T17:12:20.785Z",
-  "updated": "2025-12-05T17:12:31.206Z",
+  "updated": "2025-12-05T17:51:44.047Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/esbuild.js"

@@ -3,11 +3,11 @@
   "type": "bug",
   "category": "vscode",
   "title": "Extension Debug Mode Fails - ESM/CommonJS Output Mismatch",
-  "status": "draft",
+  "status": "in-progress",
   "priority": "medium",
   "eisenhower": "urgent-important",
   "created": "2025-12-05T17:12:03.654Z",
-  "updated": "2025-12-05T17:12:31.206Z",
+  "updated": "2025-12-05T17:51:44.046Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/esbuild.js",

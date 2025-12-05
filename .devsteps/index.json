@@ -2359,17 +2359,17 @@
       "id": "BUG-032",
       "type": "bug",
       "title": "Extension Debug Mode Fails - ESM/CommonJS Output Mismatch",
-      "status": "draft",
+      "status": "in-progress",
       "priority": "medium",
-      "updated": "2025-12-05T17:12:03.654Z"
+      "updated": "2025-12-05T17:51:44.046Z"
     },
     {
       "id": "TASK-160",
       "type": "task",
       "title": "Change esbuild Extension Output from CommonJS to ESM",
-      "status": "draft",
+      "status": "in-progress",
       "priority": "medium",
-      "updated": "2025-12-05T17:12:20.785Z"
+      "updated": "2025-12-05T17:51:44.047Z"
     },
     {
       "id": "STORY-069",
@@ -2424,9 +2424,9 @@
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 5,
+      "in-progress": 7,
       "done": 149,
-      "draft": 135,
+      "draft": 133,
       "blocked": 2,
       "obsolete": 3,
       "review": 0
@@ -2449,5 +2449,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-05T17:31:04.121Z"
+  "last_updated": "2025-12-05T17:51:44.047Z"
 }
