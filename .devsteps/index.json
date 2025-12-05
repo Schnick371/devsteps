@@ -3,8 +3,8 @@
   "counters": {
     "epic": 15,
     "story": 61,
-    "task": 154,
-    "bug": 30,
+    "task": 156,
+    "bug": 31,
     "spike": 7,
     "feature": 5,
     "requirement": 2
@@ -2234,15 +2234,39 @@
       "status": "done",
       "priority": "medium",
       "updated": "2025-12-05T09:07:42.167Z"
+    },
+    {
+      "id": "BUG-031",
+      "type": "bug",
+      "title": "TreeView Duplicate IDs: Children disappear after refresh",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-05T10:38:03.736Z"
+    },
+    {
+      "id": "TASK-155",
+      "type": "task",
+      "title": "Fix WorkItemNode: Generate unique TreeView IDs with parent context",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-05T10:38:17.852Z"
+    },
+    {
+      "id": "TASK-156",
+      "type": "task",
+      "title": "Update expansion state tracking for unique TreeView IDs",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-05T10:38:32.911Z"
     }
   ],
   "stats": {
-    "total": 272,
+    "total": 275,
     "by_type": {
       "epic": 15,
       "story": 61,
-      "task": 154,
-      "bug": 30,
+      "task": 156,
+      "bug": 31,
       "spike": 7,
       "feature": 5,
       "requirement": 2
@@ -2250,7 +2274,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 139,
-      "draft": 124,
+      "draft": 127,
       "blocked": 2,
       "obsolete": 3
     },
@@ -2272,5 +2296,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-05T09:08:20.946Z"
+  "last_updated": "2025-12-05T10:38:32.911Z"
 }
