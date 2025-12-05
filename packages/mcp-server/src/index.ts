@@ -245,7 +245,7 @@ class DevStepsServer {
           {
             uri: 'devsteps://docs/hierarchy',
             name: 'Hierarchy Rules',
-            description: 'Work item hierarchy for Scrum (Epic→Story|Spike|Bug→Task) and Waterfall (Requirement→Feature|Spike|Bug→Task) based on Azure DevOps/Jira 2025 standards',
+            description: 'Work item hierarchy for Scrum (Epic→Story|Spike, Story→Bug→Task) and Waterfall (Requirement→Feature|Spike, Feature→Bug→Task) based on Jira 2025 standards',
             mimeType: 'text/markdown',
           },
           {
