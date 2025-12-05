@@ -1,9 +1,9 @@
 {
   "version": "1.0.0",
   "counters": {
-    "epic": 15,
-    "story": 61,
-    "task": 156,
+    "epic": 16,
+    "story": 62,
+    "task": 159,
     "bug": 31,
     "spike": 7,
     "feature": 5,
@@ -2247,9 +2247,9 @@
       "id": "TASK-155",
       "type": "task",
       "title": "Fix WorkItemNode: Generate unique TreeView IDs with parent context",
-      "status": "draft",
+      "status": "in-progress",
       "priority": "critical",
-      "updated": "2025-12-05T10:38:17.852Z"
+      "updated": "2025-12-05T10:40:45.555Z"
     },
     {
       "id": "TASK-156",
@@ -2258,23 +2258,63 @@
       "status": "draft",
       "priority": "high",
       "updated": "2025-12-05T10:38:32.911Z"
+    },
+    {
+      "id": "TASK-157",
+      "type": "task",
+      "title": "Update devsteps-plan-work.prompt.md: Enforce work items in main branch",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-05T10:55:27.829Z"
+    },
+    {
+      "id": "TASK-158",
+      "type": "task",
+      "title": "Update devsteps-start-work.prompt.md: Verify items in main, implement in feature branch",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-05T10:55:49.844Z"
+    },
+    {
+      "id": "TASK-159",
+      "type": "task",
+      "title": "Update devsteps-workflow.prompt.md: Enforce feature branch discipline",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-05T10:56:15.023Z"
+    },
+    {
+      "id": "EPIC-016",
+      "type": "epic",
+      "title": "Workflow Branch Strategy: Separate Work Items from Code",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-05T10:56:33.764Z"
+    },
+    {
+      "id": "STORY-062",
+      "type": "story",
+      "title": "Update Workflow Prompts for Branch Separation",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-05T10:56:51.934Z"
     }
   ],
   "stats": {
-    "total": 275,
+    "total": 280,
     "by_type": {
-      "epic": 15,
-      "story": 61,
-      "task": 156,
+      "epic": 16,
+      "story": 62,
+      "task": 159,
       "bug": 31,
       "spike": 7,
       "feature": 5,
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 4,
+      "in-progress": 5,
       "done": 139,
-      "draft": 127,
+      "draft": 131,
       "blocked": 2,
       "obsolete": 3
     },
@@ -2296,5 +2336,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-05T10:38:32.911Z"
+  "last_updated": "2025-12-05T10:56:51.934Z"
 }
