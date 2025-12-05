@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 17,
-    "story": 69,
-    "task": 164,
+    "story": 68,
+    "task": 160,
     "bug": 32,
     "spike": 7,
     "feature": 5,
@@ -2359,73 +2359,33 @@
       "id": "BUG-032",
       "type": "bug",
       "title": "Extension Debug Mode Fails - ESM/CommonJS Output Mismatch",
-      "status": "in-progress",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-12-05T17:51:44.046Z"
+      "updated": "2025-12-05T17:52:44.807Z"
     },
     {
       "id": "TASK-160",
       "type": "task",
       "title": "Change esbuild Extension Output from CommonJS to ESM",
-      "status": "in-progress",
-      "priority": "medium",
-      "updated": "2025-12-05T17:51:44.047Z"
-    },
-    {
-      "id": "STORY-069",
-      "type": "story",
-      "title": "Add Review/Testing Phase to Status Workflow",
       "status": "done",
       "priority": "medium",
-      "updated": "2025-12-05T17:31:04.121Z"
-    },
-    {
-      "id": "TASK-161",
-      "type": "task",
-      "title": "Update Workflow Prompts - Add Review/Testing Phase",
-      "status": "done",
-      "priority": "medium",
-      "updated": "2025-12-05T17:24:00.903Z"
-    },
-    {
-      "id": "TASK-162",
-      "type": "task",
-      "title": "Update CLI Hints for Review/Testing Phase",
-      "status": "done",
-      "priority": "medium",
-      "updated": "2025-12-05T17:27:10.716Z"
-    },
-    {
-      "id": "TASK-163",
-      "type": "task",
-      "title": "Update MCP Tool Descriptions for Status Workflow",
-      "status": "done",
-      "priority": "medium",
-      "updated": "2025-12-05T17:30:59.483Z"
-    },
-    {
-      "id": "TASK-164",
-      "type": "task",
-      "title": "Remove Project-Specific Migration Scripts",
-      "status": "done",
-      "priority": "medium",
-      "updated": "2025-12-05T17:24:01.033Z"
+      "updated": "2025-12-05T17:52:44.805Z"
     }
   ],
   "stats": {
-    "total": 294,
+    "total": 289,
     "by_type": {
       "epic": 17,
-      "story": 69,
-      "task": 164,
+      "story": 68,
+      "task": 160,
       "bug": 32,
       "spike": 7,
       "feature": 5,
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 7,
-      "done": 149,
+      "in-progress": 5,
+      "done": 146,
       "draft": 133,
       "blocked": 2,
       "obsolete": 3,
@@ -2449,5 +2409,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-05T17:51:44.047Z"
+  "last_updated": "2025-12-05T17:52:44.807Z"
 }

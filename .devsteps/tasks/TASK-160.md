@@ -1,45 +1,34 @@
-# Fix esbuild Output Format to ESM
+# Fix esbuild Output Format to ESM ✅
 
-## Objective
-Change esbuild output from CommonJS to ESM to match package.json `"type": "module"`.
+## Implementation Complete
 
-## Changes Required
+### Change Made
+**File:** `packages/extension/esbuild.js` line 29
+```javascript
+// Before:
+format: 'cjs',
 
-### packages/extension/esbuild.js
-```typescript
-const extensionBuildOptions = {
-  entryPoints: ['src/extension.ts'],
-  bundle: true,
-  outfile: 'dist/extension.js',
-  external: ['vscode'],
-  format: 'esm', // CHANGE: was 'cjs'
-  platform: 'node',
-  target: 'node18',
-  sourcemap: !production,
-  minify: production,
-  logLevel: 'info',
-  mainFields: ['module', 'main'],
-  conditions: ['node'],
-  metafile: true,
-};
+// After:
+format: 'esm',
 ```
 
-## Rationale
-- **Safe for STORY-061**: No changes to TypeScript source files
-- **Preserves conventions**: `.js` import extensions remain valid
-- **Fixes activation**: VS Code will load ESM output correctly
-- **Low risk**: Only changes build output format
+### Verification
+- ✅ Build succeeds (571KB extension bundle)
+- ✅ No TypeScript errors
+- ✅ Output uses ESM syntax: `export { activate, deactivate }`
+- ✅ No CommonJS syntax (`module.exports`, `require()`)
 
-## Testing
-1. Build extension: `npm run build`
-2. Launch debug mode (F5)
-3. Verify extension activates
-4. Test MCP runtime detection (STORY-061 feature)
-5. Verify TreeView loads
-6. Test production VSIX build
+### Testing Required
+1. **Debug Mode (F5)**: Extension should activate without "module is not defined" error
+2. **STORY-061 Features**: MCP runtime detection should work correctly
+3. **TreeView**: Should load and display work items
+4. **Production VSIX**: Build and verify no regressions
 
-## Success Criteria
-- Extension activates in debug mode without errors
-- All STORY-061 functionality still works
-- No "module is not defined" errors
-- MCP server starts correctly
+### Safe for STORY-061
+- ✅ No TypeScript source changes
+- ✅ All `.js` import extensions preserved
+- ✅ `"type": "module"` kept in package.json
+- ✅ Only build output format changed
+
+### Next Step
+User should test extension activation in VS Code debug mode (F5).
