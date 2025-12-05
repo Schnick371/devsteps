@@ -3,7 +3,7 @@
   "counters": {
     "epic": 17,
     "story": 69,
-    "task": 163,
+    "task": 164,
     "bug": 32,
     "spike": 7,
     "feature": 5,
@@ -2402,14 +2402,22 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-05T17:18:32.030Z"
+    },
+    {
+      "id": "TASK-164",
+      "type": "task",
+      "title": "Remove Project-Specific Migration Scripts",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-05T17:21:30.636Z"
     }
   ],
   "stats": {
-    "total": 293,
+    "total": 294,
     "by_type": {
       "epic": 17,
       "story": 69,
-      "task": 163,
+      "task": 164,
       "bug": 32,
       "spike": 7,
       "feature": 5,
@@ -2418,7 +2426,7 @@
     "by_status": {
       "in-progress": 5,
       "done": 144,
-      "draft": 139,
+      "draft": 140,
       "blocked": 2,
       "obsolete": 3
     },
@@ -2440,5 +2448,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-05T17:18:32.030Z"
+  "last_updated": "2025-12-05T17:21:30.636Z"
 }

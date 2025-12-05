@@ -1,33 +1,37 @@
 {
-  "id": "STORY-064",
-  "type": "story",
-  "category": "general",
-  "title": "Schema & Data Migration - Remove Priority Field",
+  "id": "TASK-164",
+  "type": "task",
+  "category": "cleanup",
+  "title": "Remove Project-Specific Migration Scripts",
   "status": "draft",
-  "priority": "critical",
+  "priority": "medium",
   "eisenhower": "urgent-important",
-  "created": "2025-12-05T16:29:33.128Z",
+  "created": "2025-12-05T17:21:30.636Z",
   "updated": "2025-12-05T17:21:36.294Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [],
+  "affected_paths": [
+    "packages/shared/src/migration/"
+  ],
   "linked_items": {
-    "implements": [
-      "EPIC-017"
-    ],
+    "implements": [],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "TASK-164"
+      "STORY-064"
     ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
-  "tags": [],
+  "tags": [
+    "cleanup",
+    "migration",
+    "technical-debt"
+  ],
   "commits": [],
   "metadata": {}
 }
