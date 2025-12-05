@@ -11,17 +11,64 @@ tools: ['edit', 'search', 'devsteps/*', 'GitKraken/*', 'tavily/*', 'runCommands'
 
 **Start implementation** - review planned work, select highest priority, begin structured development.
 
-## Step 0: Prepare
+**Branch Strategy:**
+- Work items: Already in `main` (from devsteps-plan-work.prompt.md)
+- Implementation: Feature branch (this prompt creates/uses it)
+- Commits: Feature branch ONLY during work
+- Merge: Squash to main when complete (separate step)
 
-**Check working tree:**
-- Uncommitted changes? Commit or stash before proceeding
-- Another story in-progress? ⚠️ Warning: Multiple story branches allowed
+**Critical Rule:** Work items and code live in different branches until final merge.
 
-**Create story branch (Story/Spike only):**  
-Branch: `story/<STORY-ID>` before status→in-progress
+## Step 0: Branch Strategy (MANDATORY)
 
-**Tasks/Bugs:** Use parent story branch OR main  
-**Skip if:** Task on current story branch
+**BEFORE selecting work item:**
+
+### Phase 1: Verify Work Items in Main
+```bash
+git checkout main
+git pull origin main  # Sync latest work items
+```
+
+**Verify work item exists:**
+```
+#mcp_devsteps_search <work-item-id>
+```
+- ❌ Work item not found? → Run devsteps-plan-work.prompt.md first
+- ✅ Work item found? → Proceed to Phase 2
+
+### Phase 2: Create/Checkout Feature Branch
+
+**Branch naming:**
+- Story/Epic: `story/<ID>` or `epic/<ID>`
+- Bug: `bug/<ID>`
+- Task (standalone): `task/<ID>`
+- Task (part of story): Use parent story branch
+
+**Check existing branches:**
+```bash
+git branch --list 'story/*' 'bug/*' 'epic/*' 'task/*'
+```
+
+**Create new or checkout existing:**
+```bash
+# New branch
+git checkout -b story/STORY-XXX
+
+# Existing branch
+git checkout story/STORY-XXX
+```
+
+### Phase 3: Verify Clean State
+```bash
+git status
+```
+- ❌ Uncommitted changes? → Commit or stash first
+- ✅ Clean working tree? → Proceed to Step 1
+
+**CRITICAL:**
+- Work items MUST be in `main` (from devsteps-plan-work.prompt.md)
+- Feature branch is for CODE ONLY
+- All commits during implementation go to feature branch
 
 ## Step 1: Review
 
@@ -79,11 +126,35 @@ Branch: `story/<STORY-ID>` before status→in-progress
 **Verify traceability:**
 ✅ Description updated ✅ Paths complete ✅ Links set ✅ Decisions captured
 
-**Mark done + commit:**
+**Mark work item done:**
 ```
-#mcp_devsteps_update <ID> --status done --description "<summary + decisions>"
-git commit -m "type(scope): subject\n\nRefs: <ID>"
+#mcp_devsteps_update <ID> --status done
 ```
+
+**Commit to FEATURE BRANCH:**
+```bash
+git add .
+git commit -m "feat(<ID>): <Brief description>
+
+<Implementation details>
+
+Implements: <ID>"
+```
+
+**CRITICAL:**
+- ✅ Commit to feature branch (story/*, bug/*, etc.)
+- ❌ DO NOT merge to main yet
+- ❌ DO NOT commit work item status changes (already in main)
+
+**Status Update:**
+- Work item status change stored in `.devsteps/` 
+- Will be synced to main later (manual or via separate workflow)
+
+**Next Steps:**
+1. Push feature branch: `git push origin <branch-name>`
+2. Test/validate implementation
+3. When ready: Squash merge to main (manual or via PR)
+4. Update work item in main after merge
 
 ## Step 6.5: Spike Post-Processing
 
