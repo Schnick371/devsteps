@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
   "counters": {
-    "epic": 16,
-    "story": 63,
+    "epic": 17,
+    "story": 68,
     "task": 159,
     "bug": 31,
     "spike": 7,
@@ -2306,13 +2306,61 @@
       "status": "draft",
       "priority": "high",
       "updated": "2025-12-05T15:53:00.575Z"
+    },
+    {
+      "id": "EPIC-017",
+      "type": "epic",
+      "title": "Simplify Priority System - Eisenhower Matrix Only",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-05T16:29:09.041Z"
+    },
+    {
+      "id": "STORY-064",
+      "type": "story",
+      "title": "Schema & Data Migration - Remove Priority Field",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-05T16:29:33.128Z"
+    },
+    {
+      "id": "STORY-065",
+      "type": "story",
+      "title": "CLI Commands Update - Eisenhower Only",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-05T16:29:33.129Z"
+    },
+    {
+      "id": "STORY-066",
+      "type": "story",
+      "title": "MCP Server Update - Eisenhower Priority System",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-05T16:29:33.130Z"
+    },
+    {
+      "id": "STORY-067",
+      "type": "story",
+      "title": "Extension UI Update - Eisenhower Priority Display",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-05T16:29:56.007Z"
+    },
+    {
+      "id": "STORY-068",
+      "type": "story",
+      "title": "Documentation Update - Eisenhower Matrix Throughout",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-05T16:29:56.008Z"
     }
   ],
   "stats": {
-    "total": 281,
+    "total": 287,
     "by_type": {
-      "epic": 16,
-      "story": 63,
+      "epic": 17,
+      "story": 68,
       "task": 159,
       "bug": 31,
       "spike": 7,
@@ -2322,7 +2370,7 @@
     "by_status": {
       "in-progress": 5,
       "done": 144,
-      "draft": 127,
+      "draft": 133,
       "blocked": 2,
       "obsolete": 3
     },
@@ -2344,5 +2392,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-05T16:21:22.705Z"
+  "last_updated": "2025-12-05T16:29:56.008Z"
 }
