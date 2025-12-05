@@ -3,13 +3,18 @@
   "type": "story",
   "category": "build",
   "title": "Transform Build System for Dual-Target MCP Bundling",
-  "status": "draft",
+  "status": "done",
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T16:31:06.936Z",
-  "updated": "2025-12-03T16:33:01.738Z",
+  "updated": "2025-12-05T08:56:59.348Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [],
+  "affected_paths": [
+    "packages/extension/esbuild.js",
+    "packages/extension/package.json",
+    "packages/extension/.vscodeignore",
+    "packages/extension/src/mcp-server/index.ts"
+  ],
   "linked_items": {
     "implements": [
       "EPIC-015"

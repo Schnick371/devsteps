@@ -1,17 +1,17 @@
 {
-  "id": "TASK-137",
+  "id": "TASK-147",
   "type": "task",
-  "category": "extension",
-  "title": "Implement vscode.lm.registerMcpServerDefinitionProvider",
+  "category": "documentation",
+  "title": "Update CHANGELOG with bundling changes",
   "status": "draft",
-  "priority": "critical",
-  "created": "2025-12-03T17:58:31.076Z",
-  "updated": "2025-12-03T17:59:24.174Z",
+  "priority": "high",
+  "created": "2025-12-03T17:58:48.955Z",
+  "updated": "2025-12-03T17:59:14.699Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
     "implements": [
-      "STORY-057"
+      "STORY-060"
     ],
     "implemented-by": [],
     "tested-by": [],
@@ -20,14 +20,12 @@
     "blocked-by": [],
     "relates-to": [],
     "depends-on": [],
-    "required-by": [
-      "TASK-138"
-    ],
+    "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "vscode-api,mcp-registration"
+    "changelog,migration"
   ],
   "commits": [],
   "metadata": {}

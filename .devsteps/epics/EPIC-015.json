@@ -7,7 +7,7 @@
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T16:29:37.594Z",
-  "updated": "2025-12-03T16:32:53.163Z",
+  "updated": "2025-12-05T08:49:00.621Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -18,7 +18,8 @@
       "STORY-057",
       "STORY-058",
       "STORY-059",
-      "STORY-060"
+      "STORY-060",
+      "STORY-061"
     ],
     "tested-by": [],
     "tests": [],

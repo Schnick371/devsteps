@@ -1,17 +1,17 @@
 {
-  "id": "TASK-137",
+  "id": "TASK-141",
   "type": "task",
   "category": "extension",
-  "title": "Implement vscode.lm.registerMcpServerDefinitionProvider",
+  "title": "Detect IDE capabilities (VS Code vs Cursor/Windsurf)",
   "status": "draft",
-  "priority": "critical",
-  "created": "2025-12-03T17:58:31.076Z",
-  "updated": "2025-12-03T17:59:24.174Z",
+  "priority": "high",
+  "created": "2025-12-03T17:58:39.762Z",
+  "updated": "2025-12-03T17:59:24.583Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
     "implements": [
-      "STORY-057"
+      "STORY-059"
     ],
     "implemented-by": [],
     "tested-by": [],
@@ -21,13 +21,14 @@
     "relates-to": [],
     "depends-on": [],
     "required-by": [
-      "TASK-138"
+      "TASK-142",
+      "TASK-143"
     ],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "vscode-api,mcp-registration"
+    "ide-detection,compatibility"
   ],
   "commits": [],
   "metadata": {}

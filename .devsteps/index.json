@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 15,
-    "story": 60,
-    "task": 132,
+    "story": 61,
+    "task": 154,
     "bug": 30,
     "spike": 7,
     "feature": 5,
@@ -2015,9 +2015,9 @@
       "id": "STORY-056",
       "type": "story",
       "title": "Transform Build System for Dual-Target MCP Bundling",
-      "status": "draft",
+      "status": "done",
       "priority": "critical",
-      "updated": "2025-12-03T16:31:06.936Z"
+      "updated": "2025-12-03T17:27:35.531Z"
     },
     {
       "id": "STORY-057",
@@ -2031,9 +2031,9 @@
       "id": "STORY-058",
       "type": "story",
       "title": "Migrate MCP Server Code to Extension Package",
-      "status": "draft",
+      "status": "blocked",
       "priority": "critical",
-      "updated": "2025-12-03T16:31:48.140Z"
+      "updated": "2025-12-03T20:48:30.708Z"
     },
     {
       "id": "STORY-059",
@@ -2050,14 +2050,198 @@
       "status": "draft",
       "priority": "high",
       "updated": "2025-12-03T16:32:44.405Z"
+    },
+    {
+      "id": "TASK-133",
+      "type": "task",
+      "title": "Move MCP server handlers to extension/src/mcp-server/",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-12-03T19:42:54.741Z"
+    },
+    {
+      "id": "TASK-134",
+      "type": "task",
+      "title": "Update MCP server imports to use bundled structure",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-12-03T20:37:08.734Z"
+    },
+    {
+      "id": "TASK-135",
+      "type": "task",
+      "title": "Replace placeholder index.ts with real MCP server code",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-12-03T20:41:25.198Z"
+    },
+    {
+      "id": "TASK-136",
+      "type": "task",
+      "title": "Test bundled MCP server executable",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-12-03T20:46:41.655Z"
+    },
+    {
+      "id": "TASK-137",
+      "type": "task",
+      "title": "Implement vscode.lm.registerMcpServerDefinitionProvider",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T17:58:31.076Z"
+    },
+    {
+      "id": "TASK-138",
+      "type": "task",
+      "title": "Create McpStdioServerDefinition with bundled server path",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T17:58:31.204Z"
+    },
+    {
+      "id": "TASK-139",
+      "type": "task",
+      "title": "Remove legacy npx-based MCP server manager",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T17:58:31.329Z"
+    },
+    {
+      "id": "TASK-140",
+      "type": "task",
+      "title": "Add MCP server health monitoring and logging",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-03T17:58:31.456Z"
+    },
+    {
+      "id": "TASK-141",
+      "type": "task",
+      "title": "Detect IDE capabilities (VS Code vs Cursor/Windsurf)",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T17:58:39.762Z"
+    },
+    {
+      "id": "TASK-142",
+      "type": "task",
+      "title": "Create manual setup WebView UI for non-VS Code IDEs",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T17:58:39.886Z"
+    },
+    {
+      "id": "TASK-143",
+      "type": "task",
+      "title": "Generate mcp.json configuration for manual setup",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-03T17:58:40.010Z"
+    },
+    {
+      "id": "TASK-144",
+      "type": "task",
+      "title": "Add copy-to-clipboard for configuration",
+      "status": "draft",
+      "priority": "low",
+      "updated": "2025-12-03T17:58:40.136Z"
+    },
+    {
+      "id": "TASK-145",
+      "type": "task",
+      "title": "Verify .vscodeignore includes MCP server bundle",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T17:58:48.674Z"
+    },
+    {
+      "id": "TASK-146",
+      "type": "task",
+      "title": "Update extension README for bundled architecture",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T17:58:48.815Z"
+    },
+    {
+      "id": "TASK-147",
+      "type": "task",
+      "title": "Update CHANGELOG with bundling changes",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-03T17:58:48.955Z"
+    },
+    {
+      "id": "TASK-148",
+      "type": "task",
+      "title": "Create package verification script",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-03T17:58:49.078Z"
+    },
+    {
+      "id": "TASK-149",
+      "type": "task",
+      "title": "Test VSIX on Windows/macOS/Linux",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-03T17:58:49.211Z"
+    },
+    {
+      "id": "STORY-061",
+      "type": "story",
+      "title": "Implement Hybrid MCP Server Installation with Fallback Chain",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-12-05T09:08:20.946Z"
+    },
+    {
+      "id": "TASK-150",
+      "type": "task",
+      "title": "Implement fallback detection: npx → node → error guide",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-12-05T09:01:18.642Z"
+    },
+    {
+      "id": "TASK-151",
+      "type": "task",
+      "title": "Add devsteps.checkPrerequisites command with detailed validation",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-12-05T09:03:11.587Z"
+    },
+    {
+      "id": "TASK-152",
+      "type": "task",
+      "title": "Update extension activation with improved error handling and user actions",
+      "status": "done",
+      "priority": "high",
+      "updated": "2025-12-05T09:05:08.598Z"
+    },
+    {
+      "id": "TASK-153",
+      "type": "task",
+      "title": "Update README with Prerequisites and Troubleshooting sections",
+      "status": "done",
+      "priority": "medium",
+      "updated": "2025-12-05T09:07:07.984Z"
+    },
+    {
+      "id": "TASK-154",
+      "type": "task",
+      "title": "Test fallback chain on Windows/macOS/Linux with and without Node.js",
+      "status": "done",
+      "priority": "medium",
+      "updated": "2025-12-05T09:07:42.167Z"
     }
   ],
   "stats": {
-    "total": 249,
+    "total": 272,
     "by_type": {
       "epic": 15,
-      "story": 60,
-      "task": 132,
+      "story": 61,
+      "task": 154,
       "bug": 30,
       "spike": 7,
       "feature": 5,
@@ -2065,9 +2249,9 @@
     },
     "by_status": {
       "in-progress": 4,
-      "done": 128,
-      "draft": 113,
-      "blocked": 1,
+      "done": 139,
+      "draft": 124,
+      "blocked": 2,
       "obsolete": 3
     },
     "archived": 2
@@ -2088,5 +2272,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-03T16:43:20.142Z"
+  "last_updated": "2025-12-05T09:08:20.946Z"
 }

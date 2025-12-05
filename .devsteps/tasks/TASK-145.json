@@ -1,17 +1,17 @@
 {
-  "id": "TASK-137",
+  "id": "TASK-145",
   "type": "task",
-  "category": "extension",
-  "title": "Implement vscode.lm.registerMcpServerDefinitionProvider",
+  "category": "packaging",
+  "title": "Verify .vscodeignore includes MCP server bundle",
   "status": "draft",
   "priority": "critical",
-  "created": "2025-12-03T17:58:31.076Z",
-  "updated": "2025-12-03T17:59:24.174Z",
+  "created": "2025-12-03T17:58:48.674Z",
+  "updated": "2025-12-03T17:59:24.826Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
     "implements": [
-      "STORY-057"
+      "STORY-060"
     ],
     "implemented-by": [],
     "tested-by": [],
@@ -21,13 +21,14 @@
     "relates-to": [],
     "depends-on": [],
     "required-by": [
-      "TASK-138"
+      "TASK-146",
+      "TASK-149"
     ],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "vscode-api,mcp-registration"
+    "vsix,bundle-verification"
   ],
   "commits": [],
   "metadata": {}

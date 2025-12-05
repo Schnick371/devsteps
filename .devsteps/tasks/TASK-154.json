@@ -1,0 +1,35 @@
+{
+  "id": "TASK-154",
+  "type": "task",
+  "category": "general",
+  "title": "Test fallback chain on Windows/macOS/Linux with and without Node.js",
+  "status": "done",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-05T08:48:53.536Z",
+  "updated": "2025-12-05T09:07:42.167Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-061"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "testing",
+    "cross-platform",
+    "validation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

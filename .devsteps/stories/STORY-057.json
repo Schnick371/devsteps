@@ -7,18 +7,25 @@
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T16:31:48.137Z",
-  "updated": "2025-12-03T16:33:01.737Z",
+  "updated": "2025-12-05T08:51:36.291Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
     "implements": [
       "EPIC-015"
     ],
-    "implemented-by": [],
+    "implemented-by": [
+      "TASK-137",
+      "TASK-138",
+      "TASK-139",
+      "TASK-140"
+    ],
     "tested-by": [],
     "tests": [],
     "blocks": [],
-    "blocked-by": [],
+    "blocked-by": [
+      "STORY-061"
+    ],
     "relates-to": [],
     "depends-on": [
       "STORY-058"
