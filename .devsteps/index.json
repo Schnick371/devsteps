@@ -2263,25 +2263,25 @@
       "id": "TASK-157",
       "type": "task",
       "title": "Update devsteps-plan-work.prompt.md: Enforce work items in main branch",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-05T10:55:27.829Z"
+      "updated": "2025-12-05T11:01:22.151Z"
     },
     {
       "id": "TASK-158",
       "type": "task",
       "title": "Update devsteps-start-work.prompt.md: Verify items in main, implement in feature branch",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-05T10:55:49.844Z"
+      "updated": "2025-12-05T11:02:12.882Z"
     },
     {
       "id": "TASK-159",
       "type": "task",
       "title": "Update devsteps-workflow.prompt.md: Enforce feature branch discipline",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-05T10:56:15.023Z"
+      "updated": "2025-12-05T11:03:08.611Z"
     },
     {
       "id": "EPIC-016",
@@ -2295,9 +2295,9 @@
       "id": "STORY-062",
       "type": "story",
       "title": "Update Workflow Prompts for Branch Separation",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-05T10:56:51.934Z"
+      "updated": "2025-12-05T11:03:17.993Z"
     }
   ],
   "stats": {
@@ -2313,8 +2313,8 @@
     },
     "by_status": {
       "in-progress": 5,
-      "done": 139,
-      "draft": 131,
+      "done": 143,
+      "draft": 127,
       "blocked": 2,
       "obsolete": 3
     },
@@ -2336,5 +2336,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-05T10:56:51.934Z"
+  "last_updated": "2025-12-05T11:03:17.993Z"
 }

@@ -3,11 +3,11 @@
   "type": "story",
   "category": "general",
   "title": "Update Workflow Prompts for Branch Separation",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-05T10:56:51.934Z",
-  "updated": "2025-12-05T10:57:18.745Z",
+  "updated": "2025-12-05T11:03:17.993Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
