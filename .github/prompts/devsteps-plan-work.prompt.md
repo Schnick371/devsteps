@@ -9,170 +9,63 @@ tools: ['search', 'devsteps/*', 'GitKraken/*', 'microsoft/playwright-mcp/*', 'ta
 
 ## Mission
 
-**Plan work through dialogue** - understand intent, search existing items, structure new work, establish traceability.
+Plan work through dialogue - understand intent, search existing items, structure new work, establish traceability.
 
-**CRITICAL:** This is conversation, not execution. Work items are created in `main` branch ONLY. Feature branches come later in devsteps-start-work.prompt.md.
+**Branch Strategy:** Work items created in `main` ONLY. Feature branches come later.
 
-**Branch Strategy:**
-- Planning (this prompt): `main` branch for work items
-- Implementation (start-work): Feature branches for code
+## Planning Protocol
 
-## Planning Flow
+### 0. Branch Preparation
+- Verify on `main` branch before planning
+- Check clean working tree
+- Warn if uncommitted work in feature branches
+- **Principle:** Work items are metadata, belong in `main`
 
-### Step 0: Branch Preparation (MANDATORY)
-
-**Before planning work items:**
-
-1. **Check current branch:**
-   ```bash
-   git branch --show-current
-   ```
-   - ❌ NOT on `main`? → Switch to main first
-   - ✅ On `main`? → Proceed
-
-2. **Check for uncommitted changes:**
-   ```bash
-   git status
-   ```
-   - ❌ Uncommitted changes? → Commit or stash them first
-   - ✅ Clean working tree? → Proceed
-
-3. **Verify other work in feature branches:**
-   ```bash
-   git branch --list 'story/*' 'bug/*' 'task/*'
-   ```
-   - Feature branches exist? → Ensure they're committed/pushed
-   - Warn user if uncommitted work exists elsewhere
-
-**Why this matters:**
-- Work items are PROJECT METADATA → belong in `main`
-- Feature branches are for CODE ONLY
-- Prevents work items getting lost in feature branches
-
-### Step 1: Understand Context
-
-**Think about the intent:**
-- Why is this work needed now?
-- What does success look like?
-- Minimum Viable Product (MVP) scope?
-
-**Dialog with user to grasp their need:**
+### 1. Understand Context
 - Ask "why" before "what"
+- Define success criteria and MVP scope
 - Surface dependencies early
-- Clarify scope and constraints
 - Identify related existing work
 
-### Step 2: Research First - MANDATORY
+### 2. Research First (MANDATORY)
+- Search internet for latest best practices
+- Search project for existing patterns
+- Compare approaches and trade-offs
+- **Principle:** Evidence-based proposals, not premature solutions
 
-1. **Search the internet** for latest best practices (2025):
-   ```
-   #mcp_tavily_tavily-search "[topic] best practices 2025"
-   #mcp_tavily_tavily-crawl <url>  # Deep dive
-   ```
+### 3. Structure Work
+- Epic → Story → Task hierarchy
+- Epic → Spike → Task for research
+- Bug uses relates-to Epic, Task implements Bug
+- Spike outcomes → follow-up Stories
+- Identify dependencies (depends-on, blocks, relates-to)
 
-2. **Search existing project** for related patterns:
-   ```
-   #mcp_devsteps_search <keywords>
-   search <relevant modules>
-   ```
+### 4. Create Items
+- Define type, priority, Eisenhower quadrant
+- Add affected paths and tags
+- Use devsteps MCP tools for creation
 
-3. **Think deeply** about findings:
-   - Compare multiple approaches
-   - Identify trade-offs (performance vs complexity, etc.)
-   - Challenge assumptions with evidence
-   - Synthesize into coherent recommendation
+### 5. Link Relationships
+- Establish hierarchies (implements)
+- Set dependencies (depends-on, blocks)
+- Link tests (tested-by)
+- **Principle:** Explicit traceability
 
-**Core principle:** Research first = Evidence-based proposals, not premature solutions
+### 6. Validate
+- Verify clear purpose and scope
+- Check priority alignment
+- Confirm dependencies identified
+- Review with devsteps status
 
-### Step 3: Structure Work
-
-**Determine hierarchy:**
-- Epic (large initiative) → Story (feature) → Task (implementation)
-- Epic → Spike (research) → Task (proof-of-concept)
-- Bug uses affects/relates-to to Epic/Requirement, Task implements Bug
-
-**Spike planning:**
-- Plan follow-up Stories from spike outcomes
-- "What did we learn?" → "What should we build?"
-
-**Identify dependencies:**
-- depends-on, blocks, relates-to
-
-### Step 4: Create Items
-
-**Define:**
-- Type (epic/story/task/bug/spike/test)
-- Priority (critical/high/medium/low)
-- Eisenhower (Q1=urgent+important, Q2=important, Q3=urgent, Q4=eliminate)
-- Affected paths, tags
-
-**Create:**
-```
-#mcp_devsteps_add <type> "<title>" --priority <p> --eisenhower <q> --tags <t>
-```
-
-### Step 5: Link Relationships
-
-```
-#mcp_devsteps_link <ID1> implements|depends-on|tested-by <ID2>
-```
-
-**Ensure:** Hierarchies clear, dependencies explicit, tests linked
-
-### Step 6: Validate
-
-- Clear purpose + scope?
-- Priorities aligned?
-- Dependencies identified?
-
-```
-#mcp_devsteps_status --detailed
-```
+### 7. Commit to Main (MANDATORY)
+- Verify still on `main` branch
+- Stage `.devsteps/` changes
+- Commit with planning message format
+- **Prohibition:** No feature branch creation during planning
 
 ## Key Questions
 
-- "Why now?" "What's success?" "MVP scope?"
-- "Break into smaller pieces?" "Dependencies?" "How to test?"
-
-## Step 7: Commit Work Items to Main (MANDATORY)
-
-**After all work items created and linked:**
-
-1. **Verify still on main branch:**
-   ```bash
-   git branch --show-current  # Must be 'main'
-   ```
-
-2. **Stage devsteps changes:**
-   ```bash
-   git add .devsteps/
-   ```
-
-3. **Commit with planning message:**
-   ```bash
-   git commit -m "plan(<PRIMARY-ID>): <Brief description>
-   
-   Planning complete for <epic/story/bug>:
-   
-   Work Items Created:
-   - <ID-1>: <title>
-   - <ID-2>: <title>
-   
-   <Additional context if needed>
-   
-   Refs: <ID-1>, <ID-2>"
-   ```
-
-4. **Confirm completion:**
-   - ✅ All work items in `main` branch
-   - ✅ Ready for implementation via devsteps-start-work.prompt.md
-
-**DO NOT:**
-- ❌ Create feature branch during planning
-- ❌ Leave work items uncommitted
-- ❌ Switch branches before committing
-
-**Next step:** Use `devsteps-start-work.prompt.md` to begin implementation.
+"Why now?" "What's success?" "MVP scope?" "Dependencies?" "How to test?"
 
 ---
 
