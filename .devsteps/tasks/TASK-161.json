@@ -3,11 +3,11 @@
   "type": "task",
   "category": "workflow",
   "title": "Update Workflow Prompts - Add Review/Testing Phase",
-  "status": "draft",
+  "status": "done",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-05T17:18:08.361Z",
-  "updated": "2025-12-05T17:18:37.663Z",
+  "updated": "2025-12-05T17:24:00.903Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/prompts/devsteps-start-work.prompt.md",

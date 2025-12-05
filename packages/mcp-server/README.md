@@ -148,6 +148,31 @@ AI: [Uses devsteps-status to show overview]
 - **Spike** - Research or proof-of-concept work
 - **Test** - Testing activities
 
+## Status Workflow
+
+### Standard Progression
+
+```
+draft → planned → in-progress → review → done
+```
+
+1. **draft**: Item created, not started
+2. **planned**: Ready to implement, dependencies clear
+3. **in-progress**: Active development
+4. **review**: Testing/validation phase
+5. **done**: All quality gates passed
+
+### Quality Gates (Review Phase)
+
+Before marking `done`:
+- ✅ Tests pass (unit, integration, E2E when applicable)
+- ✅ Build succeeds with no errors
+- ✅ Manual testing complete
+- ✅ Documentation updated
+- ✅ No regressions detected
+
+**Critical:** Use `review` status during testing, `done` only after validation passes.
+
 ## Priority System
 
 ### Eisenhower Matrix Quadrants

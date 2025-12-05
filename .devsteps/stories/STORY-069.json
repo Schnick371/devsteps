@@ -3,11 +3,11 @@
   "type": "story",
   "category": "workflow",
   "title": "Add Review/Testing Phase to Status Workflow",
-  "status": "draft",
+  "status": "done",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-05T17:17:52.236Z",
-  "updated": "2025-12-05T17:18:48.837Z",
+  "updated": "2025-12-05T17:31:04.121Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/prompts/devsteps-start-work.prompt.md",

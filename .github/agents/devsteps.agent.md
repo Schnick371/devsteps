@@ -34,90 +34,31 @@ Search existing items (`#mcp_devsteps_search`), link related items, define scope
 ### Workflow Principles (devsteps-workflow.prompt.md)
 Understand context before/during/after. Document decisions. Maintain traceability. Every change traceable.
 
-## Item Hierarchy & Relationships
+## Item Hierarchy
 
-### Hierarchy (Parent → Child)
-**Scrum:**
-Epic (Level 1)
-        ├── Story (Level 2)
-        │   ├── Task (Level 3) - implements
-        │   └── Bug (Level 3) - blocks
-        │       └── Task (Level 4) - fix
-        └── Spike (Level 2 - research)
-            └── Task (Level 3, optional)
-**Waterfall:**
-Requirement (Level 1)
-├── Feature (Level 2)
-│   ├── Task (Level 3) - implements
-│   └── Bug (Level 3) - blocks
-│       └── Task (Level 4) - fix
-└── Spike (Level 2 - research)
-    └── Task (Level 3, optional)
+**Scrum:** Epic → Story → Task | Epic → Spike → Task | Story → Bug (blocks) → Task (fix)  
+**Waterfall:** Requirement → Feature → Task | Requirement → Spike → Task | Feature → Bug (blocks) → Task (fix)
 
-### Work Item Purposes
-**Epic/Requirement:** Business initiative (WHAT we're building, business value)  
-**Story/Feature:** User problem/feature (WHY users need it, acceptance criteria)  
-**Task:** Technical implementation (HOW to build, solution details)  
-**Bug:** Problem description ONLY (document symptoms, reproduction steps, impact)  
-**Spike:** Research (creates Stories/Features from findings, links to Epic/Requirement)  
+**Item Types:**
+- **Epic/Requirement:** Business initiative (WHAT + value)
+- **Story/Feature:** User problem (WHY + acceptance)
+- **Task:** Implementation (HOW + solution)
+- **Bug:** Problem ONLY (symptoms + reproduction) - solution in Task!
+- **Spike:** Research → creates Stories/Features
 
-**CRITICAL - Bug vs Task Separation:**
-- **Bug = Problem ONLY**: What's broken, how to reproduce, impact, affected files
-- **Task = Solution ONLY**: How to fix, implementation approach, code changes
-- **Never mix**: Bug items must NEVER contain solution code or fix instructions
-- **Workflow**: Bug → Task(s) → Implementation
+**Bug Workflow (CRITICAL):**
+1. Bug describes problem (never solution)
+2. Bug `blocks` Story/Feature (parent only)
+3. Task `implements` Bug (fix) - use `Bug implemented-by Task`
+4. Bug `relates-to` Epic/Requirement (context only)
 
-**Bug Workflow (MANDATORY):**
-1. Create Bug with problem description (what's broken, how to reproduce)
-2. Bug uses `blocks` (hierarchy) to Story (Scrum) OR Feature (Waterfall) ONLY
-3. Create Task(s) for solution implementation (how to fix)
-4. Task `implements` Bug (solution fixes the reported problem) *
-5. **Implement solution in Task, NOT in Bug item!**
+**Relationships:**
+- **implements/implemented-by**: Hierarchy (Task→Story, Story→Epic, Task→Bug)
+- **relates-to**: Horizontal (same level connections)
+- **tested-by/tests**: Validation chain
+- **depends-on/blocks**: Sequencing/impediments
 
-* Note: Due to MCP validation constraints, use `Bug implemented-by Task` relation
-
-**Bug Relationships:**
-- **`relates-to`**: Bug context to Epic/Requirement (minor association)
-- **`blocks`**: Bug blocks Story (Scrum) or Feature (Waterfall) - parent only
-- **`implemented-by`**: Bug implemented by Task (fix implementation)
-
-### Relationship Rules (CRITICAL - Prevents Common Mistakes!)
-
-**implements/implemented-by** - Vertical traceability (ONLY for hierarchy):
-- ✅ Task `implements` Story/Feature
-- ✅ Task `implements` Bug (fixes the reported problem) *
-- ✅ Story/Feature `implements` Epic/Requirement  
-- ❌ Bug `implements` Epic/Requirement (use relates-to or blocks!)
-- ✅ Test `implements` Epic/Requirement (validates business requirement)
-
-* Note: MCP currently requires using reverse relation `Bug implemented-by Task`
-
-**Bug → Story/Feature (Blocking):**
-- ✅ Bug `blocks` Story (Scrum) or Feature (Waterfall) - parent only
-
-**Bug → Epic/Requirement (Context):**
-- ✅ Bug `relates-to` Epic/Requirement (general context)
-
-**relates-to** - Horizontal connections (same level):
-- ✅ Story ↔ Story, Feature ↔ Feature, Task ↔ Task
-- ✅ Spike → Story/Feature (findings create new work items)
-
-**tested-by/tests** - Validation chain:
-- ✅ Story/Feature `tested-by` Test
-- ✅ Task `tested-by` Test
-
-**depends-on/required-by** - Sequencing:
-- ✅ Any item → Any item (execution order)
-
-**blocks/blocked-by** - Impediments:
-- ✅ Any item → Any item (temporary obstacles)
-
-**Status Consistency Rule (CRITICAL):**
-- When linking a new child item (Task/Story/Feature), verify parent item status matches!
-- ✅ Parent `in-progress` → Child `in-progress` OK
-- ✅ Parent `done` → Child `done` OK
-- ❌ Parent `draft` → Child `in-progress` = WRONG! Update parent first!
-- **Action:** Always check parent status, update if needed before linking child
+**Status Consistency:** Parent/child statuses must align (draft/in-progress/done). Update parent before linking child.
 
 ## Tool Usage Strategy
 
@@ -127,20 +68,14 @@ Requirement (Level 1)
 
 ## Quality Gates
 
-**Before marking any work item completed:**
-- ✅ No `problems` errors remain
-- ✅ Tests pass (when applicable)
-- ✅ Changes minimal and focused
-- ✅ Code follows project standards
-- ✅ Documentation updated if needed
-- ✅ Status updated to done in devsteps
+**Before done:** No errors, tests pass, minimal changes, patterns followed, docs updated. *(Details: devsteps-workflow.prompt.md)*
 
 ## Git Workflow
 
-**Branches:** Epic: `epic/<ID>`, Story: `story/<ID>` (create before in-progress)  
-**Commit:** MANDATORY after marking done. Format: `type(ID): subject` + footer `Implements: ID`  
+**Branches:** `epic/<ID>`, `story/<ID>`, `bug/<ID>`, `task/<ID>`  
+**Commit:** Mandatory after done. Format: `type(ID): subject` + footer `Implements: ID`  
 **Types:** feat, fix, refactor, perf, docs, style, test, chore  
-**Details:** See git-workflow.instructions.md
+*(Details: git-workflow.instructions.md)*
 
 ## Communication Standards
 

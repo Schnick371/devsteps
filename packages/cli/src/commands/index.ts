@@ -307,12 +307,13 @@ export async function updateCommand(id: string, options: any) {
       console.log(chalk.gray('  Changed:'), changes.join(', '));
     }
 
-    // Git hints
+    // Git hints and status progression guidance
     const configPath = join(devstepsir, 'config.json');
     const config = JSON.parse(readFileSync(configPath, 'utf-8'));
     if (config.settings.git_integration) {
       if (options.status === 'done') {
-        console.log(chalk.gray('\n💡 Git:'), chalk.cyan(`git commit -am "feat: completed ${id}"`));
+        console.log(chalk.green('\n✅ Quality gates passed!'));
+        console.log(chalk.gray('💡 Git:'), chalk.cyan(`git commit -am "feat: completed ${id}"`));
 
         // Check if this completes any parent items
         for (const parentId of metadata.linked_items.implements) {
@@ -343,14 +344,21 @@ export async function updateCommand(id: string, options: any) {
               if (allDone && parentMeta.status !== 'done') {
                 console.log(
                   chalk.gray('💡'),
-                  `All implementations of ${chalk.cyan(parentId)} are complete! Consider closing it.`
+                  `All implementations of ${chalk.cyan(parentId)} are complete! Consider reviewing parent.`
                 );
               }
             }
           }
         }
+      } else if (options.status === 'review') {
+        console.log(chalk.yellow('\n🧪 Testing Phase:'));
+        console.log(chalk.gray('  • Run tests:'), 'npm test');
+        console.log(chalk.gray('  • Verify build:'), 'npm run build');
+        console.log(chalk.gray('  • Manual testing if applicable'));
+        console.log(chalk.gray('  • When all pass:'), chalk.cyan(`devsteps update ${id} --status done`));
       } else if (options.status === 'in-progress') {
         console.log(chalk.gray('\n💡 Git:'), 'Track progress with regular commits!');
+        console.log(chalk.gray('💡 Next:'), `After implementation, mark as 'review' to start testing`);
       }
     }
   } catch (error: any) {

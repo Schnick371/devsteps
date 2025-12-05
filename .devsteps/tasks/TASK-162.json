@@ -3,11 +3,11 @@
   "type": "task",
   "category": "cli",
   "title": "Update CLI Hints for Review/Testing Phase",
-  "status": "draft",
+  "status": "done",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-05T17:18:20.685Z",
-  "updated": "2025-12-05T17:18:43.088Z",
+  "updated": "2025-12-05T17:27:10.716Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/cli/src/commands/index.ts",

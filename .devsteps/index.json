@@ -2375,41 +2375,41 @@
       "id": "STORY-069",
       "type": "story",
       "title": "Add Review/Testing Phase to Status Workflow",
-      "status": "draft",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-12-05T17:17:52.236Z"
+      "updated": "2025-12-05T17:31:04.121Z"
     },
     {
       "id": "TASK-161",
       "type": "task",
       "title": "Update Workflow Prompts - Add Review/Testing Phase",
-      "status": "draft",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-12-05T17:18:08.361Z"
+      "updated": "2025-12-05T17:24:00.903Z"
     },
     {
       "id": "TASK-162",
       "type": "task",
       "title": "Update CLI Hints for Review/Testing Phase",
-      "status": "draft",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-12-05T17:18:20.685Z"
+      "updated": "2025-12-05T17:27:10.716Z"
     },
     {
       "id": "TASK-163",
       "type": "task",
       "title": "Update MCP Tool Descriptions for Status Workflow",
-      "status": "draft",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-12-05T17:18:32.030Z"
+      "updated": "2025-12-05T17:30:59.483Z"
     },
     {
       "id": "TASK-164",
       "type": "task",
       "title": "Remove Project-Specific Migration Scripts",
-      "status": "draft",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-12-05T17:21:30.636Z"
+      "updated": "2025-12-05T17:24:01.033Z"
     }
   ],
   "stats": {
@@ -2425,10 +2425,11 @@
     },
     "by_status": {
       "in-progress": 5,
-      "done": 144,
-      "draft": 140,
+      "done": 149,
+      "draft": 135,
       "blocked": 2,
-      "obsolete": 3
+      "obsolete": 3,
+      "review": 0
     },
     "archived": 2
   },
@@ -2448,5 +2449,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-05T17:21:30.636Z"
+  "last_updated": "2025-12-05T17:31:04.121Z"
 }

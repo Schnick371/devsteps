@@ -56,33 +56,25 @@ Review planned work, select highest priority, begin structured development.
 - Dependencies found? → Link items
 - Decisions made? → Document why
 
-### 6. Complete
+### 6. Testing/Review
+**Status:** `in-progress` → `review`  
+**Quality Gates:** Tests pass, build succeeds, manual testing, docs updated, no regressions *(see devsteps-workflow.prompt.md)*  
+**If Fail:** Return to Step 5
 
-**Quality Gates:**
-- Tests pass, build OK, no problems
-- Patterns followed, docs updated
-- Description updated, paths complete
-- Links set, decisions captured
+### 7. Complete
+**Status:** `review` → `done` (all gates passed)  
+**Commit:** Feature branch, conventional format, footer `Implements: ID`  
+**Prohibition:** No merge to main yet
 
-**Commit Workflow:**
-- Mark item done via devsteps
-- Commit to feature branch with conventional format
-- **Prohibition:** No merge to main yet
-- Push feature branch for testing
-- Squash merge happens later (manual/PR)
+**Status Sync:** `.devsteps/` on feature branch → synced during final merge
 
-**Status Sync:**
-- Status changes stored in `.devsteps/` on feature branch
-- Synced to main during final merge
-- Temporary divergence expected
-
-### 6.5. Spike Post-Processing
+### 7.5. Spike Post-Processing
 - Review findings
 - Create Stories from insights
 - Link Stories to Epic
 - Estimate with confidence from learnings
 
-### 7. Next
+### 8. Next
 - Show status
 - Highlight unblocked items
 - Continue with Step 1

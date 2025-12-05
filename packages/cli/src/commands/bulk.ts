@@ -68,6 +68,16 @@ export async function bulkUpdateCommand(itemIds: string[], options: any) {
 
     spinner.stop();
     displayBulkResult(result, 'Updated');
+
+    // Status progression hints
+    if (options.status === 'review') {
+      console.log(chalk.yellow('\n🧪 Testing Phase (bulk):'));
+      console.log(chalk.gray('  • Run tests for all items'));
+      console.log(chalk.gray('  • Verify builds pass'));
+      console.log(chalk.gray('  • When ready:'), chalk.cyan('devsteps bulk update <ids> --status done'));
+    } else if (options.status === 'done') {
+      console.log(chalk.green('\n✅ Quality gates passed for all items!'));
+    }
   } catch (error: unknown) {
     spinner.fail('Bulk update failed');
     if (error instanceof Error) {

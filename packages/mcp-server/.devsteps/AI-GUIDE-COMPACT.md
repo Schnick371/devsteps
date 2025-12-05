@@ -80,8 +80,8 @@
 
 **implements (strict hierarchy):**
 - Parent-child relationships only
-- Scrum: Epic→Story|Spike, Story→Task, Bug→Task, Spike→Task
-- Waterfall: Requirement→Feature|Spike, Feature→Task, Bug→Task, Spike→Task
+- Scrum: Epic→Story|Spike|Bug, Story→Task|Bug, Bug→Task, Spike→Task
+- Waterfall: Requirement→Feature|Spike|Bug, Feature→Task|Bug, Bug→Task, Spike→Task
 
 **relates-to (flexible):**
 - Cross-references without hierarchy or blocking
@@ -89,10 +89,10 @@
 - Spike informs Story/Feature via relates-to
 
 **blocks/blocked-by (dual purpose - Jira 2025):**
-- **Hierarchy mode**: Bug blocks Story/Feature ONLY (parent-child + blocking)
+- **Hierarchy mode**: Bug blocks Epic/Story/Requirement/Feature (parent-child + blocking)
 - **Flexible mode**: Story→Story, Task→Task, etc. (sequencing/dependencies, no validation)
 - Jira semantics: One issue prevents another from progressing
-- Bug always blocks its parent Story/Feature, never Epic/Requirement
+- Use for Bug when it both belongs to AND prevents completion of Epic/Story
 
 **depends-on/required-by (flexible):**
 - Technical dependencies

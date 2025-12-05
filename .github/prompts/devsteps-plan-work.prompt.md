@@ -15,52 +15,31 @@ Plan work through dialogue - understand intent, search existing items, structure
 
 ## Planning Protocol
 
-### 0. Branch Preparation
-- Verify on `main` branch before planning
-- **Principle:** Work items are metadata, belong in `main`. 
+### 0. Branch: Main Only
+Verify on `main` - work items are metadata, not code.
 
 ### 1. Understand Context
-- Ask "why" before "what"
-- Surface dependencies early
-- Identify related existing work
+Ask "why" before "what". Surface dependencies early.
 
 ### 2. Research First (MANDATORY)
-- Search internet for latest best practices and recommendations
-- Search project for existing patterns
-- Compare approaches and trade-offs
-- **Principle:** Evidence-based proposals, not premature solutions
+Search best practices + recommendations + existing patterns. Evidence-based proposals.
 
 ### 3. Structure Work
-- Epic → Story → Task (implementation)
-- Epic → Spike → Task (research)
-- Story → Bug → Task (fix) - Bug blocks Story only
-- Spike → Story (findings create new work)
-- Identify dependencies (depends-on, blocks, relates-to)
+- Epic → Story → Task | Epic → Spike → Task
+- Story → Bug (blocks) → Task (fix)
+- Bug blocks Story only, relates-to for Epic context
 
 ### 4. Create Items
-- Define type, priority, Eisenhower quadrant
-- Add affected paths and tags
-- Use devsteps MCP tools for creation
+Type, priority (Eisenhower), affected paths, tags. Use devsteps MCP tools.
 
 ### 5. Link Relationships
-- Establish hierarchies (implements/implemented-by)
-- Bug blocks Story only (never Epic)
-- Bug uses relates-to for additional context
-- Set dependencies (depends-on, required-by)
-- Link tests (tested-by/tests)
-- **Principle:** Explicit traceability, Bug never implements Epic/Story
+Hierarchies (implements), dependencies (depends-on, blocks), tests (tested-by).
 
 ### 6. Validate
-- Verify clear purpose and scope
-- Check priority alignment
-- Confirm dependencies identified
-- Review with devsteps status
+Clear purpose, priority aligned, dependencies identified.
 
-### 7. Commit to Main (MANDATORY)
-- Verify still on `main` branch
-- Stage `.devsteps/` changes
-- Commit with planning message format
-- **Prohibition:** No feature branch creation during planning
+### 7. Commit to Main
+Stage `.devsteps/`, commit with planning format. No feature branches yet.
 
 ## Key Questions
 

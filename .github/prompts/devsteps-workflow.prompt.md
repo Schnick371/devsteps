@@ -62,6 +62,22 @@ Maintain structured workflow - preserve decisions, traceability, prevent context
 - Patterns consistent
 - No breaking changes
 
+## Status Lifecycle
+
+**Progression:** `draft → planned → in-progress → review → done`
+
+**Meanings:**
+- **draft/planned**: Created, ready to start
+- **in-progress**: Active development
+- **review**: Testing/validation
+- **done**: All gates passed
+- **blocked/cancelled/obsolete**: Stopped work
+
+**Quality Gates (Review → Done):**
+- ✅ Tests pass + Build succeeds
+- ✅ Manual testing + Docs updated
+- ✅ No regressions + Patterns followed
+
 ## Before Committing
 
 **When to Commit:**
@@ -77,20 +93,29 @@ Maintain structured workflow - preserve decisions, traceability, prevent context
 
 ## Completion Workflow
 
-**When Done:**
+**Testing Phase (Status: review):**
+- Mark item as `review` status
+- Run all applicable tests
+- Perform manual testing
+- Verify build succeeds
+- Check for regressions
+- Review code quality
+
+**If Tests Fail:**
+- Return to implementation
+- Fix issues
+- Repeat testing
+
+**When All Tests Pass (Status: done):**
+- Mark item as `done` status
 - Final commit to feature branch
 - Push branch
-- Update work item status via devsteps
 - **Prohibition:** No merge to main yet (test first, user approval, squash merge later)
 
 **Status Sync:**
 - Status stored in `.devsteps/` on feature branch
 - Synced to main during final merge
 - Temporary divergence expected
-
-**Quality Gates:**
-- Tests pass, build OK, decisions documented
-- Traceability complete, no broken deps, docs updated
 
 **Context Preservation:**
 - Why/What/How for future switches
