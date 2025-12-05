@@ -94,7 +94,7 @@ Maintain structured workflow - preserve decisions, traceability, prevent context
 ## Completion Workflow
 
 **Testing Phase (Status: review):**
-- Mark item as `review` status
+- Mark DevSteps work item as `review` status
 - Run all applicable tests
 - Perform manual testing
 - Verify build succeeds
@@ -102,7 +102,7 @@ Maintain structured workflow - preserve decisions, traceability, prevent context
 - Review code quality
 
 **If Tests Fail:**
-- Return to implementation
+- Return to DevSteps work item status implementation
 - Fix issues
 - Repeat testing
 
