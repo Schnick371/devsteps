@@ -2295,9 +2295,9 @@
       "id": "STORY-062",
       "type": "story",
       "title": "Update Workflow Prompts for Branch Separation",
-      "status": "draft",
+      "status": "in-progress",
       "priority": "high",
-      "updated": "2025-12-05T10:56:51.934Z"
+      "updated": "2025-12-05T16:14:50.076Z"
     },
     {
       "id": "TASK-160",
@@ -2344,9 +2344,9 @@
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 6,
+      "in-progress": 7,
       "done": 138,
-      "draft": 135,
+      "draft": 134,
       "blocked": 2,
       "obsolete": 3
     },
@@ -2368,5 +2368,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-05T15:58:23.096Z"
+  "last_updated": "2025-12-05T16:14:50.076Z"
 }
