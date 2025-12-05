@@ -6,14 +6,16 @@
   "status": "draft",
   "priority": "high",
   "created": "2025-12-05T15:53:29.960Z",
-  "updated": "2025-12-05T15:53:29.960Z",
+  "updated": "2025-12-05T16:03:01.020Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/mcp-server/tools/index.ts",
     "packages/extension/src/mcp-server/index.ts"
   ],
   "linked_items": {
-    "implements": [],
+    "implements": [
+      "STORY-063"
+    ],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
