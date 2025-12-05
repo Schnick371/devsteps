@@ -10,17 +10,15 @@ Theme (strategic, optional)
     └── Epic (Level 1)
         ├── Story (Level 2)
         │   ├── Task (Level 3)
-        │   └── Bug (Level 2.5 - story-level defect)
-        │       └── Task (Level 3) - fix
-        ├── Spike (Level 2 - research)
-        │   └── Task (Level 3, optional)
-        └── Bug (Level 2 - epic-level defect)
-            └── Task (Level 3) - fix
+        │   └── Bug (Level 3) - blocks
+        │       └── Task (Level 4) - fix
+        └── Spike (Level 2 - research)
+            └── Task (Level 3, optional)
 ```
 
 **Allowed Links (hierarchy):**
-- **implements**: Epic→Story|Spike|Bug, Story→Task|Bug, Bug→Task (fix), Spike→Task
-- **blocks**: Bug→Epic|Story (Jira hierarchy + blocking)
+- **implements**: Epic→Story|Spike, Story→Task, Bug→Task (fix), Spike→Task
+- **blocks**: Bug→Story (hierarchy, parent only)
 
 **Flexible Relations (any to any):**
 - relates-to, depends-on, tested-by, supersedes
@@ -38,16 +36,14 @@ Theme (strategic, optional)
 Requirement (Level 1)
 ├── Feature (Level 2)
 │   ├── Task (Level 3)
-│   └── Bug (Level 2.5 - feature-level defect)
-│       └── Task (Level 3) - fix
-├── Spike (Level 2 - research)
-│   └── Task (Level 3, optional)
-└── Bug (Level 2 - requirement-level defect)
-    └── Task (Level 3) - fix
+│   └── Bug (Level 3) - blocks
+│       └── Task (Level 4) - fix
+└── Spike (Level 2 - research)
+    └── Task (Level 3, optional)
 ```
 
 **Allowed Links (hierarchy):**
-- **implements**: Requirement→Feature|Spike|Bug, Feature→Task|Bug, Bug→Task (fix), Spike→Task
+- **implements**: Requirement→Feature|Spike, Feature→Task, Bug→Task (fix), Spike→Task
 - **blocks**: Bug→Requirement|Feature (Jira hierarchy + blocking)
 
 **Flexible Relations (any to any):**

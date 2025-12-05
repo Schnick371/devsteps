@@ -11,33 +11,30 @@ tools: ['search', 'devsteps/*', 'GitKraken/*', 'microsoft/playwright-mcp/*', 'ta
 
 Plan work through dialogue - understand intent, search existing items, structure new work, establish traceability.
 
-**Branch Strategy:** Work items created in `main` ONLY. Feature branches come later.
+**Branch Strategy:** DevSteps Work items created in `main` ONLY. Feature branches come later.
 
 ## Planning Protocol
 
 ### 0. Branch Preparation
 - Verify on `main` branch before planning
-- Check clean working tree
-- Warn if uncommitted work in feature branches
-- **Principle:** Work items are metadata, belong in `main`
+- **Principle:** Work items are metadata, belong in `main`. 
 
 ### 1. Understand Context
 - Ask "why" before "what"
-- Define success criteria and MVP scope
 - Surface dependencies early
 - Identify related existing work
 
 ### 2. Research First (MANDATORY)
-- Search internet for latest best practices
+- Search internet for latest best practices and recommendations
 - Search project for existing patterns
 - Compare approaches and trade-offs
 - **Principle:** Evidence-based proposals, not premature solutions
 
 ### 3. Structure Work
-- Epic → Story → Task hierarchy
-- Epic → Spike → Task for research
-- Bug uses relates-to Epic, Task implements Bug
-- Spike outcomes → follow-up Stories
+- Epic → Story → Task (implementation)
+- Epic → Spike → Task (research)
+- Story → Bug → Task (fix) - Bug blocks Story only
+- Spike → Story (findings create new work)
 - Identify dependencies (depends-on, blocks, relates-to)
 
 ### 4. Create Items
@@ -46,10 +43,12 @@ Plan work through dialogue - understand intent, search existing items, structure
 - Use devsteps MCP tools for creation
 
 ### 5. Link Relationships
-- Establish hierarchies (implements)
-- Set dependencies (depends-on, blocks)
-- Link tests (tested-by)
-- **Principle:** Explicit traceability
+- Establish hierarchies (implements/implemented-by)
+- Bug blocks Story only (never Epic)
+- Bug uses relates-to for additional context
+- Set dependencies (depends-on, required-by)
+- Link tests (tested-by/tests)
+- **Principle:** Explicit traceability, Bug never implements Epic/Story
 
 ### 6. Validate
 - Verify clear purpose and scope

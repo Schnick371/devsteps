@@ -18,25 +18,22 @@ Theme (optional, strategic)
     └── Epic (Level 1)
         ├── Story (Level 2)
         │   ├── Task (Level 3)
-        │   └── Bug (Level 2.5 - configurable)
-        │       └── Task (Level 3) - fix implementation
-        ├── Spike (Level 2 - research)
-        │   └── Task (Level 3, optional)
-        └── Bug (Level 2 - epic-level defect)
-            └── Task (Level 3) - fix implementation
+        │   └── Bug (Level 3) - blocks
+        │       └── Task (Level 4) - fix
+        └── Spike (Level 2 - research)
+            └── Task (Level 3, optional)
 ```
 
 **Industry Standard (Azure DevOps/Jira 2025):**
-- **Option 1**: Bug as child of Story (story-level defect, most common)
-- **Option 2**: Bug as child of Epic (epic-level defect, impacts multiple stories)
-- **Spike**: Always child of Epic (research before Story implementation)
+- Bug is ALWAYS child of Story (never Epic)
+- Bug blocks its parent Story
+- Spike is always child of Epic (research before Story implementation)
 
 **Scrum/Agile Allowed Links:**
 - `Epic → Story` (implemented-by)
 - `Epic → Spike` (implemented-by) - research
-- `Epic → Bug` (implemented-by) - epic-level defect
 - `Story → Task` (implemented-by)
-- `Story → Bug` (implemented-by) - story-level defect
+- `Story → Bug` (blocks) - Bug blocks parent Story
 - `Bug → Task` (implemented-by) - fix implementation
 - `Spike → Task` (implemented-by, optional) - research tasks
 - `Spike → Story` (relates-to) - Spike informs Story
@@ -55,25 +52,22 @@ Theme (optional, strategic)
 Requirement (Level 1)
 ├── Feature (Level 2)
 │   ├── Task (Level 3)
-│   └── Bug (Level 2.5 - configurable)
-│       └── Task (Level 3) - fix implementation
-├── Spike (Level 2 - research)
-│   └── Task (Level 3, optional)
-└── Bug (Level 2 - requirement-level defect)
-    └── Task (Level 3) - fix implementation
+│   └── Bug (Level 3) - blocks
+│       └── Task (Level 4) - fix
+└── Spike (Level 2 - research)
+    └── Task (Level 3, optional)
 ```
 
 **Industry Standard (Azure DevOps/Jira 2025):**
-- **Option 1**: Bug as child of Feature (feature-level defect)
-- **Option 2**: Bug as child of Requirement (requirement-level defect)
-- **Spike**: Always child of Requirement (research before Feature implementation)
+- Bug is ALWAYS child of Feature (never Requirement)
+- Bug blocks its parent Feature
+- Spike is always child of Requirement (research before Feature implementation)
 
 **Waterfall Allowed Links:**
 - `Requirement → Feature` (implemented-by)
 - `Requirement → Spike` (implemented-by) - research
-- `Requirement → Bug` (implemented-by) - requirement-level defect
 - `Feature → Task` (implemented-by)
-- `Feature → Bug` (implemented-by) - feature-level defect
+- `Feature → Bug` (blocks) - Bug blocks parent Feature
 - `Bug → Task` (implemented-by) - fix implementation
 - `Spike → Task` (implemented-by, optional) - research tasks
 - `Task → Bug` (implements) - solution fixes the problem

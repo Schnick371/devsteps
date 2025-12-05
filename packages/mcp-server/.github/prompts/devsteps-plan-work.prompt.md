@@ -55,7 +55,7 @@ tools: ['runCommands', 'runTasks', 'search', 'github/github-mcp-server/*', 'micr
 **Determine hierarchy:**
 - Epic (large initiative) → Story (feature) → Task (implementation)
 - Epic → Spike (research) → Task (proof-of-concept)
-- Bug/Test can implement Epic or relate to Story/Spike
+- Story → Bug → Task (fix) - Bug blocks Story only
 
 **Spike planning:**
 - Plan follow-up Stories from spike outcomes

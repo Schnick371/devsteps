@@ -37,8 +37,22 @@ Understand context before/during/after. Document decisions. Maintain traceabilit
 ## Item Hierarchy & Relationships
 
 ### Hierarchy (Parent → Child)
-**Scrum:** Epic → Story/Spike → Task  
-**Waterfall:** Requirement → Feature/Spike → Task  
+**Scrum:**
+Epic (Level 1)
+        ├── Story (Level 2)
+        │   ├── Task (Level 3) - implements
+        │   └── Bug (Level 3) - blocks
+        │       └── Task (Level 4) - fix
+        └── Spike (Level 2 - research)
+            └── Task (Level 3, optional)
+**Waterfall:**
+Requirement (Level 1)
+├── Feature (Level 2)
+│   ├── Task (Level 3) - implements
+│   └── Bug (Level 3) - blocks
+│       └── Task (Level 4) - fix
+└── Spike (Level 2 - research)
+    └── Task (Level 3, optional)
 
 ### Work Item Purposes
 **Epic/Requirement:** Business initiative (WHAT we're building, business value)  
@@ -55,16 +69,17 @@ Understand context before/during/after. Document decisions. Maintain traceabilit
 
 **Bug Workflow (MANDATORY):**
 1. Create Bug with problem description (what's broken, how to reproduce)
-2. Bug uses `relates-to` (context) OR `affects` (impact) to Epic/Requirement
+2. Bug uses `blocks` (hierarchy) to Story (Scrum) OR Feature (Waterfall) ONLY
 3. Create Task(s) for solution implementation (how to fix)
 4. Task `implements` Bug (solution fixes the reported problem) *
 5. **Implement solution in Task, NOT in Bug item!**
 
 * Note: Due to MCP validation constraints, use `Bug implemented-by Task` relation
 
-**When to use Bug relationships:**
-- **`relates-to`**: Bug is part of Epic scope (e.g., "Auth Bug" relates to "Auth Epic")
-- **`affects`**: Bug impacts deliverables (e.g., "Performance Bug" affects "Dashboard Epic")
+**Bug Relationships:**
+- **`relates-to`**: Bug context to Epic/Requirement (minor association)
+- **`blocks`**: Bug blocks Story (Scrum) or Feature (Waterfall) - parent only
+- **`implemented-by`**: Bug implemented by Task (fix implementation)
 
 ### Relationship Rules (CRITICAL - Prevents Common Mistakes!)
 
@@ -72,14 +87,16 @@ Understand context before/during/after. Document decisions. Maintain traceabilit
 - ✅ Task `implements` Story/Feature
 - ✅ Task `implements` Bug (fixes the reported problem) *
 - ✅ Story/Feature `implements` Epic/Requirement  
-- ❌ Bug `implements` Epic/Requirement (use relates-to or affects!)
+- ❌ Bug `implements` Epic/Requirement (use relates-to or blocks!)
 - ✅ Test `implements` Epic/Requirement (validates business requirement)
 
 * Note: MCP currently requires using reverse relation `Bug implemented-by Task`
 
-**Bug → Epic/Requirement (Context/Impact):**
+**Bug → Story/Feature (Blocking):**
+- ✅ Bug `blocks` Story (Scrum) or Feature (Waterfall) - parent only
+
+**Bug → Epic/Requirement (Context):**
 - ✅ Bug `relates-to` Epic/Requirement (general context)
-- ✅ Bug `affects` Epic/Requirement (impact traceability)
 
 **relates-to** - Horizontal connections (same level):
 - ✅ Story ↔ Story, Feature ↔ Feature, Task ↔ Task

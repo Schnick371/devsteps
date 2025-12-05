@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "counters": {
     "epic": 16,
-    "story": 62,
+    "story": 63,
     "task": 159,
     "bug": 31,
     "spike": 7,
@@ -2298,13 +2298,21 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-12-05T11:03:17.993Z"
+    },
+    {
+      "id": "STORY-063",
+      "type": "story",
+      "title": "Update Bug Hierarchy in Implementation Code",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-05T15:53:00.575Z"
     }
   ],
   "stats": {
-    "total": 280,
+    "total": 281,
     "by_type": {
       "epic": 16,
-      "story": 62,
+      "story": 63,
       "task": 159,
       "bug": 31,
       "spike": 7,
@@ -2314,7 +2322,7 @@
     "by_status": {
       "in-progress": 5,
       "done": 143,
-      "draft": 127,
+      "draft": 128,
       "blocked": 2,
       "obsolete": 3
     },
@@ -2336,5 +2344,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-05T11:03:17.993Z"
+  "last_updated": "2025-12-05T15:53:00.575Z"
 }

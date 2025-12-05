@@ -39,10 +39,10 @@
 - Status reflects current work state
 
 **5. Bug Handling**
-- Bug is child of Epic/Story/Requirement/Feature
-- Use `implements` for hierarchy OR `blocks` for blocking impact
+- Bug is ONLY child of Story (Scrum) or Feature (Waterfall)
+- Bug blocks its parent Story/Feature using `blocks` relation
+- Use `relates-to` for additional context to Epic/Requirement
 - Create fix Task implementing Bug
-- Choose level based on impact scope
 
 **6. Spike Management**
 - Spike is child of Epic/Requirement

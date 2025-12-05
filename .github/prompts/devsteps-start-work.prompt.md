@@ -19,19 +19,13 @@ Review planned work, select highest priority, begin structured development.
 
 ### 0. Branch Strategy (MANDATORY)
 
-**Phase 1: Verify Work Items in Main**
-- Checkout `main` and sync latest
-- Verify work item exists via search
-- If not found → Run plan-work first
-
+**Phase 1: Verify DevSteps Work Items in Main**
 **Phase 2: Create/Checkout Feature Branch**
-- Branch naming: `story/<ID>`, `bug/<ID>`, `task/<ID>`, `epic/<ID>`
-- Task (part of story): Use parent story branch
+- Branch naming: `story/<ID>`, `epic/<ID>`
 - Check existing branches before creating new
 - **Principle:** Feature branch for CODE ONLY
 
 **Phase 3: Verify Clean State**
-- Check for uncommitted changes
 - Commit or stash before proceeding
 
 ### 1. Review
