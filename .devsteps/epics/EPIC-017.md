@@ -19,7 +19,7 @@
 - **Proven framework**: Based on Eisenhower's time management principles
 - **Clearer outcomes**: Each quadrant has clear action (Do/Schedule/Delegate/Eliminate)
 
-### Color Mapping for the icon in front of the work item text
+### Color Mapping for the icon in front of the work item text in the tree view
 - 🔴 Q1 (Urgent + Important) - Do First
 - 🟠 Q2 (Not Urgent + Important) - Schedule  
 - 🟡 Q3 (Urgent + Not Important) - Delegate
