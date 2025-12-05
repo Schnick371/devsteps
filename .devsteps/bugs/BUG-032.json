@@ -1,36 +1,43 @@
 {
-  "id": "TASK-160",
-  "type": "task",
+  "id": "BUG-032",
+  "type": "bug",
   "category": "vscode",
-  "title": "Change esbuild Extension Output from CommonJS to ESM",
+  "title": "Extension Debug Mode Fails - ESM/CommonJS Output Mismatch",
   "status": "draft",
   "priority": "medium",
   "eisenhower": "urgent-important",
-  "created": "2025-12-05T17:12:20.785Z",
+  "created": "2025-12-05T17:12:03.654Z",
   "updated": "2025-12-05T17:12:31.206Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/extension/esbuild.js"
+    "packages/extension/esbuild.js",
+    "packages/extension/package.json"
   ],
   "linked_items": {
     "implements": [
       "BUG-032"
     ],
-    "implemented-by": [],
+    "implemented-by": [
+      "TASK-160"
+    ],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "STORY-061"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "esbuild",
+    "vscode",
+    "extension",
+    "activation",
     "esm",
-    "build"
+    "esbuild"
   ],
   "commits": [],
   "metadata": {}

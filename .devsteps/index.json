@@ -3,8 +3,8 @@
   "counters": {
     "epic": 17,
     "story": 68,
-    "task": 159,
-    "bug": 31,
+    "task": 160,
+    "bug": 32,
     "spike": 7,
     "feature": 5,
     "requirement": 2
@@ -2354,15 +2354,31 @@
       "status": "draft",
       "priority": "high",
       "updated": "2025-12-05T16:29:56.008Z"
+    },
+    {
+      "id": "BUG-032",
+      "type": "bug",
+      "title": "Extension Debug Mode Fails - ESM/CommonJS Output Mismatch",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-05T17:12:03.654Z"
+    },
+    {
+      "id": "TASK-160",
+      "type": "task",
+      "title": "Change esbuild Extension Output from CommonJS to ESM",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-05T17:12:20.785Z"
     }
   ],
   "stats": {
-    "total": 287,
+    "total": 289,
     "by_type": {
       "epic": 17,
       "story": 68,
-      "task": 159,
-      "bug": 31,
+      "task": 160,
+      "bug": 32,
       "spike": 7,
       "feature": 5,
       "requirement": 2
@@ -2370,7 +2386,7 @@
     "by_status": {
       "in-progress": 5,
       "done": 144,
-      "draft": 133,
+      "draft": 135,
       "blocked": 2,
       "obsolete": 3
     },
@@ -2392,5 +2408,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-05T16:29:56.008Z"
+  "last_updated": "2025-12-05T17:12:20.785Z"
 }

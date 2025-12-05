@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-05T08:47:51.338Z",
-  "updated": "2025-12-05T09:08:20.946Z",
+  "updated": "2025-12-05T17:12:09.892Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src"
@@ -29,7 +29,9 @@
       "STORY-057"
     ],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "BUG-032"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [
