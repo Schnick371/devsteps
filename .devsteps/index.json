@@ -2583,9 +2583,9 @@
       "id": "TASK-181",
       "type": "task",
       "title": "Create centralized constants module in shared package",
-      "status": "in-progress",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-08T15:08:42.598Z"
+      "updated": "2025-12-08T15:10:37.874Z"
     },
     {
       "id": "TASK-182",
@@ -2632,8 +2632,8 @@
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 5,
-      "done": 151,
+      "in-progress": 4,
+      "done": 152,
       "draft": 157,
       "blocked": 2,
       "obsolete": 5,
@@ -2657,5 +2657,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-08T15:08:42.598Z"
+  "last_updated": "2025-12-08T15:10:37.874Z"
 }
