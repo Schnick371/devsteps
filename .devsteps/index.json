@@ -2559,9 +2559,9 @@
       "id": "TASK-179",
       "type": "task",
       "title": "Centralize TYPE_TO_DIRECTORY and item prefixes mapping",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-08T14:42:48.354Z"
+      "updated": "2025-12-08T14:59:42.810Z"
     },
     {
       "id": "TASK-180",
@@ -2585,8 +2585,8 @@
     },
     "by_status": {
       "in-progress": 4,
-      "done": 150,
-      "draft": 153,
+      "done": 151,
+      "draft": 152,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2609,5 +2609,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-08T14:55:21.607Z"
+  "last_updated": "2025-12-08T14:59:42.810Z"
 }
