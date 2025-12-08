@@ -1,25 +1,19 @@
 {
-  "id": "STORY-073",
-  "type": "story",
+  "id": "TASK-179",
+  "type": "task",
   "category": "refactoring",
-  "title": "Centralize relationship type definitions and logic in shared package",
+  "title": "Centralize TYPE_TO_DIRECTORY and item prefixes mapping",
   "status": "draft",
-  "priority": "medium",
-  "eisenhower": "not-urgent-important",
-  "created": "2025-12-08T11:34:47.347Z",
+  "priority": "high",
+  "created": "2025-12-08T14:42:48.354Z",
   "updated": "2025-12-08T14:43:31.697Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
-    "implements": [],
-    "implemented-by": [
-      "TASK-175",
-      "TASK-176",
-      "TASK-177",
-      "TASK-178",
-      "TASK-179",
-      "TASK-180"
+    "implements": [
+      "STORY-073"
     ],
+    "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
@@ -32,9 +26,9 @@
   },
   "tags": [
     "refactoring",
-    "centralization",
     "DRY",
-    "relationships"
+    "centralization",
+    "types"
   ],
   "commits": [],
   "metadata": {}

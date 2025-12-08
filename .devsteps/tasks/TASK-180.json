@@ -1,16 +1,14 @@
 {
-  "id": "TASK-175",
+  "id": "TASK-180",
   "type": "task",
   "category": "refactoring",
-  "title": "Create centralized RELATIONSHIP_CONFIG in shared",
+  "title": "Derive Zod schemas and MCP enums from RELATIONSHIP_CONFIG",
   "status": "draft",
-  "priority": "medium",
-  "created": "2025-12-08T11:35:44.525Z",
+  "priority": "high",
+  "created": "2025-12-08T14:43:22.996Z",
   "updated": "2025-12-08T14:43:31.698Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [
-    "packages/shared/src/schemas/relationships.ts"
-  ],
+  "affected_paths": [],
   "linked_items": {
     "implements": [
       "STORY-073"
@@ -21,20 +19,18 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [],
-    "depends-on": [],
-    "required-by": [
-      "TASK-176",
-      "TASK-177",
-      "TASK-178",
-      "TASK-180"
+    "depends-on": [
+      "TASK-175"
     ],
+    "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "shared",
-    "relationships",
-    "configuration"
+    "refactoring",
+    "schemas",
+    "DRY",
+    "centralization"
   ],
   "commits": [],
   "metadata": {}

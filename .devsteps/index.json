@@ -3,7 +3,7 @@
   "counters": {
     "epic": 17,
     "story": 73,
-    "task": 178,
+    "task": 180,
     "bug": 32,
     "spike": 7,
     "feature": 5,
@@ -2554,14 +2554,30 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-08T11:35:44.529Z"
+    },
+    {
+      "id": "TASK-179",
+      "type": "task",
+      "title": "Centralize TYPE_TO_DIRECTORY and item prefixes mapping",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-08T14:42:48.354Z"
+    },
+    {
+      "id": "TASK-180",
+      "type": "task",
+      "title": "Derive Zod schemas and MCP enums from RELATIONSHIP_CONFIG",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-08T14:43:22.996Z"
     }
   ],
   "stats": {
-    "total": 312,
+    "total": 314,
     "by_type": {
       "epic": 17,
       "story": 73,
-      "task": 178,
+      "task": 180,
       "bug": 32,
       "spike": 7,
       "feature": 5,
@@ -2570,7 +2586,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 149,
-      "draft": 152,
+      "draft": 154,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2593,5 +2609,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-08T11:35:44.529Z"
+  "last_updated": "2025-12-08T14:43:22.996Z"
 }
