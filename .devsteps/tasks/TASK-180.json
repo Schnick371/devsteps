@@ -3,10 +3,10 @@
   "type": "task",
   "category": "refactoring",
   "title": "Derive Zod schemas and MCP enums from RELATIONSHIP_CONFIG",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "created": "2025-12-08T14:43:22.996Z",
-  "updated": "2025-12-08T14:43:31.698Z",
+  "updated": "2025-12-08T14:55:21.607Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

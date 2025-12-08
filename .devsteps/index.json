@@ -2567,9 +2567,9 @@
       "id": "TASK-180",
       "type": "task",
       "title": "Derive Zod schemas and MCP enums from RELATIONSHIP_CONFIG",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-08T14:43:22.996Z"
+      "updated": "2025-12-08T14:55:21.607Z"
     }
   ],
   "stats": {
@@ -2585,8 +2585,8 @@
     },
     "by_status": {
       "in-progress": 4,
-      "done": 149,
-      "draft": 154,
+      "done": 150,
+      "draft": 153,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2609,5 +2609,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-08T14:43:22.996Z"
+  "last_updated": "2025-12-08T14:55:21.607Z"
 }
