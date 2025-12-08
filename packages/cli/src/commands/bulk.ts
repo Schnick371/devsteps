@@ -5,6 +5,7 @@ import {
   bulkAddTags,
   bulkRemoveTags,
   bulkUpdateItems,
+  STATUS,
 } from '@schnick371/devsteps-shared';
 import type { ItemMetadata } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
@@ -70,12 +71,12 @@ export async function bulkUpdateCommand(itemIds: string[], options: any) {
     displayBulkResult(result, 'Updated');
 
     // Status progression hints
-    if (options.status === 'review') {
+    if (options.status === STATUS.REVIEW) {
       console.log(chalk.yellow('\n🧪 Testing Phase (bulk):'));
       console.log(chalk.gray('  • Run tests for all items'));
       console.log(chalk.gray('  • Verify builds pass'));
       console.log(chalk.gray('  • When ready:'), chalk.cyan('devsteps bulk update <ids> --status done'));
-    } else if (options.status === 'done') {
+    } else if (options.status === STATUS.DONE) {
       console.log(chalk.green('\n✅ Quality gates passed for all items!'));
     }
   } catch (error: unknown) {

@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import { getWorkspacePath } from '../workspace.js';
-import { type UpdateItemArgs, updateItem } from '@schnick371/devsteps-shared';
+import { type UpdateItemArgs, updateItem, STATUS } from '@schnick371/devsteps-shared';
 import { simpleGit } from 'simple-git';
 
 /**
@@ -22,7 +22,7 @@ export default async function updateHandler(args: UpdateItemArgs) {
       const git = simpleGit(getWorkspacePath());
       const isRepo = await git.checkIsRepo();
 
-      if (isRepo && args.status === 'done') {
+      if (isRepo && args.status === STATUS.DONE) {
         gitHint = `\n\n💡 Git Hint: Task completed! Consider: git add . && git commit -m "feat: completed ${args.id}"`;
 
         // Check if this completes any parent items
@@ -47,7 +47,7 @@ export default async function updateHandler(args: UpdateItemArgs) {
                   const sibPath = join(devstepsDir, sibFolder, `${siblingId}.json`);
                   if (existsSync(sibPath)) {
                     const sibMeta = JSON.parse(readFileSync(sibPath, 'utf-8'));
-                    if (sibMeta.status !== 'done' && sibMeta.status !== 'cancelled') {
+                    if (sibMeta.status !== STATUS.DONE && sibMeta.status !== STATUS.CANCELLED) {
                       allDone = false;
                       break;
                     }
@@ -55,13 +55,13 @@ export default async function updateHandler(args: UpdateItemArgs) {
                 }
               }
 
-              if (allDone && parentMeta.status !== 'done') {
+              if (allDone && parentMeta.status !== STATUS.DONE) {
                 gitHint += `\n💡 All implementations of ${parentId} are complete! Consider closing it.`;
               }
             }
           }
         }
-      } else if (isRepo && args.status === 'in-progress') {
+      } else if (isRepo && args.status === STATUS.IN_PROGRESS) {
         gitHint = `\n\n💡 Git Hint: Started work on ${args.id}. Track progress with commits!`;
       }
     } catch {

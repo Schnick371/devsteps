@@ -1,5 +1,6 @@
 import type { ItemType, Methodology } from '../schemas/index.js';
 import { isFlexibleRelation, isHierarchyRelation } from '../schemas/relationships.js';
+import { ITEM_TYPE, RELATIONSHIP_TYPE, METHODOLOGY } from '../constants/index.js';
 
 /**
  * Validation result with detailed error messaging
@@ -47,28 +48,28 @@ export function validateRelationship(
   // Special case: blocks relation (Jira 2025 - hybrid flexible/hierarchy)
   // Non-Bug blocks: Flexible (Story→Story, Task→Task allowed)
   // Bug blocks: Hierarchy validation (Bug→Epic/Story/Requirement/Feature only)
-  if (relationType === 'blocks') {
-    if (source.type !== 'bug') {
+  if (relationType === RELATIONSHIP_TYPE.BLOCKS) {
+    if (source.type !== ITEM_TYPE.BUG) {
       return { valid: true }; // Flexible for non-Bug types
     }
     // Bug blocks: validate as hierarchy below
   }
 
   // Only validate "implements" direction (implemented-by, blocked-by are automatic reverse)
-  if (relationType === 'implemented-by' || relationType === 'blocked-by') {
+  if (relationType === RELATIONSHIP_TYPE.IMPLEMENTED_BY || relationType === RELATIONSHIP_TYPE.BLOCKED_BY) {
     return { valid: true }; // Reverse relationships auto-created, no validation needed
   }
 
   // Validate based on methodology
-  if (methodology === 'scrum') {
+  if (methodology === METHODOLOGY.SCRUM) {
     return validateScrumHierarchy(source, target);
   }
 
-  if (methodology === 'waterfall') {
+  if (methodology === METHODOLOGY.WATERFALL) {
     return validateWaterfallHierarchy(source, target);
   }
 
-  if (methodology === 'hybrid') {
+  if (methodology === METHODOLOGY.HYBRID) {
     // Try Scrum rules first
     const scrumResult = validateScrumHierarchy(source, target);
     if (scrumResult.valid) {
@@ -101,8 +102,8 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
   const { type: targetType } = target;
 
   // Task → Story, Spike, or Bug
-  if (sourceType === 'task') {
-    if (targetType === 'story' || targetType === 'spike' || targetType === 'bug') {
+  if (sourceType === ITEM_TYPE.TASK) {
+    if (targetType === ITEM_TYPE.STORY || targetType === ITEM_TYPE.SPIKE || targetType === ITEM_TYPE.BUG) {
       return { valid: true };
     }
     return {
@@ -113,8 +114,8 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
   }
 
   // Story → Epic
-  if (sourceType === 'story') {
-    if (targetType === 'epic') {
+  if (sourceType === ITEM_TYPE.STORY) {
+    if (targetType === ITEM_TYPE.EPIC) {
       return { valid: true };
     }
     return {
@@ -125,8 +126,8 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
   }
 
   // Spike → Epic
-  if (sourceType === 'spike') {
-    if (targetType === 'epic') {
+  if (sourceType === ITEM_TYPE.SPIKE) {
+    if (targetType === ITEM_TYPE.EPIC) {
       return { valid: true };
     }
     return {
@@ -137,8 +138,8 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
   }
 
   // Bug → Story only (Jira 2025)
-  if (sourceType === 'bug') {
-    if (targetType === 'story') {
+  if (sourceType === ITEM_TYPE.BUG) {
+    if (targetType === ITEM_TYPE.STORY) {
       return { valid: true };
     }
     return {
@@ -151,8 +152,8 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
 
 
   // Test → Epic or Story (flexible)
-  if (sourceType === 'test') {
-    if (targetType === 'epic' || targetType === 'story') {
+  if (sourceType === ITEM_TYPE.TEST) {
+    if (targetType === ITEM_TYPE.EPIC || targetType === ITEM_TYPE.STORY) {
       return { valid: true };
     }
     return {
@@ -163,7 +164,7 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
   }
 
   // Epic cannot implement anything (top-level)
-  if (sourceType === 'epic') {
+  if (sourceType === ITEM_TYPE.EPIC) {
     return {
       valid: false,
       error: 'Epics are top-level items and cannot implement other items',
@@ -188,8 +189,8 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
   const { type: targetType } = target;
 
   // Task → Feature, Spike, or Bug
-  if (sourceType === 'task') {
-    if (targetType === 'feature' || targetType === 'spike' || targetType === 'bug') {
+  if (sourceType === ITEM_TYPE.TASK) {
+    if (targetType === ITEM_TYPE.FEATURE || targetType === ITEM_TYPE.SPIKE || targetType === ITEM_TYPE.BUG) {
       return { valid: true };
     }
     return {
@@ -200,8 +201,8 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
   }
 
   // Feature → Requirement
-  if (sourceType === 'feature') {
-    if (targetType === 'requirement') {
+  if (sourceType === ITEM_TYPE.FEATURE) {
+    if (targetType === ITEM_TYPE.REQUIREMENT) {
       return { valid: true };
     }
     return {
@@ -212,8 +213,8 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
   }
 
   // Spike → Requirement
-  if (sourceType === 'spike') {
-    if (targetType === 'requirement') {
+  if (sourceType === ITEM_TYPE.SPIKE) {
+    if (targetType === ITEM_TYPE.REQUIREMENT) {
       return { valid: true };
     }
     return {
@@ -224,8 +225,8 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
   }
 
   // Bug → Feature only (Jira 2025)
-  if (sourceType === 'bug') {
-    if (targetType === 'feature') {
+  if (sourceType === ITEM_TYPE.BUG) {
+    if (targetType === ITEM_TYPE.FEATURE) {
       return { valid: true };
     }
     return {
@@ -238,8 +239,8 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
 
 
   // Test → Requirement or Feature (flexible)
-  if (sourceType === 'test') {
-    if (targetType === 'requirement' || targetType === 'feature') {
+  if (sourceType === ITEM_TYPE.TEST) {
+    if (targetType === ITEM_TYPE.REQUIREMENT || targetType === ITEM_TYPE.FEATURE) {
       return { valid: true };
     }
     return {
@@ -250,7 +251,7 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
   }
 
   // Requirement cannot implement anything (top-level)
-  if (sourceType === 'requirement') {
+  if (sourceType === ITEM_TYPE.REQUIREMENT) {
     return {
       valid: false,
       error: 'Requirements are top-level items and cannot implement other items',

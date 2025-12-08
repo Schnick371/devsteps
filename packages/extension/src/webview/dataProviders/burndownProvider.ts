@@ -5,6 +5,8 @@
  * Burndown Chart Data Provider - Sprint progress tracking
  */
 
+import { STATUS } from '@schnick371/devsteps-shared';
+
 export interface BurndownData {
   total: number;
   remaining: number;
@@ -20,7 +22,7 @@ export function getBurndownData(tasks: any[]): BurndownData {
   }
 
   const totalTasks = tasks.length;
-  const doneTasks = tasks.filter((i: any) => i.status === 'done').length;
+  const doneTasks = tasks.filter((i: any) => i.status === STATUS.DONE).length;
 
   const dataPoints = calculateBurndownPoints(tasks);
 
@@ -41,7 +43,7 @@ function calculateBurndownPoints(items: any[]): Array<{ date: string; ideal: num
   const total = items.length;
 
   items.forEach((item) => {
-    if (item.status === 'done' && item.updated) {
+    if (item.status === STATUS.DONE && item.updated) {
       const date = new Date(item.updated).toISOString().split('T')[0];
       tasksByDate[date] = (tasksByDate[date] || 0) + 1;
     }

@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
+import { STATUS } from '@schnick371/devsteps-shared';
 
 /**
  * Get project status and statistics
@@ -21,7 +22,7 @@ export default async function statusHandler(args: { detailed?: boolean }) {
 
     // Check for stale items
     const staleItems = index.items.filter((item: any) => {
-      if (item.status === 'in-progress') {
+      if (item.status === STATUS.IN_PROGRESS) {
         const daysSinceUpdate =
           (Date.now() - new Date(item.updated).getTime()) / (1000 * 60 * 60 * 24);
         return daysSinceUpdate > 7;

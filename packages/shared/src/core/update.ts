@@ -7,6 +7,7 @@ import type {
   ItemStatus,
   Priority,
 } from '../schemas/index.js';
+import { STATUS, RELATIONSHIP_TYPE } from '../constants/index.js';
 import { TYPE_TO_DIRECTORY, getCurrentTimestamp, parseItemId } from '../utils/index.js';
 
 export interface UpdateItemArgs {
@@ -57,9 +58,9 @@ export async function updateItem(
   const oldStatus = metadata.status;
 
   // Validate status transitions (parent-child rules)
-  if (args.status === 'done') {
+  if (args.status === STATUS.DONE) {
     // Helper function to validate children are complete
-    const validateChildren = (relationshipType: 'implemented-by' | 'tested-by'): void => {
+    const validateChildren = (relationshipType: typeof RELATIONSHIP_TYPE.IMPLEMENTED_BY | typeof RELATIONSHIP_TYPE.TESTED_BY): void => {
       const children = metadata.linked_items[relationshipType];
       if (children.length > 0) {
         const openChildren: string[] = [];
@@ -70,14 +71,14 @@ export async function updateItem(
             const childPath = join(devstepsir, childFolder, `${childId}.json`);
             if (existsSync(childPath)) {
               const childMeta: ItemMetadata = JSON.parse(readFileSync(childPath, 'utf-8'));
-              if (childMeta.status !== 'done' && childMeta.status !== 'cancelled' && childMeta.status !== 'obsolete') {
+              if (childMeta.status !== STATUS.DONE && childMeta.status !== STATUS.CANCELLED && childMeta.status !== STATUS.OBSOLETE) {
                 openChildren.push(childId);
               }
             }
           }
         }
         if (openChildren.length > 0) {
-          const relationLabel = relationshipType === 'implemented-by' ? 'implementation' : 'test';
+          const relationLabel = relationshipType === RELATIONSHIP_TYPE.IMPLEMENTED_BY ? 'implementation' : 'test';
           throw new Error(
             `Cannot close ${args.id}: ${openChildren.length} ${relationLabel} item(s) still open: ${openChildren.join(', ')}`
           );
@@ -87,12 +88,12 @@ export async function updateItem(
 
     // Validate implemented-by children (Scrum: Epic→Story/Spike, Story→Task, Bug→Task; Waterfall: Requirement→Feature/Spike, Feature→Task, Bug→Task)
     if (['epic', 'story', 'requirement', 'feature', 'bug'].includes(metadata.type)) {
-      validateChildren('implemented-by');
+      validateChildren(RELATIONSHIP_TYPE.IMPLEMENTED_BY);
     }
 
     // Validate tested-by children (all parent types must have tests complete)
     if (['epic', 'story', 'requirement', 'feature'].includes(metadata.type)) {
-      validateChildren('tested-by');
+      validateChildren(RELATIONSHIP_TYPE.TESTED_BY);
     }
   }
 

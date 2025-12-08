@@ -5,7 +5,8 @@
  * Traceability Graph Renderer - SVG relationship visualization
  */
 
-import type { TraceabilityData } from '../dataProviders/traceabilityProvider.js';
+import { STATUS } from '@schnick371/devsteps-shared';
+import type { DevStepsIndex } from '@schnick371/devsteps-shared';
 
 /**
  * Generate inline JavaScript for traceability graph rendering
@@ -67,8 +68,8 @@ export function getTraceabilityGraphScript(traceability: TraceabilityData): stri
         const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         circle.setAttribute('cx', node.x);
         circle.setAttribute('cy', node.y);
-        circle.setAttribute('r', '15');
-        circle.setAttribute('fill', node.status === 'done' ? '#4caf50' : '#2196f3');
+        circle.setAttribute('r', '8');
+        circle.setAttribute('fill', node.status === STATUS.DONE ? '#4caf50' : '#2196f3');
         circle.setAttribute('data-item-id', node.id);
         circle.style.cursor = 'pointer';
         svg.appendChild(circle);

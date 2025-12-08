@@ -5,6 +5,7 @@
 
 import * as vscode from 'vscode';
 import * as path from 'node:path';
+import { STATUS } from '@schnick371/devsteps-shared';
 import { addItem, getItem, updateItem, listItems, TYPE_TO_DIRECTORY } from '@schnick371/devsteps-shared';
 import type { DevStepsTreeDataProvider } from '../treeView/devstepsTreeDataProvider.js';
 import { DashboardPanel } from '../webview/dashboardPanel.js';
@@ -516,14 +517,14 @@ export function registerCommands(
       // Select new status
       const newStatus = await vscode.window.showQuickPick(
         [
-          { label: '📝 Draft', value: 'draft', description: 'Initial planning stage', current: currentStatus === 'draft' },
-          { label: '📅 Planned', value: 'planned', description: 'Scheduled for implementation', current: currentStatus === 'planned' },
-          { label: '🚧 In Progress', value: 'in-progress', description: 'Currently being worked on', current: currentStatus === 'in-progress' },
-          { label: '👀 Review', value: 'review', description: 'Under review', current: currentStatus === 'review' },
-          { label: '✅ Done', value: 'done', description: 'Completed', current: currentStatus === 'done' },
-          { label: '🚫 Blocked', value: 'blocked', description: 'Blocked by dependencies', current: currentStatus === 'blocked' },
-          { label: '❌ Cancelled', value: 'cancelled', description: 'Work cancelled', current: currentStatus === 'cancelled' },
-          { label: '🗑️ Obsolete', value: 'obsolete', description: 'No longer relevant', current: currentStatus === 'obsolete' },
+          { label: '📝 Draft', value: STATUS.DRAFT, description: 'Initial planning stage', current: currentStatus === STATUS.DRAFT },
+          { label: '📅 Planned', value: STATUS.PLANNED, description: 'Scheduled for implementation', current: currentStatus === STATUS.PLANNED },
+          { label: '🚧 In Progress', value: STATUS.IN_PROGRESS, description: 'Currently being worked on', current: currentStatus === STATUS.IN_PROGRESS },
+          { label: '👀 Review', value: STATUS.REVIEW, description: 'Under review', current: currentStatus === STATUS.REVIEW },
+          { label: '✅ Done', value: STATUS.DONE, description: 'Completed', current: currentStatus === STATUS.DONE },
+          { label: '🚫 Blocked', value: STATUS.BLOCKED, description: 'Blocked by dependencies', current: currentStatus === STATUS.BLOCKED },
+          { label: '❌ Cancelled', value: STATUS.CANCELLED, description: 'Work cancelled', current: currentStatus === STATUS.CANCELLED },
+          { label: '🗑️ Obsolete', value: STATUS.OBSOLETE, description: 'No longer relevant', current: currentStatus === STATUS.OBSOLETE },
         ].map((status) => ({
           ...status,
           label: status.current ? `${status.label} (current)` : status.label,

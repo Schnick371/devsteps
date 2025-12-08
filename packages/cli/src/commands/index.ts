@@ -4,6 +4,7 @@ import {
   type ItemMetadata,
   type ItemType,
   type Methodology,
+  STATUS,
   TYPE_SHORTCUTS,
   TYPE_TO_DIRECTORY,
   generateItemId,
@@ -197,9 +198,9 @@ export async function listCommand(options: any) {
       } else {
         // Active items display
         const statusColor =
-          item.status === 'done'
+          item.status === STATUS.DONE
             ? chalk.green
-            : item.status === 'in-progress'
+            : item.status === STATUS.IN_PROGRESS
               ? chalk.blue
               : chalk.gray;
 
@@ -311,7 +312,7 @@ export async function updateCommand(id: string, options: any) {
     const configPath = join(devstepsir, 'config.json');
     const config = JSON.parse(readFileSync(configPath, 'utf-8'));
     if (config.settings.git_integration) {
-      if (options.status === 'done') {
+      if (options.status === STATUS.DONE) {
         console.log(chalk.green('\n✅ Quality gates passed!'));
         console.log(chalk.gray('💡 Git:'), chalk.cyan(`git commit -am "feat: completed ${id}"`));
 
@@ -333,7 +334,7 @@ export async function updateCommand(id: string, options: any) {
                   const sibPath = join(devstepsir, sibFolder, `${siblingId}.json`);
                   if (existsSync(sibPath)) {
                     const sibMeta = JSON.parse(readFileSync(sibPath, 'utf-8'));
-                    if (sibMeta.status !== 'done' && sibMeta.status !== 'cancelled') {
+                    if (sibMeta.status !== STATUS.DONE && sibMeta.status !== STATUS.CANCELLED) {
                       allDone = false;
                       break;
                     }
@@ -341,7 +342,7 @@ export async function updateCommand(id: string, options: any) {
                 }
               }
 
-              if (allDone && parentMeta.status !== 'done') {
+              if (allDone && parentMeta.status !== STATUS.DONE) {
                 console.log(
                   chalk.gray('💡'),
                   `All implementations of ${chalk.cyan(parentId)} are complete! Consider reviewing parent.`
@@ -350,13 +351,13 @@ export async function updateCommand(id: string, options: any) {
             }
           }
         }
-      } else if (options.status === 'review') {
+      } else if (options.status === STATUS.REVIEW) {
         console.log(chalk.yellow('\n🧪 Testing Phase:'));
         console.log(chalk.gray('  • Run tests:'), 'npm test');
         console.log(chalk.gray('  • Verify build:'), 'npm run build');
         console.log(chalk.gray('  • Manual testing if applicable'));
         console.log(chalk.gray('  • When all pass:'), chalk.cyan(`devsteps update ${id} --status done`));
-      } else if (options.status === 'in-progress') {
+      } else if (options.status === STATUS.IN_PROGRESS) {
         console.log(chalk.gray('\n💡 Git:'), 'Track progress with regular commits!');
         console.log(chalk.gray('💡 Next:'), `After implementation, mark as 'review' to start testing`);
       }
@@ -569,7 +570,7 @@ export async function statusCommand(options: any) {
 
     // Check for stale items
     const staleItems = index.items.filter((item: any) => {
-      if (item.status === 'in-progress') {
+      if (item.status === STATUS.IN_PROGRESS) {
         const daysSinceUpdate =
           (Date.now() - new Date(item.updated).getTime()) / (1000 * 60 * 60 * 24);
         return daysSinceUpdate > 7;
