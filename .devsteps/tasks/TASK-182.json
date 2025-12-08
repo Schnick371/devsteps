@@ -3,10 +3,10 @@
   "type": "task",
   "category": "refactoring",
   "title": "Refactor validation.ts - Replace 40+ string literals with constants",
-  "status": "draft",
+  "status": "in-progress",
   "priority": "high",
   "created": "2025-12-08T15:04:07.459Z",
-  "updated": "2025-12-08T15:04:18.756Z",
+  "updated": "2025-12-08T15:11:54.598Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/validation.ts"
