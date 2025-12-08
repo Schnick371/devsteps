@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Fix WorkItemNode: Generate unique TreeView IDs with parent context",
-  "status": "in-progress",
+  "status": "done",
   "priority": "critical",
   "created": "2025-12-05T10:38:17.852Z",
-  "updated": "2025-12-08T09:31:30.845Z",
+  "updated": "2025-12-08T10:00:31.409Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
