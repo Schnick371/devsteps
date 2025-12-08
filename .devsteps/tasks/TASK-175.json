@@ -1,0 +1,40 @@
+{
+  "id": "TASK-175",
+  "type": "task",
+  "category": "refactoring",
+  "title": "Create centralized RELATIONSHIP_CONFIG in shared",
+  "status": "draft",
+  "priority": "medium",
+  "created": "2025-12-08T11:35:44.525Z",
+  "updated": "2025-12-08T11:35:55.780Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/relationships.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-073"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-176",
+      "TASK-177",
+      "TASK-178"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "relationships",
+    "configuration"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 17,
-    "story": 72,
-    "task": 174,
+    "story": 73,
+    "task": 178,
     "bug": 32,
     "spike": 7,
     "feature": 5,
@@ -2514,14 +2514,54 @@
       "status": "draft",
       "priority": "low",
       "updated": "2025-12-08T11:19:25.077Z"
+    },
+    {
+      "id": "STORY-073",
+      "type": "story",
+      "title": "Centralize relationship type definitions and logic in shared package",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T11:34:47.347Z"
+    },
+    {
+      "id": "TASK-175",
+      "type": "task",
+      "title": "Create centralized RELATIONSHIP_CONFIG in shared",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T11:35:44.525Z"
+    },
+    {
+      "id": "TASK-176",
+      "type": "task",
+      "title": "Replace bidirectionalMap with shared getBidirectionalRelation",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T11:35:44.527Z"
+    },
+    {
+      "id": "TASK-177",
+      "type": "task",
+      "title": "Extend hideRelatesTo to hide ALL flexible relations",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T11:35:44.528Z"
+    },
+    {
+      "id": "TASK-178",
+      "type": "task",
+      "title": "Update validation for tested-by as hierarchy relation",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T11:35:44.529Z"
     }
   ],
   "stats": {
-    "total": 307,
+    "total": 312,
     "by_type": {
       "epic": 17,
-      "story": 72,
-      "task": 174,
+      "story": 73,
+      "task": 178,
       "bug": 32,
       "spike": 7,
       "feature": 5,
@@ -2530,7 +2570,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 149,
-      "draft": 147,
+      "draft": 152,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2553,5 +2593,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-08T11:19:25.077Z"
+  "last_updated": "2025-12-08T11:35:44.529Z"
 }

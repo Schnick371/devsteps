@@ -1,0 +1,41 @@
+{
+  "id": "TASK-176",
+  "type": "task",
+  "category": "refactoring",
+  "title": "Replace bidirectionalMap with shared getBidirectionalRelation",
+  "status": "draft",
+  "priority": "medium",
+  "created": "2025-12-08T11:35:44.527Z",
+  "updated": "2025-12-08T11:35:55.779Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/index.ts",
+    "packages/mcp-server/src/handlers/link.ts",
+    "packages/extension/src/mcp-server/handlers/link.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-073"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-175"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "refactoring",
+    "cli",
+    "mcp",
+    "extension"
+  ],
+  "commits": [],
+  "metadata": {}
+}

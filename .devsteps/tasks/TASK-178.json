@@ -1,0 +1,38 @@
+{
+  "id": "TASK-178",
+  "type": "task",
+  "category": "core-system",
+  "title": "Update validation for tested-by as hierarchy relation",
+  "status": "draft",
+  "priority": "medium",
+  "created": "2025-12-08T11:35:44.529Z",
+  "updated": "2025-12-08T11:35:55.780Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/validation.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-073"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-175"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "validation",
+    "testing",
+    "hierarchy"
+  ],
+  "commits": [],
+  "metadata": {}
+}

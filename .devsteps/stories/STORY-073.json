@@ -1,0 +1,39 @@
+{
+  "id": "STORY-073",
+  "type": "story",
+  "category": "refactoring",
+  "title": "Centralize relationship type definitions and logic in shared package",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-08T11:34:47.347Z",
+  "updated": "2025-12-08T11:35:55.779Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-175",
+      "TASK-176",
+      "TASK-177",
+      "TASK-178"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "refactoring",
+    "centralization",
+    "DRY",
+    "relationships"
+  ],
+  "commits": [],
+  "metadata": {}
+}
