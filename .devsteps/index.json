@@ -2599,9 +2599,9 @@
       "id": "TASK-183",
       "type": "task",
       "title": "Refactor status comparisons in core and handlers with constants",
-      "status": "in-progress",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-08T15:14:48.773Z"
+      "updated": "2025-12-08T15:18:45.378Z"
     },
     {
       "id": "TASK-184",
@@ -2632,8 +2632,8 @@
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 5,
-      "done": 153,
+      "in-progress": 4,
+      "done": 154,
       "draft": 155,
       "blocked": 2,
       "obsolete": 5,
@@ -2657,5 +2657,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-08T15:14:48.773Z"
+  "last_updated": "2025-12-08T15:18:45.378Z"
 }
