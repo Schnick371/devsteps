@@ -68,7 +68,7 @@ Review planned work, select highest priority, begin structured development.
 
 **Status Sync:** `.devsteps/` on feature branch → synced during final merge
 
-**Branch Tagging:** Mark completion status: `archive/merged/` (done), `archive/abandoned/` (cancelled), `archive/superseded/` (obsolete). Branch bleibt für Implementierungs-Details.
+**Branch Tagging:** Mark completion status: `archive/merged/` (done), `archive/abandoned/` (cancelled), `archive/superseded/` (obsolete). Keep branch for implementation history.
 
 ### 7.5. Spike Post-Processing
 - Review findings
