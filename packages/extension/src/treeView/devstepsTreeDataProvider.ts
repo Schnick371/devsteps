@@ -21,6 +21,7 @@ import {
   TypeGroupNode,
   HierarchyRootNode,
   LoadingNode,
+  WorkItemNode,
 } from './nodes/index.js';
 import { getItemMethodology } from './utils/methodologyDetector.js';
 import type { TreeViewStateManager } from '../utils/stateManager.js';
@@ -469,7 +470,18 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    * Get tree item for display
    */
   getTreeItem(element: TreeNode): vscode.TreeItem {
-    return element.toTreeItem();
+    const treeItem = element.toTreeItem();
+    
+    // Re-evaluate collapsible state based on current filter
+    // This ensures chevron visibility updates when filters change
+    if (element instanceof WorkItemNode && treeItem.collapsibleState !== vscode.TreeItemCollapsibleState.None) {
+      const hasChildren = element.hasVisibleChildren(this.filterState);
+      if (!hasChildren) {
+        treeItem.collapsibleState = vscode.TreeItemCollapsibleState.None;
+      }
+    }
+    
+    return treeItem;
   }
 
   /**

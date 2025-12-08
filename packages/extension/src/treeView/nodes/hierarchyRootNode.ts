@@ -63,7 +63,8 @@ export class HierarchyRootNode extends TreeNode {
 
       return items.map((item) => {
         const isExpanded = expandedHierarchyItems?.has(item.id);
-        return new WorkItemNode(item, true, filterState, isExpanded);
+        // Start cycle detection with empty ancestor set
+        return new WorkItemNode(item, true, filterState, isExpanded, this.id, 'root', new Set());
       });
     } catch (error) {
       console.error('Failed to load hierarchy items:', error);
