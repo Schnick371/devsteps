@@ -2591,9 +2591,9 @@
       "id": "TASK-182",
       "type": "task",
       "title": "Refactor validation.ts - Replace 40+ string literals with constants",
-      "status": "in-progress",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-08T15:11:54.598Z"
+      "updated": "2025-12-08T15:13:57.228Z"
     },
     {
       "id": "TASK-183",
@@ -2632,8 +2632,8 @@
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 5,
-      "done": 152,
+      "in-progress": 4,
+      "done": 153,
       "draft": 156,
       "blocked": 2,
       "obsolete": 5,
@@ -2657,5 +2657,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-08T15:11:54.598Z"
+  "last_updated": "2025-12-08T15:13:57.228Z"
 }
