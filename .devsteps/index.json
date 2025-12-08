@@ -2607,17 +2607,17 @@
       "id": "TASK-184",
       "type": "task",
       "title": "Refactor CLI commands - Replace status literals with constants",
-      "status": "draft",
+      "status": "in-progress",
       "priority": "medium",
-      "updated": "2025-12-08T15:04:57.454Z"
+      "updated": "2025-12-08T15:25:38.611Z"
     },
     {
       "id": "TASK-185",
       "type": "task",
       "title": "Refactor extension TreeView/WebView - Replace literals with constants",
-      "status": "draft",
+      "status": "in-progress",
       "priority": "medium",
-      "updated": "2025-12-08T15:05:22.885Z"
+      "updated": "2025-12-08T15:25:38.613Z"
     }
   ],
   "stats": {
@@ -2632,9 +2632,9 @@
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 4,
+      "in-progress": 6,
       "done": 154,
-      "draft": 155,
+      "draft": 153,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2657,5 +2657,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-08T15:18:45.378Z"
+  "last_updated": "2025-12-08T15:25:38.613Z"
 }
