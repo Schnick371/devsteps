@@ -7,7 +7,7 @@
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-08T11:11:43.712Z",
-  "updated": "2025-12-08T11:12:27.541Z",
+  "updated": "2025-12-08T11:19:25.080Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -22,7 +22,9 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "TASK-174"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],

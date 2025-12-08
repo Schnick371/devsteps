@@ -6,7 +6,7 @@
   "status": "draft",
   "priority": "medium",
   "created": "2025-12-08T11:12:17.702Z",
-  "updated": "2025-12-08T11:12:27.542Z",
+  "updated": "2025-12-08T11:18:58.047Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/schemas/index.ts"
