@@ -1,19 +1,19 @@
 {
-  "id": "TASK-167",
+  "id": "TASK-170",
   "type": "task",
   "category": "core-system",
-  "title": "Update schema regex to accept 3-4 digit IDs",
+  "title": "Add user postfix config to schema",
   "status": "draft",
   "priority": "medium",
-  "created": "2025-12-08T11:02:01.288Z",
-  "updated": "2025-12-08T11:12:27.541Z",
+  "created": "2025-12-08T11:12:17.701Z",
+  "updated": "2025-12-08T11:12:27.542Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/schemas/index.ts"
   ],
   "linked_items": {
     "implements": [
-      "STORY-071"
+      "STORY-072"
     ],
     "implemented-by": [],
     "tested-by": [],
@@ -23,17 +23,14 @@
     "relates-to": [],
     "depends-on": [],
     "required-by": [
-      "TASK-168",
-      "TASK-169",
-      "TASK-171"
+      "TASK-172"
     ],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
     "schema",
-    "validation",
-    "backwards-compatible"
+    "configuration"
   ],
   "commits": [],
   "metadata": {}

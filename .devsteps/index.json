@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 17,
-    "story": 71,
-    "task": 169,
+    "story": 72,
+    "task": 173,
     "bug": 32,
     "spike": 7,
     "feature": 5,
@@ -2466,14 +2466,54 @@
       "status": "draft",
       "priority": "low",
       "updated": "2025-12-08T11:02:34.841Z"
+    },
+    {
+      "id": "STORY-072",
+      "type": "story",
+      "title": "Add optional user postfix to work item IDs",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T11:11:43.712Z"
+    },
+    {
+      "id": "TASK-170",
+      "type": "task",
+      "title": "Add user postfix config to schema",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T11:12:17.701Z"
+    },
+    {
+      "id": "TASK-171",
+      "type": "task",
+      "title": "Update schema regex for optional postfix",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T11:12:17.702Z"
+    },
+    {
+      "id": "TASK-172",
+      "type": "task",
+      "title": "Update generateItemId for user postfix",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T11:12:17.707Z"
+    },
+    {
+      "id": "TASK-173",
+      "type": "task",
+      "title": "Integrate postfix config in CLI/MCP/Extension",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T11:12:17.708Z"
     }
   ],
   "stats": {
-    "total": 301,
+    "total": 306,
     "by_type": {
       "epic": 17,
-      "story": 71,
-      "task": 169,
+      "story": 72,
+      "task": 173,
       "bug": 32,
       "spike": 7,
       "feature": 5,
@@ -2482,7 +2522,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 149,
-      "draft": 141,
+      "draft": 146,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2505,5 +2545,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-08T11:02:34.841Z"
+  "last_updated": "2025-12-08T11:12:17.708Z"
 }

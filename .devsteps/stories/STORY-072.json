@@ -1,0 +1,39 @@
+{
+  "id": "STORY-072",
+  "type": "story",
+  "category": "core-system",
+  "title": "Add optional user postfix to work item IDs",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-08T11:11:43.712Z",
+  "updated": "2025-12-08T11:12:27.541Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-170",
+      "TASK-171",
+      "TASK-172",
+      "TASK-173"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "id-format",
+    "multi-user",
+    "configuration",
+    "optional"
+  ],
+  "commits": [],
+  "metadata": {}
+}
