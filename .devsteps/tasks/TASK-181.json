@@ -3,10 +3,10 @@
   "type": "task",
   "category": "refactoring",
   "title": "Create centralized constants module in shared package",
-  "status": "draft",
+  "status": "in-progress",
   "priority": "high",
   "created": "2025-12-08T15:03:47.200Z",
-  "updated": "2025-12-08T15:05:34.702Z",
+  "updated": "2025-12-08T15:08:42.598Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
