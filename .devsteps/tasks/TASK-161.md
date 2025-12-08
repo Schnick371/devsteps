@@ -1,87 +1,29 @@
-# Update Workflow Prompts with Review/Testing Phase
+# Add Cycle Detection Configuration Property
 
 ## Objective
-Add explicit testing/review phase between implementation and completion in workflow prompts.
+Add `devsteps.treeView.enableCycleDetection` setting to extension configuration.
 
-## Changes Required
+## Implementation
 
-### devsteps-start-work.prompt.md
+**File:** `packages/extension/package.json`
 
-**Current Step 6 (Complete):**
-```markdown
-### 6. Complete
+**Location:** In `contributes.configuration.properties` section (after existing `devsteps.logging.*` settings)
 
-**Quality Gates:**
-- Tests pass, build OK, no problems
-- Patterns followed, docs updated
-- Description updated, paths complete
-- Links set, decisions captured
-
-**Commit Workflow:**
-- Mark item done via devsteps
-- Commit to feature branch with conventional format
+```json
+"devsteps.treeView.enableCycleDetection": {
+  "type": "boolean",
+  "default": true,
+  "markdownDescription": "Enable cycle detection in hierarchical TreeView to prevent duplicate ID errors with bidirectional relationships.\n\n⚠️ **Warning:** Disabling may cause 'Element already registered' errors if your work items have bidirectional `relates-to` relationships.\n\n**When to disable:**\n- Large hierarchies (1000+ items) where performance is critical\n- Your data has strict parent→child relationships only (no cycles)\n\n**When to keep enabled (recommended):**\n- You use `relates-to` between items at the same level\n- You want maximum safety and stability"
+}
 ```
 
-**New Structure:**
-```markdown
-### 6. Testing/Review
+## Validation
+- [ ] Setting appears in VS Code Settings UI under "DevSteps"
+- [ ] Default value is `true` (checkbox checked)
+- [ ] Markdown description renders properly with warning icon
+- [ ] Setting change persists across VS Code restarts
 
-**Mark Status:**
-- Update status to 'review' before testing
-
-**Quality Gates:**
-- Run tests: unit, integration, E2E (when applicable)
-- Manual testing: verify functionality works
-- Build verification: no errors, no warnings
-- Code review: patterns followed, docs updated
-- Regression check: existing features still work
-
-**If Tests Fail:**
-- Return to Step 5 (Implementation)
-- Fix issues, repeat testing
-
-### 7. Complete
-
-**Mark Done:**
-- All quality gates passed
-- Update status to 'done' via devsteps
-
-**Commit Workflow:**
-- Commit to feature branch with conventional format
-- Push for testing
-- Squash merge happens later (manual/PR)
-```
-
-### devsteps-workflow.prompt.md
-
-Add section on status progression:
-
-```markdown
-## Status Lifecycle
-
-### Standard Progression
-draft → planned → in-progress → review → done
-
-### Status Meanings
-- **draft**: Created, ready for planning
-- **planned**: Scoped, ready to start
-- **in-progress**: Active development
-- **review**: Testing/validation phase
-- **done**: All quality gates passed
-- **blocked**: Cannot proceed
-- **cancelled**: No longer needed
-
-### Quality Gates (Review Phase)
-Before marking 'done':
-- ✅ Tests pass (unit, integration, E2E)
-- ✅ Build succeeds (no errors)
-- ✅ Manual testing complete
-- ✅ Documentation updated
-- ✅ No regressions
-```
-
-## Success Criteria
-- Workflow prompts enforce review phase
-- Status progression clearly documented
-- Quality gates explicit
-- Testing requirements before "done"
+## Notes
+- Uses `markdownDescription` for rich formatting (bold, emoji, lists)
+- Clear warning about risks when disabled
+- Guidance for when to use each option

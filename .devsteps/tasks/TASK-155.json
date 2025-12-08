@@ -6,7 +6,7 @@
   "status": "in-progress",
   "priority": "critical",
   "created": "2025-12-05T10:38:17.852Z",
-  "updated": "2025-12-05T10:40:45.555Z",
+  "updated": "2025-12-08T09:31:30.845Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -18,7 +18,9 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "STORY-069"
+    ],
     "depends-on": [],
     "required-by": [
       "TASK-156"

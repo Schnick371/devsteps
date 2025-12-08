@@ -6,7 +6,7 @@
   "status": "draft",
   "priority": "critical",
   "created": "2025-12-05T10:38:03.736Z",
-  "updated": "2025-12-05T10:38:43.510Z",
+  "updated": "2025-12-08T09:31:30.846Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -19,7 +19,9 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "STORY-069"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],

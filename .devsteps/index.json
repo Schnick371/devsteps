@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 17,
-    "story": 68,
-    "task": 160,
+    "story": 69,
+    "task": 163,
     "bug": 32,
     "spike": 7,
     "feature": 5,
@@ -2370,14 +2370,46 @@
       "status": "done",
       "priority": "medium",
       "updated": "2025-12-05T17:52:44.805Z"
+    },
+    {
+      "id": "STORY-069",
+      "type": "story",
+      "title": "Make TreeView Cycle Detection Configurable via Settings",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T09:30:34.160Z"
+    },
+    {
+      "id": "TASK-161",
+      "type": "task",
+      "title": "Add cycle detection configuration property to package.json",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T09:30:46.647Z"
+    },
+    {
+      "id": "TASK-162",
+      "type": "task",
+      "title": "Update WorkItemNode to accept cycle detection configuration flag",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T09:31:02.744Z"
+    },
+    {
+      "id": "TASK-163",
+      "type": "task",
+      "title": "Wire cycle detection setting to TreeView initialization and refresh",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T09:31:18.197Z"
     }
   ],
   "stats": {
-    "total": 289,
+    "total": 293,
     "by_type": {
       "epic": 17,
-      "story": 68,
-      "task": 160,
+      "story": 69,
+      "task": 163,
       "bug": 32,
       "spike": 7,
       "feature": 5,
@@ -2386,7 +2418,7 @@
     "by_status": {
       "in-progress": 5,
       "done": 146,
-      "draft": 133,
+      "draft": 137,
       "blocked": 2,
       "obsolete": 3,
       "review": 0
@@ -2409,5 +2441,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-05T17:52:44.807Z"
+  "last_updated": "2025-12-08T09:31:18.197Z"
 }

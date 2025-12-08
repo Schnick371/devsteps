@@ -1,57 +1,76 @@
-# Update CLI Hints for Status Progression
+# Update WorkItemNode: Accept Cycle Detection Flag
 
 ## Objective
-Update CLI command hints to guide users through review/testing phase before marking done.
-
-## Changes Required
-
-### packages/cli/src/commands/index.ts
-
-**Current Hints (update command):**
-```typescript
-💡 Git: git commit -am "feat: completed TASK-XXX"
-💡 All implementations of BUG-XXX are complete! Consider closing it.
-```
-
-**New Hints:**
-
-**When marking in-progress:**
-```typescript
-💡 Next: After implementation, mark as 'review' to start testing phase
-```
-
-**When marking review:**
-```typescript
-💡 Testing Phase:
-  • Run tests: npm test
-  • Verify build: npm run build
-  • Manual testing if applicable
-  • When all pass: devsteps update <ID> --status done
-```
-
-**When marking done:**
-```typescript
-✅ Quality gates passed!
-💡 Git: git commit -am "feat: completed <ID>"
-```
-
-**When parent has all children done:**
-```typescript
-💡 All implementations of <PARENT-ID> are complete! Consider reviewing parent.
-```
-
-### packages/cli/src/commands/bulk.ts
-
-Add hint for bulk status updates to review.
+Modify `WorkItemNode` to conditionally apply cycle detection based on configuration.
 
 ## Implementation
-- Update hint generation logic
-- Add context-aware messages based on status transition
-- Include testing commands in review hint
-- Emphasize quality gates
 
-## Success Criteria
-- CLI guides status progression
-- Testing phase clearly explained
-- Users understand review requirements
-- Hints are actionable
+**File:** `packages/extension/src/treeView/nodes/workItemNode.ts`
+
+### 1. Constructor - Add Parameter
+```typescript
+constructor(
+  private item: WorkItem,
+  private hierarchical: boolean = false,
+  private filterState?: FilterState,
+  private isExpanded?: boolean,
+  private parentId?: string,
+  private relationshipType?: string,
+  private ancestorIds: Set<string> = new Set(),
+  private enableCycleDetection: boolean = true,  // ← NEW
+)
+```
+
+### 2. getChildren() - Conditional Check
+```typescript
+const loadChildWithRelation = async (childId: string, relationType: string) => {
+  // Only check ancestors if cycle detection enabled
+  if (this.enableCycleDetection && this.ancestorIds.has(childId)) {
+    return; // Skip cycle
+  }
+  
+  // ... rest of loading logic
+};
+```
+
+### 3. hasVisibleChildren() - Conditional Logic
+```typescript
+hasVisibleChildren(filterState?: FilterState): boolean {
+  const hasLinks = this.hasImplementedByLinks(filterState);
+  if (!hasLinks) return false;
+  
+  // If cycle detection disabled, always show chevron when links exist
+  if (!this.enableCycleDetection) {
+    return true;
+  }
+  
+  // ... existing ancestor check logic
+  return allChildren.some(childId => !this.ancestorIds.has(childId));
+}
+```
+
+### 4. Child Node Creation - Pass Flag
+```typescript
+return filteredChildren.map(({ item, relationType }) => 
+  new WorkItemNode(
+    item, 
+    true, 
+    effectiveFilter, 
+    isExpanded, 
+    this.item.id, 
+    relationType, 
+    childAncestors,
+    this.enableCycleDetection  // ← Pass to children
+  )
+);
+```
+
+## Testing
+- [ ] When enabled: Cycle detection works (existing behavior)
+- [ ] When disabled: Children load without ancestor checks
+- [ ] Flag propagates to all child nodes
+- [ ] No TypeScript errors
+
+## Notes
+- Default `true` maintains backward compatibility
+- Flag must propagate through entire tree (children inherit parent's setting)

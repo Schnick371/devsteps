@@ -1,17 +1,16 @@
 {
   "id": "TASK-162",
   "type": "task",
-  "category": "cli",
-  "title": "Update CLI Hints for Review/Testing Phase",
-  "status": "done",
+  "category": "general",
+  "title": "Update WorkItemNode to accept cycle detection configuration flag",
+  "status": "draft",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-05T17:18:20.685Z",
-  "updated": "2025-12-05T17:27:10.716Z",
+  "created": "2025-12-08T09:31:02.744Z",
+  "updated": "2025-12-08T09:31:24.503Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/cli/src/commands/index.ts",
-    "packages/cli/src/commands/bulk.ts"
+    "packages/extension/src/treeView/nodes/workItemNode.ts"
   ],
   "linked_items": {
     "implements": [
@@ -29,9 +28,8 @@
     "superseded-by": []
   },
   "tags": [
-    "cli",
-    "ux",
-    "hints"
+    "treeview",
+    "implementation"
   ],
   "commits": [],
   "metadata": {}

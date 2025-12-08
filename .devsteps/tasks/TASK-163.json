@@ -1,18 +1,17 @@
 {
   "id": "TASK-163",
   "type": "task",
-  "category": "mcp",
-  "title": "Update MCP Tool Descriptions for Status Workflow",
-  "status": "done",
+  "category": "general",
+  "title": "Wire cycle detection setting to TreeView initialization and refresh",
+  "status": "draft",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-05T17:18:32.030Z",
-  "updated": "2025-12-05T17:30:59.483Z",
+  "created": "2025-12-08T09:31:18.197Z",
+  "updated": "2025-12-08T09:31:24.503Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/mcp-server/src/tools/add.ts",
-    "packages/mcp-server/src/tools/update.ts",
-    "packages/mcp-server/README.md"
+    "packages/extension/src/treeView/devstepsTreeDataProvider.ts",
+    "packages/extension/src/treeView/nodes/hierarchyRootNode.ts"
   ],
   "linked_items": {
     "implements": [
@@ -30,9 +29,8 @@
     "superseded-by": []
   },
   "tags": [
-    "mcp",
-    "documentation",
-    "tools"
+    "treeview",
+    "integration"
   ],
   "commits": [],
   "metadata": {}

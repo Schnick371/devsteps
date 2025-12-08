@@ -1,17 +1,16 @@
 {
   "id": "TASK-161",
   "type": "task",
-  "category": "workflow",
-  "title": "Update Workflow Prompts - Add Review/Testing Phase",
-  "status": "done",
+  "category": "general",
+  "title": "Add cycle detection configuration property to package.json",
+  "status": "draft",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-05T17:18:08.361Z",
-  "updated": "2025-12-05T17:24:00.903Z",
+  "created": "2025-12-08T09:30:46.647Z",
+  "updated": "2025-12-08T09:31:24.503Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    ".github/prompts/devsteps-start-work.prompt.md",
-    ".github/prompts/devsteps-workflow.prompt.md"
+    "packages/extension/package.json"
   ],
   "linked_items": {
     "implements": [
@@ -29,9 +28,8 @@
     "superseded-by": []
   },
   "tags": [
-    "prompts",
-    "workflow",
-    "documentation"
+    "configuration",
+    "settings"
   ],
   "commits": [],
   "metadata": {}

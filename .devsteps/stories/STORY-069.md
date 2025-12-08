@@ -1,136 +1,37 @@
-# Update Status Workflow to Include Review/Testing Phase
+# Make TreeView Cycle Detection Configurable
 
-## Problem
-Current workflow skips validation between implementation and completion:
-- Status progression: `draft → in-progress → done` ❌
-- Missing: Testing/review phase before marking done
-- Risk: Bugs slip through, quality gates bypassed
-- Impact: Items marked "done" without verification
+## User Value
+Give users control over TreeView cycle detection behavior based on their hierarchy complexity and performance needs.
 
-## Industry Best Practice (2025 Agile)
-**Standard Progression:** `draft → planned → in-progress → review → done`
+## Acceptance Criteria
+- [ ] Setting `devsteps.treeView.enableCycleDetection` available in VS Code settings
+- [ ] Default value: `true` (safe default, prevents duplicate ID errors)
+- [ ] When disabled, cycle detection is skipped (performance optimization)
+- [ ] Setting change triggers TreeView refresh
+- [ ] Documentation explains when to disable (no bidirectional relates-to cycles)
 
-**Review/Testing Phase Includes:**
-- Build verification (no errors)
-- Test execution (unit, integration, E2E)
-- Manual testing (if applicable)
-- Code review (if applicable)
-- Documentation updates verified
-- Quality gates passed
+## Context
+TASK-155 implemented cycle detection using `ancestorIds` Set to prevent infinite recursion with bidirectional relationships (e.g., EPIC-002 ↔ EPIC-003 relates-to). This works perfectly but adds overhead for every node expansion.
 
-## Proposed Solution
+## Use Cases
 
-### Status Progression
-```
-draft        # Created, not yet started
-planned      # Ready to start, dependencies clear
-in-progress  # Active development
-review       # Implementation complete, testing/validation in progress
-done         # All quality gates passed, verified working
-blocked      # Cannot proceed (dependency/issue)
-cancelled    # No longer needed
-obsolete     # Superseded by another item
-```
+**Enable (default):**
+- Projects with `relates-to` relationships between items at same level
+- Bidirectional relationships exist (common in cross-functional work)
+- Safety > performance (prevent "Element already registered" errors)
 
-### Workflow Changes
+**Disable:**
+- Large hierarchies (1000+ items) needing maximum performance
+- No bidirectional relationships in data (strict parent→child only)
+- Debugging/testing raw VS Code TreeView behavior
 
-**Current (WRONG):**
-```
-Step 5: Implementation
-Step 6: Complete
-  - Mark done
-  - Commit
-```
+## Risks When Disabled
+⚠️ If user has bidirectional relationships and disables cycle detection:
+- "Element with id X is already registered" errors will occur
+- TreeView may fail to expand properly
+- User must re-enable setting to fix
 
-**Proposed (CORRECT):**
-```
-Step 5: Implementation
-  - Write code
-  - Write/update tests
-  - Build and fix errors
-  
-Step 6: Testing/Review
-  - Mark item as 'review' status
-  - Run tests (unit, integration, E2E)
-  - Manual testing if applicable
-  - Verify no regressions
-  - Check documentation updated
-  
-Step 7: Complete
-  - Mark done (only after validation passes)
-  - Commit with conventional format
-  - Move to next item
-```
-
-## Changes Required
-
-### 1. Workflow Prompts
-**Files:**
-- `.github/prompts/devsteps-start-work.prompt.md`
-- `.github/prompts/devsteps-workflow.prompt.md`
-
-**Changes:**
-- Add Step 6: Testing/Review phase
-- Emphasize `review` status usage
-- Document quality gates (tests, build, manual validation)
-- Update completion criteria
-
-### 2. CLI Hints
-**File:** `packages/cli/src/commands/index.ts`
-
-**Current Hints:**
-```
-💡 Git: git commit -am "feat: completed TASK-XXX"
-💡 All implementations of BUG-XXX are complete! Consider closing it.
-```
-
-**Proposed Hints:**
-```
-💡 Next: Test your changes, then: devsteps update TASK-XXX --status review
-💡 After testing passes: devsteps update TASK-XXX --status done
-💡 Git: git commit -am "feat: completed TASK-XXX"
-```
-
-### 3. MCP Tool Descriptions
-**File:** `packages/mcp-server/src/tools/`
-
-**Update tool descriptions to mention:**
-- Status progression with review phase
-- Testing requirements before done
-- Quality gates
-
-### 4. Agent Instructions
-**File:** `.github/instructions/devsteps.instructions.md`
-
-**Add Section:**
-```markdown
-## Status Tracking
-
-**Before marking any work item completed:**
-- ✅ Mark as 'review' status
-- ✅ Run tests (when applicable)
-- ✅ Verify build passes
-- ✅ Manual testing complete
-- ✅ Documentation updated
-- ✅ THEN mark as 'done'
-```
-
-### 5. Documentation
-**File:** `.devsteps/WORKFLOW.md` (create if needed)
-
-Document complete status lifecycle with examples.
-
-## Success Criteria
-- ✅ Prompts enforce review/testing phase
-- ✅ CLI hints guide status progression
-- ✅ MCP tools mention testing requirement
-- ✅ Agent instructions updated
-- ✅ Status progression documented
-- ✅ Quality gates clearly defined
-
-## Benefits
-- **Quality Assurance**: Testing happens before "done"
-- **Traceability**: Clear when item is being validated
-- **Accountability**: Explicit validation step
-- **Process Improvement**: Matches industry standards
-- **Risk Reduction**: Bugs caught before merge
+## Success Metrics
+- Setting works in both flat and hierarchical views
+- No regressions when enabled (default behavior)
+- Clear error messaging if disabled causes issues

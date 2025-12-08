@@ -1,20 +1,18 @@
 {
   "id": "STORY-069",
   "type": "story",
-  "category": "workflow",
-  "title": "Add Review/Testing Phase to Status Workflow",
-  "status": "done",
+  "category": "general",
+  "title": "Make TreeView Cycle Detection Configurable via Settings",
+  "status": "draft",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-05T17:17:52.236Z",
-  "updated": "2025-12-05T17:31:04.121Z",
+  "created": "2025-12-08T09:30:34.160Z",
+  "updated": "2025-12-08T09:31:30.846Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    ".github/prompts/devsteps-start-work.prompt.md",
-    ".github/prompts/devsteps-workflow.prompt.md",
-    ".github/instructions/devsteps.instructions.md",
-    "packages/cli/src/commands/index.ts",
-    "packages/mcp-server/src/tools/"
+    "packages/extension/package.json",
+    "packages/extension/src/treeView/nodes/workItemNode.ts",
+    "packages/extension/src/treeView/devstepsTreeDataProvider.ts"
   ],
   "linked_items": {
     "implements": [],
@@ -27,17 +25,20 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "TASK-155",
+      "BUG-031"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "workflow",
-    "quality",
-    "testing",
-    "documentation"
+    "enhancement",
+    "settings",
+    "performance",
+    "treeview"
   ],
   "commits": [],
   "metadata": {}
