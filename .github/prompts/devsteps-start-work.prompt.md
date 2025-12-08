@@ -2,7 +2,7 @@
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Begin implementation work - review planned items, select next task, and start structured development'
-tools: ['edit', 'search', 'devsteps/*', 'GitKraken/*', 'tavily/*', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'testFailure', 'todos', 'runSubagent']
+tools: ['edit', 'search', 'runCommands', 'runTasks', 'devsteps/*', 'tavily/*', 'usages', 'problems', 'changes', 'testFailure', 'todos', 'runSubagent']
 ---
 
 # 🚀 Start Work - Begin Implementation
@@ -57,13 +57,13 @@ Review planned work, select highest priority, begin structured development.
 - Decisions made? → Document why
 
 ### 6. Testing/Review
-**Status:** `in-progress` → `review`  
+**DevSteps Status:** `in-progress` → `review`  
 **Quality Gates:** Tests pass, build succeeds, manual testing, docs updated, no regressions *(see devsteps-workflow.prompt.md)*  
 **If Fail:** Return to Step 5
 
 ### 7. Complete
-**Status:** `review` → `done` (all gates passed)  
-**Commit:** Feature branch, conventional format, footer `Implements: ID`  
+**DevSteps Status:** `review` → `done` (all gates passed)  
+**SCM Commit:** Feature branch, conventional format, footer `Implements: ID`  
 **Prohibition:** No merge to main yet
 
 **Status Sync:** `.devsteps/` on feature branch → synced during final merge

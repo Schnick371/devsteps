@@ -2,7 +2,7 @@
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Execute production release workflow - version bump, CHANGELOG, build, npm publish, and git tagging'
-tools: ['edit', 'search', 'runCommands', 'runTasks', 'devsteps/*', 'GitKraken/*', 'tavily/*', 'usages', 'problems', 'changes', 'fetch', 'todos', 'runSubagent']
+tools: ['edit', 'search', 'runCommands', 'runTasks', 'devsteps/*', 'tavily/*', 'usages', 'problems', 'changes', 'fetch', 'todos', 'runSubagent']
 ---
 
 # 🚀 Release Workflow - Production Deployment
