@@ -2407,17 +2407,17 @@
       "id": "STORY-070",
       "type": "story",
       "title": "Document Branch Lifecycle Management with Git Tags",
-      "status": "draft",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-12-08T10:33:45.825Z"
+      "updated": "2025-12-08T10:39:29.689Z"
     },
     {
       "id": "TASK-164",
       "type": "task",
       "title": "Add branch archiving to devsteps-start-work.prompt.md completion step",
-      "status": "draft",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-12-08T10:38:33.248Z"
+      "updated": "2025-12-08T10:39:29.568Z"
     },
     {
       "id": "TASK-165",
@@ -2449,8 +2449,8 @@
     },
     "by_status": {
       "in-progress": 4,
-      "done": 147,
-      "draft": 139,
+      "done": 149,
+      "draft": 137,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2473,5 +2473,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-08T10:38:46.087Z"
+  "last_updated": "2025-12-08T10:39:29.689Z"
 }
