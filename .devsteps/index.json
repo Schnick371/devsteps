@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 17,
-    "story": 69,
-    "task": 163,
+    "story": 70,
+    "task": 166,
     "bug": 32,
     "spike": 7,
     "feature": 5,
@@ -2402,14 +2402,46 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-08T09:31:18.197Z"
+    },
+    {
+      "id": "STORY-070",
+      "type": "story",
+      "title": "Document Branch Lifecycle Management with Git Tags",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T10:33:45.825Z"
+    },
+    {
+      "id": "TASK-164",
+      "type": "task",
+      "title": "Add branch archiving section to git-workflow.instructions.md",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T10:34:05.006Z"
+    },
+    {
+      "id": "TASK-165",
+      "type": "task",
+      "title": "Update start-work prompt with branch cleanup workflow",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T10:34:19.698Z"
+    },
+    {
+      "id": "TASK-166",
+      "type": "task",
+      "title": "Add branch archiving reference to workflow prompt",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T10:34:32.471Z"
     }
   ],
   "stats": {
-    "total": 293,
+    "total": 297,
     "by_type": {
       "epic": 17,
-      "story": 69,
-      "task": 163,
+      "story": 70,
+      "task": 166,
       "bug": 32,
       "spike": 7,
       "feature": 5,
@@ -2418,7 +2450,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 147,
-      "draft": 137,
+      "draft": 141,
       "blocked": 2,
       "obsolete": 3,
       "review": 0
@@ -2441,5 +2473,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-08T10:00:31.409Z"
+  "last_updated": "2025-12-08T10:34:32.471Z"
 }

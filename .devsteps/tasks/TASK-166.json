@@ -1,16 +1,16 @@
 {
-  "id": "TASK-164",
+  "id": "TASK-166",
   "type": "task",
   "category": "general",
-  "title": "Add branch archiving section to git-workflow.instructions.md",
+  "title": "Add branch archiving reference to workflow prompt",
   "status": "draft",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-08T10:34:05.006Z",
-  "updated": "2025-12-08T10:34:39.981Z",
+  "created": "2025-12-08T10:34:32.471Z",
+  "updated": "2025-12-08T10:34:39.983Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    ".github/prompts/git-workflow.instructions.md"
+    ".github/prompts/devsteps-workflow.prompt.md"
   ],
   "linked_items": {
     "implements": [
@@ -29,7 +29,7 @@
   },
   "tags": [
     "documentation",
-    "git"
+    "workflow"
   ],
   "commits": [],
   "metadata": {}

@@ -1,22 +1,24 @@
 {
-  "id": "TASK-164",
-  "type": "task",
+  "id": "STORY-070",
+  "type": "story",
   "category": "general",
-  "title": "Add branch archiving section to git-workflow.instructions.md",
+  "title": "Document Branch Lifecycle Management with Git Tags",
   "status": "draft",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-08T10:34:05.006Z",
-  "updated": "2025-12-08T10:34:39.981Z",
+  "created": "2025-12-08T10:33:45.825Z",
+  "updated": "2025-12-08T10:34:39.983Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/prompts/git-workflow.instructions.md"
   ],
   "linked_items": {
-    "implements": [
-      "STORY-070"
+    "implements": [],
+    "implemented-by": [
+      "TASK-164",
+      "TASK-165",
+      "TASK-166"
     ],
-    "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
@@ -29,7 +31,9 @@
   },
   "tags": [
     "documentation",
-    "git"
+    "git",
+    "workflow",
+    "branch-management"
   ],
   "commits": [],
   "metadata": {}

@@ -1,16 +1,16 @@
 {
-  "id": "TASK-164",
+  "id": "TASK-165",
   "type": "task",
   "category": "general",
-  "title": "Add branch archiving section to git-workflow.instructions.md",
+  "title": "Update start-work prompt with branch cleanup workflow",
   "status": "draft",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-08T10:34:05.006Z",
-  "updated": "2025-12-08T10:34:39.981Z",
+  "created": "2025-12-08T10:34:19.698Z",
+  "updated": "2025-12-08T10:34:39.983Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    ".github/prompts/git-workflow.instructions.md"
+    ".github/prompts/devsteps-start-work.prompt.md"
   ],
   "linked_items": {
     "implements": [
@@ -29,7 +29,7 @@
   },
   "tags": [
     "documentation",
-    "git"
+    "workflow"
   ],
   "commits": [],
   "metadata": {}
