@@ -3,11 +3,11 @@
   "type": "task",
   "category": "general",
   "title": "Update start-work prompt with branch cleanup workflow",
-  "status": "draft",
+  "status": "obsolete",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-08T10:34:19.698Z",
-  "updated": "2025-12-08T10:34:39.983Z",
+  "updated": "2025-12-08T10:38:39.882Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/prompts/devsteps-start-work.prompt.md"
@@ -32,5 +32,6 @@
     "workflow"
   ],
   "commits": [],
-  "metadata": {}
+  "metadata": {},
+  "superseded_by": "TASK-164"
 }

@@ -2414,26 +2414,26 @@
     {
       "id": "TASK-164",
       "type": "task",
-      "title": "Add branch archiving section to git-workflow.instructions.md",
+      "title": "Add branch archiving to devsteps-start-work.prompt.md completion step",
       "status": "draft",
       "priority": "medium",
-      "updated": "2025-12-08T10:34:05.006Z"
+      "updated": "2025-12-08T10:38:33.248Z"
     },
     {
       "id": "TASK-165",
       "type": "task",
       "title": "Update start-work prompt with branch cleanup workflow",
-      "status": "draft",
+      "status": "obsolete",
       "priority": "medium",
-      "updated": "2025-12-08T10:34:19.698Z"
+      "updated": "2025-12-08T10:38:39.882Z"
     },
     {
       "id": "TASK-166",
       "type": "task",
       "title": "Add branch archiving reference to workflow prompt",
-      "status": "draft",
+      "status": "obsolete",
       "priority": "medium",
-      "updated": "2025-12-08T10:34:32.471Z"
+      "updated": "2025-12-08T10:38:46.087Z"
     }
   ],
   "stats": {
@@ -2450,9 +2450,9 @@
     "by_status": {
       "in-progress": 4,
       "done": 147,
-      "draft": 141,
+      "draft": 139,
       "blocked": 2,
-      "obsolete": 3,
+      "obsolete": 5,
       "review": 0
     },
     "archived": 2
@@ -2473,5 +2473,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-08T10:34:32.471Z"
+  "last_updated": "2025-12-08T10:38:46.087Z"
 }

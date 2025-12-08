@@ -68,6 +68,15 @@ Review planned work, select highest priority, begin structured development.
 
 **Status Sync:** `.devsteps/` on feature branch → synced during final merge
 
+**Branch Archiving:** After final merge to main:
+```bash
+git tag archive/merged/<branch> <branch>
+git push origin archive/merged/<branch>
+git branch -D <branch>
+git push origin --delete <branch>
+```
+*Use `archive/abandoned/` for cancelled, `archive/superseded/` for obsolete.*
+
 ### 7.5. Spike Post-Processing
 - Review findings
 - Create Stories from insights

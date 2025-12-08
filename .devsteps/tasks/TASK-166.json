@@ -3,11 +3,11 @@
   "type": "task",
   "category": "general",
   "title": "Add branch archiving reference to workflow prompt",
-  "status": "draft",
+  "status": "obsolete",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-08T10:34:32.471Z",
-  "updated": "2025-12-08T10:34:39.983Z",
+  "updated": "2025-12-08T10:38:46.087Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/prompts/devsteps-workflow.prompt.md"
@@ -32,5 +32,6 @@
     "workflow"
   ],
   "commits": [],
-  "metadata": {}
+  "metadata": {},
+  "superseded_by": "TASK-164"
 }
