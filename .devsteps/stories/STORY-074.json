@@ -1,0 +1,41 @@
+{
+  "id": "STORY-074",
+  "type": "story",
+  "category": "refactoring",
+  "title": "Replace String Literal Comparisons with Type-Safe Constants",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-08T15:03:31.963Z",
+  "updated": "2025-12-08T15:05:28.628Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-181",
+      "TASK-182",
+      "TASK-183",
+      "TASK-184",
+      "TASK-185"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "typescript",
+    "best-practices",
+    "type-safety",
+    "DRY",
+    "maintainability"
+  ],
+  "commits": [],
+  "metadata": {}
+}

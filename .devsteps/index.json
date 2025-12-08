@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 17,
-    "story": 73,
-    "task": 180,
+    "story": 74,
+    "task": 185,
     "bug": 32,
     "spike": 7,
     "feature": 5,
@@ -2570,14 +2570,62 @@
       "status": "done",
       "priority": "high",
       "updated": "2025-12-08T14:55:21.607Z"
+    },
+    {
+      "id": "STORY-074",
+      "type": "story",
+      "title": "Replace String Literal Comparisons with Type-Safe Constants",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T15:03:31.963Z"
+    },
+    {
+      "id": "TASK-181",
+      "type": "task",
+      "title": "Create centralized constants module in shared package",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-08T15:03:47.200Z"
+    },
+    {
+      "id": "TASK-182",
+      "type": "task",
+      "title": "Refactor validation.ts - Replace 40+ string literals with constants",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-08T15:04:07.459Z"
+    },
+    {
+      "id": "TASK-183",
+      "type": "task",
+      "title": "Refactor status comparisons in core and handlers with constants",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-08T15:04:32.584Z"
+    },
+    {
+      "id": "TASK-184",
+      "type": "task",
+      "title": "Refactor CLI commands - Replace status literals with constants",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T15:04:57.454Z"
+    },
+    {
+      "id": "TASK-185",
+      "type": "task",
+      "title": "Refactor extension TreeView/WebView - Replace literals with constants",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T15:05:22.885Z"
     }
   ],
   "stats": {
-    "total": 314,
+    "total": 320,
     "by_type": {
       "epic": 17,
-      "story": 73,
-      "task": 180,
+      "story": 74,
+      "task": 185,
       "bug": 32,
       "spike": 7,
       "feature": 5,
@@ -2586,7 +2634,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 151,
-      "draft": 152,
+      "draft": 158,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2609,5 +2657,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-08T14:59:42.810Z"
+  "last_updated": "2025-12-08T15:05:22.885Z"
 }

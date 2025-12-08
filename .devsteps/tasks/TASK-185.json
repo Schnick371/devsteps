@@ -1,0 +1,38 @@
+{
+  "id": "TASK-185",
+  "type": "task",
+  "category": "refactoring",
+  "title": "Refactor extension TreeView/WebView - Replace literals with constants",
+  "status": "draft",
+  "priority": "medium",
+  "created": "2025-12-08T15:05:22.885Z",
+  "updated": "2025-12-08T15:05:34.702Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/treeView/devstepsTreeDataProvider.ts",
+    "packages/extension/src/treeView/nodes/methodologySectionNode.ts",
+    "packages/extension/src/treeView/utils/methodologyDetector.ts",
+    "packages/extension/src/webview/dashboardPanel.ts",
+    "packages/extension/src/commands/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-074"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-181"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

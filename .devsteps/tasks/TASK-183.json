@@ -1,0 +1,39 @@
+{
+  "id": "TASK-183",
+  "type": "task",
+  "category": "refactoring",
+  "title": "Refactor status comparisons in core and handlers with constants",
+  "status": "draft",
+  "priority": "high",
+  "created": "2025-12-08T15:04:32.584Z",
+  "updated": "2025-12-08T15:04:43.733Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/update.ts",
+    "packages/shared/src/core/list.ts",
+    "packages/mcp-server/src/handlers/update.ts",
+    "packages/mcp-server/src/handlers/status.ts",
+    "packages/extension/src/mcp-server/handlers/update.ts",
+    "packages/extension/src/mcp-server/handlers/status.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-074"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-181"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}
