@@ -1,0 +1,38 @@
+{
+  "id": "STORY-071",
+  "type": "story",
+  "category": "core-system",
+  "title": "Expand work item ID range to 4 digits",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-08T11:01:47.215Z",
+  "updated": "2025-12-08T11:02:40.534Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-167",
+      "TASK-168",
+      "TASK-169"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "schema",
+    "id-format",
+    "scalability",
+    "backwards-compatible"
+  ],
+  "commits": [],
+  "metadata": {}
+}

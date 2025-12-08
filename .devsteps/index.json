@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 17,
-    "story": 70,
-    "task": 166,
+    "story": 71,
+    "task": 169,
     "bug": 32,
     "spike": 7,
     "feature": 5,
@@ -2434,14 +2434,46 @@
       "status": "obsolete",
       "priority": "medium",
       "updated": "2025-12-08T10:38:46.087Z"
+    },
+    {
+      "id": "STORY-071",
+      "type": "story",
+      "title": "Expand work item ID range to 4 digits",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T11:01:47.215Z"
+    },
+    {
+      "id": "TASK-167",
+      "type": "task",
+      "title": "Update schema regex to accept 3-4 digit IDs",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T11:02:01.288Z"
+    },
+    {
+      "id": "TASK-168",
+      "type": "task",
+      "title": "Update ID generation to pad 4 digits",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-08T11:02:16.816Z"
+    },
+    {
+      "id": "TASK-169",
+      "type": "task",
+      "title": "Optional: Bulk migration tool for 3→4 digit IDs",
+      "status": "draft",
+      "priority": "low",
+      "updated": "2025-12-08T11:02:34.841Z"
     }
   ],
   "stats": {
-    "total": 297,
+    "total": 301,
     "by_type": {
       "epic": 17,
-      "story": 70,
-      "task": 166,
+      "story": 71,
+      "task": 169,
       "bug": 32,
       "spike": 7,
       "feature": 5,
@@ -2450,7 +2482,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 149,
-      "draft": 137,
+      "draft": 141,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2473,5 +2505,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-08T10:39:29.689Z"
+  "last_updated": "2025-12-08T11:02:34.841Z"
 }
