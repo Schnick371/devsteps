@@ -28,7 +28,7 @@ Update section header and add CRITICAL enforcement language throughout the Plann
 - ❌ No validation → Incomplete/ambiguous items
 ```
 
-### 4. renumber the 
+### 4. renumber the steps beginning with 1.
 
 ## Acceptance Criteria
 - [ ] Header renamed to "Planning Protocol (MANDATORY)"
