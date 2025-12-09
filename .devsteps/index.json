@@ -3,8 +3,8 @@
   "counters": {
     "epic": 17,
     "story": 74,
-    "task": 185,
-    "bug": 32,
+    "task": 186,
+    "bug": 33,
     "spike": 7,
     "feature": 5,
     "requirement": 2
@@ -2618,15 +2618,31 @@
       "status": "done",
       "priority": "medium",
       "updated": "2025-12-08T15:29:41.985Z"
+    },
+    {
+      "id": "BUG-033",
+      "type": "bug",
+      "title": "CLI --version shows hardcoded 0.1.0 instead of package.json version",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-09T10:05:52.489Z"
+    },
+    {
+      "id": "TASK-186",
+      "type": "task",
+      "title": "Replace hardcoded version with dynamic package.json import",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-09T10:06:10.170Z"
     }
   ],
   "stats": {
-    "total": 320,
+    "total": 322,
     "by_type": {
       "epic": 17,
       "story": 74,
-      "task": 185,
-      "bug": 32,
+      "task": 186,
+      "bug": 33,
       "spike": 7,
       "feature": 5,
       "requirement": 2
@@ -2634,7 +2650,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 157,
-      "draft": 152,
+      "draft": 154,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2657,5 +2673,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-09T08:16:55.870Z"
+  "last_updated": "2025-12-09T10:06:10.170Z"
 }

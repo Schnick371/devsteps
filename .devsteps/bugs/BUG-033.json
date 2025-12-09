@@ -1,0 +1,43 @@
+{
+  "id": "BUG-033",
+  "type": "bug",
+  "category": "cli",
+  "title": "CLI --version shows hardcoded 0.1.0 instead of package.json version",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-09T10:05:52.489Z",
+  "updated": "2025-12-09T10:06:16.981Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/index.ts",
+    "packages/cli/src/commands/init.ts",
+    "packages/cli/package.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-186"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-012"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cli",
+    "version",
+    "package.json",
+    "dynamic-import",
+    "user-experience"
+  ],
+  "commits": [],
+  "metadata": {}
+}

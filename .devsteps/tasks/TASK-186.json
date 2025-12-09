@@ -1,0 +1,40 @@
+{
+  "id": "TASK-186",
+  "type": "task",
+  "category": "cli",
+  "title": "Replace hardcoded version with dynamic package.json import",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-09T10:06:10.170Z",
+  "updated": "2025-12-09T10:06:16.981Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/index.ts",
+    "packages/cli/src/commands/init.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "BUG-033"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cli",
+    "typescript",
+    "esm",
+    "import-assertion",
+    "version-management"
+  ],
+  "commits": [],
+  "metadata": {}
+}
