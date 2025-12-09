@@ -1,0 +1,37 @@
+{
+  "id": "BUG-034",
+  "type": "bug",
+  "category": "general",
+  "title": "TreeView Menu Missing in VSIX - Context Key Race Condition",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-09T12:56:27.501Z",
+  "updated": "2025-12-09T12:56:48.964Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-188"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "extension",
+    "ui",
+    "production-bug",
+    "race-condition"
+  ],
+  "commits": [],
+  "metadata": {}
+}

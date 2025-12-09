@@ -3,8 +3,8 @@
   "counters": {
     "epic": 17,
     "story": 74,
-    "task": 187,
-    "bug": 33,
+    "task": 188,
+    "bug": 34,
     "spike": 7,
     "feature": 5,
     "requirement": 2
@@ -2642,15 +2642,31 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-09T12:53:52.722Z"
+    },
+    {
+      "id": "BUG-034",
+      "type": "bug",
+      "title": "TreeView Menu Missing in VSIX - Context Key Race Condition",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-09T12:56:27.501Z"
+    },
+    {
+      "id": "TASK-188",
+      "type": "task",
+      "title": "Set context keys before TreeView creation - fix menu race condition",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-09T12:56:40.264Z"
     }
   ],
   "stats": {
-    "total": 323,
+    "total": 325,
     "by_type": {
       "epic": 17,
       "story": 74,
-      "task": 187,
-      "bug": 33,
+      "task": 188,
+      "bug": 34,
       "spike": 7,
       "feature": 5,
       "requirement": 2
@@ -2658,7 +2674,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 157,
-      "draft": 155,
+      "draft": 157,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2681,5 +2697,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-09T12:53:52.722Z"
+  "last_updated": "2025-12-09T12:56:40.264Z"
 }

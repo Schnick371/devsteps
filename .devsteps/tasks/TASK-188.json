@@ -1,0 +1,37 @@
+{
+  "id": "TASK-188",
+  "type": "task",
+  "category": "general",
+  "title": "Set context keys before TreeView creation - fix menu race condition",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-09T12:56:40.264Z",
+  "updated": "2025-12-09T12:56:48.963Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/extension.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "BUG-034"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "extension",
+    "bugfix"
+  ],
+  "commits": [],
+  "metadata": {}
+}
