@@ -7,7 +7,7 @@
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-28T10:26:08.718Z",
-  "updated": "2025-11-28T10:28:03.346Z",
+  "updated": "2025-12-09T08:16:55.870Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/cli",
