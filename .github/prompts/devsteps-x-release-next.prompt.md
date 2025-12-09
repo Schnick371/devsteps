@@ -71,9 +71,9 @@ git add packages/*/package.json
 git commit -m "chore: Bump version to 0.7.0-next.1"
 ```
 
-## Step 3: Update CHANGELOGs (Optional)
+## Step 3: Update CHANGELOGs
 
-**Add pre-release section:**
+**Add pre-release section to all package CHANGELOGs:**
 ```markdown
 ## [0.7.0-next.1] - YYYY-MM-DD (Pre-release)
 
@@ -86,6 +86,14 @@ git commit -m "chore: Bump version to 0.7.0-next.1"
 
 ### Testing Needed
 - [What needs validation]
+```
+
+**Update files:**
+```
+packages/shared/CHANGELOG.md
+packages/cli/CHANGELOG.md
+packages/mcp-server/CHANGELOG.md
+packages/extension/CHANGELOG.md
 ```
 
 **Commit CHANGELOGs:**
