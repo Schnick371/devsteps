@@ -28,24 +28,24 @@ tools: ['edit', 'search', 'runCommands', 'runTasks', 'devsteps/*', 'problems', '
 
 **@next versions use `-next.N` suffix:**
 ```
-Current stable: 0.6.11
-Next pre-release: 0.7.0-next.1
-                  0.7.0-next.2
-                  0.7.0-next.3
-Final stable:     0.7.0
+Current stable: X.Y.Z
+Next pre-release: X.Y+1.0-next.1
+                  X.Y+1.0-next.2
+                  X.Y+1.0-next.3
+Final stable:     X.Y+1.0
 ```
 
 **Increment rules:**
 - First @next: `X.Y.0-next.1` (based on target version)
-- Subsequent: Increment `.N` suffix (0.7.0-next.2, 0.7.0-next.3...)
+- Subsequent: Increment `.N` suffix (X.Y.0-next.2, X.Y.0-next.3...)
 - Final release: Remove `-next.N` suffix
 
 ## Step 1: Prepare Next Branch
 
 **Create next branch from current work:**
 ```bash
-# From story/STORY-056 or dev/X.Y.Z
-git checkout -b next/0.7.0-next.1
+# From story/STORY-XXX or dev/X.Y.Z
+git checkout -b next/X.Y.Z-next.N
 ```
 
 **Verify clean state:**
@@ -59,16 +59,16 @@ npm test
 
 **Update all package.json versions to X.Y.Z-next.N:**
 ```
-packages/shared/package.json      → 0.7.0-next.1
-packages/cli/package.json         → 0.7.0-next.1
-packages/mcp-server/package.json  → 0.7.0-next.1
-packages/extension/package.json   → 0.7.0-next.1
+packages/shared/package.json      → X.Y.Z-next.N
+packages/cli/package.json         → X.Y.Z-next.N
+packages/mcp-server/package.json  → X.Y.Z-next.N
+packages/extension/package.json   → X.Y.Z-next.N
 ```
 
 **Commit version bump:**
 ```bash
 git add packages/*/package.json
-git commit -m "chore: Bump version to 0.7.0-next.1"
+git commit -m "chore: Bump version to X.Y.Z-next.N"
 ```
 
 ## Step 3: Update CHANGELOGs
@@ -99,7 +99,7 @@ packages/extension/CHANGELOG.md
 **Commit CHANGELOGs:**
 ```bash
 git add packages/*/CHANGELOG.md
-git commit -m "docs: Add CHANGELOG for 0.7.0-next.1 pre-release"
+git commit -m "docs: Add CHANGELOG for X.Y.Z-next.N pre-release"
 ```
 
 ## Step 4: Build Validation
@@ -122,7 +122,7 @@ npm run package
 **Verify outputs:**
 - ✅ Extension bundle: dist/extension.js (~340 KB)
 - ✅ MCP server bundle: dist/mcp-server/index.js (~500 KB)
-- ✅ VSIX created: devsteps-0.7.0-next.1.vsix
+- ✅ VSIX created: devsteps-X.Y.Z-next.N.vsix
 
 ## Step 5: npm Publishing to @next Tag
 
@@ -159,8 +159,8 @@ npm view @schnick371/devsteps-mcp-server dist-tags
 
 **Should show:**
 ```
-latest: 0.6.11
-next: 0.7.0-next.1
+latest: X.Y.Z
+next: X.Y+1.Z-next.N
 ```
 
 ## Step 6: Extension Pre-Release Package
@@ -172,7 +172,7 @@ npm run build
 vsce package --pre-release
 ```
 
-**Output:** `devsteps-0.7.0-next.1.vsix`
+**Output:** `devsteps-X.Y.Z-next.N.vsix`
 
 **⚠️ VS Code Marketplace Pre-Release:**
 - Upload to Marketplace with "Pre-Release" flag
@@ -188,21 +188,21 @@ vsce package --pre-release
 
 **Tag pre-release for tracking:**
 ```bash
-git tag -a v0.7.0-next.1 -m "Pre-release 0.7.0-next.1
+git tag -a vX.Y.Z-next.N -m "Pre-release X.Y.Z-next.N
 
 Experimental Features:
 - STORY-056: Dual-bundle architecture
 
 Testing: @next tag on npm, pre-release on Marketplace"
 
-git push origin v0.7.0-next.1
+git push origin vX.Y.Z-next.N
 ```
 
 ## Step 8: Communication
 
 **Announce to testers:**
 ```markdown
-🧪 **Pre-Release Available: 0.7.0-next.1**
+🧪 **Pre-Release Available: X.Y.Z-next.N**
 
 **Install:**
 ```bash
@@ -234,22 +234,22 @@ npm view @schnick371/devsteps-mcp-server@next version
 
 # Install and test
 npm install -g @schnick371/devsteps-cli@next
-devsteps --version  # Should show 0.7.0-next.1
+devsteps --version  # Should show X.Y.Z-next.N
 ```
 
 **Verify stable unaffected:**
 ```bash
 npm view @schnick371/devsteps-cli@latest version
-# Should still be 0.6.11
+# Should still be X.Y.Z (previous stable)
 ```
 
 ## Iteration: Publishing Next.2, Next.3...
 
 **For subsequent pre-releases:**
 
-1. **Make changes** on next/0.7.0-next.1 branch
-2. **Increment suffix**: 0.7.0-next.1 → 0.7.0-next.2
-3. **Commit**: `git commit -m "chore: Bump to 0.7.0-next.2"`
+1. **Make changes** on next/X.Y.Z-next.N branch
+2. **Increment suffix**: X.Y.Z-next.N → X.Y.Z-next.N+1
+3. **Commit**: `git commit -m "chore: Bump to X.Y.Z-next.N+1"`
 4. **Publish**: `npm publish --tag next` (all packages)
 5. **Package**: `vsce package --pre-release`
 6. **Test**: Verify installation and functionality
@@ -261,17 +261,17 @@ npm view @schnick371/devsteps-cli@latest version
 **When ready for stable release:**
 
 1. **Final testing** of latest @next version
-2. **Create dev/0.7.0 branch** from next/ branch
+2. **Create dev/X.Y.Z branch** from next/ branch
 3. **Remove -next suffix** from all package.json
 4. **Follow standard release workflow** (devsteps-x-release.prompt.md)
 5. **Publish without --tag flag** (becomes @latest)
-6. **Tag as stable**: v0.7.0
+6. **Tag as stable**: vX.Y.Z
 
 **Result:**
 ```
 npm view @schnick371/devsteps-cli dist-tags
-latest: 0.7.0
-next: 0.7.0-next.3
+latest: X.Y.Z
+next: X.Y.Z-next.N
 ```
 
 ## Rollback @next
@@ -280,14 +280,14 @@ next: 0.7.0-next.3
 
 **Unpublish specific @next:**
 ```bash
-npm unpublish @schnick371/devsteps-cli@0.7.0-next.1
-npm unpublish @schnick371/devsteps-shared@0.7.0-next.1
-npm unpublish @schnick371/devsteps-mcp-server@0.7.0-next.1
+npm unpublish @schnick371/devsteps-cli@X.Y.Z-next.N
+npm unpublish @schnick371/devsteps-shared@X.Y.Z-next.N
+npm unpublish @schnick371/devsteps-mcp-server@X.Y.Z-next.N
 ```
 
 **Or move @next tag to previous version:**
 ```bash
-npm dist-tag add @schnick371/devsteps-cli@0.7.0-next.2 next
+npm dist-tag add @schnick371/devsteps-cli@X.Y.Z-next.N-1 next
 ```
 
 **Stable (@latest) remains unaffected!**
@@ -309,15 +309,15 @@ npm dist-tag add @schnick371/devsteps-cli@0.7.0-next.2 next
 **Accidentally published to @latest:**
 ```bash
 # Move latest back to stable
-npm dist-tag add @schnick371/devsteps-cli@0.6.11 latest
+npm dist-tag add @schnick371/devsteps-cli@X.Y.Z latest
 
 # Unpublish wrong version
-npm unpublish @schnick371/devsteps-cli@0.7.0-next.1
+npm unpublish @schnick371/devsteps-cli@X.Y+1.Z-next.N
 ```
 
 **Version already exists on @next:**
 ```bash
-# Increment suffix: 0.7.0-next.1 → 0.7.0-next.2
+# Increment suffix: X.Y.Z-next.N → X.Y.Z-next.N+1
 # Update package.json
 npm publish --tag next
 ```
@@ -347,11 +347,11 @@ npm publish --tag next
 
 **Migration path:**
 ```
-Current:  0.6.11 (stable)
+Current:  X.Y.Z (stable)
           ↓
-Next:     0.7.0-next.1, 0.7.0-next.2, 0.7.0-next.3 (testing)
+Next:     X.Y+1.0-next.1, X.Y+1.0-next.2, X.Y+1.0-next.3 (testing)
           ↓
-Stable:   0.7.0 (promoted from @next)
+Stable:   X.Y+1.0 (promoted from @next)
 ```
 
 ---
