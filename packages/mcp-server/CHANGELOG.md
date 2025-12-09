@@ -1,6 +1,22 @@
-# Change Log
+# Changelog
 
-All notable changes to `@schnick371/devsteps-mcp-server` will be documented in this file.
+All notable changes to the DevSteps MCP Server will be documented in this file.
+
+## [0.7.0-next.3] - 2025-12-09 (Pre-release)
+
+### ⚠️ Experimental Features
+- Dual-bundle architecture for VS Code extension integration (STORY-056)
+- Standalone + bundled deployment modes
+- Enhanced HTTP server for VS Code native MCP API
+
+### Known Issues
+- Bundled mode requires VS Code native MCP support
+- HTTP server port configuration may need adjustment
+
+### Testing Needed
+- Bundled mode activation reliability
+- HTTP server stability under load
+- MCP tool execution in bundled context
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).

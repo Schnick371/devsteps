@@ -5,6 +5,22 @@ All notable changes to the "DevSteps" extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0-next.3] - 2025-12-09 (Pre-release)
+
+### ⚠️ Experimental Features
+- Dual-bundle MCP server architecture (EPIC-015, STORY-056)
+- VS Code native MCP registration API (BUG-034 fix)
+- Zero-config installation with bundled MCP server
+
+### Fixed
+- BUG-034: Menu race condition - context keys set before TreeView creation
+- TreeView initialization timing issues
+
+### Testing Needed
+- Bundled MCP server reliability
+- Zero-config activation flow
+- TreeView state persistence
+
 ## [0.6.11] - 2025-12-03
 
 ### Changed
