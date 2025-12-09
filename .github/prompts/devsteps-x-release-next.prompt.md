@@ -75,7 +75,7 @@ git commit -m "chore: Bump version to 0.7.0-next.1"
 
 **Add pre-release section to all package CHANGELOGs:**
 ```markdown
-## [0.7.0-next.1] - YYYY-MM-DD (Pre-release)
+## [X.Y.Z-next.N] - YYYY-MM-DD (Pre-release)
 
 ### ⚠️ Experimental Features
 - Dual-bundle MCP server architecture (EPIC-015)
