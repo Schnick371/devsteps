@@ -3,10 +3,10 @@
   "type": "task",
   "category": "refactoring",
   "title": "Refactor CLI commands - Replace status literals with constants",
-  "status": "draft",
+  "status": "done",
   "priority": "medium",
   "created": "2025-12-08T15:04:57.454Z",
-  "updated": "2025-12-08T15:05:08.018Z",
+  "updated": "2025-12-08T15:29:41.984Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/cli/src/commands/bulk.ts",

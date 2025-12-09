@@ -3,10 +3,10 @@
   "type": "task",
   "category": "refactoring",
   "title": "Refactor status comparisons in core and handlers with constants",
-  "status": "draft",
+  "status": "done",
   "priority": "high",
   "created": "2025-12-08T15:04:32.584Z",
-  "updated": "2025-12-08T15:04:43.733Z",
+  "updated": "2025-12-08T15:18:45.378Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/update.ts",
