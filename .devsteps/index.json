@@ -2655,9 +2655,9 @@
       "id": "TASK-188",
       "type": "task",
       "title": "Set context keys before TreeView creation - fix menu race condition",
-      "status": "draft",
+      "status": "review",
       "priority": "medium",
-      "updated": "2025-12-09T12:56:40.264Z"
+      "updated": "2025-12-09T13:01:45.572Z"
     }
   ],
   "stats": {
@@ -2674,10 +2674,10 @@
     "by_status": {
       "in-progress": 4,
       "done": 157,
-      "draft": 157,
+      "draft": 156,
       "blocked": 2,
       "obsolete": 5,
-      "review": 0
+      "review": 1
     },
     "archived": 2
   },
@@ -2697,5 +2697,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-09T12:56:40.264Z"
+  "last_updated": "2025-12-09T13:01:45.572Z"
 }
