@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-12-09T10:05:52.489Z",
-  "updated": "2025-12-09T10:06:16.981Z",
+  "updated": "2025-12-09T12:53:59.065Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/cli/src/index.ts",
@@ -17,7 +17,8 @@
   "linked_items": {
     "implements": [],
     "implemented-by": [
-      "TASK-186"
+      "TASK-186",
+      "TASK-187"
     ],
     "tested-by": [],
     "tests": [],

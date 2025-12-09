@@ -3,7 +3,7 @@
   "counters": {
     "epic": 17,
     "story": 74,
-    "task": 186,
+    "task": 187,
     "bug": 33,
     "spike": 7,
     "feature": 5,
@@ -2634,14 +2634,22 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-09T10:06:10.170Z"
+    },
+    {
+      "id": "TASK-187",
+      "type": "task",
+      "title": "Set context keys BEFORE TreeView creation to fix menu race condition",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-09T12:53:52.722Z"
     }
   ],
   "stats": {
-    "total": 322,
+    "total": 323,
     "by_type": {
       "epic": 17,
       "story": 74,
-      "task": 186,
+      "task": 187,
       "bug": 33,
       "spike": 7,
       "feature": 5,
@@ -2650,7 +2658,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 157,
-      "draft": 154,
+      "draft": 155,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2673,5 +2681,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-09T10:06:10.170Z"
+  "last_updated": "2025-12-09T12:53:52.722Z"
 }
