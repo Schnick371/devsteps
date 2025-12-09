@@ -1,32 +1,41 @@
 {
-  "id": "TASK-157",
-  "type": "task",
+  "id": "STORY-075",
+  "type": "story",
   "category": "general",
-  "title": "Update devsteps-plan-work.prompt.md: Enforce work items in main branch",
-  "status": "done",
+  "title": "Strengthen Planning Protocol Discipline - Restore Mandatory Language",
+  "status": "draft",
   "priority": "high",
-  "created": "2025-12-05T10:55:27.829Z",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-09T13:45:41.484Z",
   "updated": "2025-12-09T13:46:43.386Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
     "implements": [
-      "STORY-062"
+      "EPIC-016"
     ],
-    "implemented-by": [],
+    "implemented-by": [
+      "TASK-189",
+      "TASK-190",
+      "TASK-191"
+    ],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "STORY-075"
+      "TASK-157"
     ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
-  "tags": [],
+  "tags": [
+    "documentation",
+    "workflow",
+    "prompts"
+  ],
   "commits": [],
   "metadata": {}
 }

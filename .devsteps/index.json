@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "counters": {
     "epic": 17,
-    "story": 74,
-    "task": 188,
+    "story": 75,
+    "task": 191,
     "bug": 34,
     "spike": 7,
     "feature": 5,
@@ -2658,14 +2658,46 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-09T12:56:40.264Z"
+    },
+    {
+      "id": "STORY-075",
+      "type": "story",
+      "title": "Strengthen Planning Protocol Discipline - Restore Mandatory Language",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-09T13:45:41.484Z"
+    },
+    {
+      "id": "TASK-189",
+      "type": "task",
+      "title": "Rename Planning Protocol to MANDATORY with enforcement language",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-09T13:45:58.157Z"
+    },
+    {
+      "id": "TASK-190",
+      "type": "task",
+      "title": "Strengthen Step 0: Add detailed branch verification with ❌/✅ indicators",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-09T13:46:10.202Z"
+    },
+    {
+      "id": "TASK-191",
+      "type": "task",
+      "title": "Strengthen Step 3: Add explicit hierarchy rules and Bug workflow",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-09T13:46:23.364Z"
     }
   ],
   "stats": {
-    "total": 325,
+    "total": 329,
     "by_type": {
       "epic": 17,
-      "story": 74,
-      "task": 188,
+      "story": 75,
+      "task": 191,
       "bug": 34,
       "spike": 7,
       "feature": 5,
@@ -2674,7 +2706,7 @@
     "by_status": {
       "in-progress": 4,
       "done": 157,
-      "draft": 157,
+      "draft": 161,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2697,5 +2729,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-09T12:56:40.264Z"
+  "last_updated": "2025-12-09T13:46:23.364Z"
 }
