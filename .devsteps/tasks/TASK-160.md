@@ -1,34 +1,79 @@
-# Fix esbuild Output Format to ESM ✅
+# Rename CLI Flag: --eisenhower → --priority
 
-## Implementation Complete
+## Context
 
-### Change Made
-**File:** `packages/extension/esbuild.js` line 29
-```javascript
-// Before:
-format: 'cjs',
+STORY-064 removed legacy `priority` field and made Eisenhower the sole priority system. However, `--eisenhower` is verbose and less intuitive than `--priority` for end users.
 
-// After:
-format: 'esm',
+## Goal
+
+Rename CLI flag to `--priority` while keeping Eisenhower Matrix as the underlying system. Maintain backward compatibility with deprecated `--eisenhower` alias.
+
+## Implementation
+
+### CLI Changes (packages/cli/src/index.ts)
+
+**Add command:**
+```typescript
+.option('-p, --priority <quadrant>', 'Priority: urgent-important|not-urgent-important|urgent-not-important|not-urgent-not-important')
+.option('--eisenhower <quadrant>', '[DEPRECATED] Use --priority instead')
 ```
 
-### Verification
-- ✅ Build succeeds (571KB extension bundle)
-- ✅ No TypeScript errors
-- ✅ Output uses ESM syntax: `export { activate, deactivate }`
-- ✅ No CommonJS syntax (`module.exports`, `require()`)
+**Update command:**
+```typescript
+.option('-p, --priority <quadrant>', 'New priority')
+.option('--eisenhower <quadrant>', '[DEPRECATED] Use --priority instead')
+```
 
-### Testing Required
-1. **Debug Mode (F5)**: Extension should activate without "module is not defined" error
-2. **STORY-061 Features**: MCP runtime detection should work correctly
-3. **TreeView**: Should load and display work items
-4. **Production VSIX**: Build and verify no regressions
+**List command:**
+```typescript
+.option('-p, --priority <quadrant>', 'Filter by priority')
+.option('--eisenhower <quadrant>', '[DEPRECATED] Use --priority instead')
+```
 
-### Safe for STORY-061
-- ✅ No TypeScript source changes
-- ✅ All `.js` import extensions preserved
-- ✅ `"type": "module"` kept in package.json
-- ✅ Only build output format changed
+### Handler Logic (packages/cli/src/commands/index.ts)
 
-### Next Step
-User should test extension activation in VS Code debug mode (F5).
+```typescript
+// Normalize: accept both --priority and --eisenhower (deprecated)
+const eisenhowerValue = options.priority || options.eisenhower;
+
+if (options.eisenhower) {
+  console.warn(chalk.yellow('⚠️  --eisenhower is deprecated. Use --priority instead.'));
+}
+
+// Use eisenhowerValue throughout
+```
+
+### Documentation Updates
+
+- README.md: Already uses "Priority" terminology ✅
+- Init templates: Update examples to use `--priority`
+- Help text: Mark `--eisenhower` as deprecated
+
+## Testing
+
+```bash
+# New flag (primary)
+devsteps add task "Test" --priority urgent-important
+
+# Old flag (deprecated, shows warning)
+devsteps add task "Test" --eisenhower urgent-important
+⚠️  --eisenhower is deprecated. Use --priority instead.
+
+# List with new flag
+devsteps list --priority urgent-important
+```
+
+## Backward Compatibility
+
+- `--eisenhower` kept as alias until v0.8.0 (March 2026)
+- Deprecation warning shown when used
+- Internal field remains `eisenhower` in JSON/schemas
+- No breaking changes to existing scripts using `--eisenhower`
+
+## Success Criteria
+
+- CLI accepts both `--priority` and `--eisenhower` (with warning)
+- Help text shows `--priority` as primary option
+- Examples use `--priority` exclusively
+- Internal `eisenhower` field unchanged
+- Deprecation warning clear and actionable

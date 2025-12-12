@@ -3,7 +3,7 @@
   "counters": {
     "epic": 17,
     "story": 68,
-    "task": 159,
+    "task": 160,
     "bug": 31,
     "spike": 7,
     "feature": 5,
@@ -2067,14 +2067,22 @@
       "title": "Documentation Update - Eisenhower Matrix Throughout",
       "status": "draft",
       "updated": "2025-12-05T16:29:56.008Z"
+    },
+    {
+      "id": "TASK-160",
+      "type": "task",
+      "title": "Rename --eisenhower flag to --priority for better UX",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-12T20:34:41.452Z"
     }
   ],
   "stats": {
-    "total": 287,
+    "total": 288,
     "by_type": {
       "epic": 17,
       "story": 68,
-      "task": 159,
+      "task": 160,
       "bug": 31,
       "spike": 7,
       "feature": 5,
@@ -2083,7 +2091,7 @@
     "by_status": {
       "in-progress": 5,
       "done": 145,
-      "draft": 132,
+      "draft": 133,
       "blocked": 2,
       "obsolete": 3,
       "review": 0
@@ -2106,5 +2114,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-12T20:30:07.261Z"
+  "last_updated": "2025-12-12T20:34:41.452Z"
 }
