@@ -4,7 +4,6 @@
   "category": "vscode",
   "title": "Fix TreeView ID Mismatch - Change devstepsitemsView to devsteps.itemsView",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-26T07:00:09.177Z",
   "updated": "2025-11-26T07:11:00.959Z",

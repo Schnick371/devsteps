@@ -61,7 +61,7 @@ export async function bulkUpdateCommand(itemIds: string[], options: any) {
 
     const updates: Partial<ItemMetadata> = {};
     if (options.status) updates.status = options.status;
-    if (options.priority) updates.priority = options.priority;
+    if (options.eisenhower) updates.eisenhower = options.eisenhower;
     if (options.assignee) updates.assignee = options.assignee;
     if (options.category) updates.category = options.category;
 

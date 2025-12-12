@@ -182,11 +182,11 @@ devsteps add bug "Error on page load"
 
 # List items
 devsteps list --status draft
-devsteps list --type story --priority high
+devsteps list --type story --eisenhower urgent-important
 
 # Update items
 devsteps update STORY-001 --status in-progress
-devsteps update TASK-005 --priority high
+devsteps update TASK-005 --eisenhower urgent-important
 
 # Get item details
 devsteps get STORY-001
@@ -299,15 +299,7 @@ For issues and questions:
             panel: 'dedicated',
           },
         },
-        {
-          label: 'DevSteps: List High Priority Items',
-          type: 'shell',
-          command: 'node packages/cli/dist/index.js list --priority high',
-          presentation: {
-            reveal: 'always',
-            panel: 'dedicated',
-          },
-        },
+        // High Priority list replaced by Eisenhower Q1 filter
         {
           label: 'DevSteps: List Q1 Tasks (Urgent & Important)',
           type: 'shell',

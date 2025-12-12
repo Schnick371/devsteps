@@ -4,7 +4,7 @@
   "category": "extension",
   "title": "Generate mcp.json configuration for manual setup",
   "status": "draft",
-  "priority": "medium",
+  "eisenhower": "not-urgent-important",
   "created": "2025-12-03T17:58:40.010Z",
   "updated": "2025-12-03T17:59:24.582Z",
   "author": "the@devsteps.dev",

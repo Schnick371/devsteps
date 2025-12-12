@@ -4,7 +4,6 @@
   "category": "general",
   "title": "TreeView hierarchical mode broken after minimal index refactoring",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-24T10:21:26.835Z",
   "updated": "2025-11-24T14:28:36.648Z",

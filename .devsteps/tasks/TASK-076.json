@@ -4,7 +4,6 @@
   "category": "vscode",
   "title": "Fix context key race condition - Set devsteps.showWelcome explicitly",
   "status": "done",
-  "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-27T19:05:58.660Z",
   "updated": "2025-11-27T19:06:12.462Z",

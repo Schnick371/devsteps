@@ -44,12 +44,6 @@ export const ItemStatus = z.enum([
 export type ItemStatus = z.infer<typeof ItemStatus>;
 
 /**
- * Priority levels
- */
-export const Priority = z.enum(['critical', 'high', 'medium', 'low']);
-export type Priority = z.infer<typeof Priority>;
-
-/**
  * Eisenhower Matrix quadrants for prioritization
  * Q1: Urgent + Important = Do First
  * Q2: Not Urgent + Important = Schedule/Plan
@@ -135,8 +129,7 @@ export const ItemMetadata = z.object({
   category: z.string().default('general'),
   title: z.string().min(1).max(200),
   status: ItemStatus.default('draft'),
-  priority: Priority.default('medium'),
-  eisenhower: EisenhowerQuadrant.optional(),
+  eisenhower: EisenhowerQuadrant.default('not-urgent-important'),
   superseded_by: z.string().optional(),
   created: z.string().datetime(),
   updated: z.string().datetime(),
@@ -197,7 +190,7 @@ export const DevStepsIndex = z.object({
       type: ItemType,
       title: z.string(),
       status: ItemStatus,
-      priority: Priority,
+      eisenhower: EisenhowerQuadrant,
       updated: z.string().datetime(),
     })
   ),

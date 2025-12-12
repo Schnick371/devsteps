@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Context Keys nicht mit persistiertem State synchronisiert - Menu Checkmarks falsch",
   "status": "done",
-  "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-28T08:41:49.546Z",
   "updated": "2025-11-28T08:45:22.320Z",

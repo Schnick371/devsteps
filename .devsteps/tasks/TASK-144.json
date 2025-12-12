@@ -4,7 +4,7 @@
   "category": "extension",
   "title": "Add copy-to-clipboard for configuration",
   "status": "draft",
-  "priority": "low",
+  "eisenhower": "not-urgent-important",
   "created": "2025-12-03T17:58:40.136Z",
   "updated": "2025-12-03T17:59:14.314Z",
   "author": "the@devsteps.dev",

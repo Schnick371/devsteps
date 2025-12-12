@@ -5,7 +5,6 @@ import type {
   EisenhowerQuadrant,
   ItemMetadata,
   ItemStatus,
-  Priority,
 } from '../schemas/index.js';
 import { STATUS, RELATIONSHIP_TYPE } from '../constants/index.js';
 import { TYPE_TO_DIRECTORY, getCurrentTimestamp, parseItemId } from '../utils/index.js';
@@ -13,7 +12,6 @@ import { TYPE_TO_DIRECTORY, getCurrentTimestamp, parseItemId } from '../utils/in
 export interface UpdateItemArgs {
   id: string;
   status?: ItemStatus;
-  priority?: Priority;
   eisenhower?: EisenhowerQuadrant;
   superseded_by?: string;
   title?: string;
@@ -98,7 +96,6 @@ export async function updateItem(
   }
 
   if (args.status) metadata.status = args.status;
-  if (args.priority) metadata.priority = args.priority;
   if (args.eisenhower) metadata.eisenhower = args.eisenhower;
   if (args.superseded_by !== undefined) metadata.superseded_by = args.superseded_by;
   if (args.title) metadata.title = args.title;
@@ -133,7 +130,7 @@ export async function updateItem(
   const itemIndex = index.items.findIndex((i) => i.id === args.id);
   if (itemIndex !== -1) {
     if (args.status) index.items[itemIndex].status = args.status;
-    if (args.priority) index.items[itemIndex].priority = args.priority;
+    if (args.eisenhower) index.items[itemIndex].eisenhower = args.eisenhower;
     if (args.title) index.items[itemIndex].title = args.title;
     index.items[itemIndex].updated = metadata.updated;
 

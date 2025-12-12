@@ -1,7 +1,7 @@
 export type {
   ItemType,
   ItemStatus,
-  Priority,
+  EisenhowerQuadrant,
   RelationType,
   LinkedItems,
   GitCommit,

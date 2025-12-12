@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Refactor Init: Append-only .gitignore handling",
   "status": "draft",
-  "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-12-02T15:56:41.874Z",
   "updated": "2025-12-02T15:56:58.705Z",

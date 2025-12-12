@@ -4,7 +4,7 @@
   "category": "refactoring",
   "title": "Remove legacy npx-based MCP server manager",
   "status": "draft",
-  "priority": "high",
+  "eisenhower": "not-urgent-important",
   "created": "2025-12-03T17:58:31.329Z",
   "updated": "2025-12-03T17:59:24.332Z",
   "author": "the@devsteps.dev",

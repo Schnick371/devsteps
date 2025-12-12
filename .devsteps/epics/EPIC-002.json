@@ -4,7 +4,6 @@
   "category": "infrastructure",
   "title": "Monorepo Infrastructure - Build System and Package Management",
   "status": "done",
-  "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T15:33:22.968Z",
   "updated": "2025-11-24T10:15:02.472Z",

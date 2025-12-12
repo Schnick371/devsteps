@@ -4,7 +4,6 @@
   "category": "VS Code Extension",
   "title": "TreeView: Persist state across VS Code sessions",
   "status": "done",
-  "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-24T17:39:41.001Z",
   "updated": "2025-11-28T09:37:49.990Z",

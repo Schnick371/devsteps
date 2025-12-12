@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Fix story file path - openItem uses naive pluralization",
   "status": "done",
-  "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-28T09:55:18.230Z",
   "updated": "2025-12-01T10:48:00.567Z",

@@ -4,7 +4,7 @@
   "category": "documentation",
   "title": "Update extension README for bundled architecture",
   "status": "draft",
-  "priority": "high",
+  "eisenhower": "not-urgent-important",
   "created": "2025-12-03T17:58:48.815Z",
   "updated": "2025-12-03T17:59:24.708Z",
   "author": "the@devsteps.dev",

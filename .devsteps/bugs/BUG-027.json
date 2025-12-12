@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Fix FileSystemWatcher - Must exist before early return",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-30T20:03:18.657Z",
   "updated": "2025-11-30T20:04:29.431Z",

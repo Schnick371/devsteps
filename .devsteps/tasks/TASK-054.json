@@ -4,7 +4,6 @@
   "category": "vscode",
   "title": "Replace any[] with proper TypeScript types for type safety",
   "status": "draft",
-  "priority": "low",
   "eisenhower": "not-urgent-not-important",
   "created": "2025-11-26T06:27:06.637Z",
   "updated": "2025-11-26T06:27:49.261Z",

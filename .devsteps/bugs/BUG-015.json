@@ -4,7 +4,6 @@
   "category": "vscode",
   "title": "Extension Not Loading - TreeView Registration and Icon Display Failures",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-26T06:59:59.638Z",
   "updated": "2025-11-26T07:12:01.589Z",

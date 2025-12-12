@@ -4,7 +4,6 @@
   "category": "vscode",
   "title": "Fix Activity Bar Icon Reference - Rename or Update package.json Path",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-26T07:00:18.541Z",
   "updated": "2025-11-26T07:11:47.692Z",

@@ -4,7 +4,7 @@
   "category": "testing",
   "title": "Test bundled MCP server executable",
   "status": "done",
-  "priority": "high",
+  "eisenhower": "not-urgent-important",
   "created": "2025-12-03T17:58:21.452Z",
   "updated": "2025-12-03T20:46:41.655Z",
   "author": "the@devsteps.dev",

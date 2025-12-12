@@ -4,7 +4,6 @@
   "category": "Testing",
   "title": "CLI Integration Tests with BATS Framework",
   "status": "draft",
-  "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-02T14:56:08.673Z",
   "updated": "2025-12-02T14:58:19.926Z",

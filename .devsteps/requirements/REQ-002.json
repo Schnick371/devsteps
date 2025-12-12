@@ -4,7 +4,7 @@
   "category": "general",
   "title": "Test-req-neu",
   "status": "draft",
-  "priority": "low",
+  "eisenhower": "not-urgent-important",
   "created": "2025-11-28T08:35:02.014Z",
   "updated": "2025-11-28T08:53:25.411Z",
   "author": "the@devsteps.dev",

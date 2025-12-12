@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Traceability Graph Node Limiting - Fix O(n²) Performance Bottleneck",
   "status": "done",
-  "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T19:27:59.279Z",
   "updated": "2025-11-23T19:32:00.877Z",

@@ -6,7 +6,6 @@ import type {
   EisenhowerQuadrant,
   ItemMetadata,
   ItemType,
-  Priority,
 } from '../schemas/index.js';
 import { TYPE_TO_DIRECTORY, generateItemId, getCurrentTimestamp } from '../utils/index.js';
 
@@ -15,11 +14,10 @@ export interface AddItemArgs {
   title: string;
   description?: string;
   category?: string;
-  priority?: Priority;
+  eisenhower?: EisenhowerQuadrant;
   tags?: string[];
   affected_paths?: string[];
   assignee?: string;
-  eisenhower?: EisenhowerQuadrant;
 }
 
 export interface AddItemResult {
@@ -82,8 +80,7 @@ export async function addItem(devstepsir: string, args: AddItemArgs): Promise<Ad
     category: args.category || 'general',
     title: args.title,
     status: 'draft',
-    priority: args.priority || 'medium',
-    eisenhower: args.eisenhower,
+    eisenhower: args.eisenhower || 'not-urgent-important',
     created: now,
     updated: now,
     author: args.assignee || config.settings.default_author,
@@ -125,7 +122,7 @@ export async function addItem(devstepsir: string, args: AddItemArgs): Promise<Ad
     type: args.type,
     title: args.title,
     status: 'draft',
-    priority: args.priority || 'medium',
+    eisenhower: args.eisenhower || 'not-urgent-important',
     updated: now,
   });
 

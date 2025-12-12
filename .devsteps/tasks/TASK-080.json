@@ -4,7 +4,6 @@
   "category": "vscode",
   "title": "Update activationEvents - Remove Star, Add Conditional",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-28T09:04:24.075Z",
   "updated": "2025-11-28T09:07:48.135Z",

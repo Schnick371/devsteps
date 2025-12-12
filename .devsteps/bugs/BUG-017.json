@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Restore original FileDecorationProvider badge implementation",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-27T16:14:15.964Z",
   "updated": "2025-11-28T07:05:16.534Z",

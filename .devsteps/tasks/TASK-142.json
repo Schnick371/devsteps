@@ -4,7 +4,7 @@
   "category": "extension",
   "title": "Create manual setup WebView UI for non-VS Code IDEs",
   "status": "draft",
-  "priority": "high",
+  "eisenhower": "not-urgent-important",
   "created": "2025-12-03T17:58:39.886Z",
   "updated": "2025-12-03T17:59:24.462Z",
   "author": "the@devsteps.dev",

@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Dashboard Single-Load Optimization - Eliminate 5× Redundant File Reads",
   "status": "done",
-  "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T19:27:33.181Z",
   "updated": "2025-11-23T19:29:47.661Z",

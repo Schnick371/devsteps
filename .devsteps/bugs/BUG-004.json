@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Command Registration Failure - Commands Not Found After Extension Load",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-24T11:56:42.058Z",
   "updated": "2025-11-24T12:22:01.750Z",

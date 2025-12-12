@@ -4,7 +4,6 @@
   "category": "CLI",
   "title": "Doctor: Detect dependency cycles (warning only)",
   "status": "draft",
-  "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-01T10:27:02.550Z",
   "updated": "2025-12-01T10:27:15.215Z",

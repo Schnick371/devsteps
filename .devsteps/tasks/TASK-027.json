@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Fix Extension Commands API Compatibility",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T19:42:48.508Z",
   "updated": "2025-11-23T19:50:24.421Z",

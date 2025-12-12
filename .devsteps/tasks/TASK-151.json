@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Add devsteps.checkPrerequisites command with detailed validation",
   "status": "done",
-  "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-05T08:48:32.811Z",
   "updated": "2025-12-05T09:03:11.587Z",

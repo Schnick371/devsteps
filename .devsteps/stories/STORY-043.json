@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Fix Async/Sync Declaration Mismatch in Shared Core",
   "status": "draft",
-  "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-30T19:27:32.769Z",
   "updated": "2025-11-30T19:27:39.657Z",

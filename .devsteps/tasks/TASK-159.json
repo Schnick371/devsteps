@@ -4,7 +4,7 @@
   "category": "general",
   "title": "Update devsteps-workflow.prompt.md: Enforce feature branch discipline",
   "status": "done",
-  "priority": "high",
+  "eisenhower": "not-urgent-important",
   "created": "2025-12-05T10:56:15.023Z",
   "updated": "2025-12-05T16:20:11.641Z",
   "author": "the@devsteps.dev",

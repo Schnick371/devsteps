@@ -2,19 +2,18 @@
   "id": "TASK-161",
   "type": "task",
   "category": "general",
-  "title": "Add cycle detection configuration property to package.json",
+  "title": "Update MCP Server hierarchy resource description",
   "status": "draft",
-  "priority": "medium",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-08T09:30:46.647Z",
-  "updated": "2025-12-08T09:31:24.503Z",
+  "created": "2025-12-05T15:53:29.958Z",
+  "updated": "2025-12-05T16:03:01.020Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/extension/package.json"
+    "packages/mcp-server/src/index.ts"
   ],
   "linked_items": {
     "implements": [
-      "STORY-069"
+      "STORY-063"
     ],
     "implemented-by": [],
     "tested-by": [],
@@ -28,8 +27,8 @@
     "superseded-by": []
   },
   "tags": [
-    "configuration",
-    "settings"
+    "mcp-server",
+    "bug-hierarchy"
   ],
   "commits": [],
   "metadata": {}

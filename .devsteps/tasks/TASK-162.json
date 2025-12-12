@@ -2,19 +2,19 @@
   "id": "TASK-162",
   "type": "task",
   "category": "general",
-  "title": "Update WorkItemNode to accept cycle detection configuration flag",
+  "title": "Update Extension MCP tool descriptions",
   "status": "draft",
-  "priority": "medium",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-08T09:31:02.744Z",
-  "updated": "2025-12-08T09:31:24.503Z",
+  "created": "2025-12-05T15:53:29.960Z",
+  "updated": "2025-12-05T16:03:01.020Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/extension/src/treeView/nodes/workItemNode.ts"
+    "packages/extension/src/mcp-server/tools/index.ts",
+    "packages/extension/src/mcp-server/index.ts"
   ],
   "linked_items": {
     "implements": [
-      "STORY-069"
+      "STORY-063"
     ],
     "implemented-by": [],
     "tested-by": [],
@@ -28,8 +28,8 @@
     "superseded-by": []
   },
   "tags": [
-    "treeview",
-    "implementation"
+    "extension",
+    "bug-hierarchy"
   ],
   "commits": [],
   "metadata": {}

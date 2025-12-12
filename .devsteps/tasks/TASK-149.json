@@ -4,7 +4,7 @@
   "category": "testing",
   "title": "Test VSIX on Windows/macOS/Linux",
   "status": "draft",
-  "priority": "critical",
+  "eisenhower": "not-urgent-important",
   "created": "2025-12-03T17:58:49.211Z",
   "updated": "2025-12-03T17:59:24.825Z",
   "author": "the@devsteps.dev",

@@ -35,7 +35,6 @@ export async function addCommand(
   options: {
     description?: string;
     category?: string;
-    priority?: string;
     tags?: string[];
     assignee?: string;
     paths?: string[];
@@ -54,11 +53,10 @@ export async function addCommand(
       title,
       description: options.description,
       category: options.category,
-      priority: options.priority as any,
+      eisenhower: (options as any).eisenhower,
       tags: options.tags,
       affected_paths: options.paths,
       assignee: options.assignee,
-      eisenhower: (options as any).eisenhower,
     });
 
     spinner.succeed(`Created ${chalk.cyan(result.itemId)}: ${title}`);
@@ -66,8 +64,8 @@ export async function addCommand(
     if (options.tags && options.tags.length > 0) {
       console.log(chalk.gray('  Tags:'), options.tags.join(', '));
     }
-    if (options.priority) {
-      console.log(chalk.gray('  Priority:'), options.priority);
+    if ((options as any).eisenhower) {
+      console.log(chalk.gray('  Eisenhower:'), (options as any).eisenhower);
     }
 
     // Git hint
@@ -111,7 +109,9 @@ export async function getCommand(id: string) {
     console.log(chalk.bold.cyan(`${metadata.id}: ${metadata.title}`));
     console.log();
     console.log(chalk.gray('Status:'), metadata.status);
-    console.log(chalk.gray('Priority:'), metadata.priority);
+    if (metadata.eisenhower) {
+      console.log(chalk.gray('Eisenhower:'), metadata.eisenhower);
+    }
     console.log(chalk.gray('Type:'), metadata.type);
     console.log(chalk.gray('Category:'), metadata.category);
 
@@ -160,10 +160,7 @@ export async function listCommand(options: any) {
       items = items.filter((i: any) => i[statusField] === options.status);
     }
 
-    // Archived items don't have priority in the summary, skip filter
-    if (options.priority && !options.archived) {
-      items = items.filter((i: any) => i.priority === options.priority);
-    }
+    // Priority removed: use Eisenhower-only filtering
 
     if (options.eisenhower && !options.archived) {
       // Load full metadata for eisenhower filter (not available for archived summary)
@@ -207,7 +204,7 @@ export async function listCommand(options: any) {
         console.log(
           chalk.cyan(item.id),
           statusColor(`[${item.status}]`),
-          chalk.yellow(`(${item.priority})`),
+          item.eisenhower ? chalk.yellow(`(${item.eisenhower})`) : '',
           item.title
         );
       }
@@ -251,7 +248,6 @@ export async function updateCommand(id: string, options: any) {
     const oldStatus = metadata.status;
 
     if (options.status) metadata.status = options.status;
-    if (options.priority) metadata.priority = options.priority;
     if (options.title) metadata.title = options.title;
     if (options.assignee !== undefined) metadata.assignee = options.assignee;
     if (options.tags) metadata.tags = options.tags;
@@ -280,7 +276,7 @@ export async function updateCommand(id: string, options: any) {
     const itemIndex = index.items.findIndex((i: any) => i.id === id);
     if (itemIndex !== -1) {
       if (options.status) index.items[itemIndex].status = options.status;
-      if (options.priority) index.items[itemIndex].priority = options.priority;
+      // Priority removed from index items; Eisenhower remains in metadata only
       if ((options as any).eisenhower) metadata.eisenhower = (options as any).eisenhower;
       if (options.title) index.items[itemIndex].title = options.title;
       index.items[itemIndex].updated = metadata.updated;
@@ -298,7 +294,6 @@ export async function updateCommand(id: string, options: any) {
 
     const changes = [];
     if (options.status) changes.push(`status: ${options.status}`);
-    if (options.priority) changes.push(`priority: ${options.priority}`);
     if ((options as any).eisenhower) changes.push(`eisenhower: ${(options as any).eisenhower}`);
     if (options.title) changes.push('title');
     if (options.description) changes.push('description');

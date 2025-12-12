@@ -4,7 +4,6 @@
   "category": "MCP Server",
   "title": "MCP: Remove affects handlers and descriptions",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T08:59:34.159Z",
   "updated": "2025-12-03T09:16:19.874Z",

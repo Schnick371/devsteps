@@ -4,7 +4,6 @@
   "category": "VS Code Extension",
   "title": "TreeView does not auto-refresh when .devsteps files change",
   "status": "done",
-  "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-25T11:16:18.037Z",
   "updated": "2025-11-25T11:16:35.872Z",

@@ -4,7 +4,6 @@
   "category": "CLI",
   "title": "Deploy HIERARCHY.md + AI-GUIDE.md to .devsteps/ on init",
   "status": "done",
-  "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-12-01T10:08:29.285Z",
   "updated": "2025-12-01T10:13:38.138Z",

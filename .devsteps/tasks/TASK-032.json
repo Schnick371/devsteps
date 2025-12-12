@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Add CLI command to rebuild minimal index.json from item files",
   "status": "draft",
-  "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T10:21:50.188Z",
   "updated": "2025-11-24T10:21:56.069Z",

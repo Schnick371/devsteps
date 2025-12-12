@@ -4,7 +4,6 @@
   "category": "VS Code Extension",
   "title": "Fix: Priority filter shortcut conflicts with VS Code Command Palette",
   "status": "done",
-  "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T14:33:28.618Z",
   "updated": "2025-11-24T16:07:31.126Z",

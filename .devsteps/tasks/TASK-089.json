@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Remove MCP Server Bundling from Extension",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-30T11:24:35.990Z",
   "updated": "2025-11-30T11:35:45.130Z",

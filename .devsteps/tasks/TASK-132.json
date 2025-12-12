@@ -4,7 +4,6 @@
   "category": "devops",
   "title": "Fix MCP Server & CLI TypeScript Build Configuration",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T16:22:27.621Z",
   "updated": "2025-12-03T16:22:36.571Z",

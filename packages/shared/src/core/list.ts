@@ -5,17 +5,15 @@ import type {
   EisenhowerQuadrant,
   ItemStatus,
   ItemType,
-  Priority,
 } from '../schemas/index.js';
 import { TYPE_TO_DIRECTORY } from '../utils/index.js';
 
 export interface ListItemsArgs {
   type?: ItemType;
   status?: ItemStatus;
-  priority?: Priority;
+  eisenhower?: EisenhowerQuadrant;
   assignee?: string;
   tags?: string[];
-  eisenhower?: EisenhowerQuadrant;
   limit?: number;
 }
 
@@ -49,8 +47,8 @@ export async function listItems(
     items = items.filter((i) => i.status === args.status);
   }
 
-  if (args.priority) {
-    items = items.filter((i) => i.priority === args.priority);
+  if (args.eisenhower) {
+    items = items.filter((i) => i.eisenhower === args.eisenhower);
   }
 
   if (args.assignee) {

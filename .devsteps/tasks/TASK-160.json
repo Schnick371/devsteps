@@ -1,20 +1,19 @@
 {
   "id": "TASK-160",
   "type": "task",
-  "category": "vscode",
-  "title": "Change esbuild Extension Output from CommonJS to ESM",
-  "status": "done",
-  "priority": "medium",
-  "eisenhower": "urgent-important",
-  "created": "2025-12-05T17:12:20.785Z",
-  "updated": "2025-12-05T17:52:44.805Z",
+  "category": "general",
+  "title": "Update MCP Server linkTool description",
+  "status": "in-progress",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-05T15:53:29.956Z",
+  "updated": "2025-12-05T16:03:01.019Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/extension/esbuild.js"
+    "packages/mcp-server/src/tools/index.ts"
   ],
   "linked_items": {
     "implements": [
-      "BUG-032"
+      "STORY-063"
     ],
     "implemented-by": [],
     "tested-by": [],
@@ -28,9 +27,8 @@
     "superseded-by": []
   },
   "tags": [
-    "esbuild",
-    "esm",
-    "build"
+    "mcp-server",
+    "bug-hierarchy"
   ],
   "commits": [],
   "metadata": {}

@@ -1,4 +1,4 @@
-import type { EisenhowerQuadrant, ItemType, Priority } from '../schemas/index.js';
+import type { EisenhowerQuadrant, ItemType } from '../schemas/index.js';
 
 /**
  * Central type shortcuts mapping
@@ -23,7 +23,6 @@ export interface AddItemCommandArgs {
   title: string;
   description?: string;
   category?: string;
-  priority?: string;
   eisenhower?: string;
   tags?: string[];
   assignee?: string;
@@ -33,7 +32,6 @@ export interface AddItemCommandArgs {
 export interface UpdateItemCommandArgs {
   id: string;
   status?: string;
-  priority?: string;
   eisenhower?: string;
   superseded_by?: string;
   title?: string;
@@ -46,7 +44,6 @@ export interface UpdateItemCommandArgs {
 export interface ListItemsCommandArgs {
   type?: string;
   status?: string;
-  priority?: string;
   eisenhower?: string;
   assignee?: string;
   tags?: string[];
@@ -109,7 +106,7 @@ export interface IndexItem {
   type: ItemType;
   title: string;
   status: string;
-  priority: Priority;
+  eisenhower: EisenhowerQuadrant;
   updated: string;
   tags?: string[];
   category?: string;

@@ -4,7 +4,6 @@
   "category": "general",
   "title": "I/O Strategy Decision: Sync vs Async for DevSteps Scale",
   "status": "draft",
-  "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-30T19:26:01.615Z",
   "updated": "2025-11-30T19:27:39.657Z",

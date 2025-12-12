@@ -27,12 +27,29 @@
 
 ## Implementation Plan
 
-1. **Schema Migration** (shared) - Remove priority enum, keep eisenhower
-2. **Data Migration** - Convert existing items (priority → eisenhower mapping)
-3. **CLI Updates** - Replace --priority with eisenhower options
-4. **MCP Updates** - Update tool descriptions and handlers
-5. **Extension UI** - Rename labels, update filters, new icons
-6. **Documentation** - Update all guides, prompts, examples
+### Phase 1: Schema & CLI Migration ✅ (STORY-064)
+- Remove `priority` field from shared types (AddItemCommandArgs, UpdateItemCommandArgs, ListItemsCommandArgs)
+- Remove `--priority` CLI flags across add/list/update/bulk operations
+- Update CLI output to display Eisenhower instead of priority
+- Remove priority filter logic; retain Eisenhower filters
+- **Backward Compatibility**: Migration script (`remove-priority-field.ts`) available to clean existing data
+
+### Phase 2: Documentation Update ✅ (STORY-064)
+- README.md: Removed legacy priority examples; clarified Eisenhower as sole system
+- Project guidance: All prompts and examples use Eisenhower only
+- **Migration Timeline**: Legacy priority field will be removed v0.7.0 (Jan 2026)
+
+### Phase 3: Data Migration (STORY-065)
+- Run migration script to remove priority field from all 281+ work items
+- Verify all items have valid Eisenhower value (default: not-urgent-not-important)
+
+### Phase 4: Extension & MCP Updates (STORY-066, STORY-067)
+- MCP server: Update tool descriptions and handlers
+- Extension UI: Rename labels, update filters, display Eisenhower quadrant
+
+### Phase 5: Full Documentation Sync (STORY-068)
+- Update all docs, guides, examples to use Eisenhower terminology
+- Remove any remaining priority system references
 
 ## Success Criteria
 
@@ -41,3 +58,6 @@
 - Extension UI shows Eisenhower colors correctly
 - Documentation consistent (uses "Priority" label)
 - Migration script validates all data
+- CLI functional with Eisenhower-only options
+- Data migration can be run safely without data loss
+- Backward compatibility timeline communicated to users

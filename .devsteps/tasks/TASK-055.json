@@ -4,7 +4,6 @@
   "category": "vscode",
   "title": "Implement lazy loading for TreeView (100+ items performance)",
   "status": "draft",
-  "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-26T06:28:08.916Z",
   "updated": "2025-11-26T06:28:14.869Z",

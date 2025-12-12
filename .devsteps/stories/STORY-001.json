@@ -4,7 +4,6 @@
   "category": "core",
   "title": "Shared Package - Core Business Logic and Type Definitions",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T15:33:47.334Z",
   "updated": "2025-11-24T10:13:37.884Z",

@@ -4,7 +4,6 @@
   "category": "CLI",
   "title": "CLI: Remove affects from commands",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T08:59:34.160Z",
   "updated": "2025-12-03T09:17:07.237Z",

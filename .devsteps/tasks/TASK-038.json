@@ -4,7 +4,6 @@
   "category": "Core",
   "title": "Shared: Implement relationship validation engine",
   "status": "done",
-  "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-24T19:34:12.433Z",
   "updated": "2025-11-24T20:56:06.072Z",

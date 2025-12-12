@@ -4,7 +4,6 @@
   "category": "vscode",
   "title": "Refactor dashboardPanel.ts - Split 739-line file",
   "status": "done",
-  "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-26T06:26:07.894Z",
   "updated": "2025-11-26T07:53:50.283Z",

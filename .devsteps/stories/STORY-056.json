@@ -4,7 +4,6 @@
   "category": "build",
   "title": "Transform Build System for Dual-Target MCP Bundling",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T16:31:06.936Z",
   "updated": "2025-12-05T08:56:59.348Z",

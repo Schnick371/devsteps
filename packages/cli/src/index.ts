@@ -37,7 +37,6 @@ program
   .argument('<title>', 'Item title')
   .option('-d, --description <text>', 'Item description')
   .option('-c, --category <category>', 'Category/module')
-  .option('-p, --priority <priority>', 'Priority: critical|high|medium|low')
   .option(
     '-e, --eisenhower <quadrant>',
     'Eisenhower: urgent-important|not-urgent-important|urgent-not-important|not-urgent-not-important'
@@ -60,7 +59,6 @@ program
   .description('List items with optional filters')
   .option('-t, --type <type>', 'Filter by type: epic|story|task|req|feat|bug|spike|test')
   .option('-s, --status <status>', 'Filter by status')
-  .option('-p, --priority <priority>', 'Filter by priority')
   .option('-e, --eisenhower <quadrant>', 'Filter by Eisenhower quadrant')
   .option('-a, --assignee <email>', 'Filter by assignee')
   .option('--tags <tags...>', 'Filter by tags')
@@ -74,7 +72,6 @@ program
   .description('Update an existing item')
   .argument('<id>', 'Item ID')
   .option('-s, --status <status>', 'New status')
-  .option('-p, --priority <priority>', 'New priority')
   .option('-e, --eisenhower <quadrant>', 'New Eisenhower quadrant')
   .option('-t, --title <title>', 'New title')
   .option('-d, --description <text>', 'New description (replaces existing)')
@@ -198,7 +195,6 @@ bulkCmd
   .description('Update multiple items at once')
   .argument('<ids...>', 'Item IDs to update')
   .option('-s, --status <status>', 'Set status for all items')
-  .option('-p, --priority <priority>', 'Set priority for all items')
   .option('-a, --assignee <email>', 'Set assignee for all items')
   .option('-c, --category <category>', 'Set category for all items')
   .action(async (ids: string[], options) => {

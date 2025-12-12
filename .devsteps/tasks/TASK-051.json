@@ -4,7 +4,7 @@
   "category": "general",
   "title": "Test Ora 9 Spinner",
   "status": "draft",
-  "priority": "low",
+  "eisenhower": "not-urgent-important",
   "created": "2025-11-26T06:19:16.873Z",
   "updated": "2025-11-26T06:19:16.873Z",
   "author": "the@devsteps.dev",

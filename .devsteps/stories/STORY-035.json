@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Fix Welcome View flash - Activate extension before UI registration",
   "status": "done",
-  "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-27T17:12:46.374Z",
   "updated": "2025-11-28T09:04:58.035Z",

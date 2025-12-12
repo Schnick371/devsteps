@@ -88,8 +88,8 @@ DevSteps includes built-in support for the **Eisenhower Matrix** to help priorit
 ### Usage Example
 
 ```bash
-# Create high-priority tasks in different quadrants
-devsteps add task "Fix production bug" --priority critical --eisenhower urgent-important
+# Create Q1 tasks (urgent & important)
+devsteps add task "Fix production bug" --eisenhower urgent-important
 devsteps add task "Refactor authentication module" --eisenhower not-urgent-important
 devsteps add task "Update meeting notes" --eisenhower urgent-not-important
 
@@ -98,16 +98,14 @@ devsteps list --eisenhower urgent-important        # Q1 - Do First
 devsteps list --eisenhower not-urgent-important    # Q2 - Schedule
 ```
 
-### Priority vs Eisenhower
+### Eisenhower as Priority
 
-- **Priority** (`critical`, `high`, `medium`, `low`) - Technical severity
-- **Eisenhower** - Strategic importance and urgency for decision-making
+- DevSteps uses the **Eisenhower Matrix** as the single priority system.
+- Choose a quadrant to reflect urgency and importance.
 
-Use both together for comprehensive task management:
+Example:
 ```bash
-devsteps add bug "Memory leak in user service" \
-  --priority critical \
-  --eisenhower urgent-important
+devsteps add bug "Memory leak in user service" --eisenhower urgent-important
 ```
 
 ## 🛠️ Tech Stack

@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Command Name Typos - devstepsopenItem und devstepsupdateStatus missing dots",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-28T08:53:24.123Z",
   "updated": "2025-11-28T08:57:25.079Z",

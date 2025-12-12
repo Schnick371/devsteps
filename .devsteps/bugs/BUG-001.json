@@ -4,7 +4,6 @@
   "category": "VS Code Extension",
   "title": "Fix VS Code extension command errors and missing implementations",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-24T09:41:50.891Z",
   "updated": "2025-11-24T09:49:16.429Z",

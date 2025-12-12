@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Validation: Allow Bug → Epic/Requirement via relates-to + affects",
   "status": "done",
-  "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-12-02T11:38:11.598Z",
   "updated": "2025-12-02T11:57:28.814Z",

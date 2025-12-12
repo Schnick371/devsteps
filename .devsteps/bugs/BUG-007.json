@@ -4,7 +4,6 @@
   "category": "VS Code Extension",
   "title": "Fix: Flat view expanded state resets on filter toggle",
   "status": "done",
-  "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-24T13:03:10.806Z",
   "updated": "2025-11-24T20:52:11.415Z",

@@ -2,7 +2,7 @@
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Structured development workflow - preserve decisions and maintain context continuity'
-tools: ['vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'vscode/extensions', 'execute/testFailure', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web/fetch', 'devsteps/*', 'copilot-container-tools/*', 'tavily/*', 'upstash/context7/*', 'agent', 'todo']
+tools: ['execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/createAndRunTask', 'execute/runInTerminal', 'read/terminalSelection', 'read/terminalLastCommand', 'read/problems', 'read/readFile', 'edit', 'search', 'web/fetch', 'devsteps/*', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'agent', 'todo']
 ---
 
 # 🧭 Structured Development Workflow
@@ -62,22 +62,6 @@ Maintain structured workflow - preserve decisions, traceability, prevent context
 - Patterns consistent
 - No breaking changes
 
-## Status Lifecycle
-
-**Progression:** `draft → planned → in-progress → review → done`
-
-**Meanings:**
-- **draft/planned**: Created, ready to start
-- **in-progress**: Active development
-- **review**: Testing/validation
-- **done**: All gates passed
-- **blocked/cancelled/obsolete**: Stopped work
-
-**Quality Gates (Review → Done):**
-- ✅ Tests pass + Build succeeds
-- ✅ Manual testing + Docs updated
-- ✅ No regressions + Patterns followed
-
 ## Before Committing
 
 **When to Commit:**
@@ -93,29 +77,20 @@ Maintain structured workflow - preserve decisions, traceability, prevent context
 
 ## Completion Workflow
 
-**Testing Phase (Status: review):**
-- Mark DevSteps work item as `review` status
-- Run all applicable tests
-- Perform manual testing
-- Verify build succeeds
-- Check for regressions
-- Review code quality
-
-**If Tests Fail:**
-- Return to DevSteps work item status implementation
-- Fix issues
-- Repeat testing
-
-**When All Tests Pass (Status: done):**
-- Mark item as `done` status
+**When Done:**
 - Final commit to feature branch
 - Push branch
+- Update work item status via devsteps
 - **Prohibition:** No merge to main yet (test first, user approval, squash merge later)
 
 **Status Sync:**
 - Status stored in `.devsteps/` on feature branch
 - Synced to main during final merge
 - Temporary divergence expected
+
+**Quality Gates:**
+- Tests pass, build OK, decisions documented
+- Traceability complete, no broken deps, docs updated
 
 **Context Preservation:**
 - Why/What/How for future switches

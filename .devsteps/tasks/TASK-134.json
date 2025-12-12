@@ -4,7 +4,7 @@
   "category": "refactoring",
   "title": "Update MCP server imports to use bundled structure",
   "status": "done",
-  "priority": "critical",
+  "eisenhower": "not-urgent-important",
   "created": "2025-12-03T17:58:21.191Z",
   "updated": "2025-12-03T20:37:08.734Z",
   "author": "the@devsteps.dev",

@@ -4,7 +4,6 @@
   "category": "general",
   "title": "Migrate Chalk 4 → 5 (ESM-only)",
   "status": "done",
-  "priority": "high",
   "eisenhower": "urgent-important",
   "created": "2025-11-25T22:06:24.055Z",
   "updated": "2025-11-26T06:15:45.008Z",

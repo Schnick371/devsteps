@@ -4,7 +4,7 @@
   "category": "extension",
   "title": "Detect IDE capabilities (VS Code vs Cursor/Windsurf)",
   "status": "draft",
-  "priority": "high",
+  "eisenhower": "not-urgent-important",
   "created": "2025-12-03T17:58:39.762Z",
   "updated": "2025-12-03T17:59:24.583Z",
   "author": "the@devsteps.dev",

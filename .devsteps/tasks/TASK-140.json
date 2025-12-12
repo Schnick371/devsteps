@@ -4,7 +4,7 @@
   "category": "extension",
   "title": "Add MCP server health monitoring and logging",
   "status": "draft",
-  "priority": "medium",
+  "eisenhower": "not-urgent-important",
   "created": "2025-12-03T17:58:31.456Z",
   "updated": "2025-12-03T17:59:06.484Z",
   "author": "the@devsteps.dev",

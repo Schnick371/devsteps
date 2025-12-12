@@ -4,7 +4,6 @@
   "category": "VS Code Extension",
   "title": "Remove unnecessary success notifications from view mode commands",
   "status": "done",
-  "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T14:08:47.950Z",
   "updated": "2025-11-24T14:24:43.108Z",

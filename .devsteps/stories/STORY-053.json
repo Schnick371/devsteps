@@ -4,7 +4,6 @@
   "category": "Architecture",
   "title": "Remove Azure DevOps affects/affected-by Relations",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T08:58:25.631Z",
   "updated": "2025-12-03T09:20:43.947Z",

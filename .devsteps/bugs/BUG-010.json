@@ -4,7 +4,7 @@
   "category": "Testing",
   "title": "Test FileSystemWatcher Auto-Refresh",
   "status": "draft",
-  "priority": "low",
+  "eisenhower": "not-urgent-important",
   "created": "2025-11-25T11:18:55.191Z",
   "updated": "2025-11-25T11:18:55.191Z",
   "author": "the@devsteps.dev",

@@ -4,7 +4,7 @@
   "category": "documentation",
   "title": "Update CHANGELOG with bundling changes",
   "status": "draft",
-  "priority": "high",
+  "eisenhower": "not-urgent-important",
   "created": "2025-12-03T17:58:48.955Z",
   "updated": "2025-12-03T17:59:14.699Z",
   "author": "the@devsteps.dev",

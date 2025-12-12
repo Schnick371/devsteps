@@ -4,7 +4,7 @@
   "category": "general",
   "title": "Extension TreeView missing blocks/blocked-by relationship display",
   "status": "done",
-  "priority": "critical",
+  "eisenhower": "not-urgent-important",
   "created": "2025-12-03T09:54:22.995Z",
   "updated": "2025-12-03T09:55:21.321Z",
   "author": "the@devsteps.dev",

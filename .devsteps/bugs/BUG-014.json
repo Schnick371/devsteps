@@ -4,7 +4,6 @@
   "category": "vscode",
   "title": "Correct minimum VS Code version from 1.95.0 to 1.99.0 (MCP API requirement)",
   "status": "done",
-  "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-11-26T06:33:18.367Z",
   "updated": "2025-11-26T06:36:15.476Z",
