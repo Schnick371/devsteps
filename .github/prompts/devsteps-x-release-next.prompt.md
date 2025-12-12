@@ -2,7 +2,7 @@
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Execute pre-release deployment to @next tag - testing and validation before stable release'
-tools: ['edit', 'search', 'runCommands', 'runTasks', 'devsteps/*', 'problems', 'changes']
+tools: ['execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/createAndRunTask', 'execute/runInTerminal', 'read/problems', 'read/readFile', 'read/terminalSelection', 'read/terminalLastCommand', 'edit', 'search', 'devsteps/*', 'agent']
 ---
 
 # 🧪 Pre-Release Workflow - @next Tag Deployment

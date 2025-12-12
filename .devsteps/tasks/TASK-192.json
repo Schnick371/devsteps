@@ -7,7 +7,7 @@
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-12T10:09:22.528Z",
-  "updated": "2025-12-12T10:11:10.511Z",
+  "updated": "2025-12-12T10:25:26.172Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/types/index.ts",
@@ -28,7 +28,8 @@
       "TASK-193",
       "TASK-194",
       "TASK-195",
-      "TASK-196"
+      "TASK-196",
+      "TASK-197"
     ],
     "supersedes": [],
     "superseded-by": []

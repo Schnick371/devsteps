@@ -2,7 +2,7 @@
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Structured development workflow - preserve decisions and maintain context continuity'
-tools: ['edit', 'search', 'runCommands', 'runTasks', 'devsteps/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'usages', 'problems', 'changes', 'fetch', 'todos', 'runSubagent']
+tools: ['vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'vscode/extensions', 'execute/testFailure', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web/fetch', 'devsteps/*', 'copilot-container-tools/*', 'tavily/*', 'upstash/context7/*', 'agent', 'todo']
 ---
 
 # 🧭 Structured Development Workflow

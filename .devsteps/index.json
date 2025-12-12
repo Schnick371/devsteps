@@ -1,9 +1,9 @@
 {
   "version": "1.0.0",
   "counters": {
-    "epic": 18,
-    "story": 76,
-    "task": 196,
+    "epic": 19,
+    "story": 77,
+    "task": 197,
     "bug": 34,
     "spike": 8,
     "feature": 5,
@@ -2319,9 +2319,9 @@
       "id": "STORY-064",
       "type": "story",
       "title": "Schema & Data Migration - Remove Priority Field",
-      "status": "draft",
+      "status": "in-progress",
       "priority": "critical",
-      "updated": "2025-12-05T16:29:33.128Z"
+      "updated": "2025-12-12T15:24:40.670Z"
     },
     {
       "id": "STORY-065",
@@ -2754,23 +2754,47 @@
       "status": "draft",
       "priority": "high",
       "updated": "2025-12-12T10:12:51.431Z"
+    },
+    {
+      "id": "EPIC-019",
+      "type": "epic",
+      "title": "Intelligent Search & Discovery - Fuzzy Matching and Relevance Ranking",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-12T10:17:37.004Z"
+    },
+    {
+      "id": "STORY-077",
+      "type": "story",
+      "title": "Implement Fuzzy Search with Fuse.js",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-12T10:21:45.994Z"
+    },
+    {
+      "id": "TASK-197",
+      "type": "task",
+      "title": "Add ULID Validation Checks to Doctor Command",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-12T10:25:20.337Z"
     }
   ],
   "stats": {
-    "total": 337,
+    "total": 340,
     "by_type": {
-      "epic": 18,
-      "story": 76,
-      "task": 196,
+      "epic": 19,
+      "story": 77,
+      "task": 197,
       "bug": 34,
       "spike": 8,
       "feature": 5,
       "requirement": 2
     },
     "by_status": {
-      "in-progress": 4,
+      "in-progress": 5,
       "done": 157,
-      "draft": 169,
+      "draft": 171,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2793,5 +2817,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-12T10:12:51.431Z"
+  "last_updated": "2025-12-12T15:24:40.670Z"
 }

@@ -2,7 +2,7 @@
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Interactive planning session - work with developer to define and structure work items before implementation'
-tools: ['search', 'runCommands', 'runTasks', 'devsteps/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'usages', 'problems', 'changes', 'testFailure', 'fetch', 'todos', 'runSubagent']
+tools: ['vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'vscode/extensions', 'execute/testFailure', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'search', 'web/fetch', 'copilot-container-tools/inspect_container', 'copilot-container-tools/inspect_image', 'copilot-container-tools/list_containers', 'copilot-container-tools/list_images', 'copilot-container-tools/list_networks', 'copilot-container-tools/list_volumes', 'copilot-container-tools/logs_for_container', 'tavily/*', 'upstash/context7/*', 'agent', 'devsteps/*', 'todo']
 ---
 
 # 🎯 Plan Work - Interactive Planning Session
@@ -13,37 +13,62 @@ Plan work through dialogue - understand intent, search existing items, structure
 
 **Branch Strategy:** DevSteps Work items created in `main` ONLY. Feature branches come later.
 
-## Planning Protocol
+## Planning Protocol (MANDATORY)
 
-### 0. Branch: Main Only
-Verify on `main` - work items are metadata, not code.
+**CRITICAL:** These steps are required - not optional. Skipping steps leads to inconsistent work items and lost traceability.
 
-### 1. Understand Context
+### 1. Branch Preparation (MANDATORY)
+
+**Before planning work items:**
+
+1. **Verify current branch is `main`**
+2. **Verify clean working tree**
+3. **Verify other work in feature branches**
+
+
+### 2. Understand Context
 Ask "why" before "what". Surface dependencies early.
 
-### 2. Research First (MANDATORY)
+### 3. Research First (MANDATORY)
 Search best practices + recommendations + existing patterns. Evidence-based proposals.
 
-### 3. Structure Work
-- Epic → Story → Task | Epic → Spike → Task
-- Story → Bug (blocks) → Task (fix)
-- Bug blocks Story only, relates-to for Epic context
+### 4. Structure Work (MANDATORY)
 
-### 4. Create Items
+**Determine hierarchy:**
+- **Epic → Story → Task** (standard feature development)
+- **Epic → Spike → Task** (research → proof-of-concept)
+- **Epic → Story (blocked by Bug) → Bug (blocks) → Task (implements Bug)** - Bug is CHILD of Story, impediment
+  - Bug `implements` or `blocks` Story (Bug → Story relationship)
+  - Task `implements` Bug (Task → Bug relationship)
+  - Bug `relates-to` Epic (context only, NOT hierarchy)
+
+**Spike planning:**
+- Plan follow-up Stories from spike outcomes
+- "What did we learn?" → "What should we build?"
+- Link Stories to same Epic using `implements`
+
+**Identify dependencies:**
+- `depends-on` - Must complete before starting
+- `blocks` - Prevents progress on another item
+- `relates-to` - Related context, not hierarchical
+
+### 5. Create Items
 Type, priority (Eisenhower), affected paths, tags. Use devsteps MCP tools.
 
-### 5. Link Relationships
+### 6. Link Relationships
 Hierarchies (implements), dependencies (depends-on, blocks), tests (tested-by).
 
-### 6. Validate
+### 7. Validate
 Clear purpose, priority aligned, dependencies identified.
 
-### 7. Commit to Main
+### 8. Commit to Main
 Stage `.devsteps/`, commit with planning format. No feature branches yet.
 
-## Key Questions
-
-"Why now?" "What's success?" "MVP scope?" "Dependencies?" "How to test?"
+### Consequences of Skipping Steps
+- ❌ Wrong branch → Work items lost in feature branches
+- ❌ No research → Reinventing solved problems
+- ❌ Wrong structure → Broken traceability
+- ❌ No validation → Incomplete/ambiguous items
 
 ---
 
