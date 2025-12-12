@@ -1,0 +1,41 @@
+{
+  "id": "STORY-077",
+  "type": "story",
+  "category": "general",
+  "title": "Implement Fuzzy Search with Fuse.js",
+  "status": "draft",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-12T10:21:45.994Z",
+  "updated": "2025-12-12T10:21:55.118Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/search/",
+    "packages/mcp-server/src/tools/search.ts",
+    "packages/cli/src/commands/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-019"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "search",
+    "fuzzy",
+    "fuse.js",
+    "ai-friendly",
+    "quick-win"
+  ],
+  "commits": [],
+  "metadata": {}
+}
