@@ -1,0 +1,42 @@
+{
+  "id": "TASK-196",
+  "type": "task",
+  "category": "general",
+  "title": "Document ULID architecture and conflict resolution strategy",
+  "status": "draft",
+  "priority": "medium",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-12T10:11:04.016Z",
+  "updated": "2025-12-12T10:11:10.510Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/HIERARCHY.md",
+    ".devsteps/AI-GUIDE.md",
+    "packages/shared/docs/ulid-architecture.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-076"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-192"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "documentation",
+    "ulid",
+    "architecture",
+    "collaboration"
+  ],
+  "commits": [],
+  "metadata": {}
+}

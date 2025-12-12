@@ -1,0 +1,41 @@
+{
+  "id": "TASK-194",
+  "type": "task",
+  "category": "general",
+  "title": "Build LWW-based merge conflict resolver using ULID",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-12T10:10:07.678Z",
+  "updated": "2025-12-12T10:10:34.585Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/merge-resolver.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-076"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-192",
+      "TASK-193"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "conflict-resolution",
+    "lww",
+    "merge",
+    "shared"
+  ],
+  "commits": [],
+  "metadata": {}
+}
