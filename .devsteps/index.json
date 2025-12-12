@@ -5,7 +5,7 @@
     "story": 76,
     "task": 196,
     "bug": 34,
-    "spike": 7,
+    "spike": 8,
     "feature": 5,
     "requirement": 2
   },
@@ -2746,23 +2746,31 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-12T10:11:04.016Z"
+    },
+    {
+      "id": "SPIKE-008",
+      "type": "spike",
+      "title": "Research: Multi-User Scaling Beyond 5 Concurrent Users - Server vs CRDT vs ULID",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-12T10:12:51.431Z"
     }
   ],
   "stats": {
-    "total": 336,
+    "total": 337,
     "by_type": {
       "epic": 18,
       "story": 76,
       "task": 196,
       "bug": 34,
-      "spike": 7,
+      "spike": 8,
       "feature": 5,
       "requirement": 2
     },
     "by_status": {
       "in-progress": 4,
       "done": 157,
-      "draft": 168,
+      "draft": 169,
       "blocked": 2,
       "obsolete": 5,
       "review": 0
@@ -2785,5 +2793,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-12T10:11:04.016Z"
+  "last_updated": "2025-12-12T10:12:51.431Z"
 }
