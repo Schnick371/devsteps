@@ -112,24 +112,24 @@ Maintain structured workflow - preserve decisions, traceability, prevent context
 - Push branch
 
 **Merge to Main (No-FF Strategy):**
-- Use `git merge --no-ff <branch>` to preserve full development history
+- Preserve full development history with no-fast-forward merge
 - Write comprehensive merge commit message with:
   - Summary of what was implemented
   - Key changes and decisions made
   - Footer: `Implements: <ID>`
-- **Archive feature branch** instead of deleting: `git branch -m <branch> archive/merged/<branch-name>`
+- Archive feature branch instead of deleting
 - **Principle:** Full traceability - all commits, decisions, and corrections remain visible
 
-**Why --no-ff instead of --squash:**
+**Why preserve history instead of squashing:**
 - ✅ Preserves incremental development steps (implementation → correction → refinement)
-- ✅ Shows decision evolution (e.g., "changed approach from X to Y because...")
+- ✅ Shows decision evolution (changed approach reasoning visible)
 - ✅ Easier debugging (find exact commit where issue was introduced/fixed)
 - ✅ Honors DevSteps principle: "Every change traceable. No decision forgotten."
 - ❌ Squash loses valuable context and reasoning behind changes
 
 **View Options:**
-- `git log --first-parent main` - Clean story-level view (only merge commits)
-- `git log --graph --all` - Full detailed history (all commits from feature branches)
+- First-parent view shows clean story-level commits
+- Full graph view shows detailed history from feature branches
 - **Best of both worlds:** Stories visible at top level, details available when needed
 
 **Status Sync:**
