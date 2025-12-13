@@ -7,7 +7,12 @@ import type {
   ItemMetadata,
   ItemType,
 } from '../schemas/index.js';
-import { TYPE_TO_DIRECTORY, generateItemId, getCurrentTimestamp } from '../utils/index.js';
+import {
+	TYPE_TO_DIRECTORY,
+	generateItemId,
+	getCurrentTimestamp,
+	getTypePrefix,
+} from '../utils/index.js';
 import {
   hasRefsStyleIndex,
   loadCounters,
@@ -49,9 +54,11 @@ export async function addItem(devstepsir: string, args: AddItemArgs): Promise<Ad
 
   // Get counter - try refs-style first, fallback to legacy
   let counter: number;
+  const counterKey = getTypePrefix(args.type); // Use uppercase prefix for consistency
+  
   if (hasRefsStyleIndex(devstepsir)) {
     const counters = loadCounters(devstepsir);
-    counter = (counters[args.type] || 0) + 1;
+    counter = (counters[counterKey] || 0) + 1;
   } else {
     // Legacy index.json
     const indexPath = join(devstepsir, 'index.json');
@@ -65,11 +72,12 @@ export async function addItem(devstepsir: string, args: AddItemArgs): Promise<Ad
         const match = item.id.match(/-(\d+)$/);
         if (match) {
           const num = Number.parseInt(match[1], 10);
-          index.counters[item.type] = Math.max(index.counters[item.type] || 0, num);
+          const prefix = item.id.replace(/-\d+$/, ''); // Extract prefix from ID (uppercase)
+          index.counters[prefix] = Math.max(index.counters[prefix] || 0, num);
         }
       }
     }
-    counter = (index.counters[args.type] || 0) + 1;
+    counter = (index.counters[counterKey] || 0) + 1;
   }
   
   // Generate ID using global counter
@@ -122,9 +130,9 @@ export async function addItem(devstepsir: string, args: AddItemArgs): Promise<Ad
 
   // Update index - use refs-style if available, otherwise legacy
   if (hasRefsStyleIndex(devstepsir)) {
-    // Update counters
+    // Update counters (use uppercase prefix key for consistency)
     const currentCounters = loadCounters(devstepsir);
-    currentCounters[args.type] = counter;
+    currentCounters[counterKey] = counter;
     updateCounters(devstepsir, currentCounters);
     
     // Add to all relevant indexes (by-type, by-status, by-priority)
@@ -134,9 +142,9 @@ export async function addItem(devstepsir: string, args: AddItemArgs): Promise<Ad
     const indexPath = join(devstepsir, 'index.json');
     const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
     
-    // Increment counter
+    // Increment counter (use uppercase prefix key for consistency)
     if (!index.counters) index.counters = {};
-    index.counters[args.type] = counter;
+    index.counters[counterKey] = counter;
 
     index.items.push({
       id: itemId,
