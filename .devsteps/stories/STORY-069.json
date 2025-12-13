@@ -7,7 +7,7 @@
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-12-13T13:24:06.007Z",
-  "updated": "2025-12-13T13:36:56.373Z",
+  "updated": "2025-12-13T13:46:59.049Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/",
@@ -27,7 +27,8 @@
     "depends-on": [],
     "required-by": [
       "STORY-070",
-      "STORY-074"
+      "STORY-074",
+      "STORY-075"
     ],
     "supersedes": [],
     "superseded-by": []

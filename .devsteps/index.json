@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "counters": {
     "epic": 18,
-    "story": 74,
+    "story": 75,
     "task": 162,
     "bug": 31,
     "spike": 8,
@@ -2155,13 +2155,21 @@
       "status": "draft",
       "priority": "high",
       "updated": "2025-12-13T13:36:39.841Z"
+    },
+    {
+      "id": "STORY-075",
+      "type": "story",
+      "title": "Batch Operations for CLI and MCP - Enable Parallel AI Agent Workflows",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-13T13:46:47.820Z"
     }
   ],
   "stats": {
-    "total": 298,
+    "total": 299,
     "by_type": {
       "epic": 18,
-      "story": 74,
+      "story": 75,
       "task": 162,
       "bug": 31,
       "spike": 8,
@@ -2171,7 +2179,7 @@
     "by_status": {
       "in-progress": 5,
       "done": 146,
-      "draft": 142,
+      "draft": 143,
       "blocked": 2,
       "obsolete": 3,
       "review": 0
@@ -2194,5 +2202,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-13T13:36:39.841Z"
+  "last_updated": "2025-12-13T13:46:47.820Z"
 }

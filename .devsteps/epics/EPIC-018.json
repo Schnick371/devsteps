@@ -7,7 +7,7 @@
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-12-13T13:23:35.887Z",
-  "updated": "2025-12-13T13:36:56.374Z",
+  "updated": "2025-12-13T13:46:59.048Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -31,7 +31,8 @@
       "EPIC-012",
       "STORY-041",
       "STORY-040",
-      "STORY-077"
+      "STORY-077",
+      "STORY-075"
     ],
     "depends-on": [],
     "required-by": [],
