@@ -3,11 +3,11 @@
   "type": "task",
   "category": "general",
   "title": "Extension MCP Server: Rename tool parameter eisenhower → priority",
-  "status": "draft",
+  "status": "done",
   "priority": "medium",
   "eisenhower": "urgent-important",
   "created": "2025-12-13T12:32:11.768Z",
-  "updated": "2025-12-13T12:32:52.388Z",
+  "updated": "2025-12-13T12:50:06.598Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/mcp-server/tools/index.ts",

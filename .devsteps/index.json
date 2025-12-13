@@ -2080,17 +2080,17 @@
       "id": "TASK-161",
       "type": "task",
       "title": "MCP Server: Rename tool parameter eisenhower → priority",
-      "status": "done",
+      "status": "draft",
       "priority": "medium",
-      "updated": "2025-12-13T12:48:16.832Z"
+      "updated": "2025-12-13T12:31:56.650Z"
     },
     {
       "id": "TASK-162",
       "type": "task",
       "title": "Extension MCP Server: Rename tool parameter eisenhower → priority",
-      "status": "draft",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-12-13T12:32:11.768Z"
+      "updated": "2025-12-13T12:50:06.598Z"
     }
   ],
   "stats": {
@@ -2130,5 +2130,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-13T12:48:16.832Z"
+  "last_updated": "2025-12-13T12:50:06.598Z"
 }
