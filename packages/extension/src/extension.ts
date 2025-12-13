@@ -11,6 +11,7 @@ import { registerCommands } from './commands/index.js';
 import { McpServerManager } from './mcpServerManager.js';
 import { DevStepsDecorationProvider } from './decorationProvider.js';
 import { logger } from './outputChannel.js';
+import { ensureFullMigration } from '@schnick371/devsteps-shared';
 
 /**
  * Extension activation - called when extension is activated
@@ -48,6 +49,22 @@ export async function activate(context: vscode.ExtensionContext) {
     hasDevSteps = false;
   }
   
+  // CRITICAL: Run auto-migration if .devsteps exists
+  // Converts old directory structure (epics/, stories/, tasks/) to new (items/)
+  // Converts old index.json to new refs-style index/by-type/*.json
+  if (hasDevSteps) {
+    try {
+      logger.info('Checking for migration needs...');
+      await ensureFullMigration(workspaceRoot.fsPath, { silent: false });
+      logger.info('Migration check complete');
+    } catch (error) {
+      logger.error('Migration failed', error);
+      vscode.window.showErrorMessage(
+        `DevSteps migration failed: ${error instanceof Error ? error.message : String(error)}`
+      );
+    }
+  }
+  
   // CRITICAL: Set context keys IMMEDIATELY - BEFORE any UI operations!
   // This prevents Welcome View from appearing even briefly
   // devsteps.showWelcome controls viewsWelcome visibility in package.json
@@ -79,6 +96,15 @@ export async function activate(context: vscode.ExtensionContext) {
   
   devstepsWatcher.onDidCreate(async () => {
     logger.info('.devsteps directory created - initializing TreeView');
+    
+    // Run auto-migration for newly initialized projects
+    try {
+      logger.info('Running migration for new project...');
+      await ensureFullMigration(workspaceRoot.fsPath, { silent: false });
+      logger.info('Migration complete');
+    } catch (error) {
+      logger.error('Migration failed', error);
+    }
     
     // Update context keys to hide Welcome View and show TreeView
     await vscode.commands.executeCommand('setContext', 'devsteps.showWelcome', false);
