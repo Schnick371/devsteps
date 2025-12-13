@@ -1,6 +1,6 @@
 {
   "name": "@schnick371/devsteps-mcp-server",
-  "version": "0.6.14",
+  "version": "0.8.1-next.1",
   "type": "module",
   "description": "Never Code Alone. MCP server for AI-assisted developer task tracking - team up with your AI.",
   "author": "devsteps.dev",
@@ -58,7 +58,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@schnick371/devsteps-shared": "^0.6.10",
+    "@schnick371/devsteps-shared": "^0.7.0-next.3",
     "@modelcontextprotocol/sdk": "latest",
     "commander": "^14.0.2",
     "express": "^5.1.0",

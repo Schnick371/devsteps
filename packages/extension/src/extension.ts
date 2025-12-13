@@ -85,12 +85,25 @@ export async function activate(context: vscode.ExtensionContext) {
     await vscode.commands.executeCommand('setContext', 'devsteps.hasProject', true);
     await vscode.commands.executeCommand('setContext', 'devsteps.initialized', true);
     
-    // Create and initialize TreeDataProvider
+    // Create StateManager and get defaults BEFORE TreeView creation
     const stateManager = new TreeViewStateManager(context.workspaceState);
+    const viewMode = stateManager.loadViewMode();
+    const hierarchy = stateManager.loadHierarchyType();
+    const filterState = stateManager.loadFilterState();
+    const hideDone = filterState.hideDone;
+    const hideRelatesTo = filterState.hideRelatesTo;
+    
+    // Set context keys BEFORE TreeView creation to prevent menu race condition
+    await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', viewMode);
+    await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', hierarchy);
+    await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', hideDone);
+    await vscode.commands.executeCommand('setContext', 'devsteps.hideRelatesTo', hideRelatesTo);
+    
+    // Create and initialize TreeDataProvider
     const treeDataProvider = new DevStepsTreeDataProvider(workspaceRoot, stateManager);
     await treeDataProvider.initialize();
     
-    // Create TreeView
+    // Create TreeView (context keys already available)
     const treeView = vscode.window.createTreeView('devsteps.itemsView', {
       treeDataProvider,
       showCollapseAll: true,
@@ -143,8 +156,21 @@ export async function activate(context: vscode.ExtensionContext) {
     return;
   }
 
-  // Create TreeDataProvider with StateManager and pre-initialize to avoid "no data provider" flash
+  // Create StateManager and get defaults BEFORE TreeView creation
   const stateManager = new TreeViewStateManager(context.workspaceState);
+  const viewMode = stateManager.loadViewMode();
+  const hierarchy = stateManager.loadHierarchyType();
+  const filterState = stateManager.loadFilterState();
+  const hideDone = filterState.hideDone;
+  const hideRelatesTo = filterState.hideRelatesTo;
+  
+  // Set context keys BEFORE TreeView creation to prevent menu race condition
+  await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', viewMode);
+  await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', hierarchy);
+  await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', hideDone);
+  await vscode.commands.executeCommand('setContext', 'devsteps.hideRelatesTo', hideRelatesTo);
+  
+  // Create TreeDataProvider and pre-initialize to avoid "no data provider" flash
   const treeDataProvider = new DevStepsTreeDataProvider(workspaceRoot, stateManager);
   logger.info('TreeDataProvider created with state persistence, initializing...');
   
@@ -152,7 +178,7 @@ export async function activate(context: vscode.ExtensionContext) {
   await treeDataProvider.initialize();
   logger.info('TreeDataProvider initialized with data');
 
-  // Create TreeView AFTER initialization - data is ready, no flash
+  // Create TreeView AFTER initialization - data is ready, no flash, context keys available
   const treeView = vscode.window.createTreeView('devsteps.itemsView', {
     treeDataProvider,
     showCollapseAll: true,

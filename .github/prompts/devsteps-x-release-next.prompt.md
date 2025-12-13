@@ -2,7 +2,7 @@
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Execute pre-release deployment to @next tag - testing and validation before stable release'
-tools: ['execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/createAndRunTask', 'execute/runInTerminal', 'read/problems', 'read/readFile', 'read/terminalSelection', 'read/terminalLastCommand', 'edit', 'search', 'devsteps/*', 'agent']
+tools: ['edit', 'search', 'runCommands', 'runTasks', 'devsteps/*', 'problems', 'changes']
 ---
 
 # 🧪 Pre-Release Workflow - @next Tag Deployment
@@ -39,6 +39,35 @@ Final stable:     X.Y+1.0
 - First @next: `X.Y.0-next.1` (based on target version)
 - Subsequent: Increment `.N` suffix (X.Y.0-next.2, X.Y.0-next.3...)
 - Final release: Remove `-next.N` suffix
+
+**⚠️ CRITICAL: VS Code Extension Version Rules**
+
+**npm packages**: Use full semantic version with `-next.N` suffix
+- `@schnick371/devsteps-shared@0.7.0-next.4` ✅
+- `@schnick371/devsteps-cli@0.7.0-next.4` ✅
+
+**VS Code Extension**: Marketplace does NOT support `-next.N` suffix!
+- Use base version WITHOUT suffix: `0.7.0`, `0.7.1`, `0.7.2`
+- Pre-Release channel controlled by `--pre-release` flag, NOT version number
+- **NEVER skip major versions** (0.7.x → 0.8.0 for README changes)
+
+**Version Bump Strategy**:
+- **PATCH bump** (0.7.0 → 0.7.1): README updates, documentation fixes, no code changes
+- **MINOR bump** (0.7.0 → 0.8.0): New features, new functionality
+- **MAJOR bump** (0.7.0 → 1.0.0): Breaking changes
+
+**Example Progression**:
+```
+0.7.0 --pre-release   # Initial pre-release with new features
+0.7.1 --pre-release   # README update, documentation fix
+0.7.2 --pre-release   # Bug fix, no new features
+0.8.0 --pre-release   # New feature added
+```
+
+**DO NOT**:
+- ❌ Skip major versions (0.7.x → 0.8.0 for docs)
+- ❌ Use `-next.N` suffix in extension package.json
+- ❌ Publish without `--pre-release` flag during pre-release phase
 
 ## Step 1: Prepare Next Branch
 
@@ -165,19 +194,46 @@ next: X.Y+1.Z-next.N
 
 ## Step 6: Extension Pre-Release Package
 
+**⚠️ CRITICAL: Version Number in Extension package.json**
+
+**VS Code Marketplace does NOT support `-next.N` suffix!**
+
+**Before publishing, set clean semantic version:**
+```json
+// packages/extension/package.json
+{
+  "version": "0.7.0"  // NO -next.N suffix!
+}
+```
+
+**Version Bump Rules for Extension:**
+- **README/Docs Update**: Patch bump (0.7.0 → 0.7.1)
+- **Bug Fixes**: Patch bump (0.7.1 → 0.7.2)
+- **New Features**: Minor bump (0.7.2 → 0.8.0)
+- **Breaking Changes**: Major bump (0.8.0 → 1.0.0)
+
+**DO NOT skip major versions for minor changes!**
+
 **Create VSIX with pre-release flag:**
 ```bash
 cd packages/extension
+# Version already set in package.json (e.g., 0.7.1)
 npm run build
 vsce package --pre-release
 ```
 
-**Output:** `devsteps-X.Y.Z-next.N.vsix`
+**Output:** `devsteps-X.Y.Z.vsix` (clean version, no -next suffix)
+
+**Publish to Marketplace:**
+```bash
+vsce publish --pre-release
+```
 
 **⚠️ VS Code Marketplace Pre-Release:**
-- Upload to Marketplace with "Pre-Release" flag
-- Visible only to users who opt-in
-- Separate from stable channel
+- Pre-release controlled by `--pre-release` flag, NOT version suffix
+- Version must be clean semantic version (X.Y.Z)
+- Visible only to users who opt-in via "Switch to Pre-Release"
+- Separate channel from stable release
 
 **Manual Upload:**
 - VS Code Marketplace: https://marketplace.visualstudio.com/manage
@@ -243,16 +299,46 @@ npm view @schnick371/devsteps-cli@latest version
 # Should still be X.Y.Z (previous stable)
 ```
 
-## Iteration: Publishing Next.2, Next.3...
+## Iteration: Publishing Fixes/Updates to Pre-Release
 
-**For subsequent pre-releases:**
+**For subsequent pre-releases (fixes, README, docs):**
 
-1. **Make changes** on next/X.Y.Z-next.N branch
-2. **Increment suffix**: X.Y.Z-next.N → X.Y.Z-next.N+1
-3. **Commit**: `git commit -m "chore: Bump to X.Y.Z-next.N+1"`
-4. **Publish**: `npm publish --tag next` (all packages)
-5. **Package**: `vsce package --pre-release`
-6. **Test**: Verify installation and functionality
+**⚠️ CRITICAL Version Strategy:**
+
+**npm packages** (with -next.N suffix):
+1. **Increment suffix**: `0.7.0-next.N` → `0.7.0-next.N+1`
+2. **Update**: `packages/{shared,cli,mcp-server}/package.json`
+3. **Publish**: `npm publish --tag next`
+
+**VS Code Extension** (NO suffix, clean semver):
+1. **Patch bump**: `0.7.0` → `0.7.1` (README, docs, minor fixes)
+2. **Minor bump**: `0.7.1` → `0.8.0` (new features only)
+3. **Update**: `packages/extension/package.json`
+4. **Publish**: `vsce publish --pre-release`
+
+**Example: README Update**
+```bash
+# npm packages: 0.7.0-next.4 → 0.7.0-next.5
+cd packages/shared && update version to 0.7.0-next.5
+npm publish --tag next
+
+# Extension: 0.7.0 → 0.7.1 (PATCH bump!)
+cd packages/extension && update version to 0.7.1
+vsce publish --pre-release
+```
+
+**DO NOT**:
+- ❌ Skip major versions (0.7.x → 0.8.0 for README)
+- ❌ Use minor bump for docs/fixes
+- ❌ Forget `--pre-release` flag
+
+**Workflow**:
+1. Make changes on `next/X.Y.Z-next.N` branch
+2. Bump versions (npm: -next.N+1, extension: patch/minor)
+3. Commit with conventional message
+4. Publish npm packages with `--tag next`
+5. Publish extension with `--pre-release`
+6. Test installation
 
 **No need for new branches** - iterate on same next/ branch.
 

@@ -2,7 +2,7 @@
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Execute production release workflow - version bump, CHANGELOG, build, npm publish, and git tagging'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/createAndRunTask', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'read/terminalSelection', 'read/terminalLastCommand', 'edit', 'search', 'web/fetch', 'devsteps/*', 'tavily/*', 'agent', 'todo']
+tools: ['edit', 'search', 'runCommands', 'runTasks', 'devsteps/*', 'tavily/*', 'usages', 'problems', 'changes', 'fetch', 'todos', 'runSubagent']
 ---
 
 # 🚀 Release Workflow - Production Deployment
@@ -54,13 +54,42 @@ npm test
 
 ## Step 2: Version Bump
 
-**Update all package.json versions:**
+**⚠️ CRITICAL: Semantic Versioning Rules**
+
+**When to bump which number:**
+- **PATCH** (X.Y.Z → X.Y.Z+1): Bug fixes, documentation updates, no code changes
+- **MINOR** (X.Y.Z → X.Y+1.0): New features, backward-compatible changes
+- **MAJOR** (X.Y.Z → X+1.0.0): Breaking changes, API changes
+
+**Example Scenarios:**
+- README update only → PATCH (0.7.0 → 0.7.1)
+- Bug fix in existing feature → PATCH (0.7.1 → 0.7.2)
+- New command added → MINOR (0.7.2 → 0.8.0)
+- CLI argument changed → MAJOR (0.8.0 → 1.0.0)
+
+**DO NOT skip version numbers unnecessarily!**
+- ❌ 0.7.0 → 0.8.0 for README update
+- ✅ 0.7.0 → 0.7.1 for README update
+
+**⚠️ All Packages: Same Clean Semantic Version**
+
+**For stable releases, ALL packages use identical clean semver:**
+- **npm packages**: `@schnick371/devsteps-shared@X.Y.Z` (no suffix)
+- **npm packages**: `@schnick371/devsteps-cli@X.Y.Z` (no suffix)
+- **npm packages**: `@schnick371/devsteps-mcp-server@X.Y.Z` (no suffix)
+- **VS Code Extension**: `devsteps@X.Y.Z` (no suffix)
+
+**All 4 packages MUST have identical version numbers!**
+
+**Update all package.json versions to same X.Y.Z:**
 ```
-packages/shared/package.json      → X.Y.Z
-packages/cli/package.json         → X.Y.Z
-packages/mcp-server/package.json  → X.Y.Z
-packages/extension/package.json   → X.Y.Z
+packages/shared/package.json      → X.Y.Z (clean semver)
+packages/cli/package.json         → X.Y.Z (clean semver)
+packages/mcp-server/package.json  → X.Y.Z (clean semver)
+packages/extension/package.json   → X.Y.Z (clean semver)
 ```
+
+**All packages must have identical version numbers!**
 
 **Commit version bump:**
 ```bash
