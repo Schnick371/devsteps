@@ -146,6 +146,17 @@ program
     await purgeCommand(options);
   });
 
+// Migrate index
+program
+  .command('migrate')
+  .description('Auto-detect and migrate legacy index to refs-style')
+  .option('--check', 'Check if migration is needed (dry-run)')
+  .option('--skip-backup', 'Skip backup creation (advanced users)')
+  .action(async (options) => {
+    const { migrateCommand } = await import('./commands/migrate.js');
+    await migrateCommand(options);
+  });
+
 // Setup MCP
 program
   .command('setup')
