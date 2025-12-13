@@ -40,7 +40,7 @@ description: "DevSteps workflow and work item tracking"
 
 **Epic branches:** Manual creation as `epic/<ID>-<slug>` when Epic starts
 **Commits:** Conventional format `type(ID): subject` with footer `Implements: ID`
-**Merge:** PR required for Epic branch to main after all children done
+**Merge:** No-fast-forward merge to preserve history, archive branch after merge
 **Reference:** git-workflow.instructions.md
 
 ## Validation Checklist
