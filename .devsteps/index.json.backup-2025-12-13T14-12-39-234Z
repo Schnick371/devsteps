@@ -2128,9 +2128,9 @@
       "id": "STORY-071",
       "type": "story",
       "title": "Migration: Transform index.json to Refs-Style Structure",
-      "status": "done",
+      "status": "draft",
       "priority": "critical",
-      "updated": "2025-12-13T14:14:49.916Z"
+      "updated": "2025-12-13T13:24:51.268Z"
     },
     {
       "id": "STORY-072",
@@ -2202,5 +2202,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-13T14:14:49.916Z"
+  "last_updated": "2025-12-13T14:10:57.854Z"
 }
