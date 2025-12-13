@@ -38,10 +38,11 @@ export async function loadItemWithLinks(
     const typeDir = TYPE_TO_DIRECTORY[itemType];
     if (!typeDir) return null;
 
-    // Read full JSON file
+    // Read full JSON file from items directory
     const itemPath = vscode.Uri.joinPath(
       workspaceRoot,
       '.devsteps',
+      'items',
       typeDir,
       `${itemId}.json`
     );
