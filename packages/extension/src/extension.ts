@@ -55,7 +55,7 @@ export async function activate(context: vscode.ExtensionContext) {
   if (hasDevSteps) {
     try {
       logger.info('Checking for migration needs...');
-      await ensureFullMigration(workspaceRoot.fsPath, { silent: false });
+      await ensureFullMigration(devstepsPath.fsPath, { silent: false });
       logger.info('Migration check complete');
     } catch (error) {
       logger.error('Migration failed', error);
@@ -98,9 +98,10 @@ export async function activate(context: vscode.ExtensionContext) {
     logger.info('.devsteps directory created - initializing TreeView');
     
     // Run auto-migration for newly initialized projects
+    const newDevstepsPath = vscode.Uri.joinPath(workspaceRoot, '.devsteps');
     try {
       logger.info('Running migration for new project...');
-      await ensureFullMigration(workspaceRoot.fsPath, { silent: false });
+      await ensureFullMigration(newDevstepsPath.fsPath, { silent: false });
       logger.info('Migration complete');
     } catch (error) {
       logger.error('Migration failed', error);

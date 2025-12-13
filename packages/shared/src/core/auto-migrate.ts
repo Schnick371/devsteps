@@ -236,6 +236,11 @@ export async function performMigration(
 
 		const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
 
+		// Ensure eisenhower field exists (old items don't have it)
+		if (!metadata.eisenhower) {
+			metadata.eisenhower = 'not-urgent-important'; // Default Q2
+		}
+
 		addItemToIndex(devstepsDir, metadata);
 
 		stats.totalItems++;
