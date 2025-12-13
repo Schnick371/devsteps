@@ -1,39 +1,32 @@
 {
-  "id": "SPIKE-008",
-  "type": "spike",
+  "id": "STORY-079",
+  "type": "story",
   "category": "architecture",
-  "title": "Git-Inspired Index Architecture - Content-Addressable Storage Research",
+  "title": "Items Directory Migration: Complete Git-Inspired Object Store",
   "status": "draft",
-  "priority": "high",
-  "eisenhower": "not-urgent-important",
-  "created": "2025-12-13T13:22:54.748Z",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-13T17:27:30.132Z",
   "updated": "2025-12-13T17:27:37.154Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
-    "implements": [],
-    "implemented-by": [
+    "implements": [
       "EPIC-018"
     ],
+    "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "STORY-079"
+      "SPIKE-008"
     ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
-  "tags": [
-    "research",
-    "git",
-    "architecture",
-    "index",
-    "merge-conflicts"
-  ],
+  "tags": [],
   "commits": [],
   "metadata": {}
 }
