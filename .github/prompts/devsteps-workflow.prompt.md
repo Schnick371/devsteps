@@ -110,11 +110,20 @@ Maintain structured workflow - preserve decisions, traceability, prevent context
 - Mark item as `done` status
 - Final commit to feature branch
 - Push branch
-- **Prohibition:** No merge to main yet (test first, user approval, squash merge later)
+
+**Merge to Main (Squash Strategy):**
+- Use `git merge --squash <branch>` to combine all feature commits into one
+- Write comprehensive commit message with:
+  - Conventional commit format: `type(ID): summary`
+  - Full description of what was implemented
+  - List of key changes
+  - Footer: `Implements: <ID>`
+- Delete feature branch after merge: `git branch -d <branch>`
+- **Benefit:** Clean history - one commit per story/bug/task
 
 **Status Sync:**
 - Status stored in `.devsteps/` on feature branch
-- Synced to main during final merge
+- Synced to main during squash merge
 - Temporary divergence expected
 
 **Context Preservation:**
