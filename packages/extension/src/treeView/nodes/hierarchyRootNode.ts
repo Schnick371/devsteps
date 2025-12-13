@@ -39,15 +39,29 @@ export class HierarchyRootNode extends TreeNode {
 
   async getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState, expandedHierarchyItems?: Set<string>): Promise<TreeNode[]> {
     try {
-      const indexPath = vscode.Uri.joinPath(workspaceRoot, '.devsteps', 'index.json');
+      // Determine index file based on hierarchy type (refs-style index)
+      const indexFileName = this.hierarchy === 'scrum' ? 'epics.json' : 'requirements.json';
+      const indexPath = vscode.Uri.joinPath(
+        workspaceRoot, 
+        '.devsteps', 
+        'index', 
+        'by-type', 
+        indexFileName
+      );
+
+      // Check if index exists
+      try {
+        await vscode.workspace.fs.stat(indexPath);
+      } catch {
+        // Index doesn't exist - return empty (happens in new/empty projects)
+        return [];
+      }
+
       const indexData = await vscode.workspace.fs.readFile(indexPath);
       const index = JSON.parse(Buffer.from(indexData).toString('utf-8'));
 
-      // Get top-level items (Epics for Scrum, Requirements for Waterfall)
-      const topLevelType = this.hierarchy === 'scrum' ? 'epic' : 'requirement';
-      const itemIds = index.items
-        .filter((meta: any) => meta.type === topLevelType)
-        .map((meta: any) => meta.id);
+      // Refs-style index structure: { version, items: string[], updated }
+      const itemIds = index.items || [];
 
       // Load full items with linked_items for hierarchical view
       let items: WorkItem[] = [];

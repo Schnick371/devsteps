@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@inquirer/prompts": "^8.0.1",
-    "@schnick371/devsteps-shared": "^0.7.0-next.3",
+    "@schnick371/devsteps-shared": "file:../shared",
     "chalk": "^5.6.2",
     "commander": "^12.1.0",
     "ora": "^9.0.0"

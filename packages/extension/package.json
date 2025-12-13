@@ -633,7 +633,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@schnick371/devsteps-shared": "^0.6.8",
+    "@schnick371/devsteps-shared": "file:../shared",
     "chart.js": "^4.5.1",
     "d3": "^7.9.0"
   },
