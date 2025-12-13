@@ -127,6 +127,11 @@ Maintain structured workflow - preserve decisions, traceability, prevent context
 - ✅ Honors DevSteps principle: "Every change traceable. No decision forgotten."
 - ❌ Squash loses valuable context and reasoning behind changes
 
+**View Options:**
+- `git log --first-parent main` - Clean story-level view (only merge commits)
+- `git log --graph --all` - Full detailed history (all commits from feature branches)
+- **Best of both worlds:** Stories visible at top level, details available when needed
+
 **Status Sync:**
 - Status stored in `.devsteps/` on feature branch
 - Synced to main during merge
