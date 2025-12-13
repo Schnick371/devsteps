@@ -495,6 +495,7 @@ export function migrateItemsDirectory(
  * Combines both migrations:
  * 1. Legacy index.json → refs-style index/ (if needed)
  * 2. Flat structure → items/ subdirectory (if needed)
+ * 3. Cleanup: Remove legacy index.json if migration complete
  * 
  * Safe to call on every operation - only migrates when needed.
  */
@@ -502,6 +503,8 @@ export async function ensureFullMigration(
 	devstepsDir: string,
 	options: AutoMigrationOptions = {},
 ): Promise<void> {
+	const { silent = false } = options;
+	
 	// Step 1: Index migration (legacy → refs-style)
 	await ensureIndexMigrated(devstepsDir, options);
 	
@@ -509,4 +512,30 @@ export async function ensureFullMigration(
 	if (needsItemsDirectoryMigration(devstepsDir)) {
 		migrateItemsDirectory(devstepsDir, options);
 	}
+	
+	// Step 3: Cleanup legacy index.json if both exist (partial migration state)
+	// This can happen if index migration completed but archiving failed
+	const paths = getIndexPaths(devstepsDir);
+	if (hasRefsStyleIndex(devstepsDir) && existsSync(paths.legacy)) {
+		// Verify refs-style index is valid before removing legacy
+		try {
+			const indexes = loadAllIndexes(devstepsDir);
+			if (indexes.byType.size > 0) {
+				// Refs-style index is valid - safe to remove legacy
+				const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+				const archivePath = `${paths.legacy}.archived-${timestamp}`;
+				renameSync(paths.legacy, archivePath);
+				
+				if (!silent) {
+					console.log(`   🗑️  Archived legacy index: ${archivePath}`);
+				}
+			}
+		} catch (error) {
+			// If refs-style index is invalid, keep legacy as fallback
+			if (!silent) {
+				console.warn('   ⚠️  Keeping legacy index.json (refs-style index validation failed)');
+			}
+		}
+	}
 }
+
