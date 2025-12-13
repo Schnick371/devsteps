@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "counters": {
     "epic": 18,
-    "story": 72,
+    "story": 74,
     "task": 162,
     "bug": 31,
     "spike": 8,
@@ -2139,13 +2139,29 @@
       "status": "draft",
       "priority": "high",
       "updated": "2025-12-13T13:25:17.104Z"
+    },
+    {
+      "id": "STORY-073",
+      "type": "story",
+      "title": "External Project Migration: Auto-Detect and Upgrade Old Index",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-13T13:36:09.584Z"
+    },
+    {
+      "id": "STORY-074",
+      "type": "story",
+      "title": "Index Rebuild Command: Regenerate from Source of Truth",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-13T13:36:39.841Z"
     }
   ],
   "stats": {
-    "total": 296,
+    "total": 298,
     "by_type": {
       "epic": 18,
-      "story": 72,
+      "story": 74,
       "task": 162,
       "bug": 31,
       "spike": 8,
@@ -2155,7 +2171,7 @@
     "by_status": {
       "in-progress": 5,
       "done": 146,
-      "draft": 140,
+      "draft": 142,
       "blocked": 2,
       "obsolete": 3,
       "review": 0
@@ -2178,5 +2194,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-13T13:33:38.588Z"
+  "last_updated": "2025-12-13T13:36:39.841Z"
 }

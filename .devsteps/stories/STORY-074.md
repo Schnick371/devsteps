@@ -1,161 +1,140 @@
-## Problem Statement
+# Index Rebuild: Regenerate from Item Files
 
-Codebase contains **74+ violations** of TypeScript best practices by using string literals in comparisons instead of type-safe constants:
+## User Story
+As a **DevSteps user**, I want **to rebuild the index from item files** so that **I can recover from index corruption or inconsistencies**.
 
-**Examples Found:**
-```typescript
-// ❌ BAD: Magic strings scattered everywhere
-if (sourceType === 'task') { ... }
-if (targetType === 'story' || targetType === 'spike') { ... }
-if (args.status === 'done') { ... }
-if (relationType === 'blocks') { ... }
-if (methodology === 'scrum') { ... }
-```
+## Background
+Refs-style index consists of many small files (`.devsteps/index/by-*/`). If corrupted, damaged, or inconsistent, users need a way to rebuild from source of truth (item files).
 
-**Affected Areas:**
-- `validation.ts`: 40+ string literal comparisons for ItemType
-- `update.ts`, `list.ts`: Status comparisons ('done', 'in-progress')
-- Multiple handlers: RelationType comparisons ('blocks', 'implemented-by')
-- Dashboard/TreeView: Methodology comparisons ('scrum', 'waterfall')
-- CLI commands: Status filtering with magic strings
-
-**Why This Is Bad (2024/2025 Best Practices):**
-1. **No autocomplete** - developers must remember exact strings
-2. **Typo-prone** - `'task'` vs `'tasks'` silently fails at runtime
-3. **Refactoring nightmare** - changing type names requires global search/replace
-4. **No compile-time safety** - TypeScript can't catch mistakes
-5. **Inconsistent with modern TS** - violates const assertion patterns
-
-## Research: Modern TypeScript Best Practices
-
-**Sources:**
-- TypeScript Docs 2024: "Use const assertions and type guards"
-- Medium (bluepnume): "Nine terrible ways to use TypeScript enums"
-- dev.to: "TypeScript Best Practices 2025"
-
-**Recommended Pattern:**
-```typescript
-// ✅ GOOD: Type-safe constants
-const ITEM_TYPES = {
-  TASK: 'task',
-  STORY: 'story',
-  EPIC: 'epic',
-  // ...
-} as const;
-
-type ItemTypeValue = typeof ITEM_TYPES[keyof typeof ITEM_TYPES];
-
-// Usage with autocomplete + compile-time checks
-if (sourceType === ITEM_TYPES.TASK) { ... }
-```
-
-**Alternative Pattern (For Related Types):**
-```typescript
-// Namespaced constants
-export const ItemType = {
-  TASK: 'task',
-  STORY: 'story',
-} as const;
-
-export const Status = {
-  DONE: 'done',
-  IN_PROGRESS: 'in-progress',
-} as const;
-
-export const RelationType = {
-  BLOCKS: 'blocks',
-  IMPLEMENTS: 'implements',
-} as const;
-```
-
-## Solution Strategy
-
-### Phase 1: Create Centralized Constants (Shared Package)
-```typescript
-// packages/shared/src/constants/index.ts
-
-export const ITEM_TYPE = {
-  EPIC: 'epic',
-  STORY: 'story',
-  TASK: 'task',
-  REQUIREMENT: 'requirement',
-  FEATURE: 'feature',
-  BUG: 'bug',
-  SPIKE: 'spike',
-  TEST: 'test',
-} as const;
-
-export const STATUS = {
-  DRAFT: 'draft',
-  PLANNED: 'planned',
-  IN_PROGRESS: 'in-progress',
-  REVIEW: 'review',
-  DONE: 'done',
-  BLOCKED: 'blocked',
-  CANCELLED: 'cancelled',
-  OBSOLETE: 'obsolete',
-} as const;
-
-export const RELATIONSHIP_TYPE = {
-  IMPLEMENTS: 'implements',
-  IMPLEMENTED_BY: 'implemented-by',
-  BLOCKS: 'blocks',
-  BLOCKED_BY: 'blocked-by',
-  TESTED_BY: 'tested-by',
-  TESTS: 'tests',
-  RELATES_TO: 'relates-to',
-  DEPENDS_ON: 'depends-on',
-  REQUIRED_BY: 'required-by',
-  SUPERSEDES: 'supersedes',
-  SUPERSEDED_BY: 'superseded-by',
-} as const;
-
-export const METHODOLOGY = {
-  SCRUM: 'scrum',
-  WATERFALL: 'waterfall',
-  HYBRID: 'hybrid',
-} as const;
-```
-
-### Phase 2: Refactor Core Logic (High Priority)
-1. **validation.ts** (40+ violations) - Most critical
-2. **update.ts** - Status comparisons
-3. **list.ts** - Status filtering
-4. **link handlers** - RelationType checks
-
-### Phase 3: Refactor CLI & Extension
-5. **CLI commands** - Status/type filtering
-6. **TreeView components** - Methodology checks
-7. **Dashboard** - Status displays
-
-### Phase 4: Deprecate Raw Strings
-Add eslint rule to prevent new string literal comparisons.
-
-## Benefits
-
-✅ **Autocomplete** - IDE suggests valid values  
-✅ **Type Safety** - Compile-time error on typos  
-✅ **Refactoring** - Change once, update everywhere  
-✅ **Documentation** - Constants serve as API docs  
-✅ **Performance** - No runtime overhead (inlined)  
-✅ **Best Practices** - Aligns with TS 2024/2025 standards  
+**Source of Truth:** Item files (`.devsteps/items/*/*.json`)
+**Derived Data:** Index files (`.devsteps/index/*/*.json`)
 
 ## Acceptance Criteria
 
-- Centralized constants module in shared package
-- All 74+ string literal comparisons replaced
-- Existing type unions remain unchanged (e.g., `ItemType = 'task' | 'story'`)
-- Zero breaking changes - values stay same ('task' === ITEM_TYPE.TASK)
-- Build passes with no type errors
-- Documentation updated with usage examples
+### Doctor Command Integration
+- [ ] `devsteps doctor --fix` rebuilds all index files
+- [ ] `devsteps doctor --rebuild-index` dedicated command
+- [ ] Shows diff before applying changes
+- [ ] Requires confirmation (or `--yes` flag)
 
-## Rollout Strategy
+### Rebuild Logic
+- [ ] Scan all item files in `.devsteps/items/*/`
+- [ ] Extract: id, type, status, priority from each
+- [ ] Group items by type, status, priority
+- [ ] Write to index files: `by-type/*.json`, `by-status/*.json`, `by-priority/*.json`
+- [ ] Preserve metadata: `updated`, `version` timestamps
 
-**Non-Breaking Migration:**
-1. Add constants module (exports only)
-2. Replace string literals incrementally (one file at a time)
-3. Keep existing type definitions (`type ItemType = 'task' | ...`)
-4. Values remain identical (`'task'` === `ITEM_TYPE.TASK` true)
+### Validation
+- [ ] Before: Count items in old index (if exists)
+- [ ] After: Count items in new index
+- [ ] Report: Added, removed, unchanged
+- [ ] Fail if item files are corrupt/missing
 
-**Future Enhancement (Optional):**
-Consider stricter branded types after migration complete.
+### User Experience
+- [ ] Progress indicator for large projects (>1000 items)
+- [ ] Clear success/failure messages
+- [ ] Backup old index before rebuilding
+- [ ] Dry-run mode: `--check` (show what would change)
+
+## Technical Notes
+
+**Rebuild Flow:**
+```typescript
+export async function rebuildIndex(devstepsDir: string, options?: {
+  backup?: boolean;
+  dryRun?: boolean;
+}): Promise<RebuildResult> {
+  // 1. Backup existing index
+  if (options?.backup !== false) {
+    await backupIndex(devstepsDir);
+  }
+  
+  // 2. Scan all item files
+  const items = await loadAllItems(devstepsDir);
+  
+  // 3. Group by type, status, priority
+  const byType = groupBy(items, 'type');
+  const byStatus = groupBy(items, 'status');
+  const byPriority = groupBy(items, 'eisenhower');
+  
+  // 4. Write index files (if not dry-run)
+  if (!options?.dryRun) {
+    await writeIndexByType(devstepsDir, byType);
+    await writeIndexByStatus(devstepsDir, byStatus);
+    await writeIndexByPriority(devstepsDir, byPriority);
+  }
+  
+  return {
+    total: items.length,
+    byType: Object.keys(byType).length,
+    byStatus: Object.keys(byStatus).length,
+    success: true
+  };
+}
+```
+
+**User Messages:**
+```bash
+$ devsteps doctor --rebuild-index
+
+🔍 Scanning item files...
+   Found: 290 items across 7 types
+
+📊 Current index state:
+   by-type:     7 files (289 items)  ⚠️  -1 item
+   by-status:   8 files (290 items)  ✅  OK
+   by-priority: 4 files (288 items)  ⚠️  -2 items
+
+⚠️  Index inconsistencies detected!
+
+🔧 Rebuild plan:
+   ✅ Backup current index → index.backup-2025-12-13
+   🔄 Regenerate by-type indexes
+   🔄 Regenerate by-status indexes
+   🔄 Regenerate by-priority indexes
+
+Proceed? [y/N]: y
+
+✅ Index rebuilt successfully!
+   Total: 290 items
+   Files: 19 index files created
+```
+
+## Use Cases
+
+**Use Case 1: Corrupted Index**
+- User manually edits index file (bad idea, but happens)
+- Index now inconsistent with item files
+- Solution: `devsteps doctor --rebuild-index`
+
+**Use Case 2: Git Merge Conflict**
+- Despite refs-style structure, rare conflicts possible
+- User unsure how to resolve manually
+- Solution: `devsteps doctor --fix` (auto-resolves by rebuilding)
+
+**Use Case 3: Migration Verification**
+- User migrated from old to new index
+- Wants to verify correctness
+- Solution: `devsteps doctor --rebuild-index --check` (dry-run)
+
+## Affected Paths
+- `packages/shared/src/core/index-rebuild.ts` (core logic)
+- `packages/cli/src/commands/doctor.ts` (CLI integration)
+- `packages/mcp-server/src/tools/doctor.ts` (optional MCP tool)
+
+## Dependencies
+- Depends on: STORY-069 (Foundation with core operations)
+- Required by: Users, data integrity
+
+## Success Criteria
+- Rebuild completes in <5 seconds (290 items)
+- Zero data loss
+- Works with 10,000+ items
+- Clear user guidance
+
+## Definition of Done
+- Core rebuild logic implemented
+- CLI command integrated
+- Tests: corrupt index, missing index, large project
+- Documentation: "Recovering from Index Corruption"
+- User guide updated

@@ -7,7 +7,7 @@
   "priority": "critical",
   "eisenhower": "urgent-important",
   "created": "2025-12-13T13:23:35.887Z",
-  "updated": "2025-12-13T13:33:43.716Z",
+  "updated": "2025-12-13T13:36:56.374Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -18,7 +18,9 @@
       "STORY-069",
       "STORY-070",
       "STORY-071",
-      "STORY-072"
+      "STORY-072",
+      "STORY-073",
+      "STORY-074"
     ],
     "tested-by": [],
     "tests": [],
@@ -27,7 +29,9 @@
     "relates-to": [
       "EPIC-017",
       "EPIC-012",
-      "STORY-041"
+      "STORY-041",
+      "STORY-040",
+      "STORY-077"
     ],
     "depends-on": [],
     "required-by": [],
