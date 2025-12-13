@@ -231,8 +231,9 @@ export async function rebuildIndex(
 }
 
 /**
- * Scan all item files from .devsteps/{type}s/ directories
- * Supports both new (items/epics/) and legacy (epics/) structures
+ * Scan all item files from .devsteps/items/{type}s/ directories
+ * 
+ * If old flat structure is detected, automatically migrates to new structure first.
  * 
  * @param devstepsDir Path to .devsteps directory
  * @param onError Error callback for handling corrupt files
@@ -242,24 +243,24 @@ async function loadAllItemsFromFiles(
 	devstepsDir: string,
 	onError?: (error: { file: string; error: string }) => void,
 ): Promise<ItemMetadata[]> {
+	// Auto-migrate if old structure detected
+	const { needsItemsDirectoryMigration, migrateItemsDirectory } = await import('./auto-migrate.js');
+	if (needsItemsDirectoryMigration(devstepsDir)) {
+		migrateItemsDirectory(devstepsDir, { silent: true });
+	}
+
 	const items: ItemMetadata[] = [];
 
-	// Scan each item type directory
+	// Scan each item type directory (new structure only)
 	for (const [type, directory] of Object.entries(TYPE_TO_DIRECTORY)) {
 		const dirPath = join(devstepsDir, directory);
-		const legacyPath = join(devstepsDir, directory.replace('items/', '')); // epics, stories, etc
 
-		// Try new structure first, fallback to legacy
-		const pathToUse = existsSync(dirPath) ? dirPath : 
-		                  existsSync(legacyPath) ? legacyPath : 
-		                  null;
-
-		if (!pathToUse) {
+		if (!existsSync(dirPath)) {
 			continue; // Skip missing directories (empty projects)
 		}
 
 		try {
-			const files = readdirSync(pathToUse);
+			const files = readdirSync(dirPath);
 
 			for (const file of files) {
 				// Only process JSON metadata files
@@ -267,7 +268,7 @@ async function loadAllItemsFromFiles(
 					continue;
 				}
 
-				const filePath = join(pathToUse, file);
+				const filePath = join(dirPath, file);
 
 				try {
 					const item = await loadItemMetadata(filePath);
@@ -283,7 +284,7 @@ async function loadAllItemsFromFiles(
 		} catch (error) {
 			// Handle directory read errors
 			onError?.({
-				file: pathToUse,
+				file: dirPath,
 				error: `Failed to read directory: ${error instanceof Error ? error.message : String(error)}`,
 			});
 		}
