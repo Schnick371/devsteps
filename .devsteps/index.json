@@ -3,7 +3,7 @@
   "counters": {
     "epic": 17,
     "story": 68,
-    "task": 165,
+    "task": 162,
     "bug": 31,
     "spike": 7,
     "feature": 5,
@@ -2072,17 +2072,17 @@
       "id": "TASK-160",
       "type": "task",
       "title": "Rename --eisenhower flag to --priority for better UX",
-      "status": "done",
+      "status": "draft",
       "priority": "medium",
-      "updated": "2025-12-13T12:42:51.484Z"
+      "updated": "2025-12-12T20:34:41.452Z"
     },
     {
       "id": "TASK-161",
       "type": "task",
       "title": "MCP Server: Rename tool parameter eisenhower → priority",
-      "status": "draft",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-12-13T12:31:56.650Z"
+      "updated": "2025-12-13T12:48:16.832Z"
     },
     {
       "id": "TASK-162",
@@ -2091,38 +2091,14 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-13T12:32:11.768Z"
-    },
-    {
-      "id": "TASK-163",
-      "type": "task",
-      "title": "Test --priority flag",
-      "status": "cancelled",
-      "eisenhower": "urgent-important",
-      "updated": "2025-12-13T12:42:47.881Z"
-    },
-    {
-      "id": "TASK-164",
-      "type": "task",
-      "title": "Test --eisenhower deprecation",
-      "status": "cancelled",
-      "eisenhower": "not-urgent-important",
-      "updated": "2025-12-13T12:42:47.998Z"
-    },
-    {
-      "id": "TASK-165",
-      "type": "task",
-      "title": "Test clean --priority flag",
-      "status": "cancelled",
-      "eisenhower": "urgent-important",
-      "updated": "2025-12-13T12:44:23.316Z"
     }
   ],
   "stats": {
-    "total": 293,
+    "total": 290,
     "by_type": {
       "epic": 17,
       "story": 68,
-      "task": 165,
+      "task": 162,
       "bug": 31,
       "spike": 7,
       "feature": 5,
@@ -2134,8 +2110,7 @@
       "draft": 134,
       "blocked": 2,
       "obsolete": 3,
-      "review": 0,
-      "cancelled": 3
+      "review": 0
     },
     "archived": 2
   },
@@ -2155,5 +2130,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-13T12:44:23.316Z"
+  "last_updated": "2025-12-13T12:48:16.832Z"
 }
