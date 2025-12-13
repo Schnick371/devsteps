@@ -1,8 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { DevStepsIndex, ItemStatus } from '../schemas/index.js';
-import { TYPE_TO_DIRECTORY, getCurrentTimestamp, parseItemId } from '../utils/index.js';
-
+import { TYPE_TO_DIRECTORY, getCurrentTimestamp, parseItemId } from '../utils/index.js';import { hasRefsStyleIndex, removeItemFromIndex } from './index-refs.js';
 export interface ArchiveItemResult {
   itemId: string;
   archivedAt: string;
@@ -47,43 +46,58 @@ export async function archiveItem(devstepsir: string, itemId: string): Promise<A
     renameSync(descriptionPath, archiveDescriptionPath);
   }
 
-  // Update index
-  const indexPath = join(devstepsir, 'index.json');
-  const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
-
-  // Remove from items
-  const itemIndex = index.items.findIndex((i) => i.id === itemId);
-  if (itemIndex !== -1) {
-    index.items.splice(itemIndex, 1);
-  }
-
-  // Add to archived_items
-  const archivedAt = getCurrentTimestamp();
-  index.archived_items = index.archived_items || [];
-  index.archived_items.push({
-    id: itemId,
-    type: parsed.type,
-    title: metadata.title,
-    archived_at: archivedAt,
-    original_status: originalStatus,
-  });
-
-  // Update stats
-  if (index.stats) {
-    index.stats.total = index.items.length;
-    index.stats.by_status[originalStatus] = Math.max(
-      (index.stats.by_status[originalStatus] || 1) - 1,
-      0
+  // Update index - use refs-style if available, otherwise legacy
+  if (hasRefsStyleIndex(devstepsir)) {
+    // Remove from all indexes (by-type, by-status, by-priority)
+    removeItemFromIndex(
+      devstepsir,
+      itemId,
+      metadata.type,
+      metadata.status,
+      metadata.eisenhower,
     );
-    index.stats.archived = (index.stats.archived || 0) + 1;
-  }
+    
+    // Note: refs-style doesn't track archived_items in index
+    // Archive metadata already contains all needed info
+  } else {
+    // Legacy index.json update
+    const indexPath = join(devstepsir, 'index.json');
+    const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
-  index.last_updated = archivedAt;
-  writeFileSync(indexPath, JSON.stringify(index, null, 2));
+    // Remove from items
+    const itemIndex = index.items.findIndex((i) => i.id === itemId);
+    if (itemIndex !== -1) {
+      index.items.splice(itemIndex, 1);
+    }
+
+    // Add to archived_items
+    const archivedAt = getCurrentTimestamp();
+    index.archived_items = index.archived_items || [];
+    index.archived_items.push({
+      id: itemId,
+      type: parsed.type,
+      title: metadata.title,
+      archived_at: archivedAt,
+      original_status: originalStatus,
+    });
+
+    // Update stats
+    if (index.stats) {
+      index.stats.total = index.items.length;
+      index.stats.by_status[originalStatus] = Math.max(
+        (index.stats.by_status[originalStatus] || 1) - 1,
+        0
+      );
+      index.stats.archived = (index.stats.archived || 0) + 1;
+    }
+
+    index.last_updated = archivedAt;
+    writeFileSync(indexPath, JSON.stringify(index, null, 2));
+  }
 
   return {
     itemId,
-    archivedAt,
+    archivedAt: getCurrentTimestamp(),
     originalStatus,
   };
 }
