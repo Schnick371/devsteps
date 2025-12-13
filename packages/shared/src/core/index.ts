@@ -24,3 +24,6 @@ export {
   type BulkUpdateResult,
 } from './bulk-update.js';
 export { validateRelationship, type ValidationResult, type WorkItem } from './validation.js';
+
+// Refs-style index operations
+export * from './index-refs.js';

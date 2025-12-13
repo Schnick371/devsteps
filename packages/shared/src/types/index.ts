@@ -11,3 +11,4 @@ export type {
 } from '../schemas/index.js';
 
 export * from './commands.js';
+export * from './index-refs.types.js';
