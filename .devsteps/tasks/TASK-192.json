@@ -3,11 +3,11 @@
   "type": "task",
   "category": "general",
   "title": "Update DevStepsItem schema with ULID and conflict resolution fields",
-  "status": "draft",
+  "status": "obsolete",
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-12T10:09:22.528Z",
-  "updated": "2025-12-12T10:25:26.172Z",
+  "updated": "2025-12-13T13:33:38.581Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/types/index.ts",
@@ -41,5 +41,6 @@
     "shared"
   ],
   "commits": [],
-  "metadata": {}
+  "metadata": {},
+  "superseded_by": "EPIC-018"
 }

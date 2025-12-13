@@ -3,11 +3,11 @@
   "type": "task",
   "category": "general",
   "title": "Create migration script to add ULID to existing items",
-  "status": "draft",
+  "status": "obsolete",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-12T10:10:34.586Z",
-  "updated": "2025-12-12T10:25:26.172Z",
+  "updated": "2025-12-13T13:33:38.587Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/cli/src/commands/migrate-ulid.ts"
@@ -38,5 +38,6 @@
     "data-integrity"
   ],
   "commits": [],
-  "metadata": {}
+  "metadata": {},
+  "superseded_by": "EPIC-018"
 }

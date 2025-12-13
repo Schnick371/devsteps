@@ -3,11 +3,11 @@
   "type": "task",
   "category": "general",
   "title": "Document ULID architecture and conflict resolution strategy",
-  "status": "draft",
+  "status": "obsolete",
   "priority": "medium",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-12T10:11:04.016Z",
-  "updated": "2025-12-12T10:11:10.510Z",
+  "updated": "2025-12-13T13:33:38.587Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".devsteps/HIERARCHY.md",
@@ -38,5 +38,6 @@
     "collaboration"
   ],
   "commits": [],
-  "metadata": {}
+  "metadata": {},
+  "superseded_by": "EPIC-018"
 }

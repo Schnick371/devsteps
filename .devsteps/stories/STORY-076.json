@@ -3,11 +3,11 @@
   "type": "story",
   "category": "general",
   "title": "ULID Integration for Merge-Safe Work Item Identification",
-  "status": "draft",
+  "status": "obsolete",
   "priority": "high",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-12T10:09:03.333Z",
-  "updated": "2025-12-12T10:25:26.171Z",
+  "updated": "2025-12-13T13:33:31.329Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -39,5 +39,6 @@
     "backend"
   ],
   "commits": [],
-  "metadata": {}
+  "metadata": {},
+  "superseded_by": "EPIC-018"
 }
