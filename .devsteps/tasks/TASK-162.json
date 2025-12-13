@@ -2,26 +2,33 @@
   "id": "TASK-162",
   "type": "task",
   "category": "general",
-  "title": "Update Extension MCP tool descriptions",
+  "title": "Extension MCP Server: Rename tool parameter eisenhower → priority",
   "status": "draft",
-  "eisenhower": "not-urgent-important",
-  "created": "2025-12-05T15:53:29.960Z",
-  "updated": "2025-12-05T16:03:01.020Z",
+  "priority": "medium",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-13T12:32:11.768Z",
+  "updated": "2025-12-13T12:32:52.388Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/mcp-server/tools/index.ts",
-    "packages/extension/src/mcp-server/index.ts"
+    "packages/extension/src/mcp-server/handlers/add.ts",
+    "packages/extension/src/mcp-server/handlers/update.ts",
+    "packages/extension/src/mcp-server/handlers/list.ts",
+    "packages/extension/src/mcp-server/handlers/init.ts"
   ],
   "linked_items": {
-    "implements": [
-      "STORY-063"
-    ],
+    "implements": [],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "EPIC-017",
+      "STORY-064",
+      "TASK-160",
+      "TASK-161"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
@@ -29,7 +36,9 @@
   },
   "tags": [
     "extension",
-    "bug-hierarchy"
+    "mcp",
+    "api",
+    "schema"
   ],
   "commits": [],
   "metadata": {}

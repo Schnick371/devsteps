@@ -1,29 +1,91 @@
-# Add Cycle Detection Configuration Property
+# MCP Server: Rename Tool Parameter eisenhower → priority
 
-## Objective
-Add `devsteps.treeView.enableCycleDetection` setting to extension configuration.
+## Context
 
-## Implementation
+MCP tool schemas currently have BOTH legacy `priority` (critical/high/medium/low) AND `eisenhower` fields. This creates confusion for AI agents using the tools.
 
-**File:** `packages/extension/package.json`
+After STORY-064, we need to:
+1. Remove legacy `priority` field completely
+2. Rename `eisenhower` → `priority` for external API
+3. Keep internal `eisenhower` field in JSON/schemas
 
-**Location:** In `contributes.configuration.properties` section (after existing `devsteps.logging.*` settings)
+## Scope
 
-```json
-"devsteps.treeView.enableCycleDetection": {
-  "type": "boolean",
-  "default": true,
-  "markdownDescription": "Enable cycle detection in hierarchical TreeView to prevent duplicate ID errors with bidirectional relationships.\n\n⚠️ **Warning:** Disabling may cause 'Element already registered' errors if your work items have bidirectional `relates-to` relationships.\n\n**When to disable:**\n- Large hierarchies (1000+ items) where performance is critical\n- Your data has strict parent→child relationships only (no cycles)\n\n**When to keep enabled (recommended):**\n- You use `relates-to` between items at the same level\n- You want maximum safety and stability"
+### Tool Schema Updates (packages/mcp-server/src/tools/index.ts)
+
+**devsteps-add tool:**
+```typescript
+// REMOVE this legacy field
+priority: {
+  type: 'string',
+  enum: ['critical', 'high', 'medium', 'low'],
+  description: 'Priority level',
+},
+
+// RENAME eisenhower → priority (external parameter)
+priority: {  // was: eisenhower
+  type: 'string',
+  enum: [
+    'urgent-important',
+    'not-urgent-important', 
+    'urgent-not-important',
+    'not-urgent-not-important',
+  ],
+  description: 'Priority (Eisenhower Matrix): urgent-important (Q1), not-urgent-important (Q2), urgent-not-important (Q3), not-urgent-not-important (Q4)',
+},
+```
+
+**devsteps-update tool:**
+- Same pattern: remove legacy `priority`, rename `eisenhower` → `priority`
+
+**devsteps-list tool:**
+- Update filter parameter from `eisenhower` → `priority`
+
+### Handler Updates
+
+**add handler (packages/mcp-server/src/handlers/add.ts):**
+```typescript
+// Map external 'priority' parameter → internal 'eisenhower' field
+const eisenhowerValue = args.priority; // external param
+metadata.eisenhower = eisenhowerValue; // internal field
+```
+
+**update handler:**
+- Same normalization pattern
+
+**list handler:**
+- Filter by `args.priority` parameter
+- Match against internal `item.eisenhower` field
+
+## Backward Compatibility
+
+- External API: Use `priority` parameter (user-friendly)
+- Internal storage: Keep `eisenhower` field (no breaking changes to data)
+- No migration needed - only parameter rename
+
+## Testing
+
+```javascript
+// Test with AI agent or HTTP client
+{
+  "tool": "devsteps-add",
+  "arguments": {
+    "type": "task",
+    "title": "Test priority parameter",
+    "priority": "urgent-important"  // NEW parameter name
+  }
+}
+
+// Should store as:
+{
+  "eisenhower": "urgent-important"  // Internal field unchanged
 }
 ```
 
-## Validation
-- [ ] Setting appears in VS Code Settings UI under "DevSteps"
-- [ ] Default value is `true` (checkbox checked)
-- [ ] Markdown description renders properly with warning icon
-- [ ] Setting change persists across VS Code restarts
+## Success Criteria
 
-## Notes
-- Uses `markdownDescription` for rich formatting (bold, emoji, lists)
-- Clear warning about risks when disabled
-- Guidance for when to use each option
+- Legacy `priority` field removed from all tool schemas
+- External parameter renamed to `priority` (Eisenhower values)
+- Handlers correctly map `args.priority` → `metadata.eisenhower`
+- AI agents see clear, single priority system
+- No breaking changes to stored data

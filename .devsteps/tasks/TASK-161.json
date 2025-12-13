@@ -2,33 +2,42 @@
   "id": "TASK-161",
   "type": "task",
   "category": "general",
-  "title": "Update MCP Server hierarchy resource description",
+  "title": "MCP Server: Rename tool parameter eisenhower → priority",
   "status": "draft",
-  "eisenhower": "not-urgent-important",
-  "created": "2025-12-05T15:53:29.958Z",
-  "updated": "2025-12-05T16:03:01.020Z",
+  "priority": "medium",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-13T12:31:56.650Z",
+  "updated": "2025-12-13T12:32:52.388Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/mcp-server/src/index.ts"
+    "packages/mcp-server/src/tools/index.ts",
+    "packages/mcp-server/src/handlers/add.ts",
+    "packages/mcp-server/src/handlers/update.ts",
+    "packages/mcp-server/src/handlers/list.ts"
   ],
   "linked_items": {
-    "implements": [
-      "STORY-063"
-    ],
+    "implements": [],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "EPIC-017",
+      "STORY-064",
+      "TASK-160",
+      "TASK-162"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "mcp-server",
-    "bug-hierarchy"
+    "mcp",
+    "api",
+    "schema",
+    "backward-compatibility"
   ],
   "commits": [],
   "metadata": {}

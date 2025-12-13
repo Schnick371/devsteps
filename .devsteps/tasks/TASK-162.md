@@ -1,76 +1,56 @@
-# Update WorkItemNode: Accept Cycle Detection Flag
+# Extension MCP Server: Rename Tool Parameter eisenhower → priority
 
-## Objective
-Modify `WorkItemNode` to conditionally apply cycle detection based on configuration.
+## Context
 
-## Implementation
+The VS Code extension has an embedded MCP server (duplicate of main MCP server) that also needs the parameter rename from `eisenhower` → `priority`.
 
-**File:** `packages/extension/src/treeView/nodes/workItemNode.ts`
+This is the same change as TASK-161 but for the extension's embedded server.
 
-### 1. Constructor - Add Parameter
+## Scope
+
+### Tool Schema Updates (packages/extension/src/mcp-server/tools/index.ts)
+
+Same as TASK-161:
+1. Remove legacy `priority` field (critical/high/medium/low)
+2. Rename `eisenhower` → `priority` parameter
+3. Update descriptions to use "Priority" terminology
+
+### Handler Updates
+
+**add/update/list handlers:**
+- Map `args.priority` → internal `eisenhower` field
+- Same normalization as TASK-161
+
+### Documentation Updates (handlers/init.ts)
+
+Update embedded devsteps agent documentation:
+
 ```typescript
-constructor(
-  private item: WorkItem,
-  private hierarchical: boolean = false,
-  private filterState?: FilterState,
-  private isExpanded?: boolean,
-  private parentId?: string,
-  private relationshipType?: string,
-  private ancestorIds: Set<string> = new Set(),
-  private enableCycleDetection: boolean = true,  // ← NEW
-)
+// OLD example in init handler
+- priority: "high"
+
+// NEW example
+- priority: "urgent-important"
 ```
 
-### 2. getChildren() - Conditional Check
-```typescript
-const loadChildWithRelation = async (childId: string, relationType: string) => {
-  // Only check ancestors if cycle detection enabled
-  if (this.enableCycleDetection && this.ancestorIds.has(childId)) {
-    return; // Skip cycle
-  }
-  
-  // ... rest of loading logic
-};
-```
+Update workflow examples to use `priority` parameter instead of `eisenhower`.
 
-### 3. hasVisibleChildren() - Conditional Logic
-```typescript
-hasVisibleChildren(filterState?: FilterState): boolean {
-  const hasLinks = this.hasImplementedByLinks(filterState);
-  if (!hasLinks) return false;
-  
-  // If cycle detection disabled, always show chevron when links exist
-  if (!this.enableCycleDetection) {
-    return true;
-  }
-  
-  // ... existing ancestor check logic
-  return allChildren.some(childId => !this.ancestorIds.has(childId));
-}
-```
+## Relationship to TASK-161
 
-### 4. Child Node Creation - Pass Flag
-```typescript
-return filteredChildren.map(({ item, relationType }) => 
-  new WorkItemNode(
-    item, 
-    true, 
-    effectiveFilter, 
-    isExpanded, 
-    this.item.id, 
-    relationType, 
-    childAncestors,
-    this.enableCycleDetection  // ← Pass to children
-  )
-);
-```
+- Same changes, different codebase location
+- Extension's MCP server is a duplicate of main MCP server
+- Both should be updated together for consistency
 
 ## Testing
-- [ ] When enabled: Cycle detection works (existing behavior)
-- [ ] When disabled: Children load without ancestor checks
-- [ ] Flag propagates to all child nodes
-- [ ] No TypeScript errors
 
-## Notes
-- Default `true` maintains backward compatibility
-- Flag must propagate through entire tree (children inherit parent's setting)
+Test through extension's TreeView or MCP integration:
+1. Add item via extension MCP server
+2. Verify `priority` parameter accepted
+3. Verify stored as `eisenhower` field internally
+
+## Success Criteria
+
+- Extension MCP tools use `priority` parameter
+- Init handler documentation uses `priority` examples
+- Consistent with main MCP server (TASK-161)
+- No breaking changes to extension functionality
