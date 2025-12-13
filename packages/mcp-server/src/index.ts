@@ -441,6 +441,28 @@ configureLogger({
   file: opts.logFile,
 });
 
+// Auto-migrate index if needed (before server starts)
+try {
+  const { join } = await import('node:path');
+  const { existsSync } = await import('node:fs');
+  const { ensureIndexMigrated } = await import('@schnick371/devsteps-shared');
+  
+  const workspaceArgs = program.args;
+  const workspacePath = workspaceArgs.length > 0 ? workspaceArgs[0] : process.cwd();
+  const devstepsDir = join(workspacePath, '.devsteps');
+  
+  if (existsSync(devstepsDir)) {
+    // Silent auto-migration on startup
+    await ensureIndexMigrated(devstepsDir, { silent: true });
+  }
+} catch (error) {
+  // Non-fatal - log and continue
+  getLogger().warn(
+    { error: error instanceof Error ? error.message : String(error) },
+    'Auto-migration check skipped'
+  );
+}
+
 // Setup heartbeat if enabled
 const heartbeatInterval = Number.parseInt(opts.heartbeatInterval, 10);
 if (heartbeatInterval > 0) {

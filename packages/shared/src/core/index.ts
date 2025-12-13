@@ -27,3 +27,14 @@ export { validateRelationship, type ValidationResult, type WorkItem } from './va
 
 // Refs-style index operations
 export * from './index-refs.js';
+
+// Auto-migration for external projects
+export {
+  checkMigrationNeeded,
+  ensureIndexMigrated,
+  getMigrationStatusMessage,
+  performMigration,
+  type AutoMigrationOptions,
+  type MigrationCheckResult,
+  type MigrationStats,
+} from './auto-migrate.js';
