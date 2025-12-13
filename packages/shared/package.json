@@ -1,6 +1,6 @@
 {
   "name": "@schnick371/devsteps-shared",
-  "version": "0.7.0-next.4",
+  "version": "0.8.1-next.1",
   "license": "Apache-2.0",
   "description": "Never Code Alone. Shared types, schemas, and utilities for DevSteps task tracking.",
   "author": "Thomas Hertel <thomas.hertel@devsteps.dev>",
