@@ -37,7 +37,7 @@ export default async function traceHandler(args: { id: string; depth?: number })
       if (!parsed) return null;
 
       const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
-      const metadataPath = join(devstepsDir, typeFolder, `${itemId}.json`);
+      const metadataPath = join(devstepsDir, 'items', typeFolder, `${itemId}.json`);
 
       if (!existsSync(metadataPath)) return null;
 

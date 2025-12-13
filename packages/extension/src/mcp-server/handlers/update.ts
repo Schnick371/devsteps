@@ -40,7 +40,7 @@ export default async function updateHandler(args: any) {
           const parsed = parseItemId(parentId);
           if (parsed) {
             const parentFolder = TYPE_TO_DIRECTORY[parsed.type];
-            const parentPath = join(devstepsDir, parentFolder, `${parentId}.json`);
+            const parentPath = join(devstepsDir, 'items', parentFolder, `${parentId}.json`);
             if (existsSync(parentPath)) {
               const parentMeta = JSON.parse(readFileSync(parentPath, 'utf-8'));
               const siblings = parentMeta.linked_items['implemented-by'] || [];
@@ -51,7 +51,7 @@ export default async function updateHandler(args: any) {
                 const sibParsed = parseItemId(siblingId);
                 if (sibParsed) {
                   const sibFolder = TYPE_TO_DIRECTORY[sibParsed.type];
-                  const sibPath = join(devstepsDir, sibFolder, `${siblingId}.json`);
+                  const sibPath = join(devstepsDir, 'items', sibFolder, `${siblingId}.json`);
                   if (existsSync(sibPath)) {
                     const sibMeta = JSON.parse(readFileSync(sibPath, 'utf-8'));
                     if (sibMeta.status !== STATUS.DONE && sibMeta.status !== STATUS.CANCELLED) {

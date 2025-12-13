@@ -34,8 +34,8 @@ export default async function linkHandler(args: {
     }    // Get file paths
     const sourceFolder = TYPE_TO_DIRECTORY[sourceParsed.type];
     const targetFolder = TYPE_TO_DIRECTORY[targetParsed.type];
-    const sourcePath = join(devstepsDir, sourceFolder, `${args.source_id}.json`);
-    const targetPath = join(devstepsDir, targetFolder, `${args.target_id}.json`);    if (!existsSync(sourcePath)) {
+    const sourcePath = join(devstepsDir, 'items', sourceFolder, `${args.source_id}.json`);
+    const targetPath = join(devstepsDir, 'items', targetFolder, `${args.target_id}.json`);    if (!existsSync(sourcePath)) {
       throw new Error(`Source item not found: ${args.source_id}`);
     }
     if (!existsSync(targetPath)) {

@@ -434,6 +434,7 @@ export function registerCommands(
         const mdPath = path.join(
           workspaceFolder.uri.fsPath,
           '.devsteps',
+          'items',
           itemTypeFolder,
           `${itemId}.md`,
         );
