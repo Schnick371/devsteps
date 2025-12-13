@@ -24,6 +24,7 @@ import {
   WorkItemNode,
 } from './nodes/index.js';
 import { getItemMethodology } from './utils/methodologyDetector.js';
+import { loadItemWithLinks } from './utils/itemLoader.js';
 import type { TreeViewStateManager } from '../utils/stateManager.js';
 
 /**
@@ -550,12 +551,26 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       const configData = await vscode.workspace.fs.readFile(configPath);
       const config = JSON.parse(Buffer.from(configData).toString('utf-8'));
 
-      // Load items
-      const indexPath = vscode.Uri.joinPath(this.workspaceRoot, '.devsteps', 'index.json');
-      const indexData = await vscode.workspace.fs.readFile(indexPath);
-      const index = JSON.parse(Buffer.from(indexData).toString('utf-8'));
+      // Load all item IDs from refs-style index (by-type/*.json files)
+      const byTypeDir = vscode.Uri.joinPath(this.workspaceRoot, '.devsteps', 'index', 'by-type');
+      const typeFiles = await vscode.workspace.fs.readDirectory(byTypeDir);
+      
+      const allItemIds: string[] = [];
+      for (const [fileName, fileType] of typeFiles) {
+        if (fileType === vscode.FileType.File && fileName.endsWith('.json')) {
+          const filePath = vscode.Uri.joinPath(byTypeDir, fileName);
+          const fileData = await vscode.workspace.fs.readFile(filePath);
+          const typeIndex = JSON.parse(Buffer.from(fileData).toString('utf-8'));
+          allItemIds.push(...(typeIndex.items || []));
+        }
+      }
 
-      let items = (index.items || []) as WorkItem[];
+      // Load full item data from individual files
+      let items: WorkItem[] = [];
+      for (const itemId of allItemIds) {
+        const item = await loadItemWithLinks(this.workspaceRoot, itemId);
+        if (item) items.push(item);
+      }
 
       // Track counts for badge
       const totalCount = items.length;
