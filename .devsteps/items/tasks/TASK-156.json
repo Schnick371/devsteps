@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Update expansion state tracking for unique TreeView IDs",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-05T10:38:32.911Z",
-  "updated": "2025-12-05T10:38:48.646Z",
+  "updated": "2025-12-13T23:30:59.623Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

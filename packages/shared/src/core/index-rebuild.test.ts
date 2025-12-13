@@ -9,7 +9,8 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdirSync, rmSync, existsSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import type { ItemMetadata } from '../schemas/index.js';
+import type { ItemMetadata, ItemType } from '../schemas/index.js';
+import { TYPE_TO_DIRECTORY } from '../utils/index.js';
 import { rebuildIndex } from './index-rebuild.js';
 import {
 	getIndexPaths,
@@ -42,19 +43,7 @@ describe('Index Rebuild Operations', () => {
 	 * Helper: Create a test item file
 	 */
 	function createItemFile(type: string, item: Partial<ItemMetadata> & { id: string; type: ItemMetadata['type']; title: string; status: ItemMetadata['status'] }): void {
-		// Get correct directory name from TYPE_TO_DIRECTORY mapping
-		const TYPE_TO_DIR: Record<string, string> = {
-			epic: 'epics',
-			story: 'stories',
-			task: 'tasks',
-			requirement: 'requirements',
-			feature: 'features',
-			bug: 'bugs',
-			spike: 'spikes',
-			test: 'tests',
-		};
-		
-		const typeDir = join(devstepsDir, TYPE_TO_DIR[type] || `${type}s`);
+		const typeDir = join(devstepsDir, TYPE_TO_DIRECTORY[type as ItemType]);
 		mkdirSync(typeDir, { recursive: true });
 
 		// Create complete item with defaults for required fields
