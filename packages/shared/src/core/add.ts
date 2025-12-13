@@ -8,6 +8,13 @@ import type {
   ItemType,
 } from '../schemas/index.js';
 import { TYPE_TO_DIRECTORY, generateItemId, getCurrentTimestamp } from '../utils/index.js';
+import {
+  hasRefsStyleIndex,
+  loadCounters,
+  updateCounters,
+  addItemToIndex,
+  loadLegacyIndex,
+} from './index-refs.js';
 
 export interface AddItemArgs {
   type: ItemType;
@@ -38,39 +45,36 @@ export async function addItem(devstepsir: string, args: AddItemArgs): Promise<Ad
 
   // Read config and index
   const configPath = join(devstepsir, 'config.json');
-  const indexPath = join(devstepsir, 'index.json');
-
   const config: DevStepsConfig = JSON.parse(readFileSync(configPath, 'utf-8'));
-  const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
-  // Migration: Initialize counters if missing (for legacy projects)
-  if (!index.counters) {
-    index.counters = {};
-    // Calculate existing max IDs per type
-    for (const item of index.items) {
-      const match = item.id.match(/-(\d+)$/);
-      if (match) {
-        const num = Number.parseInt(match[1], 10);
-        index.counters[item.type] = Math.max(index.counters[item.type] || 0, num);
+  // Get counter - try refs-style first, fallback to legacy
+  let counter: number;
+  if (hasRefsStyleIndex(devstepsir)) {
+    const counters = loadCounters(devstepsir);
+    counter = (counters[args.type] || 0) + 1;
+  } else {
+    // Legacy index.json
+    const indexPath = join(devstepsir, 'index.json');
+    const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
+    
+    // Migration: Initialize counters if missing (for legacy projects)
+    if (!index.counters) {
+      index.counters = {};
+      // Calculate existing max IDs per type
+      for (const item of index.items) {
+        const match = item.id.match(/-(\d+)$/);
+        if (match) {
+          const num = Number.parseInt(match[1], 10);
+          index.counters[item.type] = Math.max(index.counters[item.type] || 0, num);
+        }
       }
     }
+    counter = (index.counters[args.type] || 0) + 1;
   }
-
+  
   // Generate ID using global counter
   const typeFolder = TYPE_TO_DIRECTORY[args.type];
-  const counter = (index.counters[args.type] || 0) + 1;
   const itemId = generateItemId(args.type, counter);
-
-  // Check for duplicate ID (data integrity validation)
-  const existingIds = index.items.map((i) => i.id);
-  if (existingIds.includes(itemId)) {
-    throw new Error(
-      `Duplicate ID detected: ${itemId}. Index may be corrupted or counter was reset. Please check .devsteps/index.json`
-    );
-  }
-
-  // Increment counter
-  index.counters[args.type] = counter;
 
   // Create metadata
   const now = getCurrentTimestamp();
@@ -116,23 +120,41 @@ export async function addItem(devstepsir: string, args: AddItemArgs): Promise<Ad
     args.description || `# ${args.title}\n\n<!-- Add detailed description here -->\n`;
   writeFileSync(descriptionPath, description);
 
-  // Update index
-  index.items.push({
-    id: itemId,
-    type: args.type,
-    title: args.title,
-    status: 'draft',
-    eisenhower: args.eisenhower || 'not-urgent-important',
-    updated: now,
-  });
+  // Update index - use refs-style if available, otherwise legacy
+  if (hasRefsStyleIndex(devstepsir)) {
+    // Update counters
+    const currentCounters = loadCounters(devstepsir);
+    currentCounters[args.type] = counter;
+    updateCounters(devstepsir, currentCounters);
+    
+    // Add to all relevant indexes (by-type, by-status, by-priority)
+    addItemToIndex(devstepsir, metadata);
+  } else {
+    // Legacy index.json update
+    const indexPath = join(devstepsir, 'index.json');
+    const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
+    
+    // Increment counter
+    if (!index.counters) index.counters = {};
+    index.counters[args.type] = counter;
 
-  index.last_updated = now;
-  index.stats = index.stats || { total: 0, by_type: {}, by_status: {} };
-  index.stats.total = index.items.length;
-  index.stats.by_type[args.type] = (index.stats.by_type[args.type] || 0) + 1;
-  index.stats.by_status.draft = (index.stats.by_status.draft || 0) + 1;
+    index.items.push({
+      id: itemId,
+      type: args.type,
+      title: args.title,
+      status: 'draft',
+      eisenhower: args.eisenhower || 'not-urgent-important',
+      updated: now,
+    });
 
-  writeFileSync(indexPath, JSON.stringify(index, null, 2));
+    index.last_updated = now;
+    index.stats = index.stats || { total: 0, by_type: {}, by_status: {} };
+    index.stats.total = index.items.length;
+    index.stats.by_type[args.type] = (index.stats.by_type[args.type] || 0) + 1;
+    index.stats.by_status.draft = (index.stats.by_status.draft || 0) + 1;
+
+    writeFileSync(indexPath, JSON.stringify(index, null, 2));
+  }
 
   return {
     itemId,

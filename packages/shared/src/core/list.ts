@@ -7,6 +7,14 @@ import type {
   ItemType,
 } from '../schemas/index.js';
 import { TYPE_TO_DIRECTORY } from '../utils/index.js';
+import {
+  hasRefsStyleIndex,
+  loadIndexByType,
+  loadIndexByStatus,
+  loadIndexByPriority,
+  loadLegacyIndex,
+} from './index-refs.js';
+import type { CategoryIndex } from '../types/index-refs.types.js';
 
 export interface ListItemsArgs {
   type?: ItemType;
@@ -33,26 +41,78 @@ export async function listItems(
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
-  const indexPath = join(devstepsir, 'index.json');
-  const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
+  // Try new refs-style index first, fall back to legacy
+  let allIndexItems: string[] = [];
+  
+  if (hasRefsStyleIndex(devstepsir)) {
+    // Use optimized index lookups based on filter
+    if (args.type) {
+      allIndexItems = loadIndexByType(devstepsir, args.type);
+    } else if (args.status) {
+      allIndexItems = loadIndexByStatus(devstepsir, args.status);
+    } else if (args.eisenhower) {
+      allIndexItems = loadIndexByPriority(devstepsir, args.eisenhower);
+    } else {
+      // No filter - load all via type indexes
+      const allTypes: ItemType[] = ['epic', 'story', 'task', 'bug', 'spike', 'test', 'feature', 'requirement'];
+      for (const type of allTypes) {
+        const typeItems = loadIndexByType(devstepsir, type);
+        allIndexItems.push(...typeItems);
+      }
+    }
+  } else {
+    // Legacy index.json
+    const legacyIndex = loadLegacyIndex(devstepsir);
+    allIndexItems = legacyIndex.items.map((item) => item.id);
+  }
 
-  let items = [...index.items];
+  // Load item metadata for filtering (now we only have IDs)
+  let items: DevStepsIndex['items'] = allIndexItems
+    .map((id) => {
+      const typeMatch = id.match(/^([A-Z]+)-/);
+      if (!typeMatch) return null;
+      
+      const typePrefix = typeMatch[1];
+      const type = Object.entries({
+        EPIC: 'epic' as const,
+        STORY: 'story' as const,
+        TASK: 'task' as const,
+        BUG: 'bug' as const,
+        SPIKE: 'spike' as const,
+        TEST: 'test' as const,
+        FEAT: 'feature' as const,
+        REQ: 'requirement' as const,
+      }).find(([prefix]) => prefix === typePrefix)?.[1];
+      
+      if (!type) return null;
+      
+      const metadataPath = join(devstepsir, TYPE_TO_DIRECTORY[type], `${id}.json`);
+      if (!existsSync(metadataPath)) return null;
+      
+      const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+      return {
+        id: metadata.id,
+        type: metadata.type,
+        title: metadata.title,
+        status: metadata.status,
+        eisenhower: metadata.eisenhower,
+        updated: metadata.updated,
+      };
+    })
+    .filter((item): item is NonNullable<typeof item> => item !== null);
 
-  // Apply filters
-  if (args.type) {
+  // Apply remaining filters (type/status/eisenhower already filtered via index if using refs-style)
+  // For legacy index or multi-dimensional filters, apply all filters here
+  if (args.type && !hasRefsStyleIndex(devstepsir)) {
     items = items.filter((i) => i.type === args.type);
   }
 
-  if (args.status) {
+  if (args.status && !hasRefsStyleIndex(devstepsir)) {
     items = items.filter((i) => i.status === args.status);
   }
 
-  if (args.eisenhower) {
-    items = items.filter((i) => i.eisenhower === args.eisenhower);
-  }
-
+  // For assignee and tags, always load full metadata
   if (args.assignee) {
-    // Load full metadata for assignee filter
     items = items.filter((i) => {
       const metadataPath = join(devstepsir, TYPE_TO_DIRECTORY[i.type], `${i.id}.json`);
       if (!existsSync(metadataPath)) return false;
@@ -62,7 +122,6 @@ export async function listItems(
   }
 
   if (args.tags && args.tags.length > 0) {
-    // Load full metadata for tags filter
     const filterTags = args.tags;
     items = items.filter((i) => {
       const metadataPath = join(devstepsir, TYPE_TO_DIRECTORY[i.type], `${i.id}.json`);
@@ -72,8 +131,8 @@ export async function listItems(
     });
   }
 
+  // Apply eisenhower filter if not already done via index
   if (args.eisenhower) {
-    // Load full metadata for eisenhower filter
     items = items.filter((i) => {
       const metadataPath = join(devstepsir, TYPE_TO_DIRECTORY[i.type], `${i.id}.json`);
       if (!existsSync(metadataPath)) return false;

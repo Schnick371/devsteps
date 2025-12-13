@@ -8,6 +8,7 @@ import type {
 } from '../schemas/index.js';
 import { STATUS, RELATIONSHIP_TYPE } from '../constants/index.js';
 import { TYPE_TO_DIRECTORY, getCurrentTimestamp, parseItemId } from '../utils/index.js';
+import { hasRefsStyleIndex, updateItemInIndex } from './index-refs.js';
 
 export interface UpdateItemArgs {
   id: string;
@@ -123,27 +124,42 @@ export async function updateItem(
     writeFileSync(descriptionPath, existing + args.append_description);
   }
 
-  // Update index
-  const indexPath = join(devstepsir, 'index.json');
-  const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
-
-  const itemIndex = index.items.findIndex((i) => i.id === args.id);
-  if (itemIndex !== -1) {
-    if (args.status) index.items[itemIndex].status = args.status;
-    if (args.eisenhower) index.items[itemIndex].eisenhower = args.eisenhower;
-    if (args.title) index.items[itemIndex].title = args.title;
-    index.items[itemIndex].updated = metadata.updated;
-
-    // Update stats
-    if (args.status && oldStatus !== args.status) {
-      index.stats = index.stats || { total: 0, by_type: {}, by_status: {} };
-      index.stats.by_status[oldStatus] = (index.stats.by_status[oldStatus] || 1) - 1;
-      index.stats.by_status[args.status] = (index.stats.by_status[args.status] || 0) + 1;
+  // Update index - use refs-style if available, otherwise legacy
+  if (hasRefsStyleIndex(devstepsir)) {
+    // Only update if status or eisenhower changed (triggers re-indexing)
+    if (args.status || args.eisenhower) {
+      updateItemInIndex(
+        devstepsir,
+        args.id,
+        oldStatus,
+        args.status,
+        undefined, // oldEisenhower - we don't track changes
+        args.eisenhower,
+      );
     }
-  }
+  } else {
+    // Legacy index.json update
+    const indexPath = join(devstepsir, 'index.json');
+    const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
-  index.last_updated = metadata.updated;
-  writeFileSync(indexPath, JSON.stringify(index, null, 2));
+    const itemIndex = index.items.findIndex((i) => i.id === args.id);
+    if (itemIndex !== -1) {
+      if (args.status) index.items[itemIndex].status = args.status;
+      if (args.eisenhower) index.items[itemIndex].eisenhower = args.eisenhower;
+      if (args.title) index.items[itemIndex].title = args.title;
+      index.items[itemIndex].updated = metadata.updated;
+
+      // Update stats
+      if (args.status && oldStatus !== args.status) {
+        index.stats = index.stats || { total: 0, by_type: {}, by_status: {} };
+        index.stats.by_status[oldStatus] = (index.stats.by_status[oldStatus] || 1) - 1;
+        index.stats.by_status[args.status] = (index.stats.by_status[args.status] || 0) + 1;
+      }
+    }
+
+    index.last_updated = metadata.updated;
+    writeFileSync(indexPath, JSON.stringify(index, null, 2));
+  }
 
   return {
     metadata,
