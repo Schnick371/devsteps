@@ -34,8 +34,8 @@ export default async function exportHandler(args: {
   // Load full metadata and descriptions
   const fullItems = items.map((item: any) => {
     const typeFolder = TYPE_TO_DIRECTORY[item.type as ItemType];
-    const metadataPath = join(devstepsDir, 'items', typeFolder, `${item.id}.json`);
-    const descriptionPath = join(devstepsDir, 'items', typeFolder, `${item.id}.md`);
+    const metadataPath = join(devstepsDir, typeFolder, `${item.id}.json`);
+    const descriptionPath = join(devstepsDir, typeFolder, `${item.id}.md`);
 
     const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
     const description = existsSync(descriptionPath) ? readFileSync(descriptionPath, 'utf-8') : '';

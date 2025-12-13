@@ -6,23 +6,13 @@
  */
 
 import * as vscode from 'vscode';
+import { TYPE_TO_DIRECTORY } from '@schnick371/devsteps-shared';
+
+// Re-export for convenience
+export { TYPE_TO_DIRECTORY };
 
 export type ViewMode = 'flat' | 'hierarchical';
 export type HierarchyType = 'scrum' | 'waterfall' | 'both';
-
-/**
- * Map item types to their directory names
- */
-export const TYPE_TO_DIRECTORY: Record<string, string> = {
-  epic: 'epics',
-  story: 'stories',
-  task: 'tasks',
-  requirement: 'requirements',
-  feature: 'features',
-  bug: 'bugs',
-  spike: 'spikes',
-  test: 'tests',
-};
 
 export interface FilterState {
   statuses: string[];
