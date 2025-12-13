@@ -54,13 +54,32 @@ npm test
 
 ## Step 2: Version Bump
 
-**Update all package.json versions:**
+**⚠️ CRITICAL: Semantic Versioning Rules**
+
+**When to bump which number:**
+- **PATCH** (X.Y.Z → X.Y.Z+1): Bug fixes, documentation updates, no code changes
+- **MINOR** (X.Y.Z → X.Y+1.0): New features, backward-compatible changes
+- **MAJOR** (X.Y.Z → X+1.0.0): Breaking changes, API changes
+
+**Example Scenarios:**
+- README update only → PATCH (0.7.0 → 0.7.1)
+- Bug fix in existing feature → PATCH (0.7.1 → 0.7.2)
+- New command added → MINOR (0.7.2 → 0.8.0)
+- CLI argument changed → MAJOR (0.8.0 → 1.0.0)
+
+**DO NOT skip version numbers unnecessarily!**
+- ❌ 0.7.0 → 0.8.0 for README update
+- ✅ 0.7.0 → 0.7.1 for README update
+
+**Update all package.json versions to same X.Y.Z:**
 ```
 packages/shared/package.json      → X.Y.Z
 packages/cli/package.json         → X.Y.Z
 packages/mcp-server/package.json  → X.Y.Z
 packages/extension/package.json   → X.Y.Z
 ```
+
+**All packages must have identical version numbers!**
 
 **Commit version bump:**
 ```bash
