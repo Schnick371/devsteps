@@ -232,6 +232,7 @@ export async function rebuildIndex(
 
 /**
  * Scan all item files from .devsteps/{type}s/ directories
+ * Supports both new (items/epics/) and legacy (epics/) structures
  * 
  * @param devstepsDir Path to .devsteps directory
  * @param onError Error callback for handling corrupt files
@@ -246,13 +247,19 @@ async function loadAllItemsFromFiles(
 	// Scan each item type directory
 	for (const [type, directory] of Object.entries(TYPE_TO_DIRECTORY)) {
 		const dirPath = join(devstepsDir, directory);
+		const legacyPath = join(devstepsDir, directory.replace('items/', '')); // epics, stories, etc
 
-		if (!existsSync(dirPath)) {
+		// Try new structure first, fallback to legacy
+		const pathToUse = existsSync(dirPath) ? dirPath : 
+		                  existsSync(legacyPath) ? legacyPath : 
+		                  null;
+
+		if (!pathToUse) {
 			continue; // Skip missing directories (empty projects)
 		}
 
 		try {
-			const files = readdirSync(dirPath);
+			const files = readdirSync(pathToUse);
 
 			for (const file of files) {
 				// Only process JSON metadata files
@@ -260,7 +267,7 @@ async function loadAllItemsFromFiles(
 					continue;
 				}
 
-				const filePath = join(dirPath, file);
+				const filePath = join(pathToUse, file);
 
 				try {
 					const item = await loadItemMetadata(filePath);
@@ -276,7 +283,7 @@ async function loadAllItemsFromFiles(
 		} catch (error) {
 			// Handle directory read errors
 			onError?.({
-				file: dirPath,
+				file: pathToUse,
 				error: `Failed to read directory: ${error instanceof Error ? error.message : String(error)}`,
 			});
 		}

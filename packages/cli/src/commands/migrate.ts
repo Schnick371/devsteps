@@ -3,6 +3,9 @@ import { join } from 'node:path';
 import {
 	checkMigrationNeeded,
 	ensureIndexMigrated,
+	ensureFullMigration,
+	needsItemsDirectoryMigration,
+	migrateItemsDirectory,
 	getMigrationStatusMessage,
 	performMigration,
 	type MigrationStats,
@@ -38,27 +41,30 @@ export async function migrateCommand(options: {
 	if (options.check) {
 		console.log(chalk.bold('🔍 Migration Check\n'));
 
-		const result = checkMigrationNeeded(devstepsDir);
+		const indexResult = checkMigrationNeeded(devstepsDir);
+		const itemsNeeded = needsItemsDirectoryMigration(devstepsDir);
 
-		console.log(chalk.gray('Status:'));
-		console.log(`  Legacy index.json:  ${result.hasLegacy ? chalk.green('✓') : chalk.gray('✗')}`);
-		console.log(`  Refs-style index:   ${result.hasRefs ? chalk.green('✓') : chalk.gray('✗')}`);
+		console.log(chalk.gray('Index Migration:'));
+		console.log(`  Legacy index.json:  ${indexResult.hasLegacy ? chalk.green('✓') : chalk.gray('✗')}`);
+		console.log(`  Refs-style index:   ${indexResult.hasRefs ? chalk.green('✓') : chalk.gray('✗')}`);
 
-		if (result.itemCount !== undefined) {
-			console.log(`  Items to migrate:   ${chalk.cyan(result.itemCount.toString())}`);
+		if (indexResult.itemCount !== undefined) {
+			console.log(`  Items to migrate:   ${chalk.cyan(indexResult.itemCount.toString())}`);
 		}
 
 		console.log();
+		console.log(chalk.gray('Directory Structure:'));
+		console.log(`  Needs items/ migration:  ${itemsNeeded ? chalk.yellow('Yes') : chalk.green('No')}`);
 
-		if (result.needed) {
+		console.log();
+
+		if (indexResult.needed || itemsNeeded) {
 			console.log(chalk.yellow('⚠️  Migration needed'));
 			console.log(chalk.gray('\nRun'), chalk.cyan('devsteps migrate'), chalk.gray('to proceed'));
-		} else if (result.hasRefs) {
-			console.log(chalk.green('✅ Project already using refs-style index'));
-		} else if (result.hasLegacy && result.hasRefs) {
-			console.log(chalk.red('⚠️  Both index formats detected - manual cleanup needed'));
+		} else if (indexResult.hasRefs && !itemsNeeded) {
+			console.log(chalk.green('✅ Project fully migrated'));
 		} else {
-			console.log(chalk.gray('ℹ️  No index found (new project or not initialized)'));
+			console.log(chalk.gray('ℹ️  No migration needed'));
 		}
 
 		return;
@@ -69,54 +75,74 @@ export async function migrateCommand(options: {
 
 	try {
 		const check = checkMigrationNeeded(devstepsDir);
+		const itemsNeeded = needsItemsDirectoryMigration(devstepsDir);
 
-		if (!check.needed) {
+		if (!check.needed && !itemsNeeded) {
 			spinner.stop();
-
-			if (check.hasRefs) {
-				console.log(chalk.green('✅ Project already using refs-style index'));
-			} else if (check.hasLegacy && check.hasRefs) {
-				console.error(chalk.red('⚠️  Both index formats detected'));
-				console.error(chalk.gray('Manual cleanup required - please resolve manually'));
-				process.exit(1);
-			} else {
-				console.log(chalk.gray('ℹ️  No migration needed'));
-			}
-
+			console.log(chalk.green('✅ Project fully migrated (refs-style index + items/ structure)'));
 			return;
 		}
 
-		// Perform migration
-		spinner.text = 'Migrating index...';
+		// Variables for stats
+		let stats: MigrationStats | undefined;
+		let itemsStats: { moved: number; types: Record<string, number> } | undefined;
 
-		const stats: MigrationStats = await performMigration(devstepsDir, {
-			skipBackup: options.skipBackup,
-		});
+		// Perform index migration if needed
+		if (check.needed) {
+			spinner.text = 'Migrating index to refs-style...';
+
+			stats = await performMigration(devstepsDir, {
+				skipBackup: options.skipBackup,
+			});
+
+			console.log(chalk.gray(`   Index migrated: ${stats.totalItems} items`));
+			if (stats.backupPath) {
+				console.log(chalk.gray(`   Backup: ${stats.backupPath}`));
+			}
+		}
+
+		// Perform directory structure migration if needed
+		if (itemsNeeded) {
+			spinner.text = 'Migrating to items/ directory structure...';
+			
+			itemsStats = migrateItemsDirectory(devstepsDir, { silent: true });
+			
+			console.log(chalk.gray(`   Moved ${itemsStats.moved} files to items/ subdirectories`));
+		}
 
 		spinner.succeed(chalk.green('✨ Migration complete!'));
 
-		// Print summary
-		console.log();
-		console.log(chalk.bold('Migration Summary:'));
-		console.log(`  Total items:  ${chalk.cyan(stats.totalItems.toString())}`);
+		// Print summary only if we have stats
+		if (stats) {
+			console.log();
+			console.log(chalk.bold('Migration Summary:'));
+			console.log(`  Total items:  ${chalk.cyan(stats.totalItems.toString())}`);
 
-		if (stats.backupPath) {
-			console.log(chalk.gray(`  Backup:       ${stats.backupPath}`));
-		}
-		if (stats.archivePath) {
-			console.log(chalk.gray(`  Archived:     ${stats.archivePath}`));
+			if (stats.backupPath) {
+				console.log(chalk.gray(`  Backup:       ${stats.backupPath}`));
+			}
+			if (stats.archivePath) {
+				console.log(chalk.gray(`  Archived:     ${stats.archivePath}`));
+			}
+
+			console.log();
+			console.log(chalk.gray('By Type:'));
+			for (const [type, count] of Object.entries(stats.byType)) {
+				console.log(chalk.gray(`  ${type}: ${count}`));
+			}
+
+			console.log();
+			console.log(chalk.gray('By Status:'));
+			for (const [status, count] of Object.entries(stats.byStatus)) {
+				console.log(chalk.gray(`  ${status}: ${count}`));
+			}
 		}
 
-		console.log();
-		console.log(chalk.gray('By Type:'));
-		for (const [type, count] of Object.entries(stats.byType)) {
-			console.log(chalk.gray(`  ${type}: ${count}`));
-		}
-
-		console.log();
-		console.log(chalk.gray('By Status:'));
-		for (const [status, count] of Object.entries(stats.byStatus)) {
-			console.log(chalk.gray(`  ${status}: ${count}`));
+		if (itemsStats) {
+			console.log();
+			console.log(chalk.bold('Directory Migration:'));
+			console.log(chalk.gray(`  Moved: ${itemsStats.moved} files`));
+			console.log(chalk.gray(`  Types: ${Object.entries(itemsStats.types).map(([k, v]) => `${k}=${v}`).join(', ')}`));
 		}
 
 		console.log();
