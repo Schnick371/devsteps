@@ -71,12 +71,22 @@ npm test
 - ❌ 0.7.0 → 0.8.0 for README update
 - ✅ 0.7.0 → 0.7.1 for README update
 
+**⚠️ All Packages: Same Clean Semantic Version**
+
+**For stable releases, ALL packages use identical clean semver:**
+- **npm packages**: `@schnick371/devsteps-shared@X.Y.Z` (no suffix)
+- **npm packages**: `@schnick371/devsteps-cli@X.Y.Z` (no suffix)
+- **npm packages**: `@schnick371/devsteps-mcp-server@X.Y.Z` (no suffix)
+- **VS Code Extension**: `devsteps@X.Y.Z` (no suffix)
+
+**All 4 packages MUST have identical version numbers!**
+
 **Update all package.json versions to same X.Y.Z:**
 ```
-packages/shared/package.json      → X.Y.Z
-packages/cli/package.json         → X.Y.Z
-packages/mcp-server/package.json  → X.Y.Z
-packages/extension/package.json   → X.Y.Z
+packages/shared/package.json      → X.Y.Z (clean semver)
+packages/cli/package.json         → X.Y.Z (clean semver)
+packages/mcp-server/package.json  → X.Y.Z (clean semver)
+packages/extension/package.json   → X.Y.Z (clean semver)
 ```
 
 **All packages must have identical version numbers!**
