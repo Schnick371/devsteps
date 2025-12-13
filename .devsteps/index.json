@@ -2152,9 +2152,9 @@
       "id": "STORY-074",
       "type": "story",
       "title": "Index Rebuild Command: Regenerate from Source of Truth",
-      "status": "draft",
+      "status": "done",
       "priority": "high",
-      "updated": "2025-12-13T13:36:39.841Z"
+      "updated": "2025-12-13T16:18:11.267Z"
     },
     {
       "id": "STORY-075",
@@ -2202,5 +2202,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-13T16:03:01.589Z"
-}
+  "last_updated": "2025-12-13T16:18:11.267Z"
+}}

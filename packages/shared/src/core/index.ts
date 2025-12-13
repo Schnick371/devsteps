@@ -38,3 +38,10 @@ export {
   type MigrationCheckResult,
   type MigrationStats,
 } from './auto-migrate.js';
+
+// Index rebuild operations
+export {
+  rebuildIndex,
+  type RebuildResult,
+  type RebuildOptions,
+} from './index-rebuild.js';
