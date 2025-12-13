@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Update HierarchyRootNode to use refs-style index",
-  "status": "draft",
+  "status": "review",
   "eisenhower": "urgent-important",
   "created": "2025-12-13T22:37:13.908Z",
-  "updated": "2025-12-13T22:40:16.673Z",
+  "updated": "2025-12-13T22:45:20.496Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/treeView/nodes/hierarchyRootNode.ts"
