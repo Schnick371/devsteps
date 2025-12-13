@@ -2,6 +2,23 @@
 
 > Never Code Alone. Team Up With Your AI.
 
+## ⚠️ Pre-Release Version 0.7.0-next.4
+
+**This is an experimental pre-release for early testing.** Features may change, and stability is not guaranteed. Install the stable release for production use.
+
+**What's New in 0.7.0-next.4:**
+- 🗂️ **Items Directory Migration**: Git-inspired object store architecture (`.devsteps/items/`)
+- 📝 **Improved Git Workflow**: Enhanced documentation and merge strategies
+- 🧪 **Test Configuration**: Non-blocking test execution for better CI/CD integration
+
+**Known Issues:**
+- Auto-migration triggers on first run (one-time operation, 686 files)
+- Some test failures expected during migration (fixed in next iteration)
+
+**Feedback Welcome!** Report issues or suggestions at [GitHub Issues](https://github.com/Schnick371/devsteps/issues)
+
+---
+
 **AI-First Development Workflow System** integrated directly into VS Code. Structure your development process with traceable work items, visualize project health with an interactive dashboard, and integrate with AI agents via the Model Context Protocol (MCP).
 
 ## ✨ Features
@@ -33,13 +50,30 @@
 
 ## 📦 Installation
 
-### From Marketplace (Coming Soon)
-Search for "DevSteps" in the VS Code Extensions view and click Install.
+### Pre-Release Installation (Current - 0.7.0-next.4)
 
-### From VSIX (Current)
-1. Download `devsteps-vscode-0.4.0.vsix` from [Releases](https://github.com/Schnick371/devsteps/releases)
-2. In VS Code: `Extensions` → `...` → `Install from VSIX...`
-3. Select the downloaded `.vsix` file
+**From VS Code Marketplace:**
+1. Search for "DevSteps" in Extensions view
+2. Click "Switch to Pre-Release" button
+3. Install version 0.7.0-next.4
+
+**Install MCP Server (@next):**
+```bash
+npm install -g @schnick371/devsteps-mcp-server@next
+```
+
+**CLI (@next - Optional):**
+```bash
+npm install -g @schnick371/devsteps-cli@next
+```
+
+### Stable Release (Recommended for Production)
+Search for "DevSteps" in the VS Code Extensions view and install the stable release.
+
+**MCP Server (Stable):**
+```bash
+npm install -g @schnick371/devsteps-mcp-server
+```
 
 ## ⚙️ Prerequisites
 
@@ -131,15 +165,23 @@ The command will show:
 ## 🚀 Getting Started
 
 ### Initialize a DevSteps Project
+
+**Pre-Release (@next):**
 ```bash
 # Install CLI
-npm install -g @devsteps/cli
+npm install -g @schnick371/devsteps-cli@next
 
 # Initialize project
 devsteps init my-project --methodology scrum
 
 # Add your first work item
 devsteps add epic "Build Amazing Product"
+```
+
+**Stable:**
+```bash
+npm install -g @schnick371/devsteps-cli
+devsteps init my-project
 ```
 
 ### Use in VS Code
@@ -242,14 +284,57 @@ This means npx is not installed or not in PATH.
 
 **Alternative:** Extension will automatically fall back to bundled MCP server if npx unavailable
 
-## 🐛 Known Issues
+## 🐛 Known Issues (Pre-Release 0.7.0-next.4)
 
+**Migration-Related:**
+- [ ] Auto-migration runs on first startup (expected, one-time operation)
+- [ ] Test failures during migration (addressed in next iteration)
+
+**Performance:**
 - [ ] Graph force simulation may lag with 100+ highly-connected nodes (optimization in progress)
-- [ ] Large project initial load may take 3-5s (caching planned for v0.5.0)
+- [ ] Large project initial load may take 3-5s (caching planned for future release)
+
+**How to Report Issues:**
+Please include:
+- Pre-Release version (`0.7.0-next.4`)
+- VS Code version
+- Steps to reproduce
+- Expected vs actual behavior
+
+Report at: [GitHub Issues](https://github.com/Schnick371/devsteps/issues)
 
 ## 📝 Release Notes
 
-### 0.4.0 (Current Release)
+### 0.7.0-next.4 (Pre-Release - December 2025)
+
+**⚠️ Experimental Features - Testing Only**
+
+**Major Changes:**
+- ✅ **Items Directory Migration (STORY-079)**: Restructured `.devsteps/` to git-inspired object store
+  - Old: `.devsteps/epics/`, `.devsteps/stories/` (flat)
+  - New: `.devsteps/items/epics/`, `.devsteps/items/stories/` (nested)
+  - Auto-migration: Detects old structure and migrates on first run
+- ✅ **Git Workflow Improvements**: Enhanced merge strategies and documentation
+- ✅ **Test Configuration**: Non-blocking test execution for CI/CD pipelines
+
+**Migration Notes:**
+- First startup: Auto-migration runs (one-time, ~686 files)
+- No backward compatibility during transition
+- Backup recommended before installing pre-release
+
+**What to Test:**
+- Items directory structure after migration
+- Dashboard loading with new directory layout
+- TreeView functionality with nested items
+- MCP server integration with new paths
+
+**Feedback Channels:**
+- GitHub Issues: Bug reports, feature requests
+- GitHub Discussions: Questions, suggestions
+
+---
+
+### 0.4.0 (Stable Release)
 
 **Major Features:**
 - ✅ Interactive WebView Dashboard with 5 visualization sections
