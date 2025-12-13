@@ -160,10 +160,13 @@ program
 // Doctor - Health check
 program
   .command('doctor')
-  .description('Run health checks on development environment')
-  .action(async () => {
+  .description('Run health checks and index operations')
+  .option('--rebuild-index', 'Rebuild index from item files')
+  .option('--check', 'Check what would be rebuilt (dry-run)')
+  .option('--yes', 'Skip confirmation prompts')
+  .action(async (options) => {
     const { doctorCommand } = await import('./commands/doctor.js');
-    await doctorCommand();
+    await doctorCommand(options);
   });
 
 // Context commands

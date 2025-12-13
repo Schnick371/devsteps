@@ -27,3 +27,10 @@ export { validateRelationship, type ValidationResult, type WorkItem } from './va
 
 // Refs-style index operations
 export * from './index-refs.js';
+
+// Index rebuild operations
+export {
+  rebuildIndex,
+  type RebuildResult,
+  type RebuildOptions,
+} from './index-rebuild.js';
