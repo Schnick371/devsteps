@@ -231,7 +231,9 @@ export async function rebuildIndex(
 }
 
 /**
- * Scan all item files from .devsteps/{type}s/ directories
+ * Scan all item files from .devsteps/items/{type}s/ directories
+ * 
+ * If old flat structure is detected, automatically migrates to new structure first.
  * 
  * @param devstepsDir Path to .devsteps directory
  * @param onError Error callback for handling corrupt files
@@ -241,9 +243,15 @@ async function loadAllItemsFromFiles(
 	devstepsDir: string,
 	onError?: (error: { file: string; error: string }) => void,
 ): Promise<ItemMetadata[]> {
+	// Auto-migrate if old structure detected
+	const { needsItemsDirectoryMigration, migrateItemsDirectory } = await import('./auto-migrate.js');
+	if (needsItemsDirectoryMigration(devstepsDir)) {
+		migrateItemsDirectory(devstepsDir, { silent: true });
+	}
+
 	const items: ItemMetadata[] = [];
 
-	// Scan each item type directory
+	// Scan each item type directory (new structure only)
 	for (const [type, directory] of Object.entries(TYPE_TO_DIRECTORY)) {
 		const dirPath = join(devstepsDir, directory);
 

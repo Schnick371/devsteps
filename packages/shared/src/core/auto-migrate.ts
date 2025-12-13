@@ -10,7 +10,7 @@
  * @see EPIC-018 Index Architecture Refactoring
  */
 
-import { existsSync, readFileSync, writeFileSync, renameSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, renameSync, mkdirSync, readdirSync, copyFileSync, rmdirSync } from 'node:fs';
 import { join } from 'node:path';
 import {
 	hasLegacyIndex,
@@ -22,6 +22,7 @@ import {
 	getIndexPaths,
 } from './index-refs.js';
 import type { ItemType } from '../schemas/index.js';
+import { TYPE_TO_DIRECTORY } from '../utils/index.js';
 
 /**
  * Migration check result
@@ -390,5 +391,117 @@ export async function ensureIndexMigrated(
 			console.error('❌ Migration failed:', error instanceof Error ? error.message : String(error));
 		}
 		throw error;
+	}
+}
+
+/**
+ * Check if items/ directory migration is needed
+ * 
+ * Returns true if using flat structure (epics/, stories/)
+ * instead of nested structure (items/epics/, items/stories/)
+ */
+export function needsItemsDirectoryMigration(devstepsDir: string): boolean {
+	// Check if old flat structure exists
+	const hasOldStructure = existsSync(join(devstepsDir, 'epics')) || 
+	                        existsSync(join(devstepsDir, 'stories')) ||
+	                        existsSync(join(devstepsDir, 'tasks'));
+	
+	// Check if new items/ structure exists
+	const hasNewStructure = existsSync(join(devstepsDir, 'items'));
+	
+	// Need migration if old exists and new doesn't
+	return hasOldStructure && !hasNewStructure;
+}
+
+/**
+ * Migrate from flat directory structure to items/ subdirectory
+ * 
+ * Moves files from:
+ *   .devsteps/epics/EPIC-001.json → .devsteps/items/epics/EPIC-001.json
+ *   .devsteps/stories/...         → .devsteps/items/stories/...
+ * 
+ * @param devstepsDir Path to .devsteps directory
+ * @param options Migration options
+ * @returns Migration statistics
+ */
+export function migrateItemsDirectory(
+	devstepsDir: string,
+	options: AutoMigrationOptions = {},
+): { moved: number; types: Record<string, number> } {
+	const { silent = false } = options;
+	
+	if (!silent) {
+		console.log('📂 Migrating to items/ directory structure...');
+	}
+	
+	const oldDirs = ['epics', 'stories', 'tasks', 'bugs', 'spikes', 'tests', 'requirements', 'features'];
+	const stats = { moved: 0, types: {} as Record<string, number> };
+	
+	// Create items/ directory
+	const itemsDir = join(devstepsDir, 'items');
+	if (!existsSync(itemsDir)) {
+		mkdirSync(itemsDir, { recursive: true });
+	}
+	
+	// Move each type directory
+	for (const dirName of oldDirs) {
+		const oldPath = join(devstepsDir, dirName);
+		const newPath = join(itemsDir, dirName);
+		
+		if (!existsSync(oldPath)) continue;
+		
+		// Create new subdirectory
+		mkdirSync(newPath, { recursive: true });
+		
+		// Move all files
+		const files = readdirSync(oldPath);
+		let count = 0;
+		
+		for (const file of files) {
+			const srcPath = join(oldPath, file);
+			const dstPath = join(newPath, file);
+			
+			// Use renameSync for atomic move
+			renameSync(srcPath, dstPath);
+			count++;
+		}
+		
+		stats.types[dirName] = count;
+		stats.moved += count;
+		
+		// Remove old empty directory (best effort)
+		try {
+			rmdirSync(oldPath);
+		} catch {
+			// Directory not empty or other error - ignore
+		}
+	}
+	
+	if (!silent) {
+		console.log(`   ✅ Moved ${stats.moved} files to items/ subdirectories`);
+	}
+	
+	return stats;
+}
+
+/**
+ * Ensure index is migrated AND items are in correct directory structure
+ * 
+ * Combines both migrations:
+ * 1. Legacy index.json → refs-style index/ (if needed)
+ * 2. Flat structure → items/ subdirectory (if needed)
+ * 
+ * Safe to call on every operation - only migrates when needed.
+ */
+export async function ensureFullMigration(
+	devstepsDir: string,
+	options: AutoMigrationOptions = {},
+): Promise<void> {
+	// Step 1: Index migration (legacy → refs-style)
+	await ensureIndexMigrated(devstepsDir, options);
+	
+	// Step 2: Directory structure migration (flat → items/)
+	if (needsItemsDirectoryMigration(devstepsDir)) {
+		migrateItemsDirectory(devstepsDir, options);
 	}
 }

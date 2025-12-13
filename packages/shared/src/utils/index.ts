@@ -11,16 +11,17 @@ export {
 
 /**
  * Type to plural directory mapping
+ * Uses items/ subdirectory for git-inspired object store (SPIKE-008)
  */
 export const TYPE_TO_DIRECTORY: Record<ItemType, string> = {
-  epic: 'epics',
-  story: 'stories',
-  task: 'tasks',
-  requirement: 'requirements',
-  feature: 'features',
-  bug: 'bugs',
-  spike: 'spikes',
-  test: 'tests',
+  epic: 'items/epics',
+  story: 'items/stories',
+  task: 'items/tasks',
+  requirement: 'items/requirements',
+  feature: 'items/features',
+  bug: 'items/bugs',
+  spike: 'items/spikes',
+  test: 'items/tests',
 };
 
 /**
