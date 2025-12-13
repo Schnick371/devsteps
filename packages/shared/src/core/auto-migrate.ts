@@ -71,23 +71,6 @@ export interface MigrationStats {
 }
 
 /**
- * Helper: Get type folder name
- */
-function getTypeFolder(type: string): string {
-	const map: Record<string, string> = {
-		epic: 'epics',
-		story: 'stories',
-		task: 'tasks',
-		bug: 'bugs',
-		spike: 'spikes',
-		test: 'tests',
-		feature: 'features',
-		requirement: 'requirements',
-	};
-	return map[type] || 'tasks';
-}
-
-/**
  * Check if migration is needed
  * 
  * Migration is needed when:
@@ -226,7 +209,7 @@ export async function performMigration(
 	// Migrate items
 	for (const item of legacyIndex.items) {
 		// Load full metadata for each item to get eisenhower quadrant
-		const typeFolder = getTypeFolder(item.type);
+		const typeFolder = TYPE_TO_DIRECTORY[item.type as ItemType];
 		const metadataPath = join(devstepsDir, typeFolder, `${item.id}.json`);
 
 		if (!existsSync(metadataPath)) {
