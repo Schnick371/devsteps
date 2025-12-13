@@ -1,20 +1,20 @@
 {
   "id": "SPIKE-008",
   "type": "spike",
-  "category": "general",
-  "title": "Research: Multi-User Scaling Beyond 5 Concurrent Users - Server vs CRDT vs ULID",
+  "category": "architecture",
+  "title": "Git-Inspired Index Architecture - Content-Addressable Storage Research",
   "status": "draft",
   "priority": "high",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-12T10:12:51.431Z",
-  "updated": "2025-12-12T10:13:03.937Z",
+  "created": "2025-12-13T13:22:54.748Z",
+  "updated": "2025-12-13T13:25:35.473Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
-    "implements": [
+    "implements": [],
+    "implemented-by": [
       "EPIC-018"
     ],
-    "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
@@ -26,12 +26,11 @@
     "superseded-by": []
   },
   "tags": [
-    "spike",
     "research",
-    "scaling",
-    "crdt",
-    "multi-user",
-    "server"
+    "git",
+    "architecture",
+    "index",
+    "merge-conflicts"
   ],
   "commits": [],
   "metadata": {}

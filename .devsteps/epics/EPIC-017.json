@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2025-12-05T16:29:09.041Z",
-  "updated": "2025-12-13T12:32:39.039Z",
+  "updated": "2025-12-13T13:25:35.476Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -25,7 +25,8 @@
     "relates-to": [
       "TASK-160",
       "TASK-161",
-      "TASK-162"
+      "TASK-162",
+      "EPIC-018"
     ],
     "depends-on": [],
     "required-by": [],

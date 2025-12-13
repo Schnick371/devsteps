@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
   "counters": {
-    "epic": 17,
-    "story": 68,
+    "epic": 18,
+    "story": 72,
     "task": 162,
     "bug": 31,
-    "spike": 7,
+    "spike": 8,
     "feature": 5,
     "requirement": 2
   },
@@ -2091,23 +2091,71 @@
       "status": "done",
       "priority": "medium",
       "updated": "2025-12-13T12:50:06.598Z"
+    },
+    {
+      "id": "SPIKE-008",
+      "type": "spike",
+      "title": "Git-Inspired Index Architecture - Content-Addressable Storage Research",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-13T13:22:54.748Z"
+    },
+    {
+      "id": "EPIC-018",
+      "type": "epic",
+      "title": "Index Architecture Refactoring - Git-Inspired Refs Model",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-13T13:23:35.887Z"
+    },
+    {
+      "id": "STORY-069",
+      "type": "story",
+      "title": "Foundation: Refs-Style Index Schema & Core Operations",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-13T13:24:06.007Z"
+    },
+    {
+      "id": "STORY-070",
+      "type": "story",
+      "title": "Package Integration: Update CLI, MCP, Extension for New Index",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-13T13:24:26.380Z"
+    },
+    {
+      "id": "STORY-071",
+      "type": "story",
+      "title": "Migration: Transform index.json to Refs-Style Structure",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-13T13:24:51.268Z"
+    },
+    {
+      "id": "STORY-072",
+      "type": "story",
+      "title": "Validation: Conflict Testing & Performance Benchmarking",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-13T13:25:17.104Z"
     }
   ],
   "stats": {
-    "total": 290,
+    "total": 296,
     "by_type": {
-      "epic": 17,
-      "story": 68,
+      "epic": 18,
+      "story": 72,
       "task": 162,
       "bug": 31,
-      "spike": 7,
+      "spike": 8,
       "feature": 5,
       "requirement": 2
     },
     "by_status": {
       "in-progress": 5,
       "done": 146,
-      "draft": 134,
+      "draft": 140,
       "blocked": 2,
       "obsolete": 3,
       "review": 0
@@ -2130,5 +2178,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-13T12:50:06.598Z"
+  "last_updated": "2025-12-13T13:25:17.104Z"
 }

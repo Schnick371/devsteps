@@ -1,39 +1,44 @@
 {
   "id": "STORY-070",
   "type": "story",
-  "category": "general",
-  "title": "Document Branch Lifecycle Management with Git Tags",
-  "status": "done",
-  "priority": "medium",
-  "eisenhower": "not-urgent-important",
-  "created": "2025-12-08T10:33:45.825Z",
-  "updated": "2025-12-08T10:39:29.689Z",
+  "category": "integration",
+  "title": "Package Integration: Update CLI, MCP, Extension for New Index",
+  "status": "draft",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-13T13:24:26.380Z",
+  "updated": "2025-12-13T13:25:35.476Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    ".github/prompts/git-workflow.instructions.md"
+    "packages/cli/src/commands/",
+    "packages/mcp-server/src/tools/",
+    "packages/extension/src/"
   ],
   "linked_items": {
-    "implements": [],
-    "implemented-by": [
-      "TASK-164",
-      "TASK-165",
-      "TASK-166"
+    "implements": [
+      "EPIC-018"
     ],
+    "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
     "relates-to": [],
-    "depends-on": [],
-    "required-by": [],
+    "depends-on": [
+      "STORY-069"
+    ],
+    "required-by": [
+      "STORY-071"
+    ],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "documentation",
-    "git",
-    "workflow",
-    "branch-management"
+    "integration",
+    "cli",
+    "mcp-server",
+    "extension",
+    "index"
   ],
   "commits": [],
   "metadata": {}

@@ -1,38 +1,112 @@
-## Problem Statement
+# Migration: Transform index.json to Refs-Style Structure
 
-Current ID format uses 3-digit padding (TASK-001 to TASK-999), limiting projects to 999 items per type. With TASK counter at 166, approaching capacity concerns for large long-term projects.
+## User Story
+As a **DevSteps project maintainer**, I want **a safe migration from monolithic index.json to refs-style indexes** so that **existing data is preserved and the transition is smooth**.
 
-## Solution
-
-Expand to 4-digit format (TASK-0001 to TASK-9999) providing 10x capacity (9999 items per type).
-
-## Impact Analysis
-
-**Current State:**
-- Total Items: ~299 (TASK-166, STORY-070, EPIC-017, BUG-032, SPIKE-007, FEAT-005, REQ-002)
-- Regex: `\d{3,}` (3+ digits minimum)
-- Generation: `padStart(3, '0')`
-- Counters: Tracked in index.json
-
-**Migration Strategy (Backwards Compatible):**
-1. Update regex to `\d{3,4}` (allow both 3 and 4 digits during transition)
-2. Update generation to `padStart(4, '0')` (new items: TASK-0167+)
-3. Existing items remain unchanged (TASK-001 through TASK-166)
-4. Optional: Bulk migration tool to rename existing items (TASK-001 → TASK-0001)
-
-**Files Affected:**
-- `packages/shared/src/schemas/index.ts` (regex validation, line 133)
-- `packages/shared/src/utils/index.ts` (generateItemId, line 112)
-- `packages/shared/src/utils/index.ts` (parseItemId, line 122)
+## Background
+After all packages support new index (STORY-070), migrate existing `.devsteps/index.json` (290 items, 2134 lines) to new distributed structure with zero data loss.
 
 ## Acceptance Criteria
 
-- Schema accepts both 3 and 4 digit IDs (backwards compatible)
-- New items generated with 4-digit padding (TASK-0167, STORY-0071, etc.)
-- Existing items (001-166) remain valid and functional
-- No breaking changes to CLI, MCP server, or extension
-- Optional migration tool provided for bulk renaming (if desired)
+### Migration Script
+- [ ] Create `scripts/migrate-index.ts` (or .js)
+- [ ] Read existing `.devsteps/index.json`
+- [ ] Parse all items (validate schema)
+- [ ] Group items by type, status, priority
+- [ ] Write to `index/by-type/*.json`
+- [ ] Write to `index/by-status/*.json`
+- [ ] Write to `index/by-priority/*.json`
+- [ ] Verify all items migrated (count check)
 
-## Priority
+### Data Validation
+- [ ] Pre-migration item count
+- [ ] Post-migration item count (must match)
+- [ ] Checksum verification (all IDs present)
+- [ ] No duplicates across indexes
+- [ ] No orphaned items
+- [ ] Consistency check across all index files
 
-Medium - Q2 (not-urgent-important): Improvement for long-term scalability, no immediate user-facing breakage.
+### Backup Strategy
+- [ ] Backup `.devsteps/index.json` → `index.json.backup-{timestamp}`
+- [ ] Keep backup for 30 days
+- [ ] Document recovery procedure
+
+### Rollback Plan
+- [ ] Restore from backup command
+- [ ] Remove new index structure
+- [ ] Validate old index still works
+- [ ] Test rollback procedure before migration
+
+### Testing
+- [ ] Test on production data copy (devsteps repo)
+- [ ] Test with empty index
+- [ ] Test with 1000+ items (stress test)
+- [ ] Test with corrupted index (error handling)
+- [ ] Test rollback scenario
+
+### Documentation
+- [ ] Migration guide for users
+- [ ] Troubleshooting section
+- [ ] FAQ for common issues
+- [ ] Rollback instructions
+
+### Git Workflow
+- [ ] Document .gitignore changes (if any)
+- [ ] Update .github/instructions for new index
+- [ ] Commit message template update
+
+## Technical Notes
+
+**Migration Command:**
+```bash
+npm run migrate:index
+# or
+node scripts/migrate-index.js
+```
+
+**Safety Checks:**
+```typescript
+// Pre-flight checks
+assert(oldIndexExists, 'Old index.json not found');
+assert(newIndexNotExists, 'New index already exists - aborting');
+assert(validSchema(oldIndex), 'Invalid old index schema');
+
+// Post-migration validation
+assert(itemCount(old) === itemCount(new), 'Item count mismatch');
+assert(allIdsPresent(old, new), 'Missing items detected');
+```
+
+**Index File Format:**
+```json
+{
+  "type": "tasks",
+  "items": ["TASK-160", "TASK-161", "TASK-162"],
+  "migrated": "2025-12-13T13:30:00.000Z",
+  "source": "index.json",
+  "version": "1.0.0"
+}
+```
+
+## Affected Paths
+- `scripts/migrate-index.ts` (new)
+- `.devsteps/index.json` (archived after migration)
+- `.devsteps/index/` (created during migration)
+
+## Dependencies
+- Depends on: STORY-070 (All packages support new index)
+- Blocks: STORY-072 (Validation needs migrated data)
+
+## Success Metrics
+- Migration completes in <5 seconds
+- Zero data loss (100% items migrated)
+- Zero downtime for users
+- Rollback works if needed
+
+## Definition of Done
+- Migration script tested on production data
+- Backup and rollback procedures verified
+- Documentation complete
+- Migration executed successfully
+- Old index.json archived
+- All items accessible via new index
+- Team trained on new structure

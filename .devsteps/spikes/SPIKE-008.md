@@ -1,161 +1,190 @@
-# Research: Multi-User Scaling Beyond 5 Concurrent Users
+# Research: Git-Inspired Index Architecture
 
-## Research Question
+## Mission
+Investigate how to prevent `.devsteps/index.json` merge conflicts using Git's proven architecture patterns.
 
-**At what scale does ULID + LWW conflict resolution break down, and when is a centralized server necessary?**
+## Problem Statement
+Current array-based `index.json` (2134 lines, 290 items) causes frequent merge conflicts during parallel development:
+- Feature branches update work item status → conflicts with main
+- Array structure changes many lines when items added/sorted
+- Squash merges consistently require manual conflict resolution
 
-## Background
+## Research Approach
+8 intensive research rounds covering:
+1. Git internals & object storage
+2. Human-readable vs hash-based IDs
+3. Hybrid approaches (best of both worlds)
+4. Immutable storage & append-only patterns
+5. Content-addressable filesystem design
+6. Git references (refs) architecture
+7. Refs directory structure & implementation
+8. Production best practices & lessons learned
 
-ULID-based offline-first approach works well for:
-- 2-3 developers/agents working in parallel
-- Occasional concurrent edits
-- Git as coordination layer
+## Key Findings
 
-But we need to validate the upper limits:
-- **5+ simultaneous users** editing same items
-- **High-frequency updates** (multiple changes per minute)
-- **Complex dependencies** requiring transactional consistency
-- **Real-time collaboration** expectations
+### 1. Git's Two-Layer Architecture
 
-## Research Areas
+**Lower Layer: Object Store**
+- Content-addressable storage via SHA-1/SHA-256
+- `.git/objects/ab/cdef123...` (first 2 chars = dir, rest = filename)
+- **Immutable**: Once stored, never changed
+- **Deduplication**: Same content = same hash = stored once
 
-### 1. Conflict Probability Analysis
+**Upper Layer: References**
+- Human-readable names: `refs/heads/main`, `refs/tags/v1.0`
+- Simple text files containing SHA hash
+- **Mutable**: Branches move, tags are static
+- **No merge conflicts**: Each ref = separate file!
 
-**Calculate collision scenarios:**
-- ULID collision probability with N concurrent generators
-- ID counter collision rate at different scales
-- LWW merge complexity with M branches
+### 2. Why Git Has No Index Merge Conflicts
 
-**Testing:**
-```bash
-# Simulate 5, 10, 20 concurrent agents
-for i in {1..20}; do
-  (devsteps add task "Agent $i task" &)
-done
-# Measure: conflicts, merge time, data loss
+```
+.git/refs/
+├── heads/
+│   ├── main          (file with hash)
+│   ├── feature-a     (file with hash)
+│   └── bugfix-123    (file with hash)
+└── tags/
+    ├── v1.0          (file with hash)
+    └── v2.0          (file with hash)
 ```
 
-### 2. Git Merge Performance
+**Each ref = own file** → Different branches change different files → No conflicts!
 
-**Benchmark:**
-- Merge time for N concurrent branches (N=5, 10, 20)
-- Index.json conflict resolution overhead
-- File system limitations (100s of .json files)
+### 3. Human-Readable vs Hash-Based IDs
 
-**Hypothesis:** Git merges degrade beyond 10-15 concurrent branches
+**Industry Consensus:**
+- **Stripe, GitHub**: Prefix + Short ID (`pi_3LKQhv...`)
+- **Hybrid URLs**: `/users/550e8400/john-doe` (UUID + slug)
+- **NIST OSCAL Standard**: Both `id` (human) and `uuid` (system)
 
-### 3. Real-Time vs Eventual Consistency
+**Verdict**: Keep human-readable IDs (`TASK-160`), NOT replace with hashes!
 
-**Compare patterns:**
+### 4. Event Sourcing Patterns
 
-| Pattern | Use Case | Pros | Cons |
-|---------|----------|------|------|
-| **Offline-First (ULID)** | <5 users, async work | No server, simple | Eventual consistency only |
-| **Operational Transform** | Real-time editors | True real-time | Complex, server required |
-| **CRDT (Automerge)** | 5-15 users, P2P | No central server | Network overhead, complexity |
-| **Server + Websockets** | 15+ users, real-time | Strong consistency | Infrastructure dependency |
+**Append-only logs prevent conflicts via:**
+- Each event = new line (no overwriting)
+- Immutability = no deletion/modification
+- Current state = aggregation of all events
 
-### 4. Case Studies Research
+**But**: Our use-case is queryable index, not event log.
 
-**Review production systems:**
-- **Linear**: How they handle multi-user issue tracking
-- **Notion**: CRDT + server hybrid approach
-- **Figma**: Operational Transform at scale
-- **GitHub Issues**: Server-based with optimistic UI
+### 5. Production Best Practices
 
-**Tools to research:**
-- Automerge (CRDT library)
-- Yjs (CRDT for collaborative editing)
-- Electric SQL (local-first with sync)
-- PowerSync (Postgres ↔ SQLite sync)
+From AWS, Microsoft, Git workflows:
+- Small, frequent commits > large batches
+- Trunk-based development > long-lived branches
+- Pull often > rare merges
+- Communication about parallel changes
+- Never gitignore "source of truth" files (like package-lock.json)
 
-### 5. Cost-Benefit Analysis
+## Recommended Solution: Refs-Style Index
 
-**Scenarios:**
+**Inspired by `.git/refs/` architecture:**
 
-**Scenario A: 5-10 Users (ULID + Git)**
-- Cost: Development time (ULID implementation)
-- Benefit: Zero infrastructure, offline-first
-- Risk: Occasional merge conflicts
-
-**Scenario B: 10-20 Users (CRDT Layer)**
-- Cost: Add Automerge/Yjs, network complexity
-- Benefit: Better conflict resolution, P2P sync
-- Risk: Learning curve, debugging difficulty
-
-**Scenario C: 20+ Users (Centralized Server)**
-- Cost: Infrastructure (database, websockets, hosting)
-- Benefit: True real-time, strong consistency
-- Risk: Single point of failure, offline breaks
-
-## Deliverables
-
-### 1. Scaling Report (Markdown)
 ```
-packages/shared/docs/scaling-analysis.md
-- Conflict probability calculations
-- Git merge benchmarks
-- Pattern comparison matrix
-- Recommendation by team size
+.devsteps/
+├── items/                     # Object Store (unchanged!)
+│   ├── epics/
+│   │   ├── EPIC-001.json     # Human-readable names!
+│   │   └── EPIC-001.md
+│   ├── tasks/
+│   │   ├── TASK-160.json
+│   │   └── TASK-160.md
+│   └── ... (other types)
+│
+└── index/                     # References (NEW!)
+    ├── by-type/              # Categorized refs
+    │   ├── epics.json        # ["EPIC-001", "EPIC-017", ...]
+    │   ├── stories.json      # ["STORY-042", "STORY-043", ...]
+    │   └── tasks.json        # ["TASK-160", "TASK-161", ...]
+    ├── by-status/
+    │   ├── draft.json        # ["EPIC-017", "TASK-163", ...]
+    │   ├── in-progress.json  # ["TASK-160"]
+    │   └── done.json         # ["TASK-159", "STORY-041", ...]
+    └── by-priority/
+        ├── critical.json
+        ├── high.json
+        ├── medium.json
+        └── low.json
 ```
 
-### 2. Prototype (Optional)
-- Simple CRDT integration POC (if promising)
-- Benchmark suite for concurrent operations
-- Demo of 10-agent scenario
+## Why This Works
 
-### 3. Decision Framework
-```markdown
-## When to Use What
+✅ **Drastically Reduced Merge Conflicts**
+- `by-type/tasks.json` changes only when new tasks created
+- `by-status/in-progress.json` changes only on status updates
+- Feature branches usually modify different index files
+- Small files (~20-50 IDs each) = minimal conflict surface
 
-### ULID + Git (Current Approach)
-✅ Use when:
-- Team size: 1-5 developers
-- Work style: Async, branch-based
-- Offline: Critical requirement
-- Infrastructure: None available
+✅ **Human-Readable Preserved**
+- IDs stay: `EPIC-001`, `TASK-160` (as before!)
+- Files stay: `TASK-160.json`, `TASK-160.md` (as before!)
+- No switch to cryptic hashes needed
 
-### Add CRDT Layer
-✅ Use when:
-- Team size: 5-15 users
-- Work style: Semi-real-time
-- Offline: Still important
-- Acceptable: Network complexity
+✅ **Git-Proven Architecture**
+- Same structure as `.git/refs/heads/`, `.git/refs/tags/`
+- Battle-tested for 20 years in millions of repositories
+- Scales to 866k refs (Android repository example)
 
-### Centralized Server
-✅ Use when:
-- Team size: 15+ users
-- Work style: Real-time collaboration
-- Offline: Nice to have
-- Acceptable: Infrastructure costs
+✅ **Performance Benefits**
+- Small files load fast
+- Quick filtering: Load only relevant index file
+- Parallel reads possible
+- Reduced memory footprint
+
+✅ **Backward Compatible**
+- Items unchanged: `EPIC-001.json`, `EPIC-001.md`
+- Migration: Change index structure, items untouched
+- Gradual rollout possible
+
+## Alternative Considered: Hash-Based Object Names
+
+Git's full object store model:
 ```
+.devsteps/
+├── objects/
+│   ├── a3/
+│   │   └── 4f7e2... (hash of EPIC-001 content)
+│   └── b7/
+│       └── 9a3c1... (hash of TASK-160 content)
+└── refs/
+    ├── epics/
+    │   └── EPIC-001 → "a34f7e2..."
+```
+
+**Verdict**: **Overkill** for our use-case!
+- Git needs this for deduplication (same file contents)
+- We never have identical work items
+- Complexity without real benefit
+- Human-readability lost in item files
+
+## Research Sources
+
+**8 Tavily searches with 80 authoritative sources:**
+- Git internals documentation (git-scm.com)
+- Princeton COS316 course materials
+- GitHub Engineering blog
+- Microsoft Azure Architecture Center
+- AWS Prescriptive Guidance
+- Industry best practices (Stripe, NIST OSCAL)
+- Production lessons learned articles
+
+## Next Steps
+
+1. Create EPIC: Index Architecture Refactoring
+2. Create Stories for implementation phases
+3. Link to EPIC-017 (Simplify Priority System) - both data structure improvements
+4. Design migration strategy
+5. Implement refs-style index
+6. Test with parallel feature branches
+7. Measure merge conflict reduction
 
 ## Success Criteria
 
-- [ ] Quantitative limits identified (N users, M items)
-- [ ] Comparison matrix complete
-- [ ] Recommendations documented
-- [ ] POC code (if CRDT chosen)
-- [ ] Decision made: Stay ULID-only or add layer
-
-## Timeline
-
-- Research: 2-3 days
-- Prototyping: 2-4 days (if needed)
-- Documentation: 1 day
-
-**Total: ~1 week**
-
-## Follow-Up Stories
-
-Based on findings, create:
-- **If ULID sufficient:** Close spike, proceed with STORY-076
-- **If CRDT needed:** New story for Automerge/Yjs integration
-- **If server needed:** New epic for server architecture
-
-## References
-
-- [Automerge: Local-First Software](https://automerge.org/)
-- [Electric SQL: Local-First Sync](https://electric-sql.com/)
-- [CRDT.tech: Comprehensive CRDT resources](https://crdt.tech/)
-- [Figma: Multiplayer Architecture](https://www.figma.com/blog/how-figmas-multiplayer-technology-works/)
+- Zero or minimal index.json merge conflicts during parallel development
+- Human-readable IDs preserved (TASK-xxx format)
+- Item files (.json, .md) remain unchanged
+- Performance equal or better than current index
+- Full backward compatibility maintained
+- Migration path documented and tested
