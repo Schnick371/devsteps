@@ -1,6 +1,6 @@
 ---
-agent: 'devsteps'
-model: 'Auto'
+agent: 'devsteps-coordinator'
+model: 'Claude Sonnet 4.5'
 description: 'Begin implementation work - review planned items, select next task, and start structured development'
 tools: ['vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'vscode/extensions', 'execute/testFailure', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web/fetch', 'copilot-container-tools/*', 'tavily/*', 'upstash/context7/*', 'agent', 'devsteps/*', 'todo']
 ---

@@ -308,27 +308,8 @@ function saveCategoryIndex(filePath: string, category: string, items: string[]):
 		updated: getCurrentTimestamp(),
 	};
 
-	// Atomic write: write to temp file, then rename
-	const tempPath = `${filePath}.tmp`;
-	try {
-		writeFileSync(tempPath, JSON.stringify(index, null, 2));
-		// Rename is atomic on most file systems
-		if (existsSync(filePath)) {
-			writeFileSync(filePath, readFileSync(tempPath));
-		} else {
-			writeFileSync(filePath, readFileSync(tempPath));
-		}
-	} finally {
-		// Clean up temp file
-		if (existsSync(tempPath)) {
-			try {
-				// Note: unlinkSync not used to avoid sync fs operations
-				// In production, consider fs.promises for true async
-			} catch {
-				// Ignore cleanup errors
-			}
-		}
-	}
+	// Write directly (directory should already exist via update* functions)
+	writeFileSync(filePath, JSON.stringify(index, null, 2));
 }
 
 /**
