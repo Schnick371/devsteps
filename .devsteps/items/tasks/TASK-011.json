@@ -1,0 +1,41 @@
+{
+  "id": "TASK-011",
+  "type": "task",
+  "category": "vscode",
+  "title": "Keyboard Shortcuts - Fast Navigation and Actions",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-23T16:21:29.239Z",
+  "updated": "2025-11-23T19:54:25.594Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/vscode-extension/package.json",
+    "packages/vscode-extension/src/commands.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-003",
+      "TASK-010"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "keyboard",
+    "shortcuts",
+    "productivity"
+  ],
+  "commits": [],
+  "metadata": {}
+}

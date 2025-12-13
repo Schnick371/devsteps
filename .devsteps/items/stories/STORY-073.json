@@ -1,0 +1,41 @@
+{
+  "id": "STORY-073",
+  "type": "story",
+  "category": "migration",
+  "title": "External Project Migration: Auto-Detect and Upgrade Old Index",
+  "status": "done",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-13T13:36:09.584Z",
+  "updated": "2025-12-13T16:03:01.589Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/migrate.ts",
+    "packages/shared/src/core/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-018"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-071"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "migration",
+    "backward-compatibility",
+    "auto-upgrade",
+    "user-experience"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -11,16 +11,17 @@ export {
 
 /**
  * Type to plural directory mapping
+ * Uses items/ subdirectory for git-inspired object store (SPIKE-008)
  */
 export const TYPE_TO_DIRECTORY: Record<ItemType, string> = {
-  epic: 'epics',
-  story: 'stories',
-  task: 'tasks',
-  requirement: 'requirements',
-  feature: 'features',
-  bug: 'bugs',
-  spike: 'spikes',
-  test: 'tests',
+  epic: 'items/epics',
+  story: 'items/stories',
+  task: 'items/tasks',
+  requirement: 'items/requirements',
+  feature: 'items/features',
+  bug: 'items/bugs',
+  spike: 'items/spikes',
+  test: 'items/tests',
 };
 
 /**
@@ -111,6 +112,24 @@ export function generateItemId(
   const prefix = prefixMap[type] || 'ITEM';
   const paddedNumber = counter.toString().padStart(3, '0');
   return `${prefix}-${paddedNumber}`;
+}
+
+/**
+ * Get uppercase prefix from lowercase type name
+ * Used for consistent counter key generation
+ */
+export function getTypePrefix(type: string): string {
+  const prefixMap: Record<string, string> = {
+    epic: 'EPIC',
+    story: 'STORY',
+    task: 'TASK',
+    requirement: 'REQ',
+    feature: 'FEAT',
+    bug: 'BUG',
+    spike: 'SPIKE',
+    test: 'TEST',
+  };
+  return prefixMap[type] || 'ITEM';
 }
 
 /**

@@ -1,0 +1,32 @@
+{
+  "id": "TASK-089",
+  "type": "task",
+  "category": "general",
+  "title": "Remove MCP Server Bundling from Extension",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-30T11:24:35.990Z",
+  "updated": "2025-11-30T11:35:45.130Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "BUG-025"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "deployment,build,cleanup"
+  ],
+  "commits": [],
+  "metadata": {}
+}

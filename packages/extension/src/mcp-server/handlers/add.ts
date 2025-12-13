@@ -6,12 +6,19 @@ import { simpleGit } from 'simple-git';
 /**
  * Add a new item to devsteps (MCP wrapper)
  */
-export default async function addHandler(args: AddItemArgs) {
+export default async function addHandler(args: any) {
   try {
     const devstepsDir = join(getWorkspacePath(), '.devsteps');
 
+    // Map external 'priority' parameter → internal 'eisenhower' field
+    const mappedArgs: AddItemArgs = {
+      ...args,
+      eisenhower: args.priority, // External API uses 'priority', internal uses 'eisenhower'
+    };
+    delete (mappedArgs as any).priority; // Remove external parameter
+
     // Use shared core logic
-    const result = await addItem(devstepsDir, args);
+    const result = await addItem(devstepsDir, mappedArgs);
 
     // Git hints (MCP-specific presentation)
     let gitHint = '';

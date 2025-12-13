@@ -1,0 +1,38 @@
+{
+  "id": "BUG-022",
+  "type": "bug",
+  "category": "general",
+  "title": "Command Name Typos - devstepsopenItem und devstepsupdateStatus missing dots",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-28T08:53:24.123Z",
+  "updated": "2025-11-28T08:57:25.079Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/commands/index.ts",
+    "packages/extension/src/webview/dashboardPanel.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "command-typos",
+    "executeCommand",
+    "core-functionality",
+    "search-bug"
+  ],
+  "commits": [],
+  "metadata": {}
+}

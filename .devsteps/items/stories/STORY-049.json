@@ -1,0 +1,43 @@
+{
+  "id": "STORY-049",
+  "type": "story",
+  "category": "general",
+  "title": "Flexible Bug Relationship Types - affects + relates-to",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-02T11:37:47.290Z",
+  "updated": "2025-12-03T08:59:01.729Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-005"
+    ],
+    "implemented-by": [
+      "TASK-103",
+      "TASK-104",
+      "TASK-105",
+      "TASK-043"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [
+      "STORY-053",
+      "STORY-054"
+    ]
+  },
+  "tags": [
+    "relationships",
+    "validation",
+    "bug-workflow",
+    "semantics"
+  ],
+  "commits": [],
+  "metadata": {}
+}

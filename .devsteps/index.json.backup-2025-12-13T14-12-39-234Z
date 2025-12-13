@@ -1,0 +1,2206 @@
+{
+  "version": "1.0.0",
+  "counters": {
+    "epic": 18,
+    "story": 75,
+    "task": 162,
+    "bug": 31,
+    "spike": 8,
+    "feature": 5,
+    "requirement": 2
+  },
+  "items": [
+    {
+      "id": "EPIC-001",
+      "type": "epic",
+      "title": "DevSteps Platform - AI-First Development Workflow System",
+      "status": "draft",
+      "created": "2025-11-23T15:33:22.968Z",
+      "updated": "2025-11-24T14:22:18.882Z"
+    },
+    {
+      "id": "EPIC-002",
+      "type": "epic",
+      "title": "Monorepo Infrastructure - Build System and Package Management",
+      "status": "done",
+      "created": "2025-11-23T15:33:22.968Z",
+      "updated": "2025-11-24T10:15:02.472Z"
+    },
+    {
+      "id": "EPIC-003",
+      "type": "epic",
+      "title": "VS Code Extension - Complete IDE Integration",
+      "status": "draft",
+      "created": "2025-11-23T15:34:16.783Z",
+      "updated": "2025-11-24T14:07:24.442Z"
+    },
+    {
+      "id": "EPIC-004",
+      "type": "epic",
+      "title": "GitHub Publication Preparation - Legal Compliance and Repository Setup",
+      "status": "draft",
+      "created": "2025-11-23T16:40:59.062Z",
+      "updated": "2025-11-24T14:07:31.740Z"
+    },
+    {
+      "id": "STORY-001",
+      "type": "story",
+      "title": "Shared Package - Core Business Logic and Type Definitions",
+      "status": "done",
+      "created": "2025-11-23T15:33:47.334Z",
+      "updated": "2025-11-24T10:13:37.884Z"
+    },
+    {
+      "id": "STORY-002",
+      "type": "story",
+      "title": "CLI Package - Command-Line Interface for Developers",
+      "status": "done",
+      "created": "2025-11-23T15:33:47.334Z",
+      "updated": "2025-11-24T10:21:56.070Z"
+    },
+    {
+      "id": "STORY-003",
+      "type": "story",
+      "title": "MCP Server Package - AI Integration via Model Context Protocol",
+      "status": "done",
+      "created": "2025-11-23T15:33:47.339Z",
+      "updated": "2025-11-24T10:13:37.885Z"
+    },
+    {
+      "id": "STORY-004",
+      "type": "story",
+      "title": "VS Code Extension Package - Complete Implementation",
+      "status": "done",
+      "created": "2025-11-23T15:42:52.573Z",
+      "updated": "2025-11-24T10:21:34.418Z"
+    },
+    {
+      "id": "TASK-001",
+      "type": "task",
+      "title": "Extension Scaffolding - Basic Structure and Activation",
+      "status": "done",
+      "created": "2025-11-23T15:34:16.786Z",
+      "updated": "2025-11-24T10:13:37.884Z"
+    },
+    {
+      "id": "TASK-002",
+      "type": "task",
+      "title": "TreeView Provider - Display Work Items in Sidebar",
+      "status": "done",
+      "created": "2025-11-23T15:34:45.800Z",
+      "updated": "2025-11-24T10:21:34.417Z"
+    },
+    {
+      "id": "TASK-003",
+      "type": "task",
+      "title": "Command Registration - User Interaction Handlers",
+      "status": "done",
+      "created": "2025-11-23T15:34:45.801Z",
+      "updated": "2025-11-24T10:13:37.884Z"
+    },
+    {
+      "id": "TASK-004",
+      "type": "task",
+      "title": "MCP Server Manager - Automatic Startup and Configuration",
+      "status": "done",
+      "created": "2025-11-23T15:35:22.305Z",
+      "updated": "2025-11-24T10:13:37.885Z"
+    },
+    {
+      "id": "TASK-005",
+      "type": "task",
+      "title": "WebView Dashboard - Project Statistics and Visualization",
+      "status": "done",
+      "created": "2025-11-23T15:35:22.310Z",
+      "updated": "2025-11-24T10:15:02.472Z"
+    },
+    {
+      "id": "TASK-006",
+      "type": "task",
+      "title": "Context Menus - Quick Actions and User Interactions",
+      "status": "done",
+      "created": "2025-11-23T15:39:31.433Z",
+      "updated": "2025-11-24T10:15:02.473Z"
+    },
+    {
+      "id": "TASK-007",
+      "type": "task",
+      "title": "Icons and Theming - Visual Design and Theme Integration",
+      "status": "done",
+      "created": "2025-11-23T15:39:31.434Z",
+      "updated": "2025-11-23T19:52:56.706Z"
+    },
+    {
+      "id": "TASK-008",
+      "type": "task",
+      "title": "Extension Packaging - Marketplace Distribution Preparation",
+      "status": "done",
+      "created": "2025-11-23T15:39:31.435Z",
+      "updated": "2025-11-24T10:13:37.885Z"
+    },
+    {
+      "id": "TASK-009",
+      "type": "task",
+      "title": "FileDecorationProvider - Status Color Badges for TreeView Items",
+      "status": "done",
+      "created": "2025-11-23T16:19:31.869Z",
+      "updated": "2025-11-23T18:10:50.333Z"
+    },
+    {
+      "id": "TASK-010",
+      "type": "task",
+      "title": "TreeView Filtering and Sorting - Advanced Item Navigation",
+      "status": "done",
+      "created": "2025-11-23T16:20:30.935Z",
+      "updated": "2025-11-24T09:38:41.020Z"
+    },
+    {
+      "id": "TASK-011",
+      "type": "task",
+      "title": "Keyboard Shortcuts - Fast Navigation and Actions",
+      "status": "done",
+      "created": "2025-11-23T16:21:29.239Z",
+      "updated": "2025-11-23T19:54:25.594Z"
+    },
+    {
+      "id": "TASK-012",
+      "type": "task",
+      "title": "Settings UI - Configurable Extension Behavior",
+      "status": "draft",
+      "created": "2025-11-23T16:23:17.409Z",
+      "updated": "2025-11-23T16:23:25.826Z"
+    },
+    {
+      "id": "TASK-013",
+      "type": "task",
+      "title": "Welcome View - Onboarding and Getting Started",
+      "status": "done",
+      "created": "2025-11-23T16:23:17.413Z",
+      "updated": "2025-11-25T13:59:48.765Z"
+    },
+    {
+      "id": "TASK-014",
+      "type": "task",
+      "title": "Status Bar Integration - Quick Project Stats",
+      "status": "draft",
+      "created": "2025-11-23T16:23:17.413Z",
+      "updated": "2025-11-23T16:23:25.828Z"
+    },
+    {
+      "id": "TASK-015",
+      "type": "task",
+      "title": "Output Channel Logging - Debugging and Diagnostics",
+      "status": "done",
+      "created": "2025-11-23T16:23:17.414Z",
+      "updated": "2025-11-24T10:13:37.885Z"
+    },
+    {
+      "id": "TASK-016",
+      "type": "task",
+      "title": "LICENSE Consistency Fix - Apache 2.0 Across All Packages",
+      "status": "done",
+      "created": "2025-11-23T16:42:18.041Z",
+      "updated": "2025-11-24T10:13:37.886Z"
+    },
+    {
+      "id": "TASK-017",
+      "type": "task",
+      "title": "README.md Enhancement - Legal Compliance and Attribution",
+      "status": "done",
+      "created": "2025-11-23T16:42:18.041Z",
+      "updated": "2025-11-23T17:44:16.121Z"
+    },
+    {
+      "id": "TASK-018",
+      "type": "task",
+      "title": "CODE_OF_CONDUCT.md Creation - Community Standards",
+      "status": "done",
+      "created": "2025-11-23T16:42:18.046Z",
+      "updated": "2025-11-23T17:42:12.836Z"
+    },
+    {
+      "id": "TASK-019",
+      "type": "task",
+      "title": "CONTRIBUTING.md Creation - Contribution Guidelines and DCO",
+      "status": "done",
+      "created": "2025-11-23T16:42:18.046Z",
+      "updated": "2025-11-23T17:42:45.611Z"
+    },
+    {
+      "id": "TASK-020",
+      "type": "task",
+      "title": "SECURITY.md Creation - Vulnerability Disclosure Process",
+      "status": "done",
+      "created": "2025-11-23T16:42:18.046Z",
+      "updated": "2025-11-23T17:43:18.075Z"
+    },
+    {
+      "id": "TASK-021",
+      "type": "task",
+      "title": "Project Safety Audit - Security and Legal Risk Assessment",
+      "status": "done",
+      "created": "2025-11-23T16:43:55.416Z",
+      "updated": "2025-11-23T17:31:19.709Z"
+    },
+    {
+      "id": "TASK-022",
+      "type": "task",
+      "title": "Copyright and Trademark Protection Strategy",
+      "status": "draft",
+      "created": "2025-11-23T16:43:55.423Z",
+      "updated": "2025-11-23T16:44:06.407Z"
+    },
+    {
+      "id": "TASK-023",
+      "type": "task",
+      "title": "GitHub Templates Creation - Issue and PR Templates",
+      "status": "draft",
+      "created": "2025-11-23T16:43:55.423Z",
+      "updated": "2025-11-23T16:44:06.407Z"
+    },
+    {
+      "id": "TASK-024",
+      "type": "task",
+      "title": "GitHub Repository Setup and Configuration",
+      "status": "done",
+      "created": "2025-11-23T16:43:55.424Z",
+      "updated": "2025-11-23T17:48:58.348Z"
+    },
+    {
+      "id": "TASK-025",
+      "type": "task",
+      "title": "Dashboard Single-Load Optimization - Eliminate 5× Redundant File Reads",
+      "status": "done",
+      "created": "2025-11-23T19:27:33.181Z",
+      "updated": "2025-11-23T19:29:47.661Z"
+    },
+    {
+      "id": "TASK-026",
+      "type": "task",
+      "title": "Traceability Graph Node Limiting - Fix O(n²) Performance Bottleneck",
+      "status": "done",
+      "created": "2025-11-23T19:27:59.279Z",
+      "updated": "2025-11-23T19:32:00.877Z"
+    },
+    {
+      "id": "TASK-027",
+      "type": "task",
+      "title": "Fix Extension Commands API Compatibility",
+      "status": "done",
+      "created": "2025-11-23T19:42:48.508Z",
+      "updated": "2025-11-23T19:50:24.421Z"
+    },
+    {
+      "id": "TASK-028",
+      "type": "task",
+      "title": "Sync branding & links across GitHub, npm, and devsteps.dev",
+      "status": "draft",
+      "created": "2025-11-23T21:51:57.562Z",
+      "updated": "2025-11-23T21:59:47.149Z"
+    },
+    {
+      "id": "TASK-029",
+      "type": "task",
+      "title": "Prepare clean Git repository for GitHub publication",
+      "status": "done",
+      "created": "2025-11-23T21:59:11.351Z",
+      "updated": "2025-11-24T10:09:12+01:00"
+    },
+    {
+      "id": "TASK-030",
+      "type": "task",
+      "title": "Push initial commit to GitHub with clean history",
+      "status": "blocked",
+      "created": "2025-11-23T21:59:39.039Z",
+      "updated": "2025-11-24T10:19:50+01:00"
+    },
+    {
+      "id": "TASK-031",
+      "type": "task",
+      "title": "TreeView: Add Hide Done Items Toggle Filter",
+      "status": "done",
+      "created": "2025-11-24T09:38:35.440Z",
+      "updated": "2025-11-24T11:14:31.719Z"
+    },
+    {
+      "id": "TASK-032",
+      "type": "task",
+      "title": "Add CLI command to rebuild minimal index.json from item files",
+      "status": "draft",
+      "created": "2025-11-24T10:21:50.188Z",
+      "updated": "2025-11-24T10:21:56.069Z"
+    },
+    {
+      "id": "BUG-001",
+      "type": "bug",
+      "title": "Fix VS Code extension command errors and missing implementations",
+      "status": "done",
+      "created": "2025-11-24T09:41:50.891Z",
+      "updated": "2025-11-24T09:49:16.429Z"
+    },
+    {
+      "id": "BUG-002",
+      "type": "bug",
+      "title": "TreeView hierarchical mode broken after minimal index refactoring",
+      "status": "done",
+      "created": "2025-11-24T10:21:26.835Z",
+      "updated": "2025-11-24T14:28:36.648Z"
+    },
+    {
+      "id": "SPIKE-001",
+      "type": "spike",
+      "title": "MCP Server Architecture Research",
+      "status": "done",
+      "created": "2025-11-23T15:52:14.408Z",
+      "updated": "2025-11-23T19:22:40.614Z"
+    },
+    {
+      "id": "SPIKE-002",
+      "type": "spike",
+      "title": "WebView Performance Optimization Research",
+      "status": "done",
+      "created": "2025-11-23T15:52:14.408Z",
+      "updated": "2025-11-23T19:27:12.414Z"
+    },
+    {
+      "id": "FEAT-001",
+      "type": "feature",
+      "title": "Shared Package - Core Business Logic",
+      "status": "done",
+      "created": "2025-11-23T15:49:23.356Z",
+      "updated": "2025-11-23T15:49:48.860Z"
+    },
+    {
+      "id": "FEAT-002",
+      "type": "feature",
+      "title": "CLI Package - Command-Line Interface",
+      "status": "done",
+      "created": "2025-11-23T15:49:23.358Z",
+      "updated": "2025-11-23T15:49:48.861Z"
+    },
+    {
+      "id": "FEAT-003",
+      "type": "feature",
+      "title": "MCP Server - AI Integration Protocol",
+      "status": "done",
+      "created": "2025-11-23T15:49:23.358Z",
+      "updated": "2025-11-23T15:49:48.862Z"
+    },
+    {
+      "id": "FEAT-004",
+      "type": "feature",
+      "title": "VS Code Extension - IDE Integration",
+      "status": "done",
+      "created": "2025-11-23T15:49:23.364Z",
+      "updated": "2025-11-23T19:53:12.384Z"
+    },
+    {
+      "id": "REQ-001",
+      "type": "requirement",
+      "title": "DevSteps Platform - System Requirements",
+      "status": "draft",
+      "created": "2025-11-23T15:49:23.356Z",
+      "updated": "2025-11-23T15:49:33.095Z"
+    },
+    {
+      "id": "TASK-033",
+      "type": "task",
+      "title": "Enable preview editors for TreeView clicks",
+      "status": "done",
+      "updated": "2025-11-24T10:34:19.375Z"
+    },
+    {
+      "id": "BUG-003",
+      "type": "bug",
+      "title": "Menu Items Missing Visual Checkmarks for Current State - RESOLVED",
+      "status": "done",
+      "updated": "2025-11-28T08:14:45.847Z"
+    },
+    {
+      "id": "BUG-004",
+      "type": "bug",
+      "title": "Command Registration Failure - Commands Not Found After Extension Load",
+      "status": "done",
+      "updated": "2025-11-24T12:22:01.750Z"
+    },
+    {
+      "id": "BUG-005",
+      "type": "bug",
+      "title": "DevSteps Output Channel Empty - No Logging Output",
+      "status": "done",
+      "updated": "2025-11-24T12:12:40.057Z"
+    },
+    {
+      "id": "BUG-006",
+      "type": "bug",
+      "title": "Hide Done toggle not working in hierarchical view",
+      "status": "done",
+      "updated": "2025-11-24T12:59:41.113Z"
+    },
+    {
+      "id": "TASK-034",
+      "type": "task",
+      "title": "TreeView: Add description badge for filter count (X/Y)",
+      "status": "done",
+      "updated": "2025-11-24T13:09:01.315Z"
+    },
+    {
+      "id": "TASK-035",
+      "type": "task",
+      "title": "Toolbar: Redesign with primary + hover buttons pattern",
+      "status": "draft",
+      "updated": "2025-11-24T13:02:36.765Z"
+    },
+    {
+      "id": "BUG-007",
+      "type": "bug",
+      "title": "Fix: Flat view expanded state resets on filter toggle",
+      "status": "done",
+      "updated": "2025-11-24T20:52:11.415Z"
+    },
+    {
+      "id": "TASK-036",
+      "type": "task",
+      "title": "Remove unnecessary success notifications from view mode commands",
+      "status": "done",
+      "updated": "2025-11-24T14:24:43.108Z"
+    },
+    {
+      "id": "BUG-008",
+      "type": "bug",
+      "title": "Fix: Priority filter shortcut conflicts with VS Code Command Palette",
+      "status": "done",
+      "updated": "2025-11-24T16:07:31.126Z"
+    },
+    {
+      "id": "TASK-037",
+      "type": "task",
+      "title": "TreeView: Persist state across VS Code sessions",
+      "status": "done",
+      "updated": "2025-11-28T08:24:45.444Z"
+    },
+    {
+      "id": "EPIC-005",
+      "type": "epic",
+      "title": "Workflow Governance & Git Integration",
+      "status": "draft",
+      "updated": "2025-11-24T19:33:36.249Z"
+    },
+    {
+      "id": "SPIKE-003",
+      "type": "spike",
+      "title": "Research: Git Branching Strategies for Epic-Based Development",
+      "status": "done",
+      "updated": "2025-11-24T20:07:33.747Z"
+    },
+    {
+      "id": "TASK-038",
+      "type": "task",
+      "title": "Shared: Implement relationship validation engine",
+      "status": "done",
+      "updated": "2025-11-24T20:43:35.279Z"
+    },
+    {
+      "id": "TASK-039",
+      "type": "task",
+      "title": "CLI: Enforce relationship validation in link command",
+      "status": "done",
+      "updated": "2025-11-24T20:50:12.949Z"
+    },
+    {
+      "id": "TASK-040",
+      "type": "task",
+      "title": "MCP: Enforce relationship validation with AI-friendly errors",
+      "status": "done",
+      "updated": "2025-11-24T20:50:12.952Z"
+    },
+    {
+      "id": "TASK-041",
+      "type": "task",
+      "title": "Git Workflow: Document and implement Epic branch management",
+      "status": "draft",
+      "updated": "2025-11-24T19:36:06.264Z"
+    },
+    {
+      "id": "TASK-042",
+      "type": "task",
+      "title": "Copilot Instructions: Document mandatory commit workflow",
+      "status": "draft",
+      "updated": "2025-11-24T19:36:06.268Z"
+    },
+    {
+      "id": "TASK-043",
+      "type": "task",
+      "title": "TreeView: Add toggle to show/hide related items",
+      "status": "done",
+      "updated": "2025-12-02T15:20:49.831Z"
+    },
+    {
+      "id": "STORY-005",
+      "type": "story",
+      "title": "Relationship Validation & Methodology Enforcement",
+      "status": "done",
+      "updated": "2025-11-24T20:50:55.266Z"
+    },
+    {
+      "id": "EPIC-006",
+      "type": "epic",
+      "title": "Project Health & Data Integrity",
+      "status": "draft",
+      "updated": "2025-11-24T20:55:24.977Z"
+    },
+    {
+      "id": "STORY-006",
+      "type": "story",
+      "title": "Doctor: Relationship Validation & Integrity Checks",
+      "status": "draft",
+      "updated": "2025-11-24T20:55:50.309Z"
+    },
+    {
+      "id": "TASK-044",
+      "type": "task",
+      "title": "Doctor: Invalid relationship detection",
+      "status": "draft",
+      "updated": "2025-11-24T20:56:06.069Z"
+    },
+    {
+      "id": "TASK-045",
+      "type": "task",
+      "title": "Doctor: Orphaned items detection",
+      "status": "draft",
+      "updated": "2025-11-24T20:56:20.254Z"
+    },
+    {
+      "id": "TASK-046",
+      "type": "task",
+      "title": "Doctor: Broken reference detection",
+      "status": "draft",
+      "updated": "2025-11-24T20:56:34.013Z"
+    },
+    {
+      "id": "TASK-047",
+      "type": "task",
+      "title": "Doctor: Asymmetric link detection",
+      "status": "draft",
+      "updated": "2025-11-24T20:58:56.427Z"
+    },
+    {
+      "id": "STORY-007",
+      "type": "story",
+      "title": "Doctor: Index Consistency & Repair",
+      "status": "draft",
+      "updated": "2025-11-24T20:59:12.419Z"
+    },
+    {
+      "id": "STORY-008",
+      "type": "story",
+      "title": "Doctor: Status & Workflow Logic",
+      "status": "draft",
+      "updated": "2025-11-24T20:59:29.234Z"
+    },
+    {
+      "id": "STORY-009",
+      "type": "story",
+      "title": "Doctor: Metadata Quality Checks",
+      "status": "draft",
+      "updated": "2025-11-24T20:59:45.418Z"
+    },
+    {
+      "id": "TASK-048",
+      "type": "task",
+      "title": "TreeView: Add methodology sections in flat view",
+      "status": "done",
+      "updated": "2025-11-25T08:30:59.839Z"
+    },
+    {
+      "id": "TASK-049",
+      "type": "task",
+      "title": "Add research-first principle to planning prompt",
+      "status": "done",
+      "updated": "2025-11-24T21:18:39.938Z"
+    },
+    {
+      "id": "SPIKE-004",
+      "type": "spike",
+      "title": "Test Menu Checkmarks Implementation - Multiple Approaches",
+      "status": "draft",
+      "updated": "2025-11-25T09:19:34.391Z"
+    },
+    {
+      "id": "TASK-050",
+      "type": "task",
+      "title": "Implement Menu Checkmarks using native toggled property",
+      "status": "done",
+      "updated": "2025-11-25T09:31:24.997Z"
+    },
+    {
+      "id": "BUG-009",
+      "type": "bug",
+      "title": "TreeView does not auto-refresh when .devsteps files change",
+      "status": "done",
+      "updated": "2025-11-25T11:16:35.872Z"
+    },
+    {
+      "id": "BUG-010",
+      "type": "bug",
+      "title": "Test FileSystemWatcher Auto-Refresh",
+      "status": "draft",
+      "updated": "2025-11-25T11:18:55.191Z"
+    },
+    {
+      "id": "BUG-011",
+      "type": "bug",
+      "title": "CLI init missing workflow prompts and instructions deployment",
+      "status": "done",
+      "updated": "2025-11-25T13:36:06.547Z"
+    },
+    {
+      "id": "EPIC-007",
+      "type": "epic",
+      "title": "Update all npm dependencies to latest versions",
+      "status": "done",
+      "updated": "2025-11-26T06:20:42.552Z"
+    },
+    {
+      "id": "STORY-010",
+      "type": "story",
+      "title": "Update safe minor/patch versions",
+      "status": "done",
+      "updated": "2025-11-26T06:14:50.867Z"
+    },
+    {
+      "id": "STORY-011",
+      "type": "story",
+      "title": "Migrate Chalk 4 → 5 (ESM-only)",
+      "status": "done",
+      "updated": "2025-11-26T06:15:45.008Z"
+    },
+    {
+      "id": "STORY-012",
+      "type": "story",
+      "title": "Migrate Express 4 → 5 with codemods",
+      "status": "done",
+      "updated": "2025-11-26T06:18:46.411Z"
+    },
+    {
+      "id": "STORY-013",
+      "type": "story",
+      "title": "Update Ora 8 → 9 and esbuild 0.24 → 0.27",
+      "status": "done",
+      "updated": "2025-11-26T06:19:24.693Z"
+    },
+    {
+      "id": "STORY-014",
+      "type": "story",
+      "title": "Verify builds and tests after updates",
+      "status": "done",
+      "updated": "2025-11-26T06:20:42.433Z"
+    },
+    {
+      "id": "TASK-051",
+      "type": "task",
+      "title": "Test Ora 9 Spinner",
+      "status": "draft",
+      "updated": "2025-11-26T06:19:16.873Z"
+    },
+    {
+      "id": "TASK-052",
+      "type": "task",
+      "title": "Refactor devstepsTreeDataProvider.ts - Split 843-line file",
+      "status": "done",
+      "updated": "2025-11-26T06:44:08.013Z"
+    },
+    {
+      "id": "TASK-053",
+      "type": "task",
+      "title": "Refactor dashboardPanel.ts - Split 739-line file",
+      "status": "done",
+      "updated": "2025-11-26T07:53:50.283Z"
+    },
+    {
+      "id": "BUG-013",
+      "type": "bug",
+      "title": "Add error handling with user notifications for async methods",
+      "status": "draft",
+      "updated": "2025-11-26T06:26:43.827Z"
+    },
+    {
+      "id": "TASK-054",
+      "type": "task",
+      "title": "Replace any[] with proper TypeScript types for type safety",
+      "status": "draft",
+      "updated": "2025-11-26T06:27:06.637Z"
+    },
+    {
+      "id": "STORY-015",
+      "type": "story",
+      "title": "Code Quality Improvements - Refactor Oversized Files and Dependencies",
+      "status": "draft",
+      "updated": "2025-11-26T06:30:37.314Z"
+    },
+    {
+      "id": "STORY-016",
+      "type": "story",
+      "title": "Performance and Robustness Enhancements",
+      "status": "draft",
+      "updated": "2025-11-26T06:27:41.347Z"
+    },
+    {
+      "id": "TASK-055",
+      "type": "task",
+      "title": "Implement lazy loading for TreeView (100+ items performance)",
+      "status": "draft",
+      "updated": "2025-11-26T06:28:08.916Z"
+    },
+    {
+      "id": "SPIKE-005",
+      "type": "spike",
+      "title": "Dashboard Visualization Strategy - Custom vs Chart.js/D3 Libraries",
+      "status": "draft",
+      "updated": "2025-11-26T06:30:19.240Z"
+    },
+    {
+      "id": "BUG-014",
+      "type": "bug",
+      "title": "Correct minimum VS Code version from 1.95.0 to 1.99.0 (MCP API requirement)",
+      "status": "done",
+      "updated": "2025-11-26T06:36:15.476Z"
+    },
+    {
+      "id": "EPIC-008",
+      "type": "epic",
+      "title": "Reporting & Analytics Suite - Timeline Visualization and Export Features",
+      "status": "draft",
+      "updated": "2025-11-26T06:51:55.615Z"
+    },
+    {
+      "id": "STORY-017",
+      "type": "story",
+      "title": "Advanced Timeline Visualization - Velocity, Gantt, Lifecycle Tracking",
+      "status": "draft",
+      "updated": "2025-11-26T06:52:06.319Z"
+    },
+    {
+      "id": "STORY-018",
+      "type": "story",
+      "title": "Export & Reporting Features - PDF, HTML, CSV Dashboard Export",
+      "status": "draft",
+      "updated": "2025-12-03T10:01:08.968Z"
+    },
+    {
+      "id": "TASK-056",
+      "type": "task",
+      "title": "Implement Velocity Chart - Story Points per Sprint Visualization",
+      "status": "draft",
+      "updated": "2025-11-26T06:52:25.157Z"
+    },
+    {
+      "id": "TASK-057",
+      "type": "task",
+      "title": "Implement Gantt-Style Project Timeline - Epics and Stories Overview",
+      "status": "draft",
+      "updated": "2025-11-26T06:52:34.947Z"
+    },
+    {
+      "id": "TASK-058",
+      "type": "task",
+      "title": "Implement Item Lifecycle Tracking - Status Transition Timeline",
+      "status": "draft",
+      "updated": "2025-11-26T06:52:44.370Z"
+    },
+    {
+      "id": "TASK-059",
+      "type": "task",
+      "title": "Enhance Activity Timeline - Filters, Search, Pagination",
+      "status": "draft",
+      "updated": "2025-11-26T06:52:54.529Z"
+    },
+    {
+      "id": "TASK-060",
+      "type": "task",
+      "title": "Implement PDF Export - Dashboard Report with Visualizations",
+      "status": "draft",
+      "updated": "2025-11-26T06:53:04.818Z"
+    },
+    {
+      "id": "TASK-061",
+      "type": "task",
+      "title": "Implement HTML Export - Self-Contained Shareable Dashboard",
+      "status": "draft",
+      "updated": "2025-11-26T06:53:14.530Z"
+    },
+    {
+      "id": "TASK-062",
+      "type": "task",
+      "title": "Implement CSV Export - Structured Data for Analysis",
+      "status": "draft",
+      "updated": "2025-11-26T06:53:23.777Z"
+    },
+    {
+      "id": "BUG-015",
+      "type": "bug",
+      "title": "Extension Not Loading - TreeView Registration and Icon Display Failures",
+      "status": "done",
+      "updated": "2025-11-26T07:12:01.589Z"
+    },
+    {
+      "id": "TASK-063",
+      "type": "task",
+      "title": "Fix TreeView ID Mismatch - Change devstepsitemsView to devsteps.itemsView",
+      "status": "done",
+      "updated": "2025-11-26T07:11:00.959Z"
+    },
+    {
+      "id": "TASK-064",
+      "type": "task",
+      "title": "Fix Activity Bar Icon Reference - Rename or Update package.json Path",
+      "status": "done",
+      "updated": "2025-11-26T07:11:47.692Z"
+    },
+    {
+      "id": "EPIC-009",
+      "type": "epic",
+      "title": "Brand Identity & Visual Design System - Professional DevSteps Branding",
+      "status": "draft",
+      "updated": "2025-11-26T07:00:30.849Z"
+    },
+    {
+      "id": "STORY-019",
+      "type": "story",
+      "title": "DevSteps Icon Design - Activity Bar, Marketplace, and Theme Variants",
+      "status": "draft",
+      "updated": "2025-11-26T07:00:41.240Z"
+    },
+    {
+      "id": "STORY-020",
+      "type": "story",
+      "title": "Corporate Identity Guidelines - Brand Style Guide and Design System",
+      "status": "draft",
+      "updated": "2025-11-26T07:00:52.182Z"
+    },
+    {
+      "id": "TASK-065",
+      "type": "task",
+      "title": "Design DevSteps Logo Concept - Icon-Only and Full Logo Variations",
+      "status": "draft",
+      "updated": "2025-11-26T07:01:04.353Z"
+    },
+    {
+      "id": "TASK-066",
+      "type": "task",
+      "title": "Create Activity Bar Icon - 28x28 SVG with Theme Compatibility",
+      "status": "done",
+      "updated": "2025-11-26T13:32:10.545Z"
+    },
+    {
+      "id": "TASK-067",
+      "type": "task",
+      "title": "Create Marketplace Icon - 128x128 PNG for Extension Listing",
+      "status": "draft",
+      "updated": "2025-11-26T07:01:28.058Z"
+    },
+    {
+      "id": "TASK-068",
+      "type": "task",
+      "title": "Implement Icon Variants for Light and Dark Themes",
+      "status": "draft",
+      "updated": "2025-11-26T07:01:39.983Z"
+    },
+    {
+      "id": "TASK-069",
+      "type": "task",
+      "title": "Define Brand Color Palette and Typography Standards",
+      "status": "draft",
+      "updated": "2025-11-26T07:01:52.643Z"
+    },
+    {
+      "id": "TASK-070",
+      "type": "task",
+      "title": "Create Brand Style Guide Document - Comprehensive CI Guidelines",
+      "status": "draft",
+      "updated": "2025-11-26T07:02:04.466Z"
+    },
+    {
+      "id": "TASK-071",
+      "type": "task",
+      "title": "Design Icon Library for Extension UI - Consistent Visual Language",
+      "status": "draft",
+      "updated": "2025-11-26T07:02:16.987Z"
+    },
+    {
+      "id": "TASK-072",
+      "type": "task",
+      "title": "Design Concept 1: \"Copilot's View of Sprint\" - Scrum Board Through Glasses",
+      "status": "done",
+      "updated": "2025-11-26T08:28:24.384Z"
+    },
+    {
+      "id": "TASK-073",
+      "type": "task",
+      "title": "Design Concept 2: \"Footsteps + Glasses Hybrid\" - Human & AI Walking Together",
+      "status": "done",
+      "updated": "2025-11-26T12:19:55.603Z"
+    },
+    {
+      "id": "TASK-074",
+      "type": "task",
+      "title": "Design Concept 3: \"Step Dots Through Lens\" - Progress Path with AI Focus",
+      "status": "done",
+      "updated": "2025-11-26T12:21:39.163Z"
+    },
+    {
+      "id": "STORY-021",
+      "type": "story",
+      "title": "Logo Design Workshop - Create & Compare 3 Concepts with Multiple Variations",
+      "status": "draft",
+      "updated": "2025-11-26T08:15:13.020Z"
+    },
+    {
+      "id": "BUG-016",
+      "type": "bug",
+      "title": "TreeView badges not appearing - DecorationProvider refresh missing",
+      "status": "obsolete",
+      "updated": "2025-11-27T16:15:06.195Z"
+    },
+    {
+      "id": "TASK-075",
+      "type": "task",
+      "title": "TreeView badges via TreeItem.description property",
+      "status": "obsolete",
+      "updated": "2025-11-27T16:15:06.196Z"
+    },
+    {
+      "id": "BUG-017",
+      "type": "bug",
+      "title": "Restore original FileDecorationProvider badge implementation",
+      "status": "done",
+      "updated": "2025-11-28T07:05:16.534Z"
+    },
+    {
+      "id": "BUG-018",
+      "type": "bug",
+      "title": "Verify all 8 status badges are correctly implemented",
+      "status": "obsolete",
+      "updated": "2025-11-27T16:37:39.906Z"
+    },
+    {
+      "id": "EPIC-010",
+      "type": "epic",
+      "title": "Knowledge Management & Organizational Learning System",
+      "status": "draft",
+      "updated": "2025-11-27T16:50:03.926Z"
+    },
+    {
+      "id": "STORY-022",
+      "type": "story",
+      "title": "Add lesson/pattern/antipattern/decision item types",
+      "status": "draft",
+      "updated": "2025-11-27T16:50:50.179Z"
+    },
+    {
+      "id": "STORY-023",
+      "type": "story",
+      "title": "Interactive lesson capture on work item completion",
+      "status": "draft",
+      "updated": "2025-11-27T16:50:50.183Z"
+    },
+    {
+      "id": "STORY-024",
+      "type": "story",
+      "title": "Pattern library with extractable code examples",
+      "status": "draft",
+      "updated": "2025-11-27T16:50:50.183Z"
+    },
+    {
+      "id": "STORY-025",
+      "type": "story",
+      "title": "Anti-pattern registry to prevent repeated mistakes",
+      "status": "draft",
+      "updated": "2025-11-27T16:50:50.184Z"
+    },
+    {
+      "id": "STORY-026",
+      "type": "story",
+      "title": "Architecture Decision Log (ADR-style records)",
+      "status": "draft",
+      "updated": "2025-11-27T16:50:50.185Z"
+    },
+    {
+      "id": "STORY-027",
+      "type": "story",
+      "title": "Dashboard Knowledge Base section with search",
+      "status": "draft",
+      "updated": "2025-11-27T16:50:50.186Z"
+    },
+    {
+      "id": "STORY-028",
+      "type": "story",
+      "title": "Advanced knowledge search with smart suggestions",
+      "status": "draft",
+      "updated": "2025-11-27T16:51:30.042Z"
+    },
+    {
+      "id": "STORY-029",
+      "type": "story",
+      "title": "Export knowledge base as shareable documentation",
+      "status": "draft",
+      "updated": "2025-11-27T16:51:30.043Z"
+    },
+    {
+      "id": "STORY-030",
+      "type": "story",
+      "title": "Cross-project knowledge import/export",
+      "status": "draft",
+      "updated": "2025-11-27T16:51:30.044Z"
+    },
+    {
+      "id": "STORY-031",
+      "type": "story",
+      "title": "Central Knowledge Repository (Community Platform)",
+      "status": "draft",
+      "updated": "2025-11-27T16:51:30.044Z"
+    },
+    {
+      "id": "STORY-032",
+      "type": "story",
+      "title": "Knowledge aging tracking & maintenance workflow",
+      "status": "draft",
+      "updated": "2025-11-27T16:51:58.713Z"
+    },
+    {
+      "id": "STORY-033",
+      "type": "story",
+      "title": "Knowledge impact metrics & analytics dashboard",
+      "status": "draft",
+      "updated": "2025-11-27T16:51:58.714Z"
+    },
+    {
+      "id": "STORY-034",
+      "type": "story",
+      "title": "Customizable knowledge item templates",
+      "status": "draft",
+      "updated": "2025-11-27T16:51:58.715Z"
+    },
+    {
+      "id": "STORY-035",
+      "type": "story",
+      "title": "Fix Welcome View flash - Activate extension before UI registration",
+      "status": "done",
+      "updated": "2025-11-27T19:04:17.669Z"
+    },
+    {
+      "id": "TASK-076",
+      "type": "task",
+      "title": "Fix context key race condition - Set devsteps.showWelcome explicitly",
+      "status": "done",
+      "updated": "2025-11-27T19:06:12.462Z"
+    },
+    {
+      "id": "STORY-036",
+      "type": "story",
+      "title": "Improve Copilot workflow understanding - Item hierarchy and story branches",
+      "status": "done",
+      "updated": "2025-11-27T19:34:00.411Z"
+    },
+    {
+      "id": "TASK-077",
+      "type": "task",
+      "title": "Add item hierarchy rules to agent file",
+      "status": "done",
+      "updated": "2025-11-27T19:32:17.958Z"
+    },
+    {
+      "id": "TASK-078",
+      "type": "task",
+      "title": "Add story branch workflow to start-work prompt",
+      "status": "done",
+      "updated": "2025-11-27T19:32:55.330Z"
+    },
+    {
+      "id": "TASK-079",
+      "type": "task",
+      "title": "Compress agent file - remove verbosity",
+      "status": "done",
+      "updated": "2025-11-27T19:33:46.314Z"
+    },
+    {
+      "id": "BUG-019",
+      "type": "bug",
+      "title": "Extension VSIX Installation - TreeView Provider Registration Failure",
+      "status": "done",
+      "updated": "2025-11-28T07:46:07.586Z"
+    },
+    {
+      "id": "REQ-002",
+      "type": "requirement",
+      "title": "Test-req-neu",
+      "status": "draft",
+      "updated": "2025-11-28T08:53:25.411Z"
+    },
+    {
+      "id": "BUG-020",
+      "type": "bug",
+      "title": "Context Keys nicht mit persistiertem State synchronisiert - Menu Checkmarks falsch",
+      "status": "done",
+      "updated": "2025-11-28T08:45:22.320Z"
+    },
+    {
+      "id": "BUG-021",
+      "type": "bug",
+      "title": "Hide Done Button wird deaktiviert statt als Toggle verfügbar zu bleiben",
+      "status": "done",
+      "updated": "2025-11-28T09:16:18.202Z"
+    },
+    {
+      "id": "BUG-022",
+      "type": "bug",
+      "title": "Command Name Typos - devstepsopenItem und devstepsupdateStatus missing dots",
+      "status": "done",
+      "updated": "2025-11-28T08:57:25.079Z"
+    },
+    {
+      "id": "EPIC-011",
+      "type": "epic",
+      "title": "Extension Activation Performance Optimization",
+      "status": "in-progress",
+      "updated": "2025-11-30T11:13:02.951Z"
+    },
+    {
+      "id": "STORY-037",
+      "type": "story",
+      "title": "Smart Activation Strategy - Replace Star Event",
+      "status": "in-progress",
+      "updated": "2025-11-30T11:13:07.581Z"
+    },
+    {
+      "id": "TASK-080",
+      "type": "task",
+      "title": "Update activationEvents - Remove Star, Add Conditional",
+      "status": "done",
+      "updated": "2025-11-28T09:07:48.135Z"
+    },
+    {
+      "id": "TASK-081",
+      "type": "task",
+      "title": "Update Extension Activation Logic - Handle Conditional Loading",
+      "status": "in-progress",
+      "updated": "2025-11-30T11:13:12.533Z"
+    },
+    {
+      "id": "BUG-023",
+      "type": "bug",
+      "title": "Hide Done Button Functionality Broken - Toggle Logic Not Working",
+      "status": "done",
+      "updated": "2025-11-28T09:33:13.094Z"
+    },
+    {
+      "id": "TASK-082",
+      "type": "task",
+      "title": "Fix hierarchical view collapse on filter - add expanded state tracking",
+      "status": "done",
+      "updated": "2025-11-28T09:47:01.976Z"
+    },
+    {
+      "id": "BUG-024",
+      "type": "bug",
+      "title": "Fix story file path - openItem uses naive pluralization",
+      "status": "done",
+      "updated": "2025-12-01T10:48:00.567Z"
+    },
+    {
+      "id": "STORY-038",
+      "type": "story",
+      "title": "Production Publication Pipeline - npm + Marketplace + GitHub Docs",
+      "status": "draft",
+      "updated": "2025-11-28T10:25:11.196Z"
+    },
+    {
+      "id": "TASK-083",
+      "type": "task",
+      "title": "Prepare npm packages for publication (CLI + MCP)",
+      "status": "done",
+      "updated": "2025-11-28T10:31:29.635Z"
+    },
+    {
+      "id": "TASK-084",
+      "type": "task",
+      "title": "Implement auto-download mechanism in extension",
+      "status": "draft",
+      "updated": "2025-11-28T10:27:39.026Z"
+    },
+    {
+      "id": "TASK-085",
+      "type": "task",
+      "title": "Create docs-only GitHub repository",
+      "status": "draft",
+      "updated": "2025-11-28T10:27:39.027Z"
+    },
+    {
+      "id": "TASK-086",
+      "type": "task",
+      "title": "Publish packages to npm registry",
+      "status": "draft",
+      "updated": "2025-11-28T10:26:08.718Z"
+    },
+    {
+      "id": "TASK-087",
+      "type": "task",
+      "title": "Publish extension to VS Code Marketplace",
+      "status": "in-progress",
+      "updated": "2025-11-30T20:29:56.218Z"
+    },
+    {
+      "id": "TASK-088",
+      "type": "task",
+      "title": "Cleanup devsteps work items (archive completed)",
+      "status": "draft",
+      "updated": "2025-11-28T10:26:36.267Z"
+    },
+    {
+      "id": "BUG-025",
+      "type": "bug",
+      "title": "Extension Deployment - MCP Server Missing Dependencies",
+      "status": "done",
+      "updated": "2025-11-30T17:31:23.907Z"
+    },
+    {
+      "id": "TASK-089",
+      "type": "task",
+      "title": "Remove MCP Server Bundling from Extension",
+      "status": "done",
+      "updated": "2025-11-30T11:35:45.130Z"
+    },
+    {
+      "id": "TASK-090",
+      "type": "task",
+      "title": "Update mcpServerManager to Use npm Global Installation",
+      "status": "done",
+      "updated": "2025-11-30T11:37:20.554Z"
+    },
+    {
+      "id": "TASK-091",
+      "type": "task",
+      "title": "Integrate PackageInstaller in Extension Activation",
+      "status": "done",
+      "updated": "2025-11-30T11:36:11.356Z"
+    },
+    {
+      "id": "TASK-092",
+      "type": "task",
+      "title": "Publish Shared Package to npm",
+      "status": "done",
+      "updated": "2025-11-30T11:33:55.147Z"
+    },
+    {
+      "id": "TASK-093",
+      "type": "task",
+      "title": "Update PackageInstaller to Include Shared Package",
+      "status": "done",
+      "updated": "2025-11-30T11:34:52.330Z"
+    },
+    {
+      "id": "TASK-094",
+      "type": "task",
+      "title": "Test Complete Deployment Flow",
+      "status": "done",
+      "updated": "2025-11-30T11:38:48.182Z"
+    },
+    {
+      "id": "EPIC-012",
+      "type": "epic",
+      "title": "Shared Core Consistency & I/O Architecture",
+      "status": "draft",
+      "updated": "2025-11-30T19:24:54.872Z"
+    },
+    {
+      "id": "SPIKE-006",
+      "type": "spike",
+      "title": "I/O Strategy Decision: Sync vs Async for DevSteps Scale",
+      "status": "draft",
+      "updated": "2025-11-30T19:26:01.615Z"
+    },
+    {
+      "id": "STORY-039",
+      "type": "story",
+      "title": "Centralize Relationship Management in Shared Core",
+      "status": "draft",
+      "updated": "2025-11-30T19:26:19.901Z"
+    },
+    {
+      "id": "STORY-040",
+      "type": "story",
+      "title": "Repository Pattern for Index/Config Access",
+      "status": "draft",
+      "updated": "2025-11-30T19:26:39.503Z"
+    },
+    {
+      "id": "STORY-041",
+      "type": "story",
+      "title": "Move Search Logic to Shared Core",
+      "status": "draft",
+      "updated": "2025-11-30T19:26:57.074Z"
+    },
+    {
+      "id": "STORY-042",
+      "type": "story",
+      "title": "Move Export/Reporting to Shared Core",
+      "status": "draft",
+      "updated": "2025-11-30T19:27:12.951Z"
+    },
+    {
+      "id": "STORY-043",
+      "type": "story",
+      "title": "Fix Async/Sync Declaration Mismatch in Shared Core",
+      "status": "draft",
+      "updated": "2025-11-30T19:27:32.769Z"
+    },
+    {
+      "id": "STORY-044",
+      "type": "story",
+      "title": "Move Trace/Traversal Logic to Shared Core",
+      "status": "draft",
+      "updated": "2025-11-30T19:27:50.171Z"
+    },
+    {
+      "id": "STORY-045",
+      "type": "story",
+      "title": "Move Status Calculation to Shared Core",
+      "status": "draft",
+      "updated": "2025-11-30T19:28:14.654Z"
+    },
+    {
+      "id": "BUG-026",
+      "type": "bug",
+      "title": "Welcome View bleibt nach MCP Init - Automatic Reload fehlt",
+      "status": "done",
+      "updated": "2025-11-30T19:46:59.928Z"
+    },
+    {
+      "id": "TASK-095",
+      "type": "task",
+      "title": "Welcome Screen: Add Claude Sonnet 4+ recommendation",
+      "status": "done",
+      "updated": "2025-11-30T19:58:26.125Z"
+    },
+    {
+      "id": "STORY-046",
+      "type": "story",
+      "title": "Welcome Screen Content Enhancement - Model Recommendations & User Guidance",
+      "status": "draft",
+      "updated": "2025-11-30T19:56:50.340Z"
+    },
+    {
+      "id": "TASK-096",
+      "type": "task",
+      "title": "Enable GitHub Discussions for community feedback",
+      "status": "draft",
+      "updated": "2025-11-30T20:01:20.125Z"
+    },
+    {
+      "id": "BUG-027",
+      "type": "bug",
+      "title": "Fix FileSystemWatcher - Must exist before early return",
+      "status": "done",
+      "updated": "2025-11-30T20:04:29.431Z"
+    },
+    {
+      "id": "STORY-047",
+      "type": "story",
+      "title": "Improve Copilot Hierarchy Guidance - Prevent Common Mistakes",
+      "status": "draft",
+      "updated": "2025-12-01T10:07:40.525Z"
+    },
+    {
+      "id": "TASK-097",
+      "type": "task",
+      "title": "Prevent conflicting relation types to same target",
+      "status": "draft",
+      "updated": "2025-12-01T10:27:02.546Z"
+    },
+    {
+      "id": "TASK-098",
+      "type": "task",
+      "title": "Update Copilot guidance - Bug→Task uses implemented-by",
+      "status": "draft",
+      "updated": "2025-12-01T10:08:29.284Z"
+    },
+    {
+      "id": "TASK-099",
+      "type": "task",
+      "title": "Deploy HIERARCHY.md + AI-GUIDE.md to .devsteps/ on init",
+      "status": "done",
+      "updated": "2025-12-01T10:13:38.138Z"
+    },
+    {
+      "id": "TASK-100",
+      "type": "task",
+      "title": "Doctor: Detect dependency cycles (warning only)",
+      "status": "draft",
+      "updated": "2025-12-01T10:27:02.550Z"
+    },
+    {
+      "id": "TASK-101",
+      "type": "task",
+      "title": "Remove unnecessary notification popups - UX improvement",
+      "status": "done",
+      "updated": "2025-12-01T11:01:07.874Z"
+    },
+    {
+      "id": "STORY-048",
+      "type": "story",
+      "title": "Extension UX Polish - Non-Intrusive User Experience",
+      "status": "done",
+      "updated": "2025-12-01T11:01:35.437Z"
+    },
+    {
+      "id": "TASK-102",
+      "type": "task",
+      "title": "Doctor: Check Copilot instruction files exist",
+      "status": "draft",
+      "updated": "2025-12-01T11:10:11.175Z"
+    },
+    {
+      "id": "STORY-049",
+      "type": "story",
+      "title": "Flexible Bug Relationship Types - affects + relates-to",
+      "status": "done",
+      "updated": "2025-12-03T07:43:32.513Z"
+    },
+    {
+      "id": "TASK-103",
+      "type": "task",
+      "title": "Shared: Add 'affects/affected-by' relationship type",
+      "status": "done",
+      "updated": "2025-12-02T11:46:33.416Z"
+    },
+    {
+      "id": "TASK-104",
+      "type": "task",
+      "title": "Validation: Allow Bug → Epic/Requirement via relates-to + affects",
+      "status": "done",
+      "updated": "2025-12-02T11:57:28.814Z"
+    },
+    {
+      "id": "TASK-105",
+      "type": "task",
+      "title": "Agent.md: Update Bug Workflow for relates-to + affects",
+      "status": "done",
+      "updated": "2025-12-03T07:43:08.413Z"
+    },
+    {
+      "id": "EPIC-013",
+      "type": "epic",
+      "title": "Comprehensive Integration Test Suite for CLI and MCP",
+      "status": "draft",
+      "updated": "2025-12-02T14:55:44.918Z"
+    },
+    {
+      "id": "STORY-050",
+      "type": "story",
+      "title": "CLI Integration Tests with BATS Framework",
+      "status": "draft",
+      "updated": "2025-12-02T14:56:08.673Z"
+    },
+    {
+      "id": "STORY-051",
+      "type": "story",
+      "title": "MCP Integration Tests with Node.js",
+      "status": "draft",
+      "updated": "2025-12-02T14:56:08.675Z"
+    },
+    {
+      "id": "STORY-052",
+      "type": "story",
+      "title": "Test Fixtures and Documentation",
+      "status": "draft",
+      "updated": "2025-12-02T14:56:20.231Z"
+    },
+    {
+      "id": "TASK-106",
+      "type": "task",
+      "title": "Setup BATS Framework for CLI Testing",
+      "status": "draft",
+      "updated": "2025-12-02T14:57:02.499Z"
+    },
+    {
+      "id": "TASK-107",
+      "type": "task",
+      "title": "CLI BATS Test: Complete Scrum Hierarchy",
+      "status": "draft",
+      "updated": "2025-12-02T14:57:02.500Z"
+    },
+    {
+      "id": "TASK-108",
+      "type": "task",
+      "title": "CLI BATS Test: Complete Waterfall Hierarchy",
+      "status": "draft",
+      "updated": "2025-12-02T14:57:02.506Z"
+    },
+    {
+      "id": "TASK-109",
+      "type": "task",
+      "title": "CLI BATS Test: All Relationship Types",
+      "status": "draft",
+      "updated": "2025-12-02T14:57:02.507Z"
+    },
+    {
+      "id": "TASK-110",
+      "type": "task",
+      "title": "Setup Node.js Framework for MCP Testing",
+      "status": "draft",
+      "updated": "2025-12-02T14:57:34.677Z"
+    },
+    {
+      "id": "TASK-111",
+      "type": "task",
+      "title": "MCP Node.js Test: Complete Scrum Hierarchy",
+      "status": "draft",
+      "updated": "2025-12-02T14:57:34.681Z"
+    },
+    {
+      "id": "TASK-112",
+      "type": "task",
+      "title": "MCP Node.js Test: Complete Waterfall Hierarchy",
+      "status": "draft",
+      "updated": "2025-12-02T14:57:34.684Z"
+    },
+    {
+      "id": "TASK-113",
+      "type": "task",
+      "title": "MCP Node.js Test: All Relationship Types",
+      "status": "draft",
+      "updated": "2025-12-02T14:57:34.685Z"
+    },
+    {
+      "id": "TASK-114",
+      "type": "task",
+      "title": "Create Test Fixture Files for Expected Outputs",
+      "status": "draft",
+      "updated": "2025-12-02T14:57:53.549Z"
+    },
+    {
+      "id": "TASK-115",
+      "type": "task",
+      "title": "Document Integration Test Execution and Troubleshooting",
+      "status": "draft",
+      "updated": "2025-12-02T14:57:53.551Z"
+    },
+    {
+      "id": "BUG-028",
+      "type": "bug",
+      "title": "Init überschreibt .gitignore - zerstört existierende Regeln",
+      "status": "draft",
+      "updated": "2025-12-02T15:55:34.243Z"
+    },
+    {
+      "id": "TASK-116",
+      "type": "task",
+      "title": "Refactor Init: Append-only .gitignore handling",
+      "status": "draft",
+      "updated": "2025-12-02T15:56:41.874Z"
+    },
+    {
+      "id": "BUG-029",
+      "type": "bug",
+      "title": "AI-GUIDE.md ist auf Deutsch - internationale Pakete betroffen",
+      "status": "draft",
+      "updated": "2025-12-02T16:10:12.159Z"
+    },
+    {
+      "id": "TASK-117",
+      "type": "task",
+      "title": "Translate AI-GUIDE.md to English for international publication",
+      "status": "done",
+      "updated": "2025-12-02T16:23:13.036Z"
+    },
+    {
+      "id": "EPIC-014",
+      "type": "epic",
+      "title": "Jira 2025 Link Semantics Alignment",
+      "status": "done",
+      "updated": "2025-12-03T09:27:38.439Z"
+    },
+    {
+      "id": "STORY-053",
+      "type": "story",
+      "title": "Remove Azure DevOps affects/affected-by Relations",
+      "status": "done",
+      "updated": "2025-12-03T09:20:43.947Z"
+    },
+    {
+      "id": "STORY-054",
+      "type": "story",
+      "title": "Move blocks/blocked-by to Hierarchy Relations",
+      "status": "done",
+      "updated": "2025-12-03T09:27:21.538Z"
+    },
+    {
+      "id": "TASK-118",
+      "type": "task",
+      "title": "Correct STORY-049 Azure DevOps Misinformation",
+      "status": "done",
+      "updated": "2025-12-03T09:20:43.946Z"
+    },
+    {
+      "id": "TASK-119",
+      "type": "task",
+      "title": "relationships.ts: Remove affects/affected-by",
+      "status": "done",
+      "updated": "2025-12-03T09:13:44.157Z"
+    },
+    {
+      "id": "TASK-120",
+      "type": "task",
+      "title": "index.ts: Remove affects from schema types",
+      "status": "done",
+      "updated": "2025-12-03T09:14:59.186Z"
+    },
+    {
+      "id": "TASK-121",
+      "type": "task",
+      "title": "MCP: Remove affects handlers and descriptions",
+      "status": "done",
+      "updated": "2025-12-03T09:16:19.874Z"
+    },
+    {
+      "id": "TASK-122",
+      "type": "task",
+      "title": "CLI: Remove affects from commands",
+      "status": "done",
+      "updated": "2025-12-03T09:17:07.237Z"
+    },
+    {
+      "id": "TASK-123",
+      "type": "task",
+      "title": "Extension: Remove affects from TreeView",
+      "status": "done",
+      "updated": "2025-12-03T09:17:42.271Z"
+    },
+    {
+      "id": "TASK-124",
+      "type": "task",
+      "title": "relationships.ts: Move blocks to HIERARCHY",
+      "status": "done",
+      "updated": "2025-12-03T09:25:29.192Z"
+    },
+    {
+      "id": "TASK-125",
+      "type": "task",
+      "title": "validation.ts: Add Bug blocks hierarchy rules",
+      "status": "done",
+      "updated": "2025-12-03T09:24:47.744Z"
+    },
+    {
+      "id": "TASK-126",
+      "type": "task",
+      "title": "HIERARCHY-COMPACT: Update for blocks hierarchy",
+      "status": "done",
+      "updated": "2025-12-03T09:26:28.694Z"
+    },
+    {
+      "id": "TASK-127",
+      "type": "task",
+      "title": "AI-GUIDE-COMPACT: Update for blocks dual nature",
+      "status": "done",
+      "updated": "2025-12-03T09:27:21.536Z"
+    },
+    {
+      "id": "BUG-030",
+      "type": "bug",
+      "title": "Extension TreeView missing blocks/blocked-by relationship display",
+      "status": "done",
+      "updated": "2025-12-03T09:55:21.321Z"
+    },
+    {
+      "id": "TASK-128",
+      "type": "task",
+      "title": "Implement tested-by/required-by display in TreeView",
+      "status": "done",
+      "updated": "2025-12-03T10:02:48.770Z"
+    },
+    {
+      "id": "STORY-055",
+      "type": "story",
+      "title": "Filter Status Indicator - Visual Feedback for Active Filters",
+      "status": "draft",
+      "updated": "2025-12-03T10:32:54.512Z"
+    },
+    {
+      "id": "TASK-129",
+      "type": "task",
+      "title": "Implement Filter Status Button - Icon Toggle with Badge",
+      "status": "draft",
+      "updated": "2025-12-03T10:33:20.947Z"
+    },
+    {
+      "id": "TASK-130",
+      "type": "task",
+      "title": "Improve TreeView Description Badge - Add 'filtered' Context",
+      "status": "draft",
+      "updated": "2025-12-03T10:33:33.159Z"
+    },
+    {
+      "id": "TASK-131",
+      "type": "task",
+      "title": "Verify Extension 0.6.11 Integration with Fixed npm Packages",
+      "status": "draft",
+      "updated": "2025-12-03T15:19:18.046Z"
+    },
+    {
+      "id": "TASK-132",
+      "type": "task",
+      "title": "Fix MCP Server & CLI TypeScript Build Configuration",
+      "status": "done",
+      "updated": "2025-12-03T16:22:36.571Z"
+    },
+    {
+      "id": "EPIC-015",
+      "type": "epic",
+      "title": "Transform MCP Server Bundling - GitLens Architecture Model",
+      "status": "draft",
+      "updated": "2025-12-03T16:29:37.594Z"
+    },
+    {
+      "id": "SPIKE-007",
+      "type": "spike",
+      "title": "Research GitLens/GitKraken MCP Bundling Implementation",
+      "status": "done",
+      "updated": "2025-12-03T16:43:20.142Z"
+    },
+    {
+      "id": "STORY-056",
+      "type": "story",
+      "title": "Transform Build System for Dual-Target MCP Bundling",
+      "status": "done",
+      "updated": "2025-12-03T17:27:35.531Z"
+    },
+    {
+      "id": "STORY-057",
+      "type": "story",
+      "title": "Implement VS Code Native MCP Registration API",
+      "status": "draft",
+      "updated": "2025-12-03T16:31:48.137Z"
+    },
+    {
+      "id": "STORY-058",
+      "type": "story",
+      "title": "Migrate MCP Server Code to Extension Package",
+      "status": "blocked",
+      "updated": "2025-12-03T20:48:30.708Z"
+    },
+    {
+      "id": "STORY-059",
+      "type": "story",
+      "title": "Add Fallback Support for Non-Bundled IDEs",
+      "status": "draft",
+      "updated": "2025-12-03T16:32:44.403Z"
+    },
+    {
+      "id": "STORY-060",
+      "type": "story",
+      "title": "Update Extension Packaging and Distribution",
+      "status": "draft",
+      "updated": "2025-12-03T16:32:44.405Z"
+    },
+    {
+      "id": "TASK-133",
+      "type": "task",
+      "title": "Move MCP server handlers to extension/src/mcp-server/",
+      "status": "done",
+      "updated": "2025-12-03T19:42:54.741Z"
+    },
+    {
+      "id": "TASK-134",
+      "type": "task",
+      "title": "Update MCP server imports to use bundled structure",
+      "status": "done",
+      "updated": "2025-12-03T20:37:08.734Z"
+    },
+    {
+      "id": "TASK-135",
+      "type": "task",
+      "title": "Replace placeholder index.ts with real MCP server code",
+      "status": "done",
+      "updated": "2025-12-03T20:41:25.198Z"
+    },
+    {
+      "id": "TASK-136",
+      "type": "task",
+      "title": "Test bundled MCP server executable",
+      "status": "done",
+      "updated": "2025-12-03T20:46:41.655Z"
+    },
+    {
+      "id": "TASK-137",
+      "type": "task",
+      "title": "Implement vscode.lm.registerMcpServerDefinitionProvider",
+      "status": "draft",
+      "updated": "2025-12-03T17:58:31.076Z"
+    },
+    {
+      "id": "TASK-138",
+      "type": "task",
+      "title": "Create McpStdioServerDefinition with bundled server path",
+      "status": "draft",
+      "updated": "2025-12-03T17:58:31.204Z"
+    },
+    {
+      "id": "TASK-139",
+      "type": "task",
+      "title": "Remove legacy npx-based MCP server manager",
+      "status": "draft",
+      "updated": "2025-12-03T17:58:31.329Z"
+    },
+    {
+      "id": "TASK-140",
+      "type": "task",
+      "title": "Add MCP server health monitoring and logging",
+      "status": "draft",
+      "updated": "2025-12-03T17:58:31.456Z"
+    },
+    {
+      "id": "TASK-141",
+      "type": "task",
+      "title": "Detect IDE capabilities (VS Code vs Cursor/Windsurf)",
+      "status": "draft",
+      "updated": "2025-12-03T17:58:39.762Z"
+    },
+    {
+      "id": "TASK-142",
+      "type": "task",
+      "title": "Create manual setup WebView UI for non-VS Code IDEs",
+      "status": "draft",
+      "updated": "2025-12-03T17:58:39.886Z"
+    },
+    {
+      "id": "TASK-143",
+      "type": "task",
+      "title": "Generate mcp.json configuration for manual setup",
+      "status": "draft",
+      "updated": "2025-12-03T17:58:40.010Z"
+    },
+    {
+      "id": "TASK-144",
+      "type": "task",
+      "title": "Add copy-to-clipboard for configuration",
+      "status": "draft",
+      "updated": "2025-12-03T17:58:40.136Z"
+    },
+    {
+      "id": "TASK-145",
+      "type": "task",
+      "title": "Verify .vscodeignore includes MCP server bundle",
+      "status": "draft",
+      "updated": "2025-12-03T17:58:48.674Z"
+    },
+    {
+      "id": "TASK-146",
+      "type": "task",
+      "title": "Update extension README for bundled architecture",
+      "status": "draft",
+      "updated": "2025-12-03T17:58:48.815Z"
+    },
+    {
+      "id": "TASK-147",
+      "type": "task",
+      "title": "Update CHANGELOG with bundling changes",
+      "status": "draft",
+      "updated": "2025-12-03T17:58:48.955Z"
+    },
+    {
+      "id": "TASK-148",
+      "type": "task",
+      "title": "Create package verification script",
+      "status": "draft",
+      "updated": "2025-12-03T17:58:49.078Z"
+    },
+    {
+      "id": "TASK-149",
+      "type": "task",
+      "title": "Test VSIX on Windows/macOS/Linux",
+      "status": "draft",
+      "updated": "2025-12-03T17:58:49.211Z"
+    },
+    {
+      "id": "STORY-061",
+      "type": "story",
+      "title": "Implement Hybrid MCP Server Installation with Fallback Chain",
+      "status": "done",
+      "updated": "2025-12-05T09:08:20.946Z"
+    },
+    {
+      "id": "TASK-150",
+      "type": "task",
+      "title": "Implement fallback detection: npx → node → error guide",
+      "status": "done",
+      "updated": "2025-12-05T09:01:18.642Z"
+    },
+    {
+      "id": "TASK-151",
+      "type": "task",
+      "title": "Add devsteps.checkPrerequisites command with detailed validation",
+      "status": "done",
+      "updated": "2025-12-05T09:03:11.587Z"
+    },
+    {
+      "id": "TASK-152",
+      "type": "task",
+      "title": "Update extension activation with improved error handling and user actions",
+      "status": "done",
+      "updated": "2025-12-05T09:05:08.598Z"
+    },
+    {
+      "id": "TASK-153",
+      "type": "task",
+      "title": "Update README with Prerequisites and Troubleshooting sections",
+      "status": "done",
+      "updated": "2025-12-05T09:07:07.984Z"
+    },
+    {
+      "id": "TASK-154",
+      "type": "task",
+      "title": "Test fallback chain on Windows/macOS/Linux with and without Node.js",
+      "status": "done",
+      "updated": "2025-12-05T09:07:42.167Z"
+    },
+    {
+      "id": "BUG-031",
+      "type": "bug",
+      "title": "TreeView Duplicate IDs: Children disappear after refresh",
+      "status": "draft",
+      "updated": "2025-12-05T10:38:03.736Z"
+    },
+    {
+      "id": "TASK-155",
+      "type": "task",
+      "title": "Fix WorkItemNode: Generate unique TreeView IDs with parent context",
+      "status": "in-progress",
+      "updated": "2025-12-05T10:40:45.555Z"
+    },
+    {
+      "id": "TASK-156",
+      "type": "task",
+      "title": "Update expansion state tracking for unique TreeView IDs",
+      "status": "draft",
+      "updated": "2025-12-05T10:38:32.911Z"
+    },
+    {
+      "id": "TASK-157",
+      "type": "task",
+      "title": "Update devsteps-plan-work.prompt.md: Enforce work items in main branch",
+      "status": "done",
+      "updated": "2025-12-05T16:20:11.635Z"
+    },
+    {
+      "id": "TASK-158",
+      "type": "task",
+      "title": "Update devsteps-start-work.prompt.md: Verify items in main, implement in feature branch",
+      "status": "done",
+      "updated": "2025-12-05T16:20:16.960Z"
+    },
+    {
+      "id": "TASK-159",
+      "type": "task",
+      "title": "Update devsteps-workflow.prompt.md: Enforce feature branch discipline",
+      "status": "done",
+      "updated": "2025-12-05T16:20:11.641Z"
+    },
+    {
+      "id": "EPIC-016",
+      "type": "epic",
+      "title": "Workflow Branch Strategy: Separate Work Items from Code",
+      "status": "done",
+      "updated": "2025-12-05T16:21:22.705Z"
+    },
+    {
+      "id": "STORY-062",
+      "type": "story",
+      "title": "Update Workflow Prompts for Branch Separation",
+      "status": "done",
+      "updated": "2025-12-05T16:20:16.961Z"
+    },
+    {
+      "id": "STORY-063",
+      "type": "story",
+      "title": "Update Bug Hierarchy in Implementation Code",
+      "status": "draft",
+      "updated": "2025-12-05T15:53:00.575Z"
+    },
+    {
+      "id": "EPIC-017",
+      "type": "epic",
+      "title": "Simplify Priority System - Eisenhower Matrix Only",
+      "status": "draft",
+      "updated": "2025-12-05T16:29:09.041Z"
+    },
+    {
+      "id": "STORY-064",
+      "type": "story",
+      "title": "Schema & Data Migration - Remove Priority Field",
+      "status": "done",
+      "updated": "2025-12-12T20:30:07.261Z"
+    },
+    {
+      "id": "STORY-065",
+      "type": "story",
+      "title": "CLI Commands Update - Eisenhower Only",
+      "status": "draft",
+      "updated": "2025-12-05T16:29:33.129Z"
+    },
+    {
+      "id": "STORY-066",
+      "type": "story",
+      "title": "MCP Server Update - Eisenhower Priority System",
+      "status": "draft",
+      "updated": "2025-12-05T16:29:33.130Z"
+    },
+    {
+      "id": "STORY-067",
+      "type": "story",
+      "title": "Extension UI Update - Eisenhower Priority Display",
+      "status": "draft",
+      "updated": "2025-12-05T16:29:56.007Z"
+    },
+    {
+      "id": "STORY-068",
+      "type": "story",
+      "title": "Documentation Update - Eisenhower Matrix Throughout",
+      "status": "draft",
+      "updated": "2025-12-05T16:29:56.008Z"
+    },
+    {
+      "id": "TASK-160",
+      "type": "task",
+      "title": "Rename --eisenhower flag to --priority for better UX",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-12T20:34:41.452Z"
+    },
+    {
+      "id": "TASK-161",
+      "type": "task",
+      "title": "MCP Server: Rename tool parameter eisenhower → priority",
+      "status": "draft",
+      "priority": "medium",
+      "updated": "2025-12-13T12:31:56.650Z"
+    },
+    {
+      "id": "TASK-162",
+      "type": "task",
+      "title": "Extension MCP Server: Rename tool parameter eisenhower → priority",
+      "status": "done",
+      "priority": "medium",
+      "updated": "2025-12-13T12:50:06.598Z"
+    },
+    {
+      "id": "SPIKE-008",
+      "type": "spike",
+      "title": "Git-Inspired Index Architecture - Content-Addressable Storage Research",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-13T13:22:54.748Z"
+    },
+    {
+      "id": "EPIC-018",
+      "type": "epic",
+      "title": "Index Architecture Refactoring - Git-Inspired Refs Model",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-13T13:23:35.887Z"
+    },
+    {
+      "id": "STORY-069",
+      "type": "story",
+      "title": "Foundation: Refs-Style Index Schema & Core Operations",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-12-13T14:04:00.773Z"
+    },
+    {
+      "id": "STORY-070",
+      "type": "story",
+      "title": "Package Integration: Update CLI, MCP, Extension for New Index",
+      "status": "done",
+      "priority": "critical",
+      "updated": "2025-12-13T14:10:57.854Z"
+    },
+    {
+      "id": "STORY-071",
+      "type": "story",
+      "title": "Migration: Transform index.json to Refs-Style Structure",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-13T13:24:51.268Z"
+    },
+    {
+      "id": "STORY-072",
+      "type": "story",
+      "title": "Validation: Conflict Testing & Performance Benchmarking",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-13T13:25:17.104Z"
+    },
+    {
+      "id": "STORY-073",
+      "type": "story",
+      "title": "External Project Migration: Auto-Detect and Upgrade Old Index",
+      "status": "draft",
+      "priority": "critical",
+      "updated": "2025-12-13T13:36:09.584Z"
+    },
+    {
+      "id": "STORY-074",
+      "type": "story",
+      "title": "Index Rebuild Command: Regenerate from Source of Truth",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-13T13:36:39.841Z"
+    },
+    {
+      "id": "STORY-075",
+      "type": "story",
+      "title": "Batch Operations for CLI and MCP - Enable Parallel AI Agent Workflows",
+      "status": "draft",
+      "priority": "high",
+      "updated": "2025-12-13T13:46:47.820Z"
+    }
+  ],
+  "stats": {
+    "total": 299,
+    "by_type": {
+      "epic": 18,
+      "story": 75,
+      "task": 162,
+      "bug": 31,
+      "spike": 8,
+      "feature": 5,
+      "requirement": 2
+    },
+    "by_status": {
+      "in-progress": 5,
+      "done": 148,
+      "draft": 141,
+      "blocked": 2,
+      "obsolete": 3,
+      "review": 0
+    },
+    "archived": 2
+  },
+  "archived_items": [
+    {
+      "id": "FEAT-005",
+      "type": "feature",
+      "title": "Implement lazy loading for TreeView (100+ items performance)",
+      "archived_at": "2025-11-26T06:28:09.313Z",
+      "original_status": "draft"
+    },
+    {
+      "id": "BUG-012",
+      "type": "bug",
+      "title": "Remove unused chart.js and d3 dependencies from package.json",
+      "archived_at": "2025-11-26T06:30:19.520Z",
+      "original_status": "draft"
+    }
+  ],
+  "last_updated": "2025-12-13T14:10:57.854Z"
+}

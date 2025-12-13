@@ -1,0 +1,40 @@
+{
+  "id": "TASK-107",
+  "type": "task",
+  "category": "Testing",
+  "title": "CLI BATS Test: Complete Scrum Hierarchy",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-02T14:57:02.500Z",
+  "updated": "2025-12-02T14:58:19.923Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "tests/integration/cli/scrum-hierarchy.bats"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-050"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-106"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "testing",
+    "cli",
+    "bats",
+    "scrum",
+    "hierarchy"
+  ],
+  "commits": [],
+  "metadata": {}
+}

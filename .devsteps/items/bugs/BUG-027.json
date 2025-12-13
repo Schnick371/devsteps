@@ -1,0 +1,36 @@
+{
+  "id": "BUG-027",
+  "type": "bug",
+  "category": "general",
+  "title": "Fix FileSystemWatcher - Must exist before early return",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-30T20:03:18.657Z",
+  "updated": "2025-11-30T20:04:29.431Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/extension.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "bug",
+    "extension",
+    "filesystem-watcher",
+    "welcome-view",
+    "mcp-integration"
+  ],
+  "commits": [],
+  "metadata": {}
+}

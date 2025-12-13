@@ -1,0 +1,36 @@
+{
+  "id": "STORY-032",
+  "type": "story",
+  "category": "general",
+  "title": "Knowledge aging tracking & maintenance workflow",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-27T16:51:58.713Z",
+  "updated": "2025-11-27T16:52:10.775Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/knowledge.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-010"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "knowledge-management",
+    "maintenance",
+    "quality"
+  ],
+  "commits": [],
+  "metadata": {}
+}

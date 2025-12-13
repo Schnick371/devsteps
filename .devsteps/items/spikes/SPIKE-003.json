@@ -1,0 +1,42 @@
+{
+  "id": "SPIKE-003",
+  "type": "spike",
+  "category": "Research",
+  "title": "Research: Git Branching Strategies for Epic-Based Development",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-24T19:34:12.431Z",
+  "updated": "2025-11-24T20:07:33.747Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/instructions/git-workflow.instructions.md",
+    "docs/architecture/git-strategy.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-005"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-038",
+      "TASK-041"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spike",
+    "research",
+    "git",
+    "branching",
+    "workflow"
+  ],
+  "commits": [],
+  "metadata": {}
+}

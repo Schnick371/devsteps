@@ -1,0 +1,35 @@
+{
+  "id": "TASK-191",
+  "type": "task",
+  "category": "general",
+  "title": "Strengthen Step 3: Add explicit hierarchy rules and Bug workflow",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-09T13:46:23.364Z",
+  "updated": "2025-12-09T13:46:36.576Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/prompts/devsteps-plan-work.prompt.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-075"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "documentation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

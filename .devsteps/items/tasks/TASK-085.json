@@ -1,0 +1,41 @@
+{
+  "id": "TASK-085",
+  "type": "task",
+  "category": "general",
+  "title": "Create docs-only GitHub repository",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-28T10:25:54.327Z",
+  "updated": "2025-11-28T10:27:57.372Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "README.md",
+    "LICENSE.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "docs/"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-038"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "documentation",
+    "github",
+    "publication"
+  ],
+  "commits": [],
+  "metadata": {}
+}

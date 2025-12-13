@@ -6,15 +6,22 @@ import { simpleGit } from 'simple-git';
 /**
  * Update an existing item (MCP wrapper)
  */
-export default async function updateHandler(args: UpdateItemArgs) {
+export default async function updateHandler(args: any) {
   try {
     // Validation: Cannot use both description flags
     if (args.description && args.append_description) {
       throw new Error('Cannot specify both description and append_description simultaneously');
     }
-    
+
+    // Map external 'priority' parameter → internal 'eisenhower' field
+    const mappedArgs: UpdateItemArgs = {
+      ...args,
+      eisenhower: args.priority, // External API uses 'priority', internal uses 'eisenhower'
+    };
+    delete (mappedArgs as any).priority; // Remove external parameter
+
     const devstepsDir = join(getWorkspacePath(), '.devsteps');
-    const result = await updateItem(devstepsDir, args);
+    const result = await updateItem(devstepsDir, mappedArgs);
 
     // Git hints (MCP-specific presentation)
     let gitHint = '';

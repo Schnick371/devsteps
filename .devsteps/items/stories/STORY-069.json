@@ -1,0 +1,44 @@
+{
+  "id": "STORY-069",
+  "type": "story",
+  "category": "architecture",
+  "title": "Foundation: Refs-Style Index Schema & Core Operations",
+  "status": "done",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-13T13:24:06.007Z",
+  "updated": "2025-12-13T14:04:00.773Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/",
+    "packages/shared/src/types/",
+    "packages/shared/src/schemas/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-018"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "STORY-070",
+      "STORY-074",
+      "STORY-075"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "architecture",
+    "shared",
+    "index",
+    "foundation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

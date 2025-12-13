@@ -1,0 +1,41 @@
+{
+  "id": "TASK-075",
+  "type": "task",
+  "category": "general",
+  "title": "TreeView badges via TreeItem.description property",
+  "status": "obsolete",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-27T16:05:43.357Z",
+  "updated": "2025-11-27T16:15:06.196Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/treeView/nodes/workItemNode.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-004"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [
+      "BUG-016"
+    ],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "treeview",
+    "badges",
+    "ui",
+    "description"
+  ],
+  "commits": [],
+  "metadata": {},
+  "superseded_by": "BUG-017"
+}

@@ -1,0 +1,38 @@
+{
+  "id": "STORY-046",
+  "type": "story",
+  "category": "general",
+  "title": "Welcome Screen Content Enhancement - Model Recommendations & User Guidance",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-30T19:56:38.948Z",
+  "updated": "2025-11-30T19:56:50.340Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/package.json",
+    "docs/",
+    ".github/DISCUSSION_TEMPLATES/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ux",
+    "welcome-screen",
+    "onboarding",
+    "documentation",
+    "community"
+  ],
+  "commits": [],
+  "metadata": {}
+}

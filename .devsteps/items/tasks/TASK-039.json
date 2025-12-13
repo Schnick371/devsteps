@@ -1,0 +1,39 @@
+{
+  "id": "TASK-039",
+  "type": "task",
+  "category": "CLI",
+  "title": "CLI: Enforce relationship validation in link command",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-24T19:34:50.473Z",
+  "updated": "2025-11-24T20:50:12.949Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/add.ts",
+    "packages/cli/src/commands/link.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-005"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-038"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cli",
+    "validation",
+    "ux"
+  ],
+  "commits": [],
+  "metadata": {}
+}

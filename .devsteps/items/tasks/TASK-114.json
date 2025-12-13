@@ -1,0 +1,40 @@
+{
+  "id": "TASK-114",
+  "type": "task",
+  "category": "Testing",
+  "title": "Create Test Fixture Files for Expected Outputs",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-02T14:57:53.549Z",
+  "updated": "2025-12-02T14:58:19.926Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "tests/integration/fixtures/"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-052"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-050",
+      "STORY-051"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "testing",
+    "fixtures",
+    "validation",
+    "data"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,48 @@
+{
+  "id": "STORY-036",
+  "type": "story",
+  "category": "Documentation",
+  "title": "Improve Copilot workflow understanding - Item hierarchy and story branches",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-27T19:28:05.182Z",
+  "updated": "2025-11-27T19:34:00.411Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps.agent.md",
+    ".github/prompts/devsteps-start-work.prompt.md",
+    ".github/prompts/devsteps-workflow.prompt.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-005"
+    ],
+    "implemented-by": [
+      "TASK-077",
+      "TASK-078",
+      "TASK-079"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [
+      "TASK-041",
+      "TASK-042"
+    ],
+    "superseded-by": []
+  },
+  "tags": [
+    "workflow",
+    "copilot",
+    "branching",
+    "documentation",
+    "agent",
+    "prompts"
+  ],
+  "commits": [],
+  "metadata": {}
+}

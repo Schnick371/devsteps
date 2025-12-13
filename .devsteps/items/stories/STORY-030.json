@@ -1,0 +1,41 @@
+{
+  "id": "STORY-030",
+  "type": "story",
+  "category": "general",
+  "title": "Cross-project knowledge import/export",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-27T16:51:30.044Z",
+  "updated": "2025-11-27T16:52:22.052Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/import.ts",
+    "packages/cli/src/commands/export.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-010"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-029"
+    ],
+    "required-by": [
+      "STORY-031"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "knowledge-management",
+    "import-export",
+    "sharing"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,32 @@
+{
+  "id": "BUG-010",
+  "type": "bug",
+  "category": "Testing",
+  "title": "Test FileSystemWatcher Auto-Refresh",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-25T11:18:55.191Z",
+  "updated": "2025-11-25T11:18:55.191Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "test",
+    "file-watcher",
+    "auto-refresh"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,39 @@
+{
+  "id": "STORY-029",
+  "type": "story",
+  "category": "general",
+  "title": "Export knowledge base as shareable documentation",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-27T16:51:30.043Z",
+  "updated": "2025-11-27T16:52:22.052Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/export.ts",
+    "packages/mcp-server/src/handlers/export.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-010"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "STORY-030"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "knowledge-management",
+    "export",
+    "documentation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

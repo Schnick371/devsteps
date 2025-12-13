@@ -1,0 +1,32 @@
+{
+  "id": "TASK-157",
+  "type": "task",
+  "category": "general",
+  "title": "Update devsteps-plan-work.prompt.md: Enforce work items in main branch",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-05T10:55:27.829Z",
+  "updated": "2025-12-09T13:46:43.386Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-062"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-075"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

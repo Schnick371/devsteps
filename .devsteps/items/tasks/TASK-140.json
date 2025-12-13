@@ -1,0 +1,32 @@
+{
+  "id": "TASK-140",
+  "type": "task",
+  "category": "extension",
+  "title": "Add MCP server health monitoring and logging",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-03T17:58:31.456Z",
+  "updated": "2025-12-03T17:59:06.484Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-057"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "monitoring,diagnostics"
+  ],
+  "commits": [],
+  "metadata": {}
+}

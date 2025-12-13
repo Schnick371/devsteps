@@ -1,0 +1,42 @@
+{
+  "id": "EPIC-006",
+  "type": "epic",
+  "category": "Platform",
+  "title": "Project Health & Data Integrity",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-24T20:55:24.977Z",
+  "updated": "2025-11-24T20:59:51.259Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-006",
+      "STORY-007",
+      "STORY-008",
+      "STORY-009"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-005",
+      "EPIC-001"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "health",
+    "validation",
+    "integrity",
+    "doctor",
+    "quality"
+  ],
+  "commits": [],
+  "metadata": {}
+}

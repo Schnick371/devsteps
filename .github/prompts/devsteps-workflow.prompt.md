@@ -1,8 +1,8 @@
 ---
-agent: 'devsteps'
+agent: 'devsteps-coordinator'
 model: 'Claude Sonnet 4.5'
 description: 'Structured development workflow - preserve decisions and maintain context continuity'
-tools: ['edit', 'search', 'runCommands', 'runTasks', 'devsteps/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'usages', 'problems', 'changes', 'fetch', 'todos', 'runSubagent']
+tools: ['vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'vscode/extensions', 'execute/testFailure', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web/fetch', 'devsteps/*', 'copilot-container-tools/*', 'tavily/*', 'upstash/context7/*', 'agent', 'todo']
 ---
 
 # 🧭 Structured Development Workflow
@@ -110,11 +110,31 @@ Maintain structured workflow - preserve decisions, traceability, prevent context
 - Mark item as `done` status
 - Final commit to feature branch
 - Push branch
-- **Prohibition:** No merge to main yet (test first, user approval, squash merge later)
+
+**Merge to Main (No-FF Strategy):**
+- Preserve full development history with no-fast-forward merge
+- Write comprehensive merge commit message with:
+  - Summary of what was implemented
+  - Key changes and decisions made
+  - Footer: `Implements: <ID>`
+- Archive feature branch instead of deleting
+- **Principle:** Full traceability - all commits, decisions, and corrections remain visible
+
+**Why preserve history instead of squashing:**
+- ✅ Preserves incremental development steps (implementation → correction → refinement)
+- ✅ Shows decision evolution (changed approach reasoning visible)
+- ✅ Easier debugging (find exact commit where issue was introduced/fixed)
+- ✅ Honors DevSteps principle: "Every change traceable. No decision forgotten."
+- ❌ Squash loses valuable context and reasoning behind changes
+
+**View Options:**
+- First-parent view shows clean story-level commits
+- Full graph view shows detailed history from feature branches
+- **Best of both worlds:** Stories visible at top level, details available when needed
 
 **Status Sync:**
 - Status stored in `.devsteps/` on feature branch
-- Synced to main during final merge
+- Synced to main during merge
 - Temporary divergence expected
 
 **Context Preservation:**

@@ -1,0 +1,35 @@
+{
+  "id": "TASK-026",
+  "type": "task",
+  "category": "general",
+  "title": "Traceability Graph Node Limiting - Fix O(n²) Performance Bottleneck",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-23T19:27:59.279Z",
+  "updated": "2025-11-23T19:32:00.877Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/vscode-extension/src/webview/dashboardPanel.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "performance",
+    "optimization",
+    "traceability",
+    "graph"
+  ],
+  "commits": [],
+  "metadata": {}
+}

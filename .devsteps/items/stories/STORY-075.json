@@ -1,0 +1,41 @@
+{
+  "id": "STORY-075",
+  "type": "story",
+  "category": "Core Features",
+  "title": "Batch Operations for CLI and MCP - Enable Parallel AI Agent Workflows",
+  "status": "draft",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-13T13:46:47.820Z",
+  "updated": "2025-12-13T13:46:59.049Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/batch-operations.ts",
+    "packages/cli/src/commands/bulk.ts",
+    "packages/mcp-server/src/tools/batch-add.ts",
+    "packages/mcp-server/src/tools/batch-update.ts",
+    "packages/mcp-server/src/tools/batch-link.ts",
+    "packages/shared/src/schemas/batch.schema.ts",
+    "packages/shared/src/types/batch.types.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-018"
+    ],
+    "depends-on": [
+      "STORY-069"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

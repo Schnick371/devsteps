@@ -1,0 +1,36 @@
+{
+  "id": "TASK-080",
+  "type": "task",
+  "category": "vscode",
+  "title": "Update activationEvents - Remove Star, Add Conditional",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-28T09:04:24.075Z",
+  "updated": "2025-11-28T09:07:48.135Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/package.json"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-037"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "package-json",
+    "activation-events",
+    "performance-fix"
+  ],
+  "commits": [],
+  "metadata": {}
+}

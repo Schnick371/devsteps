@@ -1,0 +1,36 @@
+{
+  "id": "FEAT-001",
+  "type": "feature",
+  "category": "general",
+  "title": "Shared Package - Core Business Logic",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-23T15:49:23.356Z",
+  "updated": "2025-11-23T15:49:48.860Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "REQ-001"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-001"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "waterfall",
+    "feature",
+    "shared-package"
+  ],
+  "commits": [],
+  "metadata": {}
+}

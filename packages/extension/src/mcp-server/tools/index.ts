@@ -60,11 +60,6 @@ export const addTool: Tool = {
       },
       priority: {
         type: 'string',
-        enum: ['critical', 'high', 'medium', 'low'],
-        description: 'Priority level',
-      },
-      eisenhower: {
-        type: 'string',
         enum: [
           'urgent-important',
           'not-urgent-important',
@@ -72,7 +67,7 @@ export const addTool: Tool = {
           'not-urgent-not-important',
         ],
         description:
-          'Eisenhower Matrix quadrant: Q1 (urgent-important: do first), Q2 (not-urgent-important: schedule), Q3 (urgent-not-important: delegate), Q4 (not-urgent-not-important: eliminate)',
+          'Priority (Eisenhower Matrix): urgent-important (Q1: do first), not-urgent-important (Q2: schedule), urgent-not-important (Q3: delegate), not-urgent-not-important (Q4: eliminate)',
       },
       tags: {
         type: 'array',
@@ -134,11 +129,6 @@ export const listTool: Tool = {
         ],
         description: 'Filter by status',
       },
-      priority: {
-        type: 'string',
-        enum: ['critical', 'high', 'medium', 'low'],
-        description: 'Filter by priority',
-      },
       assignee: {
         type: 'string',
         description: 'Filter by assignee email',
@@ -187,18 +177,13 @@ export const updateTool: Tool = {
       },
       priority: {
         type: 'string',
-        enum: ['critical', 'high', 'medium', 'low'],
-        description: 'New priority',
-      },
-      eisenhower: {
-        type: 'string',
         enum: [
           'urgent-important',
           'not-urgent-important',
           'urgent-not-important',
           'not-urgent-not-important',
         ],
-        description: 'New Eisenhower quadrant',
+        description: 'New priority (Eisenhower quadrant)',
       },
       title: {
         type: 'string',

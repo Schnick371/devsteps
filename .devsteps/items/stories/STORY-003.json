@@ -1,0 +1,43 @@
+{
+  "id": "STORY-003",
+  "type": "story",
+  "category": "mcp",
+  "title": "MCP Server Package - AI Integration via Model Context Protocol",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-23T15:33:47.339Z",
+  "updated": "2025-11-24T10:13:37.885Z",
+  "author": "thomas.hertel@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-001"
+    ],
+    "implemented-by": [
+      "TASK-008",
+      "TASK-015",
+      "TASK-016"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "FEAT-003"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "ai-integration",
+    "protocol",
+    "tools"
+  ],
+  "commits": [],
+  "metadata": {}
+}

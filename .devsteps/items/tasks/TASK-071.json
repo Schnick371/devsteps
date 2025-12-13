@@ -1,0 +1,42 @@
+{
+  "id": "TASK-071",
+  "type": "task",
+  "category": "design",
+  "title": "Design Icon Library for Extension UI - Consistent Visual Language",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2025-11-26T07:02:16.987Z",
+  "updated": "2025-11-26T07:02:29.056Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/resources/icons/",
+    "docs/branding/icon-library.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-020"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-065"
+    ],
+    "required-by": [
+      "TASK-070"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "icons",
+    "ui",
+    "library",
+    "consistency"
+  ],
+  "commits": [],
+  "metadata": {}
+}

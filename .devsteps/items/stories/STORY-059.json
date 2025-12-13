@@ -1,0 +1,45 @@
+{
+  "id": "STORY-059",
+  "type": "story",
+  "category": "extension",
+  "title": "Add Fallback Support for Non-Bundled IDEs",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-03T16:32:44.403Z",
+  "updated": "2025-12-03T17:59:14.315Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-015"
+    ],
+    "implemented-by": [
+      "TASK-141",
+      "TASK-142",
+      "TASK-143",
+      "TASK-144"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-057"
+    ],
+    "required-by": [
+      "STORY-060"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "cursor",
+    "windsurf",
+    "manual-setup",
+    "fallback"
+  ],
+  "commits": [],
+  "metadata": {}
+}

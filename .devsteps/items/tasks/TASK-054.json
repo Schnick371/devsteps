@@ -1,0 +1,37 @@
+{
+  "id": "TASK-054",
+  "type": "task",
+  "category": "vscode",
+  "title": "Replace any[] with proper TypeScript types for type safety",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2025-11-26T06:27:06.637Z",
+  "updated": "2025-11-26T06:27:49.261Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/treeView/devstepsTreeDataProvider.ts",
+    "packages/extension/src/webview/dashboardPanel.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-015"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "typescript",
+    "type-safety",
+    "technical-debt"
+  ],
+  "commits": [],
+  "metadata": {}
+}

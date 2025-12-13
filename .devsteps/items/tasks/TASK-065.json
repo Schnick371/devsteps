@@ -1,0 +1,42 @@
+{
+  "id": "TASK-065",
+  "type": "task",
+  "category": "design",
+  "title": "Design DevSteps Logo Concept - Icon-Only and Full Logo Variations",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-26T07:01:04.353Z",
+  "updated": "2025-11-26T07:02:29.056Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/resources/icons/",
+    "docs/branding/logo-concept.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-019"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-066",
+      "TASK-067",
+      "TASK-071"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "logo",
+    "concept",
+    "design",
+    "sketches"
+  ],
+  "commits": [],
+  "metadata": {}
+}

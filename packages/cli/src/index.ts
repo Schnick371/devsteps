@@ -37,10 +37,9 @@ program
   .argument('<title>', 'Item title')
   .option('-d, --description <text>', 'Item description')
   .option('-c, --category <category>', 'Category/module')
-  .option('-p, --priority <priority>', 'Priority: critical|high|medium|low')
   .option(
-    '-e, --eisenhower <quadrant>',
-    'Eisenhower: urgent-important|not-urgent-important|urgent-not-important|not-urgent-not-important'
+    '-p, --priority <quadrant>',
+    'Priority: urgent-important|not-urgent-important|urgent-not-important|not-urgent-not-important'
   )
   .option('-t, --tags <tags...>', 'Tags (space-separated)')
   .option('-a, --assignee <email>', 'Assignee email')
@@ -60,8 +59,7 @@ program
   .description('List items with optional filters')
   .option('-t, --type <type>', 'Filter by type: epic|story|task|req|feat|bug|spike|test')
   .option('-s, --status <status>', 'Filter by status')
-  .option('-p, --priority <priority>', 'Filter by priority')
-  .option('-e, --eisenhower <quadrant>', 'Filter by Eisenhower quadrant')
+  .option('-p, --priority <quadrant>', 'Filter by priority quadrant')
   .option('-a, --assignee <email>', 'Filter by assignee')
   .option('--tags <tags...>', 'Filter by tags')
   .option('--archived', 'Show archived items instead of active items')
@@ -74,8 +72,7 @@ program
   .description('Update an existing item')
   .argument('<id>', 'Item ID')
   .option('-s, --status <status>', 'New status')
-  .option('-p, --priority <priority>', 'New priority')
-  .option('-e, --eisenhower <quadrant>', 'New Eisenhower quadrant')
+  .option('-p, --priority <quadrant>', 'New priority quadrant')
   .option('-t, --title <title>', 'New title')
   .option('-d, --description <text>', 'New description (replaces existing)')
   .option('--append-description <text>', 'Append to existing description (preserves content)')
@@ -149,6 +146,17 @@ program
     await purgeCommand(options);
   });
 
+// Migrate index
+program
+  .command('migrate')
+  .description('Auto-detect and migrate legacy index to refs-style')
+  .option('--check', 'Check if migration is needed (dry-run)')
+  .option('--skip-backup', 'Skip backup creation (advanced users)')
+  .action(async (options) => {
+    const { migrateCommand } = await import('./commands/migrate.js');
+    await migrateCommand(options);
+  });
+
 // Setup MCP
 program
   .command('setup')
@@ -163,10 +171,13 @@ program
 // Doctor - Health check
 program
   .command('doctor')
-  .description('Run health checks on development environment')
-  .action(async () => {
+  .description('Run health checks and index operations')
+  .option('--rebuild-index', 'Rebuild index from item files')
+  .option('--check', 'Check what would be rebuilt (dry-run)')
+  .option('--yes', 'Skip confirmation prompts')
+  .action(async (options) => {
     const { doctorCommand } = await import('./commands/doctor.js');
-    await doctorCommand();
+    await doctorCommand(options);
   });
 
 // Context commands
@@ -198,7 +209,6 @@ bulkCmd
   .description('Update multiple items at once')
   .argument('<ids...>', 'Item IDs to update')
   .option('-s, --status <status>', 'Set status for all items')
-  .option('-p, --priority <priority>', 'Set priority for all items')
   .option('-a, --assignee <email>', 'Set assignee for all items')
   .option('-c, --category <category>', 'Set category for all items')
   .action(async (ids: string[], options) => {

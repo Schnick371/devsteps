@@ -1,0 +1,30 @@
+{
+  "id": "TASK-158",
+  "type": "task",
+  "category": "general",
+  "title": "Update devsteps-start-work.prompt.md: Verify items in main, implement in feature branch",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-05T10:55:49.844Z",
+  "updated": "2025-12-05T16:20:16.960Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-062"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

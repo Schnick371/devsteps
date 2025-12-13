@@ -1,8 +1,8 @@
 ---
-agent: 'devsteps'
+agent: 'devsteps-coordinator'
 model: 'Claude Sonnet 4.5'
 description: 'Begin implementation work - review planned items, select next task, and start structured development'
-tools: ['edit', 'search', 'runCommands', 'runTasks', 'devsteps/*', 'tavily/*', 'usages', 'problems', 'changes', 'testFailure', 'todos', 'runSubagent']
+tools: ['vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'vscode/extensions', 'execute/testFailure', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web/fetch', 'copilot-container-tools/*', 'tavily/*', 'upstash/context7/*', 'agent', 'devsteps/*', 'todo']
 ---
 
 # 🚀 Start Work - Begin Implementation
@@ -17,7 +17,7 @@ Review planned work, select highest priority, begin structured development.
 
 ## Implementation Protocol
 
-### 0. Branch Strategy (MANDATORY)
+### 1. Branch Strategy (MANDATORY)
 
 **Phase 1: Verify DevSteps Work Items in Main**
 **Phase 2: Create/Checkout Feature Branch**
@@ -28,40 +28,40 @@ Review planned work, select highest priority, begin structured development.
 **Phase 3: Verify Clean State**
 - Commit or stash before proceeding
 
-### 1. Review
+### 2. Review
 - Show Q1 items (urgent-important)
 - Highlight blockers
 - Discuss priorities
 
-### 2. Select
+### 3. Select
 - Priority order: CRITICAL bugs → Q1 → Q2 → Dependencies → Quick wins
 - Start immediately with highest priority
 - Check dependencies and verify not blocked
 
-### 3. Understand
+### 4. Understand
 - Get item details via devsteps
 - Review parent items and dependencies
 - Locate code via search and usages
 - Check existing problems
 
-### 4. Begin
+### 5. Begin
 - Mark item in-progress
 - Document decisions during work
 - Link items as discovered
 - Write tests in parallel
 
-### 5. Guide
+### 6. Guide
 - Stuck? → Create spike or mark blocked
 - Scope grows? → Break down into new task
 - Dependencies found? → Link items
 - Decisions made? → Document why
 
-### 6. Testing/Review
+### 7. Testing/Review
 **DevSteps Status:** `in-progress` → `review`  
 **Quality Gates:** Tests pass, build succeeds, manual testing, docs updated, no regressions *(see devsteps-workflow.prompt.md)*  
-**If Fail:** Return to Step 5
+**If Fail:** Return to Step 6
 
-### 7. Complete
+### 8. Complete
 **DevSteps Status:** `review` → `done` (all gates passed)  
 **SCM Commit:** Feature branch, conventional format, footer `Implements: ID`  
 **Prohibition:** No merge to main yet
@@ -70,13 +70,13 @@ Review planned work, select highest priority, begin structured development.
 
 **Branch Tagging:** Mark completion status: `archive/merged/` (done), `archive/abandoned/` (cancelled), `archive/superseded/` (obsolete). Keep branch for implementation history.
 
-### 7.5. Spike Post-Processing
+### 8.5. Spike Post-Processing
 - Review findings
 - Create Stories from insights
 - Link Stories to Epic
 - Estimate with confidence from learnings
 
-### 8. Next
+### 9. Next
 - Show status
 - Highlight unblocked items
 - Continue with Step 1

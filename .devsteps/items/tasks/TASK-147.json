@@ -1,0 +1,32 @@
+{
+  "id": "TASK-147",
+  "type": "task",
+  "category": "documentation",
+  "title": "Update CHANGELOG with bundling changes",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-03T17:58:48.955Z",
+  "updated": "2025-12-03T17:59:14.699Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-060"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "changelog,migration"
+  ],
+  "commits": [],
+  "metadata": {}
+}

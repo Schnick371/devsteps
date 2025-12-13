@@ -1,0 +1,45 @@
+{
+  "id": "TASK-162",
+  "type": "task",
+  "category": "general",
+  "title": "Extension MCP Server: Rename tool parameter eisenhower → priority",
+  "status": "done",
+  "priority": "medium",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-13T12:32:11.768Z",
+  "updated": "2025-12-13T12:50:06.598Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/mcp-server/tools/index.ts",
+    "packages/extension/src/mcp-server/handlers/add.ts",
+    "packages/extension/src/mcp-server/handlers/update.ts",
+    "packages/extension/src/mcp-server/handlers/list.ts",
+    "packages/extension/src/mcp-server/handlers/init.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-017",
+      "STORY-064",
+      "TASK-160",
+      "TASK-161"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "mcp",
+    "api",
+    "schema"
+  ],
+  "commits": [],
+  "metadata": {}
+}

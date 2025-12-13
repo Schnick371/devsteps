@@ -1,0 +1,32 @@
+{
+  "id": "BUG-030",
+  "type": "bug",
+  "category": "general",
+  "title": "Extension TreeView missing blocks/blocked-by relationship display",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-03T09:54:22.995Z",
+  "updated": "2025-12-03T09:55:21.321Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "EPIC-014"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension,treeview,relationships"
+  ],
+  "commits": [],
+  "metadata": {}
+}

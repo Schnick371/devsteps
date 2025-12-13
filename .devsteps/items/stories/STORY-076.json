@@ -1,0 +1,44 @@
+{
+  "id": "STORY-076",
+  "type": "story",
+  "category": "general",
+  "title": "ULID Integration for Merge-Safe Work Item Identification",
+  "status": "obsolete",
+  "priority": "high",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-12T10:09:03.333Z",
+  "updated": "2025-12-13T13:33:31.329Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-018"
+    ],
+    "implemented-by": [
+      "TASK-192",
+      "TASK-193",
+      "TASK-194",
+      "TASK-195",
+      "TASK-196",
+      "TASK-197"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ulid",
+    "schema",
+    "identification",
+    "backend"
+  ],
+  "commits": [],
+  "metadata": {},
+  "superseded_by": "EPIC-018"
+}

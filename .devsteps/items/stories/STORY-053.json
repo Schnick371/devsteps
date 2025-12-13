@@ -1,0 +1,56 @@
+{
+  "id": "STORY-053",
+  "type": "story",
+  "category": "Architecture",
+  "title": "Remove Azure DevOps affects/affected-by Relations",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-03T08:58:25.631Z",
+  "updated": "2025-12-03T09:20:43.947Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/relationships.ts",
+    "packages/shared/src/schemas/index.ts",
+    "packages/mcp-server/src/tools/index.ts",
+    "packages/mcp-server/src/handlers/link.ts",
+    "packages/cli/src/index.ts",
+    "packages/cli/src/commands/index.ts",
+    "packages/extension/src/treeView/nodes/workItemNode.ts",
+    ".devsteps/HIERARCHY-COMPACT.md",
+    ".devsteps/AI-GUIDE-COMPACT.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-014"
+    ],
+    "implemented-by": [
+      "TASK-118",
+      "TASK-119",
+      "TASK-120",
+      "TASK-121",
+      "TASK-122",
+      "TASK-123"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "STORY-054"
+    ],
+    "supersedes": [
+      "STORY-049"
+    ],
+    "superseded-by": []
+  },
+  "tags": [
+    "relationships",
+    "breaking-change",
+    "jira",
+    "cleanup"
+  ],
+  "commits": [],
+  "metadata": {}
+}

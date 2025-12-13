@@ -1,0 +1,36 @@
+{
+  "id": "STORY-034",
+  "type": "story",
+  "category": "general",
+  "title": "Customizable knowledge item templates",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-27T16:51:58.715Z",
+  "updated": "2025-11-27T16:52:10.775Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/templates/knowledge.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-010"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "knowledge-management",
+    "templates",
+    "consistency"
+  ],
+  "commits": [],
+  "metadata": {}
+}

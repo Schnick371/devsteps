@@ -1,0 +1,36 @@
+{
+  "id": "TASK-057",
+  "type": "task",
+  "category": "vscode",
+  "title": "Implement Gantt-Style Project Timeline - Epics and Stories Overview",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-26T06:52:34.947Z",
+  "updated": "2025-11-26T06:52:43.983Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/dashboardPanel.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-017"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "gantt",
+    "timeline",
+    "project"
+  ],
+  "commits": [],
+  "metadata": {}
+}

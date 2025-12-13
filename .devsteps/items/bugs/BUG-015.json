@@ -1,0 +1,43 @@
+{
+  "id": "BUG-015",
+  "type": "bug",
+  "category": "vscode",
+  "title": "Extension Not Loading - TreeView Registration and Icon Display Failures",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-26T06:59:59.638Z",
+  "updated": "2025-11-26T07:12:01.589Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/extension.ts",
+    "packages/extension/package.json",
+    "packages/extension/resources/icons/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-063",
+      "TASK-064"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "bug",
+    "registration",
+    "icon",
+    "critical"
+  ],
+  "commits": [],
+  "metadata": {}
+}

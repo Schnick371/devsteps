@@ -1,0 +1,40 @@
+{
+  "id": "BUG-023",
+  "type": "bug",
+  "category": "vscode",
+  "title": "Hide Done Button Functionality Broken - Toggle Logic Not Working",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-28T09:22:09.016Z",
+  "updated": "2025-11-28T09:37:43.542Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/commands/index.ts",
+    "packages/extension/src/treeView/devstepsTreeDataProvider.ts",
+    "packages/extension/src/treeView/nodes/typeGroupNode.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-082"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "hide-done",
+    "toggle-broken",
+    "treeview-filter",
+    "context-keys",
+    "core-functionality"
+  ],
+  "commits": [],
+  "metadata": {}
+}

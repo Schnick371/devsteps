@@ -1,0 +1,35 @@
+{
+  "id": "BUG-008",
+  "type": "bug",
+  "category": "VS Code Extension",
+  "title": "Fix: Priority filter shortcut conflicts with VS Code Command Palette",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-24T14:33:28.618Z",
+  "updated": "2025-11-24T16:07:31.126Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/vscode-extension/package.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "keybinding",
+    "ux",
+    "conflict",
+    "keyboard-shortcuts"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,44 @@
+{
+  "id": "STORY-017",
+  "type": "story",
+  "category": "vscode",
+  "title": "Advanced Timeline Visualization - Velocity, Gantt, Lifecycle Tracking",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-26T06:52:06.319Z",
+  "updated": "2025-11-26T06:53:30.140Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/dashboardPanel.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-008"
+    ],
+    "implemented-by": [
+      "TASK-056",
+      "TASK-057",
+      "TASK-058",
+      "TASK-059"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-053"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "timeline",
+    "velocity",
+    "gantt",
+    "lifecycle"
+  ],
+  "commits": [],
+  "metadata": {}
+}

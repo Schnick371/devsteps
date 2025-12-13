@@ -1,0 +1,44 @@
+{
+  "id": "TASK-041",
+  "type": "task",
+  "category": "Documentation",
+  "title": "Git Workflow: Document and implement Epic branch management",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-24T19:36:06.264Z",
+  "updated": "2025-11-27T19:28:56.923Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/instructions/git-workflow.instructions.md",
+    "packages/vscode-extension/src/commands/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-005"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "SPIKE-003"
+    ],
+    "required-by": [
+      "TASK-042"
+    ],
+    "supersedes": [],
+    "superseded-by": [
+      "STORY-036"
+    ]
+  },
+  "tags": [
+    "git",
+    "workflow",
+    "documentation",
+    "branching"
+  ],
+  "commits": [],
+  "metadata": {}
+}

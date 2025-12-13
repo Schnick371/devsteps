@@ -1,0 +1,39 @@
+{
+  "id": "TASK-122",
+  "type": "task",
+  "category": "CLI",
+  "title": "CLI: Remove affects from commands",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-03T08:59:34.160Z",
+  "updated": "2025-12-03T09:17:07.237Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/index.ts",
+    "packages/cli/src/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-053"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-120"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cli",
+    "commands",
+    "breaking-change"
+  ],
+  "commits": [],
+  "metadata": {}
+}

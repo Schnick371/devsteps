@@ -1,0 +1,44 @@
+{
+  "id": "TASK-104",
+  "type": "task",
+  "category": "general",
+  "title": "Validation: Allow Bug → Epic/Requirement via relates-to + affects",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-02T11:38:11.598Z",
+  "updated": "2025-12-02T11:57:28.814Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/validation.ts",
+    "packages/shared/dist/core/validation.js",
+    "packages/shared/dist/core/validation.d.ts",
+    "test-validation.js"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-049"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-103"
+    ],
+    "required-by": [
+      "TASK-105",
+      "TASK-043"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "validation",
+    "bug-workflow",
+    "shared"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,46 @@
+{
+  "id": "BUG-016",
+  "type": "bug",
+  "category": "general",
+  "title": "TreeView badges not appearing - DecorationProvider refresh missing",
+  "status": "obsolete",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-27T15:52:55.419Z",
+  "updated": "2025-11-27T16:15:06.195Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/extension.ts",
+    "packages/extension/src/treeView/devstepsTreeDataProvider.ts",
+    "packages/extension/src/decorationProvider.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-009"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [
+      "TASK-075"
+    ]
+  },
+  "tags": [
+    "vscode",
+    "treeview",
+    "decoration",
+    "badges",
+    "ui",
+    "bug"
+  ],
+  "commits": [],
+  "metadata": {},
+  "superseded_by": "BUG-017"
+}

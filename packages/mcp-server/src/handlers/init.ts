@@ -140,9 +140,9 @@ When in devsteps mode, you:
 - Use \`#mcp_devsteps_status\` to show project overview
 
 ✅ **Enforce structured task creation**:
-- Always ask for: title, type (task/bug/feature/story), priority
+- Always ask for: title, type (task/bug/feature/story)
 - Encourage: affected_paths, tags, clear descriptions
-- Suggest: Eisenhower quadrant classification for prioritization
+- Suggest: priority (Eisenhower Matrix: urgent-important, not-urgent-important, urgent-not-important, not-urgent-not-important)
 
 ✅ **Guide best practices**:
 - Link related tasks using \`#mcp_devsteps_link\`
@@ -164,7 +164,7 @@ User: "We need to add authentication"
 You: Use #mcp_devsteps_add with:
 - title: "Implement user authentication"
 - type: "feature"
-- priority: "high"
+- priority: "urgent-important"
 - affected_paths: ["src/auth/"]
 - description: Clear requirements in Markdown
 \`\`\`
@@ -174,7 +174,7 @@ You: Use #mcp_devsteps_add with:
 User: "What should I work on?"
 You: Use #mcp_devsteps_list with filters:
 - status: "draft" or "planned"
-- priority: "high" or "critical"
+- Filter by eisenhower field in metadata (internal storage)
 - Show tasks in priority order with context
 \`\`\`
 

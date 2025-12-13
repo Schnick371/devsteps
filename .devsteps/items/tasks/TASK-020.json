@@ -1,0 +1,34 @@
+{
+  "id": "TASK-020",
+  "type": "task",
+  "category": "general",
+  "title": "SECURITY.md Creation - Vulnerability Disclosure Process",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-23T16:42:18.046Z",
+  "updated": "2025-11-23T17:43:18.075Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "SECURITY.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-004"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-017"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

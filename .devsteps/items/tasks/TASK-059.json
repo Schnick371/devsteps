@@ -1,0 +1,36 @@
+{
+  "id": "TASK-059",
+  "type": "task",
+  "category": "vscode",
+  "title": "Enhance Activity Timeline - Filters, Search, Pagination",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-26T06:52:54.529Z",
+  "updated": "2025-11-26T06:53:04.406Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/dashboardPanel.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-017"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "timeline",
+    "activity",
+    "filters"
+  ],
+  "commits": [],
+  "metadata": {}
+}

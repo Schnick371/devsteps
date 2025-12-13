@@ -1,0 +1,39 @@
+{
+  "id": "BUG-024",
+  "type": "bug",
+  "category": "general",
+  "title": "Fix story file path - openItem uses naive pluralization",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-28T09:55:18.230Z",
+  "updated": "2025-12-01T10:48:00.567Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/commands/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-033"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "file-path",
+    "pluralization",
+    "story-items"
+  ],
+  "commits": [],
+  "metadata": {}
+}

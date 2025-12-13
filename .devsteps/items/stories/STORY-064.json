@@ -1,0 +1,34 @@
+{
+  "id": "STORY-064",
+  "type": "story",
+  "category": "general",
+  "title": "Schema & Data Migration - Remove Priority Field",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-05T16:29:33.128Z",
+  "updated": "2025-12-13T12:32:43.494Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-017"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-160",
+      "TASK-161",
+      "TASK-162"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

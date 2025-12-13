@@ -1,0 +1,45 @@
+{
+  "id": "STORY-051",
+  "type": "story",
+  "category": "Testing",
+  "title": "MCP Integration Tests with Node.js",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-02T14:56:08.675Z",
+  "updated": "2025-12-02T14:58:19.926Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "tests/integration/mcp/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-013"
+    ],
+    "implemented-by": [
+      "TASK-110",
+      "TASK-111",
+      "TASK-112",
+      "TASK-113"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-114"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "testing",
+    "mcp",
+    "nodejs",
+    "integration",
+    "http-api"
+  ],
+  "commits": [],
+  "metadata": {}
+}

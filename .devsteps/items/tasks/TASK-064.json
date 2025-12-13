@@ -1,0 +1,40 @@
+{
+  "id": "TASK-064",
+  "type": "task",
+  "category": "vscode",
+  "title": "Fix Activity Bar Icon Reference - Rename or Update package.json Path",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-26T07:00:18.541Z",
+  "updated": "2025-11-26T07:11:47.692Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/package.json",
+    "packages/extension/resources/icons/devcrumbs-activitybar.svg"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [
+      "TASK-066"
+    ],
+    "relates-to": [
+      "BUG-015"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "icon",
+    "activitybar",
+    "branding",
+    "fix"
+  ],
+  "commits": [],
+  "metadata": {}
+}

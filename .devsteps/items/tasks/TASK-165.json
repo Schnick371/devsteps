@@ -1,0 +1,28 @@
+{
+  "id": "TASK-165",
+  "type": "task",
+  "category": "general",
+  "title": "Test clean --priority flag",
+  "status": "cancelled",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-13T12:44:14.841Z",
+  "updated": "2025-12-13T12:44:23.316Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

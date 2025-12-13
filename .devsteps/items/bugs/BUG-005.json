@@ -1,0 +1,43 @@
+{
+  "id": "BUG-005",
+  "type": "bug",
+  "category": "general",
+  "title": "DevSteps Output Channel Empty - No Logging Output",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-11-24T11:56:42.059Z",
+  "updated": "2025-11-24T12:12:40.057Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/vscode-extension/src/outputChannel.ts",
+    "packages/vscode-extension/src/extension.ts",
+    "packages/vscode-extension/package.json"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-015",
+      "TASK-012",
+      "BUG-004"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "vscode",
+    "bug",
+    "logging",
+    "debugging"
+  ],
+  "commits": [],
+  "metadata": {}
+}

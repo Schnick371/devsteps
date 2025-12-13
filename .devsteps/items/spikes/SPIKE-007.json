@@ -1,0 +1,38 @@
+{
+  "id": "SPIKE-007",
+  "type": "spike",
+  "category": "research",
+  "title": "Research GitLens/GitKraken MCP Bundling Implementation",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-03T16:31:06.933Z",
+  "updated": "2025-12-03T16:43:20.142Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-015"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "STORY-056"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research",
+    "gitkraken",
+    "gitlens",
+    "mcp-server",
+    "architecture"
+  ],
+  "commits": [],
+  "metadata": {}
+}

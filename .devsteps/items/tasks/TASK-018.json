@@ -1,0 +1,34 @@
+{
+  "id": "TASK-018",
+  "type": "task",
+  "category": "general",
+  "title": "CODE_OF_CONDUCT.md Creation - Community Standards",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-11-23T16:42:18.046Z",
+  "updated": "2025-11-23T17:42:12.836Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "CODE_OF_CONDUCT.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-004"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-017"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

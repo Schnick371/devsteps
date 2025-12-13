@@ -1,0 +1,52 @@
+{
+  "id": "EPIC-018",
+  "type": "epic",
+  "category": "architecture",
+  "title": "Index Architecture Refactoring - Git-Inspired Refs Model",
+  "status": "draft",
+  "priority": "critical",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-13T13:23:35.887Z",
+  "updated": "2025-12-13T17:27:34.118Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "SPIKE-008"
+    ],
+    "implemented-by": [
+      "STORY-069",
+      "STORY-070",
+      "STORY-071",
+      "STORY-072",
+      "STORY-073",
+      "STORY-074",
+      "STORY-079"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-017",
+      "EPIC-012",
+      "STORY-041",
+      "STORY-040",
+      "STORY-077",
+      "STORY-075"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "architecture",
+    "refactoring",
+    "git-workflow",
+    "index",
+    "merge-conflicts"
+  ],
+  "commits": [],
+  "metadata": {}
+}

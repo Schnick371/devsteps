@@ -24,3 +24,27 @@ export {
   type BulkUpdateResult,
 } from './bulk-update.js';
 export { validateRelationship, type ValidationResult, type WorkItem } from './validation.js';
+
+// Refs-style index operations
+export * from './index-refs.js';
+
+// Auto-migration for external projects
+export {
+  checkMigrationNeeded,
+  ensureIndexMigrated,
+  getMigrationStatusMessage,
+  performMigration,
+  needsItemsDirectoryMigration,
+  migrateItemsDirectory,
+  ensureFullMigration,
+  type AutoMigrationOptions,
+  type MigrationCheckResult,
+  type MigrationStats,
+} from './auto-migrate.js';
+
+// Index rebuild operations
+export {
+  rebuildIndex,
+  type RebuildResult,
+  type RebuildOptions,
+} from './index-rebuild.js';
