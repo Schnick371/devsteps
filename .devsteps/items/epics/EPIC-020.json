@@ -1,28 +1,27 @@
 {
-  "id": "BUG-036",
-  "type": "bug",
+  "id": "EPIC-020",
+  "type": "epic",
   "category": "general",
-  "title": "Hierarchical view empty after items/ migration (STORY-079)",
+  "title": "Complete refs-style index migration across all packages",
   "status": "draft",
   "eisenhower": "urgent-important",
-  "created": "2025-12-13T22:36:29.307Z",
-  "updated": "2025-12-13T22:39:50.879Z",
+  "created": "2025-12-13T22:39:17.664Z",
+  "updated": "2025-12-13T22:40:12.062Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [
-    "packages/extension/src/treeView/nodes/hierarchyRootNode.ts"
-  ],
+  "affected_paths": [],
   "linked_items": {
     "implements": [],
     "implemented-by": [
-      "TASK-198"
+      "STORY-080",
+      "STORY-081",
+      "STORY-082"
     ],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "STORY-079",
-      "EPIC-020"
+      "BUG-036"
     ],
     "depends-on": [],
     "required-by": [],
@@ -30,11 +29,10 @@
     "superseded-by": []
   },
   "tags": [
-    "extension",
-    "treeview",
     "migration",
-    "regression",
-    "refs-index"
+    "index",
+    "architecture",
+    "breaking-change"
   ],
   "commits": [],
   "metadata": {}

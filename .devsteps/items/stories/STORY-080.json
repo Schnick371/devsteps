@@ -1,22 +1,24 @@
 {
-  "id": "TASK-198",
-  "type": "task",
+  "id": "STORY-080",
+  "type": "story",
   "category": "general",
-  "title": "Update HierarchyRootNode to use refs-style index",
+  "title": "Update Extension to use refs-style index",
   "status": "draft",
   "eisenhower": "urgent-important",
-  "created": "2025-12-13T22:37:13.908Z",
+  "created": "2025-12-13T22:39:57.781Z",
   "updated": "2025-12-13T22:40:16.673Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/extension/src/treeView/nodes/hierarchyRootNode.ts"
+    "packages/extension/src/treeView/**",
+    "packages/extension/src/mcp-server/handlers/**"
   ],
   "linked_items": {
     "implements": [
-      "BUG-036",
-      "STORY-080"
+      "EPIC-020"
     ],
-    "implemented-by": [],
+    "implemented-by": [
+      "TASK-198"
+    ],
     "tested-by": [],
     "tests": [],
     "blocks": [],
@@ -29,10 +31,8 @@
   },
   "tags": [
     "extension",
-    "treeview",
-    "bugfix",
-    "index",
-    "migration"
+    "migration",
+    "index"
   ],
   "commits": [],
   "metadata": {}
