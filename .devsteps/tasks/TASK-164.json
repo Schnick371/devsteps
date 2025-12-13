@@ -2,20 +2,15 @@
   "id": "TASK-164",
   "type": "task",
   "category": "general",
-  "title": "Add branch archiving to devsteps-start-work.prompt.md completion step",
-  "status": "done",
-  "priority": "medium",
+  "title": "Test --eisenhower deprecation",
+  "status": "cancelled",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-08T10:34:05.006Z",
-  "updated": "2025-12-08T10:39:29.568Z",
+  "created": "2025-12-13T12:42:28.573Z",
+  "updated": "2025-12-13T12:42:47.998Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [
-    ".github/prompts/git-workflow.instructions.md"
-  ],
+  "affected_paths": [],
   "linked_items": {
-    "implements": [
-      "STORY-070"
-    ],
+    "implements": [],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
@@ -27,10 +22,7 @@
     "supersedes": [],
     "superseded-by": []
   },
-  "tags": [
-    "documentation",
-    "git"
-  ],
+  "tags": [],
   "commits": [],
   "metadata": {}
 }

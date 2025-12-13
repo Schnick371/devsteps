@@ -3,7 +3,7 @@
   "counters": {
     "epic": 17,
     "story": 68,
-    "task": 162,
+    "task": 165,
     "bug": 31,
     "spike": 7,
     "feature": 5,
@@ -2072,9 +2072,9 @@
       "id": "TASK-160",
       "type": "task",
       "title": "Rename --eisenhower flag to --priority for better UX",
-      "status": "draft",
+      "status": "done",
       "priority": "medium",
-      "updated": "2025-12-12T20:34:41.452Z"
+      "updated": "2025-12-13T12:42:51.484Z"
     },
     {
       "id": "TASK-161",
@@ -2091,14 +2091,38 @@
       "status": "draft",
       "priority": "medium",
       "updated": "2025-12-13T12:32:11.768Z"
+    },
+    {
+      "id": "TASK-163",
+      "type": "task",
+      "title": "Test --priority flag",
+      "status": "cancelled",
+      "eisenhower": "urgent-important",
+      "updated": "2025-12-13T12:42:47.881Z"
+    },
+    {
+      "id": "TASK-164",
+      "type": "task",
+      "title": "Test --eisenhower deprecation",
+      "status": "cancelled",
+      "eisenhower": "not-urgent-important",
+      "updated": "2025-12-13T12:42:47.998Z"
+    },
+    {
+      "id": "TASK-165",
+      "type": "task",
+      "title": "Test clean --priority flag",
+      "status": "cancelled",
+      "eisenhower": "urgent-important",
+      "updated": "2025-12-13T12:44:23.316Z"
     }
   ],
   "stats": {
-    "total": 290,
+    "total": 293,
     "by_type": {
       "epic": 17,
       "story": 68,
-      "task": 162,
+      "task": 165,
       "bug": 31,
       "spike": 7,
       "feature": 5,
@@ -2106,11 +2130,12 @@
     },
     "by_status": {
       "in-progress": 5,
-      "done": 145,
-      "draft": 135,
+      "done": 146,
+      "draft": 134,
       "blocked": 2,
       "obsolete": 3,
-      "review": 0
+      "review": 0,
+      "cancelled": 3
     },
     "archived": 2
   },
@@ -2130,5 +2155,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-13T12:32:11.768Z"
+  "last_updated": "2025-12-13T12:44:23.316Z"
 }

@@ -2,19 +2,15 @@
   "id": "TASK-163",
   "type": "task",
   "category": "general",
-  "title": "Update CLI link command description",
-  "status": "draft",
-  "eisenhower": "not-urgent-important",
-  "created": "2025-12-05T15:53:29.961Z",
-  "updated": "2025-12-05T16:03:01.020Z",
+  "title": "Test --priority flag",
+  "status": "cancelled",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2025-12-13T12:42:24.836Z",
+  "updated": "2025-12-13T12:42:47.881Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [
-    "packages/cli/src/index.ts"
-  ],
+  "affected_paths": [],
   "linked_items": {
-    "implements": [
-      "STORY-063"
-    ],
+    "implements": [],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
@@ -26,10 +22,7 @@
     "supersedes": [],
     "superseded-by": []
   },
-  "tags": [
-    "cli",
-    "bug-hierarchy"
-  ],
+  "tags": [],
   "commits": [],
   "metadata": {}
 }

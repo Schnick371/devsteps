@@ -2,20 +2,15 @@
   "id": "TASK-165",
   "type": "task",
   "category": "general",
-  "title": "Update start-work prompt with branch cleanup workflow",
-  "status": "obsolete",
-  "priority": "medium",
-  "eisenhower": "not-urgent-important",
-  "created": "2025-12-08T10:34:19.698Z",
-  "updated": "2025-12-08T10:38:39.882Z",
+  "title": "Test clean --priority flag",
+  "status": "cancelled",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-13T12:44:14.841Z",
+  "updated": "2025-12-13T12:44:23.316Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [
-    ".github/prompts/devsteps-start-work.prompt.md"
-  ],
+  "affected_paths": [],
   "linked_items": {
-    "implements": [
-      "STORY-070"
-    ],
+    "implements": [],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
@@ -27,11 +22,7 @@
     "supersedes": [],
     "superseded-by": []
   },
-  "tags": [
-    "documentation",
-    "workflow"
-  ],
+  "tags": [],
   "commits": [],
-  "metadata": {},
-  "superseded_by": "TASK-164"
+  "metadata": {}
 }

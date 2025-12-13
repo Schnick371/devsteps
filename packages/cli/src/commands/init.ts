@@ -182,11 +182,11 @@ devsteps add bug "Error on page load"
 
 # List items
 devsteps list --status draft
-devsteps list --type story --eisenhower urgent-important
+devsteps list --type story --priority urgent-important
 
 # Update items
 devsteps update STORY-001 --status in-progress
-devsteps update TASK-005 --eisenhower urgent-important
+devsteps update TASK-005 --priority urgent-important
 
 # Get item details
 devsteps get STORY-001

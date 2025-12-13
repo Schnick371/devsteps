@@ -38,8 +38,8 @@ program
   .option('-d, --description <text>', 'Item description')
   .option('-c, --category <category>', 'Category/module')
   .option(
-    '-e, --eisenhower <quadrant>',
-    'Eisenhower: urgent-important|not-urgent-important|urgent-not-important|not-urgent-not-important'
+    '-p, --priority <quadrant>',
+    'Priority: urgent-important|not-urgent-important|urgent-not-important|not-urgent-not-important'
   )
   .option('-t, --tags <tags...>', 'Tags (space-separated)')
   .option('-a, --assignee <email>', 'Assignee email')
@@ -59,7 +59,7 @@ program
   .description('List items with optional filters')
   .option('-t, --type <type>', 'Filter by type: epic|story|task|req|feat|bug|spike|test')
   .option('-s, --status <status>', 'Filter by status')
-  .option('-e, --eisenhower <quadrant>', 'Filter by Eisenhower quadrant')
+  .option('-p, --priority <quadrant>', 'Filter by priority quadrant')
   .option('-a, --assignee <email>', 'Filter by assignee')
   .option('--tags <tags...>', 'Filter by tags')
   .option('--archived', 'Show archived items instead of active items')
@@ -72,7 +72,7 @@ program
   .description('Update an existing item')
   .argument('<id>', 'Item ID')
   .option('-s, --status <status>', 'New status')
-  .option('-e, --eisenhower <quadrant>', 'New Eisenhower quadrant')
+  .option('-p, --priority <quadrant>', 'New priority quadrant')
   .option('-t, --title <title>', 'New title')
   .option('-d, --description <text>', 'New description (replaces existing)')
   .option('--append-description <text>', 'Append to existing description (preserves content)')

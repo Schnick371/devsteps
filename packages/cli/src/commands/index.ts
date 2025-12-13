@@ -53,7 +53,7 @@ export async function addCommand(
       title,
       description: options.description,
       category: options.category,
-      eisenhower: (options as any).eisenhower,
+      eisenhower: (options as any).priority,
       tags: options.tags,
       affected_paths: options.paths,
       assignee: options.assignee,
@@ -64,8 +64,8 @@ export async function addCommand(
     if (options.tags && options.tags.length > 0) {
       console.log(chalk.gray('  Tags:'), options.tags.join(', '));
     }
-    if ((options as any).eisenhower) {
-      console.log(chalk.gray('  Eisenhower:'), (options as any).eisenhower);
+    if ((options as any).priority) {
+      console.log(chalk.gray('  Priority:'), (options as any).priority);
     }
 
     // Git hint
@@ -110,7 +110,7 @@ export async function getCommand(id: string) {
     console.log();
     console.log(chalk.gray('Status:'), metadata.status);
     if (metadata.eisenhower) {
-      console.log(chalk.gray('Eisenhower:'), metadata.eisenhower);
+      console.log(chalk.gray('Priority:'), metadata.eisenhower);
     }
     console.log(chalk.gray('Type:'), metadata.type);
     console.log(chalk.gray('Category:'), metadata.category);
@@ -162,14 +162,14 @@ export async function listCommand(options: any) {
 
     // Priority removed: use Eisenhower-only filtering
 
-    if (options.eisenhower && !options.archived) {
+    if (options.priority && !options.archived) {
       // Load full metadata for eisenhower filter (not available for archived summary)
       items = items.filter((i: any) => {
         const typeFolder = TYPE_TO_DIRECTORY[i.type as ItemType];
         const metadataPath = join(devstepsir, typeFolder, `${i.id}.json`);
         if (!existsSync(metadataPath)) return false;
         const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
-        return metadata.eisenhower === options.eisenhower;
+        return metadata.eisenhower === options.priority;
       });
     }
 
@@ -249,6 +249,7 @@ export async function updateCommand(id: string, options: any) {
 
     if (options.status) metadata.status = options.status;
     if (options.title) metadata.title = options.title;
+    if (options.priority) metadata.eisenhower = options.priority;
     if (options.assignee !== undefined) metadata.assignee = options.assignee;
     if (options.tags) metadata.tags = options.tags;
     if (options.paths) metadata.affected_paths = options.paths;
