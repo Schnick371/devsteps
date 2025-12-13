@@ -9,7 +9,6 @@
  */
 
 import { z } from 'zod';
-import { EisenhowerQuadrant, ItemStatus, ItemType } from './index.js';
 
 /**
  * Category index schema - base structure for all index files
@@ -29,21 +28,21 @@ export const CategoryIndexSchema = z.object({
  * Type index schema (by-type/*.json)
  */
 export const TypeIndexSchema = CategoryIndexSchema.extend({
-	category: ItemType,
+	category: z.enum(['epic', 'story', 'task', 'requirement', 'feature', 'bug', 'spike', 'test']),
 });
 
 /**
  * Status index schema (by-status/*.json)
  */
 export const StatusIndexSchema = CategoryIndexSchema.extend({
-	category: ItemStatus,
+	category: z.enum(['draft', 'planned', 'in-progress', 'review', 'done', 'obsolete', 'blocked', 'cancelled']),
 });
 
 /**
  * Priority index schema (by-priority/*.json)
  */
 export const PriorityIndexSchema = CategoryIndexSchema.extend({
-	category: EisenhowerQuadrant,
+	category: z.enum(['urgent-important', 'not-urgent-important', 'urgent-not-important', 'not-urgent-not-important']),
 });
 
 /**
