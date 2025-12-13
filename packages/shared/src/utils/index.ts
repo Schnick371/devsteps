@@ -114,6 +114,24 @@ export function generateItemId(
 }
 
 /**
+ * Get uppercase prefix from lowercase type name
+ * Used for consistent counter key generation
+ */
+export function getTypePrefix(type: string): string {
+  const prefixMap: Record<string, string> = {
+    epic: 'EPIC',
+    story: 'STORY',
+    task: 'TASK',
+    requirement: 'REQ',
+    feature: 'FEAT',
+    bug: 'BUG',
+    spike: 'SPIKE',
+    test: 'TEST',
+  };
+  return prefixMap[type] || 'ITEM';
+}
+
+/**
  * Parses an item ID into type and number
  */
 export function parseItemId(id: string): { type: ItemType; number: number } | null {
