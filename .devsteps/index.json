@@ -1981,8 +1981,8 @@
       "id": "TASK-156",
       "type": "task",
       "title": "Update expansion state tracking for unique TreeView IDs",
-      "status": "draft",
-      "updated": "2025-12-05T10:38:32.911Z"
+      "status": "done",
+      "updated": "2025-12-13T23:30:59.623Z"
     },
     {
       "id": "TASK-157",
@@ -2178,8 +2178,8 @@
     },
     "by_status": {
       "in-progress": 5,
-      "done": 150,
-      "draft": 139,
+      "done": 151,
+      "draft": 138,
       "blocked": 2,
       "obsolete": 3,
       "review": 0
@@ -2202,5 +2202,5 @@
       "original_status": "draft"
     }
   ],
-  "last_updated": "2025-12-13T23:09:47.245Z"
+  "last_updated": "2025-12-13T23:30:59.623Z"
 }

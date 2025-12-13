@@ -25,11 +25,27 @@ export class WorkItemNode extends TreeNode {
     super();
   }
 
+  /**
+   * Get simple item ID for expansion state tracking
+   * Returns the basic item ID (e.g., "EPIC-008") which is used to track
+   * expansion state across all contexts where this item appears.
+   * 
+   * This ensures expansion state survives context changes - if an item
+   * is expanded in one location, it will be expanded everywhere.
+   */
   getId(): string {
     return this.item.id;
   }
 
-  private generateUniqueId(): string {
+  /**
+   * Get unique TreeView ID for VS Code TreeView registration
+   * Returns a context-aware unique ID (e.g., "hierarchy-root-EPIC-008" or
+   * "EPIC-008-implemented-by-STORY-001") used for TreeView item registration.
+   * 
+   * This prevents VS Code "Element already registered" errors when the same
+   * item appears in multiple contexts (root, child, relationship).
+   */
+  getTreeViewId(): string {
     if (!this.parentId) {
       // Root level items
       return `hierarchy-root-${this.item.id}`;
@@ -58,7 +74,7 @@ export class WorkItemNode extends TreeNode {
 
     const treeItem = new vscode.TreeItem(`${this.item.id}: ${this.item.title}`, collapsibleState);
 
-    treeItem.id = this.generateUniqueId();
+    treeItem.id = this.getTreeViewId();
     treeItem.contextValue = 'workItem';
     treeItem.iconPath = this.getIcon();
     treeItem.description = undefined;
