@@ -1,0 +1,37 @@
+{
+  "id": "SPIKE-011",
+  "type": "spike",
+  "category": "general",
+  "title": "Predictive Refactoring Advisor - Hotspot Detection",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-15T10:21:24.751Z",
+  "updated": "2025-12-15T10:22:43.235Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-021"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "SPIKE-009"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research",
+    "predictive-analytics",
+    "hotspot-detection",
+    "behavioral-analysis"
+  ],
+  "commits": [],
+  "metadata": {}
+}
