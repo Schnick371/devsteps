@@ -143,11 +143,12 @@ export async function getCommand(id: string) {
 export async function listCommand(options: any) {
   try {
     const devstepsir = getDevStepsDir();
-    const indexPath = join(devstepsir, 'index.json');
-    const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
-
-    // Choose between active and archived items
-    let items = options.archived ? index.archived_items || [] : index.items;
+    
+    // Use new index-refs API
+    const itemsResult = await listItems(devstepsir, {});
+    let items = itemsResult.items;
+    
+    // TODO: Archived items support needs separate implementation
 
     if (options.type) {
       const itemType = TYPE_SHORTCUTS[options.type] || options.type;
@@ -185,13 +186,12 @@ export async function listCommand(options: any) {
 
     for (const item of items) {
       if (options.archived) {
-        // Archived items display
-        const archivedDate = new Date(item.archived_at).toLocaleDateString();
+        // TODO: Archived items need separate implementation with archive metadata
         console.log(
           chalk.cyan(item.id),
-          chalk.gray(`[${item.original_status}]`),
+          chalk.gray(`[${item.status}]`),
           item.title,
-          chalk.dim(`(archived ${archivedDate})`)
+          chalk.dim('(archived)')
         );
       } else {
         // Active items display
