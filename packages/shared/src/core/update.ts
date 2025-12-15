@@ -9,6 +9,7 @@ import type {
 import { STATUS, RELATIONSHIP_TYPE } from '../constants/index.js';
 import { TYPE_TO_DIRECTORY, getCurrentTimestamp, parseItemId } from '../utils/index.js';
 import { hasRefsStyleIndex, updateItemInIndex } from './index-refs.js';
+import { getItem } from './get.js';
 
 export interface UpdateItemArgs {
   id: string;
@@ -53,26 +54,26 @@ export async function updateItem(
   }
 
   // Read and update metadata
-  const metadata: ItemMetadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+  const { metadata } = await getItem(devstepsir, args.id);
   const oldStatus = metadata.status;
 
   // Validate status transitions (parent-child rules)
   if (args.status === STATUS.DONE) {
     // Helper function to validate children are complete
-    const validateChildren = (relationshipType: typeof RELATIONSHIP_TYPE.IMPLEMENTED_BY | typeof RELATIONSHIP_TYPE.TESTED_BY): void => {
+    const validateChildren = async (relationshipType: typeof RELATIONSHIP_TYPE.IMPLEMENTED_BY | typeof RELATIONSHIP_TYPE.TESTED_BY): Promise<void> => {
       const children = metadata.linked_items[relationshipType];
       if (children.length > 0) {
         const openChildren: string[] = [];
         for (const childId of children) {
           const childParsed = parseItemId(childId);
           if (childParsed) {
-            const childFolder = TYPE_TO_DIRECTORY[childParsed.type];
-            const childPath = join(devstepsir, childFolder, `${childId}.json`);
-            if (existsSync(childPath)) {
-              const childMeta: ItemMetadata = JSON.parse(readFileSync(childPath, 'utf-8'));
+            try {
+              const { metadata: childMeta } = await getItem(devstepsir, childId);
               if (childMeta.status !== STATUS.DONE && childMeta.status !== STATUS.CANCELLED && childMeta.status !== STATUS.OBSOLETE) {
                 openChildren.push(childId);
               }
+            } catch {
+              // Child not found - skip
             }
           }
         }
@@ -87,12 +88,12 @@ export async function updateItem(
 
     // Validate implemented-by children (Scrum: Epic→Story/Spike, Story→Task, Bug→Task; Waterfall: Requirement→Feature/Spike, Feature→Task, Bug→Task)
     if (['epic', 'story', 'requirement', 'feature', 'bug'].includes(metadata.type)) {
-      validateChildren(RELATIONSHIP_TYPE.IMPLEMENTED_BY);
+      await validateChildren(RELATIONSHIP_TYPE.IMPLEMENTED_BY);
     }
 
     // Validate tested-by children (all parent types must have tests complete)
     if (['epic', 'story', 'requirement', 'feature'].includes(metadata.type)) {
-      validateChildren(RELATIONSHIP_TYPE.TESTED_BY);
+      await validateChildren(RELATIONSHIP_TYPE.TESTED_BY);
     }
   }
 

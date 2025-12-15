@@ -20,6 +20,7 @@ import {
   addItemToIndex,
   loadLegacyIndex,
 } from './index-refs.js';
+import { getConfig } from './config.js';
 
 export interface AddItemArgs {
   type: ItemType;
@@ -49,8 +50,7 @@ export async function addItem(devstepsir: string, args: AddItemArgs): Promise<Ad
   }
 
   // Read config and index
-  const configPath = join(devstepsir, 'config.json');
-  const config: DevStepsConfig = JSON.parse(readFileSync(configPath, 'utf-8'));
+  const config = await getConfig(devstepsir);
 
   // Get counter - try refs-style first, fallback to legacy
   let counter: number;

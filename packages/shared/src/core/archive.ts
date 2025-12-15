@@ -2,6 +2,7 @@ import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from '
 import { join } from 'node:path';
 import type { DevStepsIndex, ItemStatus } from '../schemas/index.js';
 import { TYPE_TO_DIRECTORY, getCurrentTimestamp, parseItemId } from '../utils/index.js';import { hasRefsStyleIndex, removeItemFromIndex } from './index-refs.js';
+import { getItem } from './get.js';
 export interface ArchiveItemResult {
   itemId: string;
   archivedAt: string;
@@ -30,7 +31,7 @@ export async function archiveItem(devstepsir: string, itemId: string): Promise<A
   }
 
   // Read metadata
-  const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+  const { metadata } = await getItem(devstepsir, itemId);
   const originalStatus = metadata.status;
 
   // Create archive directory if not exists

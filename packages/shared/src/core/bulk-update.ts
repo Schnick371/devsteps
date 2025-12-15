@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import type { ItemMetadata, ItemStatus } from '../schemas/index.js';
 import { getCurrentTimestamp } from '../utils/index.js';
 import { updateItem } from './update.js';
+import { getItem } from './get.js';
 
 export interface BulkUpdateResult {
   success: string[];
@@ -80,7 +81,7 @@ export async function bulkAddTags(
         throw new Error(`Item ${id} not found`);
       }
 
-      const metadata: ItemMetadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+      const { metadata } = await getItem(devstepsir, id);
 
       // Add new tags (avoid duplicates)
       const existingTags = new Set(metadata.tags);
@@ -149,7 +150,7 @@ export async function bulkRemoveTags(
         throw new Error(`Item ${id} not found`);
       }
 
-      const metadata: ItemMetadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+      const { metadata } = await getItem(devstepsir, id);
 
       // Remove tags
       metadata.tags = metadata.tags.filter((tag) => !tagsToRemove.includes(tag));
