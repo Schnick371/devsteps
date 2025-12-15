@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { type Methodology, getCurrentTimestamp, getMethodologyConfig } from '@schnick371/devsteps-shared';
+import { type Methodology, getCurrentTimestamp, getMethodologyConfig, initializeRefsStyleIndex } from '@schnick371/devsteps-shared';
 import type { DevStepsConfig } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 import ora from 'ora';
@@ -62,18 +62,13 @@ export async function initCommand(
 
     writeFileSync(join(devstepsDir, 'config.json'), JSON.stringify(config, null, 2));
 
-    // Create index
-    const index = {
-      items: [],
-      last_updated: getCurrentTimestamp(),
-      stats: {
-        total: 0,
-        by_type: {},
-        by_status: {},
-      },
-    };
-
-    writeFileSync(join(devstepsDir, 'index.json'), JSON.stringify(index, null, 2));
+    // Initialize refs-style index structure with counters for all item types
+    const counters: Record<string, number> = {};
+    for (const type of methodologyConfig.item_types) {
+      counters[type] = 0;
+    }
+    
+    initializeRefsStyleIndex(devstepsDir, counters);
 
     // Create .gitignore
     const gitignore = `.devsteps/
@@ -156,14 +151,20 @@ After setup:
 ${name}/
 ├── .devsteps/          # DevSteps data directory
 │   ├── config.json   # Project configuration
-│   ├── index.json    # Master index
-│   ├── epics/        # Epic items
-│   ├── stories/      # Story items
-│   ├── tasks/        # Task items
-│   ├── requirements/ # Requirements
-│   ├── features/     # Features
-│   ├── bugs/         # Bug reports
-│   ├── tests/        # Test items
+│   ├── index/        # Refs-style distributed index
+│   │   ├── by-type/      # Type indexes (epics.json, stories.json, ...)
+│   │   ├── by-status/    # Status indexes (draft.json, done.json, ...)
+│   │   ├── by-priority/  # Priority indexes (urgent-important.json, ...)
+│   │   └── counters.json # ID generation counters
+│   ├── items/        # Item files (source of truth)
+│   │   ├── epics/        # Epic items
+│   │   ├── stories/      # Story items
+│   │   ├── tasks/        # Task items
+│   │   ├── requirements/ # Requirements
+│   │   ├── features/     # Features
+│   │   ├── bugs/         # Bug reports
+│   │   ├── tests/        # Test items
+│   │   └── spikes/       # Research spikes
 │   └── archive/      # Archived items
 └── .vscode/
     ├── tasks.json    # VS Code tasks
