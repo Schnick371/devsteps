@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
 import type { ItemType } from '@schnick371/devsteps-shared';
-import { TYPE_TO_DIRECTORY } from '@schnick371/devsteps-shared';
+import { TYPE_TO_DIRECTORY, listItems } from '@schnick371/devsteps-shared';
 
 /**
  * Search items by query
@@ -43,22 +43,18 @@ export default async function searchHandler(args: {
       return lowerText.includes(query);
     };    
     
-    // Read config to get available item types
+    // Use new index-refs API (listItems not needed for search - we read directly from files)
     const configPath = join(devstepsDir, 'config.json');
-    const indexPath = join(devstepsDir, 'index.json');
-
     const config = JSON.parse(readFileSync(configPath, 'utf-8'));
-    const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
 
-    const results: any[] = [];    
+    const results: any[] = [];
     
-    // Determine folders to search
     const folders = args.type
       ? [TYPE_TO_DIRECTORY[args.type]]
       : config.settings.item_types.map((t: ItemType) => TYPE_TO_DIRECTORY[t]);
 
     for (const folder of folders) {
-      const folderPath = join(devstepsDir, folder);
+      const folderPath = join(devstepsDir, 'items', folder);
       if (!existsSync(folderPath)) continue;
 
       const files = readdirSync(folderPath).filter((f) => f.endsWith('.json'));
