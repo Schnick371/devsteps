@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
 import type { ItemType } from '@schnick371/devsteps-shared';
-import { TYPE_TO_DIRECTORY, listItems } from '@schnick371/devsteps-shared';
+import { TYPE_TO_DIRECTORY, listItems, getItem } from '@schnick371/devsteps-shared';
 
 /**
  * Export project data
@@ -44,17 +44,13 @@ export default async function exportHandler(args: {
     stats.by_status[item.status] = (stats.by_status[item.status] || 0) + 1;
   }
 
-  // Load full metadata and descriptions
-  const fullItems = items.map((item: any) => {
-    const typeFolder = TYPE_TO_DIRECTORY[item.type as ItemType];
-    const metadataPath = join(devstepsDir, typeFolder, `${item.id}.json`);
-    const descriptionPath = join(devstepsDir, typeFolder, `${item.id}.md`);
-
-    const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
-    const description = existsSync(descriptionPath) ? readFileSync(descriptionPath, 'utf-8') : '';
-
-    return { ...metadata, description };
-  });
+  // Load full metadata and descriptions using shared getItem()
+  const fullItems = await Promise.all(
+    items.map(async (item: any) => {
+      const { metadata, description } = await getItem(devstepsDir, item.id);
+      return { ...metadata, description };
+    })
+  );
 
   let output: string;
   let filename: string;

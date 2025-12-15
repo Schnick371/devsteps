@@ -62,9 +62,8 @@ export async function contextStatsCommand() {
   }
 
   // Config info
-  const configPath = join(devstepsir, 'config.json');
-  if (existsSync(configPath)) {
-    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+  if (existsSync(join(devstepsir, 'config.json'))) {
+    const config = JSON.parse(readFileSync(join(devstepsir, 'config.json'), 'utf-8'));
     const daysSinceInit = Math.floor(
       (Date.now() - new Date(config.created).getTime()) / (1000 * 60 * 60 * 24)
     );

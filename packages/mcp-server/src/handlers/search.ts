@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
 import type { ItemType } from '@schnick371/devsteps-shared';
-import { TYPE_TO_DIRECTORY, listItems } from '@schnick371/devsteps-shared';
+import { TYPE_TO_DIRECTORY, listItems, getItem } from '@schnick371/devsteps-shared';
 
 /**
  * Search items by query
@@ -43,28 +43,18 @@ export default async function searchHandler(args: {
       return lowerText.includes(query);
     };    
     
-    // Use new index-refs API (listItems not needed for search - we read directly from files)
-    const configPath = join(devstepsDir, 'config.json');
-    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    // Use listItems() with optional type filter, then load full metadata
+    const filterArgs: any = {};
+    if (args.type) {
+      filterArgs.type = args.type;
+    }
+    const { items } = await listItems(devstepsDir, filterArgs);
 
     const results: any[] = [];
-    
-    const folders = args.type
-      ? [TYPE_TO_DIRECTORY[args.type]]
-      : config.settings.item_types.map((t: ItemType) => TYPE_TO_DIRECTORY[t]);
 
-    for (const folder of folders) {
-      const folderPath = join(devstepsDir, folder);
-      if (!existsSync(folderPath)) continue;
-
-      const files = readdirSync(folderPath).filter((f) => f.endsWith('.json'));
-
-      for (const file of files) {
-      const metadataPath = join(folderPath, file);
-      const descriptionPath = metadataPath.replace('.json', '.md');
-
-      const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
-      const description = existsSync(descriptionPath) ? readFileSync(descriptionPath, 'utf-8') : '';
+    // Load full metadata + description for each item
+    for (const itemSummary of items) {
+      const { metadata, description } = await getItem(devstepsDir, itemSummary.id);
 
       // Search in title, description, and tags
       const titleMatch = matches(metadata.title);
@@ -84,17 +74,12 @@ export default async function searchHandler(args: {
       }
     }
 
-    if (args.limit && results.length >= args.limit) {
-      break;
-    }
-  }
-
-  return {
-    success: true,
-    query: args.query,
-    count: results.length,
-    results,
-  };
+    return {
+      success: true,
+      query: args.query,
+      count: results.length,
+      results,
+    };
   } catch (error) {
     return {
       success: false,

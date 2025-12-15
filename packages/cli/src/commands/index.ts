@@ -12,6 +12,8 @@ import {
   parseItemId,
   validateRelationship,
   listItems,
+  getItem,
+  updateItem,
   updateItemInIndex,
 } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
@@ -23,12 +25,18 @@ function getDevStepsDir(): string {
     console.error(
       chalk.red('Error:'),
       'Project not initialized. Run',
-      chalk.cyan('devstepsinit'),
+      chalk.cyan('devsteps init'),
       'first.'
     );
     process.exit(1);
   }
   return dir;
+}
+
+// Helper: Load config (centralized to avoid duplication)
+function loadConfig(devstepsDir: string): any {
+  const configPath = join(devstepsDir, 'config.json');
+  return JSON.parse(readFileSync(configPath, 'utf-8'));
 }
 
 export async function addCommand(
@@ -71,8 +79,7 @@ export async function addCommand(
     }
 
     // Git hint
-    const configPath = join(devstepsir, 'config.json');
-    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    const config = loadConfig(devstepsir);
     if (config.settings.git_integration) {
       console.log(
         chalk.gray('\n💡 Git:'),
@@ -88,24 +95,9 @@ export async function addCommand(
 export async function getCommand(id: string) {
   try {
     const devstepsir = getDevStepsDir();
-    const parsed = parseItemId(id);
-
-    if (!parsed) {
-      console.error(chalk.red('Error:'), 'Invalid item ID:', id);
-      process.exit(1);
-    }
-
-    const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
-    const metadataPath = join(devstepsir, typeFolder, `${id}.json`);
-    const descriptionPath = join(devstepsir, typeFolder, `${id}.md`);
-
-    if (!existsSync(metadataPath)) {
-      console.error(chalk.red('Error:'), 'Item not found:', id);
-      process.exit(1);
-    }
-
-    const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
-    const description = existsSync(descriptionPath) ? readFileSync(descriptionPath, 'utf-8') : '';
+    
+    // Use shared core logic (throws on error)
+    const { metadata, description } = await getItem(devstepsir, id);
 
     console.log();
     console.log(chalk.bold.cyan(`${metadata.id}: ${metadata.title}`));
@@ -222,53 +214,20 @@ export async function updateCommand(id: string, options: any) {
     }
     
     const devstepsir = getDevStepsDir();
-    const parsed = parseItemId(id);
-
-    if (!parsed) {
-      spinner.fail('Invalid item ID');
-      process.exit(1);
-    }
-
-    const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
-    const metadataPath = join(devstepsir, typeFolder, `${id}.json`);
-    const descriptionPath = join(devstepsir, typeFolder, `${id}.md`);
-
-    if (!existsSync(metadataPath)) {
-      spinner.fail('Item not found');
-      process.exit(1);
-    }
-
-    const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
-    const oldStatus = metadata.status;
-
-    if (options.status) metadata.status = options.status;
-    if (options.title) metadata.title = options.title;
-    if (options.priority) metadata.eisenhower = options.priority;
-    if (options.assignee !== undefined) metadata.assignee = options.assignee;
-    if (options.tags) metadata.tags = options.tags;
-    if (options.paths) metadata.affected_paths = options.paths;
-    if (options.supersededBy !== undefined) metadata.superseded_by = options.supersededBy;
-
-    metadata.updated = getCurrentTimestamp();
-
-    writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
-
-    // Handle description updates
-    if (options.description) {
-      // Replace entire description
-      writeFileSync(descriptionPath, options.description);
-    } else if (options.appendDescription) {
-      // Append to existing (or create new)
-      const existing = existsSync(descriptionPath) 
-        ? readFileSync(descriptionPath, 'utf-8') 
-        : '';
-      writeFileSync(descriptionPath, existing + options.appendDescription);
-    }
-
-    // Update refs-style index (handles type/status/priority changes)
-    if (options.status && oldStatus !== options.status) {
-      updateItemInIndex(devstepsir, metadata);
-    }
+    
+    // Use shared core logic (throws on error)
+    const { metadata } = await updateItem(devstepsir, {
+      id,
+      status: options.status,
+      title: options.title,
+      eisenhower: options.priority,
+      assignee: options.assignee,
+      tags: options.tags,
+      affected_paths: options.paths,
+      superseded_by: options.supersededBy,
+      description: options.description,
+      append_description: options.appendDescription,
+    });
 
     spinner.succeed(`Updated ${chalk.cyan(id)}`);
 
@@ -284,8 +243,7 @@ export async function updateCommand(id: string, options: any) {
     }
 
     // Git hints and status progression guidance
-    const configPath = join(devstepsir, 'config.json');
-    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    const config = loadConfig(devstepsir);
     if (config.settings.git_integration) {
       if (options.status === STATUS.DONE) {
         console.log(chalk.green('\n✅ Quality gates passed!'));
@@ -354,30 +312,20 @@ export async function linkCommand(
   try {
     const devstepsir = getDevStepsDir();
 
+    // Use shared getItem() instead of manual parsing
+    const { metadata: sourceMetadata } = await getItem(devstepsir, sourceId);
+    const { metadata: targetMetadata } = await getItem(devstepsir, targetId);
+
+    // Get paths for writing updates
     const sourceParsed = parseItemId(sourceId);
     const targetParsed = parseItemId(targetId);
-
-    if (!sourceParsed || !targetParsed) {
-      spinner.fail('Invalid item ID(s)');
-      process.exit(1);
-    }
-
-    const sourceFolder = TYPE_TO_DIRECTORY[sourceParsed.type];
-    const targetFolder = TYPE_TO_DIRECTORY[targetParsed.type];
+    const sourceFolder = TYPE_TO_DIRECTORY[sourceParsed!.type];
+    const targetFolder = TYPE_TO_DIRECTORY[targetParsed!.type];
     const sourcePath = join(devstepsir, sourceFolder, `${sourceId}.json`);
     const targetPath = join(devstepsir, targetFolder, `${targetId}.json`);
 
-    if (!existsSync(sourcePath) || !existsSync(targetPath)) {
-      spinner.fail('Item(s) not found');
-      process.exit(1);
-    }
-
-    const sourceMetadata = JSON.parse(readFileSync(sourcePath, 'utf-8'));
-    const targetMetadata = JSON.parse(readFileSync(targetPath, 'utf-8'));
-
     // Load project config for methodology
-    const configPath = join(devstepsir, 'config.json');
-    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    const config = loadConfig(devstepsir);
     const methodology: Methodology = config.settings?.methodology || 'hybrid';
 
     // Validate relationship (unless --force)
@@ -402,8 +350,8 @@ export async function linkCommand(
       spinner.text = 'Creating link (validation overridden)...';
     }
 
-    if (!sourceMetadata.linked_items[relation].includes(targetId)) {
-      sourceMetadata.linked_items[relation].push(targetId);
+    if (!sourceMetadata.linked_items[relation as keyof typeof sourceMetadata.linked_items].includes(targetId)) {
+      sourceMetadata.linked_items[relation as keyof typeof sourceMetadata.linked_items].push(targetId);
       sourceMetadata.updated = getCurrentTimestamp();
       writeFileSync(sourcePath, JSON.stringify(sourceMetadata, null, 2));
     }
@@ -424,8 +372,8 @@ export async function linkCommand(
 
     const inverseRelation = inverseRelations[relation];
     if (inverseRelation) {
-      if (!targetMetadata.linked_items[inverseRelation].includes(sourceId)) {
-        targetMetadata.linked_items[inverseRelation].push(sourceId);
+      if (!targetMetadata.linked_items[inverseRelation as keyof typeof targetMetadata.linked_items].includes(sourceId)) {
+        targetMetadata.linked_items[inverseRelation as keyof typeof targetMetadata.linked_items].push(sourceId);
         targetMetadata.updated = getCurrentTimestamp();
         writeFileSync(targetPath, JSON.stringify(targetMetadata, null, 2));
       }
@@ -449,44 +397,32 @@ export async function searchCommand(query: string, options: any) {
     const queryLower = query.toLowerCase();
     const results: any[] = [];
 
-    // Read config to get item types
-    const configPath = join(devstepsir, 'config.json');
-    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    // Use listItems() with optional type filter
+    const filterArgs: any = {};
+    if (options.type) {
+      filterArgs.type = TYPE_SHORTCUTS[options.type] || options.type;
+    }
+    const { items } = await listItems(devstepsir, filterArgs);
 
-    const folders = options.type
-      ? [TYPE_TO_DIRECTORY[TYPE_SHORTCUTS[options.type] || (options.type as ItemType)]]
-      : config.settings.item_types.map((t: ItemType) => TYPE_TO_DIRECTORY[t]);
+    // Search through items (need to load full metadata for tags and description)
+    for (const itemSummary of items) {
+      // Load full metadata including tags and description
+      const { metadata, description } = await getItem(devstepsir, itemSummary.id);
 
-    for (const folder of folders) {
-      const folderPath = join(devstepsir, folder);
-      if (!existsSync(folderPath)) continue;
+      const titleMatch = metadata.title.toLowerCase().includes(queryLower);
+      const descMatch = description.toLowerCase().includes(queryLower);
+      const tagMatch = metadata.tags.some((tag: string) =>
+        tag.toLowerCase().includes(queryLower)
+      );
 
-      const files = readdirSync(folderPath).filter((f) => f.endsWith('.json'));
+      if (titleMatch || descMatch || tagMatch) {
+        results.push({
+          ...metadata,
+          match_type: titleMatch ? 'title' : descMatch ? 'description' : 'tag',
+        });
 
-      for (const file of files) {
-        const metadataPath = join(folderPath, file);
-        const descriptionPath = metadataPath.replace('.json', '.md');
-
-        const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
-        const description = existsSync(descriptionPath)
-          ? readFileSync(descriptionPath, 'utf-8')
-          : '';
-
-        const titleMatch = metadata.title.toLowerCase().includes(queryLower);
-        const descMatch = description.toLowerCase().includes(queryLower);
-        const tagMatch = metadata.tags.some((tag: string) =>
-          tag.toLowerCase().includes(queryLower)
-        );
-
-        if (titleMatch || descMatch || tagMatch) {
-          results.push({
-            ...metadata,
-            match_type: titleMatch ? 'title' : descMatch ? 'description' : 'tag',
-          });
-
-          const limit = Number.parseInt(options.limit, 10);
-          if (limit > 0 && results.length >= limit) break;
-        }
+        const limit = Number.parseInt(options.limit, 10);
+        if (limit > 0 && results.length >= limit) break;
       }
     }
 
@@ -514,8 +450,7 @@ export async function searchCommand(query: string, options: any) {
 export async function statusCommand(options: any) {
   try {
     const devstepsir = getDevStepsDir();
-    const configPath = join(devstepsir, 'config.json');
-    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    const config = loadConfig(devstepsir);
     
     // Use new index-refs API
     const itemsResult = await listItems(devstepsir, {});
@@ -600,39 +535,37 @@ export async function traceCommand(id: string, options: any) {
     const devstepsir = getDevStepsDir();
     const maxDepth = Number.parseInt(options.depth, 10) || 3;
 
-    function traceItem(itemId: string, depth: number, prefix = ''): void {
+    async function traceItem(itemId: string, depth: number, prefix = ''): Promise<void> {
       if (depth > maxDepth) return;
 
-      const parsed = parseItemId(itemId);
-      if (!parsed) return;
-
-      const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
-      const metadataPath = join(devstepsir, typeFolder, `${itemId}.json`);
-
-      if (!existsSync(metadataPath)) return;
-
-      const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+      // Use shared getItem() instead of manual parsing
+      try {
+        const { metadata } = await getItem(devstepsir, itemId);
 
       console.log(
         `${prefix}${chalk.cyan(metadata.id)} ${chalk.gray(`[${metadata.status}]`)} ${metadata.title}`
       );
 
-      if (depth < maxDepth) {
-        for (const [relType, linkedIds] of Object.entries(metadata.linked_items)) {
-          if (Array.isArray(linkedIds) && linkedIds.length > 0) {
-            console.log(`${prefix}  ${chalk.yellow(`--${relType}-->`)}`);
-            for (const linkedId of linkedIds) {
-              traceItem(linkedId as string, depth + 1, `${prefix}    `);
+        if (depth < maxDepth) {
+          for (const [relType, linkedIds] of Object.entries(metadata.linked_items)) {
+            if (Array.isArray(linkedIds) && linkedIds.length > 0) {
+              console.log(`${prefix}  ${chalk.yellow(`--${relType}-->`)}`);
+              for (const linkedId of linkedIds) {
+                await traceItem(linkedId as string, depth + 1, `${prefix}    `);
+              }
             }
           }
         }
+      } catch (error) {
+        // Silently skip items that don't exist
+        return;
       }
     }
 
     console.log();
     console.log(chalk.bold('Traceability Tree:'));
     console.log();
-    traceItem(id, 0);
+    await traceItem(id, 0);
     console.log();
   } catch (error: any) {
     console.error(chalk.red('Error:'), error.message);

@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
 import type { ItemType } from '@schnick371/devsteps-shared';
-import { TYPE_TO_DIRECTORY } from '@schnick371/devsteps-shared';
+import { TYPE_TO_DIRECTORY, listItems, getItem } from '@schnick371/devsteps-shared';
 
 /**
  * Export project data
@@ -20,34 +20,42 @@ export default async function exportHandler(args: {
   }
 
   const configPath = join(devstepsDir, 'config.json');
-  const indexPath = join(devstepsDir, 'index.json');
-
   const config = JSON.parse(readFileSync(configPath, 'utf-8'));
-  const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
+
+  // Use listItems() with optional type filter
+  const itemsResult = await listItems(devstepsDir, {});
+  let items = itemsResult.items;
 
   // Filter items by type if specified
-  let items = index.items;
   if (args.include_types && args.include_types.length > 0) {
     items = items.filter((i: any) => args.include_types!.includes(i.type));
   }
 
-  // Load full metadata and descriptions
-  const fullItems = items.map((item: any) => {
-    const typeFolder = TYPE_TO_DIRECTORY[item.type as ItemType];
-    const metadataPath = join(devstepsDir, typeFolder, `${item.id}.json`);
-    const descriptionPath = join(devstepsDir, typeFolder, `${item.id}.md`);
+  // Load full metadata and descriptions using shared getItem()
+  const fullItems = await Promise.all(
+    items.map(async (item: any) => {
+      const { metadata, description } = await getItem(devstepsDir, item.id);
+      return { ...metadata, description };
+    })
+  );
 
-    const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
-    const description = existsSync(descriptionPath) ? readFileSync(descriptionPath, 'utf-8') : '';
-
-    return { ...metadata, description };
-  });
+  // Calculate stats from items
+  const stats = {
+    total: fullItems.length,
+    by_type: {} as Record<string, number>,
+    by_status: {} as Record<string, number>,
+  };
+  
+  for (const item of fullItems) {
+    stats.by_type[item.type] = (stats.by_type[item.type] || 0) + 1;
+    stats.by_status[item.status] = (stats.by_status[item.status] || 0) + 1;
+  }
 
   let output: string;
   let filename: string;
 
   if (args.format === 'markdown') {
-    output = generateMarkdown(config, index.stats, fullItems);
+    output = generateMarkdown(config, stats, fullItems);
     filename = args.output_path || 'devsteps-export.md';
   } else if (args.format === 'html') {
     output = generateHTML(config, index.stats, fullItems);

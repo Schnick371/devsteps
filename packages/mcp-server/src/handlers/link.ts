@@ -8,6 +8,7 @@ import {
   getCurrentTimestamp,
   parseItemId,
   validateRelationship,
+  getItem,
 } from '@schnick371/devsteps-shared';
 
 /**
@@ -65,8 +66,8 @@ export default async function linkHandler(args: {
         methodology: methodology,
       };
     }    // Update source item
-    if (!sourceMetadata.linked_items[args.relation_type].includes(args.target_id)) {
-      sourceMetadata.linked_items[args.relation_type].push(args.target_id);
+    if (!sourceMetadata.linked_items[args.relation_type as keyof typeof sourceMetadata.linked_items].includes(args.target_id)) {
+      sourceMetadata.linked_items[args.relation_type as keyof typeof sourceMetadata.linked_items].push(args.target_id);
       sourceMetadata.updated = getCurrentTimestamp();
       writeFileSync(sourcePath, JSON.stringify(sourceMetadata, null, 2));
     }    // Create inverse relationship
