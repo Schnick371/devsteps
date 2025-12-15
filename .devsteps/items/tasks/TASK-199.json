@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Add VS Code tasks for manual CLI test execution",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-12-15T16:32:29.520Z",
-  "updated": "2025-12-15T16:32:48.289Z",
+  "updated": "2025-12-15T17:05:21.675Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".vscode/tasks.json"

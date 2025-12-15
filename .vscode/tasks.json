@@ -78,14 +78,112 @@
       }
     },
     {
-      "label": "Test",
-      "type": "shell",
-      "command": "npm test",
+      "label": "Test: All",
+      "dependsOrder": "sequence",
+      "dependsOn": ["Test: Lint", "Test: Unit", "Test: CLI Integration"],
       "group": {
         "kind": "test",
         "isDefault": true
       },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "Test: Lint",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "lint"],
+      "group": "test",
+      "problemMatcher": {
+        "owner": "biome",
+        "fileLocation": "relative",
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      }
+    },
+    {
+      "label": "Test: Unit",
+      "type": "shell",
+      "command": "npm",
+      "args": ["test"],
+      "group": "test",
+      "problemMatcher": {
+        "owner": "vitest",
+        "fileLocation": "absolute",
+        "pattern": {
+          "regexp": "^\\s*at\\s+.*\\s+\\((.*):(\\d+):(\\d+)\\)$",
+          "file": 1,
+          "line": 2,
+          "column": 3
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      }
+    },
+    {
+      "label": "Test: CLI Integration (BATS)",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "test:cli"],
+      "group": "test",
+      "problemMatcher": {
+        "owner": "bats",
+        "fileLocation": "relative",
+        "pattern": {
+          "regexp": "^\\s*not ok\\s+\\d+\\s+(.*)$",
+          "message": 1
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      }
+    },
+    {
+      "label": "Test: Watch",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "test:watch"],
+      "isBackground": true,
+      "group": "test",
+      "problemMatcher": {
+        "owner": "vitest",
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^WAIT.*",
+          "endsPattern": "^.*watching for file changes"
+        },
+        "pattern": {
+          "regexp": ".",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      }
     },
     {
       "label": "Lint",
