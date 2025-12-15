@@ -3,16 +3,16 @@
 # Load BATS helpers
 load '../../.bats-helpers/bats-support/load'
 load '../../.bats-helpers/bats-assert/load'
+load 'test-helpers'
 
 # Setup function runs before each test
 setup() {
-  # Change to project root directory
-  cd "${BATS_TEST_DIRNAME}/../../.." || exit 1
-  
-  # Ensure CLI is built
-  if [ ! -f "packages/cli/dist/index.js" ]; then
-    skip "CLI not built. Run 'npm run build' first."
-  fi
+  setup_isolated_test
+}
+
+# Teardown function runs after each test
+teardown() {
+  teardown_isolated_test
 }
 
 @test "BATS framework is working" {
@@ -22,18 +22,25 @@ setup() {
 }
 
 @test "DevSteps CLI is accessible" {
-  run node packages/cli/dist/index.js --version
+  run node "$CLI" --version
   assert_success
 }
 
 @test "DevSteps CLI shows help output" {
-  run node packages/cli/dist/index.js --help
+  run node "$CLI" --help
   # Help command may exit with status 1, but should show output
   assert_output --partial "devsteps"
 }
 
-@test "DevSteps CLI init command is available" {
-  run node packages/cli/dist/index.js --help
-  # Help command may exit with status 1, but should show output
-  assert_output --partial "init"
+@test "DevSteps CLI can initialize project in temp directory" {
+  # This test verifies we're running in isolation (temp dir, not project root)
+  # init command initializes in current working directory (process.cwd())
+  run node "$CLI" init "my-project"
+  assert_success
+  
+  # Verify .devsteps was created in current (temp) directory
+  [ -d ".devsteps" ]
+  
+  # Verify we did NOT pollute the project root
+  [ ! -d "$PROJECT_ROOT/my-project" ]
 }
