@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { getCache } from '@schnick371/devsteps-shared';
+import { getCache, hasRefsStyleIndex, loadAllIndexes } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 
 function getDevStepsDir(): string {
@@ -134,15 +134,15 @@ export async function contextValidateCommand() {
     console.log();
   }
 
-  // Check index
-  const indexPath = join(devstepsir, 'index.json');
-  if (existsSync(indexPath)) {
-    const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
-    console.log(chalk.green('✓'), `Index valid (${index.items.length} items)`);
+  // Check index (refs-style)
+  if (hasRefsStyleIndex(devstepsir)) {
+    const indexes = loadAllIndexes(devstepsir);
+    const totalItems = Array.from(indexes.byType.values()).reduce((sum, ids) => sum + ids.length, 0);
+    console.log(chalk.green('✓'), `Index valid (${totalItems} items, refs-style)`);
     console.log();
   } else {
     console.log(chalk.red('✗'), 'Index missing');
-    console.log(chalk.gray('  Project structure corrupted'));
+    console.log(chalk.gray('  Project structure corrupted or needs migration'));
     hasIssues = true;
     console.log();
   }

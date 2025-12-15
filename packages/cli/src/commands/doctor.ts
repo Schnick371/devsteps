@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import chalk from 'chalk';
 import ora from 'ora';
-import { rebuildIndex } from '@schnick371/devsteps-shared';
+import { rebuildIndex, hasRefsStyleIndex } from '@schnick371/devsteps-shared';
 
 interface CheckResult {
   name: string;
@@ -153,13 +153,12 @@ function checkDevStepsProject(): CheckResult {
   }
 
   const configPath = join(devstepsir, 'config.json');
-  const indexPath = join(devstepsir, 'index.json');
 
-  if (!existsSync(configPath) || !existsSync(indexPath)) {
+  if (!existsSync(configPath) || !hasRefsStyleIndex(devstepsir)) {
     return {
       name: 'DevSteps Project',
       status: 'fail',
-      message: 'Corrupt project structure',
+      message: 'Corrupt project structure (missing config or refs-style index)',
       fix: 'Reinitialize: rm -rf .devsteps && devstepsinit',
     };
   }
