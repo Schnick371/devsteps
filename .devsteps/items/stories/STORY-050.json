@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-02T14:56:08.673Z",
-  "updated": "2025-12-15T16:32:48.506Z",
+  "updated": "2025-12-15T17:16:17.997Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "tests/integration/cli/"
@@ -26,7 +26,15 @@
     "tested-by": [],
     "tests": [],
     "blocks": [],
-    "blocked-by": [],
+    "blocked-by": [
+      "BUG-039",
+      "BUG-040",
+      "BUG-041",
+      "BUG-042",
+      "BUG-043",
+      "BUG-044",
+      "BUG-045"
+    ],
     "relates-to": [
       "TASK-114"
     ],

@@ -1,0 +1,38 @@
+{
+  "id": "TASK-201",
+  "type": "task",
+  "category": "CLI",
+  "title": "Fix: Create spikes/ directory during init",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-15T17:16:28.891Z",
+  "updated": "2025-12-15T17:16:32.879Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/utils/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "BUG-039"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "task",
+    "fix",
+    "init",
+    "spike",
+    "critical"
+  ],
+  "commits": [],
+  "metadata": {}
+}
