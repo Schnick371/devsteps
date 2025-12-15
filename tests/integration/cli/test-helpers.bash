@@ -47,15 +47,19 @@ teardown_isolated_test() {
 }
 
 # Helper to initialize a devsteps project in the temp directory
+# Usage: init_test_project "project-name" "methodology"
+# methodology: scrum (default), waterfall, or hybrid
 init_test_project() {
   local project_name="${1:-test-project}"
-  run node "$CLI" init "$project_name"
+  local methodology="${2:-scrum}"
+  run node "$CLI" init "$project_name" --methodology "$methodology"
   assert_success
-  cd "$project_name" || exit 1
+  # Note: init command initializes in current directory, not a subdirectory
 }
 
 # Helper to extract item ID from CLI output
 # Example: "✔ Created EPIC-001: Title" → "EPIC-001"
+# Example: "✔ Created REQ-001: Title" → "REQ-001"
 extract_item_id() {
-  echo "$1" | grep -oE '(EPIC|STORY|TASK|BUG|SPIKE|REQUIREMENT|FEATURE|TEST)-[0-9]+' | head -1
+  echo "$1" | grep -oE '(EPIC|STORY|TASK|BUG|SPIKE|REQ|FEAT|TEST)-[0-9]+' | head -1
 }
