@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
-import { STATUS } from '@schnick371/devsteps-shared';
+import { STATUS, listItems } from '@schnick371/devsteps-shared';
 
 /**
  * Get project status and statistics
@@ -15,13 +15,26 @@ export default async function statusHandler(args: { detailed?: boolean }) {
     }
 
     const configPath = join(devstepsDir, 'config.json');
-    const indexPath = join(devstepsDir, 'index.json');
-
     const config = JSON.parse(readFileSync(configPath, 'utf-8'));
-    const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
+
+    // Use listItems() instead of index.json
+    const itemsResult = await listItems(devstepsDir, {});
+    const allItems = itemsResult.items;
+
+    // Calculate stats from items
+    const stats = {
+      total: allItems.length,
+      by_type: {} as Record<string, number>,
+      by_status: {} as Record<string, number>,
+    };
+    
+    for (const item of allItems) {
+      stats.by_type[item.type] = (stats.by_type[item.type] || 0) + 1;
+      stats.by_status[item.status] = (stats.by_status[item.status] || 0) + 1;
+    }
 
     // Check for stale items
-    const staleItems = index.items.filter((item: any) => {
+    const staleItems = allItems.filter((item: any) => {
       if (item.status === STATUS.IN_PROGRESS) {
         const daysSinceUpdate =
           (Date.now() - new Date(item.updated).getTime()) / (1000 * 60 * 60 * 24);
@@ -38,9 +51,9 @@ export default async function statusHandler(args: { detailed?: boolean }) {
         updated: config.updated,
       },
       stats: {
-        total: index.stats.total,
-        by_type: index.stats.by_type,
-        by_status: index.stats.by_status,
+        total: stats.total,
+        by_type: stats.by_type,
+        by_status: stats.by_status,
       },
     };    
     
