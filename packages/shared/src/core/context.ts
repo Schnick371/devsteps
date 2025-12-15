@@ -96,6 +96,8 @@ export async function getItemCounts(devstepsir: string): Promise<ItemCounts> {
 
   try {
     const content = await fs.readFile(indexPath, 'utf-8');
+    // Note: Using JSON.parse directly here because loadLegacyIndex() doesn't include
+    // all item fields (title, updated) needed for context operations
     const index = JSON.parse(content);
 
     const counts: ItemCounts = {
@@ -136,6 +138,8 @@ export async function getRecentUpdates(devstepsir: string, days: number): Promis
 
   try {
     const content = await fs.readFile(indexPath, 'utf-8');
+    // Note: Using JSON.parse directly here because loadLegacyIndex() doesn't include
+    // all item fields (title, updated) needed for context operations
     const index = JSON.parse(content);
 
     const updates = index.items

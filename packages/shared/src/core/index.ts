@@ -1,5 +1,6 @@
 export { addItem, type AddItemArgs, type AddItemResult } from './add.js';
 export { getItem, type GetItemResult } from './get.js';
+export { getConfig } from './config.js';
 export { listItems, type ListItemsArgs, type ListItemsResult } from './list.js';
 export { updateItem, type UpdateItemArgs, type UpdateItemResult } from './update.js';
 export {

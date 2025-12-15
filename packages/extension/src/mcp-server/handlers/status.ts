@@ -1,7 +1,7 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
-import { STATUS, listItems } from '@schnick371/devsteps-shared';
+import { STATUS, listItems, getConfig } from '@schnick371/devsteps-shared';
 
 /**
  * Get project status and statistics
@@ -14,8 +14,7 @@ export default async function statusHandler(args: { detailed?: boolean }) {
       throw new Error('Project not initialized. Run devsteps-init first.');
     }
 
-    const configPath = join(devstepsDir, 'config.json');
-    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    const config = await getConfig(devstepsDir);
 
     // Use listItems() instead of index.json
     const itemsResult = await listItems(devstepsDir, {});
@@ -73,7 +72,7 @@ export default async function statusHandler(args: { detailed?: boolean }) {
       // Group items by status
       const byStatus: Record<string, any[]> = {};      
       
-      for (const item of index.items) {
+      for (const item of allItems) {
         if (!byStatus[item.status]) {
           byStatus[item.status] = [];
         }
@@ -83,7 +82,7 @@ export default async function statusHandler(args: { detailed?: boolean }) {
       result.items_by_status = byStatus;
 
       // Recent updates
-      const recentItems = [...index.items]
+      const recentItems = [...allItems]
         .sort((a, b) => new Date(b.updated).getTime() - new Date(a.updated).getTime())
         .slice(0, 10);
 

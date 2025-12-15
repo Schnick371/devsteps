@@ -7,6 +7,7 @@ import type {
   ItemType,
 } from '../schemas/index.js';
 import { TYPE_TO_DIRECTORY } from '../utils/index.js';
+import { getItem } from './get.js';
 import {
   hasRefsStyleIndex,
   loadIndexByType,
@@ -69,38 +70,45 @@ export async function listItems(
   }
 
   // Load item metadata for filtering (now we only have IDs)
-  let items: DevStepsIndex['items'] = allIndexItems
-    .map((id) => {
-      const typeMatch = id.match(/^([A-Z]+)-/);
-      if (!typeMatch) return null;
-      
-      const typePrefix = typeMatch[1];
-      const type = Object.entries({
-        EPIC: 'epic' as const,
-        STORY: 'story' as const,
-        TASK: 'task' as const,
-        BUG: 'bug' as const,
-        SPIKE: 'spike' as const,
-        TEST: 'test' as const,
-        FEAT: 'feature' as const,
-        REQ: 'requirement' as const,
-      }).find(([prefix]) => prefix === typePrefix)?.[1];
-      
-      if (!type) return null;
-      
-      const metadataPath = join(devstepsir, TYPE_TO_DIRECTORY[type], `${id}.json`);
-      if (!existsSync(metadataPath)) return null;
-      
-      const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+  const itemPromises = allIndexItems.map(async (id) => {
+    const typeMatch = id.match(/^([A-Z]+)-/);
+    if (!typeMatch) return null;
+    
+    const typePrefix = typeMatch[1];
+    const type = Object.entries({
+      EPIC: 'epic' as const,
+      STORY: 'story' as const,
+      TASK: 'task' as const,
+      BUG: 'bug' as const,
+      SPIKE: 'spike' as const,
+      TEST: 'test' as const,
+      FEAT: 'feature' as const,
+      REQ: 'requirement' as const,
+    }).find(([prefix]) => prefix === typePrefix)?.[1];
+    
+    if (!type) return null;
+    
+    const metadataPath = join(devstepsir, TYPE_TO_DIRECTORY[type], `${id}.json`);
+    if (!existsSync(metadataPath)) return null;
+    
+    try {
+      const { metadata } = await getItem(devstepsir, id);
       return {
         id: metadata.id,
         type: metadata.type,
         title: metadata.title,
         status: metadata.status,
+        assignee: metadata.assignee,
+        tags: metadata.tags,
         eisenhower: metadata.eisenhower,
         updated: metadata.updated,
       };
-    })
+    } catch {
+      return null;
+    }
+  });
+
+  let items = (await Promise.all(itemPromises))
     .filter((item): item is NonNullable<typeof item> => item !== null);
 
   // Apply remaining filters for multi-dimensional queries
@@ -113,34 +121,20 @@ export async function listItems(
     items = items.filter((i) => i.status === args.status);
   }
 
-  // For assignee and tags, always load full metadata
+  // For assignee filter
   if (args.assignee) {
-    items = items.filter((i) => {
-      const metadataPath = join(devstepsir, TYPE_TO_DIRECTORY[i.type], `${i.id}.json`);
-      if (!existsSync(metadataPath)) return false;
-      const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
-      return metadata.assignee === args.assignee;
-    });
+    items = items.filter((i) => i.assignee === args.assignee);
   }
 
+  // For tags filter
   if (args.tags && args.tags.length > 0) {
     const filterTags = args.tags;
-    items = items.filter((i) => {
-      const metadataPath = join(devstepsir, TYPE_TO_DIRECTORY[i.type], `${i.id}.json`);
-      if (!existsSync(metadataPath)) return false;
-      const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
-      return filterTags.every((tag) => metadata.tags.includes(tag));
-    });
+    items = items.filter((i) => filterTags.every((tag) => i.tags.includes(tag)));
   }
 
   // Apply eisenhower filter if not already done via index
   if (args.eisenhower) {
-    items = items.filter((i) => {
-      const metadataPath = join(devstepsir, TYPE_TO_DIRECTORY[i.type], `${i.id}.json`);
-      if (!existsSync(metadataPath)) return false;
-      const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
-      return metadata.eisenhower === args.eisenhower;
-    });
+    items = items.filter((i) => i.eisenhower === args.eisenhower);
   }
 
   // Apply limit
@@ -150,6 +144,13 @@ export async function listItems(
 
   return {
     count: items.length,
-    items,
+    items: items.map((i) => ({
+      id: i.id,
+      type: i.type,
+      title: i.title,
+      status: i.status,
+      eisenhower: i.eisenhower,
+      updated: i.updated,
+    })),
   };
 }

@@ -9,6 +9,7 @@ import {
   parseItemId,
   validateRelationship,
   getItem,
+  getConfig,
 } from '@schnick371/devsteps-shared';
 
 /**
@@ -42,12 +43,11 @@ export default async function linkHandler(args: {
     if (!existsSync(targetPath)) {
       throw new Error(`Target item not found: ${args.target_id}`);
     }    // Load items
-    const sourceMetadata = JSON.parse(readFileSync(sourcePath, 'utf-8'));
-    const targetMetadata = JSON.parse(readFileSync(targetPath, 'utf-8'));
+    const { metadata: sourceMetadata } = await getItem(devstepsDir, args.source_id);
+    const { metadata: targetMetadata } = await getItem(devstepsDir, args.target_id);
 
     // Load project config for methodology
-    const configPath = join(devstepsDir, 'config.json');
-    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    const config = await getConfig(devstepsDir);
     const methodology: Methodology = config.settings?.methodology || 'hybrid';    // Validate relationship
     const validation = validateRelationship(
       { id: sourceMetadata.id, type: sourceMetadata.type },

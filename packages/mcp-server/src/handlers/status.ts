@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
-import { STATUS, listItems } from '@schnick371/devsteps-shared';
+import { STATUS, listItems, getConfig } from '@schnick371/devsteps-shared';
 
 /**
  * Get project status and statistics
@@ -14,8 +14,7 @@ export default async function statusHandler(args: { detailed?: boolean }) {
       throw new Error('Project not initialized. Run devsteps-init first.');
     }
 
-    const configPath = join(devstepsDir, 'config.json');
-    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    const config = await getConfig(devstepsDir);
     
     // Use new index-refs API (await because it's async)
     const itemsResult = await listItems(devstepsDir, {});

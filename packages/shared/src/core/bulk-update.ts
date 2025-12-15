@@ -3,6 +3,8 @@ import { join } from 'node:path';
 import type { ItemMetadata, ItemStatus } from '../schemas/index.js';
 import { getCurrentTimestamp } from '../utils/index.js';
 import { updateItem } from './update.js';
+import { getItem } from './get.js';
+import { hasRefsStyleIndex } from './index-refs.js';
 
 export interface BulkUpdateResult {
   success: string[];
@@ -80,7 +82,7 @@ export async function bulkAddTags(
         throw new Error(`Item ${id} not found`);
       }
 
-      const metadata: ItemMetadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+      const { metadata } = await getItem(devstepsir, id);
 
       // Add new tags (avoid duplicates)
       const existingTags = new Set(metadata.tags);
@@ -93,15 +95,8 @@ export async function bulkAddTags(
 
       writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
 
-      // Update index
-      const indexPath = join(devstepsir, 'index.json');
-      const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
-      const itemIndex = index.items.findIndex((i: { id: string }) => i.id === id);
-      if (itemIndex >= 0) {
-        index.items[itemIndex].updated = metadata.updated;
-      }
-      index.last_updated = getCurrentTimestamp();
-      writeFileSync(indexPath, JSON.stringify(index, null, 2));
+      // Note: Tags are stored in metadata only (refs-style index has no tags field)
+      // No index update needed with auto-migration
 
       result.success.push(id);
     } catch (error) {
@@ -149,7 +144,7 @@ export async function bulkRemoveTags(
         throw new Error(`Item ${id} not found`);
       }
 
-      const metadata: ItemMetadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+      const { metadata } = await getItem(devstepsir, id);
 
       // Remove tags
       metadata.tags = metadata.tags.filter((tag) => !tagsToRemove.includes(tag));
@@ -157,15 +152,8 @@ export async function bulkRemoveTags(
 
       writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
 
-      // Update index
-      const indexPath = join(devstepsir, 'index.json');
-      const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
-      const itemIndex = index.items.findIndex((i: { id: string }) => i.id === id);
-      if (itemIndex >= 0) {
-        index.items[itemIndex].updated = metadata.updated;
-      }
-      index.last_updated = getCurrentTimestamp();
-      writeFileSync(indexPath, JSON.stringify(index, null, 2));
+      // Note: Tags are stored in metadata only (refs-style index has no tags field)
+      // No index update needed with auto-migration
 
       result.success.push(id);
     } catch (error) {

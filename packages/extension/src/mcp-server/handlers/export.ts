@@ -1,8 +1,8 @@
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, writeFileSync } from 'node:fs';
 import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
 import type { ItemType } from '@schnick371/devsteps-shared';
-import { TYPE_TO_DIRECTORY, listItems, getItem } from '@schnick371/devsteps-shared';
+import { listItems, getItem, getConfig } from '@schnick371/devsteps-shared';
 
 /**
  * Export project data
@@ -19,8 +19,7 @@ export default async function exportHandler(args: {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
-  const configPath = join(devstepsDir, 'config.json');
-  const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+  const config = await getConfig(devstepsDir);
 
   // Use listItems() with optional type filter
   const itemsResult = await listItems(devstepsDir, {});
@@ -58,10 +57,10 @@ export default async function exportHandler(args: {
     output = generateMarkdown(config, stats, fullItems);
     filename = args.output_path || 'devsteps-export.md';
   } else if (args.format === 'html') {
-    output = generateHTML(config, index.stats, fullItems);
+    output = generateHTML(config, stats, fullItems);
     filename = args.output_path || 'devsteps-export.html';
   } else {
-    output = JSON.stringify({ config, stats: index.stats, items: fullItems }, null, 2);
+    output = JSON.stringify({ config, stats, items: fullItems }, null, 2);
     filename = args.output_path || 'devsteps-export.json';
   }
 

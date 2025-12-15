@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
 import type { ItemType } from '@schnick371/devsteps-shared';
-import { TYPE_TO_DIRECTORY, listItems, getItem } from '@schnick371/devsteps-shared';
+import { TYPE_TO_DIRECTORY, listItems, getItem, getConfig } from '@schnick371/devsteps-shared';
 
 /**
  * Export project data
@@ -19,8 +19,7 @@ export default async function exportHandler(args: {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
-  const configPath = join(devstepsDir, 'config.json');
-  const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+  const config = await getConfig(devstepsDir);
 
   // Use new index-refs API with optimized filtering
   // Note: listItems doesn't support array of types yet, so we still need manual filter
