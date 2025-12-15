@@ -54,7 +54,7 @@ export default async function searchHandler(args: {
       : config.settings.item_types.map((t: ItemType) => TYPE_TO_DIRECTORY[t]);
 
     for (const folder of folders) {
-      const folderPath = join(devstepsDir, 'items', folder);
+      const folderPath = join(devstepsDir, folder);
       if (!existsSync(folderPath)) continue;
 
       const files = readdirSync(folderPath).filter((f) => f.endsWith('.json'));

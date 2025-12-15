@@ -22,7 +22,8 @@ export default async function exportHandler(args: {
   const configPath = join(devstepsDir, 'config.json');
   const config = JSON.parse(readFileSync(configPath, 'utf-8'));
 
-  // Use new index-refs API
+  // Use new index-refs API with optimized filtering
+  // Note: listItems doesn't support array of types yet, so we still need manual filter
   const itemsResult = await listItems(devstepsDir, {});
   let items = itemsResult.items;
 
@@ -46,8 +47,8 @@ export default async function exportHandler(args: {
   // Load full metadata and descriptions
   const fullItems = items.map((item: any) => {
     const typeFolder = TYPE_TO_DIRECTORY[item.type as ItemType];
-    const metadataPath = join(devstepsDir, 'items', typeFolder, `${item.id}.json`);
-    const descriptionPath = join(devstepsDir, 'items', typeFolder, `${item.id}.md`);
+    const metadataPath = join(devstepsDir, typeFolder, `${item.id}.json`);
+    const descriptionPath = join(devstepsDir, typeFolder, `${item.id}.md`);
 
     const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
     const description = existsSync(descriptionPath) ? readFileSync(descriptionPath, 'utf-8') : '';
