@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build All",
+      "label": "🏗️ Build All",
       "type": "shell",
       "command": "npm run build",
       "group": {
@@ -22,7 +22,7 @@
       }
     },
     {
-      "label": "Package: All Distribution Files",
+      "label": "📦 Package: All Distribution Files",
       "type": "shell",
       "command": "npm run package:all",
       "group": "build",
@@ -33,7 +33,7 @@
       }
     },
     {
-      "label": "Build and Package Extension",
+      "label": "📦 Build and Package Extension",
       "type": "shell",
       "command": "npm run build && cd packages/extension && npm run package",
       "group": "build",
@@ -51,7 +51,7 @@
       "dependsOrder": "sequence"
     },
     {
-      "label": "Watch All",
+      "label": "👀 Watch All",
       "type": "shell",
       "command": "npm run dev",
       "isBackground": true,
@@ -78,9 +78,9 @@
       }
     },
     {
-      "label": "Test: All",
+      "label": "✅ Test: All",
       "dependsOrder": "sequence",
-      "dependsOn": ["Test: Lint", "Test: Unit", "Test: CLI Integration"],
+      "dependsOn": ["🔍 Test: Lint", "🧪 Test: Unit", "🦇 Test: CLI Integration"],
       "group": {
         "kind": "test",
         "isDefault": true
@@ -93,7 +93,7 @@
       }
     },
     {
-      "label": "Test: Lint",
+      "label": "🔍 Test: Lint",
       "type": "shell",
       "command": "npm",
       "args": ["run", "lint"],
@@ -117,7 +117,7 @@
       }
     },
     {
-      "label": "Test: Unit",
+      "label": "🧪 Test: Unit",
       "type": "shell",
       "command": "npm",
       "args": ["test"],
@@ -139,7 +139,7 @@
       }
     },
     {
-      "label": "Test: CLI Integration (BATS)",
+      "label": "🦇 Test: CLI Integration (BATS)",
       "type": "shell",
       "command": "npm",
       "args": ["run", "test:cli"],
@@ -159,7 +159,7 @@
       }
     },
     {
-      "label": "Test: Watch",
+      "label": "🔄 Test: Watch",
       "type": "shell",
       "command": "npm",
       "args": ["run", "test:watch"],
@@ -186,7 +186,7 @@
       }
     },
     {
-      "label": "Lint",
+      "label": "🔍 Lint",
       "type": "shell",
       "command": "npm run lint",
       "problemMatcher": {
@@ -203,19 +203,19 @@
       }
     },
     {
-      "label": "Format",
+      "label": "✨ Format",
       "type": "shell",
       "command": "npm run format",
       "problemMatcher": []
     },
     {
-      "label": "Clean",
+      "label": "🧹 Clean",
       "type": "shell",
       "command": "npm run clean",
       "problemMatcher": []
     },
     {
-      "label": "CLI: Init Project",
+      "label": "🚀 CLI: Init Project",
       "type": "shell",
       "command": "node packages/cli/dist/index.js init test-project",
       "dependsOn": [
@@ -224,7 +224,7 @@
       "problemMatcher": []
     },
     {
-      "label": "CLI: Status",
+      "label": "📊 CLI: Status",
       "type": "shell",
       "command": "node packages/cli/dist/index.js status",
       "dependsOn": [
@@ -233,7 +233,7 @@
       "problemMatcher": []
     },
     {
-      "label": "MCP: Start Server",
+      "label": "🖥️ MCP: Start Server",
       "type": "shell",
       "command": "node packages/mcp-server/dist/index.js",
       "dependsOn": [
@@ -253,13 +253,13 @@
       }
     },
     {
-      "label": "Install Dependencies",
+      "label": "📥 Install Dependencies",
       "type": "shell",
       "command": "npm install",
       "problemMatcher": []
     },
     {
-      "label": "Type Check",
+      "label": "🔎 Type Check",
       "type": "shell",
       "command": "npm run typecheck",
       "problemMatcher": [
@@ -267,7 +267,7 @@
       ]
     },
     {
-      "label": "DevSteps: List Open Stories",
+      "label": "📖 DevSteps: List Open Stories",
       "type": "shell",
       "command": "node packages/cli/dist/index.js list --type story --status draft",
       "dependsOn": [
@@ -280,7 +280,7 @@
       }
     },
     {
-      "label": "DevSteps: List High Priority Items",
+      "label": "⚡ DevSteps: List High Priority Items",
       "type": "shell",
       "command": "node packages/cli/dist/index.js list --priority high",
       "dependsOn": [
@@ -293,7 +293,7 @@
       }
     },
     {
-      "label": "DevSteps: List Q1 Tasks (Urgent & Important)",
+      "label": "🔥 DevSteps: List Q1 Tasks (Urgent & Important)",
       "type": "shell",
       "command": "node packages/cli/dist/index.js list --eisenhower urgent-important --status draft",
       "dependsOn": [
@@ -306,7 +306,7 @@
       }
     },
     {
-      "label": "DevSteps: Full Status Report",
+      "label": "📈 DevSteps: Full Status Report",
       "type": "shell",
       "command": "node packages/cli/dist/index.js status",
       "dependsOn": [
@@ -319,7 +319,7 @@
       }
     },
     {
-      "label": "Build Extension (Debug)",
+      "label": "🐛 Build Extension (Debug)",
       "type": "shell",
       "command": "node esbuild.js",
       "options": {
