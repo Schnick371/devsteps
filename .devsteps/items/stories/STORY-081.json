@@ -3,13 +3,13 @@
   "type": "story",
   "category": "general",
   "title": "Update MCP Server to use refs-style index",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-12-13T22:40:02.535Z",
-  "updated": "2025-12-13T22:40:11.973Z",
+  "updated": "2025-12-15T10:40:00.000Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/mcp-server/src/handlers/**"
+    "packages/mcp-server/src/handlers/init.ts"
   ],
   "linked_items": {
     "implements": [
