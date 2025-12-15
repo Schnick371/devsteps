@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { getWorkspacePath } from '../workspace.js';
 import { join } from 'node:path';
-import { TYPE_TO_DIRECTORY, parseItemId } from '@schnick371/devsteps-shared';
+import { TYPE_TO_DIRECTORY, parseItemId, getItem } from '@schnick371/devsteps-shared';
 
 /**
  * Trace relationships for an item
@@ -26,29 +26,23 @@ export default async function traceHandler(args: { id: string; depth?: number })
 
     const visited = new Set<string>();
 
-    function traceItem(itemId: string, currentDepth: number): TraceNode | null {
+    async function traceItem(itemId: string, currentDepth: number): Promise<TraceNode | null> {
       if (currentDepth > maxDepth || visited.has(itemId)) {
         return null;
       }
 
       visited.add(itemId);
 
-      const parsed = parseItemId(itemId);
-      if (!parsed) return null;
-
-      const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
-      const metadataPath = join(devstepsDir, typeFolder, `${itemId}.json`);
-
-      if (!existsSync(metadataPath)) return null;
-
-      const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+      // Use shared getItem() instead of manual parsing
+      try {
+        const { metadata } = await getItem(devstepsDir, itemId);
 
       const node: TraceNode = {
         id: metadata.id,
         type: metadata.type,
         title: metadata.title,
         status: metadata.status,
-        priority: metadata.priority,
+        priority: metadata.eisenhower, // Use eisenhower (new field name)
         relationships: {},
       };
 
@@ -56,17 +50,22 @@ export default async function traceHandler(args: { id: string; depth?: number })
       if (currentDepth < maxDepth) {
         for (const [relType, linkedIds] of Object.entries(metadata.linked_items)) {
           if (Array.isArray(linkedIds) && linkedIds.length > 0) {
-            node.relationships[relType] = linkedIds
-              .map((id: string) => traceItem(id, currentDepth + 1))
-              .filter((item): item is TraceNode => item !== null);
+            const traced = await Promise.all(
+              linkedIds.map((id: string) => traceItem(id, currentDepth + 1))
+            );
+            node.relationships[relType] = traced.filter((item): item is TraceNode => item !== null);
           }
         }
       }
 
       return node;
+      } catch (error) {
+        // Item not found or error - skip
+        return null;
+      }
     }
 
-  const tree = traceItem(args.id, 0);
+  const tree = await traceItem(args.id, 0);
 
   if (!tree) {
     throw new Error(`Item not found: ${args.id}`);
