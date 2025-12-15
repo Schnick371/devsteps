@@ -241,6 +241,23 @@ program.exitOverride();
 
 (async () => {
   try {
+    // Auto-migrate legacy projects before command execution (matches MCP server behavior)
+    const { join } = await import('node:path');
+    const { existsSync } = await import('node:fs');
+    const { ensureIndexMigrated } = await import('@schnick371/devsteps-shared');
+    
+    const devstepsDir = join(process.cwd(), '.devsteps');
+    
+    if (existsSync(devstepsDir)) {
+      try {
+        // Silent auto-migration - no output unless it fails
+        await ensureIndexMigrated(devstepsDir, { silent: true });
+      } catch (migrationError) {
+        // Only warn - don't block CLI
+        console.warn(chalk.yellow('⚠️  Migration check skipped:'), migrationError instanceof Error ? migrationError.message : 'Unknown error');
+      }
+    }
+    
     await program.parseAsync(process.argv);
   } catch (error) {
     const err = error as { code?: string; message?: string };

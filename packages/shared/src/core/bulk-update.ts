@@ -4,6 +4,7 @@ import type { ItemMetadata, ItemStatus } from '../schemas/index.js';
 import { getCurrentTimestamp } from '../utils/index.js';
 import { updateItem } from './update.js';
 import { getItem } from './get.js';
+import { hasRefsStyleIndex } from './index-refs.js';
 
 export interface BulkUpdateResult {
   success: string[];
@@ -94,15 +95,18 @@ export async function bulkAddTags(
 
       writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
 
-      // Update index
-      const indexPath = join(devstepsir, 'index.json');
-      const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
-      const itemIndex = index.items.findIndex((i: { id: string }) => i.id === id);
-      if (itemIndex >= 0) {
-        index.items[itemIndex].updated = metadata.updated;
+      // Update index (only for legacy index.json)
+      if (!hasRefsStyleIndex(devstepsir)) {
+        const indexPath = join(devstepsir, 'index.json');
+        const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
+        const itemIndex = index.items.findIndex((i: { id: string }) => i.id === id);
+        if (itemIndex >= 0) {
+          index.items[itemIndex].updated = metadata.updated;
+        }
+        index.last_updated = getCurrentTimestamp();
+        writeFileSync(indexPath, JSON.stringify(index, null, 2));
       }
-      index.last_updated = getCurrentTimestamp();
-      writeFileSync(indexPath, JSON.stringify(index, null, 2));
+      // For refs-style index, tags are already in metadata file only
 
       result.success.push(id);
     } catch (error) {
@@ -158,15 +162,18 @@ export async function bulkRemoveTags(
 
       writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
 
-      // Update index
-      const indexPath = join(devstepsir, 'index.json');
-      const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
-      const itemIndex = index.items.findIndex((i: { id: string }) => i.id === id);
-      if (itemIndex >= 0) {
-        index.items[itemIndex].updated = metadata.updated;
+      // Update index (only for legacy index.json)
+      if (!hasRefsStyleIndex(devstepsir)) {
+        const indexPath = join(devstepsir, 'index.json');
+        const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
+        const itemIndex = index.items.findIndex((i: { id: string }) => i.id === id);
+        if (itemIndex >= 0) {
+          index.items[itemIndex].updated = metadata.updated;
+        }
+        index.last_updated = getCurrentTimestamp();
+        writeFileSync(indexPath, JSON.stringify(index, null, 2));
       }
-      index.last_updated = getCurrentTimestamp();
-      writeFileSync(indexPath, JSON.stringify(index, null, 2));
+      // For refs-style index, tags are already in metadata file only
 
       result.success.push(id);
     } catch (error) {
