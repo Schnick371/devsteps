@@ -7,6 +7,7 @@ import {
   type Methodology,
   getCurrentTimestamp,
   getMethodologyConfig,
+  initializeRefsStyleIndex,
 } from '@schnick371/devsteps-shared';
 
 // ESM equivalent of __dirname
@@ -61,26 +62,13 @@ export default async function initHandler(args: {
 
   writeFileSync(join(devstepsDir, 'config.json'), JSON.stringify(config, null, 2));
 
-  // Create index with counters initialized for all item types
+  // Initialize refs-style index structure with counters for all item types
   const counters: Record<string, number> = {};
   for (const type of methodologyConfig.item_types) {
     counters[type] = 0;
   }
 
-  const index = {
-    items: [],
-    last_updated: getCurrentTimestamp(),
-    counters,
-    archived_items: [],
-    stats: {
-      total: 0,
-      by_type: {},
-      by_status: {},
-      archived: 0,
-    },
-  };
-
-  writeFileSync(join(devstepsDir, 'index.json'), JSON.stringify(index, null, 2));
+  initializeRefsStyleIndex(devstepsDir, counters);
 
   // Create .gitignore
   const gitignore = `.devsteps/
