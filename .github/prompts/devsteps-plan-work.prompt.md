@@ -24,6 +24,7 @@ Plan work through dialogue - understand intent, search existing items, structure
 1. **Verify current branch is `main`**
 2. **Verify clean working tree**
 3. **Verify other work in feature branches**
+4. **Merge feature branches that are ready to merge to main**
 
 
 ### 2. Understand Context
