@@ -144,41 +144,33 @@ export async function listCommand(options: any) {
   try {
     const devstepsir = getDevStepsDir();
     
-    // Use new index-refs API
-    const itemsResult = await listItems(devstepsir, {});
+    // Build filter args for optimized index-refs lookup
+    const filterArgs: any = {};
+    
+    if (options.type) {
+      filterArgs.type = TYPE_SHORTCUTS[options.type] || options.type;
+    }
+    
+    if (options.status && !options.archived) {
+      filterArgs.status = options.status;
+    }
+    
+    if (options.priority && !options.archived) {
+      filterArgs.eisenhower = options.priority;
+    }
+    
+    if (options.limit) {
+      const limit = Number.parseInt(options.limit, 10);
+      if (limit > 0) {
+        filterArgs.limit = limit;
+      }
+    }
+    
+    // Use new index-refs API with filters (optimized index lookup)
+    const itemsResult = await listItems(devstepsir, filterArgs);
     let items = itemsResult.items;
     
     // TODO: Archived items support needs separate implementation
-
-    if (options.type) {
-      const itemType = TYPE_SHORTCUTS[options.type] || options.type;
-      items = items.filter((i: any) => i.type === itemType);
-    }
-
-    // For archived items, use original_status
-    const statusField = options.archived ? 'original_status' : 'status';
-
-    if (options.status) {
-      items = items.filter((i: any) => i[statusField] === options.status);
-    }
-
-    // Priority removed: use Eisenhower-only filtering
-
-    if (options.priority && !options.archived) {
-      // Load full metadata for eisenhower filter (not available for archived summary)
-      items = items.filter((i: any) => {
-        const typeFolder = TYPE_TO_DIRECTORY[i.type as ItemType];
-        const metadataPath = join(devstepsir, typeFolder, `${i.id}.json`);
-        if (!existsSync(metadataPath)) return false;
-        const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
-        return metadata.eisenhower === options.priority;
-      });
-    }
-
-    const limit = Number.parseInt(options.limit, 10);
-    if (limit > 0) {
-      items = items.slice(0, limit);
-    }
 
     console.log();
     console.log(chalk.bold(`Found ${items.length} ${options.archived ? 'archived ' : ''}item(s)`));

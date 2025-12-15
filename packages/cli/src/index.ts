@@ -63,7 +63,7 @@ program
   .option('-a, --assignee <email>', 'Filter by assignee')
   .option('--tags <tags...>', 'Filter by tags')
   .option('--archived', 'Show archived items instead of active items')
-  .option('-l, --limit <number>', 'Limit results', '50')
+  .option('-l, --limit <number>', 'Limit results')
   .action(listCommand);
 
 // Update item

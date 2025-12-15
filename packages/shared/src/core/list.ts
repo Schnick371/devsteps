@@ -46,10 +46,12 @@ export async function listItems(
   
   if (hasRefsStyleIndex(devstepsir)) {
     // Use optimized index lookups based on filter
-    if (args.type) {
-      allIndexItems = loadIndexByType(devstepsir, args.type);
-    } else if (args.status) {
+    // For multi-dimensional filters, choose most selective index first
+    if (args.status) {
+      // Status index is usually most selective
       allIndexItems = loadIndexByStatus(devstepsir, args.status);
+    } else if (args.type) {
+      allIndexItems = loadIndexByType(devstepsir, args.type);
     } else if (args.eisenhower) {
       allIndexItems = loadIndexByPriority(devstepsir, args.eisenhower);
     } else {
@@ -101,13 +103,13 @@ export async function listItems(
     })
     .filter((item): item is NonNullable<typeof item> => item !== null);
 
-  // Apply remaining filters (type/status/eisenhower already filtered via index if using refs-style)
-  // For legacy index or multi-dimensional filters, apply all filters here
-  if (args.type && !hasRefsStyleIndex(devstepsir)) {
+  // Apply remaining filters for multi-dimensional queries
+  // (e.g., status index loaded, but need to filter by type)
+  if (args.type) {
     items = items.filter((i) => i.type === args.type);
   }
 
-  if (args.status && !hasRefsStyleIndex(devstepsir)) {
+  if (args.status) {
     items = items.filter((i) => i.status === args.status);
   }
 
