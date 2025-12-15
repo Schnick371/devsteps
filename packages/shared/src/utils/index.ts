@@ -39,7 +39,7 @@ export function getMethodologyConfig(methodology: Methodology) {
         spike: 'SPIKE',
         test: 'TEST',
       },
-      directories: ['epics', 'stories', 'tasks', 'bugs', 'spikes', 'tests'],
+      directories: ['items/epics', 'items/stories', 'items/tasks', 'items/bugs', 'items/spikes', 'items/tests'],
     },
     waterfall: {
       item_types: ['requirement', 'feature', 'task', 'bug', 'test'] as ItemType[],
@@ -50,7 +50,7 @@ export function getMethodologyConfig(methodology: Methodology) {
         bug: 'BUG',
         test: 'TEST',
       },
-      directories: ['requirements', 'features', 'tasks', 'bugs', 'tests'],
+      directories: ['items/requirements', 'items/features', 'items/tasks', 'items/bugs', 'items/tests'],
     },
     hybrid: {
       item_types: [
@@ -74,14 +74,14 @@ export function getMethodologyConfig(methodology: Methodology) {
         test: 'TEST',
       },
       directories: [
-        'epics',
-        'stories',
-        'requirements',
-        'features',
-        'tasks',
-        'bugs',
-        'spikes',
-        'tests',
+        'items/epics',
+        'items/stories',
+        'items/requirements',
+        'items/features',
+        'items/tasks',
+        'items/bugs',
+        'items/spikes',
+        'items/tests',
       ],
     },
   };
