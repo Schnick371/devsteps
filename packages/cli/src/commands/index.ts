@@ -251,37 +251,32 @@ export async function updateCommand(id: string, options: any) {
 
         // Check if this completes any parent items
         for (const parentId of metadata.linked_items.implements) {
-          const parentParsed = parseItemId(parentId);
-          if (parentParsed) {
-            const parentFolder = TYPE_TO_DIRECTORY[parentParsed.type];
-            const parentPath = join(devstepsir, parentFolder, `${parentId}.json`);
-            if (existsSync(parentPath)) {
-              const parentMeta = JSON.parse(readFileSync(parentPath, 'utf-8'));
-              const siblings = parentMeta.linked_items['implemented-by'] || [];
+          try {
+            const { metadata: parentMeta } = await getItem(devstepsir, parentId);
+            const siblings = parentMeta.linked_items['implemented-by'] || [];
 
-              let allDone = true;
-              for (const siblingId of siblings) {
-                const sibParsed = parseItemId(siblingId);
-                if (sibParsed) {
-                  const sibFolder = TYPE_TO_DIRECTORY[sibParsed.type];
-                  const sibPath = join(devstepsir, sibFolder, `${siblingId}.json`);
-                  if (existsSync(sibPath)) {
-                    const sibMeta = JSON.parse(readFileSync(sibPath, 'utf-8'));
-                    if (sibMeta.status !== STATUS.DONE && sibMeta.status !== STATUS.CANCELLED) {
-                      allDone = false;
-                      break;
-                    }
-                  }
+            let allDone = true;
+            for (const siblingId of siblings) {
+              try {
+                const { metadata: sibMeta } = await getItem(devstepsir, siblingId);
+                if (sibMeta.status !== STATUS.DONE && sibMeta.status !== STATUS.CANCELLED) {
+                  allDone = false;
+                  break;
                 }
-              }
-
-              if (allDone && parentMeta.status !== STATUS.DONE) {
-                console.log(
-                  chalk.gray('💡'),
-                  `All implementations of ${chalk.cyan(parentId)} are complete! Consider reviewing parent.`
-                );
+              } catch {
+                allDone = false;
+                break;
               }
             }
+
+            if (allDone && parentMeta.status !== STATUS.DONE) {
+              console.log(
+                chalk.gray('💡'),
+                `All implementations of ${chalk.cyan(parentId)} are complete! Consider reviewing parent.`
+              );
+            }
+          } catch {
+            // Parent not found - skip
           }
         }
       } else if (options.status === STATUS.REVIEW) {

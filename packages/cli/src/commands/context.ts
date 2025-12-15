@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { getCache, hasRefsStyleIndex, loadAllIndexes } from '@schnick371/devsteps-shared';
+import { getCache, hasRefsStyleIndex, loadAllIndexes, getConfig } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 
 function getDevStepsDir(): string {
@@ -62,8 +62,8 @@ export async function contextStatsCommand() {
   }
 
   // Config info
-  if (existsSync(join(devstepsir, 'config.json'))) {
-    const config = JSON.parse(readFileSync(join(devstepsir, 'config.json'), 'utf-8'));
+  try {
+    const config = await getConfig(devstepsir);
     const daysSinceInit = Math.floor(
       (Date.now() - new Date(config.created).getTime()) / (1000 * 60 * 60 * 24)
     );
@@ -72,6 +72,8 @@ export async function contextStatsCommand() {
     console.log(chalk.gray('  Name:'), chalk.cyan(config.project_name));
     console.log(chalk.gray('  Age:'), chalk.cyan(`${daysSinceInit} days`));
     console.log(chalk.gray('  Methodology:'), chalk.cyan(config.settings.methodology));
+  } catch {
+    // Config not found or corrupted
   }
 
   console.log();
