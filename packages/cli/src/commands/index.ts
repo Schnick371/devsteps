@@ -11,6 +11,7 @@ import {
   getCurrentTimestamp,
   parseItemId,
   validateRelationship,
+  listItems,
 } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 import ora from 'ora';
@@ -536,10 +537,23 @@ export async function statusCommand(options: any) {
   try {
     const devstepsir = getDevStepsDir();
     const configPath = join(devstepsir, 'config.json');
-    const indexPath = join(devstepsir, 'index.json');
-
     const config = JSON.parse(readFileSync(configPath, 'utf-8'));
-    const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
+    
+    // Use new index-refs API
+    const itemsResult = await listItems(devstepsir, {});
+    const allItems = itemsResult.items;
+    
+    // Calculate stats
+    const stats = {
+      total: allItems.length,
+      by_type: {} as Record<string, number>,
+      by_status: {} as Record<string, number>,
+    };
+    
+    for (const item of allItems) {
+      stats.by_type[item.type] = (stats.by_type[item.type] || 0) + 1;
+      stats.by_status[item.status] = (stats.by_status[item.status] || 0) + 1;
+    }
 
     console.log();
     console.log(chalk.bold.cyan(`📊 ${config.project_name}`));
@@ -549,23 +563,23 @@ export async function statusCommand(options: any) {
     console.log();
 
     console.log(chalk.bold('Statistics:'));
-    console.log(chalk.gray('  Total Items:'), index.stats.total);
+    console.log(chalk.gray('  Total Items:'), stats.total);
     console.log();
 
     console.log(chalk.bold('  By Type:'));
-    for (const [type, count] of Object.entries(index.stats.by_type)) {
+    for (const [type, count] of Object.entries(stats.by_type)) {
       console.log(chalk.gray(`    ${type}:`), count);
     }
     console.log();
 
     console.log(chalk.bold('  By Status:'));
-    for (const [status, count] of Object.entries(index.stats.by_status)) {
+    for (const [status, count] of Object.entries(stats.by_status)) {
       console.log(chalk.gray(`    ${status}:`), count);
     }
     console.log();
 
     // Check for stale items
-    const staleItems = index.items.filter((item: any) => {
+    const staleItems = allItems.filter((item: any) => {
       if (item.status === STATUS.IN_PROGRESS) {
         const daysSinceUpdate =
           (Date.now() - new Date(item.updated).getTime()) / (1000 * 60 * 60 * 24);
@@ -587,7 +601,7 @@ export async function statusCommand(options: any) {
     }
 
     if (options.detailed) {
-      const recent = [...index.items]
+      const recent = [...allItems]
         .sort((a: any, b: any) => new Date(b.updated).getTime() - new Date(a.updated).getTime())
         .slice(0, 5);
 
