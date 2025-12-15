@@ -12,6 +12,7 @@ import {
   parseItemId,
   validateRelationship,
   listItems,
+  updateItemInIndex,
 } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 import ora from 'ora';
@@ -264,25 +265,10 @@ export async function updateCommand(id: string, options: any) {
       writeFileSync(descriptionPath, existing + options.appendDescription);
     }
 
-    const indexPath = join(devstepsir, 'index.json');
-    const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
-
-    const itemIndex = index.items.findIndex((i: any) => i.id === id);
-    if (itemIndex !== -1) {
-      if (options.status) index.items[itemIndex].status = options.status;
-      // Priority removed from index items; Eisenhower remains in metadata only
-      if ((options as any).eisenhower) metadata.eisenhower = (options as any).eisenhower;
-      if (options.title) index.items[itemIndex].title = options.title;
-      index.items[itemIndex].updated = metadata.updated;
-
-      if (options.status && oldStatus !== options.status) {
-        index.stats.by_status[oldStatus] = (index.stats.by_status[oldStatus] || 1) - 1;
-        index.stats.by_status[options.status] = (index.stats.by_status[options.status] || 0) + 1;
-      }
+    // Update refs-style index (handles type/status/priority changes)
+    if (options.status && oldStatus !== options.status) {
+      updateItemInIndex(devstepsir, metadata);
     }
-
-    index.last_updated = metadata.updated;
-    writeFileSync(indexPath, JSON.stringify(index, null, 2));
 
     spinner.succeed(`Updated ${chalk.cyan(id)}`);
 
