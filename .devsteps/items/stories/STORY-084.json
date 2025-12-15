@@ -1,0 +1,34 @@
+{
+  "id": "STORY-084",
+  "type": "story",
+  "category": "general",
+  "title": "CLI Long-form Flags - Improve Command Discoverability",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-15T10:27:24.785Z",
+  "updated": "2025-12-15T10:28:05.969Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-001"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-002"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ux,cli,developer-experience,ergonomics"
+  ],
+  "commits": [],
+  "metadata": {}
+}

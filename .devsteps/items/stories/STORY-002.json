@@ -6,7 +6,7 @@
   "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T15:33:47.334Z",
-  "updated": "2025-11-24T10:21:56.070Z",
+  "updated": "2025-12-15T10:28:05.970Z",
   "author": "thomas.hertel@devsteps.dev",
   "affected_paths": [
     "packages/cli/src/",
@@ -27,7 +27,8 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "FEAT-002"
+      "FEAT-002",
+      "STORY-084"
     ],
     "depends-on": [],
     "required-by": [],
