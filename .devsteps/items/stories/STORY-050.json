@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-02T14:56:08.673Z",
-  "updated": "2025-12-02T14:58:19.926Z",
+  "updated": "2025-12-15T16:32:48.506Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "tests/integration/cli/"
@@ -19,7 +19,9 @@
       "TASK-106",
       "TASK-107",
       "TASK-108",
-      "TASK-109"
+      "TASK-109",
+      "TASK-199",
+      "TASK-200"
     ],
     "tested-by": [],
     "tests": [],

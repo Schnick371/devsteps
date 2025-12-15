@@ -1,0 +1,34 @@
+{
+  "id": "TASK-200",
+  "type": "task",
+  "category": "general",
+  "title": "Create GitHub Actions CI workflow for automated testing",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-15T16:32:39.346Z",
+  "updated": "2025-12-15T16:32:48.505Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/workflows/test.yml"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-050"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "testing,ci-cd,github-actions,automation"
+  ],
+  "commits": [],
+  "metadata": {}
+}
