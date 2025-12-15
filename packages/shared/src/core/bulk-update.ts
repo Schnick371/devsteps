@@ -95,18 +95,8 @@ export async function bulkAddTags(
 
       writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
 
-      // Update index (only for legacy index.json)
-      if (!hasRefsStyleIndex(devstepsir)) {
-        const indexPath = join(devstepsir, 'index.json');
-        const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
-        const itemIndex = index.items.findIndex((i: { id: string }) => i.id === id);
-        if (itemIndex >= 0) {
-          index.items[itemIndex].updated = metadata.updated;
-        }
-        index.last_updated = getCurrentTimestamp();
-        writeFileSync(indexPath, JSON.stringify(index, null, 2));
-      }
-      // For refs-style index, tags are already in metadata file only
+      // Note: Tags are stored in metadata only (refs-style index has no tags field)
+      // No index update needed with auto-migration
 
       result.success.push(id);
     } catch (error) {
@@ -162,18 +152,8 @@ export async function bulkRemoveTags(
 
       writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
 
-      // Update index (only for legacy index.json)
-      if (!hasRefsStyleIndex(devstepsir)) {
-        const indexPath = join(devstepsir, 'index.json');
-        const index = JSON.parse(readFileSync(indexPath, 'utf-8'));
-        const itemIndex = index.items.findIndex((i: { id: string }) => i.id === id);
-        if (itemIndex >= 0) {
-          index.items[itemIndex].updated = metadata.updated;
-        }
-        index.last_updated = getCurrentTimestamp();
-        writeFileSync(indexPath, JSON.stringify(index, null, 2));
-      }
-      // For refs-style index, tags are already in metadata file only
+      // Note: Tags are stored in metadata only (refs-style index has no tags field)
+      // No index update needed with auto-migration
 
       result.success.push(id);
     } catch (error) {
