@@ -18,6 +18,19 @@ import { logger } from './outputChannel.js';
 import { detectMcpRuntime, formatDiagnostics, type McpRuntimeConfig } from './utils/runtimeDetector.js';
 
 /**
+ * Check if extension is running as pre-release version
+ * 
+ * Pre-release extensions should use @next tag for npm packages to ensure
+ * compatibility with experimental features.
+ * 
+ * @param context Extension context with package.json access
+ * @returns True if extension is marked as pre-release
+ */
+function isPreRelease(context: vscode.ExtensionContext): boolean {
+  return context.extension.packageJSON.preRelease === true;
+}
+
+/**
  * Manages the DevSteps MCP server lifecycle
  * 
  * Implements intelligent runtime detection:
@@ -42,6 +55,24 @@ export class McpServerManager {
     // Event emitter for server definition changes
     this.changeEmitter = new vscode.EventEmitter<void>();
     this.context.subscriptions.push(this.changeEmitter);
+  }
+
+  /**
+   * Get MCP server package name based on pre-release status
+   * 
+   * Pre-release extensions use @next tag to get compatible MCP server versions.
+   * Stable releases use latest version without tag.
+   * 
+   * @returns Package specifier for npx
+   */
+  private getMcpServerPackage(): string {
+    const usePreRelease = isPreRelease(this.context);
+    const packageName = usePreRelease
+      ? '@schnick371/devsteps-mcp-server@next'
+      : '@schnick371/devsteps-mcp-server';
+    
+    logger.info(`Using MCP server package: ${packageName} (pre-release: ${usePreRelease})`);
+    return packageName;
   }
 
   /**
@@ -74,7 +105,8 @@ export class McpServerManager {
       
       // Detect available runtime (with optional bundled server path)
       const bundledServerPath = path.join(this.context.extensionPath, 'dist', 'mcp-server.js');
-      this.runtimeConfig = await detectMcpRuntime(bundledServerPath);
+      const mcpPackage = this.getMcpServerPackage();
+      this.runtimeConfig = await detectMcpRuntime(bundledServerPath, mcpPackage);
       
       // Log diagnostics
       logger.info(formatDiagnostics(this.runtimeConfig.diagnostics));
@@ -214,12 +246,13 @@ export class McpServerManager {
       if (selection === 'Open Documentation') {
         vscode.env.openExternal(vscode.Uri.parse('https://github.com/devsteps/devsteps#mcp-setup'));
       } else if (selection === 'Copy Config') {
+        const mcpPackage = this.getMcpServerPackage();
         const config = {
           servers: {
             devsteps: {
               type: 'stdio',
               command: 'npx',
-              args: ['-y', '--package=@schnick371/devsteps-mcp-server', 'devsteps-mcp'],
+              args: ['-y', `--package=${mcpPackage}`, 'devsteps-mcp'],
             },
           },
         };
