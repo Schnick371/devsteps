@@ -1,0 +1,37 @@
+{
+  "id": "BUG-048",
+  "type": "bug",
+  "category": "deployment",
+  "title": "npm @next package incomplete - missing dist/handlers files",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-16T08:04:49.567Z",
+  "updated": "2025-12-16T08:04:49.567Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/package.json",
+    "packages/mcp-server/dist/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "bug",
+    "npm",
+    "publication",
+    "pre-release",
+    "mcp-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}
