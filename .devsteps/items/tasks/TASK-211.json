@@ -1,0 +1,36 @@
+{
+  "id": "TASK-211",
+  "type": "task",
+  "category": "general",
+  "title": "Add default binary entry for npx compatibility",
+  "status": "in-progress",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-16T14:29:29.589Z",
+  "updated": "2025-12-16T14:29:37.392Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/package.json"
+  ],
+  "linked_items": {
+    "implements": [
+      "BUG-052"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "npm",
+    "packaging"
+  ],
+  "commits": [],
+  "metadata": {}
+}

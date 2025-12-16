@@ -29,6 +29,7 @@
   ],
   "main": "./dist/index.js",
   "bin": {
+    "devsteps-mcp-server": "bin/devsteps-mcp.js",
     "devsteps-mcp": "bin/devsteps-mcp.js",
     "devsteps-mcp-tsx": "bin/devsteps-mcp-tsx.js"
   },
