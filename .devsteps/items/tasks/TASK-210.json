@@ -1,0 +1,37 @@
+{
+  "id": "TASK-210",
+  "type": "task",
+  "category": "mcp-server",
+  "title": "Add workspace path validation to getWorkspacePath()",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-16T13:53:24.229Z",
+  "updated": "2025-12-16T13:53:28.992Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/workspace.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "BUG-051"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp-server",
+    "validation",
+    "error-handling",
+    "defensive-programming"
+  ],
+  "commits": [],
+  "metadata": {}
+}

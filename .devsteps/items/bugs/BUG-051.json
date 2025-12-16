@@ -1,0 +1,30 @@
+{
+  "id": "BUG-051",
+  "type": "bug",
+  "category": "mcp-server",
+  "title": "MCP Server crashes with 'path argument must be of type string' when no workspace folder is open",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-16T13:51:42.141Z",
+  "updated": "2025-12-16T13:53:28.992Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-210"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}
