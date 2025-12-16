@@ -43,18 +43,18 @@ export interface AddItemResult {
  * Core business logic for adding a new item to devsteps
  * Pure function that handles all file I/O and validation
  */
-export async function addItem(devstepsir: string, args: AddItemArgs): Promise<AddItemResult> {
+export async function addItem(devstepsDir: string, args: AddItemArgs): Promise<AddItemResult> {
   // Check if initialized
-  if (!existsSync(devstepsir)) {
+  if (!existsSync(devstepsDir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
   // Read config and index
-  const config = await getConfig(devstepsir);
+  const config = await getConfig(devstepsDir);
 
   // Get counter (auto-migration ensures refs-style index is always available)
   const counterKey = getTypePrefix(args.type); // Use uppercase prefix for consistency
-  const counters = loadCounters(devstepsir);
+  const counters = loadCounters(devstepsDir);
   const counter = (counters[counterKey] || 0) + 1;
   
   // Generate ID using global counter
@@ -94,7 +94,7 @@ export async function addItem(devstepsir: string, args: AddItemArgs): Promise<Ad
   };
 
   // Save metadata
-  const itemDir = join(devstepsir, typeFolder);
+  const itemDir = join(devstepsDir, typeFolder);
   const metadataPath = join(itemDir, `${itemId}.json`);
   const descriptionPath = join(itemDir, `${itemId}.md`);
 
@@ -106,12 +106,12 @@ export async function addItem(devstepsir: string, args: AddItemArgs): Promise<Ad
   writeFileSync(descriptionPath, description);
 
   // Update index (auto-migration ensures refs-style always available)
-  const currentCounters = loadCounters(devstepsir);
+  const currentCounters = loadCounters(devstepsDir);
   currentCounters[counterKey] = counter;
-  updateCounters(devstepsir, currentCounters);
+  updateCounters(devstepsDir, currentCounters);
   
   // Add to all relevant indexes (by-type, by-status, by-priority)
-  addItemToIndex(devstepsir, metadata);
+  addItemToIndex(devstepsDir, metadata);
 
   return {
     itemId,

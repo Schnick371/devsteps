@@ -33,10 +33,10 @@ export interface UpdateItemResult {
  * Core business logic for updating an item
  */
 export async function updateItem(
-  devstepsir: string,
+  devstepsDir: string,
   args: UpdateItemArgs
 ): Promise<UpdateItemResult> {
-  if (!existsSync(devstepsir)) {
+  if (!existsSync(devstepsDir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
@@ -46,15 +46,15 @@ export async function updateItem(
   }
 
   const typeFolder = TYPE_TO_DIRECTORY[parsed.type];
-  const metadataPath = join(devstepsir, typeFolder, `${args.id}.json`);
-  const descriptionPath = join(devstepsir, typeFolder, `${args.id}.md`);
+  const metadataPath = join(devstepsDir, typeFolder, `${args.id}.json`);
+  const descriptionPath = join(devstepsDir, typeFolder, `${args.id}.md`);
 
   if (!existsSync(metadataPath)) {
     throw new Error(`Item not found: ${args.id}`);
   }
 
   // Read and update metadata
-  const { metadata } = await getItem(devstepsir, args.id);
+  const { metadata } = await getItem(devstepsDir, args.id);
   const oldStatus = metadata.status;
 
   // Validate status transitions (parent-child rules)
@@ -68,7 +68,7 @@ export async function updateItem(
           const childParsed = parseItemId(childId);
           if (childParsed) {
             try {
-              const { metadata: childMeta } = await getItem(devstepsir, childId);
+              const { metadata: childMeta } = await getItem(devstepsDir, childId);
               if (childMeta.status !== STATUS.DONE && childMeta.status !== STATUS.CANCELLED && childMeta.status !== STATUS.OBSOLETE) {
                 openChildren.push(childId);
               }
@@ -129,7 +129,7 @@ export async function updateItem(
   // Only update if status or eisenhower changed (triggers re-indexing)
   if (args.status || args.eisenhower) {
     updateItemInIndex(
-      devstepsir,
+      devstepsDir,
       args.id,
       oldStatus,
       args.status,

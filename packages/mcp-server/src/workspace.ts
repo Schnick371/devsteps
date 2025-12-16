@@ -10,9 +10,22 @@
  * 
  * First checks CLI argument (process.argv[2]) as this is the standard MCP pattern.
  * Falls back to process.cwd() if no argument provided.
+ * 
+ * @throws {Error} If no workspace path is available
  */
 export function getWorkspacePath(): string {
   // CLI argument takes precedence (Standard MCP pattern)
   const workspaceArg = process.argv[2];
-  return workspaceArg || process.cwd();
+  const cwd = process.cwd();
+  const workspacePath = workspaceArg || cwd;
+  
+  if (!workspacePath) {
+    throw new Error(
+      'No workspace path available. DevSteps requires a workspace folder.\n' +
+      'Please open a folder in VS Code or provide a path argument.\n' +
+      'Usage: devsteps-mcp <workspace-path>'
+    );
+  }
+  
+  return workspacePath;
 }
