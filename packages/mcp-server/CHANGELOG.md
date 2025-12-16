@@ -2,6 +2,22 @@
 
 All notable changes to the DevSteps MCP Server will be documented in this file.
 
+## [0.8.6] - 2025-12-16
+
+### Fixed
+- **npx compatibility:** Added default binary `devsteps-mcp-server` matching package name (BUG-052, TASK-211)
+- Enables `npx @schnick371/devsteps-mcp-server` without explicit binary name
+- Extension auto-uses this version via npx @latest mechanism
+
+### Changed
+- Binary entries: Added `devsteps-mcp-server` as default (points to bin/devsteps-mcp.js)
+- Kept `devsteps-mcp` and `devsteps-mcp-tsx` for backward compatibility
+
+### Impact
+- VS Code extension can now correctly spawn MCP server via npx
+- Users can test with: `npx @schnick371/devsteps-mcp-server --help`
+- No manual installation required
+
 ## [0.8.5] - 2025-12-16
 
 ### Fixed
