@@ -7,6 +7,7 @@
   "publisher": "devsteps",
   "license": "Apache-2.0",
   "author": "Thomas Hertel (the@devsteps.dev)",
+  "preRelease": true,
   "engines": {
     "vscode": "^1.99.0"
   },

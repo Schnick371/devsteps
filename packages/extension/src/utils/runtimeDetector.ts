@@ -145,9 +145,10 @@ async function getCommandVersion(command: string): Promise<string | undefined> {
  * 3. none (error - show installation guide)
  * 
  * @param bundledServerPath Optional path to bundled MCP server for node fallback
+ * @param mcpPackage NPM package specifier (e.g., '@schnick371/devsteps-mcp-server@next')
  * @returns MCP runtime configuration
  */
-export async function detectMcpRuntime(bundledServerPath?: string): Promise<McpRuntimeConfig> {
+export async function detectMcpRuntime(bundledServerPath?: string, mcpPackage = '@schnick371/devsteps-mcp-server'): Promise<McpRuntimeConfig> {
   // Check all runtimes in parallel
   const [npxInfo, nodeInfo, npmInfo] = await Promise.all([
     checkCommand('npx'),
@@ -160,7 +161,7 @@ export async function detectMcpRuntime(bundledServerPath?: string): Promise<McpR
     return {
       strategy: 'npx',
       command: 'npx',
-      args: ['-y', '--package=@schnick371/devsteps-mcp-server', 'devsteps-mcp'],
+      args: ['-y', `--package=${mcpPackage}`, 'devsteps-mcp'],
       diagnostics: { npx: npxInfo, node: nodeInfo, npm: npmInfo },
     };
   }
