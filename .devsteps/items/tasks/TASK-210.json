@@ -3,10 +3,10 @@
   "type": "task",
   "category": "mcp-server",
   "title": "Add workspace path validation to getWorkspacePath()",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-12-16T13:53:24.229Z",
-  "updated": "2025-12-16T14:08:21.017Z",
+  "updated": "2025-12-16T14:15:28.670Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/workspace.ts"
