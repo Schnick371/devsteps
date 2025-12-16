@@ -3,10 +3,10 @@
   "type": "task",
   "category": "CLI",
   "title": "Fix: Display all relationship types in get output",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-12-15T17:16:41.250Z",
-  "updated": "2025-12-15T17:16:46.207Z",
+  "updated": "2025-12-16T06:30:36.141Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/cli/src/commands/index.ts",
