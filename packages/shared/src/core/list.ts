@@ -35,37 +35,37 @@ export interface ListItemsResult {
  * Core business logic for listing items with filters
  */
 export async function listItems(
-  devstepsir: string,
+  devstepsDir: string,
   args: ListItemsArgs = {}
 ): Promise<ListItemsResult> {
-  if (!existsSync(devstepsir)) {
+  if (!existsSync(devstepsDir)) {
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
   // Try new refs-style index first, fall back to legacy
   let allIndexItems: string[] = [];
   
-  if (hasRefsStyleIndex(devstepsir)) {
+  if (hasRefsStyleIndex(devstepsDir)) {
     // Use optimized index lookups based on filter
     // For multi-dimensional filters, choose most selective index first
     if (args.status) {
       // Status index is usually most selective
-      allIndexItems = loadIndexByStatus(devstepsir, args.status);
+      allIndexItems = loadIndexByStatus(devstepsDir, args.status);
     } else if (args.type) {
-      allIndexItems = loadIndexByType(devstepsir, args.type);
+      allIndexItems = loadIndexByType(devstepsDir, args.type);
     } else if (args.eisenhower) {
-      allIndexItems = loadIndexByPriority(devstepsir, args.eisenhower);
+      allIndexItems = loadIndexByPriority(devstepsDir, args.eisenhower);
     } else {
       // No filter - load all via type indexes
       const allTypes: ItemType[] = ['epic', 'story', 'task', 'bug', 'spike', 'test', 'feature', 'requirement'];
       for (const type of allTypes) {
-        const typeItems = loadIndexByType(devstepsir, type);
+        const typeItems = loadIndexByType(devstepsDir, type);
         allIndexItems.push(...typeItems);
       }
     }
   } else {
     // Legacy index.json
-    const legacyIndex = loadLegacyIndex(devstepsir);
+    const legacyIndex = loadLegacyIndex(devstepsDir);
     allIndexItems = legacyIndex.items.map((item) => item.id);
   }
 
@@ -88,11 +88,11 @@ export async function listItems(
     
     if (!type) return null;
     
-    const metadataPath = join(devstepsir, TYPE_TO_DIRECTORY[type], `${id}.json`);
+    const metadataPath = join(devstepsDir, TYPE_TO_DIRECTORY[type], `${id}.json`);
     if (!existsSync(metadataPath)) return null;
     
     try {
-      const { metadata } = await getItem(devstepsir, id);
+      const { metadata } = await getItem(devstepsDir, id);
       return {
         id: metadata.id,
         type: metadata.type,

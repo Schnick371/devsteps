@@ -14,13 +14,13 @@ export interface BulkUpdateResult {
 
 /**
  * Bulk update multiple items at once
- * @param devstepsir Path to .devsteps directory
+ * @param devstepsDir Path to .devsteps directory
  * @param itemIds Array of item IDs to update
  * @param updates Partial item metadata to apply to all items
  * @returns Result with success and failure lists
  */
 export async function bulkUpdateItems(
-  devstepsir: string,
+  devstepsDir: string,
   itemIds: string[],
   updates: Partial<ItemMetadata>
 ): Promise<BulkUpdateResult> {
@@ -32,7 +32,7 @@ export async function bulkUpdateItems(
 
   for (const id of itemIds) {
     try {
-      await updateItem(devstepsir, {
+      await updateItem(devstepsDir, {
         id,
         ...updates,
       });
@@ -50,13 +50,13 @@ export async function bulkUpdateItems(
 
 /**
  * Bulk add tags to multiple items
- * @param devstepsir Path to .devsteps directory
+ * @param devstepsDir Path to .devsteps directory
  * @param itemIds Array of item IDs
  * @param tagsToAdd Tags to add
  * @returns Result with success and failure lists
  */
 export async function bulkAddTags(
-  devstepsir: string,
+  devstepsDir: string,
   itemIds: string[],
   tagsToAdd: string[]
 ): Promise<BulkUpdateResult> {
@@ -77,12 +77,12 @@ export async function bulkAddTags(
         throw new Error(`Invalid item ID: ${id}`);
       }
 
-      const metadataPath = join(devstepsir, folder, `${id}.json`);
+      const metadataPath = join(devstepsDir, folder, `${id}.json`);
       if (!existsSync(metadataPath)) {
         throw new Error(`Item ${id} not found`);
       }
 
-      const { metadata } = await getItem(devstepsir, id);
+      const { metadata } = await getItem(devstepsDir, id);
 
       // Add new tags (avoid duplicates)
       const existingTags = new Set(metadata.tags);
@@ -112,13 +112,13 @@ export async function bulkAddTags(
 
 /**
  * Bulk remove tags from multiple items
- * @param devstepsir Path to .devsteps directory
+ * @param devstepsDir Path to .devsteps directory
  * @param itemIds Array of item IDs
  * @param tagsToRemove Tags to remove
  * @returns Result with success and failure lists
  */
 export async function bulkRemoveTags(
-  devstepsir: string,
+  devstepsDir: string,
   itemIds: string[],
   tagsToRemove: string[]
 ): Promise<BulkUpdateResult> {
@@ -139,12 +139,12 @@ export async function bulkRemoveTags(
         throw new Error(`Invalid item ID: ${id}`);
       }
 
-      const metadataPath = join(devstepsir, folder, `${id}.json`);
+      const metadataPath = join(devstepsDir, folder, `${id}.json`);
       if (!existsSync(metadataPath)) {
         throw new Error(`Item ${id} not found`);
       }
 
-      const { metadata } = await getItem(devstepsir, id);
+      const { metadata } = await getItem(devstepsDir, id);
 
       // Remove tags
       metadata.tags = metadata.tags.filter((tag) => !tagsToRemove.includes(tag));
