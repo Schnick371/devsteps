@@ -5,6 +5,7 @@ import { type Methodology, getCurrentTimestamp, getMethodologyConfig, initialize
 import type { DevStepsConfig } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 import ora from 'ora';
+import packageJson from '../../package.json' with { type: 'json' };
 
 export async function initCommand(
   projectName: string | undefined,
@@ -45,7 +46,7 @@ export async function initCommand(
 
     // Create config
     const config: DevStepsConfig = {
-      version: '0.1.0',
+      version: packageJson.version,
       project_name: name,
       project_id: `devsteps-${Date.now()}`,
       created: getCurrentTimestamp(),
