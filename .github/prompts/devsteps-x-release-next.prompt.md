@@ -152,6 +152,9 @@ npm run package
 - ✅ Extension bundle: dist/extension.js (~340 KB)
 - ✅ MCP server bundle: dist/mcp-server/index.js (~500 KB)
 - ✅ VSIX created: devsteps-X.Y.Z-next.N.vsix
+- ✅ npm packages: all have the correct version
+- ✅ npm packages: mcp and Cli have the correct version in dependencies
+
 
 ## Step 5: npm Publishing to @next Tag
 
@@ -159,18 +162,21 @@ npm run package
 
 ### 5.1 Shared Package
 ```bash
+export BROWSER='/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe'
 cd packages/shared
 npm publish --access public --tag next
 ```
 
 ### 5.2 CLI Package
 ```bash
+export BROWSER='/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe'
 cd packages/cli
 npm publish --access public --tag next
 ```
 
 ### 5.3 MCP Server
 ```bash
+export BROWSER='/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe'
 cd packages/mcp-server
 npm publish --access public --tag next
 ```
