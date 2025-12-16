@@ -5,6 +5,23 @@ All notable changes to the "DevSteps" extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.4] - 2025-12-16
+
+### Fixed
+- MCP server version detection working correctly (TASK-207, BUG-047)
+- Stable release using `@schnick371/devsteps-mcp-server@0.8.4`
+- All pre-release fixes integrated and verified
+
+### Changed
+- Production-ready extension with stable MCP server
+- Clean semantic version for marketplace release
+- Uses stable @latest npm packages (no @next)
+
+### Validation
+- ✅ MCP server starts correctly via npx
+- ✅ All DevSteps commands functional
+- ✅ Version detection works as expected
+
 ## [0.8.2] - 2025-12-16 (Pre-release)
 
 ### Fixed

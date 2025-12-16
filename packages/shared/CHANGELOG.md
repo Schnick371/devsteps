@@ -2,6 +2,17 @@
 
 All notable changes to `@schnick371/devsteps-shared` will be documented in this file.
 
+## [0.8.4] - 2025-12-16
+
+### Fixed
+- Stable release with all pre-release fixes integrated
+- Type compatibility with MCP server 0.8.4
+- Schema validation across all packages
+
+### Changed
+- Clean semantic version (no pre-release suffix)
+- Production-ready types and schemas
+
 ## [0.7.0-next.3] - 2025-12-09 (Pre-release)
 
 ### ⚠️ Experimental Features

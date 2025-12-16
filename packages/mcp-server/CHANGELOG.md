@@ -2,6 +2,24 @@
 
 All notable changes to the DevSteps MCP Server will be documented in this file.
 
+## [0.8.4] - 2025-12-16
+
+### Fixed
+- **STABLE RELEASE:** All TypeScript build issues resolved (BUG-048, TASK-208)
+- MCP server package now complete with all 30 handler files
+- Build uses `tsc --build` for proper composite mode compilation
+- Global npm installation via npx works correctly
+
+### Changed
+- Production-ready with verified build process
+- Clean semantic version (no pre-release suffix)
+- Updated to use `@schnick371/devsteps-shared@0.8.4`
+
+### Validation
+- ✅ Complete package with all .js files included
+- ✅ MCP server starts successfully via npx
+- ✅ All handlers functional and tested
+
 ## [0.8.1-next.6] - 2025-12-16 (Pre-release)
 
 ### 🐛 Bug Fixes

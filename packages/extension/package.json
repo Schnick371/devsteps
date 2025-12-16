@@ -2,12 +2,11 @@
   "name": "devsteps",
   "displayName": "DevSteps",
   "description": "Never Code Alone. AI-first development workflow - track tasks, epics, stories with your AI copilot.",
-  "version": "0.8.2",
+  "version": "0.8.4",
   "type": "module",
   "publisher": "devsteps",
   "license": "Apache-2.0",
   "author": "Thomas Hertel (the@devsteps.dev)",
-  "preRelease": true,
   "engines": {
     "vscode": "^1.99.0"
   },

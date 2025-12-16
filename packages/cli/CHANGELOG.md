@@ -2,6 +2,17 @@
 
 All notable changes to `@schnick371/devsteps-cli` will be documented in this file.
 
+## [0.8.4] - 2025-12-16
+
+### Fixed
+- Stable release with global npm installation working correctly
+- All esbuild bundling improvements from 0.6.11 verified
+- Production-ready CLI executable
+
+### Changed
+- Updated to use `@schnick371/devsteps-shared@0.8.4`
+- Clean semantic version for stable release
+
 ## [0.7.0-next.3] - 2025-12-09 (Pre-release)
 
 ### ⚠️ Experimental Features
