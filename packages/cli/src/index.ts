@@ -13,10 +13,11 @@ import {
   updateCommand,
 } from './commands/index.js';
 import { initCommand } from './commands/init.js';
+import packageJson from '../package.json' with { type: 'json' };
 
 const program = new Command();
 
-program.name('devsteps').description('AI-powered developer task tracking system').version('0.1.0');
+program.name('devsteps').description('AI-powered developer task tracking system').version(packageJson.version);
 
 // Initialize project
 program
