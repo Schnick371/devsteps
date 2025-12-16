@@ -5,6 +5,22 @@ All notable changes to the "DevSteps" extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.2] - 2025-12-16 (Pre-release)
+
+### Fixed
+- MCP server version detection now works correctly (TASK-207, BUG-047)
+- Pre-release extensions now use `@schnick371/devsteps-mcp-server@next`
+- Requires MCP Server 0.8.1-next.6 or later (earlier @next versions broken)
+
+### Technical
+- Added `preRelease: true` field to package.json for runtime detection
+- Extension detects pre-release status via `context.extension.packageJSON.preRelease`
+- Dynamically selects npm package tag (@next vs @latest)
+
+### Notes
+- This release works with MCP Server 0.8.1-next.6+ only
+- Skip MCP Server 0.8.1-next.5 (incomplete package)
+
 ## [0.7.0-next.3] - 2025-12-09 (Pre-release)
 
 ### ⚠️ Experimental Features

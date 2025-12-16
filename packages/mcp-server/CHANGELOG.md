@@ -2,6 +2,33 @@
 
 All notable changes to the DevSteps MCP Server will be documented in this file.
 
+## [0.8.1-next.6] - 2025-12-16 (Pre-release)
+
+### 🐛 Bug Fixes
+- **CRITICAL:** Fixed build script to use `tsc --build` instead of `tsc` (BUG-048, TASK-208)
+- **Impact:** MCP Server package now includes all .js files (was missing 6 files in 0.8.1-next.5)
+- **Files Fixed:** dist/index.js, dist/handlers/health.js, and all other handlers
+- **Root Cause:** TypeScript composite mode requires `--build` flag to emit .js files
+
+### 🔧 Changes
+- Updated build script: `tsc && ...` → `tsc --build && ...`
+- Updated clean script to remove `*.tsbuildinfo` cache files
+
+### ✅ Validation
+- ✅ Clean build creates all 30 handler files (15 .js + 15 .d.ts)
+- ✅ npm package complete (51 files vs 45 in broken version)
+- ✅ MCP server starts successfully via npx
+
+### Known Issues from Previous Releases
+- Extension 0.8.1-0.8.3 correctly detect pre-release and request @next
+- This release (0.8.1-next.6) is the FIRST working @next version
+- 0.8.1-next.5 was broken - skip this version!
+
+### Testing Needed
+- Install: `npx -y --package=@schnick371/devsteps-mcp-server@next devsteps-mcp`
+- Verify: MCP server starts without ERR_MODULE_NOT_FOUND
+- Extension: Install 0.8.2 as pre-release and test MCP commands
+
 ## [0.7.0-next.3] - 2025-12-09 (Pre-release)
 
 ### ⚠️ Experimental Features
