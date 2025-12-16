@@ -1,0 +1,28 @@
+{
+  "id": "BUG-050",
+  "type": "bug",
+  "category": "mcp-server",
+  "title": "MCP Server shows wrong version (0.1.0 instead of package.json version)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-16T13:14:32.219Z",
+  "updated": "2025-12-16T13:14:32.219Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}
