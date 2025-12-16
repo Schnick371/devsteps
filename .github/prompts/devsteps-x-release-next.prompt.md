@@ -155,6 +155,7 @@ npm run package
 - ✅ npm packages: all have the correct version
 - ✅ npm packages: mcp and Cli have the correct version in dependencies
 
+**Mandatory: Ask user to confirm successful build before publishing**
 
 ## Step 5: npm Publishing to @next Tag
 
