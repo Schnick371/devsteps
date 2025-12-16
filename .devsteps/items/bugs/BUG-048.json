@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2025-12-16T08:04:49.567Z",
-  "updated": "2025-12-16T08:04:49.567Z",
+  "updated": "2025-12-16T08:09:59.337Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/package.json",
@@ -14,7 +14,9 @@
   ],
   "linked_items": {
     "implements": [],
-    "implemented-by": [],
+    "implemented-by": [
+      "TASK-208"
+    ],
     "tested-by": [],
     "tests": [],
     "blocks": [],
