@@ -1,0 +1,37 @@
+{
+  "id": "TASK-207",
+  "type": "task",
+  "category": "extension",
+  "title": "Update extension to use @next MCP server for pre-release builds",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-16T07:39:20.428Z",
+  "updated": "2025-12-16T07:39:28.245Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/mcp-server/mcpServerManager.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "BUG-047"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "task",
+    "mcp-server",
+    "deployment",
+    "build"
+  ],
+  "commits": [],
+  "metadata": {}
+}

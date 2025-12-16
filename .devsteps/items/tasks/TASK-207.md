@@ -1,0 +1,1 @@
+Modify mcpServerManager.ts to detect pre-release versions and use npx @schnick371/devsteps-mcp-server@next instead of @latest. Ensures pre-release extensions use compatible pre-release MCP server versions.
