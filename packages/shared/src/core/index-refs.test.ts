@@ -33,8 +33,8 @@ describe('Refs-Style Index Operations', () => {
 	let devstepsDir: string;
 
 	beforeEach(() => {
-		// Create temporary test directory
-		testDir = join(tmpdir(), `devsteps-test-${Date.now()}`);
+		// Create temporary test directory with random suffix to avoid parallel test collisions
+		testDir = join(tmpdir(), `devsteps-test-${Date.now()}-${Math.random().toString(36).substring(7)}`);
 		devstepsDir = join(testDir, '.devsteps');
 		mkdirSync(devstepsDir, { recursive: true });
 	});

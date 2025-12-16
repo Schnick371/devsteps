@@ -26,8 +26,8 @@ describe('Index Rebuild Operations', () => {
 	let devstepsDir: string;
 
 	beforeEach(() => {
-		// Create temporary test directory
-		testDir = join(tmpdir(), `devsteps-rebuild-test-${Date.now()}`);
+		// Create temporary test directory with random suffix to avoid parallel test collisions
+		testDir = join(tmpdir(), `devsteps-rebuild-test-${Date.now()}-${Math.random().toString(36).substring(7)}`);
 		devstepsDir = join(testDir, '.devsteps');
 		mkdirSync(devstepsDir, { recursive: true });
 	});
@@ -84,7 +84,7 @@ describe('Index Rebuild Operations', () => {
 	 * Helper: Create a corrupt JSON file
 	 */
 	function createCorruptFile(type: string, id: string): void {
-		const typeDir = join(devstepsDir, `${type}s`);
+		const typeDir = join(devstepsDir, TYPE_TO_DIRECTORY[type as ItemType]);
 		mkdirSync(typeDir, { recursive: true });
 
 		const jsonPath = join(typeDir, `${id}.json`);
@@ -95,7 +95,7 @@ describe('Index Rebuild Operations', () => {
 	 * Helper: Create an invalid item (missing required fields)
 	 */
 	function createInvalidItemFile(type: string, id: string): void {
-		const typeDir = join(devstepsDir, `${type}s`);
+		const typeDir = join(devstepsDir, TYPE_TO_DIRECTORY[type as ItemType]);
 		mkdirSync(typeDir, { recursive: true });
 
 		const jsonPath = join(typeDir, `${id}.json`);

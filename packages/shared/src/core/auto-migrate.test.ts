@@ -209,9 +209,9 @@ describe('Auto-Migration Module', () => {
 			writeFileSync(join(devstepsDir, 'index.json'), JSON.stringify(legacyIndex, null, 2));
 
 			// Create metadata file
-			mkdirSync(join(devstepsDir, 'tasks'), { recursive: true });
+			mkdirSync(join(devstepsDir, 'items', 'tasks'), { recursive: true });
 			const metadata = createMetadata('TASK-001', 'task', 'draft', 'not-urgent-important');
-			writeFileSync(join(devstepsDir, 'tasks', 'TASK-001.json'), JSON.stringify(metadata, null, 2));
+			writeFileSync(join(devstepsDir, 'items', 'tasks', 'TASK-001.json'), JSON.stringify(metadata, null, 2));
 
 			const result = await ensureIndexMigrated(devstepsDir, { silent: true, dryRun: true });
 
@@ -269,9 +269,9 @@ describe('Auto-Migration Module', () => {
 			writeFileSync(join(devstepsDir, 'index.json'), JSON.stringify(legacyIndex, null, 2));
 
 			// Create metadata file
-			mkdirSync(join(devstepsDir, 'tasks'), { recursive: true });
+			mkdirSync(join(devstepsDir, 'items', 'tasks'), { recursive: true });
 			const metadata = createMetadata('TASK-001', 'task', 'draft', 'not-urgent-important');
-			writeFileSync(join(devstepsDir, 'tasks', 'TASK-001.json'), JSON.stringify(metadata, null, 2));
+			writeFileSync(join(devstepsDir, 'items', 'tasks', 'TASK-001.json'), JSON.stringify(metadata, null, 2));
 
 			const stats = await performMigration(devstepsDir);
 
@@ -304,9 +304,9 @@ describe('Auto-Migration Module', () => {
 			writeFileSync(join(devstepsDir, 'index.json'), JSON.stringify(legacyIndex, null, 2));
 
 			// Create metadata files
-			mkdirSync(join(devstepsDir, 'tasks'), { recursive: true });
-			mkdirSync(join(devstepsDir, 'stories'), { recursive: true });
-			mkdirSync(join(devstepsDir, 'bugs'), { recursive: true });
+			mkdirSync(join(devstepsDir, 'items', 'tasks'), { recursive: true });
+			mkdirSync(join(devstepsDir, 'items', 'stories'), { recursive: true });
+			mkdirSync(join(devstepsDir, 'items', 'bugs'), { recursive: true });
 
 			const items: ItemMetadata[] = [
 				createMetadata('TASK-001', 'task', 'draft', 'not-urgent-important'),
@@ -316,7 +316,7 @@ describe('Auto-Migration Module', () => {
 			];
 
 			for (const item of items) {
-				const folder = item.type === 'task' ? 'tasks' : item.type === 'story' ? 'stories' : 'bugs';
+				const folder = item.type === 'task' ? 'items/tasks' : item.type === 'story' ? 'items/stories' : 'items/bugs';
 				writeFileSync(join(devstepsDir, folder, `${item.id}.json`), JSON.stringify(item, null, 2));
 			}
 
@@ -352,7 +352,7 @@ describe('Auto-Migration Module', () => {
 			writeFileSync(join(devstepsDir, 'index.json'), JSON.stringify(legacyIndex, null, 2));
 
 			// Create only 2 metadata files
-			mkdirSync(join(devstepsDir, 'tasks'), { recursive: true });
+			mkdirSync(join(devstepsDir, 'items', 'tasks'), { recursive: true });
 			const items: ItemMetadata[] = [
 				createMetadata('TASK-001', 'task', 'draft', 'not-urgent-important'),
 				createMetadata('TASK-002', 'task', 'done', 'urgent-important'),
@@ -360,7 +360,7 @@ describe('Auto-Migration Module', () => {
 			];
 
 			for (const item of items) {
-				writeFileSync(join(devstepsDir, 'tasks', `${item.id}.json`), JSON.stringify(item, null, 2));
+				writeFileSync(join(devstepsDir, 'items', 'tasks', `${item.id}.json`), JSON.stringify(item, null, 2));
 			}
 
 			const stats = await performMigration(devstepsDir);
@@ -378,9 +378,9 @@ describe('Auto-Migration Module', () => {
 			};
 			writeFileSync(join(devstepsDir, 'index.json'), JSON.stringify(legacyIndex, null, 2));
 
-			mkdirSync(join(devstepsDir, 'tasks'), { recursive: true });
+			mkdirSync(join(devstepsDir, 'items', 'tasks'), { recursive: true });
 			const metadata = createMetadata('TASK-001', 'task', 'draft', 'not-urgent-important');
-			writeFileSync(join(devstepsDir, 'tasks', 'TASK-001.json'), JSON.stringify(metadata, null, 2));
+			writeFileSync(join(devstepsDir, 'items', 'tasks', 'TASK-001.json'), JSON.stringify(metadata, null, 2));
 
 			const stats = await performMigration(devstepsDir);
 
@@ -396,9 +396,9 @@ describe('Auto-Migration Module', () => {
 			};
 			writeFileSync(join(devstepsDir, 'index.json'), JSON.stringify(legacyIndex, null, 2));
 
-			mkdirSync(join(devstepsDir, 'tasks'), { recursive: true });
+			mkdirSync(join(devstepsDir, 'items', 'tasks'), { recursive: true });
 			const metadata = createMetadata('TASK-001', 'task', 'draft', 'not-urgent-important');
-			writeFileSync(join(devstepsDir, 'tasks', 'TASK-001.json'), JSON.stringify(metadata, null, 2));
+			writeFileSync(join(devstepsDir, 'items', 'tasks', 'TASK-001.json'), JSON.stringify(metadata, null, 2));
 
 			const stats = await performMigration(devstepsDir, { skipBackup: true });
 
@@ -414,9 +414,9 @@ describe('Auto-Migration Module', () => {
 			const legacyPath = join(devstepsDir, 'index.json');
 			writeFileSync(legacyPath, JSON.stringify(legacyIndex, null, 2));
 
-			mkdirSync(join(devstepsDir, 'tasks'), { recursive: true });
+			mkdirSync(join(devstepsDir, 'items', 'tasks'), { recursive: true });
 			const metadata = createMetadata('TASK-001', 'task', 'draft', 'not-urgent-important');
-			writeFileSync(join(devstepsDir, 'tasks', 'TASK-001.json'), JSON.stringify(metadata, null, 2));
+			writeFileSync(join(devstepsDir, 'items', 'tasks', 'TASK-001.json'), JSON.stringify(metadata, null, 2));
 
 			const stats = await performMigration(devstepsDir);
 
@@ -440,9 +440,9 @@ describe('Auto-Migration Module', () => {
 			};
 			writeFileSync(join(devstepsDir, 'index.json'), JSON.stringify(legacyIndex, null, 2));
 
-			mkdirSync(join(devstepsDir, 'tasks'), { recursive: true });
+			mkdirSync(join(devstepsDir, 'items', 'tasks'), { recursive: true });
 			const metadata = createMetadata('TASK-001', 'task', 'draft', 'not-urgent-important');
-			writeFileSync(join(devstepsDir, 'tasks', 'TASK-001.json'), JSON.stringify(metadata, null, 2));
+			writeFileSync(join(devstepsDir, 'items', 'tasks', 'TASK-001.json'), JSON.stringify(metadata, null, 2));
 
 			// Migration should fail with count mismatch (duplicate handling in addItemToIndex)
 			await expect(performMigration(devstepsDir)).rejects.toThrow('Item count mismatch');
