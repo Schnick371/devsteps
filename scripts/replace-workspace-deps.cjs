@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Replace workspace:* dependencies with actual versions before publishing
+ * Replace workspace:* and file: dependencies with actual versions before publishing
  * 
  * This script runs automatically via prepublishOnly hook.
  * After publish, postpublish hook restores package.json from git.
@@ -21,10 +21,10 @@ const pkg = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 
 let modified = false;
 
-// Replace workspace:* in dependencies
+// Replace workspace:* and file: in dependencies
 if (pkg.dependencies) {
   for (const [name, version] of Object.entries(pkg.dependencies)) {
-    if (version === 'workspace:*' || version.startsWith('workspace:')) {
+    if (version === 'workspace:*' || version.startsWith('workspace:') || version.startsWith('file:')) {
       // Get workspace directory name from mapping
       const workspaceDir = WORKSPACE_MAPPING[name];
       if (!workspaceDir) {
@@ -53,10 +53,10 @@ if (pkg.dependencies) {
   }
 }
 
-// Replace workspace:* in devDependencies
+// Replace workspace:* and file: in devDependencies
 if (pkg.devDependencies) {
   for (const [name, version] of Object.entries(pkg.devDependencies)) {
-    if (version === 'workspace:*' || version.startsWith('workspace:')) {
+    if (version === 'workspace:*' || version.startsWith('workspace:') || version.startsWith('file:')) {
       const workspaceDir = WORKSPACE_MAPPING[name];
       if (!workspaceDir) {
         console.error(`✗ No workspace mapping found for: ${name}`);
@@ -88,5 +88,5 @@ if (modified) {
   console.log('✓ package.json updated for publishing');
   console.log('  (will be restored after publish via postpublish hook)');
 } else {
-  console.log('No workspace: dependencies found');
+  console.log('No workspace:* or file: dependencies found');
 }
