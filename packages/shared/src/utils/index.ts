@@ -42,15 +42,16 @@ export function getMethodologyConfig(methodology: Methodology) {
       directories: ['items/epics', 'items/stories', 'items/tasks', 'items/bugs', 'items/spikes', 'items/tests'],
     },
     waterfall: {
-      item_types: ['requirement', 'feature', 'task', 'bug', 'test'] as ItemType[],
+      item_types: ['requirement', 'feature', 'task', 'bug', 'spike', 'test'] as ItemType[],
       item_prefixes: {
         requirement: 'REQ',
         feature: 'FEAT',
         task: 'TASK',
         bug: 'BUG',
+        spike: 'SPIKE',
         test: 'TEST',
       },
-      directories: ['items/requirements', 'items/features', 'items/tasks', 'items/bugs', 'items/tests'],
+      directories: ['items/requirements', 'items/features', 'items/tasks', 'items/bugs', 'items/spikes', 'items/tests'],
     },
     hybrid: {
       item_types: [

@@ -3,10 +3,10 @@
   "type": "task",
   "category": "CLI",
   "title": "Fix: Create spikes/ directory during init",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-12-15T17:16:28.891Z",
-  "updated": "2025-12-15T17:16:32.879Z",
+  "updated": "2025-12-15T18:52:18.843Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/utils/index.ts"
