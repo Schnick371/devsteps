@@ -2,6 +2,23 @@
 
 All notable changes to the DevSteps MCP Server will be documented in this file.
 
+## [0.8.5] - 2025-12-16
+
+### Fixed
+- **CRITICAL:** Fixed "path argument must be of type string" error (BUG-051, TASK-210)
+- Root cause: Typo 'devstepsir' in shared package affected all MCP operations
+- Added defensive validation to getWorkspacePath()
+- Clear error messages when workspace folder missing
+
+### Changed
+- Updated to use `@schnick371/devsteps-shared@0.8.5`
+- Improved error handling for missing workspace scenarios
+
+### Impact
+- MCP update/add/list/get operations now work reliably
+- Extension 0.8.4 automatically uses this version via npx @latest
+- Users don't need to reinstall extension
+
 ## [0.8.4] - 2025-12-16
 
 ### Fixed

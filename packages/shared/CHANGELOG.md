@@ -2,6 +2,18 @@
 
 All notable changes to `@schnick371/devsteps-shared` will be documented in this file.
 
+## [0.8.5] - 2025-12-16
+
+### Fixed
+- **CRITICAL:** Fixed systematic typo 'devstepsir' → 'devstepsDir' in 57 locations (BUG-051, TASK-210)
+- Root cause of "path argument must be of type string" errors
+- Affected files: update.ts, bulk-update.ts, add.ts, archive.ts, context.ts, get.ts, list.ts
+
+### Impact
+- MCP server update/add/list operations now work correctly
+- No more undefined path errors when updating items
+- Extension 0.8.4 automatically uses this version via npx
+
 ## [0.8.4] - 2025-12-16
 
 ### Fixed

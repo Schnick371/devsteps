@@ -2,6 +2,15 @@
 
 All notable changes to `@schnick371/devsteps-cli` will be documented in this file.
 
+## [0.8.5] - 2025-12-16
+
+### Fixed
+- Updated to use `@schnick371/devsteps-shared@0.8.5` with critical typo fix
+- Inherits all fixes from shared package (BUG-051)
+
+### Changed
+- Dependency: @schnick371/devsteps-shared@0.8.5
+
 ## [0.8.4] - 2025-12-16
 
 ### Fixed
