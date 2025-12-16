@@ -58,7 +58,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@schnick371/devsteps-shared": "file:../shared",
+    "@schnick371/devsteps-shared": "workspace:*",
     "@modelcontextprotocol/sdk": "latest",
     "commander": "^14.0.2",
     "express": "^5.1.0",
