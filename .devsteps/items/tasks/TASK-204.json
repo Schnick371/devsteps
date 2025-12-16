@@ -3,10 +3,10 @@
   "type": "task",
   "category": "extension",
   "title": "Map eisenhower quadrants to priority levels in item loader",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-12-16T06:45:48.364Z",
-  "updated": "2025-12-16T06:46:29.023Z",
+  "updated": "2025-12-16T06:52:07.459Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
