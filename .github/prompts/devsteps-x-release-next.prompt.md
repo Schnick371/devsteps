@@ -133,27 +133,26 @@ git commit -m "docs: Add CHANGELOG for X.Y.Z-next.N pre-release"
 
 ## Step 4: Build Validation
 
-**Full build test:**
+**Full build and package:**
 ```bash
 npm run clean
 npm install
 npm run build
+npm run package:all
 npm test
 ```
 
-**Dual-target extension build:**
+**Verify all distribution packages:**
 ```bash
-cd packages/extension
-npm run build
-npm run package
+./scripts/verify-packages.sh
 ```
 
-**Verify outputs:**
-- ✅ Extension bundle: dist/extension.js (~340 KB)
-- ✅ MCP server bundle: dist/mcp-server/index.js (~500 KB)
-- ✅ VSIX created: devsteps-X.Y.Z-next.N.vsix
-- ✅ npm packages: all have the correct version
-- ✅ npm packages: mcp and Cli have the correct version in dependencies
+**Expected output:**
+- ✅ All packages have correct version X.Y.Z-next.N
+- ✅ Dependencies reference correct versions
+- ✅ VSIX file created: `tmp/devsteps-X.Y.Z.vsix`
+- ✅ npm packages in tmp/package-* directories
+- ✅ No version mismatches reported
 
 **Mandatory: Ask user to confirm successful build before publishing**
 
