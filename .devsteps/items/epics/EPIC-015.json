@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T16:29:37.594Z",
-  "updated": "2025-12-05T08:49:00.621Z",
+  "updated": "2025-12-16T07:42:29.304Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -24,7 +24,9 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "BUG-047"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
