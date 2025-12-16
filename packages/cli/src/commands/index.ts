@@ -124,6 +124,25 @@ export async function getCommand(id: string) {
     console.log(chalk.gray('Created:'), new Date(metadata.created).toLocaleString());
     console.log(chalk.gray('Updated:'), new Date(metadata.updated).toLocaleString());
 
+    // Display relationships if any exist
+    if (metadata.linked_items) {
+      const hasRelationships = Object.values(metadata.linked_items).some(
+        (items) => Array.isArray(items) && items.length > 0
+      );
+
+      if (hasRelationships) {
+        console.log();
+        console.log(chalk.bold('Relationships:'));
+
+        // Display each relationship type that has items
+        for (const [relType, items] of Object.entries(metadata.linked_items)) {
+          if (Array.isArray(items) && items.length > 0) {
+            console.log(chalk.gray(`  ${relType}:`), items.join(', '));
+          }
+        }
+      }
+    }
+
     console.log();
     console.log(chalk.bold('Description:'));
     console.log(description);
