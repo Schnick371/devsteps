@@ -1,21 +1,22 @@
 {
-  "id": "BUG-049",
-  "type": "bug",
+  "id": "TASK-209",
+  "type": "task",
   "category": "npm",
-  "title": "MCP server package has file: dependency instead of npm version for shared",
+  "title": "Fix MCP server dependencies - replace file: with npm versions",
   "status": "draft",
   "eisenhower": "urgent-important",
-  "created": "2025-12-16T09:19:17.436Z",
-  "updated": "2025-12-16T09:20:29.051Z",
+  "created": "2025-12-16T09:20:24.204Z",
+  "updated": "2025-12-16T09:20:29.050Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/mcp-server/package.json"
+    "packages/mcp-server/package.json",
+    "packages/cli/package.json"
   ],
   "linked_items": {
-    "implements": [],
-    "implemented-by": [
-      "TASK-209"
+    "implements": [
+      "BUG-049"
     ],
+    "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
@@ -27,7 +28,7 @@
     "superseded-by": []
   },
   "tags": [
-    "bug,npm,dependencies,publication,mcp-server"
+    "task,npm,dependencies,publication"
   ],
   "commits": [],
   "metadata": {}
