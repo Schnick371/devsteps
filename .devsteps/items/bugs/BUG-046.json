@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "extension",
   "title": "Extension TreeView displays incorrect priority colors and tooltips",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-12-16T06:45:25.073Z",
-  "updated": "2025-12-16T06:46:29.263Z",
+  "updated": "2025-12-16T06:52:12.102Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

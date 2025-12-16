@@ -78,7 +78,16 @@ export class WorkItemNode extends TreeNode {
     treeItem.contextValue = 'workItem';
     treeItem.iconPath = this.getIcon();
     treeItem.description = undefined;
-    treeItem.tooltip = `${this.item.type.toUpperCase()} | ${this.item.status} | Priority: ${this.item.priority}`;
+    
+    // Add visual priority indicator to tooltip
+    const priorityIcons: Record<string, string> = {
+      critical: '🔴',
+      high: '🟠',
+      medium: '🔵',
+      low: '⚪'
+    };
+    const priorityIcon = priorityIcons[this.item.priority] || '⚪';
+    treeItem.tooltip = `${this.item.type.toUpperCase()} | ${this.item.status} | ${priorityIcon} Priority: ${this.item.priority}`;
 
     // Set resourceUri for FileDecorationProvider (colored badges in separate column!)
     treeItem.resourceUri = createItemUri(this.item.id, this.item.status, this.item.priority);

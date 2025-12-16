@@ -9,6 +9,19 @@ import * as vscode from 'vscode';
 import { TYPE_TO_DIRECTORY, type WorkItem } from '../types.js';
 
 /**
+ * Map Eisenhower quadrant to priority level
+ */
+function mapEisenhowerToPriority(eisenhower: string): string {
+  const mapping: Record<string, string> = {
+    'urgent-important': 'critical',           // Q1: Do First
+    'not-urgent-important': 'high',           // Q2: Schedule
+    'urgent-not-important': 'medium',         // Q3: Delegate
+    'not-urgent-not-important': 'low'         // Q4: Eliminate
+  };
+  return mapping[eisenhower] || 'medium';
+}
+
+/**
  * Load full item data from individual JSON file (includes linked_items)
  * Used for hierarchical view to get relationship data
  */
@@ -47,6 +60,11 @@ export async function loadItemWithLinks(
     );
     const itemData = await vscode.workspace.fs.readFile(itemPath);
     const item = JSON.parse(Buffer.from(itemData).toString('utf-8'));
+
+    // Map eisenhower quadrant to priority level
+    if (item.eisenhower && !item.priority) {
+      item.priority = mapEisenhowerToPriority(item.eisenhower);
+    }
 
     return item as WorkItem;
   } catch (error) {

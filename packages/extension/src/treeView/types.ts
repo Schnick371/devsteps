@@ -34,7 +34,8 @@ export interface WorkItem {
   type: string;
   title: string;
   status: string;
-  priority: string;
+  eisenhower: string;  // Source data: urgent-important, not-urgent-important, etc.
+  priority: string;    // Computed: critical, high, medium, low
   created?: string;
   updated?: string;
   tags?: string[];
