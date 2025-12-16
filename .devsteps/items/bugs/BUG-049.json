@@ -1,0 +1,32 @@
+{
+  "id": "BUG-049",
+  "type": "bug",
+  "category": "npm",
+  "title": "MCP server package has file: dependency instead of npm version for shared",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-16T09:19:17.436Z",
+  "updated": "2025-12-16T09:19:17.436Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/package.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "bug,npm,dependencies,publication,mcp-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}
