@@ -3,10 +3,10 @@
   "type": "task",
   "category": "npm",
   "title": "Fix MCP server dependencies - replace file: with npm versions",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-12-16T09:20:24.204Z",
-  "updated": "2025-12-16T09:20:29.050Z",
+  "updated": "2025-12-16T09:36:50.285Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/package.json",
