@@ -2,7 +2,7 @@
   "name": "devsteps",
   "displayName": "DevSteps",
   "description": "Never Code Alone. AI-first development workflow - track tasks, epics, stories with your AI copilot.",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "type": "module",
   "publisher": "devsteps",
   "license": "Apache-2.0",
