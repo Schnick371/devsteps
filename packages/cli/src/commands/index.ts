@@ -490,7 +490,7 @@ export async function statusCommand(options: any) {
     console.log();
 
     console.log(chalk.bold('Statistics:'));
-    console.log(chalk.gray('  Total Items:'), stats.total);
+    console.log(chalk.gray('  Total:'), stats.total);
     console.log();
 
     console.log(chalk.bold('  By Type:'));
