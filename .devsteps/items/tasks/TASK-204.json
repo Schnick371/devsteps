@@ -1,0 +1,32 @@
+{
+  "id": "TASK-204",
+  "type": "task",
+  "category": "extension",
+  "title": "Map eisenhower quadrants to priority levels in item loader",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-16T06:45:48.364Z",
+  "updated": "2025-12-16T06:46:29.023Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "BUG-046"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "priority,mapping,data-model"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,32 @@
+{
+  "id": "TASK-206",
+  "type": "task",
+  "category": "extension",
+  "title": "Update tooltip display to show user-friendly priority labels",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-16T06:46:15.725Z",
+  "updated": "2025-12-16T06:46:29.263Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "BUG-046"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ui,tooltip,priority"
+  ],
+  "commits": [],
+  "metadata": {}
+}

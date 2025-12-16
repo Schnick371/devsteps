@@ -1,0 +1,32 @@
+{
+  "id": "TASK-205",
+  "type": "task",
+  "category": "extension",
+  "title": "Update WorkItem interface to include both eisenhower and priority fields",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2025-12-16T06:46:01.657Z",
+  "updated": "2025-12-16T06:46:29.142Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "BUG-046"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "types,interface,data-model"
+  ],
+  "commits": [],
+  "metadata": {}
+}
