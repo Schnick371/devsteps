@@ -1,0 +1,41 @@
+{
+  "id": "STORY-086",
+  "type": "story",
+  "category": "general",
+  "title": "Add AITK evaluation best practices to agent instructions",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-18T10:19:01.832Z",
+  "updated": "2025-12-18T10:19:33.246Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-coordinator.agent.md",
+    ".github/agents/devsteps-analyzer.agent.md",
+    ".github/agents/devsteps-implementer.agent.md",
+    ".github/agents/devsteps-documenter.agent.md",
+    ".github/agents/devsteps-tester.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-022"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "documentation",
+    "agent-development",
+    "evaluation",
+    "quality"
+  ],
+  "commits": [],
+  "metadata": {}
+}

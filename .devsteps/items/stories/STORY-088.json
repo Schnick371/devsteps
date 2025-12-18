@@ -1,0 +1,37 @@
+{
+  "id": "STORY-088",
+  "type": "story",
+  "category": "general",
+  "title": "Create AITK-specific instructions file for AI agent workflows",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2025-12-18T10:19:27.272Z",
+  "updated": "2025-12-18T10:19:41.738Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/instructions/aitk.instructions.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-022"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "documentation",
+    "ai-toolkit",
+    "copilot",
+    "instructions"
+  ],
+  "commits": [],
+  "metadata": {}
+}
