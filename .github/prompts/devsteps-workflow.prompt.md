@@ -110,31 +110,11 @@ Maintain structured workflow - preserve decisions, traceability, prevent context
 - Mark item as `done` status
 - Final commit to feature branch
 - Push branch
-
-**Merge to Main (No-FF Strategy):**
-- Preserve full development history with no-fast-forward merge
-- Write comprehensive merge commit message with:
-  - Summary of what was implemented
-  - Key changes and decisions made
-  - Footer: `Implements: <ID>`
-- Archive feature branch instead of deleting
-- **Principle:** Full traceability - all commits, decisions, and corrections remain visible
-
-**Why preserve history instead of squashing:**
-- ✅ Preserves incremental development steps (implementation → correction → refinement)
-- ✅ Shows decision evolution (changed approach reasoning visible)
-- ✅ Easier debugging (find exact commit where issue was introduced/fixed)
-- ✅ Honors DevSteps principle: "Every change traceable. No decision forgotten."
-- ❌ Squash loses valuable context and reasoning behind changes
-
-**View Options:**
-- First-parent view shows clean story-level commits
-- Full graph view shows detailed history from feature branches
-- **Best of both worlds:** Stories visible at top level, details available when needed
+- **Prohibition:** No merge to main yet (test first, user approval, squash merge later)
 
 **Status Sync:**
 - Status stored in `.devsteps/` on feature branch
-- Synced to main during merge
+- Synced to main during final merge
 - Temporary divergence expected
 
 **Context Preservation:**

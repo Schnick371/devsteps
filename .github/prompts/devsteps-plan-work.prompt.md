@@ -1,5 +1,5 @@
 ---
-agent: 'devsteps'
+agent: 'devsteps-coordinator'
 model: 'Claude Sonnet 4.5'
 description: 'Interactive planning session - work with developer to define and structure work items before implementation'
 tools: ['vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'vscode/extensions', 'execute/testFailure', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'search', 'web/fetch', 'copilot-container-tools/inspect_container', 'copilot-container-tools/inspect_image', 'copilot-container-tools/list_containers', 'copilot-container-tools/list_images', 'copilot-container-tools/list_networks', 'copilot-container-tools/list_volumes', 'copilot-container-tools/logs_for_container', 'tavily/*', 'upstash/context7/*', 'agent', 'devsteps/*', 'todo']
@@ -24,7 +24,6 @@ Plan work through dialogue - understand intent, search existing items, structure
 1. **Verify current branch is `main`**
 2. **Verify clean working tree**
 3. **Verify other work in feature branches**
-4. **Merge feature branches that are ready to merge to main**
 
 
 ### 2. Understand Context

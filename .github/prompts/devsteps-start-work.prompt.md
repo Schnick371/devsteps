@@ -34,7 +34,7 @@ Review planned work, select highest priority, begin structured development.
 - Discuss priorities
 
 ### 3. Select
-- Priority order: CRITICAL bugs → Q1 → Quick wins → Q2 → Dependencies → Q3 → Q4
+- Priority order: CRITICAL bugs → Q1 → Q2 → Dependencies → Quick wins
 - Start immediately with highest priority
 - Check dependencies and verify not blocked
 

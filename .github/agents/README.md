@@ -8,22 +8,22 @@ The DevSteps agent system uses a **coordinator pattern** with specialized sub-wo
 
 ```
 ┌─────────────────────────────────────────┐
-│   DevSteps Coordinator (GPT-5 mini)     │
+│   DevSteps Coordinator (Claude)         │
 │   - Orchestrates workflow               │
 │   - Analyzes tasks & delegates          │
 │   - Validates outputs                   │
 │   - Manages status & commits            │
 └──────────────┬──────────────────────────┘
                │
-      ┌────────┴────────────────┬─────────────────┬─────────────────┐
-      │                         │                 │                 │
-┌─────▼──────┐      ┌──────────▼────┐   ┌───────▼────────┐ ┌──────▼───────┐
-│  Analyzer  │      │  Implementer  │   │  Documenter    │ │   Tester     │
-│  (Claude)  │      │    (Grok)     │   │   (Gemini)     │ │  (GPT-5)     │
-│            │      │               │   │                │ │              │
-│ Deep       │      │ Fast          │   │ Documentation  │ │ Test         │
-│ Analysis   │      │ Simple Tasks  │   │ Specialist     │ │ Generation   │
-└────────────┘      └───────────────┘   └────────────────┘ └──────────────┘
+      ┌────────┴────────────┬─────────────────┬──────────────────┐
+      │                     │                 │                  │
+┌─────▼──────┐   ┌──────────▼────┐   ┌────────▼───────┐  ┌───────▼──────┐
+│  Analyzer  │   │  Implementer  │   │  Documenter    │  │   Tester     │
+│  (Claude)  │   │    (Grok)     │   │   (Gemini)     │  │ (GPT-5 mini) │
+│            │   │               │   │                │  │              │
+│ Deep       │   │ Fast          │   │ Documentation  │  │ Test         │
+│ Analysis   │   │ Simple Tasks  │   │ Specialist     │  │ Generation   │
+└────────────┘   └───────────────┘   └────────────────┘  └──────────────┘
 ```
 
 ## Agents
