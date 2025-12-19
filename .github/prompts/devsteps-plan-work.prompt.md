@@ -39,6 +39,8 @@ Ask "why" before "what". Surface dependencies early.
 ### 3. Research First (MANDATORY)
 Search best practices + recommendations + existing patterns. Evidence-based proposals.
 
+**Bug Clustering:** Search existing bugs before creating new ones. Group related symptoms (typos, validation errors, UI inconsistencies) into single bug when they share root cause or component.
+
 ### 4. Structure Work (MANDATORY)
 
 **Determine hierarchy:**
