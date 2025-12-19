@@ -1,6 +1,6 @@
 ---
 description: 'Test generation and debugging specialist - optimized for creating comprehensive tests and analyzing test failures'
-model: 'GPT-5 mini'
+model: 'Claude Sonnet 4.5'
 tools: ['execute/testFailure', 'execute/runTask', 'execute/runTests', 'read/problems', 'read/readFile', 'edit/createFile', 'edit/editFiles', 'search']
 ---
 

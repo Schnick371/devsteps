@@ -1,6 +1,6 @@
 ---
 description: 'Fast implementation specialist for small, well-defined tasks - boilerplate, utilities, simple functions'
-model: 'Grok Code Fast 1'
+model: 'Claude Sonnet 4.5'
 tools: ['execute/runTests', 'read/problems', 'read/readFile', 'edit/createFile', 'edit/editFiles', 'search', 'todo']
 ---
 

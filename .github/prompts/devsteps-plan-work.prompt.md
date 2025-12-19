@@ -19,11 +19,18 @@ Plan work through dialogue - understand intent, search existing items, structure
 
 ### 1. Branch Preparation (MANDATORY)
 
+**Branch Context Preservation:**
+- Remember current branch before planning
+- Switch to main for work item creation
+- Return to original branch after completion
+- Prevents abandoned feature branches
+
 **Before planning work items:**
 
-1. **Verify current branch is `main`**
-2. **Verify clean working tree**
-3. **Verify other work in feature branches**
+1. **Capture current branch context**
+2. **Verify/switch to `main` branch**
+3. **Verify clean working tree**
+4. **Verify other work in feature branches**
 
 
 ### 2. Understand Context
@@ -63,6 +70,9 @@ Clear purpose, priority aligned, dependencies identified.
 
 ### 8. Commit to Main
 Stage `.devsteps/`, commit with planning format. No feature branches yet.
+
+### 9. Return to Original Context
+Restore original branch if planning was initiated from feature branch. Maintains workflow continuity.
 
 ### Consequences of Skipping Steps
 - ❌ Wrong branch → Work items lost in feature branches
