@@ -6,7 +6,7 @@
   "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-01-05T10:02:37.382Z",
-  "updated": "2026-01-05T10:15:22.420Z",
+  "updated": "2026-01-05T10:15:54.462Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/instructions/",
@@ -23,7 +23,9 @@
     "blocked-by": [],
     "relates-to": [],
     "depends-on": [],
-    "required-by": [],
+    "required-by": [
+      "STORY-090"
+    ],
     "supersedes": [],
     "superseded-by": []
   },

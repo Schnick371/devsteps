@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T15:33:22.968Z",
-  "updated": "2026-01-05T10:02:39.683Z",
+  "updated": "2026-01-05T10:15:54.461Z",
   "author": "thomas.hertel@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -18,7 +18,8 @@
       "STORY-002",
       "TASK-049",
       "STORY-084",
-      "SPIKE-013"
+      "SPIKE-013",
+      "STORY-090"
     ],
     "tested-by": [],
     "tests": [],

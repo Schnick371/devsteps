@@ -1,0 +1,40 @@
+{
+  "id": "STORY-090",
+  "type": "story",
+  "category": "general",
+  "title": "Sprint Backlog Support with Ephemeral Task Handling",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-01-05T10:15:48.992Z",
+  "updated": "2026-01-05T10:15:54.461Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/types/",
+    "packages/shared/src/core/",
+    "packages/mcp-server/src/tools/",
+    "packages/cli/src/commands/",
+    ".github/instructions/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "SPIKE-013"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "workflow",
+    "architecture",
+    "sprint-backlog"
+  ],
+  "commits": [],
+  "metadata": {}
+}
