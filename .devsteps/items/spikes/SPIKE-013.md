@@ -12,6 +12,7 @@ How should DevSteps handle **ephemeral/technical tasks** that don't require long
 | **Owner** | Product Owner/Team | Developers |
 | **Granularität** | WHY + WHAT | HOW |
 | **Beispiele** | Epic, Story, Feature, Bug | Fix Tests, Refactoring, Code Review Findings |
+| **Persistenz** | Git-verwaltet | Workspace-lokal |
 
 ## Background
 
@@ -21,29 +22,129 @@ AI agents (like GitHub Copilot) often create standalone Tasks for immediate tech
 - Clutter the archive with noise
 - Don't represent requirements or implementations
 
-## Research Areas
+**Key Insight:** DevSteps as AI-Developer bridge should track BOTH - but persist them DIFFERENTLY.
 
-### 1. Definition of Tracked (DoT)
-- What criteria determine if work belongs in DevSteps (Product Backlog)?
-- Clear rules for AI agents and developers
-- When does technical work become trackable?
+---
 
-### 2. Item Type Options
-Evaluate introducing new concepts:
-- `chore` type - Ephemeral technical work, auto-deleted after completion
-- `ephemeral: true` flag - Mark any task as non-archivable
-- Sprint Backlog separation - DevSteps = Product Backlog only
+## Architecture Options
 
-### 3. Industry Best Practices
-- Scrum.org: Technical tasks belong in Sprint Backlog (developer-owned)
-- Product Backlog vs Sprint Backlog distinction
-- Technical debt tracking patterns
+### Option A: Directory Separation with .gitignore
+
+```
+.devsteps/
+├── items/           # Product Backlog → Git-managed
+│   ├── epics/
+│   ├── stories/
+│   └── bugs/
+├── sprint/          # Sprint Backlog → .gitignore
+│   ├── tasks/
+│   └── chores/
+└── archive/         # Product Backlog only
+```
+
+| Pro | Contra |
+|-----|--------|
+| Clear physical separation | Sprint items lost on workspace switch |
+| Simple .gitignore rule | No team sync for sprint items |
+| Same MCP tools work for both | Explicit folder convention needed |
+
+### Option B: Ephemeral-Flag with Auto-Cleanup
+
+```json
+{
+  "id": "TASK-042",
+  "type": "task",
+  "ephemeral": true,
+  "title": "Fix mock assertions"
+}
+```
+
+**Behavior:** `ephemeral: true` → Deleted on `status: done` (not archived)
+
+| Pro | Contra |
+|-----|--------|
+| Unified system | Items temporarily in Git history |
+| No separate directory structure | Less clear separation |
+| Flag-based, flexible | Requires schema change |
+
+### Option C: Workspace-local Cache (RECOMMENDED)
+
+```
+.devsteps/
+├── items/           # Product Backlog → Git
+├── archive/         # Long-term archive → Git
+└── .local/          # Sprint Backlog → .gitignore
+    ├── sprint/
+    │   ├── CHORE-001.json
+    │   └── CHORE-001.md
+    └── session.json # Current sprint metadata
+```
+
+**Key Properties:**
+- **Product Backlog**: Git-managed as before
+- **Sprint Backlog**: In `.devsteps/.local/` (auto-gitignored by `.`-prefix convention)
+- **Same item structure**: JSON + MD, same tools
+- **New type `chore`**: Automatically stored in `.local/sprint/`
+
+**MCP-Tool Routing Logic:**
+```typescript
+function getItemPath(item: WorkItem): string {
+  if (item.type === 'chore' || item.ephemeral) {
+    return '.devsteps/.local/sprint/';
+  }
+  return `.devsteps/items/${item.type}s/`;
+}
+```
+
+| Pro | Contra |
+|-----|--------|
+| Clear separation (Git vs. local) | No team sync (by design) |
+| Sprint items trackable by AI | Need `.local` directory creation |
+| No Git pollution | New convention to learn |
+| `.local` convention (like `.git`, `.vscode`) | |
+| Session-persistent until explicitly deleted | |
+
+---
+
+## Comparison Matrix
+
+| Aspect | Option A | Option B | Option C |
+|--------|----------|----------|----------|
+| Git separation | ✅ Clear | ⚠️ Temporary | ✅ Clear |
+| Unified system | ✅ | ✅ | ✅ |
+| Convention-based | ⚠️ Explicit | ✅ Flag | ✅ `.local` |
+| Complexity | Low | Medium | Low |
+| Team sync possible | ❌ | ⚠️ | ❌ (by design) |
+
+---
+
+## Recommendation: Option C
+
+**Why `.devsteps/.local/`?**
+
+1. **Convention follows practice**: Like `.git/`, `.vscode/`, `.cache/`
+2. **Auto-gitignored**: Many templates already ignore `.*` subdirectories
+3. **Semantically clear**: "local" = workspace-local, not shared
+4. **Future-proof**: Can later hold session data, caches, etc.
+
+**New Item Types:**
+- `chore` → Sprint Backlog (technical task without Story)
+- `task` → Product Backlog (implements Story/Bug)
+
+**Implementation Steps:**
+1. Add `chore` type to shared schema
+2. Implement `.local` directory routing in core
+3. Update MCP tools for transparent handling
+4. Add `.devsteps/.local/` to default .gitignore
+5. Update AI agent instructions
+
+---
 
 ## Success Criteria
 
-1. Clear recommendation for DevSteps policy (Product Backlog vs Sprint Backlog boundary)
-2. If new type/flag recommended: Implementation proposal
-3. Updated AI agent instructions to prevent improper task creation
+1. ✅ Clear recommendation: **Option C - `.devsteps/.local/`**
+2. Implementation proposal defined above
+3. AI agent instructions update needed after implementation
 
 ## References
 
