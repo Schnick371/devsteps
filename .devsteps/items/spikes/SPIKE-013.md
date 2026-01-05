@@ -12,139 +12,114 @@ How should DevSteps handle **ephemeral/technical tasks** that don't require long
 | **Owner** | Product Owner/Team | Developers |
 | **Granularität** | WHY + WHAT | HOW |
 | **Beispiele** | Epic, Story, Feature, Bug | Fix Tests, Refactoring, Code Review Findings |
-| **Persistenz** | Git-verwaltet | Workspace-lokal |
+| **Persistenz** | Git-verwaltet (`items/`) | Workspace-lokal (`sprint/`) |
 
-## Background
+## Bug Categorization
 
-AI agents (like GitHub Copilot) often create standalone Tasks for immediate technical fixes (e.g., "Fix Mock Assertions for Config Functions"). These tasks:
-- Have no connection to Stories/Features
-- Provide no long-term documentation value
-- Clutter the archive with noise
-- Don't represent requirements or implementations
+| Bug-Typ | Backlog | Begründung |
+|---------|---------|------------|
+| **Reported Bug** (Benutzer meldet) | Product ✅ | Hat Geschäftsimpact, PO priorisiert |
+| **Regression Bug** (nach Release) | Product ✅ | Dokumentationswert, Root Cause Analysis |
+| **Sprint Bug** (während Impl. gefunden) | Sprint ⚡ | Ephemer, Teil der aktuellen Arbeit |
+| **Test-Fix Bug** (technisches Detail) | Sprint ⚡ | Kein Nutzerwert, nur Umsetzungsdetail |
 
-**Key Insight:** DevSteps as AI-Developer bridge should track BOTH - but persist them DIFFERENTLY.
+**Rule:** Bug has customer/tester issue number → Product. Bug is byproduct of current work → Sprint.
 
 ---
 
-## Architecture Options
+## Final Architecture Decision
 
-### Option A: Directory Separation with .gitignore
+### Directory Structure (Extension Approach)
 
 ```
 .devsteps/
-├── items/           # Product Backlog → Git-managed
+├── items/           # Product Backlog → Git (unchanged)
 │   ├── epics/
 │   ├── stories/
-│   └── bugs/
-├── sprint/          # Sprint Backlog → .gitignore
-│   ├── tasks/
-│   └── chores/
-└── archive/         # Product Backlog only
+│   ├── features/
+│   ├── requirements/
+│   ├── bugs/        # Reported/Regression Bugs
+│   ├── spikes/
+│   └── tasks/       # Tasks implementing Stories/Bugs
+├── sprint/          # Sprint Backlog → .gitignore (NEW)
+│   ├── tasks/       # Implementation details
+│   ├── chores/      # Technical tasks without Story
+│   └── bugs/        # Sprint-internal bugs
+├── archive/         # Product items only
+└── index.json
 ```
 
-| Pro | Contra |
-|-----|--------|
-| Clear physical separation | Sprint items lost on workspace switch |
-| Simple .gitignore rule | No team sync for sprint items |
-| Same MCP tools work for both | Explicit folder convention needed |
+### Key Properties
 
-### Option B: Ephemeral-Flag with Auto-Cleanup
+| Aspect | Product (`items/`) | Sprint (`sprint/`) |
+|--------|-------------------|-------------------|
+| Git-managed | ✅ Yes | ❌ No (.gitignore) |
+| Archived | ✅ Yes | ❌ Deleted after done |
+| Types | epic, story, feature, requirement, bug, spike, task | chore, task, bug |
+| Traceability | ✅ Full | ⚠️ Session-only |
 
-```json
-{
-  "id": "TASK-042",
-  "type": "task",
-  "ephemeral": true,
-  "title": "Fix mock assertions"
+### New Item Type: `chore`
+
+```typescript
+type SprintItemType = 'chore' | 'task' | 'bug';
+
+interface ChoreItem {
+  id: string;        // CHORE-001
+  type: 'chore';
+  title: string;
+  status: Status;
+  // No linked_items, no eisenhower, no archive
 }
 ```
 
-**Behavior:** `ephemeral: true` → Deleted on `status: done` (not archived)
+**Chore vs Task:**
+- `chore` → Sprint Backlog (technical task without Story, ephemeral)
+- `task` → Product Backlog (implements Story/Bug, persisted)
 
-| Pro | Contra |
-|-----|--------|
-| Unified system | Items temporarily in Git history |
-| No separate directory structure | Less clear separation |
-| Flag-based, flexible | Requires schema change |
+### Routing Logic
 
-### Option C: Workspace-local Cache (RECOMMENDED)
-
-```
-.devsteps/
-├── items/           # Product Backlog → Git
-├── archive/         # Long-term archive → Git
-└── .local/          # Sprint Backlog → .gitignore
-    ├── sprint/
-    │   ├── CHORE-001.json
-    │   └── CHORE-001.md
-    └── session.json # Current sprint metadata
-```
-
-**Key Properties:**
-- **Product Backlog**: Git-managed as before
-- **Sprint Backlog**: In `.devsteps/.local/` (auto-gitignored by `.`-prefix convention)
-- **Same item structure**: JSON + MD, same tools
-- **New type `chore`**: Automatically stored in `.local/sprint/`
-
-**MCP-Tool Routing Logic:**
 ```typescript
 function getItemPath(item: WorkItem): string {
-  if (item.type === 'chore' || item.ephemeral) {
-    return '.devsteps/.local/sprint/';
+  // Sprint Backlog items
+  if (item.type === 'chore') {
+    return '.devsteps/sprint/chores/';
   }
+  
+  // Sprint bugs (no parent link)
+  if (item.type === 'bug' && !hasProductParent(item)) {
+    return '.devsteps/sprint/bugs/';
+  }
+  
+  // Product Backlog items (default)
   return `.devsteps/items/${item.type}s/`;
 }
 ```
 
-| Pro | Contra |
-|-----|--------|
-| Clear separation (Git vs. local) | No team sync (by design) |
-| Sprint items trackable by AI | Need `.local` directory creation |
-| No Git pollution | New convention to learn |
-| `.local` convention (like `.git`, `.vscode`) | |
-| Session-persistent until explicitly deleted | |
+### .gitignore Addition
+
+```gitignore
+# DevSteps Sprint Backlog (ephemeral, not tracked)
+.devsteps/sprint/
+```
 
 ---
 
-## Comparison Matrix
+## Implementation Steps
 
-| Aspect | Option A | Option B | Option C |
-|--------|----------|----------|----------|
-| Git separation | ✅ Clear | ⚠️ Temporary | ✅ Clear |
-| Unified system | ✅ | ✅ | ✅ |
-| Convention-based | ⚠️ Explicit | ✅ Flag | ✅ `.local` |
-| Complexity | Low | Medium | Low |
-| Team sync possible | ❌ | ⚠️ | ❌ (by design) |
-
----
-
-## Recommendation: Option C
-
-**Why `.devsteps/.local/`?**
-
-1. **Convention follows practice**: Like `.git/`, `.vscode/`, `.cache/`
-2. **Auto-gitignored**: Many templates already ignore `.*` subdirectories
-3. **Semantically clear**: "local" = workspace-local, not shared
-4. **Future-proof**: Can later hold session data, caches, etc.
-
-**New Item Types:**
-- `chore` → Sprint Backlog (technical task without Story)
-- `task` → Product Backlog (implements Story/Bug)
-
-**Implementation Steps:**
-1. Add `chore` type to shared schema
-2. Implement `.local` directory routing in core
-3. Update MCP tools for transparent handling
-4. Add `.devsteps/.local/` to default .gitignore
-5. Update AI agent instructions
+1. **Schema**: Add `chore` type to shared types
+2. **Core**: Implement `sprint/` directory routing
+3. **MCP Tools**: Transparent handling (same tools, different paths)
+4. **Cleanup**: Auto-delete sprint items on `status: done`
+5. **gitignore**: Add `.devsteps/sprint/` to template
+6. **AI Instructions**: Update agent guidelines for chore vs task
 
 ---
 
 ## Success Criteria
 
-1. ✅ Clear recommendation: **Option C - `.devsteps/.local/`**
-2. Implementation proposal defined above
-3. AI agent instructions update needed after implementation
+1. ✅ Clear recommendation: **Extension approach with `sprint/` directory**
+2. ✅ Implementation proposal defined
+3. ⏳ AI agent instructions update (after implementation)
 
 ## References
 
