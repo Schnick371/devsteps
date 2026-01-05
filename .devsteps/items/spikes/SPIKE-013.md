@@ -23,11 +23,77 @@ How should DevSteps handle **ephemeral/technical tasks** that don't require long
 | **Sprint Bug** (während Impl. gefunden) | Sprint ⚡ | Ephemer, Teil der aktuellen Arbeit |
 | **Test-Fix Bug** (technisches Detail) | Sprint ⚡ | Kein Nutzerwert, nur Umsetzungsdetail |
 
-**Rule:** Bug has customer/tester issue number → Product. Bug is byproduct of current work → Sprint.
+---
+
+## 🏆 FINAL RECOMMENDATION: Phased Approach
+
+### Analysis: Is Two-Backlog Solution Over-Engineered?
+
+**Original Problem:**
+> AI creates standalone Task "Fix Mock Assertions" - shouldn't be archived
+
+**Proposed Complex Solution:**
+> Complete architecture overhaul with two indexes, cross-category rules, migration commands
+
+**Assessment:** The complexity is **disproportionate** to the problem.
+
+### Implications of Two-Backlog Architecture
+
+| Implication | Impact | Severity |
+|-------------|--------|----------|
+| **Two Truths** | Local sprint items invisible to team | ⚠️ Medium |
+| **Git History Orphans** | Commits reference deleted items | ⚠️ Medium |
+| **Tooling Complexity** | Every function needs scope awareness | 🔴 High |
+| **Relation Complexity** | Cross-category link validation | 🔴 High |
+| **Migration Ugliness** | ID changes, schema differences | 🔴 High |
+| **User Mental Model** | "Where does this go?" confusion | ⚠️ Medium |
+
+### Phase 1: Minimal Viable Solution (RECOMMENDED)
+
+**Changes:**
+1. **New type `chore`** - For technical work without Story parent
+2. **`ephemeral` flag** - Can be set on any item type
+3. **Auto-delete on done** - If `ephemeral: true`, delete instead of archive
+4. **Improved AI instructions** - Clear rules when to use what
+
+**Implementation:**
+```typescript
+interface WorkItem {
+  id: string;
+  type: ItemType;  // Add 'chore' to union
+  ephemeral?: boolean;  // NEW: Optional flag
+  // ...existing fields
+}
+
+// On status change to 'done':
+if (item.ephemeral) {
+  await deleteItem(item.id);  // Not archive
+} else {
+  await archiveItem(item.id);
+}
+```
+
+**Advantages:**
+- ✅ Minimal code changes
+- ✅ Single index, single directory
+- ✅ No migration needed (just change flag)
+- ✅ Backwards compatible
+
+**Disadvantages:**
+- ⚠️ Ephemeral items still in Git history until deleted
+
+### Phase 2: Sprint Backlog (Only If Phase 1 Insufficient)
+
+After 3-6 months, evaluate:
+- Is archive still too noisy?
+- Do we need Git separation?
+- Then consider full Sprint Backlog implementation
 
 ---
 
-## Directory Structure (Extension Approach)
+## Previous Architecture Analysis (Preserved)
+
+### Directory Structure Option (Evaluated but NOT Recommended for Phase 1)
 
 ```
 .devsteps/
@@ -47,11 +113,9 @@ How should DevSteps handle **ephemeral/technical tasks** that don't require long
 └── index.json
 ```
 
----
+### Unresolved Questions (For Phase 2 if needed)
 
-## ⚠️ UNRESOLVED QUESTIONS
-
-### 1. Category Decision: Who/What Decides?
+#### 1. Category Decision: Who/What Decides?
 
 **Problem:** `task` and `bug` can exist in BOTH categories. How does CLI/MCP know where to create?
 
@@ -63,13 +127,7 @@ How should DevSteps handle **ephemeral/technical tasks** that don't require long
 | **D: Interactive** | CLI/AI asks user | User decides | UX overhead |
 | **E: Default + Override** | Default to Product, `--ephemeral` for Sprint | Backwards compatible | Must remember flag |
 
-**Current Recommendation:** Hybrid of B + C
-- `chore` → Always Sprint (type-based)
-- `task` with Product parent → Product (inferred)
-- `task` without parent → Prompt or require `--sprint` flag
-- `bug` without Product parent → Sprint (inferred)
-
-### 2. Cross-Category Relations
+#### 2. Cross-Category Relations
 
 **Scenario:** `CHORE-001` (sprint) relates to `STORY-042` (product)
 
@@ -84,9 +142,7 @@ How should DevSteps handle **ephemeral/technical tasks** that don't require long
 3. On Sprint item deletion: No cleanup needed (one-way reference)
 4. Validation: Block `mcp_devsteps_link` if Product → Sprint
 
-### 3. Index Architecture
-
-**Options:**
+#### 3. Index Architecture
 
 | Approach | Description | Pro | Contra |
 |----------|-------------|-----|--------|
@@ -94,12 +150,7 @@ How should DevSteps handle **ephemeral/technical tasks** that don't require long
 | **B: Dual Index** | `index.json` + `sprint/index.json` | Clean separation | Two files to manage |
 | **C: Scoped Index** | `index.json` with `scope` field | Single file, filterable | Schema change |
 
-**Current Recommendation:** B - Dual Index
-- `index.json` → Product items only (Git-tracked)
-- `sprint/index.json` → Sprint items only (.gitignored)
-- Queries can specify scope or merge both
-
-### 4. Lifecycle & Migration
+#### 4. Lifecycle & Migration
 
 | Situation | Action | Implementation |
 |-----------|--------|----------------|
@@ -108,18 +159,7 @@ How should DevSteps handle **ephemeral/technical tasks** that don't require long
 | Sprint item done | Delete (not archive) | Auto-cleanup on `status: done` |
 | Product item done | Archive | Existing behavior |
 
-**Migration Command:**
-```bash
-devsteps migrate <ID> --to-product|--to-sprint
-```
-- Changes directory location
-- Updates index(es)
-- Preserves ID or assigns new one?
-- Handles relations?
-
-### 5. ID Namespacing
-
-**Problem:** If both have `TASK-001`, collision?
+#### 5. ID Namespacing
 
 | Approach | Example | Pro | Contra |
 |----------|---------|-----|--------|
@@ -127,21 +167,13 @@ devsteps migrate <ID> --to-product|--to-sprint
 | **B: Prefix** | S-TASK-001 vs P-TASK-001 | Clear scope | Ugly IDs |
 | **C: Separate Counters** | Both can have TASK-001 | Simple | Ambiguous references |
 
-**Current Recommendation:** A - Shared Counter
-- Single ID namespace across both scopes
-- No ambiguity in references
-- Counter in `index.json` (Product) is source of truth
-
 ---
 
-## Next Steps
+## Success Criteria
 
-1. **Resolve Questions 1-5** through discussion
-2. **Update Architecture** based on decisions
-3. **Then** mark Spike as done
-4. **Then** refine STORY-090 with implementation details
-
----
+1. ✅ Clear recommendation: **Phase 1 - `chore` type + `ephemeral` flag**
+2. ✅ Phase 2 architecture documented for future reference
+3. ⏳ AI agent instructions update (after implementation)
 
 ## References
 
