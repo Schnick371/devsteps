@@ -27,9 +27,7 @@ How should DevSteps handle **ephemeral/technical tasks** that don't require long
 
 ---
 
-## Final Architecture Decision
-
-### Directory Structure (Extension Approach)
+## Directory Structure (Extension Approach)
 
 ```
 .devsteps/
@@ -49,77 +47,101 @@ How should DevSteps handle **ephemeral/technical tasks** that don't require long
 └── index.json
 ```
 
-### Key Properties
+---
 
-| Aspect | Product (`items/`) | Sprint (`sprint/`) |
-|--------|-------------------|-------------------|
-| Git-managed | ✅ Yes | ❌ No (.gitignore) |
-| Archived | ✅ Yes | ❌ Deleted after done |
-| Types | epic, story, feature, requirement, bug, spike, task | chore, task, bug |
-| Traceability | ✅ Full | ⚠️ Session-only |
+## ⚠️ UNRESOLVED QUESTIONS
 
-### New Item Type: `chore`
+### 1. Category Decision: Who/What Decides?
 
-```typescript
-type SprintItemType = 'chore' | 'task' | 'bug';
+**Problem:** `task` and `bug` can exist in BOTH categories. How does CLI/MCP know where to create?
 
-interface ChoreItem {
-  id: string;        // CHORE-001
-  type: 'chore';
-  title: string;
-  status: Status;
-  // No linked_items, no eisenhower, no archive
-}
+| Approach | Description | Pro | Contra |
+|----------|-------------|-----|--------|
+| **A: Type-based** | `chore` = always Sprint | Simple | `task`/`bug` ambiguous |
+| **B: Explicit Flag** | `--sprint` or `--product` flag | Clear intent | Extra parameter |
+| **C: Parent-Inference** | Has parent in `items/` → Product | Automatic | Orphans unclear |
+| **D: Interactive** | CLI/AI asks user | User decides | UX overhead |
+| **E: Default + Override** | Default to Product, `--ephemeral` for Sprint | Backwards compatible | Must remember flag |
+
+**Current Recommendation:** Hybrid of B + C
+- `chore` → Always Sprint (type-based)
+- `task` with Product parent → Product (inferred)
+- `task` without parent → Prompt or require `--sprint` flag
+- `bug` without Product parent → Sprint (inferred)
+
+### 2. Cross-Category Relations
+
+**Scenario:** `CHORE-001` (sprint) relates to `STORY-042` (product)
+
+| Direction | Allowed? | Risk |
+|-----------|----------|------|
+| Sprint → Product | ✅ Yes | None (Product is persistent) |
+| Product → Sprint | ⚠️ Dangerous | Sprint item disappears, broken link |
+
+**Proposed Rules:**
+1. Sprint items MAY reference Product items (`relates-to`, `implements`)
+2. Product items MUST NOT reference Sprint items
+3. On Sprint item deletion: No cleanup needed (one-way reference)
+4. Validation: Block `mcp_devsteps_link` if Product → Sprint
+
+### 3. Index Architecture
+
+**Options:**
+
+| Approach | Description | Pro | Contra |
+|----------|-------------|-----|--------|
+| **A: Single Index** | Both in `index.json` | Simple queries | Sprint pollutes index |
+| **B: Dual Index** | `index.json` + `sprint/index.json` | Clean separation | Two files to manage |
+| **C: Scoped Index** | `index.json` with `scope` field | Single file, filterable | Schema change |
+
+**Current Recommendation:** B - Dual Index
+- `index.json` → Product items only (Git-tracked)
+- `sprint/index.json` → Sprint items only (.gitignored)
+- Queries can specify scope or merge both
+
+### 4. Lifecycle & Migration
+
+| Situation | Action | Implementation |
+|-----------|--------|----------------|
+| Sprint item becomes important | Migrate to Product | `devsteps migrate CHORE-001 --to-product` |
+| Product item is actually ephemeral | Migrate to Sprint | `devsteps migrate TASK-042 --to-sprint` |
+| Sprint item done | Delete (not archive) | Auto-cleanup on `status: done` |
+| Product item done | Archive | Existing behavior |
+
+**Migration Command:**
+```bash
+devsteps migrate <ID> --to-product|--to-sprint
 ```
+- Changes directory location
+- Updates index(es)
+- Preserves ID or assigns new one?
+- Handles relations?
 
-**Chore vs Task:**
-- `chore` → Sprint Backlog (technical task without Story, ephemeral)
-- `task` → Product Backlog (implements Story/Bug, persisted)
+### 5. ID Namespacing
 
-### Routing Logic
+**Problem:** If both have `TASK-001`, collision?
 
-```typescript
-function getItemPath(item: WorkItem): string {
-  // Sprint Backlog items
-  if (item.type === 'chore') {
-    return '.devsteps/sprint/chores/';
-  }
-  
-  // Sprint bugs (no parent link)
-  if (item.type === 'bug' && !hasProductParent(item)) {
-    return '.devsteps/sprint/bugs/';
-  }
-  
-  // Product Backlog items (default)
-  return `.devsteps/items/${item.type}s/`;
-}
-```
+| Approach | Example | Pro | Contra |
+|----------|---------|-----|--------|
+| **A: Shared Counter** | TASK-001, TASK-002 (global) | No collision | Complex counter |
+| **B: Prefix** | S-TASK-001 vs P-TASK-001 | Clear scope | Ugly IDs |
+| **C: Separate Counters** | Both can have TASK-001 | Simple | Ambiguous references |
 
-### .gitignore Addition
-
-```gitignore
-# DevSteps Sprint Backlog (ephemeral, not tracked)
-.devsteps/sprint/
-```
+**Current Recommendation:** A - Shared Counter
+- Single ID namespace across both scopes
+- No ambiguity in references
+- Counter in `index.json` (Product) is source of truth
 
 ---
 
-## Implementation Steps
+## Next Steps
 
-1. **Schema**: Add `chore` type to shared types
-2. **Core**: Implement `sprint/` directory routing
-3. **MCP Tools**: Transparent handling (same tools, different paths)
-4. **Cleanup**: Auto-delete sprint items on `status: done`
-5. **gitignore**: Add `.devsteps/sprint/` to template
-6. **AI Instructions**: Update agent guidelines for chore vs task
+1. **Resolve Questions 1-5** through discussion
+2. **Update Architecture** based on decisions
+3. **Then** mark Spike as done
+4. **Then** refine STORY-090 with implementation details
 
 ---
-
-## Success Criteria
-
-1. ✅ Clear recommendation: **Extension approach with `sprint/` directory**
-2. ✅ Implementation proposal defined
-3. ⏳ AI agent instructions update (after implementation)
 
 ## References
 
