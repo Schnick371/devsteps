@@ -82,18 +82,78 @@ if (item.ephemeral) {
 **Disadvantages:**
 - ⚠️ Ephemeral items still in Git history until deleted
 
-### Phase 2: Sprint Backlog (Only If Phase 1 Insufficient)
+---
+
+## 🔄 Integration with Workflow Prompts
+
+### Prompt Alignment Strategy
+
+**Existing Prompts:**
+- `devsteps-plan-work.prompt.md` → Planning in main branch
+- `devsteps-start-work.prompt.md` → Start work on item (creates feature branch)
+- `devsteps-sprint-execution.prompt.md` → Sprint orchestration (should rename to `devsteps-start-sprint.prompt.md`)
+- `devsteps-workflow.prompt.md` → Ongoing development work
+
+**Naming Consistency:**
+```
+devsteps-plan-work.prompt.md      → Planning phase
+devsteps-start-work.prompt.md     → Start work item
+devsteps-start-sprint.prompt.md   → Start sprint (RENAME NEEDED)
+devsteps-workflow.prompt.md       → During work/sprint execution
+```
+
+### Phase 1 Integration Points
+
+#### In devsteps-plan-work.prompt.md
+**Add guidance:**
+- When to use `chore` vs `task`
+- When to set `ephemeral: true`
+- Rule: "No parent Story? Consider chore or skip DevSteps entirely"
+
+#### In devsteps-start-sprint.prompt.md (renamed)
+**Add section:**
+- Sprint tasks can have `ephemeral: true` flag
+- Cherry-pick still works (same directory structure)
+- On sprint completion: ephemeral items auto-deleted
+
+#### In devsteps-workflow.prompt.md
+**Add guidance:**
+- Creating chores during development
+- When technical work belongs in DevSteps vs just commit message
+
+### Open Questions for Workflow Integration
+
+1. **Chore Creation During Work:**
+   - Can devsteps-start-work create chores?
+   - Or only via plan-work?
+   - Should AI ask: "Is this Product or ephemeral?"
+
+2. **Sprint Workflow:**
+   - Are all sprint tasks ephemeral by default?
+   - Or only chores?
+   - How does devsteps-start-sprint flag items?
+
+3. **Workflow Transitions:**
+   - Can ephemeral items become permanent?
+   - Migration command needed? Or just change flag?
+
+4. **Branch Strategy Compatibility:**
+   - Feature branches still used for chores?
+   - Or chores developed directly in sprint branch?
+   - How does this affect cherry-pick strategy?
+
+---
+
+## Phase 2: Sprint Backlog (Only If Phase 1 Insufficient)
 
 After 3-6 months, evaluate:
 - Is archive still too noisy?
 - Do we need Git separation?
 - Then consider full Sprint Backlog implementation
 
----
+### Previous Architecture Analysis (Preserved)
 
-## Previous Architecture Analysis (Preserved)
-
-### Directory Structure Option (Evaluated but NOT Recommended for Phase 1)
+#### Directory Structure Option (Evaluated but NOT Recommended for Phase 1)
 
 ```
 .devsteps/
@@ -113,9 +173,9 @@ After 3-6 months, evaluate:
 └── index.json
 ```
 
-### Unresolved Questions (For Phase 2 if needed)
+#### Unresolved Questions (For Phase 2 if needed)
 
-#### 1. Category Decision: Who/What Decides?
+##### 1. Category Decision: Who/What Decides?
 
 **Problem:** `task` and `bug` can exist in BOTH categories. How does CLI/MCP know where to create?
 
@@ -127,7 +187,7 @@ After 3-6 months, evaluate:
 | **D: Interactive** | CLI/AI asks user | User decides | UX overhead |
 | **E: Default + Override** | Default to Product, `--ephemeral` for Sprint | Backwards compatible | Must remember flag |
 
-#### 2. Cross-Category Relations
+##### 2. Cross-Category Relations
 
 **Scenario:** `CHORE-001` (sprint) relates to `STORY-042` (product)
 
@@ -142,7 +202,7 @@ After 3-6 months, evaluate:
 3. On Sprint item deletion: No cleanup needed (one-way reference)
 4. Validation: Block `mcp_devsteps_link` if Product → Sprint
 
-#### 3. Index Architecture
+##### 3. Index Architecture
 
 | Approach | Description | Pro | Contra |
 |----------|-------------|-----|--------|
@@ -150,7 +210,7 @@ After 3-6 months, evaluate:
 | **B: Dual Index** | `index.json` + `sprint/index.json` | Clean separation | Two files to manage |
 | **C: Scoped Index** | `index.json` with `scope` field | Single file, filterable | Schema change |
 
-#### 4. Lifecycle & Migration
+##### 4. Lifecycle & Migration
 
 | Situation | Action | Implementation |
 |-----------|--------|----------------|
@@ -159,7 +219,7 @@ After 3-6 months, evaluate:
 | Sprint item done | Delete (not archive) | Auto-cleanup on `status: done` |
 | Product item done | Archive | Existing behavior |
 
-#### 5. ID Namespacing
+##### 5. ID Namespacing
 
 | Approach | Example | Pro | Contra |
 |----------|---------|-----|--------|
@@ -169,11 +229,22 @@ After 3-6 months, evaluate:
 
 ---
 
+## Next Steps (DO NOT IMPLEMENT YET)
+
+1. **Resolve workflow integration questions** (above)
+2. **Update prompts** with ephemeral guidance
+3. **Rename** devsteps-sprint-execution.prompt.md → devsteps-start-sprint.prompt.md
+4. **Then** update spike status and refine STORY-090
+
+---
+
 ## Success Criteria
 
 1. ✅ Clear recommendation: **Phase 1 - `chore` type + `ephemeral` flag**
 2. ✅ Phase 2 architecture documented for future reference
-3. ⏳ AI agent instructions update (after implementation)
+3. ✅ Workflow integration considerations documented
+4. ⏳ Open questions for workflow prompts identified
+5. ⏳ AI agent instructions update (after implementation)
 
 ## References
 
