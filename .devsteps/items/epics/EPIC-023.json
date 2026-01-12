@@ -1,11 +1,11 @@
 {
-  "id": "EPIC-010",
+  "id": "EPIC-023",
   "type": "epic",
   "category": "general",
-  "title": "Knowledge Management & Organizational Learning System",
+  "title": "Evolutionary Architecture Support - Fitness Functions & Hypothesis Validation",
   "status": "draft",
   "eisenhower": "not-urgent-important",
-  "created": "2025-11-27T16:50:03.926Z",
+  "created": "2026-01-12T07:17:07.492Z",
   "updated": "2026-01-12T07:19:07.896Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
@@ -13,31 +13,18 @@
     "packages/shared/src/schemas",
     "packages/cli/src/commands",
     "packages/mcp-server/src/handlers",
-    "packages/extension/src/webview"
+    "packages/extension/src/webview",
+    ".github/workflows"
   ],
   "linked_items": {
     "implements": [],
-    "implemented-by": [
-      "STORY-022",
-      "STORY-023",
-      "STORY-024",
-      "STORY-025",
-      "STORY-026",
-      "STORY-027",
-      "STORY-028",
-      "STORY-029",
-      "STORY-030",
-      "STORY-031",
-      "STORY-032",
-      "STORY-033",
-      "STORY-034"
-    ],
+    "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "EPIC-023"
+      "EPIC-010"
     ],
     "depends-on": [],
     "required-by": [],
@@ -45,10 +32,11 @@
     "superseded-by": []
   },
   "tags": [
-    "knowledge-management",
-    "documentation",
-    "learning",
-    "patterns"
+    "evolutionary-architecture",
+    "fitness-functions",
+    "dora-metrics",
+    "hypothesis-driven",
+    "quality-automation"
   ],
   "commits": [],
   "metadata": {}

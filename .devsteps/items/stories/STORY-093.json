@@ -1,39 +1,38 @@
 {
-  "id": "STORY-026",
+  "id": "STORY-093",
   "type": "story",
   "category": "general",
-  "title": "Architecture Decision Log (ADR-style records)",
+  "title": "Hypothesis-Driven Development Items",
   "status": "draft",
   "eisenhower": "not-urgent-important",
-  "created": "2025-11-27T16:50:50.185Z",
-  "updated": "2026-01-12T07:19:48.931Z",
+  "created": "2026-01-12T07:18:53.516Z",
+  "updated": "2026-01-12T07:19:07.896Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/cli/src/commands/decision.ts"
+    "packages/shared/src/types/index.ts",
+    "packages/shared/src/schemas/itemSchema.ts",
+    "packages/cli/src/commands/experiment.ts"
   ],
   "linked_items": {
     "implements": [
-      "EPIC-010"
+      "EPIC-023"
     ],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [
-      "STORY-091"
-    ],
-    "depends-on": [
-      "STORY-022"
-    ],
+    "relates-to": [],
+    "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "knowledge-management",
-    "adr",
-    "decisions"
+    "hypothesis-driven",
+    "experiments",
+    "data-driven-decisions",
+    "validation"
   ],
   "commits": [],
   "metadata": {}

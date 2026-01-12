@@ -1,0 +1,41 @@
+{
+  "id": "STORY-092",
+  "type": "story",
+  "category": "general",
+  "title": "DORA Metrics Tracking",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-01-12T07:18:17.405Z",
+  "updated": "2026-01-12T07:19:07.896Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/metrics",
+    "packages/cli/src/commands/metrics.ts",
+    "packages/extension/src/webview/doraMetrics.ts",
+    ".devsteps/metrics/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-023"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "dora-metrics",
+    "deployment-frequency",
+    "lead-time",
+    "metrics",
+    "performance"
+  ],
+  "commits": [],
+  "metadata": {}
+}
