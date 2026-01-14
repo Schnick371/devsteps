@@ -6,7 +6,7 @@ description: "Git branch management and merge discipline for DevSteps workflow"
 # Git Branch Management & Merge Discipline
 
 ## Core Principle
-**Feature branches are ephemeral** - they exist only during active development and are deleted immediately after merge.
+**Feature branches are ephemeral** - they exist only during active development and are archived locally after merge.
 
 ## Branch Lifecycle
 
@@ -24,20 +24,30 @@ description: "Git branch management and merge discipline for DevSteps workflow"
 - Quality gates pass → mark work item `done`
 - Final commit to feature branch
 - **MANDATORY:** Merge to main immediately
-- **MANDATORY:** Delete branch after successful merge
+- **MANDATORY:** Cleanup after successful merge
 
 **Merge Protocol:**
 - Use `--no-ff` flag to preserve feature branch context in history
 - Ensure commit message includes `Implements: <ID>` footer
 - Verify `.devsteps/` status synced to main
-- Push merged main before deleting branch
+- Push merged main before cleanup
+
+**Branch Cleanup After Merge:**
+- **Remote**: Delete immediately (keeps remote repository clean)
+- **Local**: Rename to `archive/merged/<name>` (preserves local history for reference)
+- **Benefit**: Clean remote + local forensics available
+
+**Archive Naming Patterns:**
+- `archive/merged/<name>` - Successfully completed and merged (default for all completed work)
+- `archive/abandoned/<name>` - Work cancelled before completion
+- `archive/superseded/<name>` - Replaced by different approach
 
 ## Prohibited Patterns
 
 **Never:**
 - Leave feature branches unmerged after completion
-- Keep feature branches "just in case"
-- Create archive branches without exceptional justification
+- Keep active feature branches "just in case"
+- Leave remote branches after merge (delete remote immediately)
 - Delay merge waiting for "later"
 - Batch multiple work items in single branch
 
@@ -51,51 +61,45 @@ description: "Git branch management and merge discipline for DevSteps workflow"
 **Weekly Review:**
 - List all feature branches with last commit date
 - Identify stale branches (>1 day old)
-- Merge or delete immediately
-
-## Exceptional Cases
-
-**Archive Naming (Rare):**
-- `archive/merged/<name>` - Historical reference needed despite merge
-- `archive/abandoned/<name>` - Work cancelled before completion
-- `archive/superseded/<name>` - Replaced by different approach
-
-**Criteria for Archiving:**
-- Complex implementation requiring future reference
-- Learning material for similar future work
-- Audit trail for cancelled initiatives
-
-**Default:** Delete branch after merge. Archive only with clear justification.
+- Merge immediately or archive as abandoned
 
 ## Enforcement
 
 **Pre-Commit Validation:**
 - Check for unmerged feature branches
 - Warn if branch age exceeds threshold
-- Require justification for archive naming
+- Detect remote branches that should be deleted
 
 **Git Aliases (Recommended):**
 ```gitconfig
 [alias]
-    # Merge and delete in one operation
-    merge-done = "!f() { git merge --no-ff $1 && git branch -d $1; }; f"
+    # Merge, archive locally, delete remote
+    merge-done = "!f() { \
+        git merge --no-ff $1 && \
+        git branch -m $1 archive/merged/$1 && \
+        git push origin --delete $1; \
+    }; f"
     
     # List stale branches
     stale = "for-each-ref --sort=-committerdate refs/heads/ --no-merged main --format='%(refname:short) %(committerdate:relative)'"
+    
+    # List archived branches
+    archived = "branch --list 'archive/*'"
 ```
 
 ## Why This Matters
 
 **Benefits:**
-- Clean repository (minimal branch clutter)
-- Clear history (merged work visible)
-- Fast workflow (no accumulation)
+- Clean remote repository (no stale branches visible to team)
+- Local history preserved (implementation review, learning)
+- Clear naming convention (no ambiguity)
+- Fast workflow (automatic cleanup process)
 - Early detection of workflow failures
 
 **Consequences of Ignoring:**
-- Lost work (orphaned branches)
+- Remote clutter (confusing team members)
+- Lost implementation context (no local reference)
 - Merge conflicts (divergent history)
-- Confusion (which branch is current?)
 - Process breakdown (unmerged branches accumulate)
 
 ## Integration with DevSteps
@@ -104,12 +108,13 @@ description: "Git branch management and merge discipline for DevSteps workflow"
 - Work items planned in `main`
 - Implementation in feature branch
 - Merge completes work item lifecycle
-- Immediate deletion maintains hygiene
+- Immediate cleanup (remote delete + local archive) maintains hygiene
 
 **Status Synchronization:**
 - `.devsteps/` changes committed to feature branch during work
 - Merged to main when work complete
 - Single source of truth (main) after merge
+- Local archive preserves implementation forensics
 
 ---
 

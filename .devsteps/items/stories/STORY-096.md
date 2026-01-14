@@ -1,17 +1,18 @@
-# Story: Git Branch Hygiene Enforcement - Stale Branch Detection & Cleanup Prompts
+# Story: Git Branch Hygiene Enforcement - Stale Branch Detection & Cleanup Automation
 
 ## User Value
 
 **As a** DevSteps developer,  
-**I want** automated detection and warnings for stale feature branches,  
+**I want** automated detection and cleanup for stale feature branches,  
 **so that** I maintain clean repository hygiene per documented Copilot standards.
 
 ## Context
 
-The new `devsteps-git-hygiene.instructions.md` defines strict branch lifecycle rules:
+The `devsteps-git-hygiene.instructions.md` defines strict branch lifecycle rules:
 - Feature branches are ephemeral (temporary)
 - Merge immediately after work item reaches `done` status
-- Delete branch after successful merge
+- **Remote**: Delete after merge (clean remote)
+- **Local**: Rename to `archive/merged/<name>` (preserve history)
 - **Red Flag**: Branch older than 1 day without merge indicates workflow failure
 
 ## Acceptance Criteria
@@ -24,6 +25,7 @@ The new `devsteps-git-hygiene.instructions.md` defines strict branch lifecycle r
   - Item `done` but branch not merged → **CRITICAL**
   - Item `in-progress` with old branch → **WARNING**
   - Item `draft` with branch → **ERROR** (branch shouldn't exist yet)
+- [ ] Check both local and remote branches
 
 ### 2. Branch Age Reporting
 - [ ] Group by severity:
@@ -32,50 +34,80 @@ The new `devsteps-git-hygiene.instructions.md` defines strict branch lifecycle r
   - ℹ️ INFO: Recent branches (<1 day)
 - [ ] Show last commit date and time
 - [ ] Display associated work item ID and status
+- [ ] Separate local vs. remote branches
 
 ### 3. Interactive Cleanup Mode
 - [ ] CLI: `devsteps branch-cleanup --interactive`
 - [ ] Present stale branches one-by-one
 - [ ] Options for each:
-  - Merge to main (if tests pass)
-  - Delete branch (if abandoned)
-  - Keep (mark as exception with reason)
-  - Skip (review later)
+  - **Merge & Cleanup**: Merge to main, delete remote, archive locally
+  - **Archive as Abandoned**: Rename local to `archive/abandoned/<name>`, delete remote
+  - **Keep Active**: Mark as exception with reason
+  - **Skip**: Review later
 
-### 4. Git Integration
-- [ ] Check remote branches (not just local)
+### 4. Automated Cleanup Workflow
+- [ ] After successful merge:
+  1. Delete remote branch: `git push origin --delete <branch>`
+  2. Rename local branch: `git branch -m <branch> archive/merged/<branch>`
+  3. Confirm cleanup in summary
+- [ ] Handle errors gracefully:
+  - Remote already deleted
+  - Local rename conflicts
+  - No remote tracking branch
+
+### 5. Git Integration
+- [ ] Check remote branches via `git branch -r`
 - [ ] Verify branch is pushed before suggesting merge
 - [ ] Warn about unpushed commits
 - [ ] Prevent deletion of branches with unpushed work
+- [ ] List archived branches: `git branch --list 'archive/*'`
 
-### 5. Configuration
+### 6. Configuration
 - [ ] `.devsteps/config.json` settings:
   ```json
   {
     "git": {
       "staleBranchThresholdHours": 24,
-      "autoCleanupEnabled": false,
+      "autoCleanupRemote": true,
+      "archiveLocalBranches": true,
       "branchPatterns": ["story/*", "epic/*", "bug/*", "task/*"]
     }
   }
   ```
 
-### 6. Pre-Status Check Integration
+### 7. Pre-Status Check Integration
 - [ ] `devsteps status` shows stale branch warnings
 - [ ] Count displayed in health summary
 - [ ] Link to `devsteps doctor --check-branches`
+- [ ] Show archived branch count
 
-### 7. Merge Protocol Enforcement
+### 8. Merge Protocol Enforcement
 - [ ] Verify `--no-ff` flag used for merges
 - [ ] Check commit message includes `Implements: <ID>`
 - [ ] Validate .devsteps/ status synced to main
-- [ ] Prompt for branch deletion after successful merge
+- [ ] Automatic cleanup prompt after successful merge
+
+### 9. Git Alias Generation
+- [ ] Generate recommended git aliases:
+  ```gitconfig
+  [alias]
+      merge-done = "!f() { \
+          git merge --no-ff $1 && \
+          git branch -m $1 archive/merged/$1 && \
+          git push origin --delete $1; \
+      }; f"
+      
+      stale = "for-each-ref --sort=-committerdate refs/heads/ --no-merged main"
+      archived = "branch --list 'archive/*'"
+  ```
+- [ ] Add to `.git/config` with user confirmation
 
 ## Definition of Done
 
 - Feature implemented and tested
 - CLI commands work correctly
-- Configuration options functional
+- Remote delete + local archive workflow functional
+- Configuration options documented
 - Unit tests pass (branch detection logic)
 - Integration tests added (git operations)
 - No linting errors
@@ -85,31 +117,30 @@ The new `devsteps-git-hygiene.instructions.md` defines strict branch lifecycle r
 ## Technical Implementation
 
 **Packages affected:**
-- `packages/cli/src/commands/doctor.ts` - Add branch checking
-- `packages/cli/src/commands/branch-cleanup.ts` - New command
+- `packages/cli/src/commands/doctor.ts` - Branch checking
+- `packages/cli/src/commands/branch-cleanup.ts` - Cleanup automation
 - `packages/shared/src/git/branch-utils.ts` - Git operations
 - `packages/shared/src/types/config.ts` - Configuration
 
-**Git Integration:**
+**Branch Cleanup Logic:**
 ```typescript
-import { simpleGit } from 'simple-git';
-
-async function detectStaleBranches(thresholdHours: number) {
+async function cleanupBranch(branchName: string) {
   const git = simpleGit();
-  const branches = await git.branch(['-a']); // All branches
-  const cutoff = Date.now() - (thresholdHours * 60 * 60 * 1000);
   
-  return branches.all
-    .filter(b => /^(story|epic|bug|task)\//.test(b))
-    .map(async branch => {
-      const log = await git.log(['-1', branch]);
-      const lastCommit = new Date(log.latest.date);
-      return {
-        branch,
-        age: Date.now() - lastCommit.getTime(),
-        isStale: lastCommit.getTime() < cutoff
-      };
-    });
+  // 1. Delete remote branch
+  try {
+    await git.push(['origin', '--delete', branchName]);
+    console.log(`✓ Remote branch deleted: ${branchName}`);
+  } catch (err) {
+    console.warn(`Remote branch already deleted or doesn't exist`);
+  }
+  
+  // 2. Rename local branch to archive
+  const archiveName = `archive/merged/${branchName}`;
+  await git.branch(['-m', branchName, archiveName]);
+  console.log(`✓ Local branch archived: ${archiveName}`);
+  
+  return { remote: 'deleted', local: archiveName };
 }
 ```
 
