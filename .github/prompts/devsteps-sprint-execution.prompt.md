@@ -1,8 +1,8 @@
 ---
-agent: 'devsteps-coordinator'
+agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Sprint orchestration - integration branch workflow with feature delegation and squash merge'
-tools: ['execute/runTask', 'execute/runTests', 'execute/runInTerminal', 'read/readFile', 'agent', 'edit', 'search', 'devsteps/*', 'todo']
+tools: ['execute/testFailure', 'execute/runTask', 'execute/runInTerminal', 'execute/runTests', 'read/readFile', 'edit', 'search', 'devsteps/*', 'agent', 'todo']
 ---
 
 # 🏃 Sprint Execution - Integration Orchestration

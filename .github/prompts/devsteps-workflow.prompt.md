@@ -1,8 +1,8 @@
 ---
-agent: 'devsteps-coordinator'
+agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Structured development workflow - preserve decisions and maintain context continuity'
-tools: ['vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'vscode/extensions', 'execute/testFailure', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web/fetch', 'devsteps/*', 'copilot-container-tools/*', 'tavily/*', 'upstash/context7/*', 'agent', 'todo']
+tools: ['vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'vscode/extensions', 'execute/testFailure', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web/fetch', 'devsteps/*', 'copilot-container-tools/*', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'agent', 'todo']
 ---
 
 # 🧭 Structured Development Workflow
@@ -109,13 +109,20 @@ Maintain structured workflow - preserve decisions, traceability, prevent context
 **When All Tests Pass (Status: done):**
 - Mark item as `done` status
 - Final commit to feature branch
-- Push branch
-- **Prohibition:** No merge to main yet (test first, user approval, squash merge later)
+- Merge to main (--no-ff preserves feature context)
+- Push merged main
+- Delete feature branch (local + remote)
 
 **Status Sync:**
-- Status stored in `.devsteps/` on feature branch
-- Synced to main during final merge
-- Temporary divergence expected
+- `.devsteps/` committed to main during merge
+- No temporary divergence - immediate integration
+- Feature branches ephemeral by design
+
+**Merge Discipline:**
+- Feature branches live only during active development
+- Merge immediately after quality gates pass
+- Delete branch after successful merge
+- Stale branches indicate process failure
 
 **Context Preservation:**
 - Why/What/How for future switches

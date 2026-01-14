@@ -56,6 +56,7 @@ tools: ['edit', 'search', 'think', 'usages', 'tavily']  # Variable set based on 
 - **`'GPT-5 mini'`** - real simple tasks
 - **`'Grok Code Fast 1 (Preview) (copilot)'`** - Short files only (<250 lines), speed-critical tasks, general-purpose
 - **`'Claude Sonnet 4.5'`** - New/complex prompts, advanced workflows
+- **`'Gemini 3 Pro (Preview)'`** - Lengthy files (>500 lines), deep reasoning, complex analysis
 
 ## Content Guidelines
 - **Size matters**: Keep Copilot files short and focused. Avoid lengthy instructions or excessive line counts to prevent overwhelming Copilot and ensure optimal performance.

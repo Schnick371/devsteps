@@ -1,0 +1,36 @@
+{
+  "id": "STORY-098",
+  "type": "story",
+  "category": "Architecture",
+  "title": "Coordinator Executor Pattern - Planner-Executor Separation Documentation",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-01-14T11:06:12.117Z",
+  "updated": "2026-01-14T11:06:23.491Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-025"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "architecture",
+    "coordinator",
+    "executor-pattern",
+    "documentation",
+    "Q2"
+  ],
+  "commits": [],
+  "metadata": {}
+}

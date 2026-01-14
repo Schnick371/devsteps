@@ -1,8 +1,8 @@
 ---
-agent: 'devsteps-coordinator'
+agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Begin implementation work - review planned items, select next task, and start structured development'
-tools: ['vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'vscode/extensions', 'execute/testFailure', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web/fetch', 'copilot-container-tools/*', 'tavily/*', 'upstash/context7/*', 'agent', 'devsteps/*', 'todo']
+tools: ['vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'vscode/extensions', 'execute/testFailure', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web/fetch', 'devsteps/*', 'copilot-container-tools/*', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'agent', 'todo']
 ---
 
 # 🚀 Start Work - Begin Implementation
@@ -61,14 +61,20 @@ Review planned work, select highest priority, begin structured development.
 **Quality Gates:** Tests pass, build succeeds, manual testing, docs updated, no regressions *(see devsteps-workflow.prompt.md)*  
 **If Fail:** Return to Step 6
 
-### 8. Complete
+### 8. Complete & Integrate
 **DevSteps Status:** `review` → `done` (all gates passed)  
 **SCM Commit:** Feature branch, conventional format, footer `Implements: ID`  
-**Prohibition:** No merge to main yet
+**Integration:** Merge to main, sync devsteps status, cleanup branch
 
-**Status Sync:** `.devsteps/` on feature branch → synced during final merge
+**Merge Protocol:**
+- Verify all quality gates passed
+- Merge feature branch to main (--no-ff for traceability)
+- Push merged main
+- Delete feature branch locally and remotely
 
-**Branch Tagging:** Mark completion status: `archive/merged/` (done), `archive/abandoned/` (cancelled), `archive/superseded/` (obsolete). Keep branch for implementation history.
+**Status Sync:** `.devsteps/` committed to main during merge
+
+**Branch Lifecycle:** Feature branches are temporary - merge when done, delete immediately. Archive naming (`archive/merged/`, `archive/abandoned/`, `archive/superseded/`) only for exceptional cases requiring historical reference.
 
 ### 8.5. Spike Post-Processing
 - Review findings
@@ -83,9 +89,11 @@ Review planned work, select highest priority, begin structured development.
 
 ## Red Flags
 
-**Watch:** Task jumping, ignoring patterns, skipping tests, breaking changes, missing docs
+**Watch:** Task jumping, ignoring patterns, skipping tests, breaking changes, missing docs, unmerged branches
 
-**Redirect:** Finish first, follow patterns, write tests now, update dependents
+**Redirect:** Finish first, follow patterns, write tests now, update dependents, merge immediately
+
+**Unmerged Branch Alert:** Feature branches older than 1 day without merge indicate workflow failure. Investigate and resolve immediately.
 
 ---
 

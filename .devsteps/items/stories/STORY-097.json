@@ -1,0 +1,36 @@
+{
+  "id": "STORY-097",
+  "type": "story",
+  "category": "CLI",
+  "title": "Temporary File Management - Pre-Commit Validation & Cleanup",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-01-14T11:05:42.083Z",
+  "updated": "2026-01-14T11:06:23.489Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-025"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "CLI",
+    "file-hygiene",
+    "doctor",
+    "pre-commit",
+    "Q2"
+  ],
+  "commits": [],
+  "metadata": {}
+}
