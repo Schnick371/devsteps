@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T19:33:36.249Z",
-  "updated": "2025-12-02T15:57:05.525Z",
+  "updated": "2026-01-14T10:57:01.276Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/",
@@ -32,7 +32,8 @@
     "relates-to": [
       "EPIC-001",
       "EPIC-006",
-      "BUG-028"
+      "BUG-028",
+      "EPIC-024"
     ],
     "depends-on": [],
     "required-by": [],

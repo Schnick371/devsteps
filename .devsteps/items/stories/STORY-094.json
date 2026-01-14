@@ -1,0 +1,36 @@
+{
+  "id": "STORY-094",
+  "type": "story",
+  "category": "Documentation",
+  "title": "Document Story Change Management & Evolution Workflow",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-01-14T10:56:24.354Z",
+  "updated": "2026-01-14T10:57:01.274Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-024"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "documentation",
+    "lifecycle",
+    "change-management",
+    "best-practices",
+    "Q2"
+  ],
+  "commits": [],
+  "metadata": {}
+}

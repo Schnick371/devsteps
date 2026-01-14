@@ -1,0 +1,37 @@
+{
+  "id": "STORY-095",
+  "type": "story",
+  "category": "CLI",
+  "title": "Automated Obsolescence Detection & Backlog Health Monitoring",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-01-14T10:56:52.476Z",
+  "updated": "2026-01-14T10:57:01.274Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-024"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "CLI",
+    "automation",
+    "backlog-health",
+    "doctor",
+    "grooming",
+    "Q2"
+  ],
+  "commits": [],
+  "metadata": {}
+}

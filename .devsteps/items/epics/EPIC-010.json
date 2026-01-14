@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-27T16:50:03.926Z",
-  "updated": "2026-01-12T07:19:07.896Z",
+  "updated": "2026-01-14T10:57:01.275Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/types",
@@ -37,7 +37,8 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "EPIC-023"
+      "EPIC-023",
+      "EPIC-024"
     ],
     "depends-on": [],
     "required-by": [],
