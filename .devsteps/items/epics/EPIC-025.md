@@ -63,7 +63,7 @@
 4. **Executor Pattern**: Coordinator properly delegates to sub-agents
 5. **Documentation**: All enforcement mechanisms documented
 6. **Testing**: Automated tests validate standards compliance
-
+/home/th/dev/projekte/playground/devsteps/.devsteps/docs/architecture/repository-strategy.md to the c
 ## Related Work
 
 - EPIC-005: Workflow Governance
