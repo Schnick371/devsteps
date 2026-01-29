@@ -1,0 +1,35 @@
+{
+  "id": "STORY-099",
+  "type": "story",
+  "category": "integration",
+  "title": "Code → DevSteps: Automatic Commit Tracking",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-01-29T11:36:52.911Z",
+  "updated": "2026-01-29T11:37:08.657Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "STORY-101"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "git-hooks",
+    "commit-tracking",
+    "automation",
+    "upstream-sync"
+  ],
+  "commits": [],
+  "metadata": {}
+}

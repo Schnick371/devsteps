@@ -1,0 +1,36 @@
+{
+  "id": "STORY-100",
+  "type": "story",
+  "category": "integration",
+  "title": "DevSteps → Code: Git Workflow Validation & Automation",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-01-29T11:36:52.919Z",
+  "updated": "2026-01-29T11:37:08.656Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-099"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "git-hooks",
+    "validation",
+    "automation",
+    "downstream-sync",
+    "workflow-enforcement"
+  ],
+  "commits": [],
+  "metadata": {}
+}

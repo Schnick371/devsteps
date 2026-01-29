@@ -1,33 +1,36 @@
 {
-  "id": "EPIC-016",
-  "type": "epic",
-  "category": "general",
-  "title": "Workflow Branch Strategy: Separate Work Items from Code",
-  "status": "done",
+  "id": "STORY-101",
+  "type": "story",
+  "category": "integration",
+  "title": "Extension UI: Commit History Visualization",
+  "status": "draft",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-05T10:56:33.764Z",
+  "created": "2026-01-29T11:36:52.920Z",
   "updated": "2026-01-29T11:37:08.657Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
     "implements": [],
-    "implemented-by": [
-      "STORY-062",
-      "STORY-075"
-    ],
+    "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [
-      "EPIC-026"
+    "relates-to": [],
+    "depends-on": [
+      "STORY-099"
     ],
-    "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
-  "tags": [],
+  "tags": [
+    "extension",
+    "ui",
+    "visualization",
+    "dashboard",
+    "treeview"
+  ],
   "commits": [],
   "metadata": {}
 }
