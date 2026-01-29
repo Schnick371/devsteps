@@ -6,12 +6,14 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-01-29T11:35:36.481Z",
-  "updated": "2026-01-29T11:37:08.657Z",
+  "updated": "2026-01-29T11:39:32.070Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
     "implements": [],
-    "implemented-by": [],
+    "implemented-by": [
+      "STORY-102"
+    ],
     "tested-by": [],
     "tests": [],
     "blocks": [],

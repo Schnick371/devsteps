@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-01-29T11:36:52.911Z",
-  "updated": "2026-01-29T11:37:08.657Z",
+  "updated": "2026-01-29T11:39:32.071Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -19,7 +19,8 @@
     "relates-to": [],
     "depends-on": [],
     "required-by": [
-      "STORY-101"
+      "STORY-101",
+      "STORY-102"
     ],
     "supersedes": [],
     "superseded-by": []
