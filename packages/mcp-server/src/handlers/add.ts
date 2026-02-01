@@ -1,23 +1,31 @@
 import { join } from 'node:path';
-import { getWorkspacePath } from '../workspace.js';
-import { type AddItemArgs, addItem } from '@schnick371/devsteps-shared';
+import {
+  type AddItemArgs,
+  addItem,
+  type EisenhowerQuadrant,
+  type ItemType,
+} from '@schnick371/devsteps-shared';
 import { simpleGit } from 'simple-git';
+import { getWorkspacePath } from '../workspace.js';
 
 /**
  * Add a new item to devsteps (MCP wrapper)
  */
-export default async function addHandler(args: any) {
+export default async function addHandler(args: Record<string, unknown>) {
   try {
     const devstepsDir = join(getWorkspacePath(), '.devsteps');
 
     // Map external 'priority' parameter → internal 'eisenhower' field
     const mappedArgs: AddItemArgs = {
-      ...args,
-      eisenhower: args.priority, // External API uses 'priority', internal uses 'eisenhower'
+      type: args.type as ItemType,
+      title: args.title as string,
+      description: args.description as string | undefined,
+      category: args.category as string | undefined,
+      eisenhower: args.priority as EisenhowerQuadrant | undefined,
+      tags: args.tags as string[] | undefined,
+      affected_paths: args.affected_paths as string[] | undefined,
+      assignee: args.assignee as string | undefined,
     };
-    delete (mappedArgs as any).priority; // Remove external parameter
-
-    // Use shared core logic
     const result = await addItem(devstepsDir, mappedArgs);
 
     // Git hints (MCP-specific presentation)
@@ -37,7 +45,7 @@ export default async function addHandler(args: any) {
             gitHint = `\n\n💡 Git: Commit this with: git commit -am "feat: ${result.itemId} - ${args.title}"`;
           }
         }
-      } catch (error) {
+      } catch (_error) {
         // Silently fail - not in git repo or git not available
       }
     }

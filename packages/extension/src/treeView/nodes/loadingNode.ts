@@ -6,7 +6,7 @@
  */
 
 import * as vscode from 'vscode';
-import { TreeNode, type FilterState } from '../types.js';
+import { type FilterState, TreeNode } from '../types.js';
 
 /**
  * Loading placeholder node shown while data loads

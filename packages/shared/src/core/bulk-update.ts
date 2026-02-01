@@ -1,10 +1,9 @@
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import type { ItemMetadata, ItemStatus } from '../schemas/index.js';
+import type { ItemMetadata } from '../schemas/index.js';
 import { getCurrentTimestamp } from '../utils/index.js';
-import { updateItem } from './update.js';
 import { getItem } from './get.js';
-import { hasRefsStyleIndex } from './index-refs.js';
+import { updateItem } from './update.js';
 
 export interface BulkUpdateResult {
   success: string[];

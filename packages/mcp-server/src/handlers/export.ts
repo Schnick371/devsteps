@@ -1,8 +1,8 @@
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
-import { getWorkspacePath } from '../workspace.js';
+import { existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { ItemType } from '@schnick371/devsteps-shared';
-import { TYPE_TO_DIRECTORY, listItems, getItem, getConfig } from '@schnick371/devsteps-shared';
+import { getConfig, getItem, listItems } from '@schnick371/devsteps-shared';
+import { getWorkspacePath } from '../workspace.js';
 
 /**
  * Export project data
@@ -28,7 +28,7 @@ export default async function exportHandler(args: {
 
     // Filter items by type if specified
     if (args.include_types && args.include_types.length > 0) {
-      items = items.filter((i: any) => args.include_types!.includes(i.type));
+      items = items.filter((i: { type: ItemType }) => args.include_types?.includes(i.type));
     }
 
     // Calculate stats from items
@@ -45,7 +45,7 @@ export default async function exportHandler(args: {
 
     // Load full metadata and descriptions using shared getItem()
     const fullItems = await Promise.all(
-      items.map(async (item: any) => {
+      items.map(async (item: { id: string }) => {
         const { metadata, description } = await getItem(devstepsDir, item.id);
         return { ...metadata, description };
       })
@@ -83,7 +83,30 @@ export default async function exportHandler(args: {
   }
 }
 
-function generateMarkdown(config: any, stats: any, items: any[]): string {
+interface ExportConfig {
+  project_name: string;
+  created: string;
+  updated: string;
+}
+
+interface ExportStats {
+  total: number;
+  by_type: Record<string, number>;
+  by_status: Record<string, number>;
+}
+
+interface ExportItem {
+  id: string;
+  type: string;
+  title: string;
+  status: string;
+  eisenhower?: string;
+  assignee?: string;
+  tags: string[];
+  description: string;
+}
+
+function generateMarkdown(config: ExportConfig, stats: ExportStats, items: ExportItem[]): string {
   let md = `# ${config.project_name}\n\n`;
   md += `**Created:** ${new Date(config.created).toLocaleDateString()}\n`;
   md += `**Updated:** ${new Date(config.updated).toLocaleDateString()}\n\n`;
@@ -98,7 +121,7 @@ function generateMarkdown(config: any, stats: any, items: any[]): string {
     .join(', ')}\n\n`;
 
   // Group by type
-  const byType: Record<string, any[]> = {};
+  const byType: Record<string, ExportItem[]> = {};
   for (const item of items) {
     if (!byType[item.type]) byType[item.type] = [];
     byType[item.type].push(item);
@@ -110,7 +133,7 @@ function generateMarkdown(config: any, stats: any, items: any[]): string {
     for (const item of typeItems) {
       md += `### ${item.id}: ${item.title}\n\n`;
       md += `- **Status:** ${item.status}\n`;
-      md += `- **Priority:** ${item.priority}\n`;
+      if (item.eisenhower) md += `- **Priority:** ${item.eisenhower}\n`;
       if (item.assignee) md += `- **Assignee:** ${item.assignee}\n`;
       if (item.tags.length > 0) md += `- **Tags:** ${item.tags.join(', ')}\n`;
       md += `\n${item.description}\n\n`;
@@ -121,7 +144,7 @@ function generateMarkdown(config: any, stats: any, items: any[]): string {
   return md;
 }
 
-function generateHTML(config: any, stats: any, items: any[]): string {
+function generateHTML(config: ExportConfig, stats: ExportStats, items: ExportItem[]): string {
   let html = `<!DOCTYPE html>
 <html>
 <head>
@@ -156,7 +179,7 @@ function generateHTML(config: any, stats: any, items: any[]): string {
   </ul>
 `;
 
-  const byType: Record<string, any[]> = {};
+  const byType: Record<string, ExportItem[]> = {};
   for (const item of items) {
     if (!byType[item.type]) byType[item.type] = [];
     byType[item.type].push(item);
@@ -168,7 +191,7 @@ function generateHTML(config: any, stats: any, items: any[]): string {
     for (const item of typeItems) {
       html += `<div class="item">`;
       html += `<h3>${item.id}: ${item.title}</h3>`;
-      html += `<p><span class="status ${item.status}">${item.status}</span> | Priority: ${item.priority}</p>`;
+      html += `<p><span class="status ${item.status}">${item.status}</span>${item.eisenhower ? ` | Priority: ${item.eisenhower}` : ''}</p>`;
       if (item.assignee) html += `<p><strong>Assignee:</strong> ${item.assignee}</p>`;
       if (item.tags.length > 0) html += `<p><strong>Tags:</strong> ${item.tags.join(', ')}</p>`;
       html += `<div>${item.description.replace(/\n/g, '<br>')}</div>`;

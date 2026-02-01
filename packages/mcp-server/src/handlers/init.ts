@@ -1,14 +1,14 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync } from 'node:fs';
-import { getWorkspacePath } from '../workspace.js';
-import { join, dirname } from 'node:path';
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   type DevStepsConfig,
-  type Methodology,
   getCurrentTimestamp,
   getMethodologyConfig,
   initializeRefsStyleIndex,
+  type Methodology,
 } from '@schnick371/devsteps-shared';
+import { getWorkspacePath } from '../workspace.js';
 
 // ESM equivalent of __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -417,8 +417,6 @@ function addDevStepsToolsToAgent(content: string): { modified: boolean; newConte
     newToolsArray = "['devsteps/*']";
   } else {
     // Add to existing tools
-    const lastCommaOrQuote =
-      toolsContent.lastIndexOf(',') > -1 || toolsContent.lastIndexOf("'") > -1;
     newToolsArray = `[${toolsContent}, 'devsteps/*']`;
   }
 

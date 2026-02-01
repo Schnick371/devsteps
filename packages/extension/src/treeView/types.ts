@@ -5,8 +5,8 @@
  * Shared types and interfaces for TreeView components
  */
 
-import * as vscode from 'vscode';
 import { TYPE_TO_DIRECTORY } from '@schnick371/devsteps-shared';
+import type * as vscode from 'vscode';
 
 // Re-export for convenience
 export { TYPE_TO_DIRECTORY };

@@ -1,9 +1,9 @@
 import { execSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { hasRefsStyleIndex, rebuildIndex } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 import ora from 'ora';
-import { rebuildIndex, hasRefsStyleIndex } from '@schnick371/devsteps-shared';
 
 interface CheckResult {
   name: string;
@@ -58,7 +58,7 @@ function checkNode(): CheckResult {
   }
 
   const match = version.match(/v(\d+)\./);
-  const major = match ? Number.parseInt(match[1]) : 0;
+  const major = match ? Number.parseInt(match[1], 10) : 0;
 
   if (major < 18) {
     return {
@@ -380,14 +380,14 @@ async function rebuildIndexCommand(options: { dryRun: boolean; skipConfirm: bool
     console.log();
   }
 
-  let spinner = ora('Scanning item files...').start();
+  const spinner = ora('Scanning item files...').start();
   let currentMessage = '';
 
   try {
     const result = await rebuildIndex(devstepsDir, {
       backup: !dryRun,
       dryRun,
-      onProgress: (current: number, total: number, message: string) => {
+      onProgress: (_current: number, _total: number, message: string) => {
         if (message !== currentMessage) {
           currentMessage = message;
           spinner.text = message;

@@ -13,17 +13,20 @@ interface McpJsonRpcRequest {
   jsonrpc: '2.0';
   id?: string | number;
   method: string;
-  params?: Record<string, any>;
+  params?: {
+    name?: string;
+    arguments?: Record<string, unknown>;
+  };
 }
 
 interface McpJsonRpcResponse {
   jsonrpc: '2.0';
   id?: string | number;
-  result?: any;
+  result?: unknown;
   error?: {
     code: number;
     message: string;
-    data?: any;
+    data?: unknown;
   };
 }
 
@@ -85,8 +88,9 @@ export async function startHttpMcpServer(
   const metricsHandler = (await import('./handlers/metrics.js')).default;
   const healthHandler = (await import('./handlers/health.js')).default;
 
-  // Map of tool name to handler
-  const toolHandlers = new Map<string, (args: any) => Promise<any>>([
+  // Map of tool name to handler (cast to expected type since handlers accept various args)
+  // biome-ignore lint/suspicious/noExplicitAny: Handlers have varying argument types
+  const toolHandlers = new Map<string, (args: any) => Promise<unknown>>([
     ['init', initHandler],
     ['add', addHandler],
     ['update', updateHandler],
@@ -294,7 +298,7 @@ export async function startHttpMcpServer(
   });
 
   // Start server
-  const httpServer = await new Promise<any>((resolve, reject) => {
+  const httpServer = await new Promise<ReturnType<typeof app.listen>>((resolve, reject) => {
     const server = app.listen(port, () => {
       const url = `http://localhost:${port}/mcp`;
       logger.info({ url, port, tools: allTools.length }, 'HTTP MCP Server started');

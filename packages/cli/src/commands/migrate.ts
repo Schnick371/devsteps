@@ -2,13 +2,10 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import {
   checkMigrationNeeded,
-  ensureIndexMigrated,
-  ensureFullMigration,
-  needsItemsDirectoryMigration,
-  migrateItemsDirectory,
-  getMigrationStatusMessage,
-  performMigration,
   type MigrationStats,
+  migrateItemsDirectory,
+  needsItemsDirectoryMigration,
+  performMigration,
 } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 import ora from 'ora';

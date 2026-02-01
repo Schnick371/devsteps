@@ -1,15 +1,10 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import type {
-  DevStepsIndex,
-  EisenhowerQuadrant,
-  ItemMetadata,
-  ItemStatus,
-} from '../schemas/index.js';
-import { STATUS, RELATIONSHIP_TYPE } from '../constants/index.js';
-import { TYPE_TO_DIRECTORY, getCurrentTimestamp, parseItemId } from '../utils/index.js';
-import { hasRefsStyleIndex, updateItemInIndex } from './index-refs.js';
+import { RELATIONSHIP_TYPE, STATUS } from '../constants/index.js';
+import type { EisenhowerQuadrant, ItemMetadata, ItemStatus } from '../schemas/index.js';
+import { getCurrentTimestamp, parseItemId, TYPE_TO_DIRECTORY } from '../utils/index.js';
 import { getItem } from './get.js';
+import { updateItemInIndex } from './index-refs.js';
 
 export interface UpdateItemArgs {
   id: string;

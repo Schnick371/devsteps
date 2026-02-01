@@ -12,14 +12,31 @@
  * **Requires VS Code 1.99.0+** for MCP API support
  */
 
-import * as vscode from 'vscode';
 import * as path from 'node:path';
+import * as vscode from 'vscode';
 import { logger } from './outputChannel.js';
 import {
   detectMcpRuntime,
   formatDiagnostics,
   type McpRuntimeConfig,
 } from './utils/runtimeDetector.js';
+
+/**
+ * Experimental VS Code MCP API (requires VS Code 1.99+)
+ * These types are not yet in the official @types/vscode
+ */
+interface VsCodeWithMcpApi {
+  lm: {
+    registerMcpServerDefinitionProvider: (id: string, provider: unknown) => vscode.Disposable;
+  };
+  McpStdioServerDefinition: new (
+    label: string,
+    command: string,
+    args: string[],
+    options: { cwd?: string },
+    version: string
+  ) => unknown;
+}
 
 /**
  * Check if extension is running as pre-release version
@@ -87,7 +104,8 @@ export class McpServerManager {
   async start(): Promise<void> {
     try {
       // Check if VS Code MCP API is available
-      if (!('lm' in vscode) || !('registerMcpServerDefinitionProvider' in (vscode as any).lm)) {
+      const mcpVscode = vscode as unknown as Partial<VsCodeWithMcpApi>;
+      if (!mcpVscode.lm?.registerMcpServerDefinitionProvider) {
         logger.warn('VS Code MCP API not available (requires VS Code 1.99+)');
         this.showFallbackConfiguration();
         return;
@@ -127,7 +145,9 @@ export class McpServerManager {
       logger.info('🚀 Starting MCP server...');
 
       // Register MCP server with VS Code using detected runtime
-      this.provider = (vscode as any).lm.registerMcpServerDefinitionProvider('devsteps-mcp', {
+      // mcpVscode is already typed as VsCodeWithMcpApi from earlier check
+      const vscodeApi = vscode as unknown as VsCodeWithMcpApi;
+      this.provider = vscodeApi.lm.registerMcpServerDefinitionProvider('devsteps-mcp', {
         // Event fired when server definitions change
         onDidChangeMcpServerDefinitions: this.changeEmitter.event,
 
@@ -149,9 +169,9 @@ export class McpServerManager {
             args.push(workspaceDir); // Pass workspace as positional argument
           }
 
-          const serverDef = new (vscode as any).McpStdioServerDefinition(
+          const serverDef = new vscodeApi.McpStdioServerDefinition(
             'devsteps', // label
-            this.runtimeConfig.command!, // command: npx or node
+            this.runtimeConfig.command || '', // command: npx or node
             args, // args: based on strategy
             workspaceDir
               ? {
@@ -178,7 +198,7 @@ export class McpServerManager {
         },
 
         // Resolve server definition before starting (optional auth/validation)
-        resolveMcpServerDefinition: async (server: any) => {
+        resolveMcpServerDefinition: async (server: unknown) => {
           if (workspaceFolders && workspaceFolders.length > 0) {
             const workspacePath = workspaceFolders[0].uri.fsPath;
             logger.info(`🔧 Resolving MCP server for workspace: ${workspacePath}`);
@@ -211,7 +231,7 @@ export class McpServerManager {
   /**
    * Show error when no Node.js runtime is available
    */
-  private showNoRuntimeError(errorMessage: string): void {
+  private showNoRuntimeError(_errorMessage: string): void {
     logger.error('No Node.js runtime available');
 
     const message =

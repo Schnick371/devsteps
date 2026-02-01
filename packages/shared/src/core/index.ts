@@ -1,51 +1,48 @@
-export { addItem, type AddItemArgs, type AddItemResult } from './add.js';
-export { getItem, type GetItemResult } from './get.js';
-export { getConfig } from './config.js';
-export { listItems, type ListItemsArgs, type ListItemsResult } from './list.js';
-export { updateItem, type UpdateItemArgs, type UpdateItemResult } from './update.js';
+export { type AddItemArgs, type AddItemResult, addItem } from './add.js';
 export {
-  archiveItem,
   type ArchiveItemResult,
-  purgeItems,
+  archiveItem,
   type PurgeItemsArgs,
   type PurgeItemsResult,
+  purgeItems,
 } from './archive.js';
-export {
-  getQuickContext,
-  analyzePackages,
-  getItemCounts,
-  getRecentUpdates,
-  readProjectMd,
-  estimateTokens,
-} from './context.js';
-export {
-  bulkUpdateItems,
-  bulkAddTags,
-  bulkRemoveTags,
-  type BulkUpdateResult,
-} from './bulk-update.js';
-export { validateRelationship, type ValidationResult, type WorkItem } from './validation.js';
-
-// Refs-style index operations
-export * from './index-refs.js';
-
 // Auto-migration for external projects
 export {
+  type AutoMigrationOptions,
   checkMigrationNeeded,
+  ensureFullMigration,
   ensureIndexMigrated,
   getMigrationStatusMessage,
-  performMigration,
-  needsItemsDirectoryMigration,
-  migrateItemsDirectory,
-  ensureFullMigration,
-  type AutoMigrationOptions,
   type MigrationCheckResult,
   type MigrationStats,
+  migrateItemsDirectory,
+  needsItemsDirectoryMigration,
+  performMigration,
 } from './auto-migrate.js';
-
+export {
+  type BulkUpdateResult,
+  bulkAddTags,
+  bulkRemoveTags,
+  bulkUpdateItems,
+} from './bulk-update.js';
+export { getConfig } from './config.js';
+export {
+  analyzePackages,
+  estimateTokens,
+  getItemCounts,
+  getQuickContext,
+  getRecentUpdates,
+  readProjectMd,
+} from './context.js';
+export { type GetItemResult, getItem } from './get.js';
 // Index rebuild operations
 export {
-  rebuildIndex,
-  type RebuildResult,
   type RebuildOptions,
+  type RebuildResult,
+  rebuildIndex,
 } from './index-rebuild.js';
+// Refs-style index operations
+export * from './index-refs.js';
+export { type ListItemsArgs, type ListItemsResult, listItems } from './list.js';
+export { type UpdateItemArgs, type UpdateItemResult, updateItem } from './update.js';
+export { type ValidationResult, validateRelationship, type WorkItem } from './validation.js';

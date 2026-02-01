@@ -5,12 +5,16 @@
  * Timeline Renderer - Recent activity visualization
  */
 
+import type { DevStepsIndex } from '@schnick371/devsteps-shared';
 import { escapeHtml, formatRelativeTime } from '../utils/htmlHelpers.js';
+
+// Type alias for list items
+type ListItem = DevStepsIndex['items'][number];
 
 /**
  * Render recent activity timeline HTML
  */
-export function renderTimeline(timeline: any[]): string {
+export function renderTimeline(timeline: ListItem[]): string {
   return `
     <h2>📅 Recent Activity</h2>
     <div class="timeline">

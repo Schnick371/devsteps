@@ -2,11 +2,11 @@ import type { ItemType, Methodology } from '../schemas/index.js';
 
 // Export cache utilities
 export {
-  ContextCache,
   CACHE_CONFIG,
-  getCache,
-  clearGlobalCache,
   type CacheStats,
+  ContextCache,
+  clearGlobalCache,
+  getCache,
 } from './cache.js';
 
 /**

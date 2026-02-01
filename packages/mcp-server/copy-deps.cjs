@@ -3,9 +3,8 @@
  * Copy runtime dependencies from root node_modules to local node_modules
  * This is needed for bundling in VS Code extension
  */
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const packageJson = require('./package.json');
 const rootNodeModules = path.join(__dirname, '../../node_modules');

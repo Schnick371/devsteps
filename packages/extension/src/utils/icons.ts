@@ -3,8 +3,8 @@
  * Licensed under the Apache License, Version 2.0
  */
 
+import type { ItemStatus, ItemType, Priority } from '@schnick371/devsteps-shared';
 import * as vscode from 'vscode';
-import type { ItemType, Priority, ItemStatus } from '@schnick371/devsteps-shared';
 
 /**
  * Codicon names for work item types

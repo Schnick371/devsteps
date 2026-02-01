@@ -9,7 +9,7 @@
  * Escape HTML special characters to prevent XSS
  */
 export function escapeHtml(text: string): string {
-  const div = { textContent: text } as any;
+  const div = { textContent: text } as { textContent: string };
   return div.textContent
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')

@@ -5,20 +5,19 @@
  * @see EPIC-018 Index Architecture Refactoring
  */
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { mkdirSync, rmSync, existsSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { ItemMetadata, ItemType } from '../schemas/index.js';
 import { TYPE_TO_DIRECTORY } from '../utils/index.js';
 import { rebuildIndex } from './index-rebuild.js';
 import {
-  getIndexPaths,
   hasRefsStyleIndex,
-  loadIndexByType,
-  loadIndexByStatus,
-  loadIndexByPriority,
   loadCounters,
+  loadIndexByPriority,
+  loadIndexByStatus,
+  loadIndexByType,
 } from './index-refs.js';
 
 describe('Index Rebuild Operations', () => {
@@ -312,7 +311,7 @@ describe('Index Rebuild Operations', () => {
 
       expect(result.backupPath).toBeDefined();
       expect(result.backupPath).toContain('index.backup-');
-      expect(existsSync(result.backupPath!)).toBe(true);
+      expect(result.backupPath && existsSync(result.backupPath)).toBe(true);
     });
 
     it('should skip backup when backup=false', async () => {
@@ -495,7 +494,7 @@ describe('Index Rebuild Operations', () => {
       const progressMessages: string[] = [];
 
       await rebuildIndex(devstepsDir, {
-        onProgress: (current, total, message) => {
+        onProgress: (_current, _total, message) => {
           progressMessages.push(message);
         },
       });

@@ -1,21 +1,23 @@
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
-  type ItemMetadata,
+  type DevStepsConfig,
+  type DevStepsIndex,
+  type EisenhowerQuadrant,
+  getConfig,
+  getCurrentTimestamp,
+  getItem,
+  type ItemStatus,
   type ItemType,
+  type ListItemsArgs,
+  listItems,
   type Methodology,
+  parseItemId,
   STATUS,
   TYPE_SHORTCUTS,
   TYPE_TO_DIRECTORY,
-  generateItemId,
-  getCurrentTimestamp,
-  parseItemId,
-  validateRelationship,
-  listItems,
-  getItem,
-  getConfig,
   updateItem,
-  updateItemInIndex,
+  validateRelationship,
 } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 import ora from 'ora';
@@ -35,21 +37,20 @@ function getDevStepsDir(): string {
 }
 
 // Helper: Load config (uses centralized getConfig from shared package)
-async function loadConfig(devstepsDir: string): Promise<any> {
+async function loadConfig(devstepsDir: string): Promise<DevStepsConfig> {
   return await getConfig(devstepsDir);
 }
 
-export async function addCommand(
-  type: string,
-  title: string,
-  options: {
-    description?: string;
-    category?: string;
-    tags?: string[];
-    assignee?: string;
-    paths?: string[];
-  }
-) {
+interface AddCommandOptions {
+  description?: string;
+  category?: string;
+  tags?: string[];
+  assignee?: string;
+  paths?: string[];
+  priority?: string;
+}
+
+export async function addCommand(type: string, title: string, options: AddCommandOptions) {
   const spinner = ora('Creating item...').start();
 
   try {
@@ -63,7 +64,7 @@ export async function addCommand(
       title,
       description: options.description,
       category: options.category,
-      eisenhower: (options as any).priority,
+      eisenhower: options.priority as EisenhowerQuadrant | undefined,
       tags: options.tags,
       affected_paths: options.paths,
       assignee: options.assignee,
@@ -74,8 +75,8 @@ export async function addCommand(
     if (options.tags && options.tags.length > 0) {
       console.log(chalk.gray('  Tags:'), options.tags.join(', '));
     }
-    if ((options as any).priority) {
-      console.log(chalk.gray('  Priority:'), (options as any).priority);
+    if (options.priority) {
+      console.log(chalk.gray('  Priority:'), options.priority);
     }
 
     // Git hint
@@ -86,7 +87,7 @@ export async function addCommand(
         chalk.cyan(`git commit -am "feat: ${result.itemId} - ${title}"`)
       );
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     spinner.fail('Failed to create item');
     throw error;
   }
@@ -146,29 +147,37 @@ export async function getCommand(id: string) {
     console.log();
     console.log(chalk.bold('Description:'));
     console.log(description);
-  } catch (error: any) {
-    console.error(chalk.red('Error:'), error.message);
+  } catch (error: unknown) {
+    console.error(chalk.red('Error:'), error instanceof Error ? error.message : String(error));
     process.exit(1);
   }
 }
 
-export async function listCommand(options: any) {
+interface ListCommandOptions {
+  type?: string;
+  status?: string;
+  priority?: string;
+  limit?: string;
+  archived?: boolean;
+}
+
+export async function listCommand(options: ListCommandOptions) {
   try {
     const devstepsir = getDevStepsDir();
 
     // Build filter args for optimized index-refs lookup
-    const filterArgs: any = {};
+    const filterArgs: ListItemsArgs = {};
 
     if (options.type) {
-      filterArgs.type = TYPE_SHORTCUTS[options.type] || options.type;
+      filterArgs.type = (TYPE_SHORTCUTS[options.type] || options.type) as ItemType;
     }
 
     if (options.status && !options.archived) {
-      filterArgs.status = options.status;
+      filterArgs.status = options.status as ItemStatus;
     }
 
     if (options.priority && !options.archived) {
-      filterArgs.eisenhower = options.priority;
+      filterArgs.eisenhower = options.priority as EisenhowerQuadrant;
     }
 
     if (options.limit) {
@@ -180,7 +189,7 @@ export async function listCommand(options: any) {
 
     // Use new index-refs API with filters (optimized index lookup)
     const itemsResult = await listItems(devstepsir, filterArgs);
-    let items = itemsResult.items;
+    const items = itemsResult.items;
 
     // TODO: Archived items support needs separate implementation
 
@@ -216,13 +225,25 @@ export async function listCommand(options: any) {
     }
 
     console.log();
-  } catch (error: any) {
-    console.error(chalk.red('Error:'), error.message);
+  } catch (error: unknown) {
+    console.error(chalk.red('Error:'), error instanceof Error ? error.message : String(error));
     process.exit(1);
   }
 }
 
-export async function updateCommand(id: string, options: any) {
+interface UpdateCommandOptions {
+  status?: string;
+  title?: string;
+  priority?: string;
+  assignee?: string;
+  tags?: string[];
+  paths?: string[];
+  supersededBy?: string;
+  description?: string;
+  appendDescription?: string;
+}
+
+export async function updateCommand(id: string, options: UpdateCommandOptions) {
   const spinner = ora(`Updating ${id}...`).start();
 
   try {
@@ -237,9 +258,9 @@ export async function updateCommand(id: string, options: any) {
     // Use shared core logic (throws on error)
     const { metadata } = await updateItem(devstepsir, {
       id,
-      status: options.status,
+      status: options.status as ItemStatus | undefined,
       title: options.title,
-      eisenhower: options.priority,
+      eisenhower: options.priority as EisenhowerQuadrant | undefined,
       assignee: options.assignee,
       tags: options.tags,
       affected_paths: options.paths,
@@ -252,7 +273,7 @@ export async function updateCommand(id: string, options: any) {
 
     const changes = [];
     if (options.status) changes.push(`status: ${options.status}`);
-    if ((options as any).eisenhower) changes.push(`eisenhower: ${(options as any).eisenhower}`);
+    if (options.priority) changes.push(`priority: ${options.priority}`);
     if (options.title) changes.push('title');
     if (options.description) changes.push('description');
     if (options.supersededBy) changes.push(`superseded_by: ${options.supersededBy}`);
@@ -315,7 +336,7 @@ export async function updateCommand(id: string, options: any) {
         );
       }
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     spinner.fail('Failed to update item');
     throw error;
   }
@@ -339,8 +360,11 @@ export async function linkCommand(
     // Get paths for writing updates
     const sourceParsed = parseItemId(sourceId);
     const targetParsed = parseItemId(targetId);
-    const sourceFolder = TYPE_TO_DIRECTORY[sourceParsed!.type];
-    const targetFolder = TYPE_TO_DIRECTORY[targetParsed!.type];
+    if (!sourceParsed?.type || !targetParsed?.type) {
+      throw new Error('Invalid item ID format');
+    }
+    const sourceFolder = TYPE_TO_DIRECTORY[sourceParsed.type];
+    const targetFolder = TYPE_TO_DIRECTORY[targetParsed.type];
     const sourcePath = join(devstepsir, sourceFolder, `${sourceId}.json`);
     const targetPath = join(devstepsir, targetFolder, `${targetId}.json`);
 
@@ -415,24 +439,35 @@ export async function linkCommand(
       ? `Linked ${chalk.cyan(sourceId)} --${relation}--> ${chalk.cyan(targetId)} ${chalk.yellow('(forced)')}`
       : `Linked ${chalk.cyan(sourceId)} --${relation}--> ${chalk.cyan(targetId)}`;
     spinner.succeed(successMsg);
-  } catch (error: any) {
+  } catch (error: unknown) {
     spinner.fail('Failed to create link');
     throw error;
   }
 }
 
-export async function searchCommand(query: string, options: any) {
+interface SearchCommandOptions {
+  type?: string;
+  limit?: string;
+}
+
+interface SearchResult {
+  id: string;
+  title: string;
+  match_type: 'title' | 'description' | 'tag';
+}
+
+export async function searchCommand(query: string, options: SearchCommandOptions) {
   const spinner = ora('Searching...').start();
 
   try {
     const devstepsir = getDevStepsDir();
     const queryLower = query.toLowerCase();
-    const results: any[] = [];
+    const results: SearchResult[] = [];
 
     // Use listItems() with optional type filter
-    const filterArgs: any = {};
+    const filterArgs: ListItemsArgs = {};
     if (options.type) {
-      filterArgs.type = TYPE_SHORTCUTS[options.type] || options.type;
+      filterArgs.type = (TYPE_SHORTCUTS[options.type] || options.type) as ItemType;
     }
     const { items } = await listItems(devstepsir, filterArgs);
 
@@ -451,8 +486,10 @@ export async function searchCommand(query: string, options: any) {
           match_type: titleMatch ? 'title' : descMatch ? 'description' : 'tag',
         });
 
-        const limit = Number.parseInt(options.limit, 10);
-        if (limit > 0 && results.length >= limit) break;
+        if (options.limit) {
+          const limit = Number.parseInt(options.limit, 10);
+          if (limit > 0 && results.length >= limit) break;
+        }
       }
     }
 
@@ -471,13 +508,17 @@ export async function searchCommand(query: string, options: any) {
     }
 
     console.log();
-  } catch (error: any) {
+  } catch (error: unknown) {
     spinner.fail('Search failed');
     throw error;
   }
 }
 
-export async function statusCommand(options: any) {
+interface StatusCommandOptions {
+  detailed?: boolean;
+}
+
+export async function statusCommand(options: StatusCommandOptions) {
   try {
     const devstepsir = getDevStepsDir();
     const config = await loadConfig(devstepsir);
@@ -522,7 +563,7 @@ export async function statusCommand(options: any) {
     console.log();
 
     // Check for stale items
-    const staleItems = allItems.filter((item: any) => {
+    const staleItems = allItems.filter((item: DevStepsIndex['items'][number]) => {
       if (item.status === STATUS.IN_PROGRESS) {
         const daysSinceUpdate =
           (Date.now() - new Date(item.updated).getTime()) / (1000 * 60 * 60 * 24);
@@ -545,7 +586,7 @@ export async function statusCommand(options: any) {
 
     if (options.detailed) {
       const recent = [...allItems]
-        .sort((a: any, b: any) => new Date(b.updated).getTime() - new Date(a.updated).getTime())
+        .sort((a, b) => new Date(b.updated).getTime() - new Date(a.updated).getTime())
         .slice(0, 5);
 
       console.log(chalk.bold('Recent Updates:'));
@@ -554,16 +595,20 @@ export async function statusCommand(options: any) {
       }
       console.log();
     }
-  } catch (error: any) {
-    console.error(chalk.red('Error:'), error.message);
+  } catch (error: unknown) {
+    console.error(chalk.red('Error:'), error instanceof Error ? error.message : String(error));
     process.exit(1);
   }
 }
 
-export async function traceCommand(id: string, options: any) {
+interface TraceCommandOptions {
+  depth?: string;
+}
+
+export async function traceCommand(id: string, options: TraceCommandOptions) {
   try {
     const devstepsir = getDevStepsDir();
-    const maxDepth = Number.parseInt(options.depth, 10) || 3;
+    const maxDepth = options.depth ? Number.parseInt(options.depth, 10) : 3;
 
     async function traceItem(itemId: string, depth: number, prefix = ''): Promise<void> {
       if (depth > maxDepth) return;
@@ -586,7 +631,7 @@ export async function traceCommand(id: string, options: any) {
             }
           }
         }
-      } catch (error) {
+      } catch (_error) {
         // Silently skip items that don't exist
         return;
       }
@@ -597,23 +642,27 @@ export async function traceCommand(id: string, options: any) {
     console.log();
     await traceItem(id, 0);
     console.log();
-  } catch (error: any) {
-    console.error(chalk.red('Error:'), error.message);
+  } catch (error: unknown) {
+    console.error(chalk.red('Error:'), error instanceof Error ? error.message : String(error));
     process.exit(1);
   }
 }
 
-export async function exportCommand(options: any) {
+interface ExportCommandOptions {
+  output?: string;
+}
+
+export async function exportCommand(options: ExportCommandOptions) {
   const spinner = ora('Exporting...').start();
 
   try {
-    const devstepsir = getDevStepsDir();
+    const _devstepsir = getDevStepsDir();
     // Export implementation similar to MCP handler
     // For brevity, using simple markdown export
 
     spinner.succeed('Export completed');
     console.log(chalk.gray('  Output:'), options.output || 'devsteps-export.md');
-  } catch (error: any) {
+  } catch (error: unknown) {
     spinner.fail('Export failed');
     throw error;
   }

@@ -5,8 +5,8 @@
  * Re-export all TreeView node classes
  */
 
-export { WorkItemNode } from './workItemNode.js';
-export { TypeGroupNode } from './typeGroupNode.js';
 export { HierarchyRootNode } from './hierarchyRootNode.js';
-export { MethodologySectionNode } from './methodologySectionNode.js';
 export { LoadingNode } from './loadingNode.js';
+export { MethodologySectionNode } from './methodologySectionNode.js';
+export { TypeGroupNode } from './typeGroupNode.js';
+export { WorkItemNode } from './workItemNode.js';

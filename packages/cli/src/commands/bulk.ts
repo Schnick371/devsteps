@@ -1,5 +1,6 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
+import type { EisenhowerQuadrant, ItemMetadata, ItemStatus } from '@schnick371/devsteps-shared';
 import {
   type BulkUpdateResult,
   bulkAddTags,
@@ -7,7 +8,6 @@ import {
   bulkUpdateItems,
   STATUS,
 } from '@schnick371/devsteps-shared';
-import type { ItemMetadata } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 import ora from 'ora';
 
@@ -53,15 +53,22 @@ function displayBulkResult(result: BulkUpdateResult, operation: string): void {
 /**
  * Bulk update multiple items
  */
-export async function bulkUpdateCommand(itemIds: string[], options: any) {
+interface BulkUpdateCommandOptions {
+  status?: string;
+  eisenhower?: string;
+  assignee?: string;
+  category?: string;
+}
+
+export async function bulkUpdateCommand(itemIds: string[], options: BulkUpdateCommandOptions) {
   const spinner = ora(`Updating ${itemIds.length} item(s)...`).start();
 
   try {
     const devstepsir = getDevStepsDir();
 
     const updates: Partial<ItemMetadata> = {};
-    if (options.status) updates.status = options.status;
-    if (options.eisenhower) updates.eisenhower = options.eisenhower;
+    if (options.status) updates.status = options.status as ItemStatus;
+    if (options.eisenhower) updates.eisenhower = options.eisenhower as EisenhowerQuadrant;
     if (options.assignee) updates.assignee = options.assignee;
     if (options.category) updates.category = options.category;
 

@@ -11,8 +11,6 @@
  * @see STORY-056 - Dual-target build system transformation
  */
 import esbuild from 'esbuild';
-import { chmod } from 'node:fs/promises';
-import { join } from 'node:path';
 
 const production = process.argv.includes('--production');
 const watch = process.argv.includes('--watch');
@@ -42,7 +40,7 @@ const extensionBuildOptions = {
  * STRATEGY: Use npm package directly - bundling has ESM/CJS issues
  * @type {null}
  */
-const mcpServerBuildOptions = null; // Disabled - use @schnick371/devsteps-mcp-server package
+const _mcpServerBuildOptions = null; // Disabled - use @schnick371/devsteps-mcp-server package
 
 async function buildExtension() {
   console.log('📦 Building extension bundle...');

@@ -11,6 +11,13 @@ interface FileItem {
   type: 'file' | 'folder';
 }
 
+interface TreeNode {
+  _children?: Record<string, TreeNode>;
+  name?: string;
+  path?: string;
+  type?: 'file' | 'folder';
+}
+
 class TreeItem extends vscode.TreeItem {
   constructor(
     public readonly label: string,
@@ -33,9 +40,9 @@ class TreeItem extends vscode.TreeItem {
 }
 
 export class ViewToggleProvider implements vscode.TreeDataProvider<TreeItem> {
-  private _onDidChangeTreeData: vscode.EventEmitter<TreeItem | undefined | null | void> =
-    new vscode.EventEmitter<TreeItem | undefined | null | void>();
-  readonly onDidChangeTreeData: vscode.Event<TreeItem | undefined | null | void> =
+  private _onDidChangeTreeData: vscode.EventEmitter<TreeItem | undefined | null | undefined> =
+    new vscode.EventEmitter<TreeItem | undefined | null | undefined>();
+  readonly onDidChangeTreeData: vscode.Event<TreeItem | undefined | null | undefined> =
     this._onDidChangeTreeData.event;
 
   private _viewMode: ViewMode = ViewMode.List;
@@ -50,8 +57,6 @@ export class ViewToggleProvider implements vscode.TreeDataProvider<TreeItem> {
     { name: 'main.spec.ts', path: 'test/unit/main.spec.ts', type: 'file' },
     { name: 'integration.spec.ts', path: 'test/integration/integration.spec.ts', type: 'file' },
   ];
-
-  constructor(private context: vscode.ExtensionContext) {}
 
   get viewMode(): ViewMode {
     return this._viewMode;
@@ -89,7 +94,7 @@ export class ViewToggleProvider implements vscode.TreeDataProvider<TreeItem> {
   }
 
   private getTreeView(): TreeItem[] {
-    const tree: { [key: string]: any } = {};
+    const tree: Record<string, TreeNode> = {};
 
     this.items.forEach((item) => {
       const parts = item.path.split('/');
@@ -107,7 +112,7 @@ export class ViewToggleProvider implements vscode.TreeDataProvider<TreeItem> {
       current[fileName] = item;
     });
 
-    const buildTreeItems = (node: any, prefix: string = ''): TreeItem[] => {
+    const buildTreeItems = (node: Record<string, TreeNode>, prefix = ''): TreeItem[] => {
       const items: TreeItem[] = [];
 
       for (const key in node) {

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 // Modern esbuild configuration for VS Code extensions (2025 best practices)
 import esbuild from 'esbuild';
-import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

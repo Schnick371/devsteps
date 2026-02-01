@@ -1,13 +1,13 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import type { DevStepsConfig } from '@schnick371/devsteps-shared';
 import {
-  type Methodology,
   getCurrentTimestamp,
   getMethodologyConfig,
   initializeRefsStyleIndex,
+  type Methodology,
 } from '@schnick371/devsteps-shared';
-import type { DevStepsConfig } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 import ora from 'ora';
 import packageJson from '../../package.json' with { type: 'json' };

@@ -5,6 +5,16 @@
  * Traceability Graph Data Provider - Relationship visualization
  */
 
+import type { DevStepsIndex } from '@schnick371/devsteps-shared';
+
+// Type alias for list items
+type ListItem = DevStepsIndex['items'][number];
+
+// Extended item type with linked_items for traceability (loaded via getItem)
+interface TraceableItem extends ListItem {
+  linked_items?: Record<string, string[]>;
+}
+
 export interface TraceabilityData {
   nodes: Array<{ id: string; type: string; title: string; status: string }>;
   edges: Array<{ source: string; target: string; relation: string }>;
@@ -16,7 +26,7 @@ export interface TraceabilityData {
  * Get traceability graph data with intelligent node limiting.
  * PERFORMANCE: Limits to top N most-connected items to avoid O(n²) force simulation lag.
  */
-export function getTraceabilityData(items: any[]): TraceabilityData {
+export function getTraceabilityData(items: TraceableItem[]): TraceabilityData {
   if (items.length === 0) {
     return { nodes: [], edges: [] };
   }
@@ -25,10 +35,10 @@ export function getTraceabilityData(items: any[]): TraceabilityData {
   const MAX_NODES = 50;
 
   // Calculate connection score for each item (total # of links)
-  const itemsWithScores = items.map((item: any) => {
+  const itemsWithScores = items.map((item) => {
     const linkCount = item.linked_items
       ? Object.values(item.linked_items).reduce(
-          (acc: number, targets: any) => acc + (Array.isArray(targets) ? targets.length : 0),
+          (acc: number, targets) => acc + (Array.isArray(targets) ? targets.length : 0),
           0
         )
       : 0;
@@ -47,17 +57,19 @@ export function getTraceabilityData(items: any[]): TraceabilityData {
   const connectedIds = new Set(topIds);
   topItems.forEach(({ item }) => {
     if (item.linked_items) {
-      Object.values(item.linked_items).forEach((targets: any) => {
+      Object.values(item.linked_items).forEach((targets) => {
         if (Array.isArray(targets)) {
-          targets.forEach((targetId: string) => connectedIds.add(targetId));
+          targets.forEach((targetId: string) => {
+            connectedIds.add(targetId);
+          });
         }
       });
     }
   });
 
   // Build nodes from selected items
-  const selectedItems = items.filter((item: any) => connectedIds.has(item.id));
-  const nodes = selectedItems.map((item: any) => ({
+  const selectedItems = items.filter((item) => connectedIds.has(item.id));
+  const nodes = selectedItems.map((item) => ({
     id: item.id,
     type: item.type,
     title: item.title,
@@ -66,7 +78,7 @@ export function getTraceabilityData(items: any[]): TraceabilityData {
 
   // Build edges only between selected nodes
   const edges: Array<{ source: string; target: string; relation: string }> = [];
-  selectedItems.forEach((item: any) => {
+  selectedItems.forEach((item) => {
     if (item.linked_items) {
       Object.entries(item.linked_items).forEach(([relation, targets]) => {
         if (Array.isArray(targets)) {

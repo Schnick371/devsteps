@@ -64,14 +64,14 @@ export async function checkCommand(command: string): Promise<RuntimeInfo> {
     });
 
     let stdout = '';
-    let stderr = '';
+    let _stderr = '';
 
     child.stdout?.on('data', (data) => {
       stdout += data.toString();
     });
 
     child.stderr?.on('data', (data) => {
-      stderr += data.toString();
+      _stderr += data.toString();
     });
 
     child.on('close', async (code) => {

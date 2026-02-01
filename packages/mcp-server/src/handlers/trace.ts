@@ -1,7 +1,7 @@
-import { existsSync, readFileSync } from 'node:fs';
-import { getWorkspacePath } from '../workspace.js';
+import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { TYPE_TO_DIRECTORY, parseItemId, getItem } from '@schnick371/devsteps-shared';
+import { getItem } from '@schnick371/devsteps-shared';
+import { getWorkspacePath } from '../workspace.js';
 
 /**
  * Trace relationships for an item
@@ -61,7 +61,7 @@ export default async function traceHandler(args: { id: string; depth?: number })
         }
 
         return node;
-      } catch (error) {
+      } catch (_error) {
         // Item not found or error - skip
         return null;
       }

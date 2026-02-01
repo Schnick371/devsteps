@@ -6,25 +6,27 @@
  * Refactored: 740 lines → 150 lines (80% reduction)
  */
 
+import * as path from 'node:path';
+import { type DevStepsIndex, listItems } from '@schnick371/devsteps-shared';
 import * as vscode from 'vscode';
-import { listItems } from '@schnick371/devsteps-shared';
-import * as path from 'path';
 
+// Type alias for list items
+type ListItem = DevStepsIndex['items'][number];
+
+import { type BurndownData, getBurndownData } from './dataProviders/burndownProvider.js';
+import { type EisenhowerData, getEisenhowerData } from './dataProviders/eisenhowerProvider.js';
 // Data Providers
 import { getProjectStats, type ProjectStats } from './dataProviders/statsProvider.js';
-import { getEisenhowerData, type EisenhowerData } from './dataProviders/eisenhowerProvider.js';
-import { getBurndownData, type BurndownData } from './dataProviders/burndownProvider.js';
+import { getTimelineData } from './dataProviders/timelineProvider.js';
 import {
   getTraceabilityData,
   type TraceabilityData,
 } from './dataProviders/traceabilityProvider.js';
-import { getTimelineData } from './dataProviders/timelineProvider.js';
-
+import { getBurndownChartScript } from './renderers/burndownRenderer.js';
+import { renderEisenhowerMatrix } from './renderers/eisenhowerRenderer.js';
 // Renderers
 import { renderStatsCards } from './renderers/statsRenderer.js';
-import { renderEisenhowerMatrix } from './renderers/eisenhowerRenderer.js';
 import { renderTimeline } from './renderers/timelineRenderer.js';
-import { getBurndownChartScript } from './renderers/burndownRenderer.js';
 import { getTraceabilityGraphScript } from './renderers/traceabilityRenderer.js';
 
 // Utils
@@ -111,7 +113,7 @@ export class DashboardPanel {
    * Load all DevSteps data once for dashboard rendering.
    * PERFORMANCE: Eliminates 5× redundant listItems() calls.
    */
-  private async loadAllData(): Promise<{ allItems: any[]; tasks: any[] }> {
+  private async loadAllData(): Promise<{ allItems: ListItem[]; tasks: ListItem[] }> {
     const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
     if (!workspaceFolder) {
       return { allItems: [], tasks: [] };
@@ -120,7 +122,7 @@ export class DashboardPanel {
     const devstepsPath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
     const result = await listItems(devstepsPath);
     const allItems = result.items;
-    const tasks = allItems.filter((item: any) => item.type === 'task');
+    const tasks = allItems.filter((item) => item.type === 'task');
 
     return { allItems, tasks };
   }
@@ -131,7 +133,7 @@ export class DashboardPanel {
     eisenhower: EisenhowerData,
     burndown: BurndownData,
     traceability: TraceabilityData,
-    timeline: any[]
+    timeline: ListItem[]
   ): string {
     const styleUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, 'media', 'dashboard.css')
@@ -213,7 +215,7 @@ export class DashboardPanel {
     </html>`;
   }
 
-  private async handleMessage(message: any) {
+  private async handleMessage(message: { command: string; itemId?: string }) {
     switch (message.command) {
       case 'openItem':
         vscode.commands.executeCommand('devsteps.openItem', message.itemId);

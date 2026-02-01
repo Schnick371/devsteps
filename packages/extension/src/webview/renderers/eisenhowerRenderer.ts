@@ -5,14 +5,18 @@
  * Eisenhower Matrix Renderer - Priority quadrant visualization
  */
 
+import type { DevStepsIndex } from '@schnick371/devsteps-shared';
 import type { EisenhowerData } from '../dataProviders/eisenhowerProvider.js';
 import { escapeHtml, getIconForType } from '../utils/htmlHelpers.js';
+
+// Type alias for list items
+type ListItem = DevStepsIndex['items'][number];
 
 /**
  * Render Eisenhower Matrix HTML with 4 quadrants
  */
 export function renderEisenhowerMatrix(eisenhower: EisenhowerData): string {
-  const renderQuadrant = (quadrant: string, label: string, items: any[]) => `
+  const renderQuadrant = (quadrant: string, label: string, items: ListItem[]) => `
     <div class="quadrant ${quadrant.toLowerCase()}">
       <div class="quadrant-header">
         <span class="quadrant-label">${label}</span>

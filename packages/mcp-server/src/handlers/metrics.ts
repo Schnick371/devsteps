@@ -1,5 +1,4 @@
 import { getMetrics, getMetricsJSON } from '../metrics.js';
-import { getWorkspacePath } from '../workspace.js';
 
 /**
  * Prometheus Metrics Handler
@@ -8,7 +7,7 @@ import { getWorkspacePath } from '../workspace.js';
  * Used by monitoring systems to scrape metrics data.
  */
 
-interface MetricsArguments {
+export interface MetricsArguments {
   format?: 'prometheus' | 'json';
 }
 

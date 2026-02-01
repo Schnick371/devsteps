@@ -4,14 +4,14 @@
  * See LICENSE.md for full license text
  */
 
+import { ensureFullMigration } from '@schnick371/devsteps-shared';
 import * as vscode from 'vscode';
+import { registerCommands } from './commands/index.js';
+import { DevStepsDecorationProvider } from './decorationProvider.js';
+import { McpServerManager } from './mcpServerManager.js';
+import { logger } from './outputChannel.js';
 import { DevStepsTreeDataProvider } from './treeView/devstepsTreeDataProvider.js';
 import { TreeViewStateManager } from './utils/stateManager.js';
-import { registerCommands } from './commands/index.js';
-import { McpServerManager } from './mcpServerManager.js';
-import { DevStepsDecorationProvider } from './decorationProvider.js';
-import { logger } from './outputChannel.js';
-import { ensureFullMigration } from '@schnick371/devsteps-shared';
 
 /**
  * Extension activation - called when extension is activated

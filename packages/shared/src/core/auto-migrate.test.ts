@@ -4,22 +4,20 @@
  * @see STORY-073 External Project Migration Auto-Detection
  */
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { mkdirSync, rmSync, existsSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import type { ItemMetadata, ItemType, ItemStatus, EisenhowerQuadrant } from '../schemas/index.js';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import type { EisenhowerQuadrant, ItemMetadata, ItemStatus, ItemType } from '../schemas/index.js';
 import {
   checkMigrationNeeded,
-  getMigrationStatusMessage,
   ensureIndexMigrated,
+  getMigrationStatusMessage,
   performMigration,
-  type MigrationCheckResult,
-  type MigrationStats,
 } from './auto-migrate.js';
 import {
-  hasRefsStyleIndex,
   hasLegacyIndex,
+  hasRefsStyleIndex,
   initializeRefsStyleIndex,
   loadAllIndexes,
 } from './index-refs.js';
@@ -411,7 +409,7 @@ describe('Auto-Migration Module', () => {
       const stats = await performMigration(devstepsDir);
 
       expect(stats.backupPath).toBeDefined();
-      expect(existsSync(stats.backupPath!)).toBe(true);
+      expect(stats.backupPath && existsSync(stats.backupPath)).toBe(true);
     });
 
     it('should skip backup when skipBackup option is true', async () => {
@@ -456,7 +454,7 @@ describe('Auto-Migration Module', () => {
       expect(existsSync(legacyPath)).toBe(false);
       // Archive should exist
       expect(stats.archivePath).toBeDefined();
-      expect(existsSync(stats.archivePath!)).toBe(true);
+      expect(stats.archivePath && existsSync(stats.archivePath)).toBe(true);
       expect(stats.archivePath).toContain('.archived-');
     });
 

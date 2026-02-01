@@ -1,5 +1,3 @@
-import { getWorkspacePath } from '../workspace.js';
-
 /**
  * Health Check Handler
  *
@@ -11,7 +9,7 @@ import { getWorkspacePath } from '../workspace.js';
  * - Active connections (for future network transports)
  */
 
-interface HealthMetrics {
+export interface HealthMetrics {
   status: 'healthy' | 'degraded' | 'unhealthy';
   timestamp: string;
   uptime_seconds: number;

@@ -1,26 +1,19 @@
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type {
   DevStepsConfig,
-  DevStepsIndex,
   EisenhowerQuadrant,
   ItemMetadata,
   ItemType,
 } from '../schemas/index.js';
 import {
-  TYPE_TO_DIRECTORY,
   generateItemId,
   getCurrentTimestamp,
   getTypePrefix,
+  TYPE_TO_DIRECTORY,
 } from '../utils/index.js';
-import {
-  hasRefsStyleIndex,
-  loadCounters,
-  updateCounters,
-  addItemToIndex,
-  loadLegacyIndex,
-} from './index-refs.js';
 import { getConfig } from './config.js';
+import { addItemToIndex, loadCounters, updateCounters } from './index-refs.js';
 
 export interface AddItemArgs {
   type: ItemType;

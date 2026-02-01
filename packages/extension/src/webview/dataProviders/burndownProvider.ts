@@ -5,7 +5,10 @@
  * Burndown Chart Data Provider - Sprint progress tracking
  */
 
-import { STATUS } from '@schnick371/devsteps-shared';
+import { type DevStepsIndex, STATUS } from '@schnick371/devsteps-shared';
+
+// Type alias for list items
+type ListItem = DevStepsIndex['items'][number];
 
 export interface BurndownData {
   total: number;
@@ -16,13 +19,13 @@ export interface BurndownData {
 /**
  * Calculate burndown chart data from tasks
  */
-export function getBurndownData(tasks: any[]): BurndownData {
+export function getBurndownData(tasks: ListItem[]): BurndownData {
   if (tasks.length === 0) {
     return { total: 0, remaining: 0, dataPoints: [] };
   }
 
   const totalTasks = tasks.length;
-  const doneTasks = tasks.filter((i: any) => i.status === STATUS.DONE).length;
+  const doneTasks = tasks.filter((i) => i.status === STATUS.DONE).length;
 
   const dataPoints = calculateBurndownPoints(tasks);
 
@@ -34,7 +37,7 @@ export function getBurndownData(tasks: any[]): BurndownData {
 }
 
 function calculateBurndownPoints(
-  items: any[]
+  items: ListItem[]
 ): Array<{ date: string; ideal: number; actual: number }> {
   if (items.length === 0) {
     return [];

@@ -1,6 +1,6 @@
 import { join } from 'node:path';
-import { getWorkspacePath } from '../workspace.js';
 import { type ListItemsArgs, listItems } from '@schnick371/devsteps-shared';
+import { getWorkspacePath } from '../workspace.js';
 
 /**
  * List items with optional filtering (MCP wrapper)

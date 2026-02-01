@@ -1,13 +1,13 @@
 export type {
-  ItemType,
-  ItemStatus,
-  EisenhowerQuadrant,
-  RelationType,
-  LinkedItems,
-  GitCommit,
-  ItemMetadata,
   DevStepsConfig,
   DevStepsIndex,
+  EisenhowerQuadrant,
+  GitCommit,
+  ItemMetadata,
+  ItemStatus,
+  ItemType,
+  LinkedItems,
+  RelationType,
 } from '../schemas/index.js';
 
 export * from './commands.js';

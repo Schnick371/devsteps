@@ -12,26 +12,25 @@
 
 import {
   existsSync,
-  readFileSync,
-  writeFileSync,
-  renameSync,
   mkdirSync,
   readdirSync,
-  copyFileSync,
+  readFileSync,
+  renameSync,
   rmdirSync,
+  writeFileSync,
 } from 'node:fs';
 import { join } from 'node:path';
-import {
-  hasLegacyIndex,
-  hasRefsStyleIndex,
-  loadLegacyIndex,
-  initializeRefsStyleIndex,
-  addItemToIndex,
-  loadAllIndexes,
-  getIndexPaths,
-} from './index-refs.js';
 import type { ItemType } from '../schemas/index.js';
 import { TYPE_TO_DIRECTORY } from '../utils/index.js';
+import {
+  addItemToIndex,
+  getIndexPaths,
+  hasLegacyIndex,
+  hasRefsStyleIndex,
+  initializeRefsStyleIndex,
+  loadAllIndexes,
+  loadLegacyIndex,
+} from './index-refs.js';
 
 /**
  * Migration check result
@@ -146,7 +145,7 @@ export function checkMigrationNeeded(devstepsDir: string): MigrationCheckResult 
   try {
     const legacy = loadLegacyIndex(devstepsDir);
     itemCount = legacy.items.length;
-  } catch (error) {
+  } catch (_error) {
     // Ignore - legacy index might be corrupted
   }
 
@@ -210,7 +209,7 @@ export async function performMigration(
   // Load and validate old index
   const indexContent = readFileSync(paths.legacy, 'utf-8');
   const legacyIndex = JSON.parse(indexContent);
-  const itemCount = legacyIndex.items.length;
+  const _itemCount = legacyIndex.items.length;
 
   // Initialize new index structure
   initializeRefsStyleIndex(devstepsDir, legacyIndex.counters || {});
@@ -534,7 +533,7 @@ export async function ensureFullMigration(
           console.log(`   🗑️  Archived legacy index: ${archivePath}`);
         }
       }
-    } catch (error) {
+    } catch (_error) {
       // If refs-style index is invalid, keep legacy as fallback
       if (!silent) {
         console.warn('   ⚠️  Keeping legacy index.json (refs-style index validation failed)');

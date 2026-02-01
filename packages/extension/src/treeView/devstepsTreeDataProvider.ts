@@ -8,32 +8,32 @@
  */
 
 import * as vscode from 'vscode';
+import type { TreeViewStateManager } from '../utils/stateManager.js';
 import {
-  TreeNode,
-  type ViewMode,
-  type HierarchyType,
-  type FilterState,
-  type SortState,
-  type WorkItem,
-} from './types.js';
-import {
-  MethodologySectionNode,
-  TypeGroupNode,
   HierarchyRootNode,
   LoadingNode,
+  MethodologySectionNode,
+  TypeGroupNode,
   WorkItemNode,
 } from './nodes/index.js';
-import { getItemMethodology } from './utils/methodologyDetector.js';
+import type {
+  FilterState,
+  HierarchyType,
+  SortState,
+  TreeNode,
+  ViewMode,
+  WorkItem,
+} from './types.js';
 import { loadItemWithLinks } from './utils/itemLoader.js';
-import type { TreeViewStateManager } from '../utils/stateManager.js';
+import { getItemMethodology } from './utils/methodologyDetector.js';
 
 /**
  * TreeDataProvider with switchable view modes (flat vs hierarchical)
  */
 export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNode> {
-  private _onDidChangeTreeData: vscode.EventEmitter<TreeNode | undefined | null | void> =
-    new vscode.EventEmitter<TreeNode | undefined | null | void>();
-  readonly onDidChangeTreeData: vscode.Event<TreeNode | undefined | null | void> =
+  private _onDidChangeTreeData: vscode.EventEmitter<TreeNode | undefined | null | undefined> =
+    new vscode.EventEmitter<TreeNode | undefined | null | undefined>();
+  readonly onDidChangeTreeData: vscode.Event<TreeNode | undefined | null | undefined> =
     this._onDidChangeTreeData.event;
 
   private viewMode: ViewMode = 'flat';
@@ -284,7 +284,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       } else {
         this.treeView.description = undefined; // Clear badge when showing all
       }
-    } catch (error) {
+    } catch (_error) {
       // Silently fail if counts cannot be determined
       this.treeView.description = undefined;
     }

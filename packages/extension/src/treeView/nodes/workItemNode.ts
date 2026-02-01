@@ -5,11 +5,11 @@
  * Work Item Node - Represents individual work items in TreeView
  */
 
+import type { ItemType } from '@schnick371/devsteps-shared';
 import * as vscode from 'vscode';
 import { createItemUri } from '../../decorationProvider.js';
 import { getItemIconWithPriority } from '../../utils/icons.js';
-import type { ItemType } from '@schnick371/devsteps-shared';
-import { TreeNode, type FilterState, type WorkItem } from '../types.js';
+import { type FilterState, TreeNode, type WorkItem } from '../types.js';
 import { loadItemWithLinks } from '../utils/itemLoader.js';
 
 export class WorkItemNode extends TreeNode {

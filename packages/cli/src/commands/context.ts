@@ -1,10 +1,10 @@
-import { existsSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import {
   getCache,
+  getConfig,
   hasRefsStyleIndex,
   loadAllIndexes,
-  getConfig,
 } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 

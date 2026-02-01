@@ -1,16 +1,16 @@
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { getWorkspacePath } from '../workspace.js';
+import { existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
+  getConfig,
+  getCurrentTimestamp,
+  getItem,
   type Methodology,
+  parseItemId,
   type RelationType,
   TYPE_TO_DIRECTORY,
-  getCurrentTimestamp,
-  parseItemId,
   validateRelationship,
-  getItem,
-  getConfig,
 } from '@schnick371/devsteps-shared';
+import { getWorkspacePath } from '../workspace.js';
 
 /**
  * Link two items together

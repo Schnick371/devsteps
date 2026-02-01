@@ -1,13 +1,21 @@
 import { join } from 'node:path';
-import { getWorkspacePath } from '../workspace.js';
-import { type UpdateItemArgs, updateItem, STATUS } from '@schnick371/devsteps-shared';
+import {
+  type EisenhowerQuadrant,
+  type ItemStatus,
+  STATUS,
+  type UpdateItemArgs,
+  updateItem,
+} from '@schnick371/devsteps-shared';
 import { simpleGit } from 'simple-git';
+import { getWorkspacePath } from '../workspace.js';
 
 /**
  * Update an existing item (MCP wrapper)
  */
-export default async function updateHandler(args: any) {
+export default async function updateHandler(args: Record<string, unknown>) {
   try {
+    const devstepsDir = join(getWorkspacePath(), '.devsteps');
+
     // Validation: Cannot use both description flags
     if (args.description && args.append_description) {
       throw new Error('Cannot specify both description and append_description simultaneously');
@@ -15,12 +23,17 @@ export default async function updateHandler(args: any) {
 
     // Map external 'priority' parameter → internal 'eisenhower' field
     const mappedArgs: UpdateItemArgs = {
-      ...args,
-      eisenhower: args.priority, // External API uses 'priority', internal uses 'eisenhower'
+      id: args.id as string,
+      status: args.status as ItemStatus | undefined,
+      title: args.title as string | undefined,
+      eisenhower: args.priority as EisenhowerQuadrant | undefined,
+      assignee: args.assignee as string | undefined,
+      tags: args.tags as string[] | undefined,
+      affected_paths: args.affected_paths as string[] | undefined,
+      superseded_by: args.superseded_by as string | undefined,
+      description: args.description as string | undefined,
+      append_description: args.append_description as string | undefined,
     };
-    delete (mappedArgs as any).priority; // Remove external parameter
-
-    const devstepsDir = join(getWorkspacePath(), '.devsteps');
     const result = await updateItem(devstepsDir, mappedArgs);
 
     // Git hints (MCP-specific presentation)

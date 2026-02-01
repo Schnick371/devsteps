@@ -6,8 +6,8 @@
  * After publish, postpublish hook restores package.json from git.
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 // Map npm package names to workspace directory names
 const WORKSPACE_MAPPING = {
@@ -82,7 +82,7 @@ if (pkg.devDependencies) {
 }
 
 if (modified) {
-  fs.writeFileSync(packageJsonPath, JSON.stringify(pkg, null, 2) + '\n');
+  fs.writeFileSync(packageJsonPath, `${JSON.stringify(pkg, null, 2)}\n`);
   console.log('✓ package.json updated for publishing');
   console.log('  (will be restored after publish via postpublish hook)');
 } else {

@@ -1,6 +1,6 @@
 import { join } from 'node:path';
-import { getWorkspacePath } from '../workspace.js';
 import { archiveItem } from '@schnick371/devsteps-shared';
+import { getWorkspacePath } from '../workspace.js';
 
 /**
  * Archive a single item (MCP wrapper)

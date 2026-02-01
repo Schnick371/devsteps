@@ -6,7 +6,7 @@
  */
 
 import * as vscode from 'vscode';
-import { TreeNode, type FilterState, type WorkItem } from '../types.js';
+import { type FilterState, TreeNode, type WorkItem } from '../types.js';
 import { loadItemWithLinks } from '../utils/itemLoader.js';
 import { WorkItemNode } from './workItemNode.js';
 

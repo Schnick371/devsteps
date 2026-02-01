@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { ItemMetadata } from '../schemas/index.js';
-import { TYPE_TO_DIRECTORY, parseItemId } from '../utils/index.js';
+import { parseItemId, TYPE_TO_DIRECTORY } from '../utils/index.js';
 
 export interface GetItemResult {
   metadata: ItemMetadata;

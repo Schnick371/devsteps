@@ -1,8 +1,8 @@
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { getWorkspacePath } from '../workspace.js';
+import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import type { ItemType } from '@schnick371/devsteps-shared';
-import { TYPE_TO_DIRECTORY, listItems, getItem } from '@schnick371/devsteps-shared';
+import { getItem, listItems } from '@schnick371/devsteps-shared';
+import { getWorkspacePath } from '../workspace.js';
 
 /**
  * Search items by query
@@ -42,14 +42,20 @@ export default async function searchHandler(args: {
     };
 
     // Use listItems() with optional type filter, then load full metadata
-    const filterArgs: any = {};
+    const filterArgs: { type?: ItemType } = {};
     if (args.type) {
       filterArgs.type = args.type;
     }
     const { items } = await listItems(devstepsDir, filterArgs);
 
-    const results: any[] = [];
-
+    const results: Array<{
+      id: string;
+      type: string;
+      title: string;
+      status: string;
+      description_preview: string;
+      match_type: string;
+    }> = [];
     // Load full metadata + description for each item
     for (const itemSummary of items) {
       const { metadata, description } = await getItem(devstepsDir, itemSummary.id);

@@ -1,6 +1,6 @@
+import { ITEM_TYPE, METHODOLOGY, RELATIONSHIP_TYPE } from '../constants/index.js';
 import type { ItemType, Methodology } from '../schemas/index.js';
 import { isFlexibleRelation, isHierarchyRelation } from '../schemas/relationships.js';
-import { ITEM_TYPE, RELATIONSHIP_TYPE, METHODOLOGY } from '../constants/index.js';
 
 /**
  * Validation result with detailed error messaging

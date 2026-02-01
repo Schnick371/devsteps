@@ -1,16 +1,15 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import type { DevStepsIndex, EisenhowerQuadrant, ItemStatus, ItemType } from '../schemas/index.js';
 import { TYPE_TO_DIRECTORY } from '../utils/index.js';
 import { getItem } from './get.js';
 import {
   hasRefsStyleIndex,
-  loadIndexByType,
-  loadIndexByStatus,
   loadIndexByPriority,
+  loadIndexByStatus,
+  loadIndexByType,
   loadLegacyIndex,
 } from './index-refs.js';
-import type { CategoryIndex } from '../types/index-refs.types.js';
 
 export interface ListItemsArgs {
   type?: ItemType;

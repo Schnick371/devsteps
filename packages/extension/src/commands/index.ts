@@ -3,20 +3,24 @@
  * Licensed under the Apache License, Version 2.0
  */
 
-import * as vscode from 'vscode';
 import * as path from 'node:path';
-import { STATUS } from '@schnick371/devsteps-shared';
 import {
   addItem,
+  type EisenhowerQuadrant,
   getItem,
-  updateItem,
+  type ItemStatus,
+  type ItemType,
   listItems,
+  STATUS,
   TYPE_TO_DIRECTORY,
+  type UpdateItemArgs,
+  updateItem,
 } from '@schnick371/devsteps-shared';
-import type { DevStepsTreeDataProvider } from '../treeView/devstepsTreeDataProvider.js';
-import { DashboardPanel } from '../webview/dashboardPanel.js';
+import * as vscode from 'vscode';
 import { logger } from '../outputChannel.js';
+import type { DevStepsTreeDataProvider } from '../treeView/devstepsTreeDataProvider.js';
 import { detectMcpRuntime, formatDiagnostics } from '../utils/runtimeDetector.js';
+import { DashboardPanel } from '../webview/dashboardPanel.js';
 
 /**
  * Check if DevSteps is initialized in workspace
@@ -389,10 +393,10 @@ export function registerCommands(
         // Create the work item
         const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
         const result = await addItem(devstepsath, {
-          type: itemType.value as any,
+          type: itemType.value as ItemType,
           title: title.trim(),
           description: description?.trim() || '',
-          priority: priority.value as any,
+          priority: priority.value as EisenhowerQuadrant,
         });
 
         if (treeDataProvider) {
@@ -419,206 +423,212 @@ export function registerCommands(
 
   // Open work item (markdown file)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.openItem', async (node?: any) => {
-      // Extract ID from different possible structures
-      let itemId: string | undefined;
+    vscode.commands.registerCommand(
+      'devsteps.openItem',
+      async (node?: string | { item?: { id: string }; label?: string }) => {
+        // Extract ID from different possible structures
+        let itemId: string | undefined;
 
-      if (typeof node === 'string') {
-        itemId = node;
-      } else if (node?.item?.id) {
-        // WorkItemNode has item property
-        itemId = node.item.id;
-      } else if (node?.label) {
-        // TreeItem has label property
-        itemId = node.label.split(':')[0]?.trim();
-      }
+        if (typeof node === 'string') {
+          itemId = node;
+        } else if (node?.item?.id) {
+          // WorkItemNode has item property
+          itemId = node.item.id;
+        } else if (node?.label) {
+          // TreeItem has label property
+          itemId = node.label.split(':')[0]?.trim();
+        }
 
-      if (!itemId) {
-        vscode.window.showErrorMessage('No item ID provided');
-        return;
-      }
-
-      const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
-      if (!workspaceFolder) {
-        vscode.window.showErrorMessage('No workspace folder open');
-        return;
-      }
-
-      try {
-        // Get item metadata to determine type
-        const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
-        const itemResult = await getItem(devstepsath, itemId);
-        if (!itemResult.metadata) {
-          vscode.window.showErrorMessage(`Item ${itemId} not found`);
+        if (!itemId) {
+          vscode.window.showErrorMessage('No item ID provided');
           return;
         }
 
-        const item = itemResult.metadata;
-        const itemTypeFolder = TYPE_TO_DIRECTORY[item.type as keyof typeof TYPE_TO_DIRECTORY];
-        const mdPath = path.join(
-          workspaceFolder.uri.fsPath,
-          '.devsteps',
-          itemTypeFolder,
-          `${itemId}.md`
-        );
+        const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+        if (!workspaceFolder) {
+          vscode.window.showErrorMessage('No workspace folder open');
+          return;
+        }
 
-        // Open markdown file
-        const mdUri = vscode.Uri.file(mdPath);
-        const doc = await vscode.workspace.openTextDocument(mdUri);
-        await vscode.window.showTextDocument(doc, {
-          preview: true,
-          viewColumn: vscode.ViewColumn.One,
-        });
-      } catch (error) {
-        vscode.window.showErrorMessage(
-          `Error opening item: ${error instanceof Error ? error.message : 'Unknown error'}`
-        );
+        try {
+          // Get item metadata to determine type
+          const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
+          const itemResult = await getItem(devstepsath, itemId);
+          if (!itemResult.metadata) {
+            vscode.window.showErrorMessage(`Item ${itemId} not found`);
+            return;
+          }
+
+          const item = itemResult.metadata;
+          const itemTypeFolder = TYPE_TO_DIRECTORY[item.type as keyof typeof TYPE_TO_DIRECTORY];
+          const mdPath = path.join(
+            workspaceFolder.uri.fsPath,
+            '.devsteps',
+            itemTypeFolder,
+            `${itemId}.md`
+          );
+
+          // Open markdown file
+          const mdUri = vscode.Uri.file(mdPath);
+          const doc = await vscode.workspace.openTextDocument(mdUri);
+          await vscode.window.showTextDocument(doc, {
+            preview: true,
+            viewColumn: vscode.ViewColumn.One,
+          });
+        } catch (error) {
+          vscode.window.showErrorMessage(
+            `Error opening item: ${error instanceof Error ? error.message : 'Unknown error'}`
+          );
+        }
       }
-    })
+    )
   );
 
   // Update status
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.updateStatus', async (node?: any) => {
-      if (!checkDevStepsInitialized(treeDataProvider)) return;
+    vscode.commands.registerCommand(
+      'devsteps.updateStatus',
+      async (node?: string | { item?: { id: string }; label?: string }) => {
+        if (!checkDevStepsInitialized(treeDataProvider)) return;
 
-      const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
-      if (!workspaceFolder) {
-        vscode.window.showErrorMessage('No workspace folder open');
-        return;
-      }
-
-      // Extract ID from different possible structures
-      let itemId: string | undefined;
-
-      if (typeof node === 'string') {
-        itemId = node;
-      } else if (node?.item?.id) {
-        // WorkItemNode has item property
-        itemId = node.item.id;
-      } else if (node?.label) {
-        // TreeItem has label property
-        itemId = node.label.split(':')[0]?.trim();
-      }
-
-      // If no itemId provided, let user search/select
-      let targetItemId = itemId;
-      if (!targetItemId) {
-        const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
-        const allItems = await listItems(devstepsath);
-
-        if (!allItems.items || allItems.items.length === 0) {
-          vscode.window.showErrorMessage('No work items found');
+        const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+        if (!workspaceFolder) {
+          vscode.window.showErrorMessage('No workspace folder open');
           return;
         }
 
-        const selectedItem = await vscode.window.showQuickPick(
-          allItems.items.map((item) => ({
-            label: item.id,
-            description: item.title,
-            detail: `${item.type} | ${item.status} | ${item.priority}`,
-            value: item.id,
+        // Extract ID from different possible structures
+        let itemId: string | undefined;
+
+        if (typeof node === 'string') {
+          itemId = node;
+        } else if (node?.item?.id) {
+          // WorkItemNode has item property
+          itemId = node.item.id;
+        } else if (node?.label) {
+          // TreeItem has label property
+          itemId = node.label.split(':')[0]?.trim();
+        }
+
+        // If no itemId provided, let user search/select
+        let targetItemId = itemId;
+        if (!targetItemId) {
+          const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
+          const allItems = await listItems(devstepsath);
+
+          if (!allItems.items || allItems.items.length === 0) {
+            vscode.window.showErrorMessage('No work items found');
+            return;
+          }
+
+          const selectedItem = await vscode.window.showQuickPick(
+            allItems.items.map((item) => ({
+              label: item.id,
+              description: item.title,
+              detail: `${item.type} | ${item.status} | ${item.priority}`,
+              value: item.id,
+            })),
+            {
+              placeHolder: 'Select work item to update',
+            }
+          );
+
+          if (!selectedItem) return;
+          targetItemId = selectedItem.value;
+        }
+
+        // Get current item status
+        const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
+        const itemResult = await getItem(devstepsath, targetItemId);
+        if (!itemResult.metadata) {
+          vscode.window.showErrorMessage(`Item ${targetItemId} not found`);
+          return;
+        }
+
+        const currentStatus = itemResult.metadata.status;
+
+        // Select new status
+        const newStatus = await vscode.window.showQuickPick(
+          [
+            {
+              label: '📝 Draft',
+              value: STATUS.DRAFT,
+              description: 'Initial planning stage',
+              current: currentStatus === STATUS.DRAFT,
+            },
+            {
+              label: '📅 Planned',
+              value: STATUS.PLANNED,
+              description: 'Scheduled for implementation',
+              current: currentStatus === STATUS.PLANNED,
+            },
+            {
+              label: '🚧 In Progress',
+              value: STATUS.IN_PROGRESS,
+              description: 'Currently being worked on',
+              current: currentStatus === STATUS.IN_PROGRESS,
+            },
+            {
+              label: '👀 Review',
+              value: STATUS.REVIEW,
+              description: 'Under review',
+              current: currentStatus === STATUS.REVIEW,
+            },
+            {
+              label: '✅ Done',
+              value: STATUS.DONE,
+              description: 'Completed',
+              current: currentStatus === STATUS.DONE,
+            },
+            {
+              label: '🚫 Blocked',
+              value: STATUS.BLOCKED,
+              description: 'Blocked by dependencies',
+              current: currentStatus === STATUS.BLOCKED,
+            },
+            {
+              label: '❌ Cancelled',
+              value: STATUS.CANCELLED,
+              description: 'Work cancelled',
+              current: currentStatus === STATUS.CANCELLED,
+            },
+            {
+              label: '🗑️ Obsolete',
+              value: STATUS.OBSOLETE,
+              description: 'No longer relevant',
+              current: currentStatus === STATUS.OBSOLETE,
+            },
+          ].map((status) => ({
+            ...status,
+            label: status.current ? `${status.label} (current)` : status.label,
           })),
           {
-            placeHolder: 'Select work item to update',
+            placeHolder: `Update status for ${targetItemId}`,
           }
         );
 
-        if (!selectedItem) return;
-        targetItemId = selectedItem.value;
-      }
-
-      // Get current item status
-      const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
-      const itemResult = await getItem(devstepsath, targetItemId);
-      if (!itemResult.metadata) {
-        vscode.window.showErrorMessage(`Item ${targetItemId} not found`);
-        return;
-      }
-
-      const currentStatus = itemResult.metadata.status;
-
-      // Select new status
-      const newStatus = await vscode.window.showQuickPick(
-        [
-          {
-            label: '📝 Draft',
-            value: STATUS.DRAFT,
-            description: 'Initial planning stage',
-            current: currentStatus === STATUS.DRAFT,
-          },
-          {
-            label: '📅 Planned',
-            value: STATUS.PLANNED,
-            description: 'Scheduled for implementation',
-            current: currentStatus === STATUS.PLANNED,
-          },
-          {
-            label: '🚧 In Progress',
-            value: STATUS.IN_PROGRESS,
-            description: 'Currently being worked on',
-            current: currentStatus === STATUS.IN_PROGRESS,
-          },
-          {
-            label: '👀 Review',
-            value: STATUS.REVIEW,
-            description: 'Under review',
-            current: currentStatus === STATUS.REVIEW,
-          },
-          {
-            label: '✅ Done',
-            value: STATUS.DONE,
-            description: 'Completed',
-            current: currentStatus === STATUS.DONE,
-          },
-          {
-            label: '🚫 Blocked',
-            value: STATUS.BLOCKED,
-            description: 'Blocked by dependencies',
-            current: currentStatus === STATUS.BLOCKED,
-          },
-          {
-            label: '❌ Cancelled',
-            value: STATUS.CANCELLED,
-            description: 'Work cancelled',
-            current: currentStatus === STATUS.CANCELLED,
-          },
-          {
-            label: '🗑️ Obsolete',
-            value: STATUS.OBSOLETE,
-            description: 'No longer relevant',
-            current: currentStatus === STATUS.OBSOLETE,
-          },
-        ].map((status) => ({
-          ...status,
-          label: status.current ? `${status.label} (current)` : status.label,
-        })),
-        {
-          placeHolder: `Update status for ${targetItemId}`,
+        if (!newStatus || newStatus.value === currentStatus) {
+          return; // No change or cancelled
         }
-      );
 
-      if (!newStatus || newStatus.value === currentStatus) {
-        return; // No change or cancelled
+        try {
+          const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
+          await updateItem(devstepsath, {
+            id: targetItemId,
+            status: newStatus.value as ItemStatus,
+          });
+
+          treeDataProvider.refresh();
+          vscode.window.showInformationMessage(
+            `✅ Updated ${targetItemId} status: ${currentStatus} → ${newStatus.value}`
+          );
+        } catch (error) {
+          vscode.window.showErrorMessage(
+            `Error updating status: ${error instanceof Error ? error.message : 'Unknown error'}`
+          );
+        }
       }
-
-      try {
-        const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
-        await updateItem(devstepsath, {
-          id: targetItemId,
-          status: newStatus.value as any,
-        });
-
-        treeDataProvider.refresh();
-        vscode.window.showInformationMessage(
-          `✅ Updated ${targetItemId} status: ${currentStatus} → ${newStatus.value}`
-        );
-      } catch (error) {
-        vscode.window.showErrorMessage(
-          `Error updating status: ${error instanceof Error ? error.message : 'Unknown error'}`
-        );
-      }
-    })
+    )
   );
 
   // Search work items
@@ -749,209 +759,222 @@ ${Object.entries(byType)
 
   // Copy item ID to clipboard
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.copyId', async (node?: any) => {
-      // Extract ID from different possible structures
-      let itemId: string | undefined;
+    vscode.commands.registerCommand(
+      'devsteps.copyId',
+      async (node?: string | { item?: { id: string }; label?: string }) => {
+        // Extract ID from different possible structures
+        let itemId: string | undefined;
 
-      if (typeof node === 'string') {
-        itemId = node;
-      } else if (node?.item?.id) {
-        // WorkItemNode has item property
-        itemId = node.item.id;
-      } else if (node?.label) {
-        // TreeItem has label property
-        itemId = node.label.split(':')[0]?.trim();
+        if (typeof node === 'string') {
+          itemId = node;
+        } else if (node?.item?.id) {
+          // WorkItemNode has item property
+          itemId = node.item.id;
+        } else if (node?.label) {
+          // TreeItem has label property
+          itemId = node.label.split(':')[0]?.trim();
+        }
+
+        if (!itemId) {
+          vscode.window.showErrorMessage('No item ID provided');
+          return;
+        }
+
+        vscode.env.clipboard.writeText(itemId);
+        logger.info(`Copied ${itemId} to clipboard`);
       }
-
-      if (!itemId) {
-        vscode.window.showErrorMessage('No item ID provided');
-        return;
-      }
-
-      vscode.env.clipboard.writeText(itemId);
-      logger.info(`Copied ${itemId} to clipboard`);
-    })
+    )
   );
 
   // Show item in file explorer
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.revealInExplorer', async (node?: any) => {
-      // Extract ID from different possible structures
-      let itemId: string | undefined;
+    vscode.commands.registerCommand(
+      'devsteps.revealInExplorer',
+      async (node?: string | { item?: { id: string }; label?: string }) => {
+        // Extract ID from different possible structures
+        let itemId: string | undefined;
 
-      if (typeof node === 'string') {
-        itemId = node;
-      } else if (node?.item?.id) {
-        // WorkItemNode has item property
-        itemId = node.item.id;
-      } else if (node?.label) {
-        // TreeItem has label property
-        itemId = node.label.split(':')[0]?.trim();
-      }
+        if (typeof node === 'string') {
+          itemId = node;
+        } else if (node?.item?.id) {
+          // WorkItemNode has item property
+          itemId = node.item.id;
+        } else if (node?.label) {
+          // TreeItem has label property
+          itemId = node.label.split(':')[0]?.trim();
+        }
 
-      if (!itemId) {
-        vscode.window.showErrorMessage('No item ID provided');
-        return;
-      }
-
-      const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
-      if (!workspaceFolder) {
-        vscode.window.showErrorMessage('No workspace folder open');
-        return;
-      }
-
-      try {
-        const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
-        const itemResult = await getItem(devstepsath, itemId);
-        if (!itemResult.metadata) {
-          vscode.window.showErrorMessage(`Item ${itemId} not found`);
+        if (!itemId) {
+          vscode.window.showErrorMessage('No item ID provided');
           return;
         }
 
-        const item = itemResult.metadata;
-        const itemTypeFolder = TYPE_TO_DIRECTORY[item.type as keyof typeof TYPE_TO_DIRECTORY];
-        const mdPath = path.join(
-          workspaceFolder.uri.fsPath,
-          '.devsteps',
-          itemTypeFolder,
-          `${itemId}.md`
-        );
+        const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+        if (!workspaceFolder) {
+          vscode.window.showErrorMessage('No workspace folder open');
+          return;
+        }
 
-        const mdUri = vscode.Uri.file(mdPath);
-        await vscode.commands.executeCommand('revealInExplorer', mdUri);
-      } catch (error) {
-        vscode.window.showErrorMessage(
-          `Error revealing item: ${error instanceof Error ? error.message : 'Unknown error'}`
-        );
+        try {
+          const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
+          const itemResult = await getItem(devstepsath, itemId);
+          if (!itemResult.metadata) {
+            vscode.window.showErrorMessage(`Item ${itemId} not found`);
+            return;
+          }
+
+          const item = itemResult.metadata;
+          const itemTypeFolder = TYPE_TO_DIRECTORY[item.type as keyof typeof TYPE_TO_DIRECTORY];
+          const mdPath = path.join(
+            workspaceFolder.uri.fsPath,
+            '.devsteps',
+            itemTypeFolder,
+            `${itemId}.md`
+          );
+
+          const mdUri = vscode.Uri.file(mdPath);
+          await vscode.commands.executeCommand('revealInExplorer', mdUri);
+        } catch (error) {
+          vscode.window.showErrorMessage(
+            `Error revealing item: ${error instanceof Error ? error.message : 'Unknown error'}`
+          );
+        }
       }
-    })
+    )
   );
 
   // Edit item properties (quick edit)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.editProperties', async (node?: any) => {
-      // Extract ID from different possible structures
-      let itemId: string | undefined;
+    vscode.commands.registerCommand(
+      'devsteps.editProperties',
+      async (node?: string | { item?: { id: string }; label?: string }) => {
+        // Extract ID from different possible structures
+        let itemId: string | undefined;
 
-      if (typeof node === 'string') {
-        itemId = node;
-      } else if (node?.item?.id) {
-        // WorkItemNode has item property
-        itemId = node.item.id;
-      } else if (node?.label) {
-        // TreeItem has label property
-        itemId = node.label.split(':')[0]?.trim();
-      }
+        if (typeof node === 'string') {
+          itemId = node;
+        } else if (node?.item?.id) {
+          // WorkItemNode has item property
+          itemId = node.item.id;
+        } else if (node?.label) {
+          // TreeItem has label property
+          itemId = node.label.split(':')[0]?.trim();
+        }
 
-      if (!itemId) {
-        vscode.window.showErrorMessage('No item ID provided');
-        return;
-      }
-
-      const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
-      if (!workspaceFolder) {
-        vscode.window.showErrorMessage('No workspace folder open');
-        return;
-      }
-
-      try {
-        const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
-        const itemResult = await getItem(devstepsath, itemId);
-        if (!itemResult.metadata) {
-          vscode.window.showErrorMessage(`Item ${itemId} not found`);
+        if (!itemId) {
+          vscode.window.showErrorMessage('No item ID provided');
           return;
         }
 
-        const item = itemResult.metadata;
-
-        // Select property to edit
-        const property = await vscode.window.showQuickPick(
-          [
-            { label: '📝 Title', value: 'title', description: item.title },
-            { label: '🎯 Priority', value: 'priority', description: item.priority },
-            { label: '📊 Status', value: 'status', description: item.status },
-            { label: '🏷️ Tags', value: 'tags', description: item.tags?.join(', ') || 'None' },
-            { label: '👤 Assignee', value: 'assignee', description: item.assignee || 'Unassigned' },
-          ],
-          {
-            placeHolder: `Edit properties for ${itemId}`,
-          }
-        );
-
-        if (!property) return;
-
-        let updatePayload: any = { id: itemId };
-
-        switch (property.value) {
-          case 'title': {
-            const newTitle = await vscode.window.showInputBox({
-              prompt: 'Enter new title',
-              value: item.title,
-              validateInput: (value) => {
-                if (!value || value.trim().length === 0) return 'Title cannot be empty';
-                if (value.length > 200) return 'Title must be 200 characters or less';
-                return null;
-              },
-            });
-            if (newTitle) updatePayload.title = newTitle.trim();
-            break;
-          }
-          case 'priority': {
-            const newPriority = await vscode.window.showQuickPick(
-              [
-                { label: '🔴 Critical', value: 'critical' },
-                { label: '🟠 High', value: 'high' },
-                { label: '🟡 Medium', value: 'medium' },
-                { label: '⚪ Low', value: 'low' },
-              ],
-              { placeHolder: 'Select priority' }
-            );
-            if (newPriority) updatePayload.priority = newPriority.value;
-            break;
-          }
-          case 'status': {
-            await vscode.commands.executeCommand('devsteps.updateStatus', itemId);
-            return; // Status update handled by separate command
-          }
-          case 'tags': {
-            const newTags = await vscode.window.showInputBox({
-              prompt: 'Enter tags (comma-separated)',
-              value: item.tags?.join(', ') || '',
-              placeHolder: 'frontend, typescript, bug',
-            });
-            if (newTags !== undefined) {
-              updatePayload.tags =
-                newTags.trim().length > 0 ? newTags.split(',').map((t) => t.trim()) : [];
-            }
-            break;
-          }
-          case 'assignee': {
-            const newAssignee = await vscode.window.showInputBox({
-              prompt: 'Enter assignee email',
-              value: item.assignee || '',
-              placeHolder: 'user@example.com',
-            });
-            if (newAssignee !== undefined) {
-              updatePayload.assignee = newAssignee.trim();
-            }
-            break;
-          }
+        const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+        if (!workspaceFolder) {
+          vscode.window.showErrorMessage('No workspace folder open');
+          return;
         }
 
-        // Only update if we have changes
-        if (Object.keys(updatePayload).length > 1) {
+        try {
           const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
-          await updateItem(devstepsath, updatePayload);
-          if (treeDataProvider) {
-            treeDataProvider.refresh();
+          const itemResult = await getItem(devstepsath, itemId);
+          if (!itemResult.metadata) {
+            vscode.window.showErrorMessage(`Item ${itemId} not found`);
+            return;
           }
+
+          const item = itemResult.metadata;
+
+          // Select property to edit
+          const property = await vscode.window.showQuickPick(
+            [
+              { label: '📝 Title', value: 'title', description: item.title },
+              { label: '🎯 Priority', value: 'priority', description: item.priority },
+              { label: '📊 Status', value: 'status', description: item.status },
+              { label: '🏷️ Tags', value: 'tags', description: item.tags?.join(', ') || 'None' },
+              {
+                label: '👤 Assignee',
+                value: 'assignee',
+                description: item.assignee || 'Unassigned',
+              },
+            ],
+            {
+              placeHolder: `Edit properties for ${itemId}`,
+            }
+          );
+
+          if (!property) return;
+
+          const updatePayload: Partial<UpdateItemArgs> & { id: string } = { id: itemId };
+
+          switch (property.value) {
+            case 'title': {
+              const newTitle = await vscode.window.showInputBox({
+                prompt: 'Enter new title',
+                value: item.title,
+                validateInput: (value) => {
+                  if (!value || value.trim().length === 0) return 'Title cannot be empty';
+                  if (value.length > 200) return 'Title must be 200 characters or less';
+                  return null;
+                },
+              });
+              if (newTitle) updatePayload.title = newTitle.trim();
+              break;
+            }
+            case 'priority': {
+              const newPriority = await vscode.window.showQuickPick(
+                [
+                  { label: '🔴 Critical', value: 'critical' },
+                  { label: '🟠 High', value: 'high' },
+                  { label: '🟡 Medium', value: 'medium' },
+                  { label: '⚪ Low', value: 'low' },
+                ],
+                { placeHolder: 'Select priority' }
+              );
+              if (newPriority) updatePayload.priority = newPriority.value;
+              break;
+            }
+            case 'status': {
+              await vscode.commands.executeCommand('devsteps.updateStatus', itemId);
+              return; // Status update handled by separate command
+            }
+            case 'tags': {
+              const newTags = await vscode.window.showInputBox({
+                prompt: 'Enter tags (comma-separated)',
+                value: item.tags?.join(', ') || '',
+                placeHolder: 'frontend, typescript, bug',
+              });
+              if (newTags !== undefined) {
+                updatePayload.tags =
+                  newTags.trim().length > 0 ? newTags.split(',').map((t) => t.trim()) : [];
+              }
+              break;
+            }
+            case 'assignee': {
+              const newAssignee = await vscode.window.showInputBox({
+                prompt: 'Enter assignee email',
+                value: item.assignee || '',
+                placeHolder: 'user@example.com',
+              });
+              if (newAssignee !== undefined) {
+                updatePayload.assignee = newAssignee.trim();
+              }
+              break;
+            }
+          }
+
+          // Only update if we have changes
+          if (Object.keys(updatePayload).length > 1) {
+            const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
+            await updateItem(devstepsath, updatePayload);
+            if (treeDataProvider) {
+              treeDataProvider.refresh();
+            }
+          }
+        } catch (error) {
+          vscode.window.showErrorMessage(
+            `Error editing item: ${error instanceof Error ? error.message : 'Unknown error'}`
+          );
         }
-      } catch (error) {
-        vscode.window.showErrorMessage(
-          `Error editing item: ${error instanceof Error ? error.message : 'Unknown error'}`
-        );
       }
-    })
+    )
   );
 
   // Filter by status
@@ -1129,7 +1152,10 @@ ${Object.entries(byType)
       if (!sortOrder) return;
 
       if (!checkDevStepsInitialized(treeDataProvider)) return;
-      treeDataProvider.setSortOptions(sortBy.value as any, sortOrder.value as 'asc' | 'desc');
+      treeDataProvider.setSortOptions(
+        sortBy.value as 'id' | 'title' | 'status' | 'priority' | 'updated',
+        sortOrder.value as 'asc' | 'desc'
+      );
     })
   );
 

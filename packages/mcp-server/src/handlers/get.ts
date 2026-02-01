@@ -1,6 +1,6 @@
 import { join } from 'node:path';
-import { getWorkspacePath } from '../workspace.js';
 import { getItem } from '@schnick371/devsteps-shared';
+import { getWorkspacePath } from '../workspace.js';
 
 /**
  * Get detailed information about an item (MCP wrapper)

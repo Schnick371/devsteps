@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { ViewToggleProvider, ViewMode } from './viewPane';
+import { ViewMode, ViewToggleProvider } from './viewPane';
 
 const ContextKeys = {
   ViewMode: 'viewToggle.viewMode',

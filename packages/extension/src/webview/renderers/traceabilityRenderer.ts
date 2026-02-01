@@ -5,9 +5,6 @@
  * Traceability Graph Renderer - SVG relationship visualization
  */
 
-import { STATUS } from '@schnick371/devsteps-shared';
-import type { DevStepsIndex } from '@schnick371/devsteps-shared';
-
 /**
  * Generate inline JavaScript for traceability graph rendering
  */

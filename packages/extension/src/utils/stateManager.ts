@@ -5,8 +5,8 @@
  * State persistence manager for TreeView using VS Code Memento API
  */
 
-import * as vscode from 'vscode';
-import type { ViewMode, HierarchyType, FilterState, SortState } from '../treeView/types.js';
+import type * as vscode from 'vscode';
+import type { FilterState, HierarchyType, SortState, ViewMode } from '../treeView/types.js';
 
 export class TreeViewStateManager {
   private static readonly KEYS = {

@@ -1,6 +1,6 @@
 import { join } from 'node:path';
-import { getWorkspacePath } from '../workspace.js';
 import { type PurgeItemsArgs, purgeItems } from '@schnick371/devsteps-shared';
+import { getWorkspacePath } from '../workspace.js';
 
 /**
  * Bulk archive items (MCP wrapper)

@@ -14,18 +14,17 @@
  * @see EPIC-018 Index Architecture Refactoring
  */
 
-import { readdirSync, readFileSync, existsSync, mkdirSync, renameSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, renameSync } from 'node:fs';
 import { join } from 'node:path';
 import type { EisenhowerQuadrant, ItemMetadata, ItemStatus, ItemType } from '../schemas/index.js';
-import type { CategoryIndex } from '../types/index-refs.types.js';
-import { TYPE_TO_DIRECTORY, getCurrentTimestamp } from '../utils/index.js';
+import { getCurrentTimestamp, TYPE_TO_DIRECTORY } from '../utils/index.js';
 import {
   getIndexPaths,
   initializeRefsStyleIndex,
-  updateIndexByType,
-  updateIndexByStatus,
-  updateIndexByPriority,
   updateCounters,
+  updateIndexByPriority,
+  updateIndexByStatus,
+  updateIndexByType,
 } from './index-refs.js';
 
 /**
@@ -125,7 +124,7 @@ export async function rebuildIndex(
       const backupPath = await backupIndexBeforeRebuild(devstepsDir);
       result.backupPath = backupPath;
       onProgress?.(10, 100, `Backed up to: ${backupPath}`);
-    } catch (error) {
+    } catch (_error) {
       // Non-fatal: index might not exist yet
       onProgress?.(10, 100, 'No existing index to backup');
     }
@@ -153,19 +152,19 @@ export async function rebuildIndex(
     if (!byType.has(item.type)) {
       byType.set(item.type, []);
     }
-    byType.get(item.type)!.push(item.id);
+    byType.get(item.type)?.push(item.id);
 
     // Group by status
     if (!byStatus.has(item.status)) {
       byStatus.set(item.status, []);
     }
-    byStatus.get(item.status)!.push(item.id);
+    byStatus.get(item.status)?.push(item.id);
 
     // Group by priority
     if (!byPriority.has(item.eisenhower)) {
       byPriority.set(item.eisenhower, []);
     }
-    byPriority.get(item.eisenhower)!.push(item.id);
+    byPriority.get(item.eisenhower)?.push(item.id);
   }
 
   // Calculate stats
@@ -247,7 +246,7 @@ async function loadAllItemsFromFiles(
   const items: ItemMetadata[] = [];
 
   // Scan each item type directory (new structure only)
-  for (const [type, directory] of Object.entries(TYPE_TO_DIRECTORY)) {
+  for (const [_type, directory] of Object.entries(TYPE_TO_DIRECTORY)) {
     const dirPath = join(devstepsDir, directory);
 
     if (!existsSync(dirPath)) {

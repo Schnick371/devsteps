@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const esbuild = require('esbuild');
-const path = require('path');
+const _path = require('node:path');
 
 const production = process.argv.includes('--production');
 const watch = process.argv.includes('--watch');

@@ -1,9 +1,9 @@
-import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, renameSync } from 'node:fs';
 import { join } from 'node:path';
 import type { DevStepsIndex, ItemStatus } from '../schemas/index.js';
-import { TYPE_TO_DIRECTORY, getCurrentTimestamp, parseItemId } from '../utils/index.js';
-import { hasRefsStyleIndex, removeItemFromIndex } from './index-refs.js';
+import { getCurrentTimestamp, parseItemId, TYPE_TO_DIRECTORY } from '../utils/index.js';
 import { getItem } from './get.js';
+import { removeItemFromIndex } from './index-refs.js';
 export interface ArchiveItemResult {
   itemId: string;
   archivedAt: string;

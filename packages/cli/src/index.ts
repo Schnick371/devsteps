@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
 import { Command } from 'commander';
+import packageJson from '../package.json' with { type: 'json' };
 import {
   addCommand,
   exportCommand,
@@ -13,7 +14,6 @@ import {
   updateCommand,
 } from './commands/index.js';
 import { initCommand } from './commands/init.js';
-import packageJson from '../package.json' with { type: 'json' };
 
 const program = new Command();
 

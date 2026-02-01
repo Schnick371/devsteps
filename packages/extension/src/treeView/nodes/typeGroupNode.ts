@@ -6,7 +6,7 @@
  */
 
 import * as vscode from 'vscode';
-import { TreeNode, TYPE_TO_DIRECTORY, type FilterState, type WorkItem } from '../types.js';
+import { type FilterState, TreeNode, TYPE_TO_DIRECTORY, type WorkItem } from '../types.js';
 import { WorkItemNode } from './workItemNode.js';
 
 export class TypeGroupNode extends TreeNode {

@@ -1,7 +1,7 @@
-import { existsSync, readFileSync } from 'node:fs';
-import { getWorkspacePath } from '../workspace.js';
+import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { STATUS, listItems, getConfig } from '@schnick371/devsteps-shared';
+import { getConfig, listItems, STATUS } from '@schnick371/devsteps-shared';
+import { getWorkspacePath } from '../workspace.js';
 
 /**
  * Get project status and statistics
@@ -33,7 +33,7 @@ export default async function statusHandler(args: { detailed?: boolean }) {
     }
 
     // Check for stale items
-    const staleItems = allItems.filter((item: any) => {
+    const staleItems = allItems.filter((item: { status: string; updated: string }) => {
       if (item.status === STATUS.IN_PROGRESS) {
         const daysSinceUpdate =
           (Date.now() - new Date(item.updated).getTime()) / (1000 * 60 * 60 * 24);
@@ -42,7 +42,14 @@ export default async function statusHandler(args: { detailed?: boolean }) {
       return false;
     });
 
-    const result: any = {
+    const result: {
+      success: boolean;
+      project: { name: string; created: string; updated: string };
+      stats: { total: number; by_type: Record<string, number>; by_status: Record<string, number> };
+      warnings?: { stale_items: { id: string; title: string; days_since_update: number }[] };
+      items_by_status?: Record<string, typeof allItems>;
+      recent_updates?: typeof allItems;
+    } = {
       success: true,
       project: {
         name: config.project_name,
@@ -58,7 +65,7 @@ export default async function statusHandler(args: { detailed?: boolean }) {
 
     if (staleItems.length > 0) {
       result.warnings = {
-        stale_items: staleItems.map((item: any) => ({
+        stale_items: staleItems.map((item: { id: string; title: string; updated: string }) => ({
           id: item.id,
           title: item.title,
           days_since_update: Math.floor(
@@ -70,7 +77,7 @@ export default async function statusHandler(args: { detailed?: boolean }) {
 
     if (args.detailed) {
       // Group items by status
-      const byStatus: Record<string, any[]> = {};
+      const byStatus: Record<string, typeof allItems> = {};
 
       for (const item of allItems) {
         if (!byStatus[item.status]) {

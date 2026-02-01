@@ -4,27 +4,27 @@
  * @see STORY-069 Foundation: Refs-Style Index Schema & Core Operations
  */
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { mkdirSync, rmSync, existsSync } from 'node:fs';
+import { existsSync, mkdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { ItemMetadata } from '../schemas/index.js';
 import {
+  addItemToIndex,
   getIndexPaths,
-  hasRefsStyleIndex,
   hasLegacyIndex,
+  hasRefsStyleIndex,
   initializeRefsStyleIndex,
-  loadIndexByType,
-  loadIndexByStatus,
-  loadIndexByPriority,
   loadAllIndexes,
   loadCounters,
-  updateIndexByType,
-  updateIndexByStatus,
-  updateIndexByPriority,
-  updateCounters,
-  addItemToIndex,
+  loadIndexByPriority,
+  loadIndexByStatus,
+  loadIndexByType,
   removeItemFromIndex,
+  updateCounters,
+  updateIndexByPriority,
+  updateIndexByStatus,
+  updateIndexByType,
   updateItemInIndex,
 } from './index-refs.js';
 
