@@ -95,7 +95,7 @@ export async function addCommand(
 export async function getCommand(id: string) {
   try {
     const devstepsir = getDevStepsDir();
-    
+
     // Use shared core logic (throws on error)
     const { metadata, description } = await getItem(devstepsir, id);
 
@@ -155,33 +155,33 @@ export async function getCommand(id: string) {
 export async function listCommand(options: any) {
   try {
     const devstepsir = getDevStepsDir();
-    
+
     // Build filter args for optimized index-refs lookup
     const filterArgs: any = {};
-    
+
     if (options.type) {
       filterArgs.type = TYPE_SHORTCUTS[options.type] || options.type;
     }
-    
+
     if (options.status && !options.archived) {
       filterArgs.status = options.status;
     }
-    
+
     if (options.priority && !options.archived) {
       filterArgs.eisenhower = options.priority;
     }
-    
+
     if (options.limit) {
       const limit = Number.parseInt(options.limit, 10);
       if (limit > 0) {
         filterArgs.limit = limit;
       }
     }
-    
+
     // Use new index-refs API with filters (optimized index lookup)
     const itemsResult = await listItems(devstepsir, filterArgs);
     let items = itemsResult.items;
-    
+
     // TODO: Archived items support needs separate implementation
 
     console.log();
@@ -231,9 +231,9 @@ export async function updateCommand(id: string, options: any) {
       spinner.fail('Cannot use both --description and --append-description');
       process.exit(1);
     }
-    
+
     const devstepsir = getDevStepsDir();
-    
+
     // Use shared core logic (throws on error)
     const { metadata } = await updateItem(devstepsir, {
       id,
@@ -303,10 +303,16 @@ export async function updateCommand(id: string, options: any) {
         console.log(chalk.gray('  • Run tests:'), 'npm test');
         console.log(chalk.gray('  • Verify build:'), 'npm run build');
         console.log(chalk.gray('  • Manual testing if applicable'));
-        console.log(chalk.gray('  • When all pass:'), chalk.cyan(`devsteps update ${id} --status done`));
+        console.log(
+          chalk.gray('  • When all pass:'),
+          chalk.cyan(`devsteps update ${id} --status done`)
+        );
       } else if (options.status === STATUS.IN_PROGRESS) {
         console.log(chalk.gray('\n💡 Git:'), 'Track progress with regular commits!');
-        console.log(chalk.gray('💡 Next:'), `After implementation, mark as 'review' to start testing`);
+        console.log(
+          chalk.gray('💡 Next:'),
+          `After implementation, mark as 'review' to start testing`
+        );
       }
     }
   } catch (error: any) {
@@ -364,8 +370,14 @@ export async function linkCommand(
       spinner.text = 'Creating link (validation overridden)...';
     }
 
-    if (!sourceMetadata.linked_items[relation as keyof typeof sourceMetadata.linked_items].includes(targetId)) {
-      sourceMetadata.linked_items[relation as keyof typeof sourceMetadata.linked_items].push(targetId);
+    if (
+      !sourceMetadata.linked_items[relation as keyof typeof sourceMetadata.linked_items].includes(
+        targetId
+      )
+    ) {
+      sourceMetadata.linked_items[relation as keyof typeof sourceMetadata.linked_items].push(
+        targetId
+      );
       sourceMetadata.updated = getCurrentTimestamp();
       writeFileSync(sourcePath, JSON.stringify(sourceMetadata, null, 2));
     }
@@ -386,8 +398,14 @@ export async function linkCommand(
 
     const inverseRelation = inverseRelations[relation];
     if (inverseRelation) {
-      if (!targetMetadata.linked_items[inverseRelation as keyof typeof targetMetadata.linked_items].includes(sourceId)) {
-        targetMetadata.linked_items[inverseRelation as keyof typeof targetMetadata.linked_items].push(sourceId);
+      if (
+        !targetMetadata.linked_items[
+          inverseRelation as keyof typeof targetMetadata.linked_items
+        ].includes(sourceId)
+      ) {
+        targetMetadata.linked_items[
+          inverseRelation as keyof typeof targetMetadata.linked_items
+        ].push(sourceId);
         targetMetadata.updated = getCurrentTimestamp();
         writeFileSync(targetPath, JSON.stringify(targetMetadata, null, 2));
       }
@@ -425,9 +443,7 @@ export async function searchCommand(query: string, options: any) {
 
       const titleMatch = metadata.title.toLowerCase().includes(queryLower);
       const descMatch = description.toLowerCase().includes(queryLower);
-      const tagMatch = metadata.tags.some((tag: string) =>
-        tag.toLowerCase().includes(queryLower)
-      );
+      const tagMatch = metadata.tags.some((tag: string) => tag.toLowerCase().includes(queryLower));
 
       if (titleMatch || descMatch || tagMatch) {
         results.push({
@@ -465,18 +481,18 @@ export async function statusCommand(options: any) {
   try {
     const devstepsir = getDevStepsDir();
     const config = await loadConfig(devstepsir);
-    
+
     // Use new index-refs API
     const itemsResult = await listItems(devstepsir, {});
     const allItems = itemsResult.items;
-    
+
     // Calculate stats
     const stats = {
       total: allItems.length,
       by_type: {} as Record<string, number>,
       by_status: {} as Record<string, number>,
     };
-    
+
     for (const item of allItems) {
       stats.by_type[item.type] = (stats.by_type[item.type] || 0) + 1;
       stats.by_status[item.status] = (stats.by_status[item.status] || 0) + 1;
@@ -556,9 +572,9 @@ export async function traceCommand(id: string, options: any) {
       try {
         const { metadata } = await getItem(devstepsir, itemId);
 
-      console.log(
-        `${prefix}${chalk.cyan(metadata.id)} ${chalk.gray(`[${metadata.status}]`)} ${metadata.title}`
-      );
+        console.log(
+          `${prefix}${chalk.cyan(metadata.id)} ${chalk.gray(`[${metadata.status}]`)} ${metadata.title}`
+        );
 
         if (depth < maxDepth) {
           for (const [relType, linkedIds] of Object.entries(metadata.linked_items)) {

@@ -23,13 +23,11 @@ export default async function searchHandler(args: {
 
     // Convert wildcards (*) to regex pattern
     const hasWildcard = query.includes('*');
-    const regexPattern = hasWildcard
-      ? new RegExp(query.replace(/\*/g, '.*'), 'i')
-      : null;
+    const regexPattern = hasWildcard ? new RegExp(query.replace(/\*/g, '.*'), 'i') : null;
 
     // Tokenize multi-word queries for OR matching
-    const tokens = query.split(/\s+/).filter(t => t.length > 0);    
-    
+    const tokens = query.split(/\s+/).filter((t) => t.length > 0);
+
     // Helper: Check if text matches query (substring, wildcard, or tokens)
     const matches = (text: string): boolean => {
       const lowerText = text.toLowerCase();
@@ -38,11 +36,11 @@ export default async function searchHandler(args: {
       }
       if (tokens.length > 1) {
         // Multi-word: all tokens must match (AND logic)
-        return tokens.every(token => lowerText.includes(token));
+        return tokens.every((token) => lowerText.includes(token));
       }
       return lowerText.includes(query);
-    };    
-    
+    };
+
     // Use listItems() with optional type filter, then load full metadata
     const filterArgs: any = {};
     if (args.type) {

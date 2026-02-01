@@ -19,11 +19,14 @@ process.on('unhandledRejection', (reason, promise) => {
   const logger = getLogger();
   logger.error(
     {
-      reason: reason instanceof Error ? {
-        message: reason.message,
-        stack: reason.stack,
-        name: reason.name,
-      } : reason,
+      reason:
+        reason instanceof Error
+          ? {
+              message: reason.message,
+              stack: reason.stack,
+              name: reason.name,
+            }
+          : reason,
       promise: String(promise),
     },
     '⚠️  Unhandled Promise Rejection - Server continues running'
@@ -245,13 +248,15 @@ class DevStepsServer {
           {
             uri: 'devsteps://docs/hierarchy',
             name: 'Hierarchy Rules',
-            description: 'Work item hierarchy for Scrum (Epic→Story|Spike, Story→Bug→Task) and Waterfall (Requirement→Feature|Spike, Feature→Bug→Task) based on Jira 2025 standards',
+            description:
+              'Work item hierarchy for Scrum (Epic→Story|Spike, Story→Bug→Task) and Waterfall (Requirement→Feature|Spike, Feature→Bug→Task) based on Jira 2025 standards',
             mimeType: 'text/markdown',
           },
           {
             uri: 'devsteps://docs/ai-guide',
             name: 'MCP Tools Usage Guide',
-            description: 'Quick reference for Bug workflow, Spike workflow, link validation rules, and common mistakes',
+            description:
+              'Quick reference for Bug workflow, Spike workflow, link validation rules, and common mistakes',
             mimeType: 'text/markdown',
           },
         ],
@@ -374,7 +379,7 @@ class DevStepsServer {
           },
           'Tool execution failed'
         );
-        
+
         // Return error as MCP response instead of crashing server
         // Legitimate errors (like "Project not initialized") should not kill the server
         const errorMessage = error instanceof Error ? error.message : String(error);
@@ -430,7 +435,7 @@ program
   .option('--log-level <level>', 'Log level: debug|info|warn|error', 'info')
   .option('--heartbeat-interval <seconds>', 'Health heartbeat interval (0=disabled)', '0')
   .option('--log-file <path>', 'Log file path (default: stderr)')
-  .allowUnknownOption()  // Allow unknown options for flexibility
+  .allowUnknownOption() // Allow unknown options for flexibility
   .parse();
 
 const opts = program.opts<CliOptions>();
@@ -446,11 +451,11 @@ try {
   const { join } = await import('node:path');
   const { existsSync } = await import('node:fs');
   const { ensureIndexMigrated } = await import('@schnick371/devsteps-shared');
-  
+
   const workspaceArgs = program.args;
   const workspacePath = workspaceArgs.length > 0 ? workspaceArgs[0] : process.cwd();
   const devstepsDir = join(workspacePath, '.devsteps');
-  
+
   if (existsSync(devstepsDir)) {
     // Silent auto-migration on startup
     await ensureIndexMigrated(devstepsDir, { silent: true });
@@ -477,14 +482,14 @@ if (transport === 'http') {
   // HTTP transport for Docker/production deployment
   const { startHttpMcpServer } = await import('./http-server.js');
   const port = Number(process.env.MCP_PORT) || 3100;
-  
+
   try {
     const httpServer = await startHttpMcpServer(port);
     getLogger().info({ url: httpServer.url, transport: 'http' }, 'MCP server started in HTTP mode');
-    
+
     // Register shutdown handlers to clean up HTTP server
     registerShutdownHandlers();
-    
+
     // Add HTTP server cleanup to shutdown manager
     shutdownManager.trackOperation(
       new Promise<void>((resolve) => {

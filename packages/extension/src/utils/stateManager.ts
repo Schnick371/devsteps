@@ -1,7 +1,7 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * State persistence manager for TreeView using VS Code Memento API
  */
 
@@ -55,12 +55,18 @@ export class TreeViewStateManager {
   }
 
   loadExpandedSections(): Set<string> {
-    const array = this.workspaceState.get<string[]>(TreeViewStateManager.KEYS.EXPANDED_SECTIONS, ['scrum', 'waterfall']);
+    const array = this.workspaceState.get<string[]>(TreeViewStateManager.KEYS.EXPANDED_SECTIONS, [
+      'scrum',
+      'waterfall',
+    ]);
     return new Set(array);
   }
 
   loadExpandedHierarchyItems(): Set<string> {
-    const array = this.workspaceState.get<string[]>(TreeViewStateManager.KEYS.EXPANDED_HIERARCHY_ITEMS, []);
+    const array = this.workspaceState.get<string[]>(
+      TreeViewStateManager.KEYS.EXPANDED_HIERARCHY_ITEMS,
+      []
+    );
     return new Set(array);
   }
 
@@ -86,10 +92,16 @@ export class TreeViewStateManager {
   }
 
   async saveExpandedSections(sections: Set<string>): Promise<void> {
-    await this.workspaceState.update(TreeViewStateManager.KEYS.EXPANDED_SECTIONS, Array.from(sections));
+    await this.workspaceState.update(
+      TreeViewStateManager.KEYS.EXPANDED_SECTIONS,
+      Array.from(sections)
+    );
   }
 
   async saveExpandedHierarchyItems(items: Set<string>): Promise<void> {
-    await this.workspaceState.update(TreeViewStateManager.KEYS.EXPANDED_HIERARCHY_ITEMS, Array.from(items));
+    await this.workspaceState.update(
+      TreeViewStateManager.KEYS.EXPANDED_HIERARCHY_ITEMS,
+      Array.from(items)
+    );
   }
 }

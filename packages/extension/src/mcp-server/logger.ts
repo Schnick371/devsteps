@@ -7,7 +7,10 @@ let loggerInstance: Logger;
  * Configure logger with options
  */
 export function configureLogger(options: { level?: string; file?: string } = {}): Logger {
-  const level = options.level || process.env.LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'debug' : 'info');
+  const level =
+    options.level ||
+    process.env.LOG_LEVEL ||
+    (process.env.NODE_ENV === 'development' ? 'debug' : 'info');
 
   const config: pino.LoggerOptions = {
     level,

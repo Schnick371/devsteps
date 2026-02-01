@@ -1,0 +1,48 @@
+DevSteps - Developer Task Tracking System
+
+Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+
+This product includes software developed at DevSteps (https://devsteps.dev).
+
+Licensed under the Apache License 2.0.
+See LICENSE.md for details.
+
+---
+
+THIRD-PARTY ATTRIBUTIONS:
+
+Codicons
+Copyright (c) Microsoft Corporation
+Licensed under CC-BY-4.0
+https://github.com/microsoft/vscode-codicons
+
+MCP SDK
+Copyright (c) Anthropic
+Licensed under MIT
+https://github.com/modelcontextprotocol/typescript-sdk
+
+Zod
+Copyright (c) Colin McDonnell
+Licensed under MIT
+https://github.com/colinhacks/zod
+
+Commander.js
+Copyright (c) TJ Holowaychuk
+Licensed under MIT
+https://github.com/tj/commander.js
+
+Chalk
+Copyright (c) Sindre Sorhus
+Licensed under MIT
+https://github.com/chalk/chalk
+
+simple-git
+Copyright (c) Steve King
+Licensed under MIT
+https://github.com/steveukx/git-js
+
+---
+
+For the full list of dependencies and their licenses, see:
+- packages/*/package.json
+- node_modules/*/LICENSE (after npm install)

@@ -1,7 +1,7 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * Dashboard Panel - Main WebView orchestrator for DevSteps Dashboard
  * Refactored: 740 lines → 150 lines (80% reduction)
  */
@@ -14,7 +14,10 @@ import * as path from 'path';
 import { getProjectStats, type ProjectStats } from './dataProviders/statsProvider.js';
 import { getEisenhowerData, type EisenhowerData } from './dataProviders/eisenhowerProvider.js';
 import { getBurndownData, type BurndownData } from './dataProviders/burndownProvider.js';
-import { getTraceabilityData, type TraceabilityData } from './dataProviders/traceabilityProvider.js';
+import {
+  getTraceabilityData,
+  type TraceabilityData,
+} from './dataProviders/traceabilityProvider.js';
 import { getTimelineData } from './dataProviders/timelineProvider.js';
 
 // Renderers
@@ -66,9 +69,9 @@ export class DashboardPanel {
         enableScripts: true,
         localResourceRoots: [
           vscode.Uri.joinPath(extensionUri, 'media'),
-          vscode.Uri.joinPath(extensionUri, 'dist')
+          vscode.Uri.joinPath(extensionUri, 'dist'),
         ],
-        retainContextWhenHidden: true
+        retainContextWhenHidden: true,
       }
     );
 
@@ -170,13 +173,17 @@ export class DashboardPanel {
         <!-- Traceability Graph -->
         <section class="traceability-section">
           <h2>🕸️ Traceability Graph</h2>
-          ${traceability.displayedNodes && traceability.totalItems && traceability.displayedNodes < traceability.totalItems
-            ? `<div class="info-banner">
+          ${
+            traceability.displayedNodes &&
+            traceability.totalItems &&
+            traceability.displayedNodes < traceability.totalItems
+              ? `<div class="info-banner">
                  <span class="info-icon">ℹ️</span>
                  Showing ${traceability.displayedNodes} of ${traceability.totalItems} items (top connections only).
                  <span class="info-hint">For performance, large projects display most-connected items.</span>
                </div>`
-            : ''}
+              : ''
+          }
           <div id="traceabilityGraph"></div>
         </section>
 

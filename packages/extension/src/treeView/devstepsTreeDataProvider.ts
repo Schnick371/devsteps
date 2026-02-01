@@ -1,7 +1,7 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * TreeView Provider with switchable view modes:
  * - Flat: Group by item type
  * - Hierarchical: Show parent-child relationships (Scrum + Waterfall)
@@ -63,7 +63,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
 
   constructor(
     private workspaceRoot: vscode.Uri,
-    private stateManager?: TreeViewStateManager,
+    private stateManager?: TreeViewStateManager
   ) {
     // Load persisted state if stateManager is provided
     if (stateManager) {
@@ -83,9 +83,11 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    */
   async initialize(): Promise<void> {
     if (this.initialized) return;
-    
+
     // Pre-load root nodes to populate cache
-    const nodes = await (this.viewMode === 'flat' ? this.getFlatRootNodes() : this.getHierarchicalRootNodes());
+    const nodes = await (this.viewMode === 'flat'
+      ? this.getFlatRootNodes()
+      : this.getHierarchicalRootNodes());
     this.cachedRootNodes = nodes;
     this.initialized = true;
   }
@@ -248,8 +250,6 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     this.updateDescription();
   }
 
-
-
   /**
    * Clear all filters
    */
@@ -368,8 +368,6 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     return this.filterState.hideRelatesTo;
   }
 
-
-
   /**
    * Apply filters to work items (only used in flat view)
    */
@@ -399,7 +397,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     // Tag filter (item must have at least one matching tag)
     if (this.filterState.tags.length > 0) {
       filtered = filtered.filter((item) =>
-        item.tags?.some((tag) => this.filterState.tags.includes(tag)),
+        item.tags?.some((tag) => this.filterState.tags.includes(tag))
       );
     }
 
@@ -410,7 +408,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
         (item) =>
           item.title.toLowerCase().includes(query) ||
           item.id.toLowerCase().includes(query) ||
-          item.tags?.some((tag) => tag.toLowerCase().includes(query)),
+          item.tags?.some((tag) => tag.toLowerCase().includes(query))
       );
     }
 
@@ -442,7 +440,9 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
           break;
         case 'priority': {
           const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3 };
-          comparison = priorityOrder[a.priority as keyof typeof priorityOrder] - priorityOrder[b.priority as keyof typeof priorityOrder];
+          comparison =
+            priorityOrder[a.priority as keyof typeof priorityOrder] -
+            priorityOrder[b.priority as keyof typeof priorityOrder];
           break;
         }
         case 'status': {
@@ -456,7 +456,9 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
             cancelled: 6,
             obsolete: 7,
           };
-          comparison = statusOrder[a.status as keyof typeof statusOrder] - statusOrder[b.status as keyof typeof statusOrder];
+          comparison =
+            statusOrder[a.status as keyof typeof statusOrder] -
+            statusOrder[b.status as keyof typeof statusOrder];
           break;
         }
       }
@@ -472,23 +474,26 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
    */
   getTreeItem(element: TreeNode): vscode.TreeItem {
     const treeItem = element.toTreeItem();
-    
+
     // Re-evaluate collapsible state based on current filter
     // This ensures chevron visibility updates when filters change
-    if (element instanceof WorkItemNode && treeItem.collapsibleState !== vscode.TreeItemCollapsibleState.None) {
+    if (
+      element instanceof WorkItemNode &&
+      treeItem.collapsibleState !== vscode.TreeItemCollapsibleState.None
+    ) {
       const hasChildren = element.hasVisibleChildren(this.filterState);
       if (!hasChildren) {
         treeItem.collapsibleState = vscode.TreeItemCollapsibleState.None;
       }
     }
-    
+
     return treeItem;
   }
 
   /**
    * Get children of a tree item
    * CRITICAL: Returns SYNCHRONOUSLY with loading placeholder to prevent Welcome View flash
-   * 
+   *
    * Strategy: Show "Loading..." node while data loads
    * - View is NOT empty → VS Code doesn't show Welcome View
    * - User sees feedback instead of blank view
@@ -500,15 +505,15 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       if (this.cachedRootNodes !== null) {
         return this.cachedRootNodes; // Real data - SYNCHRONOUS return
       }
-      
+
       // Data not loaded yet - show loading placeholder and trigger async load
       if (!this.initialized) {
         this.loadAndCacheRootNodes(); // Start loading in background
-        
+
         // Return loading placeholder node - View is NOT empty → no Welcome View!
         return [new LoadingNode()]; // SYNCHRONOUS return with proper TreeNode
       }
-      
+
       return []; // Fallback (should never reach here)
     }
 
@@ -522,13 +527,14 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   private async loadAndCacheRootNodes(): Promise<void> {
     if (this.initialized) return; // Already loading
     this.initialized = true; // Mark as loading
-    
-    const nodes = this.viewMode === 'flat' 
-      ? await this.getFlatRootNodes() 
-      : await this.getHierarchicalRootNodes();
-    
+
+    const nodes =
+      this.viewMode === 'flat'
+        ? await this.getFlatRootNodes()
+        : await this.getHierarchicalRootNodes();
+
     this.cachedRootNodes = nodes;
-    
+
     // Trigger refresh to display loaded data
     this._onDidChangeTreeData.fire();
   }
@@ -554,7 +560,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       // Load all item IDs from refs-style index (by-type/*.json files)
       const byTypeDir = vscode.Uri.joinPath(this.workspaceRoot, '.devsteps', 'index', 'by-type');
       const typeFiles = await vscode.workspace.fs.readDirectory(byTypeDir);
-      
+
       const allItemIds: string[] = [];
       for (const [fileName, fileType] of typeFiles) {
         if (fileType === vscode.FileType.File && fileName.endsWith('.json')) {
@@ -606,7 +612,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       if (scrumItems.length > 0 || config.methodology !== 'waterfall') {
         const isScrumExpanded = this.expandedSections.has('scrum');
         sections.push(
-          new MethodologySectionNode('scrum', scrumByType, isScrumExpanded, this.expandedGroups),
+          new MethodologySectionNode('scrum', scrumByType, isScrumExpanded, this.expandedGroups)
         );
       }
 
@@ -617,8 +623,8 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
             'waterfall',
             waterfallByType,
             isWaterfallExpanded,
-            this.expandedGroups,
-          ),
+            this.expandedGroups
+          )
         );
       }
 
@@ -642,7 +648,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
         acc[item.type].push(item);
         return acc;
       },
-      {} as Record<string, WorkItem[]>,
+      {} as Record<string, WorkItem[]>
     );
   }
 

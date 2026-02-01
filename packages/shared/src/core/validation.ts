@@ -40,7 +40,7 @@ export function validateRelationship(
     return { valid: true };
   }
 
-    // Only validate hierarchy relationships
+  // Only validate hierarchy relationships
   if (!isHierarchyRelation(relationType)) {
     return { valid: false, error: `Unknown relationship type: ${relationType}` };
   }
@@ -56,7 +56,10 @@ export function validateRelationship(
   }
 
   // Only validate "implements" direction (implemented-by, blocked-by are automatic reverse)
-  if (relationType === RELATIONSHIP_TYPE.IMPLEMENTED_BY || relationType === RELATIONSHIP_TYPE.BLOCKED_BY) {
+  if (
+    relationType === RELATIONSHIP_TYPE.IMPLEMENTED_BY ||
+    relationType === RELATIONSHIP_TYPE.BLOCKED_BY
+  ) {
     return { valid: true }; // Reverse relationships auto-created, no validation needed
   }
 
@@ -103,7 +106,11 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
 
   // Task → Story, Spike, or Bug
   if (sourceType === ITEM_TYPE.TASK) {
-    if (targetType === ITEM_TYPE.STORY || targetType === ITEM_TYPE.SPIKE || targetType === ITEM_TYPE.BUG) {
+    if (
+      targetType === ITEM_TYPE.STORY ||
+      targetType === ITEM_TYPE.SPIKE ||
+      targetType === ITEM_TYPE.BUG
+    ) {
       return { valid: true };
     }
     return {
@@ -149,8 +156,6 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
     };
   }
 
-
-
   // Test → Epic or Story (flexible)
   if (sourceType === ITEM_TYPE.TEST) {
     if (targetType === ITEM_TYPE.EPIC || targetType === ITEM_TYPE.STORY) {
@@ -190,7 +195,11 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
 
   // Task → Feature, Spike, or Bug
   if (sourceType === ITEM_TYPE.TASK) {
-    if (targetType === ITEM_TYPE.FEATURE || targetType === ITEM_TYPE.SPIKE || targetType === ITEM_TYPE.BUG) {
+    if (
+      targetType === ITEM_TYPE.FEATURE ||
+      targetType === ITEM_TYPE.SPIKE ||
+      targetType === ITEM_TYPE.BUG
+    ) {
       return { valid: true };
     }
     return {
@@ -235,8 +244,6 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
       suggestion: `Link Bug → Requirement (requirement-level defect) or Bug → Feature (feature-level defect). Use Task to implement the fix (Task implements Bug).`,
     };
   }
-
-
 
   // Test → Requirement or Feature (flexible)
   if (sourceType === ITEM_TYPE.TEST) {

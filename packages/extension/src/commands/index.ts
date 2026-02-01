@@ -6,7 +6,13 @@
 import * as vscode from 'vscode';
 import * as path from 'node:path';
 import { STATUS } from '@schnick371/devsteps-shared';
-import { addItem, getItem, updateItem, listItems, TYPE_TO_DIRECTORY } from '@schnick371/devsteps-shared';
+import {
+  addItem,
+  getItem,
+  updateItem,
+  listItems,
+  TYPE_TO_DIRECTORY,
+} from '@schnick371/devsteps-shared';
 import type { DevStepsTreeDataProvider } from '../treeView/devstepsTreeDataProvider.js';
 import { DashboardPanel } from '../webview/dashboardPanel.js';
 import { logger } from '../outputChannel.js';
@@ -15,7 +21,9 @@ import { detectMcpRuntime, formatDiagnostics } from '../utils/runtimeDetector.js
 /**
  * Check if DevSteps is initialized in workspace
  */
-function checkDevStepsInitialized(treeDataProvider: DevStepsTreeDataProvider | null): treeDataProvider is DevStepsTreeDataProvider {
+function checkDevStepsInitialized(
+  treeDataProvider: DevStepsTreeDataProvider | null
+): treeDataProvider is DevStepsTreeDataProvider {
   if (!treeDataProvider) {
     logger.warn('Command invoked but DevSteps not initialized (treeDataProvider is null)');
     vscode.window.showWarningMessage(
@@ -31,7 +39,7 @@ function checkDevStepsInitialized(treeDataProvider: DevStepsTreeDataProvider | n
  */
 export function registerCommands(
   context: vscode.ExtensionContext,
-  treeDataProvider: DevStepsTreeDataProvider | null,
+  treeDataProvider: DevStepsTreeDataProvider | null
 ): void {
   // Initialize DevSteps Project
   context.subscriptions.push(
@@ -58,12 +66,16 @@ export function registerCommands(
       const methodology = await vscode.window.showQuickPick(
         [
           { label: 'Scrum', value: 'scrum', description: 'Epics → Stories → Tasks' },
-          { label: 'Waterfall', value: 'waterfall', description: 'Requirements → Features → Tasks' },
+          {
+            label: 'Waterfall',
+            value: 'waterfall',
+            description: 'Requirements → Features → Tasks',
+          },
           { label: 'Hybrid', value: 'hybrid', description: 'Both Scrum and Waterfall' },
         ],
         {
           placeHolder: 'Select project methodology',
-        },
+        }
       );
 
       if (!methodology) return;
@@ -85,19 +97,21 @@ export function registerCommands(
         // Check if CLI is installed
         const terminal = vscode.window.createTerminal('DevSteps Init');
         terminal.show();
-        
+
         // Use npx for zero-configuration CLI execution (no installation needed!)
         terminal.sendText('echo "🚀 Running DevSteps CLI via npx (zero-configuration)..."');
-        terminal.sendText(`npx @schnick371/devsteps-cli init ${projectName} --methodology ${methodology.value}`);
+        terminal.sendText(
+          `npx @schnick371/devsteps-cli init ${projectName} --methodology ${methodology.value}`
+        );
       }
-    }),
+    })
   );
 
   // Show Dashboard
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.showDashboard', () => {
       DashboardPanel.createOrShow(context.extensionUri);
-    }),
+    })
   );
 
   // Check Prerequisites
@@ -105,7 +119,7 @@ export function registerCommands(
     vscode.commands.registerCommand('devsteps.checkPrerequisites', async () => {
       logger.info('=== DevSteps Prerequisites Check ===');
       logger.info('');
-      
+
       // Show progress indicator
       await vscode.window.withProgress(
         {
@@ -115,26 +129,26 @@ export function registerCommands(
         },
         async (progress) => {
           progress.report({ increment: 0, message: 'Detecting Node.js runtime...' });
-          
+
           // Detect runtime
           const bundledServerPath = path.join(context.extensionPath, 'dist', 'mcp-server.js');
           const runtimeConfig = await detectMcpRuntime(bundledServerPath);
-          
+
           progress.report({ increment: 50, message: 'Analyzing results...' });
-          
+
           // Log full diagnostics
           logger.info(formatDiagnostics(runtimeConfig.diagnostics));
-          
+
           // Determine overall status
           const { node, npm, npx } = runtimeConfig.diagnostics;
           const allAvailable = node.available && npm.available && npx.available;
           const partialAvailable = node.available || npm.available;
-          
+
           // Build result message
           const resultLines: string[] = [];
           resultLines.push('**Prerequisites Check Results:**');
           resultLines.push('');
-          
+
           // Node.js
           if (node.available) {
             resultLines.push(`✅ Node.js: ${node.version}`);
@@ -142,23 +156,23 @@ export function registerCommands(
           } else {
             resultLines.push('❌ Node.js: Not found');
           }
-          
+
           // npm
           if (npm.available) {
             resultLines.push(`✅ npm: ${npm.version}`);
           } else {
             resultLines.push('❌ npm: Not found');
           }
-          
+
           // npx
           if (npx.available) {
             resultLines.push(`✅ npx: ${npx.version}`);
           } else {
             resultLines.push('❌ npx: Not found');
           }
-          
+
           resultLines.push('');
-          
+
           // MCP Runtime Strategy
           resultLines.push('**MCP Server Strategy:**');
           if (runtimeConfig.strategy === 'npx') {
@@ -168,15 +182,15 @@ export function registerCommands(
           } else {
             resultLines.push('❌ No compatible runtime available');
           }
-          
+
           progress.report({ increment: 100 });
-          
+
           // Show results
           logger.info(resultLines.join('\n'));
           logger.info('');
           logger.info('Check complete!');
           logger.show();
-          
+
           // Show appropriate message
           if (allAvailable) {
             vscode.window.showInformationMessage(
@@ -184,33 +198,37 @@ export function registerCommands(
               'OK'
             );
           } else if (partialAvailable) {
-            vscode.window.showWarningMessage(
-              '⚠️ Some prerequisites missing. Check output for details.',
-              'Show Output',
-              'Install Node.js'
-            ).then((selection) => {
-              if (selection === 'Show Output') {
-                logger.show();
-              } else if (selection === 'Install Node.js') {
-                vscode.env.openExternal(vscode.Uri.parse('https://nodejs.org/'));
-              }
-            });
+            vscode.window
+              .showWarningMessage(
+                '⚠️ Some prerequisites missing. Check output for details.',
+                'Show Output',
+                'Install Node.js'
+              )
+              .then((selection) => {
+                if (selection === 'Show Output') {
+                  logger.show();
+                } else if (selection === 'Install Node.js') {
+                  vscode.env.openExternal(vscode.Uri.parse('https://nodejs.org/'));
+                }
+              });
           } else {
-            vscode.window.showErrorMessage(
-              '❌ Node.js not found. DevSteps MCP Server requires Node.js.',
-              'Install Node.js',
-              'Show Output'
-            ).then((selection) => {
-              if (selection === 'Install Node.js') {
-                vscode.env.openExternal(vscode.Uri.parse('https://nodejs.org/'));
-              } else if (selection === 'Show Output') {
-                logger.show();
-              }
-            });
+            vscode.window
+              .showErrorMessage(
+                '❌ Node.js not found. DevSteps MCP Server requires Node.js.',
+                'Install Node.js',
+                'Show Output'
+              )
+              .then((selection) => {
+                if (selection === 'Install Node.js') {
+                  vscode.env.openExternal(vscode.Uri.parse('https://nodejs.org/'));
+                } else if (selection === 'Show Output') {
+                  logger.show();
+                }
+              });
           }
         }
       );
-    }),
+    })
   );
 
   // Refresh work items
@@ -218,20 +236,20 @@ export function registerCommands(
     vscode.commands.registerCommand('devsteps.refreshItems', () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.refresh();
-    }),
+    })
   );
 
   // View mode switching - Active commands (no-op, already active)
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.viewMode.flat.active', () => {
       // No-op - already active
-    }),
+    })
   );
 
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.viewMode.hierarchical.active', () => {
       // No-op - already active
-    }),
+    })
   );
 
   // View mode switching - Inactive commands (perform action)
@@ -240,7 +258,7 @@ export function registerCommands(
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setViewMode('flat');
       await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', 'flat');
-    }),
+    })
   );
 
   context.subscriptions.push(
@@ -248,26 +266,26 @@ export function registerCommands(
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setViewMode('hierarchical');
       await vscode.commands.executeCommand('setContext', 'devsteps.viewMode', 'hierarchical');
-    }),
+    })
   );
 
   // Hierarchy type switching - Active commands (no-op, already active)
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.hierarchy.scrum.active', () => {
       // No-op - already active
-    }),
+    })
   );
 
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.hierarchy.waterfall.active', () => {
       // No-op - already active
-    }),
+    })
   );
 
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.hierarchy.both.active', () => {
       // No-op - already active
-    }),
+    })
   );
 
   // Hierarchy type switching - Inactive commands (perform action)
@@ -276,7 +294,7 @@ export function registerCommands(
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('scrum');
       await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', 'scrum');
-    }),
+    })
   );
 
   context.subscriptions.push(
@@ -284,7 +302,7 @@ export function registerCommands(
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('waterfall');
       await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', 'waterfall');
-    }),
+    })
   );
 
   context.subscriptions.push(
@@ -292,7 +310,7 @@ export function registerCommands(
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setHierarchyType('both');
       await vscode.commands.executeCommand('setContext', 'devsteps.hierarchy', 'both');
-    }),
+    })
   );
 
   // Add work item
@@ -307,7 +325,11 @@ export function registerCommands(
       // Step 1: Select item type
       const itemType = await vscode.window.showQuickPick(
         [
-          { label: 'Epic', value: 'epic', description: 'Large initiative spanning multiple stories' },
+          {
+            label: 'Epic',
+            value: 'epic',
+            description: 'Large initiative spanning multiple stories',
+          },
           { label: 'Story', value: 'story', description: 'User story or feature requirement' },
           { label: 'Task', value: 'task', description: 'Technical task or implementation work' },
           { label: 'Bug', value: 'bug', description: 'Bug fix or defect' },
@@ -319,7 +341,7 @@ export function registerCommands(
         {
           placeHolder: 'Select work item type',
           title: 'Create New Work Item',
-        },
+        }
       );
 
       if (!itemType) return;
@@ -358,7 +380,7 @@ export function registerCommands(
         ],
         {
           placeHolder: 'Select priority',
-        },
+        }
       );
 
       if (!priority) return;
@@ -376,21 +398,23 @@ export function registerCommands(
         if (treeDataProvider) {
           treeDataProvider.refresh();
         }
-        
+
         // Optionally open the created item
         const openItem = await vscode.window.showInformationMessage(
           `Open ${result.itemId}?`,
           'Open',
-          'Later',
+          'Later'
         );
-        
+
         if (openItem === 'Open') {
           await vscode.commands.executeCommand('devsteps.openItem', result.itemId);
         }
       } catch (error) {
-        vscode.window.showErrorMessage(`Error creating item: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        vscode.window.showErrorMessage(
+          `Error creating item: ${error instanceof Error ? error.message : 'Unknown error'}`
+        );
       }
-    }),
+    })
   );
 
   // Open work item (markdown file)
@@ -398,7 +422,7 @@ export function registerCommands(
     vscode.commands.registerCommand('devsteps.openItem', async (node?: any) => {
       // Extract ID from different possible structures
       let itemId: string | undefined;
-      
+
       if (typeof node === 'string') {
         itemId = node;
       } else if (node?.item?.id) {
@@ -408,7 +432,7 @@ export function registerCommands(
         // TreeItem has label property
         itemId = node.label.split(':')[0]?.trim();
       }
-      
+
       if (!itemId) {
         vscode.window.showErrorMessage('No item ID provided');
         return;
@@ -435,7 +459,7 @@ export function registerCommands(
           workspaceFolder.uri.fsPath,
           '.devsteps',
           itemTypeFolder,
-          `${itemId}.md`,
+          `${itemId}.md`
         );
 
         // Open markdown file
@@ -447,17 +471,17 @@ export function registerCommands(
         });
       } catch (error) {
         vscode.window.showErrorMessage(
-          `Error opening item: ${error instanceof Error ? error.message : 'Unknown error'}`,
+          `Error opening item: ${error instanceof Error ? error.message : 'Unknown error'}`
         );
       }
-    }),
+    })
   );
 
   // Update status
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.updateStatus', async (node?: any) => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
-      
+
       const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
       if (!workspaceFolder) {
         vscode.window.showErrorMessage('No workspace folder open');
@@ -466,7 +490,7 @@ export function registerCommands(
 
       // Extract ID from different possible structures
       let itemId: string | undefined;
-      
+
       if (typeof node === 'string') {
         itemId = node;
       } else if (node?.item?.id) {
@@ -497,7 +521,7 @@ export function registerCommands(
           })),
           {
             placeHolder: 'Select work item to update',
-          },
+          }
         );
 
         if (!selectedItem) return;
@@ -517,21 +541,61 @@ export function registerCommands(
       // Select new status
       const newStatus = await vscode.window.showQuickPick(
         [
-          { label: '📝 Draft', value: STATUS.DRAFT, description: 'Initial planning stage', current: currentStatus === STATUS.DRAFT },
-          { label: '📅 Planned', value: STATUS.PLANNED, description: 'Scheduled for implementation', current: currentStatus === STATUS.PLANNED },
-          { label: '🚧 In Progress', value: STATUS.IN_PROGRESS, description: 'Currently being worked on', current: currentStatus === STATUS.IN_PROGRESS },
-          { label: '👀 Review', value: STATUS.REVIEW, description: 'Under review', current: currentStatus === STATUS.REVIEW },
-          { label: '✅ Done', value: STATUS.DONE, description: 'Completed', current: currentStatus === STATUS.DONE },
-          { label: '🚫 Blocked', value: STATUS.BLOCKED, description: 'Blocked by dependencies', current: currentStatus === STATUS.BLOCKED },
-          { label: '❌ Cancelled', value: STATUS.CANCELLED, description: 'Work cancelled', current: currentStatus === STATUS.CANCELLED },
-          { label: '🗑️ Obsolete', value: STATUS.OBSOLETE, description: 'No longer relevant', current: currentStatus === STATUS.OBSOLETE },
+          {
+            label: '📝 Draft',
+            value: STATUS.DRAFT,
+            description: 'Initial planning stage',
+            current: currentStatus === STATUS.DRAFT,
+          },
+          {
+            label: '📅 Planned',
+            value: STATUS.PLANNED,
+            description: 'Scheduled for implementation',
+            current: currentStatus === STATUS.PLANNED,
+          },
+          {
+            label: '🚧 In Progress',
+            value: STATUS.IN_PROGRESS,
+            description: 'Currently being worked on',
+            current: currentStatus === STATUS.IN_PROGRESS,
+          },
+          {
+            label: '👀 Review',
+            value: STATUS.REVIEW,
+            description: 'Under review',
+            current: currentStatus === STATUS.REVIEW,
+          },
+          {
+            label: '✅ Done',
+            value: STATUS.DONE,
+            description: 'Completed',
+            current: currentStatus === STATUS.DONE,
+          },
+          {
+            label: '🚫 Blocked',
+            value: STATUS.BLOCKED,
+            description: 'Blocked by dependencies',
+            current: currentStatus === STATUS.BLOCKED,
+          },
+          {
+            label: '❌ Cancelled',
+            value: STATUS.CANCELLED,
+            description: 'Work cancelled',
+            current: currentStatus === STATUS.CANCELLED,
+          },
+          {
+            label: '🗑️ Obsolete',
+            value: STATUS.OBSOLETE,
+            description: 'No longer relevant',
+            current: currentStatus === STATUS.OBSOLETE,
+          },
         ].map((status) => ({
           ...status,
           label: status.current ? `${status.label} (current)` : status.label,
         })),
         {
           placeHolder: `Update status for ${targetItemId}`,
-        },
+        }
       );
 
       if (!newStatus || newStatus.value === currentStatus) {
@@ -547,14 +611,14 @@ export function registerCommands(
 
         treeDataProvider.refresh();
         vscode.window.showInformationMessage(
-          `✅ Updated ${targetItemId} status: ${currentStatus} → ${newStatus.value}`,
+          `✅ Updated ${targetItemId} status: ${currentStatus} → ${newStatus.value}`
         );
       } catch (error) {
         vscode.window.showErrorMessage(
-          `Error updating status: ${error instanceof Error ? error.message : 'Unknown error'}`,
+          `Error updating status: ${error instanceof Error ? error.message : 'Unknown error'}`
         );
       }
-    }),
+    })
   );
 
   // Search work items
@@ -586,8 +650,7 @@ export function registerCommands(
         const query = searchQuery.toLowerCase();
         const matches = allItems.items.filter(
           (item) =>
-            item.id.toLowerCase().includes(query) ||
-            item.title.toLowerCase().includes(query),
+            item.id.toLowerCase().includes(query) || item.title.toLowerCase().includes(query)
         );
 
         if (matches.length === 0) {
@@ -605,7 +668,7 @@ export function registerCommands(
           {
             placeHolder: `Found ${matches.length} match(es)`,
             title: 'Search Results',
-          },
+          }
         );
 
         if (selectedItem) {
@@ -613,10 +676,10 @@ export function registerCommands(
         }
       } catch (error) {
         vscode.window.showErrorMessage(
-          `Error searching items: ${error instanceof Error ? error.message : 'Unknown error'}`,
+          `Error searching items: ${error instanceof Error ? error.message : 'Unknown error'}`
         );
       }
-    }),
+    })
   );
 
   // Show project status
@@ -644,14 +707,14 @@ export function registerCommands(
             acc[item.status] = (acc[item.status] || 0) + 1;
             return acc;
           },
-          {} as Record<string, number>,
+          {} as Record<string, number>
         );
         const byType = items.reduce(
           (acc, item) => {
             acc[item.type] = (acc[item.type] || 0) + 1;
             return acc;
           },
-          {} as Record<string, number>,
+          {} as Record<string, number>
         );
 
         const statusReport = `
@@ -678,10 +741,10 @@ ${Object.entries(byType)
         vscode.window.showInformationMessage(statusReport, { modal: true });
       } catch (error) {
         vscode.window.showErrorMessage(
-          `Error loading status: ${error instanceof Error ? error.message : 'Unknown error'}`,
+          `Error loading status: ${error instanceof Error ? error.message : 'Unknown error'}`
         );
       }
-    }),
+    })
   );
 
   // Copy item ID to clipboard
@@ -689,7 +752,7 @@ ${Object.entries(byType)
     vscode.commands.registerCommand('devsteps.copyId', async (node?: any) => {
       // Extract ID from different possible structures
       let itemId: string | undefined;
-      
+
       if (typeof node === 'string') {
         itemId = node;
       } else if (node?.item?.id) {
@@ -699,7 +762,7 @@ ${Object.entries(byType)
         // TreeItem has label property
         itemId = node.label.split(':')[0]?.trim();
       }
-      
+
       if (!itemId) {
         vscode.window.showErrorMessage('No item ID provided');
         return;
@@ -707,7 +770,7 @@ ${Object.entries(byType)
 
       vscode.env.clipboard.writeText(itemId);
       logger.info(`Copied ${itemId} to clipboard`);
-    }),
+    })
   );
 
   // Show item in file explorer
@@ -715,7 +778,7 @@ ${Object.entries(byType)
     vscode.commands.registerCommand('devsteps.revealInExplorer', async (node?: any) => {
       // Extract ID from different possible structures
       let itemId: string | undefined;
-      
+
       if (typeof node === 'string') {
         itemId = node;
       } else if (node?.item?.id) {
@@ -725,7 +788,7 @@ ${Object.entries(byType)
         // TreeItem has label property
         itemId = node.label.split(':')[0]?.trim();
       }
-      
+
       if (!itemId) {
         vscode.window.showErrorMessage('No item ID provided');
         return;
@@ -751,17 +814,17 @@ ${Object.entries(byType)
           workspaceFolder.uri.fsPath,
           '.devsteps',
           itemTypeFolder,
-          `${itemId}.md`,
+          `${itemId}.md`
         );
 
         const mdUri = vscode.Uri.file(mdPath);
         await vscode.commands.executeCommand('revealInExplorer', mdUri);
       } catch (error) {
         vscode.window.showErrorMessage(
-          `Error revealing item: ${error instanceof Error ? error.message : 'Unknown error'}`,
+          `Error revealing item: ${error instanceof Error ? error.message : 'Unknown error'}`
         );
       }
-    }),
+    })
   );
 
   // Edit item properties (quick edit)
@@ -769,7 +832,7 @@ ${Object.entries(byType)
     vscode.commands.registerCommand('devsteps.editProperties', async (node?: any) => {
       // Extract ID from different possible structures
       let itemId: string | undefined;
-      
+
       if (typeof node === 'string') {
         itemId = node;
       } else if (node?.item?.id) {
@@ -779,7 +842,7 @@ ${Object.entries(byType)
         // TreeItem has label property
         itemId = node.label.split(':')[0]?.trim();
       }
-      
+
       if (!itemId) {
         vscode.window.showErrorMessage('No item ID provided');
         return;
@@ -812,7 +875,7 @@ ${Object.entries(byType)
           ],
           {
             placeHolder: `Edit properties for ${itemId}`,
-          },
+          }
         );
 
         if (!property) return;
@@ -841,7 +904,7 @@ ${Object.entries(byType)
                 { label: '🟡 Medium', value: 'medium' },
                 { label: '⚪ Low', value: 'low' },
               ],
-              { placeHolder: 'Select priority' },
+              { placeHolder: 'Select priority' }
             );
             if (newPriority) updatePayload.priority = newPriority.value;
             break;
@@ -885,10 +948,10 @@ ${Object.entries(byType)
         }
       } catch (error) {
         vscode.window.showErrorMessage(
-          `Error editing item: ${error instanceof Error ? error.message : 'Unknown error'}`,
+          `Error editing item: ${error instanceof Error ? error.message : 'Unknown error'}`
         );
       }
-    }),
+    })
   );
 
   // Filter by status
@@ -908,14 +971,14 @@ ${Object.entries(byType)
         {
           canPickMany: true,
           placeHolder: 'Select statuses to show (multiple selection)',
-        },
+        }
       );
 
       if (selected) {
         if (!checkDevStepsInitialized(treeDataProvider)) return;
         treeDataProvider.setStatusFilter(selected.map((s) => s.value));
       }
-    }),
+    })
   );
 
   // Filter by priority
@@ -931,14 +994,14 @@ ${Object.entries(byType)
         {
           canPickMany: true,
           placeHolder: 'Select priorities to show (multiple selection)',
-        },
+        }
       );
 
       if (selected) {
         if (!checkDevStepsInitialized(treeDataProvider)) return;
         treeDataProvider.setPriorityFilter(selected.map((s) => s.value));
       }
-    }),
+    })
   );
 
   // Filter by type
@@ -958,14 +1021,14 @@ ${Object.entries(byType)
         {
           canPickMany: true,
           placeHolder: 'Select types to show (multiple selection)',
-        },
+        }
       );
 
       if (selected) {
         if (!checkDevStepsInitialized(treeDataProvider)) return;
         treeDataProvider.setTypeFilter(selected.map((s) => s.value));
       }
-    }),
+    })
   );
 
   // Clear all filters
@@ -973,7 +1036,7 @@ ${Object.entries(byType)
     vscode.commands.registerCommand('devsteps.clearFilters', () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.clearFilters();
-    }),
+    })
   );
 
   // Toggle Hide Done Items - Active command (perform action)
@@ -983,7 +1046,7 @@ ${Object.entries(byType)
       treeDataProvider.toggleHideDone();
       const isHidden = treeDataProvider.getHideDoneState();
       await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', isHidden);
-    }),
+    })
   );
 
   // Toggle Hide Done Items - Inactive command (perform action)
@@ -993,14 +1056,14 @@ ${Object.entries(byType)
       treeDataProvider.toggleHideDone();
       const isHidden = treeDataProvider.getHideDoneState();
       await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', isHidden);
-    }),
+    })
   );
 
   // Show RelatesTo - Active command (no-op, already showing)
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.showRelatesTo.active', () => {
       // No-op - already active
-    }),
+    })
   );
 
   // Show RelatesTo - Inactive command (perform action to show)
@@ -1012,14 +1075,14 @@ ${Object.entries(byType)
         treeDataProvider.toggleHideRelatesTo();
       }
       await vscode.commands.executeCommand('setContext', 'devsteps.hideRelatesTo', false);
-    }),
+    })
   );
 
   // Hide RelatesTo - Active command (no-op, already hiding)
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.hideRelatesTo.active', () => {
       // No-op - already active
-    }),
+    })
   );
 
   // Hide RelatesTo - Inactive command (perform action to hide)
@@ -1031,10 +1094,8 @@ ${Object.entries(byType)
         treeDataProvider.toggleHideRelatesTo();
       }
       await vscode.commands.executeCommand('setContext', 'devsteps.hideRelatesTo', true);
-    }),
+    })
   );
-
-
 
   // Sort options
   context.subscriptions.push(
@@ -1050,7 +1111,7 @@ ${Object.entries(byType)
         ],
         {
           placeHolder: 'Sort work items by...',
-        },
+        }
       );
 
       if (!sortBy) return;
@@ -1062,29 +1123,26 @@ ${Object.entries(byType)
         ],
         {
           placeHolder: 'Sort order',
-        },
+        }
       );
 
       if (!sortOrder) return;
 
       if (!checkDevStepsInitialized(treeDataProvider)) return;
-      treeDataProvider.setSortOptions(
-        sortBy.value as any,
-        sortOrder.value as 'asc' | 'desc',
-      );
-    }),
+      treeDataProvider.setSortOptions(sortBy.value as any, sortOrder.value as 'asc' | 'desc');
+    })
   );
 
   // Output Channel Commands
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.showOutput', () => {
       logger.show();
-    }),
+    })
   );
 
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.clearOutput', () => {
       logger.clear();
-    }),
+    })
   );
 }

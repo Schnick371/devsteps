@@ -1,7 +1,8 @@
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { DevStepsIndex, ItemStatus } from '../schemas/index.js';
-import { TYPE_TO_DIRECTORY, getCurrentTimestamp, parseItemId } from '../utils/index.js';import { hasRefsStyleIndex, removeItemFromIndex } from './index-refs.js';
+import { TYPE_TO_DIRECTORY, getCurrentTimestamp, parseItemId } from '../utils/index.js';
+import { hasRefsStyleIndex, removeItemFromIndex } from './index-refs.js';
 import { getItem } from './get.js';
 export interface ArchiveItemResult {
   itemId: string;
@@ -49,14 +50,8 @@ export async function archiveItem(devstepsDir: string, itemId: string): Promise<
 
   // Update index (auto-migration ensures refs-style always available)
   // Remove from all indexes (by-type, by-status, by-priority)
-  removeItemFromIndex(
-    devstepsDir,
-    itemId,
-    metadata.type,
-    metadata.status,
-    metadata.eisenhower,
-  );
-  
+  removeItemFromIndex(devstepsDir, itemId, metadata.type, metadata.status, metadata.eisenhower);
+
   // Note: refs-style doesn't track archived_items in index
   // Archive metadata already contains all needed info
 

@@ -1,7 +1,7 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * Loading placeholder node to prevent Welcome View flash
  */
 
@@ -24,7 +24,11 @@ export class LoadingNode extends TreeNode {
     return item;
   }
 
-  async getChildren(_workspaceRoot: vscode.Uri, _filterState?: FilterState, _expandedHierarchyItems?: Set<string>): Promise<TreeNode[]> {
+  async getChildren(
+    _workspaceRoot: vscode.Uri,
+    _filterState?: FilterState,
+    _expandedHierarchyItems?: Set<string>
+  ): Promise<TreeNode[]> {
     // Loading node has no children
     return [];
   }

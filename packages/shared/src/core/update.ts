@@ -60,7 +60,9 @@ export async function updateItem(
   // Validate status transitions (parent-child rules)
   if (args.status === STATUS.DONE) {
     // Helper function to validate children are complete
-    const validateChildren = async (relationshipType: typeof RELATIONSHIP_TYPE.IMPLEMENTED_BY | typeof RELATIONSHIP_TYPE.TESTED_BY): Promise<void> => {
+    const validateChildren = async (
+      relationshipType: typeof RELATIONSHIP_TYPE.IMPLEMENTED_BY | typeof RELATIONSHIP_TYPE.TESTED_BY
+    ): Promise<void> => {
       const children = metadata.linked_items[relationshipType];
       if (children.length > 0) {
         const openChildren: string[] = [];
@@ -69,7 +71,11 @@ export async function updateItem(
           if (childParsed) {
             try {
               const { metadata: childMeta } = await getItem(devstepsDir, childId);
-              if (childMeta.status !== STATUS.DONE && childMeta.status !== STATUS.CANCELLED && childMeta.status !== STATUS.OBSOLETE) {
+              if (
+                childMeta.status !== STATUS.DONE &&
+                childMeta.status !== STATUS.CANCELLED &&
+                childMeta.status !== STATUS.OBSOLETE
+              ) {
                 openChildren.push(childId);
               }
             } catch {
@@ -78,7 +84,8 @@ export async function updateItem(
           }
         }
         if (openChildren.length > 0) {
-          const relationLabel = relationshipType === RELATIONSHIP_TYPE.IMPLEMENTED_BY ? 'implementation' : 'test';
+          const relationLabel =
+            relationshipType === RELATIONSHIP_TYPE.IMPLEMENTED_BY ? 'implementation' : 'test';
           throw new Error(
             `Cannot close ${args.id}: ${openChildren.length} ${relationLabel} item(s) still open: ${openChildren.join(', ')}`
           );
@@ -113,15 +120,13 @@ export async function updateItem(
   if (args.description && args.append_description) {
     throw new Error('Cannot use both description and append_description simultaneously');
   }
-  
+
   if (args.description) {
     // Replace entire description
     writeFileSync(descriptionPath, args.description);
   } else if (args.append_description) {
     // Append to existing (or create new if doesn't exist)
-    const existing = existsSync(descriptionPath) 
-      ? readFileSync(descriptionPath, 'utf-8') 
-      : '';
+    const existing = existsSync(descriptionPath) ? readFileSync(descriptionPath, 'utf-8') : '';
     writeFileSync(descriptionPath, existing + args.append_description);
   }
 
@@ -134,7 +139,7 @@ export async function updateItem(
       oldStatus,
       args.status,
       undefined, // oldEisenhower - we don't track changes
-      args.eisenhower,
+      args.eisenhower
     );
   }
 

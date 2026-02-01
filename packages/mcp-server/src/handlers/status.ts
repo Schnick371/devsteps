@@ -15,18 +15,18 @@ export default async function statusHandler(args: { detailed?: boolean }) {
     }
 
     const config = await getConfig(devstepsDir);
-    
+
     // Use new index-refs API (await because it's async)
     const itemsResult = await listItems(devstepsDir, {});
     const allItems = itemsResult.items;
-    
+
     // Calculate stats from items
     const stats = {
       total: allItems.length,
       by_type: {} as Record<string, number>,
       by_status: {} as Record<string, number>,
     };
-    
+
     for (const item of allItems) {
       stats.by_type[item.type] = (stats.by_type[item.type] || 0) + 1;
       stats.by_status[item.status] = (stats.by_status[item.status] || 0) + 1;
@@ -40,8 +40,8 @@ export default async function statusHandler(args: { detailed?: boolean }) {
         return daysSinceUpdate > 7;
       }
       return false;
-    });    
-    
+    });
+
     const result: any = {
       success: true,
       project: {
@@ -54,8 +54,8 @@ export default async function statusHandler(args: { detailed?: boolean }) {
         by_type: stats.by_type,
         by_status: stats.by_status,
       },
-    };    
-    
+    };
+
     if (staleItems.length > 0) {
       result.warnings = {
         stale_items: staleItems.map((item: any) => ({
@@ -66,19 +66,19 @@ export default async function statusHandler(args: { detailed?: boolean }) {
           ),
         })),
       };
-    }    
-    
+    }
+
     if (args.detailed) {
       // Group items by status
-      const byStatus: Record<string, any[]> = {};      
-      
+      const byStatus: Record<string, any[]> = {};
+
       for (const item of allItems) {
         if (!byStatus[item.status]) {
           byStatus[item.status] = [];
         }
         byStatus[item.status].push(item);
-      }      
-      
+      }
+
       result.items_by_status = byStatus;
 
       // Recent updates

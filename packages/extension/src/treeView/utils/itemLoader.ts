@@ -1,7 +1,7 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * Item loader - Filesystem operations for loading work items
  */
 
@@ -13,10 +13,10 @@ import { TYPE_TO_DIRECTORY, type WorkItem } from '../types.js';
  */
 function mapEisenhowerToPriority(eisenhower: string): string {
   const mapping: Record<string, string> = {
-    'urgent-important': 'critical',           // Q1: Do First
-    'not-urgent-important': 'high',           // Q2: Schedule
-    'urgent-not-important': 'medium',         // Q3: Delegate
-    'not-urgent-not-important': 'low'         // Q4: Eliminate
+    'urgent-important': 'critical', // Q1: Do First
+    'not-urgent-important': 'high', // Q2: Schedule
+    'urgent-not-important': 'medium', // Q3: Delegate
+    'not-urgent-not-important': 'low', // Q4: Eliminate
   };
   return mapping[eisenhower] || 'medium';
 }
@@ -52,12 +52,7 @@ export async function loadItemWithLinks(
     if (!typeDir) return null;
 
     // Read full JSON file (TYPE_TO_DIRECTORY already includes 'items/' prefix)
-    const itemPath = vscode.Uri.joinPath(
-      workspaceRoot,
-      '.devsteps',
-      typeDir,
-      `${itemId}.json`
-    );
+    const itemPath = vscode.Uri.joinPath(workspaceRoot, '.devsteps', typeDir, `${itemId}.json`);
     const itemData = await vscode.workspace.fs.readFile(itemPath);
     const item = JSON.parse(Buffer.from(itemData).toString('utf-8'));
 

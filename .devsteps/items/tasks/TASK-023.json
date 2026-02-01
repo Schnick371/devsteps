@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "GitHub Templates Creation - Issue and PR Templates",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T16:43:55.423Z",
-  "updated": "2025-11-23T16:44:06.407Z",
+  "updated": "2026-02-01T10:35:09.612Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/ISSUE_TEMPLATE/bug_report.md",

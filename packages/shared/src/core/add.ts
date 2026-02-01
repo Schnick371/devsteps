@@ -8,10 +8,10 @@ import type {
   ItemType,
 } from '../schemas/index.js';
 import {
-	TYPE_TO_DIRECTORY,
-	generateItemId,
-	getCurrentTimestamp,
-	getTypePrefix,
+  TYPE_TO_DIRECTORY,
+  generateItemId,
+  getCurrentTimestamp,
+  getTypePrefix,
 } from '../utils/index.js';
 import {
   hasRefsStyleIndex,
@@ -56,7 +56,7 @@ export async function addItem(devstepsDir: string, args: AddItemArgs): Promise<A
   const counterKey = getTypePrefix(args.type); // Use uppercase prefix for consistency
   const counters = loadCounters(devstepsDir);
   const counter = (counters[counterKey] || 0) + 1;
-  
+
   // Generate ID using global counter
   const typeFolder = TYPE_TO_DIRECTORY[args.type];
   const itemId = generateItemId(args.type, counter);
@@ -109,7 +109,7 @@ export async function addItem(devstepsDir: string, args: AddItemArgs): Promise<A
   const currentCounters = loadCounters(devstepsDir);
   currentCounters[counterKey] = counter;
   updateCounters(devstepsDir, currentCounters);
-  
+
   // Add to all relevant indexes (by-type, by-status, by-priority)
   addItemToIndex(devstepsDir, metadata);
 

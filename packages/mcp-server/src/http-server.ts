@@ -29,12 +29,12 @@ interface McpJsonRpcResponse {
 
 /**
  * Simple HTTP MCP Server that wraps existing stdio-based server
- * 
+ *
  * This is a simplified approach that:
  * 1. Reuses all existing tool handlers
  * 2. Translates HTTP requests to MCP protocol
  * 3. Returns JSON-RPC responses
- * 
+ *
  * Production hardening:
  * - CORS restricted to localhost only
  * - Request timeout and body size limits
@@ -44,12 +44,12 @@ export async function startHttpMcpServer(
   port: number = Number(process.env.MCP_PORT) || 3100
 ): Promise<{ url: string; close: () => Promise<void> }> {
   const { default: express } = await import('express');
-  
+
   const app = express();
-  
+
   // Body parser with size limit
   app.use(express.json({ limit: '1mb' }));
-  
+
   // Request timeout (30 seconds)
   app.use((_req: Request, res: Response, next: () => void) => {
     res.setTimeout(30000, () => {
@@ -67,7 +67,7 @@ export async function startHttpMcpServer(
 
   // Import tool schemas and handlers
   const tools = await import('./tools/index.js');
-  
+
   // Import handlers directly
   const initHandler = (await import('./handlers/init.js')).default;
   const addHandler = (await import('./handlers/add.js')).default;
@@ -255,7 +255,7 @@ export async function startHttpMcpServer(
   // CORS headers - restricted to localhost for security
   app.use((req: Request, res: Response, next: () => void) => {
     const origin = req.headers.origin;
-    
+
     // Only allow localhost origins
     if (
       origin &&
@@ -266,7 +266,7 @@ export async function startHttpMcpServer(
     ) {
       res.setHeader('Access-Control-Allow-Origin', origin);
     }
-    
+
     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours
@@ -283,7 +283,7 @@ export async function startHttpMcpServer(
 
   // Health check endpoint
   app.get('/health', (_req: Request, res: Response) => {
-    res.status(200).json({ 
+    res.status(200).json({
       status: 'healthy',
       transport: 'http',
       version: '0.1.0',

@@ -9,9 +9,7 @@
         "kind": "build",
         "isDefault": true
       },
-      "problemMatcher": [
-        "$tsc"
-      ],
+      "problemMatcher": ["$tsc"],
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -37,9 +35,7 @@
       "type": "shell",
       "command": "npm run build && cd packages/extension && npm run package",
       "group": "build",
-      "problemMatcher": [
-        "$tsc"
-      ],
+      "problemMatcher": ["$tsc"],
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -218,27 +214,21 @@
       "label": "🚀 CLI: Init Project",
       "type": "shell",
       "command": "node packages/cli/dist/index.js init test-project",
-      "dependsOn": [
-        "Build All"
-      ],
+      "dependsOn": ["Build All"],
       "problemMatcher": []
     },
     {
       "label": "📊 CLI: Status",
       "type": "shell",
       "command": "node packages/cli/dist/index.js status",
-      "dependsOn": [
-        "Build All"
-      ],
+      "dependsOn": ["Build All"],
       "problemMatcher": []
     },
     {
       "label": "🖥️ MCP: Start Server",
       "type": "shell",
       "command": "node packages/mcp-server/dist/index.js",
-      "dependsOn": [
-        "Build All"
-      ],
+      "dependsOn": ["Build All"],
       "isBackground": true,
       "problemMatcher": {
         "pattern": {
@@ -262,17 +252,13 @@
       "label": "🔎 Type Check",
       "type": "shell",
       "command": "npm run typecheck",
-      "problemMatcher": [
-        "$tsc"
-      ]
+      "problemMatcher": ["$tsc"]
     },
     {
       "label": "📖 DevSteps: List Open Stories",
       "type": "shell",
       "command": "node packages/cli/dist/index.js list --type story --status draft",
-      "dependsOn": [
-        "Build All"
-      ],
+      "dependsOn": ["Build All"],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -283,9 +269,7 @@
       "label": "⚡ DevSteps: List High Priority Items",
       "type": "shell",
       "command": "node packages/cli/dist/index.js list --priority high",
-      "dependsOn": [
-        "Build All"
-      ],
+      "dependsOn": ["Build All"],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -296,9 +280,7 @@
       "label": "🔥 DevSteps: List Q1 Tasks (Urgent & Important)",
       "type": "shell",
       "command": "node packages/cli/dist/index.js list --eisenhower urgent-important --status draft",
-      "dependsOn": [
-        "Build All"
-      ],
+      "dependsOn": ["Build All"],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -309,9 +291,7 @@
       "label": "📈 DevSteps: Full Status Report",
       "type": "shell",
       "command": "node packages/cli/dist/index.js status",
-      "dependsOn": [
-        "Build All"
-      ],
+      "dependsOn": ["Build All"],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",

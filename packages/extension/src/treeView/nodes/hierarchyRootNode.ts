@@ -1,7 +1,7 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * Hierarchy Root Node - Top-level separators for Scrum/Waterfall hierarchies
  */
 
@@ -16,7 +16,7 @@ export class HierarchyRootNode extends TreeNode {
   constructor(
     private hierarchy: 'scrum' | 'waterfall',
     private label: string,
-    private isExpanded: boolean = true,
+    private isExpanded: boolean = true
   ) {
     super();
     this.id = `hierarchy-${hierarchy}`;
@@ -27,8 +27,8 @@ export class HierarchyRootNode extends TreeNode {
   }
 
   toTreeItem(): vscode.TreeItem {
-    const collapsibleState = this.isExpanded 
-      ? vscode.TreeItemCollapsibleState.Expanded 
+    const collapsibleState = this.isExpanded
+      ? vscode.TreeItemCollapsibleState.Expanded
       : vscode.TreeItemCollapsibleState.Collapsed;
     const item = new vscode.TreeItem(this.label, collapsibleState);
     item.id = this.id;
@@ -37,15 +37,19 @@ export class HierarchyRootNode extends TreeNode {
     return item;
   }
 
-  async getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState, expandedHierarchyItems?: Set<string>): Promise<TreeNode[]> {
+  async getChildren(
+    workspaceRoot: vscode.Uri,
+    filterState?: FilterState,
+    expandedHierarchyItems?: Set<string>
+  ): Promise<TreeNode[]> {
     try {
       // Determine index file based on hierarchy type (refs-style index)
       const indexFileName = this.hierarchy === 'scrum' ? 'epics.json' : 'requirements.json';
       const indexPath = vscode.Uri.joinPath(
-        workspaceRoot, 
-        '.devsteps', 
-        'index', 
-        'by-type', 
+        workspaceRoot,
+        '.devsteps',
+        'index',
+        'by-type',
         indexFileName
       );
 

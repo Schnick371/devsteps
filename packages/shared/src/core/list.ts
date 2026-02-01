@@ -1,11 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import type {
-  DevStepsIndex,
-  EisenhowerQuadrant,
-  ItemStatus,
-  ItemType,
-} from '../schemas/index.js';
+import type { DevStepsIndex, EisenhowerQuadrant, ItemStatus, ItemType } from '../schemas/index.js';
 import { TYPE_TO_DIRECTORY } from '../utils/index.js';
 import { getItem } from './get.js';
 import {
@@ -44,7 +39,7 @@ export async function listItems(
 
   // Try new refs-style index first, fall back to legacy
   let allIndexItems: string[] = [];
-  
+
   if (hasRefsStyleIndex(devstepsDir)) {
     // Use optimized index lookups based on filter
     // For multi-dimensional filters, choose most selective index first
@@ -57,7 +52,16 @@ export async function listItems(
       allIndexItems = loadIndexByPriority(devstepsDir, args.eisenhower);
     } else {
       // No filter - load all via type indexes
-      const allTypes: ItemType[] = ['epic', 'story', 'task', 'bug', 'spike', 'test', 'feature', 'requirement'];
+      const allTypes: ItemType[] = [
+        'epic',
+        'story',
+        'task',
+        'bug',
+        'spike',
+        'test',
+        'feature',
+        'requirement',
+      ];
       for (const type of allTypes) {
         const typeItems = loadIndexByType(devstepsDir, type);
         allIndexItems.push(...typeItems);
@@ -73,7 +77,7 @@ export async function listItems(
   const itemPromises = allIndexItems.map(async (id) => {
     const typeMatch = id.match(/^([A-Z]+)-/);
     if (!typeMatch) return null;
-    
+
     const typePrefix = typeMatch[1];
     const type = Object.entries({
       EPIC: 'epic' as const,
@@ -85,12 +89,12 @@ export async function listItems(
       FEAT: 'feature' as const,
       REQ: 'requirement' as const,
     }).find(([prefix]) => prefix === typePrefix)?.[1];
-    
+
     if (!type) return null;
-    
+
     const metadataPath = join(devstepsDir, TYPE_TO_DIRECTORY[type], `${id}.json`);
     if (!existsSync(metadataPath)) return null;
-    
+
     try {
       const { metadata } = await getItem(devstepsDir, id);
       return {
@@ -108,8 +112,9 @@ export async function listItems(
     }
   });
 
-  let items = (await Promise.all(itemPromises))
-    .filter((item): item is NonNullable<typeof item> => item !== null);
+  let items = (await Promise.all(itemPromises)).filter(
+    (item): item is NonNullable<typeof item> => item !== null
+  );
 
   // Apply remaining filters for multi-dimensional queries
   // (e.g., status index loaded, but need to filter by type)

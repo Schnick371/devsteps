@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Publish extension to VS Code Marketplace",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-11-28T10:26:23.843Z",
-  "updated": "2025-11-30T20:29:56.218Z",
+  "updated": "2026-02-01T10:37:47.424Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/package.json",

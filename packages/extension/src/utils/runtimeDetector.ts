@@ -1,9 +1,9 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * Runtime Detector - Node.js and NPX Detection Utility
- * 
+ *
  * Detects available JavaScript runtimes for MCP server execution.
  * Implements fallback chain: npx → node → error with guidance.
  */
@@ -49,7 +49,7 @@ export interface McpRuntimeConfig {
 
 /**
  * Check if a command exists in PATH
- * 
+ *
  * @param command Command name to check (e.g., 'npx', 'node')
  * @returns RuntimeInfo with availability and version
  */
@@ -57,7 +57,7 @@ export async function checkCommand(command: string): Promise<RuntimeInfo> {
   return new Promise((resolve) => {
     const isWindows = os.platform() === 'win32';
     const checkCmd = isWindows ? 'where' : 'which';
-    
+
     const child = spawn(checkCmd, [command], {
       shell: true,
       env: process.env,
@@ -105,7 +105,7 @@ export async function checkCommand(command: string): Promise<RuntimeInfo> {
 
 /**
  * Get version of a command
- * 
+ *
  * @param command Command name
  * @returns Version string or undefined
  */
@@ -138,17 +138,20 @@ async function getCommandVersion(command: string): Promise<string | undefined> {
 
 /**
  * Detect best available MCP server runtime
- * 
+ *
  * Implements fallback chain:
  * 1. npx (preferred - auto-downloads from npm registry)
  * 2. node (fallback - requires bundled server)
  * 3. none (error - show installation guide)
- * 
+ *
  * @param bundledServerPath Optional path to bundled MCP server for node fallback
  * @param mcpPackage NPM package specifier (e.g., '@schnick371/devsteps-mcp-server@next')
  * @returns MCP runtime configuration
  */
-export async function detectMcpRuntime(bundledServerPath?: string, mcpPackage = '@schnick371/devsteps-mcp-server'): Promise<McpRuntimeConfig> {
+export async function detectMcpRuntime(
+  bundledServerPath?: string,
+  mcpPackage = '@schnick371/devsteps-mcp-server'
+): Promise<McpRuntimeConfig> {
   // Check all runtimes in parallel
   const [npxInfo, nodeInfo, npmInfo] = await Promise.all([
     checkCommand('npx'),
@@ -206,7 +209,7 @@ function buildErrorMessage(npx: RuntimeInfo, node: RuntimeInfo, npm: RuntimeInfo
 
   parts.push('');
   parts.push('**Install Node.js:**');
-  
+
   const platform = os.platform();
   if (platform === 'win32') {
     parts.push('  • Download: https://nodejs.org/');

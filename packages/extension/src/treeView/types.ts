@@ -1,7 +1,7 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * Shared types and interfaces for TreeView components
  */
 
@@ -34,14 +34,14 @@ export interface WorkItem {
   type: string;
   title: string;
   status: string;
-  eisenhower: string;  // Source data: urgent-important, not-urgent-important, etc.
-  priority: string;    // Computed: critical, high, medium, low
+  eisenhower: string; // Source data: urgent-important, not-urgent-important, etc.
+  priority: string; // Computed: critical, high, medium, low
   created?: string;
   updated?: string;
   tags?: string[];
   linked_items?: {
     'implemented-by'?: string[];
-    'blocks'?: string[];
+    blocks?: string[];
     'blocked-by'?: string[];
     'relates-to'?: string[];
     'tested-by'?: string[];
@@ -54,8 +54,12 @@ export interface WorkItem {
  */
 export abstract class TreeNode {
   abstract toTreeItem(): vscode.TreeItem;
-  abstract getChildren(workspaceRoot: vscode.Uri, filterState?: FilterState, expandedHierarchyItems?: Set<string>): Promise<TreeNode[]>;
-  
+  abstract getChildren(
+    workspaceRoot: vscode.Uri,
+    filterState?: FilterState,
+    expandedHierarchyItems?: Set<string>
+  ): Promise<TreeNode[]>;
+
   /**
    * Get unique ID for this node (used for expansion tracking)
    * Returns empty string for nodes that don't need tracking

@@ -26,92 +26,92 @@ export default async function initHandler(args: {
   try {
     const projectPath = args.path || getWorkspacePath();
     const devstepsDir = join(projectPath, '.devsteps');
-  const methodology = args.methodology || 'scrum';
+    const methodology = args.methodology || 'scrum';
 
-  // Check if already initialized
-  if (existsSync(devstepsDir)) {
-    throw new Error('Project already initialized. Use devsteps-status to view project info.');
-  }
+    // Check if already initialized
+    if (existsSync(devstepsDir)) {
+      throw new Error('Project already initialized. Use devsteps-status to view project info.');
+    }
 
-  // Get methodology configuration
-  const methodologyConfig = getMethodologyConfig(methodology);
+    // Get methodology configuration
+    const methodologyConfig = getMethodologyConfig(methodology);
 
-  // Create directory structure
-  mkdirSync(devstepsDir, { recursive: true });
-  for (const dir of methodologyConfig.directories) {
-    mkdirSync(join(devstepsDir, dir), { recursive: true });
-  }
+    // Create directory structure
+    mkdirSync(devstepsDir, { recursive: true });
+    for (const dir of methodologyConfig.directories) {
+      mkdirSync(join(devstepsDir, dir), { recursive: true });
+    }
 
-  // Create config
-  const config: DevStepsConfig = {
-    version: '0.1.0',
-    project_name: args.project_name,
-    project_id: `devsteps-${Date.now()}`,
-    created: getCurrentTimestamp(),
-    updated: getCurrentTimestamp(),
-    settings: {
-      methodology: methodology,
-      auto_increment: true,
-      git_integration: args.git_integration ?? true,
-      default_author: args.author,
-      item_types: methodologyConfig.item_types,
-      item_prefixes: methodologyConfig.item_prefixes,
-    },
-  };
+    // Create config
+    const config: DevStepsConfig = {
+      version: '0.1.0',
+      project_name: args.project_name,
+      project_id: `devsteps-${Date.now()}`,
+      created: getCurrentTimestamp(),
+      updated: getCurrentTimestamp(),
+      settings: {
+        methodology: methodology,
+        auto_increment: true,
+        git_integration: args.git_integration ?? true,
+        default_author: args.author,
+        item_types: methodologyConfig.item_types,
+        item_prefixes: methodologyConfig.item_prefixes,
+      },
+    };
 
-  writeFileSync(join(devstepsDir, 'config.json'), JSON.stringify(config, null, 2));
+    writeFileSync(join(devstepsDir, 'config.json'), JSON.stringify(config, null, 2));
 
-  // Create index with counters initialized for all item types
-  const counters: Record<string, number> = {};
-  for (const type of methodologyConfig.item_types) {
-    counters[type] = 0;
-  }
+    // Create index with counters initialized for all item types
+    const counters: Record<string, number> = {};
+    for (const type of methodologyConfig.item_types) {
+      counters[type] = 0;
+    }
 
-  const index = {
-    items: [],
-    last_updated: getCurrentTimestamp(),
-    counters,
-    archived_items: [],
-    stats: {
-      total: 0,
-      by_type: {},
-      by_status: {},
-      archived: 0,
-    },
-  };
+    const index = {
+      items: [],
+      last_updated: getCurrentTimestamp(),
+      counters,
+      archived_items: [],
+      stats: {
+        total: 0,
+        by_type: {},
+        by_status: {},
+        archived: 0,
+      },
+    };
 
-  writeFileSync(join(devstepsDir, 'index.json'), JSON.stringify(index, null, 2));
+    writeFileSync(join(devstepsDir, 'index.json'), JSON.stringify(index, null, 2));
 
-  // Create .gitignore
-  const gitignore = `.devsteps/
+    // Create .gitignore
+    const gitignore = `.devsteps/
 node_modules/
 dist/
 *.log
 .env
 .DS_Store
 `;
-  writeFileSync(join(projectPath, '.gitignore'), gitignore);
+    writeFileSync(join(projectPath, '.gitignore'), gitignore);
 
-  // Create .github directory structure
-  const githubAgentsDir = join(projectPath, '.github', 'agents');
-  const githubInstructionsDir = join(projectPath, '.github', 'instructions');
-  const githubPromptsDir = join(projectPath, '.github', 'prompts');
-  
-  mkdirSync(githubAgentsDir, { recursive: true });
-  mkdirSync(githubInstructionsDir, { recursive: true });
-  mkdirSync(githubPromptsDir, { recursive: true });
+    // Create .github directory structure
+    const githubAgentsDir = join(projectPath, '.github', 'agents');
+    const githubInstructionsDir = join(projectPath, '.github', 'instructions');
+    const githubPromptsDir = join(projectPath, '.github', 'prompts');
 
-  // Read source Copilot files from package
-  // In development: 3 levels up to repo root
-  // After npm install: 2 levels up to package root (where .github was copied)
-  const packageRoot = join(__dirname, '..', '..');
-  const sourceGithubDir = join(packageRoot, '.github');
+    mkdirSync(githubAgentsDir, { recursive: true });
+    mkdirSync(githubInstructionsDir, { recursive: true });
+    mkdirSync(githubPromptsDir, { recursive: true });
 
-  // Copy devsteps agent
-  const devstepsAgentSource = join(sourceGithubDir, 'agents', 'devsteps.agent.md');
-  const devstepsAgentContent = existsSync(devstepsAgentSource) 
-    ? readFileSync(devstepsAgentSource, 'utf8')
-    : `---
+    // Read source Copilot files from package
+    // In development: 3 levels up to repo root
+    // After npm install: 2 levels up to package root (where .github was copied)
+    const packageRoot = join(__dirname, '..', '..');
+    const sourceGithubDir = join(packageRoot, '.github');
+
+    // Copy devsteps agent
+    const devstepsAgentSource = join(sourceGithubDir, 'agents', 'devsteps.agent.md');
+    const devstepsAgentContent = existsSync(devstepsAgentSource)
+      ? readFileSync(devstepsAgentSource, 'utf8')
+      : `---
 name: devsteps
 description: Task tracking with devsteps system - enforces structured documentation
 ---
@@ -223,63 +223,70 @@ The devsteps system integrates with:
 **Remember**: The devsteps is not just a todo list—it's a **living knowledge base** that grows with your project and helps both humans and AI understand what needs to be done.
 `;
 
-  writeFileSync(join(githubAgentsDir, 'devsteps.agent.md'), devstepsAgentContent);
+    writeFileSync(join(githubAgentsDir, 'devsteps.agent.md'), devstepsAgentContent);
 
-  // Copy devsteps instructions
-  const instructionFiles = ['devsteps.instructions.md', 'devsteps-code-standards.instructions.md'];
-  for (const instructionFile of instructionFiles) {
-    const instructionSource = join(sourceGithubDir, 'instructions', instructionFile);
-    if (existsSync(instructionSource)) {
-      const instructionContent = readFileSync(instructionSource, 'utf8');
-      writeFileSync(join(githubInstructionsDir, instructionFile), instructionContent);
+    // Copy devsteps instructions
+    const instructionFiles = [
+      'devsteps.instructions.md',
+      'devsteps-code-standards.instructions.md',
+    ];
+    for (const instructionFile of instructionFiles) {
+      const instructionSource = join(sourceGithubDir, 'instructions', instructionFile);
+      if (existsSync(instructionSource)) {
+        const instructionContent = readFileSync(instructionSource, 'utf8');
+        writeFileSync(join(githubInstructionsDir, instructionFile), instructionContent);
+      }
     }
-  }
 
-  // Copy devsteps prompts
-  const promptFiles = ['devsteps-plan-work.prompt.md', 'devsteps-start-work.prompt.md', 'devsteps-workflow.prompt.md'];
-  for (const promptFile of promptFiles) {
-    const promptSource = join(sourceGithubDir, 'prompts', promptFile);
-    if (existsSync(promptSource)) {
-      const promptContent = readFileSync(promptSource, 'utf8');
-      writeFileSync(join(githubPromptsDir, promptFile), promptContent);
+    // Copy devsteps prompts
+    const promptFiles = [
+      'devsteps-plan-work.prompt.md',
+      'devsteps-start-work.prompt.md',
+      'devsteps-workflow.prompt.md',
+    ];
+    for (const promptFile of promptFiles) {
+      const promptSource = join(sourceGithubDir, 'prompts', promptFile);
+      if (existsSync(promptSource)) {
+        const promptContent = readFileSync(promptSource, 'utf8');
+        writeFileSync(join(githubPromptsDir, promptFile), promptContent);
+      }
     }
-  }
 
-  // Copy HIERARCHY.md
-  const hierarchySource = join(packageRoot, '.devsteps', 'HIERARCHY.md');
-  if (existsSync(hierarchySource)) {
-    const hierarchyContent = readFileSync(hierarchySource, 'utf8');
-    writeFileSync(join(devstepsDir, 'HIERARCHY.md'), hierarchyContent);
-  }
-
-  // Copy AI-GUIDE.md
-  const aiGuideSource = join(packageRoot, '.devsteps', 'AI-GUIDE.md');
-  if (existsSync(aiGuideSource)) {
-    const aiGuideContent = readFileSync(aiGuideSource, 'utf8');
-    writeFileSync(join(devstepsDir, 'AI-GUIDE.md'), aiGuideContent);
-  }
-
-  // Extend existing agent files with devsteps tools
-  const extendedFiles = extendExistingAgents(projectPath);
-
-  let message = `Project '${args.project_name}' initialized successfully\n\n`;
-  message += '✓ Copilot files created:\n';
-  message += '  - .github/agents/devsteps.agent.md\n';
-  message += '  - .github/instructions/devsteps.instructions.md\n';
-  message += '  - .github/instructions/devsteps-code-standards.instructions.md\n';
-  message += '  - .github/prompts/devsteps-plan-work.prompt.md\n';
-  message += '  - .github/prompts/devsteps-start-work.prompt.md\n';
-  message += '  - .github/prompts/devsteps-workflow.prompt.md\n';
-  message += '\n✓ Documentation:\n';
-  message += '  - .devsteps/HIERARCHY.md\n';
-  message += '  - .devsteps/AI-GUIDE.md';
-
-  if (extendedFiles.length > 0) {
-    message += `\n\n✓ Extended ${extendedFiles.length} existing agent/chatmode file(s) with devsteps tools:`;
-    for (const file of extendedFiles) {
-      message += `\n  - ${file}`;
+    // Copy HIERARCHY.md
+    const hierarchySource = join(packageRoot, '.devsteps', 'HIERARCHY.md');
+    if (existsSync(hierarchySource)) {
+      const hierarchyContent = readFileSync(hierarchySource, 'utf8');
+      writeFileSync(join(devstepsDir, 'HIERARCHY.md'), hierarchyContent);
     }
-  }
+
+    // Copy AI-GUIDE.md
+    const aiGuideSource = join(packageRoot, '.devsteps', 'AI-GUIDE.md');
+    if (existsSync(aiGuideSource)) {
+      const aiGuideContent = readFileSync(aiGuideSource, 'utf8');
+      writeFileSync(join(devstepsDir, 'AI-GUIDE.md'), aiGuideContent);
+    }
+
+    // Extend existing agent files with devsteps tools
+    const extendedFiles = extendExistingAgents(projectPath);
+
+    let message = `Project '${args.project_name}' initialized successfully\n\n`;
+    message += '✓ Copilot files created:\n';
+    message += '  - .github/agents/devsteps.agent.md\n';
+    message += '  - .github/instructions/devsteps.instructions.md\n';
+    message += '  - .github/instructions/devsteps-code-standards.instructions.md\n';
+    message += '  - .github/prompts/devsteps-plan-work.prompt.md\n';
+    message += '  - .github/prompts/devsteps-start-work.prompt.md\n';
+    message += '  - .github/prompts/devsteps-workflow.prompt.md\n';
+    message += '\n✓ Documentation:\n';
+    message += '  - .devsteps/HIERARCHY.md\n';
+    message += '  - .devsteps/AI-GUIDE.md';
+
+    if (extendedFiles.length > 0) {
+      message += `\n\n✓ Extended ${extendedFiles.length} existing agent/chatmode file(s) with devsteps tools:`;
+      for (const file of extendedFiles) {
+        message += `\n  - ${file}`;
+      }
+    }
 
     return {
       success: true,

@@ -13,7 +13,7 @@ const localNodeModules = path.join(__dirname, 'node_modules');
 
 // Get list of runtime dependencies
 const dependencies = Object.keys(packageJson.dependencies || {}).filter(
-  dep => !dep.startsWith('@devsteps/') // Exclude workspace dependencies
+  (dep) => !dep.startsWith('@devsteps/') // Exclude workspace dependencies
 );
 
 console.log(`📦 Copying ${dependencies.length} dependencies to local node_modules...`);
@@ -27,15 +27,15 @@ if (!fs.existsSync(localNodeModules)) {
 for (const dep of dependencies) {
   const sourcePath = path.join(rootNodeModules, dep);
   const targetPath = path.join(localNodeModules, dep);
-  
+
   if (fs.existsSync(sourcePath)) {
     console.log(`  ✅ Copying ${dep}...`);
-    
+
     // Remove existing
     if (fs.existsSync(targetPath)) {
       fs.rmSync(targetPath, { recursive: true, force: true });
     }
-    
+
     // Copy
     fs.cpSync(sourcePath, targetPath, { recursive: true });
   } else {

@@ -112,7 +112,10 @@ export class DevStepsLogger {
       if (data instanceof Error) {
         logMessage += `\n  Error: ${data.message}`;
         if (data.stack) {
-          logMessage += `\n  Stack:\n${data.stack.split('\n').map(line => `    ${line}`).join('\n')}`;
+          logMessage += `\n  Stack:\n${data.stack
+            .split('\n')
+            .map((line) => `    ${line}`)
+            .join('\n')}`;
         }
       } else if (typeof data === 'object') {
         try {
@@ -144,12 +147,12 @@ export class DevStepsLogger {
   private getConfiguredLogLevel(): LogLevel {
     const config = vscode.workspace.getConfiguration('devsteps');
     const level = config.get<string>('logging.level', 'info');
-    
+
     // Validate level
     if (['error', 'warn', 'info', 'debug'].includes(level)) {
       return level as LogLevel;
     }
-    
+
     return 'info'; // Default fallback
   }
 }

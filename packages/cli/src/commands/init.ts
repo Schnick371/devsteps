@@ -1,7 +1,12 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { type Methodology, getCurrentTimestamp, getMethodologyConfig, initializeRefsStyleIndex } from '@schnick371/devsteps-shared';
+import {
+  type Methodology,
+  getCurrentTimestamp,
+  getMethodologyConfig,
+  initializeRefsStyleIndex,
+} from '@schnick371/devsteps-shared';
 import type { DevStepsConfig } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 import ora from 'ora';
@@ -68,7 +73,7 @@ export async function initCommand(
     for (const type of methodologyConfig.item_types) {
       counters[type] = 0;
     }
-    
+
     initializeRefsStyleIndex(devstepsDir, counters);
 
     // Create .gitignore
@@ -330,7 +335,7 @@ For issues and questions:
     const githubAgentsDir = join(projectPath, '.github', 'agents');
     const githubInstructionsDir = join(projectPath, '.github', 'instructions');
     const githubPromptsDir = join(projectPath, '.github', 'prompts');
-    
+
     mkdirSync(githubAgentsDir, { recursive: true });
     mkdirSync(githubInstructionsDir, { recursive: true });
     mkdirSync(githubPromptsDir, { recursive: true });
@@ -460,7 +465,10 @@ The devsteps system integrates with:
     writeFileSync(join(githubAgentsDir, 'devsteps.agent.md'), devstepsAgent);
 
     // Copy devsteps instructions
-    const instructionFiles = ['devsteps.instructions.md', 'devsteps-code-standards.instructions.md'];
+    const instructionFiles = [
+      'devsteps.instructions.md',
+      'devsteps-code-standards.instructions.md',
+    ];
     for (const instructionFile of instructionFiles) {
       const instructionSource = join(sourceGithubDir, 'instructions', instructionFile);
       if (existsSync(instructionSource)) {
@@ -470,7 +478,11 @@ The devsteps system integrates with:
     }
 
     // Copy devsteps prompts
-    const promptFiles = ['devsteps-plan-work.prompt.md', 'devsteps-start-work.prompt.md', 'devsteps-workflow.prompt.md'];
+    const promptFiles = [
+      'devsteps-plan-work.prompt.md',
+      'devsteps-start-work.prompt.md',
+      'devsteps-workflow.prompt.md',
+    ];
     for (const promptFile of promptFiles) {
       const promptSource = join(sourceGithubDir, 'prompts', promptFile);
       if (existsSync(promptSource)) {
@@ -507,7 +519,10 @@ The devsteps system integrates with:
     console.log(chalk.green('✓'), 'Copilot files:');
     console.log('      ', chalk.cyan('.github/agents/devsteps.agent.md'));
     console.log('      ', chalk.cyan('.github/instructions/devsteps.instructions.md'));
-    console.log('      ', chalk.cyan('.github/instructions/devsteps-code-standards.instructions.md'));
+    console.log(
+      '      ',
+      chalk.cyan('.github/instructions/devsteps-code-standards.instructions.md')
+    );
     console.log('      ', chalk.cyan('.github/prompts/devsteps-plan-work.prompt.md'));
     console.log('      ', chalk.cyan('.github/prompts/devsteps-start-work.prompt.md'));
     console.log('      ', chalk.cyan('.github/prompts/devsteps-workflow.prompt.md'));

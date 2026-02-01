@@ -12,12 +12,12 @@ export async function getConfig(devstepsDir: string): Promise<DevStepsConfig> {
   }
 
   const configPath = join(devstepsDir, 'config.json');
-  
+
   if (!existsSync(configPath)) {
     throw new Error('Configuration file not found. Project may be corrupted.');
   }
 
   const config: DevStepsConfig = JSON.parse(readFileSync(configPath, 'utf-8'));
-  
+
   return config;
 }

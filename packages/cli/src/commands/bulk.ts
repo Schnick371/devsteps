@@ -75,7 +75,10 @@ export async function bulkUpdateCommand(itemIds: string[], options: any) {
       console.log(chalk.yellow('\n🧪 Testing Phase (bulk):'));
       console.log(chalk.gray('  • Run tests for all items'));
       console.log(chalk.gray('  • Verify builds pass'));
-      console.log(chalk.gray('  • When ready:'), chalk.cyan('devsteps bulk update <ids> --status done'));
+      console.log(
+        chalk.gray('  • When ready:'),
+        chalk.cyan('devsteps bulk update <ids> --status done')
+      );
     } else if (options.status === STATUS.DONE) {
       console.log(chalk.green('\n✅ Quality gates passed for all items!'));
     }

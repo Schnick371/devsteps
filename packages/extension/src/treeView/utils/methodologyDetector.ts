@@ -1,7 +1,7 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * Methodology detector - Determine Scrum vs Waterfall for work items
  */
 
@@ -10,7 +10,10 @@ import type { WorkItem } from '../types.js';
 /**
  * Detect methodology for a work item based on its type and parent relationships
  */
-export function getItemMethodology(item: WorkItem, allItems: Map<string, WorkItem>): 'scrum' | 'waterfall' {
+export function getItemMethodology(
+  item: WorkItem,
+  allItems: Map<string, WorkItem>
+): 'scrum' | 'waterfall' {
   // Scrum-only types
   if (['epic', 'story', 'spike'].includes(item.type)) {
     return 'scrum';

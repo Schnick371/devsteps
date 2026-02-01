@@ -1,7 +1,7 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * Statistics Data Provider - Project metrics aggregation
  */
 
@@ -23,7 +23,7 @@ export function getProjectStats(items: any[]): ProjectStats {
       byType: {},
       byStatus: {},
       byPriority: {},
-      byEisenhower: {}
+      byEisenhower: {},
     };
   }
 
@@ -32,7 +32,7 @@ export function getProjectStats(items: any[]): ProjectStats {
     byType: groupBy(items, 'type'),
     byStatus: groupBy(items, 'status'),
     byPriority: groupBy(items, 'priority'),
-    byEisenhower: groupBy(items, 'eisenhower')
+    byEisenhower: groupBy(items, 'eisenhower'),
   };
 }
 

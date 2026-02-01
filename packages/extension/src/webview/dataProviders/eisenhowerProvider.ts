@@ -1,7 +1,7 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * Eisenhower Matrix Data Provider - Priority quadrants
  */
 
@@ -24,6 +24,6 @@ export function getEisenhowerData(items: any[]): EisenhowerData {
     Q1: items.filter((i: any) => i.eisenhower === 'urgent-important'),
     Q2: items.filter((i: any) => i.eisenhower === 'not-urgent-important'),
     Q3: items.filter((i: any) => i.eisenhower === 'urgent-not-important'),
-    Q4: items.filter((i: any) => i.eisenhower === 'not-urgent-not-important')
+    Q4: items.filter((i: any) => i.eisenhower === 'not-urgent-not-important'),
   };
 }

@@ -37,7 +37,7 @@ export const initTool: Tool = {
 export const addTool: Tool = {
   name: 'add',
   description:
-    'Add a new item to the devsteps. Item types depend on methodology: Scrum (epic/story/task/bug/spike/test), Waterfall (requirement/feature/task/bug/test), Hybrid (all types). Creates both JSON metadata and Markdown description files.\n\nStatus defaults to \'draft\'. Standard progression: draft → planned → in-progress → review → done',
+    "Add a new item to the devsteps. Item types depend on methodology: Scrum (epic/story/task/bug/spike/test), Waterfall (requirement/feature/task/bug/test), Hybrid (all types). Creates both JSON metadata and Markdown description files.\n\nStatus defaults to 'draft'. Standard progression: draft → planned → in-progress → review → done",
   inputSchema: {
     type: 'object',
     properties: {
@@ -149,7 +149,7 @@ export const listTool: Tool = {
 export const updateTool: Tool = {
   name: 'update',
   description:
-    'Update an existing item. Can update any field including status, priority, assignee, description, etc.\n\nStatus Progression: draft → planned → in-progress → review → done\n- Use \'review\' status when testing/validating before marking done\n- Mark \'done\' only after all quality gates pass (tests, build, manual testing, docs)',
+    "Update an existing item. Can update any field including status, priority, assignee, description, etc.\n\nStatus Progression: draft → planned → in-progress → review → done\n- Use 'review' status when testing/validating before marking done\n- Mark 'done' only after all quality gates pass (tests, build, manual testing, docs)",
   inputSchema: {
     type: 'object',
     properties: {
@@ -251,13 +251,15 @@ export const linkTool: Tool = {
 
 export const searchTool: Tool = {
   name: 'search',
-  description: 'Full-text search across all items (titles and descriptions). Supports wildcards (*), multi-word queries (AND logic), and substring matching.',
+  description:
+    'Full-text search across all items (titles and descriptions). Supports wildcards (*), multi-word queries (AND logic), and substring matching.',
   inputSchema: {
     type: 'object',
     properties: {
       query: {
         type: 'string',
-        description: 'Search query. Supports: wildcards (Tree*), multi-word (TreeView primary sidebar), exact substring (methodology)',
+        description:
+          'Search query. Supports: wildcards (Tree*), multi-word (TreeView primary sidebar), exact substring (methodology)',
       },
       type: {
         type: 'string',

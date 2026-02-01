@@ -1,7 +1,7 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * Methodology Section Node - Groups items by Scrum/Waterfall in flat view
  */
 
@@ -14,7 +14,7 @@ export class MethodologySectionNode extends TreeNode {
     private methodology: 'scrum' | 'waterfall',
     private itemsByType: Record<string, WorkItem[]>,
     private isExpanded: boolean = true,
-    private expandedGroups: Set<string>,
+    private expandedGroups: Set<string>
   ) {
     super();
   }
@@ -22,7 +22,7 @@ export class MethodologySectionNode extends TreeNode {
   toTreeItem(): vscode.TreeItem {
     const totalCount = Object.values(this.itemsByType).reduce(
       (sum, items) => sum + items.length,
-      0,
+      0
     );
 
     const icon = this.methodology === 'scrum' ? '🌲' : '🏗️';
@@ -32,7 +32,7 @@ export class MethodologySectionNode extends TreeNode {
       `${icon} ${label} (${totalCount})`,
       this.isExpanded
         ? vscode.TreeItemCollapsibleState.Expanded
-        : vscode.TreeItemCollapsibleState.Collapsed,
+        : vscode.TreeItemCollapsibleState.Collapsed
     );
 
     treeItem.contextValue = 'methodologySection';
@@ -41,7 +41,11 @@ export class MethodologySectionNode extends TreeNode {
     return treeItem;
   }
 
-  async getChildren(_workspaceRoot: vscode.Uri, _filterState?: FilterState, _expandedHierarchyItems?: Set<string>): Promise<TreeNode[]> {
+  async getChildren(
+    _workspaceRoot: vscode.Uri,
+    _filterState?: FilterState,
+    _expandedHierarchyItems?: Set<string>
+  ): Promise<TreeNode[]> {
     // Return TypeGroupNode for each item type
     return Object.entries(this.itemsByType)
       .sort(([typeA], [typeB]) => typeA.localeCompare(typeB))

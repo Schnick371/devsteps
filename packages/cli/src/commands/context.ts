@@ -1,6 +1,11 @@
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { getCache, hasRefsStyleIndex, loadAllIndexes, getConfig } from '@schnick371/devsteps-shared';
+import {
+  getCache,
+  hasRefsStyleIndex,
+  loadAllIndexes,
+  getConfig,
+} from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
 
 function getDevStepsDir(): string {
@@ -138,7 +143,10 @@ export async function contextValidateCommand() {
   // Check index (refs-style)
   if (hasRefsStyleIndex(devstepsir)) {
     const indexes = loadAllIndexes(devstepsir);
-    const totalItems = Array.from(indexes.byType.values()).reduce((sum, ids) => sum + ids.length, 0);
+    const totalItems = Array.from(indexes.byType.values()).reduce(
+      (sum, ids) => sum + ids.length,
+      0
+    );
     console.log(chalk.green('✓'), `Index valid (${totalItems} items, refs-style)`);
     console.log();
   } else {

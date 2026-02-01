@@ -251,13 +251,15 @@ export const linkTool: Tool = {
 
 export const searchTool: Tool = {
   name: 'search',
-  description: 'Full-text search across all items (titles and descriptions). Supports wildcards (*), multi-word queries (AND logic), and substring matching.',
+  description:
+    'Full-text search across all items (titles and descriptions). Supports wildcards (*), multi-word queries (AND logic), and substring matching.',
   inputSchema: {
     type: 'object',
     properties: {
       query: {
         type: 'string',
-        description: 'Search query. Supports: wildcards (Tree*), multi-word (TreeView primary sidebar), exact substring (methodology)',
+        description:
+          'Search query. Supports: wildcards (Tree*), multi-word (TreeView primary sidebar), exact substring (methodology)',
       },
       type: {
         type: 'string',

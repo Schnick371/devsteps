@@ -1,7 +1,7 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * Traceability Graph Data Provider - Relationship visualization
  */
 
@@ -23,14 +23,16 @@ export function getTraceabilityData(items: any[]): TraceabilityData {
 
   // PERFORMANCE OPTIMIZATION: Limit nodes for large projects
   const MAX_NODES = 50;
-  
+
   // Calculate connection score for each item (total # of links)
   const itemsWithScores = items.map((item: any) => {
-    const linkCount = item.linked_items 
-      ? Object.values(item.linked_items).reduce((acc: number, targets: any) => 
-          acc + (Array.isArray(targets) ? targets.length : 0), 0)
+    const linkCount = item.linked_items
+      ? Object.values(item.linked_items).reduce(
+          (acc: number, targets: any) => acc + (Array.isArray(targets) ? targets.length : 0),
+          0
+        )
       : 0;
-    
+
     return { item, score: linkCount };
   });
 
@@ -39,7 +41,7 @@ export function getTraceabilityData(items: any[]): TraceabilityData {
 
   // Get top N most-connected items
   const topItems = sortedItems.slice(0, Math.min(MAX_NODES, items.length));
-  const topIds = new Set(topItems.map(i => i.item.id));
+  const topIds = new Set(topItems.map((i) => i.item.id));
 
   // Include items directly connected to top items (expand neighborhood)
   const connectedIds = new Set(topIds);
@@ -59,7 +61,7 @@ export function getTraceabilityData(items: any[]): TraceabilityData {
     id: item.id,
     type: item.type,
     title: item.title,
-    status: item.status
+    status: item.status,
   }));
 
   // Build edges only between selected nodes
@@ -78,10 +80,10 @@ export function getTraceabilityData(items: any[]): TraceabilityData {
     }
   });
 
-  return { 
-    nodes, 
+  return {
+    nodes,
     edges,
     totalItems: items.length,
-    displayedNodes: nodes.length
+    displayedNodes: nodes.length,
   };
 }

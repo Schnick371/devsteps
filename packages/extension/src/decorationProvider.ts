@@ -7,13 +7,15 @@ import * as vscode from 'vscode';
 
 /**
  * DevSteps File Decoration Provider
- * 
+ *
  * Adds status badges and colors to work items in TreeView using VS Code's
  * native FileDecorationProvider API. Uses custom URI scheme (devsteps//)
  * to identify work items.
  */
 export class DevStepsDecorationProvider implements vscode.FileDecorationProvider {
-  private _onDidChangeFileDecorations = new vscode.EventEmitter<vscode.Uri | vscode.Uri[] | undefined>();
+  private _onDidChangeFileDecorations = new vscode.EventEmitter<
+    vscode.Uri | vscode.Uri[] | undefined
+  >();
   readonly onDidChangeFileDecorations = this._onDidChangeFileDecorations.event;
 
   /**
@@ -25,7 +27,7 @@ export class DevStepsDecorationProvider implements vscode.FileDecorationProvider
 
   provideFileDecoration(
     uri: vscode.Uri,
-    _token: vscode.CancellationToken,
+    _token: vscode.CancellationToken
   ): vscode.ProviderResult<vscode.FileDecoration> {
     // Only handle devsteps:// scheme
     if (uri.scheme !== 'devsteps') {
@@ -52,10 +54,7 @@ export class DevStepsDecorationProvider implements vscode.FileDecorationProvider
   /**
    * Get decoration based on status and priority
    */
-  private getDecorationForStatus(
-    status: string,
-    priority: string | null,
-  ): vscode.FileDecoration {
+  private getDecorationForStatus(status: string, priority: string | null): vscode.FileDecoration {
     // Status-based decorations (badges only, no label coloring)
     // Icons are colored via ThemeIcon in TreeDataProvider (TASK-007)
     const statusDecorations: Record<string, vscode.FileDecoration> = {
@@ -115,6 +114,6 @@ export function createItemUri(itemId: string, status: string, priority: string):
   return vscode.Uri.from({
     scheme: 'devsteps',
     path: `/item/${itemId}`,
-    query: `status=${status}&priority=${priority}`
+    query: `status=${status}&priority=${priority}`,
   });
 }

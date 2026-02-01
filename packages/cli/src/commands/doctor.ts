@@ -429,7 +429,9 @@ async function rebuildIndexCommand(options: { dryRun: boolean; skipConfirm: bool
 
     if (!dryRun) {
       if (result.backupPath) {
-        console.log(chalk.green(`✅ Backed up to: ${result.backupPath.replace(process.cwd(), '.')}`));
+        console.log(
+          chalk.green(`✅ Backed up to: ${result.backupPath.replace(process.cwd(), '.')}`)
+        );
       }
       console.log(chalk.green(`✅ Created ${result.filesCreated} index files`));
       console.log(chalk.green(`✅ Verified: ${result.processedItems}/${result.totalItems} items`));

@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Copyright and Trademark Protection Strategy",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-23T16:43:55.423Z",
-  "updated": "2025-11-23T16:44:06.407Z",
+  "updated": "2026-02-01T10:36:01.748Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/*/src/**/*.ts",

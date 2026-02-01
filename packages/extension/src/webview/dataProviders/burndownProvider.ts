@@ -1,7 +1,7 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * Burndown Chart Data Provider - Sprint progress tracking
  */
 
@@ -29,11 +29,13 @@ export function getBurndownData(tasks: any[]): BurndownData {
   return {
     total: totalTasks,
     remaining: totalTasks - doneTasks,
-    dataPoints
+    dataPoints,
   };
 }
 
-function calculateBurndownPoints(items: any[]): Array<{ date: string; ideal: number; actual: number }> {
+function calculateBurndownPoints(
+  items: any[]
+): Array<{ date: string; ideal: number; actual: number }> {
   if (items.length === 0) {
     return [];
   }
@@ -76,7 +78,7 @@ function calculateBurndownPoints(items: any[]): Array<{ date: string; ideal: num
     dataPoints.push({
       date: dateStr,
       ideal: Math.round(ideal),
-      actual: remaining
+      actual: remaining,
     });
   }
 

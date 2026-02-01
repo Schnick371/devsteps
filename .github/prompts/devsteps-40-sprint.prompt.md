@@ -1,6 +1,6 @@
 ---
 agent: 'devsteps-coordinator'
-model: 'Claude Sonnet 4.5'
+model: 'Claude Opus 4.5'
 description: 'Multi-hour autonomous sprint execution with context-aware analysis, obsolescence detection, regression prevention'
 tools: ['execute/runTask', 'execute/testFailure', 'execute/runTests', 'execute/runInTerminal', 'read/terminalSelection', 'read/terminalLastCommand', 'read/getTaskOutput', 'read/problems', 'read/readFile', 'edit', 'search', 'web/fetch', 'devsteps/*', 'local-web-search/search', 'playwright/*', 'tavily/*', 'agent', 'todo']
 ---

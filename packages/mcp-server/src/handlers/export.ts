@@ -15,58 +15,58 @@ export default async function exportHandler(args: {
   try {
     const devstepsDir = join(getWorkspacePath(), '.devsteps');
 
-  if (!existsSync(devstepsDir)) {
-    throw new Error('Project not initialized. Run devsteps-init first.');
-  }
+    if (!existsSync(devstepsDir)) {
+      throw new Error('Project not initialized. Run devsteps-init first.');
+    }
 
-  const config = await getConfig(devstepsDir);
+    const config = await getConfig(devstepsDir);
 
-  // Use new index-refs API with optimized filtering
-  // Note: listItems doesn't support array of types yet, so we still need manual filter
-  const itemsResult = await listItems(devstepsDir, {});
-  let items = itemsResult.items;
+    // Use new index-refs API with optimized filtering
+    // Note: listItems doesn't support array of types yet, so we still need manual filter
+    const itemsResult = await listItems(devstepsDir, {});
+    let items = itemsResult.items;
 
-  // Filter items by type if specified
-  if (args.include_types && args.include_types.length > 0) {
-    items = items.filter((i: any) => args.include_types!.includes(i.type));
-  }
-  
-  // Calculate stats from items
-  const stats = {
-    total: items.length,
-    by_type: {} as Record<string, number>,
-    by_status: {} as Record<string, number>,
-  };
-  
-  for (const item of items) {
-    stats.by_type[item.type] = (stats.by_type[item.type] || 0) + 1;
-    stats.by_status[item.status] = (stats.by_status[item.status] || 0) + 1;
-  }
+    // Filter items by type if specified
+    if (args.include_types && args.include_types.length > 0) {
+      items = items.filter((i: any) => args.include_types!.includes(i.type));
+    }
 
-  // Load full metadata and descriptions using shared getItem()
-  const fullItems = await Promise.all(
-    items.map(async (item: any) => {
-      const { metadata, description } = await getItem(devstepsDir, item.id);
-      return { ...metadata, description };
-    })
-  );
+    // Calculate stats from items
+    const stats = {
+      total: items.length,
+      by_type: {} as Record<string, number>,
+      by_status: {} as Record<string, number>,
+    };
 
-  let output: string;
-  let filename: string;
+    for (const item of items) {
+      stats.by_type[item.type] = (stats.by_type[item.type] || 0) + 1;
+      stats.by_status[item.status] = (stats.by_status[item.status] || 0) + 1;
+    }
 
-  if (args.format === 'markdown') {
-    output = generateMarkdown(config, stats, fullItems);
-    filename = args.output_path || 'devsteps-export.md';
-  } else if (args.format === 'html') {
-    output = generateHTML(config, stats, fullItems);
-    filename = args.output_path || 'devsteps-export.html';
-  } else {
-    output = JSON.stringify({ config, stats, items: fullItems }, null, 2);
-    filename = args.output_path || 'devsteps-export.json';
-  }
+    // Load full metadata and descriptions using shared getItem()
+    const fullItems = await Promise.all(
+      items.map(async (item: any) => {
+        const { metadata, description } = await getItem(devstepsDir, item.id);
+        return { ...metadata, description };
+      })
+    );
 
-  const outputPath = join(getWorkspacePath(), filename);
-  writeFileSync(outputPath, output);
+    let output: string;
+    let filename: string;
+
+    if (args.format === 'markdown') {
+      output = generateMarkdown(config, stats, fullItems);
+      filename = args.output_path || 'devsteps-export.md';
+    } else if (args.format === 'html') {
+      output = generateHTML(config, stats, fullItems);
+      filename = args.output_path || 'devsteps-export.html';
+    } else {
+      output = JSON.stringify({ config, stats, items: fullItems }, null, 2);
+      filename = args.output_path || 'devsteps-export.json';
+    }
+
+    const outputPath = join(getWorkspacePath(), filename);
+    writeFileSync(outputPath, output);
 
     return {
       success: true,

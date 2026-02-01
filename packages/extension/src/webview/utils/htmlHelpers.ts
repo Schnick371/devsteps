@@ -1,7 +1,7 @@
 /**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
- * 
+ *
  * HTML Helper Utilities - Escape, nonce generation, formatting
  */
 
@@ -59,7 +59,7 @@ export function getIconForType(type: string): string {
     bug: '🐛',
     feature: '💡',
     requirement: '📝',
-    spike: '🧪'
+    spike: '🧪',
   };
   return icons[type] || '●';
 }

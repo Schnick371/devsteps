@@ -33,28 +33,30 @@ export default async function linkHandler(args: {
 
     if (!sourceParsed || !targetParsed) {
       throw new Error('Invalid item ID(s)');
-    }    // Get file paths
+    } // Get file paths
     const sourceFolder = TYPE_TO_DIRECTORY[sourceParsed.type];
     const targetFolder = TYPE_TO_DIRECTORY[targetParsed.type];
     const sourcePath = join(devstepsDir, sourceFolder, `${args.source_id}.json`);
-    const targetPath = join(devstepsDir, targetFolder, `${args.target_id}.json`);    if (!existsSync(sourcePath)) {
+    const targetPath = join(devstepsDir, targetFolder, `${args.target_id}.json`);
+    if (!existsSync(sourcePath)) {
       throw new Error(`Source item not found: ${args.source_id}`);
     }
     if (!existsSync(targetPath)) {
       throw new Error(`Target item not found: ${args.target_id}`);
-    }    // Load items
+    } // Load items
     const { metadata: sourceMetadata } = await getItem(devstepsDir, args.source_id);
     const { metadata: targetMetadata } = await getItem(devstepsDir, args.target_id);
 
     // Load project config for methodology
     const config = await getConfig(devstepsDir);
-    const methodology: Methodology = config.settings?.methodology || 'hybrid';    // Validate relationship
+    const methodology: Methodology = config.settings?.methodology || 'hybrid'; // Validate relationship
     const validation = validateRelationship(
       { id: sourceMetadata.id, type: sourceMetadata.type },
       { id: targetMetadata.id, type: targetMetadata.type },
       args.relation_type,
       methodology
-    );    if (!validation.valid) {
+    );
+    if (!validation.valid) {
       return {
         success: false,
         error: validation.error,
@@ -65,12 +67,18 @@ export default async function linkHandler(args: {
         relation: args.relation_type,
         methodology: methodology,
       };
-    }    // Update source item
-    if (!sourceMetadata.linked_items[args.relation_type as keyof typeof sourceMetadata.linked_items].includes(args.target_id)) {
-      sourceMetadata.linked_items[args.relation_type as keyof typeof sourceMetadata.linked_items].push(args.target_id);
+    } // Update source item
+    if (
+      !sourceMetadata.linked_items[
+        args.relation_type as keyof typeof sourceMetadata.linked_items
+      ].includes(args.target_id)
+    ) {
+      sourceMetadata.linked_items[
+        args.relation_type as keyof typeof sourceMetadata.linked_items
+      ].push(args.target_id);
       sourceMetadata.updated = getCurrentTimestamp();
       writeFileSync(sourcePath, JSON.stringify(sourceMetadata, null, 2));
-    }    // Create inverse relationship
+    } // Create inverse relationship
     const inverseRelations: Record<string, RelationType> = {
       implements: 'implemented-by',
       'implemented-by': 'implements',
@@ -83,14 +91,16 @@ export default async function linkHandler(args: {
       'relates-to': 'relates-to',
       supersedes: 'superseded-by',
       'superseded-by': 'supersedes',
-    };    const inverseRelation = inverseRelations[args.relation_type];
+    };
+    const inverseRelation = inverseRelations[args.relation_type];
     if (inverseRelation) {
       if (!targetMetadata.linked_items[inverseRelation].includes(args.source_id)) {
         targetMetadata.linked_items[inverseRelation].push(args.source_id);
         targetMetadata.updated = getCurrentTimestamp();
         writeFileSync(targetPath, JSON.stringify(targetMetadata, null, 2));
       }
-    }    return {
+    }
+    return {
       success: true,
       message: `Linked ${args.source_id} --${args.relation_type}--> ${args.target_id}`,
       source_id: args.source_id,

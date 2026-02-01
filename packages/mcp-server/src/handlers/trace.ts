@@ -37,46 +37,48 @@ export default async function traceHandler(args: { id: string; depth?: number })
       try {
         const { metadata } = await getItem(devstepsDir, itemId);
 
-      const node: TraceNode = {
-        id: metadata.id,
-        type: metadata.type,
-        title: metadata.title,
-        status: metadata.status,
-        priority: metadata.eisenhower, // Use eisenhower (new field name)
-        relationships: {},
-      };
+        const node: TraceNode = {
+          id: metadata.id,
+          type: metadata.type,
+          title: metadata.title,
+          status: metadata.status,
+          priority: metadata.eisenhower, // Use eisenhower (new field name)
+          relationships: {},
+        };
 
-      // Trace linked items
-      if (currentDepth < maxDepth) {
-        for (const [relType, linkedIds] of Object.entries(metadata.linked_items)) {
-          if (Array.isArray(linkedIds) && linkedIds.length > 0) {
-            const traced = await Promise.all(
-              linkedIds.map((id: string) => traceItem(id, currentDepth + 1))
-            );
-            node.relationships[relType] = traced.filter((item): item is TraceNode => item !== null);
+        // Trace linked items
+        if (currentDepth < maxDepth) {
+          for (const [relType, linkedIds] of Object.entries(metadata.linked_items)) {
+            if (Array.isArray(linkedIds) && linkedIds.length > 0) {
+              const traced = await Promise.all(
+                linkedIds.map((id: string) => traceItem(id, currentDepth + 1))
+              );
+              node.relationships[relType] = traced.filter(
+                (item): item is TraceNode => item !== null
+              );
+            }
           }
         }
-      }
 
-      return node;
+        return node;
       } catch (error) {
         // Item not found or error - skip
         return null;
       }
     }
 
-  const tree = await traceItem(args.id, 0);
+    const tree = await traceItem(args.id, 0);
 
-  if (!tree) {
-    throw new Error(`Item not found: ${args.id}`);
-  }
+    if (!tree) {
+      throw new Error(`Item not found: ${args.id}`);
+    }
 
-  return {
-    success: true,
-    root_id: args.id,
-    max_depth: maxDepth,
-    tree,
-  };
+    return {
+      success: true,
+      root_id: args.id,
+      max_depth: maxDepth,
+      tree,
+    };
   } catch (error) {
     return {
       success: false,
