@@ -1,7 +1,7 @@
 ---
 description: 'DevSteps Coordinator - receives plans from sub-agents and executes them, stays on main branch'
 model: 'Claude Sonnet 4.5'
-tools: ['execute/testFailure', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'devsteps/*', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'agent', 'todo']
+tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/runTask', 'execute/testFailure', 'execute/runTests', 'execute/runInTerminal', 'read/terminalSelection', 'read/terminalLastCommand', 'read/getTaskOutput', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web/fetch', 'devsteps/*', 'local-web-search/*', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'agent', 'todo']
 ---
 
 # 🎯 DevSteps Coordinator Agent

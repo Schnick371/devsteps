@@ -1,7 +1,7 @@
 ---
 description: 'Implementation planner - creates fast, detailed implementation plans for small, well-defined tasks'
 model: 'Claude Sonnet 4.5'
-tools: ['read/problems', 'read/readFile', 'search', 'devsteps/search', 'tavily/*']
+tools: ['vscode/newWorkspace', 'vscode/runCommand', 'execute', 'read/terminalSelection', 'read/terminalLastCommand', 'read/getTaskOutput', 'read/problems', 'read/readFile', 'edit', 'search', 'web/fetch', 'devsteps/*', 'tavily/*', 'prisma.prisma/prisma-migrate-status', 'prisma.prisma/prisma-migrate-dev', 'prisma.prisma/prisma-migrate-reset', 'prisma.prisma/prisma-studio', 'prisma.prisma/prisma-platform-login', 'prisma.prisma/prisma-postgres-create-database', 'todo']
 ---
 
 # ⚡ DevSteps Implementer Sub-Worker

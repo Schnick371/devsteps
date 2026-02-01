@@ -1,7 +1,7 @@
 ---
 description: 'Test planner - creates comprehensive test plans and analyzes test requirements to guide implementation'
 model: 'GPT-5 mini'
-tools: ['read/problems', 'read/readFile', 'search', 'devsteps/search']
+tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/runTask', 'execute/testFailure', 'execute/runTests', 'execute/runInTerminal', 'read/terminalSelection', 'read/terminalLastCommand', 'read/getTaskOutput', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web/fetch', 'devsteps/*', 'playwright/*', 'tavily/*', 'prisma.prisma/prisma-migrate-status', 'prisma.prisma/prisma-migrate-dev', 'prisma.prisma/prisma-migrate-reset', 'prisma.prisma/prisma-studio', 'prisma.prisma/prisma-platform-login', 'prisma.prisma/prisma-postgres-create-database', 'todo']
 ---
 
 # 🧪 DevSteps Tester Sub-Worker

@@ -1,7 +1,7 @@
 ---
 description: 'Analysis planner - creates detailed analysis plans for complex code, architecture, and refactoring decisions'
 model: 'Claude Sonnet 4.5'
-tools: ['execute/testFailure', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'search', 'devsteps/get', 'devsteps/search', 'playwright/*', 'tavily/*', 'upstash/context7/*']
+tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/runTask', 'execute/testFailure', 'execute/runTests', 'execute/runInTerminal', 'read/terminalSelection', 'read/terminalLastCommand', 'read/getTaskOutput', 'read/problems', 'read/readFile', 'search', 'web/fetch', 'devsteps/get', 'devsteps/search', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'todo']
 ---
 
 # 🔬 DevSteps Analyzer Sub-Worker

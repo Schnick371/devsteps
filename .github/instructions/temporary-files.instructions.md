@@ -62,37 +62,19 @@ When delegating to sub-workers (devsteps-documenter, devsteps-tester, etc.):
 
 ## Git Integration
 
-The `.gitignore` includes comprehensive patterns:
-```gitignore
-# Temporary AI-Generated Reports
-*-COMPLETION-REPORT.md
-*-REPORT-*.md
-TEST-REPORT-*.md
-STORY-*.md
-EPIC-*.md
-BUG-*.md
-
-# Test outputs
-TestResults.xml
-Tests/*.trx
-Tests/*.xml
-!Tests/TestResults.xml
-```
+The `.gitignore` includes comprehensive patterns to exclude temporary reports, test outputs, and DevSteps work item files from version control.
 
 ## Enforcement
 
-**Pre-commit validation**:
-1. Check for temporary files in root
-2. Verify test outputs in Tests/
-3. Confirm no work item `.md` files in root
+**Pre-commit validation:**
+- Check for temporary files in root directory
+- Verify test outputs are in designated directories
+- Confirm no work item markdown files exist in root
 
-**Cleanup command** (if violations occur):
-```powershell
-# Remove temporary reports from root
-Remove-Item -Path .\*-REPORT-*.md, .\EPIC-*.md, .\STORY-*.md, .\BUG-*.md -ErrorAction SilentlyContinue
-# Move test results
-Move-Item -Path .\TestResults.xml -Destination Tests\ -ErrorAction SilentlyContinue
-```
+**Cleanup:**
+- Use cleanup scripts when violations occur
+- Move misplaced files to correct directories
+- Remove temporary artifacts before committing
 
 ---
 

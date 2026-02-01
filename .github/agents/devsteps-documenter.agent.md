@@ -1,7 +1,7 @@
 ---
 description: 'Documentation planner - creates comprehensive documentation plans for README files, architecture docs, and API documentation'
 model: 'Gemini 3 Pro (Preview)'
-tools: ['execute/testFailure', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/readFile', 'search', 'devsteps/get', 'devsteps/search', 'tavily/*']
+tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/runTask', 'execute/testFailure', 'execute/runTests', 'execute/runInTerminal', 'read/problems', 'read/readFile', 'search', 'web/fetch', 'devsteps/get', 'devsteps/search', 'tavily/*', 'todo']
 ---
 
 # 📚 DevSteps Documenter Sub-Worker

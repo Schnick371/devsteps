@@ -5,116 +5,110 @@ description: "Git branch management and merge discipline for DevSteps workflow"
 
 # Git Branch Management & Merge Discipline
 
-## Core Principle
-**Feature branches are ephemeral** - they exist only during active development and are archived locally after merge.
+## Core Principles
+
+**Feature branches are ephemeral** - exist only during active development.
+
+**Trunk-Based Development:** Only Story/Task/Bug/Spike get branches. Epic/Requirement exist in DevSteps only.
 
 ## Branch Lifecycle
 
 **Creation:**
-- Created when work begins on work item
-- Named by type and ID: `story/<ID>`, `epic/<ID>`, `bug/<ID>`, `task/<ID>`
-- Checked for existence before creating new
+- Named by type and ID: `<type>/<ID>-<slug>`
+- Short-lived (merge within days, not weeks)
+- Check existence before creating new
 
 **Active Development:**
-- All implementation commits go to feature branch
-- Work item status updates (`in-progress`, `review`) committed to feature branch
-- `.devsteps/` changes remain on feature branch during work
+- All code commits to feature branch
+- `.devsteps/` status updates in feature branch (tracks work-in-progress)
+- Planning in main branch
 
-**Completion & Integration:**
-- Quality gates pass → mark work item `done`
-- Final commit to feature branch
-- **MANDATORY:** Merge to main immediately
-- **MANDATORY:** Cleanup after successful merge
+**Completion:**
+- Quality gates pass → mark `done`
+- Merge to main with `--no-ff` flag
+- Commit message includes `Implements: <ID>` footer
+- **MANDATORY: Rename branch to `archive/<branch-name>` immediately after merge**
+- Push merged main
 
-**Merge Protocol:**
-- Use `--no-ff` flag to preserve feature branch context in history
-- Ensure commit message includes `Implements: <ID>` footer
-- Verify `.devsteps/` status synced to main
-- Push merged main before cleanup
+## Merge Strategy
 
-**Branch Cleanup After Merge:**
-- **Remote**: Delete immediately (keeps remote repository clean)
-- **Local**: Rename to `archive/merged/<name>` (preserves local history for reference)
-- **Benefit**: Clean remote + local forensics available
+**Always use merge (`--no-ff`):**
+- Preserves feature branch context in history
+- Required for DevSteps traceability
+- Enables rollback if needed
 
-**Archive Naming Patterns:**
-- `archive/merged/<name>` - Successfully completed and merged (default for all completed work)
-- `archive/abandoned/<name>` - Work cancelled before completion
-- `archive/superseded/<name>` - Replaced by different approach
+**Never rebase:**
+- After pushing to remote (rewrites public history)
+- Main/master/production branches
+- Shared branches (causes divergence)
 
-## Prohibited Patterns
+**Use rebase only for:**
+- Local cleanup before PR
+- Updating feature branch with latest main
+- Strictly local, never-pushed branches
 
-**Never:**
-- Leave feature branches unmerged after completion
-- Keep active feature branches "just in case"
-- Leave remote branches after merge (delete remote immediately)
-- Delay merge waiting for "later"
-- Batch multiple work items in single branch
+## Pre-Merge Validation
 
-## Branch Age Monitoring
+- Quality gates pass (tests, build, linting, type checks)
+- DevSteps status is `done`
+- No merge conflicts with main
+- Branch name matches DevSteps ID pattern
+- Commit message has `Implements: <ID>` footer
 
-**Red Flag Thresholds:**
-- Feature branch older than 1 day without merge → investigate immediately
-- Feature branch with `done` status but not merged → workflow failure
-- Multiple unmerged branches → process breakdown
+## Branch-Status Consistency Checks
 
-**Weekly Review:**
-- List all feature branches with last commit date
-- Identify stale branches (>1 day old)
-- Merge immediately or archive as abandoned
+**Detect unmerged branches with completed work:**
+- Check feature branches for items marked `done` in `.devsteps/`
+- Verify corresponding branch merged to main (not just status update)
+- Alert when branch exists but item shows `done` (incomplete workflow)
 
-## Enforcement
+## Conflict Resolution
 
-**Pre-Commit Validation:**
-- Check for unmerged feature branches
-- Warn if branch age exceeds threshold
-- Detect remote branches that should be deleted
+- Merge main into feature branch locally
+- Test thoroughly after resolution
+- Document complex resolutions in commit
+- Re-run full test suite
+- Never auto-accept without understanding changes
 
-**Git Aliases (Recommended):**
-```gitconfig
-[alias]
-    # Merge, archive locally, delete remote
-    merge-done = "!f() { \
-        git merge --no-ff $1 && \
-        git branch -m $1 archive/merged/$1 && \
-        git push origin --delete $1; \
-    }; f"
-    
-    # List stale branches
-    stale = "for-each-ref --sort=-committerdate refs/heads/ --no-merged main --format='%(refname:short) %(committerdate:relative)'"
-    
-    # List archived branches
-    archived = "branch --list 'archive/*'"
-```
+## Branch Retention After Merge
 
-## Why This Matters
+**MANDATORY Post-Merge:**
+- Rename branch to `archive/<branch-name>` immediately
+- Keep archived branch locally for verification period
+- Prevents active branch clutter while maintaining history
 
-**Benefits:**
-- Clean remote repository (no stale branches visible to team)
-- Local history preserved (implementation review, learning)
-- Clear naming convention (no ambiguity)
-- Fast workflow (automatic cleanup process)
-- Early detection of workflow failures
+**Deletion Timeline:**
+- Delete archived branches after verification complete
+- Manual decision based on parent Epic/Story status
+- Typical retention period varies by project needs
 
-**Consequences of Ignoring:**
-- Remote clutter (confusing team members)
-- Lost implementation context (no local reference)
-- Merge conflicts (divergent history)
-- Process breakdown (unmerged branches accumulate)
+**Sync Strategy:**
+- Periodically merge main into archived branches
+- Prevents divergence during retention period
+- Enables clean comparison with current state
+
+## Worktree Guidelines
+
+Worktrees enable parallel work without checkout overhead.
+
+**Use for:**
+- Hotfixes during feature development
+- Testing on one branch while coding another
+- AI agents on parallel tasks
+
+**DevSteps Integration:**
+- Avoid simultaneous DevSteps operations (index conflicts)
+- Merge sequentially, not parallel
+- Delete when work item reaches `done`
 
 ## Integration with DevSteps
 
-**Workflow Alignment:**
-- Work items planned in `main`
-- Implementation in feature branch
-- Merge completes work item lifecycle
-- Immediate cleanup (remote delete + local archive) maintains hygiene
-
-**Status Synchronization:**
-- `.devsteps/` changes committed to feature branch during work
-- Merged to main when work complete
+- **Planning** in `main` (creation, linking, initial status)
+- **Status updates** in feature branch (in-progress, review, done)
+- Implementation in feature branch (code + status changes)
+- Merge brings `.devsteps/` status to main
+- Archive rename maintains hygiene
 - Single source of truth (main) after merge
-- Local archive preserves implementation forensics
 
 ---
 
