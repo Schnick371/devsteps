@@ -12,8 +12,13 @@
 - [ ] Test improvement
 - [ ] CI/CD improvement
 
+## DevSteps Work Item
+<!-- Reference the DevSteps work item this PR implements -->
+<!-- Format: Implements: STORY-042, Fixes: BUG-015, etc. -->
+**Implements:** <!-- e.g., STORY-042, TASK-015, BUG-007 -->
+
 ## Related Issues
-<!-- Link related issues. Use "Closes #123" to automatically close issues when PR is merged -->
+<!-- Link related GitHub issues. Use "Closes #123" to automatically close issues when PR is merged -->
 - Closes #
 - Related to #
 
