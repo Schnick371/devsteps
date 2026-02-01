@@ -43,31 +43,30 @@ Final stable:     X.Y+1.0
 ## Step 1: Prepare Next Branch
 
 **DUAL REPOSITORY CONTEXT:**
-- 🔒 **origin-private**: Full development (dev-local branch)
-- 🌍 **origin**: PUBLIC releases only (main branch)
+- 🔒 **origin-private**: Full development (main branch, default remote)
+- 🌍 **origin**: PUBLIC releases only (explicit push)
 - @next releases go to PUBLIC origin with `-next.N` tag
 
 **Create next branch from public main:**
 ```bash
-git checkout main  # Public main
-git pull origin main
-git checkout -b next/X.Y.Z-next.N
+git fetch origin  # Fetch PUBLIC repo
+git checkout -b next/X.Y.Z-next.N origin/main
 ```
 
-**Cherry-pick from dev-local (private):**
+**Cherry-pick from private main:**
 ```bash
-git checkout dev-local
-git log --oneline -10  # Review commits
+# Review commits in private main not in public
+git log origin/main..main --oneline
 
-git checkout next/X.Y.Z-next.N
-git cherry-pick <commit-hash>  # ONLY clean code!
+# Cherry-pick selected commits (ONLY clean code!)
+git cherry-pick <commit-hash>
 ```
 
 **CRITICAL: Remove private files:**
 ```bash
 git status
-# If private files appear:
-git checkout main -- .devsteps/ .vscode/ docs/branding/ LessonsLearned/
+# Remove private directories
+git rm --cached -r .devsteps/ .vscode/ docs/branding/ LessonsLearned/ 2>/dev/null || true
 ```
 
 **Verify clean state:**

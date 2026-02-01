@@ -16,14 +16,16 @@ tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/runTask', 'ex
 **DUAL REPOSITORY STRATEGY:**
 - 🔒 **origin-private** (devsteps-private): Full development with .devsteps/, .vscode/, docs/, LessonsLearned/
 - 🌍 **origin** (devsteps): PUBLIC - only clean code for releases
-- ✅ Daily work on `dev-local` → push to origin-private
-- ✅ Public releases on `main` → push to origin (clean code only)
-- ❌ NEVER push dev-local to origin (public)!
+- ✅ ONE `main` branch, TWO remotes
+- ✅ Daily work: `git push` → origin-private (default)
+- ✅ Public releases: `git push origin main` (explicit)
+- ❌ NEVER accidentally push to origin (public) during development!
 
-**Branch Strategy:**
-- `dev-local` = private development (tracks origin-private/main)
-- `main` = public releases only (tracks origin/main)
-- `dev/X.Y.Z` = release preparation branch (cherry-pick from dev-local)
+**Remote Configuration:**
+- `main` branch tracks **origin-private/main** by default
+- `git push` → pushes to origin-private (private repo)
+- `git push origin main` → pushes to origin (PUBLIC repo)
+- `dev/X.Y.Z` = release preparation branch (clean code only)
 
 ## Step 0: Pre-Flight Authentication Check (MANDATORY)
 
@@ -45,34 +47,32 @@ git ls-remote origin HEAD
 
 ## Step 1: Prepare Release Branch
 
-**Create release branch from public main:**
+**Fetch latest from public repo:**
 ```bash
 git checkout main
-git pull origin main
-git checkout -b dev/X.Y.Z
+git fetch origin  # Fetch public repo (DO NOT pull!)
+git checkout -b dev/X.Y.Z origin/main  # Create release branch from PUBLIC main
 ```
 
-**Cherry-pick commits from dev-local (private development):**
+**Review and cherry-pick commits from main:**
 ```bash
-# Switch to dev-local to see available commits
-git checkout dev-local
-git log --oneline -20  # Review recent work
+# Compare what's in private main but not in public
+git log origin/main..main --oneline
 
-# Switch back to release branch
-git checkout dev/X.Y.Z
-
-# Cherry-pick commits (ONLY clean code, no private files!)
+# Cherry-pick selected commits (ONLY clean code!)
 git cherry-pick <commit-hash>
 # OR cherry-pick range
 git cherry-pick <commit1>..<commitN>
 ```
 
-**CRITICAL: Remove private files before committing:**
+**CRITICAL: Remove private files before each commit:**
 ```bash
-# Ensure no private files are included
+# Check staged files
 git status
-# If private files appear, restore from main:
-git checkout main -- .devsteps/ .vscode/ docs/branding/ LessonsLearned/
+
+# Remove private directories if accidentally included
+git rm --cached -r .devsteps/ .vscode/ docs/branding/ LessonsLearned/ 2>/dev/null || true
+git checkout origin/main -- .gitignore  # Ensure correct gitignore
 ```
 
 **Verify clean state:**
@@ -233,16 +233,19 @@ unzip -l devsteps-X.Y.Z.vsix | grep -E "(extension.js|mcp-server)"
 - Upload VSIX file
 - Publish after review
 
-## Step 7: Squash Merge to Public Main
+## Step 7: Merge to Public Main (on origin)
 
-**Push dev branch (optional, for review):**
-```bash
-git push origin dev/X.Y.Z
-```
+**⚠️ CRITICAL: We will push to PUBLIC repo now!**
 
-**Create squashed commit on public main:**
+**Create local tracking branch from public main:**
 ```bash
-git checkout main
+# Fetch latest public main
+git fetch origin
+
+# Create/update local public-main tracking branch
+git checkout -B public-main origin/main
+
+# Squash merge the release branch
 git merge --squash dev/X.Y.Z
 
 # Create comprehensive commit message
@@ -261,21 +264,21 @@ Full traceability in dev/X.Y.Z branch commits.
 Refs: EPIC-XXX, STORY-YYY"
 ```
 
-**⚠️ CRITICAL: Push to PUBLIC origin ONLY:**
+**Push to PUBLIC origin:**
 ```bash
-# Verify you're pushing to PUBLIC repo
-git remote -v | grep origin
-# Should show: origin https://github.com/Schnick371/devsteps.git
+# Double-check we're pushing to PUBLIC repo
+git remote -v | grep "^origin\s"
+# Expected: origin https://github.com/Schnick371/devsteps.git
 
 # Push to PUBLIC main
-git push origin main
+git push origin public-main:main
 ```
 
-**Update private repo with public release:**
+**Merge public release back to private main:**
 ```bash
-git checkout dev-local
-git merge main  # Bring public release into private dev
-git push origin-private dev-local:main
+git checkout main  # Private main
+git merge public-main --ff-only  # Fast-forward to include public release
+git push  # Push to origin-private (default)
 ```
 
 ## Step 8: Git Tagging
