@@ -1,12 +1,12 @@
 {
-  "id": "TASK-028",
-  "type": "task",
-  "category": "Documentation",
-  "title": "Sync branding & links across GitHub, npm, and devsteps.dev",
+  "id": "STORY-103",
+  "type": "story",
+  "category": "general",
+  "title": "DevSteps.dev Landing Page - Content Update with Playwright Automation",
   "status": "draft",
   "eisenhower": "not-urgent-important",
-  "created": "2025-11-23T21:51:57.562Z",
-  "updated": "2026-02-01T11:09:36.565Z",
+  "created": "2026-02-01T11:09:25.268Z",
+  "updated": "2026-02-01T11:09:36.567Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -17,20 +17,22 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "TASK-030",
-      "STORY-103"
+      "TASK-028"
     ],
-    "depends-on": [],
+    "depends-on": [
+      "STORY-019"
+    ],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "documentation",
-    "branding",
-    "npm",
-    "github",
     "website",
+    "landing-page",
+    "playwright",
+    "automation",
+    "SEO",
+    "content",
     "marketing"
   ],
   "commits": [],

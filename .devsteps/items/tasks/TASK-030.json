@@ -6,7 +6,7 @@
   "status": "planned",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T21:59:39.039Z",
-  "updated": "2026-02-01T10:36:16.213Z",
+  "updated": "2026-02-01T11:09:36.567Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -23,7 +23,9 @@
     "depends-on": [
       "TASK-029"
     ],
-    "required-by": [],
+    "required-by": [
+      "STORY-103"
+    ],
     "supersedes": [],
     "superseded-by": []
   },

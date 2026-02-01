@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-26T07:00:41.240Z",
-  "updated": "2025-11-26T08:15:40.334Z",
+  "updated": "2026-02-01T11:09:36.567Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/resources/icons/"
@@ -29,7 +29,9 @@
       "STORY-021"
     ],
     "depends-on": [],
-    "required-by": [],
+    "required-by": [
+      "STORY-103"
+    ],
     "supersedes": [],
     "superseded-by": []
   },
