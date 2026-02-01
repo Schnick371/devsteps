@@ -2,7 +2,7 @@
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Begin implementation work - review planned items, select next task, and start structured development'
-tools: ['vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'vscode/extensions', 'execute/testFailure', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web/fetch', 'devsteps/*', 'copilot-container-tools/*', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'agent', 'todo']
+tools: ['vscode/extensions', 'vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'execute/getTerminalOutput', 'execute/runTask', 'execute/runTests', 'execute/testFailure', 'execute/runInTerminal', 'read/terminalSelection', 'read/terminalLastCommand', 'read/getTaskOutput', 'read/problems', 'read/readFile', 'agent', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web/fetch', 'devsteps/*', 'playwright/*', 'tavily/*', 'todo', 'prisma.prisma/prisma-migrate-status', 'prisma.prisma/prisma-migrate-dev', 'prisma.prisma/prisma-migrate-reset', 'prisma.prisma/prisma-studio', 'prisma.prisma/prisma-platform-login', 'prisma.prisma/prisma-postgres-create-database']
 ---
 
 # 🚀 Start Work - Begin Implementation
@@ -11,9 +11,9 @@ tools: ['vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand'
 
 Review planned work, select highest priority, begin structured development.
 
-**Branch Strategy:** Work items in `main`, implementation in feature branch, commits to feature branch ONLY.
+**Branch Strategy:** Work item **planning** in `main`, **status updates + code** in feature branch.
 
-**Critical Rule:** Work items and code live in different branches until final merge.
+**Critical Rule:** Planning (main) → Implementation + Status (feature) → Merge (both to main).
 
 ## Implementation Protocol
 
@@ -45,7 +45,7 @@ Review planned work, select highest priority, begin structured development.
 - Check existing problems
 
 ### 5. Begin
-- Mark item in-progress
+- Mark item in-progress (`#mcp_devsteps_update <ID> --status in-progress` in feature branch)
 - Document decisions during work
 - Link items as discovered
 - Write tests in parallel
@@ -64,17 +64,30 @@ Review planned work, select highest priority, begin structured development.
 ### 8. Complete & Integrate
 **DevSteps Status:** `review` → `done` (all gates passed)  
 **SCM Commit:** Feature branch, conventional format, footer `Implements: ID`  
-**Integration:** Merge to main, sync devsteps status, cleanup branch
+**Integration:** Merge to main, sync devsteps status, retain branch 8+ weeks
+
+**Commit Discipline (CRITICAL):**
+- **Batch related changes:** Collect all changes for one logical unit before committing
+- **Wait for user approval:** Present changes, get confirmation BEFORE commit
+- **No premature commits:** Don't commit after every small edit
+- **Example:** If updating multiple instruction files for same topic → stage all, commit once
+- **If already committed prematurely:** Use `git reset HEAD~1` to undo, batch properly
 
 **Merge Protocol:**
 - Verify all quality gates passed
 - Merge feature branch to main (--no-ff for traceability)
 - Push merged main
-- Delete feature branch locally and remotely
+- **Branch Retention:** Keep branch locally 8+ weeks (see devsteps-git-hygiene.instructions.md)
+- **Sync Retained Branch:** After merge, immediately sync retained branch with main to prevent divergence
+  - Checkout retained branch, merge main with --no-ff, return to main
+  - Rationale: Subsequent main commits (docs, other merges) cause retained branches to diverge
+  - Prevents stale branches, maintains traceability during verification period
 
-**Status Sync:** `.devsteps/` committed to main during merge
+**Status Sync:** `.devsteps/` status changes merge from feature branch to main (status progression captured in git history)
 
-**Branch Lifecycle:** Feature branches are temporary - merge when done, delete immediately. Archive naming (`archive/merged/`, `archive/abandoned/`, `archive/superseded/`) only for exceptional cases requiring historical reference.
+**Branch Lifecycle:** Feature branches retained locally for 8+ weeks. Delete only after Epic/Story marked `verified`/`closed`. Archive tags (`archive/<branch-name>`) only for unmerged experimental work.
+
+**Why Status in Feature Branch:** Git history shows exact moment item progressed (in-progress → review → done), providing audit trail and branch-status alignment.
 
 ### 8.5. Spike Post-Processing
 - Review findings

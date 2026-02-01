@@ -2,7 +2,7 @@
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Execute production release workflow - version bump, CHANGELOG, build, npm publish, and git tagging'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/createAndRunTask', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'read/terminalSelection', 'read/terminalLastCommand', 'edit', 'search', 'web/fetch', 'devsteps/*', 'tavily/*', 'agent', 'todo']
+tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/runTask', 'execute/createAndRunTask', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/readFile', 'read/terminalSelection', 'read/terminalLastCommand', 'edit', 'search', 'web/fetch', 'devsteps/*', 'tavily/*', 'agent', 'todo']
 ---
 
 # 🚀 Release Workflow - Production Deployment
