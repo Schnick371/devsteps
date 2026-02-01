@@ -13,16 +13,17 @@ tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/runTask', 'ex
 
 ## ⚠️ Critical Rules
 
-**NEVER develop on main branch!**
-- ✅ All development on `dev/X.Y.Z` branch
-- ✅ Squash merge to main after validation
-- ✅ Tag after merge (not before)
-- ❌ No direct commits to main
+**DUAL REPOSITORY STRATEGY:**
+- 🔒 **origin-private** (devsteps-private): Full development with .devsteps/, .vscode/, docs/, LessonsLearned/
+- 🌍 **origin** (devsteps): PUBLIC - only clean code for releases
+- ✅ Daily work on `dev-local` → push to origin-private
+- ✅ Public releases on `main` → push to origin (clean code only)
+- ❌ NEVER push dev-local to origin (public)!
 
-**Branch Protection:**
-- main = production-ready only
-- dev/X.Y.Z = development + testing + cherry-picks
-- Squash preserves clean history
+**Branch Strategy:**
+- `dev-local` = private development (tracks origin-private/main)
+- `main` = public releases only (tracks origin/main)
+- `dev/X.Y.Z` = release preparation branch (cherry-pick from dev-local)
 
 ## Step 0: Pre-Flight Authentication Check (MANDATORY)
 
@@ -42,25 +43,36 @@ git ls-remote origin HEAD
 
 **⚠️ STOP if either check fails!** Fix authentication before proceeding.
 
-## Step 1: Prepare Development Branch
+## Step 1: Prepare Release Branch
 
-**Create dev branch from main:**
+**Create release branch from public main:**
 ```bash
 git checkout main
 git pull origin main
 git checkout -b dev/X.Y.Z
 ```
 
-**Cherry-pick commits from story branches:**
+**Cherry-pick commits from dev-local (private development):**
 ```bash
-# List commits from story branch
-git log --oneline story/STORY-053
+# Switch to dev-local to see available commits
+git checkout dev-local
+git log --oneline -20  # Review recent work
 
-# Cherry-pick range
-git cherry-pick <commit1>..<commitN>
+# Switch back to release branch
+git checkout dev/X.Y.Z
 
-# Or cherry-pick individual commits
+# Cherry-pick commits (ONLY clean code, no private files!)
 git cherry-pick <commit-hash>
+# OR cherry-pick range
+git cherry-pick <commit1>..<commitN>
+```
+
+**CRITICAL: Remove private files before committing:**
+```bash
+# Ensure no private files are included
+git status
+# If private files appear, restore from main:
+git checkout main -- .devsteps/ .vscode/ docs/branding/ LessonsLearned/
 ```
 
 **Verify clean state:**
@@ -221,14 +233,14 @@ unzip -l devsteps-X.Y.Z.vsix | grep -E "(extension.js|mcp-server)"
 - Upload VSIX file
 - Publish after review
 
-## Step 7: Squash Merge to Main
+## Step 7: Squash Merge to Public Main
 
-**Push dev branch:**
+**Push dev branch (optional, for review):**
 ```bash
 git push origin dev/X.Y.Z
 ```
 
-**Create squashed commit on main:**
+**Create squashed commit on public main:**
 ```bash
 git checkout main
 git merge --squash dev/X.Y.Z
@@ -249,9 +261,21 @@ Full traceability in dev/X.Y.Z branch commits.
 Refs: EPIC-XXX, STORY-YYY"
 ```
 
-**Push to main:**
+**⚠️ CRITICAL: Push to PUBLIC origin ONLY:**
 ```bash
+# Verify you're pushing to PUBLIC repo
+git remote -v | grep origin
+# Should show: origin https://github.com/Schnick371/devsteps.git
+
+# Push to PUBLIC main
 git push origin main
+```
+
+**Update private repo with public release:**
+```bash
+git checkout dev-local
+git merge main  # Bring public release into private dev
+git push origin-private dev-local:main
 ```
 
 ## Step 8: Git Tagging
