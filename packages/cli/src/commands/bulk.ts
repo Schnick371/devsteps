@@ -1,0 +1,141 @@
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import type { EisenhowerQuadrant, ItemMetadata, ItemStatus } from '@schnick371/devsteps-shared';
+import {
+  type BulkUpdateResult,
+  bulkAddTags,
+  bulkRemoveTags,
+  bulkUpdateItems,
+  STATUS,
+} from '@schnick371/devsteps-shared';
+import chalk from 'chalk';
+import ora from 'ora';
+
+function getDevStepsDir(): string {
+  const dir = join(process.cwd(), '.devsteps');
+  if (!existsSync(dir)) {
+    console.error(
+      chalk.red('Error:'),
+      'Project not initialized. Run',
+      chalk.cyan('devstepsinit'),
+      'first.'
+    );
+    process.exit(1);
+  }
+  return dir;
+}
+
+function displayBulkResult(result: BulkUpdateResult, operation: string): void {
+  console.log();
+  if (result.success.length > 0) {
+    console.log(chalk.green(`✓ ${operation}: ${result.success.length} item(s)`));
+    for (const id of result.success) {
+      console.log(chalk.gray(`  - ${id}`));
+    }
+  }
+
+  if (result.failed.length > 0) {
+    console.log();
+    console.log(chalk.red(`✗ Failed: ${result.failed.length} item(s)`));
+    for (const fail of result.failed) {
+      console.log(chalk.red(`  - ${fail.id}: ${fail.error}`));
+    }
+  }
+
+  console.log();
+  console.log(
+    chalk.gray(
+      `Total: ${result.success.length} succeeded, ${result.failed.length} failed out of ${result.total}`
+    )
+  );
+}
+
+/**
+ * Bulk update multiple items
+ */
+interface BulkUpdateCommandOptions {
+  status?: string;
+  eisenhower?: string;
+  assignee?: string;
+  category?: string;
+}
+
+export async function bulkUpdateCommand(itemIds: string[], options: BulkUpdateCommandOptions) {
+  const spinner = ora(`Updating ${itemIds.length} item(s)...`).start();
+
+  try {
+    const devstepsir = getDevStepsDir();
+
+    const updates: Partial<ItemMetadata> = {};
+    if (options.status) updates.status = options.status as ItemStatus;
+    if (options.eisenhower) updates.eisenhower = options.eisenhower as EisenhowerQuadrant;
+    if (options.assignee) updates.assignee = options.assignee;
+    if (options.category) updates.category = options.category;
+
+    const result = await bulkUpdateItems(devstepsir, itemIds, updates);
+
+    spinner.stop();
+    displayBulkResult(result, 'Updated');
+
+    // Status progression hints
+    if (options.status === STATUS.REVIEW) {
+      console.log(chalk.yellow('\n🧪 Testing Phase (bulk):'));
+      console.log(chalk.gray('  • Run tests for all items'));
+      console.log(chalk.gray('  • Verify builds pass'));
+      console.log(
+        chalk.gray('  • When ready:'),
+        chalk.cyan('devsteps bulk update <ids> --status done')
+      );
+    } else if (options.status === STATUS.DONE) {
+      console.log(chalk.green('\n✅ Quality gates passed for all items!'));
+    }
+  } catch (error: unknown) {
+    spinner.fail('Bulk update failed');
+    if (error instanceof Error) {
+      console.error(chalk.red(error.message));
+    }
+    process.exit(1);
+  }
+}
+
+/**
+ * Bulk add tags
+ */
+export async function bulkTagAddCommand(itemIds: string[], tags: string[]) {
+  const spinner = ora(`Adding tags to ${itemIds.length} item(s)...`).start();
+
+  try {
+    const devstepsir = getDevStepsDir();
+    const result = await bulkAddTags(devstepsir, itemIds, tags);
+
+    spinner.stop();
+    displayBulkResult(result, `Added tags: ${tags.join(', ')}`);
+  } catch (error: unknown) {
+    spinner.fail('Bulk tag add failed');
+    if (error instanceof Error) {
+      console.error(chalk.red(error.message));
+    }
+    process.exit(1);
+  }
+}
+
+/**
+ * Bulk remove tags
+ */
+export async function bulkTagRemoveCommand(itemIds: string[], tags: string[]) {
+  const spinner = ora(`Removing tags from ${itemIds.length} item(s)...`).start();
+
+  try {
+    const devstepsir = getDevStepsDir();
+    const result = await bulkRemoveTags(devstepsir, itemIds, tags);
+
+    spinner.stop();
+    displayBulkResult(result, `Removed tags: ${tags.join(', ')}`);
+  } catch (error: unknown) {
+    spinner.fail('Bulk tag remove failed');
+    if (error instanceof Error) {
+      console.error(chalk.red(error.message));
+    }
+    process.exit(1);
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "name": "@schnick371/devsteps-cli",
+  "version": "1.0.0",
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "Never Code Alone. CLI for AI-assisted developer task tracking.",
+  "author": "Thomas Hertel <thomas.hertel@devsteps.dev>",
+  "homepage": "https://devsteps.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Schnick371/devsteps.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/Schnick371/devsteps/issues"
+  },
+  "keywords": [
+    "devsteps",
+    "cli",
+    "task-tracking",
+    "project-management",
+    "agile",
+    "scrum",
+    "waterfall",
+    "development-tools"
+  ],
+  "bin": {
+    "devsteps": "./dist/index.cjs",
+    "devsteps-tsx": "./bin/devsteps-tsx.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    ".github",
+    ".devsteps",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc && node esbuild.mjs && npm run copy:docs",
+    "copy:docs": "mkdir -p .devsteps && cp ../../.devsteps/HIERARCHY.md ../../.devsteps/AI-GUIDE.md .devsteps/",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .devsteps",
+    "prepublishOnly": "node ../../scripts/replace-workspace-deps.cjs",
+    "postpublish": "git checkout package.json"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^8.0.1",
+    "@schnick371/devsteps-shared": "file:../shared",
+    "chalk": "^5.6.2",
+    "commander": "^12.1.0",
+    "ora": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "esbuild": "^0.27.0",
+    "typescript": "latest"
+  }
+}

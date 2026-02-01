@@ -1,0 +1,40 @@
+<svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <!-- DevSteps Activity Bar Icon - Optimized for 28x28px visibility -->
+  
+  <!-- Outer Circle (thicker for better visibility) -->
+  <circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" stroke-width="2"/>
+  
+  <!-- Kanban Lanes (3 bars - simplified, higher contrast) -->
+  <g id="kanban-lanes">
+    <!-- Todo Lane (left) -->
+    <rect x="5" y="7" width="3" height="10" fill="currentColor" opacity="0.9"/>
+    
+    <!-- In Progress Lane (center - brightest) -->
+    <rect x="10.5" y="7" width="3" height="10" fill="currentColor" opacity="1"/>
+    
+    <!-- Done Lane (right) -->
+    <rect x="16" y="7" width="3" height="10" fill="currentColor" opacity="0.7"/>
+  </g>
+  
+  <!-- Large visible cards (bigger, higher contrast) -->
+  <g id="work-items">
+    <!-- Card in Todo -->
+    <rect x="5.5" y="8.5" width="2" height="2" fill="currentColor" opacity="0.4" stroke="currentColor" stroke-width="0.3"/>
+    
+    <!-- Card in In Progress (2 cards for activity) -->
+    <rect x="11" y="9" width="2" height="2.5" fill="currentColor" opacity="0.3" stroke="currentColor" stroke-width="0.3"/>
+    <rect x="11" y="13" width="2" height="1.5" fill="currentColor" opacity="0.3" stroke="currentColor" stroke-width="0.3"/>
+    
+    <!-- Card in Done -->
+    <rect x="16.5" y="14" width="2" height="2" fill="currentColor" opacity="0.3" stroke="currentColor" stroke-width="0.3"/>
+  </g>
+  
+  <!-- Step progression dots (showing incremental workflow) -->
+  <g id="step-dots" fill="currentColor">
+    <circle cx="6.5" cy="19.5" r="0.8" opacity="0.8"/>
+    <circle cx="9.5" cy="19.5" r="0.8" opacity="0.9"/>
+    <circle cx="12" cy="19.5" r="0.8" opacity="0.9"/>
+    <circle cx="14.5" cy="19.5" r="1" opacity="1"/>
+    <circle cx="17.5" cy="19.5" r="0.8" opacity="0.5"/>
+  </g>
+</svg>

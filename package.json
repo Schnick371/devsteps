@@ -1,0 +1,36 @@
+{
+  "name": "devsteps",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "dev": "npm run dev --workspaces --if-present",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:cli": "bats tests/integration/cli/*.bats",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present",
+    "package:mcp": "mkdir -p dist/mcp && cd packages/mcp-server && npm pack --pack-destination ../../dist/mcp",
+    "package:extension": "mkdir -p dist/extension && cd packages/extension && npm run package && mv *.vsix ../../dist/extension/",
+    "package:all": "npm run build && npm run package:mcp && npm run package:extension && mkdir -p dist && cp INSTALL.md dist/ && cp README.md dist/ && echo '✅ Distribution packages ready in dist/'",
+    "migrate:index": "tsx scripts/migrate-index.ts",
+    "rollback:index": "tsx scripts/rollback-index.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.7",
+    "@types/node": "^24.10.1",
+    "bats": "^1.11.0",
+    "bats-assert": "^2.1.0",
+    "bats-support": "^0.3.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.14"
+  }
+}
