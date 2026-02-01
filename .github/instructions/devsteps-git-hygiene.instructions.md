@@ -110,6 +110,60 @@ Worktrees enable parallel work without checkout overhead.
 - Archive rename maintains hygiene
 - Single source of truth (main) after merge
 
+## Conventional Commits (Mandatory)
+
+### Format
+```
+<type>(<scope>): <subject>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Commit Types
+| Type | Description | SemVer Bump |
+|------|-------------|-------------|
+| `feat` | New feature | MINOR |
+| `fix` | Bug fix | PATCH |
+| `docs` | Documentation only | - |
+| `style` | Formatting, no code change | - |
+| `refactor` | Code restructure, no behavior change | - |
+| `perf` | Performance improvement | PATCH |
+| `test` | Adding/updating tests | - |
+| `chore` | Build, CI, tooling | - |
+| `build` | Build system, dependencies | - |
+
+### Examples
+```bash
+# Feature with scope
+feat(cli): add export command for JSON output
+
+# Bug fix with DevSteps reference
+fix(mcp-server): resolve memory leak in item cache
+
+Implements: BUG-042
+
+# Breaking change (major version bump)
+feat(api)!: change response format for items
+
+BREAKING CHANGE: Items now return `eisenhower` instead of `priority`
+
+# Dependency update
+build(deps): bump vitest to 3.0.0
+```
+
+### DevSteps Footer (Required)
+All feature/fix commits MUST include work item reference:
+```
+Implements: STORY-042
+```
+
+### Enforcement Tools
+- **commitlint**: Validates commit message format
+- **Husky**: Runs commitlint on pre-commit hook
+- **semantic-release**: Automates versioning from commits
+
 ---
 
-**See:** devsteps-start-work.prompt.md, devsteps-workflow.prompt.md
+**See:** devsteps-start-work.prompt.md, devsteps-workflow.prompt.md, oss-professional-practices.instructions.md
