@@ -42,17 +42,44 @@ Final stable:     X.Y+1.0
 
 ## Step 1: Prepare Next Branch
 
-**Create next branch from current work:**
+**DUAL REPOSITORY CONTEXT:**
+- 🔒 **origin-private**: Full development (main branch, default remote)
+- 🌍 **origin**: PUBLIC releases only (explicit push)
+- @next releases go to PUBLIC origin with `-next.N` tag
+
+**Create next branch from public main:**
 ```bash
-# From story/STORY-XXX or dev/X.Y.Z
-git checkout -b next/X.Y.Z-next.N
+git fetch origin  # Fetch PUBLIC repo
+git checkout -b next/X.Y.Z-next.N origin/main
+```
+
+**Cherry-pick from private main:**
+```bash
+# Review commits in private main not in public
+git log origin/main..main --oneline
+
+# Cherry-pick selected commits (ONLY clean code!)
+git cherry-pick <commit-hash>
+```
+
+**CRITICAL: Remove private files:**
+```bash
+git status
+# Remove private directories
+git rm --cached -r .devsteps/ .vscode/ docs/branding/ LessonsLearned/ 2>/dev/null || true
 ```
 
 **Verify clean state:**
 ```bash
 git status
-npm run build
+npm run build  # Includes .github sync from root
 npm test
+```
+
+**CRITICAL: Verify .github was synced:**
+```bash
+ls packages/cli/.github/prompts/devsteps-*.prompt.md
+ls packages/mcp-server/.github/prompts/devsteps-*.prompt.md
 ```
 
 ## Step 2: Version Bump to @next

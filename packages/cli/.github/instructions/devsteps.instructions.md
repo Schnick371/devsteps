@@ -16,32 +16,41 @@ description: "DevSteps workflow and work item tracking"
 
 ## Status Tracking
 
-**Before starting work:**
-```
-#mcp_devsteps_update <ID> --status in-progress
-```
+**Planning (in main branch):**
+- Create items with status `draft` or `planned`
+- Link relationships, define hierarchy
 
-**After validation/testing:**
+**Implementation (in feature branch):**
 ```
-#mcp_devsteps_update <ID> --status done
+#mcp_devsteps_update <ID> --status in-progress  # Start work
+#mcp_devsteps_update <ID> --status review       # Testing
+#mcp_devsteps_update <ID> --status done         # Complete
 ```
 
 **NEVER skip status updates** - Tracking mandatory for traceability.
+**Status lives with code:** Feature branch status reflects work state.
 
 ## Item Hierarchy
 
-**Scrum:** Epic → Story → Bug (optional) → Task | Epic → Spike → Task
-**Waterfall:** Requirement → Feature → Bug (optional) → Task | Requirement → Spike → Task
-**Bug blocking:** Bug blocks Story/Feature (parent only), uses relates-to for Epic/Requirement context
+**Scrum:** Epic → Story → Task | Epic → Spike → Task | Story → Bug → Task (fix)
+**Waterfall:** Requirement → Feature → Task | Requirement → Spike → Task | Feature → Bug → Task (fix)
+
+**Strategic vs Implementation:**
+- **Epic/Requirement:** Planning containers (DevSteps only, no branches)
+- **Story/Feature/Spike:** Implementation units (create branches)
+- **Task:** Execution details (create branches when standalone)
+- **Bug:** Problem description (blocks parent, fix via Task branch)
+
 **Relations:** "relates-to" allowed between ANY items
-**Spike completion:** Create Stories from findings, link to same Epic
+**Spike completion:** Create Stories from findings, link to same Epic/Requirement
 
 ## Git Workflow
 
-**Epic branches:** Manual creation as `epic/<ID>-<slug>` when Epic starts
+**Branches:** Only implementation items use `<type>/<ID>-<slug>` (Story, Task, Bug, Spike)
+**No Epic/Requirement Branches:** Strategic items tracked in DevSteps, not version control
 **Commits:** Conventional format `type(ID): subject` with footer `Implements: ID`
-**Merge:** PR required for Epic branch to main after all children done
-**Reference:** git-workflow.instructions.md
+**Merge:** Immediate merge after completion, no-fast-forward to preserve history
+**Reference:** devsteps-git-hygiene.instructions.md
 
 ## Validation Checklist
 

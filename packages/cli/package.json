@@ -40,11 +40,12 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc && node esbuild.mjs && npm run copy:docs",
+    "build": "tsc && node esbuild.mjs && npm run copy:docs && npm run copy:copilot",
     "copy:docs": "mkdir -p .devsteps && cp ../../.devsteps/HIERARCHY.md ../../.devsteps/AI-GUIDE.md .devsteps/",
+    "copy:copilot": "rm -rf .github && mkdir -p .github/prompts .github/instructions .github/agents && cp ../../.github/prompts/devsteps-*.prompt.md .github/prompts/ && cp ../../.github/instructions/devsteps*.instructions.md .github/instructions/ && cp ../../.github/agents/devsteps*.agent.md .github/agents/",
     "dev": "tsc --watch",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf dist .devsteps",
+    "clean": "rm -rf dist .devsteps .github",
     "prepublishOnly": "node ../../scripts/replace-workspace-deps.cjs",
     "postpublish": "git checkout package.json"
   },
