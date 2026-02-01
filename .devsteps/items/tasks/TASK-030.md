@@ -2,46 +2,56 @@
 
 Die GitHub-Publikation ist vorbereitet mit **sauberer History** (1 initialer Commit statt 481).
 
-### Strategie
+### Veröffentlichungs-Reihenfolge (WICHTIG!)
 
-**Orphan Branch `github-v1`** enthält den kompletten Code als einzelnen "DevSteps v1.0.0" Commit.
-Von hier aus wird die öffentliche Versionierung gestartet.
+#### Phase 1: Cleanup (VOR orphan branch Neuerstellung)
+1. ❌ Interne Dev-Artefakte entfernen
+2. ❌ K8s/Docker-Dateien entfernen (nicht relevant für Extension)
+3. ❌ Orphan Branch `github-v1` neu erstellen mit bereinigtem Code
 
-### Durchgeführte Schritte
-
-1. ✅ Orphan Branch erstellt: `git checkout --orphan github-v1`
-2. ✅ Backup-Dateien bereinigt (keine .devsteps/index.backup-*, archive-files)
-3. ✅ Alle Dateien gestaged
-4. ✅ Initialer V1.0 Commit erstellt
-
-### Push-Befehle (manuell auszuführen)
-
+#### Phase 2: npm Publish (VOR GitHub Push)
 ```bash
-# Remote hinzufügen (falls noch nicht vorhanden)
-git remote add origin https://github.com/Schnick371/devsteps.git
+# Version auf 1.0.0 setzen
+npm version 1.0.0 --workspaces --no-git-tag-version
 
-# Force-Push des orphan branch als main auf GitHub
+# Packages in Reihenfolge publishen
+cd packages/shared && npm publish --access public
+cd packages/cli && npm publish --access public
+cd packages/mcp-server && npm publish --access public
+```
+
+#### Phase 3: GitHub Push
+```bash
+git remote add origin https://github.com/Schnick371/devsteps.git
 git push -u origin github-v1:main --force
 ```
 
+#### Phase 4: VS Code Marketplace
+```bash
+cd packages/extension
+npx vsce publish
+```
+
+### Zu entfernende Dateien
+
+**Root:**
+- LEGACY-CODE-AUDIT.md, CLEANUP-REPORT.md, DEPLOYMENT-VERIFICATION.md
+- NPM-PUBLISH-GUIDE.md, DEPLOYMENT.md, DOCKER.md
+- Dockerfile, docker-compose.yml, .dockerignore
+- fix-commands.sh
+
+**k8s/ (ganzer Ordner):**
+- configmap.yaml, deployment.yaml, hpa.yaml, pvc.yaml, service.yaml, servicemonitor.yaml
+
+**docs/:**
+- TODO.md, SAFETY_AUDIT.md
+- DATENSCHUTZ-MINIMAL-WEBSITE.txt, DATENSCHUTZ-WEBSITE-TEXT.txt
+- WEBSITE-CONTENT.md, "Ideen für...md"
+- validation/ (ganzer Ordner)
+
 ### Nach dem Push
 
-1. GitHub Repository Description setzen:
-   - "Never Code Alone - Team Up With Your AI. Structured development with AI-first workflow."
-   
-2. Topics hinzufügen:
-   - vscode-extension, mcp-server, ai-development, copilot, typescript
-
+1. GitHub Repository Description setzen
+2. Topics hinzufügen: vscode-extension, mcp-server, ai-development, copilot, typescript
 3. GitHub Discussions aktivieren
-
 4. Branch Protection Rules für `main` einrichten
-
-### Lokale Repository-Bereinigung (nach erfolgreichem Push)
-
-```bash
-# Zurück zu main wechseln
-git checkout main
-
-# github-v1 Branch löschen (nicht mehr benötigt)
-git branch -d github-v1
-```
