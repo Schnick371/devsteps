@@ -7,11 +7,17 @@ description: "File size and code quality standards"
 
 ## File Size Guidelines
 
-### Maximum Lines Per File
+### File Size Guidelines
+- Keep files focused on single responsibility
+- Refactor when complexity or size hinders understanding
+- Large files signal multiple responsibilities requiring separation
+- Prioritize readability and maintainability over line count rules
+
+#### Maximum Lines Per File
 - **Components/Services**: 200-300 lines
 - **Complex Modules**: 350 lines (acceptable limit)
-- **400+ lines**: Consider refactoring
-- **1000+ lines**: Must be split
+- **300+ lines**: Consider refactoring
+- **500+ lines**: Must be split
 
 ### Refactoring Signals
 - Multiple responsibilities in one file
@@ -46,6 +52,8 @@ description: "File size and code quality standards"
 - Explain complex algorithms or business logic
 - Document non-obvious decisions
 - Warn about edge cases or gotchas
+- Each file should have a brief header comment describing its purpose
+- Each function/method should have a comment describing its purpose
 
 ### What NOT to Comment
 - Self-explanatory code

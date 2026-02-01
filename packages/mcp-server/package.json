@@ -40,17 +40,18 @@
     ".devsteps"
   ],
   "scripts": {
-    "build": "tsc --build && node esbuild.cjs --production && npm run copy:docs",
+    "build": "tsc --build && node esbuild.cjs --production && npm run copy:docs && npm run copy:copilot",
+    "copy:docs": "mkdir -p .devsteps && cp ../../.devsteps/HIERARCHY-COMPACT.md .devsteps/HIERARCHY-COMPACT.md && cp ../../.devsteps/AI-GUIDE-COMPACT.md .devsteps/AI-GUIDE-COMPACT.md",
+    "copy:copilot": "rm -rf .github && mkdir -p .github/prompts .github/instructions .github/agents && cp ../../.github/prompts/devsteps-*.prompt.md .github/prompts/ && cp ../../.github/instructions/devsteps*.instructions.md .github/instructions/ && cp ../../.github/agents/devsteps*.agent.md .github/agents/",
     "dev": "tsc --watch",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf dist .devsteps *.tsbuildinfo",
+    "clean": "rm -rf dist .devsteps .github *.tsbuildinfo",
     "prepublishOnly": "node ../../scripts/replace-workspace-deps.cjs",
     "postpublish": "git checkout package.json",
     "start": "node dist/index.js",
     "start:debug": "LOG_LEVEL=debug node dist/index.js",
     "start:trace": "LOG_LEVEL=trace node dist/index.js",
-    "bundle": "node esbuild.cjs --production",
-    "copy:docs": "mkdir -p .devsteps && cp ../../.devsteps/HIERARCHY-COMPACT.md .devsteps/HIERARCHY-COMPACT.md && cp ../../.devsteps/AI-GUIDE-COMPACT.md .devsteps/AI-GUIDE-COMPACT.md"
+    "bundle": "node esbuild.cjs --production"
   },
   "exports": {
     ".": "./dist/index.js",

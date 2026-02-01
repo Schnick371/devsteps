@@ -13,36 +13,66 @@ tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/runTask', 'ex
 
 ## ⚠️ Critical Rules
 
-**NEVER develop on main branch!**
-- ✅ All development on `dev/X.Y.Z` branch
-- ✅ Squash merge to main after validation
-- ✅ Tag after merge (not before)
-- ❌ No direct commits to main
+**DUAL REPOSITORY STRATEGY:**
+- 🔒 **origin-private** (devsteps-private): Full development with .devsteps/, .vscode/, docs/, LessonsLearned/
+- 🌍 **origin** (devsteps): PUBLIC - only clean code for releases
+- ✅ ONE `main` branch, TWO remotes
+- ✅ Daily work: `git push` → origin-private (default)
+- ✅ Public releases: `git push origin main` (explicit)
+- ❌ NEVER accidentally push to origin (public) during development!
 
-**Branch Protection:**
-- main = production-ready only
-- dev/X.Y.Z = development + testing + cherry-picks
-- Squash preserves clean history
+**Remote Configuration:**
+- `main` branch tracks **origin-private/main** by default
+- `git push` → pushes to origin-private (private repo)
+- `git push origin main` → pushes to origin (PUBLIC repo)
+- `dev/X.Y.Z` = release preparation branch (clean code only)
 
-## Step 1: Prepare Development Branch
+## Step 0: Pre-Flight Authentication Check (MANDATORY)
 
-**Create dev branch from main:**
+**Verify npm login:**
 ```bash
-git checkout main
-git pull origin main
-git checkout -b dev/X.Y.Z
+npm whoami
+# Expected: your npm username (e.g., schnick371)
+# If 401 Unauthorized → run: npm login
 ```
 
-**Cherry-pick commits from story branches:**
+**Verify GitHub access:**
 ```bash
-# List commits from story branch
-git log --oneline story/STORY-053
+git ls-remote origin HEAD
+# Expected: SHA reference (confirms push access)
+# If authentication fails → check git credentials
+```
 
-# Cherry-pick range
-git cherry-pick <commit1>..<commitN>
+**⚠️ STOP if either check fails!** Fix authentication before proceeding.
 
-# Or cherry-pick individual commits
+## Step 1: Prepare Release Branch
+
+**Fetch latest from public repo:**
+```bash
+git checkout main
+git fetch origin  # Fetch public repo (DO NOT pull!)
+git checkout -b dev/X.Y.Z origin/main  # Create release branch from PUBLIC main
+```
+
+**Review and cherry-pick commits from main:**
+```bash
+# Compare what's in private main but not in public
+git log origin/main..main --oneline
+
+# Cherry-pick selected commits (ONLY clean code!)
 git cherry-pick <commit-hash>
+# OR cherry-pick range
+git cherry-pick <commit1>..<commitN>
+```
+
+**CRITICAL: Remove private files before each commit:**
+```bash
+# Check staged files
+git status
+
+# Remove private directories if accidentally included
+git rm --cached -r .devsteps/ .vscode/ docs/branding/ LessonsLearned/ 2>/dev/null || true
+git checkout origin/main -- .gitignore  # Ensure correct gitignore
 ```
 
 **Verify clean state:**
@@ -116,8 +146,17 @@ git commit -m "docs: Update CHANGELOGs for X.Y.Z release"
 ```bash
 npm run clean
 npm install
-npm run build
+npm run build  # Builds all packages + syncs .github/ from root to packages
 npm test
+```
+
+**CRITICAL: Verify .github sync:**
+```bash
+# Confirm Copilot prompts copied from root to packages
+ls packages/cli/.github/prompts/devsteps-*.prompt.md
+ls packages/mcp-server/.github/prompts/devsteps-*.prompt.md
+
+# Should see: devsteps-10-plan-work.prompt.md, etc (latest versions from root)
 ```
 
 **Dual-target extension build validation:**
@@ -203,16 +242,19 @@ unzip -l devsteps-X.Y.Z.vsix | grep -E "(extension.js|mcp-server)"
 - Upload VSIX file
 - Publish after review
 
-## Step 7: Squash Merge to Main
+## Step 7: Merge to Public Main (on origin)
 
-**Push dev branch:**
-```bash
-git push origin dev/X.Y.Z
-```
+**⚠️ CRITICAL: We will push to PUBLIC repo now!**
 
-**Create squashed commit on main:**
+**Create local tracking branch from public main:**
 ```bash
-git checkout main
+# Fetch latest public main
+git fetch origin
+
+# Create/update local public-main tracking branch
+git checkout -B public-main origin/main
+
+# Squash merge the release branch
 git merge --squash dev/X.Y.Z
 
 # Create comprehensive commit message
@@ -231,9 +273,21 @@ Full traceability in dev/X.Y.Z branch commits.
 Refs: EPIC-XXX, STORY-YYY"
 ```
 
-**Push to main:**
+**Push to PUBLIC origin:**
 ```bash
-git push origin main
+# Double-check we're pushing to PUBLIC repo
+git remote -v | grep "^origin\s"
+# Expected: origin https://github.com/Schnick371/devsteps.git
+
+# Push to PUBLIC main
+git push origin public-main:main
+```
+
+**Merge public release back to private main:**
+```bash
+git checkout main  # Private main
+git merge public-main --ff-only  # Fast-forward to include public release
+git push  # Push to origin-private (default)
 ```
 
 ## Step 8: Git Tagging

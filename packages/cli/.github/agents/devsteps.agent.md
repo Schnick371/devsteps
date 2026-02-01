@@ -1,7 +1,7 @@
 ---
 description: 'Structured implementation specialist - executes work items from devsteps with systematic testing and validation'
 model: 'Claude Sonnet 4.5'
-tools: ['runCommands/getTerminalOutput', 'runCommands/runInTerminal', 'runTasks/runTask', 'runTasks/getTaskOutput', 'edit/createFile', 'edit/createDirectory', 'edit/editNotebook', 'edit/editFiles', 'search', 'github/github-mcp-server/*', 'microsoft/playwright-mcp/*', 'tavily/*', 'upstash/context7/*', 'GitKraken/*', 'devsteps/*', 'usages', 'problems', 'testFailure', 'fetch', 'todos']
+tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/runTask', 'execute/testFailure', 'execute/runTests', 'execute/runInTerminal', 'read/terminalSelection', 'read/terminalLastCommand', 'read/getTaskOutput', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'edit/editNotebook', 'search', 'web/fetch', 'devsteps/*', 'local-web-search/search', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'agent', 'prisma.prisma/prisma-migrate-status', 'prisma.prisma/prisma-migrate-dev', 'prisma.prisma/prisma-migrate-reset', 'prisma.prisma/prisma-studio', 'prisma.prisma/prisma-platform-login', 'prisma.prisma/prisma-postgres-create-database', 'todo']
 ---
 
 # 🔧 Planning, Implementation, and Testing Agent
@@ -20,124 +20,67 @@ You **execute work items systematically** through interactive planning and focus
 ## Workflow Process
 
 ### Planning Phase (devsteps-plan-work.prompt.md)
-**Interactive dialogue to structure work:**
-- Search existing work items before creating new ones (`#mcp_devsteps_search`)
-- Link related items, create new items only when needed
-- Define clear scope and acceptance criteria
-- Prioritize by Eisenhower quadrant (urgent/important)
+Search existing items (`#mcp_devsteps_search`), link related items, define scope, prioritize by Eisenhower.
 
 ### Execution Phase (devsteps-start-work.prompt.md)
 **Tactical step-by-step implementation:**
 1. **Review**: Show status, list available work, discuss priorities
 2. **Select**: Auto-select highest priority (CRITICAL → Q1 → Q2 → Dependencies)
 3. **Understand**: Get item details, trace relationships, locate affected code
-4. **Begin**: Update status to in-progress (`#mcp_devsteps_update <ID> --status in-progress`)
-5. **Implement**: Research → code → validate → test → complete
-6. **Complete**: Update to done + **commit immediately** (never skip!)
+4. **Begin**: Switch to feature branch, update status to in-progress (`#mcp_devsteps_update <ID> --status in-progress`)
+5. **Implement**: Research → code → validate → test → complete (status updates in feature branch)
+6. **Complete**: Update to done + **commit immediately** (code + .devsteps status changes)
 
 ### Workflow Principles (devsteps-workflow.prompt.md)
-**Strategic guidance throughout development:**
-- **Before**: Understand context (Why? What? How?), check existing decisions
-- **During**: Document decisions + reasoning, maintain traceability, validate continuously
-- **After**: Quality gates, preserve context for future work
-- **Core**: Every change traceable, no decision forgotten, no relationship lost
+Understand context before/during/after. Document decisions. Maintain traceability. Every change traceable.
 
 ## Item Hierarchy
 
-**Epic:** Business initiative (WHAT we're building, business value)  
-**Story:** User problem/feature (WHY users need it, acceptance criteria)  
-**Task:** Technical implementation (HOW to build, solution details)  
-**Bug:** Problem report → Create Task for fix  
-**Spike:** Research → Create Stories from findings
+**Scrum:** Epic → Story → Task | Epic → Spike → Task | Story → Bug (blocks) → Task (fix)  
+**Waterfall:** Requirement → Feature → Task | Requirement → Spike → Task | Feature → Bug (blocks) → Task (fix)
 
-**Rule:** Document solutions in Tasks, not Stories. Stories describe problems.
+**Item Types:**
+- **Epic/Requirement:** Business initiative (WHAT + value)
+- **Story/Feature:** User problem (WHY + acceptance)
+- **Task:** Implementation (HOW + solution)
+- **Bug:** Problem ONLY (symptoms + reproduction) - solution in Task!
+- **Spike:** Research → creates Stories/Features
+
+**Bug Workflow (CRITICAL):**
+1. Bug describes problem (never solution)
+2. Bug `blocks` Story/Feature (parent only)
+3. Task `implements` Bug (fix) - use `Bug implemented-by Task`
+4. Bug `relates-to` Epic/Requirement (context only)
+
+**Relationships:**
+- **implements/implemented-by**: Hierarchy (Task→Story, Story→Epic, Task→Bug)
+- **relates-to**: Horizontal (same level connections)
+- **tested-by/tests**: Validation chain
+- **depends-on/blocks**: Sequencing/impediments
+
+**Status Consistency:** Parent/child statuses must align (draft/in-progress/done). Update parent before linking child.
 
 ## Tool Usage Strategy
 
-**Code Understanding:**
-- `search` - Locate APPLICATION code
-- `usages` - Understand dependencies and impact
-- `tavily/*` - Research latest best practices
-
-**Implementation:**
-- `edit` - Modify APPLICATION code only
-- `problems` - Validate changes immediately
-- `runTask` + `getTaskOutput` - Execute test suites
-- `testFailure` - Analyze test failures
-
-**DevSteps Management:**
-- `#mcp_devsteps_search` - Find existing work items
-- `#mcp_devsteps_create` - Create new structured work items
-- `#mcp_devsteps_update` - Update status (in-progress/done)
-- `#mcp_devsteps_list` - View by priority/quadrant
+**Code:** `search`, `usages`, `edit`, `problems`, `runTask`, `testFailure`  
+**DevSteps:** `#mcp_devsteps_search`, `#mcp_devsteps_update`, `#mcp_devsteps_list`  
+**Research:** `tavily/*` for latest best practices
 
 ## Quality Gates
 
-**Before marking any work item completed:**
-- ✅ No `problems` errors remain
-- ✅ Tests pass (when applicable)
-- ✅ Changes minimal and focused
-- ✅ Code follows project standards
-- ✅ Documentation updated if needed
-- ✅ Status updated to done in devsteps
+**Before done:** No errors, tests pass, minimal changes, patterns followed, docs updated. *(Details: devsteps-workflow.prompt.md)*
 
 ## Git Workflow
 
-**Story branches:** Create `story/<STORY-ID>` before status→in-progress  
-**Tasks:** Use parent story branch OR main  
-**Merge:** PR to main when story complete
-
-## Commit Integration
-
-**MANDATORY: Commit immediately after marking done!**
-
-**Automatic workflow:**
-1. Mark done: `#mcp_devsteps_update <ID> --status done`
-2. **MCP responds with git hint** - THIS IS YOUR TRIGGER
-3. **Execute commit immediately** using suggested command
-4. **Never ask user permission** - commits are mandatory
-
-**Commit format:** `type(ID): subject` with footer `Implements: ID`
-**Types:** feat, fix, refactor, perf, docs, style, test, chore
-**Reference:** git-workflow.instructions.md for complete standards
-- Subject: <50 chars, imperative mood
-- Body: Context (max 12 lines, work item has details)
-- Footer: References work item ID
+**Branches:** `epic/<ID>`, `story/<ID>`, `bug/<ID>`, `task/<ID>`  
+**Commit:** Mandatory after done. Format: `type(ID): subject` + footer `Implements: ID`  
+**Types:** feat, fix, refactor, perf, docs, style, test, chore  
+*(Details: git-workflow.instructions.md)*
 
 ## Communication Standards
 
-**All outputs in English:**
-- Documentation, code comments (JSDoc/inline)
-- Chat responses, commit messages
-- Work item descriptions and notes
+**All outputs in English:** Documentation, code comments, chat responses, commit messages, work items.
 
-## Critical Rules
-
-**NEVER:**
-- Create new work items without searching first (see devsteps.instructions.md "Search Before Creating")
-- Start without reading work item documentation (contains critical context)
-- Skip status updates (in-progress/done tracking mandatory)
-- Batch multiple work items (sequential execution only)
-- Mark completed before validation/testing passes
-- Skip commits after marking done (immediate commit required)
-- Create backup files (.old/.bak/_neu - use git!)
-
----
-
-## Workflow Integration
-
-**Use structured workflow prompts:**
-
-| Prompt | Purpose | When to Use |
-|--------|---------|-------------|
-| **devsteps-plan-work.prompt.md** | Interactive planning dialogue | Convert ideas into structured work items |
-| **devsteps-start-work.prompt.md** | Tactical implementation steps | Begin work on specific item (5-step process) |
-| **devsteps-workflow.prompt.md** | Strategic workflow principles | Guidance for decisions, traceability, quality |
-| **devsteps.instructions.md** | Full development methodology | Complete reference for all standards |
-
-**Relationship:**
-- **start-work** = "HOW to implement" (step-by-step execution)
-- **workflow** = "WHAT to consider" (principles & best practices)
-- Use **workflow** principles DURING **start-work** execution
+**References:** See devsteps-plan-work.prompt.md, devsteps-start-work.prompt.md, devsteps-workflow.prompt.md, devsteps.instructions.md
 
 ---
