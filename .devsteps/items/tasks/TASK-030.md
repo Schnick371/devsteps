@@ -1,51 +1,47 @@
-# TASK-030: Push Full Source Code to GitHub
+## GitHub Repository Push - Clean History (V1.0)
 
-## Updated Goal
-Push complete DevSteps source code to GitHub so the community can contribute and improve the project.
+Die GitHub-Publikation ist vorbereitet mit **sauberer History** (1 initialer Commit statt 481).
 
-## Repository
-**Target**: https://github.com/Schnick371/devsteps
-**Status**: Ready for source code push
+### Strategie
 
-## What Will Be Pushed
-- **Full Source Code**: All packages (cli, mcp-server, extension, shared)
-- **Build Configuration**: tsconfig, biome, turborepo config
-- **Documentation**: README, INSTALL, CONTRIBUTING, SECURITY, etc.
-- **DevSteps Workflow**: .devsteps/ directory with work items
-- **Copilot Files**: .github/prompts/, .github/instructions/, .github/agents/
-- **GitHub Templates**: Issue templates, PR template, FUNDING
+**Orphan Branch `github-v1`** enthält den kompletten Code als einzelnen "DevSteps v1.0.0" Commit.
+Von hier aus wird die öffentliche Versionierung gestartet.
 
-## Pre-Push Checklist
-- ✅ LICENSE.md (Apache 2.0 with copyright)
-- ✅ README.md (project overview)
-- ✅ CODE_OF_CONDUCT.md
-- ✅ CONTRIBUTING.md
-- ✅ SECURITY.md
-- ✅ TRADEMARK.md (trademark protection)
-- ✅ NOTICE (third-party attributions)
-- ✅ GitHub templates in place
-- ✅ No secrets/credentials exposed
-- ✅ Build passes locally
+### Durchgeführte Schritte
 
-## Push Command
+1. ✅ Orphan Branch erstellt: `git checkout --orphan github-v1`
+2. ✅ Backup-Dateien bereinigt (keine .devsteps/index.backup-*, archive-files)
+3. ✅ Alle Dateien gestaged
+4. ✅ Initialer V1.0 Commit erstellt
+
+### Push-Befehle (manuell auszuführen)
+
 ```bash
-# Set up remote (if not exists)
+# Remote hinzufügen (falls noch nicht vorhanden)
 git remote add origin https://github.com/Schnick371/devsteps.git
 
-# Push to GitHub
-git push -u origin main
+# Force-Push des orphan branch als main auf GitHub
+git push -u origin github-v1:main --force
 ```
 
-## Post-Push Configuration
-1. Set repository description: "Never Code Alone - Team Up With Your AI"
-2. Add topics: mcp, model-context-protocol, ai, task-tracking, vscode-extension
-3. Enable GitHub Discussions
-4. Configure Dependabot
-5. Add social preview image
+### Nach dem Push
 
-## Success Criteria
-- ✅ Repository public on GitHub
-- ✅ All source code visible
-- ✅ README displays correctly
-- ✅ Others can clone and build
-- ✅ Issues and PRs enabled for contributions
+1. GitHub Repository Description setzen:
+   - "Never Code Alone - Team Up With Your AI. Structured development with AI-first workflow."
+   
+2. Topics hinzufügen:
+   - vscode-extension, mcp-server, ai-development, copilot, typescript
+
+3. GitHub Discussions aktivieren
+
+4. Branch Protection Rules für `main` einrichten
+
+### Lokale Repository-Bereinigung (nach erfolgreichem Push)
+
+```bash
+# Zurück zu main wechseln
+git checkout main
+
+# github-v1 Branch löschen (nicht mehr benötigt)
+git branch -d github-v1
+```
