@@ -6,7 +6,7 @@
   "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T16:40:59.062Z",
-  "updated": "2026-02-01T10:38:39.540Z",
+  "updated": "2026-02-01T10:51:48.356Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -31,7 +31,8 @@
     "relates-to": [
       "TASK-029",
       "TASK-030",
-      "BUG-029"
+      "BUG-029",
+      "TASK-213"
     ],
     "depends-on": [],
     "required-by": [],

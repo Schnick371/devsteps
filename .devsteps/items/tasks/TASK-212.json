@@ -1,0 +1,35 @@
+{
+  "id": "TASK-212",
+  "type": "task",
+  "category": "general",
+  "title": "GitHub Publication Checklist - Minimum Professional Requirements",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-01T10:51:40.784Z",
+  "updated": "2026-02-01T10:51:48.356Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-004"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "checklist",
+    "publication",
+    "legal",
+    "documentation"
+  ],
+  "commits": [],
+  "metadata": {}
+}
