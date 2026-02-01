@@ -24,6 +24,24 @@ tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/runTask', 'ex
 - dev/X.Y.Z = development + testing + cherry-picks
 - Squash preserves clean history
 
+## Step 0: Pre-Flight Authentication Check (MANDATORY)
+
+**Verify npm login:**
+```bash
+npm whoami
+# Expected: your npm username (e.g., schnick371)
+# If 401 Unauthorized → run: npm login
+```
+
+**Verify GitHub access:**
+```bash
+git ls-remote origin HEAD
+# Expected: SHA reference (confirms push access)
+# If authentication fails → check git credentials
+```
+
+**⚠️ STOP if either check fails!** Fix authentication before proceeding.
+
 ## Step 1: Prepare Development Branch
 
 **Create dev branch from main:**

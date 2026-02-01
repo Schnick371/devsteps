@@ -1,6 +1,6 @@
 {
   "name": "@schnick371/devsteps-mcp-server",
-  "version": "0.8.5",
+  "version": "1.0.0",
   "type": "module",
   "description": "Never Code Alone. MCP server for AI-assisted developer task tracking - team up with your AI.",
   "author": "devsteps.dev",

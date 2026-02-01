@@ -1,6 +1,6 @@
 {
   "name": "@schnick371/devsteps-cli",
-  "version": "0.8.5",
+  "version": "1.0.0",
   "type": "module",
   "license": "Apache-2.0",
   "description": "Never Code Alone. CLI for AI-assisted developer task tracking.",
