@@ -213,28 +213,40 @@ The devsteps system integrates with:
 
     writeFileSync(join(githubAgentsDir, 'devsteps.agent.md'), devstepsAgentContent);
 
-    // Copy devsteps instructions
-    const instructionFiles = [
-      'devsteps.instructions.md',
-      'devsteps-code-standards.instructions.md',
-    ];
-    for (const instructionFile of instructionFiles) {
-      const instructionSource = join(sourceGithubDir, 'instructions', instructionFile);
-      if (existsSync(instructionSource)) {
+    // Copy ALL devsteps agent files dynamically
+    const sourceAgentsDir = join(sourceGithubDir, 'agents');
+    if (existsSync(sourceAgentsDir)) {
+      const agentFiles = readdirSync(sourceAgentsDir).filter(
+        (f) => f.startsWith('devsteps') && f.endsWith('.agent.md')
+      );
+      for (const agentFile of agentFiles) {
+        const agentSource = join(sourceAgentsDir, agentFile);
+        const agentContent = readFileSync(agentSource, 'utf8');
+        writeFileSync(join(githubAgentsDir, agentFile), agentContent);
+      }
+    }
+
+    // Copy ALL devsteps instruction files dynamically
+    const sourceInstructionsDir = join(sourceGithubDir, 'instructions');
+    if (existsSync(sourceInstructionsDir)) {
+      const instructionFiles = readdirSync(sourceInstructionsDir).filter(
+        (f) => f.startsWith('devsteps') && f.endsWith('.instructions.md')
+      );
+      for (const instructionFile of instructionFiles) {
+        const instructionSource = join(sourceInstructionsDir, instructionFile);
         const instructionContent = readFileSync(instructionSource, 'utf8');
         writeFileSync(join(githubInstructionsDir, instructionFile), instructionContent);
       }
     }
 
-    // Copy devsteps prompts
-    const promptFiles = [
-      'devsteps-plan-work.prompt.md',
-      'devsteps-start-work.prompt.md',
-      'devsteps-workflow.prompt.md',
-    ];
-    for (const promptFile of promptFiles) {
-      const promptSource = join(sourceGithubDir, 'prompts', promptFile);
-      if (existsSync(promptSource)) {
+    // Copy ALL devsteps prompt files dynamically
+    const sourcePromptsDir = join(sourceGithubDir, 'prompts');
+    if (existsSync(sourcePromptsDir)) {
+      const promptFiles = readdirSync(sourcePromptsDir).filter(
+        (f) => f.startsWith('devsteps') && f.endsWith('.prompt.md')
+      );
+      for (const promptFile of promptFiles) {
+        const promptSource = join(sourcePromptsDir, promptFile);
         const promptContent = readFileSync(promptSource, 'utf8');
         writeFileSync(join(githubPromptsDir, promptFile), promptContent);
       }
@@ -257,14 +269,44 @@ The devsteps system integrates with:
     // Extend existing agent files with devsteps tools
     const extendedFiles = extendExistingAgents(projectPath);
 
+    // Collect copied files for message
+    const copiedAgents: string[] = [];
+    const copiedInstructions: string[] = [];
+    const copiedPrompts: string[] = [];
+
+    if (existsSync(sourceAgentsDir)) {
+      copiedAgents.push(
+        ...readdirSync(sourceAgentsDir).filter(
+          (f) => f.startsWith('devsteps') && f.endsWith('.agent.md')
+        )
+      );
+    }
+    if (existsSync(sourceInstructionsDir)) {
+      copiedInstructions.push(
+        ...readdirSync(sourceInstructionsDir).filter(
+          (f) => f.startsWith('devsteps') && f.endsWith('.instructions.md')
+        )
+      );
+    }
+    if (existsSync(sourcePromptsDir)) {
+      copiedPrompts.push(
+        ...readdirSync(sourcePromptsDir).filter(
+          (f) => f.startsWith('devsteps') && f.endsWith('.prompt.md')
+        )
+      );
+    }
+
     let message = `Project '${args.project_name}' initialized successfully\n\n`;
-    message += '✓ Copilot files created:\n';
-    message += '  - .github/agents/devsteps.agent.md\n';
-    message += '  - .github/instructions/devsteps.instructions.md\n';
-    message += '  - .github/instructions/devsteps-code-standards.instructions.md\n';
-    message += '  - .github/prompts/devsteps-plan-work.prompt.md\n';
-    message += '  - .github/prompts/devsteps-start-work.prompt.md\n';
-    message += '  - .github/prompts/devsteps-workflow.prompt.md\n';
+    message += `✓ Copilot files created (${copiedAgents.length + copiedInstructions.length + copiedPrompts.length} files):\n`;
+    for (const file of copiedAgents) {
+      message += `  - .github/agents/${file}\n`;
+    }
+    for (const file of copiedInstructions) {
+      message += `  - .github/instructions/${file}\n`;
+    }
+    for (const file of copiedPrompts) {
+      message += `  - .github/prompts/${file}\n`;
+    }
     message += '\n✓ Documentation:\n';
     message += '  - .devsteps/HIERARCHY.md\n';
     message += '  - .devsteps/AI-GUIDE.md';
