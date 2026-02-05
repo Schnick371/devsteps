@@ -1,5 +1,5 @@
 ---
-applyTo: ".github/prompts/*.prompt.md,.github/instructions/*.instructions.md,.github/chatmodes/*.chatmode.md"
+applyTo: ".github/prompts/*.prompt.md,.github/instructions/*.instructions.md,.github/agents/*.agent.md"
 description: "YAML frontmatter headers specification and best practices for GitHub Copilot files"
 ---
 
@@ -25,12 +25,12 @@ description: 'Brief description'
 ---
 ```
 
-### Chatmode Files
+### Agent Files
 ```yaml
 ---
 description: 'Brief description'
 model: 'Claude Sonnet 4.5'
-tools: ['edit', 'search', 'usages', 'tavily']  # Variable set based on chatmode needs
+tools: ['edit', 'search', 'usages', 'tavily']  # Variable set based on agent needs
 ---
 ```
 
@@ -106,23 +106,26 @@ Each AI model has unique strengths and reasoning capabilities:
   - `Optimize-Frontend-Bundle-Performance.prompt.md`
   - `Discover-API-Endpoints-Documentation.prompt.md`
 
-### Chatmode Files
-- **Format**: `<Role>-<Specialization>.chatmode.md`
-- **Pattern**: PascalCase with hyphens, role and expertise focused (NO verbs - chatmodes are personas, not actions)
+### Agent Files
+- **Format**: `<Role>-<Specialization>.agent.md`
+- **Pattern**: PascalCase with hyphens, role and expertise focused (NO verbs - agents are personas, not actions)
 - **Common Roles**: Architect, Engineer, Developer, Auditor, Manager, Specialist, Consultant, Analyst
-- **Optional Level Prefix**: Can add `Senior-`, `Lead-`, `Principal-` for hierarchy (e.g., `Senior-Architect-Systems.chatmode.md`)
+- **Optional Level Prefix**: Can add `Senior-`, `Lead-`, `Principal-` for hierarchy (e.g., `Senior-Architect-Systems.agent.md`)
 - **Examples**:
-  - `Architect-Systems.chatmode.md`
-  - `Architect-Enterprise.chatmode.md`
-  - `Engineer-Performance.chatmode.md`
-  - `Engineer-Security.chatmode.md`
-  - `Developer-Electron.chatmode.md`
-  - `Developer-React.chatmode.md`
-  - `Auditor-Security.chatmode.md`
-  - `Auditor-CodeQuality.chatmode.md`
-  - `Manager-CopilotFiles.chatmode.md`
-  - `Specialist-Database.chatmode.md`
-  - `Consultant-CloudMigration.chatmode.md`
+  - `Architect-Systems.agent.md`
+  - `Architect-Enterprise.agent.md`
+  - `Engineer-Performance.agent.md`
+  - `Engineer-Security.agent.md`
+  - `Developer-Electron.agent.md`
+  - `Developer-React.agent.md`
+  - `Auditor-Security.agent.md`
+  - `Auditor-CodeQuality.agent.md`
+  - `Manager-CopilotFiles.agent.md`
+  - `Specialist-Database.agent.md`
+  - `Consultant-CloudMigration.agent.md`
+
+### Migration Note
+Custom agents were previously known as "custom chat modes" (.chatmode.md files in .github/chatmodes/). VS Code 1.106+ recognizes legacy files and offers Quick Fix actions to rename and move them to .github/agents/ with .agent.md extension.
 
 ### Naming Guidelines
 - **Keep Clear and Concise** - Avoid redundant prefixes or unnecessary verbosity
