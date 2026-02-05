@@ -1,5 +1,5 @@
 ---
-applyTo: "**/*.md,!.devsteps/**,!**/node_modules/**,!.github/{instructions,prompts,agents,chatmodes}/**"
+applyTo: "**/*.md,!.devsteps/**,!**/node_modules/**,!.github/{instructions,prompts,agents}/**"
 description: "Documentation standards for markdown files"
 ---
 
