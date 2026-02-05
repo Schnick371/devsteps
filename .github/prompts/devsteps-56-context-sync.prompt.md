@@ -1,520 +1,483 @@
 ---
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
-description: 'Autonomous multi-hour context synchronization - analyze codebase reality, sync work items, consolidate documentation'
+tools: ['read', 'search', 'usages', 'edit', 'semantic', 'execute/runInTerminal', 'devsteps/*', 'todo', 't avily/*']
+description: 'Project knowledge base creation - document architecture, patterns, decisions for Copilot memory and consistent implementation'
 ---
 
-# 🔄 DevSteps Context Sync - Reality-to-Planning Alignment
+# 📚 Project Context Documentation - Copilot Memory System
 
 ## Mission
 
-Execute multi-hour autonomous context analysis - discover actual project state across all dimensions, compare with DevSteps work items, create consolidated documentation, resolve divergences between planning and implementation reality.
+Create living documentation in `.devsteps/context/` that serves as **Copilot's project memory**. Prevents reimplementation of already-defined patterns, captures architectural decisions, and links to DevSteps work items for implementation details.
 
-**Analysis work, NOT implementation.** Creates single source of truth for project context.
+**Used at project start and maintained throughout lifecycle.**
+
+**Goal:** Copilot checks context docs BEFORE implementing, ensuring consistency across components.
 
 ## Core Principles
 
-**Reality-First Discovery:**
-- Analyze actual codebase, architecture, infrastructure before checking work items
-- Code reality trumps stale planning artifacts
-- Discover what exists, not what was planned
+**README-First Discovery:**
+- Start with `.devsteps/context/README.md` as central index
+- Discover project-specific aspects through codebase analysis
+- Let project tell you what's important, don't prescribe dimensions
 
-**Divergence Detection:**
-- Implementation ahead of planning → create catch-up work items
-- Planning ahead of implementation → validate/update/obsolete items
-- Documentation-code misalignment → update documentation
+**Context as Implementation Guide:**
+- Document HOW things are done (patterns, conventions, decisions)
+- Link to WHO decided (ADRs) and WHY (work items)
+- Reference WHERE implemented (file paths, code examples)
+- Prevent Copilot from "inventing" different approaches
 
-**Consolidated Documentation:**
-- Living documentation in `.devsteps/context/*.md`
-- Single source of truth per domain
-- Updated during sync, referenced during planning
+**Work Item Integration:**
+- Context files reference relevant work items
+- Work items link to context documentation
+- Implementation details in items, strategic context in docs
+- Bidirectional traceability
 
-## Project Dimensions to Analyze
+**Living Documentation:**
+- Updated when patterns change
+- Referenced during implementation
+- Version-controlled for history
+-Markdown for readability
 
-**Each dimension gets dedicated analysis iteration and documentation file:**
+## Use Cases
 
-### 1. Data Model & Schema
-- Database schemas, ORMs, migrations
-- Data types, relationships, constraints
-- API contracts, DTOs, request/response shapes
-- File: `.devsteps/context/Data-Model.md`
+**Problem: Inconsistent Implementation**
+- Multi-app projects (frontend A + frontend B + backend)
+- Authentication implemented 3 different ways
+- Each time Copilot "invents" new approach
 
-### 2. UI/UX Architecture
-- Component hierarchy, design systems
-- State management patterns
-- Routing structure, page flows
-- Accessibility compliance
-- File: `.devsteps/context/UI-Architecture.md`
+**Solution: Context Documentation**
+- `.devsteps/context/authentication.md` documents THE pattern
+- Copilot reads before implementing
+- Links to work items with implementation details
+- References actual code locations
 
-### 3. DevOps & Infrastructure
-- CI/CD pipelines, build scripts
-- Deployment targets, environments
-- Monitoring, logging, alerting
-- Infrastructure as Code (IaC)
-- File: `.devsteps/context/DevOps-Infrastructure.md`
+**Problem: Forgotten Requirements**
+- Work items created but context lost
+- Copilot doesn't understand project goals
+- Repeats research instead of checking docs
 
-### 4. Documentation Standards
-- README structure, code comments
-- API documentation, ADRs
-- Onboarding guides, troubleshooting
-- File: `.devsteps/context/Documentation-Standards.md`
+**Solution:README.md Index**
+- Central overview of project architecture
+- Links to aspect-specific documentation
+- Quick reference for common patterns
+- Copilot's first stop before work
 
-### 5. Architecture & Design Patterns
-- System boundaries, module dependencies
-- Design patterns in use
-- Cross-cutting concerns
-- Technical debt hotspots
-- File: `.devsteps/context/Architecture-Decisions.md`
+## Documentation Structure
 
-### 6. VS Code Environment
-- Workspace tasks, launch configurations
-- Extensions, settings, snippets
-- Multi-root workspace setup
-- File: `.devsteps/context/VSCode-Setup.md`
-
-### 7. External Resources
-- Third-party APIs, services
-- npm/pip/maven dependencies
-- SaaS integrations, webhooks
-- File: `.devsteps/context/External-Resources.md`
-
-## Autonomous Execution Workflow
-
-Use `#manage_todo_list` extensively to track multi-hour progress across phases.
-
-### Phase 1: Iterative Context Discovery
-
-**For EACH dimension (7 iterations):**
-
-**Step 1: Codebase Analysis**
-
-Use semantic and structural search to discover dimension-specific reality.
-
-**Data Model discovery:**
-```bash
-# Find schema definitions
-grep -r "CREATE TABLE\|model\|schema" --include="*.sql,*.ts,*.py"
-
-# Trace ORM models
-semantic_search "database model schema entity"
-
-# Find migrations
-file_search "migrations/**/*.{sql,ts,js,py}"
+**Central Index:**
+```
+.devsteps/context/README.md
 ```
 
-**UI Architecture discovery:**
-```bash
-# Component structure
-semantic_search "component hierarchy layout page"
-
-# State management
-grep -r "useState\|Redux\|Vuex\|Pinia" --include="*.{ts,tsx,js,jsx}"
-
-# Routing
-file_search "**/{routes,router}*.{ts,js}"
+**Aspect-Specific Documentation:**
+```
+.devsteps/context/
+├── README.md                    # Index + project overview
+├── authentication.md            # How auth works across all apps
+├── cli-library-separation.md    # Package architecture decisions
+├── logging-infrastructure.md    # Logging patterns and tools
+├── path-resolution-truth.md     # File path handling strategy
+├── testing-patterns.md          # Test conventions and setup
+└── ...                          # Project-specific aspects
 ```
 
-**DevOps discovery:**
-```bash
-# CI/CD pipelines
-file_search ".github/workflows/*.{yml,yaml}"
-file_search ".gitlab-ci.yml"
-file_search "azure-pipelines.yml"
+**README.md Purpose:**
+- Project overview (What is this project?)
+- Technical stack summary
+- Index of context files with 1-line descriptions
+- Quick reference for common patterns
+- Links to key Epics and architectural work items
 
-# Build scripts
-grep -r "\"build\"\|\"deploy\"" package.json
-```
+**Aspect File Purpose:**
+- WHY this aspect matters (business/technical rationale)
+- WHAT the current approach is (implementation pattern)
+- HOW it's implemented (code locations, examples)
+- WHO decided (link to ADRs if formalized)
+- WHEN to use this pattern (applicability guidance)
+- Related work items (with DevSteps IDs)
 
-**Architecture discovery:**
-```bash
-# Module boundaries
-semantic_search "architecture layers modules boundaries"
+## Workflow
 
-# Design patterns
-grep -r "Factory\|Singleton\|Observer\|Strategy" --include="*.{ts,js,py}"
+Use `#manage_todo_list` to track progress through phases.
 
-# Dependencies
-list_code_usages "import" --depth 2
-```
+### Phase 1: Project Discovery
 
-**VS Code discovery:**
-```bash
-# Tasks
-read_file .vscode/tasks.json
+**Goal:** Understand what aspects matter for THIS project.
 
-# Extensions
-read_file .vscode/extensions.json
+**Discovery Protocol:**
 
-# Settings
-read_file .vscode/settings.json
-```
+1. **Check for existing context:**
+   - Does `.devsteps/context/README.md` exist?
+   - What aspects are already documented?
+   - Are docs current or stale?
 
-**External Resources discovery:**
-```bash
-# Package dependencies
-read_file package.json
-read_file requirements.txt
-read_file pom.xml
+2. **Analyze work items:**
+   ```bash
+   #mcp_devsteps_list --status done,in-progress
+   ```
+   - What areas have most work items?
+   - Which Epics define architecture?
+   - What patterns emerge from completed work?
 
-# API integrations
-grep -r "fetch\|axios\|http" --include="*.{ts,js}" | grep -i "api"
-```
+3. **Survey codebase structure:**
+   - Monorepo vs single-package?
+   - Multiple applications or libraries?
+   - What technologies/frameworks used?
+   - What crosscutting concerns exist?
 
-**Step 2: Create/Update Dimension Documentation**
+4. **Identify project-specific aspects:**
+   - Authentication & authorization patterns
+   - Data access & storage strategies
+   - Build & deployment pipelines
+   - Testing approaches
+   - Logging & monitoring
+   - Error handling conventions
+   - Configuration management
+   - Module boundaries & dependencies
 
-Generate structured Markdown in `.devsteps/context/[Dimension].md`
+**Output:** List of aspects to document (project-specific, not prescriptive).
 
-**Template structure:**
+### Phase 2: README.md Creation/Update
+
+**Goal:** Central index for Copilot's project understanding.
+
+**README.md Content:**
+
+**Section 1: Project Overview**
+- What problem does this project solve?
+- What are the main components?
+- Who are the users/consumers?
+
+**Section 2: Technical Stack**
+- Languages & frameworks
+- Key libraries & dependencies
+- Development tools
+
+**Section 3: Architectural Principles**
+- High-level design decisions
+- Non-negotiable constraints
+- Quality attributes prioritized
+
+**Section 4: Aspect Index**
+- Table of contents for context docs
+- 1-2 line description per aspect
+- Links to detailed aspect files
+
+**Section 5: Quick Reference**
+- Most common patterns
+- Frequently referenced work items
+- Key file locations
+
+**Section 6: Getting Context**
+- How to use these docs during implementation
+- When to update context
+- How to link work items
+
+### Phase 3: Aspect Documentation
+
+**For EACH discovered aspect:**
+
+**Investigation:**
+- Search codebase for implementations
+- Read related work items for context
+- Identify patterns and conventions
+- Find code examples
+
+**Documentation:**
+
+Create `.devsteps/context/[aspect].md`:
+
 ```markdown
-# [Dimension Name]
+# [Aspect Name]
 
-**Last Updated:** [Timestamp]
-**Analysis Scope:** [Files/modules analyzed]
+**Last Updated:** [Date]
+**Owner/Decider:** [Team/Person or "emerging pattern"]
 
-## Current State
+## Why This Matters
 
-[What EXISTS in codebase RIGHT NOW]
+[Business or technical rationale for this aspect]
 
-### Key Components
+## Current Approach
 
-- Component/Module 1: Purpose, location, dependencies
-- Component/Module 2: ...
+[HIGH-LEVEL description of pattern/convention]
 
-### Patterns & Conventions
+## Implementation Details
 
-- Pattern 1: Description, examples
-- Pattern 2: ...
+### Pattern/Convention 1
+- Description
+- When to use
+- Code locations: [file paths]
+- Examples: [link to actual files]
 
-### Known Issues & Technical Debt
+### Pattern/Convention 2
+- ...
 
-- Issue 1: Description, impact, affected areas
-- Issue 2: ...
+## Key Decisions
 
-## Planned Changes
-
-[From DevSteps work items - see Phase 2]
-
-## Divergences Detected
-
-[Differences between code reality and planning - see Phase 3]
+- Decision 1: What, why, when, impact
+- Decision 2: ...
+- ADR references if formalized
 
 ## Related Work Items
 
-- EPIC-XXX: [Title]
-- STORY-XXX: [Title]
-- TASK-XXX: [Title]
+- EPIC-XXX: [Title] - [Why relevant]
+- STORY-XXX: [Title] - [Implementation details here]
+- TASK-XXX: [Title] - [Specific technique]
 
-## References
+## Code Locations
 
-- Code locations: [paths]
-- Documentation: [links]
-- External resources: [URLs]
+- Primary: [main implementation]
+- Examples: [reference implementations]
+- Tests: [test files demonstrating usage]
+
+## Common Pitfalls
+
+[What NOT to do, with rationale]
+
+## Future Considerations
+
+[Planned changes from in-progress/planned work items]
 ```
 
-**Step 3: Document Findings Immediately**
-
-Create `.devsteps/context/[Dimension].md` with discoveries before moving to next dimension.
-
-Preserve factual observations, avoid speculation.
-
-Capture both what exists AND what's missing (gaps).
-
-### Phase 2: Work Item Correlation
-
-**After all 7 dimensions documented:**
-
-Retrieve all DevSteps work items and correlate with discovered reality.
-
-**For each work item:**
-
-```bash
-# Get item details
-#mcp_devsteps_get <ITEM-ID>
-
-# Identify affected dimension(s)
-# Check if work item addresses discovered code/architecture
-
-# Questions to answer:
-# - Does this item target code that exists?
-# - Is the problem described still accurate?
-# - Has work already started/completed without updating item?
-# - Are affected paths current?
-```
-
-**Correlation categories:**
-
-**Category A: Work Item Matches Reality**
-- Item describes planned work, code shows partial implementation
-- Item status should be `in-progress` or `review`
-- Action: Verify status accuracy, update affected paths
-
-**Category B: Code Ahead of Planning**
-- Feature/refactor implemented but no work item exists
-- Undocumented technical decisions or architecture changes
-- Action: Create retroactive work items for audit trail
-
-**Category C: Work Item Obsolete**
-- Problem solved differently
-- Technology/approach abandoned
-- Superseded by other work
-- Action: Mark obsolete with superseded-by links
-
-**Category D: Work Item Stale**
-- >12 weeks old, draft status
-- No corresponding code changes
-- Still valid but deprioritized
-- Action: Update priority, refresh description, or cancel
-
-**Category E: Divergence Detected**
-- Work item describes approach X, code implements approach Y
-- Scope creep - implementation broader than planned
-- Missing acceptance criteria met in code
-- Action: Requires reconciliation (Phase 3)
-
-### Phase 3: Divergence Resolution
-
-**For each detected divergence:**
-
-**Analyze root cause:**
-- Was work item outdated when implementation started?
-- Did implementation discover better approach mid-stream?
-- Was scope expanded without updating planning?
-- Were acceptance criteria incomplete?
-
-**Resolution strategies:**
-
-**Strategy 1: Update Work Item to Match Reality**
-
-When code implementation superior to original plan.
-
-Update work item description to reflect actual approach taken.
-
-Add acceptance criteria based on shipped functionality.
-
-Mark `done` with completion timestamp reflecting actual merge date.
-
-**Strategy 2: Create Missing Work Items**
-
-When significant work done without corresponding items.
-
-Retroactive work item creation for audit trail and traceability.
-
-Link to Git commits, PRs, merged branches.
-
-Status: `done`, dated to match actual completion.
-
-**Strategy 3: Extend Work Item Scope**
-
-When implementation broader than originally planned.
-
-Split into completed portion (mark `done`) and remaining work (new item).
-
-Preserve original item as `done`, create successor for gaps.
-
-**Strategy 4: Mark Work Item Obsolete**
-
-When planned approach abandoned for better solution.
-
-Document why approach changed in obsolescence reason.
-
-Link to actual work items that delivered alternative.
-
-### Phase 4: Documentation Consolidation
-
-**Update all `.devsteps/context/*.md` files with Phase 2-3 findings:**
-
-**Add "Planned Changes" section:**
-
-Extract from work items with status `draft`, `planned`, `in-progress`.
-
-Group by Epic for strategic view.
-
-Include acceptance criteria from work items.
-
-**Add "Divergences Detected" section:**
-
-Document misalignments found in Phase 3.
-
-Note resolutions applied.
-
-Flag unresolved divergences requiring user decision.
-
-**Add "Related Work Items" section:**
-
-Link all work items affecting this dimension.
-
-Include Epic hierarchy for context.
-
-Note completion status and priorities.
-
-**Cross-reference between dimensions:**
-
-UI changes → link Data Model changes.
-
-Architecture decisions → link DevOps impacts.
-
-External Resources → link Documentation updates.
-
-### Phase 5: Work Item Consolidation
-
-**Apply learnings from context analysis to work items:**
-
-**Epic validation:**
-- Do Epics align with architectural boundaries discovered?
-- Are Epic scopes realistic given actual codebase complexity?
-- Should Epics be merged/split based on module boundaries?
-
-**Story sharpening:**
-- Update affected paths to match actual file structure
-- Add technical context from architecture documentation
-- Refine acceptance criteria based on discovered patterns
-
-**Task creation:**
-- Create missing Task items for undocumented implementation work
-- Link Tasks to discovered technical debt
-- Break down Stories based on actual component structure
-
-**Priority recalibration:**
-- High-priority items targeting non-existent code → reconsider
-- Low-priority items addressing discovered critical debt → escalate
-- Eisenhower quadrant adjustment based on architectural reality
-
-### Phase 6: Quality Gates & Validation
-
-**Documentation quality checks:**
-
-- [ ] All 7 dimension files created/updated
-- [ ] Factual accuracy - code references current
-- [ ] Cross-references complete between dimensions
-- [ ] No speculation - only observed facts
-- [ ] Related work items linked bidirectionally
-
-**Work item quality checks:**
-
-- [ ] Affected paths match actual codebase structure
-- [ ] No work items referencing non-existent code
-- [ ] All implemented features have corresponding work items
-- [ ] Divergences resolved or documented as pending
-- [ ] Epic-Story-Task hierarchy matches module boundaries
-
-**Sync validation:**
-
-- [ ] Context documentation reflects work item planning
-- [ ] Work items reference context documentation
-- [ ] No orphaned planning (work items without code)
-- [ ] No orphaned implementation (code without work items)
-- [ ] Superseded-by chains complete for obsolete items
-
-## Adaptive Workflow Control
-
-**Re-assess after each dimension (7 checkpoints):**
-
-Measure depth of divergence discovered.
-
-If >50% work items diverge in dimension → pause, report to user.
-
-Adjust analysis strategy based on findings.
-
-**Pause triggers:**
-- Architectural decision required (competing approaches discovered)
-- Major undocumented refactor found (>1000 lines changed)
-- External dependency conflict (planned vs actual)
-- Security/compliance issue discovered
-- VS Code workspace corruption
-
-**Pause protocol:**
-
-Document current dimension analysis state.
-
-Present specific questions with context.
-
-Save progress in partial documentation files.
-
-Generate interim divergence report.
-
-## Communication Standards
-
-**Progress updates every dimension:**
-- Dimension analyzed
-- Key findings count
-- Work items correlated
-- Divergences detected
-- Documentation files created/updated
-
-**Divergence reporting:**
-- What was planned (work item)
-- What was implemented (code)
-- Root cause analysis
-- Recommended resolution
-- Risk/impact assessment
-
-**Final summary:**
-- Dimensions analyzed: 7/7
-- Context files created/updated
-- Work items correlated/created/obsoleted
-- Divergences resolved/pending
-- Documentation-code sync status
+**Integration with Work Items:**
+- Reference work items that define or refine this aspect
+- Note which work items implement specific patterns
+- Link to affected_paths in work item metadata
+
+**Code Examples:**
+- Link to actual files (don't copy/paste)
+- Note line ranges if specific
+- Keep examples current with codebase
+
+### Phase 4: Work Item Correlation
+
+**Goal:** Bidirectional links between context and work items.
+
+**For each aspect documented:**
+
+1. **Find related work items:**
+   ```bash
+   #mcp_devsteps_search "authentication"
+   #mcp_devsteps_list --tags security,auth
+   ```
+
+2. **Update work item descriptions:**
+   - Add "See: `.devsteps/context/authentication.md`" references
+   - Ensure affected_paths match documented code locations
+   - Link Epic/Story hierarchy to architectural context
+
+3. **Update aspect documentation:**
+   - Add work item IDs to "Related Work Items" section
+   - Note implementation status from work items
+   - Document planned changes from in-progress items
+
+**Traceability Matrix:**
+- Every architectural pattern has supporting work items
+- Every work item references relevant context documentation
+- Copilot can navigate from code → context → work item
+
+### Phase 5: README.md Finalization
+
+**Update central index:**
+
+1. **Add all discovered aspects** to index
+2. **Verify links** to aspect files
+3. **Add quick reference** for most critical patterns
+4. **Link to key Epics** defining architecture
+
+**Quality checks:**
+- README readable without diving into aspects
+- Aspect index complete
+- Most important patterns highlighted
+- Newcomer can understand project from README
+
+### Phase 6: Maintenance Protocol
+
+**When to update context:**
+- New architectural pattern introduced
+- Existing pattern significantly changed
+- Work item creates new crosscutting concern
+- Implementation diverges from documented approach
+
+**Update workflow:**
+1. Identify affected aspect file(s)
+2. Update implementation details
+3. Add/update related work items
+4. Update "Last Updated" timestamp
+5. Commit with reference to triggering work item
+
+**Deprecation:**
+- Mark obsolete patterns clearly
+- Note what supersedes them
+- Keep for historical reference
+- Link to superseding work item
 
 ## Git Integration
 
-**Commit strategy:**
+**Commit Strategy:**
+- Context creation: Single commit with all initial aspects
+- Context updates: Per-aspect commits during maintenance
+- Work item linking: Separate commit after correlation
 
-Separate commits per dimension for clarity.
-
-Context documentation commits in `main` branch.
-
-Work item updates committed together after Phase 5.
-
-**Commit message format:**
+**Commit Message Format:**
 ```
-docs(context): analyze [Dimension] and sync work items
+docs(context): create project knowledge base
 
-- Created/updated .devsteps/context/[Dimension].md
-- Correlated [N] work items
-- Resolved [N] divergences
-- Created [N] retroactive items
+- Created .devsteps/context/README.md (central index)
+- Documented [N] project-specific aspects
+- Linked [N] work items to context
+- Established Copilot memory system
 
-Analysis-Scope: [files/modules]
-Divergences: [summary]
+Aspects: [authentication, testing, deployment, ...]
 ```
+
+**Branch Strategy:**
+- Context creation usually in `main` (planning phase)
+- Updates can be in feature branches if aspect changes with implementation
+- Prefer main branch to keep context accessible
+
+## Communication Standards
+
+**Progress Updates:**
+- Phase 1: "[N] aspects discovered for documentation"
+- Phase 3: "Documented aspect: [name] ([M] patterns, [K] work items)"
+- Phase 5: "README.md complete - [N] aspects indexed"
+
+**Aspect Documentation Report:**
+- Aspect name and  purpose
+- Patterns documented
+- Work items linked
+- Code locations referenced
+- Limitations/gaps noted
+
+**Final Summary:**
+- Total aspects documented
+- README.md status
+- Work item correlation count
+- Traceability coverage
+- Maintenance protocol established
 
 ## Critical Rules
 
-**Context Analysis Principles:**
-- Trust code over planning artifacts
-- Document what IS, not what should be
-- Preserve implementation decisions made during development
-- Retroactive work items preserve audit trail
-- Divergence normal - resolution systematic
+**Discovery Principles:**
+- Let project reveal what's important
+- Don't force generic dimensions onto unique projects
+- Aspects emerge from work items and code patterns
+- Quality over quantity - document what matters
 
 **Documentation Principles:**
-- Living documents - update continuously
-- Reference actual code locations (file paths, line numbers)
-- Link to external resources (not copy/paste)
-- Version-controlled in `.devsteps/context/`
-- Markdown format for readability
+- Link to code, don't copy it
+- Reference work items for rationale
+- Update when patterns change
+- Keep README.md current as index
 
-**Work Item Principles:**
-- Reality drives planning updates
-- Implemented work gets retroactive items for traceability
-- Obsolete items marked explicitly with reasoning
-- Divergence documented before resolution
-- User approval for major scope changes
+**Work Item Integration:**
+- Context explains HOW (patterns, conventions)
+- Work items explain WHY (business need) and WHAT (requirements)
+- Together form complete picture
+- Copilot navigates both for implementation
 
-**Safety Principles:**
-- Index rebuild with backup after Phase 5
-- Context files committed incrementally per dimension
-- Work item updates batched and validated
-- Pause on ambiguity - never guess architectural intent
-- Git commits only after quality gates pass
+**Copilot Memory Goal:**
+- Copilot reads context BEFORE implementing
+- Prevents "invention" of conflicting approaches
+- Ensures consistency across components
+- Reduces research time - answers already documented
+
+**Trust the Model:**
+- Provide principles and patterns, not prescriptive recipes
+- Let Copilot reason about applicability
+- Document what exists, not rigid rules
+- Context guides, doesn't constrain
+
+## Example: Multi-App Authentication
+
+**Problem:**
+- Project has 3 frontends + 1 backend
+- Authentication needed in all apps
+- Copilot keeps implementing different approaches
+
+**Context Solution:**
+
+**`.devsteps/context/README.md`:**
+```markdown
+## Aspect Index
+- [authentication.md](authentication.md) - OAuth2 + JWT pattern for all apps
+```
+
+**`.devsteps/context/authentication.md`:**
+```markdown
+# Authentication & Authorization
+
+**Last Updated:** 2026-02-05
+**Owner:** Security team decision (EPIC-003)
+
+## Why This Matters
+
+All apps (admin-ui, customer-portal, mobile-app) must share authentication for SSO.
+
+## Current Approach
+
+OAuth2 authorization code flow + JWT tokens.
+- Identity Provider: Keycloak (self-hosted)
+- Token storage: httpOnly cookies (web), secure storage (mobile)
+- Refresh strategy: Silent refresh 5min before expiry
+
+## Implementation Details
+
+### Web Apps (admin-ui, customer-portal)
+- Library: `@auth0/auth0-react` (Keycloak-compatible)
+- Configuration: `src/config/auth.ts`
+- Protected routes: `src/components/ProtectedRoute.tsx`
+- Code: [apps/admin-ui/src/auth/](../../apps/admin-ui/src/auth/)
+
+### Mobile App
+- Library: AppAuth SDK
+- Configuration: `mobile/src/config/auth.ts`
+- Token refresh: Background service
+- Code: [apps/mobile/src/services/auth/](../../apps/mobile/src/services/auth/)
+
+### Backend Validation
+- Library: `jsonwebtoken`
+- Middleware: `src/middleware/authMiddleware.ts`
+- Token validation: RS256 signature + claims check
+- Code: [backend/src/middleware/](../../backend/src/middleware/)
+
+## Related Work Items
+
+- EPIC-003: Unified Authentication System - architectural decision
+- STORY-045: Implement OAuth2 in admin-ui - web pattern established
+- STORY-046: Implement OAuth2 in customer-portal - reused pattern
+- TASK-178: Configure Keycloak realms - infrastructure setup
+
+## Common Pitfalls
+
+- Don't store JWT in localStorage (XSS vulnerability)
+- Don't implement custom token refresh (use library)
+- Don't skip HTTPS in production (token interception)
+
+## Future Considerations
+
+- STORY-089 (planned): Add biometric auth to mobile
+- SPIKE-012 (in-progress): Evaluate passwordless options
+```
+
+**Copilot Workflow:**
+1. User: "Implement authentication in new-admin-tool"
+2. Copilot: Reads `.devsteps/context/README.md`
+3. Copilot: Opens `.devsteps/context/authentication.md`
+4. Copilot: Sees OAuth2 + JWT pattern for web apps
+5. Copilot: References STORY-045 for implementation details
+6. Copilot: Follows established pattern consistently
+
+**Result:** Consistent authentication across all apps, no research duplication.
 
 ---
 
-**Remember: This discovers and documents WHAT IS, not what was planned. Planning artifacts (work items) are updated to match reality, preserving traceability and learning.**
+**This prompt creates Copilot's project memory - the knowledge base that prevents re-invention and ensures consistency.**
 
 **See also:**
-- devsteps-55-item-cleanup.prompt.md - Planning hygiene counterpart
-- devsteps-40-sprint.prompt.md - Implementation workflow
-- devsteps-10-plan-work.prompt.md - Creating NEW work items from context
-- architecture/ - Store ADRs separately from context docs
+- devsteps-10-plan-work.prompt.md - Creating work items from project planning
+- devsteps-55-item-cleanup.prompt.md - Maintaining work item quality
+- .github/instructions/devsteps-documentation.instructions.md - Markdown standards
