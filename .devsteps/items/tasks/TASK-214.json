@@ -1,0 +1,37 @@
+{
+  "id": "TASK-214",
+  "type": "task",
+  "category": "general",
+  "title": "Create relationships.ts module with core structure",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-05T22:47:35.858Z",
+  "updated": "2026-02-05T22:51:58.022Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/relationships.ts",
+    "packages/shared/src/core/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-039"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "relationships",
+    "scaffolding"
+  ],
+  "commits": [],
+  "metadata": {}
+}

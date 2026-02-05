@@ -1,0 +1,37 @@
+{
+  "id": "TASK-215",
+  "type": "task",
+  "category": "general",
+  "title": "Implement removeLink() with atomic bidirectional removal",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-05T22:47:54.346Z",
+  "updated": "2026-02-05T22:51:58.022Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/relationships.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-039"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "relationships",
+    "removeLink",
+    "core-api"
+  ],
+  "commits": [],
+  "metadata": {}
+}

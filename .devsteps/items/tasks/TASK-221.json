@@ -1,0 +1,40 @@
+{
+  "id": "TASK-221",
+  "type": "task",
+  "category": "general",
+  "title": "Document relationship management API and architecture",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-05T22:51:45.887Z",
+  "updated": "2026-02-05T22:51:58.024Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/README.md",
+    "packages/cli/README.md",
+    "packages/shared/README.md",
+    "docs/architecture/relationship-management.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-039"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "documentation",
+    "readme",
+    "api-reference",
+    "architecture"
+  ],
+  "commits": [],
+  "metadata": {}
+}
