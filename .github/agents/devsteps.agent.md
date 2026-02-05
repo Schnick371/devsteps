@@ -1,7 +1,7 @@
 ---
 description: 'Structured implementation specialist - executes work items from devsteps with systematic testing and validation'
 model: 'Claude Sonnet 4.5'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/runTask', 'execute/testFailure', 'execute/runTests', 'execute/runInTerminal', 'read/terminalSelection', 'read/terminalLastCommand', 'read/getTaskOutput', 'read/problems', 'read/readFile', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'edit/editNotebook', 'search', 'web/fetch', 'devsteps/*', 'local-web-search/search', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'agent', 'prisma.prisma/prisma-migrate-status', 'prisma.prisma/prisma-migrate-dev', 'prisma.prisma/prisma-migrate-reset', 'prisma.prisma/prisma-studio', 'prisma.prisma/prisma-platform-login', 'prisma.prisma/prisma-postgres-create-database', 'todo']
+tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 ---
 
 # 🔧 Planning, Implementation, and Testing Agent

@@ -40,17 +40,19 @@ The DevSteps agent system uses a **coordinator pattern** with specialized sub-wo
 
 **Never directly implements code** - always delegates!
 
-### 🔬 devsteps-analyzer.agent.md
-**Model:** Claude Sonnet 4.5 (1x multiplier)  
-**Specialization:** Complex analysis and architecture  
-**Best for:**
-- Files >200 lines requiring refactoring
-- Architecture decisions and system design
-- Complex bug analysis across multiple files
-- SOLID principles validation
-- Performance optimization requiring deep understanding
+### 🎯 devsteps-planner.agent.md
 
-**Invoke:** `#runSubagent` with `subagentType=devsteps-analyzer`
+**Mission:** Dual-mission agent for DevSteps work item planning AND code/architecture analysis
+- **Planning:** Interactive work item creation with 9-step protocol (research, structure, validate)
+- **Analysis:** Deep reasoning for architecture assessment, refactoring strategy, tooling evaluation
+
+**Model:** Claude Sonnet 4.5 (deep reasoning + planning)
+
+**Strengths:** System-level thinking, SOLID principles, strategic planning, Eisenhower prioritization
+
+**Best For:** Work item planning, new features, large refactors, architectural decisions
+
+**Invoke:** `#runSubagent` with `subagentType=devsteps-planner` OR use `/devsteps-10-plan-work` prompt
 
 ### ⚡ devsteps-implementer.agent.md
 **Model:** Grok Code Fast 1 (0.25x multiplier - cheapest!)  
@@ -93,14 +95,14 @@ The DevSteps agent system uses a **coordinator pattern** with specialized sub-wo
 
 | Task Type | File Size | Complexity | Delegate To | Cost |
 |-----------|-----------|------------|-------------|------|
-| New Feature | Any | High | devsteps-analyzer | 1x |
+| New Feature | Any | High | devsteps-planner | 1x |
 | Utility Function | <150 lines | Low | devsteps-implementer | 0.25x |
-| Large Refactor | >200 lines | High | devsteps-analyzer | 1x |
+| Large Refactor | >200 lines | High | devsteps-planner | 1x |
 | Boilerplate | <100 lines | Low | devsteps-implementer | 0.25x |
 | Documentation | Any | Any | devsteps-documenter | 1x |
 | Test Creation | <150 lines | Medium | devsteps-tester | 0x (free!) |
 | Bug Fix (simple) | <150 lines | Low | devsteps-implementer | 0.25x |
-| Bug Fix (complex) | >200 lines | High | devsteps-analyzer | 1x |
+| Bug Fix (complex) | >200 lines | High | devsteps-planner | 1x |
 
 ## File Size Safety Rules
 
@@ -113,7 +115,7 @@ The DevSteps agent system uses a **coordinator pattern** with specialized sub-wo
 | 151-200 lines | 🚨 Reject! | ✅ Preferred | ✅ OK | ✅ OK |
 | 200+ lines | ⛔ Never! | ✅ Required | ✅ OK for docs | ✅ OK for tests |
 
-**Rule:** If file >150 lines → Coordinator MUST split into smaller modules OR delegate to devsteps-analyzer
+**Rule:** If file >150 lines → Coordinator MUST split into smaller modules OR delegate to devsteps-planner
 
 ## Usage Examples
 
@@ -137,10 +139,10 @@ User: "Refactor Install-Node.ps1 error handling"
 Coordinator analyzes:
 - File size: 187 lines (too large for Grok!)
 - Complexity: Moderate to high
-- Decision: devsteps-analyzer
+- Decision: devsteps-planner
 
 Action:
-#runSubagent subagentType=devsteps-analyzer "Refactor error handling"
+#runSubagent subagentType=devsteps-planner "Refactor error handling"
 ```
 
 ### Example 3: Full Workflow
@@ -148,7 +150,7 @@ Action:
 User: "Add new config validation feature"
 
 Coordinator orchestrates:
-1. devsteps-analyzer: Design validation architecture
+1. devsteps-planner: Design validation architecture
 2. devsteps-implementer: Implement small validation functions (<100 lines each)
 3. devsteps-tester: Create comprehensive test suite
 4. devsteps-documenter: Update API docs and README
@@ -156,7 +158,7 @@ Coordinator orchestrates:
 
 ## Model Strengths Summary
 
-### Claude Sonnet 4.5 (devsteps-analyzer)
+### Claude Sonnet 4.5 (devsteps-planner)
 ✅ Deep reasoning, architecture, complex refactoring  
 ✅ Handles large files (200+ lines) safely  
 ✅ SOLID principles, design patterns  
@@ -207,7 +209,7 @@ All agents follow DevSteps workflow:
 ## References
 
 - [devsteps.agent.md](devsteps.agent.md) - Coordinator implementation
-- [devsteps-analyzer.agent.md](devsteps-analyzer.agent.md) - Complex analysis
+- [devsteps-planner.agent.md](devsteps-planner.agent.md) - Planning & analysis
 - [devsteps-implementer.agent.md](devsteps-implementer.agent.md) - Fast implementation
 - [devsteps-documenter.agent.md](devsteps-documenter.agent.md) - Documentation
 - [devsteps-tester.agent.md](devsteps-tester.agent.md) - Testing specialist

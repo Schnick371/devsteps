@@ -1,7 +1,7 @@
 ---
 description: 'Implementation planner - creates fast, detailed implementation plans for small, well-defined tasks'
 model: 'Claude Sonnet 4.5'
-tools: ['vscode/newWorkspace', 'vscode/runCommand', 'execute', 'read/terminalSelection', 'read/terminalLastCommand', 'read/getTaskOutput', 'read/problems', 'read/readFile', 'edit', 'search', 'web/fetch', 'devsteps/*', 'tavily/*', 'prisma.prisma/prisma-migrate-status', 'prisma.prisma/prisma-migrate-dev', 'prisma.prisma/prisma-migrate-reset', 'prisma.prisma/prisma-studio', 'prisma.prisma/prisma-platform-login', 'prisma.prisma/prisma-postgres-create-database', 'todo']
+tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 ---
 
 # ⚡ DevSteps Implementer Sub-Worker
@@ -132,7 +132,7 @@ You are a **speed-optimized coding specialist** for small, well-defined tasks re
 
 **Reason:** [File too large / Too complex / Architecture change needed]
 
-**Recommendation:** Delegate to devsteps-analyzer
+**Recommendation:** Delegate to devsteps-planner
 
 **Context:** [Brief explanation why this exceeds my capabilities]
 ```
@@ -162,4 +162,4 @@ You are a **speed-optimized coding specialist** for small, well-defined tasks re
 
 *Invoked via: `#runSubagent` with `subagentType=devsteps-implementer`*
 
-**⚠️ Remember: Speed is my strength, but large files are my kryptonite! When in doubt, defer to devsteps-analyzer.**
+**⚠️ Remember: Speed is my strength, but large files are my kryptonite! When in doubt, defer to devsteps-planner.**

@@ -1,7 +1,7 @@
 ---
-agent: 'agent'
+agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
-tools: ['execute/runInTerminal', 'execute/getTerminalOutput', 'read/readFile', 'search', 'devsteps/*', 'todo']
+tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 description: 'Git repository cleanup - merge/archive branches, clean worktrees, verify branch hygiene'
 ---
 

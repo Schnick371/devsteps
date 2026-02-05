@@ -18,9 +18,9 @@ description: "Brief description"
 ### Prompt Files
 ```yaml
 ---
-mode: 'agent'
+agent: 'devsteps'  # 'ask', 'edit', 'agent', or custom agent name
 model: 'Claude Sonnet 4.5'
-tools: ['edit', 'search', 'think', 'usages', 'tavily']  # Variable set based on prompt needs
+tools: ['edit', 'search', 'usages', 'tavily']  # Variable set based on prompt needs
 description: 'Brief description'
 ---
 ```
@@ -30,7 +30,7 @@ description: 'Brief description'
 ---
 description: 'Brief description'
 model: 'Claude Sonnet 4.5'
-tools: ['edit', 'search', 'think', 'usages', 'tavily']  # Variable set based on chatmode needs
+tools: ['edit', 'search', 'usages', 'tavily']  # Variable set based on chatmode needs
 ---
 ```
 
@@ -45,7 +45,7 @@ tools: ['edit', 'search', 'think', 'usages', 'tavily']  # Variable set based on 
 ## Supported Properties
 - `applyTo`: Glob pattern (`"**"`, `"**/*.py"`, `"**/*.ts,**/*.tsx"`)
 - `description`: Brief file purpose description
-- `mode`: `'agent'`, `'ask'`, or `'edit'`
+- `agent`: `'agent'`, `'ask'`, `'edit'`, or custom agent name (for prompt files only)
 - `model`: AI model specification (see Model Selection Guidelines below)
 - `tools`: Variable array based on prompt requirements (see Tool Selection Guidelines above)
 

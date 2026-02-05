@@ -1,5 +1,5 @@
 ---
-applyTo: ".devsteps/**/*.md"
+applyTo: "**"
 description: "DevSteps workflow and work item tracking"
 ---
 

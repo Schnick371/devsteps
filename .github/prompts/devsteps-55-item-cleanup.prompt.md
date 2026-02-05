@@ -1,7 +1,7 @@
 ---
-agent: 'devsteps-coordinator'
+agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
-tools: ['execute/runTask', 'execute/testFailure', 'execute/runTests', 'execute/runInTerminal', 'read/terminalSelection', 'read/terminalLastCommand', 'read/getTaskOutput', 'read/problems', 'read/readFile', 'edit', 'search', 'web/fetch', 'devsteps/*', 'local-web-search/search', 'playwright/*', 'tavily/*', 'agent', 'todo']
+tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 description: 'Autonomous multi-hour planning hygiene - consolidate Epics, sharpen content, validate hierarchy, archive completed work'
 ---
 

@@ -1,7 +1,7 @@
 ---
 description: 'Documentation planner - creates comprehensive documentation plans for README files, architecture docs, and API documentation'
 model: 'Gemini 3 Pro (Preview)'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/runTask', 'execute/testFailure', 'execute/runTests', 'execute/runInTerminal', 'read/problems', 'read/readFile', 'search', 'web/fetch', 'devsteps/get', 'devsteps/search', 'tavily/*', 'todo']
+tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 ---
 
 # 📚 DevSteps Documenter Sub-Worker
@@ -109,7 +109,7 @@ You are a **documentation specialist** for creating comprehensive, well-structur
 ## Critical Rules
 
 **NEVER:**
-- Generate code implementations (defer to devsteps-analyzer/implementer)
+- Generate code implementations (defer to devsteps-planner/implementer)
 - Skip structure planning for long documents
 - Leave broken links or placeholder text
 - Ignore existing documentation patterns
