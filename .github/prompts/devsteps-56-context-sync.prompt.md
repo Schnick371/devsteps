@@ -1,7 +1,7 @@
 ---
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
-tools: ['read', 'search', 'usages', 'edit', 'semantic', 'execute/runInTerminal', 'devsteps/*', 'todo', 'tavily/*']
+tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'tavily/*', 'edit', 'search', 'devsteps/*', 'todo']
 description: 'Project knowledge base creation - document architecture, patterns, decisions for Copilot memory and consistent implementation'
 ---
 
