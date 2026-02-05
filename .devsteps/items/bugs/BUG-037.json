@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "general",
   "title": "Remaining CLI/MCP commands reference deprecated index.json",
-  "status": "draft",
+  "status": "obsolete",
   "eisenhower": "critical",
   "created": "2025-12-15T09:35:37.164Z",
-  "updated": "2025-12-15T09:35:37.164Z",
+  "updated": "2026-02-05T14:24:43.114Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -24,5 +24,6 @@
   },
   "tags": [],
   "commits": [],
-  "metadata": {}
+  "metadata": {},
+  "superseded_by": "BUG-038"
 }

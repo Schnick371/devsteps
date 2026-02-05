@@ -5,13 +5,22 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2025-12-15T12:00:00Z",
-  "updated": "2025-12-15T12:00:00Z",
-  "tags": ["migration", "index-refs", "cli", "mcp"],
+  "updated": "2026-02-05T14:24:43.112Z",
+  "tags": [
+    "migration",
+    "index-refs",
+    "cli",
+    "mcp"
+  ],
   "affected_paths": [
     "packages/cli/src/commands/index.ts",
+    "packages/cli/src/commands/archive.ts",
+    "packages/mcp-server/src/tools/index.ts",
+    "packages/mcp-server/src/handlers/purge.ts",
     "packages/mcp-server/src/handlers/add.ts",
     "packages/mcp-server/src/handlers/update.ts",
-    "packages/mcp-server/src/handlers/init.ts"
+    "packages/mcp-server/src/handlers/init.ts",
+    "packages/shared/src/core/archive.ts"
   ],
   "links": {
     "relates_to": [],
