@@ -16,14 +16,14 @@ Execute multi-hour autonomous planning work - consolidate overlapping Epics, sha
 ## Core Principles
 
 **Autonomous Execution:**
-- Multi-hour continuous planning operation
-- Intelligent pause when strategic decisions required
-- Self-directed Epic consolidation and content improvement
+- Multi-hour continuous planning operation without user intervention
+- Intelligent pause points when strategic decisions required
+- Self-directed Epic consolidation and backlog improvement
 
 **Context-Aware Analysis:**
-- Analyze entire project structure for duplicate/overlapping Epics
-- Understand implementation history before consolidating
-- Preserve completed work traceability
+- Analyze entire project structure for duplicate/overlapping Epics BEFORE cleanup
+- Validate Epic scopes against implementation history
+- Preserve completed work traceability and audit trail
 
 **Human-in-the-Loop Decision Points:**
 - Strategic Epic merges affecting project roadmap

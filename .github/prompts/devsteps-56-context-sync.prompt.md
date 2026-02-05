@@ -2,42 +2,39 @@
 agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'tavily/*', 'edit', 'search', 'devsteps/*', 'todo']
-description: 'Project knowledge base creation - document architecture, patterns, decisions for Copilot memory and consistent implementation'
+description: 'Autonomous multi-hour context documentation - discover aspects, create knowledge base, link work items for Copilot memory'
 ---
 
 # 📚 Project Context Documentation - Copilot Memory System
 
 ## Mission
 
-Create living documentation in `.devsteps/context/` as **Copilot's project memory**. Prevents reimplementation of defined patterns, captures architectural decisions, links to work items.
+Execute multi-hour autonomous documentation work - discover project aspects, create context files, establish Copilot memory system.
 
-**Used at project start and maintained throughout lifecycle.**
-
-**Goal:** Copilot reads context BEFORE implementing → consistency across components.
+**Analysis work, NOT implementation.** Creates knowledge base preventing pattern re-invention.
 
 ## Core Principles
 
-**README-First Discovery:**
-- Central index at `.devsteps/context/README.md`
-- Discover project-specific aspects from codebase analysis
-- Let project reveal what matters
+**Autonomous Execution:**
+- Multi-hour continuous documentation operation
+- Intelligent pause when pattern classification ambiguous
+- Self-directed aspect discovery and documentation
 
-**Context as Implementation Guide:**
-- Document HOW (patterns, conventions, decisions)
-- Link to WHO/WHY (ADRs, work items)
-- Reference WHERE (file paths)
-- Prevent "inventing" different approaches
+**Context-Aware Analysis:**
+- Discover aspects from codebase reality, not prescribed templates
+- Validate patterns against actual implementations
+- Correlate work items with documented patterns
 
-**Work Item Integration:**
-- Context files reference work items
-- Work items link to context docs
-- Implementation details in items, strategic context in docs
-- Bidirectional traceability
+**Human-in-the-Loop Decision Points:**
+- Architecture interpretation requiring domain knowledge
+- Pattern classification when multiple approaches exist
+- Work item correlation conflicts needing prioritization
 
-**Living Documentation:**
-- Updated when patterns change
-- Version-controlled
-- Markdown format
+**Documentation Principles:**
+- README-first: Central index at `.devsteps/context/README.md`
+- Let project reveal what matters through analysis
+- Document HOW (patterns), link to WHO/WHY (ADRs, work items)
+- Living docs: Updated when patterns change
 
 ## Documentation Structure
 
