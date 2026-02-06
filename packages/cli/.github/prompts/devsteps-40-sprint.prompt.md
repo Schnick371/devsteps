@@ -1,5 +1,5 @@
 ---
-agent: 'devsteps'
+agent: 'devsteps-sprint-executor'
 model: 'Claude Opus 4.5'
 description: 'Multi-hour autonomous sprint execution with context-aware analysis, obsolescence detection, regression prevention'
 tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']

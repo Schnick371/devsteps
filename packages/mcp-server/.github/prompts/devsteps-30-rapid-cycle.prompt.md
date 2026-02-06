@@ -1,5 +1,5 @@
 ---
-agent: 'devsteps-coordinator'
+agent: 'devsteps'
 model: 'Claude Sonnet 4.5'
 description: 'Rapid plan-execute cycles: create work items and implement immediately in continuous flow'
 tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
