@@ -1,5 +1,5 @@
 ---
-agent: 'devsteps'
+agent: 'devsteps-planner'
 model: 'Claude Sonnet 4.5'
 tools: ['think', 'search', 'usages', 'edit', 'tavily', 'fileSearch']
 description: 'Edit and update GitHub Copilot files (agents, instructions, prompts) for VS Code 1.106+'

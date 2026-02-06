@@ -1,6 +1,6 @@
 ---
-agent: 'devsteps'
-model: 'Claude Sonnet 4.5'
+agent: 'devsteps-documenter'
+model: 'Gemini 3 Pro (Preview)'
 tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'tavily/*', 'edit', 'search', 'devsteps/*', 'todo']
 description: 'Autonomous multi-hour context documentation - discover aspects, create knowledge base, link work items for Copilot memory'
 ---

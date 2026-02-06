@@ -2,6 +2,24 @@
 description: 'DevSteps Coordinator - delegates responsibilities to specialized sub-agents using git worktrees for parallel execution. Merges results back to main branch after quality validation.' 
 model: 'Claude Sonnet 4.5'
 tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+agents: ['implementation-subagent', 'testing-subagent', 'documentation-subagent', 'devsteps-planner']
+handoffs:
+  - label: Plan Implementation
+    agent: implementation-subagent
+    prompt: Create a detailed implementation plan for this task. Include specific file changes, test requirements, and validation criteria.
+    send: false
+  - label: Plan Tests
+    agent: testing-subagent
+    prompt: Create a comprehensive test plan. Specify test cases, mocks, assertions, and edge cases.
+    send: false
+  - label: Plan Documentation
+    agent: documentation-subagent
+    prompt: Create a documentation plan. Specify README updates, API docs, and code comments needed.
+    send: false
+  - label: Analyze Architecture
+    agent: devsteps-planner
+    prompt: Analyze this requirement and provide architectural recommendations with trade-offs.
+    send: false
 ---
 
 # 🎯 DevSteps Coordinator Agent

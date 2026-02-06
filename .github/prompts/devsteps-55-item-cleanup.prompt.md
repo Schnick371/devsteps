@@ -1,5 +1,5 @@
 ---
-agent: 'devsteps'
+agent: 'devsteps-maintainer'
 model: 'Claude Sonnet 4.5'
 tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 description: 'Autonomous multi-hour planning hygiene - consolidate Epics, sharpen content, validate hierarchy, archive completed work'
