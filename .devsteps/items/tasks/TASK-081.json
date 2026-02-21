@@ -3,10 +3,10 @@
   "type": "task",
   "category": "vscode",
   "title": "Update Extension Activation Logic - Handle Conditional Loading",
-  "status": "in-progress",
+  "status": "obsolete",
   "eisenhower": "urgent-important",
   "created": "2025-11-28T09:04:34.773Z",
-  "updated": "2025-11-30T11:13:12.533Z",
+  "updated": "2026-02-21T14:30:49.793Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/extension.ts"

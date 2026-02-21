@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { DevStepsConfig } from '@schnick371/devsteps-shared';
@@ -87,15 +87,19 @@ export async function initCommand(
 
     initializeRefsStyleIndex(devstepsDir, counters);
 
-    // Create .gitignore
-    const gitignore = `.devsteps/
-node_modules/
-dist/
-*.log
-.env
-.DS_Store
-`;
-    writeFileSync(join(projectPath, '.gitignore'), gitignore);
+    // Create or update .gitignore (append-only — preserve existing rules)
+    const gitignorePath = join(projectPath, '.gitignore');
+    const devstepsEntries = ['.devsteps/', 'node_modules/', 'dist/', '*.log', '.env', '.DS_Store'];
+    if (existsSync(gitignorePath)) {
+      const existing = readFileSync(gitignorePath, 'utf-8');
+      const missing = devstepsEntries.filter((entry) => !existing.includes(entry));
+      if (missing.length > 0) {
+        const appendBlock = `\n# DevSteps\n${missing.join('\n')}\n`;
+        writeFileSync(gitignorePath, existing + appendBlock);
+      }
+    } else {
+      writeFileSync(gitignorePath, `${devstepsEntries.join('\n')}\n`);
+    }
 
     writeSetupMd(name, devstepsDir);
 

@@ -9,6 +9,7 @@ import {
   type Tool,
 } from '@modelcontextprotocol/sdk/types.js';
 import { Command } from 'commander';
+import packageJson from '../package.json' with { type: 'json' };
 import { trackRequestError, trackRequestSuccess } from './handlers/health.js';
 import { configureLogger, createRequestLogger, getLogger } from './logger.js';
 import { activeConnections, recordError, recordSuccess } from './metrics.js';
@@ -206,7 +207,7 @@ class DevStepsServer {
     this.server = new Server(
       {
         name: 'mcp-server',
-        version: '0.1.0',
+        version: packageJson.version,
       },
       {
         capabilities: {
@@ -464,7 +465,7 @@ const program = new Command();
 program
   .name('mcp-server')
   .description('MCP server for DevSteps task tracking')
-  .version('0.1.0')
+  .version(packageJson.version)
   .argument('[workspace-path]', 'Workspace directory path (default: current directory)')
   .option('--log-level <level>', 'Log level: debug|info|warn|error', 'info')
   .option('--heartbeat-interval <seconds>', 'Health heartbeat interval (0=disabled)', '0')

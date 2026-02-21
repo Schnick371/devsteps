@@ -49,6 +49,14 @@ export default async function initHandler(args: {
       mkdirSync(join(devstepsDir, dir), { recursive: true });
     }
 
+    // Create Context Budget Protocol analysis directory with gitignore
+    const analysisDir = join(devstepsDir, 'analysis');
+    mkdirSync(analysisDir, { recursive: true });
+    writeFileSync(
+      join(analysisDir, '.gitignore'),
+      '# Analysis envelopes are ephemeral — not versioned\n*.json\n'
+    );
+
     // Create config
     const config: DevStepsConfig = {
       version: packageJson.version,
@@ -76,15 +84,19 @@ export default async function initHandler(args: {
 
     initializeRefsStyleIndex(devstepsDir, counters);
 
-    // Create .gitignore
-    const gitignore = `.devsteps/
-node_modules/
-dist/
-*.log
-.env
-.DS_Store
-`;
-    writeFileSync(join(projectPath, '.gitignore'), gitignore);
+    // Create or update .gitignore (append-only — preserve existing rules)
+    const gitignorePath = join(projectPath, '.gitignore');
+    const devstepsEntries = ['.devsteps/', 'node_modules/', 'dist/', '*.log', '.env', '.DS_Store'];
+    if (existsSync(gitignorePath)) {
+      const existing = readFileSync(gitignorePath, 'utf-8');
+      const missing = devstepsEntries.filter((entry) => !existing.includes(entry));
+      if (missing.length > 0) {
+        const appendBlock = `\n# DevSteps\n${missing.join('\n')}\n`;
+        writeFileSync(gitignorePath, existing + appendBlock);
+      }
+    } else {
+      writeFileSync(gitignorePath, `${devstepsEntries.join('\n')}\n`);
+    }
 
     writeSetupMd(args.project_name, devstepsDir);
 

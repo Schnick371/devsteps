@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "mcp-server",
   "title": "MCP Server shows wrong version (0.1.0 instead of package.json version)",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-12-16T13:14:32.219Z",
-  "updated": "2025-12-16T13:14:32.219Z",
+  "updated": "2026-02-21T14:34:37.857Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
