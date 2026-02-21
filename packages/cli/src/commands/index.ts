@@ -17,6 +17,7 @@ import {
   TYPE_SHORTCUTS,
   TYPE_TO_DIRECTORY,
   updateItem,
+  validateRelationConflict,
   validateRelationship,
 } from '@schnick371/devsteps-shared';
 import chalk from 'chalk';
@@ -392,6 +393,21 @@ export async function linkCommand(
       }
     } else {
       spinner.text = 'Creating link (validation overridden)...';
+    }
+
+    // Always validate: no conflicting relation types to same target (data integrity)
+    const conflictCheck = validateRelationConflict(
+      targetId,
+      relation,
+      sourceMetadata.linked_items
+    );
+    if (!conflictCheck.valid) {
+      spinner.fail('Relation conflict detected');
+      console.error(chalk.red('✗'), conflictCheck.error);
+      if (conflictCheck.suggestion) {
+        console.log(chalk.yellow('💡'), conflictCheck.suggestion);
+      }
+      process.exit(1);
     }
 
     if (

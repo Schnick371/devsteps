@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "general",
   "title": "TreeView Duplicate IDs: Children disappear after refresh",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-05T10:38:03.736Z",
-  "updated": "2025-12-08T09:31:30.846Z",
+  "updated": "2026-02-21T15:59:45.738Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

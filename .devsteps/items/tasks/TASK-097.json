@@ -3,10 +3,10 @@
   "type": "task",
   "category": "Validation",
   "title": "Prevent conflicting relation types to same target",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-12-01T10:08:29.279Z",
-  "updated": "2025-12-01T10:27:02.546Z",
+  "updated": "2026-02-21T16:06:13.769Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/validation.ts",

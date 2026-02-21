@@ -8,6 +8,7 @@ import {
   parseItemId,
   type RelationType,
   TYPE_TO_DIRECTORY,
+  validateRelationConflict,
   validateRelationship,
 } from '@schnick371/devsteps-shared';
 import { getWorkspacePath } from '../workspace.js';
@@ -67,7 +68,24 @@ export default async function linkHandler(args: {
         relation: args.relation_type,
         methodology: methodology,
       };
-    } // Update source item
+    }
+
+    // Validate no conflicting relation types to same target
+    const conflictCheck = validateRelationConflict(
+      args.target_id,
+      args.relation_type,
+      sourceMetadata.linked_items
+    );
+    if (!conflictCheck.valid) {
+      return {
+        success: false,
+        error: conflictCheck.error,
+        suggestion: conflictCheck.suggestion,
+        validation_failed: true,
+      };
+    }
+
+    // Update source item
     if (
       !sourceMetadata.linked_items[
         args.relation_type as keyof typeof sourceMetadata.linked_items

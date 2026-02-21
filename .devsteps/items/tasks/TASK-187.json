@@ -3,11 +3,11 @@
   "type": "task",
   "category": "general",
   "title": "Set context keys BEFORE TreeView creation to fix menu race condition",
-  "status": "draft",
+  "status": "done",
   "priority": "medium",
   "eisenhower": "urgent-important",
   "created": "2025-12-09T12:53:52.722Z",
-  "updated": "2025-12-09T12:53:59.064Z",
+  "updated": "2026-02-21T15:59:53.468Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/extension.ts"

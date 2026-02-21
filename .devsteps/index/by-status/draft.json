@@ -54,7 +54,6 @@
     "STORY-057",
     "STORY-059",
     "STORY-060",
-    "STORY-063",
     "STORY-065",
     "STORY-066",
     "STORY-067",
@@ -89,7 +88,6 @@
     "TASK-070",
     "TASK-071",
     "TASK-096",
-    "TASK-097",
     "TASK-098",
     "TASK-100",
     "TASK-102",
@@ -127,7 +125,6 @@
     "TASK-176",
     "TASK-177",
     "TASK-178",
-    "TASK-187",
     "TASK-188",
     "TASK-189",
     "TASK-190",
@@ -136,9 +133,6 @@
     "REQ-002",
     "BUG-010",
     "BUG-013",
-    "BUG-031",
-    "BUG-033",
-    "BUG-034",
     "SPIKE-004",
     "SPIKE-005",
     "SPIKE-006",
@@ -146,11 +140,9 @@
     "STORY-078",
     "BUG-035",
     "STORY-079",
-    "BUG-036",
     "TASK-198",
     "EPIC-020",
     "STORY-080",
-    "BUG-038",
     "STORY-083",
     "EPIC-021",
     "SPIKE-009",
@@ -191,7 +183,8 @@
     "TASK-219",
     "TASK-220",
     "TASK-221",
-    "SPIKE-014"
+    "SPIKE-014",
+    "BUG-053"
   ],
-  "updated": "2026-02-21T14:37:14.454Z"
+  "updated": "2026-02-21T16:06:41.612Z"
 }
