@@ -2,10 +2,13 @@
 agent: 'devsteps-reviewer'
 model: 'Claude Sonnet 4.6'
 description: 'Quality review gate - validate completed work before marking done'
-tools: ['think', 'read', 'read/problems', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'devsteps/*', 'todo']
+tools: ['read', 'read/problems', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'devsteps/*', 'todo']
 ---
 
 # ✅ Review Work — Quality Gate
+
+> **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
+
 
 ## Mission
 

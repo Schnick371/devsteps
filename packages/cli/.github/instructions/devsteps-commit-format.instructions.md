@@ -93,4 +93,4 @@ docs(readme): update installation instructions
 
 ---
 
-**Branch management details:** See [devsteps-worker.agent.md](../agents/devsteps-worker.agent.md)
+**Branch management details:** See [devsteps.agent.md](../agents/devsteps.agent.md)

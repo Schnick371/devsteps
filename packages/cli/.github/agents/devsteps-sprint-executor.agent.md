@@ -1,7 +1,7 @@
 ---
 description: 'Autonomous sprint executor - multi-hour work sessions with context-aware analysis, obsolescence detection, and regression prevention'
 model: 'Claude Sonnet 4.6'
-tools: ['think', 'vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'edit', 'search', 'web', 'read/problems', 'devsteps/*', 'tavily/*', 'todo']
+tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'edit', 'search', 'web', 'read/problems', 'devsteps/*', 'tavily/*', 'todo']
 agents:
   - devsteps-aspect-impact-subagent
   - devsteps-aspect-constraints-subagent
@@ -38,6 +38,19 @@ handoffs:
 # 🏃 DevSteps Sprint Executor
 
 ## Mission
+
+## Reasoning Protocol
+
+**Apply structured reasoning before every action — never skip this step.**
+
+| Task scope | Required reasoning depth |
+|---|---|
+| Simple / single-file | Think through approach, edge cases, and conventions |
+| Multi-file / multi-package | Analyze all affected boundaries, ordering constraints, and rollback impact |
+| Architecture / design decision | Extended reasoning: evaluate alternatives, tradeoffs, long-term consequences |
+| Security / breaking change | Extended reasoning: full threat model or migration impact analysis required |
+
+Begin each non-trivial action with an internal analysis step before using any tool.
 
 Execute multi-hour autonomous work sessions on planned backlog with context-aware analysis, obsolescence detection, and regression prevention.
 

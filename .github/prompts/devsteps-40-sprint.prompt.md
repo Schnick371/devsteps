@@ -2,10 +2,13 @@
 agent: 'devsteps-sprint-executor'
 model: 'Claude Sonnet 4.6'
 description: 'Multi-hour autonomous sprint — pre-sprint archaeology, risk-based MPD per item, all 13 agents, blocking reviewer'
-tools: ['think', 'vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'tavily/*', 'todo']
+tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'tavily/*', 'todo']
 ---
 
 # 🏃 Sprint Execution
+
+> **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
+
 
 The **sprint-executor autonomously classifies the incoming task, selects agent combinations, and manages multi-hour execution.** No additional user direction is needed for agent selection or mode choice — the agent determines this from context.
 

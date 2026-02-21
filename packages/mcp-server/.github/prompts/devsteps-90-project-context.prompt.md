@@ -1,11 +1,14 @@
 ---
 agent: 'devsteps-analyst-context-subagent'
 model: 'Claude Sonnet 4.6'
-tools: ['think', 'read', 'search', 'remarc-insight-mcp/*', 'devsteps/*']
+tools: ['read', 'search', 'remarc-insight-mcp/*', 'devsteps/*']
 description: 'Efficient project context loading - smart prioritization, token-optimal, just-in-time aspect loading'
 ---
 
 # 🧠 Efficient Project Context Loading
+
+> **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
+
 
 ## Mission
 

@@ -1,0 +1,17 @@
+# GitHub Funding Configuration
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+
+# Uncomment and configure preferred funding platforms
+# github: [devsteps
+# patreon: devsteps
+# open_collective: devsteps
+# ko_fi: devsteps
+# tidelift: npm/devsteps
+# community_bridge: devsteps
+# liberapay: devsteps
+# issuehunt: devsteps
+# lfx_crowdfunding: devsteps
+# polar: devsteps
+# buy_me_a_coffee: devsteps
+# thanks_dev: devsteps
+# custom: ['https://devstepsdev/sponsor']

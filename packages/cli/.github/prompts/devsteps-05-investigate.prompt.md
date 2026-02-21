@@ -2,10 +2,13 @@
 agent: 'Detective-CodeArcheology'
 model: 'Claude Sonnet 4.6'
 description: 'Git forensics - investigate why code exists, trace decision history, identify ownership and intent'
-tools: ['think', 'read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
+tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
 ---
 
 # 🔍 Investigate — Git Forensics Session
+
+> **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
+
 
 ## Mission
 

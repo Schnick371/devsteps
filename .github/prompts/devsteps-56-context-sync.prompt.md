@@ -1,11 +1,14 @@
 ---
 agent: 'devsteps-documenter'
 model: 'Claude Sonnet 4.6'
-tools: ['think', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'tavily/*', 'edit', 'search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'tavily/*', 'edit', 'search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 description: 'Autonomous multi-hour context documentation - discover aspects, create knowledge base, link work items for Copilot memory'
 ---
 
 # 📚 Project Context Documentation - Copilot Memory System
+
+> **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
+
 
 ## Mission
 

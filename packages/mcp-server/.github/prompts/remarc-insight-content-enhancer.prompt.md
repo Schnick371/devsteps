@@ -2,10 +2,13 @@
 agent: 'devsteps-sprint-executor'
 model: 'Claude Sonnet 4.6'
 description: 'Enhance or create remarc-insight Presentations and Tutorials with screenshots, content research, and TC deep-links'
-tools: ['think', 'vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'tavily/*', 'remarc-insight-mcp/*', 'todo']
+tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'tavily/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # 🎯 remarc-insight Content Enhancer
+
+> **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
+
 
 ## Mission
 

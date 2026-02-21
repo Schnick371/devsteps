@@ -9,8 +9,8 @@ description: "DevSteps CLI/MCP tool usage - file protection and API contracts"
 
 **NEVER edit `.devsteps/` files directly:**
 - ❌ Manual JSON/MD edits in `.devsteps/` directory
-- ✅ Use devsteps CLI commands exclusively
-- ✅ Use MCP tools exclusively
+- ✅ Use devsteps MCP tools exclusively first
+- ✅ Use devsteps CLI commands, if MCP tools unavailable (temporary fallback)
 
 **Why:** Ensures index consistency, maintains traceability, prevents corruption.
 
@@ -45,4 +45,4 @@ devsteps trace <ID>                  # Show relationships
 
 ---
 
-**Workflow details:** See [devsteps-worker.agent.md](../agents/devsteps-worker.agent.md), [devsteps-10-plan-work.prompt.md](../prompts/devsteps-10-plan-work.prompt.md), [devsteps-20-start-work.prompt.md](../prompts/devsteps-20-start-work.prompt.md)
+**Workflow details:** See [devsteps.agent.md](../agents/devsteps.agent.md), [devsteps-10-plan-work.prompt.md](../prompts/devsteps-10-plan-work.prompt.md), [devsteps-20-start-work.prompt.md](../prompts/devsteps-20-start-work.prompt.md)
