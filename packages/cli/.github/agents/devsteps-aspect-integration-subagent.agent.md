@@ -1,6 +1,6 @@
 ---
 description: 'Integration Analyst - finds cross-package, cross-process, and cross-boundary coordination requirements implied by a task but not stated'
-model: 'Claude Sonnet 4.6'
+model: 'Claude Opus 4.6'
 tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
 ---
 

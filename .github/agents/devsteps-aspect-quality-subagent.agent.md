@@ -1,6 +1,6 @@
 ---
 description: 'Quality Analyst - defines the observable behavior surface: what must be tested, documented, and validated for this change to be trustworthy'
-model: 'Claude Sonnet 4.6'
+model: 'Claude Opus 4.6'
 tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
 ---
 

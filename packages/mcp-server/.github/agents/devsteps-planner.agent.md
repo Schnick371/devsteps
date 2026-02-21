@@ -2,6 +2,14 @@
 description: 'Planning and analysis specialist - creates DevSteps work items through structured planning and analyzes complex code/architecture decisions'
 model: 'Claude Sonnet 4.6'
 tools: ['vscode/runCommand', 'vscode/askQuestions', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'read/problems', 'agent', 'edit', 'search', 'web', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+agents:
+  - devsteps-analyst-context-subagent
+  - devsteps-analyst-internal-subagent
+  - devsteps-analyst-web-subagent
+  - devsteps-aspect-staleness-subagent
+  - devsteps-aspect-impact-subagent
+  - devsteps-aspect-constraints-subagent
+  - devsteps-aspect-integration-subagent
 ---
 
 # 🔬 DevSteps Analyzer - Planning & Analysis Specialist

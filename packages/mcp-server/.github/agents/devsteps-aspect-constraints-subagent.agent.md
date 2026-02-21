@@ -1,6 +1,6 @@
 ---
 description: 'Constraint Analyst - surfaces risks, blockers, and hidden prerequisites that could derail naive implementation'
-model: 'Claude Sonnet 4.6'
+model: 'Claude Opus 4.6'
 tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'web', 'todo']
 ---
 

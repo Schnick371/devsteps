@@ -6,14 +6,14 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-18T10:19:01.832Z",
-  "updated": "2025-12-18T10:19:33.246Z",
+  "updated": "2026-02-21T13:49:19.371Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/devsteps-coordinator.agent.md",
-    ".github/agents/devsteps-analyzer.agent.md",
-    ".github/agents/devsteps-implementer.agent.md",
+    ".github/agents/devsteps-analyst-context-subagent.agent.md",
+    ".github/agents/devsteps-impl-subagent.agent.md",
     ".github/agents/devsteps-documenter.agent.md",
-    ".github/agents/devsteps-tester.agent.md"
+    ".github/agents/devsteps-test-subagent.agent.md"
   ],
   "linked_items": {
     "implements": [

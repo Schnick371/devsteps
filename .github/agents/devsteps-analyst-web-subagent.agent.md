@@ -1,6 +1,6 @@
 ---
 description: 'Web Research Analyst - searches internet for modern patterns, best practices, deprecations; produces CompressedVerdict with Internet Advantage Claim for coordinator competitive selection'
-model: 'Claude Sonnet 4.6'
+model: 'Claude Opus 4.6'
 tools: ['read', 'search', 'tavily/*', 'devsteps/*', 'todo']
 ---
 

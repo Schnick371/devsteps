@@ -2,6 +2,14 @@
 description: 'Release Specialist - npm publish workflows for @next pre-release and stable releases across public/private repos'
 model: 'Claude Sonnet 4.6'
 tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'read/problems', 'agent', 'edit', 'search', 'web', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+agents:
+  - devsteps-analyst-context-subagent
+  - devsteps-aspect-impact-subagent
+  - devsteps-aspect-constraints-subagent
+  - devsteps-impl-subagent
+  - devsteps-test-subagent
+  - devsteps-doc-subagent
+  - devsteps-reviewer
 ---
 
 # 🚀 DevSteps Release & Implementation Agent

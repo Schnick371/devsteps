@@ -2,6 +2,14 @@
 description: 'Repository and planning hygiene specialist - git cleanup, DevSteps consolidation, branch archiving, obsolescence detection'
 model: 'Claude Sonnet 4.6'
 tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'read/problems', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+agents:
+  - devsteps-analyst-context-subagent
+  - devsteps-aspect-staleness-subagent
+  - devsteps-aspect-impact-subagent
+  - devsteps-aspect-constraints-subagent
+  - devsteps-impl-subagent
+  - devsteps-test-subagent
+  - devsteps-reviewer
 ---
 
 # 🧹 DevSteps Maintainer

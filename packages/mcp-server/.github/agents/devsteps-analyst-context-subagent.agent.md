@@ -1,6 +1,6 @@
 ---
 description: 'Efficient context loading specialist - smart prioritization, token-optimal aspect loading, task preparation'
-model: 'Grok Code Fast 1 (Preview) (copilot)'
+model: 'Claude Opus 4.6'
 tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'tavily/*', 'edit', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
