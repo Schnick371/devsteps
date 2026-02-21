@@ -3,10 +3,10 @@
   "type": "story",
   "category": "Architecture",
   "title": "Coordinator MPD Architecture - Multi-Perspective Dispatch Pattern Documentation",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-01-14T11:06:12.117Z",
-  "updated": "2026-02-21T13:49:24.698Z",
+  "updated": "2026-02-21T16:13:52.113Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/devsteps-coordinator.agent.md",

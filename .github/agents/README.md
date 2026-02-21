@@ -2,219 +2,140 @@
 
 ## Overview
 
-The DevSteps agent system uses a **coordinator pattern** with specialized sub-workers, each optimized for specific tasks using the best AI models for their strengths.
+The DevSteps agent system uses **Multi-Perspective Dispatch (MPD)** as its core orchestration pattern. Instead of a single sequential analysis pass, MPD dispatches specialized agents in parallel to eliminate blind spots before synthesis and implementation.
 
-## Architecture
+The system operates at two layers:
+- **Coordinator MPD** — single work item orchestration with risk-based dispatch
+- **Sprint Executor MPD** — full sprint / session orchestration with pre-flight analysis
 
-```
-┌─────────────────────────────────────────┐
-│   DevSteps Coordinator (Claude)         │
-│   - Orchestrates workflow               │
-│   - Analyzes tasks & delegates          │
-│   - Validates outputs                   │
-│   - Manages status & commits            │
-└──────────────┬──────────────────────────┘
-               │
-      ┌────────┴────────────┬─────────────────┬──────────────────┐
-      │                     │                 │                  │
-┌─────▼──────┐   ┌──────────▼────┐   ┌────────▼───────┐  ┌───────▼──────┐
-│  Analyzer  │   │  Implementer  │   │  Documenter    │  │   Tester     │
-│  (Claude)  │   │    (Grok)     │   │   (Gemini)     │  │ (GPT-5 mini) │
-│            │   │               │   │                │  │              │
-│ Deep       │   │ Fast          │   │ Documentation  │  │ Test         │
-│ Analysis   │   │ Simple Tasks  │   │ Specialist     │  │ Generation   │
-└────────────┘   └───────────────┘   └────────────────┘  └──────────────┘
-```
-
-## Agents
-
-### 🎯 devsteps.agent.md (Coordinator)
-**Model:** GPT-5 mini (unlimited usage, 0x multiplier)  
-**Role:** Orchestrates all work, delegates to specialized sub-workers  
-**Responsibilities:**
-- Analyze task complexity and file sizes
-- Select appropriate sub-worker via decision matrix
-- Coordinate multi-agent workflows
-- Validate outputs and run quality gates
-- Manage DevSteps status tracking and git commits
-
-**Never directly implements code** - always delegates!
-
-### 🎯 devsteps-planner.agent.md
-
-**Mission:** Dual-mission agent for DevSteps work item planning AND code/architecture analysis
-- **Planning:** Interactive work item creation with 9-step protocol (research, structure, validate)
-- **Analysis:** Deep reasoning for architecture assessment, refactoring strategy, tooling evaluation
-
-**Model:** Claude Sonnet 4.6 (deep reasoning + planning)
-
-**Strengths:** System-level thinking, SOLID principles, strategic planning, Eisenhower prioritization
-
-**Best For:** Work item planning, new features, large refactors, architectural decisions
-
-**Invoke:** `#runSubagent` with `subagentType=devsteps-planner` OR use `/devsteps-10-plan-work` prompt
-
-### ⚡ devsteps-implementer.agent.md
-**Model:** Grok Code Fast 1 (0.25x multiplier - cheapest!)  
-**Specialization:** Fast, simple implementations  
-**Best for:**
-- Utility functions (<150 lines)
-- Boilerplate code generation
-- Simple bug fixes (single file, clear cause)
-- Repetitive edits
-- Quick iterations
-
-**CRITICAL:** ⚠️ **NEVER use for files >150 lines!** Will hallucinate or corrupt code!  
-**Invoke:** `#runSubagent` with `subagentType=devsteps-implementer`
-
-### 📚 devsteps-documenter.agent.md
-**Model:** Gemini 2.5 Pro (1x multiplier, 1M token context!)  
-**Specialization:** Documentation and long-form content  
-**Best for:**
-- README files and project docs
-- Architecture decision records (ADRs)
-- API documentation
-- Technical guides and how-tos
-- Analyzing large documents (up to 1,500 pages!)
-
-**Invoke:** `#runSubagent` with `subagentType=devsteps-documenter`
-
-### 🧪 devsteps-tester.agent.md
-**Model:** GPT-5 mini (unlimited usage, 0x multiplier)  
-**Specialization:** Test generation and debugging  
-**Best for:**
-- Unit test creation
-- Integration test generation
-- Debugging test failures
-- Test coverage analysis
-- Test refactoring
-
-**Invoke:** `#runSubagent` with `subagentType=devsteps-tester`
-
-## Decision Matrix
-
-| Task Type | File Size | Complexity | Delegate To | Cost |
-|-----------|-----------|------------|-------------|------|
-| New Feature | Any | High | devsteps-planner | 1x |
-| Utility Function | <150 lines | Low | devsteps-implementer | 0.25x |
-| Large Refactor | >200 lines | High | devsteps-planner | 1x |
-| Boilerplate | <100 lines | Low | devsteps-implementer | 0.25x |
-| Documentation | Any | Any | devsteps-documenter | 1x |
-| Test Creation | <150 lines | Medium | devsteps-tester | 0x (free!) |
-| Bug Fix (simple) | <150 lines | Low | devsteps-implementer | 0.25x |
-| Bug Fix (complex) | >200 lines | High | devsteps-planner | 1x |
-
-## File Size Safety Rules
-
-**CRITICAL:** Grok (devsteps-implementer) is DANGEROUS on large files!
-
-| File Size | Grok | Claude | Gemini | GPT-5 mini |
-|-----------|------|--------|--------|------------|
-| 0-100 lines | ✅ Safe | ✅ OK (overkill) | ✅ OK | ✅ OK |
-| 101-150 lines | ⚠️ Caution | ✅ Good | ✅ Good | ✅ Good |
-| 151-200 lines | 🚨 Reject! | ✅ Preferred | ✅ OK | ✅ OK |
-| 200+ lines | ⛔ Never! | ✅ Required | ✅ OK for docs | ✅ OK for tests |
-
-**Rule:** If file >150 lines → Coordinator MUST split into smaller modules OR delegate to devsteps-planner
-
-## Usage Examples
-
-### Example 1: Simple Utility Function
-```
-User: "Create a function to validate email addresses"
-
-Coordinator decides:
-- File size: New function, ~30 lines
-- Complexity: Low (regex pattern)
-- Decision: devsteps-implementer
-
-Action: 
-#runSubagent subagentType=devsteps-implementer "Create email validation"
-```
-
-### Example 2: Complex Refactoring
-```
-User: "Refactor Install-Node.ps1 error handling"
-
-Coordinator analyzes:
-- File size: 187 lines (too large for Grok!)
-- Complexity: Moderate to high
-- Decision: devsteps-planner
-
-Action:
-#runSubagent subagentType=devsteps-planner "Refactor error handling"
-```
-
-### Example 3: Full Workflow
-```
-User: "Add new config validation feature"
-
-Coordinator orchestrates:
-1. devsteps-planner: Design validation architecture
-2. devsteps-implementer: Implement small validation functions (<100 lines each)
-3. devsteps-tester: Create comprehensive test suite
-4. devsteps-documenter: Update API docs and README
-```
-
-## Model Strengths Summary
-
-### Claude Sonnet 4.6 (devsteps-planner)
-✅ Deep reasoning, architecture, complex refactoring  
-✅ Handles large files (200+ lines) safely  
-✅ SOLID principles, design patterns  
-⚠️ Slower responses, higher cost (1x)
-
-### Grok Code Fast 1 (devsteps-implementer)
-✅ Lightning fast (0.25x cost!)  
-✅ Excellent for simple tasks  
-✅ Boilerplate generation  
-🚨 DANGEROUS on files >150 lines!  
-⚠️ Limited complex reasoning
-
-### Gemini 2.5 Pro (devsteps-documenter)
-✅ Massive 1M token context (1,500 pages!)  
-✅ Excellent document analysis  
-✅ Structured content creation  
-⚠️ Not optimized for code generation  
-⚠️ Cost: 1x multiplier
-
-### GPT-5 mini (devsteps-tester + coordinator)
-✅ FREE (0x multiplier - unlimited!)  
-✅ Fast and reliable  
-✅ Great balance for testing  
-✅ Excellent coordinator model  
-⚠️ Less creative than Claude
-
-## Cost Optimization
-
-**Cheapest workflow:**
-1. Coordinator (GPT-5 mini): 0x - FREE
-2. Analysis (Claude): 1x - use sparingly
-3. Implementation (Grok): 0.25x - use heavily for small tasks
-4. Testing (GPT-5 mini): 0x - FREE
-5. Docs (Gemini): 1x - use when needed
-
-**Strategy:** Maximize Grok usage for simple tasks, minimize Claude usage for complex tasks only.
-
-## Integration with DevSteps
-
-All agents follow DevSteps workflow:
-1. Search existing items (`#mcp_devsteps_search`)
-2. Update status to in-progress
-3. Execute via appropriate sub-worker
-4. Run quality gates
-5. Update status to done
-6. Commit immediately with conventional format
-
-## References
-
-- [devsteps.agent.md](devsteps.agent.md) - Coordinator implementation
-- [devsteps-planner.agent.md](devsteps-planner.agent.md) - Planning & analysis
-- [devsteps-implementer.agent.md](devsteps-implementer.agent.md) - Fast implementation
-- [devsteps-documenter.agent.md](devsteps-documenter.agent.md) - Documentation
-- [devsteps-tester.agent.md](devsteps-tester.agent.md) - Testing specialist
+**For the full architecture documentation see:** [docs/architecture/mpd-architecture.md](../../docs/architecture/mpd-architecture.md)
 
 ---
 
-**Created:** December 12, 2025  
-**Based on:** GitHub Copilot Agent Mode patterns, Claude Code subagents, and latest 2025 model capabilities
+## Agent Roster
+
+### Orchestrators
+
+| Agent File | Role |
+|---|---|
+| `devsteps-coordinator.agent.md` | Single-item MPD orchestration — triage, parallel dispatch, synthesis |
+| `devsteps-sprint-executor.agent.md` | Multi-item sprint orchestration — pre-flight, per-item loop, adaptive replanning |
+| `devsteps-planner.agent.md` | Strategic sequencing, Enriched Sprint Brief, backlog reranking |
+
+### Analyst Agents
+
+| Agent File | Role | Trigger |
+|---|---|---|
+| `devsteps-analyst-context-subagent.agent.md` | Global codebase archaeology, dependency mapping | Sprint Phase 0 / FULL tier |
+| `devsteps-analyst-internal-subagent.agent.md` | Deep code analysis, API contract inspection | COMPETITIVE tier |
+| `devsteps-analyst-web-subagent.agent.md` | External research, library comparison, best practices | COMPETITIVE tier |
+
+### Aspect Agents (parallel, STANDARD / FULL tiers)
+
+| Agent File | Analysis Dimension |
+|---|---|
+| `devsteps-aspect-impact-subagent.agent.md` | Structural impact — what files and APIs change |
+| `devsteps-aspect-constraints-subagent.agent.md` | Business & technical constraints |
+| `devsteps-aspect-quality-subagent.agent.md` | Test coverage, code quality signals |
+| `devsteps-aspect-staleness-subagent.agent.md` | Obsolescence detection, stale item identification |
+| `devsteps-aspect-integration-subagent.agent.md` | Cross-package dependencies, API surface effects |
+
+### Specialist Agents
+
+| Agent File | Role | When Used |
+|---|---|---|
+| `devsteps-impl-subagent.agent.md` | Code writing and refactoring | All tiers |
+| `devsteps-test-subagent.agent.md` | Test generation, coverage analysis | STANDARD / FULL |
+| `devsteps-doc-subagent.agent.md` | Inline docs, architecture documentation | FULL |
+| `devsteps-reviewer.agent.md` | Blocking quality gate — PASS/FAIL review | After every item |
+
+### Utility Agents
+
+| Agent File | Role |
+|---|---|
+| `devsteps-documenter.agent.md` | User-facing documentation (README, guides) |
+| `devsteps-maintainer.agent.md` | Backlog hygiene, stale item cleanup |
+| `devsteps.agent.md` | Release workflows, general implementation |
+| `Detective-CodeArcheology.agent.md` | Deep legacy code investigation |
+
+---
+
+## Risk Tier Dispatch
+
+The coordinator determines a risk tier and dispatches agents accordingly:
+
+```
+QUICK      → impl-subagent only
+STANDARD   → [impact + staleness] → [impl + test] (parallel pairs)
+FULL       → [all 5 aspect agents] → synthesis → [impl + test + doc]
+COMPETITIVE→ [analyst-internal + analyst-web] → judge → impl ± planner
+```
+
+### Tier Selection Signals
+
+| Signal | Tier |
+|---|---|
+| Isolated, single-file, full coverage | QUICK |
+| Cross-file, shared modules, partial coverage | STANDARD |
+| Schema change, cross-package, CRITICAL label | FULL |
+| Investigation, "which approach/library?" | COMPETITIVE |
+
+---
+
+## Naming Convention
+
+All agent files use kebab-case with the following suffixes:
+
+| Suffix | Meaning |
+|---|---|
+| `.agent.md` | Agent definition file |
+| `-subagent.agent.md` | Spawned by coordinator, not invoked directly by user |
+| `-coordinator.agent.md` | Orchestrator-level (manages other agents) |
+| `-executor.agent.md` | Session-level execution controller |
+
+> **Note:** Old agent names (`devsteps-analyzer`, `devsteps-implementer`, `devsteps-tester`) were deprecated in Feb 2026. Current names use the `-subagent` suffix pattern.
+
+---
+
+## Session Classification
+
+The Sprint Executor self-classifies incoming requests:
+
+| Input Signal | Classification | Action |
+|---|---|---|
+| Single item ID only | Single-item MPD | Coordinator flow (no sprint pre-flight) |
+| "sprint", "session", "backlog" | Multi-item sprint | Full sprint protocol |
+| "continue sprint", "next items" | Resume sprint | Phase 1 from saved backlog |
+| `type=spike` or "investigate" | Spike | `analyst-context` + `planner`, no impl until direction set |
+| "review", "validate", "check" | Review | `reviewer` only |
+| No actionable items found | Empty sprint | Present blocked/draft list to user |
+
+---
+
+## Compressed Briefing Protocol (CBP)
+
+Agents communicate via structured JSON envelopes, not free-form text:
+
+```
+Aspect Agents → write_analysis_report(AnalysisBriefing)
+                                    ↓
+Coordinator ← read_analysis_envelope → synthesize → write_verdict(CompressedVerdict)
+                                                              ↓
+                              impl/test/doc-subagents ← read_analysis_envelope
+```
+
+See [docs/architecture/mpd-architecture.md](../../docs/architecture/mpd-architecture.md) for full CBP field specifications.
+
+---
+
+## References
+
+- [MPD Architecture](../../docs/architecture/mpd-architecture.md) — full architecture documentation
+- [Git Strategy](../../docs/architecture/git-strategy.md) — branching and commit conventions
+- [Repository Strategy](../../docs/architecture/repository-strategy.md) — dual-repo setup
+
+---
+
+
+**Last updated:** 2026-02-21 — Rewrote from old "Coordinator + 4 workers" model to current MPD architecture  
+**Related items:** STORY-098, EPIC-025, STORY-107
