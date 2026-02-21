@@ -13,10 +13,15 @@ tools: [vscode, execute, read, edit, search, web, 'devsteps/*', 'remarc-insight-
 
 The coordinator passes you:
 1. **Item ID only** — `TASK-042` (not the full item text)
-2. **Analysis briefing file path** — `.devsteps/analysis/TASK-042/[winner]-report.md` OR `.devsteps/analysis/TASK-042/briefing.md`
-3. **Judge verdict** — one line: which agent won and why (e.g., "web-analyst won via RULE 2 — deprecation found")
+2. **report_path** — e.g., `.devsteps/analysis/TASK-042/[winner]-report.json`
+3. **Judge verdict** — one line: which rule applied, which approach won
 
-**Your first action is always:** Read the item via `devsteps/get` using the item ID. Then read the briefing file. Do NOT ask the coordinator to repeat context — it no longer has it in its active window.
+**Your first action is always:**
+1. Read the item via `devsteps/get` using the item ID.
+2. Call `read_analysis_envelope` (devsteps MCP) with the `report_path` to get the CompressedVerdict JSON.
+3. If deeper detail is needed, read the full `.json` briefing at the `report_path` directly.
+
+Do NOT ask the coordinator to repeat context — it no longer has it in its active window.
 
 This design keeps the coordinator's context budget clean. Each subagent owns its own context window for deep reading.
 
