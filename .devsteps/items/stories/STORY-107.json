@@ -3,10 +3,10 @@
   "type": "story",
   "category": "infrastructure",
   "title": "Agent prompt updates: adopt JSON envelopes instead of prose markdown",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-21T12:05:08.210Z",
-  "updated": "2026-02-21T12:06:01.608Z",
+  "updated": "2026-02-21T13:10:05.129Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/",

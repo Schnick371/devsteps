@@ -1,7 +1,7 @@
 ---
 description: 'Autonomous sprint executor - multi-hour work sessions with context-aware analysis, obsolescence detection, and regression prevention'
 model: 'Claude Sonnet 4.6'
-tools: [vscode, execute, read, agent, edit, search, web, 'devsteps/*', 'tavily/*', todo]
+tools: ['think', 'vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'edit', 'search', 'web', 'read/problems', 'devsteps/*', 'tavily/*', 'todo']
 agents:
   - devsteps-aspect-impact-subagent
   - devsteps-aspect-constraints-subagent

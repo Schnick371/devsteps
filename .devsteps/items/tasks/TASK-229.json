@@ -3,10 +3,10 @@
   "type": "task",
   "category": "infrastructure",
   "title": "Create .devsteps/analysis/.gitignore excluding JSON envelope files",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-21T12:05:50.615Z",
-  "updated": "2026-02-21T12:06:01.608Z",
+  "updated": "2026-02-21T12:50:51.479Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/cli/src/commands/init.ts",

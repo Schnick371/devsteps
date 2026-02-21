@@ -1,8 +1,7 @@
 ---
 description: 'Testing subagent - creates comprehensive test plans and analyzes test requirements for coordinator execution'
 model: 'Claude Sonnet 4.6'
-user-invokable: false
-tools: [execute, read, edit, search, 'devsteps/*', google-search/search, local-web-search/search, 'remarc-insight-mcp/*', todo]
+tools: ['think', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'search', 'devsteps/*', 'google-search/search', 'local-web-search/search', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # 🧪 Testing Subagent

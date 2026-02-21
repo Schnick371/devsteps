@@ -1,3 +1,14 @@
+// Context Budget Protocol types
+export type {
+  AnalysisAspect,
+  AnalysisBriefing,
+  AspectVerdict,
+  CompressedVerdict,
+  EnrichedSprintBrief,
+  EnrichedSprintItem,
+  SprintItemRisk,
+  SprintVerdict,
+} from '../schemas/analysis.js';
 export type {
   DevStepsConfig,
   DevStepsIndex,
@@ -9,18 +20,6 @@ export type {
   LinkedItems,
   RelationType,
 } from '../schemas/index.js';
-
-// Context Budget Protocol types
-export type {
-  AnalysisAspect,
-  AspectVerdict,
-  CompressedVerdict,
-  AnalysisBriefing,
-  SprintVerdict,
-  SprintItemRisk,
-  EnrichedSprintItem,
-  EnrichedSprintBrief,
-} from '../schemas/analysis.js';
 
 export * from './commands.js';
 export * from './index-refs.types.js';

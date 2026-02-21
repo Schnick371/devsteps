@@ -8,6 +8,13 @@ export {
   clearGlobalCache,
   getCache,
 } from './cache.js';
+// Export init helpers
+export {
+  type CopiedGithubFiles,
+  copyDevstepsDocs,
+  copyGithubFiles,
+  writeSetupMd,
+} from './init-helpers.js';
 
 /**
  * Type to plural directory mapping

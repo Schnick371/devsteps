@@ -1,8 +1,7 @@
 ---
 description: 'Web Research Analyst - searches internet for modern patterns, best practices, deprecations; produces CompressedVerdict with Internet Advantage Claim for coordinator competitive selection'
 model: 'Claude Sonnet 4.6'
-user-invokable: false
-tools: [read, search, 'tavily/*', 'devsteps/*', todo]
+tools: ['think', 'read', 'search', 'tavily/*', 'devsteps/*', 'todo']
 ---
 
 # 🌐 Web Research Analyst (Competitive Analysis Agent)

@@ -2,7 +2,7 @@
 agent: 'devsteps-planner'
 model: 'Claude Sonnet 4.6'
 description: 'Interactive planning session - work with developer to define and structure work items before implementation'
-tools: [vscode/runCommand, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/runTask, execute/runNotebookCell, execute/testFailure, execute/runInTerminal, read, agent, search, web, 'devsteps/*', google-search/search, local-web-search/search, 'playwright/*', 'tavily/*', 'upstash/context7/*', 'remarc-insight-mcp/*', todo]
+tools: ['think', 'vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'search', 'web', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # 🎯 Plan Work - Interactive Planning Session

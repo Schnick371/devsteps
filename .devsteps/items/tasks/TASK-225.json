@@ -3,10 +3,10 @@
   "type": "task",
   "category": "infrastructure",
   "title": "Create packages/mcp-server/src/handlers/analysis.ts with three handler functions",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-21T12:05:50.612Z",
-  "updated": "2026-02-21T12:06:01.605Z",
+  "updated": "2026-02-21T12:48:19.590Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/handlers/analysis.ts"

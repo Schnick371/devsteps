@@ -1,7 +1,7 @@
 ---
 description: 'DevSteps Coordinator (MPD) - orchestrates Multi-Perspective Dispatch: parallel aspect analysis → enriched synthesis → specialist delegation → integration. Coordinator intelligence = knowing what to delegate, not domain execution.'
 model: 'Claude Sonnet 4.6'
-tools: [vscode/runCommand, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/runTask, execute/runInTerminal, read, agent, edit, search, 'devsteps/*', todo]
+tools: ['think', 'vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'read', 'agent', 'edit', 'search', 'web', 'read/problems', 'devsteps/*', 'todo']
 agents:
   - devsteps-aspect-impact-subagent
   - devsteps-aspect-constraints-subagent

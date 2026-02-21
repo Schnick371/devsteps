@@ -1,7 +1,7 @@
 ---
 agent: 'devsteps-maintainer'
 model: 'Claude Sonnet 4.6'
-tools: [vscode/runCommand, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/runTask, execute/runInTerminal, execute/runNotebookCell, execute/testFailure, read, agent, google-search/search, local-web-search/search, 'playwright/*', 'tavily/*', 'upstash/context7/*', 'devsteps/*', search, web, 'remarc-insight-mcp/*', todo]
+tools: ['think', 'vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 description: 'Repository hygiene - merge unfinished branches, archive obsolete work, clean worktrees, verify branch protection'
 ---
 

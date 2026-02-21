@@ -1,8 +1,7 @@
 ---
 description: 'Implementation subagent - creates detailed implementation plans for coordinator execution'
 model: 'Claude Sonnet 4.6'
-user-invokable: false
-tools: [vscode, execute, read, edit, search, web, 'devsteps/*', 'remarc-insight-mcp/*', todo]
+tools: ['think', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'read', 'search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # ⚡ Implementation Subagent

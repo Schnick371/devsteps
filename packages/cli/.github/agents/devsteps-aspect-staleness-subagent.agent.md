@@ -1,8 +1,7 @@
 ---
 description: 'Staleness Analyst - validates that the work item description still matches codebase reality, detecting drift since the item was written'
 model: 'Claude Sonnet 4.6'
-user-invokable: false
-tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
+tools: ['think', 'read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
 ---
 
 # 🔍 Staleness Analyst (MPD Aspect Agent)

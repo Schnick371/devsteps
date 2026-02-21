@@ -1,8 +1,7 @@
 ---
 description: 'Impact Analyst - discovers what breaks, ripples, or silently changes beyond the stated scope of a task'
 model: 'Claude Sonnet 4.6'
-user-invokable: false
-tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
+tools: ['think', 'read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
 ---
 
 # 🌊 Impact Analyst (MPD Aspect Agent)

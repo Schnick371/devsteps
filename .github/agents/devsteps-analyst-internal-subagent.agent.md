@@ -1,8 +1,7 @@
 ---
 description: 'Internal Code Analyst - analyzes existing codebase patterns without internet access; produces CompressedVerdict envelope for coordinator competitive selection'
 model: 'Claude Sonnet 4.6'
-user-invokable: false
-tools: [read, search, 'devsteps/*', todo]
+tools: ['think', 'read', 'search', 'devsteps/*', 'todo']
 ---
 
 # 🔬 Internal Code Analyst (Competitive Analysis Agent)

@@ -11,5 +11,8 @@
     "typescript.tsdk": "node_modules/typescript/lib",
     "typescript.enablePromptUseWorkspaceTsdk": true,
     "github.copilot.chat.anthropic.thinking.enabled": true
+  },
+  "extensions": {
+    "recommendations": []
   }
 }

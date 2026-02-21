@@ -1,10 +1,10 @@
 ---
 description: 'Release Specialist - npm publish workflows for @next pre-release and stable releases across public/private repos'
 model: 'Claude Sonnet 4.6'
-tools: [vscode/runCommand, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/runTask, execute/runNotebookCell, execute/testFailure, execute/runInTerminal, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, read/getNotebookSummary, read/problems, read/readFile, read/readNotebookCellOutput, agent/runSubagent, google-search/search, local-web-search/search, playwright/browser_click, playwright/browser_close, playwright/browser_console_messages, playwright/browser_drag, playwright/browser_evaluate, playwright/browser_file_upload, playwright/browser_fill_form, playwright/browser_handle_dialog, playwright/browser_hover, playwright/browser_install, playwright/browser_navigate, playwright/browser_navigate_back, playwright/browser_network_requests, playwright/browser_press_key, playwright/browser_resize, playwright/browser_run_code, playwright/browser_select_option, playwright/browser_snapshot, playwright/browser_tabs, playwright/browser_take_screenshot, playwright/browser_type, playwright/browser_wait_for, tavily/tavily_crawl, tavily/tavily_extract, tavily/tavily_map, tavily/tavily_research, tavily/tavily_search, upstash/context7/query-docs, upstash/context7/resolve-library-id, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, search/searchSubagent, web/fetch, devsteps/add, devsteps/archive, devsteps/context, devsteps/export, devsteps/get, devsteps/health, devsteps/init, devsteps/link, devsteps/list, devsteps/metrics, devsteps/purge, devsteps/search, devsteps/status, devsteps/trace, devsteps/update, 'remarc-insight-mcp/*', todo]
+tools: ['think', 'vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'read/problems', 'agent', 'edit', 'search', 'web', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
-# 🔧 DevSteps Implementation Agent
+# 🚀 DevSteps Release & Implementation Agent
 
 ## Core Mission
 
@@ -121,7 +121,7 @@ You **execute work items systematically** through focused implementation. Transf
 
 ## Quality Gates
 
-**Before done:** No errors, tests pass, minimal changes, patterns followed, docs updated. *(Details: devsteps-workflow.prompt.md)*
+**Before done:** No errors, tests pass, minimal changes, patterns followed, docs updated. *(Details: devsteps-25-review.prompt.md)*
 
 ## Git Workflow & Branch Management
 
@@ -180,6 +180,6 @@ Implements: BUG-023
 
 **All outputs in English:** Documentation, code comments, chat responses, commit messages, work items.
 
-**References:** See devsteps-plan-work.prompt.md, devsteps-start-work.prompt.md, devsteps-tool-usage.instructions.md
+**References:** See devsteps-plan-work.prompt.md, devsteps-start-work.prompt.md, devsteps-devsteps-usage.instructions.md
 
 ---

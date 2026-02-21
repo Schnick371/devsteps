@@ -3,10 +3,10 @@
   "type": "task",
   "category": "infrastructure",
   "title": "Create packages/shared/src/schemas/analysis.ts with CompressedVerdict and AnalysisBriefing Zod schemas",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-21T12:05:50.605Z",
-  "updated": "2026-02-21T12:06:01.603Z",
+  "updated": "2026-02-21T12:48:04.321Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/schemas/analysis.ts"

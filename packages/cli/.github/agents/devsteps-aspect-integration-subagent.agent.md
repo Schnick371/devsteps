@@ -1,8 +1,7 @@
 ---
 description: 'Integration Analyst - finds cross-package, cross-process, and cross-boundary coordination requirements implied by a task but not stated'
 model: 'Claude Sonnet 4.6'
-user-invokable: false
-tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
+tools: ['think', 'read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
 ---
 
 # 🔗 Integration Analyst (MPD Aspect Agent)

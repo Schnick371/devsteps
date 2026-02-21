@@ -1,7 +1,7 @@
 ---
 agent: 'devsteps-analyst-context-subagent'
 model: 'Claude Sonnet 4.6'
-tools: ['read', 'search', 'remarc-insight-mcp/*', 'devsteps/*']
+tools: ['think', 'read', 'search', 'remarc-insight-mcp/*', 'devsteps/*']
 description: 'Efficient project context loading - smart prioritization, token-optimal, just-in-time aspect loading'
 ---
 

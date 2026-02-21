@@ -1,7 +1,7 @@
 ---
 description: 'Quality control specialist - validates work completion, enforces standards, and gates status transitions to done'
 model: 'Claude Sonnet 4.6'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+tools: ['think', 'vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'read/problems', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # 🔍 DevSteps Reviewer Sub-Worker
@@ -152,6 +152,6 @@ Priority: [Critical/High/Medium] based on severity
 ---
 
 **References:**
-- [devsteps-workflow.prompt.md](../prompts/devsteps-workflow.prompt.md) - Quality gates definition
-- [devsteps-tool-usage.instructions.md](../instructions/devsteps-tool-usage.instructions.md) - DevSteps tool usage standards
+- [devsteps-25-review.prompt.md](../prompts/devsteps-25-review.prompt.md) - Quality gates definition
+- [devsteps-devsteps-usage.instructions.md](../instructions/devsteps-devsteps-usage.instructions.md) - DevSteps tool usage standards
 - [devsteps-code-standards.instructions.md](../instructions/devsteps-code-standards.instructions.md) - Code quality rules

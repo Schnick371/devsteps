@@ -1,8 +1,7 @@
 ---
 description: 'Documentation subagent - creates comprehensive documentation plans for coordinator execution'
 model: 'Claude Sonnet 4.6'
-user-invokable: false
-tools: [execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/runTask, execute/runNotebookCell, execute/testFailure, execute/runInTerminal, read, search, web, 'devsteps/*', 'remarc-insight-mcp/*', todo]
+tools: ['think', 'read', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # 📚 Documentation Subagent

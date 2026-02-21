@@ -3,10 +3,10 @@
   "type": "story",
   "category": "infrastructure",
   "title": "Shared schemas and types for CompressedVerdict and AnalysisBriefing",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-21T12:05:08.205Z",
-  "updated": "2026-02-21T12:06:01.605Z",
+  "updated": "2026-02-21T12:48:14.823Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/schemas/analysis.ts",

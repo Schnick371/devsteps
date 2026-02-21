@@ -1,8 +1,7 @@
 ---
 description: 'Quality Analyst - defines the observable behavior surface: what must be tested, documented, and validated for this change to be trustworthy'
 model: 'Claude Sonnet 4.6'
-user-invokable: false
-tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
+tools: ['think', 'read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
 ---
 
 # ✅ Quality Analyst (MPD Aspect Agent)

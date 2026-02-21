@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
+// Context Budget Protocol schemas
+export * from './analysis.js';
 export * from './index-refs.schema.js';
 // Re-export project context schemas
 export * from './project.js';
 export * from './relationships.js';
-// Context Budget Protocol schemas
-export * from './analysis.js';
 
 /**
  * Methodology types

@@ -2,7 +2,7 @@
 agent: 'devsteps-coordinator'
 model: 'Claude Sonnet 4.6'
 description: 'Rapid plan-execute kanban cycles - MPD analysis, then no-ceremony continuous flow'
-tools: [vscode, execute, read, agent, edit, search, web, 'devsteps/*', 'tavily/*', todo]
+tools: ['think', 'vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'tavily/*', 'todo']
 ---
 
 # 🔄 Rapid Cycle

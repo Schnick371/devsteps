@@ -3,10 +3,10 @@
   "type": "story",
   "category": "infrastructure",
   "title": "MCP tools: write_analysis_report, read_analysis_envelope, write_verdict",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-21T12:05:08.207Z",
-  "updated": "2026-02-21T12:06:01.606Z",
+  "updated": "2026-02-21T12:48:35.083Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/tools/index.ts",
