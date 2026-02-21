@@ -46,10 +46,14 @@ import {
   listTool,
   metricsTool,
   purgeTool,
+  readAnalysisEnvelopeTool,
   searchTool,
   statusTool,
   traceTool,
   updateTool,
+  writeAnalysisReportTool,
+  writeSprintBriefTool,
+  writeVerdictTool,
 } from './tools/index.js';
 
 /**
@@ -234,6 +238,11 @@ class DevStepsServer {
       contextTool,
       healthCheckTool,
       metricsTool,
+      // Context Budget Protocol (CBP) analysis tools
+      writeAnalysisReportTool,
+      readAnalysisEnvelopeTool,
+      writeVerdictTool,
+      writeSprintBriefTool,
     ];
 
     for (const tool of tools) {
