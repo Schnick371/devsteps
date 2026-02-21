@@ -1,8 +1,8 @@
 ---
 description: 'Testing subagent - creates comprehensive test plans and analyzes test requirements for coordinator execution'
-model: 'GPT-5 mini'
+model: 'Claude Sonnet 4.6'
 user-invokable: false
-tools: ['read', 'search', 'usages', 'problems']
+tools: [execute, read, edit, search, 'devsteps/*', google-search/search, local-web-search/search, 'remarc-insight-mcp/*', todo]
 ---
 
 # 🧪 Testing Subagent

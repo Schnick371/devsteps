@@ -1,7 +1,7 @@
 ---
 description: 'Autonomous documentation specialist - discovers project aspects, creates context files, establishes Copilot memory system'
 model: 'Gemini 3 Pro (Preview)'
-tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'tavily/*', 'edit', 'search', 'devsteps/*', 'todo']
+tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'tavily/*', 'edit', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # 📚 DevSteps Documenter

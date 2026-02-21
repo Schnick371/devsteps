@@ -1,6 +1,7 @@
 ---
 description: 'Efficient context loading specialist - smart prioritization, token-optimal aspect loading, task preparation'
-model: 'Claude Sonnet 4.6'
+model: 'Grok Code Fast 1 (Preview) (copilot)'
+user-invokable: false
 tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'tavily/*', 'edit', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
 

@@ -1,6 +1,7 @@
 ---
 description: 'Testing subagent - creates comprehensive test plans and analyzes test requirements for coordinator execution'
-model: 'Claude Opus 4.5'
+model: 'Claude Sonnet 4.6'
+user-invokable: false
 tools: [execute, read, edit, search, 'devsteps/*', google-search/search, local-web-search/search, 'remarc-insight-mcp/*', todo]
 ---
 

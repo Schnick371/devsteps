@@ -1,8 +1,8 @@
 ---
 agent: 'devsteps-planner'
-model: 'Claude Sonnet 4.5'
+model: 'Claude Sonnet 4.6'
 description: 'Interactive planning session - work with developer to define and structure work items before implementation'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'search', 'web', 'devsteps/*', 'todo']
+tools: [vscode/runCommand, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/runTask, execute/runNotebookCell, execute/testFailure, execute/runInTerminal, read, agent, search, web, 'devsteps/*', google-search/search, local-web-search/search, 'playwright/*', 'tavily/*', 'upstash/context7/*', 'remarc-insight-mcp/*', todo]
 ---
 
 # 🎯 Plan Work - Interactive Planning Session
@@ -24,8 +24,9 @@ Plan work through dialogue - understand intent, search existing items, structure
 **Branch Context Preservation:**
 - Remember current branch before planning
 - Switch to main for work item creation
+- Cherry-pick planning commit to feature branch
 - Return to original branch after completion
-- Prevents abandoned feature branches
+- Prevents abandoned feature branches and orphaned work items
 
 **Before planning work items:**
 
@@ -69,6 +70,70 @@ Search best practices + recommendations + existing patterns. Evidence-based prop
 - Create new items only when comprehensive search yields no suitable match
 
 ### 4. Structure Work (MANDATORY)
+
+**Systematic Scope Analysis (CRITICAL for Planning):**
+
+**Why Planning Needs Full Scope:**
+Implementation relies on planning to identify ALL affected components. Incomplete scope discovery during planning → missed work items → incomplete implementation → user finds gaps.
+
+**Principle:** Plan for cross-cutting concerns by analyzing functionally, not lexically.
+
+**Functional Definition:**
+- Identify WHAT the code accomplishes from user perspective
+- Avoid keyword searches alone - understand behavior and purpose
+- Recognize patterns by their role in system architecture
+- Example scope: "Auto-save" → All components with: save operations, onChange handlers, debouncing, status indicators
+
+**Complete Discovery:**
+- Use functional reasoning to find ALL affected code paths
+- Combine search techniques: semantic search, usage analysis, architectural knowledge
+- Validate completeness by checking related areas (UI, persistence, state management)
+- Create inventory: List ALL components discovered, document why each is included
+
+**Implementation Comparison:**
+- Read actual implementation for EACH affected component
+- Document current approaches systematically (create comparison table for planning)
+- Identify variations in patterns, libraries, techniques, or timing
+- Flag inconsistencies that work items must address
+
+**Truth Source Validation:**
+- Consult `.devsteps/context/` for documented architectural decisions
+- Review existing work items for established patterns
+- Seek user clarification when documented truth conflicts with observed code
+- Document which pattern is canonical for implementation to follow
+
+**Best Practice Definition:**
+- Synthesize from: documented patterns, comparative analysis, technical requirements, user input
+- Articulate rationale (WHY this approach serves project goals)
+- Get user confirmation before planning work that deviates from established patterns
+- Define success criteria based on consistency across ALL discovered components
+
+**Work Item Creation:**
+- Create Tasks for EACH component requiring updates (no "update all X" umbrella tasks)
+- OR create single Story with acceptance criteria listing ALL components
+- Include component inventory in Story description
+- Link all Tasks to parent Story with `implements`
+
+**Validation Checklist for Planning:**
+- [ ] ALL affected components identified and documented
+- [ ] Current state comparison table created
+- [ ] Target pattern defined with clear rationale
+- [ ] User confirmed scope completeness
+- [ ] Work items created for EACH component OR Story lists ALL in acceptance criteria
+- [ ] Truth source (`.devsteps/context/`) will be updated by implementation
+
+**Critical Warning Signs:**
+- Partial scope: "Found several instances" without exhaustive list
+- Keyword-only discovery: Missed components with different naming
+- Assumed equivalence: "They probably all work the same" without verification
+- Vague work items: "Unify pattern" without listing specific targets
+
+**Apply this protocol for planning:**
+- Multi-component refactoring projects
+- Pattern unification initiatives
+- Library version alignment
+- UI/UX consistency work
+- Any Story affecting 3+ components
 
 **WHY Hierarchy Matters:**
 - Epic Summary requires complete traceability tree
@@ -136,7 +201,23 @@ Stage `.devsteps/`, commit with planning format. Items remain `draft` or `planne
 **Status Boundary:** Planning creates structure (draft/planned), implementation updates status (in-progress/review/done in feature branch).
 
 ### 9. Return to Original Context
-Restore original branch if planning was initiated from feature branch. Maintains workflow continuity.
+
+**Cherry-Pick Planning Commit (MANDATORY):**
+- Planning commits in `main` must be synced to feature branch
+- Feature branch needs updated DevSteps status to see new work items
+- Without cherry-pick, newly created items invisible in current branch
+
+**Steps:**
+1. **Capture planning commit hash** (from `git log -n 1` after commit)
+2. **Switch to original feature branch** (e.g., `git checkout bug/autosave-tutorial-richtext`)
+3. **Cherry-pick planning commit** (`git cherry-pick <commit-hash>`)
+4. **Verify DevSteps status** confirms new items visible
+
+**Why This Matters:**
+- DevSteps MCP tools read from `.devsteps/` in current branch
+- Implementation needs to see BUG/TASK items created during planning
+- Prevents "work item not found" errors during development
+- Maintains traceability continuity across branches
 
 ### Consequences of Skipping Steps
 - ❌ Wrong branch → Work items lost in feature branches

@@ -1,163 +1,101 @@
 ---
 agent: 'devsteps-sprint-executor'
 model: 'Claude Sonnet 4.6'
-description: 'Multi-hour autonomous sprint execution with context-aware analysis, obsolescence detection, regression prevention'
-tools: [vscode, execute, read, agent, edit, search, web, 'devsteps/*', 'playwright/*', 'microsoftdocs/mcp/*', 'upstash/context7/*', 'remarc-insight-mcp/*', todo]
+description: 'Multi-hour autonomous sprint — pre-sprint archaeology, risk-based MPD per item, all 13 agents, blocking reviewer'
+tools: [vscode, execute, read, agent, edit, search, web, 'devsteps/*', 'tavily/*', todo]
 ---
 
-# 🏃 Sprint Execution - Autonomous Multi-Hour Workflow
+# 🏃 Sprint Execution
 
-## Mission
+The **sprint-executor autonomously classifies the incoming task, selects agent combinations, and manages multi-hour execution.** No additional user direction is needed for agent selection or mode choice — the agent determines this from context.
 
-Execute multi-hour work sessions on planned backlog with context-aware analysis, obsolescence detection, and regression prevention.
-
-## Core Principles
-
-**Autonomous Execution:**
-- Multi-hour continuous operation without user intervention
-- Intelligent pause points when user decisions required
-- Self-directed prioritization and sequencing
-
-**Context-Aware Analysis (CRITICAL):**
-- Analyze entire backlog for conflicts and obsolescence BEFORE execution
-- Validate assumptions against current codebase state
-- Prevent regressions through impact analysis
-
-**Human-in-the-Loop Decision Points:**
-- Architecture decisions affecting multiple modules
-- Conflicting requirements needing prioritization
-- Ambiguous acceptance criteria requiring clarification
-
-## Pre-Execution Analysis (MANDATORY)
-
-### Step 1: Backlog Discovery
-- `#mcp_devsteps_list` - retrieve complete backlog (draft/planned/in-progress)
-- Group by Epic hierarchy, prioritize Q1 items
-- Identify stale items (>12 weeks old)
-
-### Step 2: Codebase Context
-- Recent git commits: `git log --oneline --since="4 weeks ago"`
-- Active feature branches: `git branch --list`
-- Recent file changes: `git diff --name-status HEAD~20..HEAD`
-
-### Step 3: Obsolescence Detection
-**Validation for flagged items:**
-- Does targeted code still exist?
-- Are referenced APIs still current?
-- Does problem description still apply?
-- Would implementation conflict with recent work?
-
-**Decision matrix:**
-- Mark `obsolete`: Problem solved differently, target code gone
-- Update description: Scope changed, adjust to current reality
-- Keep `planned`: Still valid, no conflicts
-- Mark `blocked`: Needs user decision
-
-### Step 4: Impact Analysis
-- `grep_search` - find all references to affected code
-- `list_code_usages` - analyze symbol usage
-- Identify dependent modules and test coverage
-
-**Systematic Scope for Cross-Cutting Work:**
-- Functional analysis discovers all affected components regardless of naming
-- Compare ALL implementations before applying patterns
-- Validate against truth sources (`.devsteps/context/`)
-- Create exhaustive checklist - no partial updates
-- User-facing validation required for UX changes
-
-**Regression risk scoring:**
-- LOW: Isolated changes, comprehensive tests
-- MEDIUM: Shared modules, partial test coverage
-- HIGH: Core infrastructure, missing tests
-- CRITICAL: Cross-cutting changes, production-critical code
-
-### Step 5: Execution Sequencing
-**Smart prioritization:**
-- Primary: Priority (Q1 → Q2 → Q3)
-- Secondary: Unblocking items first, low-risk before high-risk
-- Resolve `depends-on` chains, fix blockers before blocked items
-
-## Autonomous Execution Loop
-
-**For each item:**
-
-### Implementation
-- Create feature branch
-- Update status `planned → in-progress` (`#mcp_devsteps_update <ID> --status in-progress`)
-- Implement changes, write tests, validate build
-- Monitor time per item (>2 hours → reassess complexity)
-
-### Quality Gates
-- Linter passes, type checker clean
-- Unit tests pass, integration tests pass
-- Build succeeds, full test suite passes
-- No regressions, no API contract breaks
-
-**For HIGH/CRITICAL risk:**
-- Pause execution, document validation steps
-- Set status `review` (user approval required)
-- Continue with next LOW/MEDIUM risk item
-
-### Completion & Integration
-- Final commit to feature branch
-- Merge to main (--no-ff)
-- Push merged main, retain feature branch (8+ weeks)
-- Mark item `done`, update Epic progress
-
-### Adaptive Replanning (Every 5 items OR 2 hours)
-- Re-scan recent git commits
-- Verify remaining items still valid
-- Reprioritize based on new completions
-- Generate interim summary
-
-## Pause Points (Human-in-the-Loop)
-
-**Automatic pause triggers:**
-- Acceptance criteria unclear
-- Design decision required
-- Test failures unrelated to changes
-- External dependency unavailable
-- Change impact HIGH/CRITICAL risk
-
-**Pause protocol:**
-- Set item status `in-progress` (preserve context)
-- Document specific questions/blockers
-- Generate summary report
-- Save execution state
-
-## Git Traceability
-
-**Commit Message Format:**
-```
-type(WORK-ITEM-ID): Subject line (50 chars max)
-
-Detailed description of changes.
-
-Implements: WORK-ITEM-ID
-```
-
-**Types:** feat, fix, refactor, perf, docs, style, test, chore
-
-**Pre-Merge Check:**
-```bash
-git log <branch> --pretty="%s" | grep -E '(EPIC|STORY|BUG|TASK|SPIKE)-[0-9]+'
-```
-
-**Code Archeology:**
-```bash
-git blame <file> | grep -A2 -B2 "<search-term>"
-git show <commit-sha>  # Extract Work Item ID from footer
-#mcp_devsteps_trace <WORK-ITEM-ID>  # Read context
-git log -S "<search-term>" -p --all -- <file>  # Find ALL changes
-```
-
-## Integration with Other Prompts
-
-- **Pre-Sprint:** devsteps-10-plan-work.prompt.md for Epic breakdown
-- **Item Execution:** devsteps-20-start-work.prompt.md pattern
-- **Quick Items:** devsteps-30-rapid-cycle.prompt.md
-- **Code Archeology:** Detective-CodeArcheology.agent.md
+Depending on what is detected (single item, multi-item backlog, spike, review), the sprint-executor selects the right subset of its 13 registered agents automatically. For a true multi-item sprint it runs: backlog pre-flight → per-item MPD loop with risk-tiered agent dispatch → adaptive replanning. Reviewer blocks every item.
 
 ---
 
-**Remember: Think deeply before acting. Context awareness prevents wasted effort. Regressions cost more than pauses.**
+## Phase 0 — Pre-Sprint (run once before the loop)
+
+1. **`devsteps-analyst-context-subagent`** → global archaeology → write `.devsteps/analysis/sprint-[DATE]/global-context.md`
+2. **`devsteps-aspect-staleness-subagent`** (batch prompt, all `planned` items) → mark `obsolete`/`blocked` before execution
+3. **`devsteps-planner`** → receives: backlog list + global-context → produces **Enriched Sprint Brief**:
+   - Ordered execution sequence (Q1 → Q2 → Q3), per-item risk score (QUICK/STANDARD/FULL)
+   - Shared-file conflict map, cross-package build order, `depends-on` chain resolution
+   - Write to `.devsteps/analysis/sprint-[DATE]/enriched-sprint-brief.md`
+
+---
+
+## Phase 1 — Per-Item Loop
+
+For each item in the Enriched Sprint Brief IN ORDER:
+
+### Triage Gate — deterministic, no LLM call
+
+| Tier | Triggers | Agents dispatched (parallel where marked) |
+|---|---|---|
+| **QUICK** | Single-file, docs-only, isolated config, full test coverage | `impl-subagent` only |
+| **STANDARD** | Cross-file, shared module, API surface, partial test coverage | `aspect-staleness` + `aspect-impact` (parallel) → `impl + test` (parallel) |
+| **FULL** | Schema change, cross-package, CRITICAL risk, STALE-CONFLICT | All 5 aspects (parallel) → synthesis → `impl + test + doc` (parallel, file paths only) |
+| **COMPETITIVE** | "Which pattern/library/approach?" detected in item description | `analyst-internal` + `analyst-web` (parallel) → Judge → `impl` + optionally `planner` |
+
+### Item Execution Steps
+
+1. Create feature branch **now** (not at sprint start): `story/<ID>`, `task/<ID>`, `bug/<ID>`
+2. Set status `→ in-progress`
+3. Dispatch analysts per triage tier — max 5 parallel calls per turn
+4. Synthesize envelopes → Enriched Task Brief; pass **file paths only** to specialists (never paste report content)
+5. **`devsteps-reviewer`** — **BLOCKING**: await PASS before advancing to next item
+   - FAIL → pause sprint, surface conflict to user, do NOT proceed
+6. Merge to main (`--no-ff`), retain branch ≥ 8 weeks
+7. Set status `→ done`
+8. Checkpoint: write `.devsteps/analysis/sprint-[DATE]/item-[ID]-summary.md` (3-line summary + verdict)
+
+### Cross-Package Rules
+
+- After any `packages/shared` item lands → run `npm run build --workspace=packages/shared` before next `impl-subagent` dispatch
+- Track modified files in `.devsteps/analysis/sprint-[DATE]/invalidation-cache.md`; if next item's `affected_paths` overlaps → re-invoke `analyst-context` scoped to those files only
+- **Changelog entries**: collect all, consolidate into CHANGELOG at **end of sprint** (not per item — causes merge conflicts)
+
+---
+
+## Phase 2 — Adaptive Replanning (every 5 items OR every 2 hours)
+
+1. **`devsteps-analyst-context-subagent`** (delta: `git diff HEAD~5..HEAD`) → update global context
+2. **`devsteps-planner`** (remaining items + delta) → rerank, detect newly invalid items
+3. If any `packages/shared` item completed in prior batch → force staleness re-evaluation on all remaining items touching `packages/cli/` or `packages/mcp-server/`
+
+---
+
+## Operational Constraints
+
+| Rule | Value |
+|---|---|
+| Time-box: QUICK | ≤ 20 min — exceeded → downscope or pause |
+| Time-box: STANDARD | ≤ 45 min — exceeded → downscope or pause |
+| Time-box: FULL | ≤ 90 min — exceeded → split item or pause |
+| Context saturation | > 70% session window → force checkpoint + summary before next item |
+| Parallel subagent cap | Max 5 per turn |
+| Competitive mode | Only if FULL-tier item has explicit strategy question — doubles cost |
+
+---
+
+## Pause Triggers → Stop Sprint, Surface to User
+
+- Reviewer FAIL that would invalidate subsequent items
+- Architecture decision required (not in Enriched Sprint Brief)
+- Item exceeds tier time-box with no clear downscope path
+- Context saturation threshold crossed
+- Acceptance criteria genuinely ambiguous
+
+**On pause:** set item `→ in-progress`, write blockers to `.devsteps/analysis/[ID]/sprint-pause.md`, generate session summary with remaining item list.
+
+---
+
+## Prompt Ecosystem
+
+| Situation | Use instead |
+|---|---|
+| Need deep planning before sprint | `devsteps-10-plan-work` → then return here |
+| Single item only | `devsteps-20-start-work` (Standard MPD) |
+| Kanban pull, no ceremony | `devsteps-30-rapid-cycle` |
+| Review only | `devsteps-25-review` |
+| Investigation / archaeology | `devsteps-05-investigate` |
