@@ -1,0 +1,36 @@
+{
+  "id": "TASK-222",
+  "type": "task",
+  "category": "infrastructure",
+  "title": "Create packages/shared/src/schemas/analysis.ts with CompressedVerdict and AnalysisBriefing Zod schemas",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-21T12:05:50.605Z",
+  "updated": "2026-02-21T12:06:01.603Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/analysis.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-104"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "context-budget",
+    "shared",
+    "zod"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,35 @@
+{
+  "id": "TASK-223",
+  "type": "task",
+  "category": "infrastructure",
+  "title": "Re-export analysis schemas from packages/shared/src/schemas/index.ts",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-21T12:05:50.610Z",
+  "updated": "2026-02-21T12:06:01.604Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-104"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "context-budget",
+    "shared"
+  ],
+  "commits": [],
+  "metadata": {}
+}

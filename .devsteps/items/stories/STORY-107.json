@@ -1,0 +1,39 @@
+{
+  "id": "STORY-107",
+  "type": "story",
+  "category": "infrastructure",
+  "title": "Agent prompt updates: adopt JSON envelopes instead of prose markdown",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-21T12:05:08.210Z",
+  "updated": "2026-02-21T12:06:01.608Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/",
+    ".github/prompts/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-027"
+    ],
+    "implemented-by": [
+      "TASK-232"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "context-budget",
+    "agents",
+    "prompts"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,37 @@
+{
+  "id": "TASK-229",
+  "type": "task",
+  "category": "infrastructure",
+  "title": "Create .devsteps/analysis/.gitignore excluding JSON envelope files",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-21T12:05:50.615Z",
+  "updated": "2026-02-21T12:06:01.608Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/init.ts",
+    ".devsteps/analysis/"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-106"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "context-budget",
+    "cli",
+    "gitignore"
+  ],
+  "commits": [],
+  "metadata": {}
+}

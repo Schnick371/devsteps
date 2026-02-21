@@ -1,0 +1,41 @@
+{
+  "id": "STORY-105",
+  "type": "story",
+  "category": "infrastructure",
+  "title": "MCP tools: write_analysis_report, read_analysis_envelope, write_verdict",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-21T12:05:08.207Z",
+  "updated": "2026-02-21T12:06:01.606Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/index.ts",
+    "packages/mcp-server/src/handlers/analysis.ts",
+    "packages/mcp-server/src/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-027"
+    ],
+    "implemented-by": [
+      "TASK-227"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "context-budget",
+    "mcp",
+    "tools",
+    "atomic-write"
+  ],
+  "commits": [],
+  "metadata": {}
+}

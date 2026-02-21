@@ -1,0 +1,41 @@
+{
+  "id": "STORY-104",
+  "type": "story",
+  "category": "infrastructure",
+  "title": "Shared schemas and types for CompressedVerdict and AnalysisBriefing",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-21T12:05:08.205Z",
+  "updated": "2026-02-21T12:06:01.605Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/analysis.ts",
+    "packages/shared/src/schemas/index.ts",
+    "packages/shared/src/types/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-027"
+    ],
+    "implemented-by": [
+      "TASK-224"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "context-budget",
+    "shared",
+    "zod",
+    "schemas"
+  ],
+  "commits": [],
+  "metadata": {}
+}

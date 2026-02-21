@@ -1,0 +1,35 @@
+{
+  "id": "TASK-231",
+  "type": "task",
+  "category": "infrastructure",
+  "title": "Update coordinator agent to read briefings via read_analysis_envelope and write CompressedVerdict via write_verdict",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-21T12:05:50.617Z",
+  "updated": "2026-02-21T12:06:01.608Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-coordinator.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-107"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "context-budget",
+    "agents"
+  ],
+  "commits": [],
+  "metadata": {}
+}
