@@ -9,8 +9,8 @@ description: "DevSteps CLI/MCP tool usage - file protection and API contracts"
 
 **NEVER edit `.devsteps/` files directly:**
 - ❌ Manual JSON/MD edits in `.devsteps/` directory
-- ✅ Use devsteps CLI commands exclusively
-- ✅ Use MCP tools exclusively
+- ✅ Use devsteps MCP tools exclusively first
+- ✅ Use devsteps CLI commands, if MCP tools unavailable (temporary fallback)
 
 **Why:** Ensures index consistency, maintains traceability, prevents corruption.
 

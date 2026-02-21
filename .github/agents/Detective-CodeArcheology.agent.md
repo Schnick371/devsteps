@@ -1,7 +1,7 @@
 ---
 description: 'Code archeology specialist - finds WHY code changed and WHO changed it using Git forensics'
-model: 'Claude Sonnet 4.5'
-tools: ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/terminalSelection', 'read/terminalLastCommand', 'read/readFile', 'agent', 'edit', 'search', 'devsteps/search', 'tavily/*', 'todo']
+model: 'Claude Sonnet 4.6'
+tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'tavily/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # 🔍 Code Detective & Archeology Specialist

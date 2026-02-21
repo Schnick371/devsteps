@@ -1,8 +1,7 @@
 ---
 description: 'Documentation subagent - creates comprehensive documentation plans for coordinator execution'
-model: 'Gemini 3 Pro (Preview)'
-user-invokable: false
-tools: ['read', 'search']
+model: 'Claude Opus 4.5'
+tools: [execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/runTask, execute/runNotebookCell, execute/testFailure, execute/runInTerminal, read, search, web, 'devsteps/*', 'remarc-insight-mcp/*', todo]
 ---
 
 # 📚 Documentation Subagent

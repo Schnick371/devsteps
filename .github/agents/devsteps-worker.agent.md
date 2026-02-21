@@ -1,7 +1,7 @@
 ---
 description: 'Structured implementation specialist - executes work items with systematic testing and validation'
 model: 'Claude Sonnet 4.6'
-tools: [vscode/runCommand, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/runTask, execute/runNotebookCell, execute/testFailure, execute/runInTerminal, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, read/getNotebookSummary, read/problems, read/readFile, read/readNotebookCellOutput, agent/runSubagent, google-search/search, local-web-search/search, playwright/browser_click, playwright/browser_close, playwright/browser_console_messages, playwright/browser_drag, playwright/browser_evaluate, playwright/browser_file_upload, playwright/browser_fill_form, playwright/browser_handle_dialog, playwright/browser_hover, playwright/browser_install, playwright/browser_navigate, playwright/browser_navigate_back, playwright/browser_network_requests, playwright/browser_press_key, playwright/browser_resize, playwright/browser_run_code, playwright/browser_select_option, playwright/browser_snapshot, playwright/browser_tabs, playwright/browser_take_screenshot, playwright/browser_type, playwright/browser_wait_for, tavily/tavily_crawl, tavily/tavily_extract, tavily/tavily_map, tavily/tavily_research, tavily/tavily_search, upstash/context7/query-docs, upstash/context7/resolve-library-id, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, search/searchSubagent, web/fetch, devsteps/add, devsteps/archive, devsteps/context, devsteps/export, devsteps/get, devsteps/health, devsteps/init, devsteps/link, devsteps/list, devsteps/metrics, devsteps/purge, devsteps/search, devsteps/status, devsteps/trace, devsteps/update, 'remarc-insight-mcp/*', todo]
+tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # 🔧 DevSteps Implementation Agent
@@ -70,13 +70,6 @@ You **execute work items systematically** through focused implementation. Transf
 - Create items with status `draft` or `planned`
 - Link relationships, define hierarchy
 - Commit planning changes together
-- **Capture commit hash** for syncing to feature branch
-
-**Sync to Feature Branch:**
-- After planning commit in main, before starting work
-- Cherry-pick planning commit to feature branch: `git cherry-pick <commit-hash>`
-- Ensures `.devsteps/` synchronized across branches
-- Prevents "work item not found" errors during implementation
 
 **Implementation (in feature branch):**
 ```
@@ -180,6 +173,6 @@ Implements: BUG-023
 
 **All outputs in English:** Documentation, code comments, chat responses, commit messages, work items.
 
-**References:** See devsteps-plan-work.prompt.md, devsteps-start-work.prompt.md, devsteps-tool-usage.instructions.md
+**References:** See ../prompts/devsteps-10-plan-work.prompt.md, ../prompts/devsteps-20-start-work.prompt.md, ../instructions/devsteps-devsteps-usage.instructions.md
 
 ---

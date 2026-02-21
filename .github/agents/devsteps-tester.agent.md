@@ -1,7 +1,7 @@
 ---
 description: 'Test planner - creates comprehensive test plans and analyzes test requirements to guide implementation'
-model: 'GPT-5 mini'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+model: 'Claude Sonnet 4.6'
+tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # 🧪 DevSteps Tester Sub-Worker

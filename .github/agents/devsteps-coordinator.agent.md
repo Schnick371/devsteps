@@ -1,19 +1,19 @@
 ---
 description: 'DevSteps Coordinator - delegates responsibilities to specialized sub-agents using git worktrees for parallel execution. Merges results back to main branch after quality validation.' 
-model: 'Claude Sonnet 4.5'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
-agents: ['implementation-subagent', 'testing-subagent', 'documentation-subagent', 'devsteps-planner']
+model: 'Claude Sonnet 4.6'
+tools: [vscode/runCommand, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/runTask, execute/runNotebookCell, execute/testFailure,  execute/runInTerminal, read, agent, edit, search, web, 'devsteps/*', 'playwright/*',  'remarc-insight-mcp/*',todo]
+agents: ['devsteps-impl-subagent', 'devsteps-test-subagent', 'devsteps-doc-subagent', 'devsteps-planner']
 handoffs:
   - label: Plan Implementation
-    agent: implementation-subagent
-    prompt: Create a detailed implementation plan for this task. Include specific file changes, test requirements, and validation criteria.
+    agent: devsteps-impl-subagent
+    prompt: Create a detailed implementation plan for this task. Include specific file changes, test requirements, and validation criteria. Search internet for best practices and patterns to follow.
     send: false
   - label: Plan Tests
-    agent: testing-subagent
+    agent: devsteps-test-subagent
     prompt: Create a comprehensive test plan. Specify test cases, mocks, assertions, and edge cases.
     send: false
   - label: Plan Documentation
-    agent: documentation-subagent
+    agent: devsteps-doc-subagent
     prompt: Create a documentation plan. Specify README updates, API docs, and code comments needed.
     send: false
   - label: Analyze Architecture
@@ -60,8 +60,8 @@ Execute work items systematically by delegating to specialized sub-workers. Tran
 
 **Delegation triggers:**
 - Code operations → sub-workers in worktrees
-- Testing → devsteps-tester (parallel with implementation)
-- Documentation → devsteps-documenter (parallel workflow)
+- Testing → devsteps-test-subagent (parallel with implementation)
+- Documentation → devsteps-doc-subagent (parallel workflow)
 - Analysis → devsteps-planner (architecture assessment)
 
 ## Executor Mode (CRITICAL - NEW 2026 Pattern)
@@ -77,14 +77,14 @@ Execute work items systematically by delegating to specialized sub-workers. Tran
 
 ### When to Delegate:
 - **Complex Analysis** → devsteps-planner (creates analysis plan)
-- **Code Implementation** → devsteps-implementer (creates implementation plan)
-- **Testing Strategy** → devsteps-tester (creates test plan)
-- **Documentation** → devsteps-documenter (creates documentation plan)
+- **Code Implementation** → devsteps-impl-subagent (creates implementation plan)
+- **Testing Strategy** → devsteps-test-subagent (creates test plan)
+- **Documentation** → devsteps-doc-subagent (creates documentation plan)
 
 ### Parallel Planning (NEW CAPABILITY):
 You can request multiple plans **simultaneously**:
-- devsteps-planner + devsteps-tester (analyze while planning tests)
-- devsteps-implementer + devsteps-documenter (plan code + plan docs)
+- devsteps-planner + devsteps-test-subagent (analyze while planning tests)
+- devsteps-impl-subagent + devsteps-doc-subagent (plan code + plan docs)
 - All sub-agents in parallel for complex features
 
 ### Executing Plans:
@@ -96,9 +96,9 @@ You can request multiple plans **simultaneously**:
 
 **Available Sub-Workers:**
 - **devsteps-planner**: DevSteps planning, architecture decisions, complexity assessment, refactoring strategy
-- **devsteps-implementer**: Code implementation, fixes, utilities
-- **devsteps-documenter**: Documentation creation and updates
-- **devsteps-tester**: Test generation, execution, validation
+- **devsteps-impl-subagent**: Code implementation, fixes, utilities
+- **devsteps-doc-subagent**: Documentation creation and updates
+- **devsteps-test-subagent**: Test generation, execution, validation
 
 **Sub-Worker Selection:**
 Match task complexity to specialist strengths. Uncertain? Delegate to devsteps-planner for assessment.
@@ -161,10 +161,10 @@ in rare context cases: Bug `relates-to` Epic/Requirement (context only)
 
 **Before marking done:**
 - No compilation or runtime errors
-- Tests pass validation (delegate to devsteps-tester)
+- Tests pass validation (delegate to devsteps-test-subagent)
 - Only necessary changes made
 - Project patterns followed
-- Documentation updated (delegate to devsteps-documenter if needed)
+- Documentation updated (delegate to devsteps-doc-subagent if needed)
 - Sub-worker outputs validated
 
 ## Git Workflow
@@ -205,6 +205,6 @@ in rare context cases: Bug `relates-to` Epic/Requirement (context only)
 
 ---
 
-**Sub-Workers:** devsteps-planner | devsteps-implementer | devsteps-documenter | devsteps-tester
+**Sub-Agents:** devsteps-planner | devsteps-impl-subagent | devsteps-doc-subagent | devsteps-test-subagent
 
 *Orchestrator role: Proactive delegation, systematic coordination, rigorous validation.*

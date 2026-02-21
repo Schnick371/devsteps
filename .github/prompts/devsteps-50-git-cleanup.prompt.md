@@ -1,7 +1,7 @@
 ---
 agent: 'devsteps-maintainer'
-model: 'Claude Sonnet 4.5'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'search', 'web', 'devsteps/*', 'todo']
+model: 'Claude Sonnet 4.6'
+tools: [vscode/runCommand, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/runTask, execute/runInTerminal, execute/runNotebookCell, execute/testFailure, read, agent, google-search/search, local-web-search/search, 'playwright/*', 'tavily/*', 'upstash/context7/*', 'devsteps/*', search, web, 'remarc-insight-mcp/*', todo]
 description: 'Repository hygiene - merge unfinished branches, archive obsolete work, clean worktrees, verify branch protection'
 ---
 
@@ -128,4 +128,4 @@ Delete branches without checking DevSteps status. Force-push to shared branches.
 Understand code before merging. Test after each merge. Document decisions comprehensively. Preserve audit trail. Rollback on failure.
 
 **See Also:**
-- [devsteps-git-hygiene.instructions.md](../instructions/devsteps-git-hygiene.instructions.md) - Branch workflow rules
+- [devsteps-commit-format.instructions.md](../instructions/devsteps-commit-format.instructions.md) - Commit and branch workflow rules

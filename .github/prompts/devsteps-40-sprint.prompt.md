@@ -1,8 +1,8 @@
 ---
 agent: 'devsteps-sprint-executor'
-model: 'Claude Opus 4.5'
+model: 'Claude Sonnet 4.6'
 description: 'Multi-hour autonomous sprint execution with context-aware analysis, obsolescence detection, regression prevention'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+tools: [vscode, execute, read, agent, edit, search, web, 'devsteps/*', 'playwright/*', 'microsoftdocs/mcp/*', 'upstash/context7/*', 'remarc-insight-mcp/*', todo]
 ---
 
 # 🏃 Sprint Execution - Autonomous Multi-Hour Workflow
@@ -57,6 +57,13 @@ Execute multi-hour work sessions on planned backlog with context-aware analysis,
 - `grep_search` - find all references to affected code
 - `list_code_usages` - analyze symbol usage
 - Identify dependent modules and test coverage
+
+**Systematic Scope for Cross-Cutting Work:**
+- Functional analysis discovers all affected components regardless of naming
+- Compare ALL implementations before applying patterns
+- Validate against truth sources (`.devsteps/context/`)
+- Create exhaustive checklist - no partial updates
+- User-facing validation required for UX changes
 
 **Regression risk scoring:**
 - LOW: Isolated changes, comprehensive tests

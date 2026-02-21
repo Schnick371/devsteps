@@ -46,7 +46,7 @@ The DevSteps agent system uses a **coordinator pattern** with specialized sub-wo
 - **Planning:** Interactive work item creation with 9-step protocol (research, structure, validate)
 - **Analysis:** Deep reasoning for architecture assessment, refactoring strategy, tooling evaluation
 
-**Model:** Claude Sonnet 4.5 (deep reasoning + planning)
+**Model:** Claude Sonnet 4.6 (deep reasoning + planning)
 
 **Strengths:** System-level thinking, SOLID principles, strategic planning, Eisenhower prioritization
 
@@ -158,7 +158,7 @@ Coordinator orchestrates:
 
 ## Model Strengths Summary
 
-### Claude Sonnet 4.5 (devsteps-planner)
+### Claude Sonnet 4.6 (devsteps-planner)
 ✅ Deep reasoning, architecture, complex refactoring  
 ✅ Handles large files (200+ lines) safely  
 ✅ SOLID principles, design patterns  

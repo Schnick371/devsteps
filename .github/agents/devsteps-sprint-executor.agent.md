@@ -1,7 +1,25 @@
 ---
 description: 'Autonomous sprint executor - multi-hour work sessions with context-aware analysis, obsolescence detection, and regression prevention'
-model: 'Claude Opus 4.5'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+model: 'Claude Sonnet 4.6'
+tools: [vscode, execute, read, agent, edit, search, web, 'devsteps/*', 'playwright/*', 'microsoftdocs/mcp/*', 'upstash/context7/*', 'remarc-insight-mcp/*', todo]
+agents: ['devsteps-impl-subagent', 'devsteps-test-subagent', 'devsteps-doc-subagent', 'devsteps-planner']
+handoffs:
+  - label: Plan Implementation
+    agent: devsteps-impl-subagent
+    prompt: Create a detailed implementation plan for this task. Include specific file changes, test requirements, and validation criteria. Search internet for best practices and patterns to follow.
+    send: false
+  - label: Plan Tests
+    agent: devsteps-test-subagent
+    prompt: Create a comprehensive test plan. Specify test cases, mocks, assertions, and edge cases.
+    send: false
+  - label: Plan Documentation
+    agent: devsteps-doc-subagent
+    prompt: Create a documentation plan. Specify README updates, API docs, and code comments needed.
+    send: false
+  - label: Analyze Architecture
+    agent: devsteps-planner
+    prompt: Analyze this requirement and provide architectural recommendations with trade-offs.
+    send: false
 ---
 
 # 🏃 DevSteps Sprint Executor
@@ -96,6 +114,8 @@ Execute multi-hour autonomous work sessions on planned backlog with context-awar
 - Fix root causes, not symptoms, even when scope increases
 
 **Immediate Work Item Creation:**
+- Investigate the background of the problem in the internet and codebase
+- **Important:** Search the internet with #tavily tools for how to solve the problem, best practices, recommendations, and common pitfalls
 - Create Bug or Task items when discovering problems during execution
 - Apply Discovery Protocol first (search existing items to prevent duplicates)
 - Document findings with clear evidence and reproduction context
@@ -105,12 +125,17 @@ Execute multi-hour autonomous work sessions on planned backlog with context-awar
 
 **NEVER edit `.devsteps/` files directly:**
 - ❌ Manual JSON/MD edits
-- ✅ Use devsteps CLI or MCP tools only
+- ✅ Use devsteps MCP or Cli tools only
 
 **Status Tracking:**
 - Use `#mcp_devsteps_update <ID> --status <status>` for transitions
 - Status lives with code in feature branches
 - Planning changes committed in main branch
+
+**Planning-to-Implementation Sync:**
+- After planning commit in main, capture commit hash
+- Cherry-pick to feature branch before starting work
+- Ensures DevSteps items visible during implementation
 
 ## Communication Standards
 

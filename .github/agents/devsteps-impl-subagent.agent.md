@@ -1,8 +1,7 @@
 ---
 description: 'Implementation subagent - creates detailed implementation plans for coordinator execution'
-model: 'Claude Sonnet 4.5'
-user-invokable: false
-tools: ['read', 'search', 'usages', 'problems']
+model: 'Claude Opus 4.5'
+tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # ⚡ Implementation Subagent

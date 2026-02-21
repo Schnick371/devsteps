@@ -1,8 +1,8 @@
 ---
-agent: 'devsteps'
-model: 'Claude Sonnet 4.5'
+agent: 'devsteps-coordinator'
+model: 'Claude Sonnet 4.6'
 description: 'Rapid plan-execute cycles: create work items and implement immediately in continuous flow'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+tools: [vscode/runCommand, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/runTask, execute/runNotebookCell, execute/testFailure, execute/runInTerminal, read, agent, edit, search, web, 'devsteps/*', google-search/search, local-web-search/search, 'playwright/*', 'tavily/*', 'upstash/context7/*', 'remarc-insight-mcp/*', todo]
 ---
 
 # 🔄 Rapid Cycle - Plan and Execute Flow
@@ -50,15 +50,22 @@ Plan Items → Start Work → Implement → Test → Merge → Repeat
    - Prioritize by Eisenhower quadrants
    - **Status**: Items remain `draft` or `planned`
    - **Commit planning to main**
+   - **Capture commit hash** (from `git log -n 1`)
 
 2. **Start Work** (transition to feature branch):
    - Create/checkout feature branch from main
+   - **Cherry-pick planning commit** (`git cherry-pick <commit-hash>`) to sync DevSteps status
+   - **Verify DevSteps items visible** via `#mcp_devsteps_get <ID>`
    - **Update status `planned → in-progress`** (`#mcp_devsteps_update <ID> --status in-progress`)
    - Verify branch naming: `story/<ID>`, `bug/<ID>`, `task/<ID>`
    - Begin implementation immediately
 
 3. **Implement** (in feature branch):
    - Code changes, test creation, documentation
+   - **Systematic Scope Analysis** for cross-cutting concerns:
+     - Functional analysis identifies ALL affected components
+     - Compare implementations before unifying
+     - Validate completeness (no overlooked code paths)
    - Status updates tracked in feature branch (`.devsteps/` changes)
    - Commit checkpoints with code + status changes
    - Status remains `in-progress` during development
@@ -122,18 +129,33 @@ Plan Items → Start Work → Implement → Test → Merge → Repeat
 
 **Items Status:** Remain `draft` or `planned` on main
 
-### Phase 2: Start Work (transition to feature branch)
+**Commit Planning:**
+- Stage `.devsteps/` directory: `git add .devsteps/`
+- Commit with planning format (see devsteps-commit-format.instructions.md)
+- **Capture commit hash** for cherry-picking: `git log -n 1 --format="%H"`
 
-**Auto-Status Transition:**
-- **CRITICAL**: Automatically set status `draft/planned → in-progress`
-- User should NOT manually update status before starting
-- Prompt should handle transition silently
+### Phase 2: Start Work (transition to feature branch)
 
 **Branch Creation:**
 - Verify current branch is main
 - Check if feature branch already exists
 - Create: `git checkout -b <type>/<ID>-<slug>`
 - Types: story, bug, task, epic, spike
+
+**Cherry-Pick Planning Commit (MANDATORY):**
+- Sync DevSteps status to feature branch: `git cherry-pick <commit-hash>`
+- **Why:** DevSteps MCP tools read from `.devsteps/` in current branch
+- Without cherry-pick, newly created items invisible during implementation
+- Prevents "work item not found" errors
+
+**Verify DevSteps Sync:**
+- Test item visibility: `#mcp_devsteps_get <ID>`
+- Confirm planning changes present in feature branch
+
+**Auto-Status Transition:**
+- **CRITICAL**: Automatically set status `draft/planned → in-progress`
+- User should NOT manually update status before starting
+- Prompt should handle transition silently
 
 **Verify Clean State:**
 - No uncommitted changes on main
