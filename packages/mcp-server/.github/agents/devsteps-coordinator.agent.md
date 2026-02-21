@@ -113,7 +113,7 @@ Send each analyst the same prompt: the full work item description + item ID. The
 
 ### Phase 1: Synthesis
 
-Collect all 5 aspect reports. Apply the synthesis algorithm:
+For each `report_path` returned by aspect agents, call `read_analysis_envelope` (devsteps MCP) to extract the CompressedVerdict JSON (~150 tokens each — never read full reports). Apply the synthesis algorithm:
 
 **1. UNION of Scope** — Every file, symbol, or concern mentioned by ANY analyst enters the enriched task scope. Do not filter at this step.
 
@@ -269,7 +269,7 @@ RULE 5 — DEPRECATION-USAGE CONFLICT:
     → Estimate: migration complexity + risk of proceeding vs. migrating
 ```
 
-**Coordinator Judge Output (written to `.devsteps/analysis/[ITEM-ID]/meta.json`):**
+**Coordinator Judge Output: call `write_verdict` (devsteps MCP) with SprintVerdict JSON:**
 
 ```json
 {
@@ -277,21 +277,21 @@ RULE 5 — DEPRECATION-USAGE CONFLICT:
   "mode": "competitive",
   "winner": "[devsteps-analyst-web-subagent | devsteps-analyst-internal-subagent]",
   "rule_applied": "[RULE 1 | 2 | 3]",
-  "implementation_briefing": ".devsteps/analysis/[ID]/[winner]-report.md",
+  "implementation_briefing": ".devsteps/analysis/[ID]/[winner]-report.json",
   "flags": []
 }
 ```
 
-**What the coordinator NEVER does:** Read the full reports. The coordinator reads ONLY the two envelopes (~800 tokens) and writes the meta.json verdict. The winning report file is passed directly to the implementation subagent.
+**What the coordinator NEVER does:** Read the full reports. Call `read_analysis_envelope` for EACH `report_path` to get envelopes (~800 tokens total), apply judge rules, then call `write_verdict`. Pass only the winning `report_path` to impl-subagent.
 
 ### Passing Context to Implementation Subagents (Context Budget Rule)
 
 The coordinator passes to `devsteps-impl-subagent`:
-- The **file path** to the winning report: `.devsteps/analysis/[ID]/[winner]-report.md`
+- The **report_path** to the winning report: `.devsteps/analysis/[ID]/[winner]-report.json` (impl-subagent calls `read_analysis_envelope` independently with this path)
 - The **item ID** only (not the full item text — the impl-subagent reads the item itself via devsteps tools)
 - The **judge verdict** (1 line: which rule applied, which approach won)
 
-**The coordinator NEVER passes full report content in the prompt.** The impl-subagent reads the file directly into its own context window — not the coordinator's.
+**The coordinator NEVER passes full report content in the prompt.** The impl-subagent calls `read_analysis_envelope` with the report_path into its own context window — not the coordinator's.
 
 ---
 

@@ -66,37 +66,18 @@ Read the task description. List only what was explicitly requested. Do NOT expan
 
 ## Context Budget Protocol (MANDATORY)
 
-### Step N+1: Write Full Analysis to File
-Before returning anything to the coordinator, write the complete analysis to:
-`.devsteps/analysis/[TASK-ID]/[aspect]-report.md`
+### Step N+1: Persist via MCP Tool
+Call `write_analysis_report` (devsteps MCP) with the AnalysisBriefing JSON:
+- `taskId`: item ID (e.g., `TASK-042`)
+- `aspect`: this agent's aspect name (`impact` | `constraints` | `quality` | `staleness` | `integration`)
+- `envelope`: CompressedVerdict object — fields: `aspect`, `verdict`, `confidence`, `top3_findings` (max 3 × 200 chars), `report_path`, `timestamp`
+- `full_analysis`: complete markdown analysis text
+- `affected_files`: list of affected file paths
+- `recommendations`: list of action strings
 
-Replace `[TASK-ID]` with the actual item ID. Replace `[aspect]` with: `impact` | `constraints` | `quality` | `staleness` | `integration`.
+Tool writes atomically to `.devsteps/analysis/[TASK-ID]/[aspect]-report.json`.
 
-Create the directory if it does not exist.
+### Step N+2: Return ONLY the report_path
+**Return to coordinator ONLY:** the `report_path` string (e.g., `.devsteps/analysis/TASK-042/impact-report.json`).
 
-### Step N+2: Return ONLY the CompressedVerdict Envelope
-
-**This envelope is the ONLY thing returned to the coordinator. Never return the full analysis.**
-
-```
-## CompressedVerdict: [Aspect Name]
-
-**Agent:** devsteps-aspect-[aspect]
-**Task ID:** [TASK-ID]
-**Source Type:** internal-code
-
-### Executive Summary (3 lines max)
-> [LINE 1: Single most important finding from this aspect analysis]
-> [LINE 2: Recommended action for coordinator (PROCEED / BLOCK / DECISION-REQUIRED)]
-> [LINE 3: Key evidence reference — e.g., "found in src/foo.ts:42" or "verified via git log"]
-
-### Scorecard
-| Confidence | HIGH / MEDIUM / LOW | [1 sentence reason] |
-| Coordinator Action | PROCEED / BLOCK / DECIDE | [What coordinator must do] |
-| Hard Stop? | YES / NO | [YES only if STALE-OBSOLETE, STALE-CONFLICT, or BREAKING boundary] |
-
-### Full Report
-Stored in: `.devsteps/analysis/[TASK-ID]/[aspect]-report.md`
-```
-
-The coordinator reads ONLY this envelope. The implementation subagent reads the full report file directly.
+Do NOT paste envelope content in chat. Coordinator calls `read_analysis_envelope` to extract it.
