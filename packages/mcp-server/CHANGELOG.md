@@ -2,6 +2,24 @@
 
 All notable changes to the DevSteps MCP Server will be documented in this file.
 
+## [1.0.0] - 2026-02-21
+
+### Added
+- **Context Budget Protocol (CBP) tools** — four new MCP tools for AI agent coordination (EPIC-027, STORY-104/105/106):
+  - `write_analysis_report` — persist a structured analysis report to `.devsteps/analysis/`
+  - `read_analysis_envelope` — read the latest analysis envelope for a given sprint or item
+  - `write_verdict` — record a compressed verdict (`CompressedVerdict`) for an analysis run
+  - `write_sprint_brief` — write a `SprintVerdict` / `AnalysisBriefing` JSON file
+- `init` handler now creates the `.devsteps/analysis/` directory (with `.gitignore`) alongside the standard scaffold
+
+### Fixed
+- **BUG-050:** Server no longer reports hardcoded version `0.1.0`; version is now read dynamically from `package.json` at startup
+- **BUG-028:** `init` handler uses an append-only strategy for the workspace root `.gitignore` — existing user entries are preserved
+
+### Changed
+- `tsconfig.json` module resolution upgraded from `Node16` to `NodeNext` to support `import` attributes required by JSON imports
+- Updated dependency: `@schnick371/devsteps-shared@1.0.0` (adds `CompressedVerdict`, `AnalysisBriefing`, `SprintVerdict` Zod schemas)
+
 ## [0.8.6] - 2025-12-16
 
 ### Fixed
