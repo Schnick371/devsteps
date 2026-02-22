@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Tier-2 Deep Analyst Agents — six domain-synthesis specialists",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-22T21:14:42.712Z",
-  "updated": "2026-02-22T22:35:06.923Z",
+  "updated": "2026-02-22T22:40:45.676Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/devsteps-deep-analyst-archaeology.agent.md",
