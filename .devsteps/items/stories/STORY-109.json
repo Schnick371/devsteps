@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-22T21:14:42.712Z",
-  "updated": "2026-02-22T21:21:03.131Z",
+  "updated": "2026-02-22T22:25:12.499Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/devsteps-deep-analyst-archaeology.agent.md",
@@ -21,7 +21,8 @@
       "EPIC-028"
     ],
     "implemented-by": [
-      "TASK-241"
+      "TASK-241",
+      "TASK-246"
     ],
     "tested-by": [],
     "tests": [],

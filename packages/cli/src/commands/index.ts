@@ -396,11 +396,7 @@ export async function linkCommand(
     }
 
     // Always validate: no conflicting relation types to same target (data integrity)
-    const conflictCheck = validateRelationConflict(
-      targetId,
-      relation,
-      sourceMetadata.linked_items
-    );
+    const conflictCheck = validateRelationConflict(targetId, relation, sourceMetadata.linked_items);
     if (!conflictCheck.valid) {
       spinner.fail('Relation conflict detected');
       console.error(chalk.red('✗'), conflictCheck.error);

@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "MCP Tools: write_rejection_feedback + write_iteration_signal + write_escalation",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-22T21:18:18.921Z",
-  "updated": "2026-02-22T21:21:03.130Z",
+  "updated": "2026-02-22T22:34:43.759Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/handlers/analysis.ts",

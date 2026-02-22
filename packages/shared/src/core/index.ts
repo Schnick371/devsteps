@@ -45,4 +45,9 @@ export {
 export * from './index-refs.js';
 export { type ListItemsArgs, type ListItemsResult, listItems } from './list.js';
 export { type UpdateItemArgs, type UpdateItemResult, updateItem } from './update.js';
-export { type ValidationResult, validateRelationship, validateRelationConflict, type WorkItem } from './validation.js';
+export {
+  type ValidationResult,
+  validateRelationConflict,
+  validateRelationship,
+  type WorkItem,
+} from './validation.js';
