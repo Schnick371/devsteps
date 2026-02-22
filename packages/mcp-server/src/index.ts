@@ -48,11 +48,16 @@ import {
   metricsTool,
   purgeTool,
   readAnalysisEnvelopeTool,
+  readMandateResultsTool,
   searchTool,
   statusTool,
   traceTool,
   updateTool,
   writeAnalysisReportTool,
+  writeEscalationTool,
+  writeIterationSignalTool,
+  writeMandateResultTool,
+  writeRejectionFeedbackTool,
   writeSprintBriefTool,
   writeVerdictTool,
 } from './tools/index.js';
@@ -239,11 +244,17 @@ class DevStepsServer {
       contextTool,
       healthCheckTool,
       metricsTool,
-      // Context Budget Protocol (CBP) analysis tools
+      // Context Budget Protocol (CBP) Tier-3 analysis tools (EPIC-027)
       writeAnalysisReportTool,
       readAnalysisEnvelopeTool,
       writeVerdictTool,
       writeSprintBriefTool,
+      // Context Budget Protocol (CBP) Tier-2 mandate tools (EPIC-028)
+      writeMandateResultTool,
+      readMandateResultsTool,
+      writeRejectionFeedbackTool,
+      writeIterationSignalTool,
+      writeEscalationTool,
     ];
 
     for (const tool of tools) {

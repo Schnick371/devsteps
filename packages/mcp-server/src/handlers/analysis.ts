@@ -48,7 +48,9 @@ export async function handleWriteAnalysisReport(
 ): Promise<{ content: Array<{ type: 'text'; text: string }> }> {
   const parsed = AnalysisBriefingSchema.safeParse(args.briefing);
   if (!parsed.success) {
-    const issues = parsed.error.issues.map((i: ZodIssue) => `${i.path.join('.')}: ${i.message}`).join(', ');
+    const issues = parsed.error.issues
+      .map((i: ZodIssue) => `${i.path.join('.')}: ${i.message}`)
+      .join(', ');
     throw new Error(`Invalid AnalysisBriefing: ${issues}`);
   }
 
@@ -123,7 +125,9 @@ export async function handleWriteVerdict(
 ): Promise<{ content: Array<{ type: 'text'; text: string }> }> {
   const parsed = SprintVerdictSchema.safeParse(args.verdict);
   if (!parsed.success) {
-    const issues = parsed.error.issues.map((i: ZodIssue) => `${i.path.join('.')}: ${i.message}`).join(', ');
+    const issues = parsed.error.issues
+      .map((i: ZodIssue) => `${i.path.join('.')}: ${i.message}`)
+      .join(', ');
     throw new Error(`Invalid SprintVerdict: ${issues}`);
   }
 
