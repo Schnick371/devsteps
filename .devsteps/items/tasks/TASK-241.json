@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Tier-2 Agent: deep-analyst-planner (atomic step decomposition)",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-22T21:19:37.752Z",
-  "updated": "2026-02-22T21:20:55.184Z",
+  "updated": "2026-02-22T22:40:16.939Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/devsteps-deep-analyst-planner.agent.md"
