@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Tier-2 Agent: deep-analyst-research (multi-source external synthesis)",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-22T21:19:03.005Z",
-  "updated": "2026-02-22T21:20:55.183Z",
+  "updated": "2026-02-22T22:40:25.335Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/devsteps-deep-analyst-research.agent.md"

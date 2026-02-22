@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "MandateResult CBP Extension — Tier 2 ↔ Tier 1 structured communication",
-  "status": "review",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-22T21:14:42.711Z",
-  "updated": "2026-02-22T22:32:34.417Z",
+  "updated": "2026-02-22T22:35:03.320Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/schemas/cbp.ts",

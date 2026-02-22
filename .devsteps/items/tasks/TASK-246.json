@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Tier-2 Protocol Template: MAP-REDUCE-RESOLVE-SYNTHESIZE Pattern",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-22T22:25:06.178Z",
-  "updated": "2026-02-22T22:25:12.499Z",
+  "updated": "2026-02-22T22:40:16.938Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/TIER2-PROTOCOL.md"
