@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "MCP Tools: write_mandate_result + read_mandate_results",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-22T21:18:18.920Z",
-  "updated": "2026-02-22T21:21:03.129Z",
+  "updated": "2026-02-22T22:34:43.759Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/handlers/analysis.ts",

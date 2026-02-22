@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Loop schemas: RejectionFeedback + IterationSignal + EscalationSignal",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-22T21:17:49.058Z",
-  "updated": "2026-02-22T21:21:03.130Z",
+  "updated": "2026-02-22T22:34:43.758Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/schemas/cbp-loops.ts",

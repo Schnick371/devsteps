@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "MandateSchema + MandateResultSchema in shared/src/schemas/cbp.ts",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-22T21:17:49.055Z",
-  "updated": "2026-02-22T21:21:03.129Z",
+  "updated": "2026-02-22T22:34:43.758Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/schemas/cbp.ts",
