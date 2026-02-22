@@ -1,0 +1,49 @@
+{
+  "id": "STORY-109",
+  "type": "story",
+  "category": "general",
+  "title": "Tier-2 Deep Analyst Agents — six domain-synthesis specialists",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-22T21:14:42.712Z",
+  "updated": "2026-02-22T21:21:03.131Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-deep-analyst-archaeology.agent.md",
+    ".github/agents/devsteps-deep-analyst-risk.agent.md",
+    ".github/agents/devsteps-deep-analyst-research.agent.md",
+    ".github/agents/devsteps-deep-analyst-quality.agent.md",
+    ".github/agents/devsteps-deep-analyst-planner.agent.md",
+    ".github/agents/devsteps-reviewer.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-028"
+    ],
+    "implemented-by": [
+      "TASK-241"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-015"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "STORY-110"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agents",
+    "tier2",
+    "deep-analyst",
+    "MPD",
+    "synthesis"
+  ],
+  "commits": [],
+  "metadata": {}
+}

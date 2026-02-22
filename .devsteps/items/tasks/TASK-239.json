@@ -1,0 +1,38 @@
+{
+  "id": "TASK-239",
+  "type": "task",
+  "category": "general",
+  "title": "Tier-2 Agent: deep-analyst-research (multi-source external synthesis)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-22T21:19:03.005Z",
+  "updated": "2026-02-22T21:20:55.183Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-deep-analyst-research.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-109"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agents",
+    "tier2",
+    "research",
+    "tavily",
+    "deep-analyst"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,37 @@
+{
+  "id": "TASK-243",
+  "type": "task",
+  "category": "general",
+  "title": "Rewrite sprint-executor agent as Tier-1 Mandate dispatcher",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-22T21:20:24.903Z",
+  "updated": "2026-02-22T21:20:55.184Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-sprint-executor.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-110"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agents",
+    "tier1",
+    "sprint-executor",
+    "mandate-dispatch"
+  ],
+  "commits": [],
+  "metadata": {}
+}

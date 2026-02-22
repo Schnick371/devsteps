@@ -6,7 +6,7 @@
   "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-21T12:04:46.175Z",
-  "updated": "2026-02-21T13:10:08.541Z",
+  "updated": "2026-02-22T21:20:40.218Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -18,7 +18,9 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "EPIC-028"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],

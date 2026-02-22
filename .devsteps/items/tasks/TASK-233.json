@@ -1,0 +1,41 @@
+{
+  "id": "TASK-233",
+  "type": "task",
+  "category": "general",
+  "title": "MandateSchema + MandateResultSchema in shared/src/schemas/cbp.ts",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-22T21:17:49.055Z",
+  "updated": "2026-02-22T21:21:03.129Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/cbp.ts",
+    "packages/shared/src/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-108"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-235"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cbp",
+    "schema",
+    "zod",
+    "tier2",
+    "enabler"
+  ],
+  "commits": [],
+  "metadata": {}
+}

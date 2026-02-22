@@ -1,0 +1,46 @@
+{
+  "id": "STORY-110",
+  "type": "story",
+  "category": "general",
+  "title": "Tier-1 Reconstruction — Masteragent dispatches Mandates to Tier-2",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-22T21:15:36.550Z",
+  "updated": "2026-02-22T21:20:55.185Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-sprint-executor.agent.md",
+    ".github/agents/devsteps-coordinator.agent.md",
+    ".github/prompts/devsteps-40-sprint.prompt.md",
+    ".github/prompts/devsteps-20-start-work.prompt.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-028"
+    ],
+    "implemented-by": [
+      "TASK-243",
+      "TASK-244"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-109"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agents",
+    "tier1",
+    "coordinator",
+    "sprint-executor",
+    "prompt-refactor"
+  ],
+  "commits": [],
+  "metadata": {}
+}

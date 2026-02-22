@@ -1,0 +1,40 @@
+{
+  "id": "TASK-235",
+  "type": "task",
+  "category": "general",
+  "title": "MCP Tools: write_mandate_result + read_mandate_results",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-22T21:18:18.920Z",
+  "updated": "2026-02-22T21:21:03.129Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/analysis.ts",
+    "packages/mcp-server/src/tools/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-108"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-233"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cbp",
+    "mcp-tools",
+    "tier2",
+    "mandate-result"
+  ],
+  "commits": [],
+  "metadata": {}
+}

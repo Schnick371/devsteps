@@ -1,0 +1,39 @@
+{
+  "id": "TASK-240",
+  "type": "task",
+  "category": "general",
+  "title": "Tier-2 Agent: deep-analyst-quality (quality gate + rejection loop)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-22T21:19:37.752Z",
+  "updated": "2026-02-22T21:20:55.184Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-deep-analyst-quality.agent.md",
+    ".github/agents/devsteps-reviewer.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-109"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agents",
+    "tier2",
+    "quality",
+    "review-fix",
+    "deep-analyst"
+  ],
+  "commits": [],
+  "metadata": {}
+}

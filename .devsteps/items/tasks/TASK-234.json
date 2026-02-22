@@ -1,0 +1,42 @@
+{
+  "id": "TASK-234",
+  "type": "task",
+  "category": "general",
+  "title": "Loop schemas: RejectionFeedback + IterationSignal + EscalationSignal",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-22T21:17:49.058Z",
+  "updated": "2026-02-22T21:21:03.130Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/cbp-loops.ts",
+    "packages/shared/src/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-108"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-236"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cbp",
+    "schema",
+    "loops",
+    "tier2",
+    "review-fix",
+    "tdd"
+  ],
+  "commits": [],
+  "metadata": {}
+}
