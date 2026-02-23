@@ -10,8 +10,8 @@ tools: ['read', 'agent', 'search', 'devsteps/*', 'execute/runInTerminal', 'read/
 
 - **Tier**: T2 — Deep Analyst
 - **Mandate type**: `quality`
-- **Accepted from**: T1 Coordinator (`devsteps-coordinator`), T1 Sprint (`devsteps-sprint-executor`)
-- **Dispatches (T3 parallel fan-out)**: `devsteps-aspect-quality-subagent`, `devsteps-aspect-staleness-subagent`
+- **Accepted from**: T1 Coordinator (`devsteps-t1-coordinator`), T1 Sprint (`devsteps-t1-sprint-executor`)
+- **Dispatches (T3 parallel fan-out)**: `devsteps-t3-aspect-quality`, `devsteps-t3-aspect-staleness`
 - **Returns**: MandateResult written via `write_mandate_result` — T1 reads via `read_mandate_results`
 - **T1 NEVER reads** raw T3 envelopes from this agent's dispatches directly
 
@@ -59,8 +59,8 @@ If automated checks FAIL: skip MAP, immediately produce `MandateResult` with `st
 
 | T3 Agent | Mandate | Always? |
 |---|---|---|
-| `devsteps-aspect-quality-subagent` | Deep analysis: missing test cases, assertion quality, pattern consistency | Yes |
-| `devsteps-aspect-staleness-subagent` | Stale comments, diverged docs, outdated type annotations | STANDARD+ |
+| `devsteps-t3-aspect-quality` | Deep analysis: missing test cases, assertion quality, pattern consistency | Yes |
+| `devsteps-t3-aspect-staleness` | Stale comments, diverged docs, outdated type annotations | STANDARD+ |
 
 ### REDUCE — Key Contradiction Checks
 

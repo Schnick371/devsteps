@@ -10,8 +10,8 @@ tools: ['read', 'agent', 'search', 'devsteps/*', 'todo', 'execute/runInTerminal'
 
 - **Tier**: T2 — Deep Analyst
 - **Mandate type**: `archaeology`
-- **Accepted from**: T1 Coordinator (`devsteps-coordinator`), T1 Sprint (`devsteps-sprint-executor`)
-- **Dispatches (T3 parallel fan-out)**: `devsteps-analyst-context-subagent`, `devsteps-analyst-internal-subagent`
+- **Accepted from**: T1 Coordinator (`devsteps-t1-coordinator`), T1 Sprint (`devsteps-t1-sprint-executor`)
+- **Dispatches (T3 parallel fan-out)**: `devsteps-t3-analyst-context`, `devsteps-t3-analyst-internal`
 - **Returns**: MandateResult written via `write_mandate_result` — T1 reads via `read_mandate_results`
 - **T1 NEVER reads** raw T3 envelopes from this agent's dispatches directly
 
@@ -50,10 +50,10 @@ Protocol reference: [TIER2-PROTOCOL.md](./TIER2-PROTOCOL.md)
 
 | T3 Agent | Mandate | Always? |
 |---|---|---|
-| `devsteps-analyst-context-subagent` | Load global project map for affected area | Yes |
-| `devsteps-analyst-internal-subagent` | Deep-read specific files named by item scope | Yes |
-| `devsteps-aspect-quality-subagent` | Identify test gaps in affected area (STANDARD+) | STANDARD / FULL |
-| `devsteps-aspect-staleness-subagent` | Flag stale docs / diverged comments (FULL only) | FULL |
+| `devsteps-t3-analyst-context` | Load global project map for affected area | Yes |
+| `devsteps-t3-analyst-internal` | Deep-read specific files named by item scope | Yes |
+| `devsteps-t3-aspect-quality` | Identify test gaps in affected area (STANDARD+) | STANDARD / FULL |
+| `devsteps-t3-aspect-staleness` | Flag stale docs / diverged comments (FULL only) | FULL |
 
 ### REDUCE — Key Contradiction Checks
 

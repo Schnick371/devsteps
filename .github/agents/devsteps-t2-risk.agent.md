@@ -10,8 +10,8 @@ tools: ['read', 'agent', 'search', 'devsteps/*', 'todo', 'execute/runInTerminal'
 
 - **Tier**: T2 — Deep Analyst
 - **Mandate type**: `risk`
-- **Accepted from**: T1 Coordinator (`devsteps-coordinator`), T1 Sprint (`devsteps-sprint-executor`)
-- **Dispatches (T3 parallel fan-out)**: `devsteps-aspect-impact-subagent`, `devsteps-aspect-integration-subagent`, `devsteps-aspect-constraints-subagent`
+- **Accepted from**: T1 Coordinator (`devsteps-t1-coordinator`), T1 Sprint (`devsteps-t1-sprint-executor`)
+- **Dispatches (T3 parallel fan-out)**: `devsteps-t3-aspect-impact`, `devsteps-t3-aspect-integration`, `devsteps-t3-aspect-constraints`
 - **Returns**: MandateResult written via `write_mandate_result` — T1 reads via `read_mandate_results`
 - **T1 NEVER reads** raw T3 envelopes from this agent's dispatches directly
 
@@ -50,10 +50,10 @@ Protocol reference: [TIER2-PROTOCOL.md](./TIER2-PROTOCOL.md)
 
 | T3 Agent | Mandate | Always? |
 |---|---|---|
-| `devsteps-aspect-impact-subagent` | Map all call-sites and dependents of changed symbols | Yes |
-| `devsteps-aspect-integration-subagent` | Check integration points across package boundaries | Yes |
-| `devsteps-aspect-constraints-subagent` | Identify hard constraints (types, schemas, contracts) | Yes |
-| `devsteps-aspect-staleness-subagent` | Identify test gaps that increase risk (FULL only) | FULL |
+| `devsteps-t3-aspect-impact` | Map all call-sites and dependents of changed symbols | Yes |
+| `devsteps-t3-aspect-integration` | Check integration points across package boundaries | Yes |
+| `devsteps-t3-aspect-constraints` | Identify hard constraints (types, schemas, contracts) | Yes |
+| `devsteps-t3-aspect-staleness` | Identify test gaps that increase risk (FULL only) | FULL |
 
 ### REDUCE — Key Contradiction Checks
 

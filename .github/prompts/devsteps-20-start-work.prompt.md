@@ -1,5 +1,5 @@
 ---
-agent: 'devsteps-coordinator'
+agent: 'devsteps-t1-coordinator'
 model: 'Claude Sonnet 4.6'
 description: 'Begin implementation work - MPD analysis then structured development'
 tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'tavily/*', 'todo']
@@ -18,7 +18,7 @@ Activate **Standard MPD**. Follow the MPD protocol from your agent instructions.
 |---|---|
 | Clearly defined task | QUICK: `t2-planner` / STANDARD: `t2-archaeology` + `t2-risk` → `t2-planner` |
 | "Which approach/pattern/library?" | COMPETITIVE: `t2-research` + `t2-archaeology` → `t2-planner` |
-| Single-file typo / formatting fix | **Skip analysis** — direct impl via `devsteps-impl-subagent` |
+| Single-file typo / formatting fix | **Skip analysis** — direct impl via `devsteps-t3-impl` |
 
 ## Entry Points
 
@@ -32,6 +32,6 @@ If no item specified → `#mcp_devsteps_list` filtered by `status: planned`, pri
 3. Create/checkout feature branch (`story/<ID>`, `task/<ID>`, `bug/<ID>`)
 4. Triage → dispatch T2 mandate analysts in parallel (see Mode Selection above)
 5. Read MandateResults via `read_mandate_results` — pass `report_path` to exec agents (never paste content)
-6. Dispatch `devsteps-impl-subagent` → `devsteps-test-subagent` + `devsteps-doc-subagent` (parallel)
+6. Dispatch `devsteps-t3-impl` → `devsteps-t3-test` + `devsteps-t3-doc` (parallel)
 7. `devsteps-reviewer` PASS → merge to main (`--no-ff`), status → `done`
 

@@ -12,7 +12,7 @@ tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 
 - **Dispatched by**: T2 Risk (`devsteps-t2-risk`)
 - **Returns**: Analysis envelope via `write_analysis_report` — T2 reads via `read_analysis_envelope`
 - **NEVER dispatches** further subagents — leaf node
-- **Naming note**: File is `devsteps-aspect-impact-subagent` (legacy name, functionally T3)
+- **Naming note**: File is `devsteps-t3-aspect-impact` (legacy name, functionally T3)
 
 ## Single Mission
 

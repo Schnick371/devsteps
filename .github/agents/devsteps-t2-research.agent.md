@@ -10,8 +10,8 @@ tools: ['read', 'agent', 'search', 'devsteps/*', 'tavily/*', 'web', 'todo']
 
 - **Tier**: T2 — Deep Analyst
 - **Mandate type**: `research`
-- **Accepted from**: T1 Coordinator (`devsteps-coordinator`), T1 Sprint (`devsteps-sprint-executor`)
-- **Dispatches (T3 parallel fan-out)**: `devsteps-analyst-web-subagent`, `devsteps-analyst-internal-subagent`
+- **Accepted from**: T1 Coordinator (`devsteps-t1-coordinator`), T1 Sprint (`devsteps-t1-sprint-executor`)
+- **Dispatches (T3 parallel fan-out)**: `devsteps-t3-analyst-web`, `devsteps-t3-analyst-internal`
 - **Returns**: MandateResult written via `write_mandate_result` — T1 reads via `read_mandate_results`
 - **T1 NEVER reads** raw T3 envelopes from this agent's dispatches directly
 
@@ -50,10 +50,10 @@ Protocol reference: [TIER2-PROTOCOL.md](./TIER2-PROTOCOL.md)
 
 | T3 Agent | Mandate | Always? |
 |---|---|---|
-| `devsteps-analyst-web-subagent` | External best practices, deprecation signals, community consensus | Yes |
-| `devsteps-analyst-internal-subagent` | Existing patterns in codebase for same problem domain | Yes |
-| `devsteps-aspect-constraints-subagent` | Hard technical constraints limiting approach options | STANDARD+ |
-| `devsteps-analyst-web-subagent` (2nd) | Alternative approaches — dispatched ONLY after primary web results show conflicting signal | RESOLVE |
+| `devsteps-t3-analyst-web` | External best practices, deprecation signals, community consensus | Yes |
+| `devsteps-t3-analyst-internal` | Existing patterns in codebase for same problem domain | Yes |
+| `devsteps-t3-aspect-constraints` | Hard technical constraints limiting approach options | STANDARD+ |
+| `devsteps-t3-analyst-web` (2nd) | Alternative approaches — dispatched ONLY after primary web results show conflicting signal | RESOLVE |
 
 ### REDUCE — Key Contradiction Checks
 

@@ -94,7 +94,7 @@ description: '[domain] deep analyst — T2, [mandate-type], parallel T3 dispatch
 model: 'Claude Sonnet 4.6'
 tier: '2'
 mandate-types: '[mandate_type_enum_value]'
-accepts-from: 'Tier-1 (devsteps-coordinator, devsteps-sprint-executor)'
+accepts-from: 'Tier-1 (devsteps-t1-coordinator, devsteps-t1-sprint-executor)'
 dispatches: '[t3-agent-1], [t3-agent-2], ...'
 returns: 'mandate-result'
 tools: ['read', 'agent', 'search', 'devsteps/*', 'todo']

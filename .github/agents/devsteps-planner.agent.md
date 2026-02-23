@@ -3,13 +3,13 @@ description: 'Planning and analysis specialist - creates DevSteps work items thr
 model: 'Claude Sonnet 4.6'
 tools: ['vscode/runCommand', 'vscode/askQuestions', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'read/problems', 'agent', 'edit', 'search', 'web', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 agents:
-  - devsteps-analyst-context-subagent
-  - devsteps-analyst-internal-subagent
-  - devsteps-analyst-web-subagent
-  - devsteps-aspect-staleness-subagent
-  - devsteps-aspect-impact-subagent
-  - devsteps-aspect-constraints-subagent
-  - devsteps-aspect-integration-subagent
+  - devsteps-t3-analyst-context
+  - devsteps-t3-analyst-internal
+  - devsteps-t3-analyst-web
+  - devsteps-t3-aspect-staleness
+  - devsteps-t3-aspect-impact
+  - devsteps-t3-aspect-constraints
+  - devsteps-t3-aspect-integration
 ---
 
 # 🔬 DevSteps Analyzer - Planning & Analysis Specialist
@@ -171,7 +171,7 @@ Your job for complex technical challenges:
 - ❌ **NEVER** modify files directly (read-only analysis)
 - ❌ **NEVER** create or edit implementation files
 
-The **devsteps-coordinator** will execute your technical analysis plans.
+The **devsteps-t1-coordinator** will execute your technical analysis plans.
 
 #### Output Format: Analysis Plan
 

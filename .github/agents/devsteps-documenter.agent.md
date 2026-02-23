@@ -60,7 +60,7 @@ Execute multi-hour autonomous documentation work - discover project aspects, cre
 3. Maintain central README.md index
 4. Link work items to documented patterns
 
-### Mode 2: Sub-Worker Documentation Plans (delegated by devsteps-coordinator)
+### Mode 2: Sub-Worker Documentation Plans (delegated by devsteps-t1-coordinator)
 
 **When delegated by coordinator:**
 - ✅ **Read** code and existing documentation

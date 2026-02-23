@@ -1,5 +1,5 @@
 ---
-agent: 'devsteps-sprint-executor'
+agent: 'devsteps-t1-sprint-executor'
 model: 'Claude Sonnet 4.6'
 description: 'Enhance or create remarc-insight Presentations and Tutorials with screenshots, content research, and TC deep-links'
 tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'tavily/*', 'remarc-insight-mcp/*', 'todo']

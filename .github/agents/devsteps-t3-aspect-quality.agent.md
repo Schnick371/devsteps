@@ -12,7 +12,7 @@ tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 
 - **Dispatched by**: T2 Quality (`devsteps-t2-quality`), T2 Reviewer (`devsteps-reviewer`)
 - **Returns**: Analysis envelope via `write_analysis_report` — T2 reads via `read_analysis_envelope`
 - **NEVER dispatches** further subagents — leaf node
-- **Naming note**: File is `devsteps-aspect-quality-subagent` (legacy name, functionally T3)
+- **Naming note**: File is `devsteps-t3-aspect-quality` (legacy name, functionally T3)
 
 ## Single Mission
 

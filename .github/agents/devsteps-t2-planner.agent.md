@@ -10,8 +10,8 @@ tools: ['read', 'agent', 'search', 'devsteps/*', 'todo']
 
 - **Tier**: T2 — Deep Analyst
 - **Mandate type**: `planning`
-- **Accepted from**: T1 Coordinator (`devsteps-coordinator`), T1 Sprint (`devsteps-sprint-executor`)
-- **Dispatches (T3, minimal)**: `devsteps-aspect-staleness-subagent` (only for stale-check; primarily reads existing MandateResults)
+- **Accepted from**: T1 Coordinator (`devsteps-t1-coordinator`), T1 Sprint (`devsteps-t1-sprint-executor`)
+- **Dispatches (T3, minimal)**: `devsteps-t3-aspect-staleness` (only for stale-check; primarily reads existing MandateResults)
 - **Returns**: MandateResult written via `write_mandate_result` — T1 reads via `read_mandate_results`
 - **T1 NEVER reads** raw T3 envelopes from this agent's dispatches directly
 
@@ -57,7 +57,7 @@ Before any T3 dispatch:
 
 | T3 Agent | Mandate | Always? |
 |---|---|---|
-| `devsteps-aspect-staleness-subagent` | Verify no conflicting active branches or in-progress items for same files | Yes |
+| `devsteps-t3-aspect-staleness` | Verify no conflicting active branches or in-progress items for same files | Yes |
 
 The Planner is primarily a **synthesis** agent — it reads, not dispatches. T3 dispatch is minimal.
 

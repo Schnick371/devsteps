@@ -18,35 +18,35 @@ The system operates at two layers:
 
 | Agent File | Role |
 |---|---|
-| `devsteps-coordinator.agent.md` | Single-item MPD orchestration — triage, parallel dispatch, synthesis |
-| `devsteps-sprint-executor.agent.md` | Multi-item sprint orchestration — pre-flight, per-item loop, adaptive replanning |
+| `devsteps-t1-coordinator.agent.md` | Single-item MPD orchestration — triage, parallel dispatch, synthesis |
+| `devsteps-t1-sprint-executor.agent.md` | Multi-item sprint orchestration — pre-flight, per-item loop, adaptive replanning |
 | `devsteps-planner.agent.md` | Strategic sequencing, Enriched Sprint Brief, backlog reranking |
 
 ### Analyst Agents
 
 | Agent File | Role | Trigger |
 |---|---|---|
-| `devsteps-analyst-context-subagent.agent.md` | Global codebase archaeology, dependency mapping | Sprint Phase 0 / FULL tier |
-| `devsteps-analyst-internal-subagent.agent.md` | Deep code analysis, API contract inspection | COMPETITIVE tier |
-| `devsteps-analyst-web-subagent.agent.md` | External research, library comparison, best practices | COMPETITIVE tier |
+| `devsteps-t3-analyst-context.agent.md` | Global codebase archaeology, dependency mapping | Sprint Phase 0 / FULL tier |
+| `devsteps-t3-analyst-internal.agent.md` | Deep code analysis, API contract inspection | COMPETITIVE tier |
+| `devsteps-t3-analyst-web.agent.md` | External research, library comparison, best practices | COMPETITIVE tier |
 
 ### Aspect Agents (parallel, STANDARD / FULL tiers)
 
 | Agent File | Analysis Dimension |
 |---|---|
-| `devsteps-aspect-impact-subagent.agent.md` | Structural impact — what files and APIs change |
-| `devsteps-aspect-constraints-subagent.agent.md` | Business & technical constraints |
-| `devsteps-aspect-quality-subagent.agent.md` | Test coverage, code quality signals |
-| `devsteps-aspect-staleness-subagent.agent.md` | Obsolescence detection, stale item identification |
-| `devsteps-aspect-integration-subagent.agent.md` | Cross-package dependencies, API surface effects |
+| `devsteps-t3-aspect-impact.agent.md` | Structural impact — what files and APIs change |
+| `devsteps-t3-aspect-constraints.agent.md` | Business & technical constraints |
+| `devsteps-t3-aspect-quality.agent.md` | Test coverage, code quality signals |
+| `devsteps-t3-aspect-staleness.agent.md` | Obsolescence detection, stale item identification |
+| `devsteps-t3-aspect-integration.agent.md` | Cross-package dependencies, API surface effects |
 
 ### Specialist Agents
 
 | Agent File | Role | When Used |
 |---|---|---|
-| `devsteps-impl-subagent.agent.md` | Code writing and refactoring | All tiers |
-| `devsteps-test-subagent.agent.md` | Test generation, coverage analysis | STANDARD / FULL |
-| `devsteps-doc-subagent.agent.md` | Inline docs, architecture documentation | FULL |
+| `devsteps-t3-impl.agent.md` | Code writing and refactoring | All tiers |
+| `devsteps-t3-test.agent.md` | Test generation, coverage analysis | STANDARD / FULL |
+| `devsteps-t3-doc.agent.md` | Inline docs, architecture documentation | FULL |
 | `devsteps-reviewer.agent.md` | Blocking quality gate — PASS/FAIL review | After every item |
 
 ### Utility Agents

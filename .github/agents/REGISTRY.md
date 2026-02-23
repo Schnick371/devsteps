@@ -4,11 +4,11 @@
 
 | Tier | Role | Files |
 |---|---|---|
-| **T1 — Coordinator** | Single-item MPD dispatcher | `devsteps-coordinator.agent.md` |
-| **T1 — Sprint** | Multi-item sprint dispatcher | `devsteps-sprint-executor.agent.md` |
+| **T1 — Coordinator** | Single-item MPD dispatcher | `devsteps-t1-coordinator.agent.md` |
+| **T1 — Sprint** | Multi-item sprint dispatcher | `devsteps-t1-sprint-executor.agent.md` |
 | **T2 — Analysts** | Domain synthesis, mandate handlers | `devsteps-t2-*.agent.md`, `devsteps-reviewer.agent.md` |
 | **T3 — Sub-agents** | Focused aspect readers (leaf nodes) | `devsteps-aspect-*.agent.md`, `devsteps-analyst-*.agent.md` |
-| **T3 Exec — Workers** | Code/test/doc implementation | `devsteps-impl-subagent.agent.md`, `devsteps-test-subagent.agent.md`, `devsteps-doc-subagent.agent.md` |
+| **T3 Exec — Workers** | Code/test/doc implementation | `devsteps-t3-impl.agent.md`, `devsteps-t3-test.agent.md`, `devsteps-t3-doc.agent.md` |
 
 > **Finding T3 files**: Search for `devsteps-aspect-` and `devsteps-analyst-` (legacy naming, no `t3-` prefix in filenames).
 > All agent files contain a `## Contract` section identifying their tier, dispatcher, and return type.
@@ -73,14 +73,14 @@ T2 calls: `read_analysis_envelope(report_path)` — internal to T2, invisible to
 
 | Agent | Domain |
 |---|---|
-| `devsteps-aspect-impact-subagent` | Call-site blast radius |
-| `devsteps-aspect-constraints-subagent` | Hard constraints, schema, contract risks |
-| `devsteps-aspect-quality-subagent` | Test gaps, pattern consistency |
-| `devsteps-aspect-staleness-subagent` | Stale docs, conflicting active branches |
-| `devsteps-aspect-integration-subagent` | Cross-package boundaries |
-| `devsteps-analyst-context-subagent` | Global project map, tree walking |
-| `devsteps-analyst-internal-subagent` | Deep file reads, symbol tracing |
-| `devsteps-analyst-web-subagent` | External best practices, deprecation signals |
+| `devsteps-t3-aspect-impact` | Call-site blast radius |
+| `devsteps-t3-aspect-constraints` | Hard constraints, schema, contract risks |
+| `devsteps-t3-aspect-quality` | Test gaps, pattern consistency |
+| `devsteps-t3-aspect-staleness` | Stale docs, conflicting active branches |
+| `devsteps-t3-aspect-integration` | Cross-package boundaries |
+| `devsteps-t3-analyst-context` | Global project map, tree walking |
+| `devsteps-t3-analyst-internal` | Deep file reads, symbol tracing |
+| `devsteps-t3-analyst-web` | External best practices, deprecation signals |
 
 ---
 
@@ -88,9 +88,9 @@ T2 calls: `read_analysis_envelope(report_path)` — internal to T2, invisible to
 
 | Agent | Role | Input from |
 |---|---|---|
-| `devsteps-impl-subagent` | Code implementation | `t2-planner` MandateResult `report_path` + item ID |
-| `devsteps-test-subagent` | Test implementation | `t2-planner` + `t2-quality` MandateResult `report_path` |
-| `devsteps-doc-subagent` | Documentation | `t2-quality` MandateResult `report_path` |
+| `devsteps-t3-impl` | Code implementation | `t2-planner` MandateResult `report_path` + item ID |
+| `devsteps-t3-test` | Test implementation | `t2-planner` + `t2-quality` MandateResult `report_path` |
+| `devsteps-t3-doc` | Documentation | `t2-quality` MandateResult `report_path` |
 
 Exec agents receive **only `report_path` + `item_id`** — never raw findings pasted in prompt.
 

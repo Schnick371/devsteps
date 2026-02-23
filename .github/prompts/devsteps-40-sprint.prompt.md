@@ -1,5 +1,5 @@
 ---
-agent: 'devsteps-sprint-executor'
+agent: 'devsteps-t1-sprint-executor'
 model: 'Claude Sonnet 4.6'
 description: 'Multi-hour autonomous sprint — pre-sprint archaeology, risk-based MPD per item, all 13 agents, blocking reviewer'
 tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'tavily/*', 'todo']
@@ -7,7 +7,7 @@ tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput
 
 # 🏃 Sprint Execution
 
-Activate `devsteps-sprint-executor` for autonomous multi-item sprint execution.
+Activate `devsteps-t1-sprint-executor` for autonomous multi-item sprint execution.
 
 The agent classifies the session automatically:
 - **Single item** → reclassifies as single-item coordinator flow

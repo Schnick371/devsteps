@@ -10,8 +10,8 @@ tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal
 
 - **Tier**: T2 — Quality Gate
 - **Mandate type**: `review`
-- **Accepted from**: T1 Coordinator (`devsteps-coordinator`), T1 Sprint (`devsteps-sprint-executor`)
-- **Dispatches (T3 parallel fan-out)**: `devsteps-aspect-quality-subagent`, `devsteps-aspect-staleness-subagent`
+- **Accepted from**: T1 Coordinator (`devsteps-t1-coordinator`), T1 Sprint (`devsteps-t1-sprint-executor`)
+- **Dispatches (T3 parallel fan-out)**: `devsteps-t3-aspect-quality`, `devsteps-t3-aspect-staleness`
 - **Returns**: MandateResult via `write_mandate_result`; on FAIL also writes `write_rejection_feedback` and `write_iteration_signal`
 - **T1 NEVER reads** raw T3 envelopes from this agent's dispatches directly
 
@@ -52,8 +52,8 @@ If any gate fails → skip phases 2-3, go directly to FAIL path.
 
 | T3 Agent | Mandate |
 |---|---|
-| `devsteps-aspect-quality-subagent` | Missing tests, assertion gaps, pattern inconsistencies, stale TODO/FIXME |
-| `devsteps-aspect-staleness-subagent` | Outdated docs, diverged comments, stale type annotations |
+| `devsteps-t3-aspect-quality` | Missing tests, assertion gaps, pattern inconsistencies, stale TODO/FIXME |
+| `devsteps-t3-aspect-staleness` | Outdated docs, diverged comments, stale type annotations |
 
 ### Phase 3: REDUCE + RESOLVE
 

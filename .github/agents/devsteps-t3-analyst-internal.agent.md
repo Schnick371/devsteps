@@ -12,7 +12,7 @@ tools: ['read', 'search', 'devsteps/*', 'todo']
 - **Dispatched by**: T2 Archaeology (`devsteps-t2-archaeology`), T2 Research (`devsteps-t2-research`)
 - **Returns**: Analysis envelope via `write_analysis_report` — T2 reads via `read_analysis_envelope`
 - **NEVER dispatches** further subagents — leaf node
-- **Naming note**: File is `devsteps-analyst-internal-subagent` (legacy name, functionally T3)
+- **Naming note**: File is `devsteps-t3-analyst-internal` (legacy name, functionally T3)
 
 ## Single Mission
 

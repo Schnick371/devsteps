@@ -9,9 +9,9 @@ agents:
   - devsteps-t2-quality
   - devsteps-t2-planner
   - devsteps-reviewer
-  - devsteps-impl-subagent
-  - devsteps-test-subagent
-  - devsteps-doc-subagent
+  - devsteps-t3-impl
+  - devsteps-t3-test
+  - devsteps-t3-doc
 ---
 
 # 🎯 DevSteps Coordinator — Tier-1
@@ -36,7 +36,7 @@ Orchestrate single-item implementation via T2 mandate dispatch. **NEVER reads ra
 
 | Signal | Classification | Action |
 |---|---|---|
-| Multiple items / "sprint" / backlog | Multi-item sprint | Hand off to `devsteps-sprint-executor` |
+| Multiple items / "sprint" / backlog | Multi-item sprint | Hand off to `devsteps-t1-sprint-executor` |
 | Single item ID, no sprint signal | Single-item MPD | Proceed below |
 | "which approach/pattern/library" | Competitive | Dispatch `devsteps-t2-research` |
 | Item type = spike / "investigate" | Investigation | `devsteps-t2-archaeology` + `devsteps-t2-research` (parallel) |
@@ -78,8 +78,8 @@ Extract: `findings` (file paths for execution), `recommendations` (ordered steps
 ### Step 4: Execute
 
 Dispatch exec agents IN ORDER (pass `report_path` + item ID only — never paste findings):
-1. `devsteps-impl-subagent` — reads `t2-planner` MandateResult independently
-2. `devsteps-test-subagent` + `devsteps-doc-subagent` (parallel if independent)
+1. `devsteps-t3-impl` — reads `t2-planner` MandateResult independently
+2. `devsteps-t3-test` + `devsteps-t3-doc` (parallel if independent)
 3. `devsteps-reviewer` — **BLOCKING** — must PASS before done
 
 ### Step 5: Quality Gate

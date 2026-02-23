@@ -9,12 +9,12 @@ tools: ['execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask',
 ## Contract
 
 - **Tier**: T3 Exec — Implementation Worker
-- **Dispatched by**: T1 Coordinator (`devsteps-coordinator`), T1 Sprint-Executor (`devsteps-sprint-executor`) — after `t2-planner` MandateResult is available
+- **Dispatched by**: T1 Coordinator (`devsteps-t1-coordinator`), T1 Sprint-Executor (`devsteps-t1-sprint-executor`) — after `t2-planner` MandateResult is available
 - **Input**: `report_path` of planner MandateResult + `item_id` — NEVER raw findings pasted in prompt
 - **Returns**: Implementation commit + status update — no write_analysis_report needed
-- **Naming note**: File is `devsteps-impl-subagent` (legacy name, functionally T3 Exec)
+- **Naming note**: File is `devsteps-t3-impl` (legacy name, functionally T3 Exec)
 
-**You are a PLANNER subagent invoked by devsteps-coordinator.**
+**You are a PLANNER subagent invoked by devsteps-t1-coordinator.**
 
 ## Context Budget Protocol (HOW YOU RECEIVE CONTEXT)
 
