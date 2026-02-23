@@ -1,7 +1,7 @@
 ---
 description: 'Autonomous sprint executor - multi-hour work sessions with context-aware analysis, obsolescence detection, and regression prevention'
 model: 'Claude Sonnet 4.6'
-tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'edit', 'search', 'web', 'read/problems', 'devsteps/*', 'tavily/*', 'todo']
+tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'edit', 'search', 'web', 'read/problems', 'devsteps/*', 'bright-data/*', 'todo']
 agents:
   - devsteps-aspect-impact-subagent
   - devsteps-aspect-constraints-subagent
@@ -199,7 +199,7 @@ Run these three lenses **independently** (do not fold findings between them):
 
 **Immediate Work Item Creation:**
 - Investigate the background of the problem in the internet and codebase
-- **Important:** Search the internet with #tavily tools for how to solve the problem, best practices, recommendations, and common pitfalls
+- **Important:** Search the internet with #bright-data tools for how to solve the problem, best practices, recommendations, and common pitfalls
 - Create Bug or Task items when discovering problems during execution
 - Apply Discovery Protocol first (search existing items to prevent duplicates)
 - Document findings with clear evidence and reproduction context

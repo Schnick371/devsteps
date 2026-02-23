@@ -1,7 +1,7 @@
 ---
 description: 'Release Specialist - npm publish workflows for @next pre-release and stable releases across public/private repos'
 model: 'Claude Sonnet 4.6'
-tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'read/problems', 'agent', 'edit', 'search', 'web', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'read/problems', 'agent', 'edit', 'search', 'web', 'playwright/*', 'bright-data/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 agents:
   - devsteps-analyst-context-subagent
   - devsteps-aspect-impact-subagent
@@ -138,7 +138,7 @@ You **execute work items systematically** through focused implementation. Transf
 
 **Code:** `search`, `usages`, `edit`, `problems`, `runTask`, `testFailure`  
 **DevSteps:** `#mcp_devsteps_search`, `#mcp_devsteps_update`, `#mcp_devsteps_list`  
-**Research:** `tavily/*` for latest best practices
+**Research:** `bright-data/*` for latest best practices
 
 ## Quality Gates
 

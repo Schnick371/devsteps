@@ -246,7 +246,7 @@ The 5 aspect analysts are **complementary** — they analyze different dimension
 
 Spawn in parallel (both simultaneously via the `agent` tool):
 1. `devsteps-analyst-internal-subagent` — analyzes what existing codebase patterns suggest
-2. `devsteps-analyst-web-subagent` — researches modern best practices via Tavily/internet
+2. `devsteps-analyst-web-subagent` — researches modern best practices via bright-data/internet
 
 Pass each agent ONLY: the task description + item ID + instruction to write full analysis to `.devsteps/analysis/[ITEM-ID]/` and return ONLY the CompressedVerdict envelope.
 

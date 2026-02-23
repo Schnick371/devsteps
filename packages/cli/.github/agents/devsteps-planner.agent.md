@@ -1,7 +1,7 @@
 ---
 description: 'Planning and analysis specialist - creates DevSteps work items through structured planning and analyzes complex code/architecture decisions'
 model: 'Claude Sonnet 4.6'
-tools: ['vscode/runCommand', 'vscode/askQuestions', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'read/problems', 'agent', 'edit', 'search', 'web', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+tools: ['vscode/runCommand', 'vscode/askQuestions', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'read/problems', 'agent', 'edit', 'search', 'web', 'playwright/*', 'bright-data/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 agents:
   - devsteps-analyst-context-subagent
   - devsteps-analyst-internal-subagent
@@ -71,7 +71,7 @@ Ask "why" before "what". Surface dependencies early.
 Search best practices + recommendations + existing patterns. Evidence-based proposals.
 
 **Deep Research Strategy:**
-- Use `#tavily/*` tools for comprehensive research
+- Use `#bright-data/*` tools for comprehensive research
 - Target 10+ different domains/websites per topic
 - Compare multiple authoritative sources
 - Synthesize findings into actionable recommendations
