@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Fix purgeItems() — replace index.json read with listItems() for refs-style index",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-23T11:38:31.406Z",
-  "updated": "2026-02-23T11:40:24.354Z",
+  "updated": "2026-02-23T11:47:36.844Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/archive.ts",

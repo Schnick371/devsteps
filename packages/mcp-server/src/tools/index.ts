@@ -142,6 +142,10 @@ export const listTool: Tool = {
         type: 'number',
         description: 'Maximum number of items to return',
       },
+      archived: {
+        type: 'boolean',
+        description: 'When true, list archived items instead of active items',
+      },
     },
   },
 };
@@ -421,6 +425,97 @@ export const purgeTool: Tool = {
         description: 'Optional: filter by item type',
       },
     },
+  },
+};
+
+export const bulkUpdateTool: Tool = {
+  name: 'bulk_update',
+  description:
+    'Bulk update status, assignee, category, or priority on multiple items at once. Specify item IDs and the fields to update — all specified fields are applied to every matched item.',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      ids: {
+        type: 'array',
+        items: { type: 'string' },
+        description: 'List of item IDs to update (e.g. ["TASK-001", "BUG-002"])',
+      },
+      status: {
+        type: 'string',
+        enum: [
+          'draft',
+          'planned',
+          'in-progress',
+          'review',
+          'done',
+          'blocked',
+          'cancelled',
+          'obsolete',
+        ],
+        description: 'New status to apply to all items',
+      },
+      assignee: {
+        type: 'string',
+        description: 'New assignee email to apply to all items',
+      },
+      category: {
+        type: 'string',
+        description: 'New category/module to apply to all items',
+      },
+      eisenhower: {
+        type: 'string',
+        enum: [
+          'urgent-important',
+          'not-urgent-important',
+          'urgent-not-important',
+          'not-urgent-not-important',
+        ],
+        description: 'New Eisenhower priority to apply to all items',
+      },
+    },
+    required: ['ids'],
+  },
+};
+
+export const bulkTagAddTool: Tool = {
+  name: 'bulk_tag_add',
+  description: 'Add one or more tags to multiple items at once.',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      ids: {
+        type: 'array',
+        items: { type: 'string' },
+        description: 'List of item IDs to tag',
+      },
+      tags: {
+        type: 'array',
+        items: { type: 'string' },
+        description: 'Tags to add to each item',
+      },
+    },
+    required: ['ids', 'tags'],
+  },
+};
+
+export const bulkTagRemoveTool: Tool = {
+  name: 'bulk_tag_remove',
+  description: 'Remove one or more tags from multiple items at once.',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      ids: {
+        type: 'array',
+        items: { type: 'string' },
+        description: 'List of item IDs to update',
+      },
+      tags: {
+        type: 'array',
+        items: { type: 'string' },
+        description: 'Tags to remove from each item',
+      },
+    },
+    required: ['ids', 'tags'],
   },
 };
 

@@ -38,6 +38,9 @@ process.on('unhandledRejection', (reason, promise) => {
 import {
   addTool,
   archiveTool,
+  bulkTagAddTool,
+  bulkTagRemoveTool,
+  bulkUpdateTool,
   contextTool,
   exportTool,
   getTool,
@@ -167,6 +170,21 @@ function generateToolSummary(
       return `[purge] → ${purgeCount} items archived ${durationStr}`;
     }
 
+    case 'bulk_update': {
+      const bulkCount = result.count || 0;
+      return `[bulk_update] ${(args.ids as string[])?.length ?? 0} items → ${bulkCount} updated ${durationStr}`;
+    }
+
+    case 'bulk_tag_add': {
+      const tagAddCount = result.count || 0;
+      return `[bulk_tag_add] +[${(args.tags as string[])?.join(', ')}] on ${(args.ids as string[])?.length ?? 0} items → ${tagAddCount} updated ${durationStr}`;
+    }
+
+    case 'bulk_tag_remove': {
+      const tagRemoveCount = result.count || 0;
+      return `[bulk_tag_remove] -[${(args.tags as string[])?.join(', ')}] on ${(args.ids as string[])?.length ?? 0} items → ${tagRemoveCount} updated ${durationStr}`;
+    }
+
     case 'init':
       return `[init] "${args.project_name}" → initialized ${durationStr}`;
 
@@ -239,12 +257,16 @@ class DevStepsServer {
       listTool,
       updateTool,
       linkTool,
-      unlinkTool,      unlinkTool,      searchTool,
+      unlinkTool,
+      searchTool,
       statusTool,
       traceTool,
       exportTool,
       archiveTool,
       purgeTool,
+      bulkUpdateTool,
+      bulkTagAddTool,
+      bulkTagRemoveTool,
       contextTool,
       healthCheckTool,
       metricsTool,
