@@ -3,12 +3,18 @@
   "type": "story",
   "category": "general",
   "title": "Documentation Update - Eisenhower Matrix Throughout",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-12-05T16:29:56.008Z",
-  "updated": "2025-12-05T16:30:05.493Z",
+  "updated": "2026-02-23T14:49:13.168Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [],
+  "affected_paths": [
+    "README.md",
+    "packages/cli/README.md",
+    ".devsteps/AI-GUIDE.md",
+    "packages/cli/src/commands/init.ts",
+    ".vscode/tasks.json"
+  ],
   "linked_items": {
     "implements": [
       "EPIC-017"

@@ -3,12 +3,14 @@
   "type": "task",
   "category": "CLI",
   "title": "Doctor: Orphaned items detection",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-11-24T20:56:20.254Z",
-  "updated": "2025-11-24T20:56:20.254Z",
+  "updated": "2026-02-23T14:35:27.637Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [],
+  "affected_paths": [
+    "packages/cli/src/commands/doctor-integrity.ts"
+  ],
   "linked_items": {
     "implements": [
       "STORY-006"

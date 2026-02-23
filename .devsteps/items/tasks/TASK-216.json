@@ -3,13 +3,14 @@
   "type": "task",
   "category": "general",
   "title": "Implement createLink() by extracting link.ts logic",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-05T22:48:15.691Z",
-  "updated": "2026-02-05T22:51:58.023Z",
+  "updated": "2026-02-23T14:38:19.903Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/shared/src/core/relationships.ts"
+    "packages/shared/src/core/link.ts",
+    "packages/shared/src/core/index.ts"
   ],
   "linked_items": {
     "implements": [

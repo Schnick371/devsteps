@@ -3,15 +3,14 @@
   "type": "task",
   "category": "Documentation",
   "title": "Update Copilot guidance - Bug→Task uses implemented-by",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-12-01T10:08:29.284Z",
-  "updated": "2025-12-01T10:08:36.673Z",
+  "updated": "2026-02-23T14:51:54.817Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    ".github/agents/devsteps.agent.md",
-    ".github/prompts/devsteps-plan-work.prompt.md",
-    ".github/prompts/devsteps-workflow.prompt.md"
+    "/.github/prompts/devsteps-10-plan-work.prompt.md",
+    ".devsteps/HIERARCHY-COMPACT.md"
   ],
   "linked_items": {
     "implements": [

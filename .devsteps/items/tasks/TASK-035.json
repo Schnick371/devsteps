@@ -3,15 +3,15 @@
   "type": "task",
   "category": "VS Code Extension",
   "title": "Toolbar: Redesign with primary + hover buttons pattern",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-11-24T13:02:36.765Z",
-  "updated": "2025-11-24T13:02:36.765Z",
+  "updated": "2026-02-23T14:45:40.301Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/vscode-extension/package.json",
-    "packages/vscode-extension/src/commands/index.ts",
-    "packages/vscode-extension/src/treeView/devstepsTreeDataProvider.ts"
+    "packages/extension/package.json",
+    "packages/extension/src/commands/index.ts",
+    "packages/extension/src/treeView/devstepsTreeDataProvider.ts"
   ],
   "linked_items": {
     "implements": [],

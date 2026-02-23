@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Refactor link.ts handler to use shared createLink()",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-05T22:50:57.964Z",
-  "updated": "2026-02-05T22:51:58.023Z",
+  "updated": "2026-02-23T14:38:23.939Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/handlers/link.ts"

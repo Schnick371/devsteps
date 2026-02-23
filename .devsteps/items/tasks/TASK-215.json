@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Implement removeLink() with atomic bidirectional removal",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-05T22:47:54.346Z",
-  "updated": "2026-02-05T22:51:58.022Z",
+  "updated": "2026-02-23T14:30:15.984Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/relationships.ts"
@@ -33,5 +33,6 @@
     "core-api"
   ],
   "commits": [],
-  "metadata": {}
+  "metadata": {},
+  "superseded_by": "TASK-248"
 }

@@ -3,10 +3,10 @@
   "type": "spike",
   "category": "general",
   "title": "Evaluate Ephemeral Task Handling Strategy",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-01-05T10:02:37.382Z",
-  "updated": "2026-01-06T07:58:02.078Z",
+  "updated": "2026-02-23T14:30:15.992Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/instructions/",

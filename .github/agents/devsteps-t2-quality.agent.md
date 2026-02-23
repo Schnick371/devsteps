@@ -5,7 +5,6 @@ tools: ['read', 'agent', 'search', 'devsteps/*', 'execute/runInTerminal', 'execu
 agents:
   - devsteps-t3-aspect-quality
   - devsteps-t3-aspect-staleness
-user-invokable: false
 handoffs:
   - label: "→ Planning"
     agent: devsteps-t2-planner
