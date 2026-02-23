@@ -1,27 +1,27 @@
 ## Problem
 
-`write_sprint_brief` ist als MCP-Tool vollständig implementiert, aber **kein Agent-File dokumentiert explizit wer es wann aufruft**. Das Tool-Docstring sagt "produced by devsteps-planner at sprint start" — aber T2-Planner dekomponiert Items, er erstellt keinen Sprint Brief. T1 Sprint Executor macht das Pre-Sprint-Analysis — aber sein Agent-File erwähnt `write_sprint_brief` mit keinem Wort.
+`write_sprint_brief` is fully implemented as an MCP tool, but **no agent file explicitly documents who calls it and when**. The tool docstring says "produced by devsteps-planner at sprint start" — but T2 Planner decomposes items; it does not create a sprint brief. T1 Sprint Executor performs the pre-sprint analysis — but its agent file does not mention `write_sprint_brief` at all.
 
-**Konsequenz:** `write_sprint_brief` wird in der Praxis nie aufgerufen. Der Enriched Sprint Brief existiert nie. T2-Planner kann nicht auf Risk-Scores und Build-Order zurückgreifen, die er bräuchte.
+**Consequence:** `write_sprint_brief` is never called in practice. The enriched sprint brief never exists. T2 Planner cannot use the risk scores and build order it needs.
 
 ## Goal
 
-Klare Ownership-Zuweisung und Agent-Dokumentation sodass `write_sprint_brief` zuverlässig am Sprint-Start aufgerufen wird.
+Clear ownership assignment and agent documentation so that `write_sprint_brief` is reliably called at sprint start.
 
 ## Acceptance Criteria
 
-- [ ] `devsteps-t1-sprint-executor.agent.md` erhält expliziten **"Step 0: Write Sprint Brief"** vor Phase A
-- [ ] Step 0 beschreibt: was wird berechnet (Risk-Scores QUICK/STANDARD/FULL/COMPETITIVE, Build-Order, Shared-File Conflict Map), wie T2 Archaeology MandateResults als Input verwendet werden
-- [ ] `TIER2-PROTOCOL.md` korrigiert: "produced by T1 Sprint Executor" statt "devsteps-planner"
-- [ ] `write_sprint_brief` Tool-Description in `analysis.ts` korrigiert: "Called by T1 Sprint Executor after initial archaeology batch — not T2 Planner"
-- [ ] T2 Planner Agent-File ergänzt: "Reads enriched-sprint-brief.json as primary planning input if available"
+- [ ] `devsteps-t1-sprint-executor.agent.md` receives an explicit **"Step 0: Write Sprint Brief"** before Phase A
+- [ ] Step 0 describes: what is calculated (risk scores QUICK/STANDARD/FULL/COMPETITIVE, build order, shared-file conflict map) and how T2 Archaeology MandateResults are used as input
+- [ ] `TIER2-PROTOCOL.md` corrected: "produced by T1 Sprint Executor" instead of "devsteps-planner"
+- [ ] `write_sprint_brief` tool description in `analysis.ts` corrected: "Called by T1 Sprint Executor after initial archaeology batch — not T2 Planner"
+- [ ] T2 Planner agent file updated: "Reads enriched-sprint-brief.json as primary planning input if available"
 
-## Ownership nach Fix
+## Ownership After Fix
 
 ```
-T1 Sprint Executor (Pre-Sprint-Analysis)
+T1 Sprint Executor (Pre-Sprint Analysis)
   Step 0: write_sprint_brief(ordered_items, risk_scores, build_order)
   Step 1: Backlog Discovery
   Step 2: Global Archaeology Batch → T2
-    └──▶ T2 Planner reads enriched-sprint-brief.json ← inputs used here
+    └──▶ T2 Planner reads enriched-sprint-brief.json ← input used here
 ```
