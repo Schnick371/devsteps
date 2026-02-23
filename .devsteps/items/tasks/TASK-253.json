@@ -1,0 +1,39 @@
+{
+  "id": "TASK-253",
+  "type": "task",
+  "category": "general",
+  "title": "add devsteps_hash + devsteps_version YAML frontmatter injection to copyGithubFiles() in init-helpers.ts",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-23T22:18:34.395Z",
+  "updated": "2026-02-23T22:19:24.726Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/utils/init-helpers.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-114"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-254"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "init",
+    "hash",
+    "frontmatter"
+  ],
+  "commits": [],
+  "metadata": {}
+}

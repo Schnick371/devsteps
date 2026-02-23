@@ -1,0 +1,50 @@
+{
+  "id": "STORY-114",
+  "type": "story",
+  "category": "general",
+  "title": "implement update_copilot_files — safe post-install update of managed .github Copilot files",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-23T22:17:41.858Z",
+  "updated": "2026-02-23T22:19:16.874Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/utils/backup-github-files.ts",
+    "packages/shared/src/utils/update-copilot-files.ts",
+    "packages/shared/src/utils/init-helpers.ts",
+    "packages/shared/src/utils/index.ts",
+    "packages/mcp-server/src/handlers/update-copilot-files.ts",
+    "packages/mcp-server/src/tools/system.ts",
+    "packages/mcp-server/src/tools/index.ts",
+    "packages/cli/src/commands/update-copilot-files.ts",
+    "packages/cli/src/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-006"
+    ],
+    "implemented-by": [
+      "TASK-252",
+      "TASK-256"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "dx",
+    "copilot-files",
+    "update",
+    "backup",
+    "mcp-tool",
+    "cli-command"
+  ],
+  "commits": [],
+  "metadata": {}
+}
