@@ -5,7 +5,6 @@ tools: ['read', 'agent', 'search', 'devsteps/*', 'bright-data/*', 'bright-data/*
 agents:
   - devsteps-t3-analyst-context
   - devsteps-t3-analyst-internal
-user-invokable: false
 handoffs:
   - label: "→ Risk Analysis"
     agent: devsteps-t2-risk

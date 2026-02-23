@@ -2,6 +2,24 @@
 
 All notable changes to `@schnick371/devsteps-cli` will be documented in this file.
 
+## [1.1.0-next.2] - 2026-02-23 (Pre-release)
+
+### ⚠️ Pre-Release Channel
+
+Install via: `npm install -g @schnick371/devsteps-cli@next`
+
+### Changed
+- Updated dependency: `@schnick371/devsteps-shared@1.1.0-next.2`
+- `copy:docs` script resilient to missing root `.devsteps/` directory (no longer fails on clean public clone)
+
+### Known Issues
+- None specific to CLI
+
+### Testing Needed
+- `devsteps init <name>` in a fresh directory
+- `devsteps list`, `devsteps add`, `devsteps status` all functional
+- `devsteps --version` reports `1.1.0-next.2`
+
 ## [1.0.0] - 2026-02-21
 
 ### Added

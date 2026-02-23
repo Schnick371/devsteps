@@ -2,6 +2,22 @@
 
 All notable changes to `@schnick371/devsteps-shared` will be documented in this file.
 
+## [1.1.0-next.2] - 2026-02-23 (Pre-release)
+
+### ⚠️ Pre-Release Channel
+
+Install via: `npm install -g @schnick371/devsteps-shared@next`
+
+### Changed
+- Stable 1.0.0 APIs remain unchanged — this is the shared-package component of the 1.1.0-next.2 bundle
+- Bumped to align with matched pre-release versioning across CLI and MCP Server
+
+### Known Issues
+- None specific to shared package
+
+### Testing Needed
+- Verify all dependent packages (cli, mcp-server) resolve `@next` correctly
+
 ## [1.0.0] - 2026-02-21
 
 ### Added

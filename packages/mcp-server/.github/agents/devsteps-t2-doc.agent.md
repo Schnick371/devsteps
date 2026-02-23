@@ -16,7 +16,7 @@ agents:
 user-invokable: false
 handoffs:
   - label: "→ Review"
-    agent: devsteps-t2-reviewer
+    agent: devsteps-t2-reviewer 
     prompt: "Review mandate: impl + doc MandateResults written. Run final quality gate for item: [ITEM_ID]."
     send: false
 ---

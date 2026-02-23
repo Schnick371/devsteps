@@ -5,7 +5,6 @@ tools: ['read', 'agent', 'search', 'devsteps/*', 'bright-data/*', 'bright-data/*
 agents:
   - devsteps-t3-analyst-web
   - devsteps-t3-analyst-internal
-user-invokable: false
 handoffs:
   - label: "→ Planning"
     agent: devsteps-t2-planner

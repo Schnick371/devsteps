@@ -4,7 +4,6 @@ model: 'Claude Sonnet 4.6'
 tools: ['read', 'agent', 'search', 'devsteps/*', 'todo']
 agents:
   - devsteps-t3-aspect-staleness
-user-invokable: false
 handoffs:
   - label: "→ Implement"
     agent: devsteps-t2-impl

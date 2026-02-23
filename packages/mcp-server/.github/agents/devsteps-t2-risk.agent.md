@@ -6,7 +6,6 @@ agents:
   - devsteps-t3-aspect-impact
   - devsteps-t3-aspect-integration
   - devsteps-t3-aspect-constraints
-user-invokable: false
 handoffs:
   - label: "→ Archaeology"
     agent: devsteps-t2-archaeology

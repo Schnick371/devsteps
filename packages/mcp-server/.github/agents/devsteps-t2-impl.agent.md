@@ -15,12 +15,11 @@ tools:
   - execute/getTerminalOutput
   - execute/runTask
   - execute/awaitTerminal
-  - execute/testFailure
+  - execute/testFailure 
 model: 'Claude Sonnet 4.6'
 agents:
   - devsteps-t3-impl
   - devsteps-t3-analyst-web
-user-invokable: false
 handoffs:
   - label: "→ Test"
     agent: devsteps-t2-test

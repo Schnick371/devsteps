@@ -21,7 +21,6 @@ agents:
   - devsteps-t3-test
   - devsteps-t3-aspect-quality
   - devsteps-t3-analyst-web
-user-invokable: false
 handoffs:
   - label: "→ Review"
     agent: devsteps-t2-reviewer
