@@ -56,6 +56,10 @@ interface VsCodeWithMcpApi {
  * @returns True if extension version indicates a pre-release build
  */
 function isPreRelease(context: vscode.ExtensionContext): boolean {
+  // Explicit channel field takes precedence over version parity
+  if (context.extension.packageJSON.channel === 'next') {
+    return true;
+  }
   const version: string = context.extension.packageJSON.version ?? '0.0.0';
   const parts = version.split('.');
   const minor = parseInt(parts[1] ?? '0', 10);
