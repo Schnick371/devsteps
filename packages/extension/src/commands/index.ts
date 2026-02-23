@@ -513,8 +513,16 @@ export function registerCommands(
         // If no itemId provided, let user search/select
         let targetItemId = itemId;
         if (!targetItemId) {
-          const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
-          const allItems = await listItems(devstepsath);
+          let allItems: Awaited<ReturnType<typeof listItems>>;
+          try {
+            const devstepsPath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
+            allItems = await listItems(devstepsPath);
+          } catch (error) {
+            vscode.window.showErrorMessage(
+              `DevSteps: Failed to load items — ${error instanceof Error ? error.message : 'Unknown error'}`
+            );
+            return;
+          }
 
           if (!allItems.items || allItems.items.length === 0) {
             vscode.window.showErrorMessage('No work items found');
@@ -538,8 +546,16 @@ export function registerCommands(
         }
 
         // Get current item status
-        const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
-        const itemResult = await getItem(devstepsath, targetItemId);
+        let itemResult: Awaited<ReturnType<typeof getItem>>;
+        try {
+          const devstepsath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
+          itemResult = await getItem(devstepsath, targetItemId);
+        } catch (error) {
+          vscode.window.showErrorMessage(
+            `DevSteps: Failed to load item ${targetItemId} — ${error instanceof Error ? error.message : 'Unknown error'}`
+          );
+          return;
+        }
         if (!itemResult.metadata) {
           vscode.window.showErrorMessage(`Item ${targetItemId} not found`);
           return;
