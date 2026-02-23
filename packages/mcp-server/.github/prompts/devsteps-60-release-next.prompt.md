@@ -63,8 +63,9 @@ Final stable:   X.Y.Z+1
 
 **VS Code extension — separate versioning:**
 - Extension uses `N.N.N` format only (Marketplace requirement, no semver suffixes)
-- Pre-release channel: use odd patch number (e.g. `1.0.1` for pre-release of `1.0.0` stable)
-- `isPreRelease()`: returns `true` when minor is odd OR patch is odd
+- Pre-release channel: set `"channel": "next"` in `package.json` — `isPreRelease()` reads this first
+- `isPreRelease()` priority: `channel === 'next'` → `true`; fallback: odd minor OR odd patch
+- VS Code Marketplace requires version > last published — increment patch for each upload (1.0.1 → 1.0.2 → ...)
 - Extension version is INDEPENDENT from npm package versions
 
 ---
@@ -196,11 +197,16 @@ ls packages/mcp-server/.github/prompts/devsteps-*.prompt.md
 Update each `package.json` to `X.Y.Z-next.N`:
 
 ```
-packages/shared/package.json      → X.Y.Z-next.N
-packages/cli/package.json         → X.Y.Z-next.N
-packages/mcp-server/package.json  → X.Y.Z-next.N
-packages/extension/package.json   → X.Y.Z-next.N
+packages/shared/package.json      → "version": "X.Y.Z-next.N"
+packages/cli/package.json         → "version": "X.Y.Z-next.N"
+packages/mcp-server/package.json  → "version": "X.Y.Z-next.N"
+packages/extension/package.json   → "version": "A.B.C+1"  (increment patch, N.N.N format!)
+                                     "channel": "next"  (MUST be set — triggers isPreRelease())
 ```
+
+> **Extension note:** The Marketplace requires a higher version number than the last published.
+> The patch number MUST be incremented (e.g. `1.0.1` → `1.0.2`). The `"channel": "next"` field
+> is what marks it as pre-release internally — NOT the version number parity.
 
 Then commit:
 
