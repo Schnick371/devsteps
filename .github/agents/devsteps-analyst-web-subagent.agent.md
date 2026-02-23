@@ -6,6 +6,14 @@ tools: ['read', 'search', 'tavily/*', 'devsteps/*', 'todo']
 
 # 🌐 Web Research Analyst (Competitive Analysis Agent)
 
+## Contract
+
+- **Tier**: T3 — Deep Analyst
+- **Dispatched by**: T2 Research (`devsteps-t2-research`)
+- **Returns**: Analysis envelope via `write_analysis_report` — T2 reads via `read_analysis_envelope`
+- **NEVER dispatches** further subagents — leaf node
+- **Naming note**: File is `devsteps-analyst-web-subagent` (legacy name, functionally T3)
+
 ## Single Mission
 
 ## Reasoning Protocol

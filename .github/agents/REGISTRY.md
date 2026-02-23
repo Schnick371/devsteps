@@ -7,8 +7,11 @@
 | **T1 — Coordinator** | Single-item MPD dispatcher | `devsteps-coordinator.agent.md` |
 | **T1 — Sprint** | Multi-item sprint dispatcher | `devsteps-sprint-executor.agent.md` |
 | **T2 — Analysts** | Domain synthesis, mandate handlers | `devsteps-t2-*.agent.md`, `devsteps-reviewer.agent.md` |
-| **T3 — Sub-agents** | Focused aspect readers | `devsteps-aspect-*.agent.md`, `devsteps-analyst-*.agent.md` |
-| **Exec — Workers** | Code implementation | `devsteps-impl-subagent.agent.md`, `devsteps-test-subagent.agent.md`, `devsteps-doc-subagent.agent.md` |
+| **T3 — Sub-agents** | Focused aspect readers (leaf nodes) | `devsteps-aspect-*.agent.md`, `devsteps-analyst-*.agent.md` |
+| **T3 Exec — Workers** | Code/test/doc implementation | `devsteps-impl-subagent.agent.md`, `devsteps-test-subagent.agent.md`, `devsteps-doc-subagent.agent.md` |
+
+> **Finding T3 files**: Search for `devsteps-aspect-` and `devsteps-analyst-` (legacy naming, no `t3-` prefix in filenames).
+> All agent files contain a `## Contract` section identifying their tier, dispatcher, and return type.
 
 ---
 
@@ -64,6 +67,10 @@ T2 calls: `read_analysis_envelope(report_path)` — internal to T2, invisible to
 
 ## T3 Sub-Agents (dispatched by T2 only — T1 NEVER dispatches these directly)
 
+> **Naming**: T3 files use legacy `devsteps-aspect-*` and `devsteps-analyst-*` prefixes (no `t3-` in filename).
+> Each file contains a `## Contract` section that identifies its tier, who dispatches it, and what it returns.
+> T2 files: `devsteps-t2-*.agent.md` | T3 files: `devsteps-aspect-*.agent.md`, `devsteps-analyst-*.agent.md`
+
 | Agent | Domain |
 |---|---|
 | `devsteps-aspect-impact-subagent` | Call-site blast radius |
@@ -77,7 +84,7 @@ T2 calls: `read_analysis_envelope(report_path)` — internal to T2, invisible to
 
 ---
 
-## Executive Agents (dispatched by T1 directly after planning MandateResult available)
+## T3 Exec — Executive Agents (dispatched by T1 directly after planning MandateResult available)
 
 | Agent | Role | Input from |
 |---|---|---|

@@ -6,6 +6,14 @@ tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 
 
 # 🌊 Impact Analyst (MPD Aspect Agent)
 
+## Contract
+
+- **Tier**: T3 — Aspect Analyst
+- **Dispatched by**: T2 Risk (`devsteps-t2-risk`)
+- **Returns**: Analysis envelope via `write_analysis_report` — T2 reads via `read_analysis_envelope`
+- **NEVER dispatches** further subagents — leaf node
+- **Naming note**: File is `devsteps-aspect-impact-subagent` (legacy name, functionally T3)
+
 ## Single Mission
 
 ## Reasoning Protocol

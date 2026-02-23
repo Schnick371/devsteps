@@ -6,6 +6,14 @@ tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTermi
 
 # 📖 Context Loading Analyst
 
+## Contract
+
+- **Tier**: T3 — Deep Analyst
+- **Dispatched by**: T2 Archaeology (`devsteps-t2-archaeology`)
+- **Returns**: Analysis envelope via `write_analysis_report` — T2 reads via `read_analysis_envelope`
+- **NEVER dispatches** further subagents — leaf node
+- **Naming note**: File is `devsteps-analyst-context-subagent` (legacy name, functionally T3)
+
 ## Mission
 
 ## Reasoning Protocol

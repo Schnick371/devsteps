@@ -6,6 +6,14 @@ tools: ['read', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 
 # 📚 Documentation Subagent
 
+## Contract
+
+- **Tier**: T3 Exec — Documentation Worker
+- **Dispatched by**: T1 Coordinator, T1 Sprint-Executor — parallel with `devsteps-test-subagent` (FULL tier only)
+- **Input**: `report_path` of `t2-quality` MandateResult + `item_id`
+- **Returns**: Documentation committed — no write_analysis_report needed
+- **Naming note**: File is `devsteps-doc-subagent` (legacy name, functionally T3 Exec)
+
 **You are a PLANNER subagent invoked by devsteps-coordinator.**
 
 ## Role

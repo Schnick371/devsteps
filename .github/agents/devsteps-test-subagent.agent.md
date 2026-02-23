@@ -6,6 +6,14 @@ tools: ['execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runNotebo
 
 # 🧪 Testing Subagent
 
+## Contract
+
+- **Tier**: T3 Exec — Test Worker
+- **Dispatched by**: T1 Coordinator, T1 Sprint-Executor — parallel with `devsteps-impl-subagent` or after it
+- **Input**: `report_path` of `t2-quality` or `t2-planner` MandateResult + `item_id`
+- **Returns**: Test files committed — no write_analysis_report needed
+- **Naming note**: File is `devsteps-test-subagent` (legacy name, functionally T3 Exec)
+
 **You are a PLANNER subagent invoked by devsteps-coordinator.**
 
 ## Role
