@@ -8,7 +8,8 @@
 | **T1 — Sprint** | Multi-item sprint dispatcher | `devsteps-t1-sprint-executor.agent.md` |
 | **T2 — Analysts** | Domain synthesis, mandate handlers | `devsteps-t2-*.agent.md` |
 | **T3 — Sub-agents** | Focused aspect readers (leaf nodes) | `devsteps-t3-aspect-*.agent.md`, `devsteps-t3-analyst-*.agent.md` |
-| **T3 Exec — Workers** | Code/test/doc implementation | `devsteps-t3-impl.agent.md`, `devsteps-t3-test.agent.md`, `devsteps-t3-doc.agent.md` |
+| **T2 Exec — Conductors** | Execution orchestration (impl/test/doc) | `devsteps-t2-impl.agent.md`, `devsteps-t2-test.agent.md`, `devsteps-t2-doc.agent.md` |
+| **T3 Exec — Workers** | Leaf-node code/test/doc writers (dispatched by T2 Exec only) | `devsteps-t3-impl.agent.md`, `devsteps-t3-test.agent.md`, `devsteps-t3-doc.agent.md` |
 
 > All agent files contain a `## Contract` section identifying their tier, dispatcher, and return type.
 
@@ -20,10 +21,10 @@
 
 | Triage Tier | T2 Mandates (Phase A — parallel) | After MandateResults available |
 |---|---|---|
-| **QUICK** | `t2-planner` | `t3-impl` → `t2-reviewer` |
-| **STANDARD** | `t2-archaeology` + `t2-risk` | → `t2-planner` → `t3-impl` + `t3-test` (parallel) → `t2-reviewer` |
-| **FULL** | `t2-archaeology` + `t2-risk` + `t2-quality` | → `t2-planner` → `t3-impl` + `t3-test` + `t3-doc` (parallel) → `t2-reviewer` |
-| **COMPETITIVE** | `t2-research` + `t2-archaeology` | → `t2-planner` → `t3-impl` → `t2-reviewer` |
+| **QUICK** | `t2-planner` | `t2-impl` → `t2-reviewer` |
+| **STANDARD** | `t2-archaeology` + `t2-risk` | → `t2-planner` → `t2-impl` → `t2-test` → `t2-reviewer` |
+| **FULL** | `t2-archaeology` + `t2-risk` + `t2-quality` | → `t2-planner` → `t2-impl` → `t2-test` ∥ `t2-doc` → `t2-reviewer` |
+| **COMPETITIVE** | `t2-research` + `t2-archaeology` | → `t2-planner` → `t2-impl` → `t2-reviewer` |
 
 ---
 
@@ -36,6 +37,10 @@
 | `research` | `devsteps-t2-research` | web + internal T3 cross-validation → ranked recommendation |
 | `quality` | `devsteps-t2-quality` | automated gates + quality T3 + Review-Fix loop |
 | `planning` | `devsteps-t2-planner` | reads existing MandateResults, minimal T3 → ordered steps |
+| `planning` | `devsteps-t2-planner` | reads existing MandateResults, minimal T3 → ordered steps |
+| `implementation` | `devsteps-t2-impl` | dispatches t3-impl + optional t3-analyst-web → code committed |
+| `testing` | `devsteps-t2-test` | dispatches t3-test + optional t3-aspect-quality → tests pass |
+| `documentation` | `devsteps-t2-doc` | dispatches t3-doc + optional t3-aspect-staleness → docs updated |
 | `review` | `devsteps-t2-reviewer` | Blocking quality gate — PASS/FAIL, write_rejection_feedback, escalation |
 
 ---
@@ -67,7 +72,7 @@ T2 calls: `read_analysis_envelope(report_path)` — internal to T2, invisible to
 ## T3 Sub-Agents (dispatched by T2 only — T1 NEVER dispatches these directly)
 
 > Each file contains a `## Contract` section that identifies its tier, who dispatches it, and what it returns.
-> T2 files: `devsteps-t2-*.agent.md` | T3 Sub-agents: `devsteps-t3-aspect-*.agent.md`, `devsteps-t3-analyst-*.agent.md` | T3 Exec: `devsteps-t3-impl/test/doc.agent.md`
+> T2 files: `devsteps-t2-*.agent.md` | T3 Sub-agents: `devsteps-t3-aspect-*.agent.md`, `devsteps-t3-analyst-*.agent.md` | T3 Exec Workers: `devsteps-t3-impl/test/doc.agent.md` (dispatched by T2 Exec Conductors only)
 
 | Agent | Domain |
 |---|---|
@@ -82,15 +87,25 @@ T2 calls: `read_analysis_envelope(report_path)` — internal to T2, invisible to
 
 ---
 
-## T3 Exec — Executive Agents (dispatched by T1 directly after planning MandateResult available)
+## T2 Exec — Conductors (dispatched by T1 after t2-planner MandateResult available)
 
-| Agent | Role | Input from |
+| Agent | Role | Dispatches (T3) |
 |---|---|---|
-| `devsteps-t3-impl` | Code implementation | `t2-planner` MandateResult `report_path` + item ID |
-| `devsteps-t3-test` | Test implementation | `t2-planner` + `t2-quality` MandateResult `report_path` |
-| `devsteps-t3-doc` | Documentation | `t2-quality` MandateResult `report_path` |
+| `devsteps-t2-impl` | Implementation Conductor | `t3-impl` (always) + `t3-analyst-web` (conditional) |
+| `devsteps-t2-test` | Test Conductor | `t3-test` (always) + `t3-aspect-quality` + `t3-analyst-web` (conditional) |
+| `devsteps-t2-doc` | Documentation Conductor | `t3-doc` (always) + `t3-aspect-staleness` (FULL only) |
 
-Exec agents receive **only `report_path` + `item_id`** — never raw findings pasted in prompt.
+T2 Exec Conductors receive **only `report_path` + `item_id`** from T1. They orchestrate their T3 workers and return a MandateResult.
+
+## T3 Exec — Workers (dispatched by T2 Exec Conductors only — T1 NEVER dispatches these)
+
+| Agent | Role | Dispatched by |
+|---|---|---|
+| `devsteps-t3-impl` | Code writer | `devsteps-t2-impl` |
+| `devsteps-t3-test` | Test writer | `devsteps-t2-test` |
+| `devsteps-t3-doc` | Documentation writer | `devsteps-t2-doc` |
+
+Exec workers receive **only `report_path` + `item_id`** — never raw findings pasted in prompt.
 
 ---
 

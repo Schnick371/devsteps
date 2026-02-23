@@ -9,7 +9,7 @@ tools: ['execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runNotebo
 ## Contract
 
 - **Tier**: T3 Exec — Test Worker
-- **Dispatched by**: T1 Coordinator, T1 Sprint-Executor — parallel with `devsteps-t3-impl` or after it
+- **Dispatched by**: T2 Test Conductor (`devsteps-t2-test`) — after `devsteps-t2-impl` MandateResult is available
 - **Input**: `report_path` of `t2-quality` or `t2-planner` MandateResult + `item_id`
 - **Returns**: Test files committed — no write_analysis_report needed
 - **Naming note**: File is `devsteps-t3-test` (legacy name, functionally T3 Exec)

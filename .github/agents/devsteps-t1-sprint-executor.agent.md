@@ -8,10 +8,10 @@ agents:
   - devsteps-t2-research
   - devsteps-t2-quality
   - devsteps-t2-planner
+  - devsteps-t2-impl
+  - devsteps-t2-test
+  - devsteps-t2-doc
   - devsteps-t2-reviewer
-  - devsteps-t3-impl
-  - devsteps-t3-test
-  - devsteps-t3-doc
 ---
 
 # 🏃 DevSteps Sprint Executor — Tier-1
@@ -97,7 +97,7 @@ For each item in Sprint Brief order:
 **4.** `read_mandate_results(item_ids)` — use `findings` for exec agent inputs (`report_path` + item ID only).
 
 **5.** Execute in order:
-- `devsteps-t3-impl` → `devsteps-t3-test` + `devsteps-t3-doc` (parallel if independent)
+- `devsteps-t2-impl` → `devsteps-t2-test` (STANDARD/FULL) → `devsteps-t2-doc` (FULL only)
 - `devsteps-t2-reviewer` — **BLOCKING** — FAIL → review-fix loop (max 3 via `write_rejection_feedback`)
 
 **6.** Merge `--no-ff`, status → `done`.

@@ -16,11 +16,11 @@ Activate **Standard MPD**. Follow the MPD protocol from your agent instructions.
 
 | Triage Tier | T2 Mandates (parallel fan-out) | Then |
 |---|---|---|
-| **QUICK** | `t2-planner` | `t3-impl` → `t2-reviewer` |
-| **STANDARD** | `t2-archaeology` + `t2-risk` | → `t2-planner` → `t3-impl` + `t3-test` → `t2-reviewer` |
-| **FULL** | `t2-archaeology` + `t2-risk` + `t2-quality` | → `t2-planner` → `t3-impl` + `t3-test` + `t3-doc` → `t2-reviewer` |
-| **COMPETITIVE** | `t2-research` + `t2-archaeology` | → `t2-planner` → `t3-impl` → `t2-reviewer` |
-| **QUICK fix** | Skip all analysis | Direct `t3-impl` → `t2-reviewer` |
+| **QUICK** | `t2-planner` | `t2-impl` → `t2-reviewer` |
+| **STANDARD** | `t2-archaeology` + `t2-risk` | → `t2-planner` → `t2-impl` → `t2-test` → `t2-reviewer` |
+| **FULL** | `t2-archaeology` + `t2-risk` + `t2-quality` | → `t2-planner` → `t2-impl` → `t2-test` ∥ `t2-doc` → `t2-reviewer` |
+| **COMPETITIVE** | `t2-research` + `t2-archaeology` | → `t2-planner` → `t2-impl` → `t2-reviewer` |
+| **QUICK fix** | Skip all analysis | Direct `t2-impl` → `t2-reviewer` |
 
 ## T3 Agents by Role
 
@@ -36,10 +36,10 @@ Activate **Standard MPD**. Follow the MPD protocol from your agent instructions.
 - `t3-aspect-staleness` — stale docs, conflicting branches
 - `t3-aspect-integration` — cross-package boundaries
 
-**Exec (dispatched by T1 after MandateResult available):**
-- `t3-impl` — code implementation
-- `t3-test` — test generation
-- `t3-doc` — documentation updates
+**Exec Conductors (dispatched by T1 — each orchestrates its own T3 workers):**
+- `t2-impl` — orchestrates code implementation via `t3-impl`
+- `t2-test` — orchestrates test generation via `t3-test`
+- `t2-doc` — orchestrates documentation updates via `t3-doc`
 
 ## HARD STOP Conditions
 
@@ -68,6 +68,6 @@ If no item specified → `#mcp_devsteps_list` filtered by `status: planned`, pri
 3. Create/checkout feature branch (`story/<ID>`, `task/<ID>`, `bug/<ID>`)
 4. Triage → dispatch T2 mandate analysts in parallel (see Mode Selection above)
 5. Read MandateResults via `read_mandate_results` — pass `report_path` to exec agents (never paste content)
-6. Dispatch `devsteps-t3-impl` → `devsteps-t3-test` + `devsteps-t3-doc` (parallel)
+6. Dispatch `devsteps-t2-impl` → `devsteps-t2-test` (then `devsteps-t2-doc` if FULL tier)
 7. `devsteps-t2-reviewer` PASS → merge to main (`--no-ff`), status → `done`
 

@@ -50,13 +50,21 @@ The system operates at two layers:
 | `devsteps-t2-planner.agent.md` | Synthesis of MandateResults → ordered implementation plan | All tiers |
 | `devsteps-t2-reviewer.agent.md` | Blocking quality gate — PASS/FAIL review | After every item |
 
-### T3 Exec Workers (dispatched by T1 after planning MandateResult available)
+### T2 Exec Conductors (dispatched by T1 after t2-planner MandateResult available)
 
 | Agent File | Role | When Used |
 |---|---|---|
-| `devsteps-t3-impl.agent.md` | Code writing and refactoring | All tiers |
-| `devsteps-t3-test.agent.md` | Test generation, coverage analysis | STANDARD / FULL |
-| `devsteps-t3-doc.agent.md` | Inline docs, architecture documentation | FULL |
+| `devsteps-t2-impl.agent.md` | Implementation Conductor — orchestrates t3-impl | All tiers |
+| `devsteps-t2-test.agent.md` | Test Conductor — orchestrates t3-test | STANDARD / FULL |
+| `devsteps-t2-doc.agent.md` | Documentation Conductor — orchestrates t3-doc | FULL |
+
+### T3 Exec Workers (dispatched by T2 Exec Conductors only — T1 NEVER dispatches these directly)
+
+| Agent File | Role | Dispatched by |
+|---|---|---|
+| `devsteps-t3-impl.agent.md` | Code writing and refactoring | `devsteps-t2-impl` |
+| `devsteps-t3-test.agent.md` | Test generation, coverage analysis | `devsteps-t2-test` |
+| `devsteps-t3-doc.agent.md` | Inline docs, architecture documentation | `devsteps-t2-doc` |
 
 ---
 
@@ -65,10 +73,10 @@ The system operates at two layers:
 The coordinator determines a risk tier and dispatches agents accordingly:
 
 ```
-QUICK      → t3-impl → t2-reviewer
-STANDARD   → [t2-archaeology + t2-risk] → t2-planner → [t3-impl + t3-test] → t2-reviewer
-FULL       → [t2-archaeology + t2-risk + t2-quality] → t2-planner → [t3-impl + t3-test + t3-doc] → t2-reviewer
-COMPETITIVE→ [t2-research + t2-archaeology] → t2-planner → t3-impl → t2-reviewer
+QUICK      → t2-planner → t2-impl → t2-reviewer
+STANDARD   → [t2-archaeology + t2-risk] → t2-planner → t2-impl → t2-test → t2-reviewer
+FULL       → [t2-archaeology + t2-risk + t2-quality] → t2-planner → t2-impl → [t2-test ∥ t2-doc] → t2-reviewer
+COMPETITIVE→ [t2-research + t2-archaeology] → t2-planner → t2-impl → t2-reviewer
 ```
 
 ### Tier Selection Signals

@@ -8,10 +8,10 @@ agents:
   - devsteps-t2-research
   - devsteps-t2-quality
   - devsteps-t2-planner
+  - devsteps-t2-impl
+  - devsteps-t2-test
+  - devsteps-t2-doc
   - devsteps-t2-reviewer
-  - devsteps-t3-impl
-  - devsteps-t3-test
-  - devsteps-t3-doc
 ---
 
 # 🎯 DevSteps Coordinator — Tier-1
@@ -78,8 +78,8 @@ Extract: `findings` (file paths for execution), `recommendations` (ordered steps
 ### Step 4: Execute
 
 Dispatch exec agents IN ORDER (pass `report_path` + item ID only — never paste findings):
-1. `devsteps-t3-impl` — reads `t2-planner` MandateResult independently
-2. `devsteps-t3-test` + `devsteps-t3-doc` (parallel if independent)
+1. `devsteps-t2-impl` — reads `t2-planner` MandateResult independently
+2. `devsteps-t2-test` (STANDARD/FULL) + `devsteps-t2-doc` (FULL only, parallel with t2-test)
 3. `devsteps-t2-reviewer` — **BLOCKING** — must PASS before done
 
 ### Step 5: Quality Gate
