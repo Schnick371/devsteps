@@ -1,0 +1,41 @@
+{
+  "id": "TASK-264",
+  "type": "task",
+  "category": "general",
+  "title": "Implement read_escalations + resolve_escalation MCP tools",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-23T22:55:10.411Z",
+  "updated": "2026-02-23T22:56:16.969Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/cbp.ts",
+    "packages/mcp-server/src/tools/index.ts",
+    "packages/mcp-server/src/handlers/"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-117"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-265"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "cbp",
+    "escalation",
+    "tool-definition"
+  ],
+  "commits": [],
+  "metadata": {}
+}
