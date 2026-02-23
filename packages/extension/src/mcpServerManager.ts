@@ -41,14 +41,24 @@ interface VsCodeWithMcpApi {
 /**
  * Check if extension is running as pre-release version
  *
- * Pre-release extensions should use @next tag for npm packages to ensure
- * compatibility with experimental features.
+ * Uses VS Code's version convention: odd minor version = pre-release.
+ * - 1.0.x → stable (even minor)
+ * - 1.1.x → pre-release (odd minor) → uses @next MCP server
+ * - 1.2.x → stable (even minor)
+ *
+ * This aligns with the VS Code Marketplace convention and works automatically
+ * without requiring a separate `"preRelease": true` field in package.json.
+ * Example: version "1.1.0-next.1" → minor=1 (odd) → isPreRelease()=true ✓
  *
  * @param context Extension context with package.json access
- * @returns True if extension is marked as pre-release
+ * @returns True if extension version uses odd minor (pre-release convention)
  */
 function isPreRelease(context: vscode.ExtensionContext): boolean {
-  return context.extension.packageJSON.preRelease === true;
+  // VS Code convention: odd minor version = pre-release (1.1.x, 1.3.x, ...)
+  // even minor version = stable (1.0.x, 1.2.x, ...)
+  const version: string = context.extension.packageJSON.version ?? '0.0.0';
+  const minor = parseInt(version.split('.')[1] ?? '0', 10);
+  return minor % 2 !== 0;
 }
 
 /**
