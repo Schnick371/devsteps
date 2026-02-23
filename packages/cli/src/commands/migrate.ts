@@ -94,13 +94,14 @@ export async function migrateCommand(options: {
     if (check.needed) {
       spinner.text = 'Migrating index to refs-style...';
 
-      stats = await performMigration(devstepsDir, {
+      const migratedStats = await performMigration(devstepsDir, {
         skipBackup: options.skipBackup,
       });
+      stats = migratedStats;
 
-      console.log(chalk.gray(`   Index migrated: ${stats.totalItems} items`));
-      if (stats.backupPath) {
-        console.log(chalk.gray(`   Backup: ${stats.backupPath}`));
+      console.log(chalk.gray(`   Index migrated: ${migratedStats.totalItems} items`));
+      if (migratedStats.backupPath) {
+        console.log(chalk.gray(`   Backup: ${migratedStats.backupPath}`));
       }
     }
 
@@ -108,9 +109,10 @@ export async function migrateCommand(options: {
     if (itemsNeeded) {
       spinner.text = 'Migrating to items/ directory structure...';
 
-      itemsStats = migrateItemsDirectory(devstepsDir, { silent: true });
+      const movedStats = migrateItemsDirectory(devstepsDir, { silent: true });
+      itemsStats = movedStats;
 
-      console.log(chalk.gray(`   Moved ${itemsStats.moved} files to items/ subdirectories`));
+      console.log(chalk.gray(`   Moved ${movedStats.moved} files to items/ subdirectories`));
     }
 
     spinner.succeed(chalk.green('✨ Migration complete!'));

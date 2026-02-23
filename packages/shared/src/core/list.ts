@@ -1,6 +1,12 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import type { DevStepsIndex, EisenhowerQuadrant, ItemMetadata, ItemStatus, ItemType } from '../schemas/index.js';
+import type {
+  DevStepsIndex,
+  EisenhowerQuadrant,
+  ItemMetadata,
+  ItemStatus,
+  ItemType,
+} from '../schemas/index.js';
 import { TYPE_TO_DIRECTORY } from '../utils/index.js';
 import { getItem } from './get.js';
 import {
@@ -33,7 +39,16 @@ async function listArchivedItems(
   devstepsDir: string,
   args: ListItemsArgs
 ): Promise<ListItemsResult> {
-  const allTypes: ItemType[] = ['epic', 'story', 'task', 'bug', 'spike', 'test', 'feature', 'requirement'];
+  const allTypes: ItemType[] = [
+    'epic',
+    'story',
+    'task',
+    'bug',
+    'spike',
+    'test',
+    'feature',
+    'requirement',
+  ];
   const typesToScan = args.type ? [args.type] : allTypes;
 
   const results: DevStepsIndex['items'] = [];
