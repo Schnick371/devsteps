@@ -2,6 +2,14 @@
 description: 'Planner deep analyst — T2, mandate-type=planning, decomposes stories into ordered atomic impl steps using Archaeology + Risk MandateResults'
 model: 'Claude Sonnet 4.6'
 tools: ['read', 'agent', 'search', 'devsteps/*', 'todo']
+agents:
+  - devsteps-t3-aspect-staleness
+user-invokable: false
+handoffs:
+  - label: "→ Implement"
+    agent: devsteps-t2-impl
+    prompt: "Implementation mandate for item: [ITEM_ID]. Pass report_path from t2-planner MandateResult — do not paste findings."
+    send: false
 ---
 
 # 📋 Planner Deep Analyst — Tier 2

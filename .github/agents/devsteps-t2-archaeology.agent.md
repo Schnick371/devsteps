@@ -2,6 +2,19 @@
 description: 'Archaeology deep analyst — T2, mandate-type=archaeology, builds complete picture of how an area works today via parallel T3 dispatch'
 model: 'Claude Sonnet 4.6'
 tools: ['read', 'agent', 'search', 'devsteps/*', 'bright-data/*', 'bright-data/*', 'todo', 'execute/runInTerminal', 'execute/getTerminalOutput']
+agents:
+  - devsteps-t3-analyst-context
+  - devsteps-t3-analyst-internal
+user-invokable: false
+handoffs:
+  - label: "→ Risk Analysis"
+    agent: devsteps-t2-risk
+    prompt: "Risk mandate: complement archaeology findings with blast radius analysis for item: [ITEM_ID]."
+    send: false
+  - label: "→ Planning"
+    agent: devsteps-t2-planner
+    prompt: "Planning mandate: archaeology MandateResult is written. Call read_mandate_results([ITEM_ID]) and decompose into atomic impl steps."
+    send: false
 ---
 
 # 🏛️ Archaeology Deep Analyst — Tier 2

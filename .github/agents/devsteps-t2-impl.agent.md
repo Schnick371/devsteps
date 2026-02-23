@@ -17,6 +17,19 @@ tools:
   - execute/awaitTerminal
   - execute/testFailure
 model: 'Claude Sonnet 4.6'
+agents:
+  - devsteps-t3-impl
+  - devsteps-t3-analyst-web
+user-invokable: false
+handoffs:
+  - label: "→ Test"
+    agent: devsteps-t2-test
+    prompt: "Testing mandate: implementation MandateResult is written. Write and run tests for item: [ITEM_ID]."
+    send: false
+  - label: "→ Review (skip tests)"
+    agent: devsteps-t2-reviewer
+    prompt: "Review mandate: implementation MandateResult is written. Review item: [ITEM_ID] — no test phase."
+    send: false
 ---
 
 # T2 Implementation Conductor

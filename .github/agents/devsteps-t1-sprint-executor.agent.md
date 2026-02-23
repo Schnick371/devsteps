@@ -12,6 +12,27 @@ agents:
   - devsteps-t2-test
   - devsteps-t2-doc
   - devsteps-t2-reviewer
+handoffs:
+  - label: "Sprint: Archaeology Batch"
+    agent: devsteps-t2-archaeology
+    prompt: "Archaeology mandate for sprint items: [PASTE_ITEM_IDS]. Build structural map for all affected areas in one pass."
+    send: false
+  - label: "Sprint: Risk Batch"
+    agent: devsteps-t2-risk
+    prompt: "Risk mandate for sprint items: [PASTE_ITEM_IDS]. Map blast radius for all planned changes."
+    send: false
+  - label: "Sprint: Plan Batch"
+    agent: devsteps-t2-planner
+    prompt: "Planning mandate for sprint items: [PASTE_ITEM_IDS]. Consume existing MandateResults via read_mandate_results and decompose all items into ordered steps."
+    send: false
+  - label: "Sprint: Review Next"
+    agent: devsteps-t2-reviewer
+    prompt: "Review mandate for completed sprint item: [PASTE_ITEM_ID]. Validate before marking done."
+    send: false
+  - label: "Switch to Single-Item MPD"
+    agent: devsteps-t1-coordinator
+    prompt: "Single-item MPD mode for: [PASTE_ITEM_ID]. Run triage and dispatch T2 mandates."
+    send: false
 ---
 
 # 🏃 DevSteps Sprint Executor — Tier-1

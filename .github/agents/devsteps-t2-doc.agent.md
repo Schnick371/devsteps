@@ -10,6 +10,15 @@ tools:
   - bright-data/*
   - todo
 model: 'Claude Sonnet 4.6'
+agents:
+  - devsteps-t3-doc
+  - devsteps-t3-aspect-staleness
+user-invokable: false
+handoffs:
+  - label: "→ Review"
+    agent: devsteps-t2-reviewer
+    prompt: "Review mandate: impl + doc MandateResults written. Run final quality gate for item: [ITEM_ID]."
+    send: false
 ---
 
 # T2 Documentation Conductor

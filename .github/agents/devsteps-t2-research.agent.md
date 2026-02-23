@@ -2,6 +2,15 @@
 description: 'Research deep analyst — T2, mandate-type=research, finds best technical approach via parallel web + internal dispatch with cross-validation'
 model: 'Claude Sonnet 4.6'
 tools: ['read', 'agent', 'search', 'devsteps/*', 'bright-data/*', 'bright-data/*', 'web', 'todo']
+agents:
+  - devsteps-t3-analyst-web
+  - devsteps-t3-analyst-internal
+user-invokable: false
+handoffs:
+  - label: "→ Planning"
+    agent: devsteps-t2-planner
+    prompt: "Planning mandate: research MandateResult is written. Call read_mandate_results([ITEM_ID]) and decompose into atomic implementation steps."
+    send: false
 ---
 
 # 🔬 Research Deep Analyst — Tier 2

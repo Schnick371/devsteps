@@ -2,6 +2,20 @@
 description: 'Risk deep analyst — T2, mandate-type=risk, maps blast radius and probability/severity matrix via parallel T3 dispatch'
 model: 'Claude Sonnet 4.6'
 tools: ['read', 'agent', 'search', 'devsteps/*', 'todo', 'execute/runInTerminal', 'execute/getTerminalOutput']
+agents:
+  - devsteps-t3-aspect-impact
+  - devsteps-t3-aspect-integration
+  - devsteps-t3-aspect-constraints
+user-invokable: false
+handoffs:
+  - label: "→ Archaeology"
+    agent: devsteps-t2-archaeology
+    prompt: "Archaeology mandate: complement risk findings with structural analysis for item: [ITEM_ID]."
+    send: false
+  - label: "→ Planning"
+    agent: devsteps-t2-planner
+    prompt: "Planning mandate: risk MandateResult is written. Call read_mandate_results([ITEM_ID]) and decompose into atomic impl steps."
+    send: false
 ---
 
 # ⚠️ Risk Deep Analyst — Tier 2

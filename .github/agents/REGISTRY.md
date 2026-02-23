@@ -109,5 +109,48 @@ Exec workers receive **only `report_path` + `item_id`** — never raw findings p
 
 ---
 
+## VS Code Agent Metadata — `agents`, `handoffs`, `user-invokable`
+
+All agent files use VS Code custom agent frontmatter (VS Code 1.106+).
+
+| Field | T1 | T2 (non-reviewer) | T2 Reviewer | T3 |
+|---|---|---|---|---|
+| `agents:` | ✓ lists T2 deps | ✓ lists T3 deps | ✓ | — |
+| `handoffs:` | ✓ workflow buttons | ✓ pipeline buttons | ✓ PASS/FAIL | — |
+| `user-invokable: false` | — (always visible) | ✓ (hidden) | — (always visible) | ✓ (hidden) |
+
+### `agents:` — Subagent Dispatch Allowlist
+
+Lists which agents this agent may programmatically dispatch via the `agent` tool.
+Requires `agent` in the file's `tools:` list. T1 lists T2 deps; T2 lists T3 deps.
+
+```yaml
+agents:
+  - devsteps-t2-archaeology
+  - devsteps-t2-risk
+```
+
+### `handoffs:` — Guided UI Transitions
+
+Buttons rendered after each response to guide the developer through workflow steps.
+`send: false` means the user must click Send — the prompt is pre-filled but not auto-sent.
+`handoffs.agent` does **not** need to be in `agents:` — handoffs are UI navigation only.
+
+```yaml
+handoffs:
+  - label: "Phase A: Archaeology"
+    agent: devsteps-t2-archaeology
+    prompt: "Archaeology mandate for item: [PASTE_ITEM_ID]."
+    send: false
+```
+
+### `user-invokable: false` — Subagent-Only Visibility
+
+Hides the agent from the VS Code agent picker dropdown.
+Set on all T2 analysts (except reviewer) and all T3 agents — they are only
+accessible when dispatched programmatically by their parent tier agent.
+
+---
+
 *Protocol details: [TIER2-PROTOCOL.md](./TIER2-PROTOCOL.md)*  
 *Agent files: `.github/agents/devsteps-t2-*.agent.md`*

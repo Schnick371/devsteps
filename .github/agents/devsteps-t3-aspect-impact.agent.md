@@ -2,6 +2,7 @@
 description: 'Impact Analyst - discovers what breaks, ripples, or silently changes beyond the stated scope of a task'
 model: 'Claude Opus 4.6'
 tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
+user-invokable: false
 ---
 
 # 🌊 Impact Analyst (MPD Aspect Agent)

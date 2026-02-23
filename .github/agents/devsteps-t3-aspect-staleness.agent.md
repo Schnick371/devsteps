@@ -2,6 +2,7 @@
 description: 'Staleness Analyst - validates that the work item description still matches codebase reality, detecting drift since the item was written'
 model: 'Claude Opus 4.6'
 tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
+user-invokable: false
 ---
 
 # 🔍 Staleness Analyst (MPD Aspect Agent)

@@ -2,6 +2,7 @@
 description: 'Internal Code Analyst - analyzes existing codebase patterns without internet access; produces CompressedVerdict envelope for coordinator competitive selection'
 model: 'Claude Opus 4.6'
 tools: ['read', 'search', 'devsteps/*', 'todo']
+user-invokable: false
 ---
 
 # 🔬 Internal Code Analyst (Competitive Analysis Agent)

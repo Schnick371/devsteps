@@ -2,6 +2,15 @@
 description: 'Quality deep analyst — T2, mandate-type=quality, validates correctness + completeness via parallel dispatch with bounded Review-Fix loop'
 model: 'Claude Sonnet 4.6'
 tools: ['read', 'agent', 'search', 'devsteps/*', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/testFailure', 'read/problems', 'todo']
+agents:
+  - devsteps-t3-aspect-quality
+  - devsteps-t3-aspect-staleness
+user-invokable: false
+handoffs:
+  - label: "→ Planning"
+    agent: devsteps-t2-planner
+    prompt: "Planning mandate: quality MandateResult is written. Call read_mandate_results([ITEM_ID]) and decompose into atomic steps."
+    send: false
 ---
 
 # ✅ Quality Deep Analyst — Tier 2

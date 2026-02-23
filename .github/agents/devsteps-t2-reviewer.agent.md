@@ -2,6 +2,18 @@
 description: 'Reviewer — T2 quality gate, mandate-type=review, dispatches quality-subagent, runs bounded Review-Fix loop via write_rejection_feedback + write_iteration_signal'
 model: 'Claude Sonnet 4.6'
 tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'read/problems', 'agent', 'edit', 'search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+agents:
+  - devsteps-t3-aspect-quality
+  - devsteps-t3-aspect-staleness
+handoffs:
+  - label: "PASS → Continue Workflow"
+    agent: devsteps-t1-coordinator
+    prompt: "Review PASSED for item: [ITEM_ID]. Mark status done and pull next item or close sprint."
+    send: false
+  - label: "FAIL → Re-implement"
+    agent: devsteps-t2-impl
+    prompt: "Reviewer FAILED: rejection_feedback and iteration_signal written. Fix implementation for item: [ITEM_ID]."
+    send: false
 ---
 
 # 🔍 DevSteps Reviewer — Tier 2

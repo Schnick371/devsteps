@@ -12,6 +12,35 @@ agents:
   - devsteps-t2-test
   - devsteps-t2-doc
   - devsteps-t2-reviewer
+handoffs:
+  - label: "Phase A: Archaeology"
+    agent: devsteps-t2-archaeology
+    prompt: "Archaeology mandate for item: [PASTE_ITEM_ID]. Build complete structural map of affected area."
+    send: false
+  - label: "Phase A: Risk"
+    agent: devsteps-t2-risk
+    prompt: "Risk mandate for item: [PASTE_ITEM_ID]. Map blast radius, probability, and severity matrix."
+    send: false
+  - label: "Phase A: Research"
+    agent: devsteps-t2-research
+    prompt: "Research mandate for item: [PASTE_ITEM_ID]. Find best technical approach with evidence."
+    send: false
+  - label: "Phase B: Plan"
+    agent: devsteps-t2-planner
+    prompt: "Planning mandate for item: [PASTE_ITEM_ID]. Read existing MandateResults via read_mandate_results, then decompose into atomic implementation steps."
+    send: false
+  - label: "Phase C: Implement"
+    agent: devsteps-t2-impl
+    prompt: "Implementation mandate for item: [PASTE_ITEM_ID]. Pass report_path from t2-planner MandateResult — do not paste content."
+    send: false
+  - label: "Phase C: Test"
+    agent: devsteps-t2-test
+    prompt: "Testing mandate for item: [PASTE_ITEM_ID]. Pass report_path from planner MandateResult — do not paste content."
+    send: false
+  - label: "Phase D: Review"
+    agent: devsteps-t2-reviewer
+    prompt: "Review mandate for item: [PASTE_ITEM_ID]. Run quality gate and return structured PASS/FAIL verdict."
+    send: false
 ---
 
 # 🎯 DevSteps Coordinator — Tier-1
