@@ -1,21 +1,21 @@
 ## Goal
 
-CLI `devsteps doctor` auf `runDoctorChecks()` aus `@schnick371/devsteps-shared` umstellen (DRY). Die duplizierten Check-Implementierungen in `doctor-integrity.ts` und `doctor-checks.ts` werden entfernt — die CLI wird zum dünnen Wrapper der shared function.
+Migrate CLI `devsteps doctor` to use `runDoctorChecks()` from `@schnick371/devsteps-shared` (DRY). The duplicated check implementations in `doctor-integrity.ts` and `doctor-checks.ts` are removed — the CLI becomes a thin wrapper around the shared function.
 
-## Vorher (jetzt)
+## Before (current)
 
 ```
 CLI doctor.ts
-  → doctor-integrity.ts (volle Implementierung)
-  → doctor-checks.ts (volle Implementierung)
+  → doctor-integrity.ts (full implementation)
+  → doctor-checks.ts (full implementation)
 ```
 
-## Nachher
+## After
 
 ```
 CLI doctor.ts
   → @schnick371/devsteps-shared → runDoctorChecks()
-    (intern: doctor-integrity-impl.ts, doctor-checks-impl.ts)
+    (internally: doctor-integrity-impl.ts, doctor-checks-impl.ts)
 MCP doctor handler
   → @schnick371/devsteps-shared → runDoctorChecks()
 ```
@@ -28,16 +28,16 @@ import { runDoctorChecks } from '@schnick371/devsteps-shared';
 
 export async function doctorCommand(opts) {
   const report = await runDoctorChecks(devstepsDir, { auto_fix: opts.fix });
-  renderDoctorReport(report); // CLI-spezifisches Chalk/Ora formatting bleibt
+  renderDoctorReport(report); // CLI-specific chalk/ora formatting stays here
 }
 ```
 
-## Was bleibt CLI-exklusiv
-- `renderDoctorReport()` — chalk/ora Ausgabe-Formatierung
-- `migrate` und `setup` Aufrufe — CLI-only, gehören nicht in shared
+## What Remains CLI-Exclusive
+- `renderDoctorReport()` — chalk/ora output formatting
+- `migrate` and `setup` calls — CLI-only, do not belong in shared
 
 ## Acceptance Criteria
-- [ ] `doctor-integrity.ts` und `doctor-checks.ts` in CLI entfernt oder zu pure Render-Helpers reduziert
-- [ ] `devsteps doctor` Ausgabe identisch zu vorher (nur Quelle ist jetzt shared)
-- [ ] Keine duplizierten Check-Implementierungen mehr
-- [ ] `devsteps doctor --fix` ruft `runDoctorChecks({ auto_fix: true })` auf
+- [ ] `doctor-integrity.ts` and `doctor-checks.ts` removed from CLI or reduced to pure render helpers
+- [ ] `devsteps doctor` output identical to before (source is now shared)
+- [ ] No duplicated check implementations
+- [ ] `devsteps doctor --fix` calls `runDoctorChecks({ auto_fix: true })`

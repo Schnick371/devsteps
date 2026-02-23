@@ -1,14 +1,14 @@
 ## Goal
 
-Extrahiere die Integrity-Check-Logik aus `packages/cli/src/commands/doctor-integrity.ts` und `packages/cli/src/commands/doctor-checks.ts` in eine shared Funktion `runDoctorChecks(devstepsDir, opts?)` im `@schnick371/devsteps-shared` Paket.
+Extract the integrity-check logic from `packages/cli/src/commands/doctor-integrity.ts` and `packages/cli/src/commands/doctor-checks.ts` into a shared function `runDoctorChecks(devstepsDir, opts?)` in the `@schnick371/devsteps-shared` package.
 
-## Warum Shared?
+## Why Shared?
 
-Sowohl CLI (`devsteps doctor`) als auch MCP-Server (`mcp_devsteps_doctor`) brauchen dieselbe Logik. Duplizierung führt zu Drift. Shared ist die einzige Source of Truth.
+Both the CLI (`devsteps doctor`) and the MCP server (`mcp_devsteps_doctor`) need the same logic. Duplication leads to drift. Shared is the single source of truth.
 
 ## Implementation
 
-**Neue Datei: `packages/shared/src/core/doctor.ts`**
+**New file: `packages/shared/src/core/doctor.ts`**
 
 ```typescript
 export interface DoctorCheckResult {
@@ -16,21 +16,21 @@ export interface DoctorCheckResult {
   status: 'pass' | 'warn' | 'fail';
   message: string;
   details?: string[];
-  fix?: string;          // Beschreibung des Auto-Fixes
-  auto_fixable: boolean; // Kann runDoctorChecks({ auto_fix: true }) das beheben?
+  fix?: string;          // Description of the auto-fix action
+  auto_fixable: boolean; // Can runDoctorChecks({ auto_fix: true }) resolve this?
 }
 
 export interface DoctorReport {
   status: 'healthy' | 'warning' | 'critical';
   checks: DoctorCheckResult[];
   summary: string;
-  fixable: string[];     // Check-Namen die auto_fix lösen kann
+  fixable: string[];     // Check names that auto_fix can resolve
   checked_at: string;    // ISO 8601
 }
 
 export interface DoctorOptions {
   dry_run?: boolean;     // default: true
-  auto_fix?: boolean;    // default: false — Asymmetrische Links + Index-Rebuild
+  auto_fix?: boolean;    // default: false — asymmetric links + index rebuild
 }
 
 export async function runDoctorChecks(
@@ -39,21 +39,21 @@ export async function runDoctorChecks(
 ): Promise<DoctorReport>
 ```
 
-## Checks zu migrieren (aus CLI)
+## Checks to Migrate (from CLI)
 
-- `checkJsonFiles()` — alle .json Dateien valide?
-- `checkIndexConsistency()` — Index ↔ Item-Dateien konsistent?
-- `checkAsymmetricLinks()` — bidirektionale Links vollständig?
-- `checkOrphanedItems()` — keine unverwaisten Items?
-- `checkBrokenReferences()` — alle referenced IDs existieren?
+- `checkJsonFiles()` — are all .json files valid?
+- `checkIndexConsistency()` — are index ↔ item files consistent?
+- `checkAsymmetricLinks()` — are all bidirectional links complete?
+- `checkOrphanedItems()` — no orphaned items without a parent?
+- `checkBrokenReferences()` — do all referenced IDs exist?
 
-**Neue Checks hinzufügen:**
-- `checkCbpDirectory()` — `.devsteps/cbp/` Struktur vorhanden und keine korrupten Loop-Signals?
-- `checkContextStaleness()` — `.devsteps/context/` Dateien nicht älter als 30 Tage?
+**New checks to add:**
+- `checkCbpDirectory()` — is the `.devsteps/cbp/` structure present and free of corrupted loop signals?
+- `checkContextStaleness()` — are `.devsteps/context/` files no older than 30 days?
 
 ## Acceptance Criteria
-- [ ] `runDoctorChecks` exportiert aus `packages/shared/src/index.ts`
-- [ ] Alle 7 Checks implementiert
-- [ ] `auto_fix: true` behebt: asymmetrische Links (bidirektional ergänzen) + Index-Rebuild
-- [ ] Vollständige TypeScript strict-mode Types
-- [ ] Unit Tests in `packages/shared/src/core/doctor.test.ts` für alle 7 Checks
+- [ ] `runDoctorChecks` exported from `packages/shared/src/index.ts`
+- [ ] All 7 checks implemented
+- [ ] `auto_fix: true` resolves: asymmetric links (add missing inverse) + index rebuild
+- [ ] Full TypeScript strict-mode types
+- [ ] Unit tests in `packages/shared/src/core/doctor.test.ts` for all 7 checks
