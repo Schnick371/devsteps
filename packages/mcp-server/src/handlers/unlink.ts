@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * MCP handler: unlink
+ * Removes a relationship between two work items on both sides.
+ */
+
 import { join } from 'node:path';
 import { type RelationType, unlinkItem } from '@schnick371/devsteps-shared';
 import { getWorkspacePath } from '../workspace.js';

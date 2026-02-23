@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * MCP handler: link
+ * Creates a validated bidirectional relationship between two work items.
+ */
+
 import { join } from 'node:path';
 import { linkItem, type RelationType } from '@schnick371/devsteps-shared';
 import { getWorkspacePath } from '../workspace.js';

@@ -1,4 +1,7 @@
 /**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
  * Auto-Migration Module — Orchestrator
  *
  * Provides auto-detection and migration for DevSteps projects.

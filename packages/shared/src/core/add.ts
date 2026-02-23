@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Core add-item operation
+ * Creates metadata JSON, description Markdown, and updates distributed index.
+ */
+
 import { existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type {

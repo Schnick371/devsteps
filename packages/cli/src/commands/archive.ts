@@ -1,3 +1,12 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * CLI archive and purge commands
+ * devsteps archive <id> — moves item to .devsteps/archive/
+ * devsteps purge — bulk archives items by status or type
+ */
+
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { archiveItem, purgeItems } from '@schnick371/devsteps-shared';

@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Core update-item operation
+ * Patches item metadata fields and synchronizes the distributed index.
+ */
+
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { RELATIONSHIP_TYPE, STATUS } from '../constants/index.js';

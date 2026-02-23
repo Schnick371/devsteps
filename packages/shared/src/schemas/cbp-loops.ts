@@ -1,3 +1,13 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Context Budget Protocol (CBP) — Loop Control Schemas
+ * Zod schemas for rejection feedback, iteration signals, and escalation.
+ *
+ * @see EPIC-028 CBP Tier-2 Mandate Tools
+ */
+
 import { z } from 'zod';
 
 /**

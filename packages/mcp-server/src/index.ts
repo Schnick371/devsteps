@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 /**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
  * MCP Server Entry Point
  *
  * Parses CLI arguments, configures logging, runs auto-migration,

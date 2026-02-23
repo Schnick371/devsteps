@@ -1,4 +1,11 @@
 #!/usr/bin/env node
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * CLI entry point
+ * Registers all devsteps sub-commands and parses CLI arguments.
+ */
 import chalk from 'chalk';
 import { Command } from 'commander';
 import packageJson from '../package.json' with { type: 'json' };

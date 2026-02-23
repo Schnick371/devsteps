@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Schemas barrel export
+ * Re-exports all Zod schemas and derived TypeScript types.
+ */
+
 import { z } from 'zod';
 
 // Context Budget Protocol schemas

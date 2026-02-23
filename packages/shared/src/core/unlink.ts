@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Core unlink operation
+ * Removes a relationship between two work items and updates both sides.
+ */
+
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { LinkedItems, RelationType } from '../schemas/index.js';

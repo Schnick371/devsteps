@@ -1,3 +1,12 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Relationship validation
+ * Enforces hierarchy rules and flexible relationship constraints
+ * based on the active project methodology.
+ */
+
 import { ITEM_TYPE, METHODOLOGY, RELATIONSHIP_TYPE } from '../constants/index.js';
 import type { ItemType, LinkedItems, Methodology } from '../schemas/index.js';
 import { isFlexibleRelation, isHierarchyRelation } from '../schemas/relationships.js';

@@ -1,4 +1,7 @@
 /**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
  * Health Check Handler
  *
  * Returns comprehensive server health status including:

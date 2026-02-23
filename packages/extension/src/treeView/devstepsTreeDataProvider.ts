@@ -24,8 +24,8 @@ import type {
   ViewMode,
   WorkItem,
 } from './types.js';
-import { loadItemWithLinks } from './utils/itemLoader.js';
-import { getItemMethodology } from './utils/methodologyDetector.js';
+import { buildFlatSectionNodes, buildFlatViewNodes } from './utils/flatViewBuilder.js';
+import { applyFilters, applySorting } from './utils/itemFilter.js';
 
 /**
  * TreeDataProvider with switchable view modes (flat vs hierarchical)
@@ -180,148 +180,51 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     this.decorationProvider?.refresh();
   }
 
-  /**
-   * Set status filter
-   */
-  setStatusFilter(statuses: string[]): void {
-    this.filterState.statuses = statuses;
-    this.stateManager?.saveFilterState(this.filterState);
-    this.refresh();
-    this.updateDescription();
-  }
+  setStatusFilter(statuses: string[]): void { this.filterState.statuses = statuses; this._saveAndRefresh(); }
+  setPriorityFilter(priorities: string[]): void { this.filterState.priorities = priorities; this._saveAndRefresh(); }
+  setTypeFilter(types: string[]): void { this.filterState.types = types; this._saveAndRefresh(); }
+  setTagFilter(tags: string[]): void { this.filterState.tags = tags; this._saveAndRefresh(); }
+  setSearchQuery(query: string): void { this.filterState.searchQuery = query; this._saveAndRefresh(); }
 
-  /**
-   * Set priority filter
-   */
-  setPriorityFilter(priorities: string[]): void {
-    this.filterState.priorities = priorities;
-    this.stateManager?.saveFilterState(this.filterState);
-    this.refresh();
-    this.updateDescription();
-  }
-
-  /**
-   * Set type filter
-   */
-  setTypeFilter(types: string[]): void {
-    this.filterState.types = types;
-    this.stateManager?.saveFilterState(this.filterState);
-    this.refresh();
-    this.updateDescription();
-  }
-
-  /**
-   * Set tag filter
-   */
-  setTagFilter(tags: string[]): void {
-    this.filterState.tags = tags;
-    this.stateManager?.saveFilterState(this.filterState);
-    this.refresh();
-    this.updateDescription();
-  }
-
-  /**
-   * Set search query
-   */
-  setSearchQuery(query: string): void {
-    this.filterState.searchQuery = query;
-    this.stateManager?.saveFilterState(this.filterState);
-    this.refresh();
-    this.updateDescription();
-  }
-
-  /**
-   * Toggle hide done items filter
-   */
   toggleHideDone(): void {
     this.filterState.hideDone = !this.filterState.hideDone;
-    this.stateManager?.saveFilterState(this.filterState);
-    this.refresh();
-    this.updateDescription();
+    this._saveAndRefresh();
   }
 
-  /**
-   * Toggle hide relates-to relationships filter
-   */
   toggleHideRelatesTo(): void {
     this.filterState.hideRelatesTo = !this.filterState.hideRelatesTo;
-    this.stateManager?.saveFilterState(this.filterState);
-    this.refresh();
-    this.updateDescription();
+    this._saveAndRefresh();
   }
 
-  /**
-   * Clear all filters
-   */
   clearFilters(): void {
     this.filterState = {
-      statuses: [],
-      priorities: [],
-      types: [],
-      tags: [],
-      searchQuery: '',
-      hideDone: this.filterState.hideDone, // Preserve hide done toggle
-      hideRelatesTo: this.filterState.hideRelatesTo, // Preserve relates-to toggle
+      statuses: [], priorities: [], types: [], tags: [], searchQuery: '',
+      hideDone: this.filterState.hideDone, hideRelatesTo: this.filterState.hideRelatesTo,
     };
+    this._saveAndRefresh();
+  }
+
+  private _saveAndRefresh(): void {
     this.stateManager?.saveFilterState(this.filterState);
     this.refresh();
     this.updateDescription();
   }
 
-  /**
-   * Update TreeView description badge (shows filtered count)
-   */
   private updateDescription(): void {
     if (!this.treeView) return;
-
     try {
-      const totalCount = this.getTotalItemCount();
-      const filteredCount = this.getFilteredItemCount();
-
-      // Show badge only when filtering is active
-      if (filteredCount < totalCount) {
-        this.treeView.description = `(${filteredCount}/${totalCount})`;
-      } else {
-        this.treeView.description = undefined; // Clear badge when showing all
-      }
-    } catch (_error) {
-      // Silently fail if counts cannot be determined
-      this.treeView.description = undefined;
-    }
+      const total = this.lastTotalCount || 0;
+      const filtered = this.lastFilteredCount;
+      this.treeView.description = filtered < total ? `(${filtered}/${total})` : undefined;
+    } catch { this.treeView.description = undefined; }
   }
 
-  /**
-   * Get total count of all work items
-   */
-  private getTotalItemCount(): number {
-    try {
-      // Synchronous operation not available, use cached count or estimate
-      // For now, return from last loaded data
-      return this.lastTotalCount || 0;
-    } catch {
-      return 0;
-    }
-  }
-
-  /**
-   * Get count of filtered items (visible items)
-   */
-  private getFilteredItemCount(): number {
-    return this.lastFilteredCount;
-  }
-
-  /**
-   * Update item counts (called during tree building)
-   */
   private updateCounts(total: number, filtered: number): void {
     this.lastTotalCount = total;
     this.lastFilteredCount = filtered;
     this.updateDescription();
   }
 
-  /**
-   * Set sort options
-   */
   setSortOptions(by: SortState['by'], order: SortState['order']): void {
     this.sortState = { by, order };
     this.stateManager?.saveSortState(this.sortState);
@@ -329,158 +232,16 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     this.updateDescription();
   }
 
-  /**
-   * Get current view mode
-   */
-  getViewMode(): ViewMode {
-    return this.viewMode;
-  }
+  getViewMode(): ViewMode { return this.viewMode; }
+  getHierarchyType(): HierarchyType { return this.hierarchyType; }
+  getFilterState(): FilterState { return { ...this.filterState }; }
+  getSortState(): SortState { return { ...this.sortState }; }
+  getHideDoneState(): boolean { return this.filterState.hideDone; }
+  getHideRelatesToState(): boolean { return this.filterState.hideRelatesTo; }
 
-  /**
-   * Get current hierarchy type
-   */
-  getHierarchyType(): HierarchyType {
-    return this.hierarchyType;
-  }
-
-  /**
-   * Get current filter state
-   */
-  getFilterState(): FilterState {
-    return { ...this.filterState }; // Return a copy
-  }
-
-  /**
-   * Get current sort state
-   */
-  getSortState(): SortState {
-    return { ...this.sortState }; // Return a copy
-  }
-
-  /**
-   * Get hide done state
-   */
-  getHideDoneState(): boolean {
-    return this.filterState.hideDone;
-  }
-
-  /**
-   * Returns true when any non-visual filter is active (excluding hideDone / hideRelatesTo)
-   */
   isFiltersActive(): boolean {
     const { statuses, priorities, types, tags, searchQuery } = this.filterState;
-    return (
-      statuses.length > 0 ||
-      priorities.length > 0 ||
-      types.length > 0 ||
-      tags.length > 0 ||
-      (searchQuery ?? '').length > 0
-    );
-  }
-
-  getHideRelatesToState(): boolean {
-    return this.filterState.hideRelatesTo;
-  }
-
-  /**
-   * Apply filters to work items (only used in flat view)
-   */
-  private applyFilters(items: WorkItem[]): WorkItem[] {
-    let filtered = items;
-
-    // Hide done items filter (only in flat view)
-    if (this.filterState.hideDone) {
-      filtered = filtered.filter((item) => item.status !== 'done');
-    }
-
-    // Status filter
-    if (this.filterState.statuses.length > 0) {
-      filtered = filtered.filter((item) => this.filterState.statuses.includes(item.status));
-    }
-
-    // Priority filter
-    if (this.filterState.priorities.length > 0) {
-      filtered = filtered.filter((item) => this.filterState.priorities.includes(item.priority));
-    }
-
-    // Type filter
-    if (this.filterState.types.length > 0) {
-      filtered = filtered.filter((item) => this.filterState.types.includes(item.type));
-    }
-
-    // Tag filter (item must have at least one matching tag)
-    if (this.filterState.tags.length > 0) {
-      filtered = filtered.filter((item) =>
-        item.tags?.some((tag) => this.filterState.tags.includes(tag))
-      );
-    }
-
-    // Search query (case-insensitive search in title and description)
-    if (this.filterState.searchQuery) {
-      const query = this.filterState.searchQuery.toLowerCase();
-      filtered = filtered.filter(
-        (item) =>
-          item.title.toLowerCase().includes(query) ||
-          item.id.toLowerCase().includes(query) ||
-          item.tags?.some((tag) => tag.toLowerCase().includes(query))
-      );
-    }
-
-    return filtered;
-  }
-
-  /**
-   * Apply sorting to work items
-   */
-  private applySorting(items: WorkItem[]): WorkItem[] {
-    const sorted = [...items];
-    const { by, order } = this.sortState;
-
-    sorted.sort((a, b) => {
-      let comparison = 0;
-
-      switch (by) {
-        case 'id':
-          comparison = a.id.localeCompare(b.id);
-          break;
-        case 'title':
-          comparison = a.title.localeCompare(b.title);
-          break;
-        case 'created':
-          comparison = new Date(a.created || 0).getTime() - new Date(b.created || 0).getTime();
-          break;
-        case 'updated':
-          comparison = new Date(a.updated || 0).getTime() - new Date(b.updated || 0).getTime();
-          break;
-        case 'priority': {
-          const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3 };
-          comparison =
-            priorityOrder[a.priority as keyof typeof priorityOrder] -
-            priorityOrder[b.priority as keyof typeof priorityOrder];
-          break;
-        }
-        case 'status': {
-          const statusOrder = {
-            'in-progress': 0,
-            planned: 1,
-            draft: 2,
-            review: 3,
-            blocked: 4,
-            done: 5,
-            cancelled: 6,
-            obsolete: 7,
-          };
-          comparison =
-            statusOrder[a.status as keyof typeof statusOrder] -
-            statusOrder[b.status as keyof typeof statusOrder];
-          break;
-        }
-      }
-
-      return order === 'asc' ? comparison : -comparison;
-    });
-
-    return sorted;
+    return statuses.length > 0 || priorities.length > 0 || types.length > 0 || tags.length > 0 || (searchQuery ?? '').length > 0;
   }
 
   /**
@@ -554,116 +315,38 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   }
 
   /**
-   * Flat view: Group items by methodology, then by type
+   * Flat view: Group items by methodology, then by type (delegates to flatViewBuilder utility)
    */
   private async getFlatRootNodes(): Promise<TreeNode[]> {
     try {
-      // Check if .devsteps directory exists
-      try {
-        await vscode.workspace.fs.stat(vscode.Uri.joinPath(this.workspaceRoot, '.devsteps'));
-      } catch {
-        // .devsteps doesn't exist yet - return empty state
-        return [];
-      }
+      // Load all items via utility
+      let items = await buildFlatViewNodes({
+        workspaceRoot: this.workspaceRoot,
+        filterState: this.filterState,
+        expandedSections: this.expandedSections,
+        expandedGroups: this.expandedGroups,
+      });
 
-      // Load config to get methodology
-      const configPath = vscode.Uri.joinPath(this.workspaceRoot, '.devsteps', 'config.json');
-      const configData = await vscode.workspace.fs.readFile(configPath);
-      const config = JSON.parse(Buffer.from(configData).toString('utf-8'));
-
-      // Load all item IDs from refs-style index (by-type/*.json files)
-      const byTypeDir = vscode.Uri.joinPath(this.workspaceRoot, '.devsteps', 'index', 'by-type');
-      const typeFiles = await vscode.workspace.fs.readDirectory(byTypeDir);
-
-      const allItemIds: string[] = [];
-      for (const [fileName, fileType] of typeFiles) {
-        if (fileType === vscode.FileType.File && fileName.endsWith('.json')) {
-          const filePath = vscode.Uri.joinPath(byTypeDir, fileName);
-          const fileData = await vscode.workspace.fs.readFile(filePath);
-          const typeIndex = JSON.parse(Buffer.from(fileData).toString('utf-8'));
-          allItemIds.push(...(typeIndex.items || []));
-        }
-      }
-
-      // Load full item data from individual files
-      let items: WorkItem[] = [];
-      for (const itemId of allItemIds) {
-        const item = await loadItemWithLinks(this.workspaceRoot, itemId);
-        if (item) items.push(item);
-      }
-
-      // Track counts for badge
       const totalCount = items.length;
 
       // Apply filters and sorting
-      items = this.applyFilters(items);
-      items = this.applySorting(items);
+      items = applyFilters(items, this.filterState);
+      items = applySorting(items, this.sortState);
 
-      // Update badge with counts
       this.updateCounts(totalCount, items.length);
 
-      // Group by methodology
-      const itemsMap = new Map(items.map((item) => [item.id, item]));
-      const scrumItems: WorkItem[] = [];
-      const waterfallItems: WorkItem[] = [];
-
-      for (const item of items) {
-        const methodology = getItemMethodology(item, itemsMap);
-        if (methodology === 'scrum') {
-          scrumItems.push(item);
-        } else {
-          waterfallItems.push(item);
-        }
-      }
-
-      // Group each methodology's items by type
-      const scrumByType = this.groupByType(scrumItems);
-      const waterfallByType = this.groupByType(waterfallItems);
-
-      // Create section nodes (always show both, even if empty)
-      const sections: TreeNode[] = [];
-
-      if (scrumItems.length > 0 || config.methodology !== 'waterfall') {
-        const isScrumExpanded = this.expandedSections.has('scrum');
-        sections.push(
-          new MethodologySectionNode('scrum', scrumByType, isScrumExpanded, this.expandedGroups)
-        );
-      }
-
-      if (waterfallItems.length > 0 || config.methodology !== 'scrum') {
-        const isWaterfallExpanded = this.expandedSections.has('waterfall');
-        sections.push(
-          new MethodologySectionNode(
-            'waterfall',
-            waterfallByType,
-            isWaterfallExpanded,
-            this.expandedGroups
-          )
-        );
-      }
-
-      return sections;
+      return await buildFlatSectionNodes(
+        this.workspaceRoot,
+        items,
+        items,
+        this.expandedSections,
+        this.expandedGroups
+      );
     } catch (error) {
       console.error('Failed to load flat view with methodology sections:', error);
       vscode.window.showErrorMessage('Failed to load DevSteps work items');
       return [];
     }
-  }
-
-  /**
-   * Group items by type
-   */
-  private groupByType(items: WorkItem[]): Record<string, WorkItem[]> {
-    return items.reduce(
-      (acc, item) => {
-        if (!acc[item.type]) {
-          acc[item.type] = [];
-        }
-        acc[item.type].push(item);
-        return acc;
-      },
-      {} as Record<string, WorkItem[]>
-    );
   }
 
   /**

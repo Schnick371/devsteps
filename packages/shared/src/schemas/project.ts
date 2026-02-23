@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Project metadata schemas
+ * Zod schemas for devsteps.config.json, PROJECT.md, and context levels.
+ */
+
 import { z } from 'zod';
 
 /**

@@ -116,7 +116,7 @@ TASK-051 --implements--> BUG-011 (Task fixes Bug)
 
 ```typescript
 // 1. Create spike
-devsteps-add --type spike --title "Architecture Research" --priority high
+devsteps-add --type spike --title "Architecture Research" --priority not-urgent-important
 
 // 2. Link to Epic (NOT to Story!)
 devsteps-link --source SPIKE-001 --relation implements --target EPIC-003
@@ -148,7 +148,7 @@ devsteps-link --source TASK-002 --relation implements --target STORY-001
 // 1. Create Bug (PROBLEM ONLY - no solution!)
 devsteps-add --type bug --title "Email validation fails for aliases" \
   --description "Users cannot register with + or . in email" \
-  --priority high
+  --priority not-urgent-important
 
 // 2. Link Bug to affected Epic/Requirement (impact traceability)
 devsteps-link --source BUG-010 --relation affects --target EPIC-003

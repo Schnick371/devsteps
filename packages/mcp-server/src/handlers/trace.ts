@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * MCP handler: trace
+ * Resolves and returns the full relationship graph for a work item.
+ */
+
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { getItem } from '@schnick371/devsteps-shared';

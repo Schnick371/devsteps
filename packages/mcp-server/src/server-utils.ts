@@ -1,4 +1,7 @@
 /**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
  * MCP Server Utilities
  *
  * Heartbeat monitoring and tool summary generation for request logging.

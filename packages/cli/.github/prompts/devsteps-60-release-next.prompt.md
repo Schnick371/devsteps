@@ -249,6 +249,8 @@ cd packages/extension
 npm run build
 vsce package --pre-release
 ```
+```
+**vsce package --pre-release is very important for the release-next prompt!** It ensures the generated VSIX is marked as pre-release, which is required for uploading to the Marketplace without affecting the stable version.
 
 **Verify outputs:**
 - ✅ Extension bundle: `dist/extension.js` (~340 KB)

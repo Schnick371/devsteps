@@ -1,4 +1,7 @@
 /**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
  * DevSteps MCP Server
  *
  * Main server class — handles tool registration and MCP protocol request routing.

@@ -1,4 +1,7 @@
 /**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
  * Index Rebuild Operations
  *
  * Rebuilds the refs-style index from source of truth (item files).

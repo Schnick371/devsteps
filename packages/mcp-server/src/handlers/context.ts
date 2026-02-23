@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * MCP handler: context
+ * Returns structured project context at quick/standard/deep level for AI agents.
+ */
+
 import path from 'node:path';
 import type { ContextLevel } from '@schnick371/devsteps-shared';
 import { getQuickContext } from '@schnick371/devsteps-shared';

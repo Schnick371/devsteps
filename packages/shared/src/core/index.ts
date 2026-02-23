@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Core module barrel export
+ * Re-exports all public operations from the shared core layer.
+ */
+
 export { type AddItemArgs, type AddItemResult, addItem } from './add.js';
 export {
   type ArchiveItemResult,

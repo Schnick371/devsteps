@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * MCP handler: status
+ * Returns project statistics: item counts grouped by type, status, and priority.
+ */
+
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { getConfig, listItems, STATUS } from '@schnick371/devsteps-shared';

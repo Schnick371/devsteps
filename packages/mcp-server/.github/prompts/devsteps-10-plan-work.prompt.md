@@ -149,8 +149,9 @@ Implementation relies on planning to identify ALL affected components. Incomplet
 - **Epic → Spike → Task** (research → proof-of-concept)
 - **Epic → Story (blocked by Bug) → Bug (blocks) → Task (implements Bug)** - Bug is CHILD of Story, impediment
   - Bug `implements` or `blocks` Story (Bug → Story relationship)
-  - Task `implements` Bug (Task → Bug relationship)
+  - Task `implements` Bug (= Bug `implemented-by` Task — fix is executed by Tasks)
   - Bug `relates-to` Epic (context only, NOT hierarchy)
+  - **NEVER** `Bug → Task (relates-to)` — use `Bug → Task (implemented-by)` instead
 
 **CRITICAL:** Task must implement Story/Bug, never Epic directly. Epic Summary won't include orphaned Tasks.
 

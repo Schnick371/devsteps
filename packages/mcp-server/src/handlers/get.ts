@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * MCP handler: get
+ * Retrieves full metadata for a single work item by ID.
+ */
+
 import { join } from 'node:path';
 import { getItem } from '@schnick371/devsteps-shared';
 import { getWorkspacePath } from '../workspace.js';

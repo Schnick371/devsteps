@@ -1,3 +1,13 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Context Budget Protocol (CBP) — Tier-2 Mandate Schemas
+ * Zod schemas for T2 mandate dispatch and result envelopes.
+ *
+ * @see EPIC-028 CBP Tier-2 Mandate Tools
+ */
+
 import { z } from 'zod';
 
 /**

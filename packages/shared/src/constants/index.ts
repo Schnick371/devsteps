@@ -1,4 +1,7 @@
 /**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
  * Centralized constants for type-safe comparisons.
  * Use these instead of string literals to get autocomplete + compile-time safety.
  *

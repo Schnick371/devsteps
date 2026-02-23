@@ -1,3 +1,12 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * CLI migrate command
+ * devsteps migrate — auto-detects and migrates legacy index.json to refs-style index
+ * devsteps migrate --check — dry-run check without performing changes
+ */
+
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import {

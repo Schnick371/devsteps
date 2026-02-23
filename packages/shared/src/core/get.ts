@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Core get-item operation
+ * Reads and returns item metadata from the distributed file store.
+ */
+
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { ItemMetadata } from '../schemas/index.js';

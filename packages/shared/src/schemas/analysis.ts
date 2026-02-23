@@ -1,3 +1,13 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Context Budget Protocol (CBP) — Analysis Schemas
+ * Zod schemas for T3 archaeology and analysis envelope files.
+ *
+ * @see EPIC-027 CBP Tier-3 Analysis Tools
+ */
+
 import { z } from 'zod';
 
 /**

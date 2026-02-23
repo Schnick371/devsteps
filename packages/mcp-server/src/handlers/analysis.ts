@@ -1,3 +1,13 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * MCP handlers: CBP analysis operations
+ * write_analysis_report, read_analysis_envelope, write_verdict, write_sprint_brief
+ *
+ * @see EPIC-027 CBP Tier-3 Analysis Tools
+ */
+
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {

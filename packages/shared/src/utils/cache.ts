@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * In-memory file-stat cache
+ * TTL-based cache keyed by file path; invalidates when mtime changes.
+ */
+
 import { statSync } from 'node:fs';
 
 interface CacheEntry<T> {

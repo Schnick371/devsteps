@@ -1,3 +1,14 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * MCP handlers: CBP Tier-2 mandate operations
+ * write_mandate_result, read_mandate_results, write_rejection_feedback,
+ * write_iteration_signal, write_escalation
+ *
+ * @see EPIC-028 CBP Tier-2 Mandate Tools
+ */
+
 import { randomUUID } from 'node:crypto';
 import {
   existsSync,

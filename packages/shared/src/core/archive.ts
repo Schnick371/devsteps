@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Core archive and purge operations
+ * Moves items to .devsteps/archive/ and updates the distributed index.
+ */
+
 import { existsSync, mkdirSync, renameSync } from 'node:fs';
 import { join } from 'node:path';
 import type { ItemStatus, ItemType } from '../schemas/index.js';

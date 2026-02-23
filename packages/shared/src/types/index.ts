@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Types barrel export
+ * Re-exports all TypeScript types from the shared type layer.
+ */
+
 // Context Budget Protocol types
 export type {
   AnalysisAspect,

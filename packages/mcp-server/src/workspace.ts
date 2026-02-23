@@ -1,4 +1,7 @@
 /**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
  * Workspace path resolution utility
  *
  * MCP servers receive workspace context via process.cwd() set by the spawning process.

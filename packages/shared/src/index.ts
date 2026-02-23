@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Shared package public API
+ * Single entry point re-exporting all public types, schemas, and core functions.
+ */
+
 export * from './constants/index.js';
 export {
   HIERARCHY_TYPE,
