@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-02-23T22:55:10.411Z",
-  "updated": "2026-02-23T22:56:16.969Z",
+  "updated": "2026-02-23T23:03:07.646Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/tools/cbp.ts",

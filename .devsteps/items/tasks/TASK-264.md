@@ -1,6 +1,6 @@
 ## Goal
 
-`read_escalations` und `resolve_escalation` als MCP-Tools in `cbp.ts` definieren und registrieren.
+Define and register `read_escalations` and `resolve_escalation` as MCP tools in `cbp.ts`.
 
 ## Tool 1: `read_escalations`
 
@@ -52,11 +52,9 @@ export const resolveEscalationTool: Tool = {
 ## Handler
 
 `packages/mcp-server/src/handlers/escalations.ts`:
-- `handleReadEscalations` — scannt Verzeichnis, parst JSONs, filtert nach Status
-- `handleResolveEscalation` — liest JSON, fügt `resolution` + `resolved_at` hinzu, schreibt atomic
+- `handleReadEscalations` — scans directory, parses JSONs, filters by status
+- `handleResolveEscalation` — reads JSON, adds `resolution` + `resolved_at`, writes atomically (.tmp → rename)
 
 ## Acceptance Criteria
-- [ ] `read_escalations(sprint_id, 'open')` returniert `{ escalations: [], pending_count: 0 }` wenn keine offen
-- [ ] `resolve_escalation` updatet `.json` Datei atomic (.tmp → rename)
-- [ ] Beide Tools registriert in `tools/index.ts`
-- [ ] Beide Tools erscheinen in `mcp_devsteps_context` Katalog
+- [ ] `read_escalations(sprint_id, 'open')` returns `{ escalations: [], pending_count: 0 }` when none are open
+- [ ] `resolve_escalation` updates `.json` file atomically (.tmp → rename)
