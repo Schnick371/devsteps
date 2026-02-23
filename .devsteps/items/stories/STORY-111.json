@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Add agents+handoffs+user-invokable to all T1/T2/T3 agent files",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-23T11:15:28.152Z",
-  "updated": "2026-02-23T11:15:28.152Z",
+  "updated": "2026-02-23T11:23:36.893Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
