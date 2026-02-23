@@ -1,5 +1,5 @@
 ---
-agent: 'devsteps'
+agent: 'devsteps-t1-coordinator'
 model: 'Claude Sonnet 4.6'
 description: 'Execute pre-release deployment to @next tag - testing and validation before stable release'
 tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'bright-data/*', 'upstash/context7/*', 'edit', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']

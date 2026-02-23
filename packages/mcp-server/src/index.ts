@@ -38,9 +38,6 @@ process.on('unhandledRejection', (reason, promise) => {
 import {
   addTool,
   archiveTool,
-  bulkTagAddTool,
-  bulkTagRemoveTool,
-  bulkUpdateTool,
   contextTool,
   exportTool,
   getTool,
@@ -126,6 +123,12 @@ function generateToolSummary(
       return `[add] Created ${result.itemId}: "${args.title}" → success ${durationStr}`;
 
     case 'update': {
+      // Multi-item (ids array)
+      if (Array.isArray(args.ids)) {
+        const count = (result as { count?: number })?.count ?? 0;
+        const op = args.add_tags ? '+tags' : args.remove_tags ? '-tags' : 'patch';
+        return `[update:batch] ${op} ${(args.ids as string[]).length} items → ${count} updated ${durationStr}`;
+      }
       const changes = Object.keys(args).filter((k) => k !== 'id');
       return `[update] ${args.id} [${changes.join(', ')}] → success ${durationStr}`;
     }
@@ -168,21 +171,6 @@ function generateToolSummary(
     case 'purge': {
       const purgeCount = result.count || 0;
       return `[purge] → ${purgeCount} items archived ${durationStr}`;
-    }
-
-    case 'bulk_update': {
-      const bulkCount = result.count || 0;
-      return `[bulk_update] ${(args.ids as string[])?.length ?? 0} items → ${bulkCount} updated ${durationStr}`;
-    }
-
-    case 'bulk_tag_add': {
-      const tagAddCount = result.count || 0;
-      return `[bulk_tag_add] +[${(args.tags as string[])?.join(', ')}] on ${(args.ids as string[])?.length ?? 0} items → ${tagAddCount} updated ${durationStr}`;
-    }
-
-    case 'bulk_tag_remove': {
-      const tagRemoveCount = result.count || 0;
-      return `[bulk_tag_remove] -[${(args.tags as string[])?.join(', ')}] on ${(args.ids as string[])?.length ?? 0} items → ${tagRemoveCount} updated ${durationStr}`;
     }
 
     case 'init':
@@ -264,9 +252,6 @@ class DevStepsServer {
       exportTool,
       archiveTool,
       purgeTool,
-      bulkUpdateTool,
-      bulkTagAddTool,
-      bulkTagRemoveTool,
       contextTool,
       healthCheckTool,
       metricsTool,

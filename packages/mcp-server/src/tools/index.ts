@@ -153,13 +153,18 @@ export const listTool: Tool = {
 export const updateTool: Tool = {
   name: 'update',
   description:
-    "Update an existing item. Can update any field including status, priority, assignee, description, etc.\n\nStatus Progression: draft → planned → in-progress → review → done\n- Use 'review' status when testing/validating before marking done\n- Mark 'done' only after all quality gates pass (tests, build, manual testing, docs)",
+    "Update one or multiple items. Provide id (single) or ids (batch — same fields applied to all).\n\nStatus Progression: draft → planned → in-progress → review → done\n- Use 'review' status when testing/validating before marking done\n- Mark 'done' only after all quality gates pass (tests, build, manual testing, docs)\n\nTag operations (incremental, no replacement):\n- add_tags: add tags without replacing existing ones\n- remove_tags: remove specific tags",
   inputSchema: {
     type: 'object',
     properties: {
       id: {
         type: 'string',
-        description: 'Item ID to update',
+        description: 'Single item ID to update',
+      },
+      ids: {
+        type: 'array',
+        items: { type: 'string' },
+        description: 'Multiple item IDs to update with the same patch (batch mode)',
       },
       status: {
         type: 'string',
@@ -191,11 +196,11 @@ export const updateTool: Tool = {
       },
       title: {
         type: 'string',
-        description: 'New title',
+        description: 'New title (single-item only)',
       },
       description: {
         type: 'string',
-        description: 'New description (Markdown)',
+        description: 'New description (Markdown, single-item only)',
       },
       assignee: {
         type: 'string',
@@ -204,15 +209,25 @@ export const updateTool: Tool = {
       tags: {
         type: 'array',
         items: { type: 'string' },
-        description: 'New tags (replaces existing)',
+        description: 'New tags (replaces all existing tags, single-item only)',
+      },
+      add_tags: {
+        type: 'array',
+        items: { type: 'string' },
+        description: 'Tags to add without replacing existing ones (works with id and ids)',
+      },
+      remove_tags: {
+        type: 'array',
+        items: { type: 'string' },
+        description: 'Tags to remove (works with id and ids)',
       },
       affected_paths: {
         type: 'array',
         items: { type: 'string' },
-        description: 'New affected paths (replaces existing)',
+        description: 'New affected paths (replaces existing, single-item only)',
       },
     },
-    required: ['id'],
+    required: [],
   },
 };
 
@@ -425,97 +440,6 @@ export const purgeTool: Tool = {
         description: 'Optional: filter by item type',
       },
     },
-  },
-};
-
-export const bulkUpdateTool: Tool = {
-  name: 'bulk_update',
-  description:
-    'Bulk update status, assignee, category, or priority on multiple items at once. Specify item IDs and the fields to update — all specified fields are applied to every matched item.',
-  inputSchema: {
-    type: 'object',
-    properties: {
-      ids: {
-        type: 'array',
-        items: { type: 'string' },
-        description: 'List of item IDs to update (e.g. ["TASK-001", "BUG-002"])',
-      },
-      status: {
-        type: 'string',
-        enum: [
-          'draft',
-          'planned',
-          'in-progress',
-          'review',
-          'done',
-          'blocked',
-          'cancelled',
-          'obsolete',
-        ],
-        description: 'New status to apply to all items',
-      },
-      assignee: {
-        type: 'string',
-        description: 'New assignee email to apply to all items',
-      },
-      category: {
-        type: 'string',
-        description: 'New category/module to apply to all items',
-      },
-      eisenhower: {
-        type: 'string',
-        enum: [
-          'urgent-important',
-          'not-urgent-important',
-          'urgent-not-important',
-          'not-urgent-not-important',
-        ],
-        description: 'New Eisenhower priority to apply to all items',
-      },
-    },
-    required: ['ids'],
-  },
-};
-
-export const bulkTagAddTool: Tool = {
-  name: 'bulk_tag_add',
-  description: 'Add one or more tags to multiple items at once.',
-  inputSchema: {
-    type: 'object',
-    properties: {
-      ids: {
-        type: 'array',
-        items: { type: 'string' },
-        description: 'List of item IDs to tag',
-      },
-      tags: {
-        type: 'array',
-        items: { type: 'string' },
-        description: 'Tags to add to each item',
-      },
-    },
-    required: ['ids', 'tags'],
-  },
-};
-
-export const bulkTagRemoveTool: Tool = {
-  name: 'bulk_tag_remove',
-  description: 'Remove one or more tags from multiple items at once.',
-  inputSchema: {
-    type: 'object',
-    properties: {
-      ids: {
-        type: 'array',
-        items: { type: 'string' },
-        description: 'List of item IDs to update',
-      },
-      tags: {
-        type: 'array',
-        items: { type: 'string' },
-        description: 'Tags to remove from each item',
-      },
-    },
-    required: ['ids', 'tags'],
   },
 };
 

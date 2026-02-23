@@ -1,5 +1,5 @@
 ---
-agent: 'Detective-CodeArcheology'
+agent: 'devsteps-t2-archaeology'
 model: 'Claude Sonnet 4.6'
 description: 'Git forensics - investigate why code exists, trace decision history, identify ownership and intent'
 tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']

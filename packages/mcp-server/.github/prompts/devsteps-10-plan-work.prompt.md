@@ -1,5 +1,5 @@
 ---
-agent: 'devsteps-planner'
+agent: 'devsteps-t1-coordinator'
 model: 'Claude Sonnet 4.6'
 description: 'Interactive planning session - work with developer to define and structure work items before implementation'
 tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'search', 'web', 'playwright/*', 'bright-data/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
@@ -230,4 +230,4 @@ Stage `.devsteps/`, commit with planning format. Items remain `draft` or `planne
 
 ---
 
-**See `devsteps.agent.md` for mentor role. See `devsteps-start-work.prompt.md` for implementation kickoff.**
+**See [`devsteps-t1-coordinator.agent.md`](../agents/devsteps-t1-coordinator.agent.md) for MPD orchestration. See [`devsteps-20-start-work.prompt.md`](devsteps-20-start-work.prompt.md) for implementation kickoff.**
