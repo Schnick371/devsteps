@@ -1,7 +1,7 @@
 ---
 description: 'DevSteps Coordinator — Tier-1, single-item MPD, dispatches T2 mandate analysts, NEVER reads raw T3 envelopes, only MandateResults via read_mandate_results'
 model: 'Claude Sonnet 4.6'
-tools: ['vscode/askQuestions', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'read', 'agent', 'edit', 'search', 'devsteps/*', 'todo']
+tools: ['vscode/askQuestions', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'read', 'agent', 'edit', 'search', 'devsteps/*', 'todo', 'bright-data/*']
 agents:
   - devsteps-t2-archaeology
   - devsteps-t2-risk

@@ -1,38 +1,7 @@
-# User Story
+# User Story (OBSOLETE)
 
-As a DevSteps agent developer, I want agent instructions to reference AITK evaluation tools, so that agents can systematically validate their outputs and improve quality.
+**Cancelled reason:** AITK tools (`aitk-evaluation_planner`, `aitk-get_agent_code_gen_best_practices` etc.) are designed for **Python/C# code generation** using Microsoft Agent Framework (Azure AI). DevSteps agent files (`devsteps-t*.agent.md`) are Copilot Chat instruction files (Markdown), not Python code — AITK tools have no applicability here.
 
-> ⚠️ **Affected paths corrected 2026-02-21.** Original paths referenced `devsteps-analyzer.agent.md`, `devsteps-implementer.agent.md`, `devsteps-tester.agent.md` — none of these exist. Corrected to current agent names with `-subagent` suffix.
+Additionally the story referenced obsolete agent names (`devsteps-impl-subagent`, `devsteps-coordinator`, etc.) that no longer exist.
 
-## Acceptance Criteria
-
-- [ ] Each agent file mentions relevant AITK tools in appropriate sections
-- [ ] Coordinator agent references `aitk-get_agent_code_gen_best_practices`
-- [ ] `devsteps-test-subagent.agent.md` references `aitk-get_evaluation_code_gen_best_practices` and `aitk-evaluation_planner`
-- [ ] All agents reference `aitk-get_ai_model_guidance` for model selection
-- [ ] Documentation explains when/how to use each AITK tool
-
-## Implementation Notes
-
-**AITK Tools Mapping:**
-- `aitk-get_agent_code_gen_best_practices` → All agents (general guidance)
-- `aitk-get_tracing_code_gen_best_practices` → MCP-related agents
-- `aitk-get_ai_model_guidance` → All agents (model selection)
-- `aitk-evaluation_planner` → `devsteps-test-subagent` (before creating evaluations)
-- `aitk-get_evaluation_code_gen_best_practices` → `devsteps-test-subagent`
-- `aitk-evaluation_agent_runner_best_practices` → Coordinator / `devsteps-test-subagent`
-
-**Current agent names (use `-subagent` suffix where applicable):**
-- `devsteps-coordinator.agent.md`
-- `devsteps-analyst-context-subagent.agent.md` (was: devsteps-analyzer)
-- `devsteps-impl-subagent.agent.md` (was: devsteps-implementer)
-- `devsteps-documenter.agent.md`
-- `devsteps-test-subagent.agent.md` (was: devsteps-tester)
-
-## Dependencies
-
-None - documentation update only
-
-## Effort Estimate
-
-Small - update 5 agent files with tool references
+**If AITK integration is still wanted:** Create a new story scoped to actual Python agent code generation for a DevSteps-specific evaluation harness, separate from the `.github/agents/` instruction files.

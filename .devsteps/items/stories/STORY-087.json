@@ -2,16 +2,17 @@
   "id": "STORY-087",
   "type": "story",
   "category": "general",
-  "title": "Integrate tracing guidance for MCP server development",
+  "title": "MCP Server Observability — Structured Logging and Handler Tracing",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-18T10:19:13.508Z",
-  "updated": "2025-12-18T10:19:37.868Z",
+  "updated": "2026-02-23T08:47:02.334Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/mcp-server/src/**/*.ts",
-    "packages/mcp-server/README.md",
-    ".github/agents/devsteps-analyzer.agent.md"
+    "packages/mcp-server/src/logger.ts",
+    "packages/mcp-server/src/handlers/*.ts",
+    "packages/mcp-server/LOGGING.md",
+    "packages/mcp-server/src/metrics.ts"
   ],
   "linked_items": {
     "implements": [

@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Add AITK evaluation best practices to agent instructions",
-  "status": "draft",
+  "status": "cancelled",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-18T10:19:01.832Z",
-  "updated": "2026-02-21T13:49:19.371Z",
+  "updated": "2026-02-23T08:46:13.589Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/devsteps-coordinator.agent.md",

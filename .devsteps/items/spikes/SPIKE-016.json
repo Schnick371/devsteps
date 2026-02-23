@@ -1,15 +1,16 @@
 {
-  "id": "STORY-088",
-  "type": "story",
+  "id": "SPIKE-016",
+  "type": "spike",
   "category": "general",
-  "title": "Create AITK-specific instructions file for AI agent workflows",
-  "status": "cancelled",
+  "title": "AITK Evaluation Framework — Can it measure DevSteps MPD agent quality?",
+  "status": "draft",
   "eisenhower": "not-urgent-important",
-  "created": "2025-12-18T10:19:27.272Z",
-  "updated": "2026-02-23T08:46:42.856Z",
+  "created": "2026-02-23T09:19:10.827Z",
+  "updated": "2026-02-23T09:19:16.571Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    ".github/instructions/aitk.instructions.md"
+    ".github/agents/",
+    "packages/mcp-server/src/"
   ],
   "linked_items": {
     "implements": [
@@ -27,10 +28,12 @@
     "superseded-by": []
   },
   "tags": [
-    "documentation",
-    "ai-toolkit",
-    "copilot",
-    "instructions"
+    "aitk",
+    "evaluation",
+    "agent-quality",
+    "mpd",
+    "python",
+    "azure-ai"
   ],
   "commits": [],
   "metadata": {}
