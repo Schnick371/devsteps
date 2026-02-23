@@ -1,15 +1,19 @@
 ---
 description: 'Archaeology deep analyst — T2, mandate-type=archaeology, builds complete picture of how an area works today via parallel T3 dispatch'
 model: 'Claude Sonnet 4.6'
-tier: '2'
-mandate-types: 'archaeology'
-accepts-from: 'devsteps-coordinator, devsteps-sprint-executor'
-dispatches: 'devsteps-analyst-context-subagent, devsteps-analyst-internal-subagent'
-returns: 'mandate-result'
 tools: ['read', 'agent', 'search', 'devsteps/*', 'todo', 'execute/runInTerminal']
 ---
 
 # 🏛️ Archaeology Deep Analyst — Tier 2
+
+## Contract
+
+- **Tier**: T2 — Deep Analyst
+- **Mandate type**: `archaeology`
+- **Accepted from**: T1 Coordinator (`devsteps-coordinator`), T1 Sprint (`devsteps-sprint-executor`)
+- **Dispatches (T3 parallel fan-out)**: `devsteps-analyst-context-subagent`, `devsteps-analyst-internal-subagent`
+- **Returns**: MandateResult written via `write_mandate_result` — T1 reads via `read_mandate_results`
+- **T1 NEVER reads** raw T3 envelopes from this agent's dispatches directly
 
 ## Mission
 

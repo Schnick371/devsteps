@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Tier-1 Reconstruction — Masteragent dispatches Mandates to Tier-2",
-  "status": "draft",
+  "status": "review",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-22T21:15:36.550Z",
-  "updated": "2026-02-22T22:25:12.499Z",
+  "updated": "2026-02-23T08:20:47.236Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/devsteps-sprint-executor.agent.md",

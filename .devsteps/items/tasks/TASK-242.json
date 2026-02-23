@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Reduce sprint + start-work prompts to pure user triggers (≤30 lines)",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-22T21:20:24.901Z",
-  "updated": "2026-02-22T21:20:55.184Z",
+  "updated": "2026-02-23T08:20:42.137Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/prompts/devsteps-40-sprint.prompt.md",

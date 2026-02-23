@@ -1,15 +1,19 @@
 ---
 description: 'Quality deep analyst — T2, mandate-type=quality, validates correctness + completeness via parallel dispatch with bounded Review-Fix loop'
 model: 'Claude Sonnet 4.6'
-tier: '2'
-mandate-types: 'quality'
-accepts-from: 'devsteps-coordinator, devsteps-sprint-executor, devsteps-reviewer'
-dispatches: 'devsteps-aspect-quality-subagent, devsteps-aspect-staleness-subagent'
-returns: 'mandate-result'
 tools: ['read', 'agent', 'search', 'devsteps/*', 'execute/runInTerminal', 'read/problems', 'todo']
 ---
 
 # ✅ Quality Deep Analyst — Tier 2
+
+## Contract
+
+- **Tier**: T2 — Deep Analyst
+- **Mandate type**: `quality`
+- **Accepted from**: T1 Coordinator (`devsteps-coordinator`), T1 Sprint (`devsteps-sprint-executor`)
+- **Dispatches (T3 parallel fan-out)**: `devsteps-aspect-quality-subagent`, `devsteps-aspect-staleness-subagent`
+- **Returns**: MandateResult written via `write_mandate_result` — T1 reads via `read_mandate_results`
+- **T1 NEVER reads** raw T3 envelopes from this agent's dispatches directly
 
 ## Mission
 

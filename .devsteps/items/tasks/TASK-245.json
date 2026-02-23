@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Agent REGISTRY.md — Tier-Routing table für Tier-1 Agents",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-22T22:25:06.173Z",
-  "updated": "2026-02-22T22:25:12.499Z",
+  "updated": "2026-02-23T08:20:55.405Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/REGISTRY.md"

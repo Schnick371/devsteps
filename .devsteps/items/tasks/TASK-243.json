@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Rewrite sprint-executor agent as Tier-1 Mandate dispatcher",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-22T21:20:24.903Z",
-  "updated": "2026-02-22T21:20:55.184Z",
+  "updated": "2026-02-23T08:20:42.141Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/devsteps-sprint-executor.agent.md"

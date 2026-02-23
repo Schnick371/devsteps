@@ -14,11 +14,11 @@ Activate **Standard MPD**. Follow the MPD protocol from your agent instructions.
 
 ## Mode Selection
 
-| Situation | Mode |
+| Situation | T2 Dispatch |
 |---|---|
-| Task is clearly defined, no strategy question | **Standard MPD** — dispatch all 5 aspect analysts in parallel |
-| Task asks "which approach/pattern/library" | **Competitive Mode** — dispatch analyst-internal + analyst-web, then relevant aspects |
-| Single-file typo/formatting fix | **Skip Phase 0** — execute directly |
+| Clearly defined task | QUICK: `t2-planner` / STANDARD: `t2-archaeology` + `t2-risk` → `t2-planner` |
+| "Which approach/pattern/library?" | COMPETITIVE: `t2-research` + `t2-archaeology` → `t2-planner` |
+| Single-file typo / formatting fix | **Skip analysis** — direct impl via `devsteps-impl-subagent` |
 
 ## Entry Points
 
@@ -30,9 +30,8 @@ If no item specified → `#mcp_devsteps_list` filtered by `status: planned`, pri
 1. Identify the item (ask user or select from backlog)
 2. Update item status to `in-progress`
 3. Create/checkout feature branch (`story/<ID>`, `task/<ID>`, `bug/<ID>`)
-4. Run Phase 0 MPD — dispatch aspect analysts in parallel
-5. Synthesize envelopes → Enriched Task Brief
-6. Dispatch specialists (impl, test, doc) with briefing file paths — never paste full content
-7. Execute integrated plan, then quality gates
-8. Mark done only after `devsteps-reviewer` PASS
+4. Triage → dispatch T2 mandate analysts in parallel (see Mode Selection above)
+5. Read MandateResults via `read_mandate_results` — pass `report_path` to exec agents (never paste content)
+6. Dispatch `devsteps-impl-subagent` → `devsteps-test-subagent` + `devsteps-doc-subagent` (parallel)
+7. `devsteps-reviewer` PASS → merge to main (`--no-ff`), status → `done`
 

@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Rewrite coordinator agent as single-item Tier-1 reference implementation",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-22T21:20:24.903Z",
-  "updated": "2026-02-22T21:20:55.185Z",
+  "updated": "2026-02-23T08:20:42.142Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/devsteps-coordinator.agent.md"

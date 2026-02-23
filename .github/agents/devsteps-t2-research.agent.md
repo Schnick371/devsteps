@@ -1,15 +1,19 @@
 ---
 description: 'Research deep analyst — T2, mandate-type=research, finds best technical approach via parallel web + internal dispatch with cross-validation'
 model: 'Claude Sonnet 4.6'
-tier: '2'
-mandate-types: 'research'
-accepts-from: 'devsteps-coordinator, devsteps-sprint-executor'
-dispatches: 'devsteps-analyst-web-subagent, devsteps-analyst-internal-subagent'
-returns: 'mandate-result'
 tools: ['read', 'agent', 'search', 'devsteps/*', 'tavily/*', 'web', 'todo']
 ---
 
 # 🔬 Research Deep Analyst — Tier 2
+
+## Contract
+
+- **Tier**: T2 — Deep Analyst
+- **Mandate type**: `research`
+- **Accepted from**: T1 Coordinator (`devsteps-coordinator`), T1 Sprint (`devsteps-sprint-executor`)
+- **Dispatches (T3 parallel fan-out)**: `devsteps-analyst-web-subagent`, `devsteps-analyst-internal-subagent`
+- **Returns**: MandateResult written via `write_mandate_result` — T1 reads via `read_mandate_results`
+- **T1 NEVER reads** raw T3 envelopes from this agent's dispatches directly
 
 ## Mission
 
