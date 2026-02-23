@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "add MCP tool update_copilot_files — handler + tool definition + registration",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-23T22:19:07.237Z",
-  "updated": "2026-02-23T22:19:24.727Z",
+  "updated": "2026-02-23T22:34:26.740Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/handlers/update-copilot-files.ts",
