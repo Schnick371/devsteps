@@ -1,7 +1,7 @@
 ---
 description: 'Research deep analyst — T2, mandate-type=research, finds best technical approach via parallel web + internal dispatch with cross-validation'
 model: 'Claude Sonnet 4.6'
-tools: ['read', 'agent', 'search', 'devsteps/*', 'tavily/*', 'bright-data/*', 'web', 'todo']
+tools: ['read', 'agent', 'search', 'devsteps/*', 'bright-data/*', 'bright-data/*', 'web', 'todo']
 ---
 
 # 🔬 Research Deep Analyst — Tier 2

@@ -2,7 +2,7 @@
 agent: 'devsteps-t1-sprint-executor'
 model: 'Claude Sonnet 4.6'
 description: 'Multi-hour autonomous sprint — pre-sprint archaeology, risk-based MPD per item, all T2+T3 agents, bright-data web research, blocking reviewer'
-tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'tavily/*', 'todo']
+tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'bright-data/*', 'todo']
 ---
 
 # 🏃 Sprint Execution

@@ -1,7 +1,7 @@
 ---
 agent: 'devsteps-t1-coordinator'
 model: 'Claude Sonnet 4.6'
-tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'tavily/*', 'edit', 'search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'bright-data/*', 'edit', 'search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 description: 'Autonomous multi-hour context documentation - discover aspects, create knowledge base, link work items for Copilot memory'
 ---
 

@@ -7,7 +7,7 @@ tools:
   - edit
   - search
   - devsteps/*
-  - tavily/*
+  - bright-data/*
   - todo
 model: 'Claude Sonnet 4.6'
 ---

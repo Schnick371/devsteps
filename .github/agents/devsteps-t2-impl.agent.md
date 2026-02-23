@@ -9,7 +9,7 @@ tools:
   - search
   - devsteps/*
   - bright-data/*
-  - tavily/*
+  - bright-data/*
   - todo
   - execute/runInTerminal
   - execute/getTerminalOutput

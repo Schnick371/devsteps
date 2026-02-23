@@ -1,7 +1,7 @@
 ---
 description: 'Efficient context loading specialist - smart prioritization, token-optimal aspect loading, task preparation'
 model: 'Claude Opus 4.6'
-tools: ['execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'read', 'tavily/*', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+tools: ['execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'read', 'bright-data/*', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # 📖 Context Loading Analyst

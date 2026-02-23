@@ -26,7 +26,7 @@ description: "YAML frontmatter headers specification and best practices for GitH
 - **Core Tools**: `'think'` (always recommended for analysis)
 - **File Operations**: `'edit'`, `'search'`, `'usages'`, `'fileSearch'`, `'readFile'`
 - **Development**: `'runCommands'`, `'runTask', 'getTaskOutput'`, `'problems'`
-- **Research**: `'tavily'`, `'githubRepo'` - **MANDATORY for planning/architecture decisions**
+- **Research**: `'bright-data'`, `'githubRepo'` - **MANDATORY for planning/architecture decisions**
 - **Testing**: `'runTests'`, `'testFailure'`
 - **Specialized**: Vary by prompt purpose and requirements
 
@@ -37,15 +37,15 @@ description: "YAML frontmatter headers specification and best practices for GitH
 - `model`: AI model specification (see Model Selection Guidelines below)
 - `tools`: Variable array based on prompt requirements (see Tool Selection Guidelines above)
 
-## Tavily Research Protocol
+## bright-data Research Protocol
 
 **When required:** Planning, architecture, unknown patterns, technology choices
 **Minimum:** 10+ sources across different domains
 
 **Tool Selection:**
-- Planning/Architecture: `#mcp_tavily_tavily_research` (auto multi-source synthesis)
-- Specific docs: `#mcp_tavily_tavily_search` + `#mcp_tavily_tavily_extract`
-- Known URLs: `fetch_webpage` (no Tavily limits)
+- Planning/Architecture: `#mcp_bright-data_bright-data_research` (auto multi-source synthesis)
+- Specific docs: `#mcp_bright-data_bright-data_search` + `#mcp_bright-data_bright-data_extract`
+- Known URLs: `fetch_webpage` (no bright-data limits)
 
 **Never:** Proceed with guesses when research provides evidence
 

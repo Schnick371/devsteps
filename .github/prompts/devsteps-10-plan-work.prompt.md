@@ -2,7 +2,7 @@
 agent: 'devsteps-t1-coordinator'
 model: 'Claude Sonnet 4.6'
 description: 'Interactive planning session - work with developer to define and structure work items before implementation'
-tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'search', 'web', 'playwright/*', 'tavily/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'search', 'web', 'playwright/*', 'bright-data/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # 🎯 Plan Work - Interactive Planning Session
@@ -53,7 +53,7 @@ Ask "why" before "what". Surface dependencies early.
 Search best practices + recommendations + existing patterns. Evidence-based proposals.
 
 **Deep Research Strategy:**
-- Use `#tavily/*` tools for comprehensive research
+- Use `#bright-data/*` tools for comprehensive research
 - Target 10+ different domains/websites per topic
 - Compare multiple authoritative sources
 - Synthesize findings into actionable recommendations
