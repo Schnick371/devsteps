@@ -1,15 +1,19 @@
 ---
 description: 'Reviewer — T2 quality gate, mandate-type=review, dispatches quality-subagent, runs bounded Review-Fix loop via write_rejection_feedback + write_iteration_signal'
 model: 'Claude Sonnet 4.6'
-tier: '2'
-mandate-types: 'review'
-accepts-from: 'devsteps-coordinator, devsteps-sprint-executor'
-dispatches: 'devsteps-aspect-quality-subagent, devsteps-aspect-staleness-subagent'
-returns: 'mandate-result'
 tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'read/problems', 'agent', 'edit', 'search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # 🔍 DevSteps Reviewer — Tier 2
+
+## Contract
+
+- **Tier**: T2 — Quality Gate
+- **Mandate type**: `review`
+- **Accepted from**: T1 Coordinator (`devsteps-coordinator`), T1 Sprint (`devsteps-sprint-executor`)
+- **Dispatches (T3 parallel fan-out)**: `devsteps-aspect-quality-subagent`, `devsteps-aspect-staleness-subagent`
+- **Returns**: MandateResult via `write_mandate_result`; on FAIL also writes `write_rejection_feedback` and `write_iteration_signal`
+- **T1 NEVER reads** raw T3 envelopes from this agent's dispatches directly
 
 ## Mission
 

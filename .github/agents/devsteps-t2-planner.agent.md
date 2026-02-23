@@ -1,15 +1,19 @@
 ---
 description: 'Planner deep analyst — T2, mandate-type=planning, decomposes stories into ordered atomic impl steps using Archaeology + Risk MandateResults'
 model: 'Claude Sonnet 4.6'
-tier: '2'
-mandate-types: 'planning'
-accepts-from: 'devsteps-coordinator, devsteps-sprint-executor'
-dispatches: 'devsteps-aspect-staleness-subagent'
-returns: 'mandate-result'
 tools: ['read', 'agent', 'search', 'devsteps/*', 'todo']
 ---
 
 # 📋 Planner Deep Analyst — Tier 2
+
+## Contract
+
+- **Tier**: T2 — Deep Analyst
+- **Mandate type**: `planning`
+- **Accepted from**: T1 Coordinator (`devsteps-coordinator`), T1 Sprint (`devsteps-sprint-executor`)
+- **Dispatches (T3, minimal)**: `devsteps-aspect-staleness-subagent` (only for stale-check; primarily reads existing MandateResults)
+- **Returns**: MandateResult written via `write_mandate_result` — T1 reads via `read_mandate_results`
+- **T1 NEVER reads** raw T3 envelopes from this agent's dispatches directly
 
 ## Mission
 
