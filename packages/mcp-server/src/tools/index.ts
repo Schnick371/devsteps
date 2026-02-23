@@ -249,6 +249,43 @@ export const linkTool: Tool = {
   },
 };
 
+export const unlinkTool: Tool = {
+  name: 'unlink',
+  description:
+    'Remove a relationship between two items. Also removes the inverse relation bi-directionally. Idempotent: safe to call when the relation does not exist.',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      source_id: {
+        type: 'string',
+        description: 'Source item ID',
+      },
+      relation_type: {
+        type: 'string',
+        enum: [
+          'implements',
+          'implemented-by',
+          'tested-by',
+          'tests',
+          'blocks',
+          'blocked-by',
+          'relates-to',
+          'depends-on',
+          'required-by',
+          'supersedes',
+          'superseded-by',
+        ],
+        description: 'Type of relationship to remove',
+      },
+      target_id: {
+        type: 'string',
+        description: 'Target item ID',
+      },
+    },
+    required: ['source_id', 'relation_type', 'target_id'],
+  },
+};
+
 export const searchTool: Tool = {
   name: 'search',
   description:

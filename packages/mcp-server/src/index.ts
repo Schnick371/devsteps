@@ -52,6 +52,7 @@ import {
   searchTool,
   statusTool,
   traceTool,
+  unlinkTool,
   updateTool,
   writeAnalysisReportTool,
   writeEscalationTool,
@@ -147,6 +148,9 @@ function generateToolSummary(
     case 'link':
       return `[link] ${args.source_id} --${args.relation_type}--> ${args.target_id} → success ${durationStr}`;
 
+    case 'unlink':
+      return `[unlink] ${args.source_id} -/${args.relation_type}/-> ${args.target_id} → success ${durationStr}`;
+
     case 'status': {
       const total = result.stats?.total || 0;
       return `[status] → ${total} items ${durationStr}`;
@@ -235,7 +239,7 @@ class DevStepsServer {
       listTool,
       updateTool,
       linkTool,
-      searchTool,
+      unlinkTool,      unlinkTool,      searchTool,
       statusTool,
       traceTool,
       exportTool,

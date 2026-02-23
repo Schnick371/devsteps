@@ -11,6 +11,7 @@ import {
   searchCommand,
   statusCommand,
   traceCommand,
+  unlinkCommand,
   updateCommand,
 } from './commands/index.js';
 import { initCommand } from './commands/init.js';
@@ -100,6 +101,17 @@ program
   .argument('<target-id>', 'Target item ID')
   .option('-f, --force', 'Override validation rules (use with caution)')
   .action(linkCommand);
+
+// Unlink items
+program
+  .command('unlink')
+  .description(
+    'Remove a relationship between two items. Removes the inverse relation bi-directionally. Idempotent: safe to call when relation does not exist.'
+  )
+  .argument('<source-id>', 'Source item ID')
+  .argument('<relation-type>', 'Relation type to remove')
+  .argument('<target-id>', 'Target item ID')
+  .action(unlinkCommand);
 
 // Search items
 program

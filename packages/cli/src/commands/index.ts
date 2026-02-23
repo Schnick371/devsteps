@@ -13,9 +13,11 @@ import {
   listItems,
   type Methodology,
   parseItemId,
+  type RelationType,
   STATUS,
   TYPE_SHORTCUTS,
   TYPE_TO_DIRECTORY,
+  unlinkItem,
   updateItem,
   validateRelationConflict,
   validateRelationship,
@@ -677,5 +679,35 @@ export async function exportCommand(options: ExportCommandOptions) {
   } catch (error: unknown) {
     spinner.fail('Export failed');
     throw error;
+  }
+}
+
+export async function unlinkCommand(
+  sourceId: string,
+  relation: string,
+  targetId: string
+) {
+  const spinner = ora('Removing link...').start();
+
+  try {
+    const devstepsDir = getDevStepsDir();
+    const result = await unlinkItem(devstepsDir, {
+      sourceId,
+      relationType: relation as RelationType,
+      targetId,
+    });
+
+    spinner.succeed(
+      `Unlinked ${chalk.cyan(sourceId)} -/${relation}/-> ${chalk.cyan(targetId)}`
+    );
+    if (result.message.includes('no-op')) {
+      console.log(chalk.yellow('  ⚠'), 'Relation was not present — no changes made');
+    }
+  } catch (error: unknown) {
+    spinner.fail('Failed to remove link');
+    if (error instanceof Error) {
+      console.error(chalk.red(error.message));
+    }
+    process.exit(1);
   }
 }
