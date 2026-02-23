@@ -1,13 +1,13 @@
 import { join } from 'node:path';
 import {
-  type EisenhowerQuadrant,
-  type ItemMetadata,
-  type ItemStatus,
   STATUS,
-  type UpdateItemArgs,
   bulkAddTags,
   bulkRemoveTags,
   bulkUpdateItems,
+  type EisenhowerQuadrant,
+  type ItemMetadata,
+  type ItemStatus,
+  type UpdateItemArgs,
   updateItem,
 } from '@schnick371/devsteps-shared';
 import { simpleGit } from 'simple-git';
@@ -112,7 +112,7 @@ export default async function updateHandler(args: Record<string, unknown>) {
         // Check if this completes any parent items
         const { getItem } = await import('@schnick371/devsteps-shared');
 
-        for (const parentId of result.metadata.linked_items.implements) {
+        for (const parentId of result.metadata.linked_items?.implements ?? []) {
           try {
             const { metadata: parentMeta } = await getItem(devstepsDir, parentId);
             const siblings = parentMeta.linked_items['implemented-by'] || [];

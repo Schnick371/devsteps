@@ -2,6 +2,7 @@ import { execSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { hasRefsStyleIndex, rebuildIndex } from '@schnick371/devsteps-shared';
+import { runIntegrityChecks } from './doctor-integrity.js';
 import chalk from 'chalk';
 import ora from 'ora';
 
@@ -9,6 +10,7 @@ interface CheckResult {
   name: string;
   status: 'pass' | 'warn' | 'fail';
   message: string;
+  details?: string[];
   fix?: string;
 }
 
@@ -296,6 +298,13 @@ export async function doctorCommand(options?: {
     checkMCPConfig(),
   ];
 
+  // Run relationship integrity checks when project is initialized
+  const devstepsDir = join(process.cwd(), '.devsteps');
+  if (existsSync(devstepsDir)) {
+    const integrityChecks = await runIntegrityChecks(devstepsDir);
+    checks.push(...integrityChecks);
+  }
+
   spinner.stop();
 
   // Display results
@@ -321,6 +330,12 @@ export async function doctorCommand(options?: {
 
     console.log(color(`${icon} ${check.name}`));
     console.log(chalk.gray(`  ${check.message}`));
+
+    if (check.details && check.details.length > 0) {
+      for (const detail of check.details) {
+        console.log(chalk.gray(`    • ${detail}`));
+      }
+    }
 
     if (check.fix) {
       console.log(chalk.cyan(`  Fix: ${check.fix}`));

@@ -58,7 +58,8 @@ export async function updateItem(
     const validateChildren = async (
       relationshipType: typeof RELATIONSHIP_TYPE.IMPLEMENTED_BY | typeof RELATIONSHIP_TYPE.TESTED_BY
     ): Promise<void> => {
-      const children = metadata.linked_items[relationshipType];
+      // Guard: old-format items may lack linked_items or specific relation keys
+      const children = metadata.linked_items?.[relationshipType] ?? [];
       if (children.length > 0) {
         const openChildren: string[] = [];
         for (const childId of children) {
