@@ -1,5 +1,5 @@
 ---
-agent: 'devsteps-reviewer'
+agent: 'devsteps-t2-reviewer'
 model: 'Claude Sonnet 4.6'
 description: 'Quality review gate - validate completed work before marking done'
 tools: ['read', 'read/problems', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'devsteps/*', 'todo']

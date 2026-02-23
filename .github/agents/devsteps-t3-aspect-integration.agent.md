@@ -56,7 +56,7 @@ This is a monorepo with packages: `shared`, `cli`, `mcp-server`, `extension`. Ea
 ### Step 4: State & Protocol Coordination
 - Does the task change MCP server behavior while the VS Code extension caches MCP state? → Extension restart required
 - Does it change git worktree patterns? → Coordinator + Sprint-Executor both reference these
-- Does it change `.devsteps/config.json` schema? → `devsteps-init`, `devsteps-maintainer`, and docs need updating
+- Does it change `.devsteps/config.json` schema? → `devsteps-init`, `devsteps-t1-coordinator`, and docs need updating
 
 ## Required Output Format
 

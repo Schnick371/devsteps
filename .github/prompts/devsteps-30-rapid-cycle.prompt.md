@@ -12,14 +12,26 @@ tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput
 
 Activate **Standard MPD** in kanban mode. Follow the MPD protocol from your agent instructions.
 
-## Mode Selection
+## Mode Selection — T2 Dispatch
 
-| Situation | Mode |
-|---|---|
-| Task is clearly defined, no strategy question | **Standard MPD** — dispatch all 5 aspect analysts in parallel |
-| Task asks "which approach/pattern/library" | **Competitive Mode** — dispatch analyst-internal + analyst-web, then relevant aspects |
-| New tooling/library decision | **Competitive + constraints + integration** aspects |
-| Single-file typo/formatting fix | **Skip Phase 0** — execute directly |
+| Situation | Mode | T2 Fan-out |
+|---|---|---|
+| Task is clearly defined, no strategy question | **STANDARD MPD** | `t2-archaeology` + `t2-risk` → `t2-planner` |
+| FULL tier (schema/cross-pkg change) | **FULL MPD** | `t2-archaeology` + `t2-risk` + `t2-quality` → `t2-planner` |
+| Task asks "which approach/pattern/library" | **Competitive Mode** | `t2-research` + `t2-archaeology` → `t2-planner` |
+| New tooling/library decision | **Competitive + constraints** | + `t3-aspect-constraints` + `t3-aspect-integration` |
+| Single-file typo/formatting fix | **Skip Phase 0** | Direct `t3-impl` → `t2-reviewer` |
+
+## T3 Agent Roster
+
+**Aspect analysts** (dispatched by T2 internally — not by T1 directly):
+- `t3-aspect-impact` · `t3-aspect-constraints` · `t3-aspect-quality` · `t3-aspect-staleness` · `t3-aspect-integration`
+
+**Domain analysts** (dispatched by T2 internally):
+- `t3-analyst-context` · `t3-analyst-internal` · `t3-analyst-web`
+
+**Exec workers** (dispatched by T1 after `read_mandate_results`):
+- `t3-impl` → `t3-test` + `t3-doc` (parallel when FULL)
 
 ## Kanban Pull System
 
@@ -33,9 +45,9 @@ Activate **Standard MPD** in kanban mode. Follow the MPD protocol from your agen
 2. Create Epic → Story → Task hierarchy, link relationships
 3. Select highest-priority `planned` item (Q1 → Q2 → Q3)
 4. Update status to `in-progress`; checkout branch (`story/<ID>`, `task/<ID>`, `bug/<ID>`)
-5. Run Phase 0 MPD — all aspect analysts in parallel
-6. Synthesize envelopes → Enriched Task Brief
-7. Dispatch specialists with briefing file paths — never paste full content
+5. Run triage → dispatch T2 mandates in parallel (see Mode Selection above)
+6. Synthesize MandateResults via `read_mandate_results(item_ids)` → pass `report_path` to exec agents only
+7. Dispatch `t3-impl` → `t3-test` + `t3-doc` (parallel if STANDARD/FULL) — pass `report_path`, never paste content
 8. Execute integrated plan, quality gates, commit (`type(ID): subject` + `Implements: ID`)
-9. Merge to main; mark done only after `devsteps-reviewer` PASS
+9. Merge to main; mark done only after `devsteps-t2-reviewer` PASS
 10. Pull next item and repeat

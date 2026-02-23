@@ -3,10 +3,10 @@
   "type": "spike",
   "category": "general",
   "title": "Evaluate: Coordinator-as-Universal-Entry-Point via Prompt-Specialization",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-21T14:01:04.690Z",
-  "updated": "2026-02-21T14:05:32.297Z",
+  "updated": "2026-02-23T08:37:47.866Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

@@ -20,7 +20,6 @@ The system operates at two layers:
 |---|---|
 | `devsteps-t1-coordinator.agent.md` | Single-item MPD orchestration — triage, parallel dispatch, synthesis |
 | `devsteps-t1-sprint-executor.agent.md` | Multi-item sprint orchestration — pre-flight, per-item loop, adaptive replanning |
-| `devsteps-planner.agent.md` | Strategic sequencing, Enriched Sprint Brief, backlog reranking |
 
 ### Analyst Agents
 
@@ -40,23 +39,24 @@ The system operates at two layers:
 | `devsteps-t3-aspect-staleness.agent.md` | Obsolescence detection, stale item identification |
 | `devsteps-t3-aspect-integration.agent.md` | Cross-package dependencies, API surface effects |
 
-### Specialist Agents
+### Synthesis & Quality Gate (T2)
+
+| Agent File | Role | When Used |
+|---|---|---|
+| `devsteps-t2-archaeology.agent.md` | Codebase archaeology, structural map | STANDARD / FULL |
+| `devsteps-t2-risk.agent.md` | Risk matrix, blast radius, constraint analysis | STANDARD / FULL |
+| `devsteps-t2-research.agent.md` | External research, library comparison | COMPETITIVE |
+| `devsteps-t2-quality.agent.md` | Automated gates, test coverage assessment | FULL |
+| `devsteps-t2-planner.agent.md` | Synthesis of MandateResults → ordered implementation plan | All tiers |
+| `devsteps-t2-reviewer.agent.md` | Blocking quality gate — PASS/FAIL review | After every item |
+
+### T3 Exec Workers (dispatched by T1 after planning MandateResult available)
 
 | Agent File | Role | When Used |
 |---|---|---|
 | `devsteps-t3-impl.agent.md` | Code writing and refactoring | All tiers |
 | `devsteps-t3-test.agent.md` | Test generation, coverage analysis | STANDARD / FULL |
 | `devsteps-t3-doc.agent.md` | Inline docs, architecture documentation | FULL |
-| `devsteps-reviewer.agent.md` | Blocking quality gate — PASS/FAIL review | After every item |
-
-### Utility Agents
-
-| Agent File | Role |
-|---|---|
-| `devsteps-documenter.agent.md` | User-facing documentation (README, guides) |
-| `devsteps-maintainer.agent.md` | Backlog hygiene, stale item cleanup |
-| `devsteps.agent.md` | Release workflows, general implementation |
-| `Detective-CodeArcheology.agent.md` | Deep legacy code investigation |
 
 ---
 
@@ -65,10 +65,10 @@ The system operates at two layers:
 The coordinator determines a risk tier and dispatches agents accordingly:
 
 ```
-QUICK      → impl-subagent only
-STANDARD   → [impact + staleness] → [impl + test] (parallel pairs)
-FULL       → [all 5 aspect agents] → synthesis → [impl + test + doc]
-COMPETITIVE→ [analyst-internal + analyst-web] → judge → impl ± planner
+QUICK      → t3-impl → t2-reviewer
+STANDARD   → [t2-archaeology + t2-risk] → t2-planner → [t3-impl + t3-test] → t2-reviewer
+FULL       → [t2-archaeology + t2-risk + t2-quality] → t2-planner → [t3-impl + t3-test + t3-doc] → t2-reviewer
+COMPETITIVE→ [t2-research + t2-archaeology] → t2-planner → t3-impl → t2-reviewer
 ```
 
 ### Tier Selection Signals
@@ -84,16 +84,15 @@ COMPETITIVE→ [analyst-internal + analyst-web] → judge → impl ± planner
 
 ## Naming Convention
 
-All agent files use kebab-case with the following suffixes:
+All agent files use kebab-case with tier-prefix naming:
 
-| Suffix | Meaning |
-|---|---|
-| `.agent.md` | Agent definition file |
-| `-subagent.agent.md` | Spawned by coordinator, not invoked directly by user |
-| `-coordinator.agent.md` | Orchestrator-level (manages other agents) |
-| `-executor.agent.md` | Session-level execution controller |
+| Prefix | Tier | Role |
+|---|---|---|
+| `devsteps-t1-` | Tier 1 | Orchestrators (user-invokable via prompts) |
+| `devsteps-t2-` | Tier 2 | Analysts + Quality Gate (dispatched by T1) |
+| `devsteps-t3-` | Tier 3 | Leaf agents (dispatched by T2, or T3-Exec by T1) |
 
-> **Note:** Old agent names (`devsteps-analyzer`, `devsteps-implementer`, `devsteps-tester`) were deprecated in Feb 2026. Current names use the `-subagent` suffix pattern.
+> **Tier identification**: Every agent file contains a `## Contract` section marking its tier, dispatcher, and return format.
 
 ---
 
@@ -106,8 +105,8 @@ The Sprint Executor self-classifies incoming requests:
 | Single item ID only | Single-item MPD | Coordinator flow (no sprint pre-flight) |
 | "sprint", "session", "backlog" | Multi-item sprint | Full sprint protocol |
 | "continue sprint", "next items" | Resume sprint | Phase 1 from saved backlog |
-| `type=spike` or "investigate" | Spike | `analyst-context` + `planner`, no impl until direction set |
-| "review", "validate", "check" | Review | `reviewer` only |
+| `type=spike` or "investigate" | Spike | `t2-archaeology` + `t2-planner`, no impl until direction set |
+| "review", "validate", "check" | Review | `devsteps-t2-reviewer` only |
 | No actionable items found | Empty sprint | Present blocked/draft list to user |
 
 ---
@@ -117,11 +116,13 @@ The Sprint Executor self-classifies incoming requests:
 Agents communicate via structured JSON envelopes, not free-form text:
 
 ```
-Aspect Agents → write_analysis_report(AnalysisBriefing)
+T3 Aspect/Analyst Agents → write_analysis_report(AnalysisBriefing)
                                     ↓
-Coordinator ← read_analysis_envelope → synthesize → write_verdict(CompressedVerdict)
+T2 Agent ← read_analysis_envelope → synthesize → write_mandate_result(MandateResult)
                                                               ↓
-                              impl/test/doc-subagents ← read_analysis_envelope
+                              T1 ← read_mandate_results(item_ids)
+                                                              ↓
+                              T3 Exec (impl/test/doc) ← report_path + item_id
 ```
 
 See [docs/architecture/mpd-architecture.md](../../docs/architecture/mpd-architecture.md) for full CBP field specifications.
@@ -137,5 +138,5 @@ See [docs/architecture/mpd-architecture.md](../../docs/architecture/mpd-architec
 ---
 
 
-**Last updated:** 2026-02-21 — Rewrote from old "Coordinator + 4 workers" model to current MPD architecture  
-**Related items:** STORY-098, EPIC-025, STORY-107
+**Last updated:** 2026-02-23 — Renamed all T1+T3 agents to tier-prefix convention, removed non-Tx standalone agents, added bright-data/* to web research agents, added vscode/askQuestions to T1 agents  
+**Related items:** STORY-098, EPIC-025, STORY-107, SPIKE-014

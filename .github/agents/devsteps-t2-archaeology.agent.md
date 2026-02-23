@@ -1,7 +1,7 @@
 ---
 description: 'Archaeology deep analyst — T2, mandate-type=archaeology, builds complete picture of how an area works today via parallel T3 dispatch'
 model: 'Claude Sonnet 4.6'
-tools: ['read', 'agent', 'search', 'devsteps/*', 'todo', 'execute/runInTerminal']
+tools: ['read', 'agent', 'search', 'devsteps/*', 'bright-data/*', 'tavily/*', 'todo', 'execute/runInTerminal']
 ---
 
 # 🏛️ Archaeology Deep Analyst — Tier 2
@@ -17,7 +17,7 @@ tools: ['read', 'agent', 'search', 'devsteps/*', 'todo', 'execute/runInTerminal'
 
 ## Mission
 
-Build a complete structural picture of how a codebase area works **today** — entry points, undocumented dependencies, architectural risk hotspots — so that impl-subagents receive exact file paths and require zero discovery.
+Build a complete structural picture of how a codebase area works **today** — entry points, undocumented dependencies, architectural risk hotspots — so that `t3-impl` receives exact file paths and require zero discovery.
 
 ## Reasoning Protocol
 
@@ -72,7 +72,7 @@ If internal-subagent and context-subagent disagree on a dependency → dispatch 
 1. Confirmed entry points (file:line references)
 2. Undocumented internal dependencies (the ones grep misses)
 3. Architectural risk hotspots (patterns making changes dangerous)
-4. Exact file paths + line ranges for impl-subagent (pre-located, no search needed)
+4. Exact file paths + line ranges for `t3-impl` (pre-located, no search needed)
 
 `recommendations` (max 5): ordered impl approach based on structural findings.
 

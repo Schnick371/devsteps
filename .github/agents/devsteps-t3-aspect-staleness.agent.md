@@ -9,7 +9,7 @@ tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 
 ## Contract
 
 - **Tier**: T3 — Aspect Analyst
-- **Dispatched by**: T2 Quality (`devsteps-t2-quality`), T2 Planner (`devsteps-t2-planner`), T2 Reviewer (`devsteps-reviewer`)
+- **Dispatched by**: T2 Quality (`devsteps-t2-quality`), T2 Planner (`devsteps-t2-planner`), T2 Reviewer (`devsteps-t2-reviewer`)
 - **Returns**: Analysis envelope via `write_analysis_report` — T2 reads via `read_analysis_envelope`
 - **NEVER dispatches** further subagents — leaf node
 - **Naming note**: File is `devsteps-t3-aspect-staleness` (legacy name, functionally T3)

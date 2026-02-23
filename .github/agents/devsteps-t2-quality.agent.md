@@ -64,7 +64,7 @@ If automated checks FAIL: skip MAP, immediately produce `MandateResult` with `st
 
 ### REDUCE — Key Contradiction Checks
 
-- Automated checks passed but quality-subagent finds gaps? → C2 Low-Confidence — run targeted re-check.
+- Automated checks passed but `t3-aspect-quality` finds gaps? → C2 Low-Confidence — run targeted re-check.
 - Absence Audit: "What class of edge case (boundary, concurrency, error path) is NOT tested?"
 
 ### RESOLVE — Quality-Specific (Review-Fix Loop)
@@ -73,7 +73,7 @@ When gaps found:
 1. Call `write_rejection_feedback` with structured issues (file, line, issue, suggestion per item).
 2. Call `write_iteration_signal` with `loop_type=REVIEW_FIX`, current `iteration`, `max_iterations=CBP_LOOP.MAX_REVIEW_FIX_ITERATIONS`.
 3. If `iteration >= max_iterations`: call `write_escalation` — do NOT retry further.
-4. After fix: re-run automated checks + targeted quality-subagent re-dispatch (only affected files).
+4. After fix: re-run automated checks + targeted `t3-aspect-quality` re-dispatch (only affected files).
 
 ### SYNTHESIZE — MandateResult `type=quality`
 

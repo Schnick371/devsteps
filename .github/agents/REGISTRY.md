@@ -6,11 +6,10 @@
 |---|---|---|
 | **T1 — Coordinator** | Single-item MPD dispatcher | `devsteps-t1-coordinator.agent.md` |
 | **T1 — Sprint** | Multi-item sprint dispatcher | `devsteps-t1-sprint-executor.agent.md` |
-| **T2 — Analysts** | Domain synthesis, mandate handlers | `devsteps-t2-*.agent.md`, `devsteps-reviewer.agent.md` |
-| **T3 — Sub-agents** | Focused aspect readers (leaf nodes) | `devsteps-aspect-*.agent.md`, `devsteps-analyst-*.agent.md` |
+| **T2 — Analysts** | Domain synthesis, mandate handlers | `devsteps-t2-*.agent.md` |
+| **T3 — Sub-agents** | Focused aspect readers (leaf nodes) | `devsteps-t3-aspect-*.agent.md`, `devsteps-t3-analyst-*.agent.md` |
 | **T3 Exec — Workers** | Code/test/doc implementation | `devsteps-t3-impl.agent.md`, `devsteps-t3-test.agent.md`, `devsteps-t3-doc.agent.md` |
 
-> **Finding T3 files**: Search for `devsteps-aspect-` and `devsteps-analyst-` (legacy naming, no `t3-` prefix in filenames).
 > All agent files contain a `## Contract` section identifying their tier, dispatcher, and return type.
 
 ---
@@ -21,10 +20,10 @@
 
 | Triage Tier | T2 Mandates (Phase A — parallel) | After MandateResults available |
 |---|---|---|
-| **QUICK** | `t2-planner` | impl-subagent → reviewer |
-| **STANDARD** | `t2-archaeology` + `t2-risk` | → `t2-planner` → impl + test (parallel) → reviewer |
-| **FULL** | `t2-archaeology` + `t2-risk` + `t2-quality` | → `t2-planner` → impl + test + doc (parallel) → reviewer |
-| **COMPETITIVE** | `t2-research` + `t2-archaeology` | → `t2-planner` → impl → reviewer |
+| **QUICK** | `t2-planner` | `t3-impl` → `t2-reviewer` |
+| **STANDARD** | `t2-archaeology` + `t2-risk` | → `t2-planner` → `t3-impl` + `t3-test` (parallel) → `t2-reviewer` |
+| **FULL** | `t2-archaeology` + `t2-risk` + `t2-quality` | → `t2-planner` → `t3-impl` + `t3-test` + `t3-doc` (parallel) → `t2-reviewer` |
+| **COMPETITIVE** | `t2-research` + `t2-archaeology` | → `t2-planner` → `t3-impl` → `t2-reviewer` |
 
 ---
 
@@ -37,7 +36,7 @@
 | `research` | `devsteps-t2-research` | web + internal T3 cross-validation → ranked recommendation |
 | `quality` | `devsteps-t2-quality` | automated gates + quality T3 + Review-Fix loop |
 | `planning` | `devsteps-t2-planner` | reads existing MandateResults, minimal T3 → ordered steps |
-| `review` | `devsteps-reviewer` | T2 quality gate, write_rejection_feedback, escalation |
+| `review` | `devsteps-t2-reviewer` | Blocking quality gate — PASS/FAIL, write_rejection_feedback, escalation |
 
 ---
 
@@ -67,9 +66,8 @@ T2 calls: `read_analysis_envelope(report_path)` — internal to T2, invisible to
 
 ## T3 Sub-Agents (dispatched by T2 only — T1 NEVER dispatches these directly)
 
-> **Naming**: T3 files use legacy `devsteps-aspect-*` and `devsteps-analyst-*` prefixes (no `t3-` in filename).
 > Each file contains a `## Contract` section that identifies its tier, who dispatches it, and what it returns.
-> T2 files: `devsteps-t2-*.agent.md` | T3 files: `devsteps-aspect-*.agent.md`, `devsteps-analyst-*.agent.md`
+> T2 files: `devsteps-t2-*.agent.md` | T3 Sub-agents: `devsteps-t3-aspect-*.agent.md`, `devsteps-t3-analyst-*.agent.md` | T3 Exec: `devsteps-t3-impl/test/doc.agent.md`
 
 | Agent | Domain |
 |---|---|

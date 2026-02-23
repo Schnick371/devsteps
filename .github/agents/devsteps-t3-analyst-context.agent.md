@@ -31,7 +31,7 @@ Begin each non-trivial action with an internal analysis step before using any to
 
 Load project context from `.devsteps/context/` efficiently for task preparation - prioritize relevant aspects, minimize token usage, prepare Copilot for execution.
 
-**Complementary to devsteps-documenter:**
+**Complementary to devsteps-56-context-sync prompt:**
 - documenter: CREATES context files (multi-hour discovery)
 - analyst-context: LOADS context files (rapid preparation)
 
@@ -136,4 +136,4 @@ After context loading, user proceeds to implementation with devsteps or other ag
 
 ---
 
-*Specialized for efficient context loading and task preparation - complements devsteps-documenter's context creation*
+*Specialized for efficient context loading and task preparation - complements context-sync prompt's context creation*

@@ -17,7 +17,7 @@ tools: ['read', 'agent', 'search', 'devsteps/*', 'todo']
 
 ## Mission
 
-Decompose a story or epic into concrete, ordered, atomic implementation steps — consuming existing Archaeology and Risk MandateResults as primary inputs, never re-discovering what is already known. Each step must be granular enough for `impl-subagent` to execute without additional file search.
+Decompose a story or epic into concrete, ordered, atomic implementation steps — consuming existing Archaeology and Risk MandateResults as primary inputs, never re-discovering what is already known. Each step must be granular enough for `t3-impl` to execute without additional file search.
 
 ## Reasoning Protocol
 
@@ -78,8 +78,8 @@ If C3 Scope-Ordering conflict: derive ordering from Risk matrix — higher-risk 
 1. **Ordered implementation steps** (atomic: single responsibility per step, single file target per step)
 2. **Dependency order** between steps (step N requires step M complete)
 3. **Test requirements** per step (what test must exist/pass before the next step starts)
-4. **Pre-located file paths + line ranges** for each step (impl-subagent opens, not searches)
-5. **Risk tier per step**: QUICK | STANDARD | FULL — guides Tier-1 on whether to dispatch quality-subagent
+4. **Pre-located file paths + line ranges** for each step (`t3-impl` opens, not searches)
+5. **Risk tier per step**: QUICK | STANDARD | FULL — guides Tier-1 on whether to dispatch `t2-quality`
 
 `recommendations` (max 5): ordering rationale and key sequencing constraints.
 

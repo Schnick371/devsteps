@@ -1,14 +1,14 @@
 ---
 description: 'Autonomous sprint executor — Tier-1, multi-item backlog, T2 mandate dispatch, NEVER reads raw T3 envelopes, only MandateResults via read_mandate_results'
 model: 'Claude Sonnet 4.6'
-tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'edit', 'search', 'read/problems', 'devsteps/*', 'tavily/*', 'todo']
+tools: ['vscode/askQuestions', 'vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'edit', 'search', 'read/problems', 'devsteps/*', 'tavily/*', 'todo']
 agents:
   - devsteps-t2-archaeology
   - devsteps-t2-risk
   - devsteps-t2-research
   - devsteps-t2-quality
   - devsteps-t2-planner
-  - devsteps-reviewer
+  - devsteps-t2-reviewer
   - devsteps-t3-impl
   - devsteps-t3-test
   - devsteps-t3-doc
@@ -43,7 +43,7 @@ Execute multi-hour autonomous work sessions on planned backlog via T2 mandate di
 | Multiple items / "sprint" / "backlog" | True sprint | Proceed with full sprint protocol below |
 | "continue sprint" / "from the backlog" | Resume sprint | Step 1 Backlog Discovery, skip archaeology if <2h since last sprint |
 | Item type = spike | Spike | `t2-archaeology` + `t2-research` (parallel), skip impl until direction set |
-| "review" / "validate" | Review | Dispatch `devsteps-reviewer` directly |
+| "review" / "validate" | Review | Dispatch `devsteps-t2-reviewer` directly |
 | Empty backlog | No items | Surface to user: list blocked/draft for triage |
 
 ---
@@ -98,7 +98,7 @@ For each item in Sprint Brief order:
 
 **5.** Execute in order:
 - `devsteps-t3-impl` → `devsteps-t3-test` + `devsteps-t3-doc` (parallel if independent)
-- `devsteps-reviewer` — **BLOCKING** — FAIL → review-fix loop (max 3 via `write_rejection_feedback`)
+- `devsteps-t2-reviewer` — **BLOCKING** — FAIL → review-fix loop (max 3 via `write_rejection_feedback`)
 
 **6.** Merge `--no-ff`, status → `done`.
 

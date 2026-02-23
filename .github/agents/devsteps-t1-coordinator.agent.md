@@ -1,14 +1,14 @@
 ---
 description: 'DevSteps Coordinator — Tier-1, single-item MPD, dispatches T2 mandate analysts, NEVER reads raw T3 envelopes, only MandateResults via read_mandate_results'
 model: 'Claude Sonnet 4.6'
-tools: ['execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'read', 'agent', 'edit', 'search', 'devsteps/*', 'todo']
+tools: ['vscode/askQuestions', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'read', 'agent', 'edit', 'search', 'devsteps/*', 'todo']
 agents:
   - devsteps-t2-archaeology
   - devsteps-t2-risk
   - devsteps-t2-research
   - devsteps-t2-quality
   - devsteps-t2-planner
-  - devsteps-reviewer
+  - devsteps-t2-reviewer
   - devsteps-t3-impl
   - devsteps-t3-test
   - devsteps-t3-doc
@@ -40,7 +40,7 @@ Orchestrate single-item implementation via T2 mandate dispatch. **NEVER reads ra
 | Single item ID, no sprint signal | Single-item MPD | Proceed below |
 | "which approach/pattern/library" | Competitive | Dispatch `devsteps-t2-research` |
 | Item type = spike / "investigate" | Investigation | `devsteps-t2-archaeology` + `devsteps-t2-research` (parallel) |
-| "review", "check", "validate" | Review only | Dispatch `devsteps-reviewer` |
+| "review", "check", "validate" | Review only | Dispatch `devsteps-t2-reviewer` |
 | Trivial fix (<2 files, no boundary crossing) | QUICK | Skip analysis, direct impl |
 
 ---
@@ -80,7 +80,7 @@ Extract: `findings` (file paths for execution), `recommendations` (ordered steps
 Dispatch exec agents IN ORDER (pass `report_path` + item ID only — never paste findings):
 1. `devsteps-t3-impl` — reads `t2-planner` MandateResult independently
 2. `devsteps-t3-test` + `devsteps-t3-doc` (parallel if independent)
-3. `devsteps-reviewer` — **BLOCKING** — must PASS before done
+3. `devsteps-t2-reviewer` — **BLOCKING** — must PASS before done
 
 ### Step 5: Quality Gate
 
