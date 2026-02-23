@@ -137,7 +137,7 @@ export async function initCommand(
           label: 'DevSteps: List Q1 Tasks (Urgent & Important)',
           type: 'shell',
           command:
-            'node packages/cli/dist/index.js list --eisenhower urgent-important --status draft',
+            'node packages/cli/dist/index.js list --priority urgent-important --status draft',
           presentation: {
             reveal: 'always',
             panel: 'dedicated',

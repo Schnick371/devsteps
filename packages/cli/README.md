@@ -25,7 +25,7 @@ devsteps add task --title "API Integration" --parent STORY-001
 
 # List items
 devsteps list --type task --status in-progress
-devsteps list --priority critical
+devsteps list --priority urgent-important  # Q1: urgent & important
 
 # Update status
 devsteps update TASK-001 --status done
