@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Add MCP bulk operations (bulk_update, bulk_tag_add, bulk_tag_remove) — CLI parity",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-23T11:39:25.586Z",
-  "updated": "2026-02-23T11:41:20.565Z",
+  "updated": "2026-02-23T11:58:00.969Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/handlers/bulk.ts",

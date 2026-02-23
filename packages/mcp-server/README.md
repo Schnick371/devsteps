@@ -106,6 +106,7 @@ The MCP server provides these tools to AI assistants:
 
 ### Traceability & Relationships
 - `devsteps-link` - Create relationships between items
+- `devsteps-unlink` - Remove a relationship between two items (idempotent, bidirectional)
 - `devsteps-trace` - Show complete traceability tree
 
 ### Project Management
@@ -116,6 +117,9 @@ The MCP server provides these tools to AI assistants:
 ### Archival & Maintenance
 - `devsteps-archive` - Archive single items
 - `devsteps-purge` - Bulk archive completed items
+- `devsteps-bulk_update` - Update status/assignee/category/priority on multiple items at once
+- `devsteps-bulk_tag_add` - Add tags to multiple items at once
+- `devsteps-bulk_tag_remove` - Remove tags from multiple items at once
 
 ### Monitoring
 - `devsteps-health` - Server health status

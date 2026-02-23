@@ -46,10 +46,15 @@ const items = await listItems('/path/to/.devsteps');
 - `getItem()` - Retrieve work item by ID
 - `updateItem()` - Update existing work item
 - `deleteItem()` - Delete work item
-- `listItems()` - List all work items with filters
+- `listItems()` - List all work items with filters (supports `archived: true` for archive scan)
 - `searchItems()` - Full-text search across items
-- `linkItems()` - Create relationships between items
-- `archiveItem()` - Archive completed items
+- `linkItems()` - Create bidirectional relationship between items
+- `unlinkItem()` - Remove a bidirectional relationship (idempotent — no-op if not present)
+- `archiveItem()` - Archive a single completed item
+- `purgeItems()` - Bulk archive items matching status/type filters
+- `bulkUpdateItems()` - Update status/assignee/category/priority on multiple items
+- `bulkAddTags()` - Add tags to multiple items at once
+- `bulkRemoveTags()` - Remove tags from multiple items at once
 
 ### Types
 - `ItemType` - Epic, Story, Task, Bug, etc.

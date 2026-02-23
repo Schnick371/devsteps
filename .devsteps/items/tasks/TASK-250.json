@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Add archived filter to MCP list tool — CLI parity for devsteps list --archived",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-not-important",
   "created": "2026-02-23T11:41:15.561Z",
-  "updated": "2026-02-23T11:41:20.565Z",
+  "updated": "2026-02-23T11:57:57.466Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/handlers/list.ts",
