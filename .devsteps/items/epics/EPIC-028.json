@@ -3,10 +3,10 @@
   "type": "epic",
   "category": "general",
   "title": "N-Tier Agent Hierarchy: Tier-2 Deep Analysts + Loop Support",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-22T21:13:43.207Z",
-  "updated": "2026-02-22T21:20:40.217Z",
+  "updated": "2026-02-23T08:21:31.518Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/",
