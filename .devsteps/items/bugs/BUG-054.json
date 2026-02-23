@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "general",
   "title": "purgeItems() reads legacy index.json — fails on directory-based index projects",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-23T11:38:10.228Z",
-  "updated": "2026-02-23T11:40:21.142Z",
+  "updated": "2026-02-23T11:47:40.801Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/archive.ts"

@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Implement unlinkItem() in shared/core — bi-directional relation removal",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-23T11:38:47.213Z",
-  "updated": "2026-02-23T11:40:28.321Z",
+  "updated": "2026-02-23T11:51:27.199Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/unlink.ts",

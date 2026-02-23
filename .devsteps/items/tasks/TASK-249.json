@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Add MCP unlink handler and tool (mcp_devsteps_unlink)",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-23T11:39:08.299Z",
-  "updated": "2026-02-23T11:40:32.153Z",
+  "updated": "2026-02-23T11:51:31.724Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/handlers/unlink.ts",
