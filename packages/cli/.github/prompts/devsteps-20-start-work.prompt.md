@@ -1,113 +1,73 @@
 ---
-agent: 'devsteps'
-model: 'Claude Sonnet 4.5'
-description: 'Begin implementation work - review planned items, select next task, and start structured development'
-tools: ['vscode/extensions', 'vscode/getProjectSetupInfo', 'vscode/newWorkspace', 'vscode/runCommand', 'vscode/vscodeAPI', 'execute/getTerminalOutput', 'execute/runTask', 'execute/runTests', 'execute/testFailure', 'execute/runInTerminal', 'read/terminalSelection', 'read/terminalLastCommand', 'read/getTaskOutput', 'read/problems', 'read/readFile', 'agent', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web/fetch', 'devsteps/*', 'playwright/*', 'tavily/*', 'todo', 'prisma.prisma/prisma-migrate-status', 'prisma.prisma/prisma-migrate-dev', 'prisma.prisma/prisma-migrate-reset', 'prisma.prisma/prisma-studio', 'prisma.prisma/prisma-platform-login', 'prisma.prisma/prisma-postgres-create-database']
+agent: 'devsteps-t1-coordinator'
+model: 'Claude Sonnet 4.6'
+description: 'Begin implementation work - MPD analysis then structured development'
+tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'bright-data/*', 'todo']
 ---
 
-# 🚀 Start Work - Begin Implementation
+# 🚀 Start Work
 
-## Mission
+> **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
 
-Review planned work, select highest priority, begin structured development.
 
-**Branch Strategy:** Work item **planning** in `main`, **status updates + code** in feature branch.
+Activate **Standard MPD**. Follow the MPD protocol from your agent instructions.
 
-**Critical Rule:** Planning (main) → Implementation + Status (feature) → Merge (both to main).
+## Mode Selection — T2 Dispatch by Triage Tier
 
-## Implementation Protocol
+| Triage Tier | T2 Mandates (parallel fan-out) | Then |
+|---|---|---|
+| **QUICK** | `t2-planner` | `t2-impl` → `t2-reviewer` |
+| **STANDARD** | `t2-archaeology` + `t2-risk` | → `t2-planner` → `t2-impl` → `t2-test` → `t2-reviewer` |
+| **FULL** | `t2-archaeology` + `t2-risk` + `t2-quality` | → `t2-planner` → `t2-impl` → `t2-test` ∥ `t2-doc` → `t2-reviewer` |
+| **COMPETITIVE** | `t2-research` + `t2-archaeology` | → `t2-planner` → `t2-impl` → `t2-reviewer` |
+| **QUICK fix** | Skip all analysis | Direct `t2-impl` → `t2-reviewer` |
 
-### 1. Branch Strategy (MANDATORY)
+## T3 Agents by Role
 
-**Phase 1: Verify DevSteps Work Items in Main**
-**Phase 2: Create/Checkout Feature Branch**
-- Branch naming: `story/<ID>`, `epic/<ID>`
-- Check existing branches before creating new
-- **Principle:** Feature branch for CODE ONLY
+**Analyst (dispatched by T2 internally):**
+- `t3-analyst-context` — global project map, dependency tree
+- `t3-analyst-internal` — deep file reads, symbol tracing
+- `t3-analyst-web` — external best practices, deprecation signals
 
-**Phase 3: Verify Clean State**
-- Commit or stash before proceeding
+**Aspect (parallel fan-out within T2):**
+- `t3-aspect-impact` — call-site blast radius
+- `t3-aspect-constraints` — schema, contract, hard constraints
+- `t3-aspect-quality` — test gaps, pattern consistency
+- `t3-aspect-staleness` — stale docs, conflicting branches
+- `t3-aspect-integration` — cross-package boundaries
 
-### 2. Review
-- Show Q1 items (urgent-important)
-- Highlight blockers
-- Discuss priorities
+**Exec Conductors (dispatched by T1 — each orchestrates its own T3 workers):**
+- `t2-impl` — orchestrates code implementation via `t3-impl`
+- `t2-test` — orchestrates test generation via `t3-test`
+- `t2-doc` — orchestrates documentation updates via `t3-doc`
 
-### 3. Select
-- Priority order: CRITICAL bugs → Q1 → Q2 → Dependencies → Quick wins
-- Start immediately with highest priority
-- Check dependencies and verify not blocked
+## HARD STOP Conditions
 
-### 4. Understand
-- Get item details via devsteps
-- Review parent items and dependencies
-- Locate code via search and usages
-- Check existing problems
+Do NOT auto-proceed if:
+- Any MandateResult `verdict` = ESCALATED
+- Risk analyst returns `HIGH_RISK`
+- Archaeology finds unexpected cross-package dependencies outside `affected_paths`
 
-### 5. Begin
-- Mark item in-progress (`#mcp_devsteps_update <ID> --status in-progress` in feature branch)
-- Document decisions during work
-- Link items as discovered
-- Write tests in parallel
+Surface to user:
+```
+⚠️ DECISION REQUIRED
+Finding: [what was found]
+Risk: [consequence of proceeding]
+Options: A) ... B) ...
+```
 
-### 6. Guide
-- Stuck? → Create spike or mark blocked
-- Scope grows? → Break down into new task
-- Dependencies found? → Link items
-- Decisions made? → Document why
+## Entry Points
 
-### 7. Testing/Review
-**DevSteps Status:** `in-progress` → `review`  
-**Quality Gates:** Tests pass, build succeeds, manual testing, docs updated, no regressions *(see devsteps-workflow.prompt.md)*  
-**If Fail:** Return to Step 6
+If the user specified an item ID → use that item.  
+If no item specified → `#mcp_devsteps_list` filtered by `status: planned`, priority Q1 first, select highest priority.
 
-### 8. Complete & Integrate
-**DevSteps Status:** `review` → `done` (all gates passed)  
-**SCM Commit:** Feature branch, conventional format, footer `Implements: ID`  
-**Integration:** Merge to main, sync devsteps status, retain branch 8+ weeks
+## What to do next
 
-**Commit Discipline (CRITICAL):**
-- **Batch related changes:** Collect all changes for one logical unit before committing
-- **Wait for user approval:** Present changes, get confirmation BEFORE commit
-- **No premature commits:** Don't commit after every small edit
-- **Example:** If updating multiple instruction files for same topic → stage all, commit once
-- **If already committed prematurely:** Use `git reset HEAD~1` to undo, batch properly
+1. Identify the item (ask user or select from backlog)
+2. Update item status to `in-progress`
+3. Create/checkout feature branch (`story/<ID>`, `task/<ID>`, `bug/<ID>`)
+4. Triage → dispatch T2 mandate analysts in parallel (see Mode Selection above)
+5. Read MandateResults via `read_mandate_results` — pass `report_path` to exec agents (never paste content)
+6. Dispatch `devsteps-t2-impl` → `devsteps-t2-test` (then `devsteps-t2-doc` if FULL tier)
+7. `devsteps-t2-reviewer` PASS → merge to main (`--no-ff`), status → `done`
 
-**Merge Protocol:**
-- Verify all quality gates passed
-- Merge feature branch to main (--no-ff for traceability)
-- Push merged main
-- **Branch Retention:** Keep branch locally 8+ weeks (see devsteps-git-hygiene.instructions.md)
-- **Sync Retained Branch:** After merge, immediately sync retained branch with main to prevent divergence
-  - Checkout retained branch, merge main with --no-ff, return to main
-  - Rationale: Subsequent main commits (docs, other merges) cause retained branches to diverge
-  - Prevents stale branches, maintains traceability during verification period
-
-**Status Sync:** `.devsteps/` status changes merge from feature branch to main (status progression captured in git history)
-
-**Branch Lifecycle:** Feature branches retained locally for 8+ weeks. Delete only after Epic/Story marked `verified`/`closed`. Archive tags (`archive/<branch-name>`) only for unmerged experimental work.
-
-**Why Status in Feature Branch:** Git history shows exact moment item progressed (in-progress → review → done), providing audit trail and branch-status alignment.
-
-### 8.5. Spike Post-Processing
-- Review findings
-- Create Stories from insights
-- Link Stories to Epic
-- Estimate with confidence from learnings
-
-### 9. Next
-- Show status
-- Highlight unblocked items
-- Continue with Step 1
-
-## Red Flags
-
-**Watch:** Task jumping, ignoring patterns, skipping tests, breaking changes, missing docs, unmerged branches
-
-**Redirect:** Finish first, follow patterns, write tests now, update dependents, merge immediately
-
-**Unmerged Branch Alert:** Feature branches older than 1 day without merge indicate workflow failure. Investigate and resolve immediately.
-
----
-
-**See `devsteps.agent.md` for mentor role. See `devsteps-workflow.prompt.md` for workflow details.**

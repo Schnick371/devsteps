@@ -5,6 +5,22 @@ All notable changes to the "DevSteps" extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2026-02-21
+
+### Added
+- Context Budget Protocol (CBP) infrastructure: MCP server now exposes `write_analysis_report`, `read_analysis_envelope`, `write_verdict`, and `write_sprint_brief` tools for AI agent coordination (EPIC-027, STORY-104/105/106)
+- Pre-release deployment workflow: extension now correctly resolves `@next` vs `@latest` npm tag at runtime
+- Compliance audit trail support via STORY-102 planning
+
+### Fixed
+- **BUG-050:** Extension-spawned MCP server now reports the correct semantic version (read dynamically from `package.json` instead of hardcoded `0.1.0`)
+- Dead MCP-server embedding code removed from extension bundle — reduces extension size and eliminates stale code paths (EPIC-004 cleanup)
+
+### Changed
+- Activation strategy optimised (STORY-037): extension activates only on relevant workspace signals, reducing VS Code startup overhead
+- Bundling cleaned up with Biome linting pass; no functional behaviour changes
+- MCP server spawned via npx now guaranteed compatible via `@schnick371/devsteps-mcp-server@latest`
+
 ## [0.8.4] - 2025-12-16
 
 ### Fixed

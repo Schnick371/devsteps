@@ -1,5 +1,19 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Schemas barrel export
+ * Re-exports all Zod schemas and derived TypeScript types.
+ */
+
 import { z } from 'zod';
 
+// Context Budget Protocol schemas
+export * from './analysis.js';
+// CBP Loop control schemas: RejectionFeedback, IterationSignal, EscalationSignal
+export * from './cbp-loops.js';
+// CBP Tier-2 schemas: Mandate ↔ MandateResult (Tier-1 ↔ Tier-2)
+export * from './cbp-mandate.js';
 export * from './index-refs.schema.js';
 // Re-export project context schemas
 export * from './project.js';

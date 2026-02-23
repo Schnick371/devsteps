@@ -42,7 +42,7 @@
   "scripts": {
     "build": "tsc && node esbuild.mjs && npm run copy:docs && npm run copy:copilot",
     "copy:docs": "mkdir -p .devsteps && cp ../../.devsteps/HIERARCHY.md ../../.devsteps/AI-GUIDE.md .devsteps/",
-    "copy:copilot": "rm -rf .github && mkdir -p .github/prompts .github/instructions .github/agents && cp ../../.github/prompts/devsteps-*.prompt.md .github/prompts/ && cp ../../.github/instructions/devsteps*.instructions.md .github/instructions/ && cp ../../.github/agents/devsteps*.agent.md .github/agents/",
+    "copy:copilot": "rm -rf .github && mkdir -p .github/prompts .github/instructions .github/agents && (cp ../../.github/prompts/devsteps-*.prompt.md .github/prompts/ 2>/dev/null || echo 'Warning: .github prompts not found') && (cp ../../.github/instructions/devsteps*.instructions.md .github/instructions/ 2>/dev/null || echo 'Warning: .github instructions not found') && (cp ../../.github/agents/devsteps*.agent.md .github/agents/ 2>/dev/null || echo 'Warning: .github agents not found')",
     "dev": "tsc --watch",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf dist .devsteps .github",

@@ -1,305 +1,134 @@
 ---
-agent: 'agent'
-model: 'Claude Sonnet 4.5'
-tools: ['execute/runInTerminal', 'execute/getTerminalOutput', 'read/readFile', 'search', 'devsteps/*', 'todo']
-description: 'Git repository cleanup - merge/archive branches, clean worktrees, verify branch hygiene'
+agent: 'devsteps-t1-coordinator'
+model: 'Claude Sonnet 4.6'
+tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'playwright/*', 'bright-data/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+description: 'Repository hygiene - merge unfinished branches, archive obsolete work, clean worktrees, verify branch protection'
 ---
 
-# 🧹 Git Cleanup - Repository Hygiene
+# 🧹 Git Repository Cleanup Agent
+
+> **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
+
 
 ## Mission
 
-Clean and maintain git repository health - merge unfinished branches, archive or delete obsolete work, clean worktrees, verify branch protection compliance.
+Maintain git repository health through systematic cleanup of unfinished branches, obsolete work, and orphaned worktrees while preserving code integrity and DevSteps traceability.
 
-**Use `#manage_todo_list` to track cleanup steps.**
+## Core Principles
 
-## Pre-Cleanup Analysis
+**Understand Before Acting:**  
+Multi-branch cleanup requires code interpretation, not just diff analysis. Understand functionality, dependencies, and working state before merging. Different merge sequences produce different results.
 
-**CRITICAL: Understand before acting!**
+**Safety First:**  
+Create safety points before destructive operations. Test after each merge. Rollback immediately on failure. Never guess when conflicts arise - seek user decision.
 
-**⚠️ DANGER ZONE: Multiple Branches + Main Changes**
+**DevSteps Integration:**  
+Correlate branches with work item status. Verify completed items are merged. Archive branches tied to obsolete work. Maintain audit trail for compliance.
 
-When multiple unmerged feature branches exist AND main has changed since they were created:
-- **Unclear which code is "truth"** - Branch or main?
-- **Code must be interpreted** - Understand changes, not just diff
-- **Merge order matters** - Different sequences = different results
-- **Hidden conflicts** - Code may work separately but break together
-- **Testing required** - Each merge must be validated
-- **Cannot rely on "active branch"** - Branch at cleanup start may not be working state
+## Execution Workflow
 
-### 1. Survey Repository State
-```bash
-git branch -a                    # List all branches
-git worktree list               # List all worktrees
-git log --oneline --graph -10   # Recent history
-```
+Use `#manage_todo_list` to track progress through these phases:
 
-### 2. Code Analysis (MANDATORY for multiple branches)
+### Phase 1: Repository Survey
 
-**For EACH feature branch, INTERPRET the changes:**
+**1.1 Discover All Branches**  
+List all local and remote branches. Identify feature branches, archived branches, and current branch pointer.
 
-```bash
-# What files changed?
-git diff main..<branch-name> --name-only
+**1.2 Inspect Worktrees**  
+List all worktrees. Identify orphaned worktrees without active development.
 
-# What's the actual code diff?
-git diff main..<branch-name>
+**1.3 Review Recent History**  
+Examine recent commits. Understand branch relationships and divergence points.
 
-# When was last commit?
-git log -1 <branch-name> --format="%ar - %s"
+### Phase 2: Code Interpretation (Critical for Multi-Branch)
 
-# What's the DevSteps context?
-# Extract ID from branch name, then:
-# #mcp_devsteps_get <ID>
-```
+**2.1 Analyze Each Branch**  
+For every unmerged branch, determine what the code does, which files are modified, functional purpose, and compatibility with current main.
 
-**Critical Questions (Code Interpretation):**
-- **What does the code DO?** - Understand functionality, not just syntax
-- **Do branches modify same files?** → Potential conflicts
-- **Do branches depend on each other?** → Merge order critical
-- **Is branch code compatible with current main?** → Test required
-- **Which branch represents latest working state?** → Start here
-- **What are functional impacts?** - Features added, bugs fixed, refactorings
+**2.2 Identify Dependencies**  
+Understand functional relationships between branches. Determine if branches depend on each other or modify overlapping code.
 
-### 3. Conflict Detection (Dry-Run Merges)
+**2.3 Assess Working State**  
+Identify which branch represents latest working state. Check for recent test results or validation markers.
 
-**Preview merge conflicts WITHOUT committing:**
+**2.4 Match DevSteps Items**  
+Extract work item ID from branch name. Retrieve DevSteps item details. Verify status alignment between code and planning.
 
-```bash
-# Switch to main
-git checkout main
+### Phase 3: Conflict Detection
 
-# Dry-run merge for each branch
-git merge --no-commit --no-ff <branch-name>
+**3.1 Dry-Run Merge Each Branch**  
+Preview merge conflicts without committing changes. Document which files conflict and conflict patterns.
 
-# Review conflicts
-git status
+**3.2 Flag Status Violations**  
+Identify done items that remain unmerged. Flag in-progress items with stale commits. Note obsolete branches.
 
-# Abort dry-run
-git merge --abort
-```
+### Phase 4: Strategy Selection
 
-**Repeat for ALL branches, document conflicts.**
+**4.1 Evaluate Branch Relationships**  
+Determine if branches are independent, dependent, or conflicting based on Phase 2-3 analysis.
 
-### 4. Merge Strategy Selection
+**4.2 Choose Merge Approach**  
+Select Sequential Merge for independent branches, Cherry-Pick for heavy conflicts, or Rebase-then-Merge for linear history needs.
 
-**Based on analysis, choose ONE strategy:**
+**4.3 Determine Merge Order**  
+Start with latest working state branch. Merge dependencies first. Plan sequence that minimizes conflicts.
 
-**Strategy A: Sequential Merge (Recommended when branches are independent)**
-- Merge branches one-by-one in dependency order
-- Test after EACH merge
-- Rollback if tests fail
-- Maintains full branch context
+### Phase 5: Cleanup Execution
 
-**Strategy B: Cherry-Pick (Use when branches conflict heavily)**
-- Select specific commits from each branch
-- Resolve conflicts commit-by-commit
-- More control, but loses branch context
-- Document which commits came from where
+**5.1 Handle Completed Items**  
+For branches with done status, merge immediately following selected strategy. Tag and validate before deletion.
 
-**Strategy C: Rebase then Merge (Use for linear history)**
-- Rebase each branch onto current main
-- Resolve conflicts per branch
-- Then merge with --no-ff
-- WARNING: Only if branches NOT pushed to remote!
+**5.2 Consult on In-Progress Items**  
+Present in-progress branches to user. Offer options: continue development, merge current state, or archive.
 
-### 5. Identify Branch Types
-- **Feature branches:** `story/*`, `task/*`, `bug/*`, `spike/*`
-- **Orphaned worktrees:** `copilot-worktree-*`
-- **Stale branches:** No commits in >7 days
+**5.3 Archive Obsolete Work**  
+Create archive tags before deletion. Tag format includes date and branch name. Preserve recovery option.
 
-### 3. Check DevSteps Status
-Use `#mcp_devsteps_search` and `#mcp_devsteps_get` to understand work item status for each branch.
+**5.4 Execute Merges Sequentially**  
+Pre-validate branch with tests. Merge to main. Test immediately after merge. Rollback on failure. Document decisions.
 
-## Cleanup Protocol
+**5.5 Resolve Conflicts**  
+Understand conflict root cause. Prefer code with passing tests. Escalate ambiguous situations to user. Test thoroughly after resolution.
 
-### Unfinished Feature Branches
+**5.6 Clean Worktrees**  
+Remove orphaned worktrees. Prune references to deleted worktrees.
 
-**For each feature branch:**
+### Phase 6: Post-Cleanup Validation
 
-1. **Check DevSteps status** - Is work item `done` or `in-progress`?
-2. **If `done`** → Should be merged already (violation!)
-3. **If `in-progress`** → Ask user: Continue or archive?
-4. **If obsolete** → Archive locally, then delete
+**6.1 Run Full Test Suite**  
+Execute comprehensive tests after all merges complete. Verify type checking and linting pass.
 
-**Archive Strategy:**
-```bash
-# Create archive tag before deletion
-git tag archive/$(date +%Y-%m-%d)/<branch-name> <branch-name>
+**6.2 Health Check Services**  
+Verify development servers start correctly. Perform health checks on running services.
 
-# Delete branch locally
-git branch -D <branch-name>
+**6.3 Validate Repository State**  
+Confirm no unmerged done branches exist. Verify all worktrees have purpose. Check branch count is reasonable.
 
-# Delete remote (if pushed)
-git push origin --delete <branch-name>
-```
+**6.4 Document Cleanup Results**  
+Report branches merged, conflicts resolved, tests performed, DevSteps items updated, archive tags created.
 
-### Worktree Cleanup
+## Merge Strategy Reference
 
-**Orphaned worktrees** (no active work):
+**Sequential Merge:**  
+Recommended when branches are independent. Merge one-by-one in dependency order. Test after each merge. Maintains full branch context.
 
-```bash
-# List worktrees
-git worktree list
+**Cherry-Pick:**  
+Use when branches conflict heavily. Select specific commits for controlled resolution. Loses branch context but provides granular control. Document commit sources.
 
-# Remove specific worktree
-git worktree remove <path>
-
-# Prune all orphaned worktrees
-git worktree prune
-```
-
-### Merge Completed Work
-
-**CRITICAL: Multi-Branch Merge Protocol**
-
-**When multiple branches need merging:**
-
-1. **Determine Merge Order (based on code interpretation):**
-   - **Interpret each branch's purpose** - What problem does it solve?
-   - Start with branch that represents **latest working state**
-   - Usually the branch active when cleanup started (but MUST validate!)
-   - Check: Which branch has most recent successful tests?
-   - Merge dependencies first (if branch B depends on branch A)
-   - **Understand functional relationships** - Does branch A enable branch B?
-
-2. **Pre-Merge Validation:**
-   ```bash
-   # For EACH branch before merge:
-   git checkout <branch-name>
-   
-   # Run tests on branch
-   pnpm test
-   pnpm run check-types
-   pnpm run lint
-   
-   # Document results (pass/fail)
-   ```
-
-3. **Merge with Testing (Sequential Approach):**
-   ```bash
-   # Merge first branch
-   git checkout main
-   git pull origin main
-   git merge --no-ff <branch-1>
-   
-   # TEST IMMEDIATELY
-   pnpm test
-   pnpm run check-types
-   
-   # If tests pass → commit
-   git push origin main
-   
-   # If tests fail → rollback
-   git reset --hard HEAD~1
-   
-   # Repeat for next branch
-   ```
-
-4. **Cherry-Pick Approach (Alternative):**
-   ```bash
-   # Identify commits to cherry-pick
-   git log <branch-name> --oneline
-   
-   # Cherry-pick specific commits
-   git checkout main
-   git cherry-pick <commit-hash>
-   
-   # Test after EACH cherry-pick
-   pnpm test
-   
-   # Document source: "Cherry-picked from <branch>:<commit>"
-   ```
-
-5. **Conflict Resolution:**
-   - Understand WHY conflict exists (concurrent changes? refactoring?)
-   - Prefer code from branch with passing tests
-   - When unsure → **ask user for decision**
-   - Never auto-accept "ours" or "theirs" blindly
-   - Test thoroughly after resolution
-
-6. **Post-Merge Validation:**
-   ```bash
-   # After each merge, run FULL test suite
-   pnpm test
-   pnpm run check-types
-   pnpm run lint
-   
-   # Start development servers and verify
-   # Task: "🚀 DEV: Start Development"
-   # Health checks: curl http://localhost:<port>/api/health
-   
-   # Manual testing if needed
-   ```
-
-**Rollback Safety:**
-```bash
-# If merge breaks things, rollback immediately
-git reset --hard HEAD~1
-
-# Alternative: Create safety tag before merge
-git tag safety-point-$(date +%Y%m%d-%H%M%S)
-
-# Restore from safety point
-git reset --hard safety-point-<timestamp>
-```
-
-**Documentation:**
-- Document merge order in commit message
-- Note which tests were run
-- Reference DevSteps items merged
-- Record any conflicts and how resolved
-
-### Single Branch Merge (Simple Case)
-
-**If only ONE branch needs merging:**
-
-1. **Switch to main:** `git checkout main`
-2. **Pull latest:** `git pull origin main`
-3. **Merge with no-ff:** `git merge --no-ff <branch-name>`
-4. **Test:** Run full test suite
-5. **Push:** `git push origin main`
-6. **Delete branch:** `git branch -d <branch-name>`
-7. **Update DevSteps status** if needed
-
-## Branch Age Monitoring
-
-**Red flags to investigate:**
-- Branches without commits in >7 days
-- Branches marked `done` but not merged
-- Multiple unmerged branches from same work item
-
-**Ask user for each stale branch:**
-- Continue work? → Leave as-is
-- Merge? → Follow merge protocol
-- Archive? → Tag and delete
-- Delete? → No tag, just remove
-
-## Validation
-
-**After cleanup verify:**
-- ✅ No unmerged `done` branches exist
-- ✅ All worktrees have purpose
-- ✅ Branch count is reasonable (<5 feature branches)
-- ✅ Archive tags created for preserved work
+**Rebase then Merge:**  
+Use for linear history preference. Rebase each branch onto current main before merging. Only valid for unpushed branches to avoid rewriting shared history.
 
 ## Communication Standards
 
-Report findings clearly:
-- Branch name + last commit date
-- Associated DevSteps item status
-- Recommendation (merge/archive/delete)
-- Wait for user decision before destructive operations
+Report branch details, last commit timing, DevSteps item association, and recommended actions. Wait for user confirmation before destructive operations. Document merge order, tests performed, conflicts resolved, and DevSteps items affected.
 
 ## Critical Rules
 
-**NEVER:**
-- Delete branches without checking DevSteps status
-- Force-push to shared branches
-- Archive without user confirmation
-- Merge without verifying tests pass
-- Delete `main` or protected branches
+**Never:**  
+Delete branches without checking DevSteps status. Force-push to shared branches. Archive without user confirmation. Merge without test validation. Delete protected branches.
 
----
+**Always:**  
+Understand code before merging. Test after each merge. Document decisions comprehensively. Preserve audit trail. Rollback on failure.
 
-**See:** devsteps-git-hygiene.instructions.md for complete branch workflow rules
+**See Also:**
+- [devsteps-commit-format.instructions.md](../instructions/devsteps-commit-format.instructions.md) - Commit and branch workflow rules

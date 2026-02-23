@@ -28,7 +28,8 @@ Theme (strategic, optional)
 **Bug Relationships:**
 - Bug uses **blocks** Story (hierarchy, parent only)
 - Bug uses **relates-to** Epic/Story (additional context)
-- Task **implements** Bug (fix implementation)
+- Task **implements** Bug (= Bug `implemented-by` Task — fix implementation)
+- ⚠️ **NEVER** use `relates-to` for Bug→Task — always use `implemented-by`
 
 ---
 
@@ -58,7 +59,8 @@ Requirement (Level 1)
 **Bug Relationships:**
 - Bug uses **relates-to** to Requirement/Feature (context)
 - Bug uses **blocks** Requirement/Feature (hierarchy, Jira 2025)
-- Task **implements** Bug (fix implementation)
+- Task **implements** Bug (= Bug `implemented-by` Task — fix implementation)
+- ⚠️ **NEVER** use `relates-to` for Bug→Task — always use `implemented-by`
 
 ---
 

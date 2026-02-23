@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * CLI setup command
+ * devsteps setup — interactive project configuration wizard
+ */
+
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';

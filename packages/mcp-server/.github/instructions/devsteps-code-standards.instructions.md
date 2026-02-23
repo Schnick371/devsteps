@@ -5,67 +5,126 @@ description: "File size and code quality standards"
 
 # Code Quality Standards
 
-## File Size Guidelines
+## Core Principles
 
-### File Size Guidelines
-- Keep files focused on single responsibility
-- Refactor when complexity or size hinders understanding
-- Large files signal multiple responsibilities requiring separation
-- Prioritize readability and maintainability over line count rules
+**No Examples**: No code snippets - trust AI to apply principles from training
+**Trust the Model**: Provide goals, not recipes - let AI determine optimal approach
 
-#### Maximum Lines Per File
-- **Components/Services**: 200-300 lines
-- **Complex Modules**: 350 lines (acceptable limit)
-- **300+ lines**: Consider refactoring
-- **500+ lines**: Must be split
+## File Length Limits
 
-### Refactoring Signals
-- Multiple responsibilities in one file
-- Difficult to understand or test
-- High cyclomatic complexity
-- Repeated patterns across file
+### Source Code Files
+- **Target**: 200-400 lines per file
+- **Hard limit**: 400 lines - split if exceeded
+- **Functions**: 10-20 lines ideal, 75 lines maximum
+- **Single responsibility** - one concern per file
+- Split when difficult to understand, test, or name clearly
 
-### Refactoring Approach
-- Extract to separate modules
-- Create utility functions for reuse
-- Split components into sub-components
-- Use composition over inheritance
+### Copilot Instruction Files
+- **Maximum**: 100-150 lines per file (token budget limit)
+- **All instructions combined**: Under 200 lines total
+- **Reason**: Shares token budget with code + conversation + workspace
+- **Keep hyper-focused** - start and end prioritized, middle ignored
 
-## Code Quality
+## TypeScript Best Practices
 
-**Style:**
-- Follow existing project conventions
-- Maintain readability over cleverness
-- Use project's linter/formatter settings
-- Remove dead code (use git for history)
+### Type Safety
+- Enable strict mode in tsconfig.json
+- Avoid `any` type - use `unknown` with type guards
+- Define explicit return types for public APIs
+- Use `readonly` for immutable data
+- Leverage discriminated unions for state management
 
-**Error Handling:**
-- Add guards for new code paths
-- Meaningful error messages
-- Consider edge cases
-- Log appropriately for your stack
+### Error Handling
+- Extend built-in Error for custom error types
+- Include error codes and operational flags
+- Use async/await with try-catch blocks
+- Distinguish operational (expected) from programmer (bugs) errors
+- Centralize error handling in middleware/services
+- Log errors with structured JSON format
+- Include correlation IDs for request tracing
 
-## Code Documentation
+## Code Quality Principles
 
-### When to Add Comments
-- Document "why" not "what"
-- Explain complex algorithms or business logic
-- Document non-obvious decisions
+### Style Consistency
+- Follow existing project conventions over personal preferences
+- Prioritize readability and maintainability over cleverness
+- Use project's configured linter and formatter (Biome)
+- Remove dead code completely - rely on git for history
+
+### Biome Tooling (2025 Standard)
+- Single tool for linting AND formatting (10-25× faster than ESLint + Prettier)
+- Run before every commit
+- Auto-fix issues where safe
+- Enforces consistent code style across team
+
+### Async/Await Patterns
+- Prefer async/await over callbacks or promise chains
+- Handle all promise rejections explicitly
+- Use Promise.all() for parallel independent operations
+- Avoid mixing await with .then() chains
+
+## Code Documentation Principles
+
+### When Documentation Adds Value
+- Explain **why** decisions were made (not what the code does)
+- Document complex algorithms or business logic
+- Clarify non-obvious design choices
 - Warn about edge cases or gotchas
-- Each file should have a brief header comment describing its purpose
-- Each function/method should have a comment describing its purpose
+- Provide file-level purpose overview
+- Describe function/method responsibilities
 
-### What NOT to Comment
-- Self-explanatory code
-- Redundant descriptions
-- Outdated information
-- Commented-out code (remove it)
+### When to Avoid Documentation
+- Self-explanatory code that speaks for itself
+- Redundant descriptions that restate code
+- Outdated comments that create confusion
+- Commented-out code (delete it, use git)
+
+## Testing Strategy
+
+### Test Pyramid Distribution
+- **Unit Tests (60-70%)**: Pure functions, isolated logic - Vitest
+- **Integration Tests (20-30%)**: CLI commands, API interactions - BATS
+- **E2E Tests (5-10%)**: Critical user flows only - Playwright
+
+### Testing Principles
+- Co-locate tests with implementation files
+- Mock external dependencies, not internal modules
+- Target 80%+ coverage for critical business logic
+- Run full test suite before every commit
+- Tests should document expected behavior
+
+### Test-Driven Development (TDD)
+- Write failing test first (red)
+- Implement minimal code to pass (green)
+- Refactor while maintaining green tests
+- Use tests as living documentation
+
+## Debugging Practices
+
+### VS Code Integration
+- Enable source maps in TypeScript configuration
+- Debug TypeScript directly (not compiled JavaScript)
+- Set breakpoints in source files
+- Use integrated debugger over console logs
+
+### Source Map Configuration
+- Essential for TypeScript debugging
+- Maps compiled code back to source
+- Enables breakpoint debugging in IDE
+- Required for production error tracking
 
 ## Prohibited Practices
 
-**Never:**
-- Create backup files: `.old`, `.bak`, `_neu` (use git!)
+**Never commit:**
+- Backup files with extensions like `.old`, `.bak`, `_neu` - use git branches
+- Code using `any` type - prefer `unknown` with proper type guards
+- Failing tests or broken builds
+- Commented-out code - delete it, git preserves history
+- TypeScript errors suppressed with `// @ts-ignore` without justification
 
 ---
 
-**Project Standards:** See project-specific `.instructions.md` files for tech stack conventions.
+**Related Standards:**
+- TypeScript implementation: `devsteps-typescript-implementation.instructions.md`
+- Testing details: `devsteps-testing.instructions.md`
+- Documentation: `devsteps-documentation.instructions.md`

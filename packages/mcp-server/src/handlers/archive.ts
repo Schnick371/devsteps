@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * MCP handler: archive
+ * Archives a single work item by moving it to .devsteps/archive/.
+ */
+
 import { join } from 'node:path';
 import { archiveItem } from '@schnick371/devsteps-shared';
 import { getWorkspacePath } from '../workspace.js';

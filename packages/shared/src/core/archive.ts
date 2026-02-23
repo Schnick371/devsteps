@@ -1,9 +1,18 @@
-import { existsSync, mkdirSync, readFileSync, renameSync } from 'node:fs';
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Core archive and purge operations
+ * Moves items to .devsteps/archive/ and updates the distributed index.
+ */
+
+import { existsSync, mkdirSync, renameSync } from 'node:fs';
 import { join } from 'node:path';
-import type { DevStepsIndex, ItemStatus } from '../schemas/index.js';
+import type { ItemStatus, ItemType } from '../schemas/index.js';
 import { getCurrentTimestamp, parseItemId, TYPE_TO_DIRECTORY } from '../utils/index.js';
 import { getItem } from './get.js';
 import { removeItemFromIndex } from './index-refs.js';
+import { listItems } from './list.js';
 export interface ArchiveItemResult {
   itemId: string;
   archivedAt: string;
@@ -84,29 +93,30 @@ export async function purgeItems(
     throw new Error('Project not initialized. Run devsteps-init first.');
   }
 
-  const indexPath = join(devstepsDir, 'index.json');
-  const index: DevStepsIndex = JSON.parse(readFileSync(indexPath, 'utf-8'));
+  // Collect candidate items using the refs-style index (via listItems).
+  // listItems() handles both legacy index.json and the current directory-based index.
+  const statusFilter: ItemStatus[] = args.status ?? ['done', 'cancelled'];
+  const seen = new Set<string>();
+  const candidates: Array<{ id: string; updated: string }> = [];
 
-  // Find items to archive
-  let itemsToArchive = [...index.items];
-
-  // Filter by status (default: done, cancelled)
-  const statusFilter = args.status || ['done', 'cancelled'];
-  itemsToArchive = itemsToArchive.filter((i) => statusFilter.includes(i.status));
-
-  // Filter by type
-  if (args.type) {
-    itemsToArchive = itemsToArchive.filter((i) => i.type === args.type);
-  }
-
-  // Filter by date
-  if (args.olderThan) {
-    const cutoffDate = args.olderThan;
-    itemsToArchive = itemsToArchive.filter((i) => {
-      const updated = new Date(i.updated);
-      return updated < cutoffDate;
+  for (const status of statusFilter) {
+    const result = await listItems(devstepsDir, {
+      status,
+      type: args.type ? (args.type as ItemType) : undefined,
     });
+    for (const item of result.items) {
+      if (!seen.has(item.id)) {
+        seen.add(item.id);
+        candidates.push({ id: item.id, updated: item.updated });
+      }
+    }
   }
+
+  // Apply optional date filter
+  const itemsToArchive =
+    args.olderThan != null
+      ? candidates.filter((i) => new Date(i.updated) < (args.olderThan as Date))
+      : candidates;
 
   // Archive each item
   const archivedIds: string[] = [];

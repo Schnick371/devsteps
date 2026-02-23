@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * MCP handler: list
+ * Returns work items filtered by type, status, priority, tag, or assignee.
+ */
+
 import { join } from 'node:path';
 import { type ListItemsArgs, listItems } from '@schnick371/devsteps-shared';
 import { getWorkspacePath } from '../workspace.js';

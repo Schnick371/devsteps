@@ -1,18 +1,32 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * MCP handler: init
+ * Initializes a new DevSteps project in the current workspace.
+ */
+
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
+  copyDevstepsDocs,
+  copyGithubFiles,
   type DevStepsConfig,
   getCurrentTimestamp,
   getMethodologyConfig,
   initializeRefsStyleIndex,
   type Methodology,
+  writeSetupMd,
 } from '@schnick371/devsteps-shared';
 import { getWorkspacePath } from '../workspace.js';
 
-// ESM equivalent of __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const packageRoot = join(__dirname, '..', '..');
+const packageJson = JSON.parse(readFileSync(join(packageRoot, 'package.json'), 'utf8')) as {
+  version: string;
+};
 
 /**
  * Initialize a new devsteps project
@@ -43,9 +57,17 @@ export default async function initHandler(args: {
       mkdirSync(join(devstepsDir, dir), { recursive: true });
     }
 
+    // Create Context Budget Protocol analysis directory with gitignore
+    const analysisDir = join(devstepsDir, 'analysis');
+    mkdirSync(analysisDir, { recursive: true });
+    writeFileSync(
+      join(analysisDir, '.gitignore'),
+      '# Analysis envelopes are ephemeral — not versioned\n*.json\n'
+    );
+
     // Create config
     const config: DevStepsConfig = {
-      version: '0.1.0',
+      version: packageJson.version,
       project_name: args.project_name,
       project_id: `devsteps-${Date.now()}`,
       created: getCurrentTimestamp(),
@@ -70,241 +92,47 @@ export default async function initHandler(args: {
 
     initializeRefsStyleIndex(devstepsDir, counters);
 
-    // Create .gitignore
-    const gitignore = `.devsteps/
-node_modules/
-dist/
-*.log
-.env
-.DS_Store
-`;
-    writeFileSync(join(projectPath, '.gitignore'), gitignore);
-
-    // Create .github directory structure
-    const githubAgentsDir = join(projectPath, '.github', 'agents');
-    const githubInstructionsDir = join(projectPath, '.github', 'instructions');
-    const githubPromptsDir = join(projectPath, '.github', 'prompts');
-
-    mkdirSync(githubAgentsDir, { recursive: true });
-    mkdirSync(githubInstructionsDir, { recursive: true });
-    mkdirSync(githubPromptsDir, { recursive: true });
-
-    // Read source Copilot files from package
-    // In development: 3 levels up to repo root
-    // After npm install: 2 levels up to package root (where .github was copied)
-    const packageRoot = join(__dirname, '..', '..');
-    const sourceGithubDir = join(packageRoot, '.github');
-
-    // Copy devsteps agent
-    const devstepsAgentSource = join(sourceGithubDir, 'agents', 'devsteps.agent.md');
-    const devstepsAgentContent = existsSync(devstepsAgentSource)
-      ? readFileSync(devstepsAgentSource, 'utf8')
-      : `---
-name: devsteps
-description: Task tracking with devsteps system - enforces structured documentation
----
-
-# 📋 DevSteps Task Tracking Mode
-
-You are a **task management assistant** that helps users work with the devsteps system.
-
-## Core Principles
-
-The devsteps system is a **lightweight, git-based task tracking system** designed for developers who want to:
-- Track tasks, features, bugs, and requirements **directly in their repository**
-- Use **simple text files** (JSON + Markdown) instead of external tools
-- Keep **project history in git** alongside code changes
-- Enable **AI-assisted development** through structured task metadata
-
-## Your Role
-
-When in devsteps mode, you:
-
-✅ **ALWAYS use devsteps tools** for task management:
-- Use \`#mcp_devsteps_add\` to create new tasks
-- Use \`#mcp_devsteps_update\` to modify existing tasks
-- Use \`#mcp_devsteps_list\` to show tasks
-- Use \`#mcp_devsteps_get\` to view task details
-- Use \`#mcp_devsteps_status\` to show project overview
-
-✅ **Enforce structured task creation**:
-- Always ask for: title, type (task/bug/feature/story)
-- Encourage: affected_paths, tags, clear descriptions
-- Suggest: priority (Eisenhower Matrix: urgent-important, not-urgent-important, urgent-not-important, not-urgent-not-important)
-
-✅ **Guide best practices**:
-- Link related tasks using \`#mcp_devsteps_link\`
-- Keep tasks focused and atomic
-- Update task status as work progresses
-- Document decisions in task descriptions
-
-❌ **DON'T**:
-- Create tasks manually without using devsteps tools
-- Skip task metadata (it enables better filtering and context)
-- Forget to update task status when work is done
-- Mix multiple concerns in a single task
-
-## Common Workflows
-
-### Creating a New Task
-\`\`\`
-User: "We need to add authentication"
-You: Use #mcp_devsteps_add with:
-- title: "Implement user authentication"
-- type: "feature"
-- priority: "urgent-important"
-- affected_paths: ["src/auth/"]
-- description: Clear requirements in Markdown
-\`\`\`
-
-### Checking Current Work
-\`\`\`
-User: "What should I work on?"
-You: Use #mcp_devsteps_list with filters:
-- status: "draft" or "planned"
-- Filter by eisenhower field in metadata (internal storage)
-- Show tasks in priority order with context
-\`\`\`
-
-### Updating Progress
-\`\`\`
-User: "I finished the login feature"
-You: Use #mcp_devsteps_update to:
-- Change status to "done"
-- Add completion notes
-- Suggest linking to related tasks
-\`\`\`
-
-## Task Lifecycle
-
-\`\`\`
-draft → planned → in-progress → review → done
-                              ↓
-                           blocked
-\`\`\`
-
-- **draft**: Initial idea, needs refinement
-- **planned**: Ready to work on, fully specified
-- **in-progress**: Currently being worked on
-- **review**: Implementation complete, needs review
-- **blocked**: Cannot proceed (document blocker)
-- **done**: Completed and verified
-
-## Integration with Development
-
-The devsteps system integrates with:
-- **Git commits**: Reference task IDs in commit messages
-- **MCP/AI tools**: Provide context for AI-assisted development
-- **VS Code**: Extension for visual task management
-- **CLI**: Command-line interface for quick operations
-
-## Tips for Users
-
-1. **Start small**: Create a task even for small changes
-2. **Link everything**: Use relationships to track dependencies
-3. **Write good descriptions**: Future-you will thank you
-4. **Use tags**: They make filtering and searching easier
-5. **Commit often**: Keep task files in sync with code
-
----
-
-**Remember**: The devsteps is not just a todo list—it's a **living knowledge base** that grows with your project and helps both humans and AI understand what needs to be done.
-`;
-
-    writeFileSync(join(githubAgentsDir, 'devsteps.agent.md'), devstepsAgentContent);
-
-    // Copy ALL devsteps agent files dynamically
-    const sourceAgentsDir = join(sourceGithubDir, 'agents');
-    if (existsSync(sourceAgentsDir)) {
-      const agentFiles = readdirSync(sourceAgentsDir).filter(
-        (f) => f.startsWith('devsteps') && f.endsWith('.agent.md')
-      );
-      for (const agentFile of agentFiles) {
-        const agentSource = join(sourceAgentsDir, agentFile);
-        const agentContent = readFileSync(agentSource, 'utf8');
-        writeFileSync(join(githubAgentsDir, agentFile), agentContent);
+    // Create or update .gitignore (append-only — preserve existing rules)
+    const gitignorePath = join(projectPath, '.gitignore');
+    const devstepsEntries = ['.devsteps/', 'node_modules/', 'dist/', '*.log', '.env', '.DS_Store'];
+    if (existsSync(gitignorePath)) {
+      const existing = readFileSync(gitignorePath, 'utf-8');
+      const missing = devstepsEntries.filter((entry) => !existing.includes(entry));
+      if (missing.length > 0) {
+        const appendBlock = `\n# DevSteps\n${missing.join('\n')}\n`;
+        writeFileSync(gitignorePath, existing + appendBlock);
       }
+    } else {
+      writeFileSync(gitignorePath, `${devstepsEntries.join('\n')}\n`);
     }
 
-    // Copy ALL devsteps instruction files dynamically
-    const sourceInstructionsDir = join(sourceGithubDir, 'instructions');
-    if (existsSync(sourceInstructionsDir)) {
-      const instructionFiles = readdirSync(sourceInstructionsDir).filter(
-        (f) => f.startsWith('devsteps') && f.endsWith('.instructions.md')
-      );
-      for (const instructionFile of instructionFiles) {
-        const instructionSource = join(sourceInstructionsDir, instructionFile);
-        const instructionContent = readFileSync(instructionSource, 'utf8');
-        writeFileSync(join(githubInstructionsDir, instructionFile), instructionContent);
-      }
-    }
+    writeSetupMd(args.project_name, devstepsDir);
 
-    // Copy ALL devsteps prompt files dynamically
-    const sourcePromptsDir = join(sourceGithubDir, 'prompts');
-    if (existsSync(sourcePromptsDir)) {
-      const promptFiles = readdirSync(sourcePromptsDir).filter(
-        (f) => f.startsWith('devsteps') && f.endsWith('.prompt.md')
-      );
-      for (const promptFile of promptFiles) {
-        const promptSource = join(sourcePromptsDir, promptFile);
-        const promptContent = readFileSync(promptSource, 'utf8');
-        writeFileSync(join(githubPromptsDir, promptFile), promptContent);
-      }
-    }
+    // Create .github directory structure and copy all devsteps Copilot files
+    const githubDir = join(projectPath, '.github');
+    const copied = copyGithubFiles(
+      join(packageRoot, '.github'),
+      join(githubDir, 'agents'),
+      join(githubDir, 'instructions'),
+      join(githubDir, 'prompts')
+    );
 
-    // Copy HIERARCHY.md
-    const hierarchySource = join(packageRoot, '.devsteps', 'HIERARCHY.md');
-    if (existsSync(hierarchySource)) {
-      const hierarchyContent = readFileSync(hierarchySource, 'utf8');
-      writeFileSync(join(devstepsDir, 'HIERARCHY.md'), hierarchyContent);
-    }
-
-    // Copy AI-GUIDE.md
-    const aiGuideSource = join(packageRoot, '.devsteps', 'AI-GUIDE.md');
-    if (existsSync(aiGuideSource)) {
-      const aiGuideContent = readFileSync(aiGuideSource, 'utf8');
-      writeFileSync(join(devstepsDir, 'AI-GUIDE.md'), aiGuideContent);
-    }
+    // Copy HIERARCHY.md and AI-GUIDE.md
+    copyDevstepsDocs(packageRoot, devstepsDir);
 
     // Extend existing agent files with devsteps tools
     const extendedFiles = extendExistingAgents(projectPath);
 
-    // Collect copied files for message
-    const copiedAgents: string[] = [];
-    const copiedInstructions: string[] = [];
-    const copiedPrompts: string[] = [];
-
-    if (existsSync(sourceAgentsDir)) {
-      copiedAgents.push(
-        ...readdirSync(sourceAgentsDir).filter(
-          (f) => f.startsWith('devsteps') && f.endsWith('.agent.md')
-        )
-      );
-    }
-    if (existsSync(sourceInstructionsDir)) {
-      copiedInstructions.push(
-        ...readdirSync(sourceInstructionsDir).filter(
-          (f) => f.startsWith('devsteps') && f.endsWith('.instructions.md')
-        )
-      );
-    }
-    if (existsSync(sourcePromptsDir)) {
-      copiedPrompts.push(
-        ...readdirSync(sourcePromptsDir).filter(
-          (f) => f.startsWith('devsteps') && f.endsWith('.prompt.md')
-        )
-      );
-    }
-
+    const totalCopied = copied.agents.length + copied.instructions.length + copied.prompts.length;
     let message = `Project '${args.project_name}' initialized successfully\n\n`;
-    message += `✓ Copilot files created (${copiedAgents.length + copiedInstructions.length + copiedPrompts.length} files):\n`;
-    for (const file of copiedAgents) {
+    message += `✓ Copilot files created (${totalCopied} files):\n`;
+    for (const file of copied.agents) {
       message += `  - .github/agents/${file}\n`;
     }
-    for (const file of copiedInstructions) {
+    for (const file of copied.instructions) {
       message += `  - .github/instructions/${file}\n`;
     }
-    for (const file of copiedPrompts) {
+    for (const file of copied.prompts) {
       message += `  - .github/prompts/${file}\n`;
     }
     message += '\n✓ Documentation:\n';
@@ -348,7 +176,7 @@ function extendExistingAgents(projectPath: string): string[] {
     const files = readdirSync(dir) as string[];
     const mdFiles = files
       .filter((f: string) => f.endsWith('.agent.md') || f.endsWith('.chatmode.md'))
-      .filter((f: string) => f !== 'devsteps.agent.md'); // Skip the devsteps agent we just created
+      .filter((f: string) => !f.startsWith('devsteps-')); // Skip devsteps-managed agents
 
     for (const file of mdFiles) {
       const filePath = join(dir, file);

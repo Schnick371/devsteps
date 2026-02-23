@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * MCP handler: export
+ * Exports work items as Markdown, JSON, or HTML report.
+ */
+
 import { existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { ItemType } from '@schnick371/devsteps-shared';

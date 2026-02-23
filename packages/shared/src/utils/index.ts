@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Utils barrel export
+ * Re-exports helper functions and constants from the utils layer.
+ */
+
 import type { ItemType, Methodology } from '../schemas/index.js';
 
 // Export cache utilities
@@ -8,6 +16,13 @@ export {
   clearGlobalCache,
   getCache,
 } from './cache.js';
+// Export init helpers
+export {
+  type CopiedGithubFiles,
+  copyDevstepsDocs,
+  copyGithubFiles,
+  writeSetupMd,
+} from './init-helpers.js';
 
 /**
  * Type to plural directory mapping

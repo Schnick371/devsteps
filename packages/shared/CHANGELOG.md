@@ -2,6 +2,15 @@
 
 All notable changes to `@schnick371/devsteps-shared` will be documented in this file.
 
+## [1.0.0] - 2026-02-21
+
+### Added
+- **Context Budget Protocol schemas:** New Zod schemas `CompressedVerdict`, `AnalysisBriefing`, and `SprintVerdict` for AI agent coordination protocol (EPIC-027, STORY-104)
+- Re-exported analysis schemas from `schemas/index.ts` for unified entry point
+
+### Changed
+- Stable 1.0.0 release — all foundational APIs considered stable
+
 ## [0.8.5] - 2025-12-16
 
 ### Fixed

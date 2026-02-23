@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * CLI and MCP command type shortcuts
+ * Central type aliases for command arguments and response shapes.
+ */
+
 import type { EisenhowerQuadrant, ItemType } from '../schemas/index.js';
 
 /**

@@ -1,4 +1,7 @@
 /**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
  * Refs-Style Index Types
  *
  * Git-inspired distributed index architecture where each category

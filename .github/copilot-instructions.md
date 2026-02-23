@@ -25,4 +25,4 @@ Monorepo for systematic software development with task tracking and traceability
 
 ---
 
-**Note:** General development workflows see `agents/devsteps.agent.md` and `instructions/devsteps.instructions.md`
+**Note:** General development workflows see `agents/devsteps-worker.agent.md` and `instructions/devsteps-devsteps-usage.instructions.md`

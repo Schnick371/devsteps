@@ -49,3 +49,4 @@ test-project/
 *.tar.gz
 *.backup
 *.tsbuildinfo
+scripts/tmp

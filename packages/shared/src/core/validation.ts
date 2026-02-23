@@ -1,5 +1,14 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Relationship validation
+ * Enforces hierarchy rules and flexible relationship constraints
+ * based on the active project methodology.
+ */
+
 import { ITEM_TYPE, METHODOLOGY, RELATIONSHIP_TYPE } from '../constants/index.js';
-import type { ItemType, Methodology } from '../schemas/index.js';
+import type { ItemType, LinkedItems, Methodology } from '../schemas/index.js';
 import { isFlexibleRelation, isHierarchyRelation } from '../schemas/relationships.js';
 
 /**
@@ -271,4 +280,61 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
     error: `Invalid Waterfall relationship: ${sourceType} → ${targetType}`,
     suggestion: 'Check Waterfall hierarchy: Requirement → Feature|Spike → Task',
   };
+}
+/**
+ * Validate that no conflicting relation types exist between the same source and target.
+ *
+ * Blocks:
+ * - hierarchy + any other type to same target
+ * - multiple hierarchy types to same target
+ *
+ * Allows:
+ * - bidirectional symmetric flexible relations (e.g. relates-to)
+ * - multiple flexible types to same target (e.g. depends-on + relates-to)
+ *
+ * @param targetId - The target item ID being linked
+ * @param newRelationType - The new relation type being added
+ * @param existingLinks - Current linked_items of the source item
+ * @returns ValidationResult indicating conflict or success
+ */
+export function validateRelationConflict(
+  targetId: string,
+  newRelationType: string,
+  existingLinks: LinkedItems
+): ValidationResult {
+  const newIsHierarchy = isHierarchyRelation(newRelationType);
+
+  for (const [existingType, targetIds] of Object.entries(existingLinks)) {
+    // Skip same type — duplicate check is handled separately
+    if (existingType === newRelationType) continue;
+
+    // Skip if target not in this relation list
+    if (!Array.isArray(targetIds) || !targetIds.includes(targetId)) continue;
+
+    const existingIsHierarchy = isHierarchyRelation(existingType);
+
+    // Block: both hierarchy types to same target
+    if (newIsHierarchy && existingIsHierarchy) {
+      return {
+        valid: false,
+        error: `Cannot add "${newRelationType}" to ${targetId} — already has hierarchy relation "${existingType}" to same target`,
+        suggestion: `Remove the existing "${existingType}" link first, or use a different target`,
+      };
+    }
+
+    // Block: hierarchy mixed with any flexible type to same target
+    if (newIsHierarchy || existingIsHierarchy) {
+      const hierarchyType = newIsHierarchy ? newRelationType : existingType;
+      const flexibleType = newIsHierarchy ? existingType : newRelationType;
+      return {
+        valid: false,
+        error: `Cannot mix hierarchy relation "${hierarchyType}" with flexible relation "${flexibleType}" to same target ${targetId}`,
+        suggestion: `Use only "${hierarchyType}" (hierarchy takes precedence) and remove "${flexibleType}", or use a different target`,
+      };
+    }
+
+    // Multiple flexible types to same target: allowed
+  }
+
+  return { valid: true };
 }

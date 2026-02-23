@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Core module barrel export
+ * Re-exports all public operations from the shared core layer.
+ */
+
 export { type AddItemArgs, type AddItemResult, addItem } from './add.js';
 export {
   type ArchiveItemResult,
@@ -44,5 +52,16 @@ export {
 // Refs-style index operations
 export * from './index-refs.js';
 export { type ListItemsArgs, type ListItemsResult, listItems } from './list.js';
+export { type LinkItemArgs, type LinkItemResult, linkItem } from './link.js';
+export {
+  type UnlinkItemArgs,
+  type UnlinkItemResult,
+  unlinkItem,
+} from './unlink.js';
 export { type UpdateItemArgs, type UpdateItemResult, updateItem } from './update.js';
-export { type ValidationResult, validateRelationship, type WorkItem } from './validation.js';
+export {
+  type ValidationResult,
+  validateRelationConflict,
+  validateRelationship,
+  type WorkItem,
+} from './validation.js';

@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Graceful Shutdown Manager
+ * Tracks in-flight operations and coordinates clean server shutdown on signals.
+ */
+
 import { logger } from './logger.js';
 
 /**

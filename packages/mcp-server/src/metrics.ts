@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Prometheus Metrics for MCP Server
+ * Request counters, duration histograms, error rates, and connection gauges.
+ */
+
 import { Counter, Gauge, Histogram, Registry } from 'prom-client';
 
 /**

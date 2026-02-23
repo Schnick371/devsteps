@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * CLI context command
+ * devsteps context — generates AI-friendly project context at quick/standard/deep level
+ */
+
 import { existsSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import {

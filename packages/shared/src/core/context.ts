@@ -1,3 +1,13 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Context generation for AI-assisted development
+ * Builds structured project context at quick/standard/deep levels.
+ *
+ * @see STORY-085 Context Command
+ */
+
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import type { ContextLevel, QuickContext } from '../schemas/project.js';

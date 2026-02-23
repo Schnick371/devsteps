@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Bulk update operations
+ * Batch tag management and field patching across multiple work items.
+ */
+
 import { existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { ItemMetadata } from '../schemas/index.js';

@@ -2,6 +2,17 @@
 
 All notable changes to `@schnick371/devsteps-cli` will be documented in this file.
 
+## [1.0.0] - 2026-02-21
+
+### Added
+- `devsteps init` now creates the `.devsteps/analysis/` directory with a dedicated `.gitignore` as part of the Context Budget Protocol (CBP) foundation (EPIC-027, feat `87884c8`)
+
+### Fixed
+- **BUG-028:** `devsteps init` no longer overwrites an existing root `.gitignore`; entries are now appended only when missing (append-only strategy)
+
+### Changed
+- Updated dependency: `@schnick371/devsteps-shared@1.0.0` (includes new CBP Zod schemas)
+
 ## [0.8.5] - 2025-12-16
 
 ### Fixed

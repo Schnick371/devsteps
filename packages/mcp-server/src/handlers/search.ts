@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * MCP handler: search
+ * Full-text search across all item titles and descriptions.
+ */
+
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import type { ItemType } from '@schnick371/devsteps-shared';

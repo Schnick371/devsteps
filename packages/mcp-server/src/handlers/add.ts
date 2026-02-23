@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * MCP handler: add
+ * Creates a new work item and returns its ID and metadata.
+ */
+
 import { join } from 'node:path';
 import {
   type AddItemArgs,

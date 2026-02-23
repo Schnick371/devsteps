@@ -1,3 +1,11 @@
+/**
+ * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
+ * Licensed under the Apache License, Version 2.0
+ *
+ * Core update-item operation
+ * Patches item metadata fields and synchronizes the distributed index.
+ */
+
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { RELATIONSHIP_TYPE, STATUS } from '../constants/index.js';
@@ -58,7 +66,8 @@ export async function updateItem(
     const validateChildren = async (
       relationshipType: typeof RELATIONSHIP_TYPE.IMPLEMENTED_BY | typeof RELATIONSHIP_TYPE.TESTED_BY
     ): Promise<void> => {
-      const children = metadata.linked_items[relationshipType];
+      // Guard: old-format items may lack linked_items or specific relation keys
+      const children = metadata.linked_items?.[relationshipType] ?? [];
       if (children.length > 0) {
         const openChildren: string[] = [];
         for (const childId of children) {

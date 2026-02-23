@@ -89,13 +89,13 @@ DevSteps includes built-in support for the **Eisenhower Matrix** to help priorit
 
 ```bash
 # Create Q1 tasks (urgent & important)
-devsteps add task "Fix production bug" --eisenhower urgent-important
-devsteps add task "Refactor authentication module" --eisenhower not-urgent-important
-devsteps add task "Update meeting notes" --eisenhower urgent-not-important
+devsteps add task "Fix production bug" --priority urgent-important
+devsteps add task "Refactor authentication module" --priority not-urgent-important
+devsteps add task "Update meeting notes" --priority urgent-not-important
 
 # List tasks by quadrant
-devsteps list --eisenhower urgent-important        # Q1 - Do First
-devsteps list --eisenhower not-urgent-important    # Q2 - Schedule
+devsteps list --priority urgent-important        # Q1 - Do First
+devsteps list --priority not-urgent-important    # Q2 - Schedule
 ```
 
 ### Eisenhower as Priority
@@ -105,7 +105,7 @@ devsteps list --eisenhower not-urgent-important    # Q2 - Schedule
 
 Example:
 ```bash
-devsteps add bug "Memory leak in user service" --eisenhower urgent-important
+devsteps add bug "Memory leak in user service" --priority urgent-important
 ```
 
 ## 🛠️ Tech Stack
