@@ -2,6 +2,28 @@
 
 All notable changes to `@schnick371/devsteps-cli` will be documented in this file.
 
+## [1.1.0-next.1] - 2026-02-23 (Pre-release)
+
+### ⚠️ Pre-Release Notes
+This is a pre-release version. Install with:
+`npm install @schnick371/devsteps-cli@next`
+
+### New Features
+- **unlink** command — remove a relation between two items bi-directionally
+- **Eisenhower Matrix priority system** — `urgent-important` / `not-urgent-important` / … flags in `add`, `update`, and `list` commands (EPIC-017)
+
+### Fixed
+- **Critical:** index corruption guard — null-check before writing relation entries
+- **doctor:** relationship validation and index integrity checks (STORY-006)
+- Apache 2.0 copyright headers added to all source files
+
+### Known Issues
+- npm token needs renewal before publish (run: `npm login`)
+
+### Testing Needed
+- `devsteps unlink <source> <target>` and index consistency after removal
+- `doctor` integrity check output with broken relations
+
 ## [1.0.0] - 2026-02-21
 
 ### Added

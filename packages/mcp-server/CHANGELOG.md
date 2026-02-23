@@ -2,6 +2,34 @@
 
 All notable changes to the DevSteps MCP Server will be documented in this file.
 
+## [1.1.0-next.1] - 2026-02-23 (Pre-release)
+
+### ⚠️ Pre-Release Notes
+This is a pre-release version. Install with:
+`npm install @schnick371/devsteps-mcp-server@next`
+
+### New Features
+- **bulk_update / bulk_tag_add / bulk_tag_remove** tools introduced (subsequently merged, see Refactored)
+- **unlink** MCP tool — removes a relation between two items bi-directionally
+- **Eisenhower Matrix priority system** — all item tools accept and return Eisenhower priority vocabulary (EPIC-017)
+
+### Refactored
+- Merged `bulk_update`, `bulk_tag_add`, and `bulk_tag_remove` into a single, unified `update` tool
+- Extracted `createLink()` to `@schnick371/devsteps-shared` core; link handler is now a thin wrapper
+- Split oversized `index.ts` into focused handler modules to enforce 400-line limit
+
+### Fixed
+- **Critical:** index corruption guard — null-check before writing relations
+- Apache 2.0 copyright headers added to all source files
+
+### Known Issues
+- npm token needs renewal before publish (run: `npm login`)
+
+### Testing Needed
+- `update` tool with `bulk: true` payload across multiple items
+- `unlink` tool and index consistency
+- Eisenhower priority field round-trip through MCP protocol
+
 ## [1.0.0] - 2026-02-21
 
 ### Added

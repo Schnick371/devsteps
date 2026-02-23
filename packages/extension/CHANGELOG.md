@@ -5,6 +5,29 @@ All notable changes to the "DevSteps" extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0-next.1] - 2026-02-23 (Pre-release)
+
+### ⚠️ Pre-Release Notes
+This is a pre-release version. Install with:
+`npm install @schnick371/devsteps-extension@next`
+
+### New Features
+- **Toolbar redesign** — collapseAll button and a filter-by-status toggle added to the TreeView toolbar
+- **Eisenhower Matrix priority system** — priority labels displayed in item tree and webview (EPIC-017)
+
+### Fixed
+- **BUG-013:** Added `try-catch` around all unprotected `async` calls in extension activation and command handlers
+- **isPreRelease()** now correctly uses VS Code's odd/even minor-version convention, ensuring `@next` MCP server tag is selected for pre-release extension installs
+- Apache 2.0 copyright headers added to all source files
+
+### Known Issues
+- npm token needs renewal before publish (run: `npm login`)
+
+### Testing Needed
+- Extension toolbar filter button state persistence across reloads
+- `isPreRelease()` detection on a pre-release build → confirms `@next` MCP server is auto-selected
+- Error surfaces gracefully when async command handler throws (BUG-013 regression)
+
 ## [1.0.0] - 2026-02-21
 
 ### Added

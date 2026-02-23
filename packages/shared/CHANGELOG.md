@@ -2,6 +2,35 @@
 
 All notable changes to `@schnick371/devsteps-shared` will be documented in this file.
 
+## [1.1.0-next.1] - 2026-02-23 (Pre-release)
+
+### ⚠️ Pre-Release Notes
+This is a pre-release version. Install with:
+`npm install @schnick371/devsteps-shared@next`
+
+### New Features
+- **bulk_update, bulk_tag_add, bulk_tag_remove** — new Zod schemas and core helpers for bulk item operations (later merged into single `update` tool)
+- **unlink** — remove relations bi-directionally; removes forward and reverse edges from index
+- **createLink()** extracted to shared core — reusable across MCP and CLI consumers
+- **Eisenhower Matrix priority system** — full `urgent-important` / `not-urgent-important` / … vocabulary throughout schemas and types (EPIC-017)
+
+### Refactored
+- Split oversized source files into focused modules to enforce 400-line limit (STORY-113)
+- `createLink()` moved from MCP handler into `shared/core` for single source of truth
+
+### Fixed
+- **Critical:** index corruption guard — null-check before writing relations to prevent silent data loss
+- **doctor:** relationship validation and index integrity checks added to `doctor-checks` (STORY-006)
+- Apache 2.0 copyright headers added to all source files
+
+### Known Issues
+- npm token needs renewal before publish (run: `npm login`)
+
+### Testing Needed
+- `bulk_update` with multiple items across edge cases
+- `unlink` operation and index consistency after removal
+- Eisenhower Matrix priority round-trip (create → list → filter)
+
 ## [1.0.0] - 2026-02-21
 
 ### Added
