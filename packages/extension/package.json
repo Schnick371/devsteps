@@ -664,6 +664,7 @@
     "lint": "biome check .",
     "format": "biome format --write .",
     "package": "npm run build && vsce package --no-dependencies",
+    "package:next": "npm run build && vsce package --no-dependencies --pre-release",
     "clean": "rm -rf dist"
   },
   "dependencies": {
