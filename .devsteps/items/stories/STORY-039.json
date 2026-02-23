@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Centralize Relationship Management in Shared Core",
-  "status": "draft",
+  "status": "planned",
   "eisenhower": "urgent-important",
   "created": "2025-11-30T19:26:19.901Z",
-  "updated": "2026-02-05T22:51:58.024Z",
+  "updated": "2026-02-23T11:40:36.184Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/relationships.ts",
@@ -17,7 +17,10 @@
       "EPIC-012"
     ],
     "implemented-by": [
-      "TASK-221"
+      "TASK-221",
+      "TASK-248",
+      "TASK-218",
+      "TASK-249"
     ],
     "tested-by": [],
     "tests": [],

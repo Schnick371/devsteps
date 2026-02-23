@@ -1,0 +1,41 @@
+{
+  "id": "BUG-054",
+  "type": "bug",
+  "category": "general",
+  "title": "purgeItems() reads legacy index.json — fails on directory-based index projects",
+  "status": "planned",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-23T11:38:10.228Z",
+  "updated": "2026-02-23T11:40:21.142Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/archive.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-247"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-012"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "purge",
+    "index",
+    "shared",
+    "bug",
+    "cli",
+    "mcp"
+  ],
+  "commits": [],
+  "metadata": {}
+}

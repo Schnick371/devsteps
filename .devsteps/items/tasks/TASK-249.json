@@ -1,16 +1,17 @@
 {
-  "id": "TASK-218",
+  "id": "TASK-249",
   "type": "task",
   "category": "general",
-  "title": "Add CLI unlink command for terminal usage",
-  "status": "draft",
+  "title": "Add MCP unlink handler and tool (mcp_devsteps_unlink)",
+  "status": "planned",
   "eisenhower": "urgent-important",
-  "created": "2026-02-05T22:50:42.618Z",
-  "updated": "2026-02-23T11:40:07.893Z",
+  "created": "2026-02-23T11:39:08.299Z",
+  "updated": "2026-02-23T11:40:32.153Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/cli/src/commands/unlink.ts",
-    "packages/cli/src/commands/index.ts"
+    "packages/mcp-server/src/handlers/unlink.ts",
+    "packages/mcp-server/src/tools/index.ts",
+    "packages/mcp-server/src/index.ts"
   ],
   "linked_items": {
     "implements": [
@@ -30,10 +31,10 @@
     "superseded-by": []
   },
   "tags": [
-    "cli",
-    "command",
     "unlink",
-    "relationships"
+    "mcp",
+    "relations",
+    "tool"
   ],
   "commits": [],
   "metadata": {}
