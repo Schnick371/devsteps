@@ -29,19 +29,43 @@ tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal
 
 ## Version Numbering Strategy
 
-**@next versions use `-next.N` suffix:**
+**@next versions use `-next.N` suffix on the SAME base version:**
 ```
 Current stable: X.Y.Z
-Next pre-release: X.Y+1.0-next.1
-                  X.Y+1.0-next.2
-                  X.Y+1.0-next.3
-Final stable:     X.Y+1.0
+Pre-releases:   X.Y.Z-next.1
+                X.Y.Z-next.2
+                X.Y.Z-next.3
+Final stable:   X.Y.Z   (same base — confirms the pre-release chain)
+
+Next cycle (e.g. patch fix):
+                X.Y.Z+1-next.1
+                X.Y.Z+1-next.2
+Final stable:   X.Y.Z+1
+```
+
+**Examples:**
+```
+1.0.0-next.1 → 1.0.0-next.2 → 1.0.0-next.3 → release 1.0.0
+1.0.1-next.1 → 1.0.1-next.2 → 1.0.1-next.3 → release 1.0.1
+1.1.0-next.1 → 1.1.0-next.2 → 1.1.0-next.3 → release 1.1.0
+```
+
+**⚠️ WRONG (do NOT do this):**
+```
+# Never bump minor/major just for a pre-release iteration!
+1.0.0 → 1.1.0-next.1 → 1.1.0-next.2   ← WRONG
 ```
 
 **Increment rules:**
-- First @next: `X.Y.0-next.1` (based on target version)
-- Subsequent: Increment `.N` suffix (X.Y.0-next.2, X.Y.0-next.3...)
-- Final release: Remove `-next.N` suffix
+- First @next of a new base: `X.Y.Z-next.1` (plan the target stable version first)
+- Subsequent iterations: Increment only `.N` suffix — base stays the same
+- Final release: Remove `-next.N` suffix → publish the same `X.Y.Z` as stable
+
+**VS Code extension — separate versioning:**
+- Extension uses `N.N.N` format only (Marketplace requirement, no semver suffixes)
+- Pre-release channel: use odd patch number (e.g. `1.0.1` for pre-release of `1.0.0` stable)
+- `isPreRelease()`: returns `true` when minor is odd OR patch is odd
+- Extension version is INDEPENDENT from npm package versions
 
 ---
 
@@ -73,8 +97,11 @@ npm view @schnick371/devsteps-cli dist-tags
 npm view @schnick371/devsteps-mcp-server dist-tags
 ```
 
-- Determine next @next version number: `currentLatest_minor + 1` → `X.Y+1.0-next.1`
-- If a @next already exists, increment `.N` suffix
+- Determine next @next version number:
+  - Base = the CURRENT planned stable target (e.g. `1.0.0` if working toward first stable)
+  - If no @next exists yet: `X.Y.Z-next.1`
+  - If @next already exists (e.g. `1.0.0-next.1`): increment only `.N` → `1.0.0-next.2`
+  - **NEVER bump minor/major just for a pre-release iteration!**
 
 **Returns:** `{ npmUser, currentLatest, currentNext, proposedVersion }`
 
@@ -404,13 +431,13 @@ npm install -g @schnick371/devsteps-mcp-server@next
 
 ## Iteration: Publishing Next.2, Next.3…
 
-For subsequent pre-releases on the same branch:
+For subsequent pre-releases on the same base version:
 
-1. **Make changes** on `next/X.Y.Z-next.N` branch
-2. **Increment suffix**: `X.Y.Z-next.N` → `X.Y.Z-next.N+1`
+1. **Make changes** on the `next/` branch
+2. **Increment suffix only**: `X.Y.Z-next.N` → `X.Y.Z-next.N+1` (base `X.Y.Z` stays the same!)
 3. **Commit**: `git commit -m "chore: bump to X.Y.Z-next.N+1"`
 4. **Run Phase 2–5** again with new version string
-5. **Package**: `vsce package --pre-release`
+5. **Package**: `vsce package --pre-release` (extension version stays e.g. `1.0.1`)
 6. **Test**: Verify installation and functionality
 
 **No need for new branches** — iterate on same `next/` branch.
@@ -419,18 +446,23 @@ For subsequent pre-releases on the same branch:
 
 When ready for stable release:
 
-1. **Final testing** of latest @next version
-2. **Create `dev/X.Y.Z` branch** from next/ branch
-3. **Remove `-next.N` suffix** from all `package.json`
-4. **Follow standard release workflow** (`devsteps-x-release.prompt.md`)
-5. **Publish without `--tag` flag** (becomes @latest)
-6. **Tag as stable**: `vX.Y.Z`
+1. **Final testing** of latest @next version (e.g. `1.0.0-next.3`)
+2. **Remove `-next.N` suffix** from all `package.json` → same base `X.Y.Z` becomes stable
+3. **Follow standard release workflow** (`devsteps-x-release.prompt.md`)
+4. **Publish without `--tag` flag** (becomes @latest automatically)
+5. **Tag as stable**: `vX.Y.Z`
 
 ```
+# Before: 1.0.0-next.3 is @next
 npm view @schnick371/devsteps-cli dist-tags
-latest: X.Y.Z
-next:   X.Y.Z-next.N
+# → { latest: '0.9.0', next: '1.0.0-next.3' }
+
+# After promoting:
+# → { latest: '1.0.0', next: '1.0.0-next.3' }
 ```
+
+**Note:** After promoting, the @next tag still points to the old pre-release. That's OK.
+Start the next cycle with `X.Y.Z+1-next.1` (or `X.Y+1.0-next.1` for minor bump).
 
 ---
 
@@ -507,9 +539,9 @@ npm publish --tag next
 - npm dist-tags are standard practice (React, TypeScript, etc.)
 
 **Version strategy:**
-- **@next**: `X.Y.0-next.N` (target version + next suffix)
-- **Stable**: `X.Y.0` (final release, no suffix)
-- **Patches**: `X.Y.Z` (bug fixes to stable)
+- **@next**: `X.Y.Z-next.N` — same base version `X.Y.Z`, only `.N` suffix increments
+- **Stable**: `X.Y.Z` — remove `-next.N` suffix to finalize
+- **Next cycle**: bump patch/minor for the new base, then start `X.Y.Z+1-next.1`
 
 **When to use @next:**
 - Major features (EPIC-015)
@@ -520,11 +552,15 @@ npm publish --tag next
 **Migration path:**
 
 ```
-Current:  X.Y.Z (stable)
+Current:  1.0.0 (stable)
           ↓
-Next:     X.Y+1.0-next.1, X.Y+1.0-next.2, X.Y+1.0-next.3 (testing)
+Pre:      1.0.0-next.1, 1.0.0-next.2, 1.0.0-next.3 (testing, same base!)
           ↓
-Stable:   X.Y+1.0 (promoted from @next)
+Stable:   1.0.0 (promoted — same version number confirmed)
+          ↓
+Next:     1.0.1-next.1, 1.0.1-next.2, 1.0.1-next.3 (patch fix pre-releases)
+          ↓
+Stable:   1.0.1
 ```
 
 ---
