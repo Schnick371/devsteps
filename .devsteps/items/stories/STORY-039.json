@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Centralize Relationship Management in Shared Core",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2025-11-30T19:26:19.901Z",
-  "updated": "2026-02-23T11:40:36.184Z",
+  "updated": "2026-02-23T11:59:47.728Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/relationships.ts",

@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Document relationship management API and architecture",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-05T22:51:45.887Z",
-  "updated": "2026-02-05T22:51:58.024Z",
+  "updated": "2026-02-23T11:59:44.727Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/README.md",
