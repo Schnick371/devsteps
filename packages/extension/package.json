@@ -2,7 +2,7 @@
   "name": "devsteps",
   "displayName": "DevSteps",
   "description": "Never Code Alone. AI-first development workflow - track tasks, epics, stories with your AI copilot.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "publisher": "devsteps",
   "license": "Apache-2.0",
@@ -64,6 +64,72 @@
         "view": "devsteps.itemsView",
         "when": "devsteps.showWelcome",
         "contents": "No DevSteps project found in this workspace.\n\n⚠️ **Prerequisites:** Node.js (≥18) required for MCP tools.\n[Check Prerequisites](command:devsteps.checkPrerequisites)\n\nℹ️ **Recommended: Claude Sonnet 4+** for best tool integration and instruction following.\nOther Copilot models may struggle with DevSteps' MCP tools.\n\n[Initialize DevSteps Project](command:devsteps.initProject)\n\nOr use the Command Palette:\n• Run 'DevSteps: Initialize Project'\n• Use the CLI: `devsteps init`\n\nDevSteps helps you track work items, features, bugs, and requirements directly in your repository.\n\n[Share Model Testing Feedback](https://github.com/Schnick371/devsteps/discussions) | [Learn More](https://github.com/Schnick371/devsteps)"
+      }
+    ],
+    "walkthroughs": [
+      {
+        "id": "devsteps.gettingStarted",
+        "title": "Get Started with DevSteps",
+        "description": "Set up AI-first development workflow tracking in your project. Track tasks, epics, and stories — right alongside your code.",
+        "steps": [
+          {
+            "id": "devsteps.gettingStarted.prerequisites",
+            "title": "Check Prerequisites",
+            "description": "DevSteps needs Node.js (≥18) to power the MCP server that integrates with GitHub Copilot.\n\n[Check Prerequisites](command:devsteps.checkPrerequisites)",
+            "media": {
+              "altText": "DevSteps prerequisite check",
+              "image": "resources/icons/devsteps-icon.svg"
+            },
+            "completionEvents": [
+              "onCommand:devsteps.checkPrerequisites"
+            ]
+          },
+          {
+            "id": "devsteps.gettingStarted.init",
+            "title": "Initialize a DevSteps Project",
+            "description": "Create a `.devsteps/` folder in your workspace to start tracking work items.\n\n[Initialize Project](command:devsteps.initProject)",
+            "media": {
+              "altText": "DevSteps project initialization",
+              "image": "resources/icons/devsteps-icon.svg"
+            },
+            "completionEvents": [
+              "onCommand:devsteps.initProject"
+            ]
+          },
+          {
+            "id": "devsteps.gettingStarted.treeview",
+            "title": "Explore Your Work Items",
+            "description": "Open the DevSteps sidebar to see, filter, and sort all your work items.\n\n[Open DevSteps Sidebar](command:devsteps.itemsView.focus)",
+            "media": {
+              "altText": "DevSteps sidebar with work items",
+              "image": "resources/icons/devsteps-icon.svg"
+            }
+          },
+          {
+            "id": "devsteps.gettingStarted.dashboard",
+            "title": "View Your Project Dashboard",
+            "description": "Open the interactive dashboard for statistics, an Eisenhower matrix, sprint burndown, and traceability graph.\n\n[Show Dashboard](command:devsteps.showDashboard)",
+            "media": {
+              "altText": "DevSteps interactive dashboard",
+              "image": "resources/icons/devsteps-icon.svg"
+            },
+            "completionEvents": [
+              "onCommand:devsteps.showDashboard"
+            ]
+          },
+          {
+            "id": "devsteps.gettingStarted.mcp",
+            "title": "Use AI Tools via MCP",
+            "description": "DevSteps registers an MCP server so GitHub Copilot can read and manage your work items directly.\n\nAsk Copilot: **\"List my open tasks\"** or **\"Add a bug for login validation\"**.\n\n[Show MCP Status](command:devsteps.mcp.showStatus)",
+            "media": {
+              "altText": "DevSteps MCP server integration",
+              "image": "resources/icons/devsteps-icon.svg"
+            },
+            "completionEvents": [
+              "onCommand:devsteps.mcp.showStatus"
+            ]
+          }
+        ]
       }
     ],
     "commands": [
@@ -665,6 +731,7 @@
     "format": "biome format --write .",
     "package": "npm run build && vsce package --no-dependencies",
     "package:next": "npm run build && vsce package --no-dependencies --pre-release",
+    "publish:next": "vsce publish --pre-release --no-dependencies",
     "clean": "rm -rf dist"
   },
   "dependencies": {

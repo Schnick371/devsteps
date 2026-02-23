@@ -5,6 +5,22 @@ All notable changes to the "DevSteps" extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - Pre-Release
+
+### Added
+- Getting Started walkthrough (`contributes.walkthroughs`) — accessible via Activity Bar → DevSteps
+- `publish:next` script in extension `package.json` for CLI-based pre-release publishing
+
+### Fixed
+- `isPreRelease()` now correctly detects patch-level pre-releases (1.0.1 with odd patch)
+  — previously only detected odd minor versions (1.1.x), so 1.0.1 was incorrectly treated as stable
+- Pre-release auto-uses `@schnick371/devsteps-mcp-server@next` as intended
+
+### Changed
+- Extension README rewritten — removes stale 0.7.0-next.4 content, updated for 1.0.0/1.0.1
+- Pre-release publishing moved to `vsce publish --pre-release` (no manual UI upload needed)
+  — Key finding: there is NO `"preRelease": true` field in package.json; the only mechanism is the vsce CLI flag
+
 ## [1.0.0] - 2026-02-21
 
 ### Added

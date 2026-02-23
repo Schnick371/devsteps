@@ -2,23 +2,6 @@
 
 > Never Code Alone. Team Up With Your AI.
 
-## ⚠️ Pre-Release Version 0.7.0-next.4
-
-**This is an experimental pre-release for early testing.** Features may change, and stability is not guaranteed. Install the stable release for production use.
-
-**What's New in 0.7.0-next.4:**
-- 🗂️ **Items Directory Migration**: Git-inspired object store architecture (`.devsteps/items/`)
-- 📝 **Improved Git Workflow**: Enhanced documentation and merge strategies
-- 🧪 **Test Configuration**: Non-blocking test execution for better CI/CD integration
-
-**Known Issues:**
-- Auto-migration triggers on first run (one-time operation, 686 files)
-- Some test failures expected during migration (fixed in next iteration)
-
-**Feedback Welcome!** Report issues or suggestions at [GitHub Issues](https://github.com/Schnick371/devsteps/issues)
-
----
-
 **AI-First Development Workflow System** integrated directly into VS Code. Structure your development process with traceable work items, visualize project health with an interactive dashboard, and integrate with AI agents via the Model Context Protocol (MCP).
 
 ## ✨ Features
@@ -46,33 +29,36 @@
 ### 🤖 AI Integration (MCP)
 - Model Context Protocol (MCP) support for AI agents
 - Export project context for AI-assisted development
-- Seamless integration with GitHub Copilot
+- Seamless integration with GitHub Copilot (recommended: Claude Sonnet 4+)
 
 ## 📦 Installation
 
-### Pre-Release Installation (Current - 0.7.0-next.4)
+### Stable Release (1.0.0)
 
-**From VS Code Marketplace:**
-1. Search for "DevSteps" in Extensions view
-2. Click "Switch to Pre-Release" button
-3. Install version 0.7.0-next.4
-
-**Install MCP Server (@next):**
-```bash
-npm install -g @schnick371/devsteps-mcp-server@next
-```
-
-**CLI (@next - Optional):**
-```bash
-npm install -g @schnick371/devsteps-cli@next
-```
-
-### Stable Release (Recommended for Production)
-Search for "DevSteps" in the VS Code Extensions view and install the stable release.
+Search for **"DevSteps"** in the VS Code Extensions view and install.
 
 **MCP Server (Stable):**
 ```bash
 npm install -g @schnick371/devsteps-mcp-server
+```
+
+**CLI (Optional, Stable):**
+```bash
+npm install -g @schnick371/devsteps-cli
+```
+
+### Pre-Release (1.0.1)
+
+In the VS Code Extensions view, find DevSteps and click **"Switch to Pre-Release Version"**.
+
+**MCP Server (@next):**
+```bash
+npm install -g @schnick371/devsteps-mcp-server@next
+```
+
+**CLI (@next — Optional):**
+```bash
+npm install -g @schnick371/devsteps-cli@next
 ```
 
 ## ⚙️ Prerequisites
@@ -284,19 +270,14 @@ This means npx is not installed or not in PATH.
 
 **Alternative:** Extension will automatically fall back to bundled MCP server if npx unavailable
 
-## 🐛 Known Issues (Pre-Release 0.7.0-next.4)
-
-**Migration-Related:**
-- [ ] Auto-migration runs on first startup (expected, one-time operation)
-- [ ] Test failures during migration (addressed in next iteration)
+## 🐛 Known Issues
 
 **Performance:**
-- [ ] Graph force simulation may lag with 100+ highly-connected nodes (optimization in progress)
-- [ ] Large project initial load may take 3-5s (caching planned for future release)
+- Graph force simulation may lag with 100+ highly-connected nodes (optimization in progress)
 
 **How to Report Issues:**
 Please include:
-- Pre-Release version (`0.7.0-next.4`)
+- Extension version
 - VS Code version
 - Steps to reproduce
 - Expected vs actual behavior
@@ -305,52 +286,26 @@ Report at: [GitHub Issues](https://github.com/Schnick371/devsteps/issues)
 
 ## 📝 Release Notes
 
-### 0.7.0-next.4 (Pre-Release - December 2025)
+### 1.0.1 (Pre-Release)
 
-**⚠️ Experimental Features - Testing Only**
+**Pre-release channel — install via "Switch to Pre-Release Version" in VS Code Extensions.**
 
-**Major Changes:**
-- ✅ **Items Directory Migration (STORY-079)**: Restructured `.devsteps/` to git-inspired object store
-  - Old: `.devsteps/epics/`, `.devsteps/stories/` (flat)
-  - New: `.devsteps/items/epics/`, `.devsteps/items/stories/` (nested)
-  - Auto-migration: Detects old structure and migrates on first run
-- ✅ **Git Workflow Improvements**: Enhanced merge strategies and documentation
-- ✅ **Test Configuration**: Non-blocking test execution for CI/CD pipelines
+- Extension now automatically uses `@schnick371/devsteps-mcp-server@next` when running as pre-release
+- Added Getting Started walkthrough (Activity Bar → DevSteps → ...)
+- `isPreRelease()` detection extended to cover patch-level pre-releases (1.0.1)
 
-**Migration Notes:**
-- First startup: Auto-migration runs (one-time, ~686 files)
-- No backward compatibility during transition
-- Backup recommended before installing pre-release
+### 1.0.0 (Stable)
 
-**What to Test:**
-- Items directory structure after migration
-- Dashboard loading with new directory layout
-- TreeView functionality with nested items
-- MCP server integration with new paths
+**First stable release.**
 
-**Feedback Channels:**
-- GitHub Issues: Bug reports, feature requests
-- GitHub Discussions: Questions, suggestions
-
----
-
-### 0.4.0 (Stable Release)
-
-**Major Features:**
-- ✅ Interactive WebView Dashboard with 5 visualization sections
-- ✅ Advanced TreeView filtering and sorting
-- ✅ Color-coded status badges (FileDecorationProvider)
-- ✅ Performance optimizations (5-10× faster dashboard)
-- ✅ Traceability graph node limiting (handles 1K+ items)
-
-**Performance:**
-- Dashboard single-load pattern (eliminates 5× redundant file reads)
-- Smart node limiting for O(n²) graph rendering
-
-**Technical:**
-- TypeScript 5.9.3
-- esbuild bundling (321KB)
-- Apache 2.0 license
+- Interactive WebView Dashboard with 5 visualization sections
+- Advanced TreeView filtering and sorting
+- Color-coded status badges (FileDecorationProvider)
+- MCP Server auto-management via VS Code MCP API (requires VS Code 1.99+)
+- Cross-platform Node.js runtime detection (npx preferred, node fallback)
+- Performance optimizations: <2s for 10K+ items
+- Traceability graph node limiting
+- TypeScript 5.9.3, esbuild bundling, Apache 2.0 license
 
 ## 🤝 Contributing
 

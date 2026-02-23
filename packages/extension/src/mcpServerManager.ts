@@ -41,24 +41,27 @@ interface VsCodeWithMcpApi {
 /**
  * Check if extension is running as pre-release version
  *
- * Uses VS Code's version convention: odd minor version = pre-release.
- * - 1.0.x → stable (even minor)
- * - 1.1.x → pre-release (odd minor) → uses @next MCP server
- * - 1.2.x → stable (even minor)
+ * Uses VS Code's version convention extended with patch-level detection:
+ * - minor is ODD (e.g. 1.1.x, 1.3.x) → pre-release (standard convention)
+ * - minor is EVEN, patch is ODD (e.g. 1.0.1, 1.2.3) → pre-release (patch-level)
+ * - minor and patch both EVEN (e.g. 1.0.0, 1.2.0) → stable
  *
- * This aligns with the VS Code Marketplace convention and works automatically
- * without requiring a separate `"preRelease": true` field in package.json.
- * Example: version "1.1.0-next.1" → minor=1 (odd) → isPreRelease()=true ✓
+ * Background: The VS Code Marketplace requires N.N.N version format — semver
+ * pre-release suffixes like "1.1.0-next.1" are not supported. VSIX pre-release
+ * status is instead set via `vsce publish --pre-release` (no package.json field).
+ *
+ * "preRelease: true" does NOT exist in package.json — only the vsce CLI flag matters.
  *
  * @param context Extension context with package.json access
- * @returns True if extension version uses odd minor (pre-release convention)
+ * @returns True if extension version indicates a pre-release build
  */
 function isPreRelease(context: vscode.ExtensionContext): boolean {
-  // VS Code convention: odd minor version = pre-release (1.1.x, 1.3.x, ...)
-  // even minor version = stable (1.0.x, 1.2.x, ...)
   const version: string = context.extension.packageJSON.version ?? '0.0.0';
-  const minor = parseInt(version.split('.')[1] ?? '0', 10);
-  return minor % 2 !== 0;
+  const parts = version.split('.');
+  const minor = parseInt(parts[1] ?? '0', 10);
+  const patch = parseInt(parts[2] ?? '0', 10);
+  // Odd minor (1.1.x, 1.3.x) OR odd patch with even minor (1.0.1, 1.2.3)
+  return minor % 2 !== 0 || patch % 2 !== 0;
 }
 
 /**

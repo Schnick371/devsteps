@@ -1,0 +1,38 @@
+{
+  "id": "TASK-251",
+  "type": "task",
+  "category": "general",
+  "title": "Document VS Code pre-release publishing — no package.json field, only vsce CLI flag",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-23T19:35:36.673Z",
+  "updated": "2026-02-23T19:35:41.999Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "scripts/publish-next.sh",
+    "packages/extension/package.json",
+    "packages/extension/CHANGELOG.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "pre-release",
+    "publishing",
+    "vsce",
+    "knowledge"
+  ],
+  "commits": [],
+  "metadata": {}
+}
