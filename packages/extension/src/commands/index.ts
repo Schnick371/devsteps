@@ -1016,6 +1016,11 @@ ${Object.entries(byType)
       if (selected) {
         if (!checkDevStepsInitialized(treeDataProvider)) return;
         treeDataProvider.setStatusFilter(selected.map((s) => s.value));
+        await vscode.commands.executeCommand(
+          'setContext',
+          'devsteps.filtersActive',
+          treeDataProvider.isFiltersActive()
+        );
       }
     })
   );
@@ -1039,6 +1044,11 @@ ${Object.entries(byType)
       if (selected) {
         if (!checkDevStepsInitialized(treeDataProvider)) return;
         treeDataProvider.setPriorityFilter(selected.map((s) => s.value));
+        await vscode.commands.executeCommand(
+          'setContext',
+          'devsteps.filtersActive',
+          treeDataProvider.isFiltersActive()
+        );
       }
     })
   );
@@ -1066,15 +1076,47 @@ ${Object.entries(byType)
       if (selected) {
         if (!checkDevStepsInitialized(treeDataProvider)) return;
         treeDataProvider.setTypeFilter(selected.map((s) => s.value));
+        await vscode.commands.executeCommand(
+          'setContext',
+          'devsteps.filtersActive',
+          treeDataProvider.isFiltersActive()
+        );
       }
     })
   );
 
   // Clear all filters
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.clearFilters', () => {
+    vscode.commands.registerCommand('devsteps.clearFilters', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.clearFilters();
+      await vscode.commands.executeCommand('setContext', 'devsteps.filtersActive', false);
+    })
+  );
+
+  // Filter status button - active (has active filters — clears them on click)
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.filterStatus.active', async () => {
+      if (!checkDevStepsInitialized(treeDataProvider)) return;
+      treeDataProvider.clearFilters();
+      await vscode.commands.executeCommand('setContext', 'devsteps.filtersActive', false);
+      vscode.window.showInformationMessage('DevSteps: All filters cleared');
+    })
+  );
+
+  // Filter status button - inactive (no active filters — informational no-op)
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.filterStatus.inactive', () => {
+      // No-op: button is shown as disabled; command registered to avoid VS Code errors
+    })
+  );
+
+  // Collapse all items in the tree view
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.collapseAll', async () => {
+      await vscode.commands.executeCommand(
+        'workbench.actions.treeView.devsteps.itemsView.collapseAll'
+      );
     })
   );
 

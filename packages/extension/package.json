@@ -257,6 +257,25 @@
         "icon": "$(eye)"
       },
       {
+        "command": "devsteps.filterStatus.active",
+        "title": "Clear Active Filters",
+        "category": "DevSteps",
+        "icon": "$(filter-filled)"
+      },
+      {
+        "command": "devsteps.filterStatus.inactive",
+        "title": "No Active Filters",
+        "category": "DevSteps",
+        "icon": "$(filter)",
+        "enablement": "false"
+      },
+      {
+        "command": "devsteps.collapseAll",
+        "title": "Collapse All",
+        "category": "DevSteps",
+        "icon": "$(collapse-all)"
+      },
+      {
         "command": "devsteps.showRelatesTo.active",
         "title": "$(check) Show 'relates-to' Links",
         "category": "DevSteps",
@@ -391,24 +410,34 @@
           "group": "navigation@1"
         },
         {
-          "command": "devsteps.refreshItems",
-          "when": "view == devsteps.itemsView && devsteps.initialized",
+          "command": "devsteps.filterStatus.active",
+          "when": "view == devsteps.itemsView && devsteps.initialized && devsteps.filtersActive",
           "group": "navigation@2"
         },
         {
-          "command": "devsteps.addItem",
+          "command": "devsteps.filterStatus.inactive",
+          "when": "view == devsteps.itemsView && devsteps.initialized && !devsteps.filtersActive",
+          "group": "navigation@2"
+        },
+        {
+          "command": "devsteps.refreshItems",
           "when": "view == devsteps.itemsView && devsteps.initialized",
           "group": "navigation@3"
         },
         {
-          "command": "devsteps.searchItems",
+          "command": "devsteps.addItem",
           "when": "view == devsteps.itemsView && devsteps.initialized",
           "group": "navigation@4"
         },
         {
-          "command": "devsteps.showDashboard",
+          "command": "devsteps.searchItems",
           "when": "view == devsteps.itemsView && devsteps.initialized",
           "group": "navigation@5"
+        },
+        {
+          "command": "devsteps.showDashboard",
+          "when": "view == devsteps.itemsView && devsteps.initialized",
+          "group": "navigation@6"
         },
         {
           "submenu": "devsteps.viewAndSort",
@@ -417,6 +446,11 @@
         }
       ],
       "devsteps.viewAndSort": [
+        {
+          "command": "devsteps.collapseAll",
+          "group": "0_collapse@1",
+          "when": "view == devsteps.itemsView"
+        },
         {
           "command": "devsteps.viewMode.flat.active",
           "group": "1_view@1",

@@ -364,6 +364,20 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     return this.filterState.hideDone;
   }
 
+  /**
+   * Returns true when any non-visual filter is active (excluding hideDone / hideRelatesTo)
+   */
+  isFiltersActive(): boolean {
+    const { statuses, priorities, types, tags, searchQuery } = this.filterState;
+    return (
+      statuses.length > 0 ||
+      priorities.length > 0 ||
+      types.length > 0 ||
+      tags.length > 0 ||
+      (searchQuery ?? '').length > 0
+    );
+  }
+
   getHideRelatesToState(): boolean {
     return this.filterState.hideRelatesTo;
   }
