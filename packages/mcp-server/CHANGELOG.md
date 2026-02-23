@@ -2,7 +2,7 @@
 
 All notable changes to the DevSteps MCP Server will be documented in this file.
 
-## [1.1.0-next.2] - 2026-02-23 (Pre-release)
+## [1.0.0-next.2] - 2026-02-23 (Pre-release)
 
 ### ⚠️ Pre-Release Channel
 
@@ -11,7 +11,7 @@ Install via: `npm install -g @schnick371/devsteps-mcp-server@next`
 Used automatically by VS Code extension `devsteps@1.0.1` when `isPreRelease()` detects odd patch version.
 
 ### Changed
-- Updated dependency: `@schnick371/devsteps-shared@1.1.0-next.2`
+- Updated dependency: `@schnick371/devsteps-shared@1.0.0-next.2`
 - `copy:docs` script resilient to missing root `.devsteps/` directory
 
 ### Known Issues
