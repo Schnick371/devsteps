@@ -3,18 +3,20 @@ name: devsteps-t2-test
 description: T2 Test Conductor — orchestrates T3 test workers to write, execute, and verify tests for implemented code. Dispatched by T1 after t2-impl MandateResult. NEVER called directly by user.
 tools:
   - read
+  - read/problems
   - agent
+  - edit
   - search
   - devsteps/*
   - todo
   - execute/runInTerminal
   - execute/getTerminalOutput
   - execute/runTask
+  - execute/awaitTerminal
   - execute/testFailure
-  - read/problems
   - local-web-search/*
   - google-search/*
-model: Claude Sonnet 4.6
+model: 'Claude Sonnet 4.6'
 ---
 
 # T2 Test Conductor

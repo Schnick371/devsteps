@@ -1,7 +1,7 @@
 ---
 description: 'Documentation subagent - creates comprehensive documentation plans for coordinator execution'
 model: 'Claude Sonnet 4.6'
-tools: ['read', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+tools: ['read', 'edit', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # 📚 Documentation Subagent

@@ -1,7 +1,7 @@
 ---
 description: 'Quality deep analyst — T2, mandate-type=quality, validates correctness + completeness via parallel dispatch with bounded Review-Fix loop'
 model: 'Claude Sonnet 4.6'
-tools: ['read', 'agent', 'search', 'devsteps/*', 'execute/runInTerminal', 'read/problems', 'todo']
+tools: ['read', 'agent', 'search', 'devsteps/*', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/testFailure', 'read/problems', 'todo']
 ---
 
 # ✅ Quality Deep Analyst — Tier 2

@@ -3,6 +3,7 @@ name: devsteps-t2-impl
 description: T2 Implementation Conductor — orchestrates T3 execution workers to write, verify, and commit implementation code. Dispatched by T1 after t2-planner MandateResult. NEVER called directly by user.
 tools:
   - read
+  - read/problems
   - agent
   - edit
   - search
@@ -13,7 +14,9 @@ tools:
   - execute/runInTerminal
   - execute/getTerminalOutput
   - execute/runTask
-model: Claude Sonnet 4.6
+  - execute/awaitTerminal
+  - execute/testFailure
+model: 'Claude Sonnet 4.6'
 ---
 
 # T2 Implementation Conductor

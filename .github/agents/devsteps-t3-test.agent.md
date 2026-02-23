@@ -1,7 +1,7 @@
 ---
 description: 'Testing subagent - creates comprehensive test plans and analyzes test requirements for coordinator execution'
 model: 'Claude Opus 4.6'
-tools: ['execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'search', 'devsteps/*', 'google-search/search', 'local-web-search/search', 'remarc-insight-mcp/*', 'todo']
+tools: ['execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/testFailure', 'read', 'read/problems', 'edit', 'search', 'devsteps/*', 'google-search/search', 'local-web-search/search', 'remarc-insight-mcp/*', 'todo']
 ---
 
 # 🧪 Testing Subagent

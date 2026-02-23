@@ -4,11 +4,12 @@ description: T2 Documentation Conductor — orchestrates T3 documentation worker
 tools:
   - read
   - agent
+  - edit
   - search
   - devsteps/*
   - tavily/*
   - todo
-model: Claude Sonnet 4.6
+model: 'Claude Sonnet 4.6'
 ---
 
 # T2 Documentation Conductor

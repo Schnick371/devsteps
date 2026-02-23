@@ -1,7 +1,7 @@
 ---
 description: 'Risk deep analyst — T2, mandate-type=risk, maps blast radius and probability/severity matrix via parallel T3 dispatch'
 model: 'Claude Sonnet 4.6'
-tools: ['read', 'agent', 'search', 'devsteps/*', 'todo', 'execute/runInTerminal']
+tools: ['read', 'agent', 'search', 'devsteps/*', 'todo', 'execute/runInTerminal', 'execute/getTerminalOutput']
 ---
 
 # ⚠️ Risk Deep Analyst — Tier 2
