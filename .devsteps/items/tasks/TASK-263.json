@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-23T22:54:26.239Z",
-  "updated": "2026-02-23T22:56:12.656Z",
+  "updated": "2026-02-23T23:00:35.589Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/cli/src/commands/doctor-integrity.ts",

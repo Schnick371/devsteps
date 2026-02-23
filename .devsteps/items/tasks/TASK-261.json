@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-02-23T22:54:26.236Z",
-  "updated": "2026-02-23T22:56:12.656Z",
+  "updated": "2026-02-23T23:00:19.477Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/doctor.ts",

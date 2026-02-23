@@ -1,40 +1,40 @@
 ## Problem
 
-`devsteps doctor` im CLI prüft Datenintegrität vollständig (asymmetrische Links, Orphaned Items, Broken References, JSON-Validierung, Index↔Item Konsistenz). Ein AI-Agent hat aber **keinen MCP-Zugriff** auf diese Prüfungen — `mcp_devsteps_health` prüft nur Server-Laufzeit, nicht Datenkonsistenz.
+`devsteps doctor` in the CLI performs comprehensive data integrity checks (asymmetric links, orphaned items, broken references, JSON validation, index ↔ item consistency). However, an AI agent has **no MCP access** to these checks — `mcp_devsteps_health` only reports server runtime status, not data consistency.
 
-**Konsequenz:** Nach einem Branch-Merge, Crash oder direktem Dateibearbeitung kann kein Agent automatisch erkennen, ob der `.devsteps/`-Index korrupt ist. Er bekommt `healthy` zurück — und schlägt dann bei der ersten Leseoperation mit verwirrenden Fehlern fehl.
+**Consequence:** After a branch merge, crash, or direct file edits, no agent can automatically detect whether the `.devsteps/` index is corrupted. The agent receives `healthy` — and then fails at the first read operation with confusing errors.
 
 ## Goal
 
-`mcp_devsteps_doctor` als vollständiges MCP-Tool das die gleichen Checks wie der CLI ausführt — aufrufbar von AI-Agenten, CI-Pipelines und der VS Code Extension.
+`mcp_devsteps_doctor` as a full MCP tool that executes the same checks as the CLI — callable by AI agents, CI pipelines, and the VS Code extension.
 
 ## Acceptance Criteria
 
-- [ ] Neue Funktion `runDoctorChecks(devstepsDir, opts?)` in `packages/shared/src/core/` extrahiert aus CLI `doctor-integrity.ts` + `doctor-checks.ts`
-- [ ] `mcp_devsteps_doctor` Tool registriert in `packages/mcp-server/src/tools/system.ts`
-- [ ] Handler in `packages/mcp-server/src/handlers/` delegiert an shared function
-- [ ] Rückgabe: `{ status: 'healthy'|'warning'|'critical', checks: CheckResult[], summary: string, fixable: string[] }`
-- [ ] CLI `devsteps doctor` importiert `runDoctorChecks` aus shared (DRY — kein duplizierter Code)
-- [ ] Option `dry_run: boolean` — Checks ohne Auto-Fix
-- [ ] Option `auto_fix: boolean` — Asymmetrische Links + Index-Rebuild automatisch reparieren (default: false, NIEMALS default true im MCP)
-- [ ] Tool erscheint in `mcp_devsteps_context` Tool-Katalog
+- [ ] New function `runDoctorChecks(devstepsDir, opts?)` in `packages/shared/src/core/` extracted from CLI `doctor-integrity.ts` + `doctor-checks.ts`
+- [ ] `mcp_devsteps_doctor` tool registered in `packages/mcp-server/src/tools/system.ts`
+- [ ] Handler in `packages/mcp-server/src/handlers/` delegates to shared function
+- [ ] Return type: `{ status: 'healthy'|'warning'|'critical', checks: CheckResult[], summary: string, fixable: string[] }`
+- [ ] CLI `devsteps doctor` imports `runDoctorChecks` from shared (DRY — no duplicated code)
+- [ ] Option `dry_run: boolean` — run checks without auto-fix
+- [ ] Option `auto_fix: boolean` — automatically repair asymmetric links + index rebuild (default: false, NEVER default true in MCP)
+- [ ] Tool appears in `mcp_devsteps_context` tool catalog
 
-## Checks abgedeckt (von CLI übernehmen)
+## Checks Covered (migrated from CLI)
 
-| Check | Quelle | Schwere |
+| Check | Source | Severity |
 |---|---|---|
-| JSON-Dateien valide | `doctor-checks.ts` | CRITICAL |
-| Index↔Items konsistent | `doctor-integrity.ts` | CRITICAL |
-| Asymmetrische bidirektionale Links | `doctor-integrity.ts` | WARNING |
-| Orphaned Items (kein Parent, nicht Epic) | `doctor-integrity.ts` | WARNING |
-| Broken References (ID existiert nicht) | `doctor-integrity.ts` | CRITICAL |
-| Context-Dateien stale | neu | WARNING |
-| CBP-Verzeichnis-Struktur | neu | INFO |
+| JSON files valid | `doctor-checks.ts` | CRITICAL |
+| Index↔Items consistent | `doctor-integrity.ts` | CRITICAL |
+| Asymmetric bidirectional links | `doctor-integrity.ts` | WARNING |
+| Orphaned items (no parent, not Epic) | `doctor-integrity.ts` | WARNING |
+| Broken references (ID does not exist) | `doctor-integrity.ts` | CRITICAL |
+| Context files stale | new | WARNING |
+| CBP directory structure | new | INFO |
 
 ## Agent Usage Pattern
 
 ```
-T1 nach Branch-Merge: mcp_devsteps_doctor({ dry_run: true })
+T1 after branch merge: mcp_devsteps_doctor({ dry_run: true })
 → status: "warning", checks: [{ name: "asymmetric-links", ... }]
 → mcp_devsteps_doctor({ auto_fix: true })
 → status: "healthy"
