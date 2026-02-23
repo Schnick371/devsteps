@@ -16,13 +16,26 @@ export {
   clearGlobalCache,
   getCache,
 } from './cache.js';
+// Export backup utilities
+export {
+  type BackupOptions,
+  type BackupResult,
+  backupGithubFiles,
+} from './backup-github-files.js';
 // Export init helpers
 export {
   type CopiedGithubFiles,
   copyDevstepsDocs,
   copyGithubFiles,
+  injectDevstepsComment,
   writeSetupMd,
 } from './init-helpers.js';
+// Export update helpers
+export {
+  type UpdateCopilotFilesOptions,
+  type UpdateCopilotFilesResult,
+  updateCopilotFiles,
+} from './update-copilot-files.js';
 
 /**
  * Type to plural directory mapping

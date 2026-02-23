@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "add backupGithubFiles() utility to shared package with rotation and integrity check",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-23T22:18:34.392Z",
-  "updated": "2026-02-23T22:19:24.726Z",
+  "updated": "2026-02-23T22:33:43.103Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/utils/backup-github-files.ts",

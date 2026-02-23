@@ -6,8 +6,42 @@
  * Creates default .devsteps structure, copies GitHub Copilot templates.
  */
 
+import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+
+/**
+ * Compute sha256 hex digest of content (UTF-8).
+ */
+function sha256(content: string): string {
+  return createHash('sha256').update(content, 'utf8').digest('hex');
+}
+
+/**
+ * Inject (or replace) the devsteps management comment directly after the YAML
+ * frontmatter closing `---` line.  The marker is placed in an HTML comment so
+ * it is invisible in rendered Markdown and does NOT affect YAML parsing.
+ *
+ * Format:
+ *   <!-- devsteps-managed: true | version: <ver> | hash: sha256:<hex> -->
+ *
+ * If the file has no frontmatter the comment is prepended to the top.
+ */
+export function injectDevstepsComment(rawContent: string, hash: string, version: string): string {
+  const marker = `<!-- devsteps-managed: true | version: ${version} | hash: sha256:${hash} -->`;
+  // Remove old marker if present
+  const withoutOld = rawContent.replace(/<!--\s*devsteps-managed:.*?-->\n?/g, '');
+
+  // Find YAML frontmatter (starts and ends with ---)
+  const frontmatterEnd = withoutOld.match(/^---\n[\s\S]*?\n---\n/);
+  if (frontmatterEnd) {
+    const endIdx = (frontmatterEnd.index ?? 0) + frontmatterEnd[0].length;
+    return withoutOld.slice(0, endIdx) + marker + '\n' + withoutOld.slice(endIdx);
+  }
+
+  // No frontmatter — prepend
+  return marker + '\n' + withoutOld;
+}
 
 export interface CopiedGithubFiles {
   agents: string[];
@@ -19,13 +53,16 @@ export interface CopiedGithubFiles {
  * Dynamically copy all devsteps-prefixed agent/instruction/prompt files
  * from a source .github directory into target directories.
  * Creates target directories if they don't exist.
+ * Injects a `<!-- devsteps-managed -->` HTML comment after the YAML frontmatter
+ * so that the canonical content hash is stored without touching the YAML block.
  * Returns lists of copied filenames for output/reporting.
  */
 export function copyGithubFiles(
   sourceGithubDir: string,
   githubAgentsDir: string,
   githubInstructionsDir: string,
-  githubPromptsDir: string
+  githubPromptsDir: string,
+  packageVersion = 'unknown'
 ): CopiedGithubFiles {
   mkdirSync(githubAgentsDir, { recursive: true });
   mkdirSync(githubInstructionsDir, { recursive: true });
@@ -39,7 +76,10 @@ export function copyGithubFiles(
     if (!existsSync(sourceDir)) return [];
     const files = readdirSync(sourceDir).filter(filter);
     for (const file of files) {
-      writeFileSync(join(targetDir, file), readFileSync(join(sourceDir, file), 'utf8'));
+      const rawContent = readFileSync(join(sourceDir, file), 'utf8');
+      const hash = sha256(rawContent);
+      const annotated = injectDevstepsComment(rawContent, hash, packageVersion);
+      writeFileSync(join(targetDir, file), annotated);
     }
     return files;
   };
