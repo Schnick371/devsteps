@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "general",
   "title": "MCP writes literal \\\\n instead of newlines in markdown description files (since v1.0.0)",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-24T08:55:41.246Z",
-  "updated": "2026-02-24T08:56:06.939Z",
+  "updated": "2026-02-24T10:38:07.588Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/add.ts",
