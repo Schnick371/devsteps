@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Add normalizeMarkdown utility and apply to add/update description writes",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-02-24T08:55:54.055Z",
-  "updated": "2026-02-24T10:37:08.843Z",
+  "updated": "2026-02-24T10:38:03.610Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/add.ts",
