@@ -1,0 +1,41 @@
+{
+  "id": "TASK-276",
+  "type": "task",
+  "category": "general",
+  "title": "Context staleness detection — add `context_meta` to all context responses",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-02-24T13:41:50.975Z",
+  "updated": "2026-02-24T13:42:19.886Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/context.ts",
+    "packages/shared/src/types/",
+    "packages/mcp-server/src/handlers/context.ts",
+    "packages/shared/src/utils/cache.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-121"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-273"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ai-onboarding",
+    "context",
+    "ux"
+  ],
+  "commits": [],
+  "metadata": {}
+}
