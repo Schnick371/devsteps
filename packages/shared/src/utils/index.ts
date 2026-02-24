@@ -230,3 +230,35 @@ export function sanitizeFilename(name: string): string {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
 }
+
+/**
+ * Normalizes escape sequences in description strings received from MCP tool calls.
+ *
+ * **Problem:** MCP clients (GitHub Copilot ≥ v1.0.0, Claude Code, etc.) transmit
+ * multiline strings with literal two-character sequences `\n`, `\t` instead of
+ * actual Unicode control characters. `JSON.parse` delivers these sequences unchanged,
+ * so `writeFileSync` writes them verbatim — producing unreadable `.md` files.
+ *
+ * **Heuristic:** If the incoming string already contains real newlines (U+000A),
+ * it is already properly formatted and returned unchanged. This makes the function
+ * safe to call on both MCP-origin strings and CLI-origin strings, and prevents
+ * double-conversion.
+ *
+ * **Handles:**
+ * - `\n` (backslash + n) → real newline (LF)
+ * - `\t` (backslash + t) → real tab
+ * - `\r` (backslash + r) → removed (stray CR from Windows-style `\r\n` literals)
+ *
+ * @param value - The raw description string from an MCP tool argument
+ * @returns A string with proper newline characters suitable for file I/O
+ */
+export function normalizeMarkdown(value: string): string {
+  // Fast path: real newlines are present → already properly formatted
+  if (value.includes('\n')) return value;
+
+  // Slow path: convert MCP-style escape sequences to real control characters
+  return value
+    .replace(/\\n/g, '\n')
+    .replace(/\\t/g, '\t')
+    .replace(/\\r/g, '');
+}

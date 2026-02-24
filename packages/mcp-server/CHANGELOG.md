@@ -2,6 +2,13 @@
 
 All notable changes to the DevSteps MCP Server will be documented in this file.
 
+## [Unreleased]
+
+### Fixed
+- **BUG-056:** Markdown description files no longer contain literal `\n` escape sequences. Fix is in `@schnick371/devsteps-shared` (`normalizeMarkdown` utility applied in `addItem` and `updateItem`). The regression was introduced when GitHub Copilot ≥ v1.0.0 started transmitting multiline tool arguments as escape sequences rather than real newline characters.
+
+---
+
 ## [1.0.0-next.2] - 2026-02-23 (Pre-release)
 
 ### ⚠️ Pre-Release Channel
