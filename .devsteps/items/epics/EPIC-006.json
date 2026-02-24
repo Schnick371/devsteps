@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-24T20:55:24.977Z",
-  "updated": "2026-02-23T22:55:30.630Z",
+  "updated": "2026-02-24T08:56:06.939Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -29,7 +29,8 @@
       "EPIC-005",
       "EPIC-001",
       "EPIC-024",
-      "EPIC-025"
+      "EPIC-025",
+      "BUG-056"
     ],
     "depends-on": [],
     "required-by": [],
