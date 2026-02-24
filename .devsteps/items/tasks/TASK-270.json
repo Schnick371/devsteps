@@ -1,0 +1,38 @@
+{
+  "id": "TASK-270",
+  "type": "task",
+  "category": "general",
+  "title": "Add normalizeMarkdown utility and apply to add/update description writes",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-24T08:55:54.055Z",
+  "updated": "2026-02-24T08:55:58.834Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/add.ts",
+    "packages/shared/src/core/update.ts",
+    "packages/shared/src/utils/"
+  ],
+  "linked_items": {
+    "implements": [
+      "BUG-056"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "fix",
+    "normalizeMarkdown"
+  ],
+  "commits": [],
+  "metadata": {}
+}
