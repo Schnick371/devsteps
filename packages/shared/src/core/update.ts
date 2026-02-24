@@ -10,7 +10,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { RELATIONSHIP_TYPE, STATUS } from '../constants/index.js';
 import type { EisenhowerQuadrant, ItemMetadata, ItemStatus } from '../schemas/index.js';
-import { getCurrentTimestamp, parseItemId, TYPE_TO_DIRECTORY } from '../utils/index.js';
+import { getCurrentTimestamp, normalizeMarkdown, parseItemId, TYPE_TO_DIRECTORY } from '../utils/index.js';
 import { getItem } from './get.js';
 import { updateItemInIndex } from './index-refs.js';
 
@@ -126,12 +126,12 @@ export async function updateItem(
   }
 
   if (args.description) {
-    // Replace entire description
-    writeFileSync(descriptionPath, args.description);
+    // Replace entire description — normalize escape sequences from MCP clients (BUG-056)
+    writeFileSync(descriptionPath, normalizeMarkdown(args.description));
   } else if (args.append_description) {
     // Append to existing (or create new if doesn't exist)
     const existing = existsSync(descriptionPath) ? readFileSync(descriptionPath, 'utf-8') : '';
-    writeFileSync(descriptionPath, existing + args.append_description);
+    writeFileSync(descriptionPath, existing + normalizeMarkdown(args.append_description));
   }
 
   // Update index (auto-migration ensures refs-style always available)

@@ -18,6 +18,7 @@ import {
   generateItemId,
   getCurrentTimestamp,
   getTypePrefix,
+  normalizeMarkdown,
   TYPE_TO_DIRECTORY,
 } from '../utils/index.js';
 import { getConfig } from './config.js';
@@ -101,9 +102,11 @@ export async function addItem(devstepsDir: string, args: AddItemArgs): Promise<A
 
   writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
 
-  // Save description
-  const description =
-    args.description || `# ${args.title}\n\n<!-- Add detailed description here -->\n`;
+  // Save description — normalizeMarkdown converts literal \n sequences from MCP clients
+  // to real newlines (BUG-056: GitHub Copilot ≥ v1.0.0 sends escape sequences, not real newlines)
+  const description = normalizeMarkdown(
+    args.description || `# ${args.title}\n\n<!-- Add detailed description here -->\n`
+  );
   writeFileSync(descriptionPath, description);
 
   // Update index (auto-migration ensures refs-style always available)
