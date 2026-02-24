@@ -2,6 +2,15 @@
 
 All notable changes to `@schnick371/devsteps-shared` will be documented in this file.
 
+## [Unreleased]
+
+### Fixed
+- **BUG-056:** `normalizeMarkdown` utility added to `packages/shared/src/utils/` — converts literal `\n`, `\t`, `\r` escape sequences (sent by MCP clients ≥ Copilot v1.0.0) to real Unicode control characters before writing `.md` description files. Idempotent: strings that already contain real newlines are returned unchanged.
+  - `addItem()` — applies `normalizeMarkdown` to description before `writeFileSync`
+  - `updateItem()` — applies to both `description` (replace) and `append_description` (append) paths
+
+---
+
 ## [1.0.0-next.2] - 2026-02-23 (Pre-release)
 
 ### ⚠️ Pre-Release Channel

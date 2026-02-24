@@ -22,6 +22,7 @@ import {
   updateCommand,
 } from './commands/index.js';
 import { initCommand } from './commands/init.js';
+import { updateCopilotFilesCommand } from './commands/update-copilot-files.js';
 
 const program = new Command();
 
@@ -40,6 +41,22 @@ program
   .option('--no-git', 'Disable git integration')
   .option('-m, --methodology <type>', 'Methodology: scrum|waterfall|hybrid (default: scrum)')
   .action(initCommand);
+
+// Update GitHub Copilot files
+program
+  .command('update-copilot-files')
+  .alias('ucf')
+  .description('Update devsteps-managed GitHub Copilot files (.github/agents, .github/instructions, .github/prompts)')
+  .option('--dry-run', 'Preview changes without writing files')
+  .option('-f, --force', 'Overwrite all files even when up-to-date')
+  .option('--max-backups <number>', 'Maximum backup rotations to keep (default: 5)', Number)
+  .action(async (options) => {
+    await updateCopilotFilesCommand({
+      dryRun: options.dryRun,
+      force: options.force,
+      maxBackups: options.maxBackups,
+    });
+  });
 
 // Add item
 program

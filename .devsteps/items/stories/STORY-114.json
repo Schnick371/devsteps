@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "implement update_copilot_files — safe post-install update of managed .github Copilot files",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-23T22:17:41.858Z",
-  "updated": "2026-02-23T22:19:16.874Z",
+  "updated": "2026-02-23T22:34:33.367Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/utils/backup-github-files.ts",

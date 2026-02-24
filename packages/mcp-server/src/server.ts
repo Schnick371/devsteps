@@ -39,6 +39,7 @@ import {
   statusTool,
   traceTool,
   unlinkTool,
+  updateCopilotFilesTool,
   updateTool,
   writeAnalysisReportTool,
   writeEscalationTool,
@@ -86,7 +87,7 @@ export class DevStepsServer {
     const tools = [
       initTool, addTool, getTool, listTool, updateTool, linkTool, unlinkTool,
       searchTool, statusTool, traceTool, exportTool, archiveTool, purgeTool,
-      contextTool, healthCheckTool, metricsTool,
+      contextTool, healthCheckTool, metricsTool, updateCopilotFilesTool,
       // Context Budget Protocol (CBP) Tier-3 analysis tools (EPIC-027)
       writeAnalysisReportTool, readAnalysisEnvelopeTool, writeVerdictTool, writeSprintBriefTool,
       // Context Budget Protocol (CBP) Tier-2 mandate tools (EPIC-028)

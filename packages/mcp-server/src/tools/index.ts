@@ -28,6 +28,7 @@ export {
   purgeTool,
   searchTool,
   statusTool,
+  updateCopilotFilesTool,
 } from './system.js';
 export {
   readAnalysisEnvelopeTool,
