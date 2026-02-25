@@ -9,7 +9,6 @@ tools:
   - search
   - devsteps/*
   - bright-data/*
-  - bright-data/*
   - todo
   - execute/runInTerminal
   - execute/getTerminalOutput
@@ -20,6 +19,7 @@ model: 'Claude Sonnet 4.6'
 agents:
   - devsteps-t3-impl
   - devsteps-t3-analyst-web
+  - devsteps-t3-build-diagnostics
 handoffs:
   - label: "→ Test"
     agent: devsteps-t2-test
@@ -45,18 +45,13 @@ handoffs:
 | **Returns** | `{ report_path, verdict, confidence }` via `write_mandate_result` |
 | **T1 reads via** | `read_mandate_results(item_ids)` |
 
-**Web search scope (EXECUTION-phase only):** Targeted API lookups for the *chosen* library/framework — e.g. "current Vitest 3.x mock API for ESM modules". This is DISTINCT from T2-research's strategic "which library" competitive analysis. Only dispatch `t3-analyst-web` when the planner findings reference a specific library/API version where currency matters.
-
----
+**Web search scope:** Targeted API lookups for specific library/API versions in planner findings — DISTINCT from T2-research's "which library" analysis. Dispatch `t3-analyst-web` only when currency matters.
 
 ## 4-Phase MAP-REDUCE-RESOLVE-SYNTHESIZE Protocol
 
 ### Phase 1: MAP (Parallel Dispatch)
 
-1. `read_mandate_results(item_ids)` — read t2-planner MandateResult. Extract:
-   - `recommendations`: ordered implementation steps
-   - `findings`: affected file paths, API/library references, version constraints
-   - Any flagged "version-sensitive" APIs or deprecated patterns
+1. `read_mandate_results(item_ids)` — read t2-planner MandateResult (recommendations, file paths, API references, version-sensitive flags).
 
 2. Determine T3 dispatch set:
 
@@ -70,8 +65,6 @@ handoffs:
 3. Dispatch ALL identified T3 agents **simultaneously** in one parallel fan-out.
 
 ### Phase 2: REDUCE (Read + Contradiction Detection)
-
-After all MAP agents complete:
 
 1. Read `devsteps-t3-impl` envelope via `read_analysis_envelope`.
 2. If `devsteps-t3-analyst-web` was dispatched, read its envelope.
@@ -94,15 +87,8 @@ Maximum 2 RESOLVE rounds. If unresolved → mark `escalation_reason`, set `verdi
 
 1. Verify `npm run build` passes (or equivalent build command from planner).
 2. Commit implementation changes: `git add <affected_paths> && git commit -m "type(scope): subject\n\nImplements: <item_id>"`.
-3. Call `write_mandate_result` with:
-   - `type: implementation`
-   - `findings`: list of changed files + git commit hash
-   - `recommendations`: what t2-test/t2-doc should do next
-   - `verdict`: DONE | BLOCKED | ESCALATED
-   - `confidence`: 0.0–1.0
+3. Call `write_mandate_result`: `type: implementation`, `findings` (changed files + git hash), `recommendations` (for t2-test/t2-doc), `verdict` (DONE|BLOCKED|ESCALATED), `confidence` (0.0–1.0).
 4. Return to T1 in chat: **ONLY** `{ report_path, verdict, confidence }`.
-
----
 
 ## Behavioral Rules
 

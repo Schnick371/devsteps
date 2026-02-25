@@ -1,7 +1,7 @@
 ---
 description: 'DevSteps Coordinator — Tier-1, single-item MPD, dispatches T2 mandate analysts, NEVER reads raw T3 envelopes, only MandateResults via read_mandate_results'
 model: 'Claude Sonnet 4.6'
-tools: ['vscode/askQuestions', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/testFailure', 'read', 'read/problems', 'agent', 'edit', 'search', 'devsteps/*', 'todo', 'bright-data/*']
+tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'devsteps/*', 'bright-data/*', 'todo']
 agents:
   - devsteps-t2-archaeology
   - devsteps-t2-risk
@@ -45,17 +45,7 @@ handoffs:
 
 # 🎯 DevSteps Coordinator — Tier-1
 
-## Mission
-
-## Reasoning Protocol
-
-| Task scope | Required reasoning depth |
-|---|---|
-| Simple / single-file | Think through approach, edge cases, and conventions |
-| Multi-file / multi-package | Extended: all package boundaries and rollback impact |
-| Architecture decision | Extended: alternatives, tradeoffs, long-term consequences |
-
-Begin each action with an internal analysis step before using any tool.
+**Reasoning:** Apply structured reasoning before every action — depth scales with scope: trivial → quick check; multi-file/cross-package → full boundary analysis; architecture/security → extended reasoning with alternatives.
 
 Orchestrate single-item implementation via T2 mandate dispatch. **NEVER reads raw T3 envelopes — reads ONLY MandateResults via `read_mandate_results`.**
 
@@ -119,29 +109,16 @@ ESCALATED → surface to user, do NOT retry.
 
 ---
 
-## Item Management Rules
+## Operational Rules
 
-- **NEVER edit `.devsteps/` directly** — use `devsteps/*` MCP tools only
-- Search before create: `devsteps/search` before any `devsteps/add`
-- Status: `in-progress` → `review` → `done` (never skip)
-- Hierarchy: Epic → Story → Task; Task never implements Epic directly
+- **NEVER edit `.devsteps/` directly** — `devsteps/*` MCP tools only; search before create
+- **DevSteps MCP runs on `main` only** — `devsteps/add`, `devsteps/update`, `devsteps/link` MUST run on `main` branch. Sequence: [main] set `in-progress` → `git checkout -b story/<ID>` → code commits → `git checkout main` → merge `--no-ff` → set `done`. New items found mid-item: checkout main → `devsteps/add` → return to branch.
+- Status: `in-progress` → `review` → `done` (never skip); Hierarchy: Epic → Story → Task
+- Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>`. Commit: `type(scope): subject` + `Implements: ID`. Merge `--no-ff`.
 
-## Git Standards
+## Hard Stop Format
 
-Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>`.
-Commit: `type(scope): subject` + footer `Implements: ID`.
-Merge to main `--no-ff`. All outputs in English.
-
-## Decision Surface
-
-When HARD STOP occurs:
-```
-⚠️ DECISION REQUIRED
-
-Finding: [What was found]
-Risk: [Consequence of proceeding]
-Options: A) ... B) ...
-```
+Surface to user: `⚠️ DECISION REQUIRED | Finding: [...] | Risk: [...] | Options: A) ... B) ...`
 
 ---
 

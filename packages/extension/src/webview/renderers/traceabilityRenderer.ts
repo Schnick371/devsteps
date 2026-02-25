@@ -5,6 +5,24 @@
  * Traceability Graph Renderer - SVG relationship visualization
  */
 
+export interface TraceabilityNode {
+  id: string;
+  status: string;
+  x?: number;
+  y?: number;
+}
+
+export interface TraceabilityEdge {
+  source: string;
+  target: string;
+  type?: string;
+}
+
+export interface TraceabilityData {
+  nodes: TraceabilityNode[];
+  edges: TraceabilityEdge[];
+}
+
 /**
  * Generate inline JavaScript for traceability graph rendering
  */

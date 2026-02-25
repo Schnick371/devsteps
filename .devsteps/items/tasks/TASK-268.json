@@ -1,0 +1,42 @@
+{
+  "id": "TASK-268",
+  "type": "task",
+  "category": "general",
+  "title": "Rename tool name strings in 5 tool definition files",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-24T07:05:38.703Z",
+  "updated": "2026-02-24T07:06:16.527Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/crud.ts",
+    "packages/mcp-server/src/tools/relationships.ts",
+    "packages/mcp-server/src/tools/system.ts",
+    "packages/mcp-server/src/tools/analysis.ts",
+    "packages/mcp-server/src/tools/cbp.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-120"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-269"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp-server",
+    "rename",
+    "tool-names"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,7 +1,7 @@
 ---
 description: 'Research deep analyst — T2, mandate-type=research, finds best technical approach via parallel web + internal dispatch with cross-validation'
 model: 'Claude Sonnet 4.6'
-tools: ['read', 'agent', 'search', 'devsteps/*', 'bright-data/*', 'bright-data/*', 'web', 'todo']
+tools: ['read', 'agent', 'search', 'devsteps/*', 'bright-data/*', 'todo']
 agents:
   - devsteps-t3-analyst-web
   - devsteps-t3-analyst-internal
@@ -29,15 +29,7 @@ Find the best technical approach for a given problem — combining external best
 
 ## Reasoning Protocol
 
-| Task scope | Required reasoning depth |
-|---|---|
-| Known pattern, standard solution | Think through codebase fit, existing conventions |
-| Novel technology or library | Extended: multi-source evidence, deprecation risk |
-| Architecture decision (long-lived) | Extended: evaluate 3+ alternatives, long-term consequences |
-
-Begin each action with an internal analysis step before using any tool.
-
----
+**Known pattern / standard solution** → think through codebase fit and existing conventions. **Novel technology / library** → Extended: multi-source evidence, deprecation risk. **Architecture decision** → Extended: evaluate 3+ alternatives, long-term consequences. Begin each action with an internal analysis step before any tool call.
 
 ## Mandate Input Format
 
@@ -49,8 +41,6 @@ Tier-1 provides:
 ---
 
 ## MAP-REDUCE-RESOLVE-SYNTHESIZE
-
-Protocol reference: [TIER2-PROTOCOL.md](./TIER2-PROTOCOL.md)
 
 ### MAP — Decomposition Table
 

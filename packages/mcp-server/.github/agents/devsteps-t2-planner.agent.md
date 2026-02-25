@@ -28,24 +28,9 @@ Decompose a story or epic into concrete, ordered, atomic implementation steps �
 
 ## Reasoning Protocol
 
-| Task scope | Required reasoning depth |
-|---|---|
-| Single-file change, clear scope | Think through ordering, test requirements |
-| Multi-file or multi-package | Extended: dependency ordering, rollback granularity |
-| New subsystem or cross-cutting change | Extended: evaluate alternative decompositions, blocking step analysis |
+**Single-file, clear scope** → think through ordering and test requirements. **Multi-file / multi-package** → Extended: dependency ordering, rollback granularity. **New subsystem / cross-cutting** → Extended: evaluate alternative decompositions, blocking step analysis. Begin each action with an internal analysis step before any tool call.
 
-Begin each action with an internal analysis step before using any tool.
-
----
-
-## Mandate Input Format
-
-Tier-1 provides:
-- `item_ids[]` — stories/tasks to decompose
-- `triage_tier` — QUICK | STANDARD | FULL
-- `constraints?` — target branch, affected packages, time-box
-
----
+**Input:** `item_ids[]`, `triage_tier` (QUICK/STANDARD/FULL), `constraints?` (target branch, packages, time-box).
 
 ## MAP-REDUCE-RESOLVE-SYNTHESIZE
 

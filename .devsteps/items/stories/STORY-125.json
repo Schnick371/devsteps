@@ -1,0 +1,41 @@
+{
+  "id": "STORY-125",
+  "type": "story",
+  "category": "general",
+  "title": "Trim T1 Agent Files to ≤120 Lines",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-25T14:21:25.454Z",
+  "updated": "2026-02-25T17:11:26.844Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-t1-coordinator.agent.md",
+    ".github/agents/devsteps-t1-sprint-executor.agent.md",
+    ".github/agents/TIER2-PROTOCOL.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-030"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-126"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "copilot-files",
+    "t1-agents",
+    "trim",
+    "activation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

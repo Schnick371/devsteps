@@ -50,3 +50,4 @@ test-project/
 *.backup
 *.tsbuildinfo
 scripts/tmp
+.devsteps/prompts

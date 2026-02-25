@@ -2,6 +2,22 @@
 
 All notable changes to the DevSteps MCP Server will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- **STORY-121 TASK-274:** MCP Prompts capability (`prompts: {}`) with three workflow prompts:
+  - `devsteps-onboard` — loads live project context at session start
+  - `devsteps-sprint-review` — instructs AI to call `devsteps_context(standard)` and summarise sprint state
+  - `devsteps-commit-message` — generates a Conventional Commits template for a given item ID
+- **STORY-121 TASK-275:** MCP Resource `devsteps://project-context` (MIME: `text/plain`, `annotations.priority: 1.0`) — returns live quick context as formatted Markdown for auto-injection by supporting clients.
+- **STORY-121 TASK-273:** `devsteps_context` tool now supports `standard` level (returns `in_progress`, `blocking_items`, `open_items_count`, `key_paths`).
+- **STORY-121 TASK-276:** Stale-context warning appended to tool `message` when `PROJECT.md` is older than 24 h or missing — guides AI to run `devsteps context generate`.
+
+### Fixed
+- **BUG-056:** Markdown description files no longer contain literal `\n` escape sequences. Fix is in `@schnick371/devsteps-shared` (`normalizeMarkdown` utility applied in `addItem` and `updateItem`). The regression was introduced when GitHub Copilot ≥ v1.0.0 started transmitting multiline tool arguments as escape sequences rather than real newline characters.
+
+---
+
 ## [1.0.0-next.2] - 2026-02-23 (Pre-release)
 
 ### ⚠️ Pre-Release Channel

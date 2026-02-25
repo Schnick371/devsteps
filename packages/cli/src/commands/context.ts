@@ -4,11 +4,14 @@
  *
  * CLI context command
  * devsteps context — generates AI-friendly project context at quick/standard/deep level
+ *
+ * @see STORY-121 TASK-272 (context generate subcommand)
  */
 
-import { existsSync, statSync } from 'node:fs';
+import { existsSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
+  generateProjectMd,
   getCache,
   getConfig,
   hasRefsStyleIndex,
@@ -174,4 +177,62 @@ export async function contextValidateCommand() {
   }
 
   console.log();
+}
+/**
+ * Context generate command — write .devsteps/PROJECT.md from live project state.
+ * @see STORY-121 TASK-272
+ */
+export async function contextGenerateCommand(options: { dryRun?: boolean } = {}): Promise<void> {
+  const cwd = process.cwd();
+  const devstepsDir = join(cwd, '.devsteps');
+
+  if (!existsSync(devstepsDir)) {
+    console.error(
+      chalk.red('Error:'),
+      'Project not initialized. Run',
+      chalk.cyan('devsteps init'),
+      'first.'
+    );
+    process.exit(1);
+  }
+
+  const outputPath = join(devstepsDir, 'PROJECT.md');
+
+  console.log();
+  console.log(chalk.bold.cyan('📋 Generating PROJECT.md...'));
+  console.log();
+
+  try {
+    const content = await generateProjectMd(cwd, devstepsDir);
+
+    if (options.dryRun) {
+      console.log(chalk.bold('Preview (dry-run — not written):'));
+      console.log(chalk.gray('─'.repeat(60)));
+      console.log(content);
+      console.log(chalk.gray('─'.repeat(60)));
+      console.log();
+      console.log(chalk.yellow('Dry-run complete. No files were written.'));
+    } else {
+      writeFileSync(outputPath, content, 'utf-8');
+
+      const sizeKb = Math.round(Buffer.byteLength(content, 'utf-8') / 1024);
+      console.log(
+        chalk.green('✓'),
+        `Written to ${chalk.cyan('.devsteps/PROJECT.md')} (${sizeKb} KB)`
+      );
+      console.log();
+      console.log(chalk.gray('AI agents will now load this context automatically.'));
+      console.log(
+        chalk.gray(`Tip: Run ${chalk.cyan('devsteps context validate')} to check for issues.`)
+      );
+    }
+
+    console.log();
+  } catch (error) {
+    console.error(
+      chalk.red('Error generating PROJECT.md:'),
+      error instanceof Error ? error.message : String(error)
+    );
+    process.exit(1);
+  }
 }

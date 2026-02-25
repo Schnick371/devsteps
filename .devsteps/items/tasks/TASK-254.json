@@ -1,0 +1,40 @@
+{
+  "id": "TASK-254",
+  "type": "task",
+  "category": "general",
+  "title": "add updateCopilotFiles() utility to shared package with hash-based modification detection",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-23T22:18:34.396Z",
+  "updated": "2026-02-23T22:34:23.117Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/utils/update-copilot-files.ts",
+    "packages/shared/src/utils/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-114"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-256"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "update",
+    "hash-detection",
+    "utility"
+  ],
+  "commits": [],
+  "metadata": {}
+}

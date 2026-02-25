@@ -6,5 +6,5 @@
  */
 
 export { addCommand, getCommand, listCommand, updateCommand } from './item-commands.js';
-export { linkCommand, unlinkCommand, traceCommand } from './relation-commands.js';
 export { searchCommand, statusCommand, exportCommand } from './search-commands.js';
+export { linkCommand, unlinkCommand, traceCommand } from './relation-commands.js';

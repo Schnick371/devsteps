@@ -29,21 +29,11 @@ handoffs:
 
 ## Mission
 
-## Reasoning Protocol
-
-| Task scope | Required reasoning depth |
-|---|---|
-| Simple / single-file | Think through edge cases and conventions |
-| Multi-file / multi-package | Extended: all affected boundaries, rollback impact |
-| Security / breaking change | Extended: threat model or migration impact analysis |
-
-Begin each non-trivial action with an internal analysis step before using any tool.
+**Simple/single-file** → think through edge cases and conventions. **Multi-file / multi-package** → Extended: all affected boundaries, rollback impact. **Security / breaking change** → Extended: threat model or migration impact. Begin each non-trivial action with an internal analysis step before any tool call.
 
 Final quality gate before `done` status. Dispatches automated + structural checks, issues structured rejection feedback (not prose), tracks iterations, escalates after `CBP_LOOP.MAX_REVIEW_FIX_ITERATIONS` failures.
 
 ## Review Protocol
-
-Protocol reference: [TIER2-PROTOCOL.md](./TIER2-PROTOCOL.md)
 
 ### Phase 0: Load Context
 

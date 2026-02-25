@@ -11,6 +11,8 @@ import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import {
   CallToolRequestSchema,
+  GetPromptRequestSchema,
+  ListPromptsRequestSchema,
   ListResourcesRequestSchema,
   ListToolsRequestSchema,
   ReadResourceRequestSchema,
@@ -18,6 +20,7 @@ import {
 } from '@modelcontextprotocol/sdk/types.js';
 import packageJson from '../package.json' with { type: 'json' };
 import { trackRequestError, trackRequestSuccess } from './handlers/health.js';
+import { getPromptHandler, listPromptsHandler } from './handlers/prompts.js';
 import { createRequestLogger, getLogger } from './logger.js';
 import { activeConnections, recordError, recordSuccess } from './metrics.js';
 import { registerShutdownHandlers, shutdownManager } from './shutdown.js';
@@ -39,6 +42,7 @@ import {
   statusTool,
   traceTool,
   unlinkTool,
+  updateCopilotFilesTool,
   updateTool,
   writeAnalysisReportTool,
   writeEscalationTool,
@@ -74,7 +78,7 @@ export class DevStepsServer {
 
     this.server = new Server(
       { name: 'mcp-server', version: packageJson.version },
-      { capabilities: { tools: {}, resources: {} } }
+      { capabilities: { tools: {}, resources: {}, prompts: {} } }
     );
 
     this.tools = new Map();
@@ -86,7 +90,7 @@ export class DevStepsServer {
     const tools = [
       initTool, addTool, getTool, listTool, updateTool, linkTool, unlinkTool,
       searchTool, statusTool, traceTool, exportTool, archiveTool, purgeTool,
-      contextTool, healthCheckTool, metricsTool,
+      contextTool, healthCheckTool, metricsTool, updateCopilotFilesTool,
       // Context Budget Protocol (CBP) Tier-3 analysis tools (EPIC-027)
       writeAnalysisReportTool, readAnalysisEnvelopeTool, writeVerdictTool, writeSprintBriefTool,
       // Context Budget Protocol (CBP) Tier-2 mandate tools (EPIC-028)
@@ -115,6 +119,19 @@ export class DevStepsServer {
       return {
         resources: [
           {
+            uri: 'devsteps://project-context',
+            name: 'DevSteps Project Context',
+            description:
+              'Current project overview: tech stack, active items, conventions, recent changes. ' +
+              'High-priority resource — auto-fetched by supporting MCP clients at session start.',
+            mimeType: 'text/plain',
+            // MCP 2025-06-18 resource annotations — STORY-121 TASK-275
+            annotations: {
+              audience: ['assistant'],
+              priority: 1.0,
+            },
+          },
+          {
             uri: 'devsteps://docs/hierarchy',
             name: 'Hierarchy Rules',
             description: 'Work item hierarchy for Scrum (Epic→Story|Spike, Story→Bug→Task) and Waterfall (Requirement→Feature|Spike, Feature→Bug→Task) based on Jira 2025 standards',
@@ -139,10 +156,19 @@ export class DevStepsServer {
         const { readFileSync } = await import('node:fs');
         const { join } = await import('node:path');
         const { getWorkspacePath } = await import('./workspace.js');
+        const { getQuickContext, formatContextAsText } = await import('@schnick371/devsteps-shared');
 
-        const devstepsDir = join(getWorkspacePath(), '.devsteps');
+        const cwd = getWorkspacePath();
+        const devstepsDir = join(cwd, '.devsteps');
+
+        // STORY-121 TASK-275: high-priority project context resource for AI auto-fetch
+        if (uri === 'devsteps://project-context') {
+          const ctx = await getQuickContext(cwd, devstepsDir);
+          const text = formatContextAsText(ctx);
+          return { contents: [{ uri, mimeType: 'text/plain', text }] };
+        }
+
         let content = '';
-
         if (uri === 'devsteps://docs/hierarchy') {
           content = readFileSync(join(devstepsDir, 'HIERARCHY-COMPACT.md'), 'utf-8');
         } else if (uri === 'devsteps://docs/ai-guide') {
@@ -157,6 +183,20 @@ export class DevStepsServer {
         getLogger().error({ uri, error: errorMessage }, 'Failed to read resource');
         throw error;
       }
+    });
+
+    // MCP Prompts capability — STORY-121 TASK-274
+    this.server.setRequestHandler(ListPromptsRequestSchema, async () => {
+      const logger = getLogger();
+      logger.info('Listing available prompts');
+      return listPromptsHandler();
+    });
+
+    this.server.setRequestHandler(GetPromptRequestSchema, async (request) => {
+      const logger = getLogger();
+      const { name, arguments: promptArgs } = request.params;
+      logger.info({ prompt_name: name }, 'Getting prompt');
+      return getPromptHandler(name, promptArgs as Record<string, string> | undefined);
     });
 
     this.server.setRequestHandler(CallToolRequestSchema, async (request) => {

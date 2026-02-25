@@ -1,0 +1,45 @@
+{
+  "id": "STORY-116",
+  "type": "story",
+  "category": "general",
+  "title": "mcp_devsteps_doctor — Data Integrity Check via MCP",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-23T22:53:39.142Z",
+  "updated": "2026-02-23T23:00:00.275Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/doctor.ts",
+    "packages/mcp-server/src/tools/system.ts",
+    "packages/mcp-server/src/handlers/",
+    "packages/mcp-server/src/tools/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-006"
+    ],
+    "implemented-by": [
+      "TASK-261",
+      "TASK-262",
+      "TASK-263"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "doctor",
+    "integrity",
+    "ai-agent",
+    "shared"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,39 @@
+{
+  "id": "TASK-274",
+  "type": "task",
+  "category": "general",
+  "title": "MCP prompts capability — expose `devsteps/onboard` and `devsteps/sprint-review` named prompts",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-24T13:41:50.973Z",
+  "updated": "2026-02-25T08:34:33.495Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/server.ts",
+    "packages/mcp-server/src/handlers/prompts.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-121"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-273"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ai-onboarding",
+    "mcp",
+    "prompts"
+  ],
+  "commits": [],
+  "metadata": {}
+}

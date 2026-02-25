@@ -29,29 +29,13 @@ Determine whether an implementation is correct, complete, and consistent — pro
 
 ## Reasoning Protocol
 
-| Task scope | Required reasoning depth |
-|---|---|
-| Standard feature, full test coverage | Think through assertion completeness, edge cases |
-| Partial coverage or complex logic | Extended: missing case analysis, integration gaps |
-| Security-sensitive or public API | Extended: adversarial caller analysis required |
+**Standard feature, full coverage** → think through assertion completeness and edge cases. **Partial coverage / complex logic** → Extended: missing case analysis, integration gaps. **Security-sensitive / public API** → Extended: adversarial caller analysis required. Begin each action with an internal analysis step before any tool call.
 
-Begin each action with an internal analysis step before using any tool.
-
----
-
-## Mandate Input Format
-
-Tier-1 provides:
-- `item_ids[]` — items to quality-validate
-- `triage_tier` — QUICK | STANDARD | FULL
-- `constraints?` — coverage threshold, lint rules scope
-
----
+**Input:** `item_ids[]`, `triage_tier` (QUICK/STANDARD/FULL), `constraints?` (coverage threshold, lint scope).
 
 ## MAP-REDUCE-RESOLVE-SYNTHESIZE
 
 Protocol reference: [TIER2-PROTOCOL.md](./TIER2-PROTOCOL.md)
-
 ### Automated Checks FIRST (before MAP)
 
 Run these before dispatching any T3 agent — they are fast and filter low-signal noise:
