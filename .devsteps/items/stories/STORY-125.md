@@ -40,3 +40,21 @@ The protocol prose (descriptions of what each step does) pushes the critical dec
 ## Key Constraint
 
 The **direct prompt files work** partly because they create explicit user-message reinforcement. The agent file (system prompt) must be tight enough that the LLM reads all of it — every line matters.
+
+
+## Research Backing (Added after web research)
+
+**Anthropic, "Effective context engineering for AI agents" (Sept 2025):**
+> *"Like humans who have limited working memory capacity, LLMs have an 'attention budget' that they draw on when parsing large volumes of context."*
+
+This directly confirms why the T1 files at 148–152 lines fail to activate protocol behavior: the critical classification tables and dispatch rules are past the primacy zone where the model's attention is highest.
+
+**OpenAI Practical Guide to Building Agents (2025):**
+> *"Keep system prompts focused and role-specific. Separate 'what you are' from 'what you do' — the role declaration goes in the agent file; the task enforcement stays in the user message."*
+
+This supports the architecture of: tight agent files (role) + enforcement prompt files (task). The two files serve distinct purposes and must stay within their lane.
+
+**Priority ordering within STORY-125 (confirmed by T2 Audit findings):**
+- T1 coordinator: trim `Step 2: Dispatch T2 Analysts` prose (5 lines) — table already encodes this
+- T1 sprint-executor: `Obsolescence Detection` table is critical — keep; `Adaptive replanning` section prose → 2-line rule
+- Both: `Item Management Rules` section → move to TIER2-PROTOCOL.md (shared with T2 files)

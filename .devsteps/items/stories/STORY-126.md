@@ -52,3 +52,42 @@ This pattern should be formalized into the regular prompt files.
 | `devsteps-40-sprint.prompt.md` | 37 | 50–70 (add enforcement) |
 | `devsteps-20-start-work.prompt.md` | 73 | 70–80 (add MUST-DO) |
 | `devsteps-10-plan-work.prompt.md` | 233 | ≤120 (trim 50%) |
+
+
+## Research Backing (Added after web research + subagent analysis)
+
+**OpenAI Practical Guide to Building Agents (2025):**
+> *"The role declaration goes in the agent file; the task enforcement stays in the user message."*
+
+This confirms the two-file architecture: agent files define *who* the agent is; prompt files enforce *how* it behaves right now. Currently the prompt files only do the first — they activate the agent without enforcing any behavior.
+
+**Why the direct prompts (`.devsteps/prompts/direct prompt/`) work and regular prompts don't:**
+
+Direct prompts explicitly enforce all three layers:
+1. **Read-first gate**: "Start by reading these agent files" — forces the model to load its full protocol before acting
+2. **Tool mandate**: "Use #devsteps, #bright-data, #runSubagent" — names the tools explicitly, triggering VS Code's tool picker
+3. **Hierarchy enforcement**: "T2 subagents MUST use T3 subagents" — without this, T2 agents execute directly
+
+The regular prompt files have none of these. They say "activate sprint executor" — the model skips straight to action.
+
+**Required additions to each prompt (research-confirmed pattern):**
+
+`devsteps-40-sprint.prompt.md` additions:
+- "Before any action: read `.github/agents/devsteps-t1-sprint-executor.agent.md`"
+- "Use `#runSubagent` for all T2 dispatch — never execute T2 work inline"
+- "Use `#mcp_devsteps_read_mandate_results` after each T2 wave — never read raw T3 files"
+- "Use `#bright-data` for any research mandate (T2-research, T2-archaeology web questions)"
+
+`devsteps-20-start-work.prompt.md` additions:
+- "MUST DO FIRST: `devsteps/get` the item, create branch, set status `in-progress`"
+- "Use `#runSubagent` for all T2 agents — never dispatch T2 inline"
+
+## Updated Line Budget
+
+| File | Current | Target | Net change |
+|---|---|---|---|
+| `devsteps-40-sprint.prompt.md` | 37 | 55–70 | Add 18–33 lines of enforcement |
+| `devsteps-20-start-work.prompt.md` | 73 | 70–80 | Small additions only |
+| `devsteps-10-plan-work.prompt.md` | 233 | ≤120 | Cut 113 lines (50%) |
+
+For `devsteps-10-plan-work.prompt.md`: the planning protocol steps are the value-add. Remove the "why" explanations (those are the project's internal documentation), keep the numbered steps, the checklist, and the hierarchy rules.

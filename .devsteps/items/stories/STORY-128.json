@@ -1,0 +1,58 @@
+{
+  "id": "STORY-128",
+  "type": "story",
+  "category": "general",
+  "title": "Extract Shared Agent Boilerplate — Apply DRY/SSOT to Agent Hierarchy",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-25T14:32:25.909Z",
+  "updated": "2026-02-25T14:33:21.969Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/TIER2-PROTOCOL.md",
+    ".github/agents/devsteps-t2-archaeology.agent.md",
+    ".github/agents/devsteps-t2-impl.agent.md",
+    ".github/agents/devsteps-t2-research.agent.md",
+    ".github/agents/devsteps-t3-analyst-context.agent.md",
+    ".github/agents/devsteps-t3-analyst-internal.agent.md",
+    ".github/agents/devsteps-t3-analyst-web.agent.md",
+    ".github/agents/devsteps-t3-aspect-constraints.agent.md",
+    ".github/agents/devsteps-t3-aspect-impact.agent.md",
+    ".github/agents/devsteps-t3-aspect-integration.agent.md",
+    ".github/agents/devsteps-t3-aspect-quality.agent.md",
+    ".github/agents/devsteps-t3-aspect-staleness.agent.md",
+    ".github/agents/devsteps-t3-doc.agent.md",
+    ".github/agents/devsteps-t3-impl.agent.md",
+    ".github/agents/devsteps-t3-test.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-030"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-127"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "copilot-files",
+    "dry",
+    "ssot",
+    "boilerplate-extraction",
+    "t2-agents",
+    "t3-agents",
+    "bugs",
+    "research-backed",
+    "attention-budget"
+  ],
+  "commits": [],
+  "metadata": {}
+}

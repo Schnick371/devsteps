@@ -6,7 +6,7 @@
   "status": "planned",
   "eisenhower": "urgent-important",
   "created": "2026-02-25T14:20:34.202Z",
-  "updated": "2026-02-25T14:21:45.296Z",
+  "updated": "2026-02-25T14:33:01.719Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/",
@@ -15,7 +15,8 @@
   "linked_items": {
     "implements": [],
     "implemented-by": [
-      "STORY-127"
+      "STORY-127",
+      "STORY-128"
     ],
     "tested-by": [],
     "tests": [],
