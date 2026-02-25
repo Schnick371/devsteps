@@ -115,6 +115,7 @@ On pause: status → `in-progress`, write blockers to `.devsteps/analysis/[ID]/s
 ## DevSteps Integration
 
 - **NEVER edit `.devsteps/` directly** — use `devsteps/*` MCP tools only
+- **DevSteps MCP runs on `main` only** — `devsteps/add`, `devsteps/update`, `devsteps/link` MUST run on `main`. Correct sequence per item: [main] set `in-progress` → `git checkout -b story/<ID>` → code commits → `git checkout main` → merge `--no-ff` → set `done`. New items found mid-sprint: stash or finish step → checkout main → `devsteps/add` → return to branch.
 - Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>` — create at start of each item
 - Commit: `type(scope): subject` + footer `Implements: ID`. All outputs in English.
 - Status: `in-progress` → `review` → `done` (never skip)

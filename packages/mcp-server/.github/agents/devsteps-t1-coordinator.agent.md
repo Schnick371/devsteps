@@ -112,6 +112,7 @@ ESCALATED → surface to user, do NOT retry.
 ## Operational Rules
 
 - **NEVER edit `.devsteps/` directly** — `devsteps/*` MCP tools only; search before create
+- **DevSteps MCP runs on `main` only** — `devsteps/add`, `devsteps/update`, `devsteps/link` MUST run on `main` branch. Sequence: [main] set `in-progress` → `git checkout -b story/<ID>` → code commits → `git checkout main` → merge `--no-ff` → set `done`. New items found mid-item: checkout main → `devsteps/add` → return to branch.
 - Status: `in-progress` → `review` → `done` (never skip); Hierarchy: Epic → Story → Task
 - Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>`. Commit: `type(scope): subject` + `Implements: ID`. Merge `--no-ff`.
 
