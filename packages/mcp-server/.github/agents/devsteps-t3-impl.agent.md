@@ -1,7 +1,7 @@
 ---
 description: 'Implementation subagent - creates detailed implementation plans for coordinator execution'
 model: 'Claude Sonnet 4.6'
-tools: ['execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/testFailure', 'read', 'read/problems', 'edit', 'search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+tools: ['execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/testFailure', 'read', 'read/problems', 'edit', 'search', 'devsteps/*', 'bright-data/*', 'remarc-insight-mcp/*', 'todo']
 user-invokable: false
 ---
 

@@ -1,7 +1,7 @@
 ---
 agent: 'devsteps-t1-coordinator'
 model: 'Claude Sonnet 4.6'
-tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'bright-data/*', 'todo']
+tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'edit', 'search', 'devsteps/*', 'bright-data/*', 'todo']
 description: 'Edit and update GitHub Copilot files (agents, instructions, prompts) for VS Code 1.106+'
 ---
 

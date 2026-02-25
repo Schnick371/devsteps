@@ -2,7 +2,7 @@
 agent: 'devsteps-t1-coordinator'
 model: 'Claude Sonnet 4.6'
 description: 'Begin implementation work - MPD analysis then structured development'
-tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'bright-data/*', 'todo']
+tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'read', 'agent', 'edit', 'search', 'devsteps/*', 'bright-data/*', 'todo']
 ---
 
 # 🚀 Start Work

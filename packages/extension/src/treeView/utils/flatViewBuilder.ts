@@ -33,11 +33,6 @@ export async function buildFlatViewNodes(options: FlatViewOptions): Promise<Work
       return [];
     }
 
-    // Load config for methodology
-    const configPath = vscode.Uri.joinPath(workspaceRoot, '.devsteps', 'config.json');
-    const configData = await vscode.workspace.fs.readFile(configPath);
-    const config = JSON.parse(Buffer.from(configData).toString('utf-8'));
-
     // Load all item IDs from by-type index files
     const byTypeDir = vscode.Uri.joinPath(workspaceRoot, '.devsteps', 'index', 'by-type');
     const typeFiles = await vscode.workspace.fs.readDirectory(byTypeDir);
@@ -53,7 +48,7 @@ export async function buildFlatViewNodes(options: FlatViewOptions): Promise<Work
     }
 
     // Load full item data
-    let items: WorkItem[] = [];
+    const items: WorkItem[] = [];
     for (const itemId of allItemIds) {
       const item = await loadItemWithLinks(workspaceRoot, itemId);
       if (item) items.push(item);
@@ -73,7 +68,7 @@ export async function buildFlatViewNodes(options: FlatViewOptions): Promise<Work
 export async function buildFlatSectionNodes(
   workspaceRoot: vscode.Uri,
   filteredItems: WorkItem[],
-  allItems: WorkItem[],
+  _allItems: WorkItem[],
   expandedSections: Set<string>,
   expandedGroups: Set<string>
 ): Promise<TreeNode[]> {
@@ -88,7 +83,11 @@ export async function buildFlatSectionNodes(
 
   for (const item of filteredItems) {
     const methodology = getItemMethodology(item, itemsMap);
-    if (methodology === 'scrum') { scrumItems.push(item); } else { waterfallItems.push(item); }
+    if (methodology === 'scrum') {
+      scrumItems.push(item);
+    } else {
+      waterfallItems.push(item);
+    }
   }
 
   const scrumByType = groupByType(scrumItems);
@@ -98,13 +97,23 @@ export async function buildFlatSectionNodes(
 
   if (scrumItems.length > 0 || config.methodology !== 'waterfall') {
     sections.push(
-      new MethodologySectionNode('scrum', scrumByType, expandedSections.has('scrum'), expandedGroups)
+      new MethodologySectionNode(
+        'scrum',
+        scrumByType,
+        expandedSections.has('scrum'),
+        expandedGroups
+      )
     );
   }
 
   if (waterfallItems.length > 0 || config.methodology !== 'scrum') {
     sections.push(
-      new MethodologySectionNode('waterfall', waterfallByType, expandedSections.has('waterfall'), expandedGroups)
+      new MethodologySectionNode(
+        'waterfall',
+        waterfallByType,
+        expandedSections.has('waterfall'),
+        expandedGroups
+      )
     );
   }
 

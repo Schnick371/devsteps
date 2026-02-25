@@ -1,7 +1,7 @@
 ---
 description: 'Autonomous sprint executor — Tier-1, multi-item backlog, T2 mandate dispatch, NEVER reads raw T3 envelopes, only MandateResults via read_mandate_results'
 model: 'Claude Sonnet 4.6'
-tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'devsteps/*', 'bright-data/*', 'todo']
+tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'devsteps/*', 'bright-data/*', 'todo']
 agents:
   - devsteps-t2-archaeology
   - devsteps-t2-risk

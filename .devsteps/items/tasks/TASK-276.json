@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Context staleness detection — add `context_meta` to all context responses",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-not-important",
   "created": "2026-02-24T13:41:50.975Z",
-  "updated": "2026-02-24T13:42:19.886Z",
+  "updated": "2026-02-25T08:34:33.496Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/context.ts",
