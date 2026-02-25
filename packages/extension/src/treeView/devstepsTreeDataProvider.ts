@@ -16,14 +16,7 @@ import {
   TypeGroupNode,
   WorkItemNode,
 } from './nodes/index.js';
-import type {
-  FilterState,
-  HierarchyType,
-  SortState,
-  TreeNode,
-  ViewMode,
-  WorkItem,
-} from './types.js';
+import type { FilterState, HierarchyType, SortState, TreeNode, ViewMode } from './types.js';
 import { buildFlatSectionNodes, buildFlatViewNodes } from './utils/flatViewBuilder.js';
 import { applyFilters, applySorting } from './utils/itemFilter.js';
 
@@ -112,7 +105,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
         this.expandedSections.add(e.element.getMethodology());
         this.stateManager?.saveExpandedSections(this.expandedSections);
       } else if (e.element instanceof TypeGroupNode) {
-        this.expandedGroups.add(e.element.getTrackingKey());
+        this.expandedGroups.add(e.element.getTypeId());
         this.stateManager?.saveExpandedGroups(this.expandedGroups);
       } else if (e.element instanceof HierarchyRootNode) {
         this.expandedHierarchyItems.add(e.element.getId());
@@ -132,7 +125,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
         this.expandedSections.delete(e.element.getMethodology());
         this.stateManager?.saveExpandedSections(this.expandedSections);
       } else if (e.element instanceof TypeGroupNode) {
-        this.expandedGroups.delete(e.element.getTrackingKey());
+        this.expandedGroups.delete(e.element.getTypeId());
         this.stateManager?.saveExpandedGroups(this.expandedGroups);
       } else if (e.element instanceof HierarchyRootNode) {
         this.expandedHierarchyItems.delete(e.element.getId());
@@ -175,16 +168,31 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   refresh(): void {
     this.cachedRootNodes = null; // Clear cache to force reload
     this.initialized = false;
-    this._onDidChangeTreeData.fire();
+    this._onDidChangeTreeData.fire(undefined);
     // Refresh decorations (colored badges) for all items
     this.decorationProvider?.refresh();
   }
 
-  setStatusFilter(statuses: string[]): void { this.filterState.statuses = statuses; this._saveAndRefresh(); }
-  setPriorityFilter(priorities: string[]): void { this.filterState.priorities = priorities; this._saveAndRefresh(); }
-  setTypeFilter(types: string[]): void { this.filterState.types = types; this._saveAndRefresh(); }
-  setTagFilter(tags: string[]): void { this.filterState.tags = tags; this._saveAndRefresh(); }
-  setSearchQuery(query: string): void { this.filterState.searchQuery = query; this._saveAndRefresh(); }
+  setStatusFilter(statuses: string[]): void {
+    this.filterState.statuses = statuses;
+    this._saveAndRefresh();
+  }
+  setPriorityFilter(priorities: string[]): void {
+    this.filterState.priorities = priorities;
+    this._saveAndRefresh();
+  }
+  setTypeFilter(types: string[]): void {
+    this.filterState.types = types;
+    this._saveAndRefresh();
+  }
+  setTagFilter(tags: string[]): void {
+    this.filterState.tags = tags;
+    this._saveAndRefresh();
+  }
+  setSearchQuery(query: string): void {
+    this.filterState.searchQuery = query;
+    this._saveAndRefresh();
+  }
 
   toggleHideDone(): void {
     this.filterState.hideDone = !this.filterState.hideDone;
@@ -198,8 +206,13 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
 
   clearFilters(): void {
     this.filterState = {
-      statuses: [], priorities: [], types: [], tags: [], searchQuery: '',
-      hideDone: this.filterState.hideDone, hideRelatesTo: this.filterState.hideRelatesTo,
+      statuses: [],
+      priorities: [],
+      types: [],
+      tags: [],
+      searchQuery: '',
+      hideDone: this.filterState.hideDone,
+      hideRelatesTo: this.filterState.hideRelatesTo,
     };
     this._saveAndRefresh();
   }
@@ -216,7 +229,9 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       const total = this.lastTotalCount || 0;
       const filtered = this.lastFilteredCount;
       this.treeView.description = filtered < total ? `(${filtered}/${total})` : undefined;
-    } catch { this.treeView.description = undefined; }
+    } catch {
+      this.treeView.description = undefined;
+    }
   }
 
   private updateCounts(total: number, filtered: number): void {
@@ -232,16 +247,34 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     this.updateDescription();
   }
 
-  getViewMode(): ViewMode { return this.viewMode; }
-  getHierarchyType(): HierarchyType { return this.hierarchyType; }
-  getFilterState(): FilterState { return { ...this.filterState }; }
-  getSortState(): SortState { return { ...this.sortState }; }
-  getHideDoneState(): boolean { return this.filterState.hideDone; }
-  getHideRelatesToState(): boolean { return this.filterState.hideRelatesTo; }
+  getViewMode(): ViewMode {
+    return this.viewMode;
+  }
+  getHierarchyType(): HierarchyType {
+    return this.hierarchyType;
+  }
+  getFilterState(): FilterState {
+    return { ...this.filterState };
+  }
+  getSortState(): SortState {
+    return { ...this.sortState };
+  }
+  getHideDoneState(): boolean {
+    return this.filterState.hideDone;
+  }
+  getHideRelatesToState(): boolean {
+    return this.filterState.hideRelatesTo;
+  }
 
   isFiltersActive(): boolean {
     const { statuses, priorities, types, tags, searchQuery } = this.filterState;
-    return statuses.length > 0 || priorities.length > 0 || types.length > 0 || tags.length > 0 || (searchQuery ?? '').length > 0;
+    return (
+      statuses.length > 0 ||
+      priorities.length > 0 ||
+      types.length > 0 ||
+      tags.length > 0 ||
+      (searchQuery ?? '').length > 0
+    );
   }
 
   /**
@@ -311,7 +344,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     this.cachedRootNodes = nodes;
 
     // Trigger refresh to display loaded data
-    this._onDidChangeTreeData.fire();
+    this._onDidChangeTreeData.fire(undefined);
   }
 
   /**

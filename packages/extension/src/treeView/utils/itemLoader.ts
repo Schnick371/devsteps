@@ -5,6 +5,7 @@
  * Item loader - Filesystem operations for loading work items
  */
 
+import type { ItemType } from '@schnick371/devsteps-shared';
 import * as vscode from 'vscode';
 import { TYPE_TO_DIRECTORY, type WorkItem } from '../types.js';
 
@@ -48,7 +49,7 @@ export async function loadItemWithLinks(
     const itemType = typeMap[match[1]];
     if (!itemType) return null;
 
-    const typeDir = TYPE_TO_DIRECTORY[itemType];
+    const typeDir = TYPE_TO_DIRECTORY[itemType as ItemType];
     if (!typeDir) return null;
 
     // Read full JSON file (TYPE_TO_DIRECTORY already includes 'items/' prefix)

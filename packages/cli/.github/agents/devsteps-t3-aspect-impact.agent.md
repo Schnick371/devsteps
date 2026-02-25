@@ -1,7 +1,7 @@
 ---
 description: 'Impact Analyst - discovers what breaks, ripples, or silently changes beyond the stated scope of a task'
 model: 'Claude Opus 4.6'
-tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
+tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'bright-data/*', 'todo']
 user-invokable: false
 ---
 

@@ -1,7 +1,7 @@
 ---
 description: 'Integration Analyst - finds cross-package, cross-process, and cross-boundary coordination requirements implied by a task but not stated'
 model: 'Claude Opus 4.6'
-tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
+tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'bright-data/*', 'todo']
 user-invokable: false
 ---
 

@@ -1,7 +1,7 @@
 ---
 description: 'Staleness Analyst - validates that the work item description still matches codebase reality, detecting drift since the item was written'
 model: 'Claude Opus 4.6'
-tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'todo']
+tools: ['read', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'devsteps/*', 'bright-data/*', 'todo']
 user-invokable: false
 ---
 

@@ -246,6 +246,15 @@ contextCmd
     await contextValidateCommand();
   });
 
+contextCmd
+  .command('generate')
+  .description('Generate .devsteps/PROJECT.md from live project state for AI context')
+  .option('--dry-run', 'Print generated content to stdout; do not write file')
+  .action(async (options) => {
+    const { contextGenerateCommand } = await import('./commands/context.js');
+    await contextGenerateCommand({ dryRun: options.dryRun });
+  });
+
 // Bulk operations
 const bulkCmd = program.command('bulk').description('Bulk operations on multiple items');
 

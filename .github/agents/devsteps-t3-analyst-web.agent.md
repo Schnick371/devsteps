@@ -1,7 +1,7 @@
 ---
 description: 'Web Research Analyst - searches internet for modern patterns, best practices, deprecations; produces CompressedVerdict with Internet Advantage Claim for coordinator competitive selection'
 model: 'Claude Opus 4.6'
-tools: ['read', 'search', 'bright-data/*', 'bright-data/*', 'devsteps/*', 'todo']
+tools: ['read', 'search', 'bright-data/*', 'devsteps/*', 'todo']
 user-invokable: false
 ---
 

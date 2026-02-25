@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "CLI command `devsteps context generate` — write PROJECT.md from live project state",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-24T13:41:50.964Z",
-  "updated": "2026-02-24T13:42:19.885Z",
+  "updated": "2026-02-25T08:34:33.492Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/cli/src/commands/context.ts",
