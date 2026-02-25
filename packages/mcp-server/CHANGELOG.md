@@ -4,7 +4,7 @@ All notable changes to the DevSteps MCP Server will be documented in this file.
 
 ## [Unreleased]
 
-## [1.1.0-next.1] - 2026-02-25 (Pre-release)
+## [1.1.0-next.3] - 2026-02-25 (Pre-release)
 
 ### ⚠️ Pre-Release Channel
 
