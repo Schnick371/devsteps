@@ -46,7 +46,9 @@ program
 program
   .command('update-copilot-files')
   .alias('ucf')
-  .description('Update devsteps-managed GitHub Copilot files (.github/agents, .github/instructions, .github/prompts)')
+  .description(
+    'Update devsteps-managed GitHub Copilot files (.github/agents, .github/instructions, .github/prompts)'
+  )
   .option('--dry-run', 'Preview changes without writing files')
   .option('-f, --force', 'Overwrite all files even when up-to-date')
   .option('--max-backups <number>', 'Maximum backup rotations to keep (default: 5)', Number)

@@ -48,10 +48,9 @@ export async function contextHandler(
     }
 
     // Build stale warning prefix for message field
-    const staleWarning =
-      context.context_meta?.is_stale
-        ? ` ⚠️ PROJECT.md is ${context.context_meta.project_md_age_hours.toFixed(1)}h old — run \`devsteps context generate\` to refresh.`
-        : '';
+    const staleWarning = context.context_meta?.is_stale
+      ? ` ⚠️ PROJECT.md is ${context.context_meta.project_md_age_hours.toFixed(1)}h old — run \`devsteps context generate\` to refresh.`
+      : '';
 
     return {
       success: true,

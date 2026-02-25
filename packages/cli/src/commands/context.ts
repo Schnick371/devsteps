@@ -216,10 +216,15 @@ export async function contextGenerateCommand(options: { dryRun?: boolean } = {})
       writeFileSync(outputPath, content, 'utf-8');
 
       const sizeKb = Math.round(Buffer.byteLength(content, 'utf-8') / 1024);
-      console.log(chalk.green('✓'), `Written to ${chalk.cyan('.devsteps/PROJECT.md')} (${sizeKb} KB)`);
+      console.log(
+        chalk.green('✓'),
+        `Written to ${chalk.cyan('.devsteps/PROJECT.md')} (${sizeKb} KB)`
+      );
       console.log();
       console.log(chalk.gray('AI agents will now load this context automatically.'));
-      console.log(chalk.gray(`Tip: Run ${chalk.cyan('devsteps context validate')} to check for issues.`));
+      console.log(
+        chalk.gray(`Tip: Run ${chalk.cyan('devsteps context validate')} to check for issues.`)
+      );
     }
 
     console.log();
