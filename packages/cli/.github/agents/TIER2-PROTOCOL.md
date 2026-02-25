@@ -151,4 +151,32 @@ Canonical DevSteps stack — T3 agents must use THESE, not other frameworks:
 
 ---
 
+## Build & Test Topology
+
+T2 agents MUST use the correct command per package. Root `npm run build` calls all packages but individual package builds differ:
+
+| Package | Build command | Notes |
+|---|---|---|
+| `packages/shared` | `npm run build` (root) or `tsc` | First — others depend on it |
+| `packages/cli` | `npm run build` → `esbuild.mjs` | Outputs `dist/index.js` |
+| `packages/mcp-server` | `npm run build` → `esbuild.cjs` + `copy-deps.cjs` | Two steps — copy-deps required |
+| `packages/extension` | `node packages/extension/esbuild.js` | **NOT** covered by root `npm run build` |
+
+**Type check only:** `npm run typecheck` (faster than full build, no esbuild step)
+
+| Test command | Framework | Failure pattern |
+|---|---|---|
+| `npm test` | Vitest | `FAIL src/...test.ts > describe > test name` |
+| `npm run test:cli` | BATS | `not ok N - test name` + `# (in test file path)` |
+| `npm run lint` | Biome | `packages/x/src/file.ts:line:col lint/rule` |
+
+**Watch mode (background only):** `npm run dev` — do NOT run in foreground during autonomous execution.
+
+**Common RESOLVE triggers** — dispatch `devsteps-t3-build-diagnostics` when:
+- `npm run build` exits non-zero but no TypeScript errors visible
+- BATS exits non-zero with `command not found` or `setup failed`
+- Extension build needed but root build passed (silent miss)
+
+---
+
 *See also: [REGISTRY.md](./REGISTRY.md) for tier-routing table.*

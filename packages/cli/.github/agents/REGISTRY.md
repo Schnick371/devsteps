@@ -85,6 +85,12 @@ T2 calls: `read_analysis_envelope(report_path)` — internal to T2, invisible to
 | `devsteps-t3-analyst-internal` | Deep file reads, symbol tracing |
 | `devsteps-t3-analyst-web` | External best practices, deprecation signals |
 
+## T3 RESOLVE Helpers (dispatched by T2-impl / T2-test in RESOLVE phase only)
+
+| Agent | Trigger | Returns |
+|---|---|---|
+| `devsteps-t3-build-diagnostics` | Build/test command exits non-zero with ambiguous error | Category + fix_command + next_action (chat — no write_analysis_report) |
+
 ---
 
 ## T2 Exec — Conductors (dispatched by T1 after t2-planner MandateResult available)
@@ -109,7 +115,15 @@ Exec workers receive **only `report_path` + `item_id`** — never raw findings p
 
 ---
 
-## VS Code Agent Metadata — `agents`, `handoffs`, `user-invokable`
+## User-Invokable Agents (appear in VS Code agent picker)
+
+| Agent | When to use |
+|---|---|
+| `devsteps-t1-coordinator` | Single item implementation (always via `devsteps-20-start-work` prompt) |
+| `devsteps-t1-sprint-executor` | Multi-item sprint (always via `devsteps-40-sprint` prompt) |
+| `devsteps-backlog-curator` | Backlog health: audit, re-triage, staleness, archiving — NOT sprint execution |
+
+--- — `agents`, `handoffs`, `user-invokable`
 
 All agent files use VS Code custom agent frontmatter (VS Code 1.106+).
 

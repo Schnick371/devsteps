@@ -19,6 +19,7 @@ model: 'Claude Sonnet 4.6'
 agents:
   - devsteps-t3-impl
   - devsteps-t3-analyst-web
+  - devsteps-t3-build-diagnostics
 handoffs:
   - label: "→ Test"
     agent: devsteps-t2-test
