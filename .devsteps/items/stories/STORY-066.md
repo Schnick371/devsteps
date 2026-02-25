@@ -1,1 +1,0 @@
-MCP server already uses `priority` parameter (TASK-161 done). Verified in packages/mcp-server/src/tools/index.ts.

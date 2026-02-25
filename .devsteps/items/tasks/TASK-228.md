@@ -1,1 +1,0 @@
-In `packages/cli/src/commands/init.ts`, add `'analysis'` to the array of directories that are created inside `.devsteps/` during `init`.

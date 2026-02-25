@@ -1,1 +1,0 @@
-TASK-215 (removeLink with atomic bidirectional removal) is fully implemented by unlinkItem() in packages/shared/src/core/unlink.ts. Superseded by TASK-248.

@@ -1,1 +1,0 @@
-CLI commands already use `--priority` flag (TASK-160 done). No `--eisenhower` flag exposed in CLI. Internal schema still stores field as `eisenhower` but public API is `--priority`. Verified: no `--eisenhower` string in packages/cli/src/commands/index.ts.

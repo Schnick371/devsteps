@@ -1,1 +1,0 @@
-SPIKE-013 stale: In-progress since January 6, 2026 (7+ weeks). Per sprint triage, no clear direction emerged. The decision: ephemeral tasks will NOT be implemented as a separate item type — instead, regular tasks with auto-archive on close serve the purpose. Closing as done (by design decision: no dedicated ephemeral type needed).

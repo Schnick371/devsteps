@@ -1,1 +1,0 @@
-MCP unlink handler and tool fully implemented as part of TASK-249. The mcp_devsteps_unlink tool exists. Superseded by TASK-249.

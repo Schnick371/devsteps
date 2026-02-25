@@ -1,1 +1,0 @@
-Extension UI maps eisenhower quadrant to priority level via `mapEisenhowerToPriority()` in itemLoader.ts (TASK-162 done). Tooltips and display already updated.

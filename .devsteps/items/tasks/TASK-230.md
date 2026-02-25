@@ -1,5 +1,0 @@
-Edit each aspect agent `.agent.md` to replace prose markdown output instructions with: call `write_analysis_report` MCP tool with structured `AnalysisBriefing` JSON, and document the schema fields inline so the agent knows what to populate.
-
-**Completed as part of STORY-107 (merged 2026-02-21).** All aspect subagents (`devsteps-aspect-impact-subagent`, `devsteps-aspect-constraints-subagent`, `devsteps-aspect-quality-subagent`, `devsteps-aspect-staleness-subagent`, `devsteps-aspect-integration-subagent`) and analyst subagents (`devsteps-analyst-context-subagent`, `devsteps-analyst-internal-subagent`, `devsteps-analyst-web-subagent`) now use `write_analysis_report` to emit structured `AnalysisBriefing` JSON.
-
-> ⚠️ **Note 2026-02-21:** Original description used outdated agent names "web-analyst, internal-analyst". Current names use the `-subagent` suffix pattern established in the January 2026 agent rename refactor.
