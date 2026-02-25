@@ -133,4 +133,22 @@ Tier-2 chat output to Tier-1: `report_path`, `verdict`, `confidence` only.
 
 ---
 
+## Project Technology Reference
+
+Canonical DevSteps stack — T3 agents must use THESE, not other frameworks:
+
+| Layer | Technology | NOT these |
+|---|---|---|
+| Runtime | Node.js 22+, TypeScript ESM | CommonJS, Deno |
+| Monorepo | npm workspaces | Turborepo, NX, Lerna (`turbo.json` does not exist) |
+| Bundler | esbuild (per-package `esbuild.{js,mjs,cjs}`) | Webpack, Rollup |
+| Unit test | Vitest + `.test.ts` co-located | Jest, Pester, pytest |
+| CLI integration test | BATS (in `tests/integration/cli/`) | Mocha, pytest |
+| Schema validation | Zod (source of truth in `packages/shared`) | Yup, Joi |
+| CLI framework | `commander` + `chalk` + `ora` | NestJS, yargs |
+| Linter/formatter | Biome | ESLint, Prettier |
+| Frontend | None — no frontend package | React, Next.js, Vue |
+
+---
+
 *See also: [REGISTRY.md](./REGISTRY.md) for tier-routing table.*

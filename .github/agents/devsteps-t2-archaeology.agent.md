@@ -1,7 +1,7 @@
 ---
 description: 'Archaeology deep analyst — T2, mandate-type=archaeology, builds complete picture of how an area works today via parallel T3 dispatch'
 model: 'Claude Sonnet 4.6'
-tools: ['read', 'agent', 'search', 'devsteps/*', 'bright-data/*', 'bright-data/*', 'todo', 'execute/runInTerminal', 'execute/getTerminalOutput']
+tools: ['read', 'agent', 'search', 'devsteps/*', 'bright-data/*', 'todo', 'execute/runInTerminal', 'execute/getTerminalOutput']
 agents:
   - devsteps-t3-analyst-context
   - devsteps-t3-analyst-internal

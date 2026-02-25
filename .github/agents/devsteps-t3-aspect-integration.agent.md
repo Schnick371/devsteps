@@ -86,7 +86,7 @@ This is a monorepo with packages: `shared`, `cli`, `mcp-server`, `extension`. Ea
 ## Rules
 
 - Read-only analysis ONLY
-- Turborepo task graph is the source of truth for build dependencies — check `turbo.json` or root `package.json`
+- Root `package.json` workspaces field is the dependency source of truth — check npm workspace links, not `turbo.json` (project uses npm workspaces, no Turborepo)
 - List EVERY package that imports from a changed `shared` module — do not assume isolation
 
 ## Context Budget Protocol (MANDATORY)

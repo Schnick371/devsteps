@@ -9,7 +9,6 @@ tools:
   - search
   - devsteps/*
   - bright-data/*
-  - bright-data/*
   - todo
   - execute/runInTerminal
   - execute/getTerminalOutput

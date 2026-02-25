@@ -17,7 +17,7 @@ user-invokable: false
 
 **You are a PLANNER subagent invoked by devsteps-t1-coordinator.**
 
-## Context Budget Protocol (HOW YOU RECEIVE CONTEXT)
+## How to Receive Planner Context
 
 ## Reasoning Protocol
 
@@ -145,7 +145,9 @@ Create fast, detailed implementation plans for small, well-defined tasks. The co
 - Basic error handling
 - Comments for non-obvious logic
 
-**Framework-Specific:**
-- NestJS: Follow module/service/controller patterns
-- React: Composition over inheritance, hooks-based
-- TypeScript: Strict types, no `any` without justification
+**DevSteps-Specific:**
+- ESM modules: no CommonJS in `src/`, use `import`/`export`
+- Zod schemas: source of truth in `packages/shared` — never duplicate types
+- CLI: `commander` patterns for commands, `chalk`/`ora` for output
+- TypeScript: strict types, no `any`, use `unknown` with type guards
+- esbuild: each package has its own `esbuild.{js,mjs,cjs}` — never break bundle config
