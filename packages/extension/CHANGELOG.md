@@ -5,6 +5,14 @@ All notable changes to the "DevSteps" extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2026-02-25 (Pre-Release)
+
+### Changed
+
+- Updated bundled AI GitHub Copilot agent/prompt files (EPIC-030): T2/T3 line budget enforcement, main-branch DevSteps protocol
+- New agents bundled: `devsteps-t3-build-diagnostics`, `devsteps-backlog-curator`
+- Build & Test Topology reference added to `TIER2-PROTOCOL.md`
+
 ## [1.0.2] - Pre-Release
 
 ### Changed

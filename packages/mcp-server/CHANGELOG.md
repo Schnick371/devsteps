@@ -4,6 +4,12 @@ All notable changes to the DevSteps MCP Server will be documented in this file.
 
 ## [Unreleased]
 
+## [1.1.0-next.1] - 2026-02-25 (Pre-release)
+
+### ⚠️ Pre-Release Channel
+
+Install via: `npm install @schnick371/devsteps-mcp-server@next`
+
 ### Added
 - **STORY-121 TASK-274:** MCP Prompts capability (`prompts: {}`) with three workflow prompts:
   - `devsteps-onboard` — loads live project context at session start

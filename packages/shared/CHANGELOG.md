@@ -4,8 +4,14 @@ All notable changes to `@schnick371/devsteps-shared` will be documented in this 
 
 ## [Unreleased]
 
+## [1.1.0-next.1] - 2026-02-25 (Pre-release)
+
+### ⚠️ Pre-Release Channel
+
+Install via: `npm install @schnick371/devsteps-shared@next`
+
 ### Added
-- **STORY-121 TASK-273:** `getStandardContext(projectDir, devstepsDir)` — extends quick context with `in_progress`, `blocking_items`, `open_items_count`, and `key_paths` fields for richer AI context at the standard level.
+- **STORY-121 TASK-273**: `getStandardContext(projectDir, devstepsDir)` — extends quick context with `in_progress`, `blocking_items`, `open_items_count`, and `key_paths` fields for richer AI context at the standard level.
 - **STORY-121 TASK-276:** `buildContextMeta(devstepsDir, level, cacheHit)` — computes `ContextMeta` block (staleness age, `is_stale` flag, `generated_at` ISO timestamp) included in all context responses.
 - **STORY-121:** `formatContextAsText(ctx)` — formats a `ContextResponse` as human-readable Markdown for embedding in MCP resources and prompts.
 - **STORY-121 TASK-272:** `generateProjectMd(projectDir, devstepsDir)` — generates `.devsteps/PROJECT.md` from live project state (config, index, README, package structure).
