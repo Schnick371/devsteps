@@ -27,8 +27,8 @@
 
 set -euo pipefail
 
-NPM_VERSION="1.0.0-next.2"
-EXTENSION_VERSION="1.0.1"
+NPM_VERSION="1.1.0-next.1"
+EXTENSION_VERSION="1.0.3"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
