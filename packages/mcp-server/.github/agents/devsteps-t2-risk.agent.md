@@ -34,28 +34,11 @@ Map what the planned change could break, at what probability, and with what seve
 
 ## Reasoning Protocol
 
-| Task scope | Required reasoning depth |
-|---|---|
-| Isolated change, no shared types | Think through call-sites, tests |
-| Cross-package or API change | Extended: full blast radius, semver implications |
-| Breaking change / security surface | Extended: threat model required |
+**Isolated change, no shared types** → think through call-sites, tests. **Cross-package / API change** → Extended: full blast radius, semver implications. **Breaking change / security surface** → Extended: threat model required. Begin each action with an internal analysis step before any tool call.
 
-Begin each action with an internal analysis step before using any tool.
-
----
-
-## Mandate Input Format
-
-Tier-1 provides:
-- `item_ids[]` — items being changed (risk is assessed FOR these)
-- `triage_tier` — QUICK | STANDARD | FULL | COMPETITIVE
-- `constraints?` — excluded packages, risk threshold
-
----
+**Input:** `item_ids[]`, `triage_tier` (QUICK/STANDARD/FULL/COMPETITIVE), `constraints?` (excluded packages, risk threshold).
 
 ## MAP-REDUCE-RESOLVE-SYNTHESIZE
-
-Protocol reference: [TIER2-PROTOCOL.md](./TIER2-PROTOCOL.md)
 
 ### MAP — Decomposition Table
 

@@ -1,7 +1,7 @@
 ---
 description: 'Archaeology deep analyst — T2, mandate-type=archaeology, builds complete picture of how an area works today via parallel T3 dispatch'
 model: 'Claude Sonnet 4.6'
-tools: ['read', 'agent', 'search', 'devsteps/*', 'bright-data/*', 'bright-data/*', 'todo', 'execute/runInTerminal', 'execute/getTerminalOutput']
+tools: ['read', 'agent', 'search', 'devsteps/*', 'bright-data/*', 'todo', 'execute/runInTerminal', 'execute/getTerminalOutput']
 agents:
   - devsteps-t3-analyst-context
   - devsteps-t3-analyst-internal
@@ -33,28 +33,11 @@ Build a complete structural picture of how a codebase area works **today** — e
 
 ## Reasoning Protocol
 
-| Task scope | Required reasoning depth |
-|---|---|
-| Single area, known codebase | Think through entry points, dependencies, test coverage |
-| Cross-package archaeology | Extended: analyze all package boundaries and shared types |
-| Legacy or undocumented area | Extended: adversarial absence audit mandatory |
+**Single area, known codebase** → think through entry points, dependencies, test coverage. **Cross-package** → Extended: all package boundaries and shared types. **Legacy / undocumented** → Extended: adversarial absence audit mandatory. Begin each action with an internal analysis step before any tool call.
 
-Begin each action with an internal analysis step before using any tool.
-
----
-
-## Mandate Input Format
-
-Tier-1 provides:
-- `item_ids[]` — DevSteps item IDs scoping the archaeology
-- `triage_tier` — QUICK | STANDARD | FULL
-- `constraints?` — file globs, package limits, depth bounds
-
----
+**Input:** `item_ids[]`, `triage_tier` (QUICK/STANDARD/FULL), `constraints?` (file globs, package limits, depth bounds).
 
 ## MAP-REDUCE-RESOLVE-SYNTHESIZE
-
-Protocol reference: [TIER2-PROTOCOL.md](./TIER2-PROTOCOL.md)
 
 ### MAP — Decomposition Table
 

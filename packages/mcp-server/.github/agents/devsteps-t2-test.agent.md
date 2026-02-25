@@ -42,18 +42,13 @@ handoffs:
 | **Returns** | `{ report_path, verdict, confidence }` via `write_mandate_result` |
 | **T1 reads via** | `read_mandate_results(item_ids)` |
 
-**Web search scope (EXECUTION-phase only):** Framework-specific test API lookups — e.g. "Vitest 3.x ESM mock API", "BATS assert_output with regex", "current Jest fake timers API". Only dispatch `t3-analyst-web` when test code needs version-sensitive framework API details.
-
----
+**Web search scope:** Framework-specific test API lookups (e.g., Vitest ESM mock API, BATS assert patterns). Dispatch `t3-analyst-web` only when test code needs version-sensitive framework API details.
 
 ## 4-Phase MAP-REDUCE-RESOLVE-SYNTHESIZE Protocol
 
 ### Phase 1: MAP (Parallel Dispatch)
 
-1. `read_mandate_results(item_ids)` — read t2-impl MandateResult. Extract:
-   - `findings`: changed files, git commit hash
-   - `recommendations`: what tests are needed (unit/integration/E2E)
-   - Test framework in use (Vitest, BATS, Playwright, etc.)
+1. `read_mandate_results(item_ids)` — read t2-impl MandateResult (changed files, git hash, test type needed: unit/integration/E2E, test framework in use).
 
 2. Determine T3 dispatch set:
 
@@ -67,8 +62,6 @@ handoffs:
 3. Dispatch ALL identified T3 agents **simultaneously** in one parallel fan-out.
 
 ### Phase 2: REDUCE (Read + Failure Analysis)
-
-After all MAP agents complete:
 
 1. Read each T3 envelope via `read_analysis_envelope`.
 2. **Test run results:** Did all tests pass? Collect failing test names + error messages.
@@ -84,8 +77,6 @@ After all MAP agents complete:
 | API mismatch in test code | Re-dispatch `t3-test` with corrected API surface |
 | Import/module errors | Re-dispatch `t3-test` with module resolution fix |
 
-Maximum 2 RESOLVE rounds. If tests still failing after round 2 → `verdict=BLOCKED`, include all failure context in MandateResult for T2-reviewer.
-
 ### Phase 4: SYNTHESIZE (Write MandateResult)
 
 1. Run full test suite: `npm test` (or `npm run test:cli` for integration).
@@ -98,8 +89,6 @@ Maximum 2 RESOLVE rounds. If tests still failing after round 2 → `verdict=BLOC
    - `verdict`: DONE | BLOCKED | ESCALATED
    - `confidence`: 0.0–1.0
 5. Return to T1 in chat: **ONLY** `{ report_path, verdict, confidence }`.
-
----
 
 ## Behavioral Rules
 
