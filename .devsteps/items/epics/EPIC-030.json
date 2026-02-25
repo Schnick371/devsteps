@@ -1,0 +1,41 @@
+{
+  "id": "EPIC-030",
+  "type": "epic",
+  "category": "general",
+  "title": "GitHub Copilot Files — Activation & Protocol Enforcement",
+  "status": "planned",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-25T14:20:34.202Z",
+  "updated": "2026-02-25T14:21:45.296Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/",
+    ".github/prompts/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-127"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-027"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "copilot-files",
+    "prompt-engineering",
+    "3-tier",
+    "mpd",
+    "activation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

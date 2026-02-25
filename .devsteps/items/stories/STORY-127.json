@@ -1,0 +1,45 @@
+{
+  "id": "STORY-127",
+  "type": "story",
+  "category": "general",
+  "title": "Audit & Trim T2 Agent Files for Verbosity",
+  "status": "planned",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-25T14:21:25.461Z",
+  "updated": "2026-02-25T14:21:45.298Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-t2-archaeology.agent.md",
+    ".github/agents/devsteps-t2-impl.agent.md",
+    ".github/agents/devsteps-t2-planner.agent.md",
+    ".github/agents/devsteps-t2-research.agent.md",
+    ".github/agents/devsteps-t2-reviewer.agent.md",
+    ".github/agents/devsteps-t2-risk.agent.md",
+    ".github/agents/devsteps-t2-test.agent.md",
+    ".github/agents/devsteps-t2-quality.agent.md",
+    ".github/agents/devsteps-t2-doc.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-030"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "copilot-files",
+    "t2-agents",
+    "trim",
+    "verbosity"
+  ],
+  "commits": [],
+  "metadata": {}
+}
