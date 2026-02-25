@@ -29,15 +29,7 @@ Find the best technical approach for a given problem — combining external best
 
 ## Reasoning Protocol
 
-| Task scope | Required reasoning depth |
-|---|---|
-| Known pattern, standard solution | Think through codebase fit, existing conventions |
-| Novel technology or library | Extended: multi-source evidence, deprecation risk |
-| Architecture decision (long-lived) | Extended: evaluate 3+ alternatives, long-term consequences |
-
-Begin each action with an internal analysis step before using any tool.
-
----
+**Known pattern / standard solution** → think through codebase fit and existing conventions. **Novel technology / library** → Extended: multi-source evidence, deprecation risk. **Architecture decision** → Extended: evaluate 3+ alternatives, long-term consequences. Begin each action with an internal analysis step before any tool call.
 
 ## Mandate Input Format
 
@@ -49,8 +41,6 @@ Tier-1 provides:
 ---
 
 ## MAP-REDUCE-RESOLVE-SYNTHESIZE
-
-Protocol reference: [TIER2-PROTOCOL.md](./TIER2-PROTOCOL.md)
 
 ### MAP — Decomposition Table
 
