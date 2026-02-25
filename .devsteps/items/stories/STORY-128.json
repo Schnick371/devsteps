@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Extract Shared Agent Boilerplate — Apply DRY/SSOT to Agent Hierarchy",
-  "status": "draft",
+  "status": "in-progress",
   "eisenhower": "urgent-important",
   "created": "2026-02-25T14:32:25.909Z",
-  "updated": "2026-02-25T14:33:21.969Z",
+  "updated": "2026-02-25T16:56:50.275Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/TIER2-PROTOCOL.md",

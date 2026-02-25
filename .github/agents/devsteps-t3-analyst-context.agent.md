@@ -135,6 +135,24 @@ User: "What patterns exist for error handling?"
 **Handoff Pattern:**
 After context loading, user proceeds to implementation with devsteps or other agents equipped with project understanding.
 
+## Context Budget Protocol (MANDATORY)
+
+### Step 5: Persist via MCP Tool
+Call `write_analysis_report` (devsteps MCP) with the AnalysisBriefing JSON:
+- `taskId`: item ID (e.g., `TASK-042`)
+- `aspect`: `context`
+- `envelope`: CompressedVerdict object — fields: `aspect`, `verdict`, `confidence`, `top3_findings` (max 3 × 200 chars), `report_path`, `timestamp`
+- `full_analysis`: compressed context summary produced in Stage 4
+- `affected_files`: list of context files loaded
+- `recommendations`: list of relevant aspects for downstream agents
+
+Tool writes atomically to `.devsteps/analysis/[TASK-ID]/context-report.json`.
+
+### Step 6: Return ONLY the report_path
+**Return to T2 Archaeology ONLY:** the `report_path` string (e.g., `.devsteps/analysis/TASK-042/context-report.json`).
+
+Do NOT paste context content in chat — coordinator calls `read_analysis_envelope` to extract it.
+
 ---
 
 *Specialized for efficient context loading and task preparation - complements context-sync prompt's context creation*

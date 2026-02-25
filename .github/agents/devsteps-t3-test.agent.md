@@ -160,7 +160,7 @@ Create comprehensive test plans for coordinator execution. Analyze code, identif
 - Edge cases for error handling and boundary conditions
 
 **Framework Adaptation:**
-- Follow project testing framework (Jest/Vitest, Pester, pytest)
+- Unit tests: Vitest (co-located with source, `.test.ts` suffix)
+- CLI integration tests: BATS (in `tests/integration/cli/`)
 - Match existing test patterns in codebase
-- Use framework-specific mocking capabilities
-- Leverage framework assertion libraries
+- Use Vitest mocking capabilities for unit tests, BATS helpers for CLI
