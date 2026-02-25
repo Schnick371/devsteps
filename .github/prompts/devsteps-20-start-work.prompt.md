@@ -7,6 +7,21 @@ tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput
 
 # 🚀 Start Work
 
+## ⚠️ Must-Do Before Any Tool Call
+
+**Step 0 — Read your agent file:**
+`#file:.github/agents/devsteps-t1-coordinator.agent.md`
+This prompt activates the session. Read the agent file **in full** before selecting triage tier or dispatching any T2 mandate.
+
+| Rule | Constraint |
+|---|---|
+| **T2 dispatch** | `#runSubagent` for every T2 agent — **NEVER** inline T2 work |
+| **MandateResults** | `#mcp_devsteps_read_mandate_results` ONLY — never paste T3 envelope content |
+| **Research** | Use `#bright-data` for COMPETITIVE-tier items |
+| **Parallel fan-out** | All analysis-phase T2 mandates MUST be dispatched in ONE call |
+
+---
+
 > **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
 
 
