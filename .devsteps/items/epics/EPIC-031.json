@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-27T12:59:50.239Z",
-  "updated": "2026-02-27T13:02:40.635Z",
+  "updated": "2026-02-27T13:09:20.674Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/",
@@ -17,7 +17,10 @@
   "linked_items": {
     "implements": [],
     "implemented-by": [
-      "STORY-132"
+      "STORY-132",
+      "STORY-129",
+      "STORY-130",
+      "STORY-131"
     ],
     "tested-by": [],
     "tests": [],

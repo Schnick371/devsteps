@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-02-27T13:01:39.305Z",
-  "updated": "2026-02-27T13:02:56.695Z",
+  "updated": "2026-02-27T13:09:50.690Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".devsteps/logs/"
@@ -19,7 +19,8 @@
     "tested-by": [],
     "tests": [],
     "blocks": [
-      "TASK-280"
+      "TASK-280",
+      "TASK-279"
     ],
     "blocked-by": [],
     "relates-to": [],

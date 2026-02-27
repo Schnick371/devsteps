@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-27T13:00:47.853Z",
-  "updated": "2026-02-27T13:02:56.695Z",
+  "updated": "2026-02-27T13:09:43.389Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/prompts/devsteps-20-start-work.prompt.md",
@@ -20,7 +20,9 @@
       "EPIC-031"
     ],
     "implemented-by": [
-      "TASK-285"
+      "TASK-285",
+      "TASK-283",
+      "TASK-284"
     ],
     "tested-by": [],
     "tests": [],

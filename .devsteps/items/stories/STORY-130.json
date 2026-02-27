@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-02-27T13:00:47.848Z",
-  "updated": "2026-02-27T13:02:56.693Z",
+  "updated": "2026-02-27T13:09:32.444Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/devsteps-t1-coordinator.agent.md",
@@ -18,7 +18,8 @@
       "EPIC-031"
     ],
     "implemented-by": [
-      "TASK-280"
+      "TASK-280",
+      "TASK-279"
     ],
     "tested-by": [],
     "tests": [],
