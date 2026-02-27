@@ -1,35 +1,35 @@
 {
-  "id": "TASK-277",
+  "id": "TASK-290",
   "type": "task",
   "category": "general",
-  "title": "Erstelle devsteps-log-protocol.instructions.md",
+  "title": "devsteps_context Integration: log_summary bei standard/deep Level",
   "status": "draft",
-  "eisenhower": "urgent-important",
-  "created": "2026-02-27T13:01:39.299Z",
-  "updated": "2026-02-27T23:45:22.358Z",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-27T23:44:55.446Z",
+  "updated": "2026-02-27T23:46:26.461Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    ".github/instructions/devsteps-log-protocol.instructions.md"
+    "packages/shared/src/core/context.ts",
+    "packages/mcp-server/src/handlers/context.ts"
   ],
   "linked_items": {
     "implements": [
-      "STORY-129"
+      "STORY-133"
     ],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
-    "blocked-by": [],
+    "blocked-by": [
+      "TASK-287"
+    ],
     "relates-to": [],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
-  "tags": [
-    "spec",
-    "instructions-file"
-  ],
+  "tags": [],
   "commits": [],
   "metadata": {}
 }

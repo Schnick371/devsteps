@@ -1,0 +1,44 @@
+{
+  "id": "STORY-133",
+  "type": "story",
+  "category": "general",
+  "title": "MCP Log-Tools Implementation — write_log_entry / read_log / list_log_entries",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-27T23:43:48.071Z",
+  "updated": "2026-02-27T23:46:11.600Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/logbook.ts",
+    "packages/mcp-server/src/tools/logbook.ts",
+    "packages/mcp-server/src/handlers/logbook/",
+    "packages/shared/src/types/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-031"
+    ],
+    "implemented-by": [
+      "TASK-286",
+      "TASK-287",
+      "TASK-288",
+      "TASK-289",
+      "TASK-290"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-130",
+      "STORY-131"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

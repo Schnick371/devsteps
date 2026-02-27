@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-27T12:59:50.239Z",
-  "updated": "2026-02-27T13:09:20.674Z",
+  "updated": "2026-02-27T23:45:45.879Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/",
@@ -20,7 +20,8 @@
       "STORY-132",
       "STORY-129",
       "STORY-130",
-      "STORY-131"
+      "STORY-131",
+      "STORY-133"
     ],
     "tested-by": [],
     "tests": [],

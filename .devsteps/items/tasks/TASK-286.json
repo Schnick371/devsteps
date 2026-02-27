@@ -1,24 +1,30 @@
 {
-  "id": "TASK-277",
+  "id": "TASK-286",
   "type": "task",
   "category": "general",
-  "title": "Erstelle devsteps-log-protocol.instructions.md",
+  "title": "Zod-Schemas: LogEntry, LogScope, TraversalMode in packages/shared",
   "status": "draft",
   "eisenhower": "urgent-important",
-  "created": "2026-02-27T13:01:39.299Z",
-  "updated": "2026-02-27T23:45:22.358Z",
+  "created": "2026-02-27T23:44:02.353Z",
+  "updated": "2026-02-27T23:46:23.272Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    ".github/instructions/devsteps-log-protocol.instructions.md"
+    "packages/shared/src/schemas/logbook.ts",
+    "packages/shared/src/types/logbook.ts",
+    "packages/shared/src/index.ts"
   ],
   "linked_items": {
     "implements": [
-      "STORY-129"
+      "STORY-133"
     ],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
-    "blocks": [],
+    "blocks": [
+      "TASK-287",
+      "TASK-288",
+      "TASK-289"
+    ],
     "blocked-by": [],
     "relates-to": [],
     "depends-on": [],
@@ -26,10 +32,7 @@
     "supersedes": [],
     "superseded-by": []
   },
-  "tags": [
-    "spec",
-    "instructions-file"
-  ],
+  "tags": [],
   "commits": [],
   "metadata": {}
 }

@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-02-27T13:00:47.841Z",
-  "updated": "2026-02-27T13:09:27.748Z",
+  "updated": "2026-02-27T23:45:10.000Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/instructions/devsteps-log-protocol.instructions.md",

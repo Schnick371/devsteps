@@ -1,35 +1,35 @@
 {
-  "id": "TASK-277",
+  "id": "TASK-288",
   "type": "task",
   "category": "general",
-  "title": "Erstelle devsteps-log-protocol.instructions.md",
+  "title": "MCP-Handler: read_log mit 4-Modus-Traversal (direct/trace/ancestors/referenced)",
   "status": "draft",
   "eisenhower": "urgent-important",
-  "created": "2026-02-27T13:01:39.299Z",
-  "updated": "2026-02-27T23:45:22.358Z",
+  "created": "2026-02-27T23:44:30.612Z",
+  "updated": "2026-02-27T23:46:19.558Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    ".github/instructions/devsteps-log-protocol.instructions.md"
+    "packages/mcp-server/src/handlers/logbook/read-log.ts",
+    "packages/mcp-server/src/tools/logbook.ts"
   ],
   "linked_items": {
     "implements": [
-      "STORY-129"
+      "STORY-133"
     ],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
-    "blocked-by": [],
+    "blocked-by": [
+      "TASK-286"
+    ],
     "relates-to": [],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
-  "tags": [
-    "spec",
-    "instructions-file"
-  ],
+  "tags": [],
   "commits": [],
   "metadata": {}
 }

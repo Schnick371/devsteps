@@ -55,3 +55,17 @@ description: "Log-Protokoll für Projekt-Logbuch und Epic-Logbücher — Format,
 - Item-Status 1:1 aus DevSteps-Items duplizieren
 - Bullet-Dump ohne Kontext (Entscheidungen brauchen Begründung)
 - "Done." als Abschluss-Statement (kein Mehrwert)
+
+---
+
+## Rollen-Klarstellung (Option C+)
+
+Diese Instructions-Datei erzwingt **nicht** mehr das Daten-Format — das übernehmen die Zod-Schemas in TASK-286. Die Datei definiert:
+
+- **Content-Quality-Anti-Patterns:** Was soll NICHT in `decisions[]` stehen? (z.B. keine Status-Updates, die schon in DevSteps-Items stehen)
+- **Semantik der Felder:** `decisions[]` = getroffene, nicht mehr revidierbare Entscheidungen; `open_threads[]` = konkrete Fragen/Risiken für die nächste Session; `observations` = Freitext-Lessons
+- **Ton-Guidance:** Narrativ, entscheidungs-fokussiert, aus Agent-Perspektive geschrieben
+- **Zwei-Tier Rolling Summary Erklärung:** Nach 10 aktiven Einträgen komprimiert `read_log(depth: 'summary')` automatisch — kein manuelles Housekeeping nötig
+- **Logbuch ≠ ADR:** Wenn eine Session eine Architektur-Entscheidung produziert → `devsteps/decide` Tool (STORY-6X), nicht in Log-Entry duplizieren, nur referenzieren (`→ ADR-005 erstellt`)
+
+`applyTo: "**"` damit sie bei Write-Log-Tool-Calls geladen ist.

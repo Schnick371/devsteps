@@ -34,3 +34,16 @@ Beide T1-Agenten (Coordinator für Single-Item, Sprint-Executor für Multi-Item)
 4. T1-Coordinator: Log-Write nach Quality Gate PASS eingebaut
 5. Beide referenzieren `devsteps-log-protocol.instructions.md` für Format
 6. Log-Write an Pause-Trigger gekoppelt: auch bei ESCALATED wird ein Pause-Eintrag geschrieben
+
+---
+
+## Implementierungs-Update (Option C+)
+
+T1 nutzt **MCP-Tool-Calls** statt `read_file` / direktem File-Edit:
+
+- **Session-Start:** `list_log_entries(scope: 'project', since: 'letzte Woche')` → dann `read_log(scope: 'project', depth: 'last-3')` für den Narrative-Kontext
+- **Session-Ende:** `write_log_entry(scope: 'project', entry: {...})` mit `decisions[]` + `open_threads[]`
+
+`devsteps_context(level: 'standard')` enthält automatisch `log_summary` (via TASK-290) — der zweistufige Call ist nur nötig wenn mehr Detail gebraucht wird.
+
+**Blocked-by STORY-133:** T1 kann erst umgestellt werden wenn die MCP-Tools existieren.
