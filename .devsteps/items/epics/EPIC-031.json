@@ -1,0 +1,40 @@
+{
+  "id": "EPIC-031",
+  "type": "epic",
+  "category": "general",
+  "title": "Projekt-Logbuch & Epic-Logbuch System",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-27T12:59:50.239Z",
+  "updated": "2026-02-27T13:02:40.635Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/",
+    ".github/instructions/",
+    ".github/prompts/",
+    ".devsteps/logs/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-132"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "session-continuity",
+    "agent-protocol",
+    "dx",
+    "logging"
+  ],
+  "commits": [],
+  "metadata": {}
+}

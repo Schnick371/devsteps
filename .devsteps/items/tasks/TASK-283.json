@@ -1,0 +1,37 @@
+{
+  "id": "TASK-283",
+  "type": "task",
+  "category": "general",
+  "title": "devsteps-20-start-work + devsteps-25-review Log-Integration",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-27T13:02:30.318Z",
+  "updated": "2026-02-27T13:02:48.800Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/prompts/devsteps-20-start-work.prompt.md",
+    ".github/prompts/devsteps-25-review.prompt.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-132"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "prompts",
+    "start-work",
+    "review"
+  ],
+  "commits": [],
+  "metadata": {}
+}

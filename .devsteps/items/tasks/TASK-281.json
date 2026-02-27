@@ -1,0 +1,35 @@
+{
+  "id": "TASK-281",
+  "type": "task",
+  "category": "general",
+  "title": "T2-Impl — Epic-Log Eintrag nach Implementation schreiben",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-27T13:02:30.312Z",
+  "updated": "2026-02-27T13:02:48.799Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-t2-impl.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-131"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "t2-impl",
+    "epic-log"
+  ],
+  "commits": [],
+  "metadata": {}
+}
