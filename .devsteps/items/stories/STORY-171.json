@@ -1,35 +1,27 @@
 {
-  "id": "EPIC-034",
-  "type": "epic",
+  "id": "STORY-171",
+  "type": "story",
   "category": "general",
-  "title": "Daily Workflow Intelligence Tools",
+  "title": "guide_scan_todos — Codebase TODO/FIXME/BUG Scanner with Auto-Item Creation",
   "status": "draft",
   "eisenhower": "not-urgent-important",
-  "created": "2026-02-28T00:55:33.348Z",
+  "created": "2026-02-28T02:10:57.801Z",
   "updated": "2026-02-28T02:12:42.970Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/tools/",
-    "packages/mcp-server/src/handlers/",
-    "packages/shared/src/schemas/",
-    "packages/cli/src/commands/"
+    ".devsteps/guide/todo-scan.json"
   ],
   "linked_items": {
-    "implements": [],
-    "implemented-by": [
-      "STORY-149",
-      "STORY-155",
-      "STORY-157",
-      "STORY-158",
-      "STORY-172"
+    "implements": [
+      "EPIC-034"
     ],
+    "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [
-      "EPIC-031"
-    ],
+    "relates-to": [],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
@@ -37,10 +29,9 @@
   },
   "tags": [
     "daily-workflow",
-    "gap-analysis",
-    "mcp-tools",
-    "ai-workflow",
-    "composite"
+    "todo-scanner",
+    "guide-server",
+    "code-quality"
   ],
   "commits": [],
   "metadata": {}

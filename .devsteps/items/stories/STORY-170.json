@@ -1,0 +1,38 @@
+{
+  "id": "STORY-170",
+  "type": "story",
+  "category": "general",
+  "title": "guide_blast_radius + guide_context_diff + guide_file_conventions_check — Context Support Tools",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T02:10:57.801Z",
+  "updated": "2026-02-28T02:12:42.970Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/",
+    ".devsteps/guide/style-contract.json"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-038"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "context-engineering",
+    "dependency-health",
+    "style-enforcement",
+    "guide-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-27T16:50:03.926Z",
-  "updated": "2026-02-28T00:51:34.614Z",
+  "updated": "2026-02-28T02:12:42.972Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/types",
@@ -30,7 +30,8 @@
       "STORY-031",
       "STORY-032",
       "STORY-033",
-      "STORY-034"
+      "STORY-034",
+      "STORY-176"
     ],
     "tested-by": [],
     "tests": [],
