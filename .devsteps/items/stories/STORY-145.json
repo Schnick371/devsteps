@@ -1,0 +1,44 @@
+{
+  "id": "STORY-145",
+  "type": "story",
+  "category": "general",
+  "title": "Knowledge Subsystem — ADR, Convention, Entry Schemas",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:51:24.726Z",
+  "updated": "2026-02-28T00:56:50.219Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/knowledge.ts",
+    "packages/shared/src/schemas/adr.ts",
+    "packages/shared/src/schemas/convention.ts",
+    "packages/shared/src/index.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-146"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [
+      "STORY-022"
+    ],
+    "superseded-by": []
+  },
+  "tags": [
+    "knowledge",
+    "adr",
+    "convention",
+    "schemas",
+    "zod",
+    "shared"
+  ],
+  "commits": [],
+  "metadata": {}
+}

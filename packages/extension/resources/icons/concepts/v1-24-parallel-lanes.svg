@@ -1,0 +1,27 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark background to ensure visibility -->
+  <rect x="8" y="8" width="240" height="240" rx="18" fill="#0F172A"/>
+  
+  <!-- CRT-style frame -->
+  <path d="M 34 8 
+           Q 128 0, 222 8
+           Q 252 8, 252 34
+           Q 256 128, 252 222
+           Q 252 252, 222 252
+           Q 128 256, 34 252
+           Q 4 252, 4 222
+           Q 0 128, 4 34
+           Q 4 8, 34 8 Z" 
+        fill="none" 
+        stroke="#FFFFFF" 
+        stroke-width="7" 
+        opacity="0.5"/>
+  
+  <!-- Six thicker parallel lanes, tight spacing -->
+  <line x1="16" y1="64" x2="240" y2="64" stroke="#38BDF8" stroke-width="26" stroke-linecap="round"/>
+  <line x1="16" y1="90" x2="240" y2="90" stroke="#38BDF8" stroke-width="26" stroke-linecap="round"/>
+  <line x1="16" y1="116" x2="240" y2="116" stroke="#38BDF8" stroke-width="26" stroke-linecap="round"/>
+  <line x1="16" y1="142" x2="240" y2="142" stroke="#38BDF8" stroke-width="26" stroke-linecap="round"/>
+  <line x1="16" y1="168" x2="240" y2="168" stroke="#38BDF8" stroke-width="26" stroke-linecap="round"/>
+  <line x1="16" y1="194" x2="240" y2="194" stroke="#38BDF8" stroke-width="26" stroke-linecap="round"/>
+</svg>

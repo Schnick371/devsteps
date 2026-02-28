@@ -1,0 +1,21 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v8 — Diamond Steps</title>
+  <defs>
+    <linearGradient id="g8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="50%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+  </defs>
+  <!-- Outer diamond (rotated square) -->
+  <polygon points="64,8 120,64 64,120 8,64"
+    fill="none" stroke="url(#g8)" stroke-width="7"/>
+  <!-- Inner step pattern — staircase inside the diamond -->
+  <!-- The steps go diagonally — bottom-left to top-right through diamond center -->
+  <polyline
+    points="26,80  50,80  50,58  74,58  74,36  98,36"
+    fill="none" stroke="url(#g8)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Corner accent dots where steps meet diamond edges -->
+  <circle cx="26" cy="80" r="5" fill="#06B6D4"/>
+  <circle cx="98" cy="36" r="5" fill="#7C3AED"/>
+</svg>

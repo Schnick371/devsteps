@@ -1,0 +1,54 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-col-5d" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563EB;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#1D4ED8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad-chart-5d" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#EF4444;stop-opacity:0.1" />
+    </linearGradient>
+    <linearGradient id="grad-ideal-5d" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#94A3B8;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#64748B;stop-opacity:0.7" />
+    </linearGradient>
+    <linearGradient id="grad-actual-5d" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EF4444;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Border frame -->
+  <rect x="2" y="2" width="252" height="252" rx="8" fill="none" stroke="#0F172A" stroke-width="3" opacity="0.2"/>
+  
+  <!-- Chart background fill area -->
+  <path d="M 20 40 L 236 40 L 236 230 Q 128 140, 20 40 Z" fill="url(#grad-chart-5d)"/>
+  
+  <!-- Three columns decreasing -->
+  <rect x="24" y="44" width="64" height="186" rx="9" fill="url(#grad-col-5d)" opacity="0.75"/>
+  <rect x="96" y="80" width="64" height="150" rx="9" fill="url(#grad-col-5d)" opacity="0.75"/>
+  <rect x="168" y="130" width="64" height="100" rx="9" fill="url(#grad-col-5d)" opacity="0.75"/>
+  
+  <!-- Cards inside columns -->
+  <rect x="32" y="58" width="48" height="28" rx="4" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="32" y="94" width="48" height="28" rx="4" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="32" y="130" width="48" height="28" rx="4" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="32" y="166" width="48" height="28" rx="4" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="104" y="94" width="48" height="28" rx="4" fill="#E0F2FE" opacity="0.7"/>
+  <rect x="104" y="130" width="48" height="28" rx="4" fill="#E0F2FE" opacity="0.7"/>
+  <rect x="176" y="144" width="48" height="28" rx="4" fill="#E0F2FE" opacity="0.5"/>
+  
+  <!-- Ideal burndown line (dotted) -->
+  <line x1="24" y1="44" x2="236" y2="230" 
+        stroke="url(#grad-ideal-5d)" 
+        stroke-width="3" 
+        stroke-dasharray="8,6"
+        stroke-linecap="round"/>
+  
+  <!-- Actual burndown line (fever curve, organic) -->
+  <path d="M 24 36 Q 40 44, 56 52 Q 72 62, 88 72 Q 104 86, 120 100 Q 136 118, 152 136 Q 168 152, 184 170 Q 200 185, 216 200 Q 226 212, 236 224" 
+        stroke="url(#grad-actual-5d)" 
+        stroke-width="4" 
+        stroke-linecap="round" 
+        fill="none"/>
+</svg>

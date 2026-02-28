@@ -1,0 +1,49 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-col-5c" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563EB;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#1D4ED8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad-ideal-5c" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#94A3B8;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#64748B;stop-opacity:0.6" />
+    </linearGradient>
+    <linearGradient id="grad-actual-5c" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EF4444;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Border frame -->
+  <rect x="2" y="2" width="252" height="252" rx="8" fill="none" stroke="#0F172A" stroke-width="3" opacity="0.2"/>
+  
+  <!-- Board background -->
+  <rect x="12" y="30" width="232" height="210" rx="10" fill="#0F172A" opacity="0.12"/>
+  
+  <!-- Three columns -->
+  <rect x="24" y="46" width="68" height="178" rx="8" fill="url(#grad-col-5c)" opacity="0.65"/>
+  <rect x="100" y="46" width="68" height="178" rx="8" fill="url(#grad-col-5c)" opacity="0.65"/>
+  <rect x="176" y="46" width="68" height="178" rx="8" fill="url(#grad-col-5c)" opacity="0.65"/>
+  
+  <!-- Cards -->
+  <rect x="32" y="60" width="52" height="32" rx="5" fill="#E0F2FE" opacity="0.85"/>
+  <rect x="32" y="100" width="52" height="32" rx="5" fill="#E0F2FE" opacity="0.85"/>
+  <rect x="32" y="140" width="52" height="32" rx="5" fill="#E0F2FE" opacity="0.85"/>
+  <rect x="108" y="60" width="52" height="32" rx="5" fill="#E0F2FE" opacity="0.65"/>
+  <rect x="108" y="100" width="52" height="32" rx="5" fill="#E0F2FE" opacity="0.65"/>
+  <rect x="184" y="170" width="52" height="32" rx="5" fill="#E0F2FE" opacity="0.45"/>
+  
+  <!-- Ideal line (dotted, smooth diagonal) -->
+  <line x1="28" y1="52" x2="240" y2="218" 
+        stroke="url(#grad-ideal-5c)" 
+        stroke-width="3" 
+        stroke-dasharray="8,6"
+        stroke-linecap="round"/>
+  
+  <!-- Actual line (fever curve, organic) -->
+  <path d="M 28 44 Q 44 50, 60 56 Q 76 68, 92 76 Q 106 88, 120 98 Q 134 114, 148 130 Q 162 146, 176 160 Q 190 176, 204 188 Q 222 200, 240 212" 
+        stroke="url(#grad-actual-5c)" 
+        stroke-width="4" 
+        stroke-linecap="round" 
+        fill="none"/>
+</svg>

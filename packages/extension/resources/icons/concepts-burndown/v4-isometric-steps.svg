@@ -1,0 +1,38 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v4 — Isometric Step Block</title>
+  <defs>
+    <linearGradient id="gtop" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
+    </linearGradient>
+    <linearGradient id="gfront" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="gside" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E40AF"/>
+      <stop offset="100%" stop-color="#1E3A8A"/>
+    </linearGradient>
+  </defs>
+  <!-- Isometric 3-step staircase — 3D depth communicates "layers/levels" -->
+  <!-- Step 1 (back-right tallest) — front face -->
+  <polygon points="100,82 100,40 80,52 80,94" fill="url(#gfront)"/>
+  <!-- Step 1 top face -->
+  <polygon points="60,40 80,52 100,40 80,28" fill="url(#gtop)"/>
+  <!-- Step 1 side face -->
+  <polygon points="80,52 80,94 60,82 60,40" fill="url(#gside)"/>
+
+  <!-- Step 2 (mid) — front face -->
+  <polygon points="80,94 80,58 60,70 60,106" fill="url(#gfront)" opacity="0.88"/>
+  <!-- Step 2 top -->
+  <polygon points="40,58 60,70 80,58 60,46" fill="url(#gtop)" opacity="0.88"/>
+  <!-- Step 2 side -->
+  <polygon points="60,70 60,106 40,94 40,58" fill="url(#gside)" opacity="0.88"/>
+
+  <!-- Step 3 (front-left smallest) — front face -->
+  <polygon points="60,106 60,76 40,88 40,118" fill="url(#gfront)" opacity="0.76"/>
+  <!-- Step 3 top -->
+  <polygon points="20,76 40,88 60,76 40,64" fill="url(#gtop)" opacity="0.76"/>
+  <!-- Step 3 side -->
+  <polygon points="40,88 40,118 20,106 20,76" fill="url(#gside)" opacity="0.76"/>
+</svg>

@@ -1,0 +1,12 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v9.4 — Facet Loop (Color)</title>
+  <defs>
+    <linearGradient id="v9g4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+  </defs>
+  <!-- Faceted D + looped S sharing a spine -->
+  <path d="M26,22 v84 h30 a30,30 0 0 0 0,-84 h-30" fill="none" stroke="url(#v9g4)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M80,26 h22 c10,0 18,6 18,16 c0,12 -10,16 -22,20 c-14,4 -22,8 -22,22 c0,10 8,16 18,16 h26" fill="none" stroke="url(#v9g4)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-02-27T23:43:48.071Z",
-  "updated": "2026-02-27T23:46:11.600Z",
+  "updated": "2026-02-28T00:50:25.896Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/schemas/logbook.ts",
@@ -34,7 +34,9 @@
     "blocked-by": [],
     "relates-to": [],
     "depends-on": [],
-    "required-by": [],
+    "required-by": [
+      "STORY-144"
+    ],
     "supersedes": [],
     "superseded-by": []
   },

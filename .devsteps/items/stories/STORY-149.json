@@ -1,0 +1,41 @@
+{
+  "id": "STORY-149",
+  "type": "story",
+  "category": "general",
+  "title": "Task Decomposition (devsteps_split)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:52:53.008Z",
+  "updated": "2026-02-28T00:56:34.944Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/split.ts",
+    "packages/mcp-server/src/handlers/split.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-034"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-148"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "split",
+    "decomposition",
+    "composite",
+    "workflow",
+    "mcp-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

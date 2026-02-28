@@ -1,0 +1,23 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v10.2 — Pixel Grid with Dev Cue (Color)</title>
+  <defs>
+    <linearGradient id="v10g" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+  <!-- 3x3 grid with diagonal emphasis -->
+  <rect x="10" y="10" width="32" height="32" rx="7" fill="url(#v10g)"/>
+  <rect x="48" y="10" width="32" height="32" rx="7" fill="#93C5FD"/>
+  <rect x="86" y="10" width="32" height="32" rx="7" fill="#E2E8F0"/>
+
+  <rect x="10" y="48" width="32" height="32" rx="7" fill="#93C5FD"/>
+  <rect x="48" y="48" width="32" height="32" rx="7" fill="url(#v10g)"/>
+  <rect x="86" y="48" width="32" height="32" rx="7" fill="#93C5FD"/>
+
+  <rect x="10" y="86" width="32" height="32" rx="7" fill="#E2E8F0"/>
+  <rect x="48" y="86" width="32" height="32" rx="7" fill="#93C5FD"/>
+  <rect x="86" y="86" width="32" height="32" rx="7" fill="url(#v10g)"/>
+  <!-- Dev cue: small prompt caret overlay -->
+  <polygon points="40,60 50,66 40,72" fill="#0F172A" opacity="0.9"/>
+</svg>

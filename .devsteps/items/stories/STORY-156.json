@@ -1,0 +1,41 @@
+{
+  "id": "STORY-156",
+  "type": "story",
+  "category": "general",
+  "title": "Blocked-Item Surfacing & File Change Delta",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:56:02.887Z",
+  "updated": "2026-02-28T00:56:34.941Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/surface.ts",
+    "packages/mcp-server/src/tools/diff.ts",
+    "packages/mcp-server/src/handlers/surface.ts",
+    "packages/mcp-server/src/handlers/diff.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-034"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "blocked-items",
+    "file-delta",
+    "surfacing",
+    "git",
+    "mcp-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

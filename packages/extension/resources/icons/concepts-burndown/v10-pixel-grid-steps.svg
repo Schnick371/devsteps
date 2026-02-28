@@ -1,0 +1,26 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v10 — Pixel Grid Steps</title>
+  <defs>
+    <linearGradient id="g10a" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="g10b" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
+    </linearGradient>
+  </defs>
+  <!-- 3x3 pixel grid, staircase diagonal lit up — like progress through a matrix -->
+  <!-- Row 3 (bottom): left column only -->
+  <rect x="10" y="88" width="34" height="34" rx="6" fill="url(#g10a)"/>
+  <rect x="48" y="88" width="34" height="34" rx="6" fill="#1E3A8A" opacity="0.2"/>
+  <rect x="86" y="88" width="34" height="34" rx="6" fill="#1E3A8A" opacity="0.2"/>
+  <!-- Row 2 (middle): left + center lit -->
+  <rect x="10" y="50" width="34" height="34" rx="6" fill="url(#g10a)" opacity="0.7"/>
+  <rect x="48" y="50" width="34" height="34" rx="6" fill="url(#g10a)"/>
+  <rect x="86" y="50" width="34" height="34" rx="6" fill="#1E3A8A" opacity="0.2"/>
+  <!-- Row 1 (top): all lit, rightmost brightest -->
+  <rect x="10" y="12" width="34" height="34" rx="6" fill="url(#g10a)" opacity="0.45"/>
+  <rect x="48" y="12" width="34" height="34" rx="6" fill="url(#g10a)" opacity="0.7"/>
+  <rect x="86" y="12" width="34" height="34" rx="6" fill="url(#g10b)"/>
+</svg>

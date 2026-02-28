@@ -1,0 +1,38 @@
+{
+  "id": "STORY-139",
+  "type": "story",
+  "category": "general",
+  "title": "Plan-Typen Taxonomie & Templates",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:48:26.126Z",
+  "updated": "2026-02-28T00:48:49.546Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/plan.ts",
+    "packages/shared/src/constants/plan-types.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-032"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "plan-types",
+    "taxonomie",
+    "templates",
+    "shared"
+  ],
+  "commits": [],
+  "metadata": {}
+}

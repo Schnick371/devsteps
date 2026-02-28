@@ -1,0 +1,16 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v9.1 — Monogram Slab (Color)</title>
+  <defs>
+    <linearGradient id="v9g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+  <!-- Solid slab with carved DS (enterprise, monolith) -->
+  <rect x="10" y="10" width="108" height="108" rx="20" fill="url(#v9g)"/>
+  <!-- Carved D -->
+  <path d="M32,30 h22 a22,22 0 0 1 0,68 h-22 z" fill="#E2E8F0"/>
+  <path d="M40,38 h14 a14,14 0 0 1 0,52 h-14 z" fill="url(#v9g)"/>
+  <!-- Carved S (channel) -->
+  <path d="M74,36 h18 c10,0 14,6 14,12 c0,8 -8,12 -16,14 c-10,2 -16,4 -16,12 c0,6 6,12 14,12 h20" fill="none" stroke="#E2E8F0" stroke-width="10" stroke-linecap="round"/>
+</svg>

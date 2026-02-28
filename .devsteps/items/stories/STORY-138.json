@@ -1,0 +1,40 @@
+{
+  "id": "STORY-138",
+  "type": "story",
+  "category": "general",
+  "title": "Trail-Query MCP-Tool",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:48:26.125Z",
+  "updated": "2026-02-28T00:48:55.860Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/trail-query.ts",
+    "packages/mcp-server/src/handlers/trail-query.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-032"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [
+      "STORY-134"
+    ],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp-tools",
+    "trail",
+    "query",
+    "mcp-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}
