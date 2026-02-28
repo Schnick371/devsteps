@@ -56,6 +56,16 @@ Execute multi-hour autonomous work sessions on planned backlog via T2 mandate di
 
 ---
 
+## Pre-Sprint Clarification (once before Step 1 — then autonomous)
+
+Use `#askQuestions` **once** to confirm scope before the sprint begins:
+
+> Sprint scope: all Q1+Q2 planned items. Exclusions or additions?
+> Focus area / tag filter? (blank = full backlog)
+> Any triage override (QUICK / STANDARD / FULL for all)?
+
+After this exchange the sprint runs autonomously. Do NOT ask again until a Pause Trigger fires.
+
 ## Pre-Sprint Analysis (MANDATORY — once per sprint session)
 
 ### Step 1: Backlog Discovery
@@ -109,6 +119,12 @@ For each Sprint Brief item (verify no new blocker first):
 - Context saturation (>70% window)
 
 On pause: status → `in-progress`, write blockers to `.devsteps/analysis/[ID]/sprint-pause.md`.
+Use `#askQuestions` to surface the blocker and collect a decision before any retry:
+
+> ⏸️ SPRINT PAUSED — [blocker type]
+> Finding: [what triggered the pause]
+> Required decision: [specific question]
+> Options: A) ... B) ...
 
 ---
 

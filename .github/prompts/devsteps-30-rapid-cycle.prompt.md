@@ -9,6 +9,7 @@ tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput
 
 > **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
 
+**Session mode: iterative.** Use `#askQuestions` at item selection and after each completion. This is the preferred mode for guide walkthroughs — the Two-Guide Pattern applies when working through a step-by-step process (see sprint prompt for the full pattern).
 
 Activate **Standard MPD** in kanban mode. Follow the MPD protocol from your agent instructions.
 
@@ -43,11 +44,14 @@ Activate **Standard MPD** in kanban mode. Follow the MPD protocol from your agen
 
 1. Search for duplicates before creating items (`#mcp_devsteps_search`)
 2. Create Epic → Story → Task hierarchy, link relationships
-3. Select highest-priority `planned` item (Q1 → Q2 → Q3)
+3. Select highest-priority `planned` item (Q1 → Q2 → Q3) — confirm via `#askQuestions`:
+   > Next item: [ID] — [title] (Q[n]). Shall I start this, or pick a different one?
 4. Update status to `in-progress`; checkout branch (`story/<ID>`, `task/<ID>`, `bug/<ID>`)
 5. Run triage → dispatch T2 mandates in parallel (see Mode Selection above)
 6. Synthesize MandateResults via `read_mandate_results(item_ids)` → pass `report_path` to exec agents only
 7. Dispatch `t2-impl` → `t2-test` (then `t2-doc` if FULL) — pass `report_path`, never paste content
 8. Execute integrated plan, quality gates, commit (`type(ID): subject` + `Implements: ID`)
 9. Merge to main; mark done only after `devsteps-t2-reviewer` PASS
-10. Pull next item and repeat
+10. Use `#askQuestions` before pulling the next item:
+    > ✅ [ID] done. Next in queue: [ID] — [title] (Q[n]). Shall I pull it, or is there a priority change?
+11. Pull next item and repeat

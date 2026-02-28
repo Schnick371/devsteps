@@ -31,6 +31,16 @@ The agent classifies the session automatically:
 - **Spike** → archaeology + research, no impl until direction set
 - **Review** → reviewer directly
 
+## Pre-Sprint Clarification (session start only — then fully autonomous)
+
+Before the sprint begins, use `#askQuestions` **once** to confirm scope and constraints:
+
+> Sprint scope: all Q1+Q2 planned items. Any items to exclude or add?
+> Focus area or tag filter? (leave blank for full backlog)
+> Triage override — force QUICK / STANDARD / FULL for all items?
+
+After this single exchange, the sprint runs end-to-end without waiting for confirmation.
+
 ## Optional Parameters
 
 - **Item list**: Specific item IDs to include (default: all Q1+Q2 planned items)

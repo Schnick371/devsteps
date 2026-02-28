@@ -1,6 +1,6 @@
 ---
 agent: 'devsteps-t1-coordinator'
-model: 'Claude Opus 4.6'
+model: 'Claude Sonnet 4.6'
 description: 'Interactive planning session - work with developer to define and structure work items before implementation'
 tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'search', 'playwright/*', 'bright-data/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
 ---
@@ -31,6 +31,12 @@ Plan work through dialogue — understand intent, research evidence, structure i
 Ask "why" before "what". Surface dependencies early. Search existing items — reuse or extend before creating new ones.
 
 **Bug clustering:** Search bugs before creating new ones. Group related symptoms sharing root cause into one bug item.
+
+Use `#askQuestions` to confirm intent before structuring:
+
+> What is the core problem — what should *not* change after this is done?
+> Any constraints, known pitfalls, or approaches to avoid?
+> Is there an existing Epic or Story this belongs to?
 
 ### 3. Research First *(Complex tasks only)*
 
@@ -63,6 +69,11 @@ Use `devsteps/*` MCP tools. Include: type, priority, `affected_paths`, tags, des
 ### 7. Validate
 
 Every item: clear purpose, priority aligned, dependencies identified, hierarchy non-orphaned.
+
+Present the proposed structure to the user via `#askQuestions` before creating any items:
+
+> Proposed: [Epic X → Story Y → Tasks Z1, Z2]. Priority: [Q1/Q2]. Affected paths: [list].
+> Shall I create these items, or adjust scope/priority first?
 
 ### 8. Commit to Main
 

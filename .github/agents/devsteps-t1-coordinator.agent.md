@@ -118,7 +118,12 @@ ESCALATED → surface to user, do NOT retry.
 
 ## Hard Stop Format
 
-Surface to user: `⚠️ DECISION REQUIRED | Finding: [...] | Risk: [...] | Options: A) ... B) ...`
+Use `#askQuestions` to surface the blocker and collect a decision — do NOT auto-proceed or retry:
+
+> ⚠️ DECISION REQUIRED
+> Finding: [what was found]
+> Risk: [consequence of proceeding]
+> Options: A) ... B) ...
 
 ---
 

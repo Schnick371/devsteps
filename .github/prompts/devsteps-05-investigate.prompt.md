@@ -23,6 +23,16 @@ Trace the full decision history for any code — who wrote it, which work item r
 - A bug appeared and you need to trace its origin
 - You're refactoring and need to know what constraints drove the original design
 
+## Session Start
+
+Use `#askQuestions` to clarify scope before diving in — especially when the request is vague:
+
+> What should I investigate? (file / function / behavior / DevSteps item ID)
+> What is the symptom or question you are trying to answer?
+> What have you already ruled out?
+
+If context is fully provided in the prompt, skip this and proceed directly.
+
 ## Provide Context
 
 Describe what you want investigated:
@@ -38,3 +48,11 @@ Describe what you want investigated:
 - **Decision context**: What was the codebase state when this was written?
 - **Intent assessment**: Is the original intent still valid? Conflicts with current reality?
 - **Recommendation**: Keep as-is / Refactor / Flag for review
+
+## Confirm Findings
+
+After investigation, present the summary and use `#askQuestions` before closing:
+
+> Root cause: [finding]. Does this match what you suspected?
+> Recommendation: [Keep / Refactor / Flag] — does this align with your intent?
+> Shall I create a DevSteps item to track the follow-up action?
