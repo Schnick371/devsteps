@@ -1,0 +1,40 @@
+{
+  "id": "STORY-166",
+  "type": "story",
+  "category": "general",
+  "title": "guide_observe + guide_playbook_find — Lightweight KB Accumulation & Playbook Surfacing",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T01:22:24.858Z",
+  "updated": "2026-02-28T01:28:51.342Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/",
+    ".devsteps/observations/",
+    ".devsteps/playbooks/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-037"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "observations",
+    "playbooks",
+    "collective-learning",
+    "guide-server",
+    "context-injection"
+  ],
+  "commits": [],
+  "metadata": {}
+}

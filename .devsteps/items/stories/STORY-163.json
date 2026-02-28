@@ -1,0 +1,40 @@
+{
+  "id": "STORY-163",
+  "type": "story",
+  "category": "general",
+  "title": "guide_pause_for_human + guide_human_response — Human-in-the-Loop Blocking Interrupt Gate",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-28T01:22:24.854Z",
+  "updated": "2026-02-28T01:28:51.341Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/",
+    "packages/shared/src/schemas/",
+    ".devsteps/guide/interrupts/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-036"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "human-in-the-loop",
+    "interrupt",
+    "durable-execution",
+    "guide-server",
+    "critical"
+  ],
+  "commits": [],
+  "metadata": {}
+}

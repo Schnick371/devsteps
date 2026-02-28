@@ -1,0 +1,39 @@
+{
+  "id": "STORY-165",
+  "type": "story",
+  "category": "general",
+  "title": "guide_pattern_record + guide_pattern_suggest — Dynamic Pattern Trust Library",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T01:22:24.857Z",
+  "updated": "2026-02-28T01:28:51.342Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/",
+    "packages/shared/src/schemas/",
+    ".devsteps/guide/patterns/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-037"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "pattern-library",
+    "trust-score",
+    "collective-learning",
+    "guide-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

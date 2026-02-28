@@ -1,0 +1,39 @@
+{
+  "id": "STORY-164",
+  "type": "story",
+  "category": "general",
+  "title": "guide_checkpoint + guide_recover_checkpoint — Sub-step Crash Recovery",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-28T01:22:24.855Z",
+  "updated": "2026-02-28T01:28:51.341Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/",
+    "packages/shared/src/schemas/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-036"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "checkpoint",
+    "durable-execution",
+    "crash-recovery",
+    "guide-server",
+    "critical"
+  ],
+  "commits": [],
+  "metadata": {}
+}
