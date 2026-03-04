@@ -1,0 +1,32 @@
+{
+  "id": "TASK-294",
+  "type": "task",
+  "category": "general",
+  "title": "Clarify Ring 4 worker-impl/worker-test role: plan-only vs executor",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-04T12:27:01.675Z",
+  "updated": "2026-03-04T12:27:01.675Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "architecture",
+    "worker",
+    "conductor"
+  ],
+  "commits": [],
+  "metadata": {}
+}

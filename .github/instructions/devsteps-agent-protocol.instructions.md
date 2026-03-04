@@ -142,17 +142,17 @@ Fallback to CLI only if explicitly authorized by user.
 
 ## DevSteps MCP — Tool Reference
 
-| Tool                                 | Usage                                                       |
-| ------------------------------------ | --------------------------------------------------------------- |
-| `mcp_devsteps_add`                   | Create new item (type, title, description, priority, tags) |
-| `mcp_devsteps_update`                | Update item (status, description, append_description)    |
-| `mcp_devsteps_list`                  | List items (filter: type, status, tags)                    |
-| `mcp_devsteps_get`                   | Read single item                                            |
-| `mcp_devsteps_search`                | Full-text search (check duplicates before mcp_devsteps_add!) |
-| `mcp_devsteps_link`                  | Create relationship (implements, depends-on, relates-to, blocks)  |
-| `mcp_devsteps_trace`                 | Show dependency tree                                      |
-| `mcp_devsteps_status`                | Project overview                                               |
-| `mcp_devsteps_write_mandate_result`  | Analyst/Exec: write MandateResult                           |
-| `mcp_devsteps_read_mandate_results`  | Coord: read MandateResults                                  |
-| `mcp_devsteps_write_analysis_report` | Aspect/Analyst: write analysis report                        |
-| `mcp_devsteps_write_escalation`      | Signal escalation                                          |
+| Tool                                 | Usage                                                            | Caller                                                                 |
+| ------------------------------------ | ---------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `mcp_devsteps_add`                   | Create new item (type, title, description, priority, tags)      | `coord (bootstrap primary) · worker-devsteps (follow-ups)`             |
+| `mcp_devsteps_update`                | Update item (status, description, append_description)           | `coord (status gates + done-gate append) · worker-devsteps (desc/tags)`|
+| `mcp_devsteps_list`                  | List items (filter: type, status, tags)                         | `coord · any agent`                                                    |
+| `mcp_devsteps_get`                   | Read single item                                                 | `coord · any agent`                                                    |
+| `mcp_devsteps_search`                | Full-text search (check duplicates before mcp_devsteps_add!)    | `coord · any agent`                                                    |
+| `mcp_devsteps_link`                  | Create relationship (implements, depends-on, relates-to, blocks) | **`worker-devsteps ONLY`**                                             |
+| `mcp_devsteps_trace`                 | Show dependency tree                                             | `coord · any agent`                                                    |
+| `mcp_devsteps_status`                | Project overview                                                 | `coord · any agent`                                                    |
+| `mcp_devsteps_write_mandate_result`  | Analyst/Exec: write MandateResult                               | `analyst-* · exec-*`                                                   |
+| `mcp_devsteps_read_mandate_results`  | Coord: read MandateResults                                       | **`coord ONLY`**                                                       |
+| `mcp_devsteps_write_analysis_report` | Aspect/Analyst: write analysis report                            | `aspect-* · analyst-*`                                                 |
+| `mcp_devsteps_write_escalation`      | Signal escalation                                                | `any agent`                                                            |

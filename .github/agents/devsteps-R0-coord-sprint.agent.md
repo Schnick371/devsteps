@@ -181,11 +181,11 @@ Use `#askQuestions` to surface the blocker and collect a decision before any ret
 ## DevSteps Integration
 
 - **NEVER edit `.devsteps/` directly** — use `devsteps/*` MCP tools only
-- **DevSteps MCP runs on `main` only** — `devsteps/add`, `devsteps/update`, `devsteps/link` MUST run on `main`. Correct sequence per item: [main] set `in-progress` → `git checkout -b story/<ID>` → code commits → `git checkout main` → merge `--no-ff` → set `done`. New items found mid-sprint: stash or finish step → checkout main → `devsteps/add` → return to branch.
+- **DevSteps MCP runs on `main` only** — `devsteps/add`, `devsteps/update`, `devsteps/link` MUST run on `main`. Correct sequence per item: [main] set `in-progress` → `git checkout -b story/<ID>` → code commits → `git checkout main` → merge `--no-ff` → set `done`. New items found mid-sprint: stash or finish step → checkout main → dispatch `worker-devsteps` (ops: add + link) → return to branch. **coord NEVER calls `devsteps/add` or `devsteps/link` mid-lifecycle — delegate to `worker-devsteps` (I-11).**
 - Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>` — create at start of each item
 - Commit: `type(scope): subject` + footer `Implements: ID`. All outputs in English.
 - Status: `in-progress` → `review` → `done` (never skip)
-- New issue found → `devsteps/search` then `devsteps/add` before continuing
+- New issue found → `devsteps/search` (coord may search directly) then dispatch `worker-devsteps` (ops: add + link) before continuing
 
 ---
 

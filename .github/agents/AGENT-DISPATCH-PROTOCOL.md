@@ -101,6 +101,7 @@ coord reads the incoming task and tilts the radar chart — dispatching more age
 | I-8  | Same-phase dispatches are parallel                  | Single fan-out tool call block               |
 | I-9  | `failed_approaches[]` propagates through Mandate    | All agents receive and honor it              |
 | I-10 | Web-First at STANDARD triage                        | Staleness aspect = MUST at STANDARD+         |
+| I-11 | coord delegates follow-up DevSteps ops to `worker-devsteps` | coord MAY directly call: `mcp_devsteps_add` (primary item bootstrap) · `mcp_devsteps_update` status (in-progress/review/done) · `mcp_devsteps_update` `append_description` (done-gate only). ALL other add/link/update ops MUST go via `worker-devsteps`. |
 
 ---
 

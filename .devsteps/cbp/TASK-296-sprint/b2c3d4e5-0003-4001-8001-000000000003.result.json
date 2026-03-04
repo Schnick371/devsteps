@@ -1,0 +1,21 @@
+{
+  "mandate_id": "b2c3d4e5-0003-4001-8001-000000000003",
+  "item_ids": [
+    "TASK-296"
+  ],
+  "sprint_id": "TASK-296-sprint",
+  "analyst": "devsteps-R2-aspect-constraints",
+  "status": "complete",
+  "findings": "BOUNDARY VALIDATION — coord vs worker-devsteps\n\nOriginal mandate_id supplied by coord: b2c3d4e5-0003-0001-0001-000000000003 (stored here; tool required conformant UUID).\n\nSources: (1) copilot-instructions.md Lifecycle (coord only) lines 52-60, (2) Work-Type Dispatch Matrix lines 139-147, (3) worker-devsteps.agent.md Contract + Execution Protocol.\n\nVERDICT: Proposed boundary is SUBSTANTIALLY CORRECT with one ambiguity (S1).\n\n--- HARD CONSTRAINTS ---\n\nH1 — Lifecycle status gates MUST stay with coord. Lifecycle steps 3 and 7 explicitly assign coord to set in-progress and done. These are Ring-sequencing gates: if a worker could advance status, it bypasses Ring ordering (R1→R5). Delegating status to worker-devsteps is an architectural invariant violation.\n\nH2 — Bootstrap mcp_devsteps_add (primary item only) stays with coord. Lifecycle step 2 'Create item if none exists' is listed under '(coord only)'. This covers the single primary sprint item before any Ring fires. It would be circular for a worker to create the item that justifies its own dispatch.\n\nH3 — All follow-up/derived mcp_devsteps_add calls MUST go to worker-devsteps. Work-Type Dispatch Matrix is unambiguous: Planning → R4: worker-devsteps (creates items); Backlog hygiene → R4: worker-devsteps. Coord calling mcp_devsteps_add for follow-up tasks is an explicit VIOLATION.\n\nH4 — mcp_devsteps_link MUST go to worker-devsteps. Worker Phase 2 batch order enforces add → update → link. Coord has no batch-ordering protocol. Delegating link to coord bypasses the existence-check in worker Phase 1 Validate.\n\n--- SOFT ITEMS ---\n\nS1 — mcp_devsteps_update append_description at done-gate. Lifecycle step 7 says coord does append_description after Gate-PASS. Proposed boundary delegates ALL description/append to worker-devsteps. CONFLICT: done-gate append accompanies status=done (HARD-coord) and should stay with coord. Mid-lifecycle enrichment can go to worker.\n\nS2 — mcp_devsteps_search and mcp_devsteps_list. Both agents may read safely. No constraint violated either way.\n\nS3 — mcp_devsteps_update for tags. No explicit rule. Low-risk delegation to worker acceptable.\n\n--- SUMMARY TABLE ---\nmcp_devsteps_add (primary item): coord MUST / HARD H2\nmcp_devsteps_add (follow-up items): coord VIOLATION / worker MUST / HARD H3\nmcp_devsteps_update status (in-progress/review/done): coord MUST / HARD H1\nmcp_devsteps_update append at done-gate: coord preferred / SOFT S1\nmcp_devsteps_update descriptions/tags mid-lifecycle: worker preferred / SOFT S3\nmcp_devsteps_link: worker MUST / HARD H4\nmcp_devsteps_search and mcp_devsteps_list: both OK / SOFT S2",
+  "recommendations": [
+    "ADOPT proposed boundary as specified — correct for all HARD constraints; coord retains status gates and one bootstrap add; worker-devsteps owns all follow-up adds and all links.",
+    "CLARIFY S1: done-gate append_description (Lifecycle step 7) stays with coord alongside status=done — NOT delegated to worker-devsteps.",
+    "UPDATE worker-devsteps contract: exclude status transitions on the primary item (coord-owned); retain status transitions only on sub-items the worker itself creates.",
+    "ADD gate-reviewer checklist: flag any coord action calling mcp_devsteps_add after Ring 1 fires — always a delegation violation.",
+    "DOCUMENT bootstrap-add exception in Lifecycle step 2: add '(primary item only — follow-up items delegated to worker-devsteps)'."
+  ],
+  "confidence": 0.91,
+  "token_cost": 1850,
+  "completed_at": "2026-03-04T00:00:00Z",
+  "schema_version": "1.0"
+}

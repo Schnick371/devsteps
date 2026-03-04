@@ -79,10 +79,29 @@ user-invokable: false
 ## Contract
 
 - **Tier**: `worker` — Execution Worker (Leaf Node)
-- **Dispatched by**: coord ONLY — for structured DevSteps batch operations
+- **Dispatched by**: coord ONLY
 - **Returns**: `{ operations_performed: OpResult[], items_affected: string[] }`
 - **NEVER dispatches** further subagents — Leaf Node, NEVER use `agent` tool
-- **Responsibility**: Create, update, link DevSteps items, status transitions
+- **Responsibility**: Create follow-up items, manage ALL link ops, mid-lifecycle description/tag updates
+
+### Delegatable Operations (coord MUST delegate these to worker-devsteps)
+
+| Operation | Trigger | Notes |
+| --------- | ------- | ----- |
+| `mcp_devsteps_add` follow-up items | New sub-task, bug, spike, or dependency discovered mid-lifecycle | coord bootstrap-add (primary item only) stays with coord |
+| `mcp_devsteps_link` (ALL) | Any relationship creation | `implements`, `blocks`, `depends-on`, `relates-to`, `tested-by`, `supersedes` — ALL go through worker-devsteps |
+| `mcp_devsteps_update` description/tags mid-lifecycle | Enrichment, tagging during implementation | Not status transitions — those remain coord-owned |
+| `mcp_devsteps_update` status for follow-up items | Sub-tasks or discovered items reaching `done` | coord owns status on the primary sprint item only |
+
+### coord-Reserved Operations (NOT delegated to worker-devsteps)
+
+| Operation | Reason |
+| --------- | ------ |
+| `mcp_devsteps_add` for the primary sprint item | Bootstrap — coord creates the item it is responsible for |
+| `mcp_devsteps_update` status → `in-progress` | Sprint-start lifecycle gate |
+| `mcp_devsteps_update` status → `review` | Gate handoff to gate-reviewer |
+| `mcp_devsteps_update` status → `done` | Lifecycle completion gate |
+| `mcp_devsteps_update` `append_description` at done-gate | Result summary owned by coord |
 
 ---
 

@@ -170,9 +170,11 @@ ESCALATED → surface to user, do NOT retry.
 ## Operational Rules
 
 - **NEVER edit `.devsteps/` directly** — `devsteps/*` MCP tools only; search before create
-- **DevSteps MCP runs on `main` only** — `devsteps/add`, `devsteps/update`, `devsteps/link` MUST run on `main` branch. Sequence: [main] set `in-progress` → `git checkout -b story/<ID>` → code commits → `git checkout main` → merge `--no-ff` → set `done`. New items found mid-item: checkout main → `devsteps/add` → return to branch.
+- **DevSteps MCP runs on `main` only** — `devsteps/add`, `devsteps/update`, `devsteps/link` MUST run on `main` branch. Sequence: [main] set `in-progress` → `git checkout -b story/<ID>` → code commits → `git checkout main` → merge `--no-ff` → set `done`. New items found mid-item: checkout main → dispatch `worker-devsteps` (ops: add + link) → return to branch. **coord NEVER calls `devsteps/add` or `devsteps/link` mid-lifecycle — delegate to `worker-devsteps` (I-11).**
 - Status: `in-progress` → `review` → `done` (never skip); Hierarchy: Epic → Story → Task
 - Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>`. Commit: `type(scope): subject` + `Implements: ID`. Merge `--no-ff`.
+
+> **Delegation boundary (I-11):** coord calls `mcp_devsteps_add` ONLY for the primary item (bootstrap). All follow-up items discovered mid-lifecycle MUST be delegated to `worker-devsteps`. All `mcp_devsteps_link` calls MUST be delegated to `worker-devsteps`. Mid-lifecycle description/tag updates → `worker-devsteps`.
 
 ## Hard Stop Format
 
