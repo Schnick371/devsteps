@@ -40,6 +40,8 @@ tools:
 
 > **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
 
+> **Active Tools:** `#runSubagent` (dispatch) · `#devsteps` (tracking) · `#bright-data` (research)
+
 ## Mission
 
 Enhance or create high-quality **Presentations** and **Tutorials** for the Teamcenter learning platform using the `#remarc-insight-mcp` tools. Think deeply and work thoroughly — take as much time as needed. Make assumptions and implement the best solution; collect open questions for the end.
