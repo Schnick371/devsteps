@@ -41,10 +41,10 @@ user-invokable: false
 
 - **Tier**: `worker` — Build Diagnostics (RESOLVE phase only)
 - **Dispatched by**: `devsteps-R4-exec-impl` or `devsteps-R4-exec-test` in RESOLVE phase only
+- **Leaf Node**: NEVER dispatches further subagents — NEVER use `agent` tool
 - **Trigger**: Build or test command exited non-zero with ambiguous or unexpected error
 - **Input** (provided by caller in dispatch prompt): failing command, raw output, `item_id`, affected package
 - **Returns**: Diagnosis in chat — NO `write_analysis_report` (RESOLVE helpers are intra-T2)
-- **NEVER dispatches** further sub-agents — leaf node
 
 ## Reasoning Protocol
 

@@ -54,15 +54,18 @@ Rings are **mandatory steps** — you cannot skip Ring 1 to go to Ring 4 except 
 
 Like a radar chart, each spoke (domain) can be **weighted differently per task**. coord reads the task profile and selects which agents to dispatch on each spoke in each ring:
 
-| Spoke / Domain | Ring 1 (analyst)                  | Ring 2 (aspect)                            | Ring 4 (worker)                          |
-| -------------- | --------------------------------- | ------------------------------------------ | ---------------------------------------- |
-| **Code**       | `analyst-archaeology`             | `aspect-impact`                            | `worker-impl`, `worker-coder`            |
-| **Tests**      | `analyst-quality`                 | `aspect-quality`                           | `worker-test`, `worker-tester`           |
-| **Docs**       | —                                 | `aspect-staleness`                         | `worker-doc`, `worker-documenter`        |
-| **Work Items** | —                                 | —                                          | `worker-devsteps`, `worker-guide-writer` |
-| **Research**   | `analyst-research`, `analyst-web` | —                                          | —                                        |
-| **Risk**       | `analyst-risk`                    | `aspect-constraints`, `aspect-integration` | —                                        |
-| **Errors** ⚠️  | _(planned: `analyst-errors`)_     | —                                          | `worker-build-diagnostics`               |
+| Spoke / Domain | Ring 1 (analyst)                  | Ring 2 (aspect)                            | Ring 4 (worker)                                                                           |
+| -------------- | --------------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| **Code**       | `analyst-archaeology`             | `aspect-impact`                            | ¹`worker-impl` · ²`worker-coder`, `worker-refactor`                                       |
+| **Tests**      | `analyst-quality`                 | `aspect-quality`                           | ¹`worker-test` · ²`worker-tester`                                                         |
+| **Docs**       | —                                 | `aspect-staleness`                         | ¹`worker-doc` · ²`worker-documenter`                                                     |
+| **Work Items** | —                                 | —                                          | ²`worker-devsteps`, `worker-guide-writer`                                                  |
+| **Research**   | `analyst-research`, `analyst-web` | —                                          | —                                                                                         |
+| **Risk**       | `analyst-risk`                    | `aspect-constraints`, `aspect-integration` | —                                                                                         |
+| **Errors** ⚠️  | _(planned: `analyst-errors`)_     | —                                          | ¹`worker-build-diagnostics`                                                                |
+
+> ¹ **Conductor-mediated** — dispatched by `exec-*` conductor (not coord directly); conductor writes MandateResult.  
+> ² **Coord-direct** — dispatched by coord without an exec conductor; coord dispatches these on specific work types (refactor stories, work-item updates). Exec conductors MAY dispatch multiple workers **in parallel** within a single fan-out call.
 
 > **⚠️ Errors spoke:** The **Errors** domain (`get_errors` / `#problems` panel) currently maps to `worker-build-diagnostics`. A dedicated `analyst-errors` agent is planned — it runs `get_errors` first, scans the Problems panel, and produces a MandateResult scoped to the error set before any implementation work begins. It can be activated directly from the `devsteps-30-rapid-cycle` prompt via `#get_errors`.
 

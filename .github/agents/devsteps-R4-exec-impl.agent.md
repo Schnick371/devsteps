@@ -36,6 +36,7 @@ agents:
   - devsteps-R4-worker-impl
   - devsteps-R1-analyst-web
   - devsteps-R4-worker-build-diagnostics
+  - devsteps-R4-worker-guide-writer
 ---
 
 <!-- devsteps-managed: true | version: unknown | hash: sha256:c1aef971c826f80f665c8a7c4ec4a4d9122c23ad86a482fadfaa10119828dd16 -->
