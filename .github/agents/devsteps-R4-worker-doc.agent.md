@@ -40,7 +40,8 @@ user-invokable: false
 ## Contract
 
 - **Role**: `worker` — Documentation Worker
-- **Dispatched by**: coord (via analyst) Documentation Conductor (`devsteps-R4-exec-doc`) — FULL tier only, after `devsteps-R4-exec-impl` MandateResult is available
+- **Dispatched by**: `devsteps-R4-exec-doc` (Documentation Conductor) — FULL tier only, after `devsteps-R4-exec-impl` MandateResult is available
+- **Leaf Node**: NEVER dispatches further subagents — NEVER use `agent` tool
 - **Input**: `report_path` of `analyst-quality` MandateResult + `item_id`
 - **Returns**: Documentation committed — no write_analysis_report needed
 

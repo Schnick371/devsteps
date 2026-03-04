@@ -46,7 +46,7 @@ user-invokable: false
 
 | Field               | Value                                                                                                           |
 | ------------------- | --------------------------------------------------------------------------------------------------------------- |
-| **Tier**            | `exec` — Execution Conductor                                                                                    |
+| **Role**            | Conductor (`exec`) — dispatches workers · NOT a leaf node                                                       |
 | **Mandate type**    | `documentation`                                                                                                 |
 | **Accepted from**   | coord, coord-sprint (FULL triage tier only)                                                                     |
 | **Input**           | `report_path` of exec-impl MandateResult + optionally analyst-quality MandateResult + `item_id` + `triage_tier` |

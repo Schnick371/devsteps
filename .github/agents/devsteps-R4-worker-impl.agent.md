@@ -40,7 +40,8 @@ user-invokable: false
 ## Contract
 
 - **Role**: `worker` — Implementation Worker
-- **Dispatched by**: `devsteps-R4-exec-impl`ementation Conductor (`devsteps-R4-exec-impl`) — after `exec-planner` MandateResult is available
+- **Dispatched by**: `devsteps-R4-exec-impl` (Implementation Conductor) — after `exec-planner` MandateResult is available
+- **Leaf Node**: NEVER dispatches further subagents — NEVER use `agent` tool
 - **Input**: `report_path` of planner MandateResult + `item_id` — NEVER raw findings pasted in prompt
 - **Returns**: Implementation commit + status update — no write_analysis_report needed
 

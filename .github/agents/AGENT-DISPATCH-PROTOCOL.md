@@ -45,7 +45,7 @@ Docs ───┼─ ─ ─ ─ ─ ─ ─ ─┼─── Tests
 | 1    | **Analysis**         | `analyst-*`                            | parallel fan-out     | MandateResults (~800 tok)     |
 | 2    | **Cross-Validation** | `aspect-*`                             | parallel fan-out     | CompressedVerdicts (~150 tok) |
 | 3    | **Planning**         | `exec-planner`                         | sequential           | ordered implementation plan   |
-| 4    | **Execution**        | `exec-impl` → `exec-test` → `exec-doc` | sequential           | code / tests / docs committed |
+| 4    | **Execution**        | **Conductors:** `exec-impl` → `exec-test` → `exec-doc` (each dispatches its `worker-*`); **Workers:** `worker-*` dispatched by conductors, NOT coord | sequential           | code / tests / docs committed |
 | 5    | **Quality Gate**     | `gate-reviewer`                        | sequential, blocking | PASS / FAIL / ESCALATE        |
 
 Rings are **mandatory steps** — you cannot skip Ring 1 to go to Ring 4 except at QUICK triage.

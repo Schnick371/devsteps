@@ -17,7 +17,7 @@ All Copilot agents follow the **Spinnennetz / Radar Chart model**: concentric ri
 | 1 — Analysis    | `analyst-*` — Read-only Research                                                              | Parallel fan-out | simultaneously  |
 | 2 — Validation  | `aspect-*` — Cross-Validation with Ring 1 results                                             | Parallel fan-out | AFTER Ring 1    |
 | 3 — Planning    | `exec-planner` — reads Ring 1+2 results                                                       | Sequential       | AFTER Ring 2    |
-| 4 — Execution   | `exec-impl`, `exec-test`, `exec-doc`, `worker-*` (incl. `worker-workspace` for new projects) | Sequential       | AFTER Ring 3    |
+| 4 — Execution   | **Conductors:** `exec-impl`, `exec-test`, `exec-doc` (each dispatches its `worker-*`); **Workers:** `worker-*` dispatched by conductors NOT coord (incl. `worker-workspace` for new projects, dispatched by coord) | Sequential       | AFTER Ring 3    |
 | 5 — Gate        | `gate-reviewer` — QA blocker PASS/FAIL                                                        | Blocking         | AFTER Ring 4    |
 
 > **VS Code Constraint**: `runSubagent` does not support nesting. `coord-*` dispatches EVERYTHING directly. No non-coord agent may call `runSubagent` — all are Leaf Nodes.

@@ -41,7 +41,8 @@ user-invokable: false
 ## Contract
 
 - **Role**: `worker` — Test Worker
-- **Dispatched by**: coord (via analyst) Test Conductor (`devsteps-R4-exec-test`) — after `devsteps-R4-exec-impl` MandateResult is available
+- **Dispatched by**: `devsteps-R4-exec-test` (Test Conductor) — after `devsteps-R4-exec-impl` MandateResult is available
+- **Leaf Node**: NEVER dispatches further subagents — NEVER use `agent` tool
 - **Input**: `report_path` of `analyst-quality` or `exec-planner` MandateResult + `item_id`
 - **Returns**: Test files committed — no write_analysis_report needed
 

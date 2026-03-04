@@ -47,7 +47,7 @@ agents:
 
 | Field               | Value                                                                                                                                |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| **Role**            | `exec` — Test Conductor                                                                                                              |
+| **Role**            | Conductor (`exec` — Test Conductor) — dispatches workers · NOT a leaf node                                                           |
 | **Mandate type**    | `testing`                                                                                                                            |
 | **Accepted from**   | coord, coord-sprint                                                                                                                  |
 | **Input**           | `report_path` of exec-impl MandateResult (STANDARD) or analyst-quality + exec-impl MandateResults (FULL) + `item_id` + `triage_tier` |

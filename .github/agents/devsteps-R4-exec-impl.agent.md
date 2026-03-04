@@ -46,7 +46,7 @@ agents:
 
 | Field               | Value                                                                   |
 | ------------------- | ----------------------------------------------------------------------- |
-| **Tier**            | `exec` — Execution Conductor                                            |
+| **Role**            | Conductor (`exec`) — dispatches workers · NOT a leaf node               |
 | **Mandate type**    | `implementation`                                                        |
 | **Accepted from**   | coord, coord-sprint                                                     |
 | **Input**           | `report_path` of exec-planner MandateResult + `item_id` + `triage_tier` |
