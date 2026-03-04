@@ -68,10 +68,12 @@ Protocol reference: [AGENT-DISPATCH-PROTOCOL.md](./AGENT-DISPATCH-PROTOCOL.md)
 
 Run these before dispatching any aspect agent — they are fast and filter low-signal noise:
 
-1. `npm run build` — zero TypeScript errors required
-2. `npm test` — all tests must pass
-3. `npm run lint` — zero Biome errors required
+1. Identify the project's build toolchain from the workspace root manifest.
+2. Compile or type-check the project using the detected toolchain — zero errors required.
+3. Run the full test suite — all tests must pass.
+4. Run the project's static analysis and formatter — zero violations required.
 
+If no recognized build toolchain manifest is found → ESCALATE immediately; do not skip checks.
 If automated checks FAIL: skip MAP, immediately produce `MandateResult` with `status=FAIL`, call `write_rejection_feedback` with specific violation list.
 
 ### MAP — Decomposition Table (only when automated checks pass)
