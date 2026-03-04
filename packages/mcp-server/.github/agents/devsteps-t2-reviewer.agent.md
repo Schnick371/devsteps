@@ -42,11 +42,13 @@ Final quality gate before `done` status. Dispatches automated + structural check
 
 ### Phase 1: Automated Gates (NON-NEGOTIABLE — fail immediately on any failure)
 
-1. `npm run build` — zero TypeScript errors
-2. `npm test` — all tests pass
-3. `npm run lint` — zero Biome errors
+1. Identify the project's build toolchain from the workspace root manifest.
+2. Compile or type-check the project using the detected toolchain — zero errors required.
+3. Run the full test suite — all tests must pass.
+4. Run the project's static analysis and formatter — zero violations required.
 
-If any gate fails → skip phases 2-3, go directly to FAIL path.
+If no recognized build toolchain manifest is found → ESCALATE immediately; do not skip gates.
+If any gate fails → stop immediately, report exact tool output, skip subsequent phases, go to FAIL path.
 
 ### Phase 2: MAP (Parallel T3 Dispatch)
 
