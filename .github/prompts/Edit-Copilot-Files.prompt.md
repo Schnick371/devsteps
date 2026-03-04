@@ -4,6 +4,7 @@ model: "Claude Sonnet 4.6"
 tools:
   [
     "agent",
+    "runSubagent",
     "vscode",
     "execute",
     "read",

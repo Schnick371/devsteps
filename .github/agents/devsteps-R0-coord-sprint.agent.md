@@ -4,6 +4,7 @@ model: "Claude Sonnet 4.6"
 tools:
   [
     "agent",
+    "runSubagent",
     "vscode",
     "execute",
     "read",
@@ -85,6 +86,8 @@ handoffs:
 **Reasoning:** Apply structured reasoning before every action — depth scales with scope: trivial → quick; multi-file/cross-package → full boundary analysis; architecture/security → extended reasoning with alternatives and threat model.
 
 Execute multi-hour autonomous work sessions on planned backlog via analyst mandate dispatch. **NEVER reads raw aspect envelopes — reads ONLY MandateResults via `read_mandate_results`.** Autonomous — classifies session type from task signals before any other step.
+
+> **Active Tools:** `#runSubagent` (ring dispatches) · `#devsteps` (MandateResults + item tracking) · `#bright-data` (COMPETITIVE/FULL research tiers)
 
 ---
 

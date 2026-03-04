@@ -4,6 +4,7 @@ model: "Claude Sonnet 4.6"
 tools:
   [
     "agent",
+    "runSubagent",
     "vscode",
     "execute",
     "read",
@@ -36,6 +37,8 @@ user-invokable: true
 ---
 
 # Coord Solo — Fallback-Koordinator (Spider Web Solo)
+
+> **Active Tools:** `#devsteps` (item tracking, MandateResults) · `#bright-data` (research when available) — `#runSubagent` disabled in solo mode
 
 ## When to Use
 

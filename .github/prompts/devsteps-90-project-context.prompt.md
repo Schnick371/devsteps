@@ -4,6 +4,7 @@ model: "Claude Sonnet 4.6"
 tools:
   [
     "agent",
+    "runSubagent",
     "vscode",
     "execute",
     "read",
@@ -38,6 +39,8 @@ description: "Efficient project context loading - smart prioritization, token-op
 # 🧠 Efficient Project Context Loading
 
 > **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
+
+> **Active Tools:** `#runSubagent` (dispatch) · `#devsteps` (tracking) · `#bright-data` (research)
 
 ## Mission
 

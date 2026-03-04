@@ -5,6 +5,7 @@ description: "Execute production release workflow - version bump, CHANGELOG, bui
 tools:
   [
     "agent",
+    "runSubagent",
     "vscode",
     "execute",
     "read",
@@ -38,6 +39,8 @@ tools:
 # 🚀 Release Workflow — Parallel Subagent Orchestration
 
 > **Reasoning:** Think through scope, risks, and approach before any action. Launch independent subagents in parallel wherever tasks have no data dependency. Only sequence what truly must be ordered.
+
+> **Active Tools:** `#runSubagent` (dispatch) · `#devsteps` (tracking) · `#bright-data` (research)
 
 ## Mission
 

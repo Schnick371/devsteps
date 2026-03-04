@@ -4,6 +4,7 @@ model: "Claude Sonnet 4.6"
 tools:
   [
     "agent",
+    "runSubagent",
     "vscode",
     "execute",
     "read",
@@ -80,6 +81,8 @@ handoffs:
 ---
 
 # 🐟 Ishikawa Workspace Health Coordinator
+
+> **Active Tools:** `#runSubagent` (bone + aspect dispatches) · `#devsteps` (MandateResults + item tracking) · `#bright-data` (web research for bone-findings)
 
 ## Contract
 

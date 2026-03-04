@@ -5,6 +5,7 @@ description: "Workspace health analysis — Ishikawa root cause analysis, coord 
 tools:
   [
     "agent",
+    "runSubagent",
     "vscode",
     "execute",
     "read",
@@ -42,6 +43,8 @@ tools:
 #file:../agents/devsteps-R0-coord-ishikawa.agent.md
 
 Read it **in full** before doing anything else. It contains the 2-round dispatch protocol and bone mandates.
+
+> **Active Tools:** `#runSubagent` (dispatch) · `#devsteps` (tracking) · `#bright-data` (research)
 
 ---
 

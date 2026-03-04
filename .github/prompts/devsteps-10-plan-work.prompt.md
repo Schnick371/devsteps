@@ -5,6 +5,7 @@ description: "Interactive planning session - work with developer to define and s
 tools:
   [
     "agent",
+    "runSubagent",
     "vscode",
     "execute",
     "read",
@@ -45,6 +46,7 @@ tools:
 | **MandateResults** | `#mcp_devsteps_read_mandate_results` ONLY — never paste envelope content |
 | **DevSteps mutations** | `devsteps-R4-worker-devsteps` is the **SOLE** agent that calls `mcp_devsteps_add/update/link` |
 | **Parallel fan-out** | R1 analysts in ONE call; R2 aspects in ONE call after R1 |
+| **Research** | `#bright-data` for planning — 10+ sources before structuring large/complex items |
 
 > **Reasoning:** Planning with wrong assumptions causes compounding failures. Always get multi-perspective input before structuring any item.
 

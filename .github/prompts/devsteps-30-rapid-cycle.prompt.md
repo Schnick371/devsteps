@@ -5,6 +5,7 @@ description: "Rapid plan-execute kanban cycles - MPD analysis, then no-ceremony 
 tools:
   [
     "agent",
+    "runSubagent",
     "vscode",
     "execute",
     "read",
@@ -46,6 +47,7 @@ tools:
 | **MandateResults** | `#mcp_devsteps_read_mandate_results` ONLY — never paste envelope content |
 | **Parallel fan-out** | All same-phase mandates MUST fire in ONE call — never sequential |
 | **Status gates** | `in-progress` → `review` → `done` — never skip; never `done` without gate-reviewer PASS |
+| **Research** | `#bright-data` for COMPETITIVE tier — web-first for unknown patterns |
 
 > **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
 

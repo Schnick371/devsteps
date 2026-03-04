@@ -5,6 +5,7 @@ description: "Quality review gate - validate completed work before marking done"
 tools:
   [
     "agent",
+    "runSubagent",
     "vscode",
     "execute",
     "read",
@@ -38,6 +39,8 @@ tools:
 # ✅ Review Work — Quality Gate
 
 > **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
+
+> **Active Tools:** `#runSubagent` (dispatch) · `#devsteps` (tracking) · `#bright-data` (research)
 
 ## Mission
 

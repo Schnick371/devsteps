@@ -5,6 +5,7 @@ description: "Guide-driven full Spider Web cycle - enforced FULL MPD at every cr
 tools:
   [
     "agent",
+    "runSubagent",
     "vscode",
     "execute",
     "read",
@@ -47,6 +48,7 @@ tools:
 | **Parallel fan-out** | All same-ring mandates MUST fire in ONE call — never sequential |
 | **Ring reduction** | **FORBIDDEN** — all 5 rings mandatory, no tier downgrade, no skips |
 | **Status gates** | Never mark step ✅ without `gate-reviewer` PASS |
+| **Research** | `#bright-data` for all FULL tiers — web-first mandatory |
 
 > **Reasoning:** Apply extended reasoning before every action. Guide steps are sequentially dependent — a wrong decision at step N compounds at step N+k. Re-spawn analysts whenever a step reveals unexpected complexity.
 
