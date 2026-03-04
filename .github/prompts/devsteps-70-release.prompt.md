@@ -1,8 +1,38 @@
 ---
-agent: 'devsteps-t1-coordinator'
-model: 'Claude Sonnet 4.6'
-description: 'Execute production release workflow - version bump, CHANGELOG, build, npm publish, and git tagging'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'bright-data/*', 'upstash/context7/*', 'edit', 'search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+agent: "devsteps-R0-coord"
+model: "Claude Sonnet 4.6"
+description: "Execute production release workflow - version bump, CHANGELOG, build, npm publish, and git tagging"
+tools:
+  [
+    "agent",
+    "vscode",
+    "execute",
+    "read",
+    "edit",
+    "search",
+    "devsteps/*",
+    "bright-data/*",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_agent_model_code_sample",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_tracing_code_gen_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_evaluation_code_gen_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_convert_declarative_agent_to_code",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_agent_runner_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_planner",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_custom_evaluator_guidance",
+    "ms-windows-ai-studio.windows-ai-studio/check_panel_open",
+    "ms-windows-ai-studio.windows-ai-studio/get_table_schema",
+    "ms-windows-ai-studio.windows-ai-studio/data_analysis_best_practice",
+    "ms-windows-ai-studio.windows-ai-studio/read_rows",
+    "ms-windows-ai-studio.windows-ai-studio/read_cell",
+    "ms-windows-ai-studio.windows-ai-studio/export_panel_data",
+    "ms-windows-ai-studio.windows-ai-studio/get_trend_data",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_list_foundry_models",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_agent_as_server",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_add_agent_debug",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo",
+    "todo",
+  ]
 ---
 
 # 🚀 Release Workflow — Parallel Subagent Orchestration
@@ -16,6 +46,7 @@ tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal
 ## ⚠️ CRITICAL RULES — Read Before Any Action
 
 **DUAL REPOSITORY STRATEGY:**
+
 - 🔒 **origin-private** (devsteps-private): Full development with `.devsteps/`, `.vscode/`, `docs/`, `LessonsLearned/`
 - 🌍 **origin** (devsteps): PUBLIC — only clean code for releases
 - ✅ ONE `main` branch, TWO remotes
@@ -24,6 +55,7 @@ tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal
 - ❌ NEVER accidentally push to origin (public) during development!
 
 **Remote Configuration:**
+
 - `main` branch tracks **origin-private/main** by default
 - `git push` → pushes to origin-private (private repo)
 - `git push origin main` → pushes to origin (PUBLIC repo)
@@ -87,6 +119,7 @@ GATE: If build output contains "error" or tests fail → emit STOP signal.
 ### Phase 0 Gate — Aggregate Results
 
 Collect Subagent A + B + C results. Apply gates in order:
+
 1. **npm auth** (A): If failed → STOP. Run `npm login` then retry.
 2. **git clean** (B): If dirty → STOP. Commit or stash changes first.
 3. **build/test** (C): If failures → STOP. Fix before proceeding.
@@ -96,7 +129,7 @@ Only proceed to Phase 1 when all four gates are green.
 
 ---
 
-## Phase 1 — Branch Prep *(Sequential — depends on Phase 0)*
+## Phase 1 — Branch Prep _(Sequential — depends on Phase 0)_
 
 > Uses `commitList` from Subagent B. Runs after Phase 0 gate is green.
 
@@ -116,6 +149,7 @@ git status   # must be clean before proceeding
 ```
 
 **Cherry-pick conflicts:**
+
 ```bash
 # Resolve manually if needed
 git status          # check conflicted files
@@ -181,6 +215,7 @@ Return: { filesUpdated: 4 }
 ```
 
 **After both D and E complete:**
+
 ```bash
 git add packages/*/CHANGELOG.md
 git commit -m "docs: update CHANGELOGs for X.Y.Z"
@@ -188,7 +223,7 @@ git commit -m "docs: update CHANGELOGs for X.Y.Z"
 
 ---
 
-## Phase 3 — Build Validation *(Sequential)*
+## Phase 3 — Build Validation _(Sequential)_
 
 > Full clean build with dual-target extension verification.
 
@@ -200,12 +235,14 @@ npm test
 ```
 
 **Verify .github sync:**
+
 ```bash
 ls packages/cli/.github/prompts/devsteps-*.prompt.md
 ls packages/mcp-server/.github/prompts/devsteps-*.prompt.md
 ```
 
 **Dual-target extension build:**
+
 ```bash
 cd packages/extension
 npm run build     # builds both extension.js + mcp-server/index.js
@@ -213,6 +250,7 @@ vsce package      # output: devsteps-X.Y.Z.vsix
 ```
 
 **Verify outputs:**
+
 - ✅ Extension bundle: `dist/extension.js` (~340 KB)
 - ✅ MCP server bundle: `dist/mcp-server/index.js` (~500 KB, executable)
 - ✅ VSIX exists and size <10 MB
@@ -223,16 +261,17 @@ unzip -l packages/extension/devsteps-X.Y.Z.vsix | grep -E "(extension.js|mcp-ser
 ```
 
 **⏸️ Manual Upload Required (async — can proceed):**
+
 - VS Code Marketplace: https://marketplace.visualstudio.com/manage
 - Upload VSIX → publish after review
 
 ---
 
-## Phase 4 — npm Publishing *(Ordered by Dependency)*
+## Phase 4 — npm Publishing _(Ordered by Dependency)_
 
 > `shared` must land first. `cli` and `mcp-server` can then publish in parallel.
 
-### Step 4.1 — Shared Package *(sequential, first)*
+### Step 4.1 — Shared Package _(sequential, first)_
 
 ```bash
 cd packages/shared
@@ -280,6 +319,7 @@ Architecture note:
 ```
 
 **After F and G complete:** Verify all three npm versions equal X.Y.Z:
+
 ```bash
 npm view @schnick371/devsteps-shared version
 npm view @schnick371/devsteps-cli version
@@ -288,7 +328,7 @@ npm view @schnick371/devsteps-mcp-server version
 
 ---
 
-## Phase 5 — Squash Merge to PUBLIC Main *(Sequential — critical path)*
+## Phase 5 — Squash Merge to PUBLIC Main _(Sequential — critical path)_
 
 > ⚠️ This pushes to the PUBLIC repository. Double-check remotes before every push.
 
@@ -323,6 +363,7 @@ git push origin public-main:main
 ```
 
 **Merge release back to private main:**
+
 ```bash
 git checkout main                    # private main (tracks origin-private)
 git merge public-main --ff-only      # fast-forward to include public release commit
@@ -390,6 +431,7 @@ git push origin --delete dev/X.Y.Z
 ## Post-Release Verification
 
 **Test installations:**
+
 ```bash
 npm install -g @schnick371/devsteps-cli@X.Y.Z
 devsteps --version
@@ -403,11 +445,13 @@ code --list-extensions --show-versions | grep devsteps
 ```
 
 **Test MCP server startup in VS Code:**
+
 - Open VS Code with extension installed
 - Check DevSteps output channel for "MCP server started"
 - Confirm instant startup (<1 second, no npx download delays)
 
 **Version consistency check:**
+
 ```bash
 devsteps --version
 devsteps-mcp --version
@@ -417,11 +461,13 @@ npm view @schnick371/devsteps-mcp-server version
 ```
 
 **Check npm pages:**
+
 - https://www.npmjs.com/package/@schnick371/devsteps-shared
 - https://www.npmjs.com/package/@schnick371/devsteps-cli
 - https://www.npmjs.com/package/@schnick371/devsteps-mcp-server
 
 **Check Marketplace:**
+
 - https://marketplace.visualstudio.com/items?itemName=schnick371.devsteps
 
 ---
@@ -429,6 +475,7 @@ npm view @schnick371/devsteps-mcp-server version
 ## Rollback Plan
 
 **Within 72 hours of publish:**
+
 ```bash
 npm unpublish @schnick371/devsteps-cli@X.Y.Z
 npm unpublish @schnick371/devsteps-shared@X.Y.Z
@@ -436,6 +483,7 @@ npm unpublish @schnick371/devsteps-mcp-server@X.Y.Z
 ```
 
 **After 72 hours:**
+
 ```bash
 npm deprecate @schnick371/devsteps-cli@X.Y.Z "Critical bug — use X.Y.Z+1"
 npm deprecate @schnick371/devsteps-shared@X.Y.Z "Critical bug — use X.Y.Z+1"
@@ -443,6 +491,7 @@ npm deprecate @schnick371/devsteps-mcp-server@X.Y.Z "Critical bug — use X.Y.Z+
 ```
 
 **Git revert:**
+
 ```bash
 git checkout main
 git revert HEAD   # revert squash commit
@@ -470,6 +519,7 @@ Before declaring the release complete, all 13 must be green:
 13. ✅ Installation verification passed (bundled extension + standalone npm)
 
 **Architecture Verification:**
+
 - ✅ Extension contains `dist/mcp-server/index.js` (bundled, executable)
 - ✅ No npx dependencies in extension
 - ✅ Standalone npm package works for Cursor / Windsurf / Claude Desktop
@@ -479,12 +529,14 @@ Before declaring the release complete, all 13 must be green:
 ## Common Issues
 
 **npm publish 403:**
+
 ```bash
 npm login
 npm whoami   # verify logged in
 ```
 
 **Version already exists on npm:**
+
 ```bash
 # Bump patch version, then re-run full workflow
 npm version patch
@@ -492,6 +544,7 @@ git push origin dev/X.Y.Z
 ```
 
 **Build failures:**
+
 ```bash
 npm run clean
 rm -rf node_modules package-lock.json
@@ -500,6 +553,7 @@ npm run build
 ```
 
 **Extension dual-target build fails:**
+
 ```bash
 cd packages/extension
 npm run clean && npm run build
@@ -507,24 +561,28 @@ ls -lh dist/extension.js dist/mcp-server/index.js
 ```
 
 **MCP server bundle not executable:**
+
 ```bash
 chmod +x packages/extension/dist/mcp-server/index.js
 ./packages/extension/dist/mcp-server/index.js
 ```
 
 **VSIX size >10 MB:**
+
 ```bash
 unzip -l devsteps-X.Y.Z.vsix | sort -k4 -n
 cat packages/extension/.vscodeignore   # verify dev files excluded
 ```
 
 **Version mismatch between packages:**
+
 ```bash
 grep '"version"' packages/*/package.json
 # All must match X.Y.Z — edit any that differ, re-commit
 ```
 
 **Cherry-pick conflicts:**
+
 ```bash
 git status              # check conflicted files
 # Edit → resolve → stage
@@ -537,22 +595,26 @@ git cherry-pick --continue
 ## Notes
 
 **Why squash merge?**
+
 - Clean `main` branch history — single atomic release commit
 - Easier bisecting and reverting
 - Detailed history preserved in `dev/X.Y.Z` branch
 
 **Why `dev/X.Y.Z` branch?**
+
 - Isolates release preparation from daily development
 - Cherry-pick lets you select only clean, public-safe commits
 - Preserves full commit traceability
 - Clear naming convention: version in branch name
 
 **Version strategy:**
+
 - MAJOR: Breaking changes
 - MINOR: New features (backward compatible)
 - PATCH: Bug fixes only
 
 **Dual Architecture Strategy (EPIC-015):**
+
 - **VS Code Extension**: Bundles MCP server internally
   - Zero-config installation, instant startup via native VS Code API
   - Users never interact with MCP server directly

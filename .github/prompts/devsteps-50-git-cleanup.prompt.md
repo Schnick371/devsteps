@@ -1,14 +1,43 @@
 ---
-agent: 'devsteps-t1-coordinator'
-model: 'Claude Sonnet 4.6'
-tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'playwright/*', 'bright-data/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
-description: 'Repository hygiene - merge unfinished branches, archive obsolete work, clean worktrees, verify branch protection'
+agent: "devsteps-R0-coord"
+model: "Claude Sonnet 4.6"
+tools:
+  [
+    "agent",
+    "vscode",
+    "execute",
+    "read",
+    "edit",
+    "search",
+    "devsteps/*",
+    "bright-data/*",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_agent_model_code_sample",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_tracing_code_gen_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_evaluation_code_gen_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_convert_declarative_agent_to_code",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_agent_runner_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_planner",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_custom_evaluator_guidance",
+    "ms-windows-ai-studio.windows-ai-studio/check_panel_open",
+    "ms-windows-ai-studio.windows-ai-studio/get_table_schema",
+    "ms-windows-ai-studio.windows-ai-studio/data_analysis_best_practice",
+    "ms-windows-ai-studio.windows-ai-studio/read_rows",
+    "ms-windows-ai-studio.windows-ai-studio/read_cell",
+    "ms-windows-ai-studio.windows-ai-studio/export_panel_data",
+    "ms-windows-ai-studio.windows-ai-studio/get_trend_data",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_list_foundry_models",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_agent_as_server",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_add_agent_debug",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo",
+    "todo",
+  ]
+description: "Repository hygiene - merge unfinished branches, archive obsolete work, clean worktrees, verify branch protection"
 ---
 
 # 🧹 Git Repository Cleanup Agent
 
 > **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
-
 
 ## Mission
 
@@ -131,4 +160,5 @@ Delete branches without checking DevSteps status. Force-push to shared branches.
 Understand code before merging. Test after each merge. Document decisions comprehensively. Preserve audit trail. Rollback on failure.
 
 **See Also:**
+
 - [devsteps-commit-format.instructions.md](../instructions/devsteps-commit-format.instructions.md) - Commit and branch workflow rules

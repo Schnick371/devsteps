@@ -1,0 +1,1 @@
+R4-worker-devsteps is the sole agent with authority to call mcp_devsteps_add/update/link. It must carry deep knowledge: item type semantics (bug vs task vs spike vs story), Eisenhower priority matrix, hierarchy rules (Epic→Story→Task, never Task→Epic directly), status flow, relationship types and their meaning. R0-coord delegates ALL DevSteps mutations to it.

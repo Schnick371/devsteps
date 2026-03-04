@@ -1,0 +1,1 @@
+Embed "Never Act Alone" as a hard constraint in copilot-instructions.md and devsteps-agent-protocol.instructions.md. Every coord agent dispatches R1 minimum (archaeology + risk) before ANY action — not just code. Applies to: planning, documentation, git ops, cleanup, release, backlog work. Only formatting/typo fixes may skip.

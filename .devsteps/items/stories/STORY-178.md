@@ -1,0 +1,1 @@
+devsteps-10-plan-work currently does no Spider Web dispatch. Must use R1+R2 for multi-perspective input, R3-exec-planner for work structure, R4-worker-devsteps (deep DevSteps knowledge: item types, hierarchy, Eisenhower) for creating items, R5 for plan validation. R0-coord orchestrates, R4-worker-devsteps is the only agent that calls mcp_devsteps_add/update/link.
