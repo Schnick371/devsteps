@@ -5,6 +5,21 @@ All notable changes to the "DevSteps" extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-03-05
+
+### Added
+- **In-process HTTP MCP server**: Extension now starts the MCP server in-process using `McpHttpServerDefinition` (VS Code 1.109+). No Node.js installation required for VS Code users. The bundled `dist/mcp-server.js` serves all MCP tool requests over localhost HTTP.
+- **Fallback to stdio**: If `McpHttpServerDefinition` is not available, the extension falls back to the existing stdio-based `McpStdioServerDefinition` (spawns node subprocess).
+- **Marketplace icon**: 128×128 PNG icon added for VS Code Marketplace listing.
+- **Gallery banner**: Dark theme gallery banner configured (#0d1117, dark).
+- **MCP Gallery category**: Extension now categorized as "AI" + "Other" for better marketplace discoverability.
+- **Dynamic workspace detection**: MCP server now reads `DEVSTEPS_WORKSPACE` environment variable for workspace path, enabling seamless in-process operation.
+
+### Changed
+- `startHttpMcpServer` now accepts `workspacePath` parameter (default: `process.cwd()`)
+- `getWorkspacePath()` checks `DEVSTEPS_WORKSPACE` env var before CLI argument
+- VS Code version requirement updated to 1.109.0 in warning messages
+
 ## [1.0.2] - Pre-Release
 
 ### Changed
