@@ -1,3 +1,7 @@
+---
+> ⚠️ **DEPRECATED (Spider Web v4.0 — 2026-03-05)** — This document describes an illegal T1→T2→T3 nested dispatch architecture that **directly contradicts Spider Web invariant I-3**: *"Non-coord agents NEVER call "*. The T2→T3 dispatch model is **forbidden**. See [AGENT-DISPATCH-PROTOCOL.md](./AGENT-DISPATCH-PROTOCOL.md) §3 for the current (Spider Web) protocol. **DO NOT implement T2→T3 dispatch.** All analysts are Leaf Nodes — they write MandateResult via MCP and return. Kept for archaeological reference only.
+---
+
 # Tier-2 Deep Analyst — Canonical Protocol
 
 ## Architecture Position
