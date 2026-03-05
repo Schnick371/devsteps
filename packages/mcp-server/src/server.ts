@@ -23,6 +23,7 @@ import { trackRequestError, trackRequestSuccess } from './handlers/health.js';
 import { getPromptHandler, listPromptsHandler } from './handlers/prompts.js';
 import { createRequestLogger, getLogger } from './logger.js';
 import { activeConnections, recordError, recordSuccess } from './metrics.js';
+import { generateToolSummary, type ToolResult } from './server-utils.js';
 import { registerShutdownHandlers, shutdownManager } from './shutdown.js';
 import {
   addTool,
@@ -35,6 +36,7 @@ import {
   linkTool,
   listTool,
   metricsTool,
+  patchDispatchManifestTool,
   purgeTool,
   readAnalysisEnvelopeTool,
   readMandateResultsTool,
@@ -45,6 +47,7 @@ import {
   updateCopilotFilesTool,
   updateTool,
   writeAnalysisReportTool,
+  writeDispatchManifestTool,
   writeEscalationTool,
   writeIterationSignalTool,
   writeMandateResultTool,
@@ -52,7 +55,6 @@ import {
   writeSprintBriefTool,
   writeVerdictTool,
 } from './tools/index.js';
-import { type ToolResult, generateToolSummary } from './server-utils.js';
 
 /**
  * DevSteps MCP Server — handles tool registration and request routing
@@ -96,6 +98,8 @@ export class DevStepsServer {
       // Context Budget Protocol (CBP) Tier-2 mandate tools (EPIC-028)
       writeMandateResultTool, readMandateResultsTool, writeRejectionFeedbackTool,
       writeIterationSignalTool, writeEscalationTool,
+      // Context Budget Protocol (CBP) Dispatch Manifest audit trail (TASK-331)
+      writeDispatchManifestTool, patchDispatchManifestTool,
     ];
 
     for (const tool of tools) { this.tools.set(tool.name, tool); }

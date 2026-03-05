@@ -56,7 +56,7 @@ Docs ─┼─ Ring 3: exec-planner ──────────────�
 1. **coord dispatches ALL agents directly** — single flat level, no nested dispatch
 2. **Non-coord agents NEVER call `runSubagent`** — behavioral leaf nodes
 3. **Same-phase dispatches fire simultaneously** — never sequential when independent
-4. **coord reads MandateResults only** — `read_mandate_results(item_ids)`, never raw envelopes
+4. **coord reads MandateResults only** — `read_mandate_results(item_ids)`, never raw envelopes. Response is an envelope `{ results[], count, quorum_ok, missing_analysts, dispatched, received, threshold, status }` — iterate `.results[]`
 5. **Communication is structured paths only** — never paste findings in chat
 6. **Ring 2 fires AFTER Ring 1 completes** — aspects are cross-validators; pass Ring 1 `report_path` values as `upstream_paths`
 7. **New project/package → `worker-workspace` first** — dispatch before `exec-impl`; `pip install -e .` must succeed without `PYTHONPATH` hacks
@@ -153,6 +153,6 @@ Fallback to CLI only if explicitly authorized by user.
 | `mcp_devsteps_trace`                 | Show dependency tree                                             | `coord · any agent`                                                    |
 | `mcp_devsteps_status`                | Project overview                                                 | `coord · any agent`                                                    |
 | `mcp_devsteps_write_mandate_result`  | Analyst/Exec: write MandateResult                               | `analyst-* · exec-*`                                                   |
-| `mcp_devsteps_read_mandate_results`  | Coord: read MandateResults                                       | **`coord ONLY`**                                                       |
+| `mcp_devsteps_read_mandate_results`  | Coord: read MandateResults — returns envelope `{ results[], count, quorum_ok, missing_analysts, dispatched, received, threshold, status }`. Iterate `.results[]` (not the response directly). Pass `expected_agent_names` to enable quorum tracking. | **`coord ONLY`**                                                       |
 | `mcp_devsteps_write_analysis_report` | Aspect/Analyst: write analysis report                            | `aspect-* · analyst-*`                                                 |
 | `mcp_devsteps_write_escalation`      | Signal escalation                                                | `any agent`                                                            |

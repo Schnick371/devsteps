@@ -1,10 +1,11 @@
 /**
  * Unit Tests for CBP Tier-2 Mandate Schemas
  *
- * Tests: MandateSchema, MandateResultSchema
+ * Tests: MandateSchema, MandateResultSchema, ReadMandateResultSchema, WriteMandateResultSchema
  *
  * @see STORY-108 MandateResult CBP Extension
  * @see TASK-233 MandateSchema + MandateResultSchema
+ * @see TASK-334 Strengthen Zod validation in MandateResultSchema
  */
 
 import { describe, expect, it } from 'vitest';
@@ -13,7 +14,9 @@ import {
   MandateResultStatus,
   MandateSchema,
   MandateType,
+  ReadMandateResultSchema,
   TriageTier,
+  WriteMandateResultSchema,
 } from './cbp-mandate.js';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -158,10 +161,13 @@ describe('MandateResultSchema', () => {
     ).toBe(false);
   });
 
-  it('rejects findings exceeding 6000 characters', () => {
+  it('accepts findings exceeding 6000 characters (lenient read schema — no max enforced)', () => {
+    // ReadMandateResultSchema (alias: MandateResultSchema) is intentionally lenient.
+    // The 6000-char limit is enforced at the handler level for new writes only.
+    // See TASK-334: WriteMandateResultSchema / ReadMandateResultSchema split.
     const tooLong = 'x'.repeat(6001);
     const result = MandateResultSchema.safeParse({ ...validMandateResult(), findings: tooLong });
-    expect(result.success).toBe(false);
+    expect(result.success).toBe(true);
   });
 
   it('accepts findings at exactly 6000 characters', () => {
@@ -179,13 +185,16 @@ describe('MandateResultSchema', () => {
     expect(result.success).toBe(false);
   });
 
-  it('rejects a recommendation exceeding 200 characters', () => {
+  it('accepts a recommendation exceeding 200 characters (lenient read schema)', () => {
+    // ReadMandateResultSchema (alias: MandateResultSchema) is intentionally lenient.
+    // Per-item character limits are no longer enforced at schema level for reads.
+    // See TASK-334: WriteMandateResultSchema / ReadMandateResultSchema split.
     const tooLong = ['x'.repeat(201)];
     const result = MandateResultSchema.safeParse({
       ...validMandateResult(),
       recommendations: tooLong,
     });
-    expect(result.success).toBe(false);
+    expect(result.success).toBe(true);
   });
 
   it('accepts all valid status values', () => {
@@ -225,5 +234,141 @@ describe('MandateResultSchema', () => {
     expect(() => MandateResultStatus.parse('partial')).not.toThrow();
     expect(() => MandateResultStatus.parse('escalated')).not.toThrow();
     expect(() => MandateResultStatus.parse('failed')).toThrow();
+  });
+});
+
+// ─── TASK-334 Regression Gate: Read/Write Schema Split ────────────────────────
+
+/**
+ * Regression gate for TASK-334: ReadMandateResultSchema / WriteMandateResultSchema split.
+ *
+ * Invariants:
+ * 1. ReadMandateResultSchema tolerates item_ids:[] (historical files MUST not break)
+ * 2. WriteMandateResultSchema rejects item_ids:[] (new writes MUST have at least 1)
+ * 3. WriteMandateResultSchema rejects analyst names not matching devsteps-R{N}-{name}
+ * 4. MandateResultSchema (backward-compat alias) behaves like ReadMandateResultSchema
+ */
+describe('TASK-334 — ReadMandateResultSchema / WriteMandateResultSchema regression gate', () => {
+  /** Minimal valid fields shared by both schemas */
+  function minimalBase() {
+    return {
+      mandate_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+      sprint_id: 'sprint-2026-03-05',
+      analyst: 'devsteps-R1-archaeology',
+      status: 'complete' as const,
+      findings: 'Minimal test findings.',
+      recommendations: ['Rec 1'],
+      confidence: 0.8,
+      token_cost: 500,
+      completed_at: '2026-03-05T12:00:00.000Z',
+    };
+  }
+
+  // ── ReadMandateResultSchema ──────────────────────────────────────────────────
+
+  it('RC-1: ReadMandateResultSchema accepts item_ids:[] (tolerates historical files)', () => {
+    const result = ReadMandateResultSchema.safeParse({ ...minimalBase(), item_ids: [] });
+    expect(result.success).toBe(true);
+  });
+
+  it('RC-2: ReadMandateResultSchema accepts item_ids with entries', () => {
+    const result = ReadMandateResultSchema.safeParse({ ...minimalBase(), item_ids: ['TASK-334'] });
+    expect(result.success).toBe(true);
+  });
+
+  it('RC-3: ReadMandateResultSchema accepts short analyst names (historical compat)', () => {
+    const result = ReadMandateResultSchema.safeParse({
+      ...minimalBase(),
+      item_ids: [],
+      analyst: 'devsteps-t2-archaeology', // old naming — must be tolerated
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('RC-4: ReadMandateResultSchema defaults schema_version to "1.0"', () => {
+    const result = ReadMandateResultSchema.parse({ ...minimalBase(), item_ids: [] });
+    expect(result.schema_version).toBe('1.0');
+  });
+
+  it('RC-5: ReadMandateResultSchema accepts optional extension fields (TASK-326)', () => {
+    const result = ReadMandateResultSchema.safeParse({
+      ...minimalBase(),
+      item_ids: ['TASK-334'],
+      t3_recommendations: { 'analyst-risk': 'Check impact on shared schemas' },
+      n_aspects_recommended: 3,
+      failed_approaches: ['inline-approach-1'],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  // ── WriteMandateResultSchema ─────────────────────────────────────────────────
+
+  it('WC-1: WriteMandateResultSchema REJECTS item_ids:[] (new writes need >=1 item)', () => {
+    const result = WriteMandateResultSchema.safeParse({ ...minimalBase(), item_ids: [] });
+    expect(result.success).toBe(false);
+  });
+
+  it('WC-2: WriteMandateResultSchema REJECTS short analyst names', () => {
+    const result = WriteMandateResultSchema.safeParse({
+      ...minimalBase(),
+      item_ids: ['TASK-334'],
+      analyst: 'devsteps-t2-archaeology', // does not match devsteps-R{N}- prefix
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('WC-3: WriteMandateResultSchema REJECTS plain analyst names', () => {
+    const result = WriteMandateResultSchema.safeParse({
+      ...minimalBase(),
+      item_ids: ['TASK-334'],
+      analyst: 'short-name',
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('WC-4: WriteMandateResultSchema accepts valid R{N} analyst names', () => {
+    for (const analyst of [
+      'devsteps-R1-archaeology',
+      'devsteps-R2-aspect-impact',
+      'devsteps-R4-exec-impl',
+    ]) {
+      const result = WriteMandateResultSchema.safeParse({
+        ...minimalBase(),
+        item_ids: ['TASK-334'],
+        analyst,
+      });
+      expect(result.success, `Expected success for analyst: ${analyst}`).toBe(true);
+    }
+  });
+
+  it('WC-5: WriteMandateResultSchema accepts item_ids with multiple entries', () => {
+    const result = WriteMandateResultSchema.safeParse({
+      ...minimalBase(),
+      item_ids: ['TASK-334', 'STORY-050'],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  // ── Backward-compat alias ────────────────────────────────────────────────────
+
+  it('BC-1: MandateResultSchema (alias) behaves like ReadMandateResultSchema — accepts item_ids:[]', () => {
+    const result = MandateResultSchema.safeParse({ ...minimalBase(), item_ids: [] });
+    expect(result.success).toBe(true);
+  });
+
+  it('BC-2: MandateResultSchema (alias) accepts short analyst names', () => {
+    const result = MandateResultSchema.safeParse({
+      ...minimalBase(),
+      item_ids: [],
+      analyst: 'devsteps-t2-archaeology',
+    });
+    expect(result.success).toBe(true);
+  });
+
+  // ── MandateType enum consistency (TASK-334) ──────────────────────────────────
+
+  it('MT-1: MandateType accepts both "quality" and "quality-review"', () => {
+    expect(() => MandateType.parse('quality')).not.toThrow();
+    expect(() => MandateType.parse('quality-review')).not.toThrow();
   });
 });

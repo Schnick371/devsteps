@@ -31,7 +31,8 @@ export const MandateType = z.enum([
   'risk', // deep-analyst-risk: single-item risk scoring
   'risk-batch', // deep-analyst-risk: multi-item sprint risk matrix
   'research', // deep-analyst-research: external technical research
-  'quality-review', // deep-analyst-quality: post-implementation gate
+  'quality', // deep-analyst-quality: post-implementation gate (canonical)
+  'quality-review', // deep-analyst-quality: post-implementation gate (legacy alias)
   'planning', // deep-analyst-planner: atomic step decomposition
   'planning-rerank', // deep-analyst-planner: adaptive sprint resequencing
 ]);
@@ -80,44 +81,142 @@ export const MandateSchema = z.object({
 });
 export type Mandate = z.infer<typeof MandateSchema>;
 
-// ─── MandateResultSchema ──────────────────────────────────────────────────────
+// ─── MandateResultSchema (Read / Write split) ────────────────────────────────
 
 /**
- * Tier-2 → Tier-1: A MandateResult is written to disk by a Tier-2 Deep Analyst
- * after synthesizing all Tier-3 sub-question answers.
+ * READ path — lenient schema for reading historical and current MandateResult files.
+ *
+ * Tolerates:
+ * - item_ids: [] (historical files written before .min(1) was enforced)
+ * - analyst names not matching the devsteps-R{N}-{name} convention
+ * - findings without a character limit (historical files may be longer)
  *
  * Storage: .devsteps/cbp/[sprint_id]/[mandate_id].result.json
- * Tier-1 reads via read_mandate_results() — never reads T3 envelopes directly.
  *
- * Max ~800 tokens in findings field — enforced by schema.
+ * @see TASK-334 Strengthen Zod validation in MandateResultSchema
  */
-export const MandateResultSchema = z.object({
+export const ReadMandateResultSchema = z.object({
   /** Correlates to the originating Mandate.mandate_id */
   mandate_id: z.string().uuid(),
-  /** DevSteps item IDs this result covers */
+  /** DevSteps item IDs this result covers — NO .min(1): historical files have [] */
   item_ids: z.array(z.string()),
   /** Sprint ID for file path construction */
-  sprint_id: z.string(),
-  /** Name of the Tier-2 agent that produced this result */
-  analyst: z.string(),
+  sprint_id: z.string().min(1),
+  /** Name of the Tier-2 agent (lenient — historical files use short names) */
+  analyst: z.string().min(1),
   /** Result completeness indicator */
   status: MandateResultStatus,
   /**
-   * Structured synthesis — max ~800 tokens.
-   * Should be a markdown table or structured paragraphs answering the mandate.
+   * Structured synthesis. Lenient on read — no max enforced to tolerate legacy files.
+   * Write path enforces the 6000-char limit via the handler layer.
    */
-  findings: z.string().max(6000), // ~800 tokens ≈ 6000 chars
-  /** Top-5 actionable items for Tier-1, max 120 chars each */
-  recommendations: z.array(z.string().max(200)).max(5),
+  findings: z.string(),
+  /** Top-5 actionable items for Tier-1 */
+  recommendations: z.array(z.string()).max(5),
   /** 0.0–1.0 confidence in the synthesis quality */
   confidence: z.number().min(0).max(1),
   /** Actual token cost of this analyst invocation (for Tier-1 budget tracking) */
-  token_cost: z.number().int().nonnegative(),
+  token_cost: z.number().int().min(0),
   /** ISO 8601 timestamp when this result was written */
   completed_at: z.string().datetime(),
   /** Required when status === "escalated" */
   escalation_reason: z.string().optional(),
   /** Schema version for forward compatibility */
-  schema_version: z.literal('1.0').default('1.0'),
+  schema_version: z.string().default('1.0'),
+  // ── Optional extension fields (TASK-326) ──────────────────────────────────
+  /** Per-analyst recommendations keyed by analyst name */
+  t3_recommendations: z.record(z.string(), z.string()).optional(),
+  /** Number of aspect-level recommendations aggregated */
+  n_aspects_recommended: z.number().int().optional(),
+  /** Approaches already tried — prevents retry cycles */
+  failed_approaches: z.array(z.string()).optional(),
 });
-export type MandateResult = z.infer<typeof MandateResultSchema>;
+
+/**
+ * WRITE path — strict schema enforced on ALL new MandateResult writes.
+ *
+ * Differences from ReadMandateResultSchema:
+ * - item_ids: requires at least 1 item
+ * - analyst: must match devsteps-R{N}-{name} naming convention
+ *
+ * Used exclusively in handleWriteMandateResult.
+ *
+ * @see TASK-334 Strengthen Zod validation in MandateResultSchema
+ */
+export const WriteMandateResultSchema = ReadMandateResultSchema.extend({
+  /** At least 1 DevSteps item ID required for new writes */
+  item_ids: z.array(z.string()).min(1),
+  /** Must follow the devsteps-R{N}-{name} agent naming convention */
+  analyst: z.string().regex(/^devsteps-R\d+-/, 'analyst must match devsteps-R{N}-{name} format'),
+});
+
+/**
+ * Backward-compatible alias — consumers importing MandateResultSchema get
+ * the lenient ReadMandateResultSchema. No breaking change for existing imports.
+ *
+ * @deprecated Use ReadMandateResultSchema (reads) or WriteMandateResultSchema (writes) directly.
+ */
+export const MandateResultSchema = ReadMandateResultSchema;
+export type MandateResult = z.infer<typeof ReadMandateResultSchema>;
+
+// ─── DispatchManifestSchema ───────────────────────────────────────────────────
+
+/**
+ * Single dispatch entry — one agent invocation in a fan-out.
+ * Written at dispatch time with status 'pending'; patched on MandateResult receipt.
+ *
+ * Storage: .devsteps/cbp/[sprint_id]/dispatch-manifest-[dispatch_id].json
+ *
+ * @see TASK-331 Dispatch Manifest per sprint run
+ */
+export const DispatchEntrySchema = z.object({
+  /** Correlates to the MandateResult written by this agent */
+  mandate_id: z.string().uuid(),
+  /** Agent name (e.g. 'analyst-archaeology') */
+  agent: z.string(),
+  /** Spider Web ring number (1–5) */
+  ring: z.number().int().min(1).max(5),
+  /** ISO 8601 timestamp when this agent was dispatched */
+  dispatched_at: z.string().datetime(),
+  /** ISO 8601 deadline for this agent */
+  expected_by: z.string().datetime(),
+  /** ISO 8601 timestamp when MandateResult was received — null until patched */
+  completed_at: z.string().datetime().nullable(),
+  /** Wall-clock duration in ms — null until patched */
+  duration_ms: z.number().int().nullable(),
+  /** Lifecycle status of this dispatch */
+  status: z.enum(['pending', 'complete', 'failed', 'timeout']),
+  /** Analyst confidence 0–1 — null until patched */
+  confidence: z.number().min(0).max(1).nullable(),
+  /** Approximate output tokens consumed — null until patched */
+  output_tokens_approx: z.number().int().nullable(),
+});
+export type DispatchEntry = z.infer<typeof DispatchEntrySchema>;
+
+/**
+ * Top-level dispatch manifest for a single coord fan-out.
+ * Written once at fan-out time (all entries status='pending');
+ * individual entries are patched as MandateResults arrive.
+ *
+ * UUID-named file prevents last-write-wins races in multi-process scenarios.
+ *
+ * Storage: .devsteps/cbp/[sprint_id]/dispatch-manifest-[dispatch_id].json
+ *
+ * @see TASK-331 Dispatch Manifest per sprint run
+ */
+export const DispatchManifestSchema = z.object({
+  schema_version: z.literal('1.0'),
+  /** UUID uniquely identifying this fan-out run */
+  dispatch_id: z.string().uuid(),
+  /** Sprint or session context identifier (path segment) */
+  sprint_id: z.string().min(1),
+  /** Triage tier that determined the ring composition */
+  triage_tier: z.enum(['QUICK', 'STANDARD', 'FULL', 'COMPETITIVE']),
+  /** ISO 8601 timestamp when coord initiated the fan-out */
+  session_start: z.string().datetime(),
+  /** ISO 8601 deadline for coord to consider the entire dispatch timed out */
+  expected_by: z.string().datetime(),
+  /** One entry per dispatched agent */
+  dispatches: z.array(DispatchEntrySchema),
+});
+export type DispatchManifest = z.infer<typeof DispatchManifestSchema>;
