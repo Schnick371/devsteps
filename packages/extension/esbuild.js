@@ -37,10 +37,23 @@ const extensionBuildOptions = {
 
 /**
  * MCP Server bundle configuration
- * STRATEGY: Use npm package directly - bundling has ESM/CJS issues
- * @type {null}
+ * Bundles the HTTP server entry point for in-process use by the VS Code extension.
+ * @type {esbuild.BuildOptions}
  */
-const _mcpServerBuildOptions = null; // Disabled - use @schnick371/devsteps-mcp-server package
+const mcpServerBuildOptions = {
+  entryPoints: ['../mcp-server/src/http-server.ts'],
+  bundle: true,
+  outfile: 'dist/mcp-server.js',
+  external: [], // Bundle everything - no vscode API used
+  format: 'esm',
+  platform: 'node',
+  target: 'node18',
+  sourcemap: !production,
+  minify: production,
+  logLevel: 'info',
+  mainFields: ['module', 'main'],
+  conditions: ['node'],
+};
 
 async function buildExtension() {
   console.log('📦 Building extension bundle...');
@@ -56,9 +69,15 @@ async function buildExtension() {
 }
 
 async function buildMcpServer() {
-  console.log('ℹ️  MCP server: Using npm package @schnick371/devsteps-mcp-server');
-  console.log('   Extension will invoke: npx @schnick371/devsteps-mcp-server');
-  // No bundling needed - npm package handles MCP server execution
+  console.log('📦 Building MCP server bundle...');
+  if (watch) {
+    const context = await esbuild.context(mcpServerBuildOptions);
+    await context.watch();
+  } else {
+    await esbuild.build(mcpServerBuildOptions);
+    // Note: metafile not enabled on MCP bundle to save build time
+    console.log('✅ MCP server bundle built: dist/mcp-server.js');
+  }
 }
 
 async function main() {

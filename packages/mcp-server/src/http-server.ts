@@ -47,8 +47,12 @@ interface McpJsonRpcResponse {
  * - Configurable port via MCP_PORT environment variable
  */
 export async function startHttpMcpServer(
-  port: number = Number(process.env.MCP_PORT) || 3100
+  port: number = Number(process.env.MCP_PORT) || 3100,
+  workspacePath: string = process.cwd()
 ): Promise<{ url: string; close: () => Promise<void> }> {
+  // Set workspace for in-process mode (used by getWorkspacePath() in handlers)
+  process.env.DEVSTEPS_WORKSPACE = workspacePath;
+
   const { default: express } = await import('express');
 
   const app = express();
@@ -300,11 +304,14 @@ export async function startHttpMcpServer(
     });
   });
 
-  // Start server
+  // Start server - dynamic port if port=0
+  let url = '';
   const httpServer = await new Promise<ReturnType<typeof app.listen>>((resolve, reject) => {
-    const server = app.listen(port, () => {
-      const url = `http://localhost:${port}/mcp`;
-      logger.info({ url, port, tools: allTools.length }, 'HTTP MCP Server started');
+    const server = app.listen(port, 'localhost', () => {
+      const addr = server.address() as { port: number };
+      const actualPort = addr.port;
+      url = `http://localhost:${actualPort}/mcp`;
+      logger.info({ port: actualPort, tools: allTools.length }, '🌐 HTTP MCP server listening');
       resolve(server);
     });
 
@@ -315,7 +322,7 @@ export async function startHttpMcpServer(
   });
 
   return {
-    url: `http://localhost:${port}/mcp`,
+    url,
     close: async () => {
       return new Promise((resolve) => {
         httpServer.close(() => {
