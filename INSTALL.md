@@ -2,6 +2,18 @@
 
 > **Self-Contained Extension** - No Node.js or external dependencies required!
 
+## ⚙️ System Requirements
+
+| Requirement | Minimum | Notes |
+|---|---|---|
+| **VS Code** | **1.109.0** | Required for `#runSubagent` multi-agent parallel dispatch (Spider Web) |
+| **Node.js** | bundled | v22.11.0 included, no external install needed |
+| **GitHub Copilot** | any | Copilot Chat subscription required for AI agent features |
+
+> ⚠️ VS Code versions 1.99–1.108 lack parallel subagent dispatch support. Agent workflows may run sequentially or fail silently. Update VS Code before installing.
+
+---
+
 ## 📦 What's Included
 
 The DevSteps VS Code extension is **completely self-contained**:

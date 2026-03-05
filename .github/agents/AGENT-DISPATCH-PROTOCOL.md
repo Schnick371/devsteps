@@ -85,6 +85,26 @@ coord reads the incoming task and tilts the radar chart — dispatching more age
 → All agents appear in `agents:` lists of coord only.  
 → Workers have `'agent'` in tools (for breadth) but MUST NEVER call `#runSubagent` — behavioral leaf nodes.
 
+### Context Propagation Model (CIS — Context-Isolated Subagents)
+
+Each `#runSubagent` call creates a **fresh context window** — the subagent sees nothing from the parent conversation by default. Communication is explicit and unidirectional:
+
+| Direction | Mechanism | Notes |
+| --------- | --------- | ----- |
+| coord → subagent | `prompt` string in dispatch call | All context the agent needs MUST be included here |
+| subagent → coord | `tool_result` block injected into parent history | Injected after the `runSubagent` call completes |
+| subagent → subagent | Physically impossible (CIS) | coord mediates all cross-agent data via MandateResults |
+
+**Token budget:** Each subagent `tool_result` adds ~800–2 000 tokens to coord's history. 10 parallel Ring-1+2 agents ≈ 8 000–20 000 tokens injected. After Ring-2, apply `/compact` (VS Code 1.110+) before dispatching Ring-3 forward.
+
+**Payload rules (coord → subagent prompt):**
+1. Always include: `item_id`, `sprint_id`, `triage_tier`
+2. Ring-2+: comma-separated `report_paths` as prose strings (file paths to upstream MandateResults)
+3. Ring-4 exec: ordered implementation steps from exec-planner MandateResult prose
+4. NEVER paste raw findings text — pass file paths only (I-12)
+
+> **VS Code requirement:** Parallel `#runSubagent` dispatch requires VS Code ≥ 1.109.0 (February 2026). See `INSTALL.md` System Requirements.
+
 ---
 
 ## 1. Dispatch Invariants (All Tiers)
@@ -102,6 +122,9 @@ coord reads the incoming task and tilts the radar chart — dispatching more age
 | I-9  | `failed_approaches[]` propagates through Mandate    | All agents receive and honor it              |
 | I-10 | Web-First at STANDARD triage                        | Staleness aspect = MUST at STANDARD+         |
 | I-11 | coord delegates follow-up DevSteps ops to `worker-devsteps` | coord MAY directly call: `mcp_devsteps_add` (primary item bootstrap) · `mcp_devsteps_update` status (in-progress/review/done) · `mcp_devsteps_update` `append_description` (done-gate only). ALL other add/link/update ops MUST go via `worker-devsteps`. |
+| I-12 | coord Ring→Ring handoff: item_id + sprint_id + prose report_paths only | All exec/aspect agents receive item_id + sprint_id + comma-separated report_path strings as prose context. coord NEVER forwards raw findings text or JSON blobs between rings. |
+
+> **I-6 note:** `read_analysis_envelope(report_path)` — `report_path` is a **prose-string signal** (the file path passed in chat), not a JSON field in the persisted AnalysisBriefing. coord uses it as a lookup key; it never appears in the `.result.json` schema.
 
 ---
 
@@ -213,6 +236,7 @@ T2 cannot re-dispatch. Instead:
 2. Build `t3_recommendations` map (MUST/SHOULD/COULD per aspect type)
 3. Call `write_mandate_result` with full payload including `t3_recommendations`
 4. Return to coord in chat: **ONLY** `{ report_path, verdict, confidence, t3_recommendations }`
+   > ℹ️ **Prose-only chat signal** — these are NOT fields in MandateResult JSON v1.0. coord reads full content via `read_mandate_results(sprint_id)`. `report_path` here means the file path of the written .result.json for human traceability only.
 
 ### MandateResult Schema (extended)
 
@@ -314,6 +338,7 @@ Run when ANY staleness trigger is present OR when `aspect = staleness`.
 4. If approach was blocked by `failed_approaches` → document alternative used
 5. Call `write_analysis_report`
 6. Return to coord ONLY: `{ report_path, verdict, confidence, aspect }`
+   > ℹ️ **Prose-only chat signal** — these are NOT fields in AnalysisBriefing JSON. coord reads full content via `read_analysis_envelope`. `report_path` is the .json file path for human traceability only.
 
 ### Staleness Aspect — Special Rules
 
