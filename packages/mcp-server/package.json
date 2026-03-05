@@ -37,7 +37,7 @@
     "dist",
     "bin",
     ".github",
-    ".devsteps"
+    ".devsteps/HIERARCHY.md"
   ],
   "scripts": {
     "build": "tsc --build && node esbuild.cjs --production && npm run copy:docs && npm run copy:copilot",
