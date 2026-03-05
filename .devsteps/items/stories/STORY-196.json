@@ -1,0 +1,35 @@
+{
+  "id": "STORY-196",
+  "type": "story",
+  "category": "general",
+  "title": "Semantic Search &amp; Embedding Index over DevSteps items (Ollama + Transformers.js fallback)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T11:29:53.037Z",
+  "updated": "2026-03-05T11:29:53.037Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "semantic-search",
+    "embedding",
+    "deduplication",
+    "ollama",
+    "transformers-js",
+    "gpu-tier-2"
+  ],
+  "commits": [],
+  "metadata": {}
+}

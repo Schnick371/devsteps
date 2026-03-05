@@ -1,0 +1,34 @@
+{
+  "id": "STORY-194",
+  "type": "story",
+  "category": "general",
+  "title": "Add Ollama HTTP proxy + AI triage MCP tool (Phase 2 GPU inference path)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T10:52:34.067Z",
+  "updated": "2026-03-05T10:52:34.067Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "gpu",
+    "ollama",
+    "mcp-server",
+    "inference",
+    "phase-2"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,34 @@
+{
+  "id": "TASK-325",
+  "type": "task",
+  "category": "general",
+  "title": "Remove phantom fields report_path/upstream_paths/verdict from 4 protocol docs",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T10:40:56.487Z",
+  "updated": "2026-03-05T10:41:05.798Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "SPIKE-021"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "protocol",
+    "documentation",
+    "schema-alignment"
+  ],
+  "commits": [],
+  "metadata": {}
+}

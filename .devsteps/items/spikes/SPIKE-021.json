@@ -1,0 +1,39 @@
+{
+  "id": "SPIKE-021",
+  "type": "spike",
+  "category": "general",
+  "title": "Research: GitHub Copilot #runSubagent inter-agent communication format & optimization",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T09:28:38.487Z",
+  "updated": "2026-03-05T10:57:09.313Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-325",
+      "TASK-327"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-192"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research",
+    "copilot",
+    "runSubagent",
+    "inter-agent-communication",
+    "architecture"
+  ],
+  "commits": [],
+  "metadata": {}
+}

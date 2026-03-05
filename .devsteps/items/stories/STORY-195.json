@@ -1,0 +1,35 @@
+{
+  "id": "STORY-195",
+  "type": "story",
+  "category": "general",
+  "title": "Spider Web Agent Visualization Panel — TypeScript port of Python prototype",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T11:29:30.438Z",
+  "updated": "2026-03-05T11:29:30.438Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spider-web",
+    "visualization",
+    "webview",
+    "d3",
+    "sigma",
+    "gpu-tier-1"
+  ],
+  "commits": [],
+  "metadata": {}
+}

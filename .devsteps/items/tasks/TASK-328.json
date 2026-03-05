@@ -1,0 +1,34 @@
+{
+  "id": "TASK-328",
+  "type": "task",
+  "category": "general",
+  "title": "Add .vscodeignore to extension package — prevent node_modules and research docs in VSIX",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T10:51:34.359Z",
+  "updated": "2026-03-05T10:51:34.359Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "security",
+    "p0",
+    "packaging",
+    "vsix",
+    "gpu-prerequisites"
+  ],
+  "commits": [],
+  "metadata": {}
+}

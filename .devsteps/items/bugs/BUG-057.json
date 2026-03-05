@@ -1,0 +1,34 @@
+{
+  "id": "BUG-057",
+  "type": "bug",
+  "category": "general",
+  "title": "Fix getNonce() uses Math.random() — replace with crypto.getRandomValues()",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T10:51:10.044Z",
+  "updated": "2026-03-05T10:51:10.044Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "security",
+    "p0",
+    "csp",
+    "webview",
+    "gpu-prerequisites"
+  ],
+  "commits": [],
+  "metadata": {}
+}

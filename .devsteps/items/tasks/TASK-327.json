@@ -1,0 +1,35 @@
+{
+  "id": "TASK-327",
+  "type": "task",
+  "category": "general",
+  "title": "Add quorum-check rule to coord: detect missing MandateResults after Ring-1 dispatch",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T10:40:56.489Z",
+  "updated": "2026-03-05T10:41:05.800Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "SPIKE-021"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "protocol",
+    "error-handling",
+    "coord",
+    "spider-web"
+  ],
+  "commits": [],
+  "metadata": {}
+}
