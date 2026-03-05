@@ -5,7 +5,6 @@ description: "Scientist prompt — evidence-based deep research, best-practice s
 tools:
   [
     "agent",
-    "runSubagent",
     "vscode",
     "execute",
     "read",

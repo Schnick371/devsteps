@@ -5,7 +5,6 @@ description: "Begin implementation work - MPD analysis then structured developme
 tools:
   [
     "agent",
-    "runSubagent",
     "vscode",
     "execute",
     "read",

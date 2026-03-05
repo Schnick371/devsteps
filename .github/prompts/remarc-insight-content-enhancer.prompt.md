@@ -5,7 +5,6 @@ description: "Enhance or create remarc-insight Presentations and Tutorials with 
 tools:
   [
     "agent",
-    "runSubagent",
     "vscode",
     "execute",
     "read",

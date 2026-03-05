@@ -1,0 +1,38 @@
+{
+  "id": "SPIKE-024",
+  "type": "spike",
+  "category": "general",
+  "title": "Research: Meta-hierarchical clustering methods above Epic→Story→Task — portfolio, program, value stream, OKR, outcome maps",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T17:41:46.250Z",
+  "updated": "2026-03-05T18:28:40.312Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-197"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research",
+    "meta-hierarchy",
+    "portfolio",
+    "value-stream",
+    "okr",
+    "vscode-extension",
+    "ai-retrieval"
+  ],
+  "commits": [],
+  "metadata": {}
+}

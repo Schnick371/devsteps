@@ -5,7 +5,6 @@ description: "Git forensics - investigate why code exists, trace decision histor
 tools:
   [
     "agent",
-    "runSubagent",
     "vscode",
     "execute",
     "read",

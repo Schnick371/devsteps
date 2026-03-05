@@ -5,7 +5,6 @@ description: "Quality review gate - validate completed work before marking done"
 tools:
   [
     "agent",
-    "runSubagent",
     "vscode",
     "execute",
     "read",

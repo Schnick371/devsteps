@@ -5,7 +5,6 @@ description: "Guide-driven full Spider Web cycle - enforced FULL MPD at every cr
 tools:
   [
     "agent",
-    "runSubagent",
     "vscode",
     "execute",
     "read",

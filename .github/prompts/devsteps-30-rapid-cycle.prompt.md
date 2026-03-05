@@ -5,7 +5,6 @@ description: "Rapid plan-execute kanban cycles - MPD analysis, then no-ceremony 
 tools:
   [
     "agent",
-    "runSubagent",
     "vscode",
     "execute",
     "read",

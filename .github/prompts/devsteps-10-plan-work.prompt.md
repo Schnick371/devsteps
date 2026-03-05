@@ -5,7 +5,6 @@ description: "Interactive planning session - work with developer to define and s
 tools:
   [
     "agent",
-    "runSubagent",
     "vscode",
     "execute",
     "read",

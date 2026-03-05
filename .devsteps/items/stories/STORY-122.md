@@ -44,3 +44,4 @@ Pattern from: https://dev.to/formulahendry/bundle-mcp-server-into-vs-code-extens
 ## Out of Scope
 - MCPB binary bundle (Track 2, separate story)
 - INSTALL.md rewrite (separate task)
+Implemented in-process HTTP MCP server. workspace.ts env var check, http-server.ts dynamic port, McpHttpServerDefinition in mcpServerManager.ts (HTTP preferred, stdio fallback), esbuild.js re-enabled → dist/mcp-server.js (2.3MB). Gate PASSED. Committed 4964ad9, merged c3397b8.

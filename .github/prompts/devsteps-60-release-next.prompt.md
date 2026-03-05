@@ -5,7 +5,6 @@ description: "Execute pre-release deployment to @next tag - testing and validati
 tools:
   [
     "agent",
-    "runSubagent",
     "vscode",
     "execute",
     "read",

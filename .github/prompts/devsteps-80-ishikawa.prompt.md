@@ -5,12 +5,11 @@ description: "Workspace health analysis — Ishikawa root cause analysis, coord 
 tools:
   [
     "agent",
-    "runSubagent",
     "vscode",
     "execute",
     "read",
     "edit",
-    "search",
+    "devsteps/search", "google-search/search", "local-web-search/search",
     "devsteps/*",
     "bright-data/*",
     "ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance",

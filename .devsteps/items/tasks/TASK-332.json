@@ -1,0 +1,38 @@
+{
+  "id": "TASK-332",
+  "type": "task",
+  "category": "general",
+  "title": "Add pino dispatch_id tracing to MCP server",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T11:48:21.774Z",
+  "updated": "2026-03-05T14:32:21.992Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/logger.ts",
+    "packages/mcp-server/src/"
+  ],
+  "linked_items": {
+    "implements": [
+      "SPIKE-022"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp-server",
+    "logging",
+    "tracing",
+    "pino"
+  ],
+  "commits": [],
+  "metadata": {}
+}

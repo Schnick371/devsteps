@@ -1,0 +1,35 @@
+{
+  "id": "TASK-344",
+  "type": "task",
+  "category": "general",
+  "title": "Add user-invokable: false to ~19 ring agent files missing the field",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T22:01:17.595Z",
+  "updated": "2026-03-05T22:04:34.298Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-350"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agent-plugin",
+    "research-2026-03-05"
+  ],
+  "commits": [],
+  "metadata": {}
+}

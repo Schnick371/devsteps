@@ -5,7 +5,6 @@ description: "Execute production release workflow - version bump, CHANGELOG, bui
 tools:
   [
     "agent",
-    "runSubagent",
     "vscode",
     "execute",
     "read",

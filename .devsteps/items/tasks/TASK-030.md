@@ -54,4 +54,4 @@ npx vsce publish
 1. GitHub Repository Description setzen
 2. Topics hinzufügen: vscode-extension, mcp-server, ai-development, copilot, typescript
 3. GitHub Discussions aktivieren
-4. Branch Protection Rules für `main` einrichten
+4. Branch Protection Rules für `main` einrichtenFiles safety fix: narrowed .devsteps entry in CLI and MCP server package.json to .devsteps/HIERARCHY.md only. Prevents CBP sprint data from being published to npm. Committed as dff689f, merged via 445bedc. GitHub push deferred — will push all SPRINT-PUBLISH work together at end of sprint.

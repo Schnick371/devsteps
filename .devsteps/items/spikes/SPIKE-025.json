@@ -1,0 +1,35 @@
+{
+  "id": "SPIKE-025",
+  "type": "spike",
+  "category": "general",
+  "title": "Research: VS Code 1.110 agent APIs — findings and integration plan",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-03-05T18:08:29.808Z",
+  "updated": "2026-03-05T18:08:29.808Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research",
+    "spike",
+    "vscode-1110",
+    "agent-debug",
+    "documentation",
+    "findings"
+  ],
+  "commits": [],
+  "metadata": {}
+}

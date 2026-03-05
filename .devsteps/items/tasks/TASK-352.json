@@ -1,0 +1,33 @@
+{
+  "id": "TASK-352",
+  "type": "task",
+  "category": "general",
+  "title": "Add MCP preflight health check to coord agent before Ring 1 dispatch",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T22:03:00.248Z",
+  "updated": "2026-03-05T22:03:00.248Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-R0-coord.agent.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agent-plugin",
+    "research-2026-03-05"
+  ],
+  "commits": [],
+  "metadata": {}
+}
