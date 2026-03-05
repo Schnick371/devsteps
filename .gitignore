@@ -51,3 +51,5 @@ test-project/
 *.tsbuildinfo
 scripts/tmp
 .devsteps/prompts
+.devsteps/cbp/
+.devsteps/analysis/
