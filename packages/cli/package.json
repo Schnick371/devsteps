@@ -32,7 +32,7 @@
     "dist",
     "bin",
     ".github",
-    ".devsteps",
+    ".devsteps/HIERARCHY.md",
     "README.md",
     "LICENSE.md"
   ],
