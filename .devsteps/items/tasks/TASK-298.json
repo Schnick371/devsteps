@@ -1,0 +1,34 @@
+{
+  "id": "TASK-298",
+  "type": "task",
+  "category": "general",
+  "title": "T0.2: Research AI Toolkit AITK tracing and evaluation APIs",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:38:43.224Z",
+  "updated": "2026-03-05T08:44:39.332Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "SPIKE-017"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spike",
+    "ai-toolkit",
+    "aitk"
+  ],
+  "commits": [],
+  "metadata": {}
+}

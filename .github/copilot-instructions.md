@@ -92,9 +92,10 @@ DevSteps is the primary work-tracking system. NEVER edit `.devsteps/` directly â
 | Iterative Kanban cycle        | `devsteps-30-rapid-cycle`     | coord               |
 | Guide-driven Full Spider Web  | `devsteps-35-guide-cycle`     | coord               |
 | Multi-item sprint             | `devsteps-40-sprint`          | coord-sprint        |
-| Git forensics                 | `devsteps-05-investigate`     | analyst-archaeology |
+| Deep research & best practices | `devsteps-05-research`       | coord               |
+| Git forensics                 | `devsteps-55-investigate`     | analyst-archaeology |
 | Git cleanup                   | `devsteps-50-git-cleanup`     | coord               |
-| Backlog hygiene               | `devsteps-55-item-cleanup`    | coord               |
+| Backlog hygiene               | `devsteps-95-item-cleanup`    | coord               |
 | Document context              | `devsteps-56-context-sync`    | coord               |
 | Pre-release                   | `devsteps-60-release-next`    | coord               |
 | Production release            | `devsteps-70-release`         | coord               |

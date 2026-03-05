@@ -1,0 +1,36 @@
+{
+  "id": "TASK-314",
+  "type": "task",
+  "category": "general",
+  "title": "T4.2: EisenhowerCard Mini-SVG Preview (2x2 quadrant dot density)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T08:40:28.610Z",
+  "updated": "2026-03-05T08:42:42.945Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-185"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cards",
+    "eisenhower",
+    "svg"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,37 @@
+{
+  "id": "TASK-303",
+  "type": "task",
+  "category": "general",
+  "title": "T2.1: Zod TraceEvent Schema in packages/shared",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:39:16.280Z",
+  "updated": "2026-03-05T08:41:57.962Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/trace.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-183"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "schema",
+    "zod",
+    "tracing"
+  ],
+  "commits": [],
+  "metadata": {}
+}

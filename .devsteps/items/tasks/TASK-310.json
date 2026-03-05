@@ -1,0 +1,37 @@
+{
+  "id": "TASK-310",
+  "type": "task",
+  "category": "general",
+  "title": "T3.3: Hover Tooltips + Session Sidebar (last 10 dispatches)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:40:03.623Z",
+  "updated": "2026-03-05T08:42:26.439Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/spider-web.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-184"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "d3",
+    "tooltips",
+    "sidebar",
+    "ux"
+  ],
+  "commits": [],
+  "metadata": {}
+}

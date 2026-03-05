@@ -1,0 +1,45 @@
+{
+  "id": "SPIKE-017",
+  "type": "spike",
+  "category": "general",
+  "title": "Passive Copilot Tracing API Investigation — VS Code LM, AI Toolkit, proposed APIs",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:37:52.773Z",
+  "updated": "2026-03-05T08:49:31.101Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/",
+    "packages/shared/src/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-040"
+    ],
+    "implemented-by": [
+      "TASK-297",
+      "TASK-298",
+      "TASK-320"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "STORY-184"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spike",
+    "tracing",
+    "vscode-api",
+    "ai-toolkit",
+    "research"
+  ],
+  "commits": [],
+  "metadata": {}
+}

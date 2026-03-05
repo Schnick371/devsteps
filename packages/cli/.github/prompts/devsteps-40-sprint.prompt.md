@@ -49,5 +49,6 @@ No further direction needed — the agent determines all agent selection, triage
 | Single item only | `devsteps-20-start-work` |
 | Kanban pull, no ceremony | `devsteps-30-rapid-cycle` |
 | Review only | `devsteps-25-review` |
-| Investigation / archaeology | `devsteps-05-investigate` |
+| Investigation / archaeology | `devsteps-55-investigate` |
+| Deep research & best practices | `devsteps-05-research` |
 

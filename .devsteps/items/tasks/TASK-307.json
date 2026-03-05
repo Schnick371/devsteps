@@ -1,0 +1,38 @@
+{
+  "id": "TASK-307",
+  "type": "task",
+  "category": "general",
+  "title": "T2.5: scripts/sync-agent-registry.mjs — CI Drift Prevention Check",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T08:39:42.566Z",
+  "updated": "2026-03-05T08:42:12.210Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "scripts/sync-agent-registry.mjs",
+    "package.json"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-183"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "scripts",
+    "ci",
+    "registry",
+    "drift"
+  ],
+  "commits": [],
+  "metadata": {}
+}

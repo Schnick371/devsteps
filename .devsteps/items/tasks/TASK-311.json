@@ -1,0 +1,36 @@
+{
+  "id": "TASK-311",
+  "type": "task",
+  "category": "general",
+  "title": "T3.4: Mini-SVG Preview for Spider Web Card",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:40:11.048Z",
+  "updated": "2026-03-05T08:42:30.908Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-184"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mini-preview",
+    "svg",
+    "cards"
+  ],
+  "commits": [],
+  "metadata": {}
+}

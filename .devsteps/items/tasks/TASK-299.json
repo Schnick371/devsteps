@@ -1,0 +1,38 @@
+{
+  "id": "TASK-299",
+  "type": "task",
+  "category": "general",
+  "title": "T1.1: WebviewPanel SPA Router + State Persistence (postMessage + hash routing)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:38:50.986Z",
+  "updated": "2026-03-05T08:41:41.409Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/dashboard.ts",
+    "packages/extension/src/extension.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-182"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spa",
+    "router",
+    "webview",
+    "extension"
+  ],
+  "commits": [],
+  "metadata": {}
+}

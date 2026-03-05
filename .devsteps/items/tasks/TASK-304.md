@@ -1,0 +1,1 @@
+Create packages/shared/src/utils/trace-logger.ts: TraceLogger class with logDispatch(event), logComplete(id, durationMs), logFailed(id, error), logEscalated(id, reason). Writes JSONL to .devsteps/traces/spider_traces.jsonl. Async file append, creates directory if missing. Rotation: keep last 500 events (configurable). Export singleton + factory function.

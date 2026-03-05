@@ -1,0 +1,1 @@
+Create scripts/sync-agent-registry.mjs that reads .github/agents/ directory, parses agent file names, compares against AgentRegistry constant in packages/shared/src/constants/agent-registry.ts, and exits non-zero if drift detected. Add to package.json 'lint' or 'pretest' script for CI integration.

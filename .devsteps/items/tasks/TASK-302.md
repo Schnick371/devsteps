@@ -1,0 +1,1 @@
+Refactor packages/extension/src/webview/ message handler to support: 'ready' (initial data load), 'requestTab' (navigation), 'pushTraceData' (FSWatcher update), 'requestHistory' (last 10 traces). Keep backward compatibility with existing message types.

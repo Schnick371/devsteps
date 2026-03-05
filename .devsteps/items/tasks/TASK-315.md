@@ -1,0 +1,1 @@
+Create mini SVG Gantt bar preview for TimelineCard. Shows top 5 in-progress items as horizontal bars. Color by priority. Max 120x60px SVG viewport.

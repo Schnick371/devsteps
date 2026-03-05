@@ -1,0 +1,51 @@
+{
+  "id": "EPIC-040",
+  "type": "epic",
+  "category": "general",
+  "title": "Card-based Dashboard SPA + Spider Web Visualizer for VS Code Extension",
+  "status": "in-progress",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:35:05.220Z",
+  "updated": "2026-03-05T08:50:16.464Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/",
+    "packages/extension/esbuild.js",
+    "packages/extension/esbuild.mjs",
+    "packages/extension/media/dashboard.css",
+    "packages/shared/src/",
+    "docs/architecture/",
+    "scripts/sync-agent-registry.mjs",
+    ".devsteps/traces/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "SPIKE-017",
+      "STORY-182",
+      "STORY-183",
+      "STORY-184",
+      "STORY-185"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "dashboard",
+    "visualizer",
+    "spider-web",
+    "extension",
+    "d3",
+    "tracing",
+    "spa"
+  ],
+  "commits": [],
+  "metadata": {}
+}

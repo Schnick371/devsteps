@@ -1,0 +1,36 @@
+{
+  "id": "TASK-319",
+  "type": "task",
+  "category": "general",
+  "title": "T4.7: docs/architecture/mpd-architecture.md — Spider Web Extension Context",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T08:40:57.949Z",
+  "updated": "2026-03-05T08:43:00.537Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "docs/architecture/mpd-architecture.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-185"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "documentation",
+    "architecture",
+    "spider-web"
+  ],
+  "commits": [],
+  "metadata": {}
+}

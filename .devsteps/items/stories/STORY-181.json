@@ -1,0 +1,33 @@
+{
+  "id": "STORY-181",
+  "type": "story",
+  "category": "general",
+  "title": "Replace npm-specific Phase 1 gate commands with language-agnostic equivalents across all agent files",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-04T13:40:25.287Z",
+  "updated": "2026-03-04T13:55:52.187Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "copilot-files",
+    "agent-protocol",
+    "language-agnostic",
+    "cross-project"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,3 +1,64 @@
 {
-  "recommendations": ["biomejs.biome", "github.copilot-chat", "devsteps.devsteps"]
+  // Extensions empfohlen für diesen TypeScript/Node.js Monorepo (devsteps)
+  "recommendations": [
+    "biomejs.biome",              // Linting + Formatting (ersetzt ESLint + Prettier)
+    "github.copilot-chat",        // AI Entwicklungsassistent
+    "devsteps.devsteps",          // DevSteps eigene Extension
+    "eamodio.gitlens",            // Git Integration
+    "github.vscode-github-actions", // GitHub Actions CI/CD
+    "redhat.vscode-yaml",         // YAML Support
+    "ms-vscode.extension-test-runner", // VS Code Extension Testing
+    "mermaidchart.vscode-mermaid-chart", // Mermaid Diagramme (docs/)
+    "ms-vscode.vscode-websearchforcopilot", // Copilot Web-Suche
+    "ms-vscode.copilot-mermaid-diagram"  // Copilot Mermaid-Generierung
+  ],
+  // Für diesen Workspace NICHT benötigte Extensions (deaktivieren empfohlen)
+  "unwantedRecommendations": [
+    // Python-Stack (kein Python in diesem Workspace)
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.vscode-python-envs",
+    "ms-python.debugpy",
+    "ms-python.black-formatter",
+    "ms-python.flake8",
+    "ms-python.isort",
+    "charliermarsh.ruff",
+    "zeshuaro.vscode-python-poetry",
+    // Jupyter (kein Jupyter in diesem Workspace)
+    "ms-toolsai.jupyter",
+    "ms-toolsai.jupyter-hub",
+    "ms-toolsai.jupyter-keymap",
+    "ms-toolsai.jupyter-renderers",
+    "ms-toolsai.vscode-jupyter-cell-tags",
+    "ms-toolsai.vscode-jupyter-powertoys",
+    "ms-toolsai.vscode-jupyter-slideshow",
+    // SQL Server (kein SQL in diesem Workspace)
+    "ms-mssql.mssql",
+    "ms-mssql.data-workspace-vscode",
+    "ms-mssql.sql-bindings-vscode",
+    "ms-mssql.sql-database-projects-vscode",
+    // Docker/Container (kein Docker in diesem Workspace)
+    "docker.docker",
+    "ms-azuretools.vscode-docker",
+    "ms-azuretools.vscode-containers",
+    // Azure (keine Azure-Resources in diesem Workspace)
+    "ms-azuretools.vscode-azureresourcegroups",
+    "teamsdevapp.vscode-ai-foundry",
+    // Ersetzte Tools (Biome verwendet — kein ESLint/Prettier nötig)
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    // GitLab (GitHub wird verwendet)
+    "gitlab.gitlab-workflow",
+    // Nicht relevante Frameworks/Tools
+    "bradlc.vscode-tailwindcss",      // Kein Tailwind CSS
+    "imgildev.vscode-nextjs-generator", // Kein Next.js
+    "nrwl.angular-console",            // Kein Angular
+    "prisma.prisma",                   // Kein Prisma ORM
+    "ms-vscode.makefile-tools",        // Kein Makefile
+    "ms-windows-ai-studio.windows-ai-studio", // Windows-spezifisch / AI Studio
+    "ohziinteractivestudio.ohzi-vscode-glb-viewer", // 3D-Viewer
+    // NICHT ZERTIFIZIERT — undefined_publisher
+    "undefined_publisher.remarc-syslog"
+  ]
 }
+

@@ -1,0 +1,1 @@
+On 'pushTraceData' postMessage: update D3 diagram node states using data join. Active (dispatched) agents: bright highlight + pulse animation. Completed: brief green flash. Failed/Escalated: red highlight. Animation duration: 600ms ease. Use CSS transitions on D3 node `<circle>` elements via class toggling.

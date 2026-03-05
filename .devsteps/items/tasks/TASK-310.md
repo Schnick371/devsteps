@@ -1,0 +1,1 @@
+D3 node hover: show tooltip with agent name, ring, domain, last dispatch timestamp, success/fail count. Session sidebar (right panel in detail tab): scrollable list of last 10 TraceEvents with timestamp, agent, status badge, duration. Sidebar updates live via FSWatcher postMessage.

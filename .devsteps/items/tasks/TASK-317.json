@@ -1,0 +1,36 @@
+{
+  "id": "TASK-317",
+  "type": "task",
+  "category": "general",
+  "title": "T4.5: StatsCard Mini-Preview (KPI numbers)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T08:40:46.294Z",
+  "updated": "2026-03-05T08:42:54.000Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-185"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cards",
+    "stats",
+    "kpi"
+  ],
+  "commits": [],
+  "metadata": {}
+}

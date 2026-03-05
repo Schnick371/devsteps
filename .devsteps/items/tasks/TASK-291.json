@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Remove runSubagent from R0 agent YAML tools arrays — body #tool refs are sufficient",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-03-04T10:50:11.531Z",
-  "updated": "2026-03-04T10:50:17.493Z",
+  "updated": "2026-03-04T11:07:26.521Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

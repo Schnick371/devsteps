@@ -1,0 +1,37 @@
+{
+  "id": "TASK-308",
+  "type": "task",
+  "category": "general",
+  "title": "T3.1: D3.js Polar Ring Layout — 6 Rings, 31 Agents, SVG",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:39:51.083Z",
+  "updated": "2026-03-05T08:42:16.207Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/spider-web.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-184"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "d3",
+    "spider-web",
+    "svg",
+    "layout"
+  ],
+  "commits": [],
+  "metadata": {}
+}

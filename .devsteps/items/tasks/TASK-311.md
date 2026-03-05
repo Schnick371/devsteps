@@ -1,0 +1,1 @@
+Create a lightweight plain SVG (no D3 dependency) spider web mini-preview for the landing page card. Shows the 6 rings as concentric circles with dots for each agent. Active agents highlighted. Updates on 'pushTraceData' postMessage (preview: last 1 event). No animation in card view — static snapshot for performance.

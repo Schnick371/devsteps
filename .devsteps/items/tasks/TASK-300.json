@@ -1,0 +1,37 @@
+{
+  "id": "TASK-300",
+  "type": "task",
+  "category": "general",
+  "title": "T1.2: Card-Grid Layout + CSS (VS Code Theme-aware cards)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:38:57.823Z",
+  "updated": "2026-03-05T08:41:44.962Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/media/dashboard.css"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-182"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "css",
+    "cards",
+    "dashboard",
+    "theme"
+  ],
+  "commits": [],
+  "metadata": {}
+}

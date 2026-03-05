@@ -31,4 +31,14 @@ In session TASK-293, coord called mcp_devsteps_add directly to create TASK-294 a
 1. coord-*.agent.md states delegation rule clearly (coord = lifecycle gates only)
 2. worker-devsteps.agent.md lists all delegatable operations with examples
 3. AGENT-DISPATCH-PROTOCOL has DevSteps Delegation Boundary table
-4. copilot-instructions.md updated with the new constraint
+4. copilot-instructions.md updated with the new constraint## Result (2026-03-04, commit 0057a94)
+
+Delegation boundary fully documented and enforced. 6 files changed:
+
+- **I-11 added** to AGENT-DISPATCH-PROTOCOL: coord MUST NOT call mcp_devsteps_add/link for follow-up ops
+- **worker-devsteps.agent.md**: Delegatable Operations table (4 rows) + coord-Reserved Operations table (5 rows) 
+- **coord.agent.md + coord-sprint.agent.md**: mid-lifecycle devsteps/add → dispatch worker-devsteps
+- **copilot-instructions.md**: bootstrap-only clarifier + I-11 boundary blockquote
+- **devsteps-agent-protocol.instructions.md**: Caller column added to Tool Reference
+
+Industry validation: ALL frameworks (ADK, AutoGen, CrewAI, LangGraph, Anthropic) confirm coordinator = lifecycle gates only. R5 GATE: PASS (all 6 AC).

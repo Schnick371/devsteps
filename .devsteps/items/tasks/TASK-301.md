@@ -1,0 +1,1 @@
+Add a second entry point to packages/extension/esbuild.js building src/webview/dashboard.ts → dist/webview/dashboard.js as iife format targeting browser platform. Include only required d3 sub-packages (d3-selection, d3-shape, d3-scale, d3-interpolate). Bundle size target: <150KB. Update package.json build script.

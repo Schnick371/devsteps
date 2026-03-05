@@ -1,0 +1,1 @@
+Create stats card mini-preview showing: total items, in-progress count, done this week, blockers count. Large number typography. No SVG required — styled HTML div with VS Code theme variables.

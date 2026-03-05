@@ -1,0 +1,36 @@
+{
+  "id": "TASK-322",
+  "type": "task",
+  "category": "general",
+  "title": "T3.6: Webview postMessage mock + D3 Spider Web render smoke test",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:49:59.368Z",
+  "updated": "2026-03-05T08:50:03.894Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-184"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "tests",
+    "vitest",
+    "d3",
+    "webview",
+    "spider-web"
+  ],
+  "commits": [],
+  "metadata": {}
+}

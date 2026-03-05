@@ -240,5 +240,5 @@ Aspects: [list]
 
 **See also:**
 - devsteps-10-plan-work.prompt.md - Creating work items
-- devsteps-55-item-cleanup.prompt.md - Work item maintenance
+- devsteps-95-item-cleanup.prompt.md - Work item maintenance
 - .github/instructions/devsteps-documentation.instructions.md - Markdown standards

@@ -1,0 +1,37 @@
+{
+  "id": "TASK-315",
+  "type": "task",
+  "category": "general",
+  "title": "T4.3: TimelineCard Mini-SVG Preview (mini Gantt bars)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T08:40:34.805Z",
+  "updated": "2026-03-05T08:42:46.743Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-185"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cards",
+    "timeline",
+    "svg",
+    "gantt"
+  ],
+  "commits": [],
+  "metadata": {}
+}

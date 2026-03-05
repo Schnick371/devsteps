@@ -1,0 +1,1 @@
+Extend packages/extension/README.md with a new 'Agent Dispatch Tracing' section documenting: how TraceLogger works, JSONL format, FSWatcher pipeline, what the Spider Web card shows, how to enable/disable tracing. Include ASCII diagram of the trace pipeline.
