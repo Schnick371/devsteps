@@ -1,0 +1,36 @@
+{
+  "id": "SPIKE-018",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: GPU capability detection + Ollama health probe",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T09:24:53.585Z",
+  "updated": "2026-03-05T09:26:30.133Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-040"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "gpu",
+    "ollama",
+    "spike",
+    "infrastructure",
+    "ai"
+  ],
+  "commits": [],
+  "metadata": {}
+}

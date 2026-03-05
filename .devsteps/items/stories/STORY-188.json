@@ -1,0 +1,38 @@
+{
+  "id": "STORY-188",
+  "type": "story",
+  "category": "general",
+  "title": "STORY: AI configuration schema + devsteps.ai.* VS Code settings + GPU status bar",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T09:26:20.027Z",
+  "updated": "2026-03-05T09:26:30.135Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-040"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "settings",
+    "status-bar",
+    "gpu",
+    "ollama",
+    "ai",
+    "configuration"
+  ],
+  "commits": [],
+  "metadata": {}
+}
