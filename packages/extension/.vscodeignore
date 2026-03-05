@@ -34,8 +34,5 @@ test-persistence-manual.md
 ../cli/**
 ../mcp-server/**
 
-# IMPORTANT: Include compiled MCP server bundle
-!dist/mcp-server/**
-
-# MCP server - NPX downloads from npm registry (zero-configuration)
-# No bundling needed!
+# Include compiled MCP server bundle (in-process HTTP mode)
+!dist/mcp-server.js
