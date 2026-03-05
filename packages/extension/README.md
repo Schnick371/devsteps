@@ -61,14 +61,20 @@ npm install -g @schnick371/devsteps-mcp-server@next
 npm install -g @schnick371/devsteps-cli@next
 ```
 
+## 🏗️ MCP Server Architecture
+
+**VS Code 1.109+ (current):** The extension runs the MCP server entirely in-process using `McpHttpServerDefinition`. No Node.js installation is required — the bundled `dist/mcp-server.js` is loaded directly by VS Code and serves all MCP tool requests over a localhost HTTP port. No configuration is needed.
+
+**VS Code < 1.109 (fallback):** If `McpHttpServerDefinition` is unavailable, the extension falls back to spawning the MCP server as a subprocess via `McpStdioServerDefinition`. This mode requires Node.js ≥ 18 and npx to be installed.
+
 ## ⚙️ Prerequisites
 
 **Required:**
-- **Node.js** ≥ 18.0 (includes npm and npx)
-- **VS Code** ≥ 1.99.0 (March 2025 or later for MCP support)
+- **VS Code** ≥ 1.109.0 (recommended; in-process MCP, no Node.js needed)
+- **Node.js** ≥ 18.0 — only required for VS Code < 1.109 (stdio fallback)
 
 ### Why Node.js?
-DevSteps uses the **Model Context Protocol (MCP)** to integrate with AI assistants like GitHub Copilot. The MCP server requires Node.js to run.
+DevSteps uses the **Model Context Protocol (MCP)** to integrate with AI assistants like GitHub Copilot. On VS Code 1.109+, the MCP server runs in-process and Node.js is not required. On older VS Code versions, the server is spawned as a subprocess and Node.js must be installed.
 
 ### Installing Node.js
 

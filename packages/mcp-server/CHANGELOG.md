@@ -5,6 +5,7 @@ All notable changes to the DevSteps MCP Server will be documented in this file.
 ## [Unreleased]
 
 ### Added
+- **STORY-122:** `startHttpMcpServer` now accepts an optional `workspacePath` parameter (default: `process.cwd()`). The MCP server also reads the `DEVSTEPS_WORKSPACE` environment variable as the primary source for workspace path resolution, enabling seamless in-process operation when launched by the VS Code extension.
 - **TASK-331:** Two new MCP tools for dispatch-manifest audit trail:
   - `write_dispatch_manifest` — write a `DispatchManifest` at coord fan-out time. UUID-named file (`dispatch-manifest-{dispatch_id}.json`) records all dispatched agents with `status=pending`. Storage: `.devsteps/cbp/{sprint_id}/dispatch-manifest-{dispatch_id}.json`.
   - `patch_dispatch_manifest` — update a single dispatch entry by `mandate_id` when a MandateResult arrives. Sets `completed_at`, `duration_ms`, `status`, `confidence`, and `output_tokens_approx`. Reads and rewrites atomically.
