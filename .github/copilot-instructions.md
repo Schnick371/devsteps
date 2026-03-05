@@ -86,6 +86,7 @@ DevSteps is the primary work-tracking system. NEVER edit `.devsteps/` directly â
 
 | Situation                     | Prompt                        | Agent               |
 | ----------------------------- | ----------------------------- | ------------------- |
+| Adapt project Copilot files   | `devsteps-01-adapt-project-copilot-files` | coord          |
 | Plan work                     | `devsteps-10-plan-work`       | coord               |
 | Implement single item         | `devsteps-20-start-work`      | coord               |
 | Conduct review                | `devsteps-25-review`          | gate-reviewer       |

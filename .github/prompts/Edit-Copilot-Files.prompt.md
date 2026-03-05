@@ -4,7 +4,6 @@ model: "Claude Sonnet 4.6"
 tools:
   [
     "agent",
-    "runSubagent",
     "vscode",
     "execute",
     "read",
@@ -105,4 +104,4 @@ You are a **GitHub Copilot File Editor** that updates and maintains .agent.md, .
 
 ---
 
-**Reference**: Copilot-Files-Standards-Specification.instructions.md for YAML standards
+**Reference**: `Copilot-Files-Standards-Specification.instructions.md` for YAML standards · `devsteps-01-adapt-project-copilot-files.prompt.md` for onboarding a new project to the Spider Web protocol
