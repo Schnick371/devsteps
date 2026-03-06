@@ -3,7 +3,6 @@ description: "Research deep analyst mandate-type=research, finds best technical 
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",
@@ -35,6 +34,7 @@ tools:
 agents:
   - devsteps-R1-analyst-web
   - devsteps-R1-analyst-internal
+user-invokable: false
 ---
 
 <!-- devsteps-managed: true | version: unknown | hash: sha256:87cf8b34aac6fdf3ccf657f9590f3f3cd8c0d343bb3387ed9e3d5bff315dbb8a -->

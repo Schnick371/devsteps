@@ -3,7 +3,6 @@ description: "Quality Analyst - defines the observable behavior surface: what mu
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",

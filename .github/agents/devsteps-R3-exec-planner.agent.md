@@ -3,7 +3,6 @@ description: "Planner deep analyst mandate-type=planning, decomposes stories int
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",
@@ -34,6 +33,7 @@ tools:
   ]
 agents:
   - devsteps-R2-aspect-staleness
+user-invokable: false
 ---
 
 <!-- devsteps-managed: true | version: unknown | hash: sha256:bcd30433fbc129891c8779f19995e6074c94c4b07df01e455273776e1c9f2a6c -->

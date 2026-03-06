@@ -77,6 +77,7 @@ handoffs:
     agent: devsteps-R2-aspect-quality
     prompt: "Ishikawa: cross-cutting quality signals not covered by Tests bone. Return analysis envelope."
     send: false
+user-invokable: true
 ---
 
 # 🐟 Ishikawa Workspace Health Coordinator

@@ -3,7 +3,6 @@ description: "Constraint Analyst - surfaces risks, blockers, and hidden prerequi
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",

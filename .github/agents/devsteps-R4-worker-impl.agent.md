@@ -3,7 +3,6 @@ description: "Implementation subagent - creates detailed implementation plans fo
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",

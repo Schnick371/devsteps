@@ -3,7 +3,6 @@ description: "Guide-Writer worker — updates AITK-Tools-Guide-Dev.md and other 
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",

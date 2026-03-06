@@ -3,7 +3,6 @@ description: "Impact Analyst - discovers what breaks, ripples, or silently chang
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",

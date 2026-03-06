@@ -3,7 +3,6 @@ description: "Build/test diagnostics — build helper (RESOLVE phase), categoriz
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",

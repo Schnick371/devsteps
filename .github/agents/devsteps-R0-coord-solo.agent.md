@@ -3,7 +3,6 @@ description: "Solo Coordinator — Fallback when runSubagent is unavailable. Han
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",

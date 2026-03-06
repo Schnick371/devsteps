@@ -3,7 +3,6 @@ description: "Integration Analyst - finds cross-package, cross-process, and cros
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",

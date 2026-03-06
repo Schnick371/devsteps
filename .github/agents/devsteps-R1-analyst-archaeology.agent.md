@@ -3,7 +3,6 @@ description: "Archaeology deep analyst mandate-type=archaeology, builds complete
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",
@@ -35,6 +34,7 @@ tools:
 agents:
   - devsteps-R1-analyst-context
   - devsteps-R1-analyst-internal
+user-invokable: false
 ---
 
 <!-- devsteps-managed: true | version: unknown | hash: sha256:31df9f4ca824c2ddb58ac7f13a36a3a54ffacc2072e4b5b01774b518c3083252 -->

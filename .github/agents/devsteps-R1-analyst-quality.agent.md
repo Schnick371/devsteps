@@ -3,7 +3,6 @@ description: "Quality deep analyst mandate-type=quality, validates correctness +
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",
@@ -32,9 +31,7 @@ tools:
     "ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo",
     "todo",
   ]
-agents:
-  - devsteps-R2-aspect-quality
-  - devsteps-R2-aspect-staleness
+user-invokable: false
 ---
 
 <!-- devsteps-managed: true | version: unknown | hash: sha256:7baae7914c8fa89747510ef5953fc0abb07b8d4e291cd614772f8e2c7ba23c7c -->

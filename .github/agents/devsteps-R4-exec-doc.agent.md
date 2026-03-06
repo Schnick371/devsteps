@@ -2,7 +2,6 @@
 description: Exec Documentation Conductor — orchestrates workers to write, update, and verify documentation for implemented changes. Dispatched by coord on FULL triage tier after exec-impl (and optionally exec-test) MandateResults. NEVER called directly by user.
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",

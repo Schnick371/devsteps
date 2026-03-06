@@ -3,7 +3,6 @@ description: "Integration-Tester worker — writes integration tests for multipl
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",

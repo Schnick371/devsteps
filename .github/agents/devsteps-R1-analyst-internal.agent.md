@@ -3,7 +3,6 @@ description: "Internal Code Analyst - analyzes existing codebase patterns withou
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",

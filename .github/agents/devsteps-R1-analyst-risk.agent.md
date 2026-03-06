@@ -3,7 +3,6 @@ description: "Risk deep analyst mandate-type=risk, maps blast radius and probabi
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",
@@ -36,6 +35,7 @@ agents:
   - devsteps-R2-aspect-impact
   - devsteps-R2-aspect-integration
   - devsteps-R2-aspect-constraints
+user-invokable: false
 ---
 
 <!-- devsteps-managed: true | version: unknown | hash: sha256:091319fdfe956f1fe4e19fd0b2249d748efacefc71eb262294a086243d680ea9 -->

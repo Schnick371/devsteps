@@ -3,7 +3,6 @@ description: "Efficient context loading specialist - smart prioritization, token
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",

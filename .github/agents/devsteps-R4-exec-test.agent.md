@@ -2,7 +2,6 @@
 description: Exec Test Conductor — orchestrates test workers to write, execute, and verify tests for implemented code. Dispatched by coord after exec-impl MandateResult. NEVER called directly by user.
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",
@@ -37,6 +36,7 @@ agents:
   - devsteps-R2-aspect-quality
   - devsteps-R1-analyst-web
   - devsteps-R4-worker-build-diagnostics
+user-invokable: false
 ---
 
 <!-- devsteps-managed: true | version: unknown | hash: sha256:cd5923b1107f8fd3dcf8be15572e7e1fd05182df231e552e7e6c68885407ace2 -->

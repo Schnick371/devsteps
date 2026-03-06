@@ -3,7 +3,6 @@ description: "Testing subagent - creates comprehensive test plans and analyzes t
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",
