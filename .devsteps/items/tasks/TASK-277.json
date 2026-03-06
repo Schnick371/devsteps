@@ -1,0 +1,35 @@
+{
+  "id": "TASK-277",
+  "type": "task",
+  "category": "general",
+  "title": "Erstelle devsteps-log-protocol.instructions.md",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-27T13:01:39.299Z",
+  "updated": "2026-02-27T23:45:22.358Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/instructions/devsteps-log-protocol.instructions.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-129"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spec",
+    "instructions-file"
+  ],
+  "commits": [],
+  "metadata": {}
+}

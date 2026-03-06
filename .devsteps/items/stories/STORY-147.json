@@ -1,0 +1,40 @@
+{
+  "id": "STORY-147",
+  "type": "story",
+  "category": "general",
+  "title": "Knowledge Context Auto-Surfacing Integration",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:51:24.728Z",
+  "updated": "2026-02-28T00:51:34.614Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/context.ts",
+    ".github/prompts/devsteps-20-start-work.prompt.md",
+    ".github/prompts/devsteps-25-review.prompt.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [
+      "STORY-146"
+    ],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "knowledge",
+    "context",
+    "integration",
+    "auto-surfacing",
+    "prompts"
+  ],
+  "commits": [],
+  "metadata": {}
+}

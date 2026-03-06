@@ -1,0 +1,42 @@
+{
+  "id": "EPIC-029",
+  "type": "epic",
+  "category": "general",
+  "title": "Node-Free MCP Distribution & VS Code Marketplace Presence",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-25T13:40:53.607Z",
+  "updated": "2026-03-05T18:27:22.218Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/mcpServerManager.ts",
+    "packages/extension/src/extension.ts",
+    "packages/extension/package.json",
+    "packages/mcp-server/src/http-server.ts",
+    "INSTALL.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-124"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "distribution",
+    "vscode-extension",
+    "node-free",
+    "marketplace"
+  ],
+  "commits": [],
+  "metadata": {}
+}

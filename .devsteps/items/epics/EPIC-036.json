@@ -1,0 +1,37 @@
+{
+  "id": "EPIC-036",
+  "type": "epic",
+  "category": "general",
+  "title": "EPIC-036: Durable Execution — Human-in-the-Loop & Crash Recovery",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-28T01:12:28.779Z",
+  "updated": "2026-02-28T02:12:42.965Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-164",
+      "STORY-167"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "durable-execution",
+    "human-in-the-loop",
+    "checkpoint",
+    "guide-server",
+    "critical"
+  ],
+  "commits": [],
+  "metadata": {}
+}

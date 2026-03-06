@@ -1,0 +1,38 @@
+{
+  "id": "TASK-287",
+  "type": "task",
+  "category": "general",
+  "title": "MCP-Handler: write_log_entry (Atomic JSON Write)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-27T23:44:14.798Z",
+  "updated": "2026-02-27T23:46:26.461Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/logbook.ts",
+    "packages/mcp-server/src/handlers/logbook/write-log-entry.ts",
+    "packages/mcp-server/src/server.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-133"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "TASK-290"
+    ],
+    "blocked-by": [
+      "TASK-286"
+    ],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

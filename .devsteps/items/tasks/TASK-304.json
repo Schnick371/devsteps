@@ -1,0 +1,36 @@
+{
+  "id": "TASK-304",
+  "type": "task",
+  "category": "general",
+  "title": "T2.2: TypeScript TraceLogger Utility (JSONL Writer)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:39:23.661Z",
+  "updated": "2026-03-05T08:42:01.696Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/utils/trace-logger.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-183"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "trace-logger",
+    "jsonl"
+  ],
+  "commits": [],
+  "metadata": {}
+}

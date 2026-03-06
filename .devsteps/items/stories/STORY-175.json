@@ -1,0 +1,38 @@
+{
+  "id": "STORY-175",
+  "type": "story",
+  "category": "general",
+  "title": "guide_nl_to_item — Natural Language to Structured DevSteps Item (NL-to-Task)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T02:12:30.432Z",
+  "updated": "2026-02-28T02:12:42.971Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/",
+    "packages/shared/src/schemas/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-010"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "natural-language",
+    "daily-workflow",
+    "guide-server",
+    "knowledge"
+  ],
+  "commits": [],
+  "metadata": {}
+}

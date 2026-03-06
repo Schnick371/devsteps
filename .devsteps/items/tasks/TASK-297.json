@@ -1,0 +1,34 @@
+{
+  "id": "TASK-297",
+  "type": "task",
+  "category": "general",
+  "title": "T0.1: Research VS Code vscode.lm API event hooks for agent call interception",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:38:37.370Z",
+  "updated": "2026-03-05T08:44:39.332Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "SPIKE-017"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spike",
+    "vscode-api",
+    "lm-api"
+  ],
+  "commits": [],
+  "metadata": {}
+}

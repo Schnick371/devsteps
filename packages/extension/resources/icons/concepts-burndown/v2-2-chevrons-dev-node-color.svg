@@ -1,0 +1,16 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v2.2 — Chevrons with Dev Node (Color)</title>
+  <defs>
+    <linearGradient id="v2g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+  <!-- Forward chevrons -->
+  <polyline points="20,92 56,64 20,36" fill="none" stroke="url(#v2g)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+  <polyline points="44,92 80,64 44,36" fill="none" stroke="url(#v2g)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <polyline points="68,92 104,64 68,36" fill="none" stroke="url(#v2g)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Dev cue: node + short tail (commit/build) -->
+  <circle cx="26" cy="22" r="6" fill="#0F172A"/>
+  <line x1="26" y1="28" x2="26" y2="38" stroke="#0F172A" stroke-width="4" stroke-linecap="round"/>
+</svg>

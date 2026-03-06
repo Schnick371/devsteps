@@ -1,0 +1,41 @@
+{
+  "id": "STORY-142",
+  "type": "story",
+  "category": "general",
+  "title": "Active Work Cursor Middleware",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:50:09.655Z",
+  "updated": "2026-02-28T00:50:25.896Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/server.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-033"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-143"
+    ],
+    "blocked-by": [
+      "STORY-141"
+    ],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "middleware",
+    "work-cursor",
+    "auto-tracking",
+    "mcp-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

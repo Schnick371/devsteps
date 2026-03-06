@@ -68,6 +68,35 @@ const items = await listItems('/path/to/.devsteps');
 - `updateItemSchema` - Validation for updates
 - `linkItemSchema` - Validation for relationships
 
+### CBP Schemas (Context Budget Protocol)
+
+The `MandateResult` schema is split into two variants to support both backward-compatible reads and strict writes:
+
+| Schema | Purpose | Strictness |
+|--------|---------|------------|
+| `ReadMandateResultSchema` | Reading historical and current `.result.json` files | Lenient — tolerates `item_ids:[]`, short analyst names |
+| `WriteMandateResultSchema` | Validating new writes via `write_mandate_result` tool | Strict — requires `item_ids` ≥ 1, `analyst` matching `devsteps-R{N}-{name}` |
+| `MandateResultSchema` | Backward-compat alias → `ReadMandateResultSchema` | Lenient (same as read) |
+
+**Write-path constraints (`WriteMandateResultSchema`):**
+- `item_ids`: must contain at least 1 item ID
+- `analyst`: must match regex `/^devsteps-R\d+-/` (e.g., `devsteps-R2-aspect-impact`)
+
+**Example:**
+```typescript
+import {
+  ReadMandateResultSchema,
+  WriteMandateResultSchema,
+  type MandateResult,
+} from '@schnick371/devsteps-shared';
+
+// For reading files from disk:
+const parsed = ReadMandateResultSchema.safeParse(rawJson);
+
+// For validating new writes:
+const validated = WriteMandateResultSchema.safeParse(newResult);
+```
+
 ## Documentation
 
 - [DevSteps Documentation](https://devsteps.dev)

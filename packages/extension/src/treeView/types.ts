@@ -40,6 +40,7 @@ export interface WorkItem {
   updated?: string;
   tags?: string[];
   linked_items?: {
+    implements?: string[];
     'implemented-by'?: string[];
     blocks?: string[];
     'blocked-by'?: string[];

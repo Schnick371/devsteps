@@ -1,0 +1,47 @@
+{
+  "id": "EPIC-034",
+  "type": "epic",
+  "category": "general",
+  "title": "Daily Workflow Intelligence Tools",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:55:33.348Z",
+  "updated": "2026-02-28T02:12:42.970Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/",
+    "packages/mcp-server/src/handlers/",
+    "packages/shared/src/schemas/",
+    "packages/cli/src/commands/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-149",
+      "STORY-155",
+      "STORY-157",
+      "STORY-158",
+      "STORY-172"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-031"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "daily-workflow",
+    "gap-analysis",
+    "mcp-tools",
+    "ai-workflow",
+    "composite"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,40 @@
+{
+  "id": "STORY-140",
+  "type": "story",
+  "category": "general",
+  "title": "Session Schema & Storage Layer",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:50:09.649Z",
+  "updated": "2026-02-28T00:50:19.197Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/session.ts",
+    "packages/shared/src/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-033"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-141"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "schemas",
+    "zod",
+    "session",
+    "shared"
+  ],
+  "commits": [],
+  "metadata": {}
+}

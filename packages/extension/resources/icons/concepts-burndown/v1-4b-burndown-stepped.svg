@@ -1,0 +1,35 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-col-b" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563EB;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#1D4ED8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad-burndown-b" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F97316;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EF4444;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Three columns with decreasing height (visualizing burndown) -->
+  <rect x="40" y="60" width="52" height="164" rx="8" fill="url(#grad-col-b)" opacity="0.7"/>
+  <rect x="104" y="100" width="52" height="124" rx="8" fill="url(#grad-col-b)" opacity="0.7"/>
+  <rect x="168" y="160" width="52" height="64" rx="8" fill="url(#grad-col-b)" opacity="0.7"/>
+  
+  <!-- Cards -->
+  <rect x="48" y="76" width="36" height="24" rx="4" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="48" y="108" width="36" height="24" rx="4" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="112" y="116" width="36" height="24" rx="4" fill="#E0F2FE" opacity="0.7"/>
+  <rect x="176" y="176" width="36" height="24" rx="4" fill="#E0F2FE" opacity="0.5"/>
+  
+  <!-- Stepped burndown curve on top -->
+  <path d="M 40 60 L 96 60 L 96 100 L 160 100 L 160 160 L 224 160" 
+        stroke="url(#grad-burndown-b)" 
+        stroke-width="5" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        fill="none"/>
+  <circle cx="40" cy="60" r="7" fill="#F59E0B"/>
+  <circle cx="96" cy="100" r="7" fill="#F97316"/>
+  <circle cx="160" cy="160" r="7" fill="#EF4444"/>
+</svg>

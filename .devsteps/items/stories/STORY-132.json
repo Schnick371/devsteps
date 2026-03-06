@@ -1,0 +1,47 @@
+{
+  "id": "STORY-132",
+  "type": "story",
+  "category": "general",
+  "title": "Prompt-Integration — Logbuch in allen Workflow-Einstiegspunkten",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-27T13:00:47.853Z",
+  "updated": "2026-02-27T13:09:43.389Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/prompts/devsteps-20-start-work.prompt.md",
+    ".github/prompts/devsteps-25-review.prompt.md",
+    ".github/prompts/devsteps-30-rapid-cycle.prompt.md",
+    ".github/prompts/devsteps-40-sprint.prompt.md",
+    ".github/prompts/devsteps-90-project-context.prompt.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-031"
+    ],
+    "implemented-by": [
+      "TASK-285",
+      "TASK-283",
+      "TASK-284"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [
+      "STORY-129"
+    ],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "prompts",
+    "dx",
+    "session-continuity",
+    "logging"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,39 @@
+{
+  "id": "SPIKE-022",
+  "type": "spike",
+  "category": "general",
+  "title": "Follow-up: runSubagent context injection, CBP audit, tracing & onboarding improvements (SPIKE-021 part 2)",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T11:20:54.161Z",
+  "updated": "2026-03-05T11:49:28.022Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-330",
+      "TASK-335"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research",
+    "copilot",
+    "runSubagent",
+    "tracing",
+    "observability",
+    "onboarding",
+    "cbp-audit"
+  ],
+  "commits": [],
+  "metadata": {}
+}

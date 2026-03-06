@@ -1,0 +1,35 @@
+{
+  "id": "TASK-289",
+  "type": "task",
+  "category": "general",
+  "title": "MCP-Handler: list_log_entries (Metadaten-Index)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-27T23:44:43.819Z",
+  "updated": "2026-02-27T23:46:23.272Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/logbook/list-log-entries.ts",
+    "packages/mcp-server/src/tools/logbook.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-133"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [
+      "TASK-286"
+    ],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

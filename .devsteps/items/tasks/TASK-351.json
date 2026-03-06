@@ -1,0 +1,35 @@
+{
+  "id": "TASK-351",
+  "type": "task",
+  "category": "general",
+  "title": "Add devsteps.mcpActive context key gate to prevent double MCP server registration when extension + plugin both active",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T22:03:00.244Z",
+  "updated": "2026-03-06T10:21:55.407Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/mcpServerManager.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-199"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agent-plugin",
+    "research-2026-03-05"
+  ],
+  "commits": [],
+  "metadata": {}
+}

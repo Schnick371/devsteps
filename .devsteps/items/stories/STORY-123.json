@@ -1,0 +1,41 @@
+{
+  "id": "STORY-123",
+  "type": "story",
+  "category": "general",
+  "title": "MCPB Binary Bundle for Claude Desktop, Cursor & Node-Free Hosts",
+  "status": "planned",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-25T13:43:08.773Z",
+  "updated": "2026-02-25T13:43:18.661Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/",
+    ".github/workflows/",
+    "scripts/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-029"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "distribution",
+    "mcpb",
+    "bun-compile",
+    "binary",
+    "track-2"
+  ],
+  "commits": [],
+  "metadata": {}
+}

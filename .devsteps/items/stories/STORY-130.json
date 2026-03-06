@@ -1,0 +1,45 @@
+{
+  "id": "STORY-130",
+  "type": "story",
+  "category": "general",
+  "title": "Session-Kontinuität — T1 liest + schreibt PROJECT-LOG.md",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-27T13:00:47.848Z",
+  "updated": "2026-02-27T23:46:07.270Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-t1-coordinator.agent.md",
+    ".github/agents/devsteps-t1-sprint-executor.agent.md",
+    ".devsteps/logs/PROJECT-LOG.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-031"
+    ],
+    "implemented-by": [
+      "TASK-280",
+      "TASK-279"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [
+      "STORY-129",
+      "STORY-133"
+    ],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "t1-coordinator",
+    "t1-sprint-executor",
+    "session-continuity",
+    "logging"
+  ],
+  "commits": [],
+  "metadata": {}
+}

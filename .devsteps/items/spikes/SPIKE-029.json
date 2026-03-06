@@ -1,0 +1,33 @@
+{
+  "id": "SPIKE-029",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: Investigate agent namespace deduplication when workspace + plugin both active (34 agents × 2 = 68?)",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-03-05T22:03:41.605Z",
+  "updated": "2026-03-05T22:04:23.410Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-199"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agent-plugin",
+    "research-2026-03-05"
+  ],
+  "commits": [],
+  "metadata": {}
+}

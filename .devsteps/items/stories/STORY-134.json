@@ -1,0 +1,42 @@
+{
+  "id": "STORY-134",
+  "type": "story",
+  "category": "general",
+  "title": "Plan & Trail Zod-Schemas",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:48:26.112Z",
+  "updated": "2026-02-28T00:48:55.860Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/plan.ts",
+    "packages/shared/src/schemas/trail.ts",
+    "packages/shared/src/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-032"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-138"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "schemas",
+    "zod",
+    "plan",
+    "trail",
+    "shared"
+  ],
+  "commits": [],
+  "metadata": {}
+}

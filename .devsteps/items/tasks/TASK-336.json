@@ -1,0 +1,37 @@
+{
+  "id": "TASK-336",
+  "type": "task",
+  "category": "general",
+  "title": "Add devsteps cbp cleanup CLI command with TTL",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-03-05T14:33:46.793Z",
+  "updated": "2026-03-05T14:34:17.933Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-335"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cli",
+    "cbp",
+    "cleanup",
+    "ttl"
+  ],
+  "commits": [],
+  "metadata": {}
+}

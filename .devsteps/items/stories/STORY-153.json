@@ -1,0 +1,42 @@
+{
+  "id": "STORY-153",
+  "type": "story",
+  "category": "general",
+  "title": "Structured Acceptance Criteria Tracking",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:52:53.013Z",
+  "updated": "2026-02-28T00:56:34.944Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/item.ts",
+    "packages/mcp-server/src/tools/verify.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-034"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-158"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "acceptance-criteria",
+    "quality",
+    "verification",
+    "schema",
+    "shared",
+    "mcp-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

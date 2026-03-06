@@ -1,0 +1,51 @@
+{
+  "id": "STORY-183",
+  "type": "story",
+  "category": "general",
+  "title": "S2: TypeScript TraceLogger + FSWatcher Pipeline for Agent Dispatch Visibility",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:38:09.451Z",
+  "updated": "2026-03-05T08:50:41.525Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/trace.ts",
+    "packages/shared/src/utils/trace-logger.ts",
+    "packages/extension/src/extension.ts",
+    ".devsteps/traces/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-040"
+    ],
+    "implemented-by": [
+      "TASK-303",
+      "TASK-304",
+      "TASK-305",
+      "TASK-306",
+      "TASK-307",
+      "TASK-321",
+      "TASK-323"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "STORY-184"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "tracing",
+    "trace-logger",
+    "fswatcher",
+    "shared",
+    "extension"
+  ],
+  "commits": [],
+  "metadata": {}
+}

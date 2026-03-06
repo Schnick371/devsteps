@@ -1,0 +1,35 @@
+{
+  "id": "TASK-321",
+  "type": "task",
+  "category": "general",
+  "title": "T2.6: Vitest unit tests — TraceLogger async write + TraceEvent Zod schema",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:49:39.795Z",
+  "updated": "2026-03-05T08:49:42.922Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-183"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "tests",
+    "vitest",
+    "trace-logger",
+    "shared"
+  ],
+  "commits": [],
+  "metadata": {}
+}

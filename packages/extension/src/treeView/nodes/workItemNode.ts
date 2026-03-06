@@ -8,6 +8,7 @@
 import type { ItemType } from '@schnick371/devsteps-shared';
 import * as vscode from 'vscode';
 import { createItemUri } from '../../decorationProvider.js';
+import type { Priority } from '../../utils/icons.js';
 import { getItemIconWithPriority } from '../../utils/icons.js';
 import { type FilterState, TreeNode, type WorkItem } from '../types.js';
 import { loadItemWithLinks } from '../utils/itemLoader.js';
@@ -233,6 +234,6 @@ export class WorkItemNode extends TreeNode {
 
   private getIcon(): vscode.ThemeIcon {
     // Use centralized icon system with priority-based coloring
-    return getItemIconWithPriority(this.item.type as ItemType, this.item.priority);
+    return getItemIconWithPriority(this.item.type as ItemType, this.item.priority as Priority);
   }
 }

@@ -1,0 +1,37 @@
+{
+  "id": "BUG-065",
+  "type": "bug",
+  "category": "general",
+  "title": "CBP Schema: WriteMandateResultSchema missing findings.max + recommendations.item.max",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-06T09:30:37.973Z",
+  "updated": "2026-03-06T09:33:49.698Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/cbp-mandate.ts",
+    "packages/shared/src/constants/index.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cbp",
+    "schema",
+    "mcp-tools",
+    "mandate-result",
+    "validation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

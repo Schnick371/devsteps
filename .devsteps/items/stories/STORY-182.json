@@ -1,0 +1,47 @@
+{
+  "id": "STORY-182",
+  "type": "story",
+  "category": "general",
+  "title": "S1: Card Dashboard Landing Page — SPA Refactor of Extension WebviewPanel",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:38:01.367Z",
+  "updated": "2026-03-05T08:49:17.528Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/",
+    "packages/extension/media/dashboard.css"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-040"
+    ],
+    "implemented-by": [
+      "TASK-299",
+      "TASK-300",
+      "TASK-301",
+      "TASK-302"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "STORY-185",
+      "STORY-184"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "dashboard",
+    "spa",
+    "extension",
+    "webview",
+    "cards"
+  ],
+  "commits": [],
+  "metadata": {}
+}

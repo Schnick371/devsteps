@@ -1,0 +1,46 @@
+{
+  "id": "STORY-131",
+  "type": "story",
+  "category": "general",
+  "title": "Epic-Narrativ — T2-Impl + T2-Reviewer schreiben Epic-Logs",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-27T13:00:47.850Z",
+  "updated": "2026-02-27T23:46:11.600Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-t2-impl.agent.md",
+    ".github/agents/devsteps-t2-reviewer.agent.md",
+    ".devsteps/logs/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-031"
+    ],
+    "implemented-by": [
+      "TASK-282",
+      "TASK-281"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [
+      "STORY-129",
+      "STORY-133"
+    ],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "t2-impl",
+    "t2-reviewer",
+    "epic-log",
+    "narrative",
+    "logging"
+  ],
+  "commits": [],
+  "metadata": {}
+}

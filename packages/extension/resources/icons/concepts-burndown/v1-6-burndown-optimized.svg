@@ -1,0 +1,55 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-col-6" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563EB;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#1D4ED8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad-chart-6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#EF4444;stop-opacity:0.1" />
+    </linearGradient>
+    <linearGradient id="grad-ideal-6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#94A3B8;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#64748B;stop-opacity:0.7" />
+    </linearGradient>
+    <linearGradient id="grad-actual-6" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#475569;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#334155;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E293B;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Border frame -->
+  <rect x="2" y="2" width="252" height="252" rx="8" fill="none" stroke="#0F172A" stroke-width="3" opacity="0.2"/>
+  
+  <!-- Chart background fill area -->
+  <path d="M 20 40 L 236 40 L 236 180 Q 128 110, 20 40 Z" fill="url(#grad-chart-6)"/>
+  
+  <!-- Three columns decreasing -->
+  <rect x="24" y="44" width="64" height="186" rx="9" fill="url(#grad-col-6)" opacity="0.75"/>
+  <rect x="96" y="80" width="64" height="150" rx="9" fill="url(#grad-col-6)" opacity="0.75"/>
+  <rect x="168" y="130" width="64" height="100" rx="9" fill="url(#grad-col-6)" opacity="0.75"/>
+  
+  <!-- Cards inside columns -->
+  <rect x="32" y="58" width="48" height="28" rx="4" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="32" y="94" width="48" height="28" rx="4" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="32" y="130" width="48" height="28" rx="4" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="32" y="166" width="48" height="28" rx="4" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="104" y="94" width="48" height="28" rx="4" fill="#E0F2FE" opacity="0.7"/>
+  <rect x="104" y="130" width="48" height="28" rx="4" fill="#E0F2FE" opacity="0.7"/>
+  <rect x="176" y="144" width="48" height="28" rx="4" fill="#E0F2FE" opacity="0.5"/>
+  
+  <!-- Ideal burndown line (dotted, less steep from v1-5d) -->
+  <line x1="24" y1="44" x2="236" y2="180" 
+        stroke="url(#grad-ideal-6)" 
+        stroke-width="3" 
+        stroke-dasharray="8,6"
+        stroke-linecap="round"/>
+  
+  <!-- Actual line from v1-5b (fever curve, dark gray) -->
+  <path d="M 24 30 Q 42 38, 60 44 Q 80 48, 100 50 Q 100 62, 100 76 Q 120 84, 140 92 Q 158 101, 176 110 Q 176 127, 176 145 Q 193 156, 210 168 Q 229 158, 248 142" 
+        stroke="url(#grad-actual-6)" 
+        stroke-width="4" 
+        stroke-linecap="round" 
+        fill="none"/>
+</svg>

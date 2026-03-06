@@ -179,3 +179,27 @@ export const metricsTool: Tool = {
     },
   },
 };
+
+export const updateCopilotFilesTool: Tool = {
+  name: 'update_copilot_files',
+  description:
+    'Update devsteps-managed GitHub Copilot files (.github/agents, .github/instructions, .github/prompts) in the current workspace. Compares installed files against the bundled package source using SHA-256 hashes stored in HTML comments, backs up changed files, then writes fresh copies. Use dry_run to preview changes without writing.',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      dry_run: {
+        type: 'boolean',
+        description: 'Preview changes without writing files or creating a backup (default: false)',
+      },
+      force: {
+        type: 'boolean',
+        description: 'Overwrite all files even when hashes match (default: false)',
+      },
+      max_backups: {
+        type: 'number',
+        description: 'Maximum number of backup rotations to keep (default: 5)',
+      },
+    },
+  },
+};
+

@@ -1,0 +1,1 @@
+Create responsive card grid layout in dashboard.css. Cards use VS Code CSS variables (--vscode-*) for full theme compatibility. Each card has: title, mini-preview area (SVG), status badge, click-to-navigate behavior. Hover effects using VS Code button styles. Affected: packages/extension/media/dashboard.css

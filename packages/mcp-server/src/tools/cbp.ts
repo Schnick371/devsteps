@@ -4,7 +4,7 @@
  *
  * MCP Tool definitions — Context Budget Protocol (CBP) Tier-2 Mandate tools:
  * write_mandate_result, read_mandate_results, write_rejection_feedback,
- * write_iteration_signal, write_escalation
+ * write_iteration_signal, write_escalation, write_dispatch_manifest, patch_dispatch_manifest
  */
 
 import type { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -13,8 +13,12 @@ export const writeMandateResultTool: Tool = {
   name: 'write_mandate_result',
   description:
     'Write a validated MandateResult to .devsteps/cbp/[sprint_id]/[mandate_id].result.json. ' +
-    'Called by Tier-2 Deep Analysts after synthesizing all T3 sub-question answers. ' +
-    'Tier-1 reads via read_mandate_results. Uses atomic write (.tmp → rename).',
+    'Called by Tier-2 Deep Analysts (Ring 1–5) after synthesizing analysis. ' +
+    'Tier-1 coord reads results via read_mandate_results. Uses atomic write (.tmp → rename). ' +
+    'REQUIRED: mandate_result must be a JSON OBJECT (not a stringified JSON string). ' +
+    'REQUIRED: analyst must match pattern devsteps-R{N}-{name} e.g. devsteps-R1-analyst-archaeology. ' +
+    'REQUIRED: sprint_id must be alphanumeric+dash+underscore+dot only (no slashes or dots-dot). ' +
+    'findings max 12000 chars; each recommendation max 300 chars; max 5 recommendations.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -34,11 +38,15 @@ export const writeMandateResultTool: Tool = {
           },
           sprint_id: {
             type: 'string',
-            description: 'Sprint or session context ID — used in file path (required)',
+            pattern: '^[a-zA-Z0-9_.\\-]+$',
+            description:
+              'Sprint or session context ID — used as filesystem path segment (required). Only alphanumeric, dash, underscore, dot.',
           },
           analyst: {
             type: 'string',
-            description: 'Tier-2 agent name that produced this result (required)',
+            pattern: '^devsteps-R\\d+-',
+            description:
+              'Agent name that produced this result (required). MUST match devsteps-R{N}-{name} format, e.g. devsteps-R1-analyst-archaeology, devsteps-R2-aspect-impact, devsteps-R3-exec-planner.',
           },
           status: {
             type: 'string',
@@ -47,12 +55,12 @@ export const writeMandateResultTool: Tool = {
           },
           findings: {
             type: 'string',
-            description: 'Structured synthesis, MAX ~800 tokens / 6000 chars (required)',
+            description: 'Structured synthesis, MAX ~1600 tokens / 12000 chars (required)',
           },
           recommendations: {
             type: 'array',
-            items: { type: 'string' },
-            description: 'Top-5 actionable items for Tier-1, max 200 chars each (required)',
+            items: { type: 'string', maxLength: 300 },
+            description: 'Top-5 actionable items for Tier-1, max 300 chars each (required)',
           },
           confidence: {
             type: 'number',
@@ -96,9 +104,12 @@ export const readMandateResultsTool: Tool = {
   name: 'read_mandate_results',
   description:
     'Read all MandateResult files for a sprint_id from .devsteps/cbp/[sprint_id]/. ' +
-    'Returns MandateResult array sorted by completed_at (ascending). ' +
+    'Returns an envelope: { results[], count, quorum_ok, missing_analysts, dispatched, received, threshold, status }. ' +
+    'Iterate .results[] (not the response directly). ' +
     'Called by Tier-1 after dispatching Tier-2 analysts. ' +
-    'Missing files return empty array (not error). Optional filters: mandate_ids, status_filter.',
+    'Missing files return empty envelope (not error). Optional filters: mandate_ids, status_filter. ' +
+    'When expected_agent_names is provided, quorum_ok and missing_analysts indicate whether all dispatched analysts have reported. ' +
+    "status is 'quorum_met' or 'quorum_failed'. When omitted, quorum fields are undefined.",
   inputSchema: {
     type: 'object',
     properties: {
@@ -115,6 +126,18 @@ export const readMandateResultsTool: Tool = {
         type: 'string',
         enum: ['complete', 'partial', 'escalated', 'all'],
         description: 'Optional: filter by result status. Default: all',
+      },
+      expected_agent_names: {
+        type: 'array',
+        items: { type: 'string' },
+        description:
+          'Optional: list of analyst names that were dispatched. When provided, enables quorum tracking: ' +
+          'quorum_ok=true when all have reported, missing_analysts lists those that have not.',
+      },
+      dispatch_id: {
+        type: 'string',
+        description:
+          'Optional: correlation ID for structured dispatch logging (TASK-332 logger integration).',
       },
     },
     required: ['sprint_id'],
@@ -321,5 +344,164 @@ export const writeEscalationTool: Tool = {
       'sprint_id',
       'escalated_at',
     ],
+  },
+};
+
+export const writeDispatchManifestTool: Tool = {
+  name: 'write_dispatch_manifest',
+  description:
+    'Write a DispatchManifest at coord fan-out time. ' +
+    "Records all dispatched agents with status='pending' for audit and timeout tracking. " +
+    'UUID-named file (dispatch-manifest-{dispatch_id}.json) prevents last-write-wins races. ' +
+    'Storage: .devsteps/cbp/[sprint_id]/dispatch-manifest-[dispatch_id].json. ' +
+    'Patch individual entries as MandateResults arrive using patch_dispatch_manifest.',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      schema_version: {
+        type: 'string',
+        enum: ['1.0'],
+        description: "Schema version — must be '1.0'",
+      },
+      dispatch_id: {
+        type: 'string',
+        format: 'uuid',
+        description: 'UUID uniquely identifying this fan-out run (required)',
+      },
+      sprint_id: {
+        type: 'string',
+        description: 'Sprint or session context ID — used as path segment (required)',
+      },
+      triage_tier: {
+        type: 'string',
+        enum: ['QUICK', 'STANDARD', 'FULL', 'COMPETITIVE'],
+        description: 'Triage tier that determined the ring composition (required)',
+      },
+      session_start: {
+        type: 'string',
+        description: 'ISO 8601 timestamp when coord initiated the fan-out (required)',
+      },
+      expected_by: {
+        type: 'string',
+        description: 'ISO 8601 deadline for the entire dispatch (required)',
+      },
+      dispatches: {
+        type: 'array',
+        description: 'One entry per dispatched agent (required)',
+        items: {
+          type: 'object',
+          properties: {
+            mandate_id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'UUID correlating to the MandateResult (required)',
+            },
+            agent: {
+              type: 'string',
+              description: "Agent name, e.g. 'analyst-archaeology' (required)",
+            },
+            ring: {
+              type: 'integer',
+              minimum: 1,
+              maximum: 5,
+              description: 'Spider Web ring number (required)',
+            },
+            dispatched_at: {
+              type: 'string',
+              description: 'ISO 8601 dispatch timestamp (required)',
+            },
+            expected_by: {
+              type: 'string',
+              description: 'ISO 8601 deadline for this agent (required)',
+            },
+            completed_at: {
+              type: 'string',
+              nullable: true,
+              description: 'ISO 8601 completion timestamp — null at dispatch time',
+            },
+            duration_ms: {
+              type: 'integer',
+              nullable: true,
+              description: 'Wall-clock duration in ms — null at dispatch time',
+            },
+            status: {
+              type: 'string',
+              enum: ['pending', 'complete', 'failed', 'timeout'],
+              description: 'Lifecycle status — set to pending at dispatch time',
+            },
+            confidence: {
+              type: 'number',
+              minimum: 0,
+              maximum: 1,
+              nullable: true,
+              description: 'Analyst confidence 0–1 — null at dispatch time',
+            },
+            output_tokens_approx: {
+              type: 'integer',
+              nullable: true,
+              description: 'Approximate output tokens — null at dispatch time',
+            },
+          },
+          required: ['mandate_id', 'agent', 'ring', 'dispatched_at', 'expected_by', 'status'],
+        },
+      },
+    },
+    required: [
+      'schema_version',
+      'dispatch_id',
+      'sprint_id',
+      'triage_tier',
+      'session_start',
+      'expected_by',
+      'dispatches',
+    ],
+  },
+};
+
+export const patchDispatchManifestTool: Tool = {
+  name: 'patch_dispatch_manifest',
+  description:
+    'Patch a single dispatch entry in an existing DispatchManifest when a MandateResult arrives. ' +
+    'Updates completed_at, duration_ms, status, confidence, and output_tokens_approx for the matching mandate_id. ' +
+    'Reads and rewrites the manifest atomically (.tmp → rename). ' +
+    'manifest_path should be the relative path returned by write_dispatch_manifest.',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      manifest_path: {
+        type: 'string',
+        description:
+          'Relative path to the manifest file, e.g. .devsteps/cbp/sprint-1/dispatch-manifest-{uuid}.json (required)',
+      },
+      mandate_id: {
+        type: 'string',
+        format: 'uuid',
+        description: 'UUID of the dispatch entry to patch (required)',
+      },
+      completed_at: {
+        type: 'string',
+        description: 'ISO 8601 timestamp when the MandateResult was received (required)',
+      },
+      duration_ms: {
+        type: 'integer',
+        description: 'Wall-clock duration in ms (optional)',
+      },
+      status: {
+        type: 'string',
+        enum: ['complete', 'failed', 'timeout'],
+        description: 'Updated lifecycle status (required)',
+      },
+      confidence: {
+        type: 'number',
+        minimum: 0,
+        maximum: 1,
+        description: 'Analyst confidence score 0–1 (optional)',
+      },
+      output_tokens_approx: {
+        type: 'integer',
+        description: 'Approximate output tokens consumed (optional)',
+      },
+    },
+    required: ['manifest_path', 'mandate_id', 'status'],
   },
 };

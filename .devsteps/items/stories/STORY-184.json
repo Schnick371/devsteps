@@ -1,0 +1,50 @@
+{
+  "id": "STORY-184",
+  "type": "story",
+  "category": "general",
+  "title": "S3: Spider Web Visualizer Card with D3.js Ring Diagram",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:38:20.055Z",
+  "updated": "2026-03-05T08:50:03.894Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/",
+    "packages/extension/esbuild.js"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-040"
+    ],
+    "implemented-by": [
+      "TASK-308",
+      "TASK-309",
+      "TASK-310",
+      "TASK-311",
+      "TASK-312",
+      "TASK-322"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-183",
+      "SPIKE-017",
+      "STORY-182"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spider-web",
+    "d3",
+    "visualizer",
+    "extension",
+    "webview"
+  ],
+  "commits": [],
+  "metadata": {}
+}

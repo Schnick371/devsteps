@@ -1,0 +1,36 @@
+{
+  "id": "TASK-313",
+  "type": "task",
+  "category": "general",
+  "title": "T4.1: BurndownCard Mini-SVG Preview (sparkline)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T08:40:23.128Z",
+  "updated": "2026-03-05T08:42:39.471Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-185"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cards",
+    "burndown",
+    "svg"
+  ],
+  "commits": [],
+  "metadata": {}
+}

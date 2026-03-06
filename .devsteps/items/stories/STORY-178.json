@@ -1,0 +1,37 @@
+{
+  "id": "STORY-178",
+  "type": "story",
+  "category": "general",
+  "title": "Planning Web — full Spider Web for devsteps-10-plan-work with R4-worker-devsteps",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-04T09:51:47.397Z",
+  "updated": "2026-03-04T09:59:57.556Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/prompts/devsteps-10-plan-work.prompt.md",
+    ".github/agents/devsteps-R4-worker-devsteps.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-039"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spider-web",
+    "planning",
+    "copilot-files"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,52 @@
+{
+  "id": "STORY-185",
+  "type": "story",
+  "category": "general",
+  "title": "S4: Mini-Preview SVG Cards + Extended Documentation",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T08:38:29.007Z",
+  "updated": "2026-03-05T08:43:12.862Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/",
+    "docs/architecture/mpd-architecture.md",
+    "packages/extension/README.md",
+    "scripts/sync-agent-registry.mjs"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-040"
+    ],
+    "implemented-by": [
+      "TASK-313",
+      "TASK-314",
+      "TASK-315",
+      "TASK-316",
+      "TASK-317",
+      "TASK-318",
+      "TASK-319"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-182"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cards",
+    "mini-preview",
+    "svg",
+    "documentation",
+    "burndown",
+    "eisenhower"
+  ],
+  "commits": [],
+  "metadata": {}
+}

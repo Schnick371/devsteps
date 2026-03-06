@@ -1,0 +1,45 @@
+{
+  "id": "STORY-117",
+  "type": "story",
+  "category": "general",
+  "title": "read_escalations MCP Tool — Close the Escalation Read Loop",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-23T22:53:39.145Z",
+  "updated": "2026-02-23T23:01:56.791Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/cbp.ts",
+    "packages/mcp-server/src/tools/index.ts",
+    "packages/mcp-server/src/handlers/",
+    ".github/agents/devsteps-t1-coordinator.agent.md",
+    ".github/agents/devsteps-t1-sprint-executor.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-006"
+    ],
+    "implemented-by": [
+      "TASK-264",
+      "TASK-265"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "cbp",
+    "escalation",
+    "agent-protocol",
+    "t1"
+  ],
+  "commits": [],
+  "metadata": {}
+}

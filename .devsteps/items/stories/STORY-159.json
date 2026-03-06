@@ -1,0 +1,40 @@
+{
+  "id": "STORY-159",
+  "type": "story",
+  "category": "general",
+  "title": "Trail Schema v2.0 — AI Observability Fields (tokens, cost, tool_invoked, iteration_hash)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-28T01:22:24.846Z",
+  "updated": "2026-02-28T01:28:51.340Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/",
+    "packages/shared/src/constants/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-035"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "trail",
+    "schema",
+    "observability",
+    "tokens",
+    "cost",
+    "guide-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

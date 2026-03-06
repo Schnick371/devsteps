@@ -1,0 +1,36 @@
+{
+  "id": "STORY-192",
+  "type": "story",
+  "category": "general",
+  "title": "VS Code Extension CBP layer: visualize Spider Web dispatch in TreeView",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-03-05T10:40:56.497Z",
+  "updated": "2026-03-05T10:41:12.080Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-021"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "cbp",
+    "spider-web",
+    "treeview",
+    "visualization"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,33 @@
+{
+  "id": "BUG-067",
+  "type": "bug",
+  "category": "general",
+  "title": "BUG: 14 leaf agent files had user-invocable: true (should be false)",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-06T11:24:45.404Z",
+  "updated": "2026-03-06T11:24:49.540Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agents",
+    "cbp",
+    "frontmatter",
+    "ci"
+  ],
+  "commits": [],
+  "metadata": {}
+}

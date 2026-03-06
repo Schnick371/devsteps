@@ -1,0 +1,40 @@
+{
+  "id": "STORY-135",
+  "type": "story",
+  "category": "general",
+  "title": "Gap-Nummerierungs-Algorithmus",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:48:26.121Z",
+  "updated": "2026-02-28T00:48:55.861Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/utils/gap-numbering.ts",
+    "packages/shared/src/utils/gap-numbering.test.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-032"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-137"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "algorithm",
+    "gap-numbering",
+    "insertion",
+    "shared"
+  ],
+  "commits": [],
+  "metadata": {}
+}

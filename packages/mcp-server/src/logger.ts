@@ -86,6 +86,31 @@ export function createRequestLogger(requestId: string, toolName?: string) {
 }
 
 /**
+ * Creates a child logger scoped to a coord dispatch context.
+ *
+ * The dispatchId is provided by coord (Ring 0) as a tool argument —
+ * it is NEVER auto-generated server-side.
+ *
+ * Pass an optional `parent` logger (e.g. a requestLogger) to combine
+ * dispatch_id with request_id + tool_name in a single log entry.
+ * Without a parent, creates a child of the module-level base logger.
+ *
+ * Follows the devsteps.* namespace design (not OpenTelemetry).
+ *
+ * @example
+ *   // Standalone dispatch logger (dispatch_id only):
+ *   const log = createDispatchLogger(args.dispatch_id);
+ *
+ *   // Combined with request context:
+ *   const requestLog = createRequestLogger(requestId, toolName);
+ *   const log = createDispatchLogger(args.dispatch_id, requestLog);
+ */
+export function createDispatchLogger(dispatchId?: string, parent?: Logger): Logger {
+  const base = parent ?? logger;
+  return base.child(dispatchId ? { dispatch_id: dispatchId } : {});
+}
+
+/**
  * Log levels:
  * - fatal: The service is going to stop or become unusable
  * - error: Fatal for a particular request, but the service continues

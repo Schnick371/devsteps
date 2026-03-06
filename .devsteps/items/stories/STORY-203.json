@@ -1,0 +1,37 @@
+{
+  "id": "STORY-203",
+  "type": "story",
+  "category": "general",
+  "title": "read_mandate_results: optional fields[] projection to prevent 120K-char coord responses",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-06T09:30:56.046Z",
+  "updated": "2026-03-06T09:30:56.046Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/cbp-mandate.ts",
+    "packages/mcp-server/src/tools/cbp.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cbp",
+    "mcp-tools",
+    "performance",
+    "mandate-result",
+    "context-budget"
+  ],
+  "commits": [],
+  "metadata": {}
+}

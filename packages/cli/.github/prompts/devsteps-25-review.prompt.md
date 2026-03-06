@@ -1,14 +1,16 @@
 ---
-agent: 'devsteps-t2-reviewer'
-model: 'Claude Sonnet 4.6'
-description: 'Quality review gate - validate completed work before marking done'
-tools: ['read', 'read/problems', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'devsteps/*', 'todo']
+agent: "devsteps-R5-gate-reviewer"
+model: "Claude Sonnet 4.6"
+description: "Quality review gate - validate completed work before marking done"
+tools:
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 ---
 
 # ✅ Review Work — Quality Gate
 
 > **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
 
+> **Active Tools:** `#runSubagent` (dispatch) · `#devsteps` (tracking) · `#bright-data` (research)
 
 ## Mission
 
@@ -24,6 +26,7 @@ Validate that a completed work item meets all acceptance criteria, quality stand
 ## Provide Context
 
 Tell the reviewer:
+
 - The **DevSteps item ID** being reviewed (e.g., `TASK-042`)
 - The **branch name** with the implementation
 - Any specific concerns or areas to focus on
@@ -40,6 +43,7 @@ Tell the reviewer:
 ## Review Verdict
 
 The reviewer issues one of:
+
 - **✅ PASS** — Work item meets all criteria, safe to mark `done`
 - **⚠️ PASS WITH NOTES** — Acceptable, but follow-up items created
 - **❌ FAIL** — Specific issues must be resolved before `done`

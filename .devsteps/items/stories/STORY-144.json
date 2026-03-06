@@ -1,0 +1,39 @@
+{
+  "id": "STORY-144",
+  "type": "story",
+  "category": "general",
+  "title": "Auto-Session-Log Generation",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:50:09.656Z",
+  "updated": "2026-02-28T00:50:25.896Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/session-log.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-033"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-133"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "auto-log",
+    "session",
+    "log-entry",
+    "mcp-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,40 @@
+{
+  "id": "STORY-141",
+  "type": "story",
+  "category": "general",
+  "title": "Core Session MCP-Tools",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:50:09.654Z",
+  "updated": "2026-02-28T00:50:25.894Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/session.ts",
+    "packages/mcp-server/src/handlers/session.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-142"
+    ],
+    "blocked-by": [
+      "STORY-140"
+    ],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp-tools",
+    "session",
+    "lifecycle",
+    "mcp-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

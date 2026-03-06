@@ -13,6 +13,6 @@
     "github.copilot.chat.anthropic.thinking.enabled": true
   },
   "extensions": {
-    "recommendations": []
+    "recommendations": ["devsteps.devsteps"]
   }
 }

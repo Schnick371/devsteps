@@ -1,0 +1,37 @@
+{
+  "id": "STORY-155",
+  "type": "story",
+  "category": "general",
+  "title": "Duplicate Detection bei Item-Erstellung",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:52:53.015Z",
+  "updated": "2026-02-28T00:56:28.187Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/add.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-034"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "duplicate-detection",
+    "quality",
+    "devsteps-add",
+    "mcp-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

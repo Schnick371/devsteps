@@ -1,0 +1,1 @@
+Create packages/shared/src/schemas/trace.ts with Zod schemas: TraceEvent (id, timestamp, sessionId, ring, agent, agentRole, domain, status: 'dispatched'|'completed'|'failed'|'escalated', durationMs?, mandateId?, itemIds, parentMandateId?), TraceSession, AgentRing enum (0-5), AgentDomain enum. Export from packages/shared index.

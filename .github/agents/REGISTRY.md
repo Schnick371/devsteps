@@ -1,57 +1,106 @@
 # DevSteps Agent Registry
 
-## Tier Architecture
+## Architecture — Spinnennetz (Spider Web)
 
-| Tier | Role | Files |
-|---|---|---|
-| **T1 — Coordinator** | Single-item MPD dispatcher | `devsteps-t1-coordinator.agent.md` |
-| **T1 — Sprint** | Multi-item sprint dispatcher | `devsteps-t1-sprint-executor.agent.md` |
-| **T2 — Analysts** | Domain synthesis, mandate handlers | `devsteps-t2-*.agent.md` |
-| **T3 — Sub-agents** | Focused aspect readers (leaf nodes) | `devsteps-t3-aspect-*.agent.md`, `devsteps-t3-analyst-*.agent.md` |
-| **T2 Exec — Conductors** | Execution orchestration (impl/test/doc) | `devsteps-t2-impl.agent.md`, `devsteps-t2-test.agent.md`, `devsteps-t2-doc.agent.md` |
-| **T3 Exec — Workers** | Leaf-node code/test/doc writers (dispatched by T2 Exec only) | `devsteps-t3-impl.agent.md`, `devsteps-t3-test.agent.md`, `devsteps-t3-doc.agent.md` |
+The Spider Web is a **radar/spider chart**: coord sits at the centre, concentric rings are execution phases, radial spokes are analysis domains. Threads are denser near the centre — coord reads many more signals than any outer agent produces.
+
+```
+  Research       Errors
+      ↑              ↑
+      │  ─ ─ ─ ─ ─   │  Ring 5 (gate-reviewer)       outermost
+      │ ─ ─ ─ ─ ─ ─  │  Ring 4 (exec-impl/test/doc)
+      │─ ─ ─ ─ ─ ─ ─ │  Ring 3 (exec-planner)
+Risk ─┼─ ─ ─ ─ ─ ─ ─ ┼─ Code
+      │─ ─ ─ ─ ─ ─ ─ │  Ring 2 (aspect-* parallel)
+      │ ─ ─ ─ ─ ─ ─  │  Ring 1 (analyst-* parallel)
+      │  ┌────────┐   │
+      │  │ coord  │   │  Ring 0 · Hub · Spinne im Zentrum
+      │  └────────┘   │
+      │ ─ ─ ─ ─ ─ ─  │  Ring 1 (analyst-*)
+      │─ ─ ─ ─ ─ ─ ─ │  Ring 2 (aspect-*)
+Docs ─┼─ ─ ─ ─ ─ ─ ─ ┼─ Tests
+      │─ ─ ─ ─ ─ ─ ─ │  Ring 3 (exec-planner)
+      │ ─ ─ ─ ─ ─ ─  │  Ring 4 (exec-impl/test/doc)
+      │  ─ ─ ─ ─ ─   │  Ring 5 (gate-reviewer)       outermost
+      ↓              ↓
+  WorkItems      Infrastr
+```
+
+| Ring | Phase            | Agents                             | Mode             |
+| ---- | ---------------- | ---------------------------------- | ---------------- |
+| 0    | Hub              | `coord-*`                          | orchestrates all |
+| 1    | Analysis         | `analyst-*`                        | parallel fan-out |
+| 2    | Cross-Validation | `aspect-*`                         | parallel fan-out |
+| 3    | Planning         | `exec-planner`                     | sequential       |
+| 4    | Execution        | `exec-impl → exec-test → exec-doc` | sequential       |
+| 5    | Quality Gate     | `gate-reviewer`                    | blocking         |
+
+| Role        | Function                                | File pattern                  |
+| ----------- | --------------------------------------- | ----------------------------- |
+| **coord**   | Coordinator — dispatches all agents     | `devsteps-R0-coord*.agent.md`    |
+| **analyst** | Deep-read analysis, mandate handlers    | `devsteps-analyst-*.agent.md` |
+| **aspect**  | Single-aspect scanner (leaf)            | `devsteps-aspect-*.agent.md`  |
+| **exec**    | Execution orchestration (impl/test/doc) | `devsteps-exec-*.agent.md`    |
+| **gate**    | Blocking QA gate                        | `devsteps-gate-*.agent.md`    |
+| **worker**  | Leaf executor (code/test/doc/devsteps)  | `devsteps-worker-*.agent.md`  |
 
 > All agent files contain a `## Contract` section identifying their tier, dispatcher, and return type.
 
 ---
 
-## T1 → T2 Mandate Routing Table
+## coord → Agent Dispatch Routing Table
 
-> **CRITICAL: All mandates in the same row MUST be dispatched simultaneously (one parallel fan-out).**
+> **CRITICAL: All mandates in the same row MUST be dispatched simultaneously (one parallel fan-out). coord dispatches ALL agents — no nested dispatch.**
 
-| Triage Tier | T2 Mandates (Phase A — parallel) | After MandateResults available |
-|---|---|---|
-| **QUICK** | `t2-planner` | `t2-impl` → `t2-reviewer` |
-| **STANDARD** | `t2-archaeology` + `t2-risk` | → `t2-planner` → `t2-impl` → `t2-test` → `t2-reviewer` |
-| **FULL** | `t2-archaeology` + `t2-risk` + `t2-quality` | → `t2-planner` → `t2-impl` → `t2-test` ∥ `t2-doc` → `t2-reviewer` |
-| **COMPETITIVE** | `t2-research` + `t2-archaeology` | → `t2-planner` → `t2-impl` → `t2-reviewer` |
+| Triage Tier     | Ring 1 — analysts (parallel)                               | Ring 2 — aspects (parallel, after Ring 1)                                      | Ring 3–5                                                                    |
+| --------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| **QUICK**       | `exec-planner`                                             | _(skip)_                                                                       | `exec-impl` → `gate-reviewer`                                               |
+| **STANDARD**    | `analyst-archaeology` + `analyst-risk`                     | `aspect-constraints` + `aspect-impact`                                         | → `exec-planner` → `exec-impl` → `exec-test` → `gate-reviewer`              |
+| **FULL**        | `analyst-archaeology` + `analyst-risk` + `analyst-quality` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` | → `exec-planner` → `exec-impl` → `exec-test` ∥ `exec-doc` → `gate-reviewer` |
+| **COMPETITIVE** | `analyst-research` + `analyst-archaeology`                 | `aspect-constraints` + `aspect-staleness`                                      | → `exec-planner` → `exec-impl` → `gate-reviewer`                            |
 
 ---
 
-## Mandate Types → T2 Agent Mapping
+## Mandate Types → Analyst/Exec Mapping
 
-| mandate-type | T2 Agent | Protocol |
-|---|---|---|
-| `archaeology` | `devsteps-t2-archaeology` | context + internal T3 fan-out → structural map |
-| `risk` | `devsteps-t2-risk` | impact + integration + constraints T3 fan-out → risk matrix |
-| `research` | `devsteps-t2-research` | web + internal T3 cross-validation → ranked recommendation |
-| `quality` | `devsteps-t2-quality` | automated gates + quality T3 + Review-Fix loop |
-| `planning` | `devsteps-t2-planner` | reads existing MandateResults, minimal T3 → ordered steps |
-| `planning` | `devsteps-t2-planner` | reads existing MandateResults, minimal T3 → ordered steps |
-| `implementation` | `devsteps-t2-impl` | dispatches t3-impl + optional t3-analyst-web → code committed |
-| `testing` | `devsteps-t2-test` | dispatches t3-test + optional t3-aspect-quality → tests pass |
-| `documentation` | `devsteps-t2-doc` | dispatches t3-doc + optional t3-aspect-staleness → docs updated |
-| `review` | `devsteps-t2-reviewer` | Blocking quality gate — PASS/FAIL, write_rejection_feedback, escalation |
+| mandate-type     | Agent                          | Protocol                                                                       |
+| ---------------- | ------------------------------ | ------------------------------------------------------------------------------ |
+| `archaeology`    | `devsteps-R1-analyst-archaeology` | context + internal aspect fan-out → structural map                             |
+| `risk`           | `devsteps-R1-analyst-risk`        | impact + integration + constraints aspect fan-out → risk matrix                |
+| `research`       | `devsteps-R1-analyst-research`    | web + internal aspect cross-validation → ranked recommendation                 |
+| `quality`        | `devsteps-R1-analyst-quality`     | automated gates + quality aspect + Review-Fix loop                             |
+| `planning`       | `devsteps-R3-exec-planner`        | reads existing MandateResults, minimal aspect dispatch → ordered steps         |
+| `workspace`      | `devsteps-R4-worker-workspace`    | scaffold new project: `create_new_workspace`, pyproject.toml, venv, .gitignore |
+| `implementation` | `devsteps-R4-exec-impl`           | reads planner MandateResult → code committed                                   |
+| `testing`        | `devsteps-R4-exec-test`           | reads impl MandateResult → tests pass                                          |
+| `documentation`  | `devsteps-R4-exec-doc`            | reads impl MandateResult → docs updated                                        |
+| `review`         | `devsteps-R5-gate-reviewer`       | Blocking quality gate — PASS/FAIL, write_rejection_feedback, escalation        |
+
+**Ishikawa bone mandates (dispatched directly by `devsteps-R0-coord-ishikawa`):**
+
+| Bone                  | Round | Agent                          | Returns           |
+| --------------------- | ----- | ------------------------------ | ----------------- |
+| Code + Structure      | R1    | `devsteps-R1-analyst-archaeology` | MandateResult     |
+| Tests                 | R1    | `devsteps-R1-analyst-quality`     | MandateResult     |
+| Environment/Risk      | R1    | `devsteps-R1-analyst-risk`        | MandateResult     |
+| Process/Context       | R2    | `devsteps-R1-analyst-context`     | MandateResult     |
+| Docs (staleness)      | R2    | `devsteps-R2-aspect-staleness`    | Analysis Envelope |
+| Constraints           | R2    | `devsteps-R2-aspect-constraints`  | Analysis Envelope |
+| Impact radius         | R2    | `devsteps-R2-aspect-impact`       | Analysis Envelope |
+| Integration seams     | R2    | `devsteps-R2-aspect-integration`  | Analysis Envelope |
+| Cross-cutting quality | R2    | `devsteps-R2-aspect-quality`      | Analysis Envelope |
 
 ---
 
 ## Communication Contracts
 
-### T1 → T2 dispatch
+### coord → Agent dispatch
 
-T1 passes via `agent` tool: `item_ids[]`, `mandate_type`, `sprint_id`, `triage_tier`, optional `constraints`.
+coord passes via `runSubagent`: `item_ids[]`, `mandate_type`, `sprint_id`, `triage_tier`, optional `constraints`.
 
-### T2 → T1 response (chat — nothing else)
+All agents — analyst, aspect, exec, gate, worker — are dispatched directly by coord. No nested dispatch.
+
+### Analyst/Exec response (chat — nothing else)
 
 ```
 report_path: .devsteps/cbp/{sprint_id}/{mandate_id}.result.json
@@ -59,75 +108,99 @@ verdict: <domain verdict>
 confidence: 0.0–1.0
 ```
 
-### T1 reading T2 results
+### coord reading analyst/exec results
 
-T1 calls: `read_mandate_results(item_ids)` — ONLY this, **never `read_analysis_envelope`**.
+coord calls: `read_mandate_results(item_ids)` — ONLY this.
 
-### T2 reading T3 results
+### Aspect agents
 
-T2 calls: `read_analysis_envelope(report_path)` — internal to T2, invisible to T1.
-
----
-
-## T3 Sub-Agents (dispatched by T2 only — T1 NEVER dispatches these directly)
-
-> Each file contains a `## Contract` section that identifies its tier, who dispatches it, and what it returns.
-> T2 files: `devsteps-t2-*.agent.md` | T3 Sub-agents: `devsteps-t3-aspect-*.agent.md`, `devsteps-t3-analyst-*.agent.md` | T3 Exec Workers: `devsteps-t3-impl/test/doc.agent.md` (dispatched by T2 Exec Conductors only)
-
-| Agent | Domain |
-|---|---|
-| `devsteps-t3-aspect-impact` | Call-site blast radius |
-| `devsteps-t3-aspect-constraints` | Hard constraints, schema, contract risks |
-| `devsteps-t3-aspect-quality` | Test gaps, pattern consistency |
-| `devsteps-t3-aspect-staleness` | Stale docs, conflicting active branches |
-| `devsteps-t3-aspect-integration` | Cross-package boundaries |
-| `devsteps-t3-analyst-context` | Global project map, tree walking |
-| `devsteps-t3-analyst-internal` | Deep file reads, symbol tracing |
-| `devsteps-t3-analyst-web` | External best practices, deprecation signals |
+Aspect and domain-analyst agents write via `write_analysis_report`, coord reads via `read_mandate_results`. No intermediate reader layer.
 
 ---
 
-## T2 Exec — Conductors (dispatched by T1 after t2-planner MandateResult available)
+## Aspect & Analyst Agents (dispatched by coord — all leaf nodes)
 
-| Agent | Role | Dispatches (T3) |
-|---|---|---|
-| `devsteps-t2-impl` | Implementation Conductor | `t3-impl` (always) + `t3-analyst-web` (conditional) |
-| `devsteps-t2-test` | Test Conductor | `t3-test` (always) + `t3-aspect-quality` + `t3-analyst-web` (conditional) |
-| `devsteps-t2-doc` | Documentation Conductor | `t3-doc` (always) + `t3-aspect-staleness` (FULL only) |
+> Each file contains a `## Contract` section that identifies its role, dispatcher, and return type.
+> Naming: `devsteps-aspect-*.agent.md` | `devsteps-analyst-*.agent.md`
 
-T2 Exec Conductors receive **only `report_path` + `item_id`** from T1. They orchestrate their T3 workers and return a MandateResult.
+| Agent                         | Domain                                       |
+| ----------------------------- | -------------------------------------------- |
+| `devsteps-R2-aspect-impact`      | Call-site blast radius                       |
+| `devsteps-R2-aspect-constraints` | Hard constraints, schema, contract risks     |
+| `devsteps-R2-aspect-quality`     | Test gaps, pattern consistency               |
+| `devsteps-R2-aspect-staleness`   | Stale docs, conflicting active branches      |
+| `devsteps-R2-aspect-integration` | Cross-package boundaries                     |
+| `devsteps-R1-analyst-context`    | Global project map, tree walking             |
+| `devsteps-R1-analyst-internal`   | Deep file reads, symbol tracing              |
+| `devsteps-R1-analyst-web`        | External best practices, deprecation signals |
 
-## T3 Exec — Workers (dispatched by T2 Exec Conductors only — T1 NEVER dispatches these)
+## Build Helper (dispatched by exec agents in RESOLVE phase only)
 
-| Agent | Role | Dispatched by |
-|---|---|---|
-| `devsteps-t3-impl` | Code writer | `devsteps-t2-impl` |
-| `devsteps-t3-test` | Test writer | `devsteps-t2-test` |
-| `devsteps-t3-doc` | Documentation writer | `devsteps-t2-doc` |
-
-Exec workers receive **only `report_path` + `item_id`** — never raw findings pasted in prompt.
+| Agent                               | Trigger                                                | Returns                                                                |
+| ----------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------------- |
+| `devsteps-R4-worker-build-diagnostics` | Build/test command exits non-zero with ambiguous error | Category + fix_command + next_action (chat — no write_analysis_report) |
 
 ---
 
-## VS Code Agent Metadata — `agents`, `handoffs`, `user-invokable`
+## Exec Conductors (dispatched by coord after exec-planner MandateResult available)
+
+| Agent                | Role                                                                               |
+| -------------------- | ---------------------------------------------------------------------------------- |
+| `devsteps-R4-exec-impl` | Implementation Conductor — reads planner MandateResult, coordinates implementation |
+| `devsteps-R4-exec-test` | Test Conductor — reads impl MandateResult, drives test writing                     |
+| `devsteps-R4-exec-doc`  | Documentation Conductor — reads impl MandateResult, drives doc writing             |
+
+Exec Conductors receive **only `report_path` + `item_id`** from coord and return a MandateResult.
+
+## Exec Workers (dispatched by coord — leaf nodes)
+
+| Agent                               | Role                                              |
+| ----------------------------------- | ------------------------------------------------- |
+| `devsteps-R4-worker-impl`              | Code writer                                       |
+| `devsteps-R4-worker-test`              | Test writer                                       |
+| `devsteps-R4-worker-doc`               | Documentation writer                              |
+| `devsteps-R4-worker-coder`             | Targeted code edits                               |
+| `devsteps-R4-worker-tester`            | Test generation                                   |
+| `devsteps-R4-worker-documenter`        | Documentation updates                             |
+| `devsteps-R4-worker-devsteps`          | DevSteps item operations                          |
+| `devsteps-R4-worker-refactor`          | Code refactoring                                  |
+| `devsteps-R4-worker-integtest`         | Integration test execution                        |
+| `devsteps-R4-worker-guide-writer`      | Guide file updates                                |
+| `devsteps-R4-worker-build-diagnostics` | Build/test failure diagnosis                      |
+| `devsteps-R4-worker-workspace`         | New project/package scaffolding (Ring 4 pre-impl) |
+
+All workers receive **only `report_path` + `item_id`** — never raw findings pasted in prompt.
+
+---
+
+## User-Invokable Agents (appear in VS Code agent picker)
+
+| Agent                      | When to use                                                                                                  |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `devsteps-R0-coord`           | Single item implementation (always via `devsteps-20-start-work` prompt)                                      |
+| `devsteps-R0-coord-sprint`    | Multi-item sprint (always via `devsteps-40-sprint` prompt)                                                   |
+| `devsteps-backlog-curator` | Backlog health: audit, re-triage, staleness, archiving — NOT sprint execution                                |
+| `devsteps-R0-coord-ishikawa`  | Workspace health analysis — Ishikawa fishbone across 6 dimensions (always via `devsteps-80-ishikawa` prompt) |
+
+--- — `agents`, `handoffs`, `user-invokable`
 
 All agent files use VS Code custom agent frontmatter (VS Code 1.106+).
 
-| Field | T1 | T2 (non-reviewer) | T2 Reviewer | T3 |
-|---|---|---|---|---|
-| `agents:` | ✓ lists T2 deps | ✓ lists T3 deps | ✓ | — |
-| `handoffs:` | ✓ workflow buttons | ✓ pipeline buttons | ✓ PASS/FAIL | — |
-| `user-invokable: false` | — (always visible) | ✓ (hidden) | — (always visible) | ✓ (hidden) |
+| Field                   | coord                         | analyst/exec/gate                | aspect/worker |
+| ----------------------- | ----------------------------- | -------------------------------- | ------------- |
+| `agents:`               | ✓ lists all dispatched agents | — (leaf, no dispatch)            | —             |
+| `handoffs:`             | ✓ workflow buttons            | ✓ pipeline buttons (gate only)   | —             |
+| `user-invocable: false` | — (always visible)            | ✓ (hidden, except gate-reviewer) | ✓ (hidden)    |
 
 ### `agents:` — Subagent Dispatch Allowlist
 
-Lists which agents this agent may programmatically dispatch via the `agent` tool.
-Requires `agent` in the file's `tools:` list. T1 lists T2 deps; T2 lists T3 deps.
+Lists which agents this agent may programmatically dispatch via `runSubagent`.
+Only coordinator agents (`coord-*`) have `agents:` lists.
 
 ```yaml
 agents:
-  - devsteps-t2-archaeology
-  - devsteps-t2-risk
+  - devsteps-R1-analyst-archaeology
+  - devsteps-R1-analyst-risk
 ```
 
 ### `handoffs:` — Guided UI Transitions
@@ -139,18 +212,18 @@ Buttons rendered after each response to guide the developer through workflow ste
 ```yaml
 handoffs:
   - label: "Phase A: Archaeology"
-    agent: devsteps-t2-archaeology
+    agent: devsteps-R1-analyst-archaeology
     prompt: "Archaeology mandate for item: [PASTE_ITEM_ID]."
     send: false
 ```
 
-### `user-invokable: false` — Subagent-Only Visibility
+### `user-invocable: false` — Subagent-Only Visibility
 
 Hides the agent from the VS Code agent picker dropdown.
-Set on all T2 analysts (except reviewer) and all T3 agents — they are only
+Set on all analysts (except reviewer) and all aspect agents — they are only
 accessible when dispatched programmatically by their parent tier agent.
 
 ---
 
-*Protocol details: [TIER2-PROTOCOL.md](./TIER2-PROTOCOL.md)*  
-*Agent files: `.github/agents/devsteps-t2-*.agent.md`*
+_Protocol details: [AGENT-DISPATCH-PROTOCOL.md](./AGENT-DISPATCH-PROTOCOL.md)_  
+_Agent naming: `devsteps-{role}-{name}.agent.md` where role ∈ {coord, analyst, aspect, exec, gate, worker}_

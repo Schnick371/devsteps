@@ -1,0 +1,36 @@
+{
+  "id": "STORY-197",
+  "type": "story",
+  "category": "general",
+  "title": "Item Classification System — hierarchical taxonomy and faceted structuring for DevSteps backlog",
+  "status": "review",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T14:08:21.818Z",
+  "updated": "2026-03-05T18:28:40.313Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-024"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "classification",
+    "taxonomy",
+    "ai-retrieval",
+    "backlog-structure",
+    "copilot-files"
+  ],
+  "commits": [],
+  "metadata": {}
+}

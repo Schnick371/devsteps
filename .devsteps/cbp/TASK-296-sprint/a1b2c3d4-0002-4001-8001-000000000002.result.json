@@ -1,0 +1,21 @@
+{
+  "mandate_id": "a1b2c3d4-0002-4001-8001-000000000002",
+  "item_ids": [
+    "TASK-296"
+  ],
+  "sprint_id": "TASK-296-sprint",
+  "analyst": "devsteps-R1-analyst-archaeology",
+  "status": "complete",
+  "findings": "## DevSteps Write-Op Delegation Audit\n\n### FILE 1: devsteps-R0-coord.agent.md\n**Tools YAML:** `devsteps/*` wildcard (all write ops included). `worker-devsteps` in agents list (line 55).\n**Line 173 (VIOLATION):** Operational Rules instructs coord to call `devsteps/add`, `devsteps/update`, `devsteps/link` directly for mid-item lifecycle and new-item discovery. No delegation to worker-devsteps for Planning/Backlog work types. Gap: no rule distinguishing lifecycle status ops (coord-OK) from batch item creation (should delegate).\n\n### FILE 2: devsteps-R0-coord-sprint.agent.md\n**Tools YAML:** `devsteps/*` wildcard. `worker-devsteps` in agents list (line 55).\n**Line 184 (VIOLATION):** DevSteps Integration section instructs sprint-coord to call `devsteps/add`, `devsteps/update`, `devsteps/link` directly for lifecycle and new-item creation.\n**Line 188 (VIOLATION):** `\"New issue found → devsteps/search then devsteps/add before continuing\"` — coord-direct add, no delegation rule.\n\n### FILE 3: devsteps-R0-coord-solo.agent.md\n**Line 64/72/73/74 (OK — by design):** `mcp_devsteps_add`, `mcp_devsteps_update`, `mcp_devsteps_link` all coord-direct. Solo mode has no runSubagent, worker-devsteps cannot be dispatched. Absent from agents list. Direct write ops are correct fallback behavior.\n\n### FILE 4: devsteps-R4-worker-devsteps.agent.md\n**(OK):** Correctly defined as exclusive delegatee. Tool-mapping table maps `add → mcp_devsteps_add`, `update → mcp_devsteps_update`, `link → mcp_devsteps_link`. `user-invokable: false`. No violations.\n\n### FILE 5: AGENT-DISPATCH-PROTOCOL.md\n**(GAP):** Invariants I-1 through I-10 exist but NO invariant prohibits coord from calling batch write ops directly for Planning/Backlog. Work Items spoke mapped to worker-devsteps in the radar table but no enforcement rule present.\n\n### FILE 6: copilot-instructions.md\n**(CONTRADICTION):** Lifecycle section (lines 55-56, 60) prescribes coord-direct `mcp_devsteps_add` and `mcp_devsteps_update`. Work-Type Dispatch Matrix (line 138, 141) prescribes delegation to worker-devsteps for Planning and Backlog hygiene work types. These directly contradict each other with no reconciliation rule.\n\n### FILE 7: devsteps-agent-protocol.instructions.md\n**(GAP):** Tool Reference table (lines 147-152) lists `mcp_devsteps_add`, `mcp_devsteps_update`, `mcp_devsteps_link` in coord-context instructions file without a 'Caller' column or delegation boundary rule.",
+  "recommendations": [
+    "FIX copilot-instructions.md:52-61 — Clarify: lifecycle status ops (in-progress/done) are coord-direct; batch item creation for Planning/Backlog work types delegates to worker-devsteps.",
+    "FIX devsteps-R0-coord.agent.md:173 — Add rule: Planning/Backlog batch ops → dispatch worker-devsteps; lifecycle status transitions remain coord-direct on main.",
+    "FIX devsteps-R0-coord-sprint.agent.md:184,188 — Clarify: mid-sprint new item discovery for batch Planning uses worker-devsteps; lifecycle ops remain coord-direct.",
+    "ADD to AGENT-DISPATCH-PROTOCOL.md Invariants — New I-11: coord MUST NOT call mcp_devsteps_add/link for batch Planning/Backlog ops — delegate to worker-devsteps.",
+    "ADD to devsteps-agent-protocol.instructions.md Tool Reference — 'Caller' column: batch add/link → worker-devsteps; status updates → coord-direct."
+  ],
+  "confidence": 0.92,
+  "token_cost": 4800,
+  "completed_at": "2026-03-04T00:00:00Z",
+  "schema_version": "1.0"
+}

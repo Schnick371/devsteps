@@ -1,0 +1,15 @@
+{
+  "mandate_id": "d4e5f6a7-0006-4001-8001-000000000006",
+  "item_ids": [
+    "TASK-296"
+  ],
+  "sprint_id": "TASK-296-sprint",
+  "analyst": "devsteps-R4-exec-impl",
+  "status": "complete",
+  "findings": "All 6 changes applied successfully:\n\nCHANGE-1 (devsteps-agent-protocol.instructions.md): Added `| Caller |` column to DevSteps MCP Tool Reference table. Rows now specify: mcp_devsteps_add → coord (bootstrap primary) · worker-devsteps (follow-ups); mcp_devsteps_update → coord (status gates + done-gate append) · worker-devsteps (desc/tags); mcp_devsteps_link → worker-devsteps ONLY; mcp_devsteps_read_mandate_results → coord ONLY; list/get/search/trace/status → coord · any agent; write_mandate_result → analyst-* · exec-*; write_analysis_report → aspect-* · analyst-*; write_escalation → any agent.\n\nCHANGE-2 (AGENT-DISPATCH-PROTOCOL.md): Added I-11 row to Dispatch Invariants table after I-10. I-11 specifies coord delegation boundary: direct add (bootstrap) + status updates + done-gate append_description are coord-reserved; all other add/link/update ops MUST go via worker-devsteps.\n\nCHANGE-3 (devsteps-R4-worker-devsteps.agent.md): Replaced Contract bullet lines - removed 'for structured DevSteps batch operations' qualifier and 'Create, update, link DevSteps items, status transitions' responsibility. Added new responsibility text. Appended two tables: 'Delegatable Operations' (4 rows: follow-up add, all link ops, mid-lifecycle desc/tags, follow-up item status) and 'coord-Reserved Operations' (5 rows: primary item add, status→in-progress, status→review, status→done, append_description at done-gate).\n\nCHANGE-4 (devsteps-R0-coord.agent.md): In Operational Rules, replaced 'New items found mid-item: checkout main → devsteps/add → return to branch' with worker-devsteps delegation text and NEVER rule (I-11). Added delegation boundary blockquote after the bullet list.\n\nCHANGE-5 (devsteps-R0-coord-sprint.agent.md): Fix A - replaced 'New items found mid-sprint: ... → devsteps/add → return to branch' with worker-devsteps delegation + NEVER rule. Fix B - replaced 'New issue found → devsteps/search then devsteps/add before continuing' with 'devsteps/search (coord may search directly) then dispatch worker-devsteps (ops: add + link) before continuing'.\n\nCHANGE-6 (copilot-instructions.md): Fix A - step 2 updated to 'Create primary item if none exists: mcp_devsteps_add (bootstrap only — coord's sole permitted direct add)'; added delegation boundary blockquote after step 8. Fix B - updated other-agents note to say 'change lifecycle status' and added Exception clause for worker-devsteps creating follow-up items and managing all link operations as delegated by coord.",
+  "recommendations": [],
+  "confidence": 0.99,
+  "token_cost": 4200,
+  "completed_at": "2026-03-04T00:00:00Z",
+  "schema_version": "1.0"
+}

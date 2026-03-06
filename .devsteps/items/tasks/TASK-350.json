@@ -1,0 +1,38 @@
+{
+  "id": "TASK-350",
+  "type": "task",
+  "category": "general",
+  "title": "Create CI YAML frontmatter validation suite for all 34 agent files",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T22:02:34.005Z",
+  "updated": "2026-03-06T10:21:55.406Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/",
+    "scripts/",
+    "vitest.config.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-344",
+      "BUG-063"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agent-plugin",
+    "research-2026-03-05"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,34 @@
+{
+  "id": "TASK-329",
+  "type": "task",
+  "category": "general",
+  "title": "TASK-329: Relax schema_version from z.literal to semver regex in CBP schemas",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T11:29:06.205Z",
+  "updated": "2026-03-05T11:29:06.205Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "security",
+    "schema",
+    "cbp",
+    "spider-web",
+    "p0"
+  ],
+  "commits": [],
+  "metadata": {}
+}

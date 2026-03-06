@@ -1,0 +1,16 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v5.2 — Switchback Path (Color)</title>
+  <defs>
+    <linearGradient id="v5g" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0F4C5C"/>
+      <stop offset="100%" stop-color="#E7CBA9"/>
+    </linearGradient>
+  </defs>
+  <!-- Reimagined staircase: switchback trail with checkpoints -->
+  <path d="M20,108 L68,108 L68,76 L36,76 L36,44 L88,44 L88,20" fill="none" stroke="url(#v5g)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="20" cy="108" r="6" fill="#0F172A"/>
+  <circle cx="36" cy="76" r="6" fill="#0F172A"/>
+  <circle cx="68" cy="108" r="6" fill="#0F172A"/>
+  <circle cx="88" cy="44" r="6" fill="#0F172A"/>
+  <circle cx="88" cy="20" r="7" fill="#F59E0B"/>
+</svg>

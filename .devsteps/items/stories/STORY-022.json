@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2025-11-27T16:50:50.179Z",
-  "updated": "2025-11-27T16:52:22.051Z",
+  "updated": "2026-02-28T00:56:50.219Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/types/index.ts",
@@ -30,7 +30,9 @@
       "STORY-026"
     ],
     "supersedes": [],
-    "superseded-by": []
+    "superseded-by": [
+      "STORY-145"
+    ]
   },
   "tags": [
     "knowledge-management",

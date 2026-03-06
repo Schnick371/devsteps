@@ -1,0 +1,35 @@
+{
+  "id": "TASK-341",
+  "type": "task",
+  "category": "general",
+  "title": "Coord agents: context compaction checkpoint guard for Spider Web rings",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T18:08:16.990Z",
+  "updated": "2026-03-05T18:08:16.990Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ai",
+    "agents",
+    "coord",
+    "context-compaction",
+    "spider-web",
+    "resilience"
+  ],
+  "commits": [],
+  "metadata": {}
+}

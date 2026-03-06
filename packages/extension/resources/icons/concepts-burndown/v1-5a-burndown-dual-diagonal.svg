@@ -1,0 +1,46 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-col-5a" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563EB;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#1D4ED8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad-ideal-5a" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#94A3B8;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#64748B;stop-opacity:0.6" />
+    </linearGradient>
+    <linearGradient id="grad-actual-5a" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EF4444;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Border frame -->
+  <rect x="2" y="2" width="252" height="252" rx="8" fill="none" stroke="#0F172A" stroke-width="3" opacity="0.2"/>
+  
+  <!-- Three columns (better space usage) -->
+  <rect x="20" y="40" width="64" height="190" rx="8" fill="url(#grad-col-5a)" opacity="0.7"/>
+  <rect x="96" y="40" width="64" height="190" rx="8" fill="url(#grad-col-5a)" opacity="0.7"/>
+  <rect x="172" y="40" width="64" height="190" rx="8" fill="url(#grad-col-5a)" opacity="0.7"/>
+  
+  <!-- Cards in columns -->
+  <rect x="28" y="54" width="48" height="32" rx="5" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="28" y="94" width="48" height="32" rx="5" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="28" y="134" width="48" height="32" rx="5" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="104" y="54" width="48" height="32" rx="5" fill="#E0F2FE" opacity="0.7"/>
+  <rect x="104" y="94" width="48" height="32" rx="5" fill="#E0F2FE" opacity="0.7"/>
+  <rect x="180" y="180" width="48" height="32" rx="5" fill="#E0F2FE" opacity="0.5"/>
+  
+  <!-- Ideal burndown line (dotted, diagonal) -->
+  <line x1="30" y1="50" x2="226" y2="220" 
+        stroke="url(#grad-ideal-5a)" 
+        stroke-width="3" 
+        stroke-dasharray="8,6"
+        stroke-linecap="round"/>
+  
+  <!-- Actual burndown line (fever curve, organic) -->
+  <path d="M 30 42 Q 50 55, 70 58 Q 85 62, 96 74 Q 110 88, 128 100 Q 145 115, 160 140 Q 175 165, 190 180 Q 208 195, 226 215" 
+        stroke="url(#grad-actual-5a)" 
+        stroke-width="4" 
+        stroke-linecap="round" 
+        fill="none"/>
+</svg>

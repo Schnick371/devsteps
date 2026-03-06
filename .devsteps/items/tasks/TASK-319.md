@@ -1,0 +1,1 @@
+Update docs/architecture/mpd-architecture.md to add a section on VS Code extension integration: how the Spider Web topology is reflected in the extension dashboard, real-time trace pipeline, data flow from agent dispatch to UI update. Cross-reference with extension README.

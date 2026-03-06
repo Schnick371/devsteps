@@ -1,0 +1,20 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v5 — Staircase Outline with Arrow</title>
+  <defs>
+    <linearGradient id="g5" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+  </defs>
+  <!-- Staircase as a single outline path — minimal, clean -->
+  <!-- Staircase shape: bottom-left corner going up-right in 3 steps -->
+  <polyline
+    points="16,112  16,78  48,78  48,48  80,48  80,18  112,18"
+    fill="none" stroke="url(#g5)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Arrow head at top-right -->
+  <polyline
+    points="94,10  112,18  100,32"
+    fill="none" stroke="url(#g5)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Floor baseline -->
+  <line x1="16" y1="112" x2="52" y2="112" stroke="url(#g5)" stroke-width="10" stroke-linecap="round"/>
+</svg>

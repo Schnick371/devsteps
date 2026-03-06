@@ -1,0 +1,35 @@
+{
+  "id": "SPIKE-023",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: FD-Factory fuzz driver generation — feasibility assessment for DevSteps GPU tier",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-03-05T11:30:08.216Z",
+  "updated": "2026-03-05T11:30:08.216Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "fuzzing",
+    "gpu",
+    "research",
+    "spike",
+    "deferred",
+    "c-cpp"
+  ],
+  "commits": [],
+  "metadata": {}
+}

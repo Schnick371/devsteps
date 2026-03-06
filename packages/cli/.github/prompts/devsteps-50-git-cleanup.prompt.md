@@ -1,14 +1,16 @@
 ---
-agent: 'devsteps-t1-coordinator'
-model: 'Claude Sonnet 4.6'
-tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'playwright/*', 'bright-data/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'search', 'web', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
-description: 'Repository hygiene - merge unfinished branches, archive obsolete work, clean worktrees, verify branch protection'
+agent: "devsteps-R0-coord"
+model: "Claude Sonnet 4.6"
+tools:
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+description: "Repository hygiene - merge unfinished branches, archive obsolete work, clean worktrees, verify branch protection"
 ---
 
 # 🧹 Git Repository Cleanup Agent
 
 > **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
 
+> **Active Tools:** `#runSubagent` (dispatch) · `#devsteps` (tracking) · `#bright-data` (research)
 
 ## Mission
 
@@ -131,4 +133,5 @@ Delete branches without checking DevSteps status. Force-push to shared branches.
 Understand code before merging. Test after each merge. Document decisions comprehensively. Preserve audit trail. Rollback on failure.
 
 **See Also:**
+
 - [devsteps-commit-format.instructions.md](../instructions/devsteps-commit-format.instructions.md) - Commit and branch workflow rules

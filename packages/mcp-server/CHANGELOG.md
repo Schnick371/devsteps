@@ -2,6 +2,29 @@
 
 All notable changes to the DevSteps MCP Server will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- **STORY-122:** `startHttpMcpServer` now accepts an optional `workspacePath` parameter (default: `process.cwd()`). The MCP server also reads the `DEVSTEPS_WORKSPACE` environment variable as the primary source for workspace path resolution, enabling seamless in-process operation when launched by the VS Code extension.
+- **TASK-331:** Two new MCP tools for dispatch-manifest audit trail:
+  - `write_dispatch_manifest` — write a `DispatchManifest` at coord fan-out time. UUID-named file (`dispatch-manifest-{dispatch_id}.json`) records all dispatched agents with `status=pending`. Storage: `.devsteps/cbp/{sprint_id}/dispatch-manifest-{dispatch_id}.json`.
+  - `patch_dispatch_manifest` — update a single dispatch entry by `mandate_id` when a MandateResult arrives. Sets `completed_at`, `duration_ms`, `status`, `confidence`, and `output_tokens_approx`. Reads and rewrites atomically.
+  - `DispatchEntrySchema` and `DispatchManifestSchema` added to `@schnick371/devsteps-shared` (`packages/shared/src/schemas/cbp-mandate.ts`).
+  - See `packages/mcp-server/LOGGING.md` § Dispatch Manifest for full lifecycle documentation.
+- **TASK-330:** `read_mandate_results` now returns an envelope `{ results[], count, quorum_ok, missing_analysts, dispatched, received, threshold, status }` instead of a bare array. New optional input parameters `expected_agent_names` (string[]) and `dispatch_id` (string) added. When `expected_agent_names` is omitted all quorum fields are `undefined` — fully backward compatible. `status` is `'quorum_met'` or `'quorum_failed'` when quorum tracking is active.
+- **STORY-121 TASK-274:** MCP Prompts capability (`prompts: {}`) with three workflow prompts:
+  - `devsteps-onboard` — loads live project context at session start
+  - `devsteps-sprint-review` — instructs AI to call `devsteps_context(standard)` and summarise sprint state
+  - `devsteps-commit-message` — generates a Conventional Commits template for a given item ID
+- **STORY-121 TASK-275:** MCP Resource `devsteps://project-context` (MIME: `text/plain`, `annotations.priority: 1.0`) — returns live quick context as formatted Markdown for auto-injection by supporting clients.
+- **STORY-121 TASK-273:** `devsteps_context` tool now supports `standard` level (returns `in_progress`, `blocking_items`, `open_items_count`, `key_paths`).
+- **STORY-121 TASK-276:** Stale-context warning appended to tool `message` when `PROJECT.md` is older than 24 h or missing — guides AI to run `devsteps context generate`.
+
+### Fixed
+- **BUG-056:** Markdown description files no longer contain literal `\n` escape sequences. Fix is in `@schnick371/devsteps-shared` (`normalizeMarkdown` utility applied in `addItem` and `updateItem`). The regression was introduced when GitHub Copilot ≥ v1.0.0 started transmitting multiline tool arguments as escape sequences rather than real newline characters.
+
+---
+
 ## [1.0.0-next.2] - 2026-02-23 (Pre-release)
 
 ### ⚠️ Pre-Release Channel

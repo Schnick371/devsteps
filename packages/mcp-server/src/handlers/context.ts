@@ -2,13 +2,15 @@
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
  *
- * MCP handler: context
+ * MCP handler: devsteps_context
  * Returns structured project context at quick/standard/deep level for AI agents.
+ *
+ * @see STORY-121 TASK-273 (standard level), TASK-276 (context_meta staleness)
  */
 
 import path from 'node:path';
 import type { ContextLevel } from '@schnick371/devsteps-shared';
-import { getQuickContext } from '@schnick371/devsteps-shared';
+import { getQuickContext, getStandardContext } from '@schnick371/devsteps-shared';
 import { getWorkspacePath } from '../workspace.js';
 
 interface ContextArgs {
@@ -16,7 +18,7 @@ interface ContextArgs {
 }
 
 /**
- * Handler for devsteps-context tool
+ * Handler for devsteps_context tool
  */
 export async function contextHandler(
   args: ContextArgs = {}
@@ -26,20 +28,34 @@ export async function contextHandler(
   const devstepsDir = path.join(cwd, '.devsteps');
 
   try {
-    // Currently only quick level is implemented
-    if (level !== 'quick') {
-      return {
-        success: false,
-        error: `Context level "${level}" is not yet implemented. Currently only "quick" is available.`,
+    let context: Awaited<ReturnType<typeof getQuickContext>>;
+
+    if (level === 'quick') {
+      context = await getQuickContext(cwd, devstepsDir);
+    } else if (level === 'standard') {
+      context = await getStandardContext(cwd, devstepsDir);
+    } else {
+      // deep level: not yet implemented, fall back to standard with a notice
+      context = await getStandardContext(cwd, devstepsDir);
+      context = {
+        ...context,
+        context_level: 'deep',
+        suggestions: [
+          ...(context.suggestions ?? []),
+          'Deep context level returns standard context for now — full implementation pending.',
+        ],
       };
     }
 
-    const context = await getQuickContext(cwd, devstepsDir);
+    // Build stale warning prefix for message field
+    const staleWarning = context.context_meta?.is_stale
+      ? ` ⚠️ PROJECT.md is ${context.context_meta.project_md_age_hours.toFixed(1)}h old — run \`devsteps context generate\` to refresh.`
+      : '';
 
     return {
       success: true,
       context,
-      message: `Retrieved ${level} context (${context.tokens_used} tokens)`,
+      message: `Retrieved ${level} context (${context.tokens_used} tokens).${staleWarning}`,
     };
   } catch (error) {
     return {

@@ -1,0 +1,18 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v9.3 — Split Pillar (Color)</title>
+  <defs>
+    <linearGradient id="v9g3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#4B5563"/>
+    </linearGradient>
+    <linearGradient id="v9g3b" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+  <!-- Two pillars with negative-space V and embedded S stroke -->
+  <rect x="22" y="16" width="30" height="96" rx="10" fill="url(#v9g3)"/>
+  <rect x="76" y="16" width="30" height="96" rx="10" fill="url(#v9g3)"/>
+  <polyline points="52,36 64,56 76,36" fill="none" stroke="url(#v9g3b)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M84,38 c8,-8 18,-8 26,0 c8,8 -2,16 -14,18 c-12,2 -18,8 -10,18 c8,10 18,8 26,0" fill="none" stroke="url(#v9g3b)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

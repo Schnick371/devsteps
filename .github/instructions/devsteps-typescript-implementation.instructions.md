@@ -5,12 +5,12 @@ description: "TypeScript and JavaScript implementation standards for DevSteps mo
 
 # TypeScript & JavaScript Implementation Standards
 
-## Framework Conventions
+## Project Conventions
 
-**Follow framework-first approach:**
-- NestJS conventions for backend services
-- Next.js conventions for frontend applications
-- Follow official documentation over custom patterns
+**This is a Node.js 22+ ESM monorepo — no NestJS, no Next.js, no Prisma, no Turborepo:**
+- 4 packages: `shared` (schemas/logic), `mcp-server`, `cli`, `extension`
+- `esbuild` per-package for bundling; `npm workspaces` for linking
+- VS Code Extension uses plain HTML/CSS webview — no frontend framework
 
 ## Module System
 

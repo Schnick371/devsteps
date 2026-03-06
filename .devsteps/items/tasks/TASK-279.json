@@ -1,0 +1,37 @@
+{
+  "id": "TASK-279",
+  "type": "task",
+  "category": "general",
+  "title": "T1 Sprint Executor — Step 0 (Log Read) + Post-Sprint (Log Write)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-27T13:01:39.319Z",
+  "updated": "2026-02-27T13:02:56.695Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-t1-sprint-executor.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-130"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [
+      "TASK-278"
+    ],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "t1-sprint-executor",
+    "session-continuity"
+  ],
+  "commits": [],
+  "metadata": {}
+}

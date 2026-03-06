@@ -1,0 +1,21 @@
+{
+  "mandate_id": "a3f2c891-7e4d-4b1a-9c3f-8d2e5f1a6b90",
+  "item_ids": [
+    "TASK-293"
+  ],
+  "sprint_id": "TASK-293",
+  "analyst": "devsteps-R2-aspect-constraints",
+  "status": "complete",
+  "findings": "CONSTRAINT VERDICTS FOR I1-I6\n\nI1 — coord-direct vs conductor workers: SOFT. Worker docs are CORRECT. Both coord and coord-sprint agents: YAMLs EXPLICITLY list worker-coder/tester/documenter/refactor as coord-direct — this is deliberate. exec-impl dispatches worker-impl (not worker-coder); exec-test dispatches worker-test (not worker-tester). These are TWO DISTINCT WORKER CATEGORIES: (a) conductor-internal (worker-impl/test/doc) and (b) coord-direct special-case (worker-coder/tester/documenter/refactor). Arch docs are INCOMPLETE, not wrong. Fix = update copilot-instructions.md to document both categories. Do NOT change worker files.\n\nI2 — build-diagnostics missing Leaf Node label: NO CONSTRAINT. Safe doc-only fix. File says 'leaf node' in lowercase prose but lacks the bold header label. Add it.\n\nI3 — worker-refactor has no conductor: SOFT ARCHITECTURAL DECISION. refactor is intentionally coord-direct ('Dispatched by: coord ONLY — typically for refactor-type stories'). Creating exec-refactor requires new agent file + protocol changes + coord YAML updates. Out of scope for TASK-293. Block.\n\nI4 — worker-guide-writer missing from exec-impl agents: YAML: HARD TECHNICAL BUG. exec-impl Phase 4 explicitly says 'Delegate to worker-guide-writer for guide update' but worker-guide-writer is NOT in exec-impl agents: YAML (only worker-impl, analyst-web, worker-build-diagnostics are listed). VS Code agents: is a hard allowlist — dispatch silently fails. All guide updates via exec-impl are broken. Must fix in TASK-293.\n\nI5 — worker-impl NEVER says 'Modify files' but exec-impl delegates commit to it: HARD SEMANTIC CONFLICT. worker-impl.agent.md explicitly: 'NEVER: Modify files (coordinator executes), Execute or test code'. worker-impl is a PLANNING WORKER. But exec-impl Phase 4 says 'Delegate to worker-impl for the actual commit'. Fundamental contradiction requiring architectural decision: keep worker-impl as planner (exec-impl must route execution to worker-coder) OR convert worker-impl to executor (change its NEVER rules). Cannot resolve without deliberate choice. Block.\n\nI6 — worker-test NEVER says 'Create test files' but exec-test delegates commit to it: HARD SEMANTIC CONFLICT. worker-test.agent.md: 'NEVER: Create test files (coordinator creates them), Run tests or execute code'. Same pattern as I5. worker-test is a TEST PLANNER, but exec-test Phase 4 routes actual commit execution to it. Same architectural decision needed. Block.\n\nPARALLEL DISPATCH VERDICT: ALLOWED AND ALREADY REQUIRED — NO BLOCKING CONSTRAINT. Protocol explicitly states 'Same-phase dispatches fire simultaneously'. exec-impl Phase 1 ALREADY specifies 'simultaneously in one parallel fan-out'. exec-test Phase 1 ALREADY specifies same. R1 research recommendation describing 'add parallel fan-out' describes behavior already codified in conductor specs. No protocol clause needs changing.",
+  "recommendations": [
+    "FIX NOW (I4-HARD): Add devsteps-R4-worker-guide-writer to exec-impl agents: YAML. Silent dispatch failure; guide updates never run. One-line fix, no side effects.",
+    "FIX NOW (I2-NONE): Add **Leaf Node** label to worker-build-diagnostics Contract section. Pure doc alignment.",
+    "FIX NOW (I1-SOFT): Update copilot-instructions.md Ring 4 row to note two worker categories: conductor-internal vs coord-direct special-case. Do NOT change worker files.",
+    "BLOCK (I5+I6-HARD): Open new TASK for architectural decision on worker-impl/test role: planner-only vs executor. exec-impl/test Phase 4 commit delegation is contradictory until decided.",
+    "BLOCK (I3-SOFT): exec-refactor conductor is an enhancement, not a bugfix. Too large for TASK-293. Open separate story if coverage gap is priority."
+  ],
+  "confidence": 0.95,
+  "token_cost": 4200,
+  "completed_at": "2026-03-04T00:00:00Z",
+  "schema_version": "1.0"
+}

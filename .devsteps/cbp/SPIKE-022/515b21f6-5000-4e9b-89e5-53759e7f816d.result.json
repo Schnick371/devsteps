@@ -1,0 +1,21 @@
+{
+  "mandate_id": "515b21f6-5000-4e9b-89e5-53759e7f816d",
+  "item_ids": [
+    "SPIKE-022"
+  ],
+  "sprint_id": "SPIKE-022",
+  "analyst": "devsteps-R1-analyst-risk",
+  "status": "complete",
+  "findings": "# Risk Analysis SPIKE-022 — devsteps-R1-analyst-risk\n\n## R1 · CRITICAL — No Dispatch Manifest (Observability Gap confirmed)\nFilesystem: `.devsteps/cbp/SPIKE-021/` contains ONLY 10 `.result.json` files keyed by mandate-UUID. No dispatch manifest, no escalations dir, no loop-signal files. Missing: dispatch_at, parent_agent, ring, expected_mandate_ids.\n\nSilent Failure impact chain: analyst silently fails → read_mandate_results returns partial set → coord has no quorum-check → Ring-2 aspects cross-validate against incomplete upstream_paths → Ring-3 planner builds plan missing arch constraints → Ring-5 gate may PASS code that needs FAIL. Post-hoc diagnosis requires manual UUID cross-reference with agent docs — no machine-readable signal exists.\n\n## R2 · HIGH — Timestamp Fabrication\nSPIKE-021 MandateResults have synthetic timestamps: analyst-quality=T00:00:00Z, others at round hours. Real dispatch-to-completion latency is unknown. Timeout thresholds cannot be empirically determined. Timing as debugging signal is eliminated.\n\n## R3 · HIGH — No Ring-1 Timeout Mechanism\n4 parallel Ring-1 dispatches with no timeout. If 1 agent hangs, coord waits indefinitely or reads with missing data after fixed delay. Probability of silent failure per sprint: unmeasurable (no real timing data), structurally HIGH given LLM API rate-limits and context overflows.\n\n## R4 · HIGH — content.txt Unbounded Growth\nFilesystem: 2 sessions, 151 files, 4.5 MB total. Session-1 (1c2e94bc): 91 subdirs = 91 tool-call results stored, largest single file: 824 KB (content.json). Session-2: 26 subdirs, uses .txt extension. No cleanup/TTL visible.\nProjection: 10 agents × 15 tool calls = 150 dirs/sprint. At 824 KB max: ~120 MB/sprint. Disk risk within 10-20 sprints. No public VS Code API for cleanup.\n\n## R5 · MEDIUM — VS Code Version: partial mitigation only\nExtension package.json already declares `\"vscode\": \"^1.99.0\"` (confirmed). Marketplace enforces on install. BUT: no runtime guard in extension.activate() comparing vscode.version to minimum. Pre-1.99: Promise.all dispatches run sequentially → 4× Ring-1 latency → Ring-2 timeout risk. Failure mode is silent degradation with no user feedback.\n\n## R6 · MEDIUM — report_path Protocol Inconsistency (NOT a phantom field)\nGrep-confirmed: report_path appears in R1-archaeology, R1-quality, R3-planner output schemas, R2-aspect CompressedVerdict envelope, R4-worker-impl input (calls read_analysis_envelope via report_path), R0-coord orchestration (passes report_path to exec-impl/exec-test). Removing it breaks R4. Invariant-4 (coord reads ONLY via read_mandate_results) conflicts with coord passing report_path to R4-agents — undocumented architectural exception.\n\n## R7 · LOW — OpenTelemetry too heavy\nOTEL SDK needs collector sidecar, ~500 KB+ bundle addition, breaks npm link/standalone binaries. Simple NDJSON dispatch.log at `.devsteps/cbp/{sprint_id}/dispatch.log` is sufficient for SpiderWeb scale (10-40 agents/sprint): ~50 LOC, zero new dependencies, coord writes before each runSubagent call.",
+  "recommendations": [
+    "[CRITICAL] Write dispatch.log before each runSubagent: NDJSON entry {dispatched_at,agent,ring,expected_mandate_id,item_ids} at .devsteps/cbp/{sprint_id}/dispatch.log.",
+    "[HIGH] Quorum-check in coord: after read_mandate_results, compare received UUIDs vs dispatch.log expected_mandate_ids; write_escalation on any missing instead of continuing downstream.",
+    "[HIGH] Reject synthetic timestamps in mcp-server write_mandate_result: flag T00:00:00Z and round-hour patterns; force real measurement.",
+    "[MEDIUM] Runtime VS Code version guard in extension.activate(): warn via notification if vscode.version < 1.99.0 to surface silent sequential-dispatch degradation.",
+    "[MEDIUM] Define content.txt TTL policy: cleanup sessions >7 days or total >100 MB in extension activation; document in CONTRIBUTING.md."
+  ],
+  "confidence": 0.87,
+  "token_cost": 4950,
+  "completed_at": "2026-03-05T13:42:00Z",
+  "schema_version": "1.0"
+}

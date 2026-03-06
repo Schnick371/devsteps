@@ -1,0 +1,1 @@
+Create mini SVG sparkline/burndown preview for BurndownCard on landing page. Shows last 7 data points as a simple polyline. Uses VS Code theme colors. Updates on devsteps status change. Max 80x50px SVG viewport.

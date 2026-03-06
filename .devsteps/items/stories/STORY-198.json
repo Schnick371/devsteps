@@ -1,0 +1,36 @@
+{
+  "id": "STORY-198",
+  "type": "story",
+  "category": "general",
+  "title": "Webview: Spider Web ring timeline tab in DevSteps dashboard",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T18:07:52.672Z",
+  "updated": "2026-03-05T18:07:52.672Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "webview",
+    "dashboard",
+    "visualization",
+    "cbp",
+    "spider-web",
+    "competitive"
+  ],
+  "commits": [],
+  "metadata": {}
+}

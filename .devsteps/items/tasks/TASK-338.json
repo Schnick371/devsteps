@@ -1,0 +1,38 @@
+{
+  "id": "TASK-338",
+  "type": "task",
+  "category": "general",
+  "title": "Enforce real timestamps in agent prompts for completed_at",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T14:34:02.334Z",
+  "updated": "2026-03-05T14:34:24.167Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/",
+    "packages/shared/src/schemas/cbp-mandate.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-335"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agents",
+    "schema",
+    "cbp",
+    "quality"
+  ],
+  "commits": [],
+  "metadata": {}
+}

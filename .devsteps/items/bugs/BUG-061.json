@@ -1,0 +1,36 @@
+{
+  "id": "BUG-061",
+  "type": "bug",
+  "category": "general",
+  "title": "SECURITY: Block chat.plugins.enabled:false in DevSteps workspace settings",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T22:00:51.029Z",
+  "updated": "2026-03-05T22:04:28.289Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".vscode/settings.json",
+    "SECURITY.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-199"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "security",
+    "agent-plugin"
+  ],
+  "commits": [],
+  "metadata": {}
+}

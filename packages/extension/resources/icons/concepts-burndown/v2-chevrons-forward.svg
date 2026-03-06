@@ -1,0 +1,16 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v2 — Step Chevrons</title>
+  <defs>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+  <!-- Three nested chevrons > stepping upwards — progress / forward momentum -->
+  <!-- Back chevron (largest, most opaque) -->
+  <polyline points="14,90 46,64 14,38" fill="none" stroke="url(#g2)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+  <!-- Mid chevron -->
+  <polyline points="42,90 74,64 42,38" fill="none" stroke="url(#g2)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+  <!-- Front chevron (sharpest) -->
+  <polyline points="70,90 102,64 70,38" fill="none" stroke="url(#g2)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+</svg>

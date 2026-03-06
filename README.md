@@ -122,6 +122,12 @@ devsteps add bug "Memory leak in user service" --priority urgent-important
 
 ### Prerequisites
 
+| Requirement | Minimum Version | Notes |
+| ----------- | --------------- | ----- |
+| [VS Code](https://code.visualstudio.com/) | **1.109.0** | Required for parallel `#runSubagent` dispatch |
+| [Bun](https://bun.sh) | latest | Build toolchain |
+| Node.js | 22+ | Runtime |
+
 Install [Bun](https://bun.sh):
 ```bash
 curl -fsSL https://bun.sh/install | bash

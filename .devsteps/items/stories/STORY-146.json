@@ -1,0 +1,39 @@
+{
+  "id": "STORY-146",
+  "type": "story",
+  "category": "general",
+  "title": "Knowledge MCP-Tools",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:51:24.727Z",
+  "updated": "2026-02-28T00:51:34.613Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/knowledge.ts",
+    "packages/mcp-server/src/handlers/knowledge.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-147"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "knowledge",
+    "mcp-tools",
+    "adr",
+    "convention",
+    "mcp-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

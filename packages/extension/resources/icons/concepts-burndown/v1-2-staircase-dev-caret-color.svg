@@ -1,0 +1,15 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v1.2 — Staircase with Dev Caret (Color)</title>
+  <defs>
+    <linearGradient id="v1g" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded staircase bars -->
+  <rect x="12" y="52" width="30" height="64" rx="7" fill="url(#v1g)"/>
+  <rect x="49" y="32" width="30" height="84" rx="7" fill="url(#v1g)" opacity="0.88"/>
+  <rect x="86" y="12" width="30" height="104" rx="7" fill="url(#v1g)" opacity="0.76"/>
+  <!-- Dev cue: small caret notch as prompt indicator -->
+  <polygon points="54,26 66,32 54,38" fill="#0F172A" opacity="0.85"/>
+</svg>

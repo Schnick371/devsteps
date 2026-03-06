@@ -23,6 +23,17 @@ import { TreeViewStateManager } from './utils/stateManager.js';
 export async function activate(context: vscode.ExtensionContext) {
   logger.info('DevSteps extension activating...');
 
+  // Runtime VS Code version guard (non-blocking warning)
+  // engines.vscode enforces ^1.109.0 at install time; this guard adds runtime clarity for edge cases.
+  const [major, minor] = vscode.version.split('.').map(Number);
+  if (major < 1 || (major === 1 && minor < 109)) {
+    void vscode.window.showWarningMessage(
+      `DevSteps requires VS Code 1.109.0 or later for parallel agent dispatch (#runSubagent). ` +
+        `Current version: ${vscode.version}. Please update VS Code.`
+    );
+    logger.warn(`VS Code version ${vscode.version} is below the required 1.109.0`);
+  }
+
   // Check for workspace
   const workspaceFolders = vscode.workspace.workspaceFolders;
   if (!workspaceFolders || workspaceFolders.length === 0) {

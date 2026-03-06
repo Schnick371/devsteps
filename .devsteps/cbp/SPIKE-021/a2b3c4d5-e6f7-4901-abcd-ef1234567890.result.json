@@ -1,0 +1,21 @@
+{
+  "mandate_id": "a2b3c4d5-e6f7-4901-abcd-ef1234567890",
+  "item_ids": [
+    "SPIKE-021"
+  ],
+  "sprint_id": "SPIKE-021",
+  "analyst": "devsteps-R1-analyst-archaeology",
+  "status": "complete",
+  "findings": "## Archaeology: `#runSubagent` Inter-Agent Communication\n\n### 1. Agent Corpus\n36 agent files (Ring 0–5) + 17 prompt files confirmed. Full hierarchy operational.\n\n### 2. IPC Protocol — How It Works\n\n**Primary channel: filesystem-mediated JSON via DevSteps MCP**\n\nSubagents do NOT return output through `runSubagent` return values. Protocol:\n1. Analyst/Aspect agents call `mcp_devsteps_write_mandate_result` → writes `.devsteps/cbp/<sprint>/<uuid>.result.json`\n2. coord calls `mcp_devsteps_read_mandate_results(sprint_id)` → reads all results\n3. The MCP tool IS the bus — not in-process function calls\n\n**Confirmed MandateResult JSON schema (from live files):**\n```\n{ mandate_id, item_ids[], sprint_id, analyst, status, findings (markdown ~800tok),\n  recommendations[5], confidence, token_cost, completed_at, schema_version:\"1.0\" }\n```\nNOT present in live schema (contrary to instruction text): `report_path`, `verdict`, `upstream_paths`.\n\n### 3. WorkspaceStorage Artifacts\n\n**Path:** `~/.vscode-server/data/User/workspaceStorage/aa6ece7ae7.../GitHub.copilot-chat/chat-session-resources/<session-uuid>/<toolu_vrtx_*>/`\n\nSession `1c2e94bc` (2026-03-05 09:38–10:28): 49 tool directories total.\n- **`content.txt`** (26 dirs): Raw text output of the tool call — either subagent's Markdown chat-response OR web-scraped HTML-as-markdown.\n- **`content.json` + `schema.json`** (21 dirs): Structured JSON from MCP tool calls (bright-data, devsteps MCP, file ops).\n\n**Critical:** `content.txt` is VS Code Copilot's INTERNAL persistence for session history. coord NEVER accesses it. coord reads `.devsteps/cbp/` MandateResult JSON, not workspaceStorage.\n\nContent of a `content.txt` example: a 60+ line research report on VS Code SPA webview APIs and D3.js polar diagrams — the analyst's full Markdown output. Confirms subagent TEXT output is stored here.\n\n### 4. Live MandateResult Files\n\n| Sprint | Files | Analysts |\n|---|---|---|\n| `TASK-293` | 5 | archaeology, staleness, risk |\n| `TASK-296-sprint` | 6 | multiple |\n| `plan-spider-web-dashboard-2026-03-04` | 5 | archaeology, planning |\n| `gpu-research-2026-03-05` | 1 | research |\n\nExample from `TASK-293`: `analyst: devsteps-R2-aspect-staleness`, `confidence: 0.82`, `token_cost: 4200`, findings = full staleness cross-validation with live URL citations.\n\n### 5. Git History Evidence\n\n30 commits with SPIKE/STORY/TASK IDs. Branch pattern `story/<ID>` → `--no-ff` merge confirmed. Most recent: EPIC-040 Spider Web Visualizer. STORY-127/128/181 all went through full Spider Web dispatch runs.\n\n### 6. Return Format Map\n\n| Artifact | Producer | Format | Consumer |\n|---|---|---|---|\n| `content.txt` workspaceStorage | Copilot framework | Markdown text | Framework only (session history) |\n| `content.json` workspaceStorage | Copilot framework | JSON array | Framework only |\n| `.devsteps/cbp/<sprint>/<uuid>.result.json` | Agents via MCP | JSON MandateResult | coord via `read_mandate_results` |\n| `.devsteps/analysis/<task>/*-report.json` | Aspect agents via MCP | JSON AnalysisBriefing | coord via `read_analysis_envelope` |",
+  "recommendations": [
+    "Confirm: `.devsteps/cbp/` filesystem path is the SOLE IPC channel. No direct runSubagent return-value reading exists in Spider Web.",
+    "Note: `report_path` / `upstream_paths` in instruction text are prompt-layer metaphors, NOT actual MandateResult JSON fields in schema_version 1.0.",
+    "Document: `content.txt` in workspaceStorage = Copilot internal artifact for session history. Has no role in Spider Web IPC — never read by agents.",
+    "Verify: `schema_version: '1.0'` field appears in live MandateResult files but may not be in MCP tool param spec — confirm and document.",
+    "Opportunity: Session 1c2e94bc (49 tool dirs) = ground-truth Spider Web run; use its content.txt files as examples of subagent output format for documentation."
+  ],
+  "confidence": 0.93,
+  "token_cost": 3800,
+  "completed_at": "2026-03-05T10:45:00Z",
+  "schema_version": "1.0"
+}

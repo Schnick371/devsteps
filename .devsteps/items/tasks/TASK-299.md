@@ -1,0 +1,1 @@
+Implement hash-based client-side routing in the WebviewPanel. Use postMessage for tab switching events. Use webview.setState() / webview.getState() for tab persistence across panel hides/restores. Landing page = cards grid. Each card click sends tab navigation message. Affected: packages/extension/src/webview/dashboard.ts, packages/extension/src/extension.ts

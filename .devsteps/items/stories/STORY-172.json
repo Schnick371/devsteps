@@ -1,0 +1,38 @@
+{
+  "id": "STORY-172",
+  "type": "story",
+  "category": "general",
+  "title": "guide_code_health — Local AST Complexity Analysis with Optional CodeScene Enrichment",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T02:12:30.426Z",
+  "updated": "2026-02-28T02:12:42.970Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-034"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "daily-workflow",
+    "code-health",
+    "ast-analysis",
+    "codescene-integration",
+    "guide-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

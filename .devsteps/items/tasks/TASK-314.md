@@ -1,0 +1,1 @@
+Create mini SVG 2x2 quadrant preview for EisenhowerCard. Shows dot count per quadrant with color coding (Q1=red, Q2=blue, Q3=yellow, Q4=gray). Text labels hidden in mini view. Max 80x80px SVG viewport.

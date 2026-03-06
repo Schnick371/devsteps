@@ -4,11 +4,18 @@
 
 The DevSteps agent system uses **Multi-Perspective Dispatch (MPD)** as its core orchestration pattern. Instead of a single sequential analysis pass, MPD dispatches specialized agents in parallel to eliminate blind spots before synthesis and implementation.
 
-The system operates at two layers:
-- **Coordinator MPD** — single work item orchestration with risk-based dispatch
+The system uses a **Spinnennetz (Spider Web)** topology — structurally identical to a radar/spider chart (Netzdiagramm):
+
+- **Concentric rings** = execution phases: Analysis → Cross-Validation → Planning → Execution → Gate
+- **Radial spokes** = domains: Code · Tests · Docs · Risk · Research · Work Items · Errors
+- **coord at the centre** — dispatches all agents in one level, synthesizes all returning signals. No nested dispatch (VS Code constraint).
+
+Like a radar chart, the spoke weights shift per task: a bug fix emphasizes Errors + Code, a feature emphasizes Research + Tests + Docs.
+
+- **Coordinator MPD** — single work item orchestration with risk-based parallel fan-out
 - **Sprint Executor MPD** — full sprint / session orchestration with pre-flight analysis
 
-**For the full architecture documentation see:** [docs/architecture/mpd-architecture.md](../../docs/architecture/mpd-architecture.md)
+**Architecture details:** [AGENT-DISPATCH-PROTOCOL.md](./AGENT-DISPATCH-PROTOCOL.md) · [REGISTRY.md](./REGISTRY.md)
 
 ---
 
@@ -16,55 +23,60 @@ The system operates at two layers:
 
 ### Orchestrators
 
-| Agent File | Role |
-|---|---|
-| `devsteps-t1-coordinator.agent.md` | Single-item MPD orchestration — triage, parallel dispatch, synthesis |
-| `devsteps-t1-sprint-executor.agent.md` | Multi-item sprint orchestration — pre-flight, per-item loop, adaptive replanning |
+| Agent File                       | Role                                                                             |
+| -------------------------------- | -------------------------------------------------------------------------------- |
+| `devsteps-R0-coord.agent.md`        | Single-item MPD orchestration — triage, parallel dispatch, synthesis             |
+| `devsteps-R0-coord-sprint.agent.md` | Multi-item sprint orchestration — pre-flight, per-item loop, adaptive replanning |
 
 ### Analyst Agents
 
-| Agent File | Role | Trigger |
-|---|---|---|
-| `devsteps-t3-analyst-context.agent.md` | Global codebase archaeology, dependency mapping | Sprint Phase 0 / FULL tier |
-| `devsteps-t3-analyst-internal.agent.md` | Deep code analysis, API contract inspection | COMPETITIVE tier |
-| `devsteps-t3-analyst-web.agent.md` | External research, library comparison, best practices | COMPETITIVE tier |
+| Agent File                           | Role                                                  | Trigger                    |
+| ------------------------------------ | ----------------------------------------------------- | -------------------------- |
+| `devsteps-R1-analyst-context.agent.md`  | Global codebase archaeology, dependency mapping       | Sprint Phase 0 / FULL tier |
+| `devsteps-R1-analyst-internal.agent.md` | Deep code analysis, API contract inspection           | COMPETITIVE tier           |
+| `devsteps-R1-analyst-web.agent.md`      | External research, library comparison, best practices | COMPETITIVE tier           |
 
 ### Aspect Agents (parallel, STANDARD / FULL tiers)
 
-| Agent File | Analysis Dimension |
-|---|---|
-| `devsteps-t3-aspect-impact.agent.md` | Structural impact — what files and APIs change |
-| `devsteps-t3-aspect-constraints.agent.md` | Business & technical constraints |
-| `devsteps-t3-aspect-quality.agent.md` | Test coverage, code quality signals |
-| `devsteps-t3-aspect-staleness.agent.md` | Obsolescence detection, stale item identification |
-| `devsteps-t3-aspect-integration.agent.md` | Cross-package dependencies, API surface effects |
+| Agent File                             | Analysis Dimension                                |
+| -------------------------------------- | ------------------------------------------------- |
+| `devsteps-R2-aspect-impact.agent.md`      | Structural impact — what files and APIs change    |
+| `devsteps-R2-aspect-constraints.agent.md` | Business & technical constraints                  |
+| `devsteps-R2-aspect-quality.agent.md`     | Test coverage, code quality signals               |
+| `devsteps-R2-aspect-staleness.agent.md`   | Obsolescence detection, stale item identification |
+| `devsteps-R2-aspect-integration.agent.md` | Cross-package dependencies, API surface effects   |
 
 ### Synthesis & Quality Gate (T2)
 
-| Agent File | Role | When Used |
-|---|---|---|
-| `devsteps-t2-archaeology.agent.md` | Codebase archaeology, structural map | STANDARD / FULL |
-| `devsteps-t2-risk.agent.md` | Risk matrix, blast radius, constraint analysis | STANDARD / FULL |
-| `devsteps-t2-research.agent.md` | External research, library comparison | COMPETITIVE |
-| `devsteps-t2-quality.agent.md` | Automated gates, test coverage assessment | FULL |
-| `devsteps-t2-planner.agent.md` | Synthesis of MandateResults → ordered implementation plan | All tiers |
-| `devsteps-t2-reviewer.agent.md` | Blocking quality gate — PASS/FAIL review | After every item |
+| Agent File                              | Role                                                      | When Used        |
+| --------------------------------------- | --------------------------------------------------------- | ---------------- |
+| `devsteps-R1-analyst-archaeology.agent.md` | Codebase archaeology, structural map                      | STANDARD / FULL  |
+| `devsteps-R1-analyst-risk.agent.md`        | Risk matrix, blast radius, constraint analysis            | STANDARD / FULL  |
+| `devsteps-R1-analyst-research.agent.md`    | External research, library comparison                     | COMPETITIVE      |
+| `devsteps-R1-analyst-quality.agent.md`     | Automated gates, test coverage assessment                 | FULL             |
+| `devsteps-R3-exec-planner.agent.md`        | Synthesis of MandateResults → ordered implementation plan | All tiers        |
+| `devsteps-R5-gate-reviewer.agent.md`       | Blocking quality gate — PASS/FAIL review                  | After every item |
 
-### T2 Exec Conductors (dispatched by T1 after t2-planner MandateResult available)
+### Exec Conductors (dispatched by coord after exec-planner MandateResult available)
 
-| Agent File | Role | When Used |
-|---|---|---|
-| `devsteps-t2-impl.agent.md` | Implementation Conductor — orchestrates t3-impl | All tiers |
-| `devsteps-t2-test.agent.md` | Test Conductor — orchestrates t3-test | STANDARD / FULL |
-| `devsteps-t2-doc.agent.md` | Documentation Conductor — orchestrates t3-doc | FULL |
+| Agent File                    | Role                     | When Used       |
+| ----------------------------- | ------------------------ | --------------- |
+| `devsteps-R4-exec-impl.agent.md` | Implementation Conductor | All tiers       |
+| `devsteps-R4-exec-test.agent.md` | Test Conductor           | STANDARD / FULL |
+| `devsteps-R4-exec-doc.agent.md`  | Documentation Conductor  | FULL            |
 
-### T3 Exec Workers (dispatched by T2 Exec Conductors only — T1 NEVER dispatches these directly)
+### Exec Workers (all dispatched directly by coord — leaf nodes)
 
-| Agent File | Role | Dispatched by |
-|---|---|---|
-| `devsteps-t3-impl.agent.md` | Code writing and refactoring | `devsteps-t2-impl` |
-| `devsteps-t3-test.agent.md` | Test generation, coverage analysis | `devsteps-t2-test` |
-| `devsteps-t3-doc.agent.md` | Inline docs, architecture documentation | `devsteps-t2-doc` |
+| Agent File                              | Role                     |
+| --------------------------------------- | ------------------------ |
+| `devsteps-R4-worker-impl.agent.md`         | Code writing             |
+| `devsteps-R4-worker-test.agent.md`         | Test generation          |
+| `devsteps-R4-worker-doc.agent.md`          | Documentation writing    |
+| `devsteps-R4-worker-coder.agent.md`        | Targeted code edits      |
+| `devsteps-R4-worker-tester.agent.md`       | Test execution           |
+| `devsteps-R4-worker-documenter.agent.md`   | Documentation updates    |
+| `devsteps-R4-worker-devsteps.agent.md`     | DevSteps item operations |
+| `devsteps-R4-worker-guide-writer.agent.md` | Guide file updates       |
 
 ---
 
@@ -73,34 +85,40 @@ The system operates at two layers:
 The coordinator determines a risk tier and dispatches agents accordingly:
 
 ```
-QUICK      → t2-planner → t2-impl → t2-reviewer
-STANDARD   → [t2-archaeology + t2-risk] → t2-planner → t2-impl → t2-test → t2-reviewer
-FULL       → [t2-archaeology + t2-risk + t2-quality] → t2-planner → t2-impl → [t2-test ∥ t2-doc] → t2-reviewer
-COMPETITIVE→ [t2-research + t2-archaeology] → t2-planner → t2-impl → t2-reviewer
+QUICK      → exec-planner → exec-impl → gate-reviewer
+STANDARD   → [analyst-archaeology ∥ analyst-risk] → exec-planner → exec-impl → exec-test → gate-reviewer
+FULL       → [analyst-archaeology ∥ analyst-risk ∥ analyst-quality] → exec-planner → exec-impl → [exec-test ∥ exec-doc] → gate-reviewer
+COMPETITIVE→ [analyst-research ∥ analyst-archaeology] → exec-planner → exec-impl → gate-reviewer
+
+Note: coord dispatches ALL agents directly — no nested dispatch (VS Code constraint).
 ```
 
 ### Tier Selection Signals
 
-| Signal | Tier |
-|---|---|
-| Isolated, single-file, full coverage | QUICK |
-| Cross-file, shared modules, partial coverage | STANDARD |
-| Schema change, cross-package, CRITICAL label | FULL |
-| Investigation, "which approach/library?" | COMPETITIVE |
+| Signal                                       | Tier        |
+| -------------------------------------------- | ----------- |
+| Isolated, single-file, full coverage         | QUICK       |
+| Cross-file, shared modules, partial coverage | STANDARD    |
+| Schema change, cross-package, CRITICAL label | FULL        |
+| Investigation, "which approach/library?"     | COMPETITIVE |
 
 ---
 
 ## Naming Convention
 
-All agent files use kebab-case with tier-prefix naming:
+All agent files use `devsteps-{role}-{name}.agent.md`:
 
-| Prefix | Tier | Role |
-|---|---|---|
-| `devsteps-t1-` | Tier 1 | Orchestrators (user-invokable via prompts) |
-| `devsteps-t2-` | Tier 2 | Analysts + Quality Gate (dispatched by T1) |
-| `devsteps-t3-` | Tier 3 | Leaf agents (dispatched by T2, or T3-Exec by T1) |
+| Role prefix         | Function                                  | Dispatch                   |
+| ------------------- | ----------------------------------------- | -------------------------- |
+| `devsteps-R0-coord-`   | Coordinator — dispatches all other agents | User-invokable via prompts |
+| `devsteps-analyst-` | Deep analysis, mandate production         | Dispatched by coord coord  |
+| `devsteps-aspect-`  | Single-aspect scanner                     | Dispatched by coord coord  |
+| `devsteps-exec-`    | Execution orchestration (impl/test/doc)   | Dispatched by coord coord  |
+| `devsteps-gate-`    | Blocking QA gate                          | Dispatched by coord coord  |
+| `devsteps-worker-`  | Leaf executor                             | Dispatched by coord coord  |
 
-> **Tier identification**: Every agent file contains a `## Contract` section marking its tier, dispatcher, and return format.
+> **Key constraint**: VS Code does not support nested `runSubagent` calls. coord agents dispatch all agents directly. Every non-coordinator agent is a leaf node.
+> Every agent file contains a `## Contract` section marking its role, dispatcher, and return format.
 
 ---
 
@@ -108,14 +126,14 @@ All agent files use kebab-case with tier-prefix naming:
 
 The Sprint Executor self-classifies incoming requests:
 
-| Input Signal | Classification | Action |
-|---|---|---|
-| Single item ID only | Single-item MPD | Coordinator flow (no sprint pre-flight) |
-| "sprint", "session", "backlog" | Multi-item sprint | Full sprint protocol |
-| "continue sprint", "next items" | Resume sprint | Phase 1 from saved backlog |
-| `type=spike` or "investigate" | Spike | `t2-archaeology` + `t2-planner`, no impl until direction set |
-| "review", "validate", "check" | Review | `devsteps-t2-reviewer` only |
-| No actionable items found | Empty sprint | Present blocked/draft list to user |
+| Input Signal                    | Classification    | Action                                                              |
+| ------------------------------- | ----------------- | ------------------------------------------------------------------- |
+| Single item ID only             | Single-item MPD   | Coordinator flow (no sprint pre-flight)                             |
+| "sprint", "session", "backlog"  | Multi-item sprint | Full sprint protocol                                                |
+| "continue sprint", "next items" | Resume sprint     | Phase 1 from saved backlog                                          |
+| `type=spike` or "investigate"   | Spike             | `analyst-archaeology` + `exec-planner`, no impl until direction set |
+| "review", "validate", "check"   | Review            | `devsteps-R5-gate-reviewer` only                                       |
+| No actionable items found       | Empty sprint      | Present blocked/draft list to user                                  |
 
 ---
 
@@ -124,27 +142,23 @@ The Sprint Executor self-classifies incoming requests:
 Agents communicate via structured JSON envelopes, not free-form text:
 
 ```
-T3 Aspect/Analyst Agents → write_analysis_report(AnalysisBriefing)
+Aspect/Analyst Agents → write_analysis_report(AnalysisBriefing)
                                     ↓
-T2 Agent ← read_analysis_envelope → synthesize → write_mandate_result(MandateResult)
-                                                              ↓
-                              T1 ← read_mandate_results(item_ids)
-                                                              ↓
-                              T3 Exec (impl/test/doc) ← report_path + item_id
+              coord ← read_mandate_results(item_ids) ← write_mandate_result(MandateResult)
+                                    ↓
+              Exec Agents (impl/test/doc) ← report_path + item_id  [dispatched by coord]
+                                    ↓
+              Worker Agents ← report_path + item_id  [also dispatched by coord]
 ```
-
-See [docs/architecture/mpd-architecture.md](../../docs/architecture/mpd-architecture.md) for full CBP field specifications.
 
 ---
 
 ## References
 
-- [MPD Architecture](../../docs/architecture/mpd-architecture.md) — full architecture documentation
-- [Git Strategy](../../docs/architecture/git-strategy.md) — branching and commit conventions
-- [Repository Strategy](../../docs/architecture/repository-strategy.md) — dual-repo setup
+- [AGENT-DISPATCH-PROTOCOL.md](./AGENT-DISPATCH-PROTOCOL.md) — Spider Web model, rings, spokes, dispatch invariants
+- [REGISTRY.md](./REGISTRY.md) — full agent roster and routing table
 
 ---
 
-
-**Last updated:** 2026-02-23 — Renamed all T1+T3 agents to tier-prefix convention, removed non-Tx standalone agents, added bright-data/* to web research agents, added vscode/askQuestions to T1 agents  
+**Last updated:** 2026-02-23 — Renamed all agents to Spider Web role-based convention, removed tier labels, added bright-data/\* to web research agents, added vscode/askQuestions to coord agents  
 **Related items:** STORY-098, EPIC-025, STORY-107, SPIKE-014

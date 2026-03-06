@@ -1,0 +1,35 @@
+{
+  "id": "SPIKE-027",
+  "type": "spike",
+  "category": "general",
+  "title": "Create first SKILL.md for devsteps-start-work Spider Web entry point (trial for plugin bundling)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T22:03:16.830Z",
+  "updated": "2026-03-05T22:04:18.789Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/skills/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-199"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agent-plugin",
+    "research-2026-03-05"
+  ],
+  "commits": [],
+  "metadata": {}
+}

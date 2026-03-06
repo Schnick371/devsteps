@@ -36,10 +36,15 @@ export {
 export { getConfig } from './config.js';
 export {
   analyzePackages,
+  buildContextMeta,
+  type ContextMeta,
   estimateTokens,
+  formatContextAsText,
+  generateProjectMd,
   getItemCounts,
   getQuickContext,
   getRecentUpdates,
+  getStandardContext,
   readProjectMd,
 } from './context.js';
 export { type GetItemResult, getItem } from './get.js';

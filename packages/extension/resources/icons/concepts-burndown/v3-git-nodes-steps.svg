@@ -1,0 +1,21 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v3 — Git Nodes on Steps</title>
+  <defs>
+    <linearGradient id="g3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <!-- L-shaped step paths connecting nodes — git-graph meets staircase -->
+  <!-- Path: node1 → right → up → node2 → right → up → node3 -->
+  <polyline points="22,100 58,100 58,64 94,64 94,28" fill="none" stroke="#06B6D4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+  <!-- Node 1 (bottom-left) -->
+  <circle cx="22" cy="100" r="12" fill="url(#g3)"/>
+  <circle cx="22" cy="100" r="6" fill="white" opacity="0.3"/>
+  <!-- Node 2 (middle) -->
+  <circle cx="58" cy="64" r="14" fill="url(#g3)"/>
+  <circle cx="58" cy="64" r="7" fill="white" opacity="0.3"/>
+  <!-- Node 3 (top-right, largest = goal) -->
+  <circle cx="94" cy="28" r="16" fill="url(#g3)"/>
+  <circle cx="94" cy="28" r="8" fill="white" opacity="0.3"/>
+</svg>

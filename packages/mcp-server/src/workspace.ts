@@ -17,7 +17,11 @@
  * @throws {Error} If no workspace path is available
  */
 export function getWorkspacePath(): string {
-  // CLI argument takes precedence (Standard MCP pattern)
+  // Env var takes precedence (set by in-process HTTP mode from VS Code extension)
+  if (process.env.DEVSTEPS_WORKSPACE) {
+    return process.env.DEVSTEPS_WORKSPACE;
+  }
+  // CLI argument (Standard MCP stdio pattern)
   const workspaceArg = process.argv[2];
   const cwd = process.cwd();
   const workspacePath = workspaceArg || cwd;

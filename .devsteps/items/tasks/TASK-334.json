@@ -1,0 +1,38 @@
+{
+  "id": "TASK-334",
+  "type": "task",
+  "category": "general",
+  "title": "Strengthen Zod validation in MandateResultSchema",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T11:48:41.296Z",
+  "updated": "2026-03-05T14:32:21.994Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/cbp-mandate.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "SPIKE-022"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "zod",
+    "schema",
+    "cbp",
+    "validation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

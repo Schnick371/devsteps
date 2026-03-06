@@ -1,0 +1,39 @@
+{
+  "id": "STORY-186",
+  "type": "story",
+  "category": "general",
+  "title": "STORY: P0/P1 security + staleness — getNonce, postMessage, CSP, esbuild",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T09:26:20.023Z",
+  "updated": "2026-03-05T09:26:30.135Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-040"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "security",
+    "staleness",
+    "csp",
+    "csprng",
+    "webview",
+    "p0",
+    "p1",
+    "blocker"
+  ],
+  "commits": [],
+  "metadata": {}
+}

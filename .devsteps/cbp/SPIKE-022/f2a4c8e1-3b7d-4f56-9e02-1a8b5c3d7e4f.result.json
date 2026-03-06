@@ -1,0 +1,21 @@
+{
+  "mandate_id": "f2a4c8e1-3b7d-4f56-9e02-1a8b5c3d7e4f",
+  "item_ids": [
+    "SPIKE-022"
+  ],
+  "sprint_id": "SPIKE-022",
+  "analyst": "devsteps-R1-analyst-quality",
+  "status": "complete",
+  "findings": "## Quality Analysis SPIKE-022\n\n### 1: VS Code Version-Requirement Standards\n\nBEFUND: packages/extension/package.json hat engines.vscode: ^1.99.0 (NICHT 1.109+). Falls mcpServerDefinitionProviders API 1.109 erfordert, muss Feld auf ^1.109.0 gesetzt werden.\n\nSTANDARD: engines.vscode ist die korrekte Syntax (SemVer caret). VS Code zeigt automatisch Installationswarnung wenn Version unterschritten. Kein Laufzeit-Check noetig. Andere Extensions nutzen ausschliesslich engines.vscode.\n\nVOLLSTAENDIGER DOKUMENTATIONS-SATZ:\n1. packages/extension/package.json: engines.vscode (primaere Quelle)\n2. README.md: Prerequisites-Sektion fehlt Versionsangabe\n3. INSTALL.md: Requirements-Sektion fehlt Mindestversion\n4. packages/cli/README.md: NICHT noetig (CLI ist Node.js, kein VS Code)\n5. .github/agents/*.agent.md Frontmatter: NICHT geeignet (kein Deployment-Dokument)\n\n### 2: Tracing Standards\n\nEXISTIERENDE INFRASTRUKTUR:\n- logger.ts: Pino JSON-Logging, MCP-sicher (kein ANSI), redact fuer Secrets\n- metrics.ts: Prometheus (prom-client) mit mcp_tool_requests_total, mcp_tool_duration_seconds, mcp_active_connections, mcp_errors_total\n\nFEHLT fuer Spider Web Dispatch-Tracing:\n- Kein dispatch-event Logging (wer dispatcht, wann, triage_tier)\n- Kein mandate-completion Tracking (confidence, token_cost-Summe)\n- Kein per-Sprint Aggregat\n\ndispatch-manifest.json: Gutes Konzept. Pflichtfelder: sprint_id, triage_tier, dispatch_started_at, dispatched_agents[], expected_agent_names[], manifest_version. HINWEIS: expected_mandate_ids[] ist problematisch da UUIDs zum Dispatch-Zeitpunkt unbekannt.\n\nPino vs OpenTelemetry: Pino ausreichend fuer dev/staging. Pino-child-logger mit dispatch_id (UUID pro Sprint-Run) als span-Ersatz. OTel erst noetig bei Multi-Service Distributed Tracing.\n\n### 3: Phantom-Felder Qualitaetsentscheid\n\nLIVE-SCHEMA-BEFUND (SPIKE-021 Archaeology): report_path, upstream_paths, verdict erscheinen NICHT in .devsteps/cbp/ MandateResult JSON-Dateien (schema_version 1.0 bestaetigt).\n\nWO DIESE FELDER VORKOMMEN:\n- AGENT-DISPATCH-PROTOCOL.md Zeile 215: Chat-Return (prose): { report_path, verdict, confidence, t3_recommendations }\n- Zeile 316: Aspect-Chat: { report_path, verdict, confidence, aspect }\n- Beide sind Chat-Prose, NICHT persistiertes JSON\n\nENTSCHEIDUNG: Option C (Prompt-Metapher, prose-only kennzeichnen)\nOption A: Verliert Chat-Signal-Funktion.\nOption B: Redundant, coord kennt Pfad via read_mandate_results.\nOption C: Kostenguenstigste Loesung, besteht bereits, braucht nur Klarstellung.\nImplementierung: Kommentar in AGENT-DISPATCH-PROTOCOL nahe Zeile 215 und 316.\n\n### 4: Quorum-Check Mechanismus\n\nMechanismus A: read_mandate_results zaehlen - funktioniert, aber expected_count manuell tracken.\nMechanismus B: neues MCP-Tool check_mandate_quorum - zu hoher Aufwand fuer aktuellen Reifegrad.\nMechanismus C: quorum_ok + missing_analysts als optionale Felder in read_mandate_results-Response.\n\nEMPFEHLUNG: Mechanismus C. Optionaler Parameter expected_agent_names[], Response erweitert um quorum_ok: bool, missing_analysts: string[]. Rueckwaerts-kompatibel, ca. 15 LOC Implementierung.",
+  "recommendations": [
+    "B1: extension/package.json engines.vscode auf ^1.109.0; README+INSTALL.md mit Mindestversion. CLI/Agent-Frontmatter benoetigen keinen Eintrag.",
+    "B2: Pino-child-logger mit dispatch_id als span-Ersatz; dispatch-manifest.json mit expected_agent_names[] statt IDs. OTel erst bei Multi-Service-Bedarf.",
+    "B3: Option C - Kommentar in AGENT-DISPATCH-PROTOCOL Zeilen 215+316: Chat-only prose, not persisted in MandateResult JSON v1.0.",
+    "B4: Mechanismus C - read_mandate_results um expected_agent_names-Parameter und quorum_ok+missing_analysts-Felder erweitern; ca. 15 LOC.",
+    "Global: schema_version 1.0 als Pflichtfeld in MandateResult MCP-Tool-Paramspecs dokumentieren (in Live-Dateien vorhanden, in Tool-Spec fehlend)."
+  ],
+  "confidence": 0.88,
+  "token_cost": 3200,
+  "completed_at": "2026-03-05T11:30:00Z",
+  "schema_version": "1.0"
+}

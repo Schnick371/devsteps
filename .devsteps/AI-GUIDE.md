@@ -12,6 +12,10 @@ DevSteps supports **two parallel hierarchies**:
 
 ### Scrum/Agile Tree
 
+> **[PLANNED — NOT YET IMPLEMENTED — see SPIKE-024]**
+> The `Theme` and `Initiative` levels above Epic are not yet first-class fields in ItemMetadata.
+> Tracked for implementation in Phase 2 of SPIKE-024. Do not use these in CLI or MCP calls.
+
 ```
 Theme (optional, strategic)
 └── Initiative (optional)
@@ -103,8 +107,8 @@ REQ-001: User Authentication
 
 # Links:
 BUG-011 --implements--> REQ-001 (Bug is child of Requirement)
-BUG-011 --affects--> FEAT-002 (Bug impacts Email Registration)
-BUG-011 --affects--> FEAT-003 (Bug impacts OAuth Login)
+BUG-011 --relates-to--> FEAT-002 (Bug impacts Email Registration)
+BUG-011 --relates-to--> FEAT-003 (Bug impacts OAuth Login)
 TASK-051 --implements--> BUG-011 (Task fixes Bug)
 ```
 
@@ -151,7 +155,7 @@ devsteps-add --type bug --title "Email validation fails for aliases" \
   --priority not-urgent-important
 
 // 2. Link Bug to affected Epic/Requirement (impact traceability)
-devsteps-link --source BUG-010 --relation affects --target EPIC-003
+devsteps-link --source BUG-010 --relation relates-to --target EPIC-003
 // OR use relates-to for general context
 devsteps-link --source BUG-010 --relation relates-to --target FEAT-002
 

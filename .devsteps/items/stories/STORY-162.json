@@ -1,0 +1,40 @@
+{
+  "id": "STORY-162",
+  "type": "story",
+  "category": "general",
+  "title": "guide_cost_report + guide_detect_loops — Token Cost Tracking & AI Loop Detection",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T01:22:24.853Z",
+  "updated": "2026-02-28T01:28:51.341Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/",
+    "packages/shared/src/constants/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-035"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "trail",
+    "cost",
+    "tokens",
+    "loop-detection",
+    "guide-server",
+    "observability"
+  ],
+  "commits": [],
+  "metadata": {}
+}

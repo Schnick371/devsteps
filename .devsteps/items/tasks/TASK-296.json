@@ -1,0 +1,36 @@
+{
+  "id": "TASK-296",
+  "type": "task",
+  "category": "general",
+  "title": "Delegate DevSteps item management from coord to worker-devsteps",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-04T12:52:50.215Z",
+  "updated": "2026-03-04T13:24:57.026Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-292"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spider-web",
+    "architecture",
+    "worker-devsteps",
+    "coord",
+    "devsteps-delegation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

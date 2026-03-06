@@ -3,7 +3,11 @@
  * Licensed under the Apache License, Version 2.0
  */
 
-import type { ItemStatus, ItemType, Priority } from '@schnick371/devsteps-shared';
+import type { ItemStatus, ItemType } from '@schnick371/devsteps-shared';
+
+/** Legacy priority levels (computed from Eisenhower quadrant via itemLoader) */
+export type Priority = 'critical' | 'high' | 'medium' | 'low';
+
 import * as vscode from 'vscode';
 
 /**

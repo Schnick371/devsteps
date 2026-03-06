@@ -1,0 +1,36 @@
+{
+  "id": "TASK-343",
+  "type": "task",
+  "category": "general",
+  "title": "STORY-123: Node.js SEA binary pipeline + MCPB Claude Desktop bundle",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T18:27:41.658Z",
+  "updated": "2026-03-05T18:27:41.658Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "binary",
+    "sea",
+    "node-free",
+    "claude-desktop",
+    "cursor",
+    "track-2"
+  ],
+  "commits": [],
+  "metadata": {}
+}

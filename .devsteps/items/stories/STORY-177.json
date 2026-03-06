@@ -1,0 +1,37 @@
+{
+  "id": "STORY-177",
+  "type": "story",
+  "category": "general",
+  "title": "Never Act Alone — universal R1+R2 minimum for all non-trivial actions",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-04T09:51:47.393Z",
+  "updated": "2026-03-04T09:59:57.554Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/copilot-instructions.md",
+    ".github/instructions/devsteps-agent-protocol.instructions.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-039"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spider-web",
+    "copilot-files",
+    "instructions"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,24 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v11 — Ascending Hexagons (Honeycomb Steps)</title>
+  <defs>
+    <linearGradient id="g11" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+  <!-- Three hexagons in ascending staircase — honeycomb = team, hex = precision -->
+  <!-- Hexagon helper: center cx,cy radius r; pointy-top hex -->
+  <!-- Bottom-left hex (cx=30, cy=96, r=26) -->
+  <polygon points="30,70 52,83 52,109 30,122 8,109 8,83" fill="url(#g11)" opacity="0.55"/>
+  <polygon points="30,76 48,86 48,106 30,116 12,106 12,86" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Mid hex (cx=72, cy=72, r=26) -->
+  <polygon points="72,46 94,59 94,85 72,98 50,85 50,59" fill="url(#g11)" opacity="0.78"/>
+  <polygon points="72,52 90,62 90,82 72,92 54,82 54,62" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Top-right hex (cx=114, cy=48, r=26) — brightest, goal reached -->
+  <polygon points="114,22 136,35 136,61 114,74 92,61 92,35" fill="url(#g11)"/>
+  <polygon points="114,28 132,38 132,58 114,68 96,58 96,38" fill="none" stroke="white" stroke-width="2" opacity="0.5"/>
+  <!-- Checkmark inside top hex = done/goal -->
+  <polyline points="105,48 111,56 124,38" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

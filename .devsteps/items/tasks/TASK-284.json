@@ -1,0 +1,36 @@
+{
+  "id": "TASK-284",
+  "type": "task",
+  "category": "general",
+  "title": "devsteps-30-rapid-cycle — Bug-Loop-Detection + Compact Log",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-27T13:02:30.319Z",
+  "updated": "2026-02-27T13:02:48.800Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/prompts/devsteps-30-rapid-cycle.prompt.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-132"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "prompts",
+    "rapid-cycle",
+    "bug-loop-detection"
+  ],
+  "commits": [],
+  "metadata": {}
+}

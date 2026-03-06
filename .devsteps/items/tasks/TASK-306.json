@@ -1,0 +1,36 @@
+{
+  "id": "TASK-306",
+  "type": "task",
+  "category": "general",
+  "title": "T2.4: TypeScript Agent Registry Constant (Mirror of .github/agents/)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T08:39:36.235Z",
+  "updated": "2026-03-05T08:42:08.682Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/constants/agent-registry.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-183"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "registry",
+    "agents",
+    "typescript"
+  ],
+  "commits": [],
+  "metadata": {}
+}

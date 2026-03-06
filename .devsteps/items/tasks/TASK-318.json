@@ -1,0 +1,36 @@
+{
+  "id": "TASK-318",
+  "type": "task",
+  "category": "general",
+  "title": "T4.6: Extension README.md — Tracing Architecture Section",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T08:40:52.380Z",
+  "updated": "2026-03-05T08:42:57.297Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/README.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-185"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "documentation",
+    "readme",
+    "tracing"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,55 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-col-17" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563EB;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#1D4ED8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad-ideal-17" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E2E8F0;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#CBD5E1;stop-opacity:0.6" />
+    </linearGradient>
+  </defs>
+  
+  <!-- White border frame (rounder CRT corners) -->
+  <path d="M 34 8 
+           Q 128 0, 222 8
+           Q 252 8, 252 34
+           Q 256 128, 252 222
+           Q 252 252, 222 252
+           Q 128 256, 34 252
+           Q 4 252, 4 222
+           Q 0 128, 4 34
+           Q 4 8, 34 8 Z" 
+        fill="none" 
+        stroke="#FFFFFF" 
+        stroke-width="7" 
+        opacity="0.5"/>
+  
+  <!-- Three columns (large, full area) -->
+  <rect x="16" y="24" width="72" height="208" rx="10" fill="url(#grad-col-17)" opacity="0.7"/>
+  <rect x="92" y="24" width="72" height="208" rx="10" fill="url(#grad-col-17)" opacity="0.7"/>
+  <rect x="168" y="24" width="72" height="208" rx="10" fill="url(#grad-col-17)" opacity="0.7"/>
+  
+  <!-- Cards in columns - all top-to-bottom -->
+  <rect x="24" y="36" width="56" height="36" rx="6" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="24" y="80" width="56" height="36" rx="6" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="24" y="124" width="56" height="36" rx="6" fill="#E0F2FE" opacity="0.9"/>
+  <rect x="100" y="36" width="56" height="36" rx="6" fill="#E0F2FE" opacity="0.7"/>
+  <rect x="176" y="36" width="56" height="36" rx="6" fill="#E0F2FE" opacity="0.5"/>
+  <rect x="176" y="80" width="56" height="36" rx="6" fill="#E0F2FE" opacity="0.5"/>
+  
+  <!-- Ideal burndown line (starts at left edge of left lane) -->
+  <line x1="16" y1="110" x2="240" y2="232" 
+        stroke="url(#grad-ideal-17)" 
+        stroke-width="3" 
+        stroke-dasharray="2,6"
+        stroke-linecap="round"/>
+  
+  <!-- Actual burndown line (5th segment ~50deg) -->
+  <path d="M 16 110 L 60 122 L 90 128 L 130 170 L 168 177 L 192 205 L 240 222" 
+        stroke="#FFFFFF" 
+        stroke-width="4" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        fill="none"/>
+</svg>

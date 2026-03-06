@@ -1,0 +1,38 @@
+{
+  "id": "STORY-190",
+  "type": "story",
+  "category": "general",
+  "title": "STORY: Semantic search via nomic-embed-text embeddings across DevSteps items",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T09:26:20.030Z",
+  "updated": "2026-03-05T09:26:30.136Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-040"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ai",
+    "semantic-search",
+    "embeddings",
+    "nomic",
+    "ollama",
+    "mcp-tool",
+    "extension"
+  ],
+  "commits": [],
+  "metadata": {}
+}

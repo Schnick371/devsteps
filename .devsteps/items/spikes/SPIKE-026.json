@@ -1,0 +1,37 @@
+{
+  "id": "SPIKE-026",
+  "type": "spike",
+  "category": "general",
+  "title": "Research: VS Code 1.110 Copilot Hooks — Spider Web visualization integration potential",
+  "status": "in-progress",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T21:48:05.517Z",
+  "updated": "2026-03-05T21:48:08.824Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "hooks",
+    "vscode-1110",
+    "visualization",
+    "spider-web",
+    "research",
+    "copilot-agents",
+    "webview",
+    "d3"
+  ],
+  "commits": [],
+  "metadata": {}
+}

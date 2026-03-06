@@ -1,0 +1,1 @@
+Define a universal dispatch matrix covering all work types beyond code: planning, documentation, git cleanup, release, backlog hygiene, context sync. Each work type maps to minimum ring set. Embed in copilot-instructions.md and update all affected prompts (10, 30, 50, 55, 56, 60, 70).

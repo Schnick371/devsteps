@@ -2,6 +2,11 @@
 
 All notable changes to `@schnick371/devsteps-cli` will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- **STORY-121 TASK-272:** `devsteps context generate` subcommand — generates `.devsteps/PROJECT.md` from live project state (items, config, README, package structure). Supports `--dry-run` to print output to stdout without writing to disk.
+
 ## [1.0.0-next.2] - 2026-02-23 (Pre-release)
 
 ### ⚠️ Pre-Release Channel

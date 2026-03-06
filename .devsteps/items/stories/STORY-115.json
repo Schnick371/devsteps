@@ -1,0 +1,49 @@
+{
+  "id": "STORY-115",
+  "type": "story",
+  "category": "general",
+  "title": "Guided AI Prompt Showcase in Get Started Walkthrough",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-23T22:39:34.680Z",
+  "updated": "2026-02-23T22:40:48.020Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/package.json",
+    "packages/extension/src/extension.ts",
+    "packages/extension/src/commands/",
+    "packages/extension/media/",
+    "README.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003"
+    ],
+    "implemented-by": [
+      "TASK-257",
+      "TASK-258",
+      "TASK-259",
+      "TASK-260"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ux",
+    "onboarding",
+    "walkthrough",
+    "extension",
+    "copilot-chat",
+    "prompts",
+    "get-started"
+  ],
+  "commits": [],
+  "metadata": {}
+}

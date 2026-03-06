@@ -1,0 +1,40 @@
+{
+  "id": "EPIC-033",
+  "type": "epic",
+  "category": "general",
+  "title": "Session Resume & Continuity System",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:49:25.992Z",
+  "updated": "2026-02-28T00:56:50.219Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-140",
+      "STORY-144"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-031",
+      "EPIC-032"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "session",
+    "resume",
+    "continuity",
+    "context",
+    "work-cursor"
+  ],
+  "commits": [],
+  "metadata": {}
+}

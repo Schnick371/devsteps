@@ -1,0 +1,38 @@
+{
+  "id": "STORY-171",
+  "type": "story",
+  "category": "general",
+  "title": "guide_scan_todos — Codebase TODO/FIXME/BUG Scanner with Auto-Item Creation",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T02:10:57.801Z",
+  "updated": "2026-02-28T02:12:42.970Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/",
+    ".devsteps/guide/todo-scan.json"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-034"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "daily-workflow",
+    "todo-scanner",
+    "guide-server",
+    "code-quality"
+  ],
+  "commits": [],
+  "metadata": {}
+}

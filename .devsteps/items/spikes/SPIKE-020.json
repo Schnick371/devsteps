@@ -1,0 +1,37 @@
+{
+  "id": "SPIKE-020",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: Sigma.js v3 vs D3 force simulation for traceability renderer",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-03-05T09:24:53.591Z",
+  "updated": "2026-03-05T09:26:30.134Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-040"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "visualization",
+    "d3",
+    "sigmajs",
+    "spike",
+    "webgl",
+    "traceability"
+  ],
+  "commits": [],
+  "metadata": {}
+}

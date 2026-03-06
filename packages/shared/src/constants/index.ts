@@ -102,8 +102,8 @@ export const CBP_LOOP = {
   MAX_CONFLICT_RESOLUTION_ROUNDS: 2,
   /** Max Tier-2 parallel T3 dispatches per turn */
   MAX_PARALLEL_T3_DISPATCHES: 10,
-  /** Max tokens for MandateResult findings field (~800 tokens) */
-  MAX_MANDATE_FINDINGS_CHARS: 6000,
+  /** Max tokens for MandateResult findings field (~1600 tokens) */
+  MAX_MANDATE_FINDINGS_CHARS: 12000,
 } as const;
 export type RelationshipTypeValue = (typeof RELATIONSHIP_TYPE)[keyof typeof RELATIONSHIP_TYPE];
 export type MethodologyValue = (typeof METHODOLOGY)[keyof typeof METHODOLOGY];

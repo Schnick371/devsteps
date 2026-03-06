@@ -1,0 +1,41 @@
+{
+  "id": "STORY-148",
+  "type": "story",
+  "category": "general",
+  "title": "Inline Bug Discovery (devsteps_flag)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:52:53.001Z",
+  "updated": "2026-02-28T00:56:34.944Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/flag.ts",
+    "packages/mcp-server/src/handlers/flag.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-034"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-149"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "flag",
+    "side-quest",
+    "bug-discovery",
+    "workflow",
+    "mcp-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

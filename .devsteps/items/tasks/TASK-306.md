@@ -1,0 +1,1 @@
+Create packages/shared/src/constants/agent-registry.ts: AgentRegistry constant listing all 31 registered agents with their ring (0-5), domain, role, and agent file name. Source of truth for D3 diagram node layout and TraceEvent validation. Manually synchronized with .github/agents/ files.

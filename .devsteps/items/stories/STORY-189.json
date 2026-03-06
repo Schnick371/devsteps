@@ -1,0 +1,38 @@
+{
+  "id": "STORY-189",
+  "type": "story",
+  "category": "general",
+  "title": "STORY: Intelligent triage auto-classification via Qwen2.5-Coder-7B",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T09:26:20.029Z",
+  "updated": "2026-03-05T09:26:30.136Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-040"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "ai",
+    "triage",
+    "classification",
+    "ollama",
+    "qwen",
+    "extension",
+    "mcp-tool"
+  ],
+  "commits": [],
+  "metadata": {}
+}

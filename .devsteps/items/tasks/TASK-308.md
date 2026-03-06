@@ -1,0 +1,1 @@
+Implement D3.js polar ring diagram in packages/extension/src/webview/spider-web.ts. Rings 0-5 as concentric circles. Agents distributed per ring (Ring 0: coord, Ring 1: 4 analysts, Ring 2: 5 aspects, Ring 3: 1 planner, Ring 4: 8 exec+workers, Ring 5: 1 reviewer). Color coding by domain (Code, Tests, Docs, Risk, Research, WorkItems, Errors). Labels hover-only to avoid clutter.

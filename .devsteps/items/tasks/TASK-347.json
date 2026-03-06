@@ -1,0 +1,34 @@
+{
+  "id": "TASK-347",
+  "type": "task",
+  "category": "general",
+  "title": "Update copilot-instructions.md for VS Code 1.109/1.110 (background agents, Edit deprecation, new slash commands, phantom framework refs)",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T22:02:07.512Z",
+  "updated": "2026-03-06T09:35:10.091Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/copilot-instructions.md",
+    ".github/instructions/devsteps-typescript-implementation.instructions.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agent-plugin",
+    "research-2026-03-05"
+  ],
+  "commits": [],
+  "metadata": {}
+}

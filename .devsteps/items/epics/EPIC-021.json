@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-15T10:18:20.338Z",
-  "updated": "2025-12-15T13:23:55.019Z",
+  "updated": "2026-02-24T13:42:13.084Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -15,7 +15,8 @@
       "SPIKE-009",
       "SPIKE-010",
       "SPIKE-011",
-      "SPIKE-012"
+      "SPIKE-012",
+      "STORY-121"
     ],
     "tested-by": [],
     "tests": [],

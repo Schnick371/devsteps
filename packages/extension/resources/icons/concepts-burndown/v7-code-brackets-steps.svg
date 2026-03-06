@@ -1,0 +1,19 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v7 — Code Brackets with Steps</title>
+  <defs>
+    <linearGradient id="g7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
+    </linearGradient>
+  </defs>
+  <!-- Left bracket { -->
+  <path d="M 42 16 Q 26 16 26 32 L 26 56 Q 26 64 14 64 Q 26 64 26 72 L 26 96 Q 26 112 42 112"
+    fill="none" stroke="#10B981" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right bracket } -->
+  <path d="M 86 16 Q 102 16 102 32 L 102 56 Q 102 64 114 64 Q 102 64 102 72 L 102 96 Q 102 112 86 112"
+    fill="none" stroke="#0EA5E9" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Inside: ascending step bars (the "dev" process) -->
+  <rect x="48" y="86" width="10" height="22" rx="2" fill="url(#g7)" opacity="0.7"/>
+  <rect x="62" y="68" width="10" height="40" rx="2" fill="url(#g7)" opacity="0.85"/>
+  <rect x="76" y="50" width="10" height="58" rx="2" fill="url(#g7)"/>
+</svg>

@@ -1,0 +1,44 @@
+{
+  "id": "STORY-129",
+  "type": "story",
+  "category": "general",
+  "title": "Log-Protokoll Spezifikation — Format, Regeln, Anti-Patterns",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-02-27T13:00:47.841Z",
+  "updated": "2026-02-27T23:45:10.000Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/instructions/devsteps-log-protocol.instructions.md",
+    ".devsteps/logs/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-031"
+    ],
+    "implemented-by": [
+      "TASK-278",
+      "TASK-277"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-131",
+      "STORY-132",
+      "STORY-130"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spec",
+    "logging",
+    "ssot"
+  ],
+  "commits": [],
+  "metadata": {}
+}

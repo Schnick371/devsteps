@@ -26,11 +26,18 @@ export function registerItemCommands(
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.addItem', async () => {
       const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
-      if (!workspaceFolder) { vscode.window.showErrorMessage('No workspace folder open'); return; }
+      if (!workspaceFolder) {
+        vscode.window.showErrorMessage('No workspace folder open');
+        return;
+      }
 
       const itemType = await vscode.window.showQuickPick(
         [
-          { label: 'Epic', value: 'epic', description: 'Large initiative spanning multiple stories' },
+          {
+            label: 'Epic',
+            value: 'epic',
+            description: 'Large initiative spanning multiple stories',
+          },
           { label: 'Story', value: 'story', description: 'User story or feature requirement' },
           { label: 'Task', value: 'task', description: 'Technical task or implementation work' },
           { label: 'Bug', value: 'bug', description: 'Bug fix or defect' },
@@ -62,9 +69,21 @@ export function registerItemCommands(
 
       const priority = await vscode.window.showQuickPick(
         [
-          { label: '🔴 Urgent & Important', value: 'urgent-important', description: 'Do first (Q1)' },
-          { label: '🟠 Important, not urgent', value: 'not-urgent-important', description: 'Schedule (Q2)' },
-          { label: '🟡 Urgent, not important', value: 'urgent-not-important', description: 'Delegate (Q3)' },
+          {
+            label: '🔴 Urgent & Important',
+            value: 'urgent-important',
+            description: 'Do first (Q1)',
+          },
+          {
+            label: '🟠 Important, not urgent',
+            value: 'not-urgent-important',
+            description: 'Schedule (Q2)',
+          },
+          {
+            label: '🟡 Urgent, not important',
+            value: 'urgent-not-important',
+            description: 'Delegate (Q3)',
+          },
           { label: '⚪ Neither', value: 'not-urgent-not-important', description: 'Eliminate (Q4)' },
         ],
         { placeHolder: 'Select priority (Eisenhower Matrix)' }
@@ -77,16 +96,22 @@ export function registerItemCommands(
           type: itemType.value as ItemType,
           title: title.trim(),
           description: description?.trim() || '',
-          priority: priority.value as EisenhowerQuadrant,
+          eisenhower: priority.value as EisenhowerQuadrant,
         });
         if (treeDataProvider) treeDataProvider.refresh();
 
-        const openChoice = await vscode.window.showInformationMessage(`Open ${result.itemId}?`, 'Open', 'Later');
+        const openChoice = await vscode.window.showInformationMessage(
+          `Open ${result.itemId}?`,
+          'Open',
+          'Later'
+        );
         if (openChoice === 'Open') {
           await vscode.commands.executeCommand('devsteps.openItem', result.itemId);
         }
       } catch (error) {
-        vscode.window.showErrorMessage(`Error creating item: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        vscode.window.showErrorMessage(
+          `Error creating item: ${error instanceof Error ? error.message : 'Unknown error'}`
+        );
       }
     })
   );
@@ -97,23 +122,37 @@ export function registerItemCommands(
       'devsteps.openItem',
       async (node?: string | { item?: { id: string }; label?: string }) => {
         const itemId = extractItemId(node);
-        if (!itemId) { vscode.window.showErrorMessage('No item ID provided'); return; }
+        if (!itemId) {
+          vscode.window.showErrorMessage('No item ID provided');
+          return;
+        }
 
         const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
-        if (!workspaceFolder) { vscode.window.showErrorMessage('No workspace folder open'); return; }
+        if (!workspaceFolder) {
+          vscode.window.showErrorMessage('No workspace folder open');
+          return;
+        }
 
         try {
           const devstepsPath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
           const itemResult = await getItem(devstepsPath, itemId);
-          if (!itemResult.metadata) { vscode.window.showErrorMessage(`Item ${itemId} not found`); return; }
+          if (!itemResult.metadata) {
+            vscode.window.showErrorMessage(`Item ${itemId} not found`);
+            return;
+          }
 
           const item = itemResult.metadata;
           const folder = TYPE_TO_DIRECTORY[item.type as keyof typeof TYPE_TO_DIRECTORY];
           const mdPath = path.join(workspaceFolder.uri.fsPath, '.devsteps', folder, `${itemId}.md`);
           const doc = await vscode.workspace.openTextDocument(vscode.Uri.file(mdPath));
-          await vscode.window.showTextDocument(doc, { preview: true, viewColumn: vscode.ViewColumn.One });
+          await vscode.window.showTextDocument(doc, {
+            preview: true,
+            viewColumn: vscode.ViewColumn.One,
+          });
         } catch (error) {
-          vscode.window.showErrorMessage(`Error opening item: ${error instanceof Error ? error.message : 'Unknown error'}`);
+          vscode.window.showErrorMessage(
+            `Error opening item: ${error instanceof Error ? error.message : 'Unknown error'}`
+          );
         }
       }
     )
@@ -123,7 +162,10 @@ export function registerItemCommands(
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.searchItems', async () => {
       const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
-      if (!workspaceFolder) { vscode.window.showErrorMessage('No workspace folder open'); return; }
+      if (!workspaceFolder) {
+        vscode.window.showErrorMessage('No workspace folder open');
+        return;
+      }
 
       const searchQuery = await vscode.window.showInputBox({
         prompt: 'Search work items by title or ID',
@@ -141,7 +183,8 @@ export function registerItemCommands(
 
         const query = searchQuery.toLowerCase();
         const matches = allItems.items.filter(
-          (item) => item.id.toLowerCase().includes(query) || item.title.toLowerCase().includes(query)
+          (item) =>
+            item.id.toLowerCase().includes(query) || item.title.toLowerCase().includes(query)
         );
 
         if (matches.length === 0) {
@@ -150,14 +193,21 @@ export function registerItemCommands(
         }
 
         const selectedItem = await vscode.window.showQuickPick(
-          matches.map((item) => ({ label: `$(file) ${item.id}`, description: item.title, detail: `${item.type} | ${item.status}`, value: item.id })),
+          matches.map((item) => ({
+            label: `$(file) ${item.id}`,
+            description: item.title,
+            detail: `${item.type} | ${item.status}`,
+            value: item.id,
+          })),
           { placeHolder: `Found ${matches.length} match(es)`, title: 'Search Results' }
         );
         if (selectedItem) {
           await vscode.commands.executeCommand('devsteps.openItem', selectedItem.value);
         }
       } catch (error) {
-        vscode.window.showErrorMessage(`Error searching: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        vscode.window.showErrorMessage(
+          `Error searching: ${error instanceof Error ? error.message : 'Unknown error'}`
+        );
       }
     })
   );

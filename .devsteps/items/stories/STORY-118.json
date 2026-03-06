@@ -1,0 +1,42 @@
+{
+  "id": "STORY-118",
+  "type": "story",
+  "category": "general",
+  "title": "Clarify write_sprint_brief Ownership in T1 Sprint Executor",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-23T22:53:39.146Z",
+  "updated": "2026-02-23T23:02:10.886Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-t1-sprint-executor.agent.md",
+    ".github/agents/TIER2-PROTOCOL.md",
+    "packages/mcp-server/src/tools/analysis.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-006"
+    ],
+    "implemented-by": [
+      "TASK-266"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agent-protocol",
+    "sprint-brief",
+    "t1",
+    "t2",
+    "documentation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

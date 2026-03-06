@@ -1,0 +1,1 @@
+In packages/extension/src/extension.ts: create vscode.workspace.createFileSystemWatcher for .devsteps/traces/spider_traces.jsonl. On change: debounce 200ms, read last N lines, parse JSONL, send { type: 'pushTraceData', preview: lastEvent, history: last10 } to webview. Dispose watcher with extension. Handle file-not-found gracefully (show empty state).

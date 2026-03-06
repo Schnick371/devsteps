@@ -1,0 +1,1 @@
+Add SpiderWebDataProvider to the VS Code TreeView in packages/extension/src/treeView/. Shows current session summary: active agents count, dispatches this session, escalations, last activity timestamp. Refreshes when FSWatcher triggers. Integrates with existing TreeView item structure.

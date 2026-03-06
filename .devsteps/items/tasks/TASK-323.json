@@ -1,0 +1,35 @@
+{
+  "id": "TASK-323",
+  "type": "task",
+  "category": "general",
+  "title": "T2.7: VS Code extension setting — configurable TraceEvent retention limit",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T08:50:24.587Z",
+  "updated": "2026-03-05T08:50:41.525Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-183"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "settings",
+    "configuration",
+    "retention"
+  ],
+  "commits": [],
+  "metadata": {}
+}

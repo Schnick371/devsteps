@@ -1,0 +1,33 @@
+{
+  "id": "SPIKE-028",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: Monitor chatPromptFiles VS Code API proposal — track stabilization for bundling .prompt.md in plugin",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-03-05T22:03:41.604Z",
+  "updated": "2026-03-05T22:04:18.789Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-199"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agent-plugin",
+    "research-2026-03-05"
+  ],
+  "commits": [],
+  "metadata": {}
+}

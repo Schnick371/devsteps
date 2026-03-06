@@ -1,0 +1,36 @@
+{
+  "id": "TASK-312",
+  "type": "task",
+  "category": "general",
+  "title": "T3.5: SpiderWebDataProvider Integration (TreeView)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T08:40:16.804Z",
+  "updated": "2026-03-05T08:42:34.516Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/treeView/"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-184"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "treeview",
+    "data-provider",
+    "extension"
+  ],
+  "commits": [],
+  "metadata": {}
+}

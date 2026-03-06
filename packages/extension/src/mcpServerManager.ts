@@ -22,7 +22,7 @@ import {
 } from './utils/runtimeDetector.js';
 
 /**
- * Experimental VS Code MCP API (requires VS Code 1.99+)
+ * Experimental VS Code MCP API (requires VS Code 1.109+)
  * These types are not yet in the official @types/vscode
  */
 interface VsCodeWithMcpApi {
@@ -34,6 +34,12 @@ interface VsCodeWithMcpApi {
     command: string,
     args: string[],
     options: { cwd?: string },
+    version: string
+  ) => unknown;
+  /** Available in VS Code 1.109+ for in-process HTTP MCP servers */
+  McpHttpServerDefinition: new (
+    label: string,
+    url: string,
     version: string
   ) => unknown;
 }
@@ -81,6 +87,7 @@ export class McpServerManager {
   private provider?: vscode.Disposable;
   private changeEmitter: vscode.EventEmitter<void>;
   private runtimeConfig?: McpRuntimeConfig;
+  private httpServer?: { url: string; close: () => Promise<void> };
 
   constructor(private context: vscode.ExtensionContext) {
     this.statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
@@ -120,6 +127,18 @@ export class McpServerManager {
    */
   async start(): Promise<void> {
     try {
+      // Skip if a DevSteps VS Code plugin is already managing MCP
+      const pluginPaths = vscode.workspace
+        .getConfiguration('chat')
+        .get<Record<string, string[]>>('plugins.paths', {});
+      const pluginActive = Object.values(pluginPaths)
+        .flat()
+        .some((p) => p.toLowerCase().includes('devsteps'));
+      if (pluginActive) {
+        logger.info('[MCP] DevSteps plugin detected — skipping extension-managed MCP server start');
+        return;
+      }
+
       // Check if VS Code MCP API is available
       const mcpVscode = vscode as unknown as Partial<VsCodeWithMcpApi>;
       if (!mcpVscode.lm?.registerMcpServerDefinitionProvider) {
@@ -137,7 +156,50 @@ export class McpServerManager {
         logger.warn('No workspace folder detected - MCP server may not function correctly');
       }
 
-      logger.info('🔍 Detecting Node.js runtime...');
+      const vscodeApi = vscode as unknown as VsCodeWithMcpApi;
+
+      // Prefer HTTP in-process mode (VS Code 1.109+)
+      if ('McpHttpServerDefinition' in vscodeApi) {
+        logger.info('🌐 VS Code 1.109+ detected — starting in-process HTTP MCP server');
+
+        const bundledServerPath = path.join(this.context.extensionPath, 'dist', 'mcp-server.js');
+        const workspacePath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath ?? process.cwd();
+
+        logger.info(`📂 Workspace: ${workspacePath}`);
+        logger.info(`📦 Loading bundled MCP server: ${bundledServerPath}`);
+
+        const { startHttpMcpServer } = await import(bundledServerPath);
+        this.httpServer = await startHttpMcpServer(0, workspacePath);
+
+        logger.info(`✅ In-process HTTP MCP server started: ${this.httpServer.url}`);
+
+        const httpDef = new vscodeApi.McpHttpServerDefinition(
+          'devsteps',
+          this.httpServer.url,
+          '1.0.0'
+        );
+        this.provider = vscodeApi.lm.registerMcpServerDefinitionProvider('devsteps-mcp', {
+          onDidChangeMcpServerDefinitions: this.changeEmitter.event,
+          provideMcpServerDefinitions: async () => [httpDef],
+          resolveMcpServerDefinition: async (server: unknown) => server,
+        });
+
+        if (this.provider) {
+          this.context.subscriptions.push(this.provider);
+        }
+
+        this.statusBarItem.text = '$(check) DevSteps MCP';
+        this.statusBarItem.tooltip = `DevSteps MCP Server (in-process HTTP) @ ${this.httpServer.url}`;
+        this.statusBarItem.show();
+
+        await vscode.commands.executeCommand('setContext', 'devsteps.mcpActive', true);
+        logger.info('[MCP] devsteps.mcpActive context key set (HTTP in-process)');
+        logger.info('✅ DevSteps MCP Server registered successfully (HTTP in-process)');
+        return;
+      }
+
+      // Fallback: stdio mode (VS Code < 1.109)
+      logger.info('🔍 Detecting Node.js runtime (stdio fallback)...');
 
       // Detect available runtime (with optional bundled server path)
       const bundledServerPath = path.join(this.context.extensionPath, 'dist', 'mcp-server.js');
@@ -159,11 +221,9 @@ export class McpServerManager {
       logger.info(
         `   Command: ${this.runtimeConfig.command} ${this.runtimeConfig.args?.join(' ') || ''}`
       );
-      logger.info('🚀 Starting MCP server...');
+      logger.info('🚀 Starting MCP server (stdio)...');
 
       // Register MCP server with VS Code using detected runtime
-      // mcpVscode is already typed as VsCodeWithMcpApi from earlier check
-      const vscodeApi = vscode as unknown as VsCodeWithMcpApi;
       this.provider = vscodeApi.lm.registerMcpServerDefinitionProvider('devsteps-mcp', {
         // Event fired when server definitions change
         onDidChangeMcpServerDefinitions: this.changeEmitter.event,
@@ -236,6 +296,8 @@ export class McpServerManager {
       this.statusBarItem.tooltip = `DevSteps MCP Server registered (${this.runtimeConfig.strategy})`;
       this.statusBarItem.show();
 
+      await vscode.commands.executeCommand('setContext', 'devsteps.mcpActive', true);
+      logger.info('[MCP] devsteps.mcpActive context key set (stdio)');
       logger.info('✅ DevSteps MCP Server registered successfully');
       logger.info(`   Runtime: ${this.runtimeConfig.strategy}`);
       logger.info(`   Command: ${this.runtimeConfig.command}`);
@@ -278,7 +340,7 @@ export class McpServerManager {
     logger.warn('VS Code MCP API not available - showing fallback configuration');
 
     const message =
-      'DevSteps MCP Server requires VS Code 1.99+ for automatic setup. ' +
+      'DevSteps MCP Server requires VS Code 1.109+ for automatic setup. ' +
       'You can configure it manually or upgrade VS Code.';
 
     vscode.window
@@ -313,9 +375,13 @@ export class McpServerManager {
   /**
    * Stop the MCP server
    */
-  stop(): void {
+  async stop(): Promise<void> {
     logger.info('Stopping DevSteps MCP Server...');
     this.provider?.dispose();
+    if (this.httpServer) {
+      await this.httpServer.close();
+      this.httpServer = undefined;
+    }
     this.statusBarItem.hide();
   }
 

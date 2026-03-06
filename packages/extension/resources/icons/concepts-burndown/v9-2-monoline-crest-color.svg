@@ -1,0 +1,12 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <title>DevSteps v9.2 — Monoline Crest (Color)</title>
+  <defs>
+    <linearGradient id="v9g2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+  <!-- Premium monoline DS with generous counters -->
+  <path d="M30,30 v68 h22 a22,22 0 0 0 0,-68 h-22 m48,10 c0,-10 20,-10 20,0 c0,10 -20,10 -20,20 c0,10 20,10 20,20 c0,10 -20,10 -20,0"
+    fill="none" stroke="url(#v9g2)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

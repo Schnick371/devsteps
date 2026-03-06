@@ -1,0 +1,1 @@
+Create mini SVG dependency graph preview for TraceabilityCard. Shows top-level Epic→Story connections as simple nodes+edges. Max 100x80px SVG viewport. Node labels omitted in mini view.

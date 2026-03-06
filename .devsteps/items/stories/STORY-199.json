@@ -1,0 +1,39 @@
+{
+  "id": "STORY-199",
+  "type": "story",
+  "category": "general",
+  "title": "Agent Plugin: create plugin.json manifest for @agentPlugins (VS Code 1.110)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T18:08:04.494Z",
+  "updated": "2026-03-05T22:04:28.289Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-028",
+      "SPIKE-031",
+      "TASK-351"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "agent-plugin",
+    "chat-plugins",
+    "vscode-1110",
+    "competitive",
+    "packaging"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,35 @@
+{
+  "id": "TASK-348",
+  "type": "task",
+  "category": "general",
+  "title": "Refactor 9 oversized agent files to ≤150 lines (extract AITK tool list boilerplate)",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T22:02:07.513Z",
+  "updated": "2026-03-06T10:06:54.289Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-345"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agent-plugin",
+    "research-2026-03-05"
+  ],
+  "commits": [],
+  "metadata": {}
+}

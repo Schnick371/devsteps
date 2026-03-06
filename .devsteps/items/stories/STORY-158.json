@@ -1,0 +1,41 @@
+{
+  "id": "STORY-158",
+  "type": "story",
+  "category": "general",
+  "title": "Batch Operations & Test Evidence Recording",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-02-28T00:56:02.891Z",
+  "updated": "2026-02-28T00:56:34.944Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/batch.ts",
+    "packages/mcp-server/src/tools/evidence.ts",
+    "packages/mcp-server/src/handlers/batch.ts",
+    "packages/mcp-server/src/handlers/evidence.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [
+      "STORY-153"
+    ],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "batch",
+    "evidence",
+    "test-results",
+    "bulk-operations",
+    "mcp-server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

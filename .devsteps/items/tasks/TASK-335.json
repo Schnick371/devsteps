@@ -1,0 +1,41 @@
+{
+  "id": "TASK-335",
+  "type": "task",
+  "category": "general",
+  "title": "Audit .devsteps/cbp/ for compliance — expired workspaceStorage",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T11:48:41.297Z",
+  "updated": "2026-03-05T14:34:24.167Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/cbp/"
+  ],
+  "linked_items": {
+    "implements": [
+      "SPIKE-022"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-336",
+      "TASK-337",
+      "TASK-338"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cbp",
+    "audit",
+    "devsteps",
+    "workspaceStorage"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,36 @@
+{
+  "id": "TASK-302",
+  "type": "task",
+  "category": "general",
+  "title": "T1.4: Extension handleMessage Refactor for SPA Commands",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-05T08:39:09.482Z",
+  "updated": "2026-03-05T08:41:54.394Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-182"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "webview",
+    "messages"
+  ],
+  "commits": [],
+  "metadata": {}
+}

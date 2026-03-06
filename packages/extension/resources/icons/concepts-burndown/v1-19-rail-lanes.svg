@@ -1,0 +1,41 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-rail-19" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1D4ED8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0EA5E9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad-switch-19" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22D3EE;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#38BDF8;stop-opacity:0.9" />
+    </linearGradient>
+  </defs>
+  
+  <!-- CRT-style frame -->
+  <path d="M 34 8 
+           Q 128 0, 222 8
+           Q 252 8, 252 34
+           Q 256 128, 252 222
+           Q 252 252, 222 252
+           Q 128 256, 34 252
+           Q 4 252, 4 222
+           Q 0 128, 4 34
+           Q 4 8, 34 8 Z" 
+        fill="none" 
+        stroke="#FFFFFF" 
+        stroke-width="7" 
+        opacity="0.5"/>
+  
+  <!-- Six thick parallel lanes -->
+  <line x1="16" y1="56" x2="240" y2="56" stroke="url(#grad-rail-19)" stroke-width="16" stroke-linecap="round"/>
+  <line x1="16" y1="86" x2="240" y2="86" stroke="url(#grad-rail-19)" stroke-width="16" stroke-linecap="round"/>
+  <line x1="16" y1="116" x2="240" y2="116" stroke="url(#grad-rail-19)" stroke-width="16" stroke-linecap="round"/>
+  <line x1="16" y1="146" x2="240" y2="146" stroke="url(#grad-rail-19)" stroke-width="16" stroke-linecap="round"/>
+  <line x1="16" y1="176" x2="240" y2="176" stroke="url(#grad-rail-19)" stroke-width="16" stroke-linecap="round"/>
+  <line x1="16" y1="206" x2="240" y2="206" stroke="url(#grad-rail-19)" stroke-width="16" stroke-linecap="round"/>
+  
+  <!-- Steep rail switches -->
+  <path d="M 120 86 L 150 116" stroke="url(#grad-switch-19)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M 160 116 L 190 146" stroke="url(#grad-switch-19)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M 100 146 L 130 176" stroke="url(#grad-switch-19)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M 180 176 L 210 206" stroke="url(#grad-switch-19)" stroke-width="10" stroke-linecap="round"/>
+</svg>
