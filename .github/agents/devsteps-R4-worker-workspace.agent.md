@@ -1,8 +1,9 @@
 ---
 description: "Workspace worker — scaffolds new Python/JS projects before exec-impl. Creates pyproject.toml, venv, .gitignore, and calls create_new_workspace. Leaf Node."
 model: "Claude Sonnet 4.6"
-tools: ["vscode", "think", "runCommands", "readFile", "edit", "fileSearch", "devsteps/*", "todo"]
-user-invokable: false
+tools:
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+user-invocable: false
 ---
 
 <!-- devsteps-managed: true | version: 1.0.0 | hash: sha256:pending -->
