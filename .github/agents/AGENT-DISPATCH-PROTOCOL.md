@@ -232,7 +232,7 @@ T2 cannot re-dispatch. Instead:
 
 ### Phase 4: SYNTHESIZE — Write MandateResult
 
-1. Produce findings (max 6000 chars / ~800 tokens)
+1. Produce findings (max 12000 chars / ~1600 tokens)
 2. Build `t3_recommendations` map (MUST/SHOULD/COULD per aspect type)
 3. Call `write_mandate_result` with full payload including `t3_recommendations`
 4. Return to coord in chat: **ONLY** `{ report_path, verdict, confidence, t3_recommendations }`
@@ -245,10 +245,10 @@ T2 cannot re-dispatch. Instead:
   "mandate_id": "uuid",
   "item_ids": ["STORY-001"],
   "sprint_id": "sprint-2026-03-01",
-  "analyst": "analyst-archaeology",
+  "analyst": "devsteps-R1-analyst-archaeology",
   "status": "complete",
-  "findings": "...(max 6000 chars)...",
-  "recommendations": ["top-5 actions, max 200 chars each"],
+  "findings": "...(max 12000 chars / ~1600 tokens)...",
+  "recommendations": ["top-5 actions, max 300 chars each"],
   "confidence": 0.85,
   "token_cost": 3200,
   "completed_at": "2026-03-01T14:00:00Z",

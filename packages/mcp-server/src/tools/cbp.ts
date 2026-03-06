@@ -13,8 +13,12 @@ export const writeMandateResultTool: Tool = {
   name: 'write_mandate_result',
   description:
     'Write a validated MandateResult to .devsteps/cbp/[sprint_id]/[mandate_id].result.json. ' +
-    'Called by Tier-2 Deep Analysts after synthesizing all T3 sub-question answers. ' +
-    'Tier-1 reads via read_mandate_results. Uses atomic write (.tmp → rename).',
+    'Called by Tier-2 Deep Analysts (Ring 1–5) after synthesizing analysis. ' +
+    'Tier-1 coord reads results via read_mandate_results. Uses atomic write (.tmp → rename). ' +
+    'REQUIRED: mandate_result must be a JSON OBJECT (not a stringified JSON string). ' +
+    'REQUIRED: analyst must match pattern devsteps-R{N}-{name} e.g. devsteps-R1-analyst-archaeology. ' +
+    'REQUIRED: sprint_id must be alphanumeric+dash+underscore+dot only (no slashes or dots-dot). ' +
+    'findings max 12000 chars; each recommendation max 300 chars; max 5 recommendations.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -35,11 +39,14 @@ export const writeMandateResultTool: Tool = {
           sprint_id: {
             type: 'string',
             pattern: '^[a-zA-Z0-9_.\\-]+$',
-            description: 'Sprint or session context ID — used as filesystem path segment (required). Only alphanumeric, dash, underscore, dot.',
+            description:
+              'Sprint or session context ID — used as filesystem path segment (required). Only alphanumeric, dash, underscore, dot.',
           },
           analyst: {
             type: 'string',
-            description: 'Tier-2 agent name that produced this result (required)',
+            pattern: '^devsteps-R\\d+-',
+            description:
+              'Agent name that produced this result (required). MUST match devsteps-R{N}-{name} format, e.g. devsteps-R1-analyst-archaeology, devsteps-R2-aspect-impact, devsteps-R3-exec-planner.',
           },
           status: {
             type: 'string',
