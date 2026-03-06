@@ -30,3 +30,4 @@ Add `mcp` category tag to extension `package.json`, fix `activationEvents`, inve
 - https://dev.to/formulahendry/bundle-mcp-server-into-vs-code-extension-3lii (2025-05-01)
 - https://www.kenmuse.com/blog/adding-mcp-server-to-vs-code-extension/ (2026-02-19)
 - https://github.com/modelcontextprotocol/mcpb (2025-12-04)
+All implementing stories completed: STORY-122 (HTTP MCP) and STORY-124 (Marketplace listing). STORY-123 (Binary SEA distribution) created as follow-up for node-free hosts outside VS Code.

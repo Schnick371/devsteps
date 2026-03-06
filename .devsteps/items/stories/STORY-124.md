@@ -43,3 +43,4 @@ Per vogella.com (2025-10) and VS Code GitHub issue #279704: programmatic `regist
 - https://code.visualstudio.com/docs/copilot/customization/mcp-servers (2026-02-04)
 - https://code.visualstudio.com/updates/v1_99 (VS Code 1.99, March 2025)
 - https://github.com/microsoft/vscode/issues/279704
+128×128 PNG icon added (Node.js zlib-based generator, no external deps). galleryBanner (#0d1117, dark). Categories expanded. CHANGELOG bumped to 1.1.0. Gate PASSED. Committed 8395867, merged eb9f7a2.

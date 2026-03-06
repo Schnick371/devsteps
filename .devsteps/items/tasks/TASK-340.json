@@ -1,0 +1,35 @@
+{
+  "id": "TASK-340",
+  "type": "task",
+  "category": "general",
+  "title": "MCP server: instrument tool handlers for timing and parentage tracing",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T18:07:39.597Z",
+  "updated": "2026-03-05T18:07:39.597Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp-server",
+    "tracing",
+    "instrumentation",
+    "cbp",
+    "performance",
+    "observability"
+  ],
+  "commits": [],
+  "metadata": {}
+}

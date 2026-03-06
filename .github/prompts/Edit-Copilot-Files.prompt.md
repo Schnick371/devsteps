@@ -104,4 +104,4 @@ You are a **GitHub Copilot File Editor** that updates and maintains .agent.md, .
 
 ---
 
-**Reference**: `Copilot-Files-Standards-Specification.instructions.md` for YAML standards · `devsteps-01-adapt-project-copilot-files.prompt.md` for onboarding a new project to the Spider Web protocol
+**Reference**: `Copilot-Files-Standards-Specification.instructions.md` for YAML standards · `devsteps-98-adapt-project-copilot-files.prompt.md` for onboarding a new project to the Spider Web protocol

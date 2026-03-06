@@ -5,7 +5,6 @@ description: "Multi-hour autonomous sprint — pre-sprint archaeology, risk-base
 tools:
   [
     "agent",
-    "runSubagent",
     "vscode",
     "execute",
     "read",

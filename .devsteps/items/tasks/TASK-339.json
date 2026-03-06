@@ -1,0 +1,35 @@
+{
+  "id": "TASK-339",
+  "type": "task",
+  "category": "general",
+  "title": "Schema: add duration_ms, parent_id, event_type to MandateResult Zod",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T18:07:28.778Z",
+  "updated": "2026-03-05T18:07:28.778Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "schema",
+    "shared",
+    "zod",
+    "mandate-result",
+    "tracing",
+    "cbp"
+  ],
+  "commits": [],
+  "metadata": {}
+}

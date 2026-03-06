@@ -1,0 +1,33 @@
+{
+  "id": "SPIKE-031",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: Plugin marketplace submission checklist — copilot-plugins repo requirements, security scan, compliance",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T22:04:06.404Z",
+  "updated": "2026-03-05T22:04:23.410Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-199"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agent-plugin",
+    "research-2026-03-05"
+  ],
+  "commits": [],
+  "metadata": {}
+}

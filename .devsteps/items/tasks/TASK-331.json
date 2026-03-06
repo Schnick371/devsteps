@@ -1,0 +1,38 @@
+{
+  "id": "TASK-331",
+  "type": "task",
+  "category": "general",
+  "title": "Implement dispatch-manifest.json per sprint run",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T11:48:21.769Z",
+  "updated": "2026-03-05T14:32:21.994Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/",
+    ".devsteps/cbp/"
+  ],
+  "linked_items": {
+    "implements": [
+      "SPIKE-022"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp-server",
+    "cbp",
+    "tracing",
+    "dispatch"
+  ],
+  "commits": [],
+  "metadata": {}
+}

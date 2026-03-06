@@ -1,14 +1,45 @@
 ---
-agent: 'devsteps-t1-coordinator'
-model: 'Claude Sonnet 4.6'
-description: 'Execute pre-release deployment to @next tag - testing and validation before stable release'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'bright-data/*', 'upstash/context7/*', 'edit', 'search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+agent: "devsteps-R0-coord"
+model: "Claude Sonnet 4.6"
+description: "Execute pre-release deployment to @next tag - testing and validation before stable release"
+tools:
+  [
+    "agent",
+    "vscode",
+    "execute",
+    "read",
+    "edit",
+    "search",
+    "devsteps/*",
+    "bright-data/*",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_agent_model_code_sample",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_tracing_code_gen_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_evaluation_code_gen_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_convert_declarative_agent_to_code",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_agent_runner_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_planner",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_custom_evaluator_guidance",
+    "ms-windows-ai-studio.windows-ai-studio/check_panel_open",
+    "ms-windows-ai-studio.windows-ai-studio/get_table_schema",
+    "ms-windows-ai-studio.windows-ai-studio/data_analysis_best_practice",
+    "ms-windows-ai-studio.windows-ai-studio/read_rows",
+    "ms-windows-ai-studio.windows-ai-studio/read_cell",
+    "ms-windows-ai-studio.windows-ai-studio/export_panel_data",
+    "ms-windows-ai-studio.windows-ai-studio/get_trend_data",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_list_foundry_models",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_agent_as_server",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_add_agent_debug",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo",
+    "todo",
+  ]
 ---
 
 # 🧪 Pre-Release Workflow - @next Tag Deployment
 
 > **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
 
+> **Active Tools:** `#runSubagent` (dispatch) · `#devsteps` (tracking) · `#bright-data` (research)
 
 ## Mission
 
@@ -17,12 +48,14 @@ tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal
 ## When to Use @next
 
 **Perfect for:**
+
 - ✅ Testing major architectural changes (like EPIC-015)
 - ✅ Early adopter feedback before stable release
 - ✅ Iterating on breaking changes
 - ✅ Validating features in production-like environment
 
 **NOT for:**
+
 - ❌ Hotfixes to stable version
 - ❌ Final production releases
 - ❌ Bug fixes to current stable
@@ -30,6 +63,7 @@ tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal
 ## Version Numbering Strategy
 
 **@next versions use `-next.N` suffix on the SAME base version:**
+
 ```
 Current stable: X.Y.Z
 Pre-releases:   X.Y.Z-next.1
@@ -44,6 +78,7 @@ Final stable:   X.Y.Z+1
 ```
 
 **Examples:**
+
 ```
 1.0.0-next.1 → 1.0.0-next.2 → 1.0.0-next.3 → release 1.0.0
 1.0.1-next.1 → 1.0.1-next.2 → 1.0.1-next.3 → release 1.0.1
@@ -51,17 +86,20 @@ Final stable:   X.Y.Z+1
 ```
 
 **⚠️ WRONG (do NOT do this):**
+
 ```
 # Never bump minor/major just for a pre-release iteration!
 1.0.0 → 1.1.0-next.1 → 1.1.0-next.2   ← WRONG
 ```
 
 **Increment rules:**
+
 - First @next of a new base: `X.Y.Z-next.1` (plan the target stable version first)
 - Subsequent iterations: Increment only `.N` suffix — base stays the same
 - Final release: Remove `-next.N` suffix → publish the same `X.Y.Z` as stable
 
 **VS Code extension — separate versioning:**
+
 - Extension uses `N.N.N` format only (Marketplace requirement, no semver suffixes)
 - Pre-release channel: set `"channel": "next"` in `package.json` — `isPreRelease()` reads this first
 - `isPreRelease()` priority: `channel === 'next'` → `true`; fallback: odd minor OR odd patch
@@ -83,6 +121,7 @@ Final stable:   X.Y.Z+1
 > Launch ALL three as simultaneous `#runSubagent` calls. Merge results before proceeding.
 
 **DUAL REPOSITORY CONTEXT:**
+
 - 🔒 **origin-private**: Full development (main branch, default remote)
 - 🌍 **origin**: PUBLIC releases only (explicit push)
 - @next releases go to PUBLIC origin with `-next.N` tag
@@ -227,16 +266,20 @@ Add pre-release section to top of each CHANGELOG:
 ## [X.Y.Z-next.N] - YYYY-MM-DD (Pre-release)
 
 ### ⚠️ Experimental Features
+
 - Dual-bundle MCP server architecture (EPIC-015)
 - VS Code native MCP registration API
 
 ### Fixed
+
 - [List fixed bugs]
 
 ### Known Issues
+
 - [List any known limitations]
 
 ### Testing Needed
+
 - [What needs validation]
 ```
 
@@ -282,7 +325,8 @@ cd packages/extension
 npm run build
 vsce package --pre-release
 ```
-```
+
+````
 **vsce package --pre-release is very important for the release-next prompt!** It ensures the generated VSIX is marked as pre-release, which is required for uploading to the Marketplace without affecting the stable version.
 
 **Verify outputs:**
@@ -303,7 +347,7 @@ If any output is missing → **STOP**, investigate before publishing.
 ```bash
 cd packages/shared
 npm publish --access public --tag next
-```
+````
 
 Verify immediately:
 
@@ -414,6 +458,7 @@ Generate announcement (see Communication Template below).
 🧪 **Pre-Release Available: X.Y.Z-next.N**
 
 **Install:**
+
 ```bash
 # npm packages
 npm install -g @schnick371/devsteps-cli@next
@@ -424,10 +469,12 @@ npm install -g @schnick371/devsteps-mcp-server@next
 ```
 
 **What's New:**
+
 - Dual-bundle MCP server architecture
 - Zero-config VS Code installation
 
 **Known Issues:**
+
 - [List issues]
 
 **Feedback:** GitHub Issues or Discussions
@@ -531,6 +578,7 @@ npm publish --tag next
 ```
 
 **Users install @next by accident:**
+
 - Not possible — requires explicit `@next` suffix
 - Default `npm install` always uses `@latest`
 
@@ -539,17 +587,20 @@ npm publish --tag next
 ## Notes
 
 **Why @next tag?**
+
 - Protects stable users from experimental changes
 - Enables rapid iteration without version pollution
 - VS Code Marketplace has native pre-release support
 - npm dist-tags are standard practice (React, TypeScript, etc.)
 
 **Version strategy:**
+
 - **@next**: `X.Y.Z-next.N` — same base version `X.Y.Z`, only `.N` suffix increments
 - **Stable**: `X.Y.Z` — remove `-next.N` suffix to finalize
 - **Next cycle**: bump patch/minor for the new base, then start `X.Y.Z+1-next.1`
 
 **When to use @next:**
+
 - Major features (EPIC-015)
 - Breaking changes
 - Architectural transformations

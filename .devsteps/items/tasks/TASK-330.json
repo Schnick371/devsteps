@@ -1,0 +1,36 @@
+{
+  "id": "TASK-330",
+  "type": "task",
+  "category": "general",
+  "title": "Implement quorum_ok + missing_analysts in read_mandate_results",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T11:48:21.768Z",
+  "updated": "2026-03-05T14:32:21.993Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/"
+  ],
+  "linked_items": {
+    "implements": [
+      "SPIKE-022"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp-server",
+    "cbp",
+    "quorum"
+  ],
+  "commits": [],
+  "metadata": {}
+}

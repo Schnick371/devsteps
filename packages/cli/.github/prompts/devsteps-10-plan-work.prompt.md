@@ -1,87 +1,83 @@
 ---
-agent: 'devsteps-t1-coordinator'
-model: 'Claude Sonnet 4.6'
-description: 'Interactive planning session - work with developer to define and structure work items before implementation'
-tools: ['vscode/runCommand', 'execute/runInTerminal', 'execute/getTerminalOutput', 'execute/runTask', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runNotebookCell', 'execute/testFailure', 'read', 'agent', 'search', 'playwright/*', 'bright-data/*', 'upstash/context7/*', 'google-search/search', 'local-web-search/search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
+agent: "devsteps-R0-coord"
+model: "Claude Sonnet 4.6"
+description: "Interactive planning session - work with developer to define and structure work items before implementation"
+tools:
+  [
+    "agent",
+    "vscode",
+    "execute",
+    "read",
+    "edit",
+    "search",
+    "devsteps/*",
+    "bright-data/*",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_agent_model_code_sample",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_tracing_code_gen_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_evaluation_code_gen_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_convert_declarative_agent_to_code",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_agent_runner_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_planner",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_custom_evaluator_guidance",
+    "ms-windows-ai-studio.windows-ai-studio/check_panel_open",
+    "ms-windows-ai-studio.windows-ai-studio/get_table_schema",
+    "ms-windows-ai-studio.windows-ai-studio/data_analysis_best_practice",
+    "ms-windows-ai-studio.windows-ai-studio/read_rows",
+    "ms-windows-ai-studio.windows-ai-studio/read_cell",
+    "ms-windows-ai-studio.windows-ai-studio/export_panel_data",
+    "ms-windows-ai-studio.windows-ai-studio/get_trend_data",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_list_foundry_models",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_agent_as_server",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_add_agent_debug",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo",
+    "todo",
+  ]
 ---
 
-# 🎯 Plan Work - Interactive Planning Session
+# 🎯 Plan Work — Spider Web Planning Session
 
-> **Auto-classify before acting:**
-> **(A) Trivial** — isolated change, config value, single-file fix → skip research, go to branch prep directly.
-> **(B) Complex** — cross-cutting, tech/library choice, pattern unification, 3+ components → run `#bright-data` research + `#context7` docs lookup FIRST, synthesize findings before creating any item. When uncertain, classify as Complex.
+## ⚠️ Mandatory Protocol — Execute Before Any Action
 
-Plan work through dialogue — understand intent, research evidence, structure items with traceability.
+| Rule | Constraint |
+| ---- | ---------- |
+| **Agent dispatch** | `#runSubagent` for every agent — **NEVER** inline analyst/exec or DevSteps mutations |
+| **MandateResults** | `#mcp_devsteps_read_mandate_results` ONLY — never paste envelope content |
+| **DevSteps mutations** | `devsteps-R4-worker-devsteps` is the **SOLE** agent that calls `mcp_devsteps_add/update/link` |
+| **Parallel fan-out** | R1 analysts in ONE call; R2 aspects in ONE call after R1 |
+| **Research** | `#bright-data` for planning — 10+ sources before structuring large/complex items |
 
-**Branch strategy:** Work items created in `main` ONLY. Feature branches come later.
-**Progress:** Use `#manage_todo_list` to track planning steps.
+> **Reasoning:** Planning with wrong assumptions causes compounding failures. Always get multi-perspective input before structuring any item.
 
-## Planning Protocol
+## Spider Web Dispatch — Planning Flow
 
-### 1. Branch Preparation (MANDATORY)
+1. **Understand intent** — use `#askQuestions` before ANY dispatch:
+   > Core problem? Constraints, known pitfalls? Existing Epic/Story to attach to?
+2. **Dispatch R1 in parallel:** `devsteps-R1-analyst-archaeology` (what exists that this touches?) + `devsteps-R1-analyst-risk` (what could go wrong?)
+3. **Dispatch R2 in parallel (after R1):** `devsteps-R2-aspect-constraints` + `devsteps-R2-aspect-impact` — pass R1 `report_path` as `upstream_paths`
+4. **Dispatch R3:** `devsteps-R3-exec-planner` — reads R1+R2, proposes item structure (hierarchy, priority, affected_paths)
+5. **Present plan** to user via `#askQuestions` before any item creation:
+   > Proposed: [Epic X → Story Y → Tasks]. Priority: [Q]. Affected: [paths]. Create?
+6. **Dispatch R4:** `devsteps-R4-worker-devsteps` — creates items, links relationships
+7. **Dispatch R5:** `devsteps-R5-gate-reviewer` — validates plan coherence, hierarchy, no orphaned items
 
-1. Check current branch: `git branch --show-current`
-2. Switch to `main` if not already there: `git checkout main && git status`
-3. Verify clean working tree
+## Branch Rules
 
-**Commit discipline:** Plan ALL related items first → create with MCP tools → commit together → wait for user approval before committing.
+- ALL DevSteps mutations happen on `main`: switch before dispatch, return after
+- Items stay `draft` or `planned` — never `in-progress` during planning
+- Commit: `feat(devsteps): plan [DESCRIPTION]`
 
-### 2. Understand Context
+## Item Hierarchy (for R3 + R4 reference)
 
-Ask "why" before "what". Surface dependencies early. Search existing items — reuse or extend before creating new ones.
+- Epic → Story | Spike; Story → Task | Bug
+- Task implements Story/Bug — **NEVER** Epic directly
+- `implements` = hierarchical; `blocks`/`depends-on` = execution; `relates-to` = context
 
-**Bug clustering:** Search bugs before creating new ones. Group related symptoms sharing root cause into one bug item.
+## Guide Mode
 
-### 3. Research First *(Complex tasks only)*
-
-Use `#bright-data` for 10+ external sources. Use `#context7` for official API docs. Evidence-based proposals only.
-
-### 4. Structure Work
-
-**Scope:** Identify ALL affected components — functional reasoning, not keyword search only. Create inventory before creating items.
-
-**Hierarchy:**
-- Epic → Story → Task (standard feature development)
-- Epic → Spike → Task (research → proof-of-concept)
-- Story ← Bug → Task (`Bug blocks/implements Story`; `Task implements Bug`)
-- Task implements Story/Bug — **NEVER** Epic directly (breaks Epic Summary traceability)
-
-**Priority:** Eisenhower matrix — urgent-important (Q1) first.
-
-**Spike → Story:** When Spike completes: create Stories for validated approaches under same Epic, link with `relates-to`.
-
-### 5. Create Items
-
-Use `devsteps/*` MCP tools. Include: type, priority, `affected_paths`, tags, description with acceptance criteria.
-
-### 6. Link Relationships
-
-- `implements` — hierarchical (child → parent)
-- `blocks` / `depends-on` — execution dependency
-- `tested-by` / `relates-to` — context only
-
-### 7. Validate
-
-Every item: clear purpose, priority aligned, dependencies identified, hierarchy non-orphaned.
-
-### 8. Commit to Main
-
-```bash
-git add .devsteps/
-git commit -m "feat(devsteps): plan [DESCRIPTION]"
-```
-
-Items stay `draft` or `planned` — never `in-progress` during planning.
-
-### 9. Return to Original Branch
-
-```bash
-git checkout <original-branch>
-git cherry-pick <planning-commit-hash>
-```
-
-DevSteps MCP tools read from current branch — cherry-pick ensures new items are visible during implementation.
+**Activate when:** User says "create a guide". Dispatch `devsteps-R4-worker-guide-writer`. Link to DevSteps item via `append_description`. Walk-throughs run in `devsteps-35-guide-cycle`.
 
 ---
 
-**See [`devsteps-t1-coordinator.agent.md`](../agents/devsteps-t1-coordinator.agent.md) for MPD orchestration. See [`devsteps-20-start-work.prompt.md`](devsteps-20-start-work.prompt.md) for implementation kickoff.**
+**Agent file:** `devsteps-R0-coord.agent.md` · **Implementation kickoff:** `devsteps-20-start-work.prompt.md`
+

@@ -1,0 +1,33 @@
+{
+  "id": "TASK-346",
+  "type": "task",
+  "category": "general",
+  "title": "Add 'think' tool to analytical agent frontmatter (37/38 files missing)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-05T22:01:40.897Z",
+  "updated": "2026-03-05T22:01:40.897Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agent-plugin",
+    "research-2026-03-05"
+  ],
+  "commits": [],
+  "metadata": {}
+}

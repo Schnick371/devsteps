@@ -97,6 +97,7 @@ DevSteps is the primary work-tracking system. NEVER edit `.devsteps/` directly â
 | Git cleanup                   | `devsteps-50-git-cleanup`     | coord               |
 | Backlog hygiene               | `devsteps-95-item-cleanup`    | coord               |
 | Classify backlog items        | `devsteps-45-classify-items`  | coord               |
+| Assign meta-hierarchy (initiative/theme) | `devsteps-15-meta-hierarchy` | coord          |
 | Document context              | `devsteps-56-context-sync`    | coord               |
 | Pre-release                   | `devsteps-60-release-next`    | coord               |
 | Production release            | `devsteps-70-release`         | coord               |
@@ -145,6 +146,7 @@ Applies to ALL coord agents. R1+R2 provide the multi-perspective input; R4 execu
 | Release | archaeology + risk | constraints + impact | parallel release workers |
 | Backlog hygiene | archaeology + quality | staleness + impact | worker-devsteps |
 | Item classification | archaeology + quality | staleness + impact | worker-classifier |
+| Meta-hierarchy assignment | archaeology + quality | staleness + constraints | worker-meta-hierarchy |
 | Build config change | archaeology + risk | constraints + integration | exec-impl + worker-build-diagnostics |
 
 **Always R5-gate-reviewer after every R4 that produces an artifact.**
