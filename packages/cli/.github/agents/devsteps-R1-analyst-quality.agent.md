@@ -2,39 +2,8 @@
 description: "Quality deep analyst mandate-type=quality, validates correctness + completeness via parallel dispatch with bounded Review-Fix loop"
 model: "Claude Sonnet 4.6"
 tools:
-  [
-    "agent",
-    "vscode",
-    "execute",
-    "read",
-    "edit",
-    "search",
-    "devsteps/*",
-    "bright-data/*",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_agent_model_code_sample",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_tracing_code_gen_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_evaluation_code_gen_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_convert_declarative_agent_to_code",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_agent_runner_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_planner",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_custom_evaluator_guidance",
-    "ms-windows-ai-studio.windows-ai-studio/check_panel_open",
-    "ms-windows-ai-studio.windows-ai-studio/get_table_schema",
-    "ms-windows-ai-studio.windows-ai-studio/data_analysis_best_practice",
-    "ms-windows-ai-studio.windows-ai-studio/read_rows",
-    "ms-windows-ai-studio.windows-ai-studio/read_cell",
-    "ms-windows-ai-studio.windows-ai-studio/export_panel_data",
-    "ms-windows-ai-studio.windows-ai-studio/get_trend_data",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_list_foundry_models",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_agent_as_server",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_add_agent_debug",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo",
-    "todo",
-  ]
-agents:
-  - devsteps-R2-aspect-quality
-  - devsteps-R2-aspect-staleness
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+user-invocable: false
 ---
 
 <!-- devsteps-managed: true | version: unknown | hash: sha256:7baae7914c8fa89747510ef5953fc0abb07b8d4e291cd614772f8e2c7ba23c7c -->

@@ -2,39 +2,11 @@
 description: "Research deep analyst mandate-type=research, finds best technical approach via parallel web + internal dispatch with cross-validation"
 model: "Claude Sonnet 4.6"
 tools:
-  [
-    "agent",
-    "vscode",
-    "execute",
-    "read",
-    "edit",
-    "search",
-    "devsteps/*",
-    "bright-data/*",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_agent_model_code_sample",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_tracing_code_gen_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_evaluation_code_gen_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_convert_declarative_agent_to_code",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_agent_runner_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_planner",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_custom_evaluator_guidance",
-    "ms-windows-ai-studio.windows-ai-studio/check_panel_open",
-    "ms-windows-ai-studio.windows-ai-studio/get_table_schema",
-    "ms-windows-ai-studio.windows-ai-studio/data_analysis_best_practice",
-    "ms-windows-ai-studio.windows-ai-studio/read_rows",
-    "ms-windows-ai-studio.windows-ai-studio/read_cell",
-    "ms-windows-ai-studio.windows-ai-studio/export_panel_data",
-    "ms-windows-ai-studio.windows-ai-studio/get_trend_data",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_list_foundry_models",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_agent_as_server",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_add_agent_debug",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo",
-    "todo",
-  ]
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 agents:
   - devsteps-R1-analyst-web
   - devsteps-R1-analyst-internal
+user-invocable: false
 ---
 
 <!-- devsteps-managed: true | version: unknown | hash: sha256:87cf8b34aac6fdf3ccf657f9590f3f3cd8c0d343bb3387ed9e3d5bff315dbb8a -->

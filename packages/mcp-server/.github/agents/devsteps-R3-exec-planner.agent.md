@@ -2,38 +2,10 @@
 description: "Planner deep analyst mandate-type=planning, decomposes stories into ordered atomic impl steps using Archaeology + Risk MandateResults"
 model: "Claude Sonnet 4.6"
 tools:
-  [
-    "agent",
-    "vscode",
-    "execute",
-    "read",
-    "edit",
-    "search",
-    "devsteps/*",
-    "bright-data/*",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_agent_model_code_sample",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_tracing_code_gen_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_evaluation_code_gen_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_convert_declarative_agent_to_code",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_agent_runner_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_planner",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_custom_evaluator_guidance",
-    "ms-windows-ai-studio.windows-ai-studio/check_panel_open",
-    "ms-windows-ai-studio.windows-ai-studio/get_table_schema",
-    "ms-windows-ai-studio.windows-ai-studio/data_analysis_best_practice",
-    "ms-windows-ai-studio.windows-ai-studio/read_rows",
-    "ms-windows-ai-studio.windows-ai-studio/read_cell",
-    "ms-windows-ai-studio.windows-ai-studio/export_panel_data",
-    "ms-windows-ai-studio.windows-ai-studio/get_trend_data",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_list_foundry_models",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_agent_as_server",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_add_agent_debug",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo",
-    "todo",
-  ]
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 agents:
   - devsteps-R2-aspect-staleness
+user-invocable: false
 ---
 
 <!-- devsteps-managed: true | version: unknown | hash: sha256:bcd30433fbc129891c8779f19995e6074c94c4b07df01e455273776e1c9f2a6c -->
