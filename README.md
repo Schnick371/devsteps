@@ -227,7 +227,58 @@ devsteps init my-project --methodology scrum
 - Click items to open/edit
 - Use toolbar filters
 
-## 📚 Documentation
+## � MCP Setup
+
+The DevSteps VS Code extension **automatically registers the MCP server** — no manual configuration required when installed from the Marketplace.
+
+> **VS Code 1.99+ required.** The extension registers the MCP server on activation via the VS Code MCP API.
+
+### Automatic Setup (Recommended)
+
+1. Install the extension from the Marketplace
+2. Open a workspace folder
+3. The MCP server starts automatically — look for `$(check) DevSteps MCP` in the status bar
+4. All `mcp_devsteps_*` tools are immediately available in Copilot Chat
+
+### Manual Setup (WSL / Remote)
+
+If you're running VS Code via WSL Remote and need to configure the server manually, add this to `.vscode/mcp.json` in your workspace:
+
+```json
+{
+  "servers": {
+    "devsteps": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "/path/to/devsteps/packages/mcp-server/dist/index.js",
+        "/path/to/your/workspace"
+      ]
+    }
+  }
+}
+```
+
+Replace paths with your actual installation paths. Then reload the window (`Ctrl+Shift+P` → **Developer: Reload Window**).
+
+### Verifying the Connection
+
+In Copilot Chat, run:
+```
+/mcp.devsteps.devsteps-onboard
+```
+
+This loads the current project context and confirms the MCP server is connected.
+
+### Available MCP Prompts
+
+| Prompt | Description |
+|--------|-------------|
+| `/mcp.devsteps.devsteps-onboard` | Load project context into the AI session |
+| `/mcp.devsteps.devsteps-sprint-review` | Summarise in-progress items and blockers |
+| `/mcp.devsteps.devsteps-commit-message` | Generate a Conventional Commits message for an item |
+
+## �📚 Documentation
 
 - [Installation Guide](./INSTALL.md) - Detailed setup instructions
 - [Development Guide](./DEVELOPMENT.md) - Contributing and local development
