@@ -13,6 +13,8 @@ import { logger } from './outputChannel.js';
 import { DevStepsTreeDataProvider } from './treeView/devstepsTreeDataProvider.js';
 import { TreeViewStateManager } from './utils/stateManager.js';
 
+let activeMcpManager: McpServerManager | undefined;
+
 /**
  * Extension activation - called when extension is activated
  * Activation event: "*" (activates immediately on VS Code startup)
@@ -86,9 +88,9 @@ export async function activate(context: vscode.ExtensionContext) {
   // Initialize and start MCP server ALWAYS (even without .devsteps)
   // MCP tools work globally and can initialize projects
   try {
-    const mcpManager = new McpServerManager(context);
-    mcpManager.registerCommands();
-    await mcpManager.start();
+    activeMcpManager = new McpServerManager(context);
+    activeMcpManager.registerCommands();
+    await activeMcpManager.start();
     logger.info('MCP Server initialization attempted');
     // Note: mcpServerManager.start() handles all user-facing errors internally
     // including "Node.js not found" notifications with actionable buttons
@@ -274,7 +276,9 @@ export async function activate(context: vscode.ExtensionContext) {
 /**
  * Extension deactivation - cleanup resources
  */
-export function deactivate() {
+export async function deactivate() {
   logger.info('DevSteps extension deactivating...');
+  await activeMcpManager?.stop();
+  activeMcpManager = undefined;
   logger.dispose();
 }

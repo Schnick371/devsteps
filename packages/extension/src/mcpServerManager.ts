@@ -165,7 +165,11 @@ export class McpServerManager {
 
         const bundledServerPath = path.join(this.context.extensionPath, 'dist', 'mcp-server.js');
         const bundledServerUrl = pathToFileURL(bundledServerPath).href;
-        const workspacePath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath ?? process.cwd();
+        const workspacePath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        if (!workspacePath) {
+          logger.warn('⚠️  No workspace folder open — cannot start in-process HTTP MCP server safely');
+          return;
+        }
 
         logger.info(`📂 Workspace: ${workspacePath}`);
         logger.info(`📦 Loading bundled MCP server: ${bundledServerPath}`);
@@ -434,6 +438,11 @@ export class McpServerManager {
   private async restart(): Promise<void> {
     try {
       logger.info('Restarting DevSteps MCP Server...');
+
+      if (this.httpServer) {
+        await this.httpServer.close();
+        this.httpServer = undefined;
+      }
 
       if (this.provider) {
         this.provider.dispose();

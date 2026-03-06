@@ -324,6 +324,7 @@ export async function startHttpMcpServer(
   return {
     url,
     close: async () => {
+      delete process.env.DEVSTEPS_WORKSPACE;
       return new Promise((resolve) => {
         httpServer.close(() => {
           logger.info('HTTP MCP Server closed');
