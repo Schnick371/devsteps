@@ -2,37 +2,7 @@
 description: "Autonomous sprint executor — multi-item backlog, dispatches all agents directly (Spider Web), reads only MandateResults via read_mandate_results"
 model: "Claude Sonnet 4.6"
 tools:
-  [
-    "agent",
-    "vscode",
-    "think",
-    "runCommands",
-    "readFile",
-    "edit",
-    "fileSearch",
-    "devsteps/*",
-    "bright-data/*",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_agent_model_code_sample",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_tracing_code_gen_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_evaluation_code_gen_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_convert_declarative_agent_to_code",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_agent_runner_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_planner",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_custom_evaluator_guidance",
-    "ms-windows-ai-studio.windows-ai-studio/check_panel_open",
-    "ms-windows-ai-studio.windows-ai-studio/get_table_schema",
-    "ms-windows-ai-studio.windows-ai-studio/data_analysis_best_practice",
-    "ms-windows-ai-studio.windows-ai-studio/read_rows",
-    "ms-windows-ai-studio.windows-ai-studio/read_cell",
-    "ms-windows-ai-studio.windows-ai-studio/export_panel_data",
-    "ms-windows-ai-studio.windows-ai-studio/get_trend_data",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_list_foundry_models",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_agent_as_server",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_add_agent_debug",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo",
-    "todo",
-  ]
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 agents:
   - devsteps-R1-analyst-archaeology
   - devsteps-R1-analyst-risk
@@ -105,15 +75,9 @@ Execute multi-hour autonomous work sessions on planned backlog via analyst manda
 
 ---
 
-## Pre-Sprint Clarification (once before Step 1 — then autonomous)
+## Pre-Sprint Clarification (once — then autonomous)
 
-Use `#askQuestions` **once** to confirm scope before the sprint begins:
-
-> Sprint scope: all Q1+Q2 planned items. Exclusions or additions?
-> Focus area / tag filter? (blank = full backlog)
-> Any triage override (QUICK / STANDARD / FULL for all)?
-
-After this exchange the sprint runs autonomously. Do NOT ask again until a Pause Trigger fires.
+Use `#askQuestions` once: confirm scope (all Q1+Q2 planned?), tag filter, triage override. Then run autonomously until a Pause Trigger fires.
 
 ## Pre-Sprint Analysis (MANDATORY — once per sprint session)
 
@@ -165,29 +129,19 @@ For each Sprint Brief item (verify no new blocker first):
 
 ## Pause Triggers → Surface to User
 
-- Reviewer ESCALATED (loop bound exceeded)
-- Architecture decision not in Sprint Brief
-- HARD STOP in MandateResult (HIGH_RISK or cross-package break)
-- Context saturation (>70% window)
+ESCALATED · Architecture decision · HIGH_RISK cross-package break · Context >70%
 
-On pause: status → `in-progress`, write blockers to `.devsteps/analysis/[ID]/sprint-pause.md`.
-Use `#askQuestions` to surface the blocker and collect a decision before any retry:
-
-> ⏸️ SPRINT PAUSED — [blocker type]
-> Finding: [what triggered the pause]
-> Required decision: [specific question]
-> Options: A) ... B) ...
+On pause: status `in-progress`, write blockers to `.devsteps/analysis/[ID]/sprint-pause.md`, use `#askQuestions`:
+`⏸️ SPRINT PAUSED — [blocker] | Finding: [...] | Decision needed: [...] | Options: A) ... B) ...`
 
 ---
 
 ## DevSteps Integration
 
-- **NEVER edit `.devsteps/` directly** — use `devsteps/*` MCP tools only
-- **DevSteps MCP runs on `main` only** — `devsteps/add`, `devsteps/update`, `devsteps/link` MUST run on `main`. Correct sequence per item: [main] set `in-progress` → `git checkout -b story/<ID>` → code commits → `git checkout main` → merge `--no-ff` → set `done`. New items found mid-sprint: stash or finish step → checkout main → dispatch `worker-devsteps` (ops: add + link) → return to branch. **coord NEVER calls `devsteps/add` or `devsteps/link` mid-lifecycle — delegate to `worker-devsteps` (I-11).**
-- Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>` — create at start of each item
-- Commit: `type(scope): subject` + footer `Implements: ID`. All outputs in English.
-- Status: `in-progress` → `review` → `done` (never skip)
-- New issue found → `devsteps/search` (coord may search directly) then dispatch `worker-devsteps` (ops: add + link) before continuing
+- **NEVER edit `.devsteps/` directly** — `devsteps/*` MCP tools only
+- **DevSteps MCP on `main` only** — set `in-progress` on main → `git checkout -b story/<ID>` → code commits → checkout main → merge `--no-ff` → set `done`
+- Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>` — Commit: `type(scope): subject` + `Implements: ID`
+- Status: `in-progress` → `review` → `done` (never skip) — I-11: delegate follow-up adds + all links to `worker-devsteps`
 
 ---
 

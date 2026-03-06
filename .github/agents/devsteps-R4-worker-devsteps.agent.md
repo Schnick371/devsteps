@@ -1,37 +1,7 @@
 ---
 description: "DevSteps worker — manages DevSteps items (create, update, link, status-transitions) via MCP tools. Leaf Node of the Spider Web Dispatch architecture."
 model: "Claude Sonnet 4.6"
-tools:
-  [
-    "vscode",
-    "think",
-    "runCommands",
-    "readFile",
-    "edit",
-    "fileSearch",
-    "devsteps/*",
-    "bright-data/*",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_agent_model_code_sample",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_tracing_code_gen_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_evaluation_code_gen_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_convert_declarative_agent_to_code",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_agent_runner_best_practices",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_planner",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_get_custom_evaluator_guidance",
-    "ms-windows-ai-studio.windows-ai-studio/check_panel_open",
-    "ms-windows-ai-studio.windows-ai-studio/get_table_schema",
-    "ms-windows-ai-studio.windows-ai-studio/data_analysis_best_practice",
-    "ms-windows-ai-studio.windows-ai-studio/read_rows",
-    "ms-windows-ai-studio.windows-ai-studio/read_cell",
-    "ms-windows-ai-studio.windows-ai-studio/export_panel_data",
-    "ms-windows-ai-studio.windows-ai-studio/get_trend_data",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_list_foundry_models",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_agent_as_server",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_add_agent_debug",
-    "ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo",
-    "todo",
-  ]
+tools: ['vscode', 'think', 'runCommands', 'readFile', 'edit', 'fileSearch', 'devsteps/*', 'bright-data/*']
 user-invokable: false
 ---
 
@@ -162,45 +132,11 @@ Verify each `update` with `mcp_devsteps_get` — check status and relations.
 
 ---
 
-## Status Transitions (allowed)
-
-```
-backlog → planned → in-progress → review → done
-any → blocked (bei externen Blockern)
-any → cancelled (bei explizitem Abbruch)
-any → obsolete (when superseded)
-```
-
----
-
 ## Invariants
 
 - **NEVER** call `#runSubagent` — Leaf Node
 - **NEVER** edit `.devsteps/` files directly — MCP tools only
-- **NEVER** skip status transitions (e.g. `planned` → `done`)
+- **NEVER** skip status transitions (`draft → planned → in-progress → review → done`)
 - **NEVER** delete items — only set `cancelled` or `obsolete`
 - **ALWAYS** `add` before `link` — links require existing IDs
-
----
-
-## Return
-
-```json
-{
-  "operations_performed": [
-    {
-      "type": "update",
-      "target_id": "STORY-XXX",
-      "result": "ok",
-      "new_status": "done"
-    },
-    {
-      "type": "link",
-      "source_id": "STORY-XXX",
-      "target_id": "EPIC-001",
-      "result": "ok"
-    }
-  ],
-  "items_affected": ["STORY-XXX", "EPIC-001"]
-}
-```
+- Return: `{ operations_performed: OpResult[], items_affected: string[] }`
