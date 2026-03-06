@@ -1,14 +1,45 @@
 ---
-agent: 'devsteps-t1-coordinator'
-model: 'Claude Sonnet 4.6'
-tools: ['vscode/runCommand', 'execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'agent', 'playwright/*', 'bright-data/*', 'upstash/context7/*', 'edit', 'search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
-description: 'Autonomous multi-hour planning hygiene - consolidate Epics, sharpen content, validate hierarchy, archive completed work'
+agent: "devsteps-R0-coord"
+model: "Claude Sonnet 4.6"
+tools:
+  [
+    "agent",
+    "vscode",
+    "execute",
+    "read",
+    "edit",
+    "search",
+    "devsteps/*",
+    "bright-data/*",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_agent_model_code_sample",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_tracing_code_gen_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_evaluation_code_gen_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_convert_declarative_agent_to_code",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_agent_runner_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_planner",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_custom_evaluator_guidance",
+    "ms-windows-ai-studio.windows-ai-studio/check_panel_open",
+    "ms-windows-ai-studio.windows-ai-studio/get_table_schema",
+    "ms-windows-ai-studio.windows-ai-studio/data_analysis_best_practice",
+    "ms-windows-ai-studio.windows-ai-studio/read_rows",
+    "ms-windows-ai-studio.windows-ai-studio/read_cell",
+    "ms-windows-ai-studio.windows-ai-studio/export_panel_data",
+    "ms-windows-ai-studio.windows-ai-studio/get_trend_data",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_list_foundry_models",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_agent_as_server",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_add_agent_debug",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo",
+    "todo",
+  ]
+description: "Autonomous multi-hour planning hygiene - consolidate Epics, sharpen content, validate hierarchy, archive completed work"
 ---
 
 # 🧹 DevSteps Planning Hygiene - Autonomous Cleanup & Consolidation
 
 > **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
 
+> **Active Tools:** `#runSubagent` (dispatch) · `#devsteps` (tracking) · `#bright-data` (research)
 
 ## Mission
 
@@ -19,16 +50,19 @@ Execute multi-hour autonomous planning work - consolidate overlapping Epics, sha
 ## Core Principles
 
 **Autonomous Execution:**
+
 - Multi-hour continuous planning operation without user intervention
 - Intelligent pause points when strategic decisions required
 - Self-directed Epic consolidation and backlog improvement
 
 **Context-Aware Analysis:**
+
 - Analyze entire project structure for duplicate/overlapping Epics BEFORE cleanup
 - Validate Epic scopes against implementation history
 - Preserve completed work traceability and audit trail
 
 **Human-in-the-Loop Decision Points:**
+
 - Strategic Epic merges affecting project roadmap
 - Ambiguous item content requiring domain knowledge
 - Conflicting priorities needing product owner input
@@ -52,26 +86,31 @@ Retrieve full project inventory - all Epics, Stories, Tasks, Bugs, Spikes across
 Evaluate backlog against professional standards ensuring planning effectiveness.
 
 **D - Detailed Appropriately:**
+
 - Near-term items (next 2-3 sprints) have acceptance criteria and estimates
 - Medium-term items (4-6 weeks out) have rough scoping
 - Long-term items (>6 weeks) remain high-level Epics
 
 **E - Estimated:**
+
 - Stories sized for single sprint completion
 - Tasks broken down from Stories during sprint planning
 - Estimation relative (story points) not absolute (hours)
 
 **E - Emergent:**
+
 - Backlog evolves with learning and changing priorities
 - Regular refinement sessions (90 minutes biweekly per Scrum Alliance 2025)
 - Items added, removed, split, combined based on discovery
 
 **P - Prioritized:**
+
 - Clear ordering based on business value and Eisenhower matrix
 - Dependencies drive sequencing (unblock items first)
 - High-risk items addressed early for learning
 
 **Backlog health metrics (Industry benchmarks 2025):**
+
 - Optimal size: <100 active items (reduces planning time 40%)
 - Refinement capacity: 10% of sprint time maximum
 - Story rejection rate: Target <15% (quality indicator)
@@ -88,11 +127,13 @@ Build mental model of project structure, priorities, and technical architecture.
 Analyze Epic titles and descriptions for semantic similarity using 2025 industry standards.
 
 **Modern Epic sizing rules (Atlassian/Jira 2025):**
+
 - 3-month rule - Epic should fit within fiscal quarter
 - Epics taking >9 months are lifestyle choices not deliverables
 - Consider Initiative level for mega-programs spanning multiple Epics
 
 **Overlap patterns:**
+
 - Same business value, different technical approaches
 - Sequential phases of same initiative split artificially
 - Feature creep causing Epic proliferation
@@ -100,6 +141,7 @@ Analyze Epic titles and descriptions for semantic similarity using 2025 industry
 - Multiple Epics delivering to same delivery item (duplicate tagging)
 
 **Similarity scoring (semantic analysis):**
+
 - Title similarity - domain keyword overlap using NLP
 - Description overlap - solving same problem statement
 - Affected path overlap - modifying same codebase areas
@@ -108,6 +150,7 @@ Analyze Epic titles and descriptions for semantic similarity using 2025 industry
 - Stakeholder overlap - same product owner/team
 
 **Red flags requiring investigation:**
+
 - Epics with >50% content overlap
 - Different Epic names describing identical outcomes
 - Epics with interleaved Story dependencies
@@ -124,6 +167,7 @@ Trace relationships to understand child Story/Task completion.
 Identify Git branches associated with completed Stories.
 
 **Critical distinction:**
+
 - **Planning Epics** - draft/planned status, no started Stories → easily merged
 - **Active Epics** - in-progress Stories/Tasks → needs careful consideration
 - **Completed Epics** - done/review Stories, merged branches → preserve as-is
@@ -135,6 +179,7 @@ Identify Git branches associated with completed Stories.
 Scan all items for content issues requiring sharpening.
 
 **Quality indicators:**
+
 - Vague titles - lacks specificity
 - Missing acceptance criteria
 - Ambiguous descriptions
@@ -158,6 +203,7 @@ LinkedIn/Monday.com research shows backlogs >100 active items see 40% increase i
 Bulk archive done/cancelled items to reduce noise.
 
 **Staleness detection thresholds:**
+
 - Items unchanged >90 days - flag for review
 - Draft status >12 weeks - candidate for cancellation
 - Done items >4 weeks old - archive immediately
@@ -172,6 +218,7 @@ Validate no active dependencies blocking archival through dependency graph analy
 Document archival decisions for audit trail with superseded-by links.
 
 **Archival velocity tracking:**
+
 - Items archived per cleanup session
 - Average age of archived items
 - Backlog size trend over time
@@ -186,6 +233,7 @@ Proper hierarchy enables meaningful rollup reporting, roadmap clarity, and stake
 Find orphaned Tasks without parent Stories using relationship graph traversal.
 
 Detect invalid relationships through automated validation:
+
 - Task implements Epic directly (INVALID - Story layer missing)
 - Bug implements Epic (INVALID - Bug blocks Story, relates-to Epic)
 - Story nested under Story (INVALID - flatten or convert parent to Epic)
@@ -196,6 +244,7 @@ Identify broken links to non-existent items through index consistency checks.
 **Repair strategies (Scrum Alliance/Agile Alliance 2025 consensus):**
 
 **Orphaned Task handling:**
+
 - Create missing Story parent if standalone Task represents user value
 - Link orphaned Task to existing appropriate Story maintaining value chain
 - Re-classify standalone Task as Story if it delivers direct user value
@@ -212,11 +261,13 @@ Task (implements) → Bug (fix implementation)
 ```
 
 **CORRECT links:**
+
 - Bug blocks Story/Feature (impediment to user value)
 - Task implements Bug (delivers fix)
 - Bug relates-to Epic (business context, NOT hierarchy)
 
 **INCORRECT links (auto-repair):**
+
 - Bug implements Epic → Convert to Bug blocks Story, Bug relates-to Epic
 - Task implements Epic → Find/create intermediate Story
 
@@ -239,6 +290,7 @@ Document all repairs with reasoning in item descriptions preserving audit trail.
 **Consolidation decision matrix:**
 
 **Scenario A: Both Epics are planning-only (draft/planned, no started work)**
+
 - Choose primary Epic - better title, description, or priority
 - Migrate all Stories/Spikes from secondary to primary Epic
 - Update primary Epic description - merge unique content from both
@@ -246,15 +298,17 @@ Document all repairs with reasoning in item descriptions preserving audit trail.
 - Preserve both Epics initially - archive secondary only after verification
 
 **Scenario B: One Epic active, one planning-only**
+
 - Keep active Epic unchanged - has implementation investment
 - Review planning Epic Stories - migrate valuable ones to active Epic
 - Stories must align with active Epic's vision
 - Mark planning Epic obsolete if fully subsumed
-- If planning Epi protocol:**
+- If planning Epi protocol:\*\*
 
 Use relationship tools to re-link Stories checking INVEST criteria preservation.
 
 **INVEST validation for migrated Stories (Bill Wake 2025 update):**
+
 - Independent - Story self-contained after migration
 - Negotiable - Solution details remain flexible
 - Valuable - Delivers user/business value under new Epic
@@ -264,13 +318,14 @@ Use relationship tools to re-link Stories checking INVEST criteria preservation.
 
 **SPIDR Story Splitting (Mountain Goat 2025):**
 
-WhIndustry standards (Atlassian/Agile Alliance 2025):**
+WhIndustry standards (Atlassian/Agile Alliance 2025):\*\*
 
 Teams with high-quality acceptance criteria see 40% fewer story rejections and 60% less rework during sprints.
 
 **For each flagged item needing improvement:**
 
 **Title sharpening:**
+
 - Make specific, action-oriented, scannable (<50 chars)
 - Remove vague language ("improve", "enhance", "refactor")
 - Epic titles express business value clearly using outcome language
@@ -280,6 +335,7 @@ Teams with high-quality acceptance criteria see 40% fewer story rejections and 6
 **Description enhancement using structured templates:**
 
 **Epic template (2025 standard):**
+
 - Business value statement (why this matters)
 - Success metrics (OKRs, KPIs tied to Epic)
 - 3-month delivery timeline constraint
@@ -291,6 +347,7 @@ Teams with high-quality acceptance criteria see 40% fewer story rejections and 6
 User story format: "As a [user type], I want [goal] so that [benefit]"
 
 **Acceptance criteria (BDD format required):**
+
 ```
 Given [precondition/context]
 When [action/event]
@@ -298,6 +355,7 @@ Then [expected outcome]
 ```
 
 **Definition of Ready checklist (2025 standard):**
+
 - [ ] Clear user perspective (who/what/why)
 - [ ] Acceptance criteria defined (3-7 criteria max)
 - [ ] Estimated and fits in sprint
@@ -306,6 +364,7 @@ Then [expected outcome]
 - [ ] Testable with measurable outcomes
 
 **Metadata completion:**
+
 - Assign Eisenhower priority if missing (Q1/Q2/Q3/Q4 MANDATORY)
 
 Industry research (Gartner 2025) shows 93% of teams experience technical debt with architecture debt most common.
@@ -326,6 +385,7 @@ Continuous monitoring prevents consolidation errors and maintains backlog health
 **Technical debt items (special handling):**
 
 Track with specific markers following 2025 research showing 15-25% capacity allocation optimal:
+
 - Tag: `technical-debt`
 - Priority: Q2 (important not urgent) unless blocking feature
 - Acceptance criteria focused on measurable improvements:
@@ -335,12 +395,14 @@ Track with specific markers following 2025 research showing 15-25% capacity allo
   - Code duplication reduction metric
 
 **Clarification handling:**
+
 - If content truly ambiguous → pause, ask user with specific options
 - If technical detail unclear → research codebase using semantic search, propose concrete update
 - If business value uncertain → analyze Epic context and OKRs, infer or present alternatives
 - If acceptance criteria vague → convert to BDD Given/When/Then format
 
 **Quality gates for sharpened content:**
+
 - Story passes INVEST criteria validation
 - Acceptance criteria are specific, measurable, testable
 - No solution details prescribed (leaves room for negotiation)
@@ -349,6 +411,7 @@ Track with specific markers following 2025 research showing 15-25% capacity allo
 
 **Preserve user intent** - sharpen clarity, don't change meaning or strategic direction
 **Traceability preservation:**
+
 - Mark obsolete Epic with superseded-by relationship
 - Keep obsolete Epic accessible - don't archive immediately
 - Link related work items explicitly
@@ -369,24 +432,28 @@ Validate no items lost or corrupted using checksum verification.
 **Quality metrics validation (2025 standards):**
 
 **Backlog health indicators:**
+
 - Active item count reduced (target <100)
 - Staleness eliminated (no items >90 days unchanged)
 - Orphaned items resolved (100% hierarchy compliance)
 - Broken links removed (0 references to non-existent items)
 
 **Content quality improvements:**
+
 - Stories with acceptance criteria (target 100%)
 - Items with Eisenhower priority (target 100%)
 - INVEST compliance rate (track per story type)
 - Technical debt tagged and tracked (15-25% capacity allocated)
 
 **Consolidation impact:**
+
 - Epic count reduction (fewer overlapping initiatives)
 - Story migration success rate (no orphaned after consolidation)
 - Superseded-by chain integrity (audit trail complete)
 - Implementation preservation (no work lost in active Epics)
 
 **Velocity indicators post-cleanup:**
+
 - Sprint planning time reduced (fewer items to scan)
 - Story estimation accuracy improved (clearer acceptance criteria)
 - Cycle time reduction potential (cleaner dependencies)
@@ -394,6 +461,7 @@ Validate no items lost or corrupted using checksum verification.
 
 Generate comprehensive cleanup report documenting all changes, rationale, metrics before/after
 **Description enhancement:**
+
 - Add missing acceptance criteria
 - Clarify ambiguous requirements
 - Update outdated technical references
@@ -402,12 +470,14 @@ Generate comprehensive cleanup report documenting all changes, rationale, metric
 - Reference related code/docs
 
 **Metadata completion:**
+
 - Assign Eisenhower priority if missing
 - Add relevant tags for discoverability
 - Set category for grouping
 - Update affected paths based on current codebase
 
 **Clarification handling:**
+
 - If content truly ambiguous → pause, ask user
 - If technical detail unclear → research codebase, propose update
 - If business value uncertain → analyze Epic context, infer or ask
@@ -427,17 +497,20 @@ Validate no items lost or corrupted.
 ## Adaptive Workflow Control
 
 **Re-assess every 10 items processed:**
+
 - Scan for newly discovered Epic overlaps
 - Check for pattern changes requiring strategy adjustment
 - Verify no unintended side effects from consolidations
 
 **Pause triggers:**
+
 - Strategic Epic merge requiring roadmap decision
 - Content ambiguity needing domain expertise
 - Complex relationship conflicts
 - Implementation history complicates consolidation
 
 **Pause protocol:**
+
 - Document current state and decisions made
 - Present specific questions/options clearly
 - Save progress, enable resume
@@ -454,18 +527,21 @@ Use conventional commit format describing cleanup actions performed.
 ## Communication Standards
 
 **Progress updates:**
+
 - Current phase and item count processed
 - Epic consolidations performed
 - Content improvements made
 - Issues requiring user input
 
 **Consolidation proposals:**
+
 - Which Epics being merged and why
 - Content being preserved from each
 - Stories being migrated
 - Traceability links created
 
 **Final summary:**
+
 - Total items archived
 - Hierarchy violations fixed
 - Epics consolidated
@@ -477,6 +553,7 @@ Use conventional commit format describing cleanup actions performed.
 ## Critical Rules
 
 **Epic Consolidation Principles:**
+
 - Trust implementation investment over planning artifacts
 - Completed work always preserved - never consolidate done Epics
 - Active implementation always wins over draft planning
@@ -484,6 +561,7 @@ Use conventional commit format describing cleanup actions performed.
 - Superseded-by links maintain audit trail
 
 **Content Sharpening Principles:**
+
 - Clarify without changing user intent
 - Research codebase before proposing technical updates
 - Pause for strategic/business clarification
@@ -491,6 +569,7 @@ Use conventional commit format describing cleanup actions performed.
 - Preserve domain terminology
 
 **Hierarchy Validation Principles:**
+
 - Invalid relationships fixed systematically
 - Orphaned items get proper parents or reclassification
 - Bug patterns strictly enforced - blocks Story, not Epic
@@ -498,6 +577,7 @@ Use conventional commit format describing cleanup actions performed.
 - No direct Epic-to-Task relationships created
 
 **Safety Principles:**
+
 - Index rebuild with backup before final commit
 - Superseded-by links before marking obsolete
 - Verification after bulk operations
@@ -509,6 +589,7 @@ Use conventional commit format describing cleanup actions performed.
 **Remember: This is planning work - sharpen the backlog for future implementation. Epic consolidation requires understanding both planning intent and implementation reality.**
 
 **See also:**
+
 - devsteps-40-sprint.prompt.md - Implementation workflow (this is planning counterpart)
 - devsteps-10-plan-work.prompt.md - Creating NEW work items, Spike transitions
 - devsteps-20-start-work.prompt.md - Bug lifecycle, quality gates

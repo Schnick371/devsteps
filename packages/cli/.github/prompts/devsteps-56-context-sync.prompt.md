@@ -1,14 +1,45 @@
 ---
-agent: 'devsteps-t1-coordinator'
-model: 'Claude Sonnet 4.6'
-tools: ['execute/getTerminalOutput', 'execute/awaitTerminal', 'execute/killTerminal', 'execute/runTask', 'execute/runNotebookCell', 'execute/testFailure', 'execute/runInTerminal', 'read', 'bright-data/*', 'edit', 'search', 'devsteps/*', 'remarc-insight-mcp/*', 'todo']
-description: 'Autonomous multi-hour context documentation - discover aspects, create knowledge base, link work items for Copilot memory'
+agent: "devsteps-R0-coord"
+model: "Claude Sonnet 4.6"
+tools:
+  [
+    "agent",
+    "vscode",
+    "execute",
+    "read",
+    "edit",
+    "search",
+    "devsteps/*",
+    "bright-data/*",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_agent_model_code_sample",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_tracing_code_gen_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_evaluation_code_gen_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_convert_declarative_agent_to_code",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_agent_runner_best_practices",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_planner",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_get_custom_evaluator_guidance",
+    "ms-windows-ai-studio.windows-ai-studio/check_panel_open",
+    "ms-windows-ai-studio.windows-ai-studio/get_table_schema",
+    "ms-windows-ai-studio.windows-ai-studio/data_analysis_best_practice",
+    "ms-windows-ai-studio.windows-ai-studio/read_rows",
+    "ms-windows-ai-studio.windows-ai-studio/read_cell",
+    "ms-windows-ai-studio.windows-ai-studio/export_panel_data",
+    "ms-windows-ai-studio.windows-ai-studio/get_trend_data",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_list_foundry_models",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_agent_as_server",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_add_agent_debug",
+    "ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo",
+    "todo",
+  ]
+description: "Autonomous multi-hour context documentation - discover aspects, create knowledge base, link work items for Copilot memory"
 ---
 
 # 📚 Project Context Documentation - Copilot Memory System
 
 > **Reasoning:** Think through scope, risks, and approach before any action. For large or cross-cutting tasks, use extended reasoning — analyze alternatives and consequences before executing.
 
+> **Active Tools:** `#runSubagent` (dispatch) · `#devsteps` (tracking) · `#bright-data` (research)
 
 ## Mission
 
@@ -19,16 +50,19 @@ Execute multi-hour autonomous documentation work - discover project aspects, cre
 ## Core Principles
 
 **Autonomous Execution:**
+
 - Multi-hour continuous documentation operation
 - Intelligent pause when pattern classification ambiguous
 - Self-directed aspect discovery and documentation
 
 **Context-Aware Analysis:**
+
 - Discover aspects from codebase reality, not prescribed templates
 - Validate patterns against actual implementations
 - Correlate work items with documented patterns
 
 **Systematic Documentation Scope:**
+
 - Functional analysis identifies ALL pattern instances across codebase
 - Compare implementations to extract common principles
 - Document unified patterns, note intentional variations
@@ -36,11 +70,13 @@ Execute multi-hour autonomous documentation work - discover project aspects, cre
 - Truth source defines canonical approaches
 
 **Human-in-the-Loop Decision Points:**
+
 - Architecture interpretation requiring domain knowledge
 - Pattern classification when multiple approaches exist
 - Work item correlation conflicts needing prioritization
 
 **Documentation Principles:**
+
 - README-first: Central index at `.devsteps/context/README.md`
 - Let project reveal what matters through analysis
 - Document HOW (patterns), link to WHO/WHY (ADRs, work items)
@@ -49,6 +85,7 @@ Execute multi-hour autonomous documentation work - discover project aspects, cre
 ## Documentation Structure
 
 **Central Index:**
+
 ```
 .devsteps/context/README.md        # Project index
 ```
@@ -56,6 +93,7 @@ Execute multi-hour autonomous documentation work - discover project aspects, cre
 **Aspect Documentation (Project-Specific):**
 
 Discover aspects from codebase reality. Common examples include:
+
 - **Data Model & Schema**: Database, ORMs, API contracts, DTOs
 - **Architecture & Design**: System boundaries, module dependencies, patterns
 - **DevOps & Infrastructure**: CI/CD, deployment, monitoring, IaC
@@ -70,31 +108,38 @@ Discover aspects from codebase reality. Common examples include:
 **File naming:** Descriptive kebab-case (authentication.md, logging-infrastructure.md, cli-library-separation.md)
 
 **README.md Content:**
+
 - Project overview + technical stack
 - Index of aspect files (1-line descriptions)
 - Quick reference for common patterns
 - Links to key work items
 
 **Aspect File Template:**
+
 ```markdown
 # [Aspect Name]
 
 **Last Updated:** [Date]
 
 ## Why This Matters
+
 [Rationale]
 
 ## Current Approach
+
 [Pattern/convention description]
 
 ## Implementation Details
+
 [Code locations, key files]
 
 ## Related Work Items
+
 - EPIC-XXX: [Context]
 - STORY-XXX: [Details]
 
 ## Common Pitfalls
+
 [What to avoid]
 ```
 
@@ -120,6 +165,7 @@ Use `#manage_todo_list` to track phases.
 **Goal:** Central index for navigation.
 
 Create/update `.devsteps/context/README.md`:
+
 - Project overview
 - Technical stack summary
 - Aspect index with descriptions
@@ -151,6 +197,7 @@ Create/update `.devsteps/context/README.md`:
 **Goal:** Bidirectional traceability.
 
 For each aspect:
+
 1. Find related work items via search
 2. Update work item descriptions: "See: `.devsteps/context/[aspect].md`"
 3. Verify affected_paths match documented code
@@ -159,6 +206,7 @@ For each aspect:
 ### Phase 5: Validation
 
 **Quality checks:**
+
 - README.md readable and complete
 - All aspect files follow template
 - Work items reference context docs
@@ -168,12 +216,14 @@ For each aspect:
 ### Phase 6: Maintenance
 
 **Update context when:**
+
 - New pattern introduced
 - Existing pattern changes
 - Work item creates new crosscutting concern
 - Implementation diverges from docs
 
 **Update workflow:**
+
 1. Identify affected aspect file(s)
 2. Update implementation details
 3. Add/update work item links
@@ -183,11 +233,13 @@ For each aspect:
 ## Git Integration
 
 **Commit Strategy:**
+
 - Context creation: Single commit with all aspects
 - Updates: Per-aspect commits
 - Prefer `main` branch (planning phase)
 
 **Commit Format:**
+
 ```
 docs(context): create project knowledge base
 
@@ -201,11 +253,13 @@ Aspects: [list]
 ## Communication Standards
 
 **Progress Updates:**
+
 - Phase 1: "[N] aspects identified"
 - Phase 3: "Documented: [aspect-name]"
 - Phase 5: "README.md complete"
 
 **Final Summary:**
+
 - Aspects documented
 - Work items correlated
 - README.md status
@@ -213,22 +267,26 @@ Aspects: [list]
 ## Critical Rules
 
 **Discovery:**
+
 - Let project reveal aspects
 - Don't force generic templates
 - Quality over quantity
 
 **Documentation:**
+
 - Link to code, don't copy
 - Reference work items
 - Update when patterns change
 - README.md as central index
 
 **Work Item Integration:**
+
 - Context = HOW (patterns)
 - Work items = WHY/WHAT (requirements)
 - Bidirectional links required
 
 **Copilot Memory:**
+
 - Read context BEFORE implementing
 - Prevents conflicting approaches
 - Ensures consistency
@@ -239,6 +297,7 @@ Aspects: [list]
 **This creates Copilot's project memory preventing re-invention of established patterns.**
 
 **See also:**
+
 - devsteps-10-plan-work.prompt.md - Creating work items
 - devsteps-95-item-cleanup.prompt.md - Work item maintenance
 - .github/instructions/devsteps-documentation.instructions.md - Markdown standards
