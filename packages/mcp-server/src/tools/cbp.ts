@@ -34,7 +34,8 @@ export const writeMandateResultTool: Tool = {
           },
           sprint_id: {
             type: 'string',
-            description: 'Sprint or session context ID — used in file path (required)',
+            pattern: '^[a-zA-Z0-9_.\\-]+$',
+            description: 'Sprint or session context ID — used as filesystem path segment (required). Only alphanumeric, dash, underscore, dot.',
           },
           analyst: {
             type: 'string',
@@ -47,12 +48,12 @@ export const writeMandateResultTool: Tool = {
           },
           findings: {
             type: 'string',
-            description: 'Structured synthesis, MAX ~800 tokens / 6000 chars (required)',
+            description: 'Structured synthesis, MAX ~1600 tokens / 12000 chars (required)',
           },
           recommendations: {
             type: 'array',
-            items: { type: 'string' },
-            description: 'Top-5 actionable items for Tier-1, max 200 chars each (required)',
+            items: { type: 'string', maxLength: 300 },
+            description: 'Top-5 actionable items for Tier-1, max 300 chars each (required)',
           },
           confidence: {
             type: 'number',
