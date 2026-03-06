@@ -127,6 +127,18 @@ export class McpServerManager {
    */
   async start(): Promise<void> {
     try {
+      // Skip if a DevSteps VS Code plugin is already managing MCP
+      const pluginPaths = vscode.workspace
+        .getConfiguration('chat')
+        .get<Record<string, string[]>>('plugins.paths', {});
+      const pluginActive = Object.values(pluginPaths)
+        .flat()
+        .some((p) => p.toLowerCase().includes('devsteps'));
+      if (pluginActive) {
+        logger.info('[MCP] DevSteps plugin detected — skipping extension-managed MCP server start');
+        return;
+      }
+
       // Check if VS Code MCP API is available
       const mcpVscode = vscode as unknown as Partial<VsCodeWithMcpApi>;
       if (!mcpVscode.lm?.registerMcpServerDefinitionProvider) {
@@ -161,7 +173,11 @@ export class McpServerManager {
 
         logger.info(`✅ In-process HTTP MCP server started: ${this.httpServer.url}`);
 
-        const httpDef = new vscodeApi.McpHttpServerDefinition('devsteps', this.httpServer.url, '1.0.0');
+        const httpDef = new vscodeApi.McpHttpServerDefinition(
+          'devsteps',
+          this.httpServer.url,
+          '1.0.0'
+        );
         this.provider = vscodeApi.lm.registerMcpServerDefinitionProvider('devsteps-mcp', {
           onDidChangeMcpServerDefinitions: this.changeEmitter.event,
           provideMcpServerDefinitions: async () => [httpDef],
@@ -176,6 +192,8 @@ export class McpServerManager {
         this.statusBarItem.tooltip = `DevSteps MCP Server (in-process HTTP) @ ${this.httpServer.url}`;
         this.statusBarItem.show();
 
+        await vscode.commands.executeCommand('setContext', 'devsteps.mcpActive', true);
+        logger.info('[MCP] devsteps.mcpActive context key set (HTTP in-process)');
         logger.info('✅ DevSteps MCP Server registered successfully (HTTP in-process)');
         return;
       }
@@ -278,6 +296,8 @@ export class McpServerManager {
       this.statusBarItem.tooltip = `DevSteps MCP Server registered (${this.runtimeConfig.strategy})`;
       this.statusBarItem.show();
 
+      await vscode.commands.executeCommand('setContext', 'devsteps.mcpActive', true);
+      logger.info('[MCP] devsteps.mcpActive context key set (stdio)');
       logger.info('✅ DevSteps MCP Server registered successfully');
       logger.info(`   Runtime: ${this.runtimeConfig.strategy}`);
       logger.info(`   Command: ${this.runtimeConfig.command}`);
