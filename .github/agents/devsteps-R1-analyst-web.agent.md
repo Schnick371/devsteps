@@ -3,7 +3,6 @@ description: "Web Research Analyst - searches internet for modern patterns, best
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",

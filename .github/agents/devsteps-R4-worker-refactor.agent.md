@@ -3,7 +3,6 @@ description: "Refactor worker — restructures code without changing behavior. I
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",

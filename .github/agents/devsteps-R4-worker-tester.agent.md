@@ -3,7 +3,6 @@ description: "Tester worker — writes unit tests based on the Planner MandateRe
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",
