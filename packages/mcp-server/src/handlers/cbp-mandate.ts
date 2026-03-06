@@ -18,7 +18,7 @@ import {
   renameSync,
   writeFileSync,
 } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import {
   CBP_LOOP,
   DispatchManifestSchema,
@@ -58,8 +58,7 @@ function getEscalationDir(sprintId: string): string {
 }
 
 function atomicWriteJson(filePath: string, data: unknown): void {
-  const dir = filePath.substring(0, filePath.lastIndexOf('/'));
-  mkdirSync(dir, { recursive: true });
+  mkdirSync(dirname(filePath), { recursive: true });
   const tmpPath = `${filePath}.tmp`;
   writeFileSync(tmpPath, JSON.stringify(data, null, 2), 'utf-8');
   renameSync(tmpPath, filePath);
@@ -75,7 +74,16 @@ function atomicWriteJson(filePath: string, data: unknown): void {
 export async function handleWriteMandateResult(
   args: Record<string, unknown>
 ): Promise<{ content: Array<{ type: 'text'; text: string }> }> {
-  const parsed = WriteMandateResultSchema.safeParse(args.mandate_result);
+  // Coercion guard: agents may pass mandate_result as a JSON string instead of an object
+  let mandateResultArg = args.mandate_result;
+  if (typeof mandateResultArg === 'string') {
+    try {
+      mandateResultArg = JSON.parse(mandateResultArg);
+    } catch {
+      throw new Error('Invalid MandateResult: mandate_result is a string but not valid JSON — pass a JSON object, not a string');
+    }
+  }
+  const parsed = WriteMandateResultSchema.safeParse(mandateResultArg);
   if (!parsed.success) {
     const issues = parsed.error.issues
       .map((i: ZodIssue) => `${i.path.join('.')}: ${i.message}`)

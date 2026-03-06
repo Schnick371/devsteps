@@ -108,7 +108,7 @@ export const ReadMandateResultSchema = z.object({
   status: MandateResultStatus,
   /**
    * Structured synthesis. Lenient on read — no max enforced to tolerate legacy files.
-   * Write path enforces the 6000-char limit via the handler layer.
+   * Write path enforces the 12000-char limit via WriteMandateResultSchema.
    */
   findings: z.string(),
   /** Top-5 actionable items for Tier-1 */
@@ -148,6 +148,15 @@ export const WriteMandateResultSchema = ReadMandateResultSchema.extend({
   item_ids: z.array(z.string()).min(1),
   /** Must follow the devsteps-R{N}-{name} agent naming convention */
   analyst: z.string().regex(/^devsteps-R\d+-/, 'analyst must match devsteps-R{N}-{name} format'),
+  /** Structured synthesis, max 12000 chars (~1600 tokens) */
+  findings: z.string().max(12000, 'findings must be ≤12000 chars (≈1600 tokens) — use bullet points'),
+  /** Top-5 actionable items: max 300 chars each */
+  recommendations: z.array(z.string().max(300, 'each recommendation must be ≤300 chars')).max(5),
+  /** Sprint ID must be safe for filesystem path: no traversal chars */
+  sprint_id: z.string().min(1).regex(
+    /^[a-zA-Z0-9_.\-]+$/,
+    'sprint_id must contain only alphanumeric, dash, underscore, or dot characters'
+  ),
 });
 
 /**

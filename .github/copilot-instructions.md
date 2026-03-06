@@ -22,6 +22,7 @@ All Copilot agents follow the **Spinnennetz / Radar Chart model**: concentric ri
 
 > **VS Code Constraint**: `runSubagent` does not support nesting. `coord-*` dispatches EVERYTHING directly. No non-coord agent may call `runSubagent` — all are Leaf Nodes.
 > **Ring 2** fires via coord directly (not the analysts), AFTER Ring 1 MandateResults are available. Ring 1 `report_path` values are passed as `upstream_paths`.
+> **Background Agents** (VS Code 1.109+, stable): Agents can run without an open chat window, persist across sessions, and use the same tools. Long-running exec-impl/exec-test tasks benefit from background execution.
 
 When `runSubagent` is available: use Spider Web Dispatch.
 When `runSubagent` is disabled: use `devsteps-R0-coord-solo` as fallback.
@@ -104,7 +105,10 @@ DevSteps is the primary work-tracking system. NEVER edit `.devsteps/` directly �
 | Workspace Health / Root Cause | `devsteps-80-ishikawa`        | coord-ishikawa      |
 | Load context                  | `devsteps-90-project-context` | coord               |
 | Adapt project Copilot files   | `devsteps-98-adapt-project-copilot-files` | coord          |
-| Solo (no runSubagent)         | direct                        | coord-solo          |
+| Solo (no runSubagent)         | direct                                    | coord-solo     |
+| Create agent file             | `/create-agent` (VS Code built-in)        | —              |
+| Create instruction file       | `/create-instruction` (VS Code built-in)  | —              |
+| Create skill file             | `/create-skill` (VS Code built-in)        | —              |
 
 
 ## Session Start
