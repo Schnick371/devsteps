@@ -3,10 +3,11 @@ description: Exec Test Conductor — orchestrates test workers to write, execute
 tools:
   [
     "vscode",
-    "execute",
-    "read",
+    "think",
+    "runCommands",
+    "readFile",
     "edit",
-    "search",
+    "fileSearch",
     "devsteps/*",
     "bright-data/*",
     "ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance",
