@@ -149,14 +149,19 @@ export const WriteMandateResultSchema = ReadMandateResultSchema.extend({
   /** Must follow the devsteps-R{N}-{name} agent naming convention */
   analyst: z.string().regex(/^devsteps-R\d+-/, 'analyst must match devsteps-R{N}-{name} format'),
   /** Structured synthesis, max 12000 chars (~1600 tokens) */
-  findings: z.string().max(12000, 'findings must be ≤12000 chars (≈1600 tokens) — use bullet points'),
+  findings: z
+    .string()
+    .max(12000, 'findings must be ≤12000 chars (≈1600 tokens) — use bullet points'),
   /** Top-5 actionable items: max 300 chars each */
   recommendations: z.array(z.string().max(300, 'each recommendation must be ≤300 chars')).max(5),
   /** Sprint ID must be safe for filesystem path: no traversal chars */
-  sprint_id: z.string().min(1).regex(
-    /^[a-zA-Z0-9_.\-]+$/,
-    'sprint_id must contain only alphanumeric, dash, underscore, or dot characters'
-  ),
+  sprint_id: z
+    .string()
+    .min(1)
+    .regex(
+      /^[a-zA-Z0-9_.-]+$/,
+      'sprint_id must contain only alphanumeric, dash, underscore, or dot characters'
+    ),
 });
 
 /**

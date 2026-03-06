@@ -190,7 +190,7 @@ All agent files use VS Code custom agent frontmatter (VS Code 1.106+).
 | ----------------------- | ----------------------------- | -------------------------------- | ------------- |
 | `agents:`               | ✓ lists all dispatched agents | — (leaf, no dispatch)            | —             |
 | `handoffs:`             | ✓ workflow buttons            | ✓ pipeline buttons (gate only)   | —             |
-| `user-invokable: false` | — (always visible)            | ✓ (hidden, except gate-reviewer) | ✓ (hidden)    |
+| `user-invocable: false` | — (always visible)            | ✓ (hidden, except gate-reviewer) | ✓ (hidden)    |
 
 ### `agents:` — Subagent Dispatch Allowlist
 
@@ -217,7 +217,7 @@ handoffs:
     send: false
 ```
 
-### `user-invokable: false` — Subagent-Only Visibility
+### `user-invocable: false` — Subagent-Only Visibility
 
 Hides the agent from the VS Code agent picker dropdown.
 Set on all analysts (except reviewer) and all aspect agents — they are only

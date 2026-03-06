@@ -131,7 +131,8 @@ Each `#runSubagent` call creates a **fresh context window** — the subagent see
 ## 2. Tier-1 Coordinator — Dispatch Rules
 
 **Model:** Claude Sonnet 4.6  
-**tools: ["agent",'vscode', 'execute', 'read', 'agent', 'edit', 'search', 'devsteps/*', 'bright-data/*', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_agent_model_code_sample', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_tracing_code_gen_best_practices', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_evaluation_code_gen_best_practices', 'ms-windows-ai-studio.windows-ai-studio/aitk_convert_declarative_agent_to_code', 'ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_agent_runner_best_practices', 'ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_planner', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_custom_evaluator_guidance', 'ms-windows-ai-studio.windows-ai-studio/check_panel_open', 'ms-windows-ai-studio.windows-ai-studio/get_table_schema', 'ms-windows-ai-studio.windows-ai-studio/data_analysis_best_practice', 'ms-windows-ai-studio.windows-ai-studio/read_rows', 'ms-windows-ai-studio.windows-ai-studio/read_cell', 'ms-windows-ai-studio.windows-ai-studio/export_panel_data', 'ms-windows-ai-studio.windows-ai-studio/get_trend_data', 'ms-windows-ai-studio.windows-ai-studio/aitk_list_foundry_models', 'ms-windows-ai-studio.windows-ai-studio/aitk_agent_as_server', 'ms-windows-ai-studio.windows-ai-studio/aitk_add_agent_debug', 'ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo', 'todo']`  
+**tools:
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']`  
 **YAML `agents:`\*\* must include ALL analyst/aspect/exec/gate/worker agents used (for dispatch)
 
 ### Triage → Dispatch Table
@@ -202,7 +203,8 @@ Before every Round 1 dispatch:
 ## 3. Tier-2 Analyst — 4-Phase MAP-REDUCE-RESOLVE-SYNTHESIZE
 
 **Models:** Claude Sonnet 4.6 (default), Claude Opus 4.6 (quality-critical paths)  
-**tools: ["agent",'vscode', 'execute', 'read', 'agent', 'edit', 'search', 'devsteps/*', 'bright-data/*', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_agent_model_code_sample', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_tracing_code_gen_best_practices', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_evaluation_code_gen_best_practices', 'ms-windows-ai-studio.windows-ai-studio/aitk_convert_declarative_agent_to_code', 'ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_agent_runner_best_practices', 'ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_planner', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_custom_evaluator_guidance', 'ms-windows-ai-studio.windows-ai-studio/check_panel_open', 'ms-windows-ai-studio.windows-ai-studio/get_table_schema', 'ms-windows-ai-studio.windows-ai-studio/data_analysis_best_practice', 'ms-windows-ai-studio.windows-ai-studio/read_rows', 'ms-windows-ai-studio.windows-ai-studio/read_cell', 'ms-windows-ai-studio.windows-ai-studio/export_panel_data', 'ms-windows-ai-studio.windows-ai-studio/get_trend_data', 'ms-windows-ai-studio.windows-ai-studio/aitk_list_foundry_models', 'ms-windows-ai-studio.windows-ai-studio/aitk_agent_as_server', 'ms-windows-ai-studio.windows-ai-studio/aitk_add_agent_debug', 'ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo', 'todo']`  
+**tools:
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']`  
 **Note:** Non-coord agents do NOT have `'agent'` in tools for aspect dispatch — Spider Web means coord dispatches all.  
 **`handoffs:`\*\* must be empty in all non-coord agent YAML files — non-coord never hands off to another non-coord.
 
@@ -285,7 +287,8 @@ T2 cannot re-dispatch. Instead:
 ## 4. Tier-3 Aspect Analyst — ANALYZE–SEARCH–SYNTHESIZE
 
 **Models:** Claude Sonnet 4.6 (default), Claude Opus 4.6 (quality, staleness)  
-**tools: ["agent",'vscode', 'execute', 'read', 'agent', 'edit', 'search', 'devsteps/*', 'bright-data/*', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_ai_model_guidance', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_agent_model_code_sample', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_tracing_code_gen_best_practices', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_evaluation_code_gen_best_practices', 'ms-windows-ai-studio.windows-ai-studio/aitk_convert_declarative_agent_to_code', 'ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_agent_runner_best_practices', 'ms-windows-ai-studio.windows-ai-studio/aitk_evaluation_planner', 'ms-windows-ai-studio.windows-ai-studio/aitk_get_custom_evaluator_guidance', 'ms-windows-ai-studio.windows-ai-studio/check_panel_open', 'ms-windows-ai-studio.windows-ai-studio/get_table_schema', 'ms-windows-ai-studio.windows-ai-studio/data_analysis_best_practice', 'ms-windows-ai-studio.windows-ai-studio/read_rows', 'ms-windows-ai-studio.windows-ai-studio/read_cell', 'ms-windows-ai-studio.windows-ai-studio/export_panel_data', 'ms-windows-ai-studio.windows-ai-studio/get_trend_data', 'ms-windows-ai-studio.windows-ai-studio/aitk_list_foundry_models', 'ms-windows-ai-studio.windows-ai-studio/aitk_agent_as_server', 'ms-windows-ai-studio.windows-ai-studio/aitk_add_agent_debug', 'ms-windows-ai-studio.windows-ai-studio/aitk_gen_windows_ml_web_demo', 'todo']`  
+**tools:
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']`  
 **CRITICAL:** Aspects/workers have NO `'agent'` tool — CANNOT dispatch sub-agents. Structural leaf-node enforcement.  
 **Dispatched by:\*\* coord ONLY (Hub-and-Spoke Round 2)
 

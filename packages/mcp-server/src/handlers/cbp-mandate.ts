@@ -80,7 +80,9 @@ export async function handleWriteMandateResult(
     try {
       mandateResultArg = JSON.parse(mandateResultArg);
     } catch {
-      throw new Error('Invalid MandateResult: mandate_result is a string but not valid JSON — pass a JSON object, not a string');
+      throw new Error(
+        'Invalid MandateResult: mandate_result is a string but not valid JSON — pass a JSON object, not a string'
+      );
     }
   }
   const parsed = WriteMandateResultSchema.safeParse(mandateResultArg);

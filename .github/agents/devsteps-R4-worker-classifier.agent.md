@@ -1,8 +1,9 @@
 ---
 description: "Classifies DevSteps items by assigning domain/subdomain/topic taxonomy + concern/scope/cluster facets stored in metadata.classification"
 model: Claude Sonnet 4.6
-tools: ['vscode', 'think', 'runCommands', 'readFile', 'edit', 'fileSearch', 'web', 'devsteps/*', 'bright-data/*', 'todo']
-user-invokable: false
+tools:
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+user-invocable: false
 ---
 
 # devsteps-R4-worker-classifier

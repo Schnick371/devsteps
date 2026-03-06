@@ -90,22 +90,48 @@ export class DevStepsServer {
 
   private setupTools() {
     const tools = [
-      initTool, addTool, getTool, listTool, updateTool, linkTool, unlinkTool,
-      searchTool, statusTool, traceTool, exportTool, archiveTool, purgeTool,
-      contextTool, healthCheckTool, metricsTool, updateCopilotFilesTool,
+      initTool,
+      addTool,
+      getTool,
+      listTool,
+      updateTool,
+      linkTool,
+      unlinkTool,
+      searchTool,
+      statusTool,
+      traceTool,
+      exportTool,
+      archiveTool,
+      purgeTool,
+      contextTool,
+      healthCheckTool,
+      metricsTool,
+      updateCopilotFilesTool,
       // Context Budget Protocol (CBP) Tier-3 analysis tools (EPIC-027)
-      writeAnalysisReportTool, readAnalysisEnvelopeTool, writeVerdictTool, writeSprintBriefTool,
+      writeAnalysisReportTool,
+      readAnalysisEnvelopeTool,
+      writeVerdictTool,
+      writeSprintBriefTool,
       // Context Budget Protocol (CBP) Tier-2 mandate tools (EPIC-028)
-      writeMandateResultTool, readMandateResultsTool, writeRejectionFeedbackTool,
-      writeIterationSignalTool, writeEscalationTool,
+      writeMandateResultTool,
+      readMandateResultsTool,
+      writeRejectionFeedbackTool,
+      writeIterationSignalTool,
+      writeEscalationTool,
       // Context Budget Protocol (CBP) Dispatch Manifest audit trail (TASK-331)
-      writeDispatchManifestTool, patchDispatchManifestTool,
+      writeDispatchManifestTool,
+      patchDispatchManifestTool,
     ];
 
-    for (const tool of tools) { this.tools.set(tool.name, tool); }
+    for (const tool of tools) {
+      this.tools.set(tool.name, tool);
+    }
 
     const logger = getLogger();
-    logger.info({ tool_count: tools.length, tool_names: tools.map((t) => t.name) }, '✅ Tools registered');
+    logger.info(
+      { tool_count: tools.length, tool_names: tools.map((t) => t.name) },
+      '✅ Tools registered'
+    );
   }
 
   private setupHandlers() {
@@ -138,13 +164,15 @@ export class DevStepsServer {
           {
             uri: 'devsteps://docs/hierarchy',
             name: 'Hierarchy Rules',
-            description: 'Work item hierarchy for Scrum (Epic→Story|Spike, Story→Bug→Task) and Waterfall (Requirement→Feature|Spike, Feature→Bug→Task) based on Jira 2025 standards',
+            description:
+              'Work item hierarchy for Scrum (Epic→Story|Spike, Story→Bug→Task) and Waterfall (Requirement→Feature|Spike, Feature→Bug→Task) based on Jira 2025 standards',
             mimeType: 'text/markdown',
           },
           {
             uri: 'devsteps://docs/ai-guide',
             name: 'MCP Tools Usage Guide',
-            description: 'Quick reference for Bug workflow, Spike workflow, link validation rules, and common mistakes',
+            description:
+              'Quick reference for Bug workflow, Spike workflow, link validation rules, and common mistakes',
             mimeType: 'text/markdown',
           },
         ],
@@ -160,7 +188,9 @@ export class DevStepsServer {
         const { readFileSync } = await import('node:fs');
         const { join } = await import('node:path');
         const { getWorkspacePath } = await import('./workspace.js');
-        const { getQuickContext, formatContextAsText } = await import('@schnick371/devsteps-shared');
+        const { getQuickContext, formatContextAsText } = await import(
+          '@schnick371/devsteps-shared'
+        );
 
         const cwd = getWorkspacePath();
         const devstepsDir = join(cwd, '.devsteps');
@@ -226,9 +256,17 @@ export class DevStepsServer {
 
         trackRequestSuccess(duration);
         recordSuccess(toolName, duration);
-        requestLogger.info({ duration_ms: duration, status: 'success' }, 'Tool executed successfully');
+        requestLogger.info(
+          { duration_ms: duration, status: 'success' },
+          'Tool executed successfully'
+        );
 
-        const summary = generateToolSummary(toolName, request.params.arguments ?? {}, result as ToolResult, duration);
+        const summary = generateToolSummary(
+          toolName,
+          request.params.arguments ?? {},
+          result as ToolResult,
+          duration
+        );
         requestLogger.info(summary);
 
         return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] };
@@ -241,14 +279,22 @@ export class DevStepsServer {
           {
             duration_ms: duration,
             status: 'error',
-            error: error instanceof Error ? { message: error.message, stack: error.stack, name: error.name } : error,
+            error:
+              error instanceof Error
+                ? { message: error.message, stack: error.stack, name: error.name }
+                : error,
           },
           'Tool execution failed'
         );
 
         const errorMessage = error instanceof Error ? error.message : String(error);
         return {
-          content: [{ type: 'text', text: JSON.stringify({ success: false, error: errorMessage }, null, 2) }],
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify({ success: false, error: errorMessage }, null, 2),
+            },
+          ],
           isError: true,
         };
       }
@@ -261,7 +307,13 @@ export class DevStepsServer {
     activeConnections.inc();
 
     const logger = getLogger();
-    logger.info({ transport: 'stdio', pid: process.pid, uptime_ms: Math.floor(process.uptime() * 1000) }, '🔌 MCP server connected');
-    logger.info({ startup_duration_ms: Date.now() - this.startTime }, '✨ MCP server ready to accept requests');
+    logger.info(
+      { transport: 'stdio', pid: process.pid, uptime_ms: Math.floor(process.uptime() * 1000) },
+      '🔌 MCP server connected'
+    );
+    logger.info(
+      { startup_duration_ms: Date.now() - this.startTime },
+      '✨ MCP server ready to accept requests'
+    );
   }
 }

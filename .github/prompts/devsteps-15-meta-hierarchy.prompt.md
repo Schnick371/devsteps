@@ -1,7 +1,8 @@
 ---
 agent: devsteps-R0-coord
 model: Claude Sonnet 4.6
-tools: [think, devsteps, runSubagent, readFile, search]
+tools:
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 description: "Assign meta-hierarchy (initiative/theme) to DevSteps items — top-down strategic grouping above Epic"
 ---
 

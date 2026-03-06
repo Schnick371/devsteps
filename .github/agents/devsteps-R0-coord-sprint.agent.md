@@ -47,7 +47,7 @@ handoffs:
     agent: devsteps-R0-coord
     prompt: "Single-item MPD mode for: [PASTE_ITEM_ID]. Run triage and dispatch analyst mandates."
     send: false
-user-invokable: true
+user-invocable: true
 ---
 
 <!-- devsteps-managed: true | version: unknown | hash: sha256:0307b0ff8b59c9b8bfd8e153183fba1f74f303332ed80f809d8b30b3a6d3cfb2 -->

@@ -1,8 +1,9 @@
 ---
 description: 'Backlog curator — user-invokable organizational agent for bulk backlog auditing, Eisenhower re-triage, staleness detection, and archiving. NOT part of sprint execution flow.'
 model: 'Claude Sonnet 4.6'
-tools: ['think', 'readFile', 'fileSearch', 'devsteps/*', 'todo']
-user-invokable: true
+tools:
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+user-invocable: true
 ---
 
 # 📋 Backlog Curator

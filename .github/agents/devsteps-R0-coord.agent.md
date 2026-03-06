@@ -59,7 +59,7 @@ handoffs:
     agent: devsteps-R4-worker-workspace
     prompt: "Workspace scaffold for item: [PASTE_ITEM_ID]. Create project structure, pyproject.toml, venv, and .gitignore before exec-impl."
     send: false
-user-invokable: true
+user-invocable: true
 ---
 
 <!-- devsteps-managed: true | version: unknown | hash: sha256:6afac3d12fbac1b3293df020deffd88925eeea7ad1fe4da378351f45d1c20bd5 -->
