@@ -348,7 +348,7 @@ export class McpServerManager {
       .then((selection) => {
         if (selection === 'Open Documentation') {
           vscode.env.openExternal(
-            vscode.Uri.parse('https://github.com/devsteps/devsteps#mcp-setup')
+            vscode.Uri.parse('https://github.com/Schnick371/devsteps#mcp-setup')
           );
         } else if (selection === 'Copy Config') {
           const mcpPackage = this.getMcpServerPackage();
