@@ -3,7 +3,6 @@ description: "gate-reviewer — quality gate, mandate-type=review, dispatches qu
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",
@@ -40,6 +39,7 @@ handoffs:
     agent: devsteps-R0-coord
     prompt: "Review PASSED for item: [ITEM_ID]. Mark status done and pull next item or close sprint."
     send: false
+user-invokable: false
 ---
 
 <!-- devsteps-managed: true | version: unknown | hash: sha256:3a42c9b65ac2050b4cc3931f7b06a3313af7e95158b953f1c894111183ebbff0 -->

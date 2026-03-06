@@ -3,7 +3,6 @@ description: "Staleness Analyst - validates that the work item description still
 model: "Claude Sonnet 4.6"
 tools:
   [
-    "agent",
     "vscode",
     "execute",
     "read",
