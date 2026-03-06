@@ -13,6 +13,7 @@
  */
 
 import * as path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import * as vscode from 'vscode';
 import { logger } from './outputChannel.js';
 import {
@@ -163,12 +164,13 @@ export class McpServerManager {
         logger.info('🌐 VS Code 1.109+ detected — starting in-process HTTP MCP server');
 
         const bundledServerPath = path.join(this.context.extensionPath, 'dist', 'mcp-server.js');
+        const bundledServerUrl = pathToFileURL(bundledServerPath).href;
         const workspacePath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath ?? process.cwd();
 
         logger.info(`📂 Workspace: ${workspacePath}`);
         logger.info(`📦 Loading bundled MCP server: ${bundledServerPath}`);
 
-        const { startHttpMcpServer } = await import(bundledServerPath);
+        const { startHttpMcpServer } = await import(bundledServerUrl);
         this.httpServer = await startHttpMcpServer(0, workspacePath);
 
         logger.info(`✅ In-process HTTP MCP server started: ${this.httpServer.url}`);
