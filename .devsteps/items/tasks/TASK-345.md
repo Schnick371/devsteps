@@ -25,4 +25,4 @@ grep -rh "tools:" .github/agents/ | sort | uniq -c | sort -rn
 - Build/lint or CI frontmatter validation confirms no deprecated names
 
 ## Notes
-This is a batch sweep — do all files in a single operation to avoid partial state. After update, verify agents still invoke correctly in VS Code.
+This is a batch sweep — do all files in a single operation to avoid partial state. After update, verify agents still invoke correctly in VS Code.Implemented: execute→runCommands, read→readFile, search→fileSearch in 36 files. Gate-PASS. Merged 2026-03-06.

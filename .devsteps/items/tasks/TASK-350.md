@@ -17,7 +17,7 @@
 - CI fails on any agent file with:
   - Missing required frontmatter field
   - Line count > 150
-  - `user-invokable: true` on R1–R5 agent
+  - `user-invocable: true` on R1–R5 agent
   - `agents:` key present on R1–R5 agent
   - `"agent"` in `tools[]` of R1–R5 agent
 - Validation runs on every PR touching `.github/agents/`

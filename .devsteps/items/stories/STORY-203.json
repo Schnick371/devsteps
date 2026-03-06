@@ -1,16 +1,16 @@
 {
-  "id": "TASK-349",
-  "type": "task",
+  "id": "STORY-203",
+  "type": "story",
   "category": "general",
-  "title": "Add rsync prepack hook to packages/mcp-server to auto-sync .github/ from root (prevent 66-file manual copy divergence)",
-  "status": "done",
+  "title": "read_mandate_results: optional fields[] projection to prevent 120K-char coord responses",
+  "status": "draft",
   "eisenhower": "not-urgent-important",
-  "created": "2026-03-05T22:02:34.001Z",
-  "updated": "2026-03-06T10:21:55.403Z",
+  "created": "2026-03-06T09:30:56.046Z",
+  "updated": "2026-03-06T09:30:56.046Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/mcp-server/package.json",
-    ".github/"
+    "packages/mcp-server/src/handlers/cbp-mandate.ts",
+    "packages/mcp-server/src/tools/cbp.ts"
   ],
   "linked_items": {
     "implements": [],
@@ -26,8 +26,11 @@
     "superseded-by": []
   },
   "tags": [
-    "agent-plugin",
-    "research-2026-03-05"
+    "cbp",
+    "mcp-tools",
+    "performance",
+    "mandate-result",
+    "context-budget"
   ],
   "commits": [],
   "metadata": {}

@@ -1,17 +1,16 @@
 {
-  "id": "TASK-350",
-  "type": "task",
+  "id": "BUG-064",
+  "type": "bug",
   "category": "general",
-  "title": "Create CI YAML frontmatter validation suite for all 34 agent files",
+  "title": "CBP Security: sprint_id allows path traversal (../../) in write_mandate_result",
   "status": "done",
   "eisenhower": "not-urgent-important",
-  "created": "2026-03-05T22:02:34.005Z",
-  "updated": "2026-03-06T10:21:55.406Z",
+  "created": "2026-03-06T09:30:37.970Z",
+  "updated": "2026-03-06T09:33:49.693Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    ".github/agents/",
-    "scripts/",
-    "vitest.config.ts"
+    "packages/shared/src/schemas/cbp-mandate.ts",
+    "packages/mcp-server/src/tools/cbp.ts"
   ],
   "linked_items": {
     "implements": [],
@@ -21,17 +20,16 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [],
-    "depends-on": [
-      "TASK-344",
-      "BUG-063"
-    ],
+    "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "agent-plugin",
-    "research-2026-03-05"
+    "security",
+    "cbp",
+    "mcp-tools",
+    "mandate-result"
   ],
   "commits": [],
   "metadata": {}

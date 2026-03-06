@@ -23,4 +23,10 @@ AITK tool list copy-paste — the full tool reference table from AITK documentat
 - Models still have access to the information via referenced SKILL.md or instructions
 
 ## Notes
-Batch this update; fix all 9 files in one commit. May be coordinated with TASK-345 (tool name sweep) to reduce total churn.
+Batch this update; fix all 9 files in one commit. May be coordinated with TASK-345 (tool name sweep) to reduce total churn.## Impl (2026-03-06)
+- coord: 187→150 (fuse routing+triage tables, compress steps 2+3)
+- coord-sprint: 194→148 (compress clarification, DevSteps integration, pause triggers)
+- worker-devsteps: 206→142 (remove Status Transitions + Return JSON examples)
+- coord-ishikawa: 159→129, aspect-constraints: 153→124, aspect-staleness: 151→122 (AITK boilerplate removed)
+- tools[] NOT changed per user instruction
+- Gate PASS: all 6 files ≤150 lines

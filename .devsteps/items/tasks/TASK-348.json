@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Refactor 9 oversized agent files to ≤150 lines (extract AITK tool list boilerplate)",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-03-05T22:02:07.513Z",
-  "updated": "2026-03-05T22:04:39.556Z",
+  "updated": "2026-03-06T10:06:54.289Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/"

@@ -127,7 +127,7 @@ Issues found across the 38-file agent corpus (34 `.agent.md` + 4 support files):
 | Issue | Scope | Count | Priority |
 |-------|-------|-------|----------|
 | `analyst-quality.agent.md` has `agents:` dispatch array in YAML | 1 file | 1 | 🔴 CRITICAL BUG |
-| `user-invokable: false` missing on non-coord agents | ~19 agents | 19 | 🔴 HIGH BUG |
+| `user-invocable: false` missing on non-coord agents | ~19 agents | 19 | 🔴 HIGH BUG |
 | `agent` tool present in leaf node `tools[]` arrays | 13 files | 13 | 🔴 HIGH BUG |
 | Tool names stale (`execute`→`runCommands`, `read_file`→`readFile`, etc.) | 37/38 files | 37 | 🟠 HIGH TASK |
 | `'think'` tool absent from `tools[]` | 37/38 files | 37 | 🟡 MEDIUM TASK |
@@ -168,7 +168,7 @@ Issues found across the 38-file agent corpus (34 `.agent.md` + 4 support files):
 | # | Type | Item | Owner |
 |---|------|------|-------|
 | 1.1 | BUG | Remove `agents:` dispatch array from `analyst-quality.agent.md` | exec-impl |
-| 1.2 | BUG | Add `user-invokable: false` to all 19 non-coord agent files | exec-impl |
+| 1.2 | BUG | Add `user-invocable: false` to all 19 non-coord agent files | exec-impl |
 | 1.3 | BUG | Remove `agent` tool from `tools[]` in all 13 leaf-node worker files | exec-impl |
 
 ### Priority 2 — High (Tool Name Modernisation)

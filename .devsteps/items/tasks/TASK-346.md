@@ -30,4 +30,4 @@ tools:
 - Verified by grep across all listed files
 
 ## Notes
-Can be batched with TASK-345 (stale tool name update) in a single sweep for efficiency.
+Can be batched with TASK-345 (stale tool name update) in a single sweep for efficiency.Implemented: 'think' added to tools[] in all 36 agent files (33 double-quoted, 3 already single-quoted). Gate-PASS. Merged 2026-03-06.

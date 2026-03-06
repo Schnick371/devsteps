@@ -28,4 +28,8 @@
 - No NestJS or Next.js references in TypeScript implementation instructions
 - Background agent note present in copilot-instructions.md
 - New 1.110 slash commands documented
-- Edit mode references removed
+- Edit mode references removed## Impl (2026-03-06)
+- `copilot-instructions.md`: Background Agents note (VS Code 1.109+) added; /create-agent, /create-instruction, /create-skill slash commands documented in Entry Point Routing
+- `devsteps-typescript-implementation.instructions.md`: Replaced phantom NestJS/Next.js Framework Conventions section with Node.js 22+ ESM monorepo context
+- No edit mode references found to remove
+- Gate PASS: 0 instructional framework refs, 1 background-agent note, 3 slash commands documented
