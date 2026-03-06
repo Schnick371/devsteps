@@ -2,6 +2,33 @@
 
 All notable changes to the DevSteps MCP Server will be documented in this file.
 
+## [1.1.0-next.4] - 2026-03-06 (Pre-release)
+
+### ⚠️ Experimental Features
+
+- **TASK-330**: `read_mandate_results` now returns quorum envelope `{results[], count, quorum_ok, missing_analysts, dispatched, received, threshold, status}` — **BREAKING CHANGE**: callers must iterate `.results[]`
+- **TASK-331**: New MCP tools `write_dispatch_manifest` + `patch_dispatch_manifest` for audit trail
+- **TASK-332**: `createDispatchLogger(dispatchId?, parent?)` pino structured logging
+- **TASK-333**: VS Code version runtime guard in `extension.activate()`
+- **STORY-122**: In-process HTTP MCP server (Express) launchable from VS Code extension host
+- MCP preflight protocol: `coord` must call `mcp_devsteps_status` before any dispatch (TASK-352)
+
+### Fixed
+
+- BUG-064/065/066: `sprint_id` path traversal, char limit enforcement, ENOENT on missing dirs, string coercion
+- BUG-067: All 14 leaf agent files set to `user-invocable: false`
+- Agent tool name updates + `think` tool support (TASK-345/346)
+
+### Known Issues
+
+- BATS waterfall relation-conflict test (2 tests) fail due to pre-existing test script mismatch with TASK-097 conflict validation — not a regression
+
+### Testing Needed
+
+- `read_mandate_results` quorum envelope in full Spider Web dispatch cycle
+- `write_dispatch_manifest` / `patch_dispatch_manifest` round-trip
+- HTTP MCP server transport with VS Code extension
+
 ## [Unreleased]
 
 ### Added

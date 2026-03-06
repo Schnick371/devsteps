@@ -5,6 +5,24 @@ All notable changes to the "DevSteps" extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2026-03-06 (Pre-release)
+
+### ⚠️ Experimental Features
+
+- `mcpActive` context key registered in `activate()`: when true, MCP server connected (TASK-351)
+- VS Code version runtime guard in `activate()` — warns if engine requirement not met (TASK-333)
+- In-process HTTP MCP server support (STORY-122)
+- Marketplace listing metadata aligned to VS Code Marketplace standards (STORY-124)
+
+### Fixed
+
+- Extension `channel: 'next'` field ensures `isPreRelease()` returns true correctly
+
+### Testing Needed
+
+- Install as pre-release via Marketplace and switch to "Pre-Release" in extension panel
+- Verify `mcpActive` context activates when MCP server connects
+
 ## [1.1.0] - 2026-03-05
 
 ### Added

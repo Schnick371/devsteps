@@ -2,6 +2,27 @@
 
 All notable changes to `@schnick371/devsteps-shared` will be documented in this file.
 
+## [1.1.0-next.4] - 2026-03-06 (Pre-release)
+
+### ⚠️ Experimental Features
+
+- CBP MandateResult schema split: `ReadMandateResultSchema` / `WriteMandateResultSchema` (TASK-334)
+- `read_mandate_results` returns quorum envelope `{results[], count, quorum_ok, missing_analysts, ...}` — **BREAKING**: iterate `.results[]`, not bare array (TASK-330)
+- `DispatchManifestSchema` for audit trail (TASK-331)
+- `analyst` field regex validation: must match `devsteps-R{N}-{name}` format
+- `sprint_id` path-traversal guard regex
+
+### Fixed
+
+- BUG-064/065/066: sprint_id path traversal, char limits, ENOENT handling, string coercion in MandateResult
+- BUG-067: 14 leaf agent files had `user-invocable: true` (should be false) — CI gate now enforces this
+
+### Testing Needed
+
+- `read_mandate_results` quorum envelope in agent workflows
+- `write_mandate_result` with new `WriteMandateResultSchema` validation
+- Sprint_id regex accepts all valid IDs (alphanumeric, dash, underscore, dot)
+
 ## [Unreleased]
 
 ### Added
