@@ -100,6 +100,21 @@ export class McpServerManager {
     // Event emitter for server definition changes
     this.changeEmitter = new vscode.EventEmitter<void>();
     this.context.subscriptions.push(this.changeEmitter);
+
+    // Keep DEVSTEPS_WORKSPACE in sync when the user adds/removes workspace folders.
+    // getWorkspacePath() reads the env var live on every call (no cache), so updating
+    // it here is sufficient — no server restart needed, no handler changes required.
+    this.context.subscriptions.push(
+      vscode.workspace.onDidChangeWorkspaceFolders(() => {
+        const newPath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        if (newPath) {
+          logger.info(`🔄 Workspace folder changed — updating DEVSTEPS_WORKSPACE: ${newPath}`);
+          process.env.DEVSTEPS_WORKSPACE = newPath;
+        } else {
+          logger.warn('⚠️  All workspace folders removed — DEVSTEPS_WORKSPACE retained as-is');
+        }
+      })
+    );
   }
 
   /**
@@ -169,7 +184,9 @@ export class McpServerManager {
         const bundledServerUrl = pathToFileURL(bundledServerPath).href;
         const workspacePath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
         if (!workspacePath) {
-          logger.warn('⚠️  No workspace folder open — cannot start in-process HTTP MCP server safely');
+          logger.warn(
+            '⚠️  No workspace folder open — cannot start in-process HTTP MCP server safely'
+          );
           return;
         }
 

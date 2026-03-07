@@ -6,7 +6,7 @@
   "status": "in-progress",
   "eisenhower": "urgent-important",
   "created": "2026-03-05T08:35:05.220Z",
-  "updated": "2026-03-05T09:26:30.136Z",
+  "updated": "2026-03-07T23:21:02.263Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/",
@@ -25,7 +25,8 @@
       "STORY-182",
       "STORY-183",
       "STORY-184",
-      "STORY-185"
+      "STORY-185",
+      "SPIKE-026"
     ],
     "tested-by": [],
     "tests": [],

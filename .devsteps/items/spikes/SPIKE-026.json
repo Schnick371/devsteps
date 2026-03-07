@@ -6,17 +6,21 @@
   "status": "in-progress",
   "eisenhower": "urgent-important",
   "created": "2026-03-05T21:48:05.517Z",
-  "updated": "2026-03-05T21:48:08.824Z",
+  "updated": "2026-03-07T23:21:06.555Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
-    "implements": [],
+    "implements": [
+      "EPIC-040"
+    ],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "SPIKE-017"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
