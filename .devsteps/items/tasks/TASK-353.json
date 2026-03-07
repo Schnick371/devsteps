@@ -1,0 +1,32 @@
+{
+  "id": "TASK-353",
+  "type": "task",
+  "category": "general",
+  "title": "Enable chat.mcp.gallery.enabled in VS Code settings for @mcp search",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-07T15:56:00.338Z",
+  "updated": "2026-03-07T15:56:00.338Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "vscode",
+    "settings"
+  ],
+  "commits": [],
+  "metadata": {}
+}

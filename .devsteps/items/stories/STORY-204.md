@@ -1,0 +1,1 @@
+Publish packages/mcp-server as standalone npm package for GitHub MCP Registry submission. Pre-requisites: version bump 1.1.0-next.2 to 1.1.0 stable, shared package published first. server.json created, mcpName field added. After publish: submit to registry.modelcontextprotocol.io via mcp-publisher CLI.

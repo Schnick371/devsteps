@@ -1,0 +1,1 @@
+Add setting chat.mcp.gallery.enabled=true to .vscode/settings.json so the @mcp marketplace filter in Extensions view works for the DevSteps workspace. Tracks: VS Code setting that unlocks MCP gallery discovery. Part of STORY-205 registry submission.

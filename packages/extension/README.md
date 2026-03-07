@@ -247,7 +247,7 @@ DevSteps extension follows **VS Code theme colors** automatically:
 ### Extension Not Activating?
 - Ensure `.devsteps/` directory exists in workspace root OR
 - Extension activates even without project (for MCP tools)
-- Check VS Code version (requires 1.99.0+, March 2025 or later)
+- Check VS Code version (requires 1.109.0+)
 - Reload window: `Cmd/Ctrl+Shift+P` → `Developer: Reload Window`
 
 ### Dashboard Not Loading?
@@ -307,7 +307,7 @@ Report at: [GitHub Issues](https://github.com/Schnick371/devsteps/issues)
 - Interactive WebView Dashboard with 5 visualization sections
 - Advanced TreeView filtering and sorting
 - Color-coded status badges (FileDecorationProvider)
-- MCP Server auto-management via VS Code MCP API (requires VS Code 1.99+)
+- MCP Server auto-management via VS Code MCP API (requires VS Code 1.109+)
 - Cross-platform Node.js runtime detection (npx preferred, node fallback)
 - Performance optimizations: <2s for 10K+ items
 - Traceability graph node limiting

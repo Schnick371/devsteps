@@ -1,0 +1,33 @@
+{
+  "id": "STORY-205",
+  "type": "story",
+  "category": "general",
+  "title": "Submit DevSteps to GitHub MCP Registry (registry.modelcontextprotocol.io)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-07T15:55:54.388Z",
+  "updated": "2026-03-07T15:55:54.388Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "registry",
+    "marketplace",
+    "vscode"
+  ],
+  "commits": [],
+  "metadata": {}
+}

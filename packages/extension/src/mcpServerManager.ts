@@ -5,13 +5,15 @@
  * MCP Server Manager - Hybrid Runtime Detection Architecture
  *
  * **Fallback Chain:**
- * 1. npx (preferred) - Auto-downloads from npm registry
- * 2. node (fallback) - Uses bundled MCP server
- * 3. error (guidance) - Shows installation instructions
+ * 1. HTTP in-process (VS Code 1.109+) - Zero-overhead, no child process
+ * 2. stdio via npx (1.99–1.108) - Auto-downloads from npm registry
+ * 3. stdio via node (fallback) - Uses bundled MCP server
+ * 4. error (guidance) - Shows installation instructions
  *
- * **Requires VS Code 1.99.0+** for MCP API support
+ * **Requires VS Code 1.109.0+** for automatic in-process setup
  */
 
+import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import * as vscode from 'vscode';
@@ -174,6 +176,25 @@ export class McpServerManager {
         logger.info(`📂 Workspace: ${workspacePath}`);
         logger.info(`📦 Loading bundled MCP server: ${bundledServerPath}`);
 
+        if (!fs.existsSync(bundledServerPath)) {
+          const reinstallMsg =
+            'DevSteps extension installation is incomplete — bundled MCP server not found. ' +
+            'Please reinstall the DevSteps extension.';
+          logger.error(`❌ Bundled MCP server not found: ${bundledServerPath}`);
+          void vscode.window.showErrorMessage(reinstallMsg, 'Reinstall Extension').then((sel) => {
+            if (sel === 'Reinstall Extension') {
+              void vscode.commands.executeCommand(
+                'workbench.extensions.action.showExtensionsWithIds',
+                ['devsteps.devsteps']
+              );
+            }
+          });
+          this.statusBarItem.text = '$(error) DevSteps MCP';
+          this.statusBarItem.tooltip = 'DevSteps MCP: Reinstall required';
+          this.statusBarItem.show();
+          return;
+        }
+
         const { startHttpMcpServer } = await import(bundledServerUrl);
         this.httpServer = await startHttpMcpServer(0, workspacePath);
 
@@ -309,7 +330,7 @@ export class McpServerManager {
       logger.info(`   Command: ${this.runtimeConfig.command}`);
     } catch (error) {
       logger.error('Failed to register MCP server', error);
-      this.showFallbackConfiguration();
+      this.showStartupError(error);
     }
   }
 
@@ -340,7 +361,37 @@ export class McpServerManager {
   }
 
   /**
-   * Show fallback instructions for manual configuration
+   * Show error when MCP server startup fails on VS Code 1.109+.
+   * Surfaces the actual error to the user instead of misleading version message.
+   */
+  private showStartupError(error: unknown): void {
+    const detail = error instanceof Error ? error.message : String(error);
+    logger.error(`MCP server startup failed: ${detail}`);
+
+    void vscode.window
+      .showErrorMessage(
+        `DevSteps MCP Server failed to start. See DevSteps output for details.`,
+        'Show Output',
+        'Open Documentation'
+      )
+      .then((selection) => {
+        if (selection === 'Show Output') {
+          logger.show();
+        } else if (selection === 'Open Documentation') {
+          void vscode.env.openExternal(
+            vscode.Uri.parse('https://github.com/Schnick371/devsteps#mcp-setup')
+          );
+        }
+      });
+
+    this.statusBarItem.text = '$(error) DevSteps MCP';
+    this.statusBarItem.tooltip = `DevSteps MCP failed: ${detail.slice(0, 80)}`;
+    this.statusBarItem.show();
+  }
+
+  /**
+   * Show fallback instructions for manual configuration.
+   * Only called when VS Code < 1.99 (MCP API entirely absent).
    */
   private showFallbackConfiguration(): void {
     logger.warn('VS Code MCP API not available - showing fallback configuration');

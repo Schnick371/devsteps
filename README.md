@@ -231,7 +231,7 @@ devsteps init my-project --methodology scrum
 
 The DevSteps VS Code extension **automatically registers the MCP server** — no manual configuration required when installed from the Marketplace.
 
-> **VS Code 1.99+ required.** The extension registers the MCP server on activation via the VS Code MCP API.
+> **VS Code 1.109+ required.** The extension registers the MCP server on activation via the VS Code MCP API.
 
 ### Automatic Setup (Recommended)
 

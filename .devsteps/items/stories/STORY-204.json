@@ -1,0 +1,32 @@
+{
+  "id": "STORY-204",
+  "type": "story",
+  "category": "general",
+  "title": "Publish mcp-server to npm as @schnick371/devsteps-mcp-server (stable release)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-07T15:55:47.559Z",
+  "updated": "2026-03-07T15:55:47.559Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "npm-publish",
+    "registry"
+  ],
+  "commits": [],
+  "metadata": {}
+}
