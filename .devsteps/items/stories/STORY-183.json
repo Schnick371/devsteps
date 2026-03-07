@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-03-05T08:38:09.451Z",
-  "updated": "2026-03-05T08:50:41.525Z",
+  "updated": "2026-03-07T23:57:44.299Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/schemas/trace.ts",
@@ -31,7 +31,9 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "STORY-206"
+    ],
     "depends-on": [],
     "required-by": [
       "STORY-184"

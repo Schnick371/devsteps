@@ -1,0 +1,39 @@
+{
+  "id": "STORY-206",
+  "type": "story",
+  "category": "general",
+  "title": "S0: Copilot Hooks Phase 1 — File-Bridge for Spider Web Ring Events",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-07T23:57:37.785Z",
+  "updated": "2026-03-07T23:57:44.298Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/,packages/extension/src/extension.ts,.github/hooks/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-040"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-026",
+      "STORY-183"
+    ],
+    "depends-on": [
+      "BUG-060"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "hooks,vscode-1110,spider-web,visualization,extension,d3,phase-1"
+  ],
+  "commits": [],
+  "metadata": {}
+}

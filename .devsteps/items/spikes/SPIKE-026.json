@@ -3,10 +3,10 @@
   "type": "spike",
   "category": "general",
   "title": "Research: VS Code 1.110 Copilot Hooks — Spider Web visualization integration potential",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-03-05T21:48:05.517Z",
-  "updated": "2026-03-07T23:21:06.555Z",
+  "updated": "2026-03-07T23:57:44.148Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -19,11 +19,14 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "SPIKE-017"
+      "SPIKE-017",
+      "STORY-206"
     ],
     "depends-on": [],
     "required-by": [],
-    "supersedes": [],
+    "supersedes": [
+      "SPIKE-017"
+    ],
     "superseded-by": []
   },
   "tags": [

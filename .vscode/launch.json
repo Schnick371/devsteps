@@ -57,6 +57,25 @@
       "outFiles": ["${workspaceFolder}/packages/extension/dist/**/*.js"],
       "sourceMaps": true,
       "preLaunchTask": "Build Extension (Debug)"
+    },
+    {
+      "name": "🕷 Debug Visualizer HTTP Server (Agent Inspector)",
+      "type": "debugpy",
+      "request": "attach",
+      "connect": {
+        "host": "localhost",
+        "port": 5679
+      },
+      "preLaunchTask": "🕷 Visualizer: Open Agent Inspector",
+      "internalConsoleOptions": "neverOpen",
+      "postDebugTask": "🕷 Visualizer: Terminate All Tasks",
+      "justMyCode": true,
+      "pathMappings": [
+        {
+          "localRoot": "${workspaceFolder}/tmp/visualizer",
+          "remoteRoot": "${workspaceFolder}/tmp/visualizer"
+        }
+      ]
     }
   ]
 }
