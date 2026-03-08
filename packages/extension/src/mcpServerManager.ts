@@ -25,8 +25,16 @@ import {
 } from './utils/runtimeDetector.js';
 
 /**
- * Experimental VS Code MCP API (requires VS Code 1.109+)
- * These types are not yet in the official @types/vscode
+ * Base VS Code MCP API surface present in VS Code 1.99+ (stdio transport).
+ * These types are not yet in the official @types/vscode.
+ *
+ * **Why two interfaces instead of one?**
+ * Using a single `VsCodeWithMcpApi` union/intersection caused TypeScript's `in`-operator
+ * narrowing to collapse the stdio fallback branch to `never`: once `McpHttpServerDefinition`
+ * was narrowed away, the compiler inferred the remaining type as `never` and emitted errors
+ * on every stdio-path access.  Splitting into a base `VsCodeStdioMcpApi` and a derived
+ * `VsCodeHttpMcpApi` keeps the hierarchy linear, so `in`-narrowing produces the correct
+ * subtype on the HTTP branch and leaves the base type intact on the stdio branch. [BUG-069]
  */
 interface VsCodeStdioMcpApi {
   lm: {
@@ -41,7 +49,14 @@ interface VsCodeStdioMcpApi {
   ) => unknown;
 }
 
-/** Extends base MCP API with in-process HTTP support (VS Code 1.109+) */
+/**
+ * Extends the base stdio MCP API with in-process HTTP transport (VS Code 1.109+).
+ *
+ * Defined as a sub-interface of `VsCodeStdioMcpApi` so that `in`-narrowing on
+ * `McpHttpServerDefinition` yields `VsCodeHttpMcpApi` on the HTTP branch and the plain
+ * `VsCodeStdioMcpApi` base type on the stdio fallback branch — avoiding the `never`
+ * collapse that a flat union or intersection would produce. [BUG-069]
+ */
 interface VsCodeHttpMcpApi extends VsCodeStdioMcpApi {
   McpHttpServerDefinition: new (label: string, url: string, version: string) => unknown;
 }
