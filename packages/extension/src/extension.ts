@@ -255,7 +255,7 @@ export async function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(watcher);
 
   // Spider Events watcher — forwards hook events to dashboard webview
-  const spiderWatcher = new SpiderEventsWatcher(workspaceRoot, (event) => {
+  const spiderWatcher = new SpiderEventsWatcher(workspaceRoot.fsPath, (event) => {
     if (DashboardPanel.currentPanel) {
       DashboardPanel.currentPanel.postSpiderEvent(event);
     }
