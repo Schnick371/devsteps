@@ -28,7 +28,7 @@ import {
  * Experimental VS Code MCP API (requires VS Code 1.109+)
  * These types are not yet in the official @types/vscode
  */
-interface VsCodeWithMcpApi {
+interface VsCodeStdioMcpApi {
   lm: {
     registerMcpServerDefinitionProvider: (id: string, provider: unknown) => vscode.Disposable;
   };
@@ -39,12 +39,11 @@ interface VsCodeWithMcpApi {
     options: { cwd?: string },
     version: string
   ) => unknown;
-  /** Available in VS Code 1.109+ for in-process HTTP MCP servers */
-  McpHttpServerDefinition?: new (
-    label: string,
-    url: string,
-    version: string
-  ) => unknown;
+}
+
+/** Extends base MCP API with in-process HTTP support (VS Code 1.109+) */
+interface VsCodeHttpMcpApi extends VsCodeStdioMcpApi {
+  McpHttpServerDefinition: new (label: string, url: string, version: string) => unknown;
 }
 
 /**
@@ -184,7 +183,7 @@ export class McpServerManager {
       }
 
       // Check if VS Code MCP API is available
-      const mcpVscode = vscode as unknown as Partial<VsCodeWithMcpApi>;
+      const mcpVscode = vscode as unknown as Partial<VsCodeStdioMcpApi>;
       if (!mcpVscode.lm?.registerMcpServerDefinitionProvider) {
         logger.warn('VS Code MCP API not available (requires VS Code 1.99+)');
         this.showFallbackConfiguration();
@@ -200,11 +199,12 @@ export class McpServerManager {
         logger.warn('No workspace folder detected - MCP server may not function correctly');
       }
 
-      const vscodeApi = vscode as unknown as VsCodeWithMcpApi;
+      const vscodeApi = vscode as unknown as VsCodeStdioMcpApi;
 
       // Prefer HTTP in-process mode (VS Code 1.109+)
       if ('McpHttpServerDefinition' in vscodeApi) {
         logger.info('🌐 VS Code 1.109+ detected — starting in-process HTTP MCP server');
+        const httpApi = vscodeApi as unknown as VsCodeHttpMcpApi;
 
         const bundledServerPath = path.join(this.context.extensionPath, 'dist', 'mcp-server.js');
         const bundledServerUrl = pathToFileURL(bundledServerPath).href;
@@ -239,19 +239,16 @@ export class McpServerManager {
         }
 
         const { startHttpMcpServer } = await import(bundledServerUrl);
-        this.httpServer = await startHttpMcpServer(0, workspacePath);
-        const httpServer = this.httpServer!;
+        const httpServer: { url: string; close: () => Promise<void> } = await startHttpMcpServer(
+          0,
+          workspacePath
+        );
+        this.httpServer = httpServer;
 
         logger.info(`✅ In-process HTTP MCP server started: ${httpServer.url}`);
 
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const McpHttpServerDef = vscodeApi.McpHttpServerDefinition!;
-        const httpDef = new McpHttpServerDef(
-          'devsteps',
-          httpServer.url,
-          '1.0.0'
-        );
-        this.provider = vscodeApi.lm.registerMcpServerDefinitionProvider('devsteps-mcp', {
+        const httpDef = new httpApi.McpHttpServerDefinition('devsteps', httpServer.url, '1.0.0');
+        this.provider = httpApi.lm.registerMcpServerDefinitionProvider('devsteps-mcp', {
           onDidChangeMcpServerDefinitions: this.changeEmitter.event,
           provideMcpServerDefinitions: async () => [httpDef],
           resolveMcpServerDefinition: async (server: unknown) => server,
