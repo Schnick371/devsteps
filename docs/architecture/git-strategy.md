@@ -3,6 +3,8 @@
 ## Status
 **Accepted** - November 24, 2025
 
+> **Note (March 2026):** The day-to-day branch convention has evolved. While Epic branches remain valid for large initiatives, most work now uses `story/STORY-XXX`, `task/TASK-XXX`, or `bug/BUG-XXX` branches per individual work item. The core principles (traceability, isolation, merge-to-main) still apply.
+
 ## Context
 
 DevSteps requires a git branching strategy that:

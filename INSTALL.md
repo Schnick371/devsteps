@@ -7,7 +7,7 @@
 | Requirement | Minimum | Notes |
 |---|---|---|
 | **VS Code** | **1.109.0** | Required for `#runSubagent` multi-agent parallel dispatch (Spider Web) |
-| **Node.js** | bundled | v22.11.0 included, no external install needed |
+| **Node.js** | not required | VS Code ≥ 1.109 runs MCP server in-process; Node.js ≥ 18 needed only for VS Code < 1.109 fallback |
 | **GitHub Copilot** | any | Copilot Chat subscription required for AI agent features |
 
 > ⚠️ VS Code versions 1.99–1.108 lack parallel subagent dispatch support. Agent workflows may run sequentially or fail silently. Update VS Code before installing.
@@ -18,7 +18,7 @@
 
 The DevSteps VS Code extension is **completely self-contained**:
 - ✅ **MCP Server** - Bundled with extension
-- ✅ **Node.js Runtime** - v22.11.0 bundled for all platforms
+- ✅ **In-Process MCP** — No Node.js needed on VS Code ≥ 1.109
 - ✅ **TreeView & Dashboard** - Visual project management
 - ✅ **Works Offline** - No internet required after installation
 - ✅ **Zero Configuration** - Auto-setup on first activation
@@ -45,14 +45,14 @@ The DevSteps VS Code extension is **completely self-contained**:
 
 **Command Line:**
 ```bash
-code --install-extension devsteps-vscode-0.2.0.vsix
+code --install-extension devsteps-<version>.vsix
 ```
 
 **Or via VS Code UI:**
 1. Open VS Code
 2. Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac)
 3. Type: "Extensions: Install from VSIX"
-4. Select `devsteps-vscode-0.2.0.vsix`
+4. Select `devsteps-<version>.vsix`
 5. Reload VS Code when prompted
 
 ---
@@ -133,67 +133,6 @@ devsteps init my-project --methodology scrum
 
 ---
 
-## 🏢 Advanced: Docker/HTTP Mode (Optional)
-
-**For team environments with shared server:**
-
-### When to Use Docker Mode
-- ✅ Team wants centralized server
-- ✅ Shared database across users
-- ✅ CI/CD pipeline integration
-- ✅ Remote development scenarios
-
-### Setup
-
-**1. Deploy Docker container:**
-```bash
-# From devsteps repository
-docker-compose up -d
-
-# Verify
-curl http://localhost:3100/health
-```
-
-**2. Configure VS Code (Manual):**
-
-Add to User Settings (`~/.config/Code/User/settings.json` on Linux):
-```json
-{
-  "mcp.servers": {
-    "devsteps": {
-      "type": "http",
-      "url": "http://localhost:3100/mcp",
-      "description": "DevSteps MCP Server (shared Docker instance)"
-    }
-  }
-}
-```
-
-**3. Restart VS Code**
-
-### Docker Deployment Options
-
-**Local (docker-compose):**
-```bash
-docker-compose up -d
-docker logs devsteps-mcp-server
-```
-
-**Kubernetes (production):**
-```bash
-kubectl apply -f k8s/
-kubectl get pods -l app=devsteps-mcp
-```
-
-**Environment Variables:**
-```bash
-MCP_TRANSPORT=http    # Use HTTP mode
-MCP_PORT=3100         # Server port
-LOG_LEVEL=info        # Logging level
-```
-
----
-
 ## ✅ Verification
 
 ### Extension Installation
@@ -248,7 +187,7 @@ Should return project information and task list.
 **Build errors:**
 ```bash
 # Rebuild from project root
-pnpm build
+npm run build
 
 # Check server manually
 node packages/mcp-server/dist/index.js
@@ -282,22 +221,19 @@ sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
 ## 🔄 Updating
 
 ### VS Code Extension
+
+Update from the VS Code marketplace (Extensions → DevSteps → Update), or manually:
 ```bash
 # Uninstall old version
-code --uninstall-extension devsteps.devsteps-vscode
+code --uninstall-extension devsteps.devsteps
 
-# Install new version
-code --install-extension devsteps-vscode-0.2.0.vsix
+# Install new VSIX
+code --install-extension devsteps-<version>.vsix
 ```
 
-### MCP Server
+### MCP Server (Standalone)
 ```bash
-# Global update
-npm update -g devsteps-mcp-server
-
-# Or reinstall
-npm uninstall -g devsteps-mcp-server
-npm install -g dist/mcp/devsteps-mcp-server-0.2.0.tgz
+npm update -g @schnick371/devsteps-mcp-server
 ```
 
 ---
@@ -341,9 +277,9 @@ Access via Command Palette (`Ctrl+Shift+P`):
 ## 📖 Documentation
 
 - [README.md](README.md) - Project overview
-- [DEVELOPMENT.md](docs/DEVELOPMENT.md) - Development guide
+- [CONTRIBUTING.md](CONTRIBUTING.md) - Development guide
 - VS Code: Press `F1` → "DevSteps: Help"
-- MCP Server: `devsteps-mcp --help`
+- MCP Server: [packages/mcp-server/README.md](packages/mcp-server/README.md)
 
 ---
 

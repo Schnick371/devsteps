@@ -23,7 +23,7 @@ Thank you for your interest in contributing! We welcome contributions from every
 
 ### Contributing Code
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feat/amazing-feature`)
+2. Create a feature branch (`git checkout -b story/STORY-XXX` or `feat/description`)
 3. Make your changes following our coding standards
 4. Write or update tests as needed
 5. Run tests and linting (`npm test`, `npm run lint`)
@@ -34,7 +34,7 @@ Thank you for your interest in contributing! We welcome contributions from every
 ## Development Setup
 
 ### Prerequisites
-- Node.js 20+ or Bun runtime
+- Node.js 22+
 - Git
 - VS Code (recommended)
 

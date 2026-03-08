@@ -6,8 +6,8 @@ We release security updates for the following versions:
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.4.x   | :white_check_mark: |
-| < 0.4   | :x:                |
+| 1.x     | :white_check_mark: |
+| < 1.0   | :x:                |
 
 **Recommendation**: Always use the latest version for security updates.
 
@@ -66,7 +66,6 @@ Include in your report:
 
 ### MCP Server Deployment
 
-- ✅ Run in containerized environment (Docker)
 - ✅ Use read-only file systems where possible
 - ✅ Limit network access to necessary ports only
 - ✅ Enable logging for audit trails
@@ -80,12 +79,15 @@ DevSteps stores data in `.devsteps/` directory with local file system access. En
 ```bash
 # Recommended permissions
 chmod 700 .devsteps/
-chmod 600 .devsteps/**/*.json
+find .devsteps -name '*.json' -exec chmod 600 {} \;
 ```
 
 ### MCP Server HTTP Mode
 
 If running MCP server in HTTP mode (not stdio):
+
+> **Note:** The VS Code extension runs the MCP server in-process on localhost. These recommendations apply to standalone HTTP deployments only.
+
 - ✅ Use authentication (API keys, JWT)
 - ✅ Enable HTTPS in production
 - ✅ Rate limit requests

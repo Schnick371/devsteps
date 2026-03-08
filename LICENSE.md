@@ -1,6 +1,6 @@
 # Apache License 2.0
 
-**Copyright © 2025 Thomas Hertel (the@devsteps.dev)**
+**Copyright © 2025–2026 Thomas Hertel (the@devsteps.dev)**
 
 ---
 

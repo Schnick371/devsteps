@@ -119,13 +119,42 @@ The MCP server provides these tools to AI assistants:
 ### Archival & Maintenance
 - `devsteps-archive` - Archive single items
 - `devsteps-purge` - Bulk archive completed items
-- `devsteps-bulk_update` - Update status/assignee/category/priority on multiple items at once
-- `devsteps-bulk_tag_add` - Add tags to multiple items at once
-- `devsteps-bulk_tag_remove` - Remove tags from multiple items at once
 
 ### Monitoring
 - `devsteps-health` - Server health status
 - `devsteps-metrics` - Prometheus metrics
+
+### AI Agent Coordination (CBP)
+- `devsteps-write_mandate_result` - Write analyst/executor mandate result
+- `devsteps-read_mandate_results` - Read mandate results (coord only)
+- `devsteps-write_analysis_report` - Write analysis report
+- `devsteps-read_analysis_envelope` - Read analysis envelope
+- `devsteps-write_rejection_feedback` - Write review rejection feedback
+- `devsteps-write_iteration_signal` - Write iteration signal
+- `devsteps-write_escalation` - Signal escalation
+- `devsteps-write_sprint_brief` - Write sprint brief
+- `devsteps-write_verdict` - Write verdict
+- `devsteps-write_dispatch_manifest` - Write dispatch manifest
+- `devsteps-patch_dispatch_manifest` - Patch dispatch manifest
+
+### Copilot Integration
+- `devsteps-update_copilot_files` - Update Copilot instruction files
+
+## MCP Prompts
+
+The server also provides prompts for AI assistants:
+
+| Prompt | Description |
+|--------|-------------|
+| `devsteps-onboard` | Load project context into AI session |
+| `devsteps-sprint-review` | Summarize in-progress items and blockers |
+| `devsteps-commit-message` | Generate Conventional Commits message |
+
+## MCP Resources
+
+| Resource | Description |
+|----------|-------------|
+| `devsteps://project-context` | AI-optimized project context |
 
 ## Quick Start Example
 
@@ -186,12 +215,6 @@ Before marking `done`:
 - **Q2 (Not Urgent-Important)** - Schedule
 - **Q3 (Urgent-Not Important)** - Delegate
 - **Q4 (Not Urgent-Not Important)** - Eliminate
-
-### Priority Levels
-- **Critical** - Immediate action required
-- **High** - Important, short deadline
-- **Medium** - Normal priority
-- **Low** - Can be deferred
 
 ## Project Structure
 
