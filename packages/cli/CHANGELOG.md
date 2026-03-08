@@ -2,6 +2,25 @@
 
 All notable changes to `@schnick371/devsteps-cli` will be documented in this file.
 
+## [1.1.0-next.4] - 2026-03-06 (Pre-release)
+
+### ⚠️ Experimental Features
+
+- Agent file frontmatter CI validation (TASK-350): agents CI tests enforce `user-invocable: false` for all non-coord leaf agents
+- `mcpActive` context key for VS Code extension (TASK-351)
+- `prepack` hook syncs `.github/` Copilot files into package before publish (TASK-349)
+
+### Fixed
+
+- BUG-067: 14 leaf agent files corrected to `user-invocable: false`
+- Stale tool names updated, `think` tool added to agent files (TASK-345/346)
+- Removed `agent` tool from 16 leaf-node agent files (BUG-063)
+
+### Testing Needed
+
+- `devsteps --version` shows `1.1.0-next.4` after install
+- Agent file CI test suite (397 tests) passes
+
 ## [Unreleased]
 
 ### Added

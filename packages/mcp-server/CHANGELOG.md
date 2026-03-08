@@ -2,16 +2,36 @@
 
 All notable changes to the DevSteps MCP Server will be documented in this file.
 
+## [1.1.0-next.4] - 2026-03-06 (Pre-release)
+
+### ⚠️ Experimental Features
+
+- **TASK-330**: `read_mandate_results` now returns quorum envelope `{results[], count, quorum_ok, missing_analysts, dispatched, received, threshold, status}` — **BREAKING CHANGE**: callers must iterate `.results[]`
+- **TASK-331**: New MCP tools `write_dispatch_manifest` + `patch_dispatch_manifest` for audit trail
+- **TASK-332**: `createDispatchLogger(dispatchId?, parent?)` pino structured logging
+- **TASK-333**: VS Code version runtime guard in `extension.activate()`
+- **STORY-122**: In-process HTTP MCP server (Express) launchable from VS Code extension host
+- MCP preflight protocol: `coord` must call `mcp_devsteps_status` before any dispatch (TASK-352)
+
+### Fixed
+
+- BUG-064/065/066: `sprint_id` path traversal, char limit enforcement, ENOENT on missing dirs, string coercion
+- BUG-067: All 14 leaf agent files set to `user-invocable: false`
+- Agent tool name updates + `think` tool support (TASK-345/346)
+
+### Known Issues
+
+- BATS waterfall relation-conflict test (2 tests) fail due to pre-existing test script mismatch with TASK-097 conflict validation — not a regression
+
+### Testing Needed
+
+- `read_mandate_results` quorum envelope in full Spider Web dispatch cycle
+- `write_dispatch_manifest` / `patch_dispatch_manifest` round-trip
+- HTTP MCP server transport with VS Code extension
+
 ## [Unreleased]
 
 ### Added
-- **STORY-122:** `startHttpMcpServer` now accepts an optional `workspacePath` parameter (default: `process.cwd()`). The MCP server also reads the `DEVSTEPS_WORKSPACE` environment variable as the primary source for workspace path resolution, enabling seamless in-process operation when launched by the VS Code extension.
-- **TASK-331:** Two new MCP tools for dispatch-manifest audit trail:
-  - `write_dispatch_manifest` — write a `DispatchManifest` at coord fan-out time. UUID-named file (`dispatch-manifest-{dispatch_id}.json`) records all dispatched agents with `status=pending`. Storage: `.devsteps/cbp/{sprint_id}/dispatch-manifest-{dispatch_id}.json`.
-  - `patch_dispatch_manifest` — update a single dispatch entry by `mandate_id` when a MandateResult arrives. Sets `completed_at`, `duration_ms`, `status`, `confidence`, and `output_tokens_approx`. Reads and rewrites atomically.
-  - `DispatchEntrySchema` and `DispatchManifestSchema` added to `@schnick371/devsteps-shared` (`packages/shared/src/schemas/cbp-mandate.ts`).
-  - See `packages/mcp-server/LOGGING.md` § Dispatch Manifest for full lifecycle documentation.
-- **TASK-330:** `read_mandate_results` now returns an envelope `{ results[], count, quorum_ok, missing_analysts, dispatched, received, threshold, status }` instead of a bare array. New optional input parameters `expected_agent_names` (string[]) and `dispatch_id` (string) added. When `expected_agent_names` is omitted all quorum fields are `undefined` — fully backward compatible. `status` is `'quorum_met'` or `'quorum_failed'` when quorum tracking is active.
 - **STORY-121 TASK-274:** MCP Prompts capability (`prompts: {}`) with three workflow prompts:
   - `devsteps-onboard` — loads live project context at session start
   - `devsteps-sprint-review` — instructs AI to call `devsteps_context(standard)` and summarise sprint state
