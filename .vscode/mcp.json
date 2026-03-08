@@ -1,15 +1,13 @@
 {
     "servers": {
-        // The DevSteps VS Code Extension (devsteps.devsteps) manages the MCP server automatically
-        // via registerMcpServerDefinitionProvider — no manual entry needed here.
-        //
-        // If you are working WITHOUT the extension installed, uncomment this block:
-        //
-        // "devsteps": {
-        //   "type": "stdio",
-        //   "command": "npx",
-        //   "args": ["-y", "--package=@schnick371/devsteps-mcp-server@next", "devsteps-mcp", "${workspaceFolder}"],
-        //   "env": {}
-        // }
+        // Active during development (no installed VSIX — extension not auto-starting the server).
+        // The extension detects this entry and skips its own auto-registration (no duplicate).
+        // ${workspaceFolder} is expanded by VS Code — no hardcoded absolute paths.
+        "devsteps": {
+            "type": "stdio",
+            "command": "npx",
+            "args": ["-y", "--package=@schnick371/devsteps-mcp-server@next", "devsteps-mcp", "${workspaceFolder}"],
+            "env": {}
+        }
     }
 }
