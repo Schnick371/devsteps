@@ -39,8 +39,8 @@ tmp/
 temp/
 *.tmp
 
-# Local documentation artifacts (not for GitHub)
-docs/
+# Branding assets — not for public release
+docs/branding/
 
 # Test projects (example/demo data)
 test-project/

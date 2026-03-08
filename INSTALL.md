@@ -218,7 +218,43 @@ sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
 
 ---
 
-## 🔄 Updating
+## � Per-Workspace Data Storage
+
+Each DevSteps workspace stores its data in a `.devsteps/` folder at the **root of that workspace**:
+
+```
+my-project/
+├── .devsteps/          ← DevSteps data for this workspace
+│   ├── items/          # Work items (JSON + Markdown)
+│   ├── index/          # Search indices
+│   └── config.json     # Project configuration
+├── src/
+└── ...
+```
+
+### Multiple VS Code Windows
+
+When you have **multiple VS Code windows open simultaneously**, each window manages a completely independent DevSteps workspace:
+
+| VS Code Window | Workspace Root | `.devsteps/` Location |
+|---|---|---|
+| Window 1 | `~/projects/backend/` | `~/projects/backend/.devsteps/` |
+| Window 2 | `~/projects/frontend/` | `~/projects/frontend/.devsteps/` |
+| Window 3 | `~/projects/docs/` | `~/projects/docs/.devsteps/` |
+
+Each window launches its own in-process MCP server scoped to that window's workspace root. The servers do not share state and do not conflict with each other.
+
+This mirrors how VS Code itself isolates workspace settings: each `workspace-root/.vscode/settings.json` is independent.
+
+> ⚠️ **Same folder in two windows** — If two VS Code windows open the **same folder** simultaneously, both MCP servers target the same `.devsteps/` directory. Avoid making bulk changes from both windows at the same time, as concurrent index writes are not synchronized.
+
+### Multi-Root Workspaces
+
+For VS Code [multi-root workspaces](https://code.visualstudio.com/docs/editor/multi-root-workspaces) (`.code-workspace` files), DevSteps uses the **first workspace folder** as the project root. Additional folders are accessible for file navigation but their content is tracked under the primary `.devsteps/`.
+
+---
+
+## �🔄 Updating
 
 ### VS Code Extension
 
@@ -285,6 +321,6 @@ Access via Command Palette (`Ctrl+Shift+P`):
 
 ## 🆘 Support
 
-- Issues: https://github.com/your-org/devsteps/issues
-- Discussions: https://github.com/your-org/devsteps/discussions
-- Docs: https://devsteps.dev/docs
+- Issues: https://github.com/Schnick371/devsteps/issues
+- Discussions: https://github.com/Schnick371/devsteps/discussions
+- Docs: https://devsteps.dev

@@ -41,6 +41,48 @@ Copyright (c) Steve King
 Licensed under MIT
 https://github.com/steveukx/git-js
 
+pino
+Copyright (c) 2016 Matteo Collina and contributors
+Licensed under MIT
+https://github.com/pinojs/pino
+
+pino-pretty
+Copyright (c) 2019 the Pino team
+Licensed under MIT
+https://github.com/pinojs/pino-pretty
+
+express
+Copyright (c) 2009-2014 TJ Holowaychuk
+Copyright (c) 2013-2014 Roman Shtylman
+Copyright (c) 2014-2015 Douglas Christopher Wilson
+Licensed under MIT
+https://github.com/expressjs/express
+
+prom-client
+Copyright (c) 2015 Simen Bekkhus
+Licensed under Apache-2.0
+https://github.com/siimon/prom-client
+
+Chart.js
+Copyright (c) 2014-2024 Chart.js Contributors
+Licensed under MIT
+https://github.com/chartjs/Chart.js
+
+D3
+Copyright (c) 2010-2024 Mike Bostock
+Licensed under ISC
+https://github.com/d3/d3
+
+ora
+Copyright (c) Sindre Sorhus
+Licensed under MIT
+https://github.com/sindresorhus/ora
+
+@inquirer/prompts
+Copyright (c) Simon Boudrias
+Licensed under MIT
+https://github.com/SBoudrias/Inquirer.js
+
 ---
 
 For the full list of dependencies and their licenses, see:
