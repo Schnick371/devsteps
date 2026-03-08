@@ -1,7 +1,7 @@
 # 🚀 DevSteps - Developer Task Tracking System
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE.md)
-[![Version](https://img.shields.io/badge/version-0.4.0-green.svg)](package.json)
+[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](package.json)
 
 > Never Code Alone. Team Up With Your AI.
 
@@ -110,10 +110,10 @@ devsteps add bug "Memory leak in user service" --priority urgent-important
 
 ## 🛠️ Tech Stack
 
-- **Runtime**: [Bun](https://bun.sh) - Fast all-in-one JavaScript runtime
+- **Runtime**: [Node.js](https://nodejs.org/) 22+ — JavaScript runtime
 - **Language**: TypeScript 5.7+ with strict mode
 - **MCP SDK**: [@modelcontextprotocol/sdk](https://github.com/anthropics/mcp-typescript-sdk)
-- **CLI**: Commander.js, Inquirer, Chalk, Ora
+- **CLI**: Commander.js, @inquirer/prompts, Chalk, Ora
 - **Validation**: Zod for runtime type safety
 - **Linting**: Biome for fast linting and formatting
 - **Testing**: Vitest for unit and integration tests
@@ -125,62 +125,20 @@ devsteps add bug "Memory leak in user service" --priority urgent-important
 | Requirement | Minimum Version | Notes |
 | ----------- | --------------- | ----- |
 | [VS Code](https://code.visualstudio.com/) | **1.109.0** | Required for parallel `#runSubagent` dispatch |
-| [Bun](https://bun.sh) | latest | Build toolchain |
-| Node.js | 22+ | Runtime |
-
-Install [Bun](https://bun.sh):
-```bash
-curl -fsSL https://bun.sh/install | bash
-```
+| [Node.js](https://nodejs.org/) | 22+ | Runtime and build toolchain |
 
 ### Install DevSteps
 
 ```bash
 # Clone and build
-git clone <repository-url>
+git clone https://github.com/Schnick371/devsteps.git
 cd devsteps
-bun install
-bun run build
+npm install
+npm run build
 
 # Link CLI globally (optional)
 cd packages/cli
-bun link
-```
-
-## 🚀 Quick Start
-
-### Initialize a Project
-
-```bash
-devsteps init my-project
-```
-
-### Add Items
-
-```bash
-# Add a requirement
-devsteps add req "User authentication system"
-
-# Add a feature
-devsteps add feat "Login form with email/password"
-
-# Add a test
-devsteps add test "Test login with valid credentials"
-```
-
-### Link Items
-
-```bash
-devsteps link REQ-001 implements FEAT-001
-devsteps link FEAT-001 tested-by TEST-001
-```
-
-### View Status
-
-```bash
-devsteps status
-devsteps list --status=in-progress
-devsteps trace REQ-001
+npm link
 ```
 
 ## 🚀 Quick Start
@@ -278,23 +236,25 @@ This loads the current project context and confirms the MCP server is connected.
 | `/mcp.devsteps.devsteps-sprint-review` | Summarise in-progress items and blockers |
 | `/mcp.devsteps.devsteps-commit-message` | Generate a Conventional Commits message for an item |
 
-## �📚 Documentation
+## 📚 Documentation
 
-- [Installation Guide](./INSTALL.md) - Detailed setup instructions
-- [Development Guide](./DEVELOPMENT.md) - Contributing and local development
-- [CLI Commands](./docs/cli-commands.md) - Command-line reference
-- [MCP Tools Reference](./docs/mcp-tools.md) - AI integration tools
+- [Installation Guide](./INSTALL.md) — Detailed setup instructions
+- [Contributing Guide](./CONTRIBUTING.md) — Development setup and PR process
+- [CLI Reference](./packages/cli/README.md) — Command-line interface
+- [MCP Server Reference](./packages/mcp-server/README.md) — AI integration tools
+- [Testing Guide](./TESTING.md) — How to test the extension
 
 ## 🏗️ Project Structure
 
 ```
 devsteps/
 ├── packages/
-│   ├── mcp-server/     # MCP server for AI integration
-│   ├── cli/            # CLI tool for developers
-│   └── shared/         # Shared types, schemas, and utilities
-├── .devsteps/            # Example project data
-├── docs/               # Documentation
+│   ├── extension/    # VS Code extension (TreeView, Dashboard, MCP manager)
+│   ├── mcp-server/   # MCP server for AI integration
+│   ├── cli/          # CLI tool for developers
+│   └── shared/       # Shared types, schemas, and utilities
+├── .devsteps/        # Example project data
+├── docs/             # Documentation
 └── README.md
 ```
 
@@ -302,30 +262,30 @@ devsteps/
 
 ```bash
 # Install dependencies
-bun install
+npm install
 
 # Development mode (watch)
-bun run dev
+npm run dev
 
 # Build all packages
-bun run build
+npm run build
 
 # Run tests
-bun test
+npm test
 
 # Lint and format
-bun run lint
-bun run format
+npm run lint
+npm run format
 
 # Type check
-bun run typecheck
+npm run typecheck
 ```
 
 ## 👤 Author
 
 **Thomas Hertel**
 - Email: [the@devsteps.dev](mailto:the@devsteps.dev)
-- GitHub: [@devsteps](https://github.com/devsteps)
+- GitHub: [@Schnick371](https://github.com/Schnick371)
 
 ## 🤝 Contributing
 
@@ -358,7 +318,7 @@ All contributions require:
 
 ## 📄 License
 
-**Copyright © 2025 Thomas Hertel (the@devsteps.dev)**
+**Copyright © 2025–2026 Thomas Hertel (the@devsteps.dev)**
 
 This project is licensed under the **Apache License 2.0** - see the [LICENSE.md](LICENSE.md) file for details.
 

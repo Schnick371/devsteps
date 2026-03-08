@@ -1,278 +1,159 @@
-# Testing Guide - DevSteps VS Code Extension mit Embedded MCP
+# Testing Guide — DevSteps VS Code Extension
 
-## 🚀 Quick Test (F5 Development Host)
+## Automated Tests
 
-**Best für Development & Debugging:**
+### Unit Tests (Vitest)
 
-1. **Start Extension Development Host:**
-   ```bash
-   # Im devsteps Projekt-Ordner
-   code .
-   ```
+```bash
+# Run all unit tests
+npm test
 
-2. **In VS Code:**
-   - Öffne `packages/extension/src/extension.ts`
-   - Drücke `F5` (oder Run → Start Debugging)
-   - Neue VS Code Fenster öffnet sich: **Extension Development Host**
+# Watch mode (re-runs on file changes)
+npm run test:watch
+```
 
-3. **Was passiert:**
-   - Extension wird automatisch aktiviert
-   - MCP Server startet auf Port 3098
-   - Debug Console zeigt Logs
+### CLI Integration Tests (BATS)
 
-4. **Verify in Development Host:**
-   - Status Bar (rechts unten) → `✓ DevSteps MCP: Running`
-   - Extensions View (`Ctrl+Shift+X`) → Search `@mcp` → "devsteps-embedded" sichtbar
-   - Output Panel (`Ctrl+Shift+U`) → "DevSteps MCP Server" auswählen → Logs checken
+```bash
+# Run CLI integration tests
+npm run test:cli
+```
+
+### Lint & Type Check
+
+```bash
+# Biome linting
+npm run lint
+
+# TypeScript type checking
+npm run typecheck
+
+# Format code
+npm run format
+```
+
+### Run All Quality Checks
+
+```bash
+# Sequential: lint → unit tests → CLI integration tests
+npm run lint && npm test && npm run test:cli
+```
 
 ---
 
-## 📦 Production-like Test (Install VSIX)
+## Manual Testing — Extension Development Host
 
-**Best für End-to-End Testing:**
+### Start the Extension (F5)
 
-1. **Install Extension:**
+1. Open the DevSteps project in VS Code:
    ```bash
-   code --install-extension dist/vscode/devsteps-vscode-0.1.0.vsix
+   code /path/to/devsteps
    ```
+2. Open `packages/extension/src/extension.ts`
+3. Press **F5** (or Run → Start Debugging)
+4. A new VS Code window opens: **Extension Development Host**
 
-2. **Reload VS Code:**
-   ```
-   Ctrl+Shift+P → "Developer: Reload Window"
-   ```
+### What Happens on Activation
 
-3. **Verify Installation:**
-   ```bash
-   code --list-extensions | grep devsteps
-   # Should show: devsteps.devsteps-vscode
-   ```
+- Extension activates automatically
+- MCP server starts **in-process** on a dynamic OS-assigned port
+- Status bar shows: `✓ DevSteps MCP`
+- Output panel "DevSteps MCP Server" shows startup logs
 
-4. **Uninstall after testing:**
-   ```bash
-   code --uninstall-extension devsteps.devsteps-vscode
-   ```
+### Verify Extension Basics
 
----
+- [ ] **Activity Bar**: DevSteps icon appears (left sidebar)
+- [ ] **TreeView**: Shows work items (if `.devsteps/` exists in workspace)
+- [ ] **Commands**: `Ctrl+Shift+P` → type "DevSteps" → commands visible
+- [ ] **Status Bar**: Bottom-right shows `✓ DevSteps MCP: Running`
 
-## ✅ Test Checklist
+### Verify MCP Server
 
-### Extension Basics
-- [ ] Activity Bar: DevSteps icon erscheint
-- [ ] TreeView: Shows devsteps items (wenn `.devsteps/` existiert)
-- [ ] Commands: `Ctrl+Shift+P` → Type "DevSteps" → Commands sichtbar
+- [ ] **Extensions View**: `Ctrl+Shift+X` → search `@mcp` → "devsteps-mcp" visible in MCP SERVERS
+- [ ] **Output Panel**: `Ctrl+Shift+U` → select "DevSteps MCP Server" → see startup logs
 
-### MCP Server Status
-- [ ] **Status Bar** (bottom right): Shows `✓ DevSteps MCP: Running`
-- [ ] Click Status Bar → Opens Settings to `devsteps.mcp`
-- [ ] **Extensions View**: Search `@mcp` → "devsteps-embedded" in MCP SERVERS section
-- [ ] **Output Panel**: `Ctrl+Shift+U` → Select "DevSteps MCP Server" → See startup logs
+> **Note:** The MCP server port is OS-assigned dynamically and cannot be predicted. Do not use hardcoded port numbers for testing.
 
-### MCP Server Functionality
+### Verify GitHub Copilot Integration
 
-**Check HTTP Endpoint:**
-```bash
-# Test health endpoint
-curl http://localhost:3098/health
-
-# Should return:
-# {"status":"ok","transport":"streamable-http","tools":15}
-```
-
-**Check MCP Protocol:**
-```bash
-# Test tools/list
-curl -X POST http://localhost:3098/mcp \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
-
-# Should return all 15 tools
-```
-
-### GitHub Copilot Integration
-
-1. **Open Copilot Chat:** `Ctrl+Shift+I` (or `Ctrl+Alt+I`)
-
-2. **Test Commands:**
-   ```
-   @workspace Initialize a devsteps project
-   ```
-   - Copilot sollte devsteps-init tool verwenden
-   - Response: Project initialization steps
-
+1. Open Copilot Chat (`Ctrl+Shift+I`)
+2. Test a DevSteps command:
    ```
    @workspace List my devsteps tasks
    ```
-   - Copilot sollte devsteps-list tool verwenden
-   - Response: Current tasks
+3. Copilot should use the `devsteps-list` MCP tool
+4. Check Output Panel → "DevSteps MCP Server" for tool execution logs
 
-   ```
-   @workspace Show devsteps status
-   ```
-   - Copilot sollte devsteps-status tool verwenden
-   - Response: Project statistics
+### Extension Settings
 
-3. **Verify Tool Usage:**
-   - Check Output Panel → DevSteps MCP Server
-   - Should show: "Tool executed successfully" logs
+The extension provides these settings (Settings → search "devsteps"):
 
-### Settings
-
-**Open Settings:** `Ctrl+,` → Search "devsteps.mcp"
-
-Check these settings exist:
-- [ ] `devsteps.mcp.autoStart` = `true` (default)
-- [ ] `devsteps.mcp.port` = `3098` (default)
-
-**Test Auto-Start Disable:**
-1. Set `devsteps.mcp.autoStart` = `false`
-2. Reload Window: `Ctrl+Shift+P` → "Developer: Reload Window"
-3. Status Bar should show: `⊘ DevSteps MCP: Stopped`
-4. Re-enable and reload
-
-**Test Port Change:**
-1. Set `devsteps.mcp.port` = `3099`
-2. Reload Window
-3. Status Bar tooltip should show new port
-4. Test: `curl http://localhost:3099/health`
-
-### Error Scenarios
-
-**Port Already in Use:**
-1. Start MCP server manually: `node packages/mcp-server/dist/index.js`
-2. Try to activate extension
-3. Status Bar should show error state
-4. Output Panel should show error message
-
-**MCP Server Crash:**
-1. With extension running, kill MCP process
-2. Status Bar should update to error state
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `devsteps.logging.level` | `info` | Logging level: `error`, `warn`, `info`, `debug` |
+| `devsteps.logging.showOutputOnError` | `true` | Auto-show output channel on errors |
 
 ---
 
-## 🐛 Debugging
+## Production-Like Test (VSIX Install)
 
-### Enable Debug Logs
+```bash
+# Build the VSIX
+cd packages/extension && npm run package
 
-**Extension Logs:**
-```
-Developer Tools → Console → Filter: "DevSteps"
+# Install the VSIX (use actual filename from build output)
+code --install-extension devsteps-<version>.vsix
+
+# Reload VS Code
+# Ctrl+Shift+P → "Developer: Reload Window"
+
+# Verify
+code --list-extensions | grep devsteps
+
+# Uninstall after testing
+code --uninstall-extension devsteps.devsteps
 ```
 
-**MCP Server Logs:**
-```
-Output Panel → Select "DevSteps MCP Server"
-```
+---
 
-**VS Code Logs:**
-```
-Help → Toggle Developer Tools → Console
-```
+## Debugging
+
+### Extension Logs
+- Developer Tools console: `Help` → `Toggle Developer Tools` → Console → filter "DevSteps"
+
+### MCP Server Logs
+- Output Panel: `Ctrl+Shift+U` → select "DevSteps MCP Server"
 
 ### Common Issues
 
-**Issue: MCP Server doesn't start**
-- Check Output Panel for errors
-- Verify port 3098 is free: `lsof -i :3098`
-- Check Settings: `devsteps.mcp.autoStart` = true
+**MCP server not starting:**
+- Check the Output Panel for error messages
+- Run `DevSteps: Check Prerequisites` from Command Palette
+- Ensure VS Code ≥ 1.109.0
 
-**Issue: Copilot doesn't see MCP tools**
-- Verify in Extensions: `@mcp` shows "devsteps-embedded"
-- Check `curl http://localhost:3098/health`
+**Copilot doesn't see DevSteps tools:**
+- Verify status bar shows "DevSteps MCP: Running"
+- Try: `Ctrl+Shift+P` → `MCP: List Servers` → verify "devsteps-mcp" is listed
 - Restart VS Code completely
 
-**Issue: Status Bar shows error**
-- Click status bar → See error details
-- Check Output Panel → DevSteps MCP Server
-- Verify dependencies: `cd packages/mcp-server && pnpm install`
+**Extension not activating:**
+- Ensure `.devsteps/` directory exists in workspace root, OR
+- Extension activates even without a project (for MCP tool availability)
+- Check VS Code version (requires ≥ 1.109.0)
 
 ---
 
-## 📊 Success Criteria
-
-Extension is working correctly when:
-
-✅ Status Bar shows: `✓ DevSteps MCP: Running`
-✅ Extensions View shows "devsteps-embedded" under MCP SERVERS
-✅ `curl http://localhost:3098/health` returns `{"status":"ok"}`
-✅ GitHub Copilot can execute devsteps commands
-✅ Output Panel shows MCP server logs
-✅ Settings page shows devsteps.mcp.* options
-
----
-
-## 🔄 Development Workflow
-
-### Make Changes → Test
-
-1. **Edit Extension Code:**
-   ```
-   packages/extension/src/*.ts
-   ```
-
-2. **Rebuild:**
-   ```bash
-   pnpm build
-   # Or watch mode:
-   cd packages/extension && pnpm watch
-   ```
-
-3. **In Extension Development Host:**
-   ```
-   Ctrl+Shift+P → "Developer: Reload Window"
-   ```
-   - Extension reloads with changes
-   - MCP server restarts
-
-4. **Check Logs:**
-   - Debug Console (in main VS Code)
-   - Output Panel (in Development Host)
-
-### Hot Reload
-
-**Watch Mode (Terminal 1):**
-```bash
-cd packages/extension
-pnpm watch
-```
-
-**Development Host (Terminal 2):**
-- Press F5 in VS Code
-- Code changes auto-compile
-- Reload Window to apply
-
----
-
-## 📋 Test Matrix
+## Test Matrix
 
 | Test | Method | Expected Result |
 |------|--------|----------------|
 | Extension loads | F5 | Development Host opens |
-| MCP starts | Check Status Bar | "✓ DevSteps MCP: Running" |
-| MCP visible | Extensions View | "devsteps-embedded" shown |
-| HTTP endpoint | curl health | {"status":"ok"} |
-| Copilot integration | Chat command | Tool executed |
-| Auto-start setting | Toggle & reload | Starts/stops accordingly |
-| Port setting | Change & reload | Runs on new port |
-| Error handling | Kill server | Status shows error |
+| MCP starts | Status Bar | "✓ DevSteps MCP: Running" |
+| MCP registered | Extensions View | "devsteps-mcp" in MCP SERVERS |
+| Copilot integration | Chat command | Tool executed successfully |
+| Unit tests | `npm test` | All tests pass |
+| CLI integration | `npm run test:cli` | All BATS tests pass |
+| Lint | `npm run lint` | No errors |
+| Type check | `npm run typecheck` | No errors |
 
----
 
-## 🎯 Next Steps After Testing
-
-1. **Document Issues:** Create tasks for any bugs found
-2. **Update INSTALL.md:** Add troubleshooting from test findings
-3. **Create Test Cases:** Automated tests for CI/CD
-4. **Performance Test:** Test with large devsteps projects
-5. **User Acceptance:** Beta test with real users
-
----
-
-## 💡 Tips
-
-- **Fast Iteration:** Use F5 + Watch mode for quick development
-- **Production Test:** Install VSIX before releasing
-- **Clean State:** Uninstall extension between tests to verify fresh install
-- **Log Everything:** Check both Extension logs and MCP Server logs
-- **Test All Tools:** Verify all 15 MCP tools work via Copilot
-
-Happy Testing! 🚀

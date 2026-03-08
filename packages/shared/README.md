@@ -29,7 +29,7 @@ import type { ItemType, ItemStatus } from '@schnick371/devsteps-shared';
 const result = await addItem('/path/to/.devsteps', {
   type: 'task',
   title: 'Implement feature',
-  priority: 'high'
+  priority: 'urgent-important'
 });
 
 // Get work item
@@ -45,7 +45,6 @@ const items = await listItems('/path/to/.devsteps');
 - `addItem()` - Create new work item
 - `getItem()` - Retrieve work item by ID
 - `updateItem()` - Update existing work item
-- `deleteItem()` - Delete work item
 - `listItems()` - List all work items with filters (supports `archived: true` for archive scan)
 - `searchItems()` - Full-text search across items
 - `linkItems()` - Create bidirectional relationship between items
@@ -59,7 +58,7 @@ const items = await listItems('/path/to/.devsteps');
 ### Types
 - `ItemType` - Epic, Story, Task, Bug, etc.
 - `ItemStatus` - Draft, In Progress, Done, etc.
-- `Priority` - Critical, High, Medium, Low
+- `EisenhowerQuadrant` - urgent-important, not-urgent-important, urgent-not-important, not-urgent-not-important
 - `Methodology` - Scrum, Waterfall, Hybrid
 - `ItemMetadata` - Complete work item structure
 

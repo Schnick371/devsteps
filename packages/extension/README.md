@@ -19,7 +19,7 @@
 - **Sprint Burndown Chart**: Track progress with ideal vs actual burndown
 - **Traceability Graph**: Force-directed visualization of item relationships
 - **Activity Timeline**: Recent updates at a glance
-- **Performance Optimized**: Handles 10K+ items with <2s load time
+- **Performance Optimized**: Handles 10K+ items with <2s load time (design target)
 
 ### 🔗 Traceability & Relationships
 - Navigate parent-child relationships (epic → story → task)
@@ -33,7 +33,7 @@
 
 ## 📦 Installation
 
-### Stable Release (1.0.0)
+### Stable Release
 
 Search for **"DevSteps"** in the VS Code Extensions view and install.
 
@@ -47,7 +47,7 @@ npm install -g @schnick371/devsteps-mcp-server
 npm install -g @schnick371/devsteps-cli
 ```
 
-### Pre-Release (1.0.1)
+### Pre-Release
 
 In the VS Code Extensions view, find DevSteps and click **"Switch to Pre-Release Version"**.
 
@@ -196,9 +196,11 @@ devsteps init my-project
 
 No configuration required! Extension auto-detects DevSteps projects.
 
-**Optional Settings** (future releases):
-- `devsteps.dashboard.traceabilityMaxNodes`: Max nodes in traceability graph (default: 50)
-- `devsteps.treeView.defaultView`: Initial view mode (default: "flat")
+**Available Settings:**
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `devsteps.logging.level` | `info` | Logging level: `error`, `warn`, `info`, `debug` |
+| `devsteps.logging.showOutputOnError` | `true` | Auto-show output channel on errors |
 
 ## 🎨 Visual Design
 
@@ -209,7 +211,7 @@ DevSteps extension follows **VS Code theme colors** automatically:
 
 ## 📈 Performance
 
-**Optimized for Large Projects:**
+**Optimized for Large Projects (design targets):**
 - Dashboard: <500ms for 1K items, <2s for 10K items
 - TreeView: Instant filtering/sorting
 - Memory: <50MB for 10K items (within VS Code guidelines)
@@ -292,34 +294,15 @@ Report at: [GitHub Issues](https://github.com/Schnick371/devsteps/issues)
 
 ## 📝 Release Notes
 
-### 1.0.1 (Pre-Release)
-
-**Pre-release channel — install via "Switch to Pre-Release Version" in VS Code Extensions.**
-
-- Extension now automatically uses `@schnick371/devsteps-mcp-server@next` when running as pre-release
-- Added Getting Started walkthrough (Activity Bar → DevSteps → ...)
-- `isPreRelease()` detection extended to cover patch-level pre-releases (1.0.1)
-
-### 1.0.0 (Stable)
-
-**First stable release.**
-
-- Interactive WebView Dashboard with 5 visualization sections
-- Advanced TreeView filtering and sorting
-- Color-coded status badges (FileDecorationProvider)
-- MCP Server auto-management via VS Code MCP API (requires VS Code 1.109+)
-- Cross-platform Node.js runtime detection (npx preferred, node fallback)
-- Performance optimizations: <2s for 10K+ items
-- Traceability graph node limiting
-- TypeScript 5.9.3, esbuild bundling, Apache 2.0 license
+See [CHANGELOG.md](./CHANGELOG.md) for detailed release history.
 
 ## 🤝 Contributing
 
 DevSteps is open source! Contributions welcome:
 1. Fork the repository
-2. Create feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
+2. Create feature branch: `git checkout -b story/STORY-XXX`
+3. Commit changes: `git commit -m 'feat(extension): add amazing feature'`
+4. Push to branch: `git push origin story/STORY-XXX`
 5. Open Pull Request
 
 See [CONTRIBUTING.md](https://github.com/Schnick371/devsteps/blob/main/CONTRIBUTING.md) for guidelines.
@@ -333,7 +316,7 @@ Apache-2.0 - see [LICENSE](./LICENSE.md)
 - **Documentation**: [github.com/Schnick371/devsteps](https://github.com/Schnick371/devsteps)
 - **Report Issues**: [github.com/Schnick371/devsteps/issues](https://github.com/Schnick371/devsteps/issues)
 - **Changelog**: [CHANGELOG.md](./CHANGELOG.md)
-- **MCP Integration**: [docs/mcp-integration.md](https://github.com/Schnick371/devsteps/blob/main/docs/mcp-integration.md)
+- **MCP Server**: [packages/mcp-server/README.md](https://github.com/Schnick371/devsteps/blob/main/packages/mcp-server/README.md)
 
 ---
 

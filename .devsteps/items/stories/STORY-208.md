@@ -1,0 +1,1 @@
+Revise all documents shipped with the repository and visible on GitHub. Ensure accuracy: mark features not yet implemented, remove false claims, align with current codebase reality. Covers: README.md (root + packages), CONTRIBUTING.md, INSTALL.md, TESTING.md, SECURITY.md, CHANGELOG files, docs/ folder.
