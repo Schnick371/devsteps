@@ -1,0 +1,1 @@
+Developer guide for setting up 12GB VRAM GPU local inference on Linux: NVIDIA driver, CUDA toolkit, Ollama installation, model download (Mistral 7B + LLaMA 3.2 11B Q4_K_M), SHA256 verification, loopback binding verification. Target: tmp/visualizer/INSTALL-Local-GPU.md. Research basis: SPIKE-032 DOC-1.

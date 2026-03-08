@@ -1,0 +1,1 @@
+New instruction file defining which Spider Web rings are allowed to route to local GPU models vs. must use cloud (Claude Sonnet 4.6). Rules: Ring 4 workers ONLY → local; Rings 0/1/2/3/5 → cloud. Reference: SPIKE-032 architecture recommendation ARCH-1.

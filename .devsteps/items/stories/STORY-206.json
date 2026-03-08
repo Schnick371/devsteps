@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "S0: Copilot Hooks Phase 1 — File-Bridge for Spider Web Ring Events",
-  "status": "draft",
+  "status": "in-progress",
   "eisenhower": "urgent-important",
   "created": "2026-03-07T23:57:37.785Z",
-  "updated": "2026-03-07T23:57:44.298Z",
+  "updated": "2026-03-08T00:35:27.738Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/webview/,packages/extension/src/extension.ts,.github/hooks/"
@@ -19,7 +19,9 @@
     "tested-by": [],
     "tests": [],
     "blocks": [],
-    "blocked-by": [],
+    "blocked-by": [
+      "TASK-305"
+    ],
     "relates-to": [
       "SPIKE-026",
       "STORY-183"
@@ -27,7 +29,9 @@
     "depends-on": [
       "BUG-060"
     ],
-    "required-by": [],
+    "required-by": [
+      "STORY-184"
+    ],
     "supersedes": [],
     "superseded-by": []
   },

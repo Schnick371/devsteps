@@ -1,0 +1,15 @@
+{
+    "servers": {
+        "devsteps": {
+            "type": "stdio",
+            "command": "npx",
+            "args": [
+                "-y",
+                "--package=@schnick371/devsteps-mcp-server@next",
+                "devsteps-mcp",
+                "/home/th/dev/projekte/playground/devsteps"
+            ],
+            "env": {}
+        }
+    }
+}

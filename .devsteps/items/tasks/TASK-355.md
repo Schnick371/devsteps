@@ -1,0 +1,1 @@
+Create .vscode/settings.json with chat.models entry pointing to Ollama at localhost:11434 (127.0.0.1 loopback only). Required for Ring 4 worker agents to route to local GPU. Model ID convention: 'ollama/mistral:7b-instruct-q4_K_M' and 'ollama/llama3.2:11b-instruct-q4_K_M'. Implements: SPIKE-032.

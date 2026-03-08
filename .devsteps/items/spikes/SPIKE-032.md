@@ -1,0 +1,1 @@
+Research local GPU (12GB VRAM) usage with VS Code AI Toolkit, Agent Inspector, and local inference engines for devsteps Spider Web architecture.

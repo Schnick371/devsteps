@@ -18,10 +18,12 @@ export * from './index-refs.schema.js';
 // Re-export project context schemas
 export * from './project.js';
 export * from './relationships.js';
+export * from './spider-event.js';
 
 /**
  * Methodology types
  */
+
 export const Methodology = z.enum(['scrum', 'waterfall', 'hybrid']);
 export type Methodology = z.infer<typeof Methodology>;
 

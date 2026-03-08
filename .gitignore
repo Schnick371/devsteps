@@ -53,3 +53,5 @@ scripts/tmp
 .devsteps/prompts
 .devsteps/cbp/
 .devsteps/analysis/
+.devsteps/events/
+.devsteps/.mcp-port

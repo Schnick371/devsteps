@@ -12,7 +12,9 @@ import { McpServerManager } from './mcpServerManager.js';
 import { logger } from './outputChannel.js';
 import { DevStepsTreeDataProvider } from './treeView/devstepsTreeDataProvider.js';
 import { debounce } from './utils/debounce.js';
+import { SpiderEventsWatcher } from './utils/spiderEventsWatcher.js';
 import { TreeViewStateManager } from './utils/stateManager.js';
+import { DashboardPanel } from './webview/dashboardPanel.js';
 
 let activeMcpManager: McpServerManager | undefined;
 
@@ -251,6 +253,14 @@ export async function activate(context: vscode.ExtensionContext) {
   watcher.onDidDelete(() => debouncedRefreshMain());
 
   context.subscriptions.push(watcher);
+
+  // Spider Events watcher — forwards hook events to dashboard webview
+  const spiderWatcher = new SpiderEventsWatcher(workspaceRoot, (event) => {
+    if (DashboardPanel.currentPanel) {
+      DashboardPanel.currentPanel.postSpiderEvent(event);
+    }
+  });
+  context.subscriptions.push(spiderWatcher);
 
   // Always register commands to avoid "command not found" errors
   registerCommands(context, treeDataProvider);

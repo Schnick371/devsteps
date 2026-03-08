@@ -1,0 +1,1 @@
+Add 1MB Content-Length limit and optional Authorization header to POST /v1/traces in tmp/visualizer/server.py. Mitigates OWASP A07 finding from SPIKE-032 quality audit. Implements: SPIKE-032.

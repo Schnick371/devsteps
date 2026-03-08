@@ -1,0 +1,1 @@
+Set up local GPU inference stack (Ollama + CUDA) for Ring 4 worker agents in the Spider Web architecture. Includes: Ollama service config (loopback-only), model deployment (Mistral 7B + LLaMA 3.2 11B Q4_K_M), VS Code BYOM settings.json config, agentdev Python MCP client for MandateResult writes, security hardening (CVE-2026-21869 mitigations). Research basis: SPIKE-032.

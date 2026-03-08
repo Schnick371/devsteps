@@ -1,0 +1,22 @@
+{
+  "hooks": {
+    "SubagentStart": [
+      {
+        "type": "command",
+        "command": ".github/hooks/spider-ring-start.sh"
+      }
+    ],
+    "SubagentStop": [
+      {
+        "type": "command",
+        "command": ".github/hooks/spider-ring-stop.sh"
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": ".github/hooks/spider-session-end.sh"
+      }
+    ]
+  }
+}
