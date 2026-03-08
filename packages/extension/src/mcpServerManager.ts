@@ -40,7 +40,7 @@ interface VsCodeWithMcpApi {
     version: string
   ) => unknown;
   /** Available in VS Code 1.109+ for in-process HTTP MCP servers */
-  McpHttpServerDefinition: new (
+  McpHttpServerDefinition?: new (
     label: string,
     url: string,
     version: string
@@ -240,12 +240,15 @@ export class McpServerManager {
 
         const { startHttpMcpServer } = await import(bundledServerUrl);
         this.httpServer = await startHttpMcpServer(0, workspacePath);
+        const httpServer = this.httpServer!;
 
-        logger.info(`✅ In-process HTTP MCP server started: ${this.httpServer.url}`);
+        logger.info(`✅ In-process HTTP MCP server started: ${httpServer.url}`);
 
-        const httpDef = new vscodeApi.McpHttpServerDefinition(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const McpHttpServerDef = vscodeApi.McpHttpServerDefinition!;
+        const httpDef = new McpHttpServerDef(
           'devsteps',
-          this.httpServer.url,
+          httpServer.url,
           '1.0.0'
         );
         this.provider = vscodeApi.lm.registerMcpServerDefinitionProvider('devsteps-mcp', {
@@ -259,7 +262,7 @@ export class McpServerManager {
         }
 
         this.statusBarItem.text = '$(check) DevSteps MCP';
-        this.statusBarItem.tooltip = `DevSteps MCP Server (in-process HTTP) @ ${this.httpServer.url}`;
+        this.statusBarItem.tooltip = `DevSteps MCP Server (in-process HTTP) @ ${httpServer.url}`;
         this.statusBarItem.show();
 
         await vscode.commands.executeCommand('setContext', 'devsteps.mcpActive', true);
