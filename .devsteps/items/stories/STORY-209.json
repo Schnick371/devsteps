@@ -1,12 +1,12 @@
 {
-  "id": "STORY-208",
+  "id": "STORY-209",
   "type": "story",
   "category": "general",
-  "title": "Documentation Overhaul - Revise All Public-Facing Documents for Accuracy",
+  "title": "Install docs: .devsteps per-workspace MCP context, gitignore docs/branding, NOTICE audit",
   "status": "done",
   "eisenhower": "urgent-important",
-  "created": "2026-03-08T11:00:10.909Z",
-  "updated": "2026-03-08T11:45:15.631Z",
+  "created": "2026-03-08T12:07:45.959Z",
+  "updated": "2026-03-08T12:30:38.789Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -24,8 +24,10 @@
   },
   "tags": [
     "documentation",
-    "github",
-    "public-facing"
+    "install",
+    "gitignore",
+    "mcp",
+    "notice"
   ],
   "commits": [],
   "metadata": {}

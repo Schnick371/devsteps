@@ -1,12 +1,12 @@
 {
-  "id": "STORY-208",
-  "type": "story",
+  "id": "BUG-069",
+  "type": "bug",
   "category": "general",
-  "title": "Documentation Overhaul - Revise All Public-Facing Documents for Accuracy",
-  "status": "done",
+  "title": "Fix TypeScript compile errors in mcpServerManager.ts (httpServer url narrowing + vscodeApi never-type)",
+  "status": "in-progress",
   "eisenhower": "urgent-important",
-  "created": "2026-03-08T11:00:10.909Z",
-  "updated": "2026-03-08T11:45:15.631Z",
+  "created": "2026-03-08T12:09:18.597Z",
+  "updated": "2026-03-08T12:09:26.793Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -23,9 +23,11 @@
     "superseded-by": []
   },
   "tags": [
-    "documentation",
-    "github",
-    "public-facing"
+    "typescript",
+    "extension",
+    "mcpServerManager",
+    "typecheck",
+    "narrowing"
   ],
   "commits": [],
   "metadata": {}

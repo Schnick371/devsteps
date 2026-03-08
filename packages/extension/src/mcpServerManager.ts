@@ -174,8 +174,7 @@ export class McpServerManager {
                 'Remove the "devsteps" entry from .vscode/mcp.json to use auto-managed mode.'
             );
             this.statusBarItem.text = '$(info) DevSteps MCP';
-            this.statusBarItem.tooltip =
-              'DevSteps MCP: managed via .vscode/mcp.json (manual mode)';
+            this.statusBarItem.tooltip = 'DevSteps MCP: managed via .vscode/mcp.json (manual mode)';
             this.statusBarItem.show();
             return;
           }
