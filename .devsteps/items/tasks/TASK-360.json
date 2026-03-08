@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Implement Python MCP client in agentdev for MandateResult writes",
-  "status": "draft",
+  "status": "cancelled",
   "eisenhower": "not-urgent-important",
   "created": "2026-03-08T09:45:43.173Z",
-  "updated": "2026-03-08T09:46:13.398Z",
+  "updated": "2026-03-08T10:14:46.622Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

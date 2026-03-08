@@ -34,4 +34,20 @@ Do NOT use Claude Code trigger/matchers format.
 - Tests: unit test for ring number extraction regex; integration test for JSONL write
 
 ## Supersedes
-Replaces the TraceLogger approach from STORY-183 (agent-instrumented JSONL). Hooks Phase 1 makes STORY-183 Tasks 303-307 partially obsolete — coordinate with STORY-183 owner before starting.
+Replaces the TraceLogger approach from STORY-183 (agent-instrumented JSONL). Hooks Phase 1 makes STORY-183 Tasks 303-307 partially obsolete — coordinate with STORY-183 owner before starting.## Result
+
+Gate-PASS (iteration 2, confidence 0.90). Merged to main via `--no-ff`.
+
+**Delivered:**
+- SpiderEventSchema (Zod) in packages/shared
+- 3 hook shell scripts (.github/hooks/) with multi-field fallback
+- hooks.json config (devsteps-spider-web.json)
+- SpiderEventsWatcher in extension (incremental JSONL reader)
+- DashboardPanel.postSpiderEvent() bridge
+- getNonce() crypto fix (OWASP A02)
+- 14 unit tests + 11 BATS integration tests
+
+**Phase 2 backlog (non-blocking):**
+1. Shell JSON value escaping helper
+2. File truncation resilience for _lastSize
+3. Stricter z.string().datetime() for timestamp

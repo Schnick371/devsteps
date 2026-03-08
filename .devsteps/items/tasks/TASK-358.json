@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Write INSTALL-Local-GPU.md: Linux CUDA + Ollama setup guide",
-  "status": "draft",
+  "status": "cancelled",
   "eisenhower": "not-urgent-important",
   "created": "2026-03-08T09:45:43.169Z",
-  "updated": "2026-03-08T09:46:13.398Z",
+  "updated": "2026-03-08T10:14:34.180Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
