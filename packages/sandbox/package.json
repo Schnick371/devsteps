@@ -1,0 +1,12 @@
+{
+  "name": "@devsteps/sandbox",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Research sandbox — experimental features never published to npm. Promotes to a production package only if and when a production decision is made.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {}
+}

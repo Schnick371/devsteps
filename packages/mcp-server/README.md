@@ -70,9 +70,9 @@ After adding the configuration:
 
 ## Usage with VS Code (Copilot)
 
-Add to your VS Code MCP configuration:
+> **If you have the [DevSteps VS Code Extension](https://marketplace.visualstudio.com/items?itemName=devsteps.devsteps) installed, no manual configuration is needed.** The extension automatically starts and registers the MCP server on activation. The steps below apply only to users without the extension who want to connect the standalone npm package.
 
-**Method 1: User Configuration (Recommended)**  
+**Method 1: User Configuration**  
 Open Command Palette (`Ctrl + Shift + P`) → `MCP: Open User Configuration`
 
 **Method 2: Workspace Configuration**  
@@ -91,6 +91,8 @@ Create `.vscode/mcp.json` in your workspace
   }
 }
 ```
+
+> **Warning:** Do not add this configuration if the DevSteps extension is already installed — both would start simultaneously causing non-deterministic tool dispatch.
 
 ## Available Tools
 

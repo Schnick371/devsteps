@@ -157,6 +157,33 @@ export class McpServerManager {
         return;
       }
 
+      // Skip if .vscode/mcp.json already has a manual 'devsteps' server entry.
+      // Running both causes two simultaneous servers with non-deterministic tool dispatch.
+      const wsFolder = vscode.workspace.workspaceFolders?.[0];
+      if (wsFolder) {
+        try {
+          const mcpJsonUri = vscode.Uri.joinPath(wsFolder.uri, '.vscode', 'mcp.json');
+          const raw = await vscode.workspace.fs.readFile(mcpJsonUri);
+          const mcpConfig = JSON.parse(Buffer.from(raw).toString()) as {
+            servers?: Record<string, unknown>;
+          };
+          if (mcpConfig?.servers?.devsteps) {
+            logger.info(
+              '[MCP] Manual .vscode/mcp.json "devsteps" entry detected — ' +
+                'skipping extension-managed server to avoid duplicate registration. ' +
+                'Remove the "devsteps" entry from .vscode/mcp.json to use auto-managed mode.'
+            );
+            this.statusBarItem.text = '$(info) DevSteps MCP';
+            this.statusBarItem.tooltip =
+              'DevSteps MCP: managed via .vscode/mcp.json (manual mode)';
+            this.statusBarItem.show();
+            return;
+          }
+        } catch {
+          // File absent or parse error — not a manual setup, continue with auto-start
+        }
+      }
+
       // Check if VS Code MCP API is available
       const mcpVscode = vscode as unknown as Partial<VsCodeWithMcpApi>;
       if (!mcpVscode.lm?.registerMcpServerDefinitionProvider) {

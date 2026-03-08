@@ -1,0 +1,32 @@
+{
+  "id": "BUG-068",
+  "type": "bug",
+  "category": "general",
+  "title": "HTTP MCP server has zero automated test coverage",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-08T10:20:55.114Z",
+  "updated": "2026-03-08T10:20:55.114Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "testing",
+    "http"
+  ],
+  "commits": [],
+  "metadata": {}
+}

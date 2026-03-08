@@ -61,37 +61,20 @@ code --install-extension devsteps-vscode-0.2.0.vsix
 
 **What happens when you first activate the extension:**
 
-1. **Extension starts** embedded HTTP MCP server on port 3000
-2. **Auto-registers** in VS Code MCP settings:
-   ```json
-   {
-     "mcp.servers": {
-       "devsteps-embedded": {
-         "type": "http",
-         "url": "http://localhost:3737/mcp",
-         "description": "DevSteps MCP Server (embedded HTTP server)"
-       }
-     }
-   }
-   ```
-3. **Status bar** appears: `✓ DevSteps MCP: Running`
-4. **Notification** confirms server started
-5. **MCP tools** available to GitHub Copilot immediately!
+1. **Extension starts** an in-process HTTP MCP server on a dynamic OS-assigned port (`0` → auto)
+2. **Auto-registers** with VS Code via the `registerMcpServerDefinitionProvider` API — no manual `mcp.json` needed
+3. **Status bar** appears: `✓ DevSteps MCP`
+4. **MCP tools** available to GitHub Copilot immediately!
 
 **No manual configuration needed!** 🎉
 
+> **Note:** If your workspace already has a manual `devsteps` entry in `.vscode/mcp.json`, the extension detects this and skips auto-registration to avoid duplicate servers. Remove the manual entry to use the auto-managed mode.
+
 ### 🔧 Optional Configuration
 
-You can customize the HTTP server port in VS Code settings:
+The extension respects `devsteps.logging.level` (one of `debug`, `info`, `warn`, `error`) which you can set in VS Code user or workspace settings.
 
-```json
-{
-  "devsteps.mcp.port": 3737,  // Default: 3737, Range: 1024-65535
-  "devsteps.mcp.autoStart": true  // Automatically start server on activation
-}
-```
-
-**Note:** Port 3737 is chosen to avoid common conflicts. Changing the port requires extension reload to take effect.
+The MCP server port is OS-assigned automatically and cannot be fixed — this avoids conflicts with other running services.
 
 ---
 
