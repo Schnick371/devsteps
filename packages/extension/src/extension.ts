@@ -11,6 +11,7 @@ import { DevStepsDecorationProvider } from './decorationProvider.js';
 import { McpServerManager } from './mcpServerManager.js';
 import { logger } from './outputChannel.js';
 import { DevStepsTreeDataProvider } from './treeView/devstepsTreeDataProvider.js';
+import { debounce } from './utils/debounce.js';
 import { TreeViewStateManager } from './utils/stateManager.js';
 
 let activeMcpManager: McpServerManager | undefined;
@@ -159,12 +160,14 @@ export async function activate(context: vscode.ExtensionContext) {
     treeDataProvider.setTreeView(treeView);
 
     // Register FileSystemWatcher for TreeView refresh
+    const debouncedRefreshLazy = debounce(() => treeDataProvider.refresh(), 500);
+    context.subscriptions.push({ dispose: () => debouncedRefreshLazy.cancel() });
     const itemsWatcher = vscode.workspace.createFileSystemWatcher(
       new vscode.RelativePattern(workspaceRoot, '.devsteps/**/*.json')
     );
-    itemsWatcher.onDidCreate(() => treeDataProvider.refresh());
-    itemsWatcher.onDidChange(() => treeDataProvider.refresh());
-    itemsWatcher.onDidDelete(() => treeDataProvider.refresh());
+    itemsWatcher.onDidCreate(() => debouncedRefreshLazy());
+    itemsWatcher.onDidChange(() => debouncedRefreshLazy());
+    itemsWatcher.onDidDelete(() => debouncedRefreshLazy());
     context.subscriptions.push(itemsWatcher);
 
     // Register commands with TreeDataProvider
@@ -241,9 +244,11 @@ export async function activate(context: vscode.ExtensionContext) {
     new vscode.RelativePattern(workspaceRoot, '.devsteps/**/*.json')
   );
 
-  watcher.onDidCreate(() => treeDataProvider.refresh());
-  watcher.onDidChange(() => treeDataProvider.refresh());
-  watcher.onDidDelete(() => treeDataProvider.refresh());
+  const debouncedRefreshMain = debounce(() => treeDataProvider.refresh(), 500);
+  context.subscriptions.push({ dispose: () => debouncedRefreshMain.cancel() });
+  watcher.onDidCreate(() => debouncedRefreshMain());
+  watcher.onDidChange(() => debouncedRefreshMain());
+  watcher.onDidDelete(() => debouncedRefreshMain());
 
   context.subscriptions.push(watcher);
 
