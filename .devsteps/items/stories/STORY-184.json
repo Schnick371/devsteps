@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-03-05T08:38:20.055Z",
-  "updated": "2026-03-05T08:50:03.894Z",
+  "updated": "2026-03-08T00:35:27.582Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/webview/",
@@ -32,7 +32,8 @@
     "depends-on": [
       "STORY-183",
       "SPIKE-017",
-      "STORY-182"
+      "STORY-182",
+      "STORY-206"
     ],
     "required-by": [],
     "supersedes": [],

@@ -323,7 +323,7 @@
     {
       "label": "🕷 Visualizer: Run HTTP Server (Agent Inspector)",
       "type": "shell",
-      "command": "${workspaceFolder}/tmp/visualizer/.venv/bin/python -m debugpy --listen 127.0.0.1:5679 -m agentdev run ${workspaceFolder}/tmp/visualizer/agent.py --verbose --port 8087",
+      "command": "${workspaceFolder}/tmp/visualizer/.venv/bin/python -m debugpy --listen 127.0.0.1:5679 -m agentdev run ${workspaceFolder}/tmp/visualizer/agent.py --verbose --port 8087 -- --devsteps-root ${workspaceFolder}/.devsteps",
       "isBackground": true,
       "options": {
         "cwd": "${workspaceFolder}/tmp/visualizer"

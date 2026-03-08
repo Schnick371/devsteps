@@ -1,0 +1,1 @@
+Create packages/mcp-server/src/handlers/cbp-mandate.test.ts with integration tests for handleWriteMandateResult. Test: valid MandateResult → persisted, invalid agent_name → rejected, oversized findings → rejected, malformed JSON → Zod error. SPIKE-032 quality finding P1-3.

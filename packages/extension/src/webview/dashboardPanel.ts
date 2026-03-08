@@ -13,6 +13,7 @@ import * as vscode from 'vscode';
 // Type alias for list items
 type ListItem = DevStepsIndex['items'][number];
 
+import type { SpiderEvent } from '@schnick371/devsteps-shared';
 import { type BurndownData, getBurndownData } from './dataProviders/burndownProvider.js';
 import { type EisenhowerData, getEisenhowerData } from './dataProviders/eisenhowerProvider.js';
 // Data Providers
@@ -213,6 +214,13 @@ export class DashboardPanel {
       </script>
     </body>
     </html>`;
+  }
+
+  /**
+   * Forward a spider event from hooks to the webview for live ring updates.
+   */
+  public postSpiderEvent(event: SpiderEvent): void {
+    this._panel.webview.postMessage({ command: 'spiderEvent', event });
   }
 
   private async handleMessage(message: { command: string; itemId?: string }) {

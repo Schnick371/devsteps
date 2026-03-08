@@ -1,0 +1,2 @@
+# Ensure shell scripts use LF line endings (CRLF breaks bash shebang on Windows checkout)
+*.sh text eol=lf

@@ -1,0 +1,1 @@
+Documentation of which models to use for which Spider Web ring, VRAM budgets, token/s benchmarks, JSON fidelity ratings. Includes VRAM peak fan-out calculations and serialization constraints for 12GB VRAM. Target: tmp/visualizer/MODEL-SELECTION.md. Research basis: SPIKE-032 DOC-2.

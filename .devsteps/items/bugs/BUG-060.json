@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "general",
   "title": "Fix: add 500ms debounce to all FileSystemWatcher refresh() calls in extension",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-03-05T18:07:17.504Z",
-  "updated": "2026-03-07T23:57:44.002Z",
+  "updated": "2026-03-08T00:20:08.800Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

@@ -1,0 +1,32 @@
+{
+  "id": "TASK-359",
+  "type": "task",
+  "category": "general",
+  "title": "Write MODEL-SELECTION.md: ring-based model routing guide",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-08T09:45:43.171Z",
+  "updated": "2026-03-08T09:46:13.398Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-207"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-032"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

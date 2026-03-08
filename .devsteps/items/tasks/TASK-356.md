@@ -1,0 +1,1 @@
+Replace 'agent-dev-cli --pre' with pinned version in tmp/visualizer/requirements.txt. Also pin debugpy. Staleness finding from SPIKE-032 aspect-staleness: unpinned --pre flag causes silent breakage on pip install --upgrade. Implements: SPIKE-032.

@@ -1,0 +1,30 @@
+{
+  "id": "SPIKE-032",
+  "type": "spike",
+  "category": "general",
+  "title": "Research: Local GPU + VS Code AI Toolkit Agent Inspector",
+  "status": "review",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-08T09:15:48.959Z",
+  "updated": "2026-03-08T09:51:25.735Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-362"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

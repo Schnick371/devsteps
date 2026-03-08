@@ -1,0 +1,32 @@
+{
+  "id": "TASK-354",
+  "type": "task",
+  "category": "general",
+  "title": "SEC: Harden server.py with body-size limit and auth header",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-08T09:45:43.152Z",
+  "updated": "2026-03-08T09:46:13.395Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-207"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-032"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

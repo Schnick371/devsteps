@@ -1,0 +1,1 @@
+Staleness fix: Guide uses pre-Spider-Web-v4.0 agent names (devsteps-coord.agent.md). Update all references to R-prefix convention: devsteps-R0-coord, devsteps-R1-analyst-*, etc. Implements: SPIKE-032 staleness finding STALE-2.

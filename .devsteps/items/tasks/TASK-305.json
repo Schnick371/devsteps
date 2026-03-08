@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-03-05T08:39:30.248Z",
-  "updated": "2026-03-05T08:42:05.268Z",
+  "updated": "2026-03-08T00:35:27.737Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/extension.ts"
@@ -18,7 +18,9 @@
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
-    "blocks": [],
+    "blocks": [
+      "STORY-206"
+    ],
     "blocked-by": [],
     "relates-to": [],
     "depends-on": [],

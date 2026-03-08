@@ -1,0 +1,32 @@
+{
+  "id": "STORY-207",
+  "type": "story",
+  "category": "general",
+  "title": "Implement Ollama CUDA local inference for Ring 4 workers",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-08T09:45:12.388Z",
+  "updated": "2026-03-08T09:46:13.399Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-362"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-032"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

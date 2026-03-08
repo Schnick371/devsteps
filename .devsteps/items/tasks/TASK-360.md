@@ -1,0 +1,1 @@
+agentdev Python agents cannot currently write MandateResults via MCP — they would need to write directly to .devsteps/ (protocol violation). Create a thin Python MCP client wrapper using 'mcp' Python SDK in tmp/visualizer/ that connects to packages/mcp-server via stdio transport. Implements: SPIKE-032 ARCH-2.
