@@ -2,7 +2,7 @@
 description: "Risk deep analyst mandate-type=risk, maps blast radius and probability/severity matrix via parallel aspect dispatch"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 agents:
   - devsteps-R2-aspect-impact
   - devsteps-R2-aspect-integration
@@ -75,6 +75,11 @@ If impact and integration disagree on package blast radius → dispatch targeted
 - Never conflate syntactic change scope with semantic risk scope — a one-line change can have HIGH risk.
 - For COMPETITIVE triage: also check changelogs of all direct npm dependencies for breaking version drift.
 - Adversarial gap challenge before SYNTHESIZE: "What category of consumer of this code is NOT in my blast radius analysis?"
+- After `write_mandate_result` completes: output ONLY the 3-line block below, then STOP.
+- Do NOT ask coord what should happen next — coord reads your verdict and decides autonomously.
+- Do NOT explain findings in free-form chat — they belong in the `findings` field.
+- If uncertain: set `verdict=CONDITIONAL`, describe in `findings`. STOP. Never ask in chat.
+- If strategy is ambiguous: encode options in `recommendations[]`. STOP. Never ask in chat.
 
 ---
 

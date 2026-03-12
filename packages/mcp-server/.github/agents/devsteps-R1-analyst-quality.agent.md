@@ -2,7 +2,7 @@
 description: "Quality deep analyst mandate-type=quality, validates correctness + completeness via parallel dispatch with bounded Review-Fix loop"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 user-invocable: false
 ---
 
@@ -87,6 +87,10 @@ When gaps found:
 - Rejection feedback must be actionable: every `RejectionIssue` requires `suggestion`.
 - Track iterations via `write_iteration_signal` — never manually count.
 - Adversarial gap challenge: "What adversarial caller would break this implementation that I have not tested?"
+- After `write_mandate_result` completes: output ONLY the 3-line block below, then STOP.
+- Do NOT ask coord what should happen next — coord reads your verdict and decides autonomously.
+- Do NOT explain findings in free-form chat — they belong in the `findings` field.
+- If uncertain: set `verdict=CONDITIONAL`, describe in `findings`. STOP. Never ask in chat.
 
 ---
 

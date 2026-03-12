@@ -115,6 +115,8 @@ Coordinator agents must distinguish user-facing decisions from internal orchestr
 - HARD STOP escalation (ESCALATED verdict, HIGH_RISK, architecture decisions)
 - Guide cycle step result collection after human-executed steps
 - Session scope / focus / tag filter at session start (once only)
+- Pre-planner gate — display compiled overview then ONE `#askQuestions` after Ring 2, before exec-planner (only if ambiguities exist; skip if operation is clear)
+- Post-sprint gate — ONE `#askQuestions` after gate-reviewer PASS if new blockers or replanning needs arose (skip if none)
 
 **PROHIBITED** (coordinator decides autonomously — never ask user):
 - Triage tier selection (QUICK / STANDARD / FULL / COMPETITIVE)

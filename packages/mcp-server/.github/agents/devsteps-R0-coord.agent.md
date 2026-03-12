@@ -2,7 +2,7 @@
 description: "DevSteps Coordinator — dispatches all agents (analyst/aspect/exec/gate/worker) directly via Spider Web pattern, reads MandateResults via read_mandate_results"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 agents:
   - devsteps-R1-analyst-archaeology
   - devsteps-R1-analyst-risk
@@ -99,14 +99,26 @@ Pass to each analyst: `item_ids`, `sprint_id`, `triage_tier`, `constraints`. Aft
 
 ### Step 3: Read MandateResults + Execute
 
-`read_mandate_results(item_ids)` — block on ESCALATED / HIGH_RISK / unexpected cross-package deps (surface to user).
+`read_mandate_results(item_ids)` — iterate `.results[]`. Block on ESCALATED / HIGH_RISK / unexpected cross-package deps (surface to user).
 
-Dispatch exec agents IN ORDER:
+**3a — Synthesis gate:** Resolve signals before R3 dispatch:
+- Any analyst `verdict=ESCALATED` → Hard Stop; do NOT proceed to R3
+- `CONDITIONAL` results → note constraints; pass to exec-planner as context
+- Archaeology vs Risk contradiction → synthesize; pass conflict summary to R3
 
+**3b — Pre-Planning Clarification Gate (CSPG):** After compiling Ring 1+2 findings, BEFORE dispatching exec-planner:
+1. Compile ambiguities from Ring 1+2 results (scope gaps, constraint conflicts, priority choices)
+2. If any exist: display a structured overview (bullet list or table — topics, implications, options), then ONE `#askQuestions` — use both numbered questions AND multiple-choice per decision point → dispatch exec-planner with answers embedded
+3. If none: skip entirely — dispatch exec-planner immediately (no question asked)
+4. If exec-planner returns `NEEDS_CLARIFICATION`: collect `clarification_needed[]` → ONE follow-up `#askQuestions` — max 1 re-dispatch. If planner emits 2nd `NEEDS_CLARIFICATION` → `write_escalation`, surface to user, STOP
+
+**3c — Dispatch exec agents IN ORDER:**
 0. New package → `worker-workspace` FIRST
 1. `exec-impl` → 2. `exec-test` (S/F) + `exec-doc` (F, parallel) → 3. `gate-reviewer` **BLOCKING**
 
 PASS → merge `--no-ff`, status `done`. FAIL → fix loop (max 3). ESCALATED → surface, do NOT retry.
+
+**3d — Post-Sprint Gate:** After gate-reviewer PASS and merge: if new blockers or replanning needs arose → display summary of issue + available options → ONE `#askQuestions`. If none → close out.
 
 ---
 
@@ -117,6 +129,7 @@ PASS → merge `--no-ff`, status `done`. FAIL → fix loop (max 3). ESCALATED �
 - Status: `in-progress` → `review` → `done` (never skip); Hierarchy: Epic → Story → Task
 - Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>`. Commit: `type(scope): subject` + `Implements: ID`. Merge `--no-ff`.
 - **I-11:** `mcp_devsteps_add` ONLY for the primary item (bootstrap). All follow-up items + ALL `mcp_devsteps_link` → delegate to `worker-devsteps`.
+- **`#askQuestions` boundary** — PERMITTED: item selection when none given, HARD STOP escalation, guide cycle step feedback, session scope/focus filter, pre-planner gate (Step 3b — once, only if ambiguities exist), post-sprint gate (Step 3d — once, only if blockers). PROHIBITED: triage tier, ring selection, dispatch order, analyst composition — these are coordinator-autonomous decisions, never surfaced to the user.
 
 ## Hard Stop Format
 

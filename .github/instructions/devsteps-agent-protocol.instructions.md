@@ -78,19 +78,7 @@ Docs ─┼─ Ring 3: exec-planner ──────────────�
 
 ### `runSubagent` unavailable
 
-→ **Switch to `devsteps-R0-coord-solo`.** Report to user:
-
-> "Agent dispatch (`runSubagent`) is unavailable. Switching to `devsteps-R0-coord-solo` fallback — all analysis and implementation runs inline without subagent dispatch."
-
-**Fallback rules for `devsteps-R0-coord-solo`:**
-
-- Do NOT inline analyst logic verbatim — condense to single-pass analysis
-- Triage the task (Trivial / Small / Medium / Large) and apply Solo-Execution-Protocol
-- For tasks classified as "Large": inform user that full Spider Web Dispatch is recommended and proceed with best-effort solo execution
-- DevSteps integration remains MANDATORY even in solo mode
-- Conventional Commits format remains MANDATORY
-
-Do NOT attempt to simulate full subagent behavior or fake MandateResult structures.
+→ **Switch to `devsteps-R0-coord-solo`.** Report: _“Agent dispatch (`runSubagent`) is unavailable. Switching to coord-solo fallback.”_ Condense to single-pass analysis. Triage task size (Trivial / Small / Medium / Large); for Large → warn user full Spider Web is recommended. DevSteps + Conventional Commits remain MANDATORY. Never simulate MandateResult structures.
 
 ### DevSteps MCP tools unavailable
 
@@ -134,7 +122,7 @@ Fallback to CLI only if explicitly authorized by user.
 | ----------------------------- | -------------- | -------------------------- |
 | Review-Fix cycles             | 3              | `write_escalation`         |
 | TDD iterations                | 3              | `write_escalation`         |
-| Clarification rounds          | 2              | Proceed with best judgment |
+| Clarification rounds (CSPG)   | 1              | `write_escalation`         |
 | Conflict resolution (analyst) | 2              | Caveated synthesis         |
 | Aspect parallel dispatches    | 10             | Split into batches         |
 

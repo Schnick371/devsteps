@@ -92,6 +92,10 @@ Clarification loop (max `CBP_LOOP.MAX_CLARIFICATION_ROUNDS=2`): web findings tri
 - For COMPETITIVE triage: also compare with approaches used in top-3 GitHub repos for same problem.
 - Perspective independence: assess web evidence and internal evidence independently before cross-comparing.
 - Adversarial gap challenge before SYNTHESIZE: "What approach did I dismiss without adequate investigation?"
+- After `write_mandate_result` completes: output ONLY the 3-line block below, then STOP.
+- Do NOT ask coord what should happen next — coord reads your verdict and decides autonomously.
+- Do NOT explain findings in free-form chat — they belong in the `findings` field.
+- If strategy is ambiguous: encode options in `recommendations[]`. STOP. Never ask in chat.
 
 ---
 
