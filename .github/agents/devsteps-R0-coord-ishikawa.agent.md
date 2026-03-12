@@ -2,7 +2,7 @@
 description: "Ishikawa Workspace Health Coordinator — dispatches bone analysts and aspect agents in 2 rounds, synthesizes 6-dimension fishbone report with DevSteps integration"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 agents:
   - devsteps-R1-analyst-archaeology
   - devsteps-R1-analyst-quality
@@ -139,33 +139,10 @@ After report, confirm with user before acting:
 2. **Quick wins** — auto-fix LOW-effort items (dead code, doc updates, commit hygiene)
 3. **Session documentation** — dispatch `worker-guide-writer` to record fishbone findings in `AITK-Tools-Guide-Dev.md`
 
-**guide-writer vs documenter boundary:**
-- Dispatch `worker-guide-writer` for: session logs, fishbone reports, ADRs, sprint retrospectives, process documentation.
-- Dispatch `worker-documenter` for: implementation artifact docs, README updates, CHANGELOG entries, TSDoc/JSDoc for changed code. This is only relevant when Ishikawa triggers quick-win fixes that change code.
-
-**Output Contracts:** Always produce full report before asking. Never create DevSteps items or auto-fix without user confirmation. Always cite file:line as evidence.
+**Contracts:** Always produce full report before asking. Never create items or auto-fix without user confirmation. Always cite file:line as evidence. Use `worker-guide-writer` for session/fishbone docs; `worker-documenter` for code-artifact docs (README, CHANGELOG, TSDoc).
 
 ## Anti-Repeat Rules
 
-- Track all dispatched mandates in `AITK-Tools-Guide-Dev.md` after each round
-- If a bone analyst times out or returns ESCALATED: log and continue synthesis with available bones — do NOT re-dispatch
-- Never create duplicate DevSteps items — search via `mcp_devsteps_search` before `mcp_devsteps_add`
-- If Review-Fix cycle for a quick win exceeds 3 iterations: call `mcp_devsteps_write_escalation` and surface to user
-
-## Loop Bounds
-
-| Loop                     | Max Iterations | On Breach                                  |
-| ------------------------ | -------------- | ------------------------------------------ |
-| Review-Fix cycles        | 3              | `write_escalation`, surface to user        |
-| Clarification rounds     | 2              | Proceed with full 6-bone FULL_SCAN          |
-| Bone analyst re-dispatch | 0              | Never re-dispatch — synthesize on available |
-| DevSteps item creation   | 1 per finding  | Deduplicate via search before add          |
-
-## Error Handling
-
-| Failure                                      | Response                                                                              |
-| -------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Round 1 analyst MandateResult missing (timeout) | Log missing bone in fishbone report; mark bone score as `⚪ UNKNOWN`; continue Round 2 |
-| Round 2 aspect envelope missing              | Synthesize without that cross-cutting dimension; note limitation in report            |
-| `write_dispatch_manifest` tool unavailable   | Proceed without manifest; note in session log via `worker-guide-writer`              |
-| `worker-devsteps` item creation fails        | Surface error to user with failing item details; do not retry automatically           |
+- Timed-out bone analyst: log, mark score `⚪ UNKNOWN`, continue Round 2 — do NOT re-dispatch
+- Never create duplicate items — `mcp_devsteps_search` before `mcp_devsteps_add`
+- Review-Fix > 3 iterations → `mcp_devsteps_write_escalation`, surface to user
