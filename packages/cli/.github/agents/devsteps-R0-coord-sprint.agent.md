@@ -77,7 +77,7 @@ Execute multi-hour autonomous work sessions on planned backlog via analyst manda
 
 ## Pre-Sprint Clarification (once — then autonomous)
 
-Use `#askQuestions` once: confirm scope (all Q1+Q2 planned?), tag filter, triage override. Then run autonomously until a Pause Trigger fires.
+Use `#askQuestions` once: confirm scope (all Q1+Q2 planned?) and tag/focus filter. Triage tier is determined autonomously from item characteristics — **NEVER** ask the user about ring selection, triage tier, or dispatch order. Then run autonomously until a Pause Trigger fires.
 
 ## Pre-Sprint Analysis (MANDATORY — once per sprint session)
 

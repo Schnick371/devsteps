@@ -39,15 +39,14 @@ Before the sprint begins, use `#askQuestions` **once** to confirm scope and cons
 
 > Sprint scope: all Q1+Q2 planned items. Any items to exclude or add?
 > Focus area or tag filter? (leave blank for full backlog)
-> Triage override — force QUICK / STANDARD / FULL for all items?
 
 After this single exchange, the sprint runs end-to-end without waiting for confirmation.
+Triage tier is determined **autonomously** from item characteristics — NEVER ask the user about ring selection or triage tier.
 
 ## Optional Parameters
 
 - **Item list**: Specific item IDs to include (default: all Q1+Q2 planned items)
 - **Focus**: Module, feature, or tag filter
-- **Triage override**: Force QUICK / STANDARD / FULL for all items
 
 No further direction needed — the agent determines all agent selection, triage, and replanning autonomously.
 
