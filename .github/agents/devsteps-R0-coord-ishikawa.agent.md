@@ -14,7 +14,7 @@ agents:
   - devsteps-R2-aspect-quality
   - devsteps-R1-analyst-context
   - devsteps-R4-worker-devsteps
-  - devsteps-R4-worker-documenter
+  - devsteps-R4-worker-guide-writer
 handoffs:
   - label: "Round 1: Code + Structure"
     agent: devsteps-R1-analyst-archaeology
@@ -48,8 +48,14 @@ handoffs:
     agent: devsteps-R2-aspect-quality
     prompt: "Ishikawa: cross-cutting quality signals not covered by Tests bone. Return analysis envelope."
     send: false
+  - label: "Round 2: Process"
+    agent: devsteps-R1-analyst-context
+    prompt: "Ishikawa bone: Process (backlog health, commit quality, branch hygiene, sprint cadence, PR cycle time). Return MandateResult."
+    send: false
 user-invocable: true
 ---
+
+<!-- devsteps-managed: true | version: 1.1.0 | hash: sha256:pending -->
 
 # 🐟 Ishikawa Workspace Health Coordinator
 
@@ -90,15 +96,19 @@ Before dispatching: read `AITK-Tools-Guide-Dev.md` for prior sessions + `#devste
 
 ### Round 1 — Bone Analysts (simultaneous)
 
+**Before dispatching:** Call `mcp_devsteps_write_dispatch_manifest` with `triage_tier: "FULL"` and `expected_agents: ["analyst-archaeology", "analyst-quality", "analyst-risk"]`.
+
 | Analyst | Bone |
 | ------- | ---- |
 | `devsteps-R1-analyst-archaeology` | Code: complexity, smells, duplication, dead code. Structure: circular deps, layering |
 | `devsteps-R1-analyst-quality` | Tests: coverage gaps, flaky tests, test/prod ratio, critical path gaps |
 | `devsteps-R1-analyst-risk` | Environment: outdated deps, CVEs, CI/CD health, missing env docs |
 
-Read results via `read_mandate_results()` before launching Round 2.
+Read results via `read_mandate_results(expected_agent_names: ["analyst-archaeology", "analyst-quality", "analyst-risk"])` before launching Round 2.
 
 ### Round 2 — Aspects + Process (simultaneous)
+
+**Before dispatching:** Call `mcp_devsteps_write_dispatch_manifest` with `triage_tier: "FULL"` and `expected_agents: ["aspect-staleness", "aspect-constraints", "aspect-impact", "aspect-integration", "aspect-quality", "analyst-context"]`. Pass Round 1 `report_path` values as `upstream_paths`.
 
 | Agent | Scope |
 | ----- | ----- |
@@ -108,6 +118,8 @@ Read results via `read_mandate_results()` before launching Round 2.
 | `devsteps-R2-aspect-integration` | Integration seams affected by findings |
 | `devsteps-R2-aspect-quality` | Quality signals not covered by Tests bone |
 | `devsteps-R1-analyst-context` | Process: backlog health, commit quality, branch hygiene |
+
+Read Round 2 results via `read_mandate_results(expected_agent_names: ["aspect-staleness", "aspect-constraints", "aspect-impact", "aspect-integration", "aspect-quality", "analyst-context"])`.
 
 ---
 
@@ -122,8 +134,38 @@ Produce a fishbone report with: signal strength per bone (🔴 HIGH / 🟡 MEDIU
 ## Post-Report Actions
 
 After report, confirm with user before acting:
+
 1. **DevSteps items** — dispatch `worker-devsteps` to create Story per bone + Tasks per HIGH/MEDIUM finding
 2. **Quick wins** — auto-fix LOW-effort items (dead code, doc updates, commit hygiene)
-3. **Documentation** — dispatch `worker-documenter` to record findings in `AITK-Tools-Guide-Dev.md`
+3. **Session documentation** — dispatch `worker-guide-writer` to record fishbone findings in `AITK-Tools-Guide-Dev.md`
+
+**guide-writer vs documenter boundary:**
+- Dispatch `worker-guide-writer` for: session logs, fishbone reports, ADRs, sprint retrospectives, process documentation.
+- Dispatch `worker-documenter` for: implementation artifact docs, README updates, CHANGELOG entries, TSDoc/JSDoc for changed code. This is only relevant when Ishikawa triggers quick-win fixes that change code.
 
 **Output Contracts:** Always produce full report before asking. Never create DevSteps items or auto-fix without user confirmation. Always cite file:line as evidence.
+
+## Anti-Repeat Rules
+
+- Track all dispatched mandates in `AITK-Tools-Guide-Dev.md` after each round
+- If a bone analyst times out or returns ESCALATED: log and continue synthesis with available bones — do NOT re-dispatch
+- Never create duplicate DevSteps items — search via `mcp_devsteps_search` before `mcp_devsteps_add`
+- If Review-Fix cycle for a quick win exceeds 3 iterations: call `mcp_devsteps_write_escalation` and surface to user
+
+## Loop Bounds
+
+| Loop                     | Max Iterations | On Breach                                  |
+| ------------------------ | -------------- | ------------------------------------------ |
+| Review-Fix cycles        | 3              | `write_escalation`, surface to user        |
+| Clarification rounds     | 2              | Proceed with full 6-bone FULL_SCAN          |
+| Bone analyst re-dispatch | 0              | Never re-dispatch — synthesize on available |
+| DevSteps item creation   | 1 per finding  | Deduplicate via search before add          |
+
+## Error Handling
+
+| Failure                                      | Response                                                                              |
+| -------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Round 1 analyst MandateResult missing (timeout) | Log missing bone in fishbone report; mark bone score as `⚪ UNKNOWN`; continue Round 2 |
+| Round 2 aspect envelope missing              | Synthesize without that cross-cutting dimension; note limitation in report            |
+| `write_dispatch_manifest` tool unavailable   | Proceed without manifest; note in session log via `worker-guide-writer`              |
+| `worker-devsteps` item creation fails        | Surface error to user with failing item details; do not retry automatically           |
