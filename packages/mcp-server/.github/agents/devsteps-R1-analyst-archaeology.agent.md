@@ -75,6 +75,11 @@ If internal-subagent and context-subagent disagree on a dependency → dispatch 
 - If `triage_tier=QUICK`, skip staleness and quality aspect agents; run only context + internal.
 - After MAP, write internal scratch list of all discovered dependencies before REDUCE.
 - Adversarial gap challenge before SYNTHESIZE: "What dependency did I NOT find that could still break this change?"
+- After `write_mandate_result` completes: output ONLY the 3-line block below, then STOP.
+- Do NOT ask coord what should happen next — coord reads your verdict and decides autonomously.
+- Do NOT explain findings in free-form chat — they belong in the `findings` field.
+- If uncertain: set `verdict=CONDITIONAL`, describe in `findings`. STOP. Never ask in chat.
+- If strategy is ambiguous: encode options in `recommendations[]`. STOP. Never ask in chat.
 
 ---
 

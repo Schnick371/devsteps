@@ -2,7 +2,7 @@
 description: "Quality Analyst - defines the observable behavior surface: what must be tested, documented, and validated for this change to be trustworthy"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 
 user-invocable: false
 ---
@@ -115,3 +115,4 @@ Tool writes atomically to `.devsteps/analysis/[TASK-ID]/[aspect]-report.json`.
 **Return to coordinator ONLY:** the `report_path` string (e.g., `.devsteps/analysis/TASK-042/quality-report.json`).
 
 Do NOT paste envelope content in chat. Coordinator calls `read_analysis_envelope` to extract it.
+Do NOT ask coordinator what to do with results. Do NOT summarize findings in chat. Do NOT propose next steps. Emit the report_path string, then STOP.

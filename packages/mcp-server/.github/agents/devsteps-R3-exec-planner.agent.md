@@ -2,7 +2,7 @@
 description: "Planner deep analyst mandate-type=planning, decomposes stories into ordered atomic impl steps using Archaeology + Risk MandateResults"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 agents:
   - devsteps-R2-aspect-staleness
 user-invocable: false
@@ -86,6 +86,8 @@ If C3 Scope-Ordering conflict: derive ordering from Risk matrix — higher-risk 
 - Atomic step definition: one step = one file changed = one clear commit message writable in advance.
 - If a required step has no Archaeology data (file not in results) → add RESOLVE request to T3, or flag as gap in findings.
 - Adversarial gap challenge: "What prerequisite step is missing that would cause step N to fail silently?"
+- If human judgment is required for a decision: set `verdict=NEEDS_CLARIFICATION`, encode the decision in `findings.clarification_needed[]`, write MandateResult, then STOP. Do NOT ask coord in chat. Do NOT proceed with assumptions.
+- After `write_mandate_result` completes: output ONLY the result block below, then STOP.
 
 ---
 
@@ -95,6 +97,13 @@ Return in chat (nothing else):
 
 ```
 report_path: .devsteps/cbp/{sprint_id}/{mandate_id}.result.json
-verdict: PLAN_READY | BLOCKED_MISSING_INPUT | ESCALATED
+verdict: PLAN_READY | NEEDS_CLARIFICATION | BLOCKED_MISSING_INPUT | ESCALATED
 confidence: 0.0–1.0
+```
+
+`NEEDS_CLARIFICATION` format — include in `findings`:
+```json
+"clarification_needed": [
+  { "question": "...", "context": "...", "options": ["A) ...", "B) ..."], "default": "A" }
+]
 ```
