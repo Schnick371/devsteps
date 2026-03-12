@@ -117,6 +117,7 @@ PASS → merge `--no-ff`, status `done`. FAIL → fix loop (max 3). ESCALATED �
 - Status: `in-progress` → `review` → `done` (never skip); Hierarchy: Epic → Story → Task
 - Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>`. Commit: `type(scope): subject` + `Implements: ID`. Merge `--no-ff`.
 - **I-11:** `mcp_devsteps_add` ONLY for the primary item (bootstrap). All follow-up items + ALL `mcp_devsteps_link` → delegate to `worker-devsteps`.
+- **`#askQuestions` boundary** — PERMITTED: item selection when none given, HARD STOP escalation, guide cycle step feedback, session scope/focus filter. PROHIBITED: triage tier, ring selection, dispatch order, analyst composition — these are coordinator-autonomous decisions, never surfaced to the user.
 
 ## Hard Stop Format
 

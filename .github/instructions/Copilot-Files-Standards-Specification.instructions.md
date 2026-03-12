@@ -106,6 +106,24 @@ description: "YAML frontmatter headers specification and best practices for GitH
 - Goals over prescriptive rules
 - Let models use their reasoning strengths
 
+### `#askQuestions` Usage Boundaries
+
+Coordinator agents must distinguish user-facing decisions from internal orchestration decisions.
+
+**PERMITTED** (user judgment required):
+- Item selection when none specified or ambiguous
+- HARD STOP escalation (ESCALATED verdict, HIGH_RISK, architecture decisions)
+- Guide cycle step result collection after human-executed steps
+- Session scope / focus / tag filter at session start (once only)
+
+**PROHIBITED** (coordinator decides autonomously — never ask user):
+- Triage tier selection (QUICK / STANDARD / FULL / COMPETITIVE)
+- Ring composition — which analysts or aspects to dispatch
+- Dispatch order — sequence of exec agents
+- Agent selection within a ring
+
+Violation of this boundary breaks the Spider Web autonomy model and leaks internal orchestration state to the user interface.
+
 ## File Naming
 
 **DevSteps Standard:** All files use `devsteps-` prefix (lowercase-with-hyphens)
