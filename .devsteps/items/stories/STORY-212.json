@@ -1,12 +1,12 @@
 {
-  "id": "BUG-069",
-  "type": "bug",
+  "id": "STORY-212",
+  "type": "story",
   "category": "general",
-  "title": "Fix TypeScript compile errors in mcpServerManager.ts (httpServer url narrowing + vscodeApi never-type)",
+  "title": "Agent STOP protocol + CSPG: fix agents asking questions + R3 bottleneck",
   "status": "done",
   "eisenhower": "urgent-important",
-  "created": "2026-03-08T12:09:18.597Z",
-  "updated": "2026-03-08T16:00:27.772Z",
+  "created": "2026-03-12T19:12:34.925Z",
+  "updated": "2026-03-12T20:01:22.886Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -23,11 +23,12 @@
     "superseded-by": []
   },
   "tags": [
-    "typescript",
-    "extension",
-    "mcpServerManager",
-    "typecheck",
-    "narrowing"
+    "spider-web",
+    "agent-protocol",
+    "r3-bottleneck",
+    "stop-protocol",
+    "coordinator",
+    "dx"
   ],
   "commits": [],
   "metadata": {}

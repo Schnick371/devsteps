@@ -1,12 +1,12 @@
 {
-  "id": "BUG-069",
-  "type": "bug",
+  "id": "STORY-211",
+  "type": "story",
   "category": "general",
-  "title": "Fix TypeScript compile errors in mcpServerManager.ts (httpServer url narrowing + vscodeApi never-type)",
+  "title": "Fix #askQuestions overuse in coordinator/prompt agent files",
   "status": "done",
   "eisenhower": "urgent-important",
-  "created": "2026-03-08T12:09:18.597Z",
-  "updated": "2026-03-08T16:00:27.772Z",
+  "created": "2026-03-12T18:43:42.401Z",
+  "updated": "2026-03-12T19:07:35.436Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -23,11 +23,11 @@
     "superseded-by": []
   },
   "tags": [
-    "typescript",
-    "extension",
-    "mcpServerManager",
-    "typecheck",
-    "narrowing"
+    "copilot-files",
+    "coordinator",
+    "askQuestions",
+    "spider-web",
+    "dx"
   ],
   "commits": [],
   "metadata": {}

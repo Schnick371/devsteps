@@ -1,12 +1,12 @@
 {
-  "id": "BUG-069",
-  "type": "bug",
+  "id": "STORY-210",
+  "type": "story",
   "category": "general",
-  "title": "Fix TypeScript compile errors in mcpServerManager.ts (httpServer url narrowing + vscodeApi never-type)",
-  "status": "done",
+  "title": "Fix coord-ishikawa handoffs validation errors and enrich worker/researcher agent mandates",
+  "status": "draft",
   "eisenhower": "urgent-important",
-  "created": "2026-03-08T12:09:18.597Z",
-  "updated": "2026-03-08T16:00:27.772Z",
+  "created": "2026-03-08T16:24:10.091Z",
+  "updated": "2026-03-08T16:24:10.091Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -23,11 +23,11 @@
     "superseded-by": []
   },
   "tags": [
-    "typescript",
-    "extension",
-    "mcpServerManager",
-    "typecheck",
-    "narrowing"
+    "agents",
+    "copilot",
+    "handoffs",
+    "validation",
+    "enrichment"
   ],
   "commits": [],
   "metadata": {}
