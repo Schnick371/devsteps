@@ -2,7 +2,7 @@
 description: "Ishikawa Workspace Health Coordinator — dispatches bone analysts and aspect agents in 2 rounds, synthesizes 6-dimension fishbone report with DevSteps integration"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 agents:
   - devsteps-R1-analyst-archaeology
   - devsteps-R1-analyst-quality

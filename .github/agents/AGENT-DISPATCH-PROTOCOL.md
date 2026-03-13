@@ -132,7 +132,7 @@ Each `#runSubagent` call creates a **fresh context window** — the subagent see
 
 **Model:** Claude Sonnet 4.6  
 **tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']`  
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']`  
 **YAML `agents:`\*\* must include ALL analyst/aspect/exec/gate/worker agents used (for dispatch)
 
 ### Triage → Dispatch Table
@@ -204,7 +204,7 @@ Before every Round 1 dispatch:
 
 **Models:** Claude Sonnet 4.6 (default), Claude Opus 4.6 (quality-critical paths)  
 **tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']`  
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']`  
 **Note:** Non-coord agents do NOT have `'agent'` in tools for aspect dispatch — Spider Web means coord dispatches all.  
 **`handoffs:`\*\* must be empty in all non-coord agent YAML files — non-coord never hands off to another non-coord.
 
@@ -288,7 +288,7 @@ T2 cannot re-dispatch. Instead:
 
 **Models:** Claude Sonnet 4.6 (default), Claude Opus 4.6 (quality, staleness)  
 **tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']`  
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']`  
 **CRITICAL:** Aspects/workers have NO `'agent'` tool — CANNOT dispatch sub-agents. Structural leaf-node enforcement.  
 **Dispatched by:\*\* coord ONLY (Hub-and-Spoke Round 2)
 

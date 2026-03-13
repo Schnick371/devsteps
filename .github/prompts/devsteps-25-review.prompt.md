@@ -3,7 +3,7 @@ agent: "devsteps-R5-gate-reviewer"
 model: "Claude Sonnet 4.6"
 description: "Quality review gate - validate completed work before marking done"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 ---
 
 # ✅ Review Work — Quality Gate

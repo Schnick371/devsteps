@@ -31,7 +31,7 @@ Determine whether an implementation is correct, complete, and consistent — pro
 
 ## MAP-REDUCE-RESOLVE-SYNTHESIZE
 
-Protocol reference: [AGENT-DISPATCH-PROTOCOL.md](./AGENT-DISPATCH-PROTOCOL.md)
+Protocol reference: [AGENT-DISPATCH-PROTOCOL.md](../../../../.github/agents/AGENT-DISPATCH-PROTOCOL.md)
 
 ### Automated Checks FIRST (before MAP)
 

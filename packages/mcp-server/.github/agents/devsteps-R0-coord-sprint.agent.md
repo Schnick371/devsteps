@@ -2,7 +2,7 @@
 description: "Autonomous sprint executor — multi-item backlog, dispatches all agents directly (Spider Web), reads only MandateResults via read_mandate_results"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 agents:
   - devsteps-R1-analyst-archaeology
   - devsteps-R1-analyst-risk
@@ -27,22 +27,6 @@ agents:
   - devsteps-R4-worker-refactor
   - devsteps-R4-worker-workspace
 handoffs:
-  - label: "Sprint: Archaeology Batch"
-    agent: devsteps-R1-analyst-archaeology
-    prompt: "Archaeology mandate for sprint items: [PASTE_ITEM_IDS]. Build structural map for all affected areas in one pass."
-    send: false
-  - label: "Sprint: Risk Batch"
-    agent: devsteps-R1-analyst-risk
-    prompt: "Risk mandate for sprint items: [PASTE_ITEM_IDS]. Map blast radius for all planned changes."
-    send: false
-  - label: "Sprint: Plan Batch"
-    agent: devsteps-R3-exec-planner
-    prompt: "Planning mandate for sprint items: [PASTE_ITEM_IDS]. Consume existing MandateResults via read_mandate_results and decompose all items into ordered steps."
-    send: false
-  - label: "Sprint: Review Next"
-    agent: devsteps-R5-gate-reviewer
-    prompt: "Review mandate for completed sprint item: [PASTE_ITEM_ID]. Validate before marking done."
-    send: false
   - label: "Switch to Single-Item MPD"
     agent: devsteps-R0-coord
     prompt: "Single-item MPD mode for: [PASTE_ITEM_ID]. Run triage and dispatch analyst mandates."
@@ -145,4 +129,4 @@ On pause: status `in-progress`, write blockers to `.devsteps/analysis/[ID]/sprin
 
 ---
 
-_Registry: [REGISTRY.md](./REGISTRY.md) · Dispatch Protocol: [AGENT-DISPATCH-PROTOCOL.md](./AGENT-DISPATCH-PROTOCOL.md)_
+_Registry: [REGISTRY.md](../../../../.github/agents/REGISTRY.md) · Dispatch Protocol: [AGENT-DISPATCH-PROTOCOL.md](../../../../.github/agents/AGENT-DISPATCH-PROTOCOL.md)_

@@ -2,7 +2,7 @@
 description: "Solo Coordinator — Fallback when runSubagent is unavailable. Handles all tasks directly without subagent dispatch."
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 user-invocable: true
 ---
 

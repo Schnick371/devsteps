@@ -3,7 +3,7 @@ agent: "devsteps-R0-coord-sprint"
 model: "Claude Sonnet 4.6"
 description: "Enhance or create remarc-insight Presentations and Tutorials with screenshots, content research, and TC deep-links"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 ---
 
 # 🎯 remarc-insight Content Enhancer

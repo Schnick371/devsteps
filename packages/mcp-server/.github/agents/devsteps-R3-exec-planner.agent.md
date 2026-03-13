@@ -33,7 +33,7 @@ Decompose a story or epic into concrete, ordered, atomic implementation steps â€
 
 ## MAP-REDUCE-RESOLVE-SYNTHESIZE
 
-Protocol reference: [AGENT-DISPATCH-PROTOCOL.md](./AGENT-DISPATCH-PROTOCOL.md)
+Protocol reference: [AGENT-DISPATCH-PROTOCOL.md](../../../../.github/agents/AGENT-DISPATCH-PROTOCOL.md)
 
 ### Pre-MAP: Read Existing MandateResults FIRST
 

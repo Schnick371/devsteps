@@ -3,7 +3,7 @@ agent: "devsteps-R0-coord"
 model: "Claude Sonnet 4.6"
 description: "Guide-driven full Spider Web cycle - enforced FULL MPD at every critical decision, user-workflow step-by-step testing"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 ---
 
 # 🕸️ Guide Cycle — Full Spider Web

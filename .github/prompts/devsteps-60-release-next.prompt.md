@@ -3,7 +3,7 @@ agent: "devsteps-R0-coord"
 model: "Claude Sonnet 4.6"
 description: "Execute pre-release deployment to @next tag - testing and validation before stable release"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 ---
 
 # 🧪 Pre-Release Workflow - @next Tag Deployment

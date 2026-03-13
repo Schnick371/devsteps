@@ -2,7 +2,7 @@
 description: "Autonomous sprint executor — multi-item backlog, dispatches all agents directly (Spider Web), reads only MandateResults via read_mandate_results"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 agents:
   - devsteps-R1-analyst-archaeology
   - devsteps-R1-analyst-risk
@@ -27,22 +27,6 @@ agents:
   - devsteps-R4-worker-refactor
   - devsteps-R4-worker-workspace
 handoffs:
-  - label: "Sprint: Archaeology Batch"
-    agent: devsteps-R1-analyst-archaeology
-    prompt: "Archaeology mandate for sprint items: [PASTE_ITEM_IDS]. Build structural map for all affected areas in one pass."
-    send: false
-  - label: "Sprint: Risk Batch"
-    agent: devsteps-R1-analyst-risk
-    prompt: "Risk mandate for sprint items: [PASTE_ITEM_IDS]. Map blast radius for all planned changes."
-    send: false
-  - label: "Sprint: Plan Batch"
-    agent: devsteps-R3-exec-planner
-    prompt: "Planning mandate for sprint items: [PASTE_ITEM_IDS]. Consume existing MandateResults via read_mandate_results and decompose all items into ordered steps."
-    send: false
-  - label: "Sprint: Review Next"
-    agent: devsteps-R5-gate-reviewer
-    prompt: "Review mandate for completed sprint item: [PASTE_ITEM_ID]. Validate before marking done."
-    send: false
   - label: "Switch to Single-Item MPD"
     agent: devsteps-R0-coord
     prompt: "Single-item MPD mode for: [PASTE_ITEM_ID]. Run triage and dispatch analyst mandates."
@@ -77,7 +61,9 @@ Execute multi-hour autonomous work sessions on planned backlog via analyst manda
 
 ## Pre-Sprint Clarification (once — then autonomous)
 
-Use `#askQuestions` once: confirm scope (all Q1+Q2 planned?) and tag/focus filter. Triage tier is determined autonomously from item characteristics — **NEVER** ask the user about ring selection, triage tier, or dispatch order. Then run autonomously until a Pause Trigger fires.
+Use `#askQuestions` once before devsteps-R3-exec-planner.agent after you compiled Ring-2 findings! Before asking the user any questions, compile and display a concise overview of the current questions and respective topics to help the user make informed decisions. This overview should be structured, highlighting the key points and implications of each question. Use bullet points or a table format for clarity. Then ask any questions needed to clarify scope, constraints, or priorities before planning. After this single exchange, the sprint runs end-to-end without waiting for confirmation.
+Use `#askQuestions` after the sprint to adress new blockers or replanning needs that arise during execution. Always provide a clear summary of the issue and the options available to the user before asking for input. This ensures that the user has all the necessary information to make informed decisions about how to proceed with the sprint.
+Use not only the numbered questions but also the multible-choice questions! often there are more than one actionable options, and the user may not know which one to choose without guidance. By providing multiple-choice questions, you can help guide the user towards the best decision for the sprint while still allowing them to have agency in the process. Always provide a clear summary of the options available to the user before asking for input, and be prepared to offer additional information or context if needed to help them make an informed decision.
 
 ## Pre-Sprint Analysis (MANDATORY — once per sprint session)
 
@@ -145,4 +131,4 @@ On pause: status `in-progress`, write blockers to `.devsteps/analysis/[ID]/sprin
 
 ---
 
-_Registry: [REGISTRY.md](./REGISTRY.md) · Dispatch Protocol: [AGENT-DISPATCH-PROTOCOL.md](./AGENT-DISPATCH-PROTOCOL.md)_
+_Registry: [REGISTRY.md](../../../../.github/agents/REGISTRY.md) · Dispatch Protocol: [AGENT-DISPATCH-PROTOCOL.md](../../../../.github/agents/AGENT-DISPATCH-PROTOCOL.md)_

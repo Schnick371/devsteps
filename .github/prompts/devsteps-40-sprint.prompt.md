@@ -3,7 +3,7 @@ agent: "devsteps-R0-coord-sprint"
 model: "Claude Sonnet 4.6"
 description: "Multi-hour autonomous sprint — pre-sprint archaeology, risk-based MPD per item, all analyst/exec/gate agents, bright-data web research, Playwright browser automation, blocking reviewer"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 ---
 
 # 🏃 Sprint Execution

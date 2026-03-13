@@ -3,7 +3,7 @@ agent: "devsteps-R0-coord"
 model: "Claude Sonnet 4.6"
 description: "Scientist prompt — evidence-based deep research, best-practice synthesis & actionable recommendations using full spider web across all rings and domains"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 ---
 
 # 🔬 Research — Evidence-Based Best Practices & Recommendations

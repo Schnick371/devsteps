@@ -2,7 +2,7 @@
 agent: "devsteps-R0-coord"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 description: "Efficient project context loading - smart prioritization, token-optimal, just-in-time aspect loading"
 ---
 

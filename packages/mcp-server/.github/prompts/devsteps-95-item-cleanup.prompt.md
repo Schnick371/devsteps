@@ -2,7 +2,7 @@
 agent: "devsteps-R0-coord"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 description: "Autonomous multi-hour planning hygiene - consolidate Epics, sharpen content, validate hierarchy, archive completed work"
 ---
 

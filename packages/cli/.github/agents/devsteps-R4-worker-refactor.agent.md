@@ -2,7 +2,7 @@
 description: "Refactor worker — restructures code without changing behavior. Improves readability, structure, and maintainability. Leaf Node of the Spider Web Dispatch architecture."
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 user-invocable: false
 ---
 
