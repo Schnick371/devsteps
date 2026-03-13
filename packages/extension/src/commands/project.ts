@@ -40,7 +40,11 @@ export function registerProjectCommands(
       const methodology = await vscode.window.showQuickPick(
         [
           { label: 'Scrum', value: 'scrum', description: 'Epics → Stories → Tasks' },
-          { label: 'Waterfall', value: 'waterfall', description: 'Requirements → Features → Tasks' },
+          {
+            label: 'Waterfall',
+            value: 'waterfall',
+            description: 'Requirements → Features → Tasks',
+          },
           { label: 'Hybrid', value: 'hybrid', description: 'Both Scrum and Waterfall' },
         ],
         { placeHolder: 'Select project methodology' }
@@ -81,7 +85,11 @@ export function registerProjectCommands(
     vscode.commands.registerCommand('devsteps.checkPrerequisites', async () => {
       logger.info('=== DevSteps Prerequisites Check ===');
       await vscode.window.withProgress(
-        { location: vscode.ProgressLocation.Notification, title: 'Checking prerequisites...', cancellable: false },
+        {
+          location: vscode.ProgressLocation.Notification,
+          title: 'Checking prerequisites...',
+          cancellable: false,
+        },
         async (progress) => {
           progress.report({ increment: 0, message: 'Detecting Node.js runtime...' });
           const bundledServerPath = path.join(context.extensionPath, 'dist', 'mcp-server.js');
@@ -93,12 +101,18 @@ export function registerProjectCommands(
           const allAvailable = node.available && npm.available && npx.available;
           const partialAvailable = node.available || npm.available;
           const lines: string[] = ['**Prerequisites Check Results:**', ''];
-          lines.push(node.available ? `✅ Node.js: ${node.version}\n   Path: ${node.path}` : '❌ Node.js: Not found');
+          lines.push(
+            node.available
+              ? `✅ Node.js: ${node.version}\n   Path: ${node.path}`
+              : '❌ Node.js: Not found'
+          );
           lines.push(npm.available ? `✅ npm: ${npm.version}` : '❌ npm: Not found');
           lines.push(npx.available ? `✅ npx: ${npx.version}` : '❌ npx: Not found');
           lines.push('', '**MCP Server Strategy:**');
-          if (runtimeConfig.strategy === 'npx') lines.push('✅ Will use npx (auto-install from npm registry)');
-          else if (runtimeConfig.strategy === 'node') lines.push('⚠️  Will use node + bundled server');
+          if (runtimeConfig.strategy === 'npx')
+            lines.push('✅ Will use npx (auto-install from npm registry)');
+          else if (runtimeConfig.strategy === 'node')
+            lines.push('⚠️  Will use node + bundled server');
           else lines.push('❌ No compatible runtime available');
           progress.report({ increment: 100 });
           logger.info(lines.join('\n'));
@@ -108,15 +122,21 @@ export function registerProjectCommands(
             vscode.window.showInformationMessage('✅ All prerequisites satisfied!', 'OK');
           } else if (partialAvailable) {
             const sel = await vscode.window.showWarningMessage(
-              '⚠️ Some prerequisites missing.', 'Show Output', 'Install Node.js'
+              '⚠️ Some prerequisites missing.',
+              'Show Output',
+              'Install Node.js'
             );
             if (sel === 'Show Output') logger.show();
-            else if (sel === 'Install Node.js') vscode.env.openExternal(vscode.Uri.parse('https://nodejs.org/'));
+            else if (sel === 'Install Node.js')
+              vscode.env.openExternal(vscode.Uri.parse('https://nodejs.org/'));
           } else {
             const sel = await vscode.window.showErrorMessage(
-              '❌ Node.js not found.', 'Install Node.js', 'Show Output'
+              '❌ Node.js not found.',
+              'Install Node.js',
+              'Show Output'
             );
-            if (sel === 'Install Node.js') vscode.env.openExternal(vscode.Uri.parse('https://nodejs.org/'));
+            if (sel === 'Install Node.js')
+              vscode.env.openExternal(vscode.Uri.parse('https://nodejs.org/'));
             else if (sel === 'Show Output') logger.show();
           }
         }
@@ -135,33 +155,62 @@ export function registerProjectCommands(
       try {
         const devstepsPath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
         const allItems = await listItems(devstepsPath);
-        if (!allItems.items) { vscode.window.showErrorMessage('Failed to load project status'); return; }
+        if (!allItems.items) {
+          vscode.window.showErrorMessage('Failed to load project status');
+          return;
+        }
         const items = allItems.items;
         const total = items.length;
-        const byStatus = items.reduce((acc, item) => { acc[item.status] = (acc[item.status] || 0) + 1; return acc; }, {} as Record<string, number>);
-        const byType = items.reduce((acc, item) => { acc[item.type] = (acc[item.type] || 0) + 1; return acc; }, {} as Record<string, number>);
+        const byStatus = items.reduce(
+          (acc, item) => {
+            acc[item.status] = (acc[item.status] || 0) + 1;
+            return acc;
+          },
+          {} as Record<string, number>
+        );
+        const byType = items.reduce(
+          (acc, item) => {
+            acc[item.type] = (acc[item.type] || 0) + 1;
+            return acc;
+          },
+          {} as Record<string, number>
+        );
         const report = [
-          `📊 **DevSteps Project Status**`, ``, `**Total Items:** ${total}`, ``,
+          `📊 **DevSteps Project Status**`,
+          ``,
+          `**Total Items:** ${total}`,
+          ``,
           `**By Status:**`,
-          `- Draft: ${byStatus.draft || 0}`, `- Planned: ${byStatus.planned || 0}`,
-          `- In Progress: ${byStatus['in-progress'] || 0}`, `- Review: ${byStatus.review || 0}`,
-          `- Done: ${byStatus.done || 0}`, `- Blocked: ${byStatus.blocked || 0}`,
-          `- Cancelled: ${byStatus.cancelled || 0}`, `- Obsolete: ${byStatus.obsolete || 0}`,
-          ``, `**By Type:**`,
+          `- Draft: ${byStatus.draft || 0}`,
+          `- Planned: ${byStatus.planned || 0}`,
+          `- In Progress: ${byStatus['in-progress'] || 0}`,
+          `- Review: ${byStatus.review || 0}`,
+          `- Done: ${byStatus.done || 0}`,
+          `- Blocked: ${byStatus.blocked || 0}`,
+          `- Cancelled: ${byStatus.cancelled || 0}`,
+          `- Obsolete: ${byStatus.obsolete || 0}`,
+          ``,
+          `**By Type:**`,
           ...Object.entries(byType).map(([type, count]) => `- ${type}: ${count}`),
         ].join('\n');
         vscode.window.showInformationMessage(report, { modal: true });
       } catch (error) {
-        vscode.window.showErrorMessage(`Error loading status: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        vscode.window.showErrorMessage(
+          `Error loading status: ${error instanceof Error ? error.message : 'Unknown error'}`
+        );
       }
     })
   );
 
   // Output channel commands
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.showOutput', () => { logger.show(); })
+    vscode.commands.registerCommand('devsteps.showOutput', () => {
+      logger.show();
+    })
   );
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.clearOutput', () => { logger.clear(); })
+    vscode.commands.registerCommand('devsteps.clearOutput', () => {
+      logger.clear();
+    })
   );
 }

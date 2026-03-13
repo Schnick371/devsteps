@@ -1,13 +1,18 @@
 {
-    "servers": {
-        // Active during development (no installed VSIX — extension not auto-starting the server).
-        // The extension detects this entry and skips its own auto-registration (no duplicate).
-        // ${workspaceFolder} is expanded by VS Code — no hardcoded absolute paths.
-        "devsteps": {
-            "type": "stdio",
-            "command": "npx",
-            "args": ["-y", "--package=@schnick371/devsteps-mcp-server@next", "devsteps-mcp", "${workspaceFolder}"],
-            "env": {}
-        }
+  "servers": {
+    // Active during development (no installed VSIX — extension not auto-starting the server).
+    // The extension detects this entry and skips its own auto-registration (no duplicate).
+    // ${workspaceFolder} is expanded by VS Code — no hardcoded absolute paths.
+    "devsteps": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "--package=@schnick371/devsteps-mcp-server@next",
+        "devsteps-mcp",
+        "${workspaceFolder}"
+      ],
+      "env": {}
     }
+  }
 }

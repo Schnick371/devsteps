@@ -10,6 +10,7 @@ import { join } from 'node:path';
 import chalk from 'chalk';
 import ora from 'ora';
 import {
+  type CheckResult,
   checkDependencies,
   checkDevStepsProject,
   checkGit,
@@ -17,7 +18,6 @@ import {
   checkNode,
   checkPackageManager,
   checkTypeScript,
-  type CheckResult,
 } from './doctor-checks.js';
 import { runIntegrityChecks } from './doctor-integrity.js';
 import { rebuildIndexCommand } from './doctor-rebuild.js';
@@ -72,7 +72,9 @@ export async function doctorCommand(options?: {
 
     console.log(color(`${icon} ${check.name}`));
     console.log(chalk.gray(`  ${check.message}`));
-    if (check.details?.length) { for (const d of check.details) console.log(chalk.gray(`    • ${d}`)); }
+    if (check.details?.length) {
+      for (const d of check.details) console.log(chalk.gray(`    • ${d}`));
+    }
     if (check.fix) console.log(chalk.cyan(`  Fix: ${check.fix}`));
     console.log();
   }

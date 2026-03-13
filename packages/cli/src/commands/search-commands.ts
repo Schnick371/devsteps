@@ -47,7 +47,10 @@ export async function searchCommand(query: string, options: SearchCommandOptions
       const tagMatch = metadata.tags.some((tag: string) => tag.toLowerCase().includes(queryLower));
 
       if (titleMatch || descMatch || tagMatch) {
-        results.push({ ...metadata, match_type: titleMatch ? 'title' : descMatch ? 'description' : 'tag' });
+        results.push({
+          ...metadata,
+          match_type: titleMatch ? 'title' : descMatch ? 'description' : 'tag',
+        });
         if (options.limit) {
           const limit = Number.parseInt(options.limit, 10);
           if (limit > 0 && results.length >= limit) break;
@@ -58,7 +61,12 @@ export async function searchCommand(query: string, options: SearchCommandOptions
     spinner.succeed(`Found ${results.length} result(s)`);
     console.log();
     for (const item of results) {
-      const matchBadge = item.match_type === 'title' ? chalk.green('[title]') : item.match_type === 'description' ? chalk.blue('[desc]') : chalk.yellow('[tag]');
+      const matchBadge =
+        item.match_type === 'title'
+          ? chalk.green('[title]')
+          : item.match_type === 'description'
+            ? chalk.blue('[desc]')
+            : chalk.yellow('[tag]');
       console.log(matchBadge, chalk.cyan(item.id), item.title);
     }
     console.log();
@@ -99,10 +107,12 @@ export async function statusCommand(options: StatusCommandOptions) {
     console.log(chalk.gray('  Total:'), stats.total);
     console.log();
     console.log(chalk.bold('  By Type:'));
-    for (const [type, count] of Object.entries(stats.by_type)) console.log(chalk.gray(`    ${type}:`), count);
+    for (const [type, count] of Object.entries(stats.by_type))
+      console.log(chalk.gray(`    ${type}:`), count);
     console.log();
     console.log(chalk.bold('  By Status:'));
-    for (const [status, count] of Object.entries(stats.by_status)) console.log(chalk.gray(`    ${status}:`), count);
+    for (const [status, count] of Object.entries(stats.by_status))
+      console.log(chalk.gray(`    ${status}:`), count);
     console.log();
 
     const staleItems = allItems.filter((item: DevStepsIndex['items'][number]) => {
@@ -114,7 +124,9 @@ export async function statusCommand(options: StatusCommandOptions) {
       console.log(chalk.bold.yellow('⚠️  Warnings:'));
       console.log(chalk.yellow(`  ${staleItems.length} stale item(s) in progress for >7 days:`));
       for (const item of staleItems) {
-        const days = Math.floor((Date.now() - new Date(item.updated).getTime()) / (1000 * 60 * 60 * 24));
+        const days = Math.floor(
+          (Date.now() - new Date(item.updated).getTime()) / (1000 * 60 * 60 * 24)
+        );
         console.log(chalk.yellow(`    ${item.id}`), `(${days} days)`);
       }
       console.log();

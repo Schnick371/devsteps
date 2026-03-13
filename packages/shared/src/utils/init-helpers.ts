@@ -36,11 +36,11 @@ export function injectDevstepsComment(rawContent: string, hash: string, version:
   const frontmatterEnd = withoutOld.match(/^---\n[\s\S]*?\n---\n/);
   if (frontmatterEnd) {
     const endIdx = (frontmatterEnd.index ?? 0) + frontmatterEnd[0].length;
-    return withoutOld.slice(0, endIdx) + marker + '\n' + withoutOld.slice(endIdx);
+    return `${withoutOld.slice(0, endIdx) + marker}\n${withoutOld.slice(endIdx)}`;
   }
 
   // No frontmatter — prepend
-  return marker + '\n' + withoutOld;
+  return `${marker}\n${withoutOld}`;
 }
 
 export interface CopiedGithubFiles {

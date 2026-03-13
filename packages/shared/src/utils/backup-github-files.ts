@@ -69,7 +69,9 @@ function collectManagedFiles(githubDir: string): Array<{ rel: string; abs: strin
     if (!existsSync(dir)) continue;
 
     const files = readdirSync(dir).filter(
-      (f) => f.startsWith('devsteps') && (f.endsWith('.agent.md') || f.endsWith('.instructions.md') || f.endsWith('.prompt.md'))
+      (f) =>
+        f.startsWith('devsteps') &&
+        (f.endsWith('.agent.md') || f.endsWith('.instructions.md') || f.endsWith('.prompt.md'))
     );
 
     for (const file of files) {

@@ -15,10 +15,10 @@
  * @see TASK-350
  */
 
-import { describe, expect, it } from 'vitest';
 import { readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { describe, expect, it } from 'vitest';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const workspaceRoot = resolve(__dirname, '../../..');
@@ -57,8 +57,7 @@ function parseFrontmatter(content: string): Frontmatter {
 
   // Extract simple key: value pairs (handles quoted and unquoted values)
   const scalarRe = /^([\w-]+):\s*(.+)$/gm;
-  let m: RegExpExecArray | null;
-  while ((m = scalarRe.exec(yaml)) !== null) {
+  for (const m of yaml.matchAll(scalarRe)) {
     const key = m[1] as keyof Frontmatter;
     const value = m[2].replace(/^["']|["']$/g, '').trim();
     (result as Record<string, string>)[key] = value;
@@ -112,7 +111,9 @@ describe('agent file frontmatter', () => {
       });
 
       it('does not exceed 150 lines', () => {
-        expect(lines.length, `${filename} exceeds 150 lines (${lines.length})`).toBeLessThanOrEqual(150);
+        expect(lines.length, `${filename} exceeds 150 lines (${lines.length})`).toBeLessThanOrEqual(
+          150
+        );
       });
     });
   }

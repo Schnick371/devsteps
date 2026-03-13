@@ -21,7 +21,9 @@ import {
 
 // ─── Test fixtures ────────────────────────────────────────────────────────────
 
-function makeIndex(items: Array<{ id: string; type: string; title: string; status: string; updated: string }>) {
+function makeIndex(
+  items: Array<{ id: string; type: string; title: string; status: string; updated: string }>
+) {
   return JSON.stringify({
     version: '2.0.0',
     items,
@@ -76,36 +78,36 @@ describe('getQuickContext', () => {
   it('includes context_meta', async () => {
     const ctx = await getQuickContext(projectDir, devstepsDir);
     expect(ctx.context_meta).toBeDefined();
-    expect(ctx.context_meta!.level).toBe('quick');
-    expect(typeof ctx.context_meta!.generated_at).toBe('string');
-    expect(typeof ctx.context_meta!.project_md_age_hours).toBe('number');
-    expect(typeof ctx.context_meta!.is_stale).toBe('boolean');
-    expect(typeof ctx.context_meta!.cache_hit).toBe('boolean');
+    expect(ctx.context_meta?.level).toBe('quick');
+    expect(typeof ctx.context_meta?.generated_at).toBe('string');
+    expect(typeof ctx.context_meta?.project_md_age_hours).toBe('number');
+    expect(typeof ctx.context_meta?.is_stale).toBe('boolean');
+    expect(typeof ctx.context_meta?.cache_hit).toBe('boolean');
   });
 
   it('context_meta.is_stale true when PROJECT.md missing', async () => {
     const ctx = await getQuickContext(projectDir, devstepsDir);
     // PROJECT.md not written in beforeEach — should be stale (Infinity age)
-    expect(ctx.context_meta!.is_stale).toBe(true);
-    expect(ctx.context_meta!.project_md_age_hours).toBe(Number.POSITIVE_INFINITY);
+    expect(ctx.context_meta?.is_stale).toBe(true);
+    expect(ctx.context_meta?.project_md_age_hours).toBe(Number.POSITIVE_INFINITY);
   });
 
   it('context_meta.is_stale false when PROJECT.md is fresh', async () => {
     writeFileSync(path.join(devstepsDir, 'PROJECT.md'), '# Test', 'utf-8');
     const ctx = await getQuickContext(projectDir, devstepsDir);
-    expect(ctx.context_meta!.is_stale).toBe(false);
-    expect(ctx.context_meta!.project_md_age_hours).toBeLessThan(1);
+    expect(ctx.context_meta?.is_stale).toBe(false);
+    expect(ctx.context_meta?.project_md_age_hours).toBeLessThan(1);
   });
 
   it('includes suggestions when PROJECT.md missing', async () => {
     const ctx = await getQuickContext(projectDir, devstepsDir);
     expect(ctx.suggestions).toBeDefined();
-    expect(ctx.suggestions!.some((s) => s.includes('devsteps context generate'))).toBe(true);
+    expect(ctx.suggestions?.some((s) => s.includes('devsteps context generate'))).toBe(true);
   });
 
   it('includes suggestions for blocked items', async () => {
     const ctx = await getQuickContext(projectDir, devstepsDir);
-    expect(ctx.suggestions!.some((s) => s.includes('blocked'))).toBe(true);
+    expect(ctx.suggestions?.some((s) => s.includes('blocked'))).toBe(true);
   });
 
   it('tokens_used is positive', async () => {
@@ -125,7 +127,7 @@ describe('getStandardContext', () => {
   it('includes context_meta with level standard', async () => {
     const ctx = await getStandardContext(projectDir, devstepsDir);
     expect(ctx.context_meta).toBeDefined();
-    expect(ctx.context_meta!.level).toBe('standard');
+    expect(ctx.context_meta?.level).toBe('standard');
   });
 
   it('standard context includes open_items_count in dynamic_context', async () => {
@@ -140,14 +142,14 @@ describe('getStandardContext', () => {
     const ctx = await getStandardContext(projectDir, devstepsDir);
     const dc = ctx.dynamic_context as { in_progress?: Array<{ id: string }> };
     expect(dc.in_progress).toBeDefined();
-    expect(dc.in_progress!.some((i) => i.id === 'STORY-001')).toBe(true);
+    expect(dc.in_progress?.some((i) => i.id === 'STORY-001')).toBe(true);
   });
 
   it('standard context includes blocking_items array', async () => {
     const ctx = await getStandardContext(projectDir, devstepsDir);
     const dc = ctx.dynamic_context as { blocking_items?: Array<{ id: string }> };
     expect(dc.blocking_items).toBeDefined();
-    expect(dc.blocking_items!.some((i) => i.id === 'BUG-001')).toBe(true);
+    expect(dc.blocking_items?.some((i) => i.id === 'BUG-001')).toBe(true);
   });
 
   it('tokens_used is positive and larger than quick', async () => {
@@ -271,7 +273,11 @@ describe('generateProjectMd', () => {
   });
 
   it('reads description from README.md when no config description', async () => {
-    writeFileSync(path.join(projectDir, 'README.md'), '# Test\n\nThis is the first paragraph.', 'utf-8');
+    writeFileSync(
+      path.join(projectDir, 'README.md'),
+      '# Test\n\nThis is the first paragraph.',
+      'utf-8'
+    );
     const md = await generateProjectMd(projectDir, devstepsDir);
     expect(md).toContain('This is the first paragraph.');
   });

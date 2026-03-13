@@ -51,7 +51,10 @@ export async function addCommand(type: string, title: string, options: AddComman
     if (options.priority) console.log(chalk.gray('  Priority:'), options.priority);
     const config = await loadConfig(devstepsDir);
     if (config.settings.git_integration) {
-      console.log(chalk.gray('\n💡 Git:'), chalk.cyan(`git commit -am "feat: ${result.itemId} - ${title}"`));
+      console.log(
+        chalk.gray('\n💡 Git:'),
+        chalk.cyan(`git commit -am "feat: ${result.itemId} - ${title}"`)
+      );
     }
   } catch (error: unknown) {
     spinner.fail('Failed to create item');
@@ -72,7 +75,8 @@ export async function getCommand(id: string) {
     console.log(chalk.gray('Category:'), metadata.category);
     if (metadata.assignee) console.log(chalk.gray('Assignee:'), metadata.assignee);
     if (metadata.tags.length > 0) console.log(chalk.gray('Tags:'), metadata.tags.join(', '));
-    if (metadata.affected_paths.length > 0) console.log(chalk.gray('Paths:'), metadata.affected_paths.join(', '));
+    if (metadata.affected_paths.length > 0)
+      console.log(chalk.gray('Paths:'), metadata.affected_paths.join(', '));
     console.log(chalk.gray('Created:'), new Date(metadata.created).toLocaleString());
     console.log(chalk.gray('Updated:'), new Date(metadata.updated).toLocaleString());
     if (metadata.linked_items) {
@@ -112,7 +116,8 @@ export async function listCommand(options: ListCommandOptions) {
     const filterArgs: ListItemsArgs = {};
     if (options.type) filterArgs.type = (TYPE_SHORTCUTS[options.type] || options.type) as ItemType;
     if (options.status && !options.archived) filterArgs.status = options.status as ItemStatus;
-    if (options.priority && !options.archived) filterArgs.eisenhower = options.priority as EisenhowerQuadrant;
+    if (options.priority && !options.archived)
+      filterArgs.eisenhower = options.priority as EisenhowerQuadrant;
     if (options.limit) {
       const limit = Number.parseInt(options.limit, 10);
       if (limit > 0) filterArgs.limit = limit;
@@ -124,10 +129,25 @@ export async function listCommand(options: ListCommandOptions) {
     console.log();
     for (const item of items) {
       if (options.archived) {
-        console.log(chalk.cyan(item.id), chalk.gray(`[${item.status}]`), item.title, chalk.dim('(archived)'));
+        console.log(
+          chalk.cyan(item.id),
+          chalk.gray(`[${item.status}]`),
+          item.title,
+          chalk.dim('(archived)')
+        );
       } else {
-        const statusColor = item.status === STATUS.DONE ? chalk.green : item.status === STATUS.IN_PROGRESS ? chalk.blue : chalk.gray;
-        console.log(chalk.cyan(item.id), statusColor(`[${item.status}]`), item.eisenhower ? chalk.yellow(`(${item.eisenhower})`) : '', item.title);
+        const statusColor =
+          item.status === STATUS.DONE
+            ? chalk.green
+            : item.status === STATUS.IN_PROGRESS
+              ? chalk.blue
+              : chalk.gray;
+        console.log(
+          chalk.cyan(item.id),
+          statusColor(`[${item.status}]`),
+          item.eisenhower ? chalk.yellow(`(${item.eisenhower})`) : '',
+          item.title
+        );
       }
     }
     console.log();
@@ -187,7 +207,12 @@ export async function updateCommand(id: string, options: UpdateCommandOptions) {
   }
 }
 
-async function _printUpdateGitHints(devstepsDir: string, id: string, status: string | undefined, metadata: { linked_items: { implements: string[] } }) {
+async function _printUpdateGitHints(
+  devstepsDir: string,
+  id: string,
+  status: string | undefined,
+  metadata: { linked_items: { implements: string[] } }
+) {
   if (status === STATUS.DONE) {
     console.log(chalk.green('\n✅ Quality gates passed!'));
     console.log(chalk.gray('💡 Git:'), chalk.cyan(`git commit -am "feat: completed ${id}"`));
@@ -199,20 +224,34 @@ async function _printUpdateGitHints(devstepsDir: string, id: string, status: str
         for (const sibId of siblings) {
           try {
             const { metadata: sibMeta } = await getItem(devstepsDir, sibId);
-            if (sibMeta.status !== STATUS.DONE && sibMeta.status !== STATUS.CANCELLED) { allDone = false; break; }
-          } catch { allDone = false; break; }
+            if (sibMeta.status !== STATUS.DONE && sibMeta.status !== STATUS.CANCELLED) {
+              allDone = false;
+              break;
+            }
+          } catch {
+            allDone = false;
+            break;
+          }
         }
         if (allDone && parentMeta.status !== STATUS.DONE) {
-          console.log(chalk.gray('💡'), `All implementations of ${chalk.cyan(parentId)} are complete! Consider reviewing parent.`);
+          console.log(
+            chalk.gray('💡'),
+            `All implementations of ${chalk.cyan(parentId)} are complete! Consider reviewing parent.`
+          );
         }
-      } catch { /* skip */ }
+      } catch {
+        /* skip */
+      }
     }
   } else if (status === STATUS.REVIEW) {
     console.log(chalk.yellow('\n🧪 Testing Phase:'));
     console.log(chalk.gray('  • Run tests:'), 'npm test');
     console.log(chalk.gray('  • Verify build:'), 'npm run build');
     console.log(chalk.gray('  • Manual testing if applicable'));
-    console.log(chalk.gray('  • When all pass:'), chalk.cyan(`devsteps update ${id} --status done`));
+    console.log(
+      chalk.gray('  • When all pass:'),
+      chalk.cyan(`devsteps update ${id} --status done`)
+    );
   } else if (status === STATUS.IN_PROGRESS) {
     console.log(chalk.gray('\n💡 Git:'), 'Track progress with regular commits!');
     console.log(chalk.gray('💡 Next:'), `After implementation, mark as 'review' to start testing`);

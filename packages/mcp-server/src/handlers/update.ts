@@ -8,13 +8,13 @@
 
 import { join } from 'node:path';
 import {
-  STATUS,
   bulkAddTags,
   bulkRemoveTags,
   bulkUpdateItems,
   type EisenhowerQuadrant,
   type ItemMetadata,
   type ItemStatus,
+  STATUS,
   type UpdateItemArgs,
   updateItem,
 } from '@schnick371/devsteps-shared';

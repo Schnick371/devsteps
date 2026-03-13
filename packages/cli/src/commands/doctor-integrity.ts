@@ -130,9 +130,7 @@ function detectAsymmetricLinks(allItems: Map<string, ItemMetadata>): CheckResult
         const targetMeta = allItems.get(targetId);
         if (!targetMeta?.linked_items) continue;
 
-        const inverseArray = (targetMeta.linked_items as Record<string, string[]>)[
-          expectedInverse
-        ];
+        const inverseArray = (targetMeta.linked_items as Record<string, string[]>)[expectedInverse];
         if (!inverseArray?.includes(id)) {
           asymmetric.push(
             `${id} →[${relType}]→ ${targetId} but ${targetId} missing [${expectedInverse}]→ ${id}`

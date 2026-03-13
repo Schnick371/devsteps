@@ -143,15 +143,26 @@ export function updateCopilotFiles(
           continue;
         }
 
-        const reasonSuffix = installedHash === null
-          ? 'no-marker'
-          : force
-            ? 'force'
-            : 'hash-mismatch';
-        updateCandidates.push({ sourceFile, targetFile, rawContent, hash: sourceHash, rel, status: 'updated' });
+        const reasonSuffix =
+          installedHash === null ? 'no-marker' : force ? 'force' : 'hash-mismatch';
+        updateCandidates.push({
+          sourceFile,
+          targetFile,
+          rawContent,
+          hash: sourceHash,
+          rel,
+          status: 'updated',
+        });
         fileStatuses.push({ file: rel, status: 'updated', reason: reasonSuffix });
       } else {
-        updateCandidates.push({ sourceFile, targetFile, rawContent, hash: sourceHash, rel, status: 'added' });
+        updateCandidates.push({
+          sourceFile,
+          targetFile,
+          rawContent,
+          hash: sourceHash,
+          rel,
+          status: 'added',
+        });
         fileStatuses.push({ file: rel, status: 'added' });
       }
     }

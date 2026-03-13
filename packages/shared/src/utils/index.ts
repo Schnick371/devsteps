@@ -8,6 +8,12 @@
 
 import type { ItemType, Methodology } from '../schemas/index.js';
 
+// Export backup utilities
+export {
+  type BackupOptions,
+  type BackupResult,
+  backupGithubFiles,
+} from './backup-github-files.js';
 // Export cache utilities
 export {
   CACHE_CONFIG,
@@ -16,12 +22,6 @@ export {
   clearGlobalCache,
   getCache,
 } from './cache.js';
-// Export backup utilities
-export {
-  type BackupOptions,
-  type BackupResult,
-  backupGithubFiles,
-} from './backup-github-files.js';
 // Export init helpers
 export {
   type CopiedGithubFiles,
@@ -257,8 +257,5 @@ export function normalizeMarkdown(value: string): string {
   if (value.includes('\n')) return value;
 
   // Slow path: convert MCP-style escape sequences to real control characters
-  return value
-    .replace(/\\n/g, '\n')
-    .replace(/\\t/g, '\t')
-    .replace(/\\r/g, '');
+  return value.replace(/\\n/g, '\n').replace(/\\t/g, '\t').replace(/\\r/g, '');
 }

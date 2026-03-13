@@ -22,6 +22,7 @@ import {
 import { join } from 'node:path';
 import type { ItemType } from '../schemas/index.js';
 import { TYPE_TO_DIRECTORY } from '../utils/index.js';
+import type { AutoMigrationOptions, MigrationStats } from './auto-migrate-detect.js';
 import {
   addItemToIndex,
   getIndexPaths,
@@ -30,7 +31,6 @@ import {
   initializeRefsStyleIndex,
   loadAllIndexes,
 } from './index-refs.js';
-import type { AutoMigrationOptions, MigrationStats } from './auto-migrate-detect.js';
 
 /**
  * Perform core index migration: legacy index.json → refs-style distributed index
@@ -48,9 +48,11 @@ export async function performMigration(
   const { skipBackup = false } = options;
   const paths = getIndexPaths(devstepsDir);
 
-  if (!existsSync(devstepsDir)) throw new Error('.devsteps directory not found. Is this a DevSteps project?');
+  if (!existsSync(devstepsDir))
+    throw new Error('.devsteps directory not found. Is this a DevSteps project?');
   if (!hasLegacyIndex(devstepsDir)) throw new Error('No index.json found. Nothing to migrate.');
-  if (hasRefsStyleIndex(devstepsDir)) throw new Error('Refs-style index already exists. Aborting to prevent data loss.');
+  if (hasRefsStyleIndex(devstepsDir))
+    throw new Error('Refs-style index already exists. Aborting to prevent data loss.');
 
   const stats: MigrationStats = { totalItems: 0, byType: {}, byStatus: {}, byPriority: {} };
 
@@ -85,10 +87,14 @@ export async function performMigration(
   // Verify migration: count + deduplicate
   const newIndexes = loadAllIndexes(devstepsDir);
   let newItemCount = 0;
-  for (const items of newIndexes.byType.values()) { newItemCount += items.length; }
+  for (const items of newIndexes.byType.values()) {
+    newItemCount += items.length;
+  }
 
   if (newItemCount !== stats.totalItems) {
-    throw new Error(`Item count mismatch! Migrated: ${stats.totalItems}, Verified: ${newItemCount}`);
+    throw new Error(
+      `Item count mismatch! Migrated: ${stats.totalItems}, Verified: ${newItemCount}`
+    );
   }
 
   const allIds = new Set<string>();
@@ -119,7 +125,16 @@ export function migrateItemsDirectory(
   const { silent = false } = options;
   if (!silent) console.log('📂 Migrating to items/ directory structure...');
 
-  const oldDirs = ['epics', 'stories', 'tasks', 'bugs', 'spikes', 'tests', 'requirements', 'features'];
+  const oldDirs = [
+    'epics',
+    'stories',
+    'tasks',
+    'bugs',
+    'spikes',
+    'tests',
+    'requirements',
+    'features',
+  ];
   const stats = { moved: 0, types: {} as Record<string, number> };
   const itemsDir = join(devstepsDir, 'items');
   if (!existsSync(itemsDir)) mkdirSync(itemsDir, { recursive: true });
@@ -133,11 +148,18 @@ export function migrateItemsDirectory(
     const files = readdirSync(oldPath);
     let count = 0;
 
-    for (const file of files) { renameSync(join(oldPath, file), join(newPath, file)); count++; }
+    for (const file of files) {
+      renameSync(join(oldPath, file), join(newPath, file));
+      count++;
+    }
     stats.types[dirName] = count;
     stats.moved += count;
 
-    try { rmdirSync(oldPath); } catch { /* ignore — not empty or other error */ }
+    try {
+      rmdirSync(oldPath);
+    } catch {
+      /* ignore — not empty or other error */
+    }
   }
 
   if (!silent) console.log(`   ✅ Moved ${stats.moved} files to items/ subdirectories`);

@@ -9,8 +9,7 @@
  * @see STORY-121 Layered AI Context Auto-Delivery
  */
 
-import { statSync } from 'node:fs';
-import { promises as fs } from 'node:fs';
+import { promises as fs, statSync } from 'node:fs';
 import path from 'node:path';
 import type { ContextLevel, QuickContext } from '../schemas/project.js';
 import { CACHE_CONFIG, getCache } from '../utils/cache.js';
@@ -435,7 +434,12 @@ export async function getStandardContext(
   const extendedContext = {
     ...response.dynamic_context,
     open_items_count: allActiveItems.length,
-    in_progress: inProgress.map((i) => ({ id: i.id, type: i.type, title: i.title, updated: i.updated })),
+    in_progress: inProgress.map((i) => ({
+      id: i.id,
+      type: i.type,
+      title: i.title,
+      updated: i.updated,
+    })),
     blocking_items: blocked.map((i) => ({ id: i.id, type: i.type, title: i.title })),
     key_paths: keyPaths,
   };
@@ -541,10 +545,7 @@ export function formatContextAsText(ctx: ContextResponse): string {
  * Used by `devsteps context generate` CLI command.
  * @see STORY-121 TASK-272
  */
-export async function generateProjectMd(
-  projectDir: string,
-  devstepsDir: string
-): Promise<string> {
+export async function generateProjectMd(projectDir: string, devstepsDir: string): Promise<string> {
   const [packages, counts, recentUpdates] = await Promise.all([
     analyzePackages(projectDir),
     getItemCounts(devstepsDir),

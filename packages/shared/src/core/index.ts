@@ -56,8 +56,8 @@ export {
 } from './index-rebuild.js';
 // Refs-style index operations
 export * from './index-refs.js';
-export { type ListItemsArgs, type ListItemsResult, listItems } from './list.js';
 export { type LinkItemArgs, type LinkItemResult, linkItem } from './link.js';
+export { type ListItemsArgs, type ListItemsResult, listItems } from './list.js';
 export {
   type UnlinkItemArgs,
   type UnlinkItemResult,

@@ -14,16 +14,16 @@
  */
 
 import { existsSync, renameSync } from 'node:fs';
-import { getIndexPaths, hasRefsStyleIndex, loadAllIndexes } from './index-refs.js';
 import {
   type AutoMigrationOptions,
-  type MigrationCheckResult,
-  type MigrationStats,
   checkMigrationNeeded,
   getMigrationStatusMessage,
+  type MigrationCheckResult,
+  type MigrationStats,
   needsItemsDirectoryMigration,
 } from './auto-migrate-detect.js';
 import { migrateItemsDirectory, performMigration } from './auto-migrate-impl.js';
+import { getIndexPaths, hasRefsStyleIndex, loadAllIndexes } from './index-refs.js';
 
 // Re-export types and detection helpers for convenience
 export type { AutoMigrationOptions, MigrationCheckResult, MigrationStats };
@@ -78,7 +78,8 @@ export async function ensureIndexMigrated(
     }
     return true;
   } catch (error) {
-    if (!silent) console.error('❌ Migration failed:', error instanceof Error ? error.message : String(error));
+    if (!silent)
+      console.error('❌ Migration failed:', error instanceof Error ? error.message : String(error));
     throw error;
   }
 }
@@ -117,7 +118,8 @@ export async function ensureFullMigration(
         if (!silent) console.log(`   🗑️  Archived legacy index: ${archivePath}`);
       }
     } catch (_error) {
-      if (!silent) console.warn('   ⚠️  Keeping legacy index.json (refs-style index validation failed)');
+      if (!silent)
+        console.warn('   ⚠️  Keeping legacy index.json (refs-style index validation failed)');
     }
   }
 }

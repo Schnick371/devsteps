@@ -30,9 +30,7 @@ export function applyFilters(items: WorkItem[], filterState: FilterState): WorkI
   }
 
   if (filterState.tags.length > 0) {
-    filtered = filtered.filter((item) =>
-      item.tags?.some((tag) => filterState.tags.includes(tag))
-    );
+    filtered = filtered.filter((item) => item.tags?.some((tag) => filterState.tags.includes(tag)));
   }
 
   if (filterState.searchQuery) {
@@ -80,8 +78,14 @@ export function applySorting(items: WorkItem[], sortState: SortState): WorkItem[
       }
       case 'status': {
         const statusOrder = {
-          'in-progress': 0, planned: 1, draft: 2, review: 3,
-          blocked: 4, done: 5, cancelled: 6, obsolete: 7,
+          'in-progress': 0,
+          planned: 1,
+          draft: 2,
+          review: 3,
+          blocked: 4,
+          done: 5,
+          cancelled: 6,
+          obsolete: 7,
         };
         comparison =
           (statusOrder[a.status as keyof typeof statusOrder] ?? 8) -

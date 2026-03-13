@@ -9,13 +9,13 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 
-const COPYRIGHT = `/**
+const _COPYRIGHT = `/**
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0`;
 
@@ -224,7 +224,12 @@ function injectHeader(content, header) {
       const startIdx = rest.indexOf('/**');
       const before = rest.slice(0, startIdx + 3); // includes '/**'
       const after = rest.slice(startIdx + 3);
-      return sheban + before + '\n * Copyright © 2025 Thomas Hertel (the@devsteps.dev)\n * Licensed under the Apache License, Version 2.0\n *' + after;
+      return (
+        sheban +
+        before +
+        '\n * Copyright © 2025 Thomas Hertel (the@devsteps.dev)\n * Licensed under the Apache License, Version 2.0\n *' +
+        after
+      );
     }
     return sheban + header + rest;
   }
@@ -234,11 +239,15 @@ function injectHeader(content, header) {
     const startIdx = content.indexOf('/**');
     const before = content.slice(0, startIdx + 3); // '/**'
     const after = content.slice(startIdx + 3);
-    return before + '\n * Copyright © 2025 Thomas Hertel (the@devsteps.dev)\n * Licensed under the Apache License, Version 2.0\n *' + after;
+    return (
+      before +
+      '\n * Copyright © 2025 Thomas Hertel (the@devsteps.dev)\n * Licensed under the Apache License, Version 2.0\n *' +
+      after
+    );
   }
 
   // Plain file: prepend full header
-  return header + '\n' + content;
+  return `${header}\n${content}`;
 }
 
 // Files to process (relative to packages/)
@@ -267,7 +276,10 @@ for (const relPath of FILES) {
   }
 
   const header = buildHeader(relPath);
-  if (!header) { skipped++; continue; }
+  if (!header) {
+    skipped++;
+    continue;
+  }
 
   const newContent = injectHeader(content, header);
   writeFileSync(absPath, newContent, 'utf-8');

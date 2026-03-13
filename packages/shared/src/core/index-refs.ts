@@ -36,13 +36,22 @@ export * from './index-refs-core.js';
  */
 export function addItemToIndex(devstepsDir: string, item: ItemMetadata): void {
   const typeItems = loadIndexByType(devstepsDir, item.type);
-  if (!typeItems.includes(item.id)) { typeItems.push(item.id); updateIndexByType(devstepsDir, item.type, typeItems); }
+  if (!typeItems.includes(item.id)) {
+    typeItems.push(item.id);
+    updateIndexByType(devstepsDir, item.type, typeItems);
+  }
 
   const statusItems = loadIndexByStatus(devstepsDir, item.status);
-  if (!statusItems.includes(item.id)) { statusItems.push(item.id); updateIndexByStatus(devstepsDir, item.status, statusItems); }
+  if (!statusItems.includes(item.id)) {
+    statusItems.push(item.id);
+    updateIndexByStatus(devstepsDir, item.status, statusItems);
+  }
 
   const priorityItems = loadIndexByPriority(devstepsDir, item.eisenhower);
-  if (!priorityItems.includes(item.id)) { priorityItems.push(item.id); updateIndexByPriority(devstepsDir, item.eisenhower, priorityItems); }
+  if (!priorityItems.includes(item.id)) {
+    priorityItems.push(item.id);
+    updateIndexByPriority(devstepsDir, item.eisenhower, priorityItems);
+  }
 }
 
 /**
@@ -56,29 +65,62 @@ export function removeItemFromIndex(
   priority?: EisenhowerQuadrant
 ): void {
   if (type) {
-    updateIndexByType(devstepsDir, type, loadIndexByType(devstepsDir, type).filter((id) => id !== itemId));
+    updateIndexByType(
+      devstepsDir,
+      type,
+      loadIndexByType(devstepsDir, type).filter((id) => id !== itemId)
+    );
   } else {
     for (const t of Object.keys(INDEX_FILENAMES.TYPE) as ItemType[]) {
       const items = loadIndexByType(devstepsDir, t);
-      if (items.includes(itemId)) { updateIndexByType(devstepsDir, t, items.filter((id) => id !== itemId)); break; }
+      if (items.includes(itemId)) {
+        updateIndexByType(
+          devstepsDir,
+          t,
+          items.filter((id) => id !== itemId)
+        );
+        break;
+      }
     }
   }
 
   if (status) {
-    updateIndexByStatus(devstepsDir, status, loadIndexByStatus(devstepsDir, status).filter((id) => id !== itemId));
+    updateIndexByStatus(
+      devstepsDir,
+      status,
+      loadIndexByStatus(devstepsDir, status).filter((id) => id !== itemId)
+    );
   } else {
     for (const s of Object.keys(INDEX_FILENAMES.STATUS) as ItemStatus[]) {
       const items = loadIndexByStatus(devstepsDir, s);
-      if (items.includes(itemId)) { updateIndexByStatus(devstepsDir, s, items.filter((id) => id !== itemId)); break; }
+      if (items.includes(itemId)) {
+        updateIndexByStatus(
+          devstepsDir,
+          s,
+          items.filter((id) => id !== itemId)
+        );
+        break;
+      }
     }
   }
 
   if (priority) {
-    updateIndexByPriority(devstepsDir, priority, loadIndexByPriority(devstepsDir, priority).filter((id) => id !== itemId));
+    updateIndexByPriority(
+      devstepsDir,
+      priority,
+      loadIndexByPriority(devstepsDir, priority).filter((id) => id !== itemId)
+    );
   } else {
     for (const p of Object.keys(INDEX_FILENAMES.PRIORITY) as EisenhowerQuadrant[]) {
       const items = loadIndexByPriority(devstepsDir, p);
-      if (items.includes(itemId)) { updateIndexByPriority(devstepsDir, p, items.filter((id) => id !== itemId)); break; }
+      if (items.includes(itemId)) {
+        updateIndexByPriority(
+          devstepsDir,
+          p,
+          items.filter((id) => id !== itemId)
+        );
+        break;
+      }
     }
   }
 }
@@ -95,15 +137,29 @@ export function updateItemInIndex(
   newPriority?: EisenhowerQuadrant
 ): void {
   if (oldStatus && newStatus && oldStatus !== newStatus) {
-    updateIndexByStatus(devstepsDir, oldStatus, loadIndexByStatus(devstepsDir, oldStatus).filter((id) => id !== itemId));
+    updateIndexByStatus(
+      devstepsDir,
+      oldStatus,
+      loadIndexByStatus(devstepsDir, oldStatus).filter((id) => id !== itemId)
+    );
     const newItems = loadIndexByStatus(devstepsDir, newStatus);
-    if (!newItems.includes(itemId)) { newItems.push(itemId); updateIndexByStatus(devstepsDir, newStatus, newItems); }
+    if (!newItems.includes(itemId)) {
+      newItems.push(itemId);
+      updateIndexByStatus(devstepsDir, newStatus, newItems);
+    }
   }
 
   if (oldPriority && newPriority && oldPriority !== newPriority) {
-    updateIndexByPriority(devstepsDir, oldPriority, loadIndexByPriority(devstepsDir, oldPriority).filter((id) => id !== itemId));
+    updateIndexByPriority(
+      devstepsDir,
+      oldPriority,
+      loadIndexByPriority(devstepsDir, oldPriority).filter((id) => id !== itemId)
+    );
     const newItems = loadIndexByPriority(devstepsDir, newPriority);
-    if (!newItems.includes(itemId)) { newItems.push(itemId); updateIndexByPriority(devstepsDir, newPriority, newItems); }
+    if (!newItems.includes(itemId)) {
+      newItems.push(itemId);
+      updateIndexByPriority(devstepsDir, newPriority, newItems);
+    }
   }
 }
 

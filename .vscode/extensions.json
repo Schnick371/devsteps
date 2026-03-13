@@ -1,21 +1,21 @@
 {
   // Extensions empfohlen für diesen TypeScript/Node.js Monorepo (devsteps)
   "recommendations": [
-    "biomejs.biome",              // Linting + Formatting (ersetzt ESLint + Prettier)
-    "github.copilot-chat",        // AI Entwicklungsassistent
-    "devsteps.devsteps",          // DevSteps eigene Extension
-    "eamodio.gitlens",            // Git Integration
+    "biomejs.biome", // Linting + Formatting (ersetzt ESLint + Prettier)
+    "github.copilot-chat", // AI Entwicklungsassistent
+    "devsteps.devsteps", // DevSteps eigene Extension
+    "eamodio.gitlens", // Git Integration
     "github.vscode-github-actions", // GitHub Actions CI/CD
-    "redhat.vscode-yaml",         // YAML Support
+    "redhat.vscode-yaml", // YAML Support
     "ms-vscode.extension-test-runner", // VS Code Extension Testing
-    "mermaidchart.vscode-mermaid-chart", // Mermaid Diagramme (docs/)
     "ms-vscode.vscode-websearchforcopilot", // Copilot Web-Suche
-    "ms-vscode.copilot-mermaid-diagram"  // Copilot Mermaid-Generierung
+    "ms-vscode.copilot-mermaid-diagram" // Copilot Mermaid-Generierung
   ],
   // Für diesen Workspace NICHT benötigte Extensions (deaktivieren empfohlen)
   "unwantedRecommendations": [
     // Python-Stack (kein Python in diesem Workspace)
     "ms-python.python",
+    "mermaidchart.vscode-mermaid-chart", // Mermaid Diagramme (docs/)
     "ms-python.vscode-pylance",
     "ms-python.vscode-python-envs",
     "ms-python.debugpy",
@@ -50,15 +50,14 @@
     // GitLab (GitHub wird verwendet)
     "gitlab.gitlab-workflow",
     // Nicht relevante Frameworks/Tools
-    "bradlc.vscode-tailwindcss",      // Kein Tailwind CSS
+    "bradlc.vscode-tailwindcss", // Kein Tailwind CSS
     "imgildev.vscode-nextjs-generator", // Kein Next.js
-    "nrwl.angular-console",            // Kein Angular
-    "prisma.prisma",                   // Kein Prisma ORM
-    "ms-vscode.makefile-tools",        // Kein Makefile
+    "nrwl.angular-console", // Kein Angular
+    "prisma.prisma", // Kein Prisma ORM
+    "ms-vscode.makefile-tools", // Kein Makefile
     "ms-windows-ai-studio.windows-ai-studio", // Windows-spezifisch / AI Studio
     "ohziinteractivestudio.ohzi-vscode-glb-viewer", // 3D-Viewer
     // NICHT ZERTIFIZIERT — undefined_publisher
     "undefined_publisher.remarc-syslog"
   ]
 }
-

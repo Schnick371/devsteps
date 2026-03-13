@@ -45,7 +45,7 @@ export default async function updateCopilotFilesHandler(args: {
       };
     }
 
-    let report = result.message + '\n';
+    let report = `${result.message}\n`;
 
     if (result.files.length > 0) {
       report += '\nFiles:\n';

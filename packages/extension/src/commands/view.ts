@@ -23,10 +23,14 @@ export function registerViewCommands(
 
   // View mode — no-ops (already active)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.viewMode.flat.active', () => { /* no-op */ })
+    vscode.commands.registerCommand('devsteps.viewMode.flat.active', () => {
+      /* no-op */
+    })
   );
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.viewMode.hierarchical.active', () => { /* no-op */ })
+    vscode.commands.registerCommand('devsteps.viewMode.hierarchical.active', () => {
+      /* no-op */
+    })
   );
 
   // View mode — inactive (perform action)
@@ -47,13 +51,19 @@ export function registerViewCommands(
 
   // Hierarchy type — no-ops (already active)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.hierarchy.scrum.active', () => { /* no-op */ })
+    vscode.commands.registerCommand('devsteps.hierarchy.scrum.active', () => {
+      /* no-op */
+    })
   );
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.hierarchy.waterfall.active', () => { /* no-op */ })
+    vscode.commands.registerCommand('devsteps.hierarchy.waterfall.active', () => {
+      /* no-op */
+    })
   );
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.hierarchy.both.active', () => { /* no-op */ })
+    vscode.commands.registerCommand('devsteps.hierarchy.both.active', () => {
+      /* no-op */
+    })
   );
 
   // Hierarchy type — inactive (perform action)
@@ -93,20 +103,30 @@ export function registerViewCommands(
     vscode.commands.registerCommand('devsteps.hideDone.active', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.toggleHideDone();
-      await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', treeDataProvider.getHideDoneState());
+      await vscode.commands.executeCommand(
+        'setContext',
+        'devsteps.hideDone',
+        treeDataProvider.getHideDoneState()
+      );
     })
   );
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.hideDone.inactive', async () => {
       if (!checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.toggleHideDone();
-      await vscode.commands.executeCommand('setContext', 'devsteps.hideDone', treeDataProvider.getHideDoneState());
+      await vscode.commands.executeCommand(
+        'setContext',
+        'devsteps.hideDone',
+        treeDataProvider.getHideDoneState()
+      );
     })
   );
 
   // Show/Hide RelatesTo
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.showRelatesTo.active', () => { /* no-op */ })
+    vscode.commands.registerCommand('devsteps.showRelatesTo.active', () => {
+      /* no-op */
+    })
   );
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.showRelatesTo.inactive', async () => {
@@ -116,7 +136,9 @@ export function registerViewCommands(
     })
   );
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.hideRelatesTo.active', () => { /* no-op */ })
+    vscode.commands.registerCommand('devsteps.hideRelatesTo.active', () => {
+      /* no-op */
+    })
   );
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.hideRelatesTo.inactive', async () => {
@@ -143,7 +165,10 @@ export function registerViewCommands(
       if (!sortBy) return;
 
       const sortOrder = await vscode.window.showQuickPick(
-        [{ label: '⬆️ Ascending', value: 'asc' }, { label: '⬇️ Descending', value: 'desc' }],
+        [
+          { label: '⬆️ Ascending', value: 'asc' },
+          { label: '⬇️ Descending', value: 'desc' },
+        ],
         { placeHolder: 'Sort order' }
       );
       if (!sortOrder) return;

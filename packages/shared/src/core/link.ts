@@ -9,11 +9,7 @@
 import { existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { RelationType } from '../schemas/index.js';
-import {
-  getCurrentTimestamp,
-  parseItemId,
-  TYPE_TO_DIRECTORY,
-} from '../utils/index.js';
+import { getCurrentTimestamp, parseItemId, TYPE_TO_DIRECTORY } from '../utils/index.js';
 import { getConfig } from './config.js';
 import { getItem } from './get.js';
 import { validateRelationConflict, validateRelationship } from './validation.js';
@@ -58,10 +54,7 @@ const INVERSE_RELATIONS: Record<RelationType, RelationType> = {
  * Validates methodology rules and conflict constraints before writing.
  * Idempotent: adding an already-existing link returns success without re-writing.
  */
-export async function linkItem(
-  devstepsDir: string,
-  args: LinkItemArgs
-): Promise<LinkItemResult> {
+export async function linkItem(devstepsDir: string, args: LinkItemArgs): Promise<LinkItemResult> {
   const { sourceId, relationType, targetId } = args;
 
   const sourceParsed = parseItemId(sourceId);
@@ -108,11 +101,7 @@ export async function linkItem(
   }
 
   // Validate no conflicting relations to the same target
-  const conflictCheck = validateRelationConflict(
-    targetId,
-    relationType,
-    sourceMeta.linked_items
-  );
+  const conflictCheck = validateRelationConflict(targetId, relationType, sourceMeta.linked_items);
   if (!conflictCheck.valid) {
     return {
       success: false,
@@ -123,9 +112,7 @@ export async function linkItem(
   }
 
   // Write forward relation (idempotent)
-  const forwardArray = (sourceMeta.linked_items as Record<RelationType, string[]>)[
-    relationType
-  ];
+  const forwardArray = (sourceMeta.linked_items as Record<RelationType, string[]>)[relationType];
   if (!forwardArray.includes(targetId)) {
     forwardArray.push(targetId);
     sourceMeta.updated = getCurrentTimestamp();

@@ -84,15 +84,28 @@ export async function linkCommand(
       process.exit(1);
     }
 
-    if (!sourceMetadata.linked_items[relation as keyof typeof sourceMetadata.linked_items].includes(targetId)) {
-      sourceMetadata.linked_items[relation as keyof typeof sourceMetadata.linked_items].push(targetId);
+    if (
+      !sourceMetadata.linked_items[relation as keyof typeof sourceMetadata.linked_items].includes(
+        targetId
+      )
+    ) {
+      sourceMetadata.linked_items[relation as keyof typeof sourceMetadata.linked_items].push(
+        targetId
+      );
       sourceMetadata.updated = getCurrentTimestamp();
       writeFileSync(sourcePath, JSON.stringify(sourceMetadata, null, 2));
     }
 
     const inverseRelation = INVERSE_RELATIONS[relation];
-    if (inverseRelation && !targetMetadata.linked_items[inverseRelation as keyof typeof targetMetadata.linked_items].includes(sourceId)) {
-      targetMetadata.linked_items[inverseRelation as keyof typeof targetMetadata.linked_items].push(sourceId);
+    if (
+      inverseRelation &&
+      !targetMetadata.linked_items[
+        inverseRelation as keyof typeof targetMetadata.linked_items
+      ].includes(sourceId)
+    ) {
+      targetMetadata.linked_items[inverseRelation as keyof typeof targetMetadata.linked_items].push(
+        sourceId
+      );
       targetMetadata.updated = getCurrentTimestamp();
       writeFileSync(targetPath, JSON.stringify(targetMetadata, null, 2));
     }
@@ -140,7 +153,9 @@ export async function traceCommand(id: string, options: TraceCommandOptions) {
       if (depth > maxDepth) return;
       try {
         const { metadata } = await getItem(devstepsDir, itemId);
-        console.log(`${prefix}${chalk.cyan(metadata.id)} ${chalk.gray(`[${metadata.status}]`)} ${metadata.title}`);
+        console.log(
+          `${prefix}${chalk.cyan(metadata.id)} ${chalk.gray(`[${metadata.status}]`)} ${metadata.title}`
+        );
         if (depth < maxDepth) {
           for (const [relType, linkedIds] of Object.entries(metadata.linked_items)) {
             if (Array.isArray(linkedIds) && linkedIds.length > 0) {
@@ -151,7 +166,9 @@ export async function traceCommand(id: string, options: TraceCommandOptions) {
             }
           }
         }
-      } catch { /* skip missing items */ }
+      } catch {
+        /* skip missing items */
+      }
     }
 
     console.log();

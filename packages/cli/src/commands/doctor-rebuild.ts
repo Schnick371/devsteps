@@ -46,7 +46,10 @@ export async function rebuildIndexCommand(options: { dryRun: boolean; skipConfir
       backup: !dryRun,
       dryRun,
       onProgress: (_current: number, _total: number, message: string) => {
-        if (message !== currentMessage) { currentMessage = message; spinner.text = message; }
+        if (message !== currentMessage) {
+          currentMessage = message;
+          spinner.text = message;
+        }
       },
     });
 
@@ -57,23 +60,30 @@ export async function rebuildIndexCommand(options: { dryRun: boolean; skipConfir
     console.log(chalk.cyan('Items:'));
     console.log(chalk.gray(`  Total found:  ${result.totalItems}`));
     console.log(chalk.gray(`  Processed:    ${result.processedItems}`));
-    if (result.skippedItems > 0) console.log(chalk.yellow(`  Skipped:      ${result.skippedItems}`));
+    if (result.skippedItems > 0)
+      console.log(chalk.yellow(`  Skipped:      ${result.skippedItems}`));
     console.log();
 
     console.log(chalk.cyan('By Type:'));
-    for (const [type, count] of Object.entries(result.stats.byType).sort()) console.log(chalk.gray(`  ${type.padEnd(12)} ${count}`));
+    for (const [type, count] of Object.entries(result.stats.byType).sort())
+      console.log(chalk.gray(`  ${type.padEnd(12)} ${count}`));
     console.log();
 
     console.log(chalk.cyan('By Status:'));
-    for (const [status, count] of Object.entries(result.stats.byStatus).sort()) console.log(chalk.gray(`  ${status.padEnd(12)} ${count}`));
+    for (const [status, count] of Object.entries(result.stats.byStatus).sort())
+      console.log(chalk.gray(`  ${status.padEnd(12)} ${count}`));
     console.log();
 
     console.log(chalk.cyan('By Priority:'));
-    for (const [priority, count] of Object.entries(result.stats.byPriority).sort()) console.log(chalk.gray(`  ${priority.padEnd(30)} ${count}`));
+    for (const [priority, count] of Object.entries(result.stats.byPriority).sort())
+      console.log(chalk.gray(`  ${priority.padEnd(30)} ${count}`));
     console.log();
 
     if (!dryRun) {
-      if (result.backupPath) console.log(chalk.green(`✅ Backed up to: ${result.backupPath.replace(process.cwd(), '.')}`));
+      if (result.backupPath)
+        console.log(
+          chalk.green(`✅ Backed up to: ${result.backupPath.replace(process.cwd(), '.')}`)
+        );
       console.log(chalk.green(`✅ Created ${result.filesCreated} index files`));
       console.log(chalk.green(`✅ Verified: ${result.processedItems}/${result.totalItems} items`));
       console.log();
@@ -90,7 +100,8 @@ export async function rebuildIndexCommand(options: { dryRun: boolean; skipConfir
         console.log(chalk.yellow(`  ${error.file.replace(process.cwd(), '.')}`));
         console.log(chalk.gray(`    ${error.error}`));
       }
-      if (result.errors.length > 10) console.log(chalk.gray(`  ... and ${result.errors.length - 10} more`));
+      if (result.errors.length > 10)
+        console.log(chalk.gray(`  ... and ${result.errors.length - 10} more`));
     }
     console.log();
   } catch (error) {

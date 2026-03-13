@@ -59,22 +59,42 @@ export interface MigrationStats {
  */
 export function checkMigrationNeeded(devstepsDir: string): MigrationCheckResult {
   if (!existsSync(devstepsDir)) {
-    return { needed: false, hasLegacy: false, hasRefs: false, message: 'Not a DevSteps project (no .devsteps directory)' };
+    return {
+      needed: false,
+      hasLegacy: false,
+      hasRefs: false,
+      message: 'Not a DevSteps project (no .devsteps directory)',
+    };
   }
 
   const hasLegacy = hasLegacyIndex(devstepsDir);
   const hasRefs = hasRefsStyleIndex(devstepsDir);
 
   if (!hasLegacy && hasRefs) {
-    return { needed: false, hasLegacy: false, hasRefs: true, message: 'Project already using refs-style index ✓' };
+    return {
+      needed: false,
+      hasLegacy: false,
+      hasRefs: true,
+      message: 'Project already using refs-style index ✓',
+    };
   }
 
   if (hasLegacy && hasRefs) {
-    return { needed: false, hasLegacy: true, hasRefs: true, message: 'Both index formats exist - manual intervention required' };
+    return {
+      needed: false,
+      hasLegacy: true,
+      hasRefs: true,
+      message: 'Both index formats exist - manual intervention required',
+    };
   }
 
   if (!hasLegacy && !hasRefs) {
-    return { needed: false, hasLegacy: false, hasRefs: false, message: 'No index found - new project or not initialized' };
+    return {
+      needed: false,
+      hasLegacy: false,
+      hasRefs: false,
+      message: 'No index found - new project or not initialized',
+    };
   }
 
   let itemCount: number | undefined;
@@ -85,7 +105,13 @@ export function checkMigrationNeeded(devstepsDir: string): MigrationCheckResult 
     // Ignore - legacy index might be corrupted
   }
 
-  return { needed: true, hasLegacy: true, hasRefs: false, itemCount, message: `Migration needed: ${itemCount ?? 'unknown'} items to migrate` };
+  return {
+    needed: true,
+    hasLegacy: true,
+    hasRefs: false,
+    itemCount,
+    message: `Migration needed: ${itemCount ?? 'unknown'} items to migrate`,
+  };
 }
 
 /**
@@ -95,9 +121,11 @@ export function getMigrationStatusMessage(devstepsDir: string): string {
   const result = checkMigrationNeeded(devstepsDir);
 
   if (!existsSync(devstepsDir)) return '❌ Not a DevSteps project';
-  if (result.needed) return `🔄 Migration available: ${result.itemCount ?? 'unknown'} items can be migrated to refs-style index`;
+  if (result.needed)
+    return `🔄 Migration available: ${result.itemCount ?? 'unknown'} items can be migrated to refs-style index`;
   if (result.hasRefs) return '✅ Project using refs-style index';
-  if (result.hasLegacy && result.hasRefs) return '⚠️  Both index formats detected - manual cleanup needed';
+  if (result.hasLegacy && result.hasRefs)
+    return '⚠️  Both index formats detected - manual cleanup needed';
   return '📦 DevSteps project (no index yet)';
 }
 

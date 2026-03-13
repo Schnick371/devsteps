@@ -75,7 +75,11 @@ export async function updateCopilotFilesCommand(options: {
     if (result.files.length > 0) {
       for (const f of result.files) {
         if (f.status === 'updated') {
-          console.log(chalk.yellow('  ↑'), chalk.white(`.github/${f.file}`), chalk.gray(`(${f.reason ?? 'changed'})`));
+          console.log(
+            chalk.yellow('  ↑'),
+            chalk.white(`.github/${f.file}`),
+            chalk.gray(`(${f.reason ?? 'changed'})`)
+          );
         } else if (f.status === 'added') {
           console.log(chalk.green('  +'), chalk.white(`.github/${f.file}`));
         } else {

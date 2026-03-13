@@ -20,7 +20,8 @@ export const initTool: Tool = {
       },
       path: {
         type: 'string',
-        description: 'Path where to initialize the project (optional, defaults to current directory)',
+        description:
+          'Path where to initialize the project (optional, defaults to current directory)',
       },
       author: {
         type: 'string',
@@ -171,7 +172,8 @@ export const updateTool: Tool = {
       ids: {
         type: 'array',
         items: { type: 'string' },
-        description: 'Multiple item IDs to update with the same patch — batch mode (optional if id is provided)',
+        description:
+          'Multiple item IDs to update with the same patch — batch mode (optional if id is provided)',
       },
       status: {
         type: 'string',
@@ -189,7 +191,8 @@ export const updateTool: Tool = {
       },
       superseded_by: {
         type: 'string',
-        description: 'Item ID that supersedes/replaces this item — use when status=obsolete (optional)',
+        description:
+          'Item ID that supersedes/replaces this item — use when status=obsolete (optional)',
       },
       priority: {
         type: 'string',
@@ -225,7 +228,8 @@ export const updateTool: Tool = {
       add_tags: {
         type: 'array',
         items: { type: 'string' },
-        description: 'Tags to add without replacing existing ones — works with id and ids (optional)',
+        description:
+          'Tags to add without replacing existing ones — works with id and ids (optional)',
       },
       remove_tags: {
         type: 'array',

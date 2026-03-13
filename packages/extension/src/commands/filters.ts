@@ -31,7 +31,11 @@ export function registerFilterCommands(
       );
       if (!selected || !checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setStatusFilter(selected.map((s) => s.value));
-      await vscode.commands.executeCommand('setContext', 'devsteps.filtersActive', treeDataProvider.isFiltersActive());
+      await vscode.commands.executeCommand(
+        'setContext',
+        'devsteps.filtersActive',
+        treeDataProvider.isFiltersActive()
+      );
     })
   );
 
@@ -49,7 +53,11 @@ export function registerFilterCommands(
       );
       if (!selected || !checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setPriorityFilter(selected.map((s) => s.value));
-      await vscode.commands.executeCommand('setContext', 'devsteps.filtersActive', treeDataProvider.isFiltersActive());
+      await vscode.commands.executeCommand(
+        'setContext',
+        'devsteps.filtersActive',
+        treeDataProvider.isFiltersActive()
+      );
     })
   );
 
@@ -71,7 +79,11 @@ export function registerFilterCommands(
       );
       if (!selected || !checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setTypeFilter(selected.map((s) => s.value));
-      await vscode.commands.executeCommand('setContext', 'devsteps.filtersActive', treeDataProvider.isFiltersActive());
+      await vscode.commands.executeCommand(
+        'setContext',
+        'devsteps.filtersActive',
+        treeDataProvider.isFiltersActive()
+      );
     })
   );
 
@@ -96,6 +108,8 @@ export function registerFilterCommands(
 
   // Filter status button — inactive (no active filters — registered to avoid VS Code errors)
   context.subscriptions.push(
-    vscode.commands.registerCommand('devsteps.filterStatus.inactive', () => { /* no-op */ })
+    vscode.commands.registerCommand('devsteps.filterStatus.inactive', () => {
+      /* no-op */
+    })
   );
 }

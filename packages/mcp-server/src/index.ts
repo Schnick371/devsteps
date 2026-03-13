@@ -12,9 +12,9 @@
 import { Command } from 'commander';
 import packageJson from '../package.json' with { type: 'json' };
 import { configureLogger, getLogger } from './logger.js';
-import { registerShutdownHandlers, shutdownManager } from './shutdown.js';
 import { DevStepsServer } from './server.js';
 import { setupHeartbeat } from './server-utils.js';
+import { registerShutdownHandlers, shutdownManager } from './shutdown.js';
 
 /**
  * CLI Options interface
@@ -30,7 +30,10 @@ process.on('unhandledRejection', (reason, promise) => {
   const logger = getLogger();
   logger.error(
     {
-      reason: reason instanceof Error ? { message: reason.message, stack: reason.stack, name: reason.name } : reason,
+      reason:
+        reason instanceof Error
+          ? { message: reason.message, stack: reason.stack, name: reason.name }
+          : reason,
       promise: String(promise),
     },
     '⚠️  Unhandled Promise Rejection - Server continues running'
@@ -97,8 +100,14 @@ if (transport === 'http') {
     registerShutdownHandlers();
     shutdownManager.trackOperation(
       new Promise<void>((resolve) => {
-        process.once('SIGTERM', async () => { await httpServer.close(); resolve(); });
-        process.once('SIGINT', async () => { await httpServer.close(); resolve(); });
+        process.once('SIGTERM', async () => {
+          await httpServer.close();
+          resolve();
+        });
+        process.once('SIGINT', async () => {
+          await httpServer.close();
+          resolve();
+        });
       })
     );
   } catch (error) {

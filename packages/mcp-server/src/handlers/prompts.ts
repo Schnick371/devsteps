@@ -12,8 +12,12 @@
  */
 
 import path from 'node:path';
+import type {
+  GetPromptResult,
+  ListPromptsResult,
+  Prompt,
+} from '@modelcontextprotocol/sdk/types.js';
 import { formatContextAsText, getQuickContext } from '@schnick371/devsteps-shared';
-import type { GetPromptResult, ListPromptsResult, Prompt } from '@modelcontextprotocol/sdk/types.js';
 import { getWorkspacePath } from '../workspace.js';
 
 /**
@@ -139,7 +143,11 @@ export async function getPromptHandler(
       const itemId = args.item_id || '<ITEM_ID>';
       const changeSummary = args.change_summary || '';
 
-      const typeHint = itemId.startsWith('BUG') ? 'fix' : itemId.startsWith('TASK') ? 'feat' : 'chore';
+      const typeHint = itemId.startsWith('BUG')
+        ? 'fix'
+        : itemId.startsWith('TASK')
+          ? 'feat'
+          : 'chore';
 
       const template = [
         `${typeHint}(<scope>): ${changeSummary || '<describe what changed>'}`,

@@ -5,7 +5,7 @@
  * Extension commands — barrel: delegates to domain-specific registrers
  */
 
-import * as vscode from 'vscode';
+import type * as vscode from 'vscode';
 import type { DevStepsTreeDataProvider } from '../treeView/devstepsTreeDataProvider.js';
 import { registerFilterCommands } from './filters.js';
 import { registerItemActionCommands } from './item-actions.js';
