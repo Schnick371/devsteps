@@ -1,0 +1,62 @@
+{
+  "id": "STORY-214",
+  "type": "story",
+  "category": "general",
+  "title": "ADP Protocol Hardening — Pre-scan, Tiered Limits, Single-Concern Mandate Rule (P1+P2+P3+P5+R3-fix)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-23T12:07:39.407Z",
+  "updated": "2026-03-23T12:10:47.984Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/AGENT-DISPATCH-PROTOCOL.md",
+    "packages/mcp-server/.github/agents/devsteps-R0-coord.agent.md",
+    "packages/mcp-server/.github/agents/devsteps-R0-coord-sprint.agent.md",
+    "packages/mcp-server/.github/agents/devsteps-R3-exec-planner.agent.md",
+    "packages/mcp-server/.github/instructions/devsteps-agent-protocol.instructions.md",
+    ".github/agents/devsteps-R0-coord.agent.md",
+    ".github/agents/devsteps-R0-coord-sprint.agent.md",
+    ".github/agents/devsteps-R3-exec-planner.agent.md",
+    ".github/instructions/devsteps-agent-protocol.instructions.md",
+    "packages/cli/.github/agents/devsteps-R0-coord.agent.md",
+    "packages/cli/.github/agents/devsteps-R0-coord-sprint.agent.md",
+    "packages/cli/.github/agents/devsteps-R3-exec-planner.agent.md",
+    "packages/cli/.github/instructions/devsteps-agent-protocol.instructions.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-041"
+    ],
+    "implemented-by": [
+      "TASK-363",
+      "TASK-364",
+      "TASK-365",
+      "TASK-366",
+      "TASK-367"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-213"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "STORY-215",
+      "TASK-368"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agents",
+    "protocol",
+    "adp",
+    "efficiency",
+    "spider-web",
+    "mandate-scoping"
+  ],
+  "commits": [],
+  "metadata": {}
+}

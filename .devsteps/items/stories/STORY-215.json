@@ -1,0 +1,47 @@
+{
+  "id": "STORY-215",
+  "type": "story",
+  "category": "general",
+  "title": "Research Prompt Tiering — FOCUSED vs DEEP Dispatch Profiles (P4)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-23T12:09:06.460Z",
+  "updated": "2026-03-23T12:10:33.937Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/.github/prompts/devsteps-05-research.prompt.md",
+    ".github/prompts/devsteps-05-research.prompt.md",
+    "packages/cli/.github/prompts/devsteps-05-research.prompt.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-041"
+    ],
+    "implemented-by": [
+      "TASK-368",
+      "TASK-369"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-214"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agents",
+    "research",
+    "prompt",
+    "efficiency",
+    "spider-web",
+    "gate",
+    "p4"
+  ],
+  "commits": [],
+  "metadata": {}
+}

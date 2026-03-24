@@ -1,0 +1,40 @@
+{
+  "id": "TASK-369",
+  "type": "task",
+  "category": "general",
+  "title": "Sync updated research prompt from canonical source to root and cli",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-23T12:09:29.592Z",
+  "updated": "2026-03-23T12:10:42.804Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/prompts/devsteps-05-research.prompt.md",
+    "packages/cli/.github/prompts/devsteps-05-research.prompt.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-215"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-368"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "sync",
+    "files",
+    "research",
+    "prompt"
+  ],
+  "commits": [],
+  "metadata": {}
+}

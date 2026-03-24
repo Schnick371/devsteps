@@ -1,0 +1,44 @@
+{
+  "id": "TASK-368",
+  "type": "task",
+  "category": "general",
+  "title": "Add FOCUSED/DEEP dispatch profiles and tier-conditional gate criteria to devsteps-05-research.prompt.md",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-03-23T12:09:22.233Z",
+  "updated": "2026-03-23T12:10:42.804Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/.github/prompts/devsteps-05-research.prompt.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-215"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-214"
+    ],
+    "required-by": [
+      "TASK-369"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research",
+    "prompt",
+    "p4",
+    "gate",
+    "atomic",
+    "focused",
+    "deep"
+  ],
+  "commits": [],
+  "metadata": {}
+}

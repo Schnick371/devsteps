@@ -1,0 +1,47 @@
+{
+  "id": "TASK-367",
+  "type": "task",
+  "category": "general",
+  "title": "Sync all Story A modified devsteps-* files from canonical source to root and cli",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-23T12:08:47.483Z",
+  "updated": "2026-03-23T12:10:27.642Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/devsteps-R0-coord.agent.md",
+    ".github/agents/devsteps-R0-coord-sprint.agent.md",
+    ".github/agents/devsteps-R3-exec-planner.agent.md",
+    ".github/instructions/devsteps-agent-protocol.instructions.md",
+    "packages/cli/.github/agents/devsteps-R0-coord.agent.md",
+    "packages/cli/.github/agents/devsteps-R0-coord-sprint.agent.md",
+    "packages/cli/.github/agents/devsteps-R3-exec-planner.agent.md",
+    "packages/cli/.github/instructions/devsteps-agent-protocol.instructions.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-214"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-364",
+      "TASK-365",
+      "TASK-366"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "sync",
+    "files",
+    "packages"
+  ],
+  "commits": [],
+  "metadata": {}
+}

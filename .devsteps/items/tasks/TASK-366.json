@@ -1,0 +1,41 @@
+{
+  "id": "TASK-366",
+  "type": "task",
+  "category": "general",
+  "title": "Mirror I-14 single-concern mandate invariant in devsteps-agent-protocol.instructions.md",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-23T12:08:35.722Z",
+  "updated": "2026-03-23T12:10:27.642Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/.github/instructions/devsteps-agent-protocol.instructions.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-214"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-363"
+    ],
+    "required-by": [
+      "TASK-367"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "instructions",
+    "adp",
+    "i-14",
+    "protocol"
+  ],
+  "commits": [],
+  "metadata": {}
+}

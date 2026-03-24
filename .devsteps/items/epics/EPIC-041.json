@@ -1,0 +1,43 @@
+{
+  "id": "EPIC-041",
+  "type": "epic",
+  "category": "general",
+  "title": "Spider Web Dispatch Efficiency — Mandate Scoping and Token Budget Control",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-23T12:07:15.285Z",
+  "updated": "2026-03-23T12:09:58.817Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/AGENT-DISPATCH-PROTOCOL.md",
+    "packages/mcp-server/.github/agents/devsteps-R0-coord.agent.md",
+    "packages/mcp-server/.github/agents/devsteps-R0-coord-sprint.agent.md",
+    "packages/mcp-server/.github/agents/devsteps-R3-exec-planner.agent.md",
+    "packages/mcp-server/.github/instructions/devsteps-agent-protocol.instructions.md",
+    "packages/mcp-server/.github/prompts/devsteps-05-research.prompt.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-214",
+      "STORY-215"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "agents",
+    "protocol",
+    "efficiency",
+    "spider-web"
+  ],
+  "commits": [],
+  "metadata": {}
+}

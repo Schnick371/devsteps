@@ -1,0 +1,43 @@
+{
+  "id": "TASK-364",
+  "type": "task",
+  "category": "general",
+  "title": "Add FULL-tier pre-scan Step 0.5 and compress Scope-Split section in coord and coord-sprint",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-23T12:08:13.552Z",
+  "updated": "2026-03-23T12:10:20.898Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/.github/agents/devsteps-R0-coord.agent.md",
+    "packages/mcp-server/.github/agents/devsteps-R0-coord-sprint.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-214"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-363"
+    ],
+    "required-by": [
+      "TASK-365",
+      "TASK-367"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "coord",
+    "p1",
+    "pre-scan",
+    "mandate-scoping"
+  ],
+  "commits": [],
+  "metadata": {}
+}

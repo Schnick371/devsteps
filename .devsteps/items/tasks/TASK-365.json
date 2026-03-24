@@ -1,0 +1,41 @@
+{
+  "id": "TASK-365",
+  "type": "task",
+  "category": "general",
+  "title": "Update exec-planner MAP step 5 to check Relevant files before calling read_file",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-23T12:08:26.515Z",
+  "updated": "2026-03-23T12:10:24.197Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/.github/agents/devsteps-R3-exec-planner.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-214"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-364"
+    ],
+    "required-by": [
+      "TASK-367"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "exec-planner",
+    "r3-fix",
+    "cross-ring-reread",
+    "efficiency"
+  ],
+  "commits": [],
+  "metadata": {}
+}
