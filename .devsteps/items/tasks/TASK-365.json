@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Update exec-planner MAP step 5 to check Relevant files before calling read_file",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-03-23T12:08:26.515Z",
-  "updated": "2026-03-23T12:10:24.197Z",
+  "updated": "2026-03-24T08:15:24.258Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/.github/agents/devsteps-R3-exec-planner.agent.md"

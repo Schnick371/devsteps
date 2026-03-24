@@ -24,4 +24,16 @@ Five coordinated documentation-only changes across ADP, coord, exec-planner, and
 9. AGENT-DISPATCH-PROTOCOL.md is root-only; no copies created
 
 ## Sync Direction
-pkg/mcp-server/.github/ (canonical source) → root .github/ → packages/cli/.github/
+pkg/mcp-server/.github/ (canonical source) → root .github/ → packages/cli/.github/## Completion — 2026-03-24
+
+Implemented in commit c70747e (merged to main 6f28700).
+
+**Changes delivered:**
+- **I-14 invariant (ADP §1):** Single-concern mandate rule — coord MUST scope-split when ≥2 orthogonal concerns; MAX_SPLIT=4 concern-split guard added to Scope-Split Fan-Out prose
+- **DPF Relevant files: field (ADP §2):** Added to Ring 1 and Ring 2 templates (FULL tier only; omit at QUICK/STANDARD); note added explaining coord populates from Step 0.5
+- **Tier-Adjusted Tool-Call Ceiling (ADP §3):** QUICK:5 / STANDARD:12 / FULL:20 (informational guideline, not hard cutoff)
+- **coord Step 0.5 pre-scan:** Run ≤3 searches, select ≤8 paths, inject Relevant files: into all Ring 1/2/3 DPFs at FULL tier; coord.md stays at 150 lines
+- **coord-sprint:** Pre-scan note embedded directly in DPF section; 149 lines
+- **exec-planner MAP step 5:** Check Relevant files: first before calling read_file + behavioral rule added
+- **Instructions (I-14 row):** Mirrored as item 10 in devsteps-agent-protocol.instructions.md
+- All 4 canonical files synced: mcp-server → root (.github/) → cli; ADP remains root-only (no package copies)",

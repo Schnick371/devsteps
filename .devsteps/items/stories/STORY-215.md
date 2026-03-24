@@ -16,4 +16,15 @@ Note: devsteps-R5-gate-reviewer.agent.md requires NO changes — it reads accept
 3. Prompt contains dispatch-profile selector logic (triage criteria)
 4. Ring 5 gate section uses tier-conditional criteria (FOCUSED: ≥5 sources; DEEP: ≥10 sources + all 5 axes)
 5. gate-reviewer.agent.md unchanged
-6. All three prompt copies in sync (mcp-server canonical, root, cli)
+6. All three prompt copies in sync (mcp-server canonical, root, cli)## Completion — 2026-03-24
+
+Commit 53aedd5, merged to main 756702e.
+
+**Delivered:**
+- Profile selector table: FOCUSED (bounded, single-tech) vs DEEP (architecture/ADR/ecosystem); coord decides autonomously, once `#askQuestions` for ambiguous scope
+- FOCUSED: analyst-research + aspect-constraints → exec-planner → exec-doc → gate with relaxed criteria (≥5 sources, ≥3 axes)
+- DEEP: existing 12-agent Spider Web renamed, gate criteria unchanged (≥10 sources, all 5 axes)
+- Gate criteria now tier-conditional — passes via mandate DPF without changes to gate-reviewer.agent.md
+- 'Clarify Scope' section dropped (absorbed into profile selector)
+- 117 lines total (within 150 limit)
+- All 3 copies in sync: mcp-server canonical → root → cli

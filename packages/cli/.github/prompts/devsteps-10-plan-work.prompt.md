@@ -24,11 +24,26 @@ tools:
 
 1. **Understand intent** — use `#askQuestions` before ANY dispatch:
    > Core problem? Constraints, known pitfalls? Existing Epic/Story to attach to?
-2. **Dispatch R1 in parallel:** `devsteps-R1-analyst-archaeology` (what exists that this touches?) + `devsteps-R1-analyst-risk` (what could go wrong?)
+2. **Dispatch R1 in parallel:** `devsteps-R1-analyst-context` (what's the current state?) + `devsteps-R1-analyst-internal` (code patterns?) + `devsteps-R1-analyst-risk` (what could go wrong?)
 3. **Dispatch R2 in parallel (after R1):** `devsteps-R2-aspect-constraints` + `devsteps-R2-aspect-impact` — pass R1 `report_path` as `upstream_paths`
 4. **Dispatch R3:** `devsteps-R3-exec-planner` — reads R1+R2, proposes item structure (hierarchy, priority, affected_paths)
-5. **Present plan** to user via `#askQuestions` before any item creation:
-   > Proposed: [Epic X → Story Y → Tasks]. Priority: [Q]. Affected: [paths]. Create?
+5. **Pre-Create Summary Gate** — BEFORE dispatching R4, display a structured summary for every planned item. Do NOT dispatch R4 until the user approves.
+
+   **Format per item (5–10 lines each):**
+   - **[Type] Title** — Priority: [Q] | Affects: [path, ...] | Parent: [Epic/Story ID or standalone]
+   - Rationale: 1–2 sentences — why this item exists and what it delivers
+
+   Group items by type when multiple items of the same type are planned (e.g., all tasks together).
+
+   Then use `#askQuestions` with these options:
+   > **A)** Approve all — proceed with creation
+   > **B)** Modify item [X] — describe change
+   > **C)** Remove item [X]
+   > **D)** Add a missing item
+   > **E)** _(Freetext)_
+
+   Incorporate feedback, re-display updated summary, ask again if changes were made. Only dispatch R4 after explicit approval.
+
 6. **Dispatch R4:** `devsteps-R4-worker-devsteps` — creates items, links relationships
 7. **Dispatch R5:** `devsteps-R5-gate-reviewer` — validates plan coherence, hierarchy, no orphaned items
 
