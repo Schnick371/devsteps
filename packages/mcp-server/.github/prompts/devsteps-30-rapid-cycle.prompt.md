@@ -26,13 +26,15 @@ Activate **Standard MPD** in kanban mode. Follow the MPD protocol from your agen
 
 ## Mode Selection — Analysis Fan-out
 
-| Situation                                     | Mode                          | Ring 1 — analysts                                          | Ring 2 — aspects (after Ring 1)                                                |
-| --------------------------------------------- | ----------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| Task is clearly defined, no strategy question | **STANDARD MPD**              | `analyst-archaeology` + `analyst-risk`                     | `aspect-constraints` + `aspect-impact`                                         |
-| FULL tier (schema/cross-pkg change)           | **FULL MPD**                  | `analyst-archaeology` + `analyst-risk` + `analyst-quality` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` |
-| Task asks "which approach/pattern/library"    | **Competitive Mode**          | `analyst-research` + `analyst-archaeology`                 | `aspect-constraints` + `aspect-staleness`                                      |
-| New tooling/library AND install-overhead risk | **Competitive + constraints** | `analyst-research` + `analyst-archaeology`                 | `aspect-constraints` + `aspect-staleness` + `aspect-integration`               |
-| Single-file formatting / typo ONLY            | **QUICK — skip R1+R2**        | (skip)                                                     | (skip)                                                                         |
+| Situation                                     | Mode                          | Ring 1 — analysts                                                               | Ring 2 — aspects (after Ring 1)                                                |
+| --------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Task is clearly defined, no strategy question | **STANDARD MPD**              | `analyst-context` + `analyst-internal` + `analyst-risk`                         | `aspect-constraints` + `aspect-impact`                                         |
+| FULL tier (schema/cross-pkg change)           | **FULL MPD**                  | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` |
+| Task asks "which approach/pattern/library"    | **Competitive Mode**          | `analyst-research` + `analyst-internal` + `analyst-web` + `analyst-context`     | `aspect-constraints` + `aspect-staleness`                                      |
+| New tooling/library AND install-overhead risk | **Competitive + constraints** | `analyst-research` + `analyst-internal` + `analyst-web` + `analyst-context`     | `aspect-constraints` + `aspect-staleness` + `aspect-integration`               |
+| Single-file formatting / typo ONLY            | **QUICK — skip R1+R2**        | (skip)                                                                          | (skip)                                                                         |
+
+> **`analyst-archaeology`** = git forensics only — dispatched at FULL or when git history analysis matters (reverts, blame, structural changes).
 
 ## Aspect & Domain Agent Roster
 
@@ -57,7 +59,11 @@ Activate **Standard MPD** in kanban mode. Follow the MPD protocol from your agen
 ## Session Flow
 
 1. Search for duplicates before creating items (`#mcp_devsteps_search`)
-2. Create Epic → Story → Task hierarchy, link relationships
+2. Pre-Create Summary Gate — before creating any new items, display a structured summary per item:
+   - **[Type] Title** — Priority: [Q] | Affects: [path, ...] | Parent: [Epic/Story or standalone]
+   - Rationale: 1–2 sentences — why it exists and what it delivers
+   Then `#askQuestions`: A) Approve all B) Modify X C) Remove X D) Add missing E) Freetext.
+   Re-display on changes; only create items + link relationships after explicit approval.
 3. Select highest-priority `planned` item (Q1 → Q2 → Q3) — confirm via `#askQuestions`:
    > Next item: [ID] — [title] (Q[n]). Shall I start this, or pick a different one?
 4. Update status to `in-progress`; checkout branch (`story/<ID>`, `task/<ID>`, `bug/<ID>`)
