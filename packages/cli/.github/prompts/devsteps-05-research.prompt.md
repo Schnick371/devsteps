@@ -44,37 +44,56 @@ All sources MUST fall within `[today minus 90 days, today]`. The formula is alwa
 - Pre-sprint research to front-load knowledge and reduce mid-sprint surprises
 - Post-incident: "what is the industry stance on the approach that failed?"
 
-## Full Spider Web Dispatch — COMPETITIVE+ Tier
+## Dispatch Profile Selection (coord decides — never ask user)
 
-This prompt triggers the **most expansive dispatch profile**: all four Ring-1 analysts fire simultaneously, then all five Ring-2 aspects.
+| Signal | Profile |
+|--------|--------|
+| Single library, API, or specific pattern — bounded, direct answer | FOCUSED |
+| "Which approach should we adopt", ADR, ecosystem audit, cross-cutting | DEEP |
+| Ambiguous or multi-technology scope | `#askQuestions` once, then dispatch |
 
-### Ring 1 — All Analysts (single simultaneous call)
+---
+
+## FOCUSED Profile — Bounded Research (3 agents, ≥5 sources)
+
+For narrow, single-technology questions with a direct answer.
+
+**Ring 1 (simultaneous):** `analyst-research` — web research, ≥5 sources, 90-day window
+
+**Ring 2 (after Ring 1):** `aspect-constraints` — project fit and applicability limits
+
+**Ring 3–5:** `exec-planner` → `exec-doc` → `gate-reviewer`
+
+**Gate criteria (FOCUSED):** ≥5 sources · ≥3 coverage axes · actionable recommendation with owner
+
+---
+
+## DEEP Profile — Full Spider Web (12 agents, 10+ sources)
+
+For architecture decisions, ecosystem comparisons, ADRs, and cross-cutting audits.
+
+### Ring 1 — All Analysts (simultaneous)
 
 | Agent | Domain |
 |---|---|
-| `analyst-research` | Live bright-data web research — 10+ sources, last 90-day window, multi-domain |
-| `analyst-archaeology` | Internal codebase archaeology — what does this project already assume or use? |
-| `analyst-risk` | Risk surface — CVEs, deprecation cliffs, supply-chain, adoption risk |
-| `analyst-quality` | Standards compliance — are existing patterns still best-practice today? |
+| `analyst-research` | Web research — 10+ sources, 90-day window, multi-domain |
+| `analyst-archaeology` | Internal codebase — current assumptions and usage patterns |
+| `analyst-risk` | CVEs, deprecation cliffs, supply-chain, adoption risk |
+| `analyst-quality` | Standards compliance vs. today's best practice |
 
 ### Ring 2 — All Aspects (after Ring 1, pass all report_paths)
 
-| Agent | Cross-validation angle |
+| Agent | Angle |
 |---|---|
-| `aspect-impact` | Impact of adopting vs. rejecting the recommended approach |
-| `aspect-constraints` | Project constraints that bound applicability of external best practices |
-| `aspect-staleness` | Which current implementation parts are stale vs. community standard? |
+| `aspect-impact` | Adopting vs. rejecting the recommended approach |
+| `aspect-constraints` | Project constraints bounding external best practices |
+| `aspect-staleness` | Current impl parts stale vs. community standard |
 | `aspect-quality` | Quality gap: current state vs. externally observed best practice |
-| `aspect-integration` | Integration surface: how recommendations fit existing architecture |
+| `aspect-integration` | Integration surface with existing architecture |
 
-### Ring 3 — Planner
-`exec-planner` synthesizes all MandateResults into a structured **Research Brief** with gap analysis and prioritized recommendations.
+### Ring 3–5: `exec-planner` → `exec-doc` → `gate-reviewer`
 
-### Ring 4 — Documentation only (no `exec-impl`)
-`exec-doc` produces the deliverable: a structured Research Brief document.
-
-### Ring 5 — Quality Gate
-`gate-reviewer` validates: minimum 10 sources · all within 90-day window · all five coverage axes addressed · all recommendations are actionable (owner + timeline + rationale).
+**Gate criteria (DEEP):** ≥10 sources · all within 90-day window · all 5 coverage axes addressed · recommendations with owner + timeline + rationale
 
 ## Research Brief Output Structure
 
@@ -95,10 +114,4 @@ After research completes and gate passes:
 - Use `worker-devsteps` to link the spike to affected stories or epics
 - Add follow-up `story` or `task` items for each actionable recommendation
 
-## Clarify Scope Before Dispatching
 
-Use `#askQuestions` when topic is ambiguous:
-
-> What is the research topic (library / pattern / architecture / security domain / ecosystem)?
-> Is this anchored to a specific DevSteps item, or open-horizon exploration?
-> Are there constraints (licensing, language, platform, team skill level) to weight recommendations?
