@@ -13,8 +13,8 @@ All Copilot agents follow the **Spinnennetz / Radar Chart model**: concentric ri
 
 | Ring            | Agents                                                                                        | Mode             | Timing          |
 | --------------- | --------------------------------------------------------------------------------------------- | ---------------- | --------------- |
-| 0 — Hub         | `coord-*` — dispatches ALL, reads ONLY MandateResults                                         | Orchestration    | always          |
-| 1 — Analysis    | `analyst-*` — Read-only Research                                                              | Parallel fan-out | simultaneously  |
+| 0 — Hub         | `coord-*` — dispatches ALL, reads MandateResults + Analysis Envelopes                         | Orchestration    | always          |
+| 1 — Analysis    | `analyst-*` — Read-only Research (standard: `context·internal·risk`; FULL adds `quality·archaeology·web`; COMPETITIVE adds `research·web`) | Parallel fan-out | simultaneously  |
 | 2 — Validation  | `aspect-*` — Cross-Validation with Ring 1 results                                             | Parallel fan-out | AFTER Ring 1    |
 | 3 — Planning    | `exec-planner` — reads Ring 1+2 results                                                       | Sequential       | AFTER Ring 2    |
 | 4 — Execution   | **Conductors:** `exec-impl`, `exec-test`, `exec-doc` (each dispatches its `worker-*`); **Workers:** `worker-*` dispatched by conductors NOT coord (incl. `worker-workspace` for new projects, dispatched by coord) | Sequential       | AFTER Ring 3    |
@@ -22,6 +22,7 @@ All Copilot agents follow the **Spinnennetz / Radar Chart model**: concentric ri
 
 > **VS Code Constraint**: `runSubagent` does not support nesting. `coord-*` dispatches EVERYTHING directly. No non-coord agent may call `runSubagent` — all are Leaf Nodes.
 > **Ring 2** fires via coord directly (not the analysts), AFTER Ring 1 MandateResults are available. Ring 1 `report_path` values are passed as `upstream_paths`.
+> **Read split (Ring 1):** `archaeology·risk·quality·research` → `read_mandate_results`; `context·internal·web` → `read_analysis_envelope(report_path)` — these write `write_analysis_report`, not `write_mandate_result`.
 > **Background Agents** (VS Code 1.109+, stable): Agents can run without an open chat window, persist across sessions, and use the same tools. Long-running exec-impl/exec-test tasks benefit from background execution.
 
 When `runSubagent` is available: use Spider Web Dispatch.
@@ -70,11 +71,12 @@ DevSteps is the primary work-tracking system. NEVER edit `.devsteps/` directly �
 | Constraint | Rule |
 | ---------- | ---- |
 | **runSubagent** | `coord-*` dispatches ALL agents via `runSubagent` — NEVER inline analyst/exec logic |
-| **Never Act Alone** | R1 minimum fires before ANY non-trivial action — code, docs, planning, git, release, backlog. QUICK = whitespace/typo ONLY |
+| **Never Act Alone** | R1 minimum (context + internal + risk) fires before ANY non-trivial action — code, docs, planning, git, release, backlog. QUICK = whitespace/typo ONLY. `analyst-archaeology` added only when git history analysis is needed |
 | **Parallel fan-out** | All agents in the same ring fire in ONE simultaneous call — never sequential |
+| **Scope-split fan-out** | coord MAY dispatch multiple instances of the same analyst type with non-overlapping scope partitions — see ADP §1 I-13 for write-path constraints |
 | **Ring ordering** | Ring 2 fires AFTER Ring 1 completes — pass MandateResult `report_path` as `upstream_paths` |
 | **Nesting** | Non-coord agents NEVER call `runSubagent` — all are Leaf Nodes |
-| **MandateResults** | Read via `mcp_devsteps_read_mandate_results` ONLY — returns envelope `{ results[], count, quorum_ok, missing_analysts, dispatched, received, threshold, status }`. Iterate `.results[]`. Pass `expected_agent_names` for quorum tracking. |
+| **MandateResults** | Read via `mcp_devsteps_read_mandate_results` (archaeology/risk/quality/research) OR `mcp_devsteps_read_analysis_envelope` (context/internal/web) — iterate `.results[]`. Pass `expected_agent_names` for quorum tracking. |
 | **new package** | Dispatch `worker-workspace` FIRST (before `exec-impl`) |
 | **runSubagent off** | → `devsteps-R0-coord-solo`, inform user |
 | **MCP tools missing** | → STOP immediately, list missing tools |
@@ -143,17 +145,18 @@ Applies to ALL coord agents. R1+R2 provide the multi-perspective input; R4 execu
 
 | Work Type | R1 (parallel) | R2 (parallel, after R1) | R4 Execution |
 | --------- | ------------- | ----------------------- | ------------ |
-| Code change | archaeology + risk | constraints + impact | exec-impl + exec-test [+ exec-doc] |
-| Documentation | archaeology + quality | impact + staleness | exec-doc |
-| Planning | archaeology + risk | constraints + impact | worker-devsteps (creates items) |
-| Git cleanup / merge | archaeology + risk | impact + integration | coord direct |
-| Release | archaeology + risk | constraints + impact | parallel release workers |
-| Backlog hygiene | archaeology + quality | staleness + impact | worker-devsteps |
-| Item classification | archaeology + quality | staleness + impact | worker-classifier |
-| Meta-hierarchy assignment | archaeology + quality | staleness + constraints | worker-meta-hierarchy |
-| Build config change | archaeology + risk | constraints + integration | exec-impl + worker-build-diagnostics |
+| Code change | **context** + **internal** + risk | constraints + impact | exec-impl + exec-test [+ exec-doc] |
+| Documentation | **context** + quality | impact + staleness | exec-doc |
+| Planning | **context** + **internal** + risk | constraints + impact | worker-devsteps (creates items) |
+| Git cleanup / merge | **context** + risk + **archaeology** | impact + integration | coord direct |
+| Release | **context** + **internal** + risk + **archaeology** | constraints + impact | parallel release workers |
+| Backlog hygiene | **context** + quality | staleness + impact | worker-devsteps |
+| Item classification | **context** + quality | staleness + impact | worker-classifier |
+| Meta-hierarchy assignment | **context** + quality | staleness + constraints | worker-meta-hierarchy |
+| Build config change | **context** + **internal** + risk | constraints + integration | exec-impl + worker-build-diagnostics |
+| Feature (approach unclear) | **context** + **internal** + **research** + **web** | constraints + staleness | exec-impl + exec-test |
 
-**Always R5-gate-reviewer after every R4 that produces an artifact.**
+> **Bold** = mandatory R1 agents. `context` (task preparation) + `internal` (code conventions) form the core at STANDARD+. `archaeology` is added only when git history analysis is relevant (git cleanup, release, reverts). `web` and `research` are added when approach selection or deprecation risk applies. FULL tiers also add `quality` + `archaeology`.
 
 ## Quality Principles
 
