@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "ADP Protocol Hardening — Pre-scan, Tiered Limits, Single-Concern Mandate Rule (P1+P2+P3+P5+R3-fix)",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-03-23T12:07:39.407Z",
-  "updated": "2026-03-23T12:10:47.984Z",
+  "updated": "2026-03-24T08:15:49.400Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/AGENT-DISPATCH-PROTOCOL.md",

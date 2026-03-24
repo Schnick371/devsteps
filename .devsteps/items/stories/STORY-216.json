@@ -1,12 +1,12 @@
 {
-  "id": "STORY-213",
+  "id": "STORY-216",
   "type": "story",
   "category": "general",
-  "title": "R0-coord: mandate fine-grained parallel fan-out in R1 dispatch (same-type multi-instance + scope splitting)",
-  "status": "done",
+  "title": "Add pre-create item-summary gate to devsteps-10-plan-work prompt",
+  "status": "in-progress",
   "eisenhower": "urgent-important",
-  "created": "2026-03-17T19:59:18.948Z",
-  "updated": "2026-03-24T09:04:12.333Z",
+  "created": "2026-03-24T10:21:35.463Z",
+  "updated": "2026-03-24T10:21:41.058Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -16,21 +16,18 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [
-      "STORY-214",
-      "EPIC-041"
-    ],
+    "relates-to": [],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "architecture",
-    "agents",
-    "parallel-dispatch",
-    "spider-web",
-    "coordinator"
+    "planning",
+    "prompt",
+    "ux",
+    "pre-create-gate",
+    "coord"
   ],
   "commits": [],
   "metadata": {}

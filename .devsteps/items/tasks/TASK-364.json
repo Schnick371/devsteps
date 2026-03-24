@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Add FULL-tier pre-scan Step 0.5 and compress Scope-Split section in coord and coord-sprint",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-03-23T12:08:13.552Z",
-  "updated": "2026-03-23T12:10:20.898Z",
+  "updated": "2026-03-24T08:15:19.009Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/.github/agents/devsteps-R0-coord.agent.md",

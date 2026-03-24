@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Sync all Story A modified devsteps-* files from canonical source to root and cli",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-03-23T12:08:47.483Z",
-  "updated": "2026-03-23T12:10:27.642Z",
+  "updated": "2026-03-24T08:15:32.585Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/devsteps-R0-coord.agent.md",

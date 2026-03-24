@@ -5,4 +5,13 @@ Fixes via two stories:
 - **Story B** — restructures the research prompt to support FOCUSED vs DEEP dispatch profiles with matching tier-conditional gate criteria
 
 ## Done When
-Both stories gate-PASS; all file copies are in sync; no regressions in existing dispatch flows.
+Both stories gate-PASS; all file copies are in sync; no regressions in existing dispatch flows.## Completion — 2026-03-24
+
+All stories done:
+- **STORY-213** (done, 2026-03-24): I-13 scope-split fan-out — foundation for I-14, linked as `relates-to`
+- **STORY-214** (done, 2026-03-24): I-14 single-concern mandate, pre-scan Step 0.5, tier-adjusted limits, Relevant files DPF field, exec-planner R3-fix
+- **STORY-215** (done, 2026-03-24): Research prompt FOCUSED/DEEP tiered profiles, tier-conditional gate criteria
+
+All affected file copies in sync (mcp-server → root → cli).
+
+Sub-items: TASK-363 through TASK-369 all done.

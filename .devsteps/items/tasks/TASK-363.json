@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Add I-14 invariant, DPF Relevant-files field, and tier-adjusted limits to AGENT-DISPATCH-PROTOCOL.md",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-03-23T12:07:56.406Z",
-  "updated": "2026-03-23T12:10:17.503Z",
+  "updated": "2026-03-24T08:15:14.669Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/agents/AGENT-DISPATCH-PROTOCOL.md"
