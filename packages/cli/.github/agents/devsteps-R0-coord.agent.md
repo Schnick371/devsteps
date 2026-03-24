@@ -69,12 +69,14 @@ Orchestrate single-item implementation via analyst mandate dispatch. **NEVER rea
 
 - Multiple items / sprint → `coord-sprint`; spike / investigate → archaeology + research (parallel); review → `gate-reviewer`; trivial (<2 files) → QUICK
 - Single item → triage below
-
 ## MPD Protocol — Analyst Mandate Dispatch
 
 ### Step 0: MCP Preflight
 
 Call `mcp_devsteps_status` before any dispatch. If it fails → STOP immediately, report MCP unavailable.
+
+### Step 0.5: Pre-Scan (FULL tier only)
+Run ≤3 targeted searches on affected_paths. Select ≤8 most-relevant file paths. Append `Relevant files: {path1, ...}` to every Ring 1, Ring 2, and Ring 3 DPF dispatch. Skip at QUICK/STANDARD.
 
 ### Step 1: Triage → Ring Dispatch
 
@@ -92,12 +94,10 @@ Call `mcp_devsteps_status` before any dispatch. If it fails → STOP immediately
 > Synthesize ALL results from both mechanisms before dispatching Ring 2.
 
 ### Dispatch Prompt Format
-
 Use Dispatch Prompt Format (DPF) from [AGENT-DISPATCH-PROTOCOL.md §2](./AGENT-DISPATCH-PROTOCOL.md). Every `runSubagent` call MUST include the structured prompt — agents are Context-Isolated (CIS).
 
 ### Scope-Split Fan-Out
-
-When a task's scope is large enough to partition, dispatch **multiple instances of the same analyst type** simultaneously with non-overlapping scope shards (subtree, angle, concern, or volume split). See [AGENT-DISPATCH-PROTOCOL.md §1 — I-13](./AGENT-DISPATCH-PROTOCOL.md) for triggers, write-path constraints, and synthesis responsibilities.
+See [ADP §1 — I-13 and I-14](./AGENT-DISPATCH-PROTOCOL.md) for triggers, write-path constraints, MAX_SPLIT=4 concern-split guard, and synthesis responsibilities.
 
 ### Step 2: Dispatch Ring 1 Analysts (simultaneously — NEVER sequential)
 

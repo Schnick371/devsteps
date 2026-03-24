@@ -120,11 +120,10 @@ For each Sprint Brief item (verify no new blocker first):
 
 ## Dispatch Prompt Format
 
-Use Dispatch Prompt Format (DPF) from [AGENT-DISPATCH-PROTOCOL.md §2](./AGENT-DISPATCH-PROTOCOL.md). Every `runSubagent` call MUST include the structured prompt — agents are Context-Isolated (CIS).
+Use Dispatch Prompt Format (DPF) from [AGENT-DISPATCH-PROTOCOL.md §2](./AGENT-DISPATCH-PROTOCOL.md). Every `runSubagent` call MUST include the structured prompt — agents are Context-Isolated (CIS). **FULL tier only:** Before Ring 1 dispatch for each item, run ≤3 targeted searches on affected_paths, select ≤8 most-relevant paths, and append `Relevant files: {path1, ...}` to all Ring 1, Ring 2, and Ring 3 DPFs.
 
 ### Scope-Split Fan-Out
-
-When a task's scope is large enough to partition, dispatch **multiple instances of the same analyst type** simultaneously with non-overlapping scope shards (subtree, angle, concern, or volume split). See [AGENT-DISPATCH-PROTOCOL.md §1 — I-13](./AGENT-DISPATCH-PROTOCOL.md) for triggers, write-path constraints, and synthesis responsibilities.
+See [ADP §1 — I-13 and I-14](./AGENT-DISPATCH-PROTOCOL.md) for triggers, write-path constraints, MAX_SPLIT=4 concern-split guard, and synthesis responsibilities.
 
 ---
 
