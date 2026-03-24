@@ -1,6 +1,6 @@
 ---
 agent: "devsteps-R0-coord-sprint"
-model: "Claude Sonnet 4.6"
+model: "Claude Opus 4.6"
 description: "Multi-hour autonomous sprint — pre-sprint archaeology, risk-based MPD per item, all analyst/exec/gate agents, bright-data web research, Playwright browser automation, blocking reviewer"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
@@ -64,7 +64,7 @@ No further direction needed — the agent determines all agent selection, triage
 
 1. Read guide file → find last `✅` marker → current step is the next `⬜`
 2. Execute or observe the step (agent tools preferred; human when unavoidable)
-3. Process immediately: bug → DevSteps `bug` item + MPD; improvement → `task` item; guide note → `worker-guide-writer`
+3. Process immediately: bug → delegate `worker-devsteps` to create `bug` item + MPD; improvement → delegate `worker-devsteps` for `task` item; guide note → `worker-guide-writer`
 4. Mark step `✅` on pass, `🔄` on pause → repeat from step 1
 5. Collect result and feedback via `#askQuestions` — always at the end
 

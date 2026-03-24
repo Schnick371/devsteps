@@ -10,6 +10,9 @@ tools:
 
 ## ⚠️ Mandatory Protocol — Execute Before Any Action
 
+**Step 0 — Read your agent file:**
+#file:../agents/devsteps-R0-coord.agent.md
+
 | Rule | Constraint |
 | ---- | ---------- |
 | **Agent dispatch** | `#runSubagent` for every agent — **NEVER** inline analyst/exec work |
@@ -27,7 +30,7 @@ tools:
 
 | Ring | Agents | When |
 | ---- | ------ | ---- |
-| 1 | `analyst-archaeology` + `analyst-risk` + `analyst-quality` | Session start + every critical step |
+| 1 | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | Session start + every critical step |
 | 2 | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` | After Ring 1 |
 | 3 | `exec-planner` | After Ring 2 |
 | 4 | `exec-impl` → `exec-test` ∥ `exec-doc` | After Ring 3 |
@@ -97,12 +100,12 @@ Classify every issue found immediately:
 | Issue type | Condition | Action |
 | ---------- | --------- | ------ |
 | **Blocking bug** | Prevents current step from passing | Fix now via full exec pipeline; re-run step |
-| **Non-blocking bug** | Step passes despite issue | `mcp_devsteps_add` (type: `bug`) immediately; advance |
-| **Non-blocking improvement** | User wish, not a failure | `mcp_devsteps_add` (type: `story` or `task`) immediately; advance |
+| **Non-blocking bug** | Step passes despite issue | Delegate `worker-devsteps` to create `bug` item; log and advance |
+| **Non-blocking improvement** | User wish, not a failure | Delegate `worker-devsteps` to create `story`/`task` item; log and advance |
 | **Design conflict** | Fix requires cross-module change | HARD STOP; surface to user via `#askQuestions`; re-dispatch Ring 1 |
 | **Guide gap** | Step description is ambiguous | Pause; `worker-guide-writer` updates guide; re-present step |
 
-> `mcp_devsteps_add` items are created **without switching focus** — log and continue the guide step. Search for duplicates first (`mcp_devsteps_search`).
+> Items are created via `worker-devsteps` delegation — log and continue the guide step without interrupting flow. Search for duplicates first (`mcp_devsteps_search`).
 
 ---
 
