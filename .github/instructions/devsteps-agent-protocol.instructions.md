@@ -34,7 +34,7 @@ Docs ─┼─ Ring 3: exec-planner ──────────────�
 | Ring | Phase            | Agents                                                                                            | Mode                  |
 | ---- | ---------------- | ------------------------------------------------------------------------------------------------- | --------------------- |
 | 0    | Hub              | `coord-*`                                                                                         | dispatch + synthesis  |
-| 1    | Analysis         | `analyst-archaeology`, `analyst-risk`, `analyst-research`, `analyst-quality`                      | Parallel fan-out      |
+| 1    | Analysis         | `analyst-archaeology`, `analyst-risk`, `analyst-research`, `analyst-quality`, `analyst-context`, `analyst-internal`, `analyst-web` | Parallel fan-out      |
 | 2    | Cross-Validation | `aspect-impact`, `aspect-constraints`, `aspect-quality`, `aspect-staleness`, `aspect-integration` | Parallel fan-out      |
 | 3    | Planning         | `exec-planner` (reads Ring 1+2 results)                                                           | Sequential            |
 | 4    | Execution        | **Conductors:** `exec-impl` → `exec-test` ∧ `exec-doc` (each dispatches its workers); **Workers:** `worker-*` dispatched by conductors NOT coord; `worker-workspace` (new projects, dispatched by coord directly) | Sequential / parallel |
@@ -42,12 +42,15 @@ Docs ─┼─ Ring 3: exec-planner ──────────────�
 
 ### Triage → Dispatch Mapping
 
-| Triage      | Ring 1 — Analysis (parallel)                               | Ring 2 — Cross-Validation (parallel, after Ring 1)                             | Ring 3–5                                                                    |
-| ----------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| QUICK       | _(whitespace / typo ONLY — no logic, no structure change)_ | _(skip)_                                                                       | → direct `exec-impl` → `gate-reviewer`                                      |
-| STANDARD    | `analyst-archaeology` + `analyst-risk`                     | `aspect-constraints` + `aspect-impact`                                         | → `exec-planner` → `exec-impl` → `exec-test` → `gate-reviewer`              |
-| FULL        | `analyst-archaeology` + `analyst-risk` + `analyst-quality` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` | → `exec-planner` → `exec-impl` → `exec-test` ∥ `exec-doc` → `gate-reviewer` |
-| COMPETITIVE | `analyst-research` + `analyst-archaeology`                 | `aspect-constraints` + `aspect-staleness`                                      | → `exec-planner` → `exec-impl` → `gate-reviewer`                            |
+| Triage      | Ring 1 — Analysis (parallel)                                                                                      | Ring 2 — Cross-Validation (parallel, after Ring 1)                             | Ring 3–5                                                                    |
+| ----------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| QUICK       | _(whitespace / typo ONLY — no logic, no structure change)_                                                        | _(skip)_                                                                       | → direct `exec-impl` → `gate-reviewer`                                      |
+| STANDARD    | `analyst-context` + `analyst-internal` + `analyst-risk`                                                           | `aspect-constraints` + `aspect-impact`                                         | → `exec-planner` → `exec-impl` → `exec-test` → `gate-reviewer`              |
+| FULL        | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` | → `exec-planner` → `exec-impl` → `exec-test` ∥ `exec-doc` → `gate-reviewer` |
+| COMPETITIVE | `analyst-research` + `analyst-internal` + `analyst-web` + `analyst-context`                                       | `aspect-constraints` + `aspect-staleness`                                      | → `exec-planner` → `exec-impl` → `gate-reviewer`                            |
+
+> **Read split:** `archaeology·risk·quality·research` → `read_mandate_results(item_ids)` · `context·internal·web` → `read_analysis_envelope(report_path)` (these write `write_analysis_report`)
+> **`analyst-archaeology`** git forensics only — dispatched at FULL tier or explicitly when git history analysis is needed (reverts, blame, structural changes).
 
 ---
 
@@ -56,11 +59,12 @@ Docs ─┼─ Ring 3: exec-planner ──────────────�
 1. **coord dispatches ALL agents directly** — single flat level, no nested dispatch
 2. **Non-coord agents NEVER call `runSubagent`** — behavioral leaf nodes
 3. **Same-phase dispatches fire simultaneously** — never sequential when independent
-4. **coord reads MandateResults only** — `read_mandate_results(item_ids)`, never raw envelopes. Response is an envelope `{ results[], count, quorum_ok, missing_analysts, dispatched, received, threshold, status }` — iterate `.results[]`
+4. **coord reads results by mechanism** — `read_mandate_results(item_ids)` for `archaeology/risk/quality/research`; `read_analysis_envelope(report_path)` for `context/internal/web`. Never raw envelopes.
 5. **Communication is structured paths only** — never paste findings in chat
 6. **Ring 2 fires AFTER Ring 1 completes** — aspects are cross-validators; pass Ring 1 `report_path` values as `upstream_paths`
 7. **New project/package → `worker-workspace` first** — dispatch before `exec-impl`; `pip install -e .` must succeed without `PYTHONPATH` hacks
-8. **Never Act Alone** — R1 minimum (archaeology + risk) fires before ANY non-trivial action regardless of work type (code, docs, planning, git, release, backlog). QUICK is restricted to whitespace/typo only. Work-type dispatch matrix is in `copilot-instructions.md`.
+8. **Never Act Alone** — R1 minimum (context + internal + risk for STANDARD+) fires before ANY non-trivial action regardless of work type (code, docs, planning, git, release, backlog). QUICK is restricted to whitespace/typo only. `analyst-archaeology` added only when git history analysis is needed. Work-type dispatch matrix is in `copilot-instructions.md`.
+9. **Scope-split fan-out** — coord MAY dispatch multiple instances of the same analyst type with non-overlapping scope partitions (subtree, angle, concern, or volume split). Safe for `write_mandate_result` types (UUID-keyed). `write_analysis_report` types require sequential dispatch or accept last-writer-wins until MCP adds `scope_shard`. See AGENT-DISPATCH-PROTOCOL.md §1 I-13.
 
 ---
 

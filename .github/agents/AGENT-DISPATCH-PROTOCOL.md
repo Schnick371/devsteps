@@ -45,7 +45,7 @@ Docs ───┼─ ─ ─ ─ ─ ─ ─ ─┼─── Tests
 | 1    | **Analysis**         | `analyst-*`                            | parallel fan-out     | MandateResults (~800 tok)     |
 | 2    | **Cross-Validation** | `aspect-*`                             | parallel fan-out     | CompressedVerdicts (~150 tok) |
 | 3    | **Planning**         | `exec-planner`                         | sequential           | ordered implementation plan   |
-| 4    | **Execution**        | **Conductors:** `exec-impl` → `exec-test` → `exec-doc` (each dispatches its `worker-*`); **Workers:** `worker-*` dispatched by conductors, NOT coord | sequential           | code / tests / docs committed |
+| 4    | **Execution**        | `exec-impl`, `exec-test`, `exec-doc` (self-sufficient leaf nodes); `worker-*` dispatched by coord directly for specific work types | sequential           | code / tests / docs committed |
 | 5    | **Quality Gate**     | `gate-reviewer`                        | sequential, blocking | PASS / FAIL / ESCALATE        |
 
 Rings are **mandatory steps** — you cannot skip Ring 1 to go to Ring 4 except at QUICK triage.
@@ -54,18 +54,21 @@ Rings are **mandatory steps** — you cannot skip Ring 1 to go to Ring 4 except 
 
 Like a radar chart, each spoke (domain) can be **weighted differently per task**. coord reads the task profile and selects which agents to dispatch on each spoke in each ring:
 
-| Spoke / Domain | Ring 1 (analyst)                  | Ring 2 (aspect)                            | Ring 4 (worker)                                                                           |
-| -------------- | --------------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------- |
-| **Code**       | `analyst-archaeology`             | `aspect-impact`                            | ¹`worker-impl` · ²`worker-coder`, `worker-refactor`                                       |
-| **Tests**      | `analyst-quality`                 | `aspect-quality`                           | ¹`worker-test` · ²`worker-tester`                                                         |
-| **Docs**       | —                                 | `aspect-staleness`                         | ¹`worker-doc` · ²`worker-documenter`                                                     |
-| **Work Items** | —                                 | —                                          | ²`worker-devsteps`, `worker-guide-writer`                                                  |
-| **Research**   | `analyst-research`, `analyst-web` | —                                          | —                                                                                         |
-| **Risk**       | `analyst-risk`                    | `aspect-constraints`, `aspect-integration` | —                                                                                         |
-| **Errors** ⚠️  | _(planned: `analyst-errors`)_     | —                                          | ¹`worker-build-diagnostics`                                                                |
+| Spoke / Domain | Ring 1 (analyst)                            | Ring 2 (aspect)                            | Ring 4 (exec / worker)                                                                    |
+| -------------- | ------------------------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| **Code**       | `analyst-internal`                          | `aspect-impact`                            | `exec-impl` · `worker-coder`, `worker-refactor`                                           |
+| **Tests**      | `analyst-quality`                           | `aspect-quality`                           | `exec-test` · `worker-tester`                                                              |
+| **Docs**       | —                                           | `aspect-staleness`                         | `exec-doc` · `worker-documenter`                                                          |
+| **Work Items** | —                                           | —                                          | `worker-devsteps`, `worker-guide-writer`                                                   |
+| **Context**    | `analyst-context`                           | —                                          | — _(always dispatched at STANDARD+)_                                                      |
+| **Research**   | `analyst-research`, `analyst-web`           | —                                          | —                                                                                         |
+| **Risk**       | `analyst-risk`                              | `aspect-constraints`, `aspect-integration` | —                                                                                         |
+| **Git History**| `analyst-archaeology`                       | —                                          | — _(FULL tier or on-demand for git forensics)_                                            |
+| **Errors** ⚠️  | _(planned: `analyst-errors`)_               | —                                          | `worker-build-diagnostics`                                                                 |
 
-> ¹ **Conductor-mediated** — dispatched by `exec-*` conductor (not coord directly); conductor writes MandateResult.  
-> ² **Coord-direct** — dispatched by coord without an exec conductor; coord dispatches these on specific work types (refactor stories, work-item updates). Exec conductors MAY dispatch multiple workers **in parallel** within a single fan-out call.
+> **Read mechanism:** `analyst-archaeology`, `analyst-risk`, `analyst-quality`, `analyst-research` → `write_mandate_result` → read via `read_mandate_results`. `analyst-context`, `analyst-internal`, `analyst-web` → `write_analysis_report` → read via `read_analysis_envelope(report_path)`. Coord MUST call both mechanisms after Ring 1 completes.
+
+> All Ring 4 agents are **Leaf Nodes** dispatched by coord directly. `exec-impl/test/doc` are self-sufficient — they read planner MandateResults, write code/tests/docs, and commit. Workers (`worker-coder`, `worker-tester`, etc.) are dispatched by coord for specific work types (QUICK triage, refactor stories, work-item updates).
 
 > **⚠️ Errors spoke:** The **Errors** domain (`get_errors` / `#problems` panel) currently maps to `worker-build-diagnostics`. A dedicated `analyst-errors` agent is planned — it runs `get_errors` first, scans the Problems panel, and produces a MandateResult scoped to the error set before any implementation work begins. It can be activated directly from the `devsteps-30-rapid-cycle` prompt via `#get_errors`.
 
@@ -80,10 +83,10 @@ Archaeology:  Code █████████  Risk ██████  Researc
 
 coord reads the incoming task and tilts the radar chart — dispatching more agents on the heavy spokes, fewer on the light ones.
 
-**1-Level Nesting Rule:** VS Code Copilot supports exactly 1 level of `#runSubagent` nesting.  
-→ coord dispatches ALL agents directly. Non-coord agents CANNOT dispatch sub-agents.  
-→ All agents appear in `agents:` lists of coord only.  
-→ Workers have `'agent'` in tools (for breadth) but MUST NEVER call `#runSubagent` — behavioral leaf nodes.
+**Flat 2-Tier Architecture:** coord (Ring 0) dispatches ALL agents directly — there is no nested dispatch.  
+→ All non-coord agents are **Leaf Nodes** — they NEVER call `#runSubagent`.  
+→ All agents appear in `agents:` list of coord only — no cross-agent `agents:` references.  
+→ Non-coord agents do NOT have `'agent'` in their tools list — structural enforcement of leaf-node behavior.
 
 ### Context Propagation Model (CIS — Context-Isolated Subagents)
 
@@ -123,39 +126,63 @@ Each `#runSubagent` call creates a **fresh context window** — the subagent see
 | I-10 | Web-First at STANDARD triage                        | Staleness aspect = MUST at STANDARD+         |
 | I-11 | coord delegates follow-up DevSteps ops to `worker-devsteps` | coord MAY directly call: `mcp_devsteps_add` (primary item bootstrap) · `mcp_devsteps_update` status (in-progress/review/done) · `mcp_devsteps_update` `append_description` (done-gate only). ALL other add/link/update ops MUST go via `worker-devsteps`. |
 | I-12 | coord Ring→Ring handoff: item_id + sprint_id + prose report_paths only | All exec/aspect agents receive item_id + sprint_id + comma-separated report_path strings as prose context. coord NEVER forwards raw findings text or JSON blobs between rings. |
+| I-13 | Scope-split fan-out: coord MAY dispatch multiple instances of the same analyst type with non-overlapping scope partitions | Each instance receives a distinct `Scope shard:` in its dispatch prompt. Instances of `write_mandate_result` types (risk, quality, archaeology, research) are safe now (UUID-keyed). Instances of `write_analysis_report` types (context, internal, web) require distinct `scope_shard` parameter — otherwise the second instance silently overwrites the first. |
 
 > **I-6 note:** `read_analysis_envelope(report_path)` — `report_path` is a **prose-string signal** (the file path passed in chat), not a JSON field in the persisted AnalysisBriefing. coord uses it as a lookup key; it never appears in the `.result.json` schema.
+
+### Scope-Split Fan-Out (Multi-Instance Dispatch)
+
+Standard dispatch assigns one instance per analyst type ("type-parallel"). **Scope-split fan-out** dispatches multiple instances of the **same** analyst type, each scoped to a non-overlapping partition of the problem ("instance-parallel"). Both modes fire simultaneously in Ring 1.
+
+**When to scope-split:**
+
+1. **Subtree split** — affected paths span ≥2 independent packages or modules → dispatch one `analyst-internal` per subtree
+2. **Angle split** — task involves ≥2 orthogonal research questions → dispatch one `analyst-web` or `analyst-research` per question
+3. **Concern split** — task touches ≥2 distinct concern domains (e.g. security + performance) → dispatch one `analyst-risk` per concern
+4. **Volume split** — scope exceeds single-agent token budget (~12 000 chars findings) → partition by file group or functional boundary
+
+**Coord responsibilities for scope-split:**
+
+- Define non-overlapping partitions BEFORE dispatch — no partition may cover the same files or questions
+- Append `Scope shard: {partition_description}` to each instance's dispatch prompt
+- After completion: synthesize all instance results into a single coherent picture before passing to Ring 2
+- Apply `/compact` when total Ring 1 instances exceed 6 to manage token budget
+
+**Write-path constraint:** `write_mandate_result` uses UUID-keyed paths — safe for multi-instance without changes. `write_analysis_report` uses a fixed `[aspect]-report.json` path — a second instance of the same type overwrites the first. Until the MCP schema adds a `scope_shard` path discriminator, scope-split is limited to `write_mandate_result` types (risk, quality, archaeology, research) for safe concurrent writes. For `write_analysis_report` types (context, internal, web), coord must dispatch instances sequentially or accept that only the last writer's result persists.
 
 ---
 
 ## 2. Tier-1 Coordinator — Dispatch Rules
 
 **Model:** Claude Sonnet 4.6  
-**tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']`  
-**YAML `agents:`\*\* must include ALL analyst/aspect/exec/gate/worker agents used (for dispatch)
+**tools:** `['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']`  
+**YAML `agents:`** must include ALL analyst/aspect/exec/gate/worker agents used (for dispatch)
 
 ### Triage → Dispatch Table
 
-| Triage      | Round 1: Analysts (∥)              | Round 2: Aspects (∥)       | Round 3: Workers (seq)                                       |
-| ----------- | ---------------------------------- | -------------------------- | ------------------------------------------------------------ |
-| QUICK       | `planner` only                     | None                       | `coder` → `reviewer`                                         |
-| STANDARD    | `archaeology` + `risk`             | MUST aspects + `staleness` | `coder` → `tester` → `reviewer`                              |
-| FULL        | `archaeology` + `risk` + `quality` | All MUST + SHOULD aspects  | `coder` → `tester` + `integtest` ∥ `documenter` → `reviewer` |
-| COMPETITIVE | `research` + `archaeology`         | MUST aspects + `staleness` | `coder` → `reviewer`                                         |
+| Triage      | Round 1: Analysts (∥)                                                                | Round 2: Aspects (∥)       | Round 3–5: Exec → Gate (seq)                                      |
+| ----------- | -------------------------------------------------------------------------------- | -------------------------- | ------------------------------------------------------------ |
+| QUICK       | `planner` only                                                                   | None                       | `exec-impl` → `gate-reviewer`                                |
+| STANDARD    | `context` + `internal` + `risk`                                                  | MUST aspects + `staleness` | `exec-impl` → `exec-test` → `gate-reviewer`                  |
+| FULL        | `context` + `internal` + `risk` + `quality` + `archaeology` + `web`              | All MUST + SHOULD aspects  | `exec-impl` → `exec-test` ∥ `exec-doc` → `gate-reviewer`      |
+| COMPETITIVE | `research` + `internal` + `web` + `context`                                      | MUST aspects + `staleness` | `exec-impl` → `gate-reviewer`                                |
 
-**Round 3 Worker Reference:**
+> **`analyst-archaeology`** = git forensics (blame, reverts, recent structural changes). Dispatched at FULL tier or on-demand. NOT part of the STANDARD core.
 
-| Worker                | Trigger                    | Responsibility                                         |
-| --------------------- | -------------------------- | ------------------------------------------------------ |
-| `worker-coder`        | always (after Planner)     | Write + commit implementation code                     |
-| `worker-tester`       | STANDARD+                  | Write + run + commit unit tests                        |
-| `worker-integtest`    | FULL or explicit           | Integration tests                                      |
-| `worker-documenter`   | FULL (parallel with tester) | Docs, README, Changelog                               |
-| `worker-devsteps`     | as needed                  | Manage DevSteps items                                  |
-| `worker-refactor`     | Refactor-type stories      | Restructure code without behavior change               |
-| `worker-workspace`    | new package/project        | Scaffold: create_new_workspace + pyproject.toml + venv |
-| `worker-guide-writer` | after Execution            | Update guide files                                     |
+**Direct Worker Dispatch (coord → worker):**
+
+coord dispatches workers directly for specific work types that don’t need the full exec pipeline:
+
+| Worker                | When to dispatch directly         | Responsibility                                         |
+| --------------------- | --------------------------------- | ------------------------------------------------------ |
+| `worker-coder`        | QUICK triage (simple code change) | Write + commit implementation code                     |
+| `worker-tester`       | Targeted test additions           | Write + run + commit unit tests                        |
+| `worker-integtest`    | FULL or explicit                  | Integration tests                                      |
+| `worker-documenter`   | Standalone doc updates            | Docs, README, Changelog                                |
+| `worker-devsteps`     | Follow-up items + links           | Manage DevSteps items                                  |
+| `worker-refactor`     | Refactor-type stories             | Restructure code without behavior change               |
+| `worker-workspace`    | New package/project               | Scaffold: create_new_workspace + pyproject.toml + venv |
+| `worker-guide-writer` | After Execution                   | Update guide files                                     |
 
 ### coord Round 2: How to Select Aspects
 
@@ -198,15 +225,67 @@ Before every Round 1 dispatch:
 | Clarification rounds       | 2   | Proceed with best judgment                 |
 | Round 2 aspect re-dispatch | 1   | No second Round 2 — use available verdicts |
 
+### Dispatch Prompt Format (DPF)
+
+Every `runSubagent` call MUST include a structured prompt. Agents are Context-Isolated (CIS) — they receive ONLY their `.agent.md` + this prompt. No shared context exists.
+
+**Ring 1 (Analysts):**
+```
+Mandate: {mandate_type}
+Item: {item_id} | Sprint: {sprint_id} | Tier: {triage_tier}
+Title: {task_title}
+Description: {task_description}
+Affected paths: {affected_paths}
+Constraints: {constraints}
+Failed approaches: {failed_approaches}
+```
+
+**Ring 2 (Aspects) — include upstream reports:**
+```
+Mandate: {aspect_type}
+Item: {item_id} | Sprint: {sprint_id} | Tier: {triage_tier}
+Title: {task_title}
+Description: {task_description}
+Affected paths: {affected_paths}
+Upstream reports: {ring1_report_paths}
+```
+
+**Ring 3 (Planner):**
+```
+Mandate: planning
+Item: {item_id} | Sprint: {sprint_id} | Tier: {triage_tier}
+Upstream reports: {ring1_report_paths}, {ring2_report_paths}
+Constraints: {constraints}
+```
+
+**Ring 4 (Exec):**
+```
+Mandate: {implementation|testing|documentation}
+Item: {item_id} | Sprint: {sprint_id} | Tier: {triage_tier}
+Planner report: {planner_report_path}
+Upstream reports: {all_report_paths}
+```
+
+**Ring 5 (Gate):**
+```
+Mandate: review
+Item: {item_id} | Sprint: {sprint_id} | Tier: {triage_tier}
+Implementation report: {impl_report_path}
+Test report: {test_report_path}
+Upstream reports: {all_report_paths}
+Acceptance criteria: {acceptance_criteria}
+```
+
+When using **scope-split fan-out** (multiple instances of the same analyst type), append a `Scope shard:` field to each instance prompt identifying its non-overlapping partition.
+
 ---
 
 ## 3. Tier-2 Analyst — 4-Phase MAP-REDUCE-RESOLVE-SYNTHESIZE
 
 **Models:** Claude Sonnet 4.6 (default), Claude Opus 4.6 (quality-critical paths)  
-**tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']`  
-**Note:** Non-coord agents do NOT have `'agent'` in tools for aspect dispatch — Spider Web means coord dispatches all.  
-**`handoffs:`\*\* must be empty in all non-coord agent YAML files — non-coord never hands off to another non-coord.
+**tools:** `['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']`  
+**Note:** Non-coord agents do NOT have `'agent'` in tools — Leaf Nodes cannot dispatch.  
+**`handoffs:`** must be empty in all non-coord agent YAML files — non-coord never hands off to another non-coord.
 
 ### Phase 1: MAP (Internal — no sub-dispatch)
 
@@ -287,10 +366,9 @@ T2 cannot re-dispatch. Instead:
 ## 4. Tier-3 Aspect Analyst — ANALYZE–SEARCH–SYNTHESIZE
 
 **Models:** Claude Sonnet 4.6 (default), Claude Opus 4.6 (quality, staleness)  
-**tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']`  
-**CRITICAL:** Aspects/workers have NO `'agent'` tool — CANNOT dispatch sub-agents. Structural leaf-node enforcement.  
-**Dispatched by:\*\* coord ONLY (Hub-and-Spoke Round 2)
+**tools:** `['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']`  
+**CRITICAL:** All non-coord agents (aspects, workers, exec, analysts) do NOT have `'agent'` in tools — Leaf Nodes, cannot dispatch.  
+**Dispatched by:** coord ONLY (Hub-and-Spoke Ring 2)
 
 ### Aspect Types
 
@@ -402,12 +480,13 @@ No prose. No summary. No recommendations in chat. coord uses `read_analysis_enve
 
 ## 5. Communication Contracts Summary
 
-| Direction               | Channel                                        | T reads via              | T writes via            |
+| Direction               | Channel                                        | Reader tool              | Writer tool             |
 | ----------------------- | ---------------------------------------------- | ------------------------ | ----------------------- |
-| coord → analyst Mandate | In-chat Mandate JSON                           | —                        | Chat prompt             |
+| coord → agent prompt     | `runSubagent` prompt parameter (structured)    | —                        | coord builds prompt     |
 | analyst → coord Result  | `.devsteps/cbp/[sprint]/[mandate].result.json` | `read_mandate_results`   | `write_mandate_result`  |
-| coord → aspect Mandate  | In-chat Mandate JSON                           | —                        | Chat prompt             |
 | aspect → coord Verdict  | `.devsteps/analysis/[itemId]/[agent].json`     | `read_analysis_envelope` | `write_analysis_report` |
+| exec → coord Result     | `.devsteps/cbp/[sprint]/[mandate].result.json` | `read_mandate_results`   | `write_mandate_result`  |
+| gate → coord Result     | `.devsteps/cbp/[sprint]/[mandate].result.json` | `read_mandate_results`   | `write_mandate_result`  |
 
 **Forbidden patterns:**
 
