@@ -1,10 +1,8 @@
 ---
 description: "Planner deep analyst mandate-type=planning, decomposes stories into ordered atomic impl steps using Archaeology + Risk MandateResults"
-model: "Claude Sonnet 4.6"
+model: "Claude Opus 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
-agents:
-  - devsteps-R2-aspect-staleness
+  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 user-invocable: false
 ---
 
@@ -14,12 +12,21 @@ user-invocable: false
 
 ## Contract
 
-- **Role**: `exec` — Planner
+- **Role**: `exec` — Planner (Leaf Node)
 - **Mandate type**: `planning`
-- **Accepted from**: coord (`devsteps-R0-coord`), coord-sprint (`devsteps-R0-coord-sprint`)
-- **Dispatches (minimal)**: `devsteps-R2-aspect-staleness` (only for stale-check; primarily reads existing MandateResults)
+- **Dispatched by**: coord (`devsteps-R0-coord`), coord-sprint (`devsteps-R0-coord-sprint`) via `runSubagent`
+- **Dispatches**: NONE — Leaf Node, NEVER uses `runSubagent`
 - **Returns**: MandateResult written via `write_mandate_result` — coord reads via `read_mandate_results`
-- **coord NEVER reads** raw aspect envelopes from this agent's dispatches directly
+
+## Expected Input (via `runSubagent` prompt from coord)
+
+coord passes a structured dispatch prompt. Parse these fields:
+
+- **item_id** — DevSteps work item ID
+- **sprint_id** — Current sprint identifier
+- **triage_tier** — QUICK | STANDARD | FULL | COMPETITIVE
+- **upstream_reports** — Report paths from Ring 1 + Ring 2 (read via `read_mandate_results` and `read_analysis_envelope`)
+- **constraints** — Target branch, packages, time-box
 
 ## Mission
 
@@ -45,13 +52,15 @@ Before any aspect dispatch:
 
 ### MAP — Decomposition Table
 
-> **CRITICAL: Dispatch ALL agents below simultaneously in ONE parallel fan-out.**
+All analysis is performed inline. No agents are dispatched.
 
-| Agent                       | Mandate                                                                   | Always? |
-| --------------------------- | ------------------------------------------------------------------------- | ------- |
-| `devsteps-R2-aspect-staleness` | Verify no conflicting active branches or in-progress items for same files | Yes     |
-
-The Planner is primarily a **synthesis** agent — it reads, not dispatches. Aspect dispatch is minimal.
+| Step | Action | Tool |
+| ---- | ------ | ---- |
+| 1 | Read Ring 1+2 upstream reports | `read_mandate_results` + `read_analysis_envelope` |
+| 2 | Check for conflicting active branches or in-progress items for same files | `grep_search` on `.devsteps/` + `git branch --list` |
+| 3 | Decompose into atomic implementation steps using Archaeology findings | inline analysis |
+| 4 | Order steps by Risk matrix — higher-risk steps last | inline analysis |
+| 5 | Assign file paths + line ranges per step from Archaeology data | Check `Relevant files:` in Mandate first; call `read_file` only for paths absent from that field |
 
 ### REDUCE — Planning-Specific Checks
 
@@ -82,6 +91,7 @@ If C3 Scope-Ordering conflict: derive ordering from Risk matrix — higher-risk 
 ## Behavioral Rules
 
 - Never re-discover what Archaeology already found — trust its `findings` for file locations.
+- If `Relevant files:` is present in the Mandate (injected by coord at FULL tier), treat those paths as pre-verified — do NOT re-read them in MAP step 5. Call `read_file` only for paths needed that are absent from `Relevant files:`.
 - Never plan steps that violate constraints in Risk's `findings` — flag them as CONDITIONAL.
 - Atomic step definition: one step = one file changed = one clear commit message writable in advance.
 - If a required step has no Archaeology data (file not in results) → add RESOLVE request to T3, or flag as gap in findings.

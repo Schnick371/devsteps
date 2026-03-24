@@ -65,6 +65,7 @@ Docs ─┼─ Ring 3: exec-planner ──────────────�
 7. **New project/package → `worker-workspace` first** — dispatch before `exec-impl`; `pip install -e .` must succeed without `PYTHONPATH` hacks
 8. **Never Act Alone** — R1 minimum (context + internal + risk for STANDARD+) fires before ANY non-trivial action regardless of work type (code, docs, planning, git, release, backlog). QUICK is restricted to whitespace/typo only. `analyst-archaeology` added only when git history analysis is needed. Work-type dispatch matrix is in `copilot-instructions.md`.
 9. **Scope-split fan-out** — coord MAY dispatch multiple instances of the same analyst type with non-overlapping scope partitions (subtree, angle, concern, or volume split). Safe for `write_mandate_result` types (UUID-keyed). `write_analysis_report` types require sequential dispatch or accept last-writer-wins until MCP adds `scope_shard`. See AGENT-DISPATCH-PROTOCOL.md §1 I-13.
+10. **Single-concern mandate (I-14)** — Each analyst/aspect mandate covers ONE investigation question. coord MUST scope-split when ≥2 orthogonal concerns are present. Concern-split produces at most MAX_SPLIT=4 additional agents total.
 
 ---
 

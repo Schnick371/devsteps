@@ -127,6 +127,7 @@ Each `#runSubagent` call creates a **fresh context window** — the subagent see
 | I-11 | coord delegates follow-up DevSteps ops to `worker-devsteps` | coord MAY directly call: `mcp_devsteps_add` (primary item bootstrap) · `mcp_devsteps_update` status (in-progress/review/done) · `mcp_devsteps_update` `append_description` (done-gate only). ALL other add/link/update ops MUST go via `worker-devsteps`. |
 | I-12 | coord Ring→Ring handoff: item_id + sprint_id + prose report_paths only | All exec/aspect agents receive item_id + sprint_id + comma-separated report_path strings as prose context. coord NEVER forwards raw findings text or JSON blobs between rings. |
 | I-13 | Scope-split fan-out: coord MAY dispatch multiple instances of the same analyst type with non-overlapping scope partitions | Each instance receives a distinct `Scope shard:` in its dispatch prompt. Instances of `write_mandate_result` types (risk, quality, archaeology, research) are safe now (UUID-keyed). Instances of `write_analysis_report` types (context, internal, web) require distinct `scope_shard` parameter — otherwise the second instance silently overwrites the first. |
+| I-14 | Single-concern mandate: each analyst/aspect mandate covers ONE investigation question | coord MUST scope-split when ≥2 orthogonal concerns are present; concern-split produces at most MAX_SPLIT=4 additional agents total across all splits |
 
 > **I-6 note:** `read_analysis_envelope(report_path)` — `report_path` is a **prose-string signal** (the file path passed in chat), not a JSON field in the persisted AnalysisBriefing. coord uses it as a lookup key; it never appears in the `.result.json` schema.
 
@@ -147,6 +148,8 @@ Standard dispatch assigns one instance per analyst type ("type-parallel"). **Sco
 - Append `Scope shard: {partition_description}` to each instance's dispatch prompt
 - After completion: synthesize all instance results into a single coherent picture before passing to Ring 2
 - Apply `/compact` when total Ring 1 instances exceed 6 to manage token budget
+
+**I-14 concern-split guard:** Splitting by concern (type 3) produces at most MAX_SPLIT=4 additional agents total. A 4-concern task → dispatch at most 4 analyst instances, not 4×N.
 
 **Write-path constraint:** `write_mandate_result` uses UUID-keyed paths — safe for multi-instance without changes. `write_analysis_report` uses a fixed `[aspect]-report.json` path — a second instance of the same type overwrites the first. Until the MCP schema adds a `scope_shard` path discriminator, scope-split is limited to `write_mandate_result` types (risk, quality, archaeology, research) for safe concurrent writes. For `write_analysis_report` types (context, internal, web), coord must dispatch instances sequentially or accept that only the last writer's result persists.
 
@@ -238,6 +241,7 @@ Description: {task_description}
 Affected paths: {affected_paths}
 Constraints: {constraints}
 Failed approaches: {failed_approaches}
+Relevant files: {pre_scan_results}   # FULL tier only; omit at QUICK/STANDARD
 ```
 
 **Ring 2 (Aspects) — include upstream reports:**
@@ -248,7 +252,10 @@ Title: {task_title}
 Description: {task_description}
 Affected paths: {affected_paths}
 Upstream reports: {ring1_report_paths}
+Relevant files: {pre_scan_results}   # FULL tier only; omit at QUICK/STANDARD
 ```
+
+> coord populates `Relevant files:` at FULL tier from a brief pre-scan before Ring 1 dispatch (see Step 0.5 in coord agent). Omit the field at QUICK/STANDARD — do not include an empty placeholder line.
 
 **Ring 3 (Planner):**
 ```
@@ -360,6 +367,18 @@ T2 cannot re-dispatch. Instead:
 | Internal resolution attempts | 2   | Caveated synthesis, mark escalation_reason |
 | read_mandate_results calls   | 1   | Deduplication done once                    |
 | bright-data searches         | 5   | Stop, use available data                   |
+
+### Tier-Adjusted Tool-Call Ceiling (informational guideline)
+
+Analysts should self-limit total tool calls per mandate:
+
+| Tier     | Recommended ceiling |
+| -------- | ------------------- |
+| QUICK    | 5                   |
+| STANDARD | 12                  |
+| FULL     | 20                  |
+
+Exceeding the ceiling is permitted if still within the bright-data search limit. This is a self-regulation signal, not a hard cutoff.
 
 ---
 
