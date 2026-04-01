@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Extension icon redesigned**: New devsteps board+burndown logo across all icon contexts
+  - Activity bar, walkthroughs, and UI icons updated to new kanban-board-with-sparkle design (`currentColor`)
+  - Marketplace icon: 128×128 burndown chart on dark gradient with cyan sparkle (abstract velocity style)
+  - Removed 58 design iteration files from repository (`concepts/`, `concepts-burndown/`)
+
 ### Fixed
 
 - Fix TypeScript narrowing errors in `mcpServerManager.ts` — split `VsCodeWithMcpApi` into `VsCodeStdioMcpApi` and `VsCodeHttpMcpApi` to prevent `in`-operator narrowing from collapsing type to `never` in stdio fallback path ([BUG-069])
