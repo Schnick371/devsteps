@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isVersionAtLeast, parseVersion } from '../../extension.js';
+import { isVersionAtLeast, parseVersion } from './version.js';
 
 describe('version comparison', () => {
   it('parses semver-like version strings into numeric parts', () => {

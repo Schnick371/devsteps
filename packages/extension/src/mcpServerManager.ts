@@ -23,6 +23,7 @@ import {
   formatDiagnostics,
   type McpRuntimeConfig,
 } from './utils/runtimeDetector.js';
+import { isVersionAtLeast } from './utils/version.js';
 
 /**
  * Base VS Code MCP API surface present in VS Code 1.99+ (stdio transport).
@@ -59,24 +60,6 @@ interface VsCodeStdioMcpApi {
  */
 interface VsCodeHttpMcpApi extends VsCodeStdioMcpApi {
   McpHttpServerDefinition: new (label: string, url: string, version: string) => unknown;
-}
-
-function parseVersion(version: string): [number, number, number] {
-  const parts = version.split('.').map((p) => parseInt(p.replace(/[^0-9].*$/, ''), 10) || 0);
-  return [parts[0] || 0, parts[1] || 0, parts[2] || 0];
-}
-
-function isVersionAtLeast(version: string, requiredVersion: string): boolean {
-  const [major, minor, patch] = parseVersion(version);
-  const [reqMajor, reqMinor, reqPatch] = parseVersion(requiredVersion);
-
-  if (major !== reqMajor) {
-    return major > reqMajor;
-  }
-  if (minor !== reqMinor) {
-    return minor > reqMinor;
-  }
-  return patch >= reqPatch;
 }
 
 /**

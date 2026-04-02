@@ -82,7 +82,8 @@ describe('agent file frontmatter', () => {
   for (const filename of files) {
     const filePath = join(agentsDir, filename);
     const content = readFileSync(filePath, 'utf-8');
-    const lines = content.split('\n');
+    const rawLines = content.split('\n');
+    const lines = rawLines[rawLines.length - 1] === '' ? rawLines.slice(0, -1) : rawLines;
     const fm = parseFrontmatter(content);
     const isCoord = USER_INVOKABLE_AGENTS.has(filename);
 
