@@ -1,12 +1,12 @@
 {
-  "id": "SPIKE-030",
+  "id": "SPIKE-034",
   "type": "spike",
   "category": "general",
-  "title": "SPIKE: Investigate runSubagent Experimental API stabilization timeline and upgrade path",
+  "title": "SPIKE: Fischernetz-Topologie als adaptives Multi-Agent-Orchestrierungsmodell — Vergleich mit Spider Web",
   "status": "done",
-  "eisenhower": "not-urgent-important",
-  "created": "2026-03-05T22:04:06.403Z",
-  "updated": "2026-03-30T15:10:02.606Z",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-30T15:28:57.543Z",
+  "updated": "2026-03-31T10:40:47.804Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -23,8 +23,13 @@
     "superseded-by": []
   },
   "tags": [
-    "agent-plugin",
-    "research-2026-03-05"
+    "architecture",
+    "agents",
+    "research",
+    "orchestration",
+    "topology",
+    "fisher-net",
+    "spider-web"
   ],
   "commits": [],
   "metadata": {}

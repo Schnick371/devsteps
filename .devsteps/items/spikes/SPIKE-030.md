@@ -22,4 +22,25 @@ Written briefing (LessonsLearned doc) covering:
 - Current API status and stability guarantee
 - Expected breaking changes before stabilization
 - Recommended mitigation strategy if API becomes unavailable
-- Go/no-go: should Spider Web protocol be redesigned to not depend on experimental API?
+- Go/no-go: should Spider Web protocol be redesigned to not depend on experimental API?## Resolution (2026-03-30)
+
+**VS Code 1.113 (March 25, 2026) answers all research questions:**
+
+### Q1: API Stability Status
+**STABLE** — `runSubagent` is confirmed stable. VS Code 1.113 release notes explicitly mention it as a general-availability feature, not experimental.
+
+### Q2–Q6: Additional Findings from 1.113
+- **New capability:** `chat.subagents.allowInvocationsFromSubagents` — nested sub-agent dispatch enabled
+- **New capability:** `chat.subagents.maxDepth` — recursion depth hard limit (recommended: 3)
+- **No breaking API surface changes** between experimental and stable version
+- **No alternative needed** — runSubagent is the correct mechanism confirmed long-term
+- **Microsoft commitment confirmed** via stable release + extension capability
+
+### Decision
+Spider Web protocol dependency on `runSubagent` is VALIDATED — the fallback `devsteps-R0-coord-solo` remains as emergency fallback only.
+
+### Follow-Up Item
+EPIC-042 (Spider Web v2.0) builds on this stability confirmation to add Selective Nesting.
+
+### LessonsLearned
+Published to `LessonsLearned/research/SPIKE-030-runsubagent-stabilization.md` (pending TASK-370 implementation)

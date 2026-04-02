@@ -1,12 +1,12 @@
 {
-  "id": "SPIKE-030",
-  "type": "spike",
+  "id": "EPIC-042",
+  "type": "epic",
   "category": "general",
-  "title": "SPIKE: Investigate runSubagent Experimental API stabilization timeline and upgrade path",
-  "status": "done",
-  "eisenhower": "not-urgent-important",
-  "created": "2026-03-05T22:04:06.403Z",
-  "updated": "2026-03-30T15:10:02.606Z",
+  "title": "Spider Web v2.0 — Selective Nesting: Exec-Conductors + gate-reviewer Sub-Reviewer",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-30T15:08:08.636Z",
+  "updated": "2026-03-30T15:08:08.636Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -23,8 +23,12 @@
     "superseded-by": []
   },
   "tags": [
-    "agent-plugin",
-    "research-2026-03-05"
+    "architecture",
+    "agents",
+    "spider-web-v2",
+    "selective-nesting",
+    "nested-subagents",
+    "gate-reviewer"
   ],
   "commits": [],
   "metadata": {}

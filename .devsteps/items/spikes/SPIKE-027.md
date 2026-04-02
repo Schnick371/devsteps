@@ -30,3 +30,17 @@ Contents should cover:
 ## Dependencies
 - Requires STORY-199 (plugin.json) for bundling context
 - Research findings from SPIKE-027 (chatPromptFiles) may affect decision
+## Correction — 2026-03-24: Skills are Tool-Reference Libraries, not Entry-Point Stubs
+
+**Previous understanding (incorrect):** SKILL.md files were categorized as "partial workaround" for missing `prompts:` key in `plugin.json` — limited to slash-command discovery hooks (e.g. `/devsteps-plan`) without full workflow capability. Verdict: TRIAL at best.
+
+**Updated understanding (correct):** SKILL.md files are **reusable procedural knowledge libraries** with progressive loading (name+description → body → references/ → scripts/). Real-world examples from GitLens, Python Envs, and Copilot Chat itself confirm this pattern:
+- GitLens `/investigate`: 6-step bug investigation procedure with templates
+- GitLens `/audit-commits`: commit analysis workflow with impact classification
+- Python Envs `debug-failing-test`: 5-phase iterative debugging loop
+- Python Envs `run-pre-commit-checks`: detailed lint/type/test commands
+- Copilot Chat `agent-customization`: complete decision matrix + reference library with 6 sub-docs
+
+**What this means for DevSteps:** A `devsteps-mcp` skill could consolidate the duplicated DevSteps MCP tool knowledge currently spread across 48 files (3 instruction files, 9 prompt files, 36 agent files) into one canonical reference with sub-docs for: tool-reference, item-lifecycle, mandate-protocol, delegation-boundary. All agents would load it on-demand via progressive loading instead of repeating tool rules inline.
+
+**Status:** This spike's original scope (entry-point stub) is too narrow. Superseded by new story for tool-reference-library approach.

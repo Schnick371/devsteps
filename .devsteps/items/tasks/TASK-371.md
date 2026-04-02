@@ -1,0 +1,1 @@
+packages/shared MandateResult Zod-Schema um 3 optionale backward-compatible Felder erweitern: spawn_signal (trigger, confidence, remaining_scope, max_depth_request), parent_mandate_id (UUID), generation_depth (1-3). Alle optional() — keine Breaking Changes. Unit-Tests + CHANGELOG. Referenz: SPIKE-034, tmp/SPIKE-034-Fischernetz-Research-Brief.md §7 R1

@@ -58,4 +58,26 @@ Research and design the **Tier-4 layer** and formalize all **loop patterns** bef
 - [ ] Loop termination conditions are ALWAYS bounded (no infinite loops possible)
 - [ ] ADR + Loop Pattern Spec committed to `docs/architecture/`
 - [ ] Findings feed back into STORY-108 (schema adjustments) and STORY-109 (agent adjustments)
-- [ ] EPIC-028 scope re-validated or scope change items created
+- [ ] EPIC-028 scope re-validated or scope change items created## Resolution (2026-03-30) — OBSOLETE
+
+**VS Code 1.113 answers Q1 definitively: YES, subagents CAN spawn sub-subagents.**
+
+The hypothesis "subagents are leaf nodes = NO" was correct at the time of writing (pre-1.113) and has now been superseded.
+
+### Q1 Answer: Can GitHub Copilot subagents spawn sub-subagents?
+**YES** — via `chat.subagents.allowInvocationsFromSubagents = true` (default: false, requires opt-in). Guard: `chat.subagents.maxDepth` limits recursion depth.
+
+### Q2 Answer: Optimal atomic unit within Ring 4
+**Option C confirmed** — exec-planner step = atomic unit. exec-impl dispatches one worker-coder per implementation step.
+
+### Q3 Answer: Loop bounds
+IterationSignal mechanism in AGENT-DISPATCH-PROTOCOL is correct. Loops are bounded by max iterations tracked via `write_iteration_signal`.
+
+### Q4 Answer: 5th tier
+Not needed at scale seen so far. maxDepth=3 = 2 nesting levels beyond coord (coord→conductor→worker) is sufficient.
+
+### Q5 Answer: Lateral loops
+Handled by clarification loop within analysts (bounded by 1 `#askQuestions` call per ADP §3b). No additional mechanism needed.
+
+### Superseded by
+**EPIC-042** (Spider Web v2.0) implements the architecture enabled by this spike's findings. All deliverables (ADR, loop patterns) are incorporated into AGENT-DISPATCH-PROTOCOL v5.0 (see TASK-370).

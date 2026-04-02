@@ -1,12 +1,12 @@
 {
-  "id": "SPIKE-030",
-  "type": "spike",
+  "id": "STORY-218",
+  "type": "story",
   "category": "general",
-  "title": "SPIKE: Investigate runSubagent Experimental API stabilization timeline and upgrade path",
-  "status": "done",
-  "eisenhower": "not-urgent-important",
-  "created": "2026-03-05T22:04:06.403Z",
-  "updated": "2026-03-30T15:10:02.606Z",
+  "title": "Ring 5 gate-reviewer Sub-Reviewer: 3 reviewer-domain-* Agents + Phase 2 Fan-Out",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-03-30T15:09:36.745Z",
+  "updated": "2026-03-30T15:09:36.745Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -23,8 +23,12 @@
     "superseded-by": []
   },
   "tags": [
-    "agent-plugin",
-    "research-2026-03-05"
+    "spider-web-v2",
+    "gate-reviewer",
+    "sub-reviewer",
+    "ring5",
+    "security-review",
+    "quality-review"
   ],
   "commits": [],
   "metadata": {}

@@ -11,4 +11,6 @@
 2. Each item summary is 5–10 lines (type, title, priority, paths, parent, rationale)
 3. Items grouped by type when multiple items of same type are planned
 4. `#askQuestions` with approval options fires before any `mcp_devsteps_add`
-5. All 3 prompt copies in sync (mcp-server canonical → root → cli)
+5. All 3 prompt copies in sync (mcp-server canonical → root → cli)## Completion — 2026-03-24
+
+Commit 8f08b62, merged to main. Step 5 now requires a structured pre-create summary (5-10 lines per item, grouped by type) + #askQuestions approval gate before any R4 dispatch. All 3 copies synced.

@@ -1,16 +1,14 @@
 {
-  "id": "SPIKE-027",
-  "type": "spike",
+  "id": "TASK-372",
+  "type": "task",
   "category": "general",
-  "title": "Create first SKILL.md for devsteps-start-work Spider Web entry point (trial for plugin bundling)",
+  "title": "ADP v5.0: I-13 Erweiterung 'Adaptive Fan-Out via spawn_signal' + I-15 Spawn Policy",
   "status": "draft",
   "eisenhower": "not-urgent-important",
-  "created": "2026-03-05T22:03:16.830Z",
-  "updated": "2026-03-25T09:53:42.035Z",
+  "created": "2026-03-31T10:40:12.691Z",
+  "updated": "2026-03-31T10:40:12.691Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [
-    ".github/skills/"
-  ],
+  "affected_paths": [],
   "linked_items": {
     "implements": [],
     "implemented-by": [],
@@ -18,17 +16,18 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [
-      "STORY-199"
-    ],
+    "relates-to": [],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []
   },
   "tags": [
-    "agent-plugin",
-    "research-2026-03-05"
+    "fischernetz",
+    "agent-protocol",
+    "adp",
+    "spawn-signal",
+    "triage"
   ],
   "commits": [],
   "metadata": {}

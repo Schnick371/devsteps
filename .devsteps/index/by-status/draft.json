@@ -157,7 +157,6 @@
     "STORY-103",
     "TASK-214",
     "TASK-220",
-    "SPIKE-015",
     "SPIKE-016",
     "STORY-115",
     "TASK-257",
@@ -325,7 +324,6 @@
     "SPIKE-027",
     "SPIKE-028",
     "SPIKE-029",
-    "SPIKE-030",
     "SPIKE-031",
     "STORY-203",
     "STORY-204",
@@ -337,7 +335,15 @@
     "TASK-356",
     "TASK-357",
     "BUG-068",
-    "STORY-210"
+    "STORY-210",
+    "EPIC-042",
+    "STORY-217",
+    "STORY-218",
+    "TASK-370",
+    "SPIKE-033",
+    "TASK-371",
+    "TASK-372",
+    "SPIKE-035"
   ],
-  "updated": "2026-03-24T10:21:41.059Z"
+  "updated": "2026-03-31T10:40:22.570Z"
 }

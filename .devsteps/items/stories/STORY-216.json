@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Add pre-create item-summary gate to devsteps-10-plan-work prompt",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-03-24T10:21:35.463Z",
-  "updated": "2026-03-24T10:21:41.058Z",
+  "updated": "2026-03-24T10:22:36.645Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

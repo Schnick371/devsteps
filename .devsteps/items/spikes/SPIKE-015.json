@@ -3,10 +3,10 @@
   "type": "spike",
   "category": "general",
   "title": "Tier-4 Atomic Executor Design + Loop Pattern Formalization",
-  "status": "draft",
+  "status": "obsolete",
   "eisenhower": "not-urgent-important",
   "created": "2026-02-22T21:15:36.554Z",
-  "updated": "2026-02-22T21:21:03.130Z",
+  "updated": "2026-03-30T15:10:02.608Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "docs/architecture/",
