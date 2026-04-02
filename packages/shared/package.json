@@ -53,6 +53,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "yaml": "^2.7.0",
     "zod": "latest"
   },
   "devDependencies": {

@@ -25,3 +25,8 @@ Added: `detail_level` frontmatter field as part of Phase 1 scope.
 A new optional field `detail_level: 1 | 2 | 3 | "full"` in DOC item frontmatter specifies the default depth at which the Depth View should open this document. Example: a reference document optimized for scanning would set `detail_level: 1` (headings only). A runbook would set `detail_level: "full"`. This is a presentation layer hint, NOT a Diataxis classification (ADR-006 retirement reason).
 
 Schema proposal: `detail_level?: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal("full")]).optional()` — stored as a root ItemMetadata field alongside `bom_position`.
+
+---
+## Completion (Sprint 2026-04-02)
+
+All 27 coordinated locations updated across shared/mcp-server/extension. Hard stops HS-1 (ID regex), HS-3 (INVERSE_RELATIONS), HS-4 (LinkedItems Zod) all satisfied. 444 tests passing. Merged branch story/STORY-219 → main. NOTE: detail_level field NOT added per sprint binding decision (moved to docs-map.yaml Phase A schema as default_depth).

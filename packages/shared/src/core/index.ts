@@ -70,3 +70,9 @@ export {
   validateRelationship,
   type WorkItem,
 } from './validation.js';
+export {
+  appendDocsMapNode,
+  readDocsMap,
+  rebuildDocsMapShadow,
+  writeDocsMap,
+} from './docs-map.js';

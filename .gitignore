@@ -57,3 +57,4 @@ scripts/tmp
 .devsteps/.mcp-port
 # Experimental sandbox package (never published)
 packages/sandbox/
+pnpm-lock.yaml
