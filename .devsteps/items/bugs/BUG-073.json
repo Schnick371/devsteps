@@ -1,0 +1,40 @@
+{
+  "id": "BUG-073",
+  "type": "bug",
+  "category": "general",
+  "title": "Fix: safeJsonStringify for getTraceabilityGraphScript — JSON injection into inline script tag (OWASP A03)",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-02T15:09:07.898Z",
+  "updated": "2026-04-02T17:25:42.642Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/renderers/traceabilityRenderer.ts",
+    "packages/extension/src/webview/dashboardPanel.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "STORY-224"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "security",
+    "webview",
+    "xss",
+    "traceability"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,42 @@
+{
+  "id": "SPIKE-037",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: docs/manifest.yaml structure — DITA-map-inspired BOM position tree format for Doc Map",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T13:38:04.263Z",
+  "updated": "2026-04-02T15:11:33.519Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/",
+    "packages/shared/src/schemas/index.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [
+      "STORY-221"
+    ]
+  },
+  "tags": [
+    "doc-type",
+    "phase-3",
+    "bom",
+    "doc-map",
+    "dita",
+    "manifest"
+  ],
+  "commits": [],
+  "metadata": {}
+}

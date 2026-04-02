@@ -51,7 +51,7 @@ export const addTool: Tool = {
     properties: {
       type: {
         type: 'string',
-        enum: ['epic', 'story', 'task', 'requirement', 'feature', 'bug', 'spike', 'test'],
+        enum: ['epic', 'story', 'task', 'requirement', 'feature', 'bug', 'spike', 'test', 'doc'],
         description: 'Type of item to create (required)',
       },
       title: {
@@ -120,7 +120,7 @@ export const listTool: Tool = {
     properties: {
       type: {
         type: 'string',
-        enum: ['epic', 'story', 'task', 'requirement', 'feature', 'bug', 'spike', 'test'],
+        enum: ['epic', 'story', 'task', 'requirement', 'feature', 'bug', 'spike', 'test', 'doc'],
         description: 'Filter by item type (optional)',
       },
       status: {

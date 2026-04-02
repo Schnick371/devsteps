@@ -42,6 +42,7 @@ export const ItemType = z.enum([
   'bug',
   'spike',
   'test',
+  'doc',
 ]);
 export type ItemType = z.infer<typeof ItemType>;
 
@@ -90,6 +91,10 @@ export const RelationType = z.enum([
   'required-by',
   'supersedes',
   'superseded-by',
+  'canonical-for',
+  'derived-from',
+  'documented-by',
+  'documents',
 ]);
 export type RelationType = z.infer<typeof RelationType>;
 
@@ -109,6 +114,10 @@ export const LinkedItems = z
     'required-by': z.array(z.string()),
     supersedes: z.array(z.string()),
     'superseded-by': z.array(z.string()),
+    'canonical-for': z.array(z.string()),
+    'derived-from': z.array(z.string()),
+    'documented-by': z.array(z.string()),
+    documents: z.array(z.string()),
   })
   .default({
     implements: [],
@@ -122,6 +131,10 @@ export const LinkedItems = z
     'required-by': [],
     supersedes: [],
     'superseded-by': [],
+    'canonical-for': [],
+    'derived-from': [],
+    'documented-by': [],
+    documents: [],
   });
 export type LinkedItems = z.infer<typeof LinkedItems>;
 
@@ -141,7 +154,7 @@ export type GitCommit = z.infer<typeof GitCommit>;
  * Core item schema - metadata stored as JSON
  */
 export const ItemMetadata = z.object({
-  id: z.string().regex(/^(EPIC|STORY|TASK|REQ|FEAT|BUG|SPIKE|TEST)-\d{3,}$/),
+  id: z.string().regex(/^(EPIC|STORY|TASK|REQ|FEAT|BUG|SPIKE|TEST|DOC)-\d{3,}$/),
   type: ItemType,
   category: z.string().default('general'),
   title: z.string().min(1).max(200),

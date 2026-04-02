@@ -74,6 +74,7 @@ export function registerFilterCommands(
           { label: 'Requirement', value: 'requirement' },
           { label: 'Spike', value: 'spike' },
           { label: 'Test', value: 'test' },
+          { label: 'Doc', value: 'doc' },
         ],
         { canPickMany: true, placeHolder: 'Select types to show (multiple selection)' }
       );

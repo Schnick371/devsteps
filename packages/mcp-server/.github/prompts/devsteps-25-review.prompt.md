@@ -1,5 +1,5 @@
 ---
-agent: "devsteps-R5-gate-reviewer"
+agent: "devsteps-R0-coord"
 model: "Claude Sonnet 4.6"
 description: "Quality review gate - validate completed work before marking done"
 tools:

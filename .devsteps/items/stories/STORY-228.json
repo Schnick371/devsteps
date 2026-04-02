@@ -1,0 +1,43 @@
+{
+  "id": "STORY-228",
+  "type": "story",
+  "category": "general",
+  "title": "Add canonical-for and derived-from RelationType pair to shared schema, link.ts INVERSE_RELATIONS guard, and extension TreeView relation renderer",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T15:10:36.760Z",
+  "updated": "2026-04-02T15:11:20.028Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/index.ts",
+    "packages/shared/src/schemas/relationships.ts",
+    "packages/shared/src/core/link.ts",
+    "packages/mcp-server/src/tools/link.ts",
+    "packages/extension/src/treeView/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "schema",
+    "relations",
+    "canonical-for",
+    "tsd",
+    "phase-b"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,47 @@
+{
+  "id": "STORY-219",
+  "type": "story",
+  "category": "general",
+  "title": "DOC ItemType Phase 1 — Core Schema + 27-Point Source Changes (doc type + 4 relation types)",
+  "status": "in-progress",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-02T13:36:37.568Z",
+  "updated": "2026-04-02T19:36:20.173Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/index.ts",
+    "packages/shared/src/schemas/relationships.ts",
+    "packages/shared/src/constants/index.ts",
+    "packages/shared/src/core/link.ts",
+    "packages/mcp-server/src/tools/",
+    "packages/extension/src/utils/icons.ts",
+    "packages/extension/src/treeView/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "STORY-220"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "phase-1",
+    "schema",
+    "shared",
+    "mcp-server",
+    "extension"
+  ],
+  "commits": [],
+  "metadata": {}
+}

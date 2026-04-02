@@ -1,0 +1,41 @@
+{
+  "id": "STORY-224",
+  "type": "story",
+  "category": "general",
+  "title": "Extend mcp_devsteps_get with output_format param for embed-block and markdown-card rendering (HTML-escape required)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T15:09:30.098Z",
+  "updated": "2026-04-02T15:11:27.483Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/get.ts",
+    "packages/shared/src/core/format-helpers.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [
+      "BUG-073"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp-server",
+    "get",
+    "embed",
+    "tsd",
+    "security"
+  ],
+  "commits": [],
+  "metadata": {}
+}

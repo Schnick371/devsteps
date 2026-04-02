@@ -19,6 +19,10 @@ const RELATION_TYPE_ENUM = [
   'required-by',
   'supersedes',
   'superseded-by',
+  'canonical-for',
+  'derived-from',
+  'documented-by',
+  'documents',
 ] as const;
 
 export const linkTool: Tool = {

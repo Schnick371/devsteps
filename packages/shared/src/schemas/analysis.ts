@@ -91,7 +91,7 @@ export type CompressedVerdict = z.infer<typeof CompressedVerdictSchema>;
  */
 export const AnalysisBriefingSchema = z.object({
   /** DevSteps item ID this analysis belongs to */
-  task_id: z.string().regex(/^(EPIC|STORY|TASK|REQ|FEAT|BUG|SPIKE|TEST)-\d{3,}$/),
+  task_id: z.string().regex(/^(EPIC|STORY|TASK|REQ|FEAT|BUG|SPIKE|TEST|DOC)-\d{3,}$/),
   /** Which aspect this briefing covers */
   aspect: AnalysisAspect,
   /** Name of the agent that produced this briefing */

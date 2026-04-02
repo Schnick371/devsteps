@@ -55,6 +55,7 @@ export function getIconForType(type: string): string {
     feature: '💡',
     requirement: '📝',
     spike: '🧪',
+    doc: '📄',
   };
   return icons[type] || '●';
 }

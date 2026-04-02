@@ -1,0 +1,40 @@
+{
+  "id": "TASK-376",
+  "type": "task",
+  "category": "general",
+  "title": "Implement breadcrumb injection for odd depth levels ≥ 3 in depthSlider.ts filterHeadingsByLevel (correctness requirement)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T15:10:36.757Z",
+  "updated": "2026-04-02T15:11:20.029Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/preview/depthSlider.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [
+      "STORY-227"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "tsd",
+    "depth-view",
+    "breadcrumb",
+    "correctness"
+  ],
+  "commits": [],
+  "metadata": {}
+}

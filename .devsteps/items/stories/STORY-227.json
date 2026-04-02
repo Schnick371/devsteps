@@ -1,0 +1,42 @@
+{
+  "id": "STORY-227",
+  "type": "story",
+  "category": "general",
+  "title": "Implement depthSlider.ts previewScript — TSD depth slider UI with acquireVsCodeApi() state and tsd frontmatter guard",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T15:09:54.475Z",
+  "updated": "2026-04-02T15:11:27.483Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/preview/depthSlider.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [
+      "TASK-375"
+    ],
+    "required-by": [
+      "TASK-376"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "tsd",
+    "depth-view",
+    "previewscript",
+    "vs-code"
+  ],
+  "commits": [],
+  "metadata": {}
+}

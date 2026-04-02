@@ -1,0 +1,39 @@
+{
+  "id": "BUG-071",
+  "type": "bug",
+  "category": "general",
+  "title": "SILENT BLOCKER: cbp-mandate.ts:72 + analysis.ts:94 item-id regex excludes DOC prefix — Spider Web dispatch fails silently for DOC items",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-02T13:36:13.524Z",
+  "updated": "2026-04-02T13:38:10.903Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/cbp-mandate.ts",
+    "packages/shared/src/schemas/analysis.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "cbp",
+    "regex",
+    "silent-bug",
+    "shared"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,37 @@
+{
+  "id": "BUG-072",
+  "type": "bug",
+  "category": "general",
+  "title": "SILENT: treeView/utils/itemLoader.ts returns null for DOC-NNN items (regex excludes DOC prefix)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-02T13:36:22.639Z",
+  "updated": "2026-04-02T13:38:15.209Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/treeView/utils/itemLoader.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "extension",
+    "treeview",
+    "silent-bug"
+  ],
+  "commits": [],
+  "metadata": {}
+}

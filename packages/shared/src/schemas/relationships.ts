@@ -36,6 +36,10 @@ export const FLEXIBLE_RELATIONSHIPS = [
   'tests',
   'supersedes',
   'superseded-by',
+  'canonical-for',
+  'derived-from',
+  'documented-by',
+  'documents',
 ] as const;
 
 export type HierarchyRelation = (typeof HIERARCHY_RELATIONSHIPS)[number];

@@ -26,6 +26,9 @@ export const ITEM_TYPE_ICONS: Record<ItemType, string> = {
   // Waterfall hierarchy
   requirement: 'note', // 📝 Requirements
   feature: 'lightbulb', // 💡 Features
+
+  // Documentation
+  doc: 'symbol-file', // 📄 Architecture/design documents
 };
 
 /**

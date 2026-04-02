@@ -1,0 +1,38 @@
+{
+  "id": "TASK-374",
+  "type": "task",
+  "category": "general",
+  "title": "Refactor mcp-server ITEM_TYPE_ENUM → derive from ItemType.options (eliminates 4 hardcoded duplicate sites)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T13:37:46.621Z",
+  "updated": "2026-04-02T13:38:56.565Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/system.ts",
+    "packages/mcp-server/src/tools/crud.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "refactor",
+    "mcp-server",
+    "shared"
+  ],
+  "commits": [],
+  "metadata": {}
+}

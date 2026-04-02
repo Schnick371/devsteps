@@ -1,0 +1,40 @@
+{
+  "id": "STORY-222",
+  "type": "story",
+  "category": "general",
+  "title": "Implement mcp_devsteps_docs_map_write MCP tool — atomic YAML + JSON shadow dual-write",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T15:09:30.095Z",
+  "updated": "2026-04-02T15:11:27.482Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/docs-map-write.ts",
+    "packages/mcp-server/src/index.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [
+      "STORY-221"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp-server",
+    "docs-map",
+    "tsd",
+    "bom"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -114,4 +114,30 @@ After research completes and gate passes:
 - Use `worker-devsteps` to link the spike to affected stories or epics
 - Add follow-up `story` or `task` items for each actionable recommendation
 
+## Insight Harvest Loop (MANDATORY — starts after gate-reviewer PASS, repeats until done, max 5 rounds)
+
+> Research sessions spawn new questions — both from unexpected findings in the brief and from the human reading it in real time. This loop harvests both directions repeatedly — until the question space is exhausted.
+
+**Each iteration — autonomous step (never surface to user):**
+
+1. From the research brief: which findings fell outside the main question but are worth tracking?
+2. Any technology signals (adopt/retire) that imply a concrete follow-up item not yet in the brief?
+3. Draft 0–2 additional proposals beyond what "Next Actions" already captured
+
+**Then call `#askQuestions`:**
+
+> **Round [N] — What the research surfaced beyond the main brief:**
+> [0–2 additional proposals — or "Next Actions covers everything notable"]
+>
+> **Your turn:** Reading the brief often sparks new questions — what arose?
+>
+> A) Add these as items + I have more questions: [describe] → *creates items, then next round*
+> B) Decline — I have a different follow-up: [describe] → *creates items, then next round*
+> C) Add some + I have more: [describe] → *creates items, then next round*
+> D) The brief is enough for now — session complete
+
+**After A/B/C:** delegate to `worker-devsteps`, then immediately start the next iteration — no user prompt needed to continue.
+**After D:** session complete.
+**Round 5:** if input is still flowing, capture remaining ideas in one final `#askQuestions`, create those items, then close.
+
 

@@ -69,7 +69,7 @@ export const MandateSchema = z.object({
   /** Sprint or item context identifier (used as storage path segment) */
   sprint_id: z.string(),
   /** DevSteps item IDs this mandate covers (single item or batch) */
-  item_ids: z.array(z.string().regex(/^(EPIC|STORY|TASK|REQ|FEAT|BUG|SPIKE|TEST)-\d{3,}$/)),
+  item_ids: z.array(z.string().regex(/^(EPIC|STORY|TASK|REQ|FEAT|BUG|SPIKE|TEST|DOC)-\d{3,}$/)),
   /** Determines which sub-questions the analyst must answer */
   triage_tier: TriageTier,
   /** Optional Tier-1 context hints (e.g., shared-file conflicts, prior results paths) */

@@ -39,6 +39,10 @@ const INVERSE_RELATIONS: Record<RelationType, RelationType> = {
   'relates-to': 'relates-to',
   supersedes: 'superseded-by',
   'superseded-by': 'supersedes',
+  'canonical-for': 'derived-from',
+  'derived-from': 'canonical-for',
+  'documented-by': 'documents',
+  documents: 'documented-by',
 };
 
 /**
