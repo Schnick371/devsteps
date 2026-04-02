@@ -23,12 +23,14 @@ export interface TraceabilityData {
   edges: TraceabilityEdge[];
 }
 
+import { safeJsonStringify } from '../../utils/scriptHelpers.js';
+
 /**
  * Generate inline JavaScript for traceability graph rendering
  */
 export function getTraceabilityGraphScript(traceability: TraceabilityData): string {
-  const nodes = JSON.stringify(traceability.nodes);
-  const edges = JSON.stringify(traceability.edges);
+  const nodes = safeJsonStringify(traceability.nodes);
+  const edges = safeJsonStringify(traceability.edges);
 
   return `
     // Simple SVG force-directed graph

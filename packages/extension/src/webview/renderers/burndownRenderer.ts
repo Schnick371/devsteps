@@ -6,6 +6,7 @@
  */
 
 import type { BurndownData } from '../dataProviders/burndownProvider.js';
+import { safeJsonStringify } from '../../utils/scriptHelpers.js';
 
 /**
  * Generate inline JavaScript for burndown chart rendering
@@ -25,9 +26,9 @@ export function getBurndownChartScript(burndown: BurndownData): string {
       const width = canvas.width;
       const height = canvas.height;
       
-      const labels = ${JSON.stringify(labels)};
-      const ideal = ${JSON.stringify(idealData)};
-      const actual = ${JSON.stringify(actualData)};
+      const labels = ${safeJsonStringify(labels)};
+      const ideal = ${safeJsonStringify(idealData)};
+      const actual = ${safeJsonStringify(actualData)};
       
       const maxValue = Math.max(...ideal, ...actual);
       const padding = 40;
