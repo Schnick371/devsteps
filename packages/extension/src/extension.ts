@@ -25,18 +25,36 @@ let activeMcpManager: McpServerManager | undefined;
  * This prevents Welcome View flash by ensuring extension loads before view renders.
  * We check for .devsteps directory and set context accordingly.
  */
+export function parseVersion(version: string): [number, number, number] {
+  const parts = version.split('.').map((p) => parseInt(p.replace(/[^0-9].*$/, ''), 10) || 0);
+  return [parts[0] || 0, parts[1] || 0, parts[2] || 0];
+}
+
+export function isVersionAtLeast(version: string, requirement: string): boolean {
+  const [major, minor, patch] = parseVersion(version);
+  const [reqMajor, reqMinor, reqPatch] = parseVersion(requirement);
+
+  if (major !== reqMajor) {
+    return major > reqMajor;
+  }
+  if (minor !== reqMinor) {
+    return minor > reqMinor;
+  }
+  return patch >= reqPatch;
+}
+
 export async function activate(context: vscode.ExtensionContext) {
   logger.info('DevSteps extension activating...');
 
   // Runtime VS Code version guard (non-blocking warning)
   // engines.vscode enforces ^1.109.0 at install time; this guard adds runtime clarity for edge cases.
-  const [major, minor] = vscode.version.split('.').map(Number);
-  if (major < 1 || (major === 1 && minor < 109)) {
+  const requiredVersion = '1.109.0';
+  if (!isVersionAtLeast(vscode.version, requiredVersion)) {
     void vscode.window.showWarningMessage(
-      `DevSteps requires VS Code 1.109.0 or later for parallel agent dispatch (#runSubagent). ` +
+      `DevSteps requires VS Code ${requiredVersion} or later for parallel agent dispatch (#runSubagent). ` +
         `Current version: ${vscode.version}. Please update VS Code.`
     );
-    logger.warn(`VS Code version ${vscode.version} is below the required 1.109.0`);
+    logger.warn(`VS Code version ${vscode.version} is below the required ${requiredVersion}`);
   }
 
   // Check for workspace

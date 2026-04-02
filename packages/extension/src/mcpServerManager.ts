@@ -61,6 +61,24 @@ interface VsCodeHttpMcpApi extends VsCodeStdioMcpApi {
   McpHttpServerDefinition: new (label: string, url: string, version: string) => unknown;
 }
 
+function parseVersion(version: string): [number, number, number] {
+  const parts = version.split('.').map((p) => parseInt(p.replace(/[^0-9].*$/, ''), 10) || 0);
+  return [parts[0] || 0, parts[1] || 0, parts[2] || 0];
+}
+
+function isVersionAtLeast(version: string, requiredVersion: string): boolean {
+  const [major, minor, patch] = parseVersion(version);
+  const [reqMajor, reqMinor, reqPatch] = parseVersion(requiredVersion);
+
+  if (major !== reqMajor) {
+    return major > reqMajor;
+  }
+  if (minor !== reqMinor) {
+    return minor > reqMinor;
+  }
+  return patch >= reqPatch;
+}
+
 /**
  * Check if extension is running as pre-release version
  *
@@ -200,8 +218,17 @@ export class McpServerManager {
       // Check if VS Code MCP API is available
       const mcpVscode = vscode as unknown as Partial<VsCodeStdioMcpApi>;
       if (!mcpVscode.lm?.registerMcpServerDefinitionProvider) {
-        logger.warn('VS Code MCP API not available (requires VS Code 1.99+)');
-        this.showFallbackConfiguration();
+        const requiredVersionForMcpApi = '1.109.0';
+        logger.warn('VS Code MCP API not available');
+
+        if (!isVersionAtLeast(vscode.version, requiredVersionForMcpApi)) {
+          this.showFallbackConfiguration();
+        } else {
+          logger.error(
+            `VS Code ${vscode.version} is >= ${requiredVersionForMcpApi}, but MCP API still unavailable. ` +
+              'Please report this at https://github.com/Schnick371/devsteps/issues'
+          );
+        }
         return;
       }
 
