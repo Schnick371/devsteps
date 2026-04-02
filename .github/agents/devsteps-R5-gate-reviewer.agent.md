@@ -2,15 +2,7 @@
 description: "gate-reviewer — quality gate, mandate-type=review, dispatches quality-subagent, runs bounded Review-Fix loop via write_rejection_feedback + write_iteration_signal"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
-agents:
-  - devsteps-R2-aspect-quality
-  - devsteps-R2-aspect-staleness
-handoffs:
-  - label: "PASS → Continue Workflow"
-    agent: devsteps-R0-coord
-    prompt: "Review PASSED for item: [ITEM_ID]. Mark status done and pull next item or close sprint."
-    send: false
+  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 user-invocable: false
 ---
 
@@ -20,12 +12,21 @@ user-invocable: false
 
 ## Contract
 
-- **Role**: `gate` — Quality Gate
+- **Role**: `gate` — Quality Gate (Leaf Node)
 - **Mandate type**: `review`
-- **Accepted from**: coord (`devsteps-R0-coord`), coord-sprint (`devsteps-R0-coord-sprint`)
-- **Dispatches (internal, parallel)**: `devsteps-R2-aspect-quality`, `devsteps-R2-aspect-staleness`
+- **Dispatched by**: coord (`devsteps-R0-coord`), coord-sprint (`devsteps-R0-coord-sprint`) via `runSubagent`
+- **Dispatches**: NONE — Leaf Node, NEVER uses `runSubagent`
 - **Returns**: MandateResult via `write_mandate_result`; on FAIL also writes `write_rejection_feedback` and `write_iteration_signal`
-- **coord NEVER reads** raw aspect envelopes from this agent's dispatches directly
+
+## Expected Input (via `runSubagent` prompt from coord)
+
+coord passes a structured dispatch prompt. Parse these fields:
+
+- **item_id** — DevSteps work item ID
+- **sprint_id** — Current sprint identifier
+- **triage_tier** — QUICK | STANDARD | FULL | COMPETITIVE
+- **upstream_reports** — Report paths from all previous rings (impl, test, doc MandateResults)
+- **acceptance_criteria** — Criteria the implementation must satisfy
 
 ## Mission
 
@@ -50,18 +51,23 @@ Final quality gate before `done` status. Dispatches automated + structural check
 If no recognized build toolchain manifest is found → ESCALATE immediately; do not skip gates.
 If any gate fails → stop immediately, report exact tool output, skip subsequent phases, go to FAIL path.
 
-### Phase 2: MAP (Parallel Aspect Dispatch)
+### Phase 2: Inline Quality + Staleness Analysis
 
-> **CRITICAL: Dispatch ALL agents simultaneously in ONE parallel fan-out.**
+All analysis is performed inline. No agents are dispatched.
 
-| Agent                       | Mandate                                                                  |
-| --------------------------- | ------------------------------------------------------------------------ |
-| `devsteps-R2-aspect-quality`   | Missing tests, assertion gaps, pattern inconsistencies, stale TODO/FIXME |
-| `devsteps-R2-aspect-staleness` | Outdated docs, diverged comments, stale type annotations                 |
+| Check | What to look for |
+| ----- | ---------------- |
+| Missing tests | Changed code paths without corresponding test coverage |
+| Assertion gaps | Tests that exist but don't assert meaningful behavior |
+| Pattern inconsistencies | Deviations from established codebase conventions |
+| Stale TODO/FIXME | Leftover markers that reference resolved issues |
+| Outdated docs | Documentation that references old API surface |
+| Diverged comments | Code comments that don't match actual implementation |
+| Stale type annotations | Type definitions that don't match runtime behavior |
 
 ### Phase 3: REDUCE + RESOLVE
 
-Read envelopes via `read_analysis_envelope`. Run Absence Audit: "What class of defect (boundary, error-path, concurrency) is NOT checked?"
+Review Phase 1 gate results and Phase 2 inline analysis. Run Absence Audit: "What class of defect (boundary, error-path, concurrency) is NOT checked?"
 
 ### Phase 4: Verdict
 

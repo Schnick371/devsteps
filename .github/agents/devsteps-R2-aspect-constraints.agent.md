@@ -2,7 +2,7 @@
 description: "Constraint Analyst - surfaces risks, blockers, and hidden prerequisites that could derail naive implementation"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 
 user-invocable: false
 ---
@@ -13,10 +13,22 @@ user-invocable: false
 
 ## Contract
 
-- **Role**: `aspect` — Aspect Analyst
-- **Dispatched by**: coord (Ring 2 cross-validation) · `devsteps-R1-analyst-risk` (internal risk analysis)
-- **Returns**: Analysis envelope via `write_analysis_report` — caller reads via `read_analysis_envelope`
-- **NEVER dispatches** further subagents — leaf node
+- **Role**: `aspect` — Aspect Analyst (Leaf Node)
+- **Dispatched by**: coord (`devsteps-R0-coord`) via `runSubagent` — Ring 2 cross-validation, AFTER Ring 1 completes
+- **Dispatches**: NONE — Leaf Node, NEVER uses `runSubagent`
+- **Returns**: Analysis envelope via `write_analysis_report` — coord reads via `read_analysis_envelope`
+
+## Expected Input (via `runSubagent` prompt from coord)
+
+coord passes a structured dispatch prompt. Parse these fields:
+
+- **item_id** — DevSteps work item ID
+- **sprint_id** — Current sprint identifier
+- **triage_tier** — STANDARD | FULL | COMPETITIVE
+- **task_title** — Work item title
+- **task_description** — Work item description / acceptance criteria
+- **affected_paths** — File paths relevant to this task
+- **upstream_reports** — Ring 1 MandateResult report paths (read via `read_mandate_results`)
 
 ## Single Mission
 
@@ -110,7 +122,13 @@ Call `write_analysis_report` (devsteps MCP) with the AnalysisBriefing JSON:
 
 - `taskId`: item ID (e.g., `TASK-042`)
 - `aspect`: this agent's aspect name (`impact` | `constraints` | `quality` | `staleness` | `integration`)
-- `envelope`: CompressedVerdict object — fields: `aspect`, `verdict`, `confidence`, `top3_findings` (max 3 × 200 chars), `report_path`, `timestamp`
+- `envelope`: CompressedVerdict object — **all fields are SCHEMA-ENFORCED, wrong values cause tool failure**:
+  - `aspect`: same string as the briefing aspect (e.g. `"constraints"`)
+  - `verdict`: **EXACT enum — use ONLY one of:** `"PROCEED"` | `"PROCEED-WITH-CAUTION"` | `"STOP"` — NEVER use BLOCK, FAIL, BLOCKER, HARD-STOP, or any other string
+  - `confidence`: float 0.0–1.0
+  - `top3_findings`: array of **EXACTLY 3 strings**, each **≤200 characters — HARD LIMIT**. Count characters before submitting. Truncate to 195 chars + `"…"` if needed. Never exceed 200.
+  - `report_path`: e.g. `.devsteps/analysis/TASK-042/constraints-report.json`
+  - `timestamp`: ISO 8601 UTC (e.g. `"2026-01-15T10:30:00Z"`)
 - `full_analysis`: complete markdown analysis text
 - `affected_files`: list of affected file paths
 - `recommendations`: list of action strings

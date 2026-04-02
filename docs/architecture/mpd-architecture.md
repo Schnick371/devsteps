@@ -251,7 +251,7 @@ The Spider Web model replaces MPD's flat "aspects + impl/test/doc subagents" wit
 | Ring | Phase | Agents | Mode |
 |------|-------|--------|------|
 | 0 | Hub | `coord-*` | Dispatch + synthesis |
-| 1 | Analysis | `analyst-archaeology`, `analyst-risk`, `analyst-quality`, `analyst-research` | Parallel fan-out |
+| 1 | Analysis | `analyst-context`, `analyst-internal`, `analyst-risk`, `analyst-quality`, `analyst-archaeology`, `analyst-research`, `analyst-web` | Parallel fan-out |
 | 2 | Cross-Validation | `aspect-impact`, `aspect-constraints`, `aspect-quality`, `aspect-staleness`, `aspect-integration` | Parallel fan-out (after Ring 1) |
 | 3 | Planning | `exec-planner` | Sequential |
 | 4 | Execution | `exec-impl` → `exec-test` ∧ `exec-doc` (conductors); `worker-*` (leaves) | Sequential/parallel |
@@ -266,8 +266,8 @@ The Spider Web model replaces MPD's flat "aspects + impl/test/doc subagents" wit
 | `test-subagent` | Ring 4 `exec-test` conductor → `worker-tester` |
 | `doc-subagent` | Ring 4 `exec-doc` conductor → `worker-documenter` |
 | `devsteps-reviewer` | Ring 5 `gate-reviewer` |
-| `analyst-context-subagent` | Ring 1 `analyst-archaeology` |
-| `analyst-web` + `analyst-internal` | Ring 1 `analyst-research` |
+| `analyst-context-subagent` | Ring 1 `analyst-context` |
+| `analyst-web` + `analyst-internal` | Ring 1 `analyst-internal`, `analyst-web`, `analyst-research` |
 | Raw aspect envelopes read by coord | MandateResults read via `read_mandate_results` tool ONLY |
 
 ### Triage Tiers (unchanged)

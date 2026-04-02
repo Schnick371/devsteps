@@ -2,11 +2,7 @@
 description: "Risk deep analyst mandate-type=risk, maps blast radius and probability/severity matrix via parallel aspect dispatch"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
-agents:
-  - devsteps-R2-aspect-impact
-  - devsteps-R2-aspect-integration
-  - devsteps-R2-aspect-constraints
+  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 user-invocable: false
 ---
 
@@ -16,12 +12,24 @@ user-invocable: false
 
 ## Contract
 
-- **Tier**: `analyst` — Deep Analyst
+- **Tier**: `analyst` — Deep Analyst (Leaf Node)
 - **Mandate type**: `risk`
-- **Accepted from**: coord (`devsteps-R0-coord`), coord-sprint (`devsteps-R0-coord-sprint`)
-- **Dispatches (internal, parallel)**: `devsteps-R2-aspect-impact`, `devsteps-R2-aspect-integration`, `devsteps-R2-aspect-constraints`
+- **Dispatched by**: coord (`devsteps-R0-coord`), coord-sprint (`devsteps-R0-coord-sprint`) via `runSubagent`
+- **Dispatches**: NONE — Leaf Node, NEVER uses `runSubagent`
 - **Returns**: MandateResult written via `write_mandate_result` — coord reads via `read_mandate_results`
-- **coord NEVER reads** raw aspect envelopes from this agent's dispatches directly
+
+## Expected Input (via `runSubagent` prompt from coord)
+
+coord passes a structured dispatch prompt. Parse these fields:
+
+- **item_id** — DevSteps work item ID (e.g., `STORY-042`)
+- **sprint_id** — Current sprint identifier
+- **triage_tier** — QUICK | STANDARD | FULL | COMPETITIVE
+- **task_title** — Work item title
+- **task_description** — Work item description / acceptance criteria
+- **affected_paths** — File paths relevant to this task
+- **constraints** — Scope, time, or technical constraints (e.g., excluded packages, risk threshold)
+- **failed_approaches** — Previously tried approaches to avoid
 
 ## Mission
 
@@ -35,16 +43,21 @@ Map what the planned change could break, at what probability, and with what seve
 
 ## MAP-REDUCE-RESOLVE-SYNTHESIZE
 
-### MAP — Decomposition Table
+### MAP — Inline Risk Analysis (no sub-dispatch)
 
-> **CRITICAL: Dispatch ALL agents below simultaneously in ONE parallel fan-out.**
+Perform ALL risk analysis steps directly using available tools. NEVER dispatch sub-agents.
 
-| Agent                         | Mandate                                               | Always? |
-| ----------------------------- | ----------------------------------------------------- | ------- |
-| `devsteps-R2-aspect-impact`      | Map all call-sites and dependents of changed symbols  | Yes     |
-| `devsteps-R2-aspect-integration` | Check integration points across package boundaries    | Yes     |
-| `devsteps-R2-aspect-constraints` | Identify hard constraints (types, schemas, contracts) | Yes     |
-| `devsteps-R2-aspect-staleness`   | Identify test gaps that increase risk (FULL only)     | FULL    |
+| Step | Action | Tool |
+| --- | --- | --- |
+| 1. Map call-sites and dependents | Find all consumers of changed symbols | `grep_search`, `semantic_search` |
+| 2. Check integration points | Scan cross-package boundaries for coupling | `read_file`, `grep_search` |
+| 3. Identify hard constraints | Check types, schemas, contracts that must not break | `read_file` |
+| 4. Assess test coverage gaps | Find untested paths that increase risk | `grep_search` |
+| 5. Build blast radius | Map which packages, modules, consumers are affected | synthesis |
+| 6. Construct risk matrix | `component × probability × severity` | synthesis |
+
+**FULL tier:** Additionally check dependency changelogs for breaking version drift.
+**COMPETITIVE:** Also check changelogs of all direct npm dependencies.
 
 ### REDUCE — Key Contradiction Checks
 
@@ -54,7 +67,7 @@ Map what the planned change could break, at what probability, and with what seve
 
 ### RESOLVE — Risk-Specific
 
-If impact and integration disagree on package blast radius → dispatch targeted `impact-subagent` scoped to disputed package.
+If blast radius analysis and integration check disagree on package scope — do a targeted search scoped to the disputed package.
 
 ### SYNTHESIZE — MandateResult `type=risk`
 

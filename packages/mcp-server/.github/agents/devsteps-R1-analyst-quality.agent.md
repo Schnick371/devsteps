@@ -2,7 +2,7 @@
 description: "Quality deep analyst mandate-type=quality, validates correctness + completeness via parallel dispatch with bounded Review-Fix loop"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 user-invocable: false
 ---
 
@@ -12,12 +12,24 @@ user-invocable: false
 
 ## Contract
 
-- **Role**: `analyst` — Deep Analyst
+- **Role**: `analyst` — Deep Analyst (Leaf Node)
 - **Mandate type**: `quality`
-- **Accepted from**: coord (`devsteps-R0-coord`), coord-sprint (`devsteps-R0-coord-sprint`)
-- **Dispatches (parallel fan-out)**: `devsteps-R2-aspect-quality`, `devsteps-R2-aspect-staleness`
+- **Dispatched by**: coord (`devsteps-R0-coord`), coord-sprint (`devsteps-R0-coord-sprint`) via `runSubagent`
+- **Dispatches**: NONE — Leaf Node, NEVER uses `runSubagent`
 - **Returns**: MandateResult written via `write_mandate_result` — coord reads via `read_mandate_results`
-- **coord NEVER reads** raw aspect envelopes from this agent's dispatches directly
+
+## Expected Input (via `runSubagent` prompt from coord)
+
+coord passes a structured dispatch prompt. Parse these fields:
+
+- **item_id** — DevSteps work item ID (e.g., `STORY-042`)
+- **sprint_id** — Current sprint identifier
+- **triage_tier** — QUICK | STANDARD | FULL | COMPETITIVE
+- **task_title** — Work item title
+- **task_description** — Work item description / acceptance criteria
+- **affected_paths** — File paths relevant to this task
+- **constraints** — Coverage threshold, lint scope
+- **failed_approaches** — Previously tried approaches to avoid
 
 ## Mission
 
@@ -31,7 +43,7 @@ Determine whether an implementation is correct, complete, and consistent — pro
 
 ## MAP-REDUCE-RESOLVE-SYNTHESIZE
 
-Protocol reference: [AGENT-DISPATCH-PROTOCOL.md](../../../../.github/agents/AGENT-DISPATCH-PROTOCOL.md)
+Protocol reference: [AGENT-DISPATCH-PROTOCOL.md](./AGENT-DISPATCH-PROTOCOL.md)
 
 ### Automated Checks FIRST (before MAP)
 
@@ -45,18 +57,18 @@ Run these before dispatching any aspect agent — they are fast and filter low-s
 If no recognized build toolchain manifest is found → ESCALATE immediately; do not skip checks.
 If automated checks FAIL: skip MAP, immediately produce `MandateResult` with `status=FAIL`, call `write_rejection_feedback` with specific violation list.
 
-### MAP — Decomposition Table (only when automated checks pass)
+### MAP — Inline Quality Analysis (only when automated checks pass)
 
-> **CRITICAL: Dispatch ALL agents below simultaneously in ONE parallel fan-out.**
+Perform ALL quality analysis steps directly using available tools. NEVER dispatch sub-agents.
 
-| Agent                       | Mandate                                                                   | Always?   |
-| --------------------------- | ------------------------------------------------------------------------- | --------- |
-| `devsteps-R2-aspect-quality`   | Deep analysis: missing test cases, assertion quality, pattern consistency | Yes       |
-| `devsteps-R2-aspect-staleness` | Stale comments, diverged docs, outdated type annotations                  | STANDARD+ |
+| Step | Action | Tool |
+| --- | --- | --- |
+| 1. Deep quality analysis | Find missing test cases, assertion quality issues, pattern inconsistencies | `read_file`, `grep_search`, `semantic_search` |
+| 2. Staleness check (STANDARD+) | Detect stale comments, diverged docs, outdated type annotations | `read_file`, `grep_search` |
 
 ### REDUCE — Key Contradiction Checks
 
-- Automated checks passed but `aspect-quality` finds gaps? → C2 Low-Confidence — run targeted re-check.
+- Automated checks passed but quality analysis finds gaps? → C2 Low-Confidence — run targeted re-check.
 - Absence Audit: "What class of edge case (boundary, concurrency, error path) is NOT tested?"
 
 ### RESOLVE — Quality-Specific (Review-Fix Loop)
@@ -66,7 +78,7 @@ When gaps found:
 1. Call `write_rejection_feedback` with structured issues (file, line, issue, suggestion per item).
 2. Call `write_iteration_signal` with `loop_type=REVIEW_FIX`, current `iteration`, `max_iterations=CBP_LOOP.MAX_REVIEW_FIX_ITERATIONS`.
 3. If `iteration >= max_iterations`: call `write_escalation` — do NOT retry further.
-4. After fix: re-run automated checks + targeted `aspect-quality` re-dispatch (only affected files).
+4. After fix: re-run automated checks + targeted re-analysis of affected files.
 
 ### SYNTHESIZE — MandateResult `type=quality`
 

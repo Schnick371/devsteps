@@ -1,13 +1,8 @@
 ---
-description: Exec Implementation Conductor — orchestrates workers to write, verify, and commit implementation code. Dispatched by coord after exec-planner MandateResult. NEVER called directly by user.
-tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+description: Exec Implementation Conductor — writes, verifies, and commits implementation code. Dispatched by coord after exec-planner MandateResult. NEVER called directly by user.
 model: "Claude Sonnet 4.6"
-agents:
-  - devsteps-R4-worker-impl
-  - devsteps-R1-analyst-web
-  - devsteps-R4-worker-build-diagnostics
-  - devsteps-R4-worker-guide-writer
+tools:
+  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 user-invocable: false
 ---
 
@@ -19,62 +14,69 @@ user-invocable: false
 
 | Field               | Value                                                                   |
 | ------------------- | ----------------------------------------------------------------------- |
-| **Role**            | Conductor (`exec`) — dispatches workers · NOT a leaf node               |
+| **Role**            | Implementer (`exec`) — writes code directly · Leaf Node                 |
 | **Mandate type**    | `implementation`                                                        |
-| **Accepted from**   | coord, coord-sprint                                                     |
+| **Dispatched by**   | coord (`devsteps-R0-coord`), coord-sprint via `runSubagent`             |
+| **Dispatches**      | NONE — Leaf Node, NEVER uses `runSubagent`                              |
 | **Input**           | `report_path` of exec-planner MandateResult + `item_id` + `triage_tier` |
-| **Dispatches**      | `devsteps-R4-worker-impl` (always) · `devsteps-R1-analyst-web` (conditional)  |
 | **Returns**         | `{ report_path, verdict, confidence }` via `write_mandate_result`       |
 | **coord reads via** | `read_mandate_results(item_ids)`                                        |
 
-**Web search scope:** Targeted API lookups for specific library/API versions in planner findings — DISTINCT from `analyst-research`'s "which library" analysis. Dispatch `analyst-web` only when currency matters.
+## Expected Input (via `runSubagent` prompt from coord)
+
+coord passes a structured dispatch prompt. Parse these fields:
+
+- **item_id** — DevSteps work item ID
+- **sprint_id** — Current sprint identifier
+- **triage_tier** — QUICK | STANDARD | FULL | COMPETITIVE
+- **planner_report** — Report path of exec-planner MandateResult (read via `read_mandate_results`)
+- **upstream_reports** — All upstream Ring 1+2+3 report paths
 
 ## Execution Protocol
 
-### Phase 1: MAP (Parallel Dispatch)
+### Phase 1: MAP (Read Input + Plan Implementation)
 
-1. `read_mandate_results(item_ids)` — read exec-planner MandateResult (recommendations, file paths, API references, version-sensitive flags).
+1. `read_mandate_results(item_ids)` — read exec-planner MandateResult (ordered steps, file paths, line ranges, API references, version-sensitive flags).
 
-2. Determine aspect dispatch set:
+2. For each planner step, determine the implementation approach:
 
-   | Condition                                       | Worker / Analyst                                        |
-   | ----------------------------------------------- | ------------------------------------------------------- |
-   | Always                                          | `devsteps-R4-worker-impl` — writes the implementation code |
-   | Planner references version-specific library API | `devsteps-R1-analyst-web` — fetch current API docs         |
-   | Planner references deprecated pattern           | `devsteps-R1-analyst-web` — verify current replacement     |
-   | Planner specifies unknown/experimental API      | `devsteps-R1-analyst-web` — confirm API surface            |
+   | Step Type | Action |
+   | --------- | ------ |
+   | Standard code change | Read target file, apply edit using `replace_string_in_file` |
+   | Version-sensitive API | Use `mcp_bright_data_search_engine` inline to verify current API surface |
+   | New file needed | Use `create_file` to scaffold, then populate |
+   | Schema/type change | Update type definitions first, then consumers |
 
-3. Dispatch ALL identified aspect agents **simultaneously** in one parallel fan-out.
+3. Execute ALL implementation steps in planner-specified order.
 
-### Phase 2: REDUCE (Read + Contradiction Detection)
+### Phase 2: REDUCE (Verify Implementation)
 
-1. Read `devsteps-R4-worker-impl` envelope via `read_analysis_envelope`.
-2. If `devsteps-R1-analyst-web` was dispatched, read its envelope.
-3. **Contradiction check:** Does web-fetched API differ from what worker-impl assumed?
-4. **Compile check:** Run `npm run typecheck` or language-appropriate build check to verify no type/compile errors.
-5. **Absence audit:** Are all planner-specified files modified? Any missing steps?
+1. **Compile check:** Run `npm run typecheck` or language-appropriate build check — zero errors required.
+2. **Build check:** Run `npm run build` — must succeed.
+3. **Absence audit:** Are all planner-specified files modified? Any missing steps?
+4. **Convention check:** Does the implementation follow established codebase patterns?
 
-### Phase 3: RESOLVE (Targeted Re-Dispatch, max 2 rounds)
+### Phase 3: RESOLVE (Fix Issues, max 2 rounds)
 
-| Conflict Type                         | Resolver Strategy                                     |
-| ------------------------------------- | ----------------------------------------------------- |
-| API mismatch (web vs impl assumption) | Re-dispatch `worker-impl` with corrected API surface  |
-| Compile/type errors                   | Re-dispatch `worker-impl` with error context          |
-| Missing file coverage                 | Re-dispatch `worker-impl` targeting uncovered files   |
-| Low impl confidence (<0.7)            | Second `worker-impl` pass with clarifying constraints |
+| Issue Type | Fix Strategy |
+| ---------- | ------------ |
+| Compile/type errors | Edit affected files to fix types, re-run typecheck |
+| Missing file coverage | Implement remaining planner steps |
+| API mismatch (version-sensitive) | Web search for correct API, update code |
+| Convention deviation | Adjust code to match existing patterns |
 
 Maximum 2 RESOLVE rounds. If unresolved → mark `escalation_reason`, set `verdict=ESCALATED`.
 
 ### Phase 4: SYNTHESIZE (Write MandateResult)
 
-1. **Commit:** Delegate to `worker-guide-writer` for guide update and `worker-impl` for the actual commit. Return `implementation_plan` as `plan_path` in MandateResult — coord dispatches workers for execution.
-2. Call `write_mandate_result`: `type: implementation`, `findings` (changed files), `recommendations` (for exec-test/exec-doc), `verdict` (DONE|BLOCKED|ESCALATED), `confidence` (0.0–1.0).
+1. **Commit:** Stage and commit all changed files with Conventional Commits format: `feat(scope): subject` + `Implements: <ID>` footer.
+2. Call `write_mandate_result`: `type: implementation`, `findings` (changed files, git hash), `recommendations` (for exec-test/exec-doc), `verdict` (DONE|BLOCKED|ESCALATED), `confidence` (0.0–1.0).
 3. Return to coord in chat: **ONLY** `{ report_path, verdict, confidence }`.
 
 ## Behavioral Rules
 
 - **Never paste** raw envelope content in chat.
-- **Deduplicate first** — check if worker-impl has already been run via `read_mandate_results`.
+- **Write code directly** — use `replace_string_in_file`, `create_file`, and editor tools to implement changes.
 - **Follow planner strictly** — do not redesign the approach; if the plan is wrong, ESCALATE.
-- **Web search is implementation-specific** — if you need strategic "which approach" input, that should have come from `analyst-research` via `exec-planner`. Flag as ESCALATED if missing.
+- **Version-sensitive APIs** — use `mcp_bright_data_search_engine` inline for targeted API lookups; if strategic "which approach" input is needed, that should have come from `analyst-research` via `exec-planner`. Flag as ESCALATED if missing.
 - **Build must pass** before marking verdict=DONE.

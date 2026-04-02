@@ -58,7 +58,7 @@ description: "YAML frontmatter headers specification and best practices for GitH
 ## Model Selection
 
 - `'GPT-5 mini'` - Simple tasks
-- `'Grok Code Fast 1 (Preview) (copilot)'` - Short files (<250 lines), speed-critical
+- `'GPT-5 mini'` - Short files (<250 lines), speed-critical
 - `'Claude Sonnet 4.6'` - Complex prompts, advanced workflows
 - `'Gemini 3 Pro (Preview)'` - Long files (>500 lines), deep reasoning
 
@@ -117,6 +117,7 @@ Coordinator agents must distinguish user-facing decisions from internal orchestr
 - Session scope / focus / tag filter at session start (once only)
 - Pre-planner gate — display compiled overview then ONE `#askQuestions` after Ring 2, before exec-planner (only if ambiguities exist; skip if operation is clear)
 - Post-sprint gate — ONE `#askQuestions` after gate-reviewer PASS if new blockers or replanning needs arose (skip if none)
+- Post-completion gate — ONE `#askQuestions` after task/sprint is done; ALWAYS ask with multiple-choice options what to do next
 
 **PROHIBITED** (coordinator decides autonomously — never ask user):
 - Triage tier selection (QUICK / STANDARD / FULL / COMPETITIVE)

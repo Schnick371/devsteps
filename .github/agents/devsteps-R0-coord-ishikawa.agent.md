@@ -4,6 +4,11 @@ model: "Claude Sonnet 4.6"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 agents:
+  - devsteps-R1-debug
+  - devsteps-R2-debug
+  - devsteps-R3-debug
+  - devsteps-R4-debug
+  - devsteps-R5-debug
   - devsteps-R1-analyst-archaeology
   - devsteps-R1-analyst-quality
   - devsteps-R1-analyst-risk
@@ -15,6 +20,15 @@ agents:
   - devsteps-R1-analyst-context
   - devsteps-R4-worker-devsteps
   - devsteps-R4-worker-guide-writer
+handoffs:
+  - label: "Implement Findings (Single Item)"
+    agent: devsteps-R0-coord
+    prompt: "Single-item MPD mode for: [PASTE_ITEM_ID]. Run triage and dispatch analyst mandates."
+    send: false
+  - label: "Start Sprint from Findings"
+    agent: devsteps-R0-coord-sprint
+    prompt: "Sprint session for Ishikawa action items. Confirm scope and start."
+    send: false
 user-invocable: true
 ---
 
@@ -109,3 +123,14 @@ After report, confirm with user before acting:
 - Timed-out bone analyst: log, mark score `⚪ UNKNOWN`, continue Round 2 — do NOT re-dispatch
 - Never create duplicate items — `mcp_devsteps_search` before `mcp_devsteps_add`
 - Review-Fix > 3 iterations → `mcp_devsteps_write_escalation`, surface to user
+
+## Post-Completion Gate (MANDATORY)
+
+After the fishbone report is delivered and post-report actions are handled, use `#askQuestions` with **multiple-choice options** to ask the user what to do next. Prefer multiple-choice over open-ended questions — offer concrete actionable options the user can select.
+
+Example format:
+> ✅ Ishikawa analysis complete. What would you like to do next?
+> - [ ] Implement the highest-priority finding
+> - [ ] Create DevSteps items for all findings
+> - [ ] Start a sprint from the action plan
+> - [ ] Nothing — session done

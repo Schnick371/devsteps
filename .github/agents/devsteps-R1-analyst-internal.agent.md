@@ -2,7 +2,7 @@
 description: "Internal Code Analyst - analyzes existing codebase patterns without internet access; produces CompressedVerdict envelope for coordinator competitive selection"
 model: "Claude Sonnet 4.6"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 user-invocable: false
 ---
 
@@ -12,11 +12,21 @@ user-invocable: false
 
 ## Contract
 
-- **Tier**: `analyst` — Deep Analyst
-- **Dispatched by**: `devsteps-R1-analyst-archaeology`, `devsteps-R1-analyst-research`
-- **Returns**: Analysis envelope via `write_analysis_report` — caller reads via `read_analysis_envelope`
-- **NEVER dispatches** further subagents — leaf node
-- **Naming note**: File is `devsteps-R1-analyst-internal` (legacy name, functionally T3)
+- **Tier**: `analyst` — Leaf Node
+- **Dispatched by**: coord (`devsteps-R0-coord`), coord-sprint (`devsteps-R0-coord-sprint`) via `runSubagent`
+- **Dispatches**: NONE — Leaf Node, NEVER uses `runSubagent`
+- **Returns**: Analysis envelope via `write_analysis_report` — coord reads via `read_analysis_envelope`
+
+## Expected Input (via `runSubagent` prompt from coord)
+
+coord passes a structured dispatch prompt. Parse these fields:
+
+- **item_id** — DevSteps work item ID (e.g., `STORY-042`)
+- **sprint_id** — Current sprint identifier
+- **task_title** — Work item title
+- **task_description** — Work item description / acceptance criteria
+- **affected_paths** — File paths relevant to this task
+- **target_symbols** — Specific symbols, functions, or types to analyze (if known)
 
 ## Mission
 
@@ -41,9 +51,9 @@ This makes your analysis authoritative for: "what does our code currently do?", 
 
 ## Execution Protocol
 
-### Step 1: Read the Task
+### Step 1: Parse Dispatch Prompt
 
-Extract from the task prompt: the target files, symbols, or behaviors to analyze.
+Extract from cord's dispatch prompt: the target files, symbols, or behaviors to analyze.
 
 ### Step 2: Internal Survey
 

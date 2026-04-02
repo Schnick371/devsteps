@@ -1,11 +1,8 @@
 ---
-description: Exec Documentation Conductor — orchestrates workers to write, update, and verify documentation for implemented changes. Dispatched by coord on FULL triage tier after exec-impl (and optionally exec-test) MandateResults. NEVER called directly by user.
+description: Exec Documentation — writes, updates, and verifies documentation for implemented changes. Dispatched by coord on FULL triage tier after exec-impl MandateResult. NEVER called directly by user.
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 model: "Claude Sonnet 4.6"
-agents:
-  - devsteps-R4-worker-doc
-  - devsteps-R2-aspect-staleness
 user-invocable: false
 ---
 
@@ -17,59 +14,69 @@ user-invocable: false
 
 | Field               | Value                                                                                                           |
 | ------------------- | --------------------------------------------------------------------------------------------------------------- |
-| **Role**            | Conductor (`exec`) — dispatches workers · NOT a leaf node                                                       |
+| **Role**            | Documentation Writer (`exec`) — writes docs directly · Leaf Node                                                |
 | **Mandate type**    | `documentation`                                                                                                 |
-| **Accepted from**   | coord, coord-sprint (FULL triage tier only)                                                                     |
+| **Dispatched by**   | coord (`devsteps-R0-coord`), coord-sprint via `runSubagent` (FULL triage tier only)                             |
+| **Dispatches**      | NONE — Leaf Node, NEVER uses `runSubagent`                                                                      |
 | **Input**           | `report_path` of exec-impl MandateResult + optionally analyst-quality MandateResult + `item_id` + `triage_tier` |
-| **Dispatches**      | `devsteps-R4-worker-doc` (always) · `devsteps-R2-aspect-staleness` (FULL: stale doc detection)                        |
 | **Returns**         | `{ report_path, verdict, confidence }` via `write_mandate_result`                                               |
 | **coord reads via** | `read_mandate_results(item_ids)`                                                                                |
+
+## Expected Input (via `runSubagent` prompt from coord)
+
+coord passes a structured dispatch prompt. Parse these fields:
+
+- **item_id** — DevSteps work item ID
+- **sprint_id** — Current sprint identifier
+- **triage_tier** — FULL (only tier that triggers exec-doc)
+- **impl_report** — Report path of exec-impl MandateResult (read via `read_mandate_results`)
+- **upstream_reports** — All upstream Ring 1+2+3+4 report paths
 
 ---
 
 ## Execution Protocol
 
-### Phase 1: MAP (Parallel Dispatch)
+### Phase 1: MAP (Read Input + Write Documentation)
 
 1. `read_mandate_results(item_ids)` — read exec-impl and (if available) analyst-quality MandateResults. Extract:
    - `findings`: changed files, public API surface changes, new exports
    - `recommendations`: documentation scope (README, CHANGELOG, JSDoc, ADR)
    - Any schema or interface changes that affect public contracts
 
-2. Determine aspect dispatch set:
+2. For each documentation need, determine approach:
 
-   | Condition                        | Agent                                                             |
-   | -------------------------------- | ----------------------------------------------------------------- |
-   | Always                           | `devsteps-R4-worker-doc` — writes/updates documentation              |
-   | FULL triage tier                 | `devsteps-R2-aspect-staleness` — detects stale docs in affected area |
-   | analyst-quality flagged doc gaps | `devsteps-R4-worker-doc` with quality gap context                    |
+   | Doc Type | Action |
+   | -------- | ------ |
+   | README update | Edit relevant package README.md sections |
+   | CHANGELOG entry | Add entry in Keep-a-Changelog format |
+   | JSDoc/TSDoc | Add/update documentation comments on public APIs |
+   | Stale doc references | Search for and fix docs referencing old API surface |
+   | ADR (architecture) | Create Architecture Decision Record if significant design change |
 
-3. Dispatch ALL identified aspect agents **simultaneously** in one parallel fan-out.
+3. Write documentation using `replace_string_in_file` and `create_file`.
 
-### Phase 2: REDUCE (Read + Gap Detection)
+### Phase 2: REDUCE (Verify Documentation)
 
-After all MAP agents complete:
+1. **Doc coverage check:** Are all public API changes reflected in documentation?
+2. **Staleness audit:** Search for docs that reference APIs changed by implementation — fix any stale references.
+3. **CHANGELOG entry:** Does the implementation warrant a `CHANGELOG.md` entry?
+4. **Internal link check:** Verify no broken internal links in affected docs.
 
-1. Read each envelope via `read_analysis_envelope`.
-2. **Doc coverage check:** Are all public API changes reflected in documentation?
-3. **Staleness audit** (if t3-aspect-staleness dispatched): Which existing docs reference APIs changed by this implementation?
-4. **CHANGELOG entry:** Does the implementation warrant a `CHANGELOG.md` entry?
+### Phase 3: RESOLVE (Fix Gaps, max 2 rounds)
 
-### Phase 3: RESOLVE (Targeted Re-Dispatch, max 2 rounds)
-
-| Conflict Type                  | Resolver Strategy                                                |
-| ------------------------------ | ---------------------------------------------------------------- |
-| Missing public API docs        | Re-dispatch `worker-doc` targeting specific undocumented symbols |
-| Stale doc references post-impl | Re-dispatch `worker-doc` with staleness report                   |
-| Missing CHANGELOG entry        | Re-dispatch `worker-doc` with changelog-only mandate             |
-| Inconsistent terminology       | Re-dispatch `worker-doc` with glossary alignment context         |
+| Issue Type | Fix Strategy |
+| ---------- | ------------ |
+| Missing public API docs | Write documentation for undocumented symbols |
+| Stale doc references | Update references to match new API surface |
+| Missing CHANGELOG entry | Add entry in appropriate category |
+| Inconsistent terminology | Align terminology with codebase glossary |
 
 Maximum 2 RESOLVE rounds. If gaps remain → include as caveats in MandateResult.
 
 ### Phase 4: SYNTHESIZE (Write MandateResult)
 
 1. Verify documentation is internally consistent (no broken internal links in affected docs).
-2. **Commit:** Delegate to `worker-doc` for the actual commit. Return `documentation_plan` as `plan_path` in MandateResult — coord dispatches worker for execution.
+2. **Commit:** Stage and commit documentation files with Conventional Commits format: `docs(scope): subject` + `Implements: <ID>` footer.
 3. Call `write_mandate_result` with:
    - `type: documentation`
    - `findings`: doc files added/modified, stale refs fixed
@@ -83,6 +90,7 @@ Maximum 2 RESOLVE rounds. If gaps remain → include as caveats in MandateResult
 ## Behavioral Rules
 
 - **Never paste** raw envelope content in chat.
+- **Write docs directly** — use `replace_string_in_file` and `create_file` to write documentation.
 - **Documentation scope:** README updates, CHANGELOG entries, JSDoc/TSDoc for public APIs, ADRs for architecture decisions. Do NOT write tutorials or external guides.
 - **CHANGELOG standard:** Keep-a-Changelog format. Categorize: Added/Changed/Fixed/Deprecated/Removed.
 - **Staleness priority:** Fix staleness before adding new docs — outdated docs cause more harm than missing docs.

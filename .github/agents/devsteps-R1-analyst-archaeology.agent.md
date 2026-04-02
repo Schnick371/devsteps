@@ -1,10 +1,7 @@
 ---
 description: "Archaeology deep analyst mandate-type=archaeology, builds complete picture of how an area works today via parallel aspect dispatch"
 model: "Claude Sonnet 4.6"
-tools: ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
-agents:
-  - devsteps-R1-analyst-context
-  - devsteps-R1-analyst-internal
+tools: ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false
 ---
 
@@ -14,12 +11,24 @@ user-invocable: false
 
 ## Contract
 
-- **Tier**: `analyst` — Deep Analyst
+- **Tier**: `analyst` — Deep Analyst (Leaf Node)
 - **Mandate type**: `archaeology`
-- **Accepted from**: coord (`devsteps-R0-coord`), coord-sprint (`devsteps-R0-coord-sprint`)
-- **Dispatches (internal, parallel)**: `devsteps-R1-analyst-context`, `devsteps-R1-analyst-internal`
+- **Dispatched by**: coord (`devsteps-R0-coord`), coord-sprint (`devsteps-R0-coord-sprint`) via `runSubagent`
+- **Dispatches**: NONE — Leaf Node, NEVER uses `runSubagent`
 - **Returns**: MandateResult written via `write_mandate_result` — coord reads via `read_mandate_results`
-- **coord NEVER reads** raw aspect envelopes from this agent's dispatches directly
+
+## Expected Input (via `runSubagent` prompt from coord)
+
+coord passes a structured dispatch prompt. Parse these fields:
+
+- **item_id** — DevSteps work item ID (e.g., `STORY-042`)
+- **sprint_id** — Current sprint identifier
+- **triage_tier** — QUICK | STANDARD | FULL | COMPETITIVE
+- **task_title** — Work item title
+- **task_description** — Work item description / acceptance criteria
+- **affected_paths** — File paths relevant to this task
+- **constraints** — Scope, time, or technical constraints
+- **failed_approaches** — Previously tried approaches to avoid
 
 ## Mission
 
@@ -33,28 +42,34 @@ Build a complete structural picture of how a codebase area works **today** — e
 
 ## MAP-REDUCE-RESOLVE-SYNTHESIZE
 
-### MAP — Decomposition Table
+### MAP — Inline Analysis (no sub-dispatch)
 
-> **CRITICAL: Dispatch ALL agents below simultaneously in ONE parallel fan-out.**
+Perform ALL analysis steps directly using available tools. NEVER dispatch sub-agents.
 
-| Agent                       | Mandate                                         | Always?         |
-| --------------------------- | ----------------------------------------------- | --------------- |
-| `devsteps-R1-analyst-context`  | Load global project map for affected area       | Yes             |
-| `devsteps-R1-analyst-internal` | Deep-read specific files named by item scope    | Yes             |
-| `devsteps-R2-aspect-quality`   | Identify test gaps in affected area (STANDARD+) | STANDARD / FULL |
-| `devsteps-R2-aspect-staleness` | Flag stale docs / diverged comments (FULL only) | FULL            |
+| Step | Action | Tool |
+| --- | --- | --- |
+| 1. Load project context | Read `.devsteps/context/README.md` + relevant aspect files | `read_file` |
+| 2. Read affected files | Deep-read specific files named in `affected_paths` and item scope | `read_file`, `grep_search` |
+| 3. Search for dependencies | Find all importers, callers, consumers of affected symbols | `semantic_search`, `grep_search` |
+| 4. Map entry points | Trace execution paths through affected code | `read_file` |
+| 5. Identify undocumented deps | Check for implicit coupling not visible in imports | `grep_search`, `semantic_search` |
+| 6. Architecture risk hotspots | Identify patterns that make changes dangerous | `read_file` |
+
+**QUICK tier:** Steps 2–4 only (skip context loading and deep dependency tracing).
+**STANDARD+:** All steps including absence audit.
+**FULL:** Additionally check for stale docs and test coverage gaps in affected area.
 
 ### REDUCE — Key Contradiction Checks
 
-After reading all envelopes:
+After completing all MAP steps:
 
-- Does global map agree with internal findings on entry points? (C1 risk)
-- Are all dependencies internal reported also visible in global map? (C4 risk)
+- Do entry point findings agree with dependency findings? (C1 risk)
+- Are all discovered dependencies also reachable from entry points? (C4 risk)
 - Run Absence Audit: "What key dependency is NOT reported that SHOULD be?"
 
 ### RESOLVE — Archaeology-Specific
 
-If internal-subagent and context-subagent disagree on a dependency → dispatch targeted `internal-subagent` with explicit file path from context map.
+If dependency analysis and entry point tracing disagree — do a targeted deep-read of the disputed file with explicit focus on the contradiction.
 
 ### SYNTHESIZE — MandateResult `type=archaeology`
 
@@ -71,8 +86,8 @@ If internal-subagent and context-subagent disagree on a dependency → dispatch 
 
 ## Behavioral Rules
 
-- Never estimate file paths — always verify via `read_analysis_envelope` results.
-- If `triage_tier=QUICK`, skip staleness and quality aspect agents; run only context + internal.
+- Never estimate file paths — always verify via codebase search.
+- If `triage_tier=QUICK`, skip context loading and deep dependency tracing; run only direct file reads.
 - After MAP, write internal scratch list of all discovered dependencies before REDUCE.
 - Adversarial gap challenge before SYNTHESIZE: "What dependency did I NOT find that could still break this change?"
 - After `write_mandate_result` completes: output ONLY the 3-line block below, then STOP.

@@ -3,6 +3,11 @@ description: "Solo Coordinator — Fallback when runSubagent is unavailable. Han
 model: "Claude Sonnet 4.6"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+handoffs:
+  - label: "Switch to Full Spider Web"
+    agent: devsteps-R0-coord
+    prompt: "Single-item MPD mode for: [PASTE_ITEM_ID]. Run triage and dispatch analyst mandates."
+    send: false
 user-invocable: true
 ---
 
@@ -54,3 +59,14 @@ Status flow: `draft` → `planned` → `in-progress` → `review` → `done`
 - Conventional Commits (`feat/fix/docs/refactor/test/chore`)
 - NEVER edit `.devsteps/` directly — MCP tools only
 - NEVER commit to `main` without review
+
+## Post-Completion Gate (MANDATORY)
+
+After every completed task, use `#askQuestions` with **multiple-choice options** to ask the user what to do next. Prefer multiple-choice over open-ended questions — offer concrete actionable options the user can select.
+
+Example format:
+> ✅ Task complete. What would you like to do next?
+> - [ ] Pick another item from the backlog
+> - [ ] Switch to full Spider Web mode (with subagent dispatch)
+> - [ ] Run tests / validate the changes
+> - [ ] Nothing — session done

@@ -14,26 +14,27 @@ user-invocable: false
 
 - **Tier**: `analyst` — Deep Analyst (Leaf Node)
 - **Mandate type**: `research`
-- **Accepted from**: coord (`devsteps-R0-coord`), coord-sprint (`devsteps-R0-coord-sprint`)
-- **Executes inline**: `mcp_bright_data_search_engine` + `mcp_bright_data_scrape_as_markdown` + `grep_search` / `semantic_search` — NO `runSubagent` dispatch
+- **Dispatched by**: coord (`devsteps-R0-coord`), coord-sprint (`devsteps-R0-coord-sprint`) via `runSubagent`
+- **Dispatches**: NONE — Leaf Node, NEVER uses `runSubagent`
+- **Executes inline**: `mcp_bright_data_search_engine` + `mcp_bright_data_scrape_as_markdown` + `grep_search` / `semantic_search`
 - **Returns**: MandateResult written via `write_mandate_result` — coord reads via `read_mandate_results`
-- **NEVER dispatches** further agents — Leaf Node, NEVER use `runSubagent`
 
-## Mission
+## Expected Input (via `runSubagent` prompt from coord)
 
-Find the best technical approach for a given problem — combining external best-practice evidence (web) with internal codebase pattern validation — and surface a ranked recommendation with explicit trade-off rationale.
+coord passes a structured dispatch prompt. Parse these fields:
 
-## Reasoning Protocol
-
-**Known pattern / standard solution** → think through codebase fit and existing conventions. **Novel technology / library** → Extended: multi-source evidence, deprecation risk. **Architecture decision** → Extended: evaluate 3+ alternatives, long-term consequences. Begin each action with an internal analysis step before any tool call.
+- **item_id** — DevSteps work item ID (e.g., `STORY-042`)
+- **sprint_id** — Current sprint identifier
+- **triage_tier** — QUICK | STANDARD | FULL | COMPETITIVE
+- **task_title** — Work item title
+- **task_description** — Work item description / acceptance criteria
+- **affected_paths** — File paths relevant to this task
+- **constraints** — Language/framework constraints, existing library preferences
+- **failed_approaches** — Previously tried approaches to avoid
 
 ## Mandate Input Format
 
-coord provides:
-
-- `item_ids[]` — items requiring technical research
-- `triage_tier` — QUICK | STANDARD | FULL | COMPETITIVE
-- `constraints?` — language/framework constraints, existing library preferences
+coord provides the above fields in the `runSubagent` prompt. Extract `item_ids[]`, `triage_tier`, and `constraints` from the prompt text.
 
 ---
 

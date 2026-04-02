@@ -1,13 +1,8 @@
 ---
-description: Exec Test Conductor — orchestrates test workers to write, execute, and verify tests for implemented code. Dispatched by coord after exec-impl MandateResult. NEVER called directly by user.
+description: Exec Test — writes, executes, and verifies tests for implemented code. Dispatched by coord after exec-impl MandateResult. NEVER called directly by user.
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 model: "Claude Sonnet 4.6"
-agents:
-  - devsteps-R4-worker-test
-  - devsteps-R2-aspect-quality
-  - devsteps-R1-analyst-web
-  - devsteps-R4-worker-build-diagnostics
 user-invocable: false
 ---
 
@@ -19,54 +14,62 @@ user-invocable: false
 
 | Field               | Value                                                                                                                                |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| **Role**            | Conductor (`exec` — Test Conductor) — dispatches workers · NOT a leaf node                                                           |
+| **Role**            | Test Writer (`exec`) — writes and runs tests directly · Leaf Node                                                                    |
 | **Mandate type**    | `testing`                                                                                                                            |
-| **Accepted from**   | coord, coord-sprint                                                                                                                  |
+| **Dispatched by**   | coord (`devsteps-R0-coord`), coord-sprint via `runSubagent`                                                                          |
+| **Dispatches**      | NONE — Leaf Node, NEVER uses `runSubagent`                                                                                           |
 | **Input**           | `report_path` of exec-impl MandateResult (STANDARD) or analyst-quality + exec-impl MandateResults (FULL) + `item_id` + `triage_tier` |
-| **Dispatches**      | `devsteps-R4-worker-test` (always) · `devsteps-R2-aspect-quality` (STANDARD/FULL) · `devsteps-R1-analyst-web` (conditional)                   |
 | **Returns**         | `{ report_path, verdict, confidence }` via `write_mandate_result`                                                                    |
 | **coord reads via** | `read_mandate_results(item_ids)`                                                                                                     |
 
-**Web search scope:** Framework-specific test API lookups (e.g., Vitest ESM mock API, BATS assert patterns). Dispatch `analyst-web` only when test code needs version-sensitive framework API details.
+## Expected Input (via `runSubagent` prompt from coord)
+
+coord passes a structured dispatch prompt. Parse these fields:
+
+- **item_id** — DevSteps work item ID
+- **sprint_id** — Current sprint identifier
+- **triage_tier** — QUICK | STANDARD | FULL | COMPETITIVE
+- **impl_report** — Report path of exec-impl MandateResult (read via `read_mandate_results`)
+- **upstream_reports** — All upstream Ring 1+2+3+4 report paths
 
 ## Execution Protocol
 
-### Phase 1: MAP (Parallel Dispatch)
+### Phase 1: MAP (Read Input + Write Tests)
 
 1. `read_mandate_results(item_ids)` — read exec-impl MandateResult (changed files, git hash, test type needed: unit/integration/E2E, test framework in use).
 
-2. Determine worker/aspect dispatch set:
+2. For each changed file, determine test approach:
 
-   | Condition                                | Agent                                                 |
-   | ---------------------------------------- | ----------------------------------------------------- |
-   | Always                                   | `devsteps-R4-worker-test` — writes and runs tests        |
-   | STANDARD or FULL triage tier             | `devsteps-R2-aspect-quality` — coverage gap analysis     |
-   | Test framework has version-sensitive API | `devsteps-R1-analyst-web` — fetch current test API docs  |
-   | New integration test pattern needed      | `devsteps-R1-analyst-web` — fetch BATS/framework pattern |
+   | Condition | Action |
+   | --------- | ------ |
+   | Business logic change | Write unit tests (Vitest) covering new/changed code paths |
+   | CLI command change | Write integration tests (BATS) for command behavior |
+   | Version-sensitive test API | Use `mcp_bright_data_search_engine` inline for current API docs |
+   | Schema/type change | Write tests for validation and edge cases |
 
-3. Dispatch ALL identified agents **simultaneously** in one parallel fan-out.
+3. Write test files using `create_file` or `replace_string_in_file`.
 
-### Phase 2: REDUCE (Read + Failure Analysis)
+### Phase 2: REDUCE (Run Tests + Verify Coverage)
 
-1. Read each envelope via `read_analysis_envelope`.
-2. **Test run results:** Did all tests pass? Collect failing test names + error messages.
-3. **Coverage gap** (if aspect-quality dispatched): Which critical paths lack test coverage?
-4. **API mismatch** (if analyst-web dispatched): Did web-fetched API differ from test code assumptions?
+1. **Run tests:** Execute `npm test` (or `npm run test:cli` for integration).
+2. **Test results:** Collect pass count, fail count, coverage percentage.
+3. **Coverage gap analysis:** Which critical paths changed by implementation lack test coverage?
+4. **Convention check:** Do tests follow established patterns (naming, structure, assertion style)?
 
-### Phase 3: RESOLVE (Targeted Re-Dispatch, max 2 rounds)
+### Phase 3: RESOLVE (Fix Failures, max 2 rounds)
 
-| Conflict Type             | Resolver Strategy                                                         |
-| ------------------------- | ------------------------------------------------------------------------- |
-| Test failures             | Re-dispatch `worker-test` with failing test context + implementation code |
-| Coverage gaps             | Re-dispatch `worker-test` targeting uncovered paths                       |
-| API mismatch in test code | Re-dispatch `worker-test` with corrected API surface                      |
-| Import/module errors      | Re-dispatch `worker-test` with module resolution fix                      |
+| Issue Type | Fix Strategy |
+| ---------- | ------------ |
+| Test failures | Edit test code to fix assertions, mocks, or setup |
+| Coverage gaps | Write additional tests for uncovered critical paths |
+| Import/module errors | Fix import paths, module resolution |
+| API mismatch in test code | Web search for correct test API, update test code |
 
 ### Phase 4: SYNTHESIZE (Write MandateResult)
 
 1. Run full test suite: `npm test` (or `npm run test:cli` for integration).
 2. Collect: pass count, fail count, coverage percentage (if available).
-3. **Commit:** Delegate to `worker-test` for the actual commit. Return `test_plan` as `plan_path` in MandateResult — coord dispatches worker for execution.
+3. **Commit:** Stage and commit test files with Conventional Commits format: `test(scope): subject` + `Implements: <ID>` footer.
 4. Call `write_mandate_result` with:
    - `type: testing`
    - `findings`: test files added/modified, pass/fail counts
@@ -78,6 +81,7 @@ user-invocable: false
 ## Behavioral Rules
 
 - **Never paste** raw envelope content in chat.
+- **Write tests directly** — use `create_file` and `replace_string_in_file` to write test code.
 - **Tests must pass** before marking verdict=DONE. BLOCKED is acceptable if implementation has a bug — include detailed failure context.
 - **Test pyramid:** Prefer unit tests (Vitest) for logic, integration tests (BATS) for CLI commands. Avoid E2E unless explicitly in planner recommendations.
 - **Coverage target:** 80%+ for critical business logic paths touched by the implementation.

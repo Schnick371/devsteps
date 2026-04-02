@@ -98,6 +98,8 @@ DevSteps is the primary work-tracking system. NEVER edit `.devsteps/` directly â
 | Deep research & best practices | `devsteps-05-research`       | coord               |
 | Git forensics                 | `devsteps-55-investigate`     | analyst-archaeology |
 | Git cleanup                   | `devsteps-50-git-cleanup`     | coord               |
+| Structural refactoring        | `devsteps-48-refactor`        | coord               |
+| Naming convention enforcement | `devsteps-49-rename`          | coord               |
 | Backlog hygiene               | `devsteps-95-item-cleanup`    | coord               |
 | Classify backlog items        | `devsteps-45-classify-items`  | coord               |
 | Assign meta-hierarchy (initiative/theme) | `devsteps-15-meta-hierarchy` | coord          |

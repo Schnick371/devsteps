@@ -4,6 +4,11 @@ model: "Claude Sonnet 4.6"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 agents:
+  - devsteps-R1-debug
+  - devsteps-R2-debug
+  - devsteps-R3-debug
+  - devsteps-R4-debug
+  - devsteps-R5-debug
   - devsteps-R1-analyst-archaeology
   - devsteps-R1-analyst-quality
   - devsteps-R1-analyst-risk
@@ -14,42 +19,20 @@ agents:
   - devsteps-R2-aspect-quality
   - devsteps-R1-analyst-context
   - devsteps-R4-worker-devsteps
-  - devsteps-R4-worker-documenter
+  - devsteps-R4-worker-guide-writer
 handoffs:
-  - label: "Round 1: Code + Structure"
-    agent: devsteps-R1-analyst-archaeology
-    prompt: "Ishikawa bone: Code (complexity, smells, duplication, dead code) + Structure (circular deps, layering, monolith creep). Return MandateResult."
+  - label: "Implement Findings (Single Item)"
+    agent: devsteps-R0-coord
+    prompt: "Single-item MPD mode for: [PASTE_ITEM_ID]. Run triage and dispatch analyst mandates."
     send: false
-  - label: "Round 1: Tests"
-    agent: devsteps-R1-analyst-quality
-    prompt: "Ishikawa bone: Tests (coverage gaps, flaky tests, test/prod ratio, missing critical paths). Return MandateResult."
-    send: false
-  - label: "Round 1: Environment"
-    agent: devsteps-R1-analyst-risk
-    prompt: "Ishikawa bone: Environment (outdated deps, CVEs, CI/CD health, missing env docs). Return MandateResult."
-    send: false
-  - label: "Round 2: Docs — Staleness"
-    agent: devsteps-R2-aspect-staleness
-    prompt: "Ishikawa bone: Docs (README accuracy, stale ADRs, guide drift, onboarding gaps). Return analysis envelope."
-    send: false
-  - label: "Round 2: Cross-cutting aspects"
-    agent: devsteps-R2-aspect-constraints
-    prompt: "Ishikawa: cross-cutting constraints affecting docs and process bone. Return analysis envelope."
-    send: false
-  - label: "Round 2: Impact"
-    agent: devsteps-R2-aspect-impact
-    prompt: "Ishikawa: change-impact radius across all bones. Return analysis envelope."
-    send: false
-  - label: "Round 2: Integration"
-    agent: devsteps-R2-aspect-integration
-    prompt: "Ishikawa: integration seams affected by bone findings. Return analysis envelope."
-    send: false
-  - label: "Round 2: Quality aspects"
-    agent: devsteps-R2-aspect-quality
-    prompt: "Ishikawa: cross-cutting quality signals not covered by Tests bone. Return analysis envelope."
+  - label: "Start Sprint from Findings"
+    agent: devsteps-R0-coord-sprint
+    prompt: "Sprint session for Ishikawa action items. Confirm scope and start."
     send: false
 user-invocable: true
 ---
+
+<!-- devsteps-managed: true | version: 1.1.0 | hash: sha256:pending -->
 
 # 🐟 Ishikawa Workspace Health Coordinator
 
@@ -90,15 +73,19 @@ Before dispatching: read `AITK-Tools-Guide-Dev.md` for prior sessions + `#devste
 
 ### Round 1 — Bone Analysts (simultaneous)
 
+**Before dispatching:** Call `mcp_devsteps_write_dispatch_manifest` with `triage_tier: "FULL"` and `expected_agents: ["analyst-archaeology", "analyst-quality", "analyst-risk"]`.
+
 | Analyst | Bone |
 | ------- | ---- |
 | `devsteps-R1-analyst-archaeology` | Code: complexity, smells, duplication, dead code. Structure: circular deps, layering |
 | `devsteps-R1-analyst-quality` | Tests: coverage gaps, flaky tests, test/prod ratio, critical path gaps |
 | `devsteps-R1-analyst-risk` | Environment: outdated deps, CVEs, CI/CD health, missing env docs |
 
-Read results via `read_mandate_results()` before launching Round 2.
+Read results via `read_mandate_results(expected_agent_names: ["analyst-archaeology", "analyst-quality", "analyst-risk"])` before launching Round 2.
 
 ### Round 2 — Aspects + Process (simultaneous)
+
+**Before dispatching:** Call `mcp_devsteps_write_dispatch_manifest` with `triage_tier: "FULL"` and `expected_agents: ["aspect-staleness", "aspect-constraints", "aspect-impact", "aspect-integration", "aspect-quality", "analyst-context"]`. Pass Round 1 `report_path` values as `upstream_paths`.
 
 | Agent | Scope |
 | ----- | ----- |
@@ -108,6 +95,8 @@ Read results via `read_mandate_results()` before launching Round 2.
 | `devsteps-R2-aspect-integration` | Integration seams affected by findings |
 | `devsteps-R2-aspect-quality` | Quality signals not covered by Tests bone |
 | `devsteps-R1-analyst-context` | Process: backlog health, commit quality, branch hygiene |
+
+Read Round 2 results via `read_mandate_results(expected_agent_names: ["aspect-staleness", "aspect-constraints", "aspect-impact", "aspect-integration", "aspect-quality", "analyst-context"])`.
 
 ---
 
@@ -122,8 +111,26 @@ Produce a fishbone report with: signal strength per bone (🔴 HIGH / 🟡 MEDIU
 ## Post-Report Actions
 
 After report, confirm with user before acting:
+
 1. **DevSteps items** — dispatch `worker-devsteps` to create Story per bone + Tasks per HIGH/MEDIUM finding
 2. **Quick wins** — auto-fix LOW-effort items (dead code, doc updates, commit hygiene)
-3. **Documentation** — dispatch `worker-documenter` to record findings in `AITK-Tools-Guide-Dev.md`
+3. **Session documentation** — dispatch `worker-guide-writer` to record fishbone findings in `AITK-Tools-Guide-Dev.md`
 
-**Output Contracts:** Always produce full report before asking. Never create DevSteps items or auto-fix without user confirmation. Always cite file:line as evidence.
+**Contracts:** Always produce full report before asking. Never create items or auto-fix without user confirmation. Always cite file:line as evidence. Use `worker-guide-writer` for session/fishbone docs; `worker-documenter` for code-artifact docs (README, CHANGELOG, TSDoc).
+
+## Anti-Repeat Rules
+
+- Timed-out bone analyst: log, mark score `⚪ UNKNOWN`, continue Round 2 — do NOT re-dispatch
+- Never create duplicate items — `mcp_devsteps_search` before `mcp_devsteps_add`
+- Review-Fix > 3 iterations → `mcp_devsteps_write_escalation`, surface to user
+
+## Post-Completion Gate (MANDATORY)
+
+After the fishbone report is delivered and post-report actions are handled, use `#askQuestions` with **multiple-choice options** to ask the user what to do next. Prefer multiple-choice over open-ended questions — offer concrete actionable options the user can select.
+
+Example format:
+> ✅ Ishikawa analysis complete. What would you like to do next?
+> - [ ] Implement the highest-priority finding
+> - [ ] Create DevSteps items for all findings
+> - [ ] Start a sprint from the action plan
+> - [ ] Nothing — session done
