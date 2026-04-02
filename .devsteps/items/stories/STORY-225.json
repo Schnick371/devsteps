@@ -1,0 +1,40 @@
+{
+  "id": "STORY-225",
+  "type": "story",
+  "category": "general",
+  "title": "Add .devsteps/items/**/*.json FileSystemWatcher and Map<itemId, ItemMetadata> item cache to extension.ts for sync embed resolution",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T15:09:54.470Z",
+  "updated": "2026-04-02T15:11:20.030Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/extension.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "STORY-226"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "tsd",
+    "embed",
+    "cache",
+    "fswatcher"
+  ],
+  "commits": [],
+  "metadata": {}
+}

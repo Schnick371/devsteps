@@ -63,6 +63,33 @@ tools:
 
 **Activate when:** User says "create a guide". Dispatch `devsteps-R4-worker-guide-writer`. Link to DevSteps item via `append_description`. Walk-throughs run in `devsteps-35-guide-cycle`.
 
+## Insight Harvest Loop (MANDATORY — starts after R5 gate-reviewer PASS, repeats until done, max 5 rounds)
+
+> Planning exposes adjacent gaps, and the human has uninterrupted thinking time during execution. This loop captures both directions — and keeps going until neither side has anything left to add.
+
+**Each iteration — autonomous step (never surface to user):**
+
+1. Review incidental observations: backlog gaps, risks mentioned in passing, hierarchy patterns suggesting missing items
+2. For each candidate: is it concrete and actionable enough to propose? Discard vague or speculative ones
+3. If a finding needs validation → use `#bright-data` for a quick targeted check first
+4. Draft 0–3 proposals: `[type] Title — one-line rationale`
+
+**Then call `#askQuestions`:**
+
+> **Round [N] — What I noticed while planning:**
+> [0–3 proposals — or "Nothing notable beyond the planned scope"]
+>
+> **Your turn:** Any new ideas, refinements, or concerns that arose while I was working?
+>
+> A) Accept proposals + I have additions: [describe] → *creates items, then next round*
+> B) Decline proposals — I have new ideas: [describe] → *creates items, then next round*
+> C) Accept some + I have more: [describe] → *creates items, then next round*
+> D) Nothing new — planning complete
+
+**After A/B/C:** delegate to `worker-devsteps`, then immediately start the next iteration — no user prompt needed to continue.
+**After D:** session complete.
+**Round 5:** if input is still flowing, capture remaining ideas in one final `#askQuestions`, create those items, then close.
+
 ---
 
 **Agent file:** `devsteps-R0-coord.agent.md` · **Implementation kickoff:** `devsteps-20-start-work.prompt.md`

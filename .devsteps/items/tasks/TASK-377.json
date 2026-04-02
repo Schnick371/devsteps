@@ -1,0 +1,39 @@
+{
+  "id": "TASK-377",
+  "type": "task",
+  "category": "general",
+  "title": "Create docs-map-positions.json JSON shadow write and staleness rebuild in docs-map.ts",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T15:10:36.764Z",
+  "updated": "2026-04-02T15:11:20.029Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/docs-map.ts",
+    ".devsteps/index/docs-map-positions.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "docs-map",
+    "index",
+    "json-shadow",
+    "tsd"
+  ],
+  "commits": [],
+  "metadata": {}
+}

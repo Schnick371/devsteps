@@ -1,0 +1,39 @@
+{
+  "id": "SPIKE-038",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: VS Code markdown previewScript to extension host message routing — confirm stable vs proposed API status in VS Code 1.109+ before Phase C",
+  "status": "in-progress",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-02T15:10:49.345Z",
+  "updated": "2026-04-02T19:36:20.174Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "docs/architecture/tsd-vscode-api-research.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spike",
+    "extension",
+    "tsd",
+    "previewscript",
+    "vs-code-api",
+    "phase-c-gate"
+  ],
+  "commits": [],
+  "metadata": {}
+}

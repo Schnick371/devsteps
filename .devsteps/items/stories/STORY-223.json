@@ -1,0 +1,41 @@
+{
+  "id": "STORY-223",
+  "type": "story",
+  "category": "general",
+  "title": "Implement mcp_devsteps_doc_depth_query MCP tool — reads docs-map.yaml tree, returns BOM nodes at requested depth",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T15:09:30.097Z",
+  "updated": "2026-04-02T15:11:27.483Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/doc-depth-query.ts",
+    "packages/mcp-server/src/index.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [
+      "STORY-221"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp-server",
+    "docs-map",
+    "tsd",
+    "depth-view",
+    "bom"
+  ],
+  "commits": [],
+  "metadata": {}
+}

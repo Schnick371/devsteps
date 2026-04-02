@@ -1,0 +1,49 @@
+{
+  "id": "SPIKE-036",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: DOC Item Type — Hierarchical Documentation Architecture with Depth View (Lupe) and Doc Map (BOM)",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-02T13:34:40.778Z",
+  "updated": "2026-04-02T15:12:19.972Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "BUG-071",
+      "BUG-072",
+      "STORY-219",
+      "STORY-220",
+      "TASK-373",
+      "TASK-374",
+      "SPIKE-037",
+      "STORY-223",
+      "STORY-224",
+      "TASK-376",
+      "SPIKE-038"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "documentation",
+    "depth-view",
+    "lupe",
+    "bom",
+    "doc-map",
+    "progressive-disclosure",
+    "research"
+  ],
+  "commits": [],
+  "metadata": {}
+}

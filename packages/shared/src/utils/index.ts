@@ -50,6 +50,7 @@ export const TYPE_TO_DIRECTORY: Record<ItemType, string> = {
   bug: 'items/bugs',
   spike: 'items/spikes',
   test: 'items/tests',
+  doc: 'items/docs',
 };
 
 /**
@@ -58,7 +59,7 @@ export const TYPE_TO_DIRECTORY: Record<ItemType, string> = {
 export function getMethodologyConfig(methodology: Methodology) {
   const configs = {
     scrum: {
-      item_types: ['epic', 'story', 'task', 'bug', 'spike', 'test'] as ItemType[],
+      item_types: ['epic', 'story', 'task', 'bug', 'spike', 'test', 'doc'] as ItemType[],
       item_prefixes: {
         epic: 'EPIC',
         story: 'STORY',
@@ -66,6 +67,7 @@ export function getMethodologyConfig(methodology: Methodology) {
         bug: 'BUG',
         spike: 'SPIKE',
         test: 'TEST',
+        doc: 'DOC',
       },
       directories: [
         'items/epics',
@@ -74,10 +76,11 @@ export function getMethodologyConfig(methodology: Methodology) {
         'items/bugs',
         'items/spikes',
         'items/tests',
+        'items/docs',
       ],
     },
     waterfall: {
-      item_types: ['requirement', 'feature', 'task', 'bug', 'spike', 'test'] as ItemType[],
+      item_types: ['requirement', 'feature', 'task', 'bug', 'spike', 'test', 'doc'] as ItemType[],
       item_prefixes: {
         requirement: 'REQ',
         feature: 'FEAT',
@@ -85,6 +88,7 @@ export function getMethodologyConfig(methodology: Methodology) {
         bug: 'BUG',
         spike: 'SPIKE',
         test: 'TEST',
+        doc: 'DOC',
       },
       directories: [
         'items/requirements',
@@ -93,6 +97,7 @@ export function getMethodologyConfig(methodology: Methodology) {
         'items/bugs',
         'items/spikes',
         'items/tests',
+        'items/docs',
       ],
     },
     hybrid: {
@@ -105,6 +110,7 @@ export function getMethodologyConfig(methodology: Methodology) {
         'bug',
         'spike',
         'test',
+        'doc',
       ] as ItemType[],
       item_prefixes: {
         epic: 'EPIC',
@@ -115,6 +121,7 @@ export function getMethodologyConfig(methodology: Methodology) {
         bug: 'BUG',
         spike: 'SPIKE',
         test: 'TEST',
+        doc: 'DOC',
       },
       directories: [
         'items/epics',
@@ -125,6 +132,7 @@ export function getMethodologyConfig(methodology: Methodology) {
         'items/bugs',
         'items/spikes',
         'items/tests',
+        'items/docs',
       ],
     },
   };
@@ -149,6 +157,7 @@ export function generateItemId(
     bug: 'BUG',
     spike: 'SPIKE',
     test: 'TEST',
+    doc: 'DOC',
   };
 
   const prefixMap = prefixes || defaultPrefixes;
@@ -179,7 +188,7 @@ export function getTypePrefix(type: string): string {
  * Parses an item ID into type and number
  */
 export function parseItemId(id: string): { type: ItemType; number: number } | null {
-  const match = id.match(/^(EPIC|STORY|TASK|REQ|FEAT|BUG|SPIKE|TEST)-(\d+)$/);
+  const match = id.match(/^(EPIC|STORY|TASK|REQ|FEAT|BUG|SPIKE|TEST|DOC)-(\d+)$/);
   if (!match) return null;
 
   const typeMap: Record<string, ItemType> = {
@@ -191,6 +200,7 @@ export function parseItemId(id: string): { type: ItemType; number: number } | nu
     BUG: 'bug',
     SPIKE: 'spike',
     TEST: 'test',
+    DOC: 'doc',
   };
 
   return {

@@ -1,0 +1,40 @@
+{
+  "id": "TASK-375",
+  "type": "task",
+  "category": "general",
+  "title": "Add contributes.markdown.markdownItPlugins, previewScripts, and extensionDependencies for TSD depth slider to extension package.json",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T15:09:07.901Z",
+  "updated": "2026-04-02T19:37:29.909Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/package.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "STORY-227"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "manifest",
+    "tsd",
+    "preview",
+    "depth-view"
+  ],
+  "commits": [],
+  "metadata": {}
+}

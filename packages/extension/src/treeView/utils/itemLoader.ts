@@ -32,7 +32,7 @@ export async function loadItemWithLinks(
 ): Promise<WorkItem | null> {
   try {
     // Parse item type from ID (e.g., "EPIC-001" -> "epic")
-    const match = itemId.match(/^(EPIC|STORY|TASK|REQ|FEAT|BUG|SPIKE|TEST)-(\d+)$/);
+    const match = itemId.match(/^(EPIC|STORY|TASK|REQ|FEAT|BUG|SPIKE|TEST|DOC)-(\d+)$/);
     if (!match) return null;
 
     const typeMap: Record<string, string> = {
@@ -44,6 +44,7 @@ export async function loadItemWithLinks(
       BUG: 'bug',
       SPIKE: 'spike',
       TEST: 'test',
+      DOC: 'doc',
     };
 
     const itemType = typeMap[match[1]];

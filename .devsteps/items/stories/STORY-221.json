@@ -1,0 +1,46 @@
+{
+  "id": "STORY-221",
+  "type": "story",
+  "category": "general",
+  "title": "Create docs-map.ts module in packages/shared with YAML dep, read/write/append/rebuild-shadow API for docs-map.yaml",
+  "status": "in-progress",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T15:09:07.906Z",
+  "updated": "2026-04-02T19:36:20.173Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/docs-map.ts",
+    "packages/shared/src/types/docs-map.ts",
+    "packages/shared/src/index.ts",
+    "packages/shared/package.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "STORY-222",
+      "STORY-223"
+    ],
+    "supersedes": [
+      "SPIKE-037"
+    ],
+    "superseded-by": []
+  },
+  "tags": [
+    "shared",
+    "docs-map",
+    "yaml",
+    "bom",
+    "tsd"
+  ],
+  "commits": [],
+  "metadata": {}
+}

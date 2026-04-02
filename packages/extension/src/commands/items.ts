@@ -33,11 +33,7 @@ export function registerItemCommands(
 
       const itemType = await vscode.window.showQuickPick(
         [
-          {
-            label: 'Epic',
-            value: 'epic',
-            description: 'Large initiative spanning multiple stories',
-          },
+          { label: 'Epic', value: 'epic', description: 'Large initiative spanning multiple stories' },
           { label: 'Story', value: 'story', description: 'User story or feature requirement' },
           { label: 'Task', value: 'task', description: 'Technical task or implementation work' },
           { label: 'Bug', value: 'bug', description: 'Bug fix or defect' },
@@ -45,6 +41,7 @@ export function registerItemCommands(
           { label: 'Requirement', value: 'requirement', description: 'Business requirement' },
           { label: 'Spike', value: 'spike', description: 'Research or investigation task' },
           { label: 'Test', value: 'test', description: 'Test case or testing task' },
+          { label: 'Doc', value: 'doc', description: 'Architecture or design document' },
         ],
         { placeHolder: 'Select work item type', title: 'Create New Work Item' }
       );

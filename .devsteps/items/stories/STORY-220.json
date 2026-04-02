@@ -1,0 +1,41 @@
+{
+  "id": "STORY-220",
+  "type": "story",
+  "category": "general",
+  "title": "DOC ItemType Phase 2 — Depth View (\"Lupe\") with Progressive Disclosure heading-depth filter",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T13:37:25.852Z",
+  "updated": "2026-04-02T13:39:10.284Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [
+      "STORY-219"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "phase-2",
+    "depth-view",
+    "lupe",
+    "progressive-disclosure",
+    "extension"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -21,7 +21,7 @@ export const CategoryIndexSchema = z.object({
   category: z.string(),
 
   /** Array of item IDs */
-  items: z.array(z.string().regex(/^(EPIC|STORY|TASK|REQ|FEAT|BUG|SPIKE|TEST)-\d{3,}$/)),
+  items: z.array(z.string().regex(/^(EPIC|STORY|TASK|REQ|FEAT|BUG|SPIKE|TEST|DOC)-\d{3,}$/)),
 
   /** Last update timestamp (ISO 8601) */
   updated: z.string().datetime(),
@@ -31,7 +31,7 @@ export const CategoryIndexSchema = z.object({
  * Type index schema (by-type/*.json)
  */
 export const TypeIndexSchema = CategoryIndexSchema.extend({
-  category: z.enum(['epic', 'story', 'task', 'requirement', 'feature', 'bug', 'spike', 'test']),
+  category: z.enum(['epic', 'story', 'task', 'requirement', 'feature', 'bug', 'spike', 'test', 'doc']),
 });
 
 /**

@@ -1,0 +1,41 @@
+{
+  "id": "STORY-226",
+  "type": "story",
+  "category": "general",
+  "title": "Implement embedPlugin.ts markdown-it plugin — replace <!-- devsteps:embed ID --> comments with placeholder divs (reads from item cache)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T15:09:54.473Z",
+  "updated": "2026-04-02T15:11:27.483Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/preview/embedPlugin.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [
+      "STORY-225",
+      "TASK-375"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "tsd",
+    "embed",
+    "markdownit",
+    "preview"
+  ],
+  "commits": [],
+  "metadata": {}
+}

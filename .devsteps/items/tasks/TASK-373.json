@@ -1,0 +1,38 @@
+{
+  "id": "TASK-373",
+  "type": "task",
+  "category": "general",
+  "title": "Supersede ADR-002 in DOC-ARCHITECTURE.md — config-only approach is incorrect",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-02T13:37:37.113Z",
+  "updated": "2026-04-02T13:38:51.098Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/ideas/DOC-ARCHITECTURE.md",
+    ".devsteps/ideas/DOC-ARCHITECTURE copy.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-036"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "adr",
+    "documentation",
+    "SSOT"
+  ],
+  "commits": [],
+  "metadata": {}
+}

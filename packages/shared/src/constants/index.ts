@@ -25,6 +25,7 @@ export const ITEM_TYPE = {
   BUG: 'bug',
   SPIKE: 'spike',
   TEST: 'test',
+  DOC: 'doc',
 } as const;
 
 /**
@@ -56,6 +57,10 @@ export const RELATIONSHIP_TYPE = {
   REQUIRED_BY: 'required-by',
   SUPERSEDES: 'supersedes',
   SUPERSEDED_BY: 'superseded-by',
+  CANONICAL_FOR: 'canonical-for',
+  DERIVED_FROM: 'derived-from',
+  DOCUMENTED_BY: 'documented-by',
+  DOCUMENTS: 'documents',
 } as const;
 
 /**

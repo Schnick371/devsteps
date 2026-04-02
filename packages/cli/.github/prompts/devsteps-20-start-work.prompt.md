@@ -71,3 +71,31 @@ If no item specified → `#mcp_devsteps_list` filtered by `status: planned`, pri
 6. Read all MandateResults via `read_mandate_results` — pass `report_path` to exec agents (never paste content)
 7. Dispatch `devsteps-R4-exec-impl` → `devsteps-R4-exec-test` (then `devsteps-R4-exec-doc` if FULL tier)
 8. `devsteps-R5-gate-reviewer` PASS → merge to main (`--no-ff`), status → `done`
+9. **Insight Harvest Loop** — see below
+
+## Insight Harvest Loop (MANDATORY — starts after gate-reviewer PASS + merge, repeats until done, max 5 rounds)
+
+> Implementation exposes adjacent debt and the user has async thinking time during execution. This loop captures both directions — and keeps going until neither side has anything left to add.
+
+**Each iteration — autonomous step (never surface to user):**
+
+1. Review incidental findings: dead code, analyst warnings outside task scope, inconsistent patterns, test gaps flagged but not fixed
+2. Discard speculative findings — only propose what is concrete and independently actionable
+3. If a pattern's severity is unclear → quick `#bright-data` or codebase check first
+4. Draft 0–3 proposals: `[type] Title — one-line rationale`
+
+**Then call `#askQuestions`:**
+
+> **Round [N] — What I noticed while implementing:**
+> [0–3 proposals — or "Implementation was clean, no notable adjacent findings"]
+>
+> **Your turn:** What came to mind while I was working?
+>
+> A) Accept proposals + I have more: [describe] → *creates items, then next round*
+> B) Decline proposals — I have new ideas: [describe] → *creates items, then next round*
+> C) Accept some + I have more: [describe] → *creates items, then next round*
+> D) Nothing new — session complete
+
+**After A/B/C:** delegate to `worker-devsteps`, then immediately start the next iteration — no user prompt needed to continue.
+**After D:** session complete.
+**Round 5:** if input is still flowing, capture remaining ideas in one final `#askQuestions`, create those items, then close.
