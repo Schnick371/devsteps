@@ -30,4 +30,5 @@ export type {
 } from '../schemas/index.js';
 
 export * from './commands.js';
+export * from './docs-map.js';
 export * from './index-refs.types.js';
