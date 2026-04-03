@@ -56,6 +56,7 @@ async function listArchivedItems(
     'test',
     'feature',
     'requirement',
+    'doc',
   ];
   const typesToScan = args.type ? [args.type] : allTypes;
 
@@ -142,6 +143,7 @@ export async function listItems(
         'test',
         'feature',
         'requirement',
+        'doc',
       ];
       for (const type of allTypes) {
         const typeItems = loadIndexByType(devstepsDir, type);
@@ -169,6 +171,7 @@ export async function listItems(
       TEST: 'test' as const,
       FEAT: 'feature' as const,
       REQ: 'requirement' as const,
+      DOC: 'doc' as const,
     }).find(([prefix]) => prefix === typePrefix)?.[1];
 
     if (!type) return null;
