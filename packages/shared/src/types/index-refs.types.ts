@@ -125,6 +125,7 @@ export const INDEX_FILENAMES = {
     bug: 'bugs.json',
     spike: 'spikes.json',
     test: 'tests.json',
+    doc: 'docs.json',
   } as Record<ItemType, string>,
 
   /** Status index filenames */

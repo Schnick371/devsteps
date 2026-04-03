@@ -180,6 +180,7 @@ export function getTypePrefix(type: string): string {
     bug: 'BUG',
     spike: 'SPIKE',
     test: 'TEST',
+    doc: 'DOC',
   };
   return prefixMap[type] || 'ITEM';
 }

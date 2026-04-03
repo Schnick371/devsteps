@@ -15,6 +15,7 @@ import {
   copyGithubFiles,
   getCurrentTimestamp,
   getMethodologyConfig,
+  getTypePrefix,
   initializeRefsStyleIndex,
   type Methodology,
   writeSetupMd,
@@ -90,7 +91,7 @@ export async function initCommand(
     // Initialize refs-style index structure with counters for all item types
     const counters: Record<string, number> = {};
     for (const type of methodologyConfig.item_types) {
-      counters[type] = 0;
+      counters[getTypePrefix(type)] = 0;
     }
 
     initializeRefsStyleIndex(devstepsDir, counters);
