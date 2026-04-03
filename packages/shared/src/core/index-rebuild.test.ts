@@ -10,7 +10,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { ItemMetadata, ItemType } from '../schemas/index.js';
-import { TYPE_TO_DIRECTORY } from '../utils/index.js';
+import { getTypePrefix, TYPE_TO_DIRECTORY } from '../utils/index.js';
 import { rebuildIndex } from './index-rebuild.js';
 import {
   hasRefsStyleIndex,
@@ -696,6 +696,51 @@ describe('Index Rebuild Operations', () => {
       expect(taskIds).toContain('TASK-001');
       expect(taskIds).toContain('TASK-002');
       expect(taskIds).toContain('TASK-003');
+    });
+  });
+
+  describe('doc type — index round-trip (BUG-075 regression)', () => {
+    it('should index and retrieve a doc item by type', async () => {
+      createItemFile('doc', {
+        id: 'DOC-001',
+        type: 'doc',
+        title: 'Architecture Overview',
+        status: 'draft',
+        eisenhower: 'not-urgent-important',
+        created: new Date().toISOString(),
+        updated: new Date().toISOString(),
+      });
+
+      await rebuildIndex(devstepsDir);
+
+      const docIds = loadIndexByType(devstepsDir, 'doc');
+      expect(docIds).toHaveLength(1);
+      expect(docIds).toContain('DOC-001');
+    });
+
+    it('should track doc item counter with uppercase DOC key', async () => {
+      createItemFile('doc', {
+        id: 'DOC-007',
+        type: 'doc',
+        title: 'Reference: CLI Commands',
+        status: 'draft',
+        eisenhower: 'not-urgent-not-important',
+        created: new Date().toISOString(),
+        updated: new Date().toISOString(),
+      });
+
+      await rebuildIndex(devstepsDir);
+
+      const counters = loadCounters(devstepsDir);
+      expect(counters['DOC']).toBe(7);
+      // Verify lowercase 'doc' is NOT used as counter key (DEFECT-7 guard)
+      expect(counters['doc']).toBeUndefined();
+    });
+
+    it('should use DOC prefix via getTypePrefix for doc item type', () => {
+      expect(getTypePrefix('doc')).toBe('DOC');
+      // Verify no fallback to 'ITEM' (DEFECT-1 guard)
+      expect(getTypePrefix('doc')).not.toBe('ITEM');
     });
   });
 });

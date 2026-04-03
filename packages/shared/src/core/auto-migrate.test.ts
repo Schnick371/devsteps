@@ -11,6 +11,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { EisenhowerQuadrant, ItemMetadata, ItemStatus, ItemType } from '../schemas/index.js';
 import {
   checkMigrationNeeded,
+  ensureFullMigration,
   ensureIndexMigrated,
   getMigrationStatusMessage,
   performMigration,
@@ -483,6 +484,29 @@ describe('Auto-Migration Module', () => {
 
       // Migration should fail with count mismatch (duplicate handling in addItemToIndex)
       await expect(performMigration(devstepsDir)).rejects.toThrow('Item count mismatch');
+    });
+  });
+
+  describe('ensureFullMigration — phase 4: doc type directory scaffold (TASK-391 / BUG-075)', () => {
+    it('should create items/docs/ and docs.json when missing from a refs-style project', async () => {
+      initializeRefsStyleIndex(devstepsDir);
+      // Verify phase 4 targets are absent before migration
+      expect(existsSync(join(devstepsDir, 'items', 'docs'))).toBe(false);
+      expect(existsSync(join(devstepsDir, 'index', 'by-type', 'docs.json'))).toBe(true); // created by initializeRefsStyleIndex after BUG-075
+
+      await ensureFullMigration(devstepsDir, { silent: true });
+
+      // Phase 4 should create items/docs/ (idempotent)
+      expect(existsSync(join(devstepsDir, 'items', 'docs'))).toBe(true);
+      expect(existsSync(join(devstepsDir, 'index', 'by-type', 'docs.json'))).toBe(true);
+    });
+
+    it('should be idempotent — safe to call ensureFullMigration twice', async () => {
+      initializeRefsStyleIndex(devstepsDir);
+      await ensureFullMigration(devstepsDir, { silent: true });
+      // Second call must not throw
+      await expect(ensureFullMigration(devstepsDir, { silent: true })).resolves.not.toThrow();
+      expect(existsSync(join(devstepsDir, 'items', 'docs'))).toBe(true);
     });
   });
 });

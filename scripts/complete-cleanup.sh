@@ -98,6 +98,17 @@ else
 fi
 echo ""
 
+# IMPORTANT: Research output protection
+# ============================================================================
+# DO NOT add tmp/analyst-*.md, tmp/aspect-*.md, or tmp/SPIKE-*.md deletion
+# to this script. These files are research outputs that may be promoted to
+# DOC items via: git mv tmp/<file>.md docs/research/ && devsteps add --type doc
+#
+# To check which research files are unprotected (not yet linked to a DOC item):
+#   node packages/cli/dist/index.js list --type doc 2>/dev/null | grep -v "tmp/" || \
+#   echo "No DOC items yet — consider running: devsteps docs import ./tmp"
+# ============================================================================
+
 echo "✅ COMPLETE Cleanup finished!"
 echo ""
 echo "📋 Next steps:"

@@ -13,7 +13,10 @@
  * @see EPIC-018 Index Architecture Refactoring
  */
 
-import { existsSync, renameSync } from 'node:fs';
+import { existsSync, mkdirSync, renameSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { getCurrentTimestamp } from '../utils/index.js';
+import { INDEX_FILENAMES } from '../types/index-refs.types.js';
 import {
   type AutoMigrationOptions,
   checkMigrationNeeded,
@@ -120,6 +123,23 @@ export async function ensureFullMigration(
     } catch (_error) {
       if (!silent)
         console.warn('   ⚠️  Keeping legacy index.json (refs-style index validation failed)');
+    }
+  }
+
+  // Phase 4: ensure items/docs/ dir and by-type/docs.json exist (idempotent, safe to re-run)
+  if (hasRefsStyleIndex(devstepsDir)) {
+    const docsItemsDir = join(devstepsDir, 'items', 'docs');
+    if (!existsSync(docsItemsDir)) {
+      mkdirSync(docsItemsDir, { recursive: true });
+      if (!silent) console.log('   📁 Created items/docs/ directory for DOC item type');
+    }
+    const docsIndexPath = join(devstepsDir, 'index', 'by-type', INDEX_FILENAMES.TYPE.doc);
+    if (!existsSync(docsIndexPath)) {
+      writeFileSync(
+        docsIndexPath,
+        JSON.stringify({ category: 'doc', items: [], updated: getCurrentTimestamp() }, null, 2)
+      );
+      if (!silent) console.log('   📄 Created index/by-type/docs.json for DOC item type');
     }
   }
 }
