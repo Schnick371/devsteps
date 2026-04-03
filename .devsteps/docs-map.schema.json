@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://devsteps.dev/schemas/docs-map.schema.json",
+  "title": "DocsMap",
+  "description": "BOM manifest for documentation structure (Tiefenstrukturiertes Dokument / TSD). Adjacency list format — ADR-007.",
+  "type": "object",
+  "required": ["version", "nodes"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "description": "Schema version for migration guards (e.g. '1.0')"
+    },
+    "nodes": {
+      "type": "array",
+      "description": "Flat adjacency list of all BOM nodes. Tree structure is derived via parent_id + order at runtime.",
+      "items": {
+        "$ref": "#/$defs/DocsMapNode"
+      }
+    }
+  },
+  "$defs": {
+    "DocsMapNode": {
+      "type": "object",
+      "required": ["id", "parent_id", "order", "title", "devsteps_items"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^ARCH-[A-Z0-9]+(-[A-Z0-9]+)*$",
+          "description": "Stable BOM position code, e.g. 'ARCH-001'. Never a DevSteps work-item ID."
+        },
+        "doc_id": {
+          "type": "string",
+          "pattern": "^DOC-[0-9]+$",
+          "description": "Optional DOC-NNN work-item that owns this section. Omit for root cluster nodes that span multiple files."
+        },
+        "parent_id": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^ARCH-[A-Z0-9]+(-[A-Z0-9]+)*$"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Parent node ID, or null for root-level nodes."
+        },
+        "order": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Sort order within siblings. Gap numbering (10, 20, 30) is recommended — insert at 15 without renaming."
+        },
+        "title": {
+          "type": "string",
+          "description": "Section heading text (mirrors H1–H4 in the TSD file)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional human note for editorial context."
+        },
+        "devsteps_items": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(STORY|TASK|BUG|EPIC|SPIKE|FEATURE|DOC|REQUIREMENT)-[0-9]+$"
+          },
+          "default": [],
+          "description": "DevSteps work items that produced or govern this node (N:M — one section can relate to multiple items)."
+        },
+        "tsd_heading_depth_max": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6,
+          "description": "Maximum heading depth rendered in this subtree (1 = H1 only, 4 = H1–H4). Overrides slider ceiling."
+        },
+        "default_depth": {
+          "type": "number",
+          "enum": [1, 2, 3, 4],
+          "description": "Default zoom level when VS Code Depth View opens this doc. Presentation hint only."
+        }
+      }
+    }
+  }
+}

@@ -2,18 +2,17 @@
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
  *
- * Core docs-map module — read/write/append/rebuild-shadow API for docs-map.yaml.
+ * Core docs-map module — read/write/append/rebuild-shadow API for docs-map.json.
  *
- * Design decisions: SPIKE-036
- * - ADR-S2-10: docs-map.yaml lives at .devsteps/docs-map.yaml
- * - ADR-S2-11: Atomic dual-write (YAML + JSON shadow) via .tmp → rename
- * - ADR-S2-13: `yaml` npm package for human-editable YAML
+ * Design decisions: SPIKE-036, ADR-007
+ * - ADR-S2-10: docs-map.json lives at .devsteps/docs-map.json
+ * - ADR-S2-11: Atomic dual-write (JSON primary + JSON shadow) via .tmp → rename
+ * - ADR-007: JSON adjacency list format (parent_id + order replace children[])
  * - ADR-S2-06/07: position and level are derived at runtime, never stored
  */
 
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { parse, stringify } from 'yaml';
 import type {
   DocsMapDocument,
   DocsMapNode,
@@ -22,13 +21,13 @@ import type {
 } from '../types/docs-map.js';
 import { getCurrentTimestamp } from '../utils/index.js';
 
-const DOCS_MAP_PATH = 'docs-map.yaml';
+const DOCS_MAP_PATH = 'docs-map.json';
 const POSITIONS_INDEX_DIR = 'index';
 const POSITIONS_INDEX_FILE = 'docs-map-positions.json';
 const SCHEMA_VERSION = '1.0';
 
 /**
- * Resolve the docs-map.yaml path within a devstepsDir.
+ * Resolve the docs-map.json path within a devstepsDir.
  */
 function docsMapPath(devstepsDir: string): string {
   return join(devstepsDir, DOCS_MAP_PATH);
@@ -42,7 +41,7 @@ function positionsIndexPath(devstepsDir: string): string {
 }
 
 /**
- * Read docs-map.yaml from .devsteps/docs-map.yaml.
+ * Read docs-map.json from .devsteps/docs-map.json.
  * Returns an empty document if the file does not exist yet.
  */
 export function readDocsMap(devstepsDir: string): DocsMapDocument {
@@ -51,7 +50,12 @@ export function readDocsMap(devstepsDir: string): DocsMapDocument {
     return { version: SCHEMA_VERSION, nodes: [] };
   }
   const raw = readFileSync(filePath, 'utf-8');
-  const parsed = parse(raw) as DocsMapDocument | null;
+  let parsed: DocsMapDocument | null = null;
+  try {
+    parsed = JSON.parse(raw) as DocsMapDocument;
+  } catch {
+    return { version: SCHEMA_VERSION, nodes: [] };
+  }
   if (!parsed || typeof parsed !== 'object') {
     return { version: SCHEMA_VERSION, nodes: [] };
   }
@@ -62,7 +66,7 @@ export function readDocsMap(devstepsDir: string): DocsMapDocument {
 }
 
 /**
- * Atomic dual-write: persist docs-map.yaml + rebuild JSON shadow.
+ * Atomic dual-write: persist docs-map.json + rebuild JSON shadow.
  * Uses .tmp → rename to prevent partial writes (ADR-S2-11).
  */
 export function writeDocsMap(devstepsDir: string, document: DocsMapDocument): void {
@@ -72,13 +76,7 @@ export function writeDocsMap(devstepsDir: string, document: DocsMapDocument): vo
   // Ensure .devsteps/ directory exists
   mkdirSync(devstepsDir, { recursive: true });
 
-  const yamlContent = stringify(document, {
-    indent: 2,
-    lineWidth: 120,
-    defaultStringType: 'QUOTE_DOUBLE',
-  });
-
-  writeFileSync(tmpPath, yamlContent, 'utf-8');
+  writeFileSync(tmpPath, JSON.stringify(document, null, 2), 'utf-8');
   renameSync(tmpPath, filePath);
 
   // Dual-write JSON shadow
@@ -86,8 +84,9 @@ export function writeDocsMap(devstepsDir: string, document: DocsMapDocument): vo
 }
 
 /**
- * Append a new node under a parent identified by ARCH-NNN id.
- * If parentId is null, appends to the root `nodes` array.
+ * Append a new node to the adjacency list.
+ * If parentId is not null, validates that the parent exists before appending.
+ * The node must already have parent_id set (should match parentId parameter).
  * Performs atomic dual-write after mutation.
  *
  * @returns true if the node was appended, false if parentId was not found.
@@ -99,23 +98,19 @@ export function appendDocsMapNode(
 ): boolean {
   const document = readDocsMap(devstepsDir);
 
-  if (parentId === null) {
-    document.nodes.push(node);
-    writeDocsMap(devstepsDir, document);
-    return true;
+  if (parentId !== null) {
+    const parent = _findNode(document.nodes, parentId);
+    if (!parent) return false;
   }
 
-  const parent = _findNode(document.nodes, parentId);
-  if (!parent) return false;
-
-  parent.children.push(node);
+  document.nodes.push({ ...node, parent_id: parentId });
   writeDocsMap(devstepsDir, document);
   return true;
 }
 
 /**
- * Rebuild the JSON shadow from the current docs-map.yaml without rewriting YAML.
- * Use this for index recovery or after external edits to docs-map.yaml.
+ * Rebuild the JSON shadow from the current docs-map.json without rewriting the primary file.
+ * Use this for index recovery or after external edits to docs-map.json.
  */
 export function rebuildDocsMapShadow(devstepsDir: string): void {
   const document = readDocsMap(devstepsDir);
@@ -129,7 +124,7 @@ export function rebuildDocsMapShadow(devstepsDir: string): void {
  * Uses .tmp → rename for atomicity.
  */
 function _writePositionsShadow(devstepsDir: string, document: DocsMapDocument): void {
-  const entries = _flattenNodes(document.nodes, '');
+  const entries = _flattenNodes(document.nodes);
   const index: DocsMapPositionsIndex = {
     updated: getCurrentTimestamp(),
     entries,
@@ -146,47 +141,43 @@ function _writePositionsShadow(devstepsDir: string, document: DocsMapDocument): 
 }
 
 /**
- * Flatten the tree into DocsMapPositionEntry[] with derived position + depth.
- * Position is dot-notation (e.g. "1.2.3") computed from sibling index.
+ * Flatten the adjacency list into DocsMapPositionEntry[] with derived position + depth.
+ * Position is dot-notation (e.g. "1.2.3") computed by traversing the parent_id chain.
+ * Nodes are sorted by `order` within each sibling group.
  */
-function _flattenNodes(
-  nodes: DocsMapNode[],
-  parentPosition: string,
-  depth = 0
-): DocsMapPositionEntry[] {
+function _flattenNodes(nodes: DocsMapNode[]): DocsMapPositionEntry[] {
   const result: DocsMapPositionEntry[] = [];
 
-  for (let i = 0; i < nodes.length; i++) {
-    const node = nodes[i];
-    const position = parentPosition ? `${parentPosition}.${i + 1}` : `${i + 1}`;
+  function processChildren(parentId: string | null, parentPosition: string, depth: number): void {
+    const siblings = nodes
+      .filter((n) => n.parent_id === parentId)
+      .sort((a, b) => a.order - b.order);
 
-    result.push({
-      id: node.id,
-      doc_id: node.doc_id,
-      title: node.title,
-      devsteps_items: node.devsteps_items,
-      position,
-      depth,
-    });
+    for (let i = 0; i < siblings.length; i++) {
+      const node = siblings[i];
+      const position = parentPosition ? `${parentPosition}.${i + 1}` : `${i + 1}`;
 
-    if (node.children.length > 0) {
-      result.push(..._flattenNodes(node.children, position, depth + 1));
+      result.push({
+        id: node.id,
+        doc_id: node.doc_id,
+        parent_arch_id: node.parent_id,
+        title: node.title,
+        devsteps_items: node.devsteps_items,
+        position,
+        depth,
+      });
+
+      processChildren(node.id, position, depth + 1);
     }
   }
 
+  processChildren(null, '', 0);
   return result;
 }
 
 /**
- * Depth-first search for a node by ARCH-NNN id.
+ * Find a node by ARCH-NNN id in the flat adjacency list.
  */
 function _findNode(nodes: DocsMapNode[], id: string): DocsMapNode | null {
-  for (const node of nodes) {
-    if (node.id === id) return node;
-    if (node.children.length > 0) {
-      const found = _findNode(node.children, id);
-      if (found) return found;
-    }
-  }
-  return null;
+  return nodes.find((n) => n.id === id) ?? null;
 }
