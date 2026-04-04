@@ -66,12 +66,14 @@
             { "from": "spike", "relation": "relates-to", "to": ["story", "task"] },
             { "from": "spike", "relation": "required-by", "to": ["task"] },
             { "from": "bug", "relation": "implements", "to": ["epic"] },
-            { "from": "task", "relation": "implements", "to": ["story", "spike", "bug"] }
+            { "from": "task", "relation": "implements", "to": ["story", "spike", "bug"] },
+            { "from": "doc", "relation": "documents", "to": ["epic", "story", "task", "bug", "spike", "test"] }
           ],
           "forbidden_links": [
             { "from": "spike", "relation": "implements", "to": ["story"], "reason": "Spike is same level as Story, not under it!" },
             { "from": "task", "relation": "implements", "to": ["epic"], "reason": "Task must go through Story/Spike/Bug" },
-            { "from": "epic", "relation": "implemented-by", "to": ["task"], "reason": "Epic cannot contain Tasks directly" }
+            { "from": "epic", "relation": "implemented-by", "to": ["task"], "reason": "Epic cannot contain Tasks directly" },
+            { "from": "doc", "relation": "implements", "to": ["epic", "story", "task", "bug", "spike", "test"], "reason": "Doc is cross-cutting — use 'documents' relation, not 'implements'" }
           ]
         }
       },
@@ -107,7 +109,8 @@
             { "from": "feature", "relation": "implemented-by", "to": ["task"] },
             { "from": "feature", "relation": "relates-to", "to": ["spike"] },
             { "from": "spike", "relation": "implements", "to": ["requirement", "feature"] },
-            { "from": "task", "relation": "implements", "to": ["feature"] }
+            { "from": "task", "relation": "implements", "to": ["feature"] },
+            { "from": "doc", "relation": "documents", "to": ["requirement", "feature", "task", "bug", "spike", "test"] }
           ],
           "forbidden_links": [
             { "from": "task", "relation": "implements", "to": ["requirement"], "reason": "Task must go through Feature" }

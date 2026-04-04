@@ -1,10 +1,10 @@
 {
   "EPIC": 42,
-  "STORY": 235,
-  "TASK": 395,
+  "STORY": 245,
+  "TASK": 439,
   "REQ": 2,
   "FEAT": 4,
-  "BUG": 75,
-  "SPIKE": 43,
-  "DOC": 0
+  "BUG": 79,
+  "SPIKE": 50,
+  "DOC": 1
 }
