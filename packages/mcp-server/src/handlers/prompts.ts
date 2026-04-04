@@ -58,6 +58,62 @@ const DEVSTEPS_PROMPTS: Prompt[] = [
       },
     ],
   },
+  {
+    name: 'devsteps-docs-diataxis-explain',
+    title: 'DevSteps: Explain Diataxis Quadrant',
+    description:
+      'Explain which Diataxis quadrant a document belongs to and why. ' +
+      'Provide the file path to classify.',
+    arguments: [
+      {
+        name: 'file_path',
+        description: 'Path to the markdown file to classify (relative to workspace root)',
+        required: true,
+      },
+    ],
+  },
+  {
+    name: 'devsteps-docs-write-howto',
+    title: 'DevSteps: Scaffold How-to Guide',
+    description:
+      'Generate a how-to guide skeleton for a specific task. ' +
+      'Follows Diataxis how-to conventions: imperative steps, prerequisites, goal statement.',
+    arguments: [
+      {
+        name: 'task_description',
+        description: 'What the user wants to accomplish (e.g. "add a new MCP tool")',
+        required: true,
+      },
+    ],
+  },
+  {
+    name: 'devsteps-docs-write-reference',
+    title: 'DevSteps: Scaffold Reference Page',
+    description:
+      'Generate a reference page skeleton for an API, config, or CLI command. ' +
+      'Follows Diataxis reference conventions: tables, signatures, exhaustive coverage.',
+    arguments: [
+      {
+        name: 'subject',
+        description: 'The API, config, or CLI command to document (e.g. "devsteps add command")',
+        required: true,
+      },
+    ],
+  },
+  {
+    name: 'devsteps-docs-classify',
+    title: 'DevSteps: Classify Document',
+    description:
+      'Classify an existing markdown file into its Diataxis type using heuristic signals ' +
+      '(path, headings, content patterns). Returns type, confidence, and reasoning.',
+    arguments: [
+      {
+        name: 'file_path',
+        description: 'Path to the markdown file to classify (relative to workspace root)',
+        required: true,
+      },
+    ],
+  },
 ];
 
 /**
@@ -176,6 +232,128 @@ export async function getPromptHandler(
                 changeSummary
                   ? `The changes involve: ${changeSummary}`
                   : 'Fill in the subject line with a concise description of what changed.',
+              ].join('\n'),
+            },
+          },
+        ],
+      };
+    }
+
+    case 'devsteps-docs-diataxis-explain': {
+      const filePath = args.file_path || '<file_path>';
+      return {
+        description: `Diataxis classification for ${filePath}.`,
+        messages: [
+          {
+            role: 'user',
+            content: {
+              type: 'text',
+              text: [
+                `Read the file at \`${filePath}\` and classify it into a Diataxis quadrant.`,
+                '',
+                'The four quadrants are:',
+                '- **Tutorial** — learning-oriented, step-by-step project, "you will learn…"',
+                '- **How-to** — task-oriented, numbered imperative steps, solves a specific problem',
+                '- **Reference** — information-oriented, tables/signatures, exhaustive coverage',
+                '- **Explanation** — understanding-oriented, why/how, trade-offs, design rationale',
+                '',
+                'Extended types: **Architecture** (ADR/system design), **Research** (investigation/spike)',
+                '',
+                'Provide:',
+                '1. The primary quadrant classification',
+                '2. Confidence level (high/medium/low)',
+                '3. Key signals that led to the classification',
+                '4. Suggestions to improve alignment with the identified quadrant',
+              ].join('\n'),
+            },
+          },
+        ],
+      };
+    }
+
+    case 'devsteps-docs-write-howto': {
+      const task = args.task_description || '<describe the task>';
+      return {
+        description: `How-to guide scaffold for: ${task}.`,
+        messages: [
+          {
+            role: 'user',
+            content: {
+              type: 'text',
+              text: [
+                `Generate a how-to guide for: **${task}**`,
+                '',
+                'Follow Diataxis how-to conventions:',
+                '- Title: "How to <verb> <noun>"',
+                '- Start with a one-sentence goal statement',
+                '- List prerequisites',
+                '- Numbered steps with imperative verbs ("Run…", "Add…", "Configure…")',
+                '- Each step: one action, expected result where helpful',
+                '- End with "Next steps" linking to related docs',
+                '- Keep under 200 lines; split longer procedures',
+                '',
+                'Output as a complete markdown file ready to save.',
+              ].join('\n'),
+            },
+          },
+        ],
+      };
+    }
+
+    case 'devsteps-docs-write-reference': {
+      const subject = args.subject || '<API or command>';
+      return {
+        description: `Reference page scaffold for: ${subject}.`,
+        messages: [
+          {
+            role: 'user',
+            content: {
+              type: 'text',
+              text: [
+                `Generate a reference page for: **${subject}**`,
+                '',
+                'Follow Diataxis reference conventions:',
+                '- Title: "Reference: <subject>"',
+                '- Use tables for parameters, options, and flags',
+                '- Include type signatures where applicable',
+                '- Cover all options exhaustively — no opinions or tutorials',
+                '- Group related items under clear headings',
+                '- Add a "See also" section linking to tutorials and how-to guides',
+                '',
+                'Output as a complete markdown file ready to save.',
+              ].join('\n'),
+            },
+          },
+        ],
+      };
+    }
+
+    case 'devsteps-docs-classify': {
+      const filePath = args.file_path || '<file_path>';
+      return {
+        description: `Heuristic Diataxis classification for ${filePath}.`,
+        messages: [
+          {
+            role: 'user',
+            content: {
+              type: 'text',
+              text: [
+                `Classify \`${filePath}\` into its Diataxis type using these heuristic signals:`,
+                '',
+                '| Signal | Type |',
+                '|--------|------|',
+                '| Path contains architecture/ or adr- | Architecture |',
+                '| Path contains research/ or analyst- | Research |',
+                '| Numbered steps with imperative verbs | How-to |',
+                '| "you will learn" / baby-steps / project | Tutorial |',
+                '| Tables of parameters, signatures | Reference |',
+                '| "Why", "Background", "Trade-offs" headings | Explanation |',
+                '',
+                'Read the file, then provide:',
+                '1. **Type**: The primary Diataxis classification',
+                '2. **Confidence**: high / medium / low',
+                '3. **Signals found**: List the specific signals detected',
+                '4. **Mixed?**: If the doc mixes quadrants, note which and suggest a split',
               ].join('\n'),
             },
           },
