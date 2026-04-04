@@ -121,11 +121,7 @@ export async function updateItem(
   if (args.tags) metadata.tags = args.tags;
   if (args.affected_paths) metadata.affected_paths = args.affected_paths;
 
-  metadata.updated = getCurrentTimestamp();
-
-  writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
-
-  // Update description
+  // Update description BEFORE JSON so description_hash (STORY-240) can hash final content
   if (args.description && args.append_description) {
     throw new Error('Cannot use both description and append_description simultaneously');
   }
@@ -138,6 +134,10 @@ export async function updateItem(
     const existing = existsSync(descriptionPath) ? readFileSync(descriptionPath, 'utf-8') : '';
     writeFileSync(descriptionPath, existing + normalizeMarkdown(args.append_description));
   }
+
+  metadata.updated = getCurrentTimestamp();
+
+  writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
 
   // Update index (auto-migration ensures refs-style always available)
   // Only update if status or eisenhower changed (triggers re-indexing)
