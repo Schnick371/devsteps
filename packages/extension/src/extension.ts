@@ -15,6 +15,7 @@ import { debounce } from './utils/debounce.js';
 import { SpiderEventsWatcher } from './utils/spiderEventsWatcher.js';
 import { TreeViewStateManager } from './utils/stateManager.js';
 import { isVersionAtLeast } from './utils/version.js';
+import { hasDevStepsRoot } from './utils/workspace.js';
 import { DashboardPanel } from './webview/dashboardPanel.js';
 
 let activeMcpManager: McpServerManager | undefined;
@@ -49,15 +50,8 @@ export async function activate(context: vscode.ExtensionContext) {
 
   const workspaceRoot = workspaceFolders[0].uri;
 
-  // Check if .devsteps directory exists
-  const devstepsPath = vscode.Uri.joinPath(workspaceRoot, '.devsteps');
-  let hasDevSteps = false;
-  try {
-    await vscode.workspace.fs.stat(devstepsPath);
-    hasDevSteps = true;
-  } catch {
-    hasDevSteps = false;
-  }
+  // Check if .devsteps directory exists (guard for onLanguage:markdown activation)
+  const hasDevSteps = await hasDevStepsRoot(workspaceFolders);
 
   // CRITICAL: Run auto-migration if .devsteps exists
   // Converts old directory structure (epics/, stories/, tasks/) to new (items/)
@@ -65,6 +59,7 @@ export async function activate(context: vscode.ExtensionContext) {
   if (hasDevSteps) {
     try {
       logger.info('Checking for migration needs...');
+      const devstepsPath = vscode.Uri.joinPath(workspaceRoot, '.devsteps');
       await ensureFullMigration(devstepsPath.fsPath, { silent: false });
       logger.info('Migration check complete');
     } catch (error) {

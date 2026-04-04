@@ -32,6 +32,7 @@
   ],
   "activationEvents": [
     "onStartupFinished",
+    "onLanguage:markdown",
     "workspaceContains:.devsteps",
     "onCommand:devsteps.initProject"
   ],
