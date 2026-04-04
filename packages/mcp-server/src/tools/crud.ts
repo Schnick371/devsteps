@@ -6,6 +6,7 @@
  */
 
 import type { Tool } from '@modelcontextprotocol/sdk/types.js';
+import { EisenhowerQuadrant, ItemStatus, ItemType } from '@schnick371/devsteps-shared';
 
 export const initTool: Tool = {
   name: 'init',
@@ -51,7 +52,7 @@ export const addTool: Tool = {
     properties: {
       type: {
         type: 'string',
-        enum: ['epic', 'story', 'task', 'requirement', 'feature', 'bug', 'spike', 'test', 'doc'],
+        enum: ItemType.options,
         description: 'Type of item to create (required)',
       },
       title: {
@@ -68,12 +69,7 @@ export const addTool: Tool = {
       },
       priority: {
         type: 'string',
-        enum: [
-          'urgent-important',
-          'not-urgent-important',
-          'urgent-not-important',
-          'not-urgent-not-important',
-        ],
+        enum: EisenhowerQuadrant.options,
         description:
           'Priority (Eisenhower Matrix): urgent-important (Q1: do first), not-urgent-important (Q2: schedule), urgent-not-important (Q3: delegate), not-urgent-not-important (Q4: eliminate). Optional.',
       },
@@ -120,21 +116,12 @@ export const listTool: Tool = {
     properties: {
       type: {
         type: 'string',
-        enum: ['epic', 'story', 'task', 'requirement', 'feature', 'bug', 'spike', 'test', 'doc'],
+        enum: ItemType.options,
         description: 'Filter by item type (optional)',
       },
       status: {
         type: 'string',
-        enum: [
-          'draft',
-          'planned',
-          'in-progress',
-          'review',
-          'done',
-          'blocked',
-          'cancelled',
-          'obsolete',
-        ],
+        enum: ItemStatus.options,
         description: 'Filter by status (optional)',
       },
       assignee: {
@@ -177,16 +164,7 @@ export const updateTool: Tool = {
       },
       status: {
         type: 'string',
-        enum: [
-          'draft',
-          'planned',
-          'in-progress',
-          'review',
-          'done',
-          'blocked',
-          'cancelled',
-          'obsolete',
-        ],
+        enum: ItemStatus.options,
         description: 'New status (optional)',
       },
       superseded_by: {
@@ -196,12 +174,7 @@ export const updateTool: Tool = {
       },
       priority: {
         type: 'string',
-        enum: [
-          'urgent-important',
-          'not-urgent-important',
-          'urgent-not-important',
-          'not-urgent-not-important',
-        ],
+        enum: EisenhowerQuadrant.options,
         description: 'New priority (Eisenhower quadrant, optional)',
       },
       title: {
