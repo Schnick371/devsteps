@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-04T21:46:27.394Z",
-  "updated": "2026-04-04T21:46:27.394Z",
+  "updated": "2026-04-04T22:46:50.660Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,9 +27,7 @@
     "documents": []
   },
   "tags": [
-    "adr",
-    "decision",
-    "path-c"
+    "adr,decision,path-c,accepted,madr,spike-046"
   ],
   "commits": [],
   "metadata": {}
