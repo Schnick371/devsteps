@@ -47,7 +47,21 @@ export {
   getStandardContext,
   readProjectMd,
 } from './context.js';
+export {
+  appendDocsMapNode,
+  readDocsMap,
+  rebuildDocsMapShadow,
+  writeDocsMap,
+} from './docs-map.js';
 export { type GetItemResult, getItem } from './get.js';
+export {
+  type ClassificationResult,
+  DIATAXIS_TYPES,
+  type DiataxisType,
+  heuristicClassify,
+  MIXED_THRESHOLD,
+  type ScoreVector,
+} from './heuristic-classify.js';
 // Index rebuild operations
 export {
   type RebuildOptions,
@@ -70,9 +84,3 @@ export {
   validateRelationship,
   type WorkItem,
 } from './validation.js';
-export {
-  appendDocsMapNode,
-  readDocsMap,
-  rebuildDocsMapShadow,
-  writeDocsMap,
-} from './docs-map.js';
