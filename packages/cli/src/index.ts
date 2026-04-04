@@ -63,8 +63,8 @@ program
 // Add item
 program
   .command('add')
-  .description('Add a new item (epic, story, task, requirement, feature, bug, spike, test)')
-  .argument('<type>', 'Item type: epic|story|task|req|feat|bug|spike|test')
+  .description('Add a new item (epic, story, task, requirement, feature, bug, spike, test, doc)')
+  .argument('<type>', 'Item type: epic|story|task|req|feat|bug|spike|test|doc')
   .argument('<title>', 'Item title')
   .option('-d, --description <text>', 'Item description')
   .option('-c, --category <category>', 'Category/module')

@@ -177,6 +177,15 @@ function validateScrumHierarchy(source: WorkItem, target: WorkItem): ValidationR
     };
   }
 
+  // Doc items are cross-cutting — use documents/documented-by, not implements
+  if (sourceType === ITEM_TYPE.DOC) {
+    return {
+      valid: false,
+      error: 'Doc items are cross-cutting and do not use the implements hierarchy',
+      suggestion: 'Use "documents" relation: DOC documents TARGET, or TARGET documented-by DOC',
+    };
+  }
+
   // Epic cannot implement anything (top-level)
   if (sourceType === ITEM_TYPE.EPIC) {
     return {
@@ -263,6 +272,15 @@ function validateWaterfallHierarchy(source: WorkItem, target: WorkItem): Validat
       valid: false,
       error: 'Tests can only implement Requirements or Features in Waterfall',
       suggestion: `Use "tested-by" relationship or create Requirement/Feature first`,
+    };
+  }
+
+  // Doc items are cross-cutting — use documents/documented-by, not implements
+  if (sourceType === ITEM_TYPE.DOC) {
+    return {
+      valid: false,
+      error: 'Doc items are cross-cutting and do not use the implements hierarchy',
+      suggestion: 'Use "documents" relation: DOC documents TARGET, or TARGET documented-by DOC',
     };
   }
 
