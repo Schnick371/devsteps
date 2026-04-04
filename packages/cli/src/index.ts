@@ -292,6 +292,21 @@ bulkCmd
     await bulkTagRemoveCommand(ids, options.tags || []);
   });
 
+// Docs subcommand
+const docsCmd = program.command('docs').description('Document management commands');
+
+docsCmd
+  .command('import')
+  .description('Scan and classify markdown files, create DOC items with Diataxis heuristic')
+  .argument('<path>', 'Directory to scan for markdown files')
+  .option('--yes', 'Skip confirmation, create items immediately')
+  .option('--dry-run', 'Show classification table only, never create items')
+  .option('--heuristic-only', 'Show heuristic scores only, no item creation')
+  .action(async (scanPath: string, options) => {
+    const { docsImportCommand } = await import('./commands/docs.js');
+    await docsImportCommand(scanPath, options);
+  });
+
 // Error handling
 program.exitOverride();
 
