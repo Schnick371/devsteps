@@ -17,7 +17,8 @@
       "task",
       "bug",
       "spike",
-      "test"
+      "test",
+      "doc"
     ],
     "item_prefixes": {
       "epic": "EPIC",
@@ -27,7 +28,8 @@
       "task": "TASK",
       "bug": "BUG",
       "spike": "SPIKE",
-      "test": "TEST"
+      "test": "TEST",
+      "doc": "DOC"
     },
     "hierarchies": {
       "scrum": {

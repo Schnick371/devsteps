@@ -6,28 +6,10 @@
  */
 
 import type { Tool } from '@modelcontextprotocol/sdk/types.js';
+import { ItemStatus, ItemType } from '@schnick371/devsteps-shared';
 
-const ITEM_TYPE_ENUM = [
-  'epic',
-  'story',
-  'task',
-  'requirement',
-  'feature',
-  'bug',
-  'spike',
-  'test',
-] as const;
-
-const ITEM_STATUS_ENUM = [
-  'draft',
-  'planned',
-  'in-progress',
-  'review',
-  'done',
-  'blocked',
-  'cancelled',
-  'obsolete',
-] as const;
+const ITEM_TYPE_ENUM = ItemType.options;
+const ITEM_STATUS_ENUM = ItemStatus.options;
 
 export const searchTool: Tool = {
   name: 'search',

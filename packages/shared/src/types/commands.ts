@@ -20,6 +20,7 @@ export const TYPE_SHORTCUTS: Record<string, ItemType> = {
   bug: 'bug',
   spike: 'spike',
   test: 'test',
+  doc: 'doc',
 } as const;
 
 /**
