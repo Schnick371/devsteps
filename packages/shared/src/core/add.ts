@@ -14,6 +14,7 @@ import type {
   ItemMetadata,
   ItemType,
 } from '../schemas/index.js';
+import { generateMadrTemplate, isMadrCandidate } from '../templates/madr.js';
 import {
   generateItemId,
   getCurrentTimestamp,
@@ -108,9 +109,14 @@ export async function addItem(devstepsDir: string, args: AddItemArgs): Promise<A
 
   // Save description — normalizeMarkdown converts literal \n sequences from MCP clients
   // to real newlines (BUG-056: GitHub Copilot ≥ v1.0.0 sends escape sequences, not real newlines)
-  const description = normalizeMarkdown(
-    args.description || `# ${args.title}\n\n<!-- Add detailed description here -->\n`
-  );
+  let defaultDescription = `# ${args.title}\n\n<!-- Add detailed description here -->\n`;
+
+  // TASK-413: Auto-populate MADR 4.0 template for ADR-type DOC items
+  if (args.type === 'doc' && !args.description && isMadrCandidate(args.tags || [], args.title)) {
+    defaultDescription = generateMadrTemplate(itemId, args.title, now.split('T')[0]);
+  }
+
+  const description = normalizeMarkdown(args.description || defaultDescription);
   writeFileSync(descriptionPath, description);
 
   // Update index (auto-migration ensures refs-style always available)
