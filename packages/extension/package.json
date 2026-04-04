@@ -79,7 +79,7 @@
       {
         "view": "devsteps.itemsView",
         "when": "devsteps.showWelcome",
-        "contents": "No DevSteps project found in this workspace.\n\n⚠️ **Prerequisites:** Node.js (≥18) required for MCP tools.\n[Check Prerequisites](command:devsteps.checkPrerequisites)\n\nℹ️ **Recommended: Claude Sonnet 4+** for best tool integration and instruction following.\nOther Copilot models may struggle with DevSteps' MCP tools.\n\n[Initialize DevSteps Project](command:devsteps.initProject)\n\nOr use the Command Palette:\n• Run 'DevSteps: Initialize Project'\n• Use the CLI: `devsteps init`\n\nDevSteps helps you track work items, features, bugs, and requirements directly in your repository.\n\n[Share Model Testing Feedback](https://github.com/Schnick371/devsteps/discussions) | [Learn More](https://github.com/Schnick371/devsteps)"
+        "contents": "No DevSteps project found in this workspace.\n\n⚠️ **Prerequisites:** Node.js (≥18) required for MCP tools.\n[Check Prerequisites](command:devsteps.checkPrerequisites)\n\nℹ️ **Recommended: Claude Sonnet 4+** for best tool integration and instruction following.\nOther Copilot models may struggle with DevSteps' MCP tools.\n\n💡 **AI Setup:** Set Copilot thinking to **medium** — Spider Web orchestrates itself.\nUse `/dev` in Copilot chat to access DevSteps prompts. Agent mode: `devsteps-R0-coord`.\n\n[Initialize DevSteps Project](command:devsteps.initProject)\n\nOr use the Command Palette:\n• Run 'DevSteps: Initialize Project'\n• Use the CLI: `devsteps init`\n\nDevSteps helps you track work items, features, bugs, and requirements directly in your repository.\n\n[Share Model Testing Feedback](https://github.com/Schnick371/devsteps/discussions) | [Learn More](https://github.com/Schnick371/devsteps)"
       }
     ],
     "walkthroughs": [
@@ -134,9 +134,18 @@
             ]
           },
           {
+            "id": "devsteps.gettingStarted.aiSetup",
+            "title": "Optimize AI Settings",
+            "description": "DevSteps uses the **Spider Web** dispatch protocol to orchestrate AI agents automatically — no manual tuning needed.\n\n**Set Copilot thinking to `medium`** — higher settings waste time and resources since Spider Web already adapts depth dynamically.\n\n**Start workflows with `/dev`** in Copilot chat — this opens the list of prepared DevSteps prompts (e.g. plan, implement, sprint).\n\n**Control scope by prompt** — add phrases like \"quick fix\", \"full analysis\", or \"just plan\" to adjust what Spider Web does.",
+            "media": {
+              "altText": "DevSteps AI settings optimization",
+              "image": "resources/icons/devsteps-icon.svg"
+            }
+          },
+          {
             "id": "devsteps.gettingStarted.mcp",
             "title": "Use AI Tools via MCP",
-            "description": "DevSteps registers an MCP server so GitHub Copilot can read and manage your work items directly.\n\nAsk Copilot: **\"List my open tasks\"** or **\"Add a bug for login validation\"**.\n\n[Show MCP Status](command:devsteps.mcp.showStatus)",
+            "description": "DevSteps registers an MCP server so GitHub Copilot can read and manage your work items directly.\n\nType `/dev` in Copilot chat and select a DevSteps prompt — or ask directly: **\"List my open tasks\"** or **\"Add a bug for login validation\"**.\n\nFor full Spider Web orchestration, use agent mode **`devsteps-R0-coord`**.\n\n[Show MCP Status](command:devsteps.mcp.showStatus)",
             "media": {
               "altText": "DevSteps MCP server integration",
               "image": "resources/icons/devsteps-icon.svg"
