@@ -31,6 +31,7 @@ export async function initCommand(
     author?: string;
     git: boolean;
     methodology?: Methodology;
+    importDocs?: string;
   }
 ) {
   const spinner = ora('Initializing devsteps project...').start();
@@ -224,6 +225,13 @@ export async function initCommand(
     console.log(chalk.yellow('Next steps:'));
     console.log('  ', chalk.cyan('devsteps add req "Your first requirement"'));
     console.log('  ', chalk.cyan('devsteps status'));
+
+    // Optional docs import after init
+    if (options.importDocs) {
+      console.log();
+      const { docsImportCommand } = await import('./docs.js');
+      await docsImportCommand(options.importDocs, { dryRun: false, yes: false });
+    }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     spinner.fail('Initialization failed');

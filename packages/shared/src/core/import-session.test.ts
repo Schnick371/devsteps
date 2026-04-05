@@ -20,11 +20,21 @@ import {
   validateSessionToken,
   writeSession,
 } from './import-session.js';
-import type { ImportSession, ImportSessionFile } from './import-session.js';
+import type { ImportSession, ImportSessionFile, SessionValidation } from './import-session.js';
 
 const SAMPLE_FILES: ImportSessionFile[] = [
-  { path: 'docs/README.md', excerpt: '# README\nSome content', size_bytes: 100, last_modified: '2026-01-01T00:00:00Z' },
-  { path: 'docs/guide.md', excerpt: '# Guide\nSteps here', size_bytes: 200, last_modified: '2026-01-02T00:00:00Z' },
+  {
+    path: 'docs/README.md',
+    excerpt: '# README\nSome content',
+    size_bytes: 100,
+    last_modified: '2026-01-01T00:00:00Z',
+  },
+  {
+    path: 'docs/guide.md',
+    excerpt: '# Guide\nSteps here',
+    size_bytes: 200,
+    last_modified: '2026-01-02T00:00:00Z',
+  },
 ];
 
 describe('import-session', () => {
@@ -159,10 +169,9 @@ describe('import-session', () => {
     it('returns session for valid token', async () => {
       const { session, token } = await createSession(devstepsDir, 'docs/', SAMPLE_FILES);
       const result = await validateSession(devstepsDir, session.session_id, token);
-      expect('session' in result).toBe(true);
-      if ('session' in result) {
-        expect(result.session.session_id).toBe(session.session_id);
-      }
+      expect('error' in result && result.error).toBeFalsy();
+      const valid = result as SessionValidation;
+      expect(valid.session.session_id).toBe(session.session_id);
     });
 
     it('returns error for missing session', async () => {
