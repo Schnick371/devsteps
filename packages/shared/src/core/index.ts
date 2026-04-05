@@ -62,6 +62,21 @@ export {
   MIXED_THRESHOLD,
   type ScoreVector,
 } from './heuristic-classify.js';
+export {
+  type ClassifiedEntry,
+  createSession,
+  findActiveSession,
+  generateSessionToken,
+  type ImportSession,
+  type ImportSessionFile,
+  type ImportSessionStatus,
+  isSessionExpired,
+  readSession,
+  type SplitEntry,
+  validateSession,
+  validateSessionToken,
+  writeSession,
+} from './import-session.js';
 // Index rebuild operations
 export {
   type RebuildOptions,

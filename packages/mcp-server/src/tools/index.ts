@@ -40,6 +40,15 @@ export {
 } from './crud.js';
 
 export {
+  docsBomCommitTool,
+  docsBomStatusTool,
+  docsClassifyConfirmTool,
+  docsClassifyTool,
+  docsImportTool,
+  docsNewTool,
+} from './docs-import.js';
+
+export {
   linkTool,
   traceTool,
   unlinkTool,
