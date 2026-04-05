@@ -40,6 +40,7 @@ program
   .option('-a, --author <email>', 'Default author email')
   .option('--no-git', 'Disable git integration')
   .option('-m, --methodology <type>', 'Methodology: scrum|waterfall|hybrid (default: scrum)')
+  .option('--import-docs <path>', 'Import documentation from path after init')
   .action(initCommand);
 
 // Update GitHub Copilot files
