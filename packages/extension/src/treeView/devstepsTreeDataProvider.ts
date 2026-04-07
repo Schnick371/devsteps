@@ -46,7 +46,7 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   };
   private treeView?: vscode.TreeView<TreeNode>;
   private expandedGroups = new Set<string>();
-  private expandedSections = new Set<string>(['scrum', 'waterfall']); // Both expanded by default
+  private expandedSections = new Set<string>(['scrum', 'waterfall', 'cross-cutting']); // All sections expanded by default
   private expandedHierarchyItems = new Set<string>();
   private lastTotalCount = 0;
   private lastFilteredCount = 0;

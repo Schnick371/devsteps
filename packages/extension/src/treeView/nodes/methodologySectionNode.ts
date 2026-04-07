@@ -11,7 +11,7 @@ import { TypeGroupNode } from './typeGroupNode.js';
 
 export class MethodologySectionNode extends TreeNode {
   constructor(
-    private methodology: 'scrum' | 'waterfall',
+    private methodology: 'scrum' | 'waterfall' | 'cross-cutting',
     private itemsByType: Record<string, WorkItem[]>,
     private isExpanded: boolean = true,
     private expandedGroups: Set<string>
@@ -25,8 +25,10 @@ export class MethodologySectionNode extends TreeNode {
       0
     );
 
-    const icon = this.methodology === 'scrum' ? '🌲' : '🏗️';
-    const label = this.methodology === 'scrum' ? 'Scrum Items' : 'Waterfall Items';
+    const iconMap = { scrum: '🌲', waterfall: '🏗️', 'cross-cutting': '🔗' };
+    const labelMap = { scrum: 'Scrum Items', waterfall: 'Waterfall Items', 'cross-cutting': 'Cross-Cutting Items' };
+    const icon = iconMap[this.methodology];
+    const label = labelMap[this.methodology];
 
     const treeItem = new vscode.TreeItem(
       `${icon} ${label} (${totalCount})`,
@@ -58,7 +60,7 @@ export class MethodologySectionNode extends TreeNode {
   /**
    * Get methodology identifier for state tracking
    */
-  getMethodology(): 'scrum' | 'waterfall' {
+  getMethodology(): 'scrum' | 'waterfall' | 'cross-cutting' {
     return this.methodology;
   }
 }

@@ -13,7 +13,12 @@ import type { WorkItem } from '../types.js';
 export function getItemMethodology(
   item: WorkItem,
   allItems: Map<string, WorkItem>
-): 'scrum' | 'waterfall' {
+): 'scrum' | 'waterfall' | 'cross-cutting' {
+  // Cross-cutting types: doc is always cross-cutting
+  if (item.type === 'doc') {
+    return 'cross-cutting';
+  }
+
   // Scrum-only types
   if (['epic', 'story', 'spike'].includes(item.type)) {
     return 'scrum';
@@ -43,6 +48,11 @@ export function getItemMethodology(
         return getItemMethodology(relatedItemData, allItems);
       }
     }
+  }
+
+  // test with no parent → cross-cutting
+  if (item.type === 'test') {
+    return 'cross-cutting';
   }
 
   // Default to scrum if no parent found

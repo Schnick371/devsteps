@@ -80,10 +80,13 @@ export async function buildFlatSectionNodes(
   const itemsMap = new Map(filteredItems.map((item) => [item.id, item]));
   const scrumItems: WorkItem[] = [];
   const waterfallItems: WorkItem[] = [];
+  const crossCuttingItems: WorkItem[] = [];
 
   for (const item of filteredItems) {
     const methodology = getItemMethodology(item, itemsMap);
-    if (methodology === 'scrum') {
+    if (methodology === 'cross-cutting') {
+      crossCuttingItems.push(item);
+    } else if (methodology === 'scrum') {
       scrumItems.push(item);
     } else {
       waterfallItems.push(item);
@@ -92,6 +95,7 @@ export async function buildFlatSectionNodes(
 
   const scrumByType = groupByType(scrumItems);
   const waterfallByType = groupByType(waterfallItems);
+  const crossCuttingByType = groupByType(crossCuttingItems);
 
   const sections: TreeNode[] = [];
 
@@ -112,6 +116,17 @@ export async function buildFlatSectionNodes(
         'waterfall',
         waterfallByType,
         expandedSections.has('waterfall'),
+        expandedGroups
+      )
+    );
+  }
+
+  if (crossCuttingItems.length > 0) {
+    sections.push(
+      new MethodologySectionNode(
+        'cross-cutting',
+        crossCuttingByType,
+        expandedSections.has('cross-cutting'),
         expandedGroups
       )
     );
