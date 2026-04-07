@@ -36,6 +36,8 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     priorities: [],
     types: [],
     tags: [],
+    eisenhower: [],
+    assignees: [],
     searchQuery: '',
     hideDone: false,
     hideRelatesTo: false,
@@ -189,6 +191,14 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
     this.filterState.tags = tags;
     this._saveAndRefresh();
   }
+  setEisenhowerFilter(quadrants: string[]): void {
+    this.filterState.eisenhower = quadrants;
+    this._saveAndRefresh();
+  }
+  setAssigneeFilter(assignees: string[]): void {
+    this.filterState.assignees = assignees;
+    this._saveAndRefresh();
+  }
   setSearchQuery(query: string): void {
     this.filterState.searchQuery = query;
     this._saveAndRefresh();
@@ -210,6 +220,8 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
       priorities: [],
       types: [],
       tags: [],
+      eisenhower: [],
+      assignees: [],
       searchQuery: '',
       hideDone: this.filterState.hideDone,
       hideRelatesTo: this.filterState.hideRelatesTo,
@@ -267,12 +279,14 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   }
 
   isFiltersActive(): boolean {
-    const { statuses, priorities, types, tags, searchQuery } = this.filterState;
+    const { statuses, priorities, types, tags, eisenhower, assignees, searchQuery } = this.filterState;
     return (
       statuses.length > 0 ||
       priorities.length > 0 ||
       types.length > 0 ||
       tags.length > 0 ||
+      (eisenhower ?? []).length > 0 ||
+      (assignees ?? []).length > 0 ||
       (searchQuery ?? '').length > 0
     );
   }

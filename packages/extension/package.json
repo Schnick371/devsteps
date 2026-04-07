@@ -302,6 +302,18 @@
         "icon": "$(filter)"
       },
       {
+        "command": "devsteps.filterByEisenhower",
+        "title": "Filter by Eisenhower Quadrant",
+        "category": "DevSteps",
+        "icon": "$(filter)"
+      },
+      {
+        "command": "devsteps.filterByAssignee",
+        "title": "Filter by Assignee",
+        "category": "DevSteps",
+        "icon": "$(person)"
+      },
+      {
         "command": "devsteps.clearFilters",
         "title": "Clear All Filters",
         "category": "DevSteps",

@@ -33,6 +33,16 @@ export function applyFilters(items: WorkItem[], filterState: FilterState): WorkI
     filtered = filtered.filter((item) => item.tags?.some((tag) => filterState.tags.includes(tag)));
   }
 
+  if (filterState.eisenhower && filterState.eisenhower.length > 0) {
+    filtered = filtered.filter((item) => filterState.eisenhower.includes(item.eisenhower));
+  }
+
+  if (filterState.assignees && filterState.assignees.length > 0) {
+    filtered = filtered.filter(
+      (item) => item.assignee && filterState.assignees.includes(item.assignee)
+    );
+  }
+
   if (filterState.searchQuery) {
     const query = filterState.searchQuery.toLowerCase();
     filtered = filtered.filter(
