@@ -144,7 +144,8 @@ export const docsBomCommitTool: Tool = {
       },
       dry_run: {
         type: 'boolean',
-        description: 'If true, compute and return what would be created without writing (default: false)',
+        description:
+          'If true, compute and return what would be created without writing (default: false)',
       },
     },
     required: ['session_id', 'token'],

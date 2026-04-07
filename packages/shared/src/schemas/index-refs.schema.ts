@@ -31,7 +31,17 @@ export const CategoryIndexSchema = z.object({
  * Type index schema (by-type/*.json)
  */
 export const TypeIndexSchema = CategoryIndexSchema.extend({
-  category: z.enum(['epic', 'story', 'task', 'requirement', 'feature', 'bug', 'spike', 'test', 'doc']),
+  category: z.enum([
+    'epic',
+    'story',
+    'task',
+    'requirement',
+    'feature',
+    'bug',
+    'spike',
+    'test',
+    'doc',
+  ]),
 });
 
 /**

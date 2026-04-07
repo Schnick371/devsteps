@@ -6,10 +6,11 @@
  * @see STORY-238
  */
 
-import { mkdtemp, readdir, readFile, rm } from 'node:fs/promises';
+import { mkdtemp, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import type { ImportSessionFile, SessionValidation } from './import-session.js';
 import {
   createSession,
   findActiveSession,
@@ -20,7 +21,6 @@ import {
   validateSessionToken,
   writeSession,
 } from './import-session.js';
-import type { ImportSession, ImportSessionFile, SessionValidation } from './import-session.js';
 
 const SAMPLE_FILES: ImportSessionFile[] = [
   {
@@ -84,8 +84,8 @@ describe('import-session', () => {
       const { session } = await createSession(devstepsDir, 'docs/', SAMPLE_FILES);
       const loaded = await readSession(devstepsDir, session.session_id);
       expect(loaded).not.toBeNull();
-      expect(loaded!.session_id).toBe(session.session_id);
-      expect(loaded!.files).toHaveLength(2);
+      expect(loaded?.session_id).toBe(session.session_id);
+      expect(loaded?.files).toHaveLength(2);
     });
 
     it('returns null for missing session', async () => {
@@ -132,8 +132,8 @@ describe('import-session', () => {
       await writeSession(devstepsDir, session);
 
       const loaded = await readSession(devstepsDir, session.session_id);
-      expect(loaded!.status).toBe('classifying');
-      expect(loaded!.pending).toEqual(['docs/guide.md']);
+      expect(loaded?.status).toBe('classifying');
+      expect(loaded?.pending).toEqual(['docs/guide.md']);
     });
   });
 
@@ -142,7 +142,7 @@ describe('import-session', () => {
       const { session } = await createSession(devstepsDir, 'docs/', SAMPLE_FILES);
       const found = await findActiveSession(devstepsDir, 'docs/');
       expect(found).not.toBeNull();
-      expect(found!.session_id).toBe(session.session_id);
+      expect(found?.session_id).toBe(session.session_id);
     });
 
     it('returns null for different path', async () => {

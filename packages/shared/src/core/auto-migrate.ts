@@ -15,8 +15,8 @@
 
 import { existsSync, mkdirSync, renameSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { getCurrentTimestamp } from '../utils/index.js';
 import { INDEX_FILENAMES } from '../types/index-refs.types.js';
+import { getCurrentTimestamp } from '../utils/index.js';
 import {
   type AutoMigrationOptions,
   checkMigrationNeeded,

@@ -170,11 +170,7 @@ describe('appendDocsMapNode', () => {
   });
 
   it('returns false when parentId does not exist', () => {
-    const result = appendDocsMapNode(
-      devstepsDir,
-      'ARCH-NONEXISTENT',
-      makeNode({ id: 'ARCH-002' })
-    );
+    const result = appendDocsMapNode(devstepsDir, 'ARCH-NONEXISTENT', makeNode({ id: 'ARCH-002' }));
     expect(result).toBe(false);
   });
 

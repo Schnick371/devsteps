@@ -5,8 +5,8 @@
  * Burndown Chart Renderer - Canvas visualization script
  */
 
-import type { BurndownData } from '../dataProviders/burndownProvider.js';
 import { safeJsonStringify } from '../../utils/scriptHelpers.js';
+import type { BurndownData } from '../dataProviders/burndownProvider.js';
 
 /**
  * Generate inline JavaScript for burndown chart rendering

@@ -732,9 +732,9 @@ describe('Index Rebuild Operations', () => {
       await rebuildIndex(devstepsDir);
 
       const counters = loadCounters(devstepsDir);
-      expect(counters['DOC']).toBe(7);
+      expect(counters.DOC).toBe(7);
       // Verify lowercase 'doc' is NOT used as counter key (DEFECT-7 guard)
-      expect(counters['doc']).toBeUndefined();
+      expect(counters.doc).toBeUndefined();
     });
 
     it('should use DOC prefix via getTypePrefix for doc item type', () => {
