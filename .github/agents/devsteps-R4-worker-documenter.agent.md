@@ -69,14 +69,19 @@ Before every non-trivial documentation change: read the actual implementation co
 - Use three-axis quality check: **Completeness** (all symbols covered), **Helpfulness** (examples + rationale), **Truthfulness** (cross-check symbol exists in code before documenting)
 - Document in topological order: leaf components before composites
 
-### Phase 3: Commit
+### Phase 3: Advisory — commit hint
 
-```bash
-git add <doc_files>
-git commit -m "docs(<scope>): document <feature>
+Output the following advisory hint for the user to execute:
+
+```
+💡 Git: user executes — suggested commit:
+  git add <doc_files>
+  git commit -m "docs(<scope>): document <feature>
 
 Implements: <item_id>"
 ```
+
+> **G-1 MANDATORY:** The commit message MUST contain `Implements: <item_id>`. Verify before outputting the hint.
 
 ---
 
