@@ -142,4 +142,25 @@ Signed-off-by: Your Name <your.email@example.com>
 
 ---
 
+## Hybrid Git Policy — Rollback Criteria
+
+The Hybrid Git Ownership Policy (`.github/instructions/devsteps-git-ownership.instructions.md`) was introduced with rollback snapshot tag `pre-hybrid-policy-migration-2026-04-07`.
+
+**Rollback to the snapshot if any of the following occur:**
+
+| Trigger | Indicator | Action |
+|---|---|---|
+| Agent-driven wrong-branch commits | Agent commits directly to `main` without user consent | Revert to tag, audit agent instructions |
+| `Implements:` footer regression | Commits missing the footer at a rate >5% of agent-guided sessions | Revert to tag, re-validate guardrail wording |
+| Release remote safety incident | Agent autonomously pushes to public `origin` during a development session | Revert to tag immediately, audit release prompts |
+| Advisory hints ignored | Agent runs `git add`/`git commit`/`git merge` autonomously instead of suggesting | Revert to tag, review worker agent protocols |
+
+**To rollback:**
+```bash
+git checkout pre-hybrid-policy-migration-2026-04-07 -- .github/
+git commit -m "chore(instructions): rollback to pre-hybrid-policy snapshot"
+```
+
+---
+
 Thank you for contributing to DevSteps! 🚀
