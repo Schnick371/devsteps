@@ -66,12 +66,12 @@ Activate **Standard MPD** in kanban mode. Follow the MPD protocol from your agen
    Re-display on changes; only create items + link relationships after explicit approval.
 3. Select highest-priority `planned` item (Q1 → Q2 → Q3) — confirm via `#askQuestions`:
    > Next item: [ID] — [title] (Q[n]). Shall I start this, or pick a different one?
-4. Update status to `in-progress`; 💡 suggest: checkout branch `story/<ID>`, `task/<ID>`, `bug/<ID>` (user executes)
+4. Update status to `in-progress`; checkout branch (`story/<ID>`, `task/<ID>`, `bug/<ID>`)
 5. Run triage → dispatch analyst mandates in parallel (see Mode Selection above)
 6. Synthesize MandateResults via `read_mandate_results(item_ids)` → pass `report_path` to exec agents only
 7. Dispatch `exec-impl` → `exec-test` (then `exec-doc` if FULL) — pass `report_path`, never paste content
-8. Execute integrated plan, quality gates; prepare commit message (`type(ID): subject` + `Implements: ID`) — 💡 suggest `git commit` (user executes)
-9. 💡 Suggest merge to main: `git merge --no-ff <branch>`; mark done only after `devsteps-R5-gate-reviewer` PASS
+8. Execute integrated plan, quality gates, commit (`type(ID): subject` + `Implements: ID`)
+9. Merge to main; mark done only after `devsteps-R5-gate-reviewer` PASS
 10. Use `#askQuestions` before pulling the next item:
     > ✅ [ID] done. Next in queue: [ID] — [title] (Q[n]). Shall I pull it, or is there a priority change?
 11. Pull next item and repeat

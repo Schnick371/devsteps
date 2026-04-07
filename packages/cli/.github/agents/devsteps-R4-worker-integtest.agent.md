@@ -70,23 +70,15 @@ async def test_<scenario>():
 
 Use mocks only for external services (APIs, databases); use real internal components.
 
-### Phase 4: Run + Advisory — commit hint
+### Phase 4: Run + Commit
 
 ```bash
 pytest tests/integration/ -v -m integration --tb=long
-```
-
-Output the following advisory hint for the user to execute:
-
-```
-💡 Git: user executes — suggested commit:
-  git add tests/integration/
-  git commit -m "test(<scope>): add integration tests for <feature>
+git add tests/integration/
+git commit -m "test(<scope>): add integration tests for <feature>
 
 Implements: <item_id>"
 ```
-
-> **G-1 MANDATORY:** The commit message MUST contain `Implements: <item_id>`. Verify before outputting the hint.
 
 ---
 

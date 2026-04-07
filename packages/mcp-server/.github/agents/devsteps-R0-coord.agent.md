@@ -131,9 +131,9 @@ PASS → merge `--no-ff`, status `done`. FAIL → fix loop (max 3). ESCALATED �
 ## Operational Rules
 
 - **NEVER edit `.devsteps/` directly** — `devsteps/*` MCP tools only; search before create
-- **DevSteps MCP runs on `main` only** — set `in-progress` on main → 💡 suggest `git checkout -b story/<ID>` (user executes) → code → 💡 suggest `git merge --no-ff <branch>` (user executes) → set `done`
+- **DevSteps MCP runs on `main` only** — set `in-progress` on main → `git checkout -b story/<ID>` → code → checkout main → merge `--no-ff` → set `done`
 - Status: `in-progress` → `review` → `done` (never skip); Hierarchy: Epic → Story → Task
-- Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>`. Prepare commit message: `type(scope): subject` + `Implements: ID`. 💡 suggest `git commit` (user executes). 💡 suggest `--no-ff` merge.
+- Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>`. Commit: `type(scope): subject` + `Implements: ID`. Merge `--no-ff`.
 - **I-11:** `mcp_devsteps_add` ONLY for the primary item (bootstrap). All follow-up items + ALL `mcp_devsteps_link` → delegate to `worker-devsteps`.
 - **`#askQuestions` boundary** — PERMITTED: item selection when none given, HARD STOP escalation, guide cycle step feedback, session scope/focus filter, pre-planner gate (Step 3b — once, only if ambiguities exist), post-sprint gate (Step 3d — once, only if blockers), **post-completion gate** (after task is done — always). PROHIBITED: triage tier, ring selection, dispatch order, analyst composition — these are coordinator-autonomous decisions, never surfaced to the user.
 

@@ -136,8 +136,8 @@ ESCALATED · Architecture decision · HIGH_RISK cross-package · Context >70% �
 ## DevSteps Integration
 
 - **NEVER edit `.devsteps/` directly** — `devsteps/*` MCP tools only
-- **DevSteps MCP on `main` only** — set `in-progress` on main → 💡 suggest branch `story/<ID>` (user executes) → code changes → 💡 suggest `git merge --no-ff <branch>` (user executes) → set `done`
-- Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>` — Prepare commit message: `type(scope): subject` + `Implements: ID`; 💡 suggest `git commit` (user executes)
+- **DevSteps MCP on `main` only** — set `in-progress` on main → `git checkout -b story/<ID>` → code commits → checkout main → merge `--no-ff` → set `done`
+- Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>` — Commit: `type(scope): subject` + `Implements: ID`
 - Status: `in-progress` → `review` → `done` (never skip) — I-11: delegate follow-up adds + all links to `worker-devsteps`
 
 ## Post-Completion Gate (MANDATORY)

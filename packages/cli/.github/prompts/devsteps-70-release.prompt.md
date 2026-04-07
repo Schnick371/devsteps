@@ -106,7 +106,6 @@ Only proceed to Phase 1 when all four gates are green.
 
 > Uses `commitList` from Subagent B. Runs after Phase 0 gate is green.
 
-💡 Git: user executes — create release branch and cherry-pick:
 ```bash
 git checkout main
 git fetch origin                               # fetch public repo (DO NOT pull)
@@ -122,10 +121,10 @@ git checkout origin/main -- .gitignore         # ensure correct .gitignore
 git status   # must be clean before proceeding
 ```
 
-**Cherry-pick conflicts — if they occur:**
+**Cherry-pick conflicts:**
 
-💡 Git: user executes — resolve conflicts:
 ```bash
+# Resolve manually if needed
 git status          # check conflicted files
 # Edit → resolve → stage
 git add <resolved-files>
@@ -150,10 +149,10 @@ Actions:
   Edit packages/mcp-server/package.json  → set "version": "X.Y.Z"
   Edit packages/extension/package.json   → set "version": "X.Y.Z"
 
-Then output advisory hint:
-  💡 Git: user executes — git add packages/*/package.json && git commit -m "chore: bump version to X.Y.Z"
+  git add packages/*/package.json
+  git commit -m "chore: bump version to X.Y.Z"
 
-Return: { commitMessage: "chore: bump version to X.Y.Z" }
+Return: { commitHash }
 ```
 
 ### Subagent E — CHANGELOG Updates (all 4 packages)
@@ -190,7 +189,6 @@ Return: { filesUpdated: 4 }
 
 **After both D and E complete:**
 
-💡 Git: user executes — commit CHANGELOG updates:
 ```bash
 git add packages/*/CHANGELOG.md
 git commit -m "docs: update CHANGELOGs for X.Y.Z"
@@ -305,14 +303,8 @@ npm view @schnick371/devsteps-mcp-server version
 
 ## Phase 5 — Squash Merge to PUBLIC Main _(Sequential — critical path)_
 
-> **G-3 Release Remote Safety:** This phase pushes to the PUBLIC repository. Verify origin remote before user executes push.
+> ⚠️ This pushes to the PUBLIC repository. Double-check remotes before every push.
 
-Agent verifies: `git remote -v | grep "^origin"`
-Expected: `origin  https://github.com/Schnick371/devsteps.git`
-
-If remote check fails or shows wrong URL → STOP and surface to user before continuing.
-
-💡 Git: user executes — squash merge sequence:
 ```bash
 git fetch origin
 
@@ -345,7 +337,6 @@ git push origin public-main:main
 
 **Merge release back to private main:**
 
-💡 Git: user executes — sync private main:
 ```bash
 git checkout main                    # private main (tracks origin-private)
 git merge public-main --ff-only      # fast-forward to include public release commit
@@ -362,15 +353,10 @@ git push                             # → origin-private (safe default)
 
 ```
 #runSubagent
-Goal: Prepare release tag advisory and verify public remote before user executes.
+Goal: Create annotated tag and push to public remote.
 
-Commands (READ ONLY — verification):
-  git remote -v | grep "^origin"     # G-3: verify public remote target
-  git tag -l -n1 "v*" | sort -V | tail -3   # check existing tags
-
-Then output advisory hint for user to execute:
-  💡 Git: user executes — tag and push to PUBLIC origin:
-    git tag -a vX.Y.Z -m "Release X.Y.Z
+Commands:
+  git tag -a vX.Y.Z -m "Release X.Y.Z
 
 Key Changes:
 - Feature summary
@@ -379,10 +365,10 @@ Key Changes:
 
 Full CHANGELOG: packages/*/CHANGELOG.md"
 
-    git push origin vX.Y.Z
-    git tag -l -n9 vX.Y.Z              # verify tag exists
+  git push origin vX.Y.Z
+  git tag -l -n9 vX.Y.Z              # verify tag exists
 
-Return: { advisoryHintDelivered: true, remoteVerified: true }
+Return: { tag: "vX.Y.Z", pushed: true }
 ```
 
 ### Subagent I — Full Verification Report

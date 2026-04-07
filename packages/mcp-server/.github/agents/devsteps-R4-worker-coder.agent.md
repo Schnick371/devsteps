@@ -49,19 +49,14 @@ user-invocable: false
 3. Set imports and dependencies correctly
 4. Use AITK code sample tool if needed: `aitk_get_agent_model_code_sample`
 
-### Phase 3: Advisory — commit hint
+### Phase 3: Commit
 
-Output the following advisory hint for the user to execute:
-
-```
-💡 Git: user executes — suggested commit:
-  git add <affected_paths>
-  git commit -m "feat(<scope>): <subject>
+```bash
+git add <affected_paths>
+git commit -m "feat(<scope>): <subject>
 
 Implements: <item_id>"
 ```
-
-> **G-1 MANDATORY:** The commit message MUST contain `Implements: <item_id>`. Verify before outputting the hint.
 
 ---
 
