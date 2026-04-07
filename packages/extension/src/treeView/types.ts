@@ -19,6 +19,8 @@ export interface FilterState {
   priorities: string[];
   types: string[];
   tags: string[];
+  eisenhower: string[];
+  assignees: string[];
   searchQuery: string;
   hideDone: boolean;
   hideRelatesTo: boolean;
@@ -39,6 +41,7 @@ export interface WorkItem {
   created?: string;
   updated?: string;
   tags?: string[];
+  assignee?: string;
   linked_items?: {
     implements?: string[];
     'implemented-by'?: string[];

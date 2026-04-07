@@ -88,6 +88,48 @@ export function registerFilterCommands(
     })
   );
 
+  // Filter by eisenhower quadrant
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.filterByEisenhower', async () => {
+      const selected = await vscode.window.showQuickPick(
+        [
+          { label: '🔥 Q1 — Urgent & Important (Do First)', value: 'urgent-important' },
+          { label: '📅 Q2 — Not Urgent & Important (Schedule)', value: 'not-urgent-important' },
+          { label: '📤 Q3 — Urgent & Not Important (Delegate)', value: 'urgent-not-important' },
+          {
+            label: '🗑️ Q4 — Not Urgent & Not Important (Eliminate)',
+            value: 'not-urgent-not-important',
+          },
+        ],
+        { canPickMany: true, placeHolder: 'Select Eisenhower quadrants to show (multiple selection)' }
+      );
+      if (!selected || !checkDevStepsInitialized(treeDataProvider)) return;
+      treeDataProvider.setEisenhowerFilter(selected.map((s) => s.value));
+      await vscode.commands.executeCommand(
+        'setContext',
+        'devsteps.filtersActive',
+        treeDataProvider.isFiltersActive()
+      );
+    })
+  );
+
+  // Filter by assignee
+  context.subscriptions.push(
+    vscode.commands.registerCommand('devsteps.filterByAssignee', async () => {
+      const input = await vscode.window.showInputBox({
+        placeHolder: 'Enter assignee email (or leave blank to clear filter)',
+        prompt: 'Filter items by assignee email address',
+      });
+      if (input === undefined || !checkDevStepsInitialized(treeDataProvider)) return;
+      treeDataProvider.setAssigneeFilter(input.trim() ? [input.trim()] : []);
+      await vscode.commands.executeCommand(
+        'setContext',
+        'devsteps.filtersActive',
+        treeDataProvider.isFiltersActive()
+      );
+    })
+  );
+
   // Clear all filters
   context.subscriptions.push(
     vscode.commands.registerCommand('devsteps.clearFilters', async () => {
