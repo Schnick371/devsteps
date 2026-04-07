@@ -69,6 +69,35 @@ Docs ─┼─ Ring 3: exec-planner ──────────────�
 
 ---
 
+## Git Governance (Hybrid Ownership Policy)
+
+Full policy: `.github/instructions/devsteps-git-ownership.instructions.md`
+
+### Mandatory Guardrails — All Agents
+
+| Guardrail | Rule | Enforcement |
+| --------- | ---- | ----------- |
+| **G-1: Implements footer** | Every work commit MUST include `Implements: <ID>` in the footer | Agents prepare the message; NEVER omit this footer |
+| **G-2: No direct main commit** | Work happens on feature branches only (`story/<ID>`, `task/<ID>`, etc.) | Warn if user is on `main` before any commit hint |
+| **G-3: Release remote safety** | WARN before any `git push origin` suggestion (public remote) during development | Blocking gate: verify remote config before push hint |
+
+### Advisory Model — All Agents
+
+Git write operations are **user-owned**. Agents output `💡 Git:` advisory hints:
+
+```
+💡 Git: user executes — suggested commands:
+  git add <files>
+  git commit -m "type(scope): subject
+
+Implements: <ID>"
+```
+
+Agents MAY autonomously run read-only git commands: `git status`, `git log`, `git remote -v`, `git branch`, `git diff --name-only`, `git tag -l`.  
+Agents MUST NOT autonomously run: `git add`, `git commit`, `git checkout -b`, `git merge`, `git push`, `git tag`  (write operations).
+
+---
+
 ## Anti-Repeat Rules
 
 - **Track all approaches** in guide-dev file (`AITK-Tools-Guide-Dev.md`)

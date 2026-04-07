@@ -168,6 +168,7 @@ npm test 2>&1 | tail -10
 
 > Depends on Phase 0: `proposedVersion` and `commitsToCherryPick[]` from Subagents A & B.
 
+💡 Git: user executes — create release branch:
 ```bash
 git fetch origin
 git checkout -b next/{proposedVersion} origin/main
@@ -175,19 +176,21 @@ git checkout -b next/{proposedVersion} origin/main
 
 Cherry-pick each commit from Subagent B's `commitsToCherryPick` list (ONLY clean code — no private data):
 
+💡 Git: user executes — cherry-pick sequence:
 ```bash
 git cherry-pick <commit-hash>
 # Repeat for each commit in the list
 ```
 
-**CRITICAL: Remove private files before any publish step:**
+**CRITICAL — Remove private files before any publish step:**
 
+💡 Git: user executes — remove private files:
 ```bash
 git rm --cached -r .devsteps/ .vscode/ docs/branding/ LessonsLearned/ 2>/dev/null || true
 git status   # verify only expected files remain
 ```
 
-**CRITICAL: Verify .github was synced by build:**
+**CRITICAL — Verify .github was synced by build:**
 
 ```bash
 ls packages/cli/.github/prompts/devsteps-*.prompt.md
@@ -218,8 +221,7 @@ packages/extension/package.json   → "version": "A.B.C+1"  (increment patch, N.
 > The patch number MUST be incremented (e.g. `1.0.1` → `1.0.2`). The `"channel": "next"` field
 > is what marks it as pre-release internally — NOT the version number parity.
 
-Then commit:
-
+💡 Git: user executes — commit version bump:
 ```bash
 git add packages/*/package.json
 git commit -m "chore: bump version to X.Y.Z-next.N"
@@ -269,6 +271,7 @@ packages/extension/CHANGELOG.md
 
 ### After Both Phase 2 Subagents Complete
 
+💡 Git: user executes — commit CHANGELOG updates:
 ```bash
 git add packages/*/CHANGELOG.md
 git commit -m "docs: add CHANGELOG entries for X.Y.Z-next.N pre-release"
@@ -386,6 +389,9 @@ next:   X.Y.Z-next.N   ← newly published
 
 ### Subagent H — Git Tag & Push
 
+> **G-3 Release Remote Safety:** `git push origin vX.Y.Z-next.N` targets the PUBLIC remote. Confirm this is an intentional pre-release before user executes.
+
+💡 Git: user executes — tag and push to public origin:
 ```bash
 git tag -a vX.Y.Z-next.N -m "Pre-release X.Y.Z-next.N
 
@@ -459,7 +465,7 @@ For subsequent pre-releases on the same base version:
 
 1. **Make changes** on the `next/` branch
 2. **Increment suffix only**: `X.Y.Z-next.N` → `X.Y.Z-next.N+1` (base `X.Y.Z` stays the same!)
-3. **Commit**: `git commit -m "chore: bump to X.Y.Z-next.N+1"`
+3. 💡 Git: user executes — `git commit -m "chore: bump to X.Y.Z-next.N+1"`
 4. **Run Phase 2–5** again with new version string
 5. **Package**: `vsce package --pre-release` (extension version stays e.g. `1.0.1`)
 6. **Test**: Verify installation and functionality

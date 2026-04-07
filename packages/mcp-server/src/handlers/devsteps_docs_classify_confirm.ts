@@ -8,8 +8,7 @@
  * @see STORY-238 SPIKE-044
  */
 
-import { resolve } from 'node:path';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import {
   type ClassifiedEntry,
   type DiataxisType,

@@ -73,14 +73,19 @@ python -m flake8 <target_files>
 
 All tests green, no new lint errors → continue. Otherwise: revert changes.
 
-### Phase 4: Commit
+### Phase 4: Advisory — commit hint
 
-```bash
-git add <target_files>
-git commit -m "refactor(<scope>): <description of restructuring>
+Output the following advisory hint for the user to execute:
+
+```
+💡 Git: user executes — suggested commit:
+  git add <target_files>
+  git commit -m "refactor(<scope>): <description of restructuring>
 
 Implements: <item_id>"
 ```
+
+> **G-1 MANDATORY:** The commit message MUST contain `Implements: <item_id>`. Verify before outputting the hint.
 
 ---
 

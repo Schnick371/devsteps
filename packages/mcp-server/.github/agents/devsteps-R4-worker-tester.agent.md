@@ -60,14 +60,19 @@ pytest tests/test_<module>.py -v --tb=short
 
 Failures → fix, maximum 3 fix rounds. Then escalate.
 
-### Phase 4: Commit
+### Phase 4: Advisory — commit hint
 
-```bash
-git add tests/
-git commit -m "test(<scope>): add unit tests for <module>
+Output the following advisory hint for the user to execute:
+
+```
+💡 Git: user executes — suggested commit:
+  git add tests/
+  git commit -m "test(<scope>): add unit tests for <module>
 
 Implements: <item_id>"
 ```
+
+> **G-1 MANDATORY:** The commit message MUST contain `Implements: <item_id>`. Verify before outputting the hint.
 
 ---
 

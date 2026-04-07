@@ -11,8 +11,8 @@ import { existsSync, mkdtempSync, readFileSync, rmSync, unlinkSync, writeFileSyn
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { appendDocsMapNode, readDocsMap, rebuildDocsMapShadow, writeDocsMap } from './docs-map.js';
 import type { DocsMapDocument, DocsMapNode, DocsMapPositionsIndex } from '../types/docs-map.js';
+import { appendDocsMapNode, readDocsMap, rebuildDocsMapShadow, writeDocsMap } from './docs-map.js';
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
