@@ -65,12 +65,12 @@ If no item specified → `#mcp_devsteps_list` filtered by `status: planned`, pri
 
 1. Identify the item (ask user or select from backlog)
 2. Update item status to `in-progress`
-3. 💡 Suggest: create branch `story/<ID>` / `task/<ID>` / `bug/<ID>` (user executes: `git checkout -b story/<ID>`)
+3. Create/checkout feature branch (`story/<ID>`, `task/<ID>`, `bug/<ID>`)
 4. Triage → dispatch Ring 1 analyst mandates in parallel (see Mode Selection above)
 5. Read Ring 1 MandateResults → dispatch Ring 2 aspects in parallel (STANDARD+ only)
 6. Read all MandateResults via `read_mandate_results` — pass `report_path` to exec agents (never paste content)
 7. Dispatch `devsteps-R4-exec-impl` → `devsteps-R4-exec-test` (then `devsteps-R4-exec-doc` if FULL tier)
-8. `devsteps-R5-gate-reviewer` PASS → 💡 suggest merge: `git merge --no-ff <branch>` (user executes); status → `done`
+8. `devsteps-R5-gate-reviewer` PASS → merge to main (`--no-ff`), status → `done`
 9. **Insight Harvest Loop** — see below
 
 ## Insight Harvest Loop (MANDATORY — starts after gate-reviewer PASS + merge, repeats until done, max 5 rounds)
