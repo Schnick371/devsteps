@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "general",
   "title": "Fix Lint Baseline for Policy Corpus",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-04-04T23:02:50.291Z",
-  "updated": "2026-04-07T06:43:55.611Z",
+  "updated": "2026-04-07T08:58:09.975Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/copilot-instructions.md",

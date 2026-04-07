@@ -9,7 +9,7 @@
  */
 
 import { mkdir, writeFile } from 'node:fs/promises';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
 import type { DiataxisType } from '@schnick371/devsteps-shared';
 import { getWorkspacePath } from '../workspace.js';
 
