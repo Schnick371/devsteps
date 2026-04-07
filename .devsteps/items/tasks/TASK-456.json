@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Remove Command-Level Git Choreography from Prompts/Agents",
-  "status": "done",
+  "status": "obsolete",
   "eisenhower": "urgent-important",
   "created": "2026-04-04T23:02:50.288Z",
-  "updated": "2026-04-07T07:11:48.473Z",
+  "updated": "2026-04-07T08:40:06.763Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/copilot-instructions.md",

@@ -3,10 +3,10 @@
   "type": "spike",
   "category": "general",
   "title": "GIT Instruction Ownership Matrix (Hybrid Policy)",
-  "status": "done",
+  "status": "obsolete",
   "eisenhower": "urgent-important",
   "created": "2026-04-04T23:02:50.284Z",
-  "updated": "2026-04-07T07:11:29.081Z",
+  "updated": "2026-04-07T08:39:20.427Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/copilot-instructions.md",

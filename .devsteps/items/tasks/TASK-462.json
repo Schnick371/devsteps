@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Define Release Safety Checkpoint for Instruction Changes",
-  "status": "draft",
+  "status": "obsolete",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-04T23:03:00.834Z",
-  "updated": "2026-04-07T06:43:55.611Z",
+  "updated": "2026-04-07T08:40:06.765Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "README.md",

@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Update CONTRIBUTING and architecture docs for new ownership model",
-  "status": "draft",
+  "status": "obsolete",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-07T06:43:04.736Z",
-  "updated": "2026-04-07T06:43:55.611Z",
+  "updated": "2026-04-07T08:40:06.777Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "CONTRIBUTING.md",

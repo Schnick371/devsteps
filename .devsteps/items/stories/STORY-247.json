@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Migrate to Hybrid Git Ownership Policy",
-  "status": "draft",
+  "status": "obsolete",
   "eisenhower": "urgent-important",
   "created": "2026-04-04T23:02:50.288Z",
-  "updated": "2026-04-07T06:43:18.622Z",
+  "updated": "2026-04-07T08:39:37.225Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/copilot-instructions.md",

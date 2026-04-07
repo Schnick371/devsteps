@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Prepare rollback snapshot before HYBRID policy migration",
-  "status": "done",
+  "status": "obsolete",
   "eisenhower": "urgent-important",
   "created": "2026-04-07T06:42:24.504Z",
-  "updated": "2026-04-07T07:11:29.082Z",
+  "updated": "2026-04-07T08:40:06.776Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/copilot-instructions.md",

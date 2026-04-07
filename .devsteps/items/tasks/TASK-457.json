@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Normalize Guardrails and Explicit Consent Gates",
-  "status": "done",
+  "status": "obsolete",
   "eisenhower": "urgent-important",
   "created": "2026-04-04T23:02:50.289Z",
-  "updated": "2026-04-07T07:11:48.475Z",
+  "updated": "2026-04-07T08:40:06.764Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/copilot-instructions.md",

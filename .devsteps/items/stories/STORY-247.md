@@ -1,1 +1,1 @@
-Implement migration auf Hybrid Policy. Ergebnis: konsistente ownership semantics in instructions/prompts/agents, mit minimal breakage und nachvollziehbarer rollout order.
+Implement migration auf Hybrid Policy. Ergebnis: konsistente ownership semantics in instructions/prompts/agents, mit minimal breakage und nachvollziehbarer rollout order.Obsolete: übergeordnetes SPIKE und alle Tasks wurden zurückgerollt (2026-04-07).
