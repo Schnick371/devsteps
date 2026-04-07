@@ -1,0 +1,1 @@
+Modify packages/shared/src/core/add.ts default template generation to branch on args.type === 'doc' and inject a YAML frontmatter stub. Keep non-doc templates unchanged.

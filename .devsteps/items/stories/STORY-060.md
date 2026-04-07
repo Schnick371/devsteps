@@ -232,4 +232,5 @@ If issues found:
 - Installation success rate >99%
 - Zero npm permission errors
 - Positive user feedback
-- No critical bugs in first week
+- No critical bugs in first week## Update (April 2026)
+Description updated: 'v2.0.0 bundled' → actual architecture is HTTP in-process MCP server @ v1.0.2. v1.113 bridging auto-exposes to Copilot CLI + Claude.

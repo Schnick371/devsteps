@@ -1,0 +1,1 @@
+Verify dist/mcp-server.js is included in VSIX. Check .vscodeignore and 'files' field in package.json.

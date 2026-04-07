@@ -1,0 +1,39 @@
+{
+  "id": "TASK-402",
+  "type": "task",
+  "category": "general",
+  "title": "ADR-002: Mixed-type dialog is MCP prompt (Copilot-led), not CLI readline",
+  "status": "planned",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T18:29:27.482Z",
+  "updated": "2026-04-03T18:30:17.514Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-236",
+      "TASK-398",
+      "SPIKE-043"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "adr",
+    "diataxis",
+    "docs-import",
+    "mcp-prompts",
+    "architecture",
+    "doc-type-pending"
+  ],
+  "commits": [],
+  "metadata": {}
+}

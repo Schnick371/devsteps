@@ -1,0 +1,1 @@
+Wire CLI exportCommand stub to real export handler and add --heading-mode and --heading-offset flags; add guard to prevent gray-matter imports.

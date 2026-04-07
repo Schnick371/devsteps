@@ -1,0 +1,1 @@
+Create adjustHeadingLevels(content, offset) with fenced-block state machine, heading cap at H6, setext handling, negative offset RangeError, and utility export wiring.

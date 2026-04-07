@@ -1,0 +1,36 @@
+{
+  "id": "TASK-437",
+  "type": "task",
+  "category": "general",
+  "title": "T7: Update export.ts — strip frontmatter from descriptions + add heading_offset_mode param",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T21:28:14.008Z",
+  "updated": "2026-04-04T21:28:14.008Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/export.ts",
+    "packages/shared/src/core/index.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "export",
+    "frontmatter",
+    "heading-normalization",
+    "shared-core"
+  ],
+  "commits": [],
+  "metadata": {}
+}

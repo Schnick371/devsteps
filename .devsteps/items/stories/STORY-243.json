@@ -1,0 +1,40 @@
+{
+  "id": "STORY-243",
+  "type": "story",
+  "category": "general",
+  "title": "Register all Spider Web tools in HTTP MCP server",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T21:26:54.248Z",
+  "updated": "2026-04-04T21:33:08.094Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src",
+    "packages/mcp-server/src"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-015"
+    ],
+    "implemented-by": [
+      "TASK-427",
+      "TASK-426"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "release-blocker",
+    "mcp",
+    "spider-web"
+  ],
+  "commits": [],
+  "metadata": {}
+}

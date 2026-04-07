@@ -1,0 +1,34 @@
+{
+  "id": "TASK-464",
+  "type": "task",
+  "category": "general",
+  "title": "Integrate MCP export handler with shared md-compose",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T23:05:19.425Z",
+  "updated": "2026-04-04T23:05:19.425Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spike-060",
+    "mcp-server",
+    "export"
+  ],
+  "commits": [],
+  "metadata": {}
+}

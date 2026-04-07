@@ -1,0 +1,40 @@
+{
+  "id": "TASK-379",
+  "type": "task",
+  "category": "general",
+  "title": "`DocIndex.scanSymbolAnnotations()` — Phase 2 JSDoc `@see ARCH-NNN` scanner",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T23:21:36.656Z",
+  "updated": "2026-04-02T23:22:00.408Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/docs/DocIndex.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "SPIKE-039"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-378"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "code-navigation",
+    "doc-type",
+    "extension",
+    "phase-2",
+    "symbol-annotation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,37 @@
+{
+  "id": "TASK-422",
+  "type": "task",
+  "category": "general",
+  "title": "Add AI-workflow hints to extension walkthrough and Welcome View",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T21:11:56.265Z",
+  "updated": "2026-04-04T21:36:20.515Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/package.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-003"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "ux",
+    "onboarding",
+    "ai-setup"
+  ],
+  "commits": [],
+  "metadata": {}
+}

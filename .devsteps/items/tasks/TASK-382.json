@@ -1,0 +1,42 @@
+{
+  "id": "TASK-382",
+  "type": "task",
+  "category": "general",
+  "title": "Create `docs/research/` archive structure + `tmp/README.md` ephemeral warning + cleanup script guard",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-02T23:56:52.890Z",
+  "updated": "2026-04-02T23:58:35.533Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "docs/research/README.md",
+    "tmp/README.md",
+    "scripts/complete-cleanup.sh"
+  ],
+  "linked_items": {
+    "implements": [
+      "SPIKE-040"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-383",
+      "STORY-232"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research-preservation",
+    "documentation-architecture",
+    "docs",
+    "ephemeral"
+  ],
+  "commits": [],
+  "metadata": {}
+}

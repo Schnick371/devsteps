@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-27T16:50:50.185Z",
-  "updated": "2026-01-12T07:19:48.931Z",
+  "updated": "2026-04-04T22:38:19.981Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/cli/src/commands/decision.ts"
@@ -21,7 +21,8 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "STORY-091"
+      "STORY-091",
+      "TASK-412"
     ],
     "depends-on": [
       "STORY-022"

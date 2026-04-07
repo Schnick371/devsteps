@@ -1,0 +1,43 @@
+{
+  "id": "TASK-446",
+  "type": "task",
+  "category": "general",
+  "title": "T4: mcp_devsteps_get returns parsed frontmatter + mcp_devsteps_update validates frontmatter fields",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T22:39:29.002Z",
+  "updated": "2026-04-04T22:40:00.337Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/get.ts",
+    "packages/mcp-server/src/handlers/update.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-242"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "mcp",
+    "get",
+    "update",
+    "frontmatter",
+    "doc-type"
+  ],
+  "commits": [],
+  "metadata": {}
+}

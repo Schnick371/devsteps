@@ -64,4 +64,5 @@ Extension continues using `npx @schnick371/devsteps-mcp-server` (external npm pa
 Should we:
 1. Continue investigating bundling solutions?
 2. Accept npm package architecture?
-3. Try alternative bundling approach?
+3. Try alternative bundling approach?## Obsolescence Note
+Superseded by HTTP-in-extension-host approach (EPIC-029 + STORY-061). Bundling approach abandoned.

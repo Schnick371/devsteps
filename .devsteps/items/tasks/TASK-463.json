@@ -1,0 +1,34 @@
+{
+  "id": "TASK-463",
+  "type": "task",
+  "category": "general",
+  "title": "Build shared md-compose pipeline in packages/shared",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T23:05:19.421Z",
+  "updated": "2026-04-04T23:05:19.421Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spike-060",
+    "shared",
+    "composition"
+  ],
+  "commits": [],
+  "metadata": {}
+}

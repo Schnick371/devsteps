@@ -1,0 +1,34 @@
+{
+  "id": "SPIKE-058",
+  "type": "spike",
+  "category": "general",
+  "title": "Evaluate Agent Plugin format (.mcp.json) vs McpServerDefinitionProvider API",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T22:30:53.385Z",
+  "updated": "2026-04-04T22:31:16.842Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-015"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research",
+    "mcp",
+    "extension"
+  ],
+  "commits": [],
+  "metadata": {}
+}

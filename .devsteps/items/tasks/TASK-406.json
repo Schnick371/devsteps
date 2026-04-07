@@ -1,0 +1,37 @@
+{
+  "id": "TASK-406",
+  "type": "task",
+  "category": "general",
+  "title": "feat: MCP tool devsteps_docs_import — scan + session init",
+  "status": "planned",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T19:22:43.688Z",
+  "updated": "2026-04-03T19:23:17.394Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-238"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "TASK-407"
+    ],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-044"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "docs-import",
+    "mcp-dialog"
+  ],
+  "commits": [],
+  "metadata": {}
+}

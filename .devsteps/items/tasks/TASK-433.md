@@ -1,0 +1,1 @@
+Write ADR: should we prefix tool names server-side? Options: A) No prefix (rely on VS Code FQN), B) devsteps_ prefix, C) Wait for MCP Spec SEP #1395. Evaluate impact on existing .github/agents references.

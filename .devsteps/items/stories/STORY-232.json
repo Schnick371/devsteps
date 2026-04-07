@@ -1,0 +1,40 @@
+{
+  "id": "STORY-232",
+  "type": "story",
+  "category": "general",
+  "title": "Update Agent Dispatch Protocol: `report_path` convention → `docs/research/{item_id}/agents/`",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T23:58:04.070Z",
+  "updated": "2026-04-02T23:58:35.533Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/agents/AGENT-DISPATCH-PROTOCOL.md",
+    ".github/agents/devsteps-R0-coord.agent.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-040"
+    ],
+    "depends-on": [
+      "TASK-383"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "documentation-architecture",
+    "agentic",
+    "protocol",
+    "research-preservation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

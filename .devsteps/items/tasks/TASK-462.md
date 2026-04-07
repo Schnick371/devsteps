@@ -1,0 +1,1 @@
+Release safety checkpoint definieren fuer instruction changes (gates, minimum checks, sign-off criteria).

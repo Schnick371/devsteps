@@ -1,0 +1,38 @@
+{
+  "id": "SPIKE-041",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: DOC Items in DevSteps Index — Storage Architecture, Full-Stack Implications & Unified Lookup",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T11:11:59.347Z",
+  "updated": "2026-04-03T11:50:52.166Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "BUG-075",
+      "TASK-395"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "index-architecture",
+    "devsteps-storage",
+    "code-navigation",
+    "research-preservation",
+    "unified-lookup"
+  ],
+  "commits": [],
+  "metadata": {}
+}

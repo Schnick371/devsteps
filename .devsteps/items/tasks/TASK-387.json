@@ -1,0 +1,37 @@
+{
+  "id": "TASK-387",
+  "type": "task",
+  "category": "general",
+  "title": "Add docs-map.schema.json JSON Schema to .devsteps/",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-03T09:20:56.745Z",
+  "updated": "2026-04-03T09:35:41.122Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/docs-map.schema.json"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-233"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "docs-map",
+    "adr-007",
+    "schema",
+    "validation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

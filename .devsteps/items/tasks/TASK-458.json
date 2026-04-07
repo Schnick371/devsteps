@@ -1,0 +1,45 @@
+{
+  "id": "TASK-458",
+  "type": "task",
+  "category": "general",
+  "title": "Align Coordinator/Worker Branch-Merge Ownership Semantics",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T23:02:50.290Z",
+  "updated": "2026-04-07T07:11:48.473Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/copilot-instructions.md",
+    ".github/agents/devsteps-R0-coord.agent.md",
+    ".github/agents/devsteps-R0-coord-sprint.agent.md",
+    ".github/agents/devsteps-R4-worker-coder.agent.md",
+    ".github/agents/devsteps-R4-worker-tester.agent.md",
+    ".github/agents/devsteps-R4-worker-documenter.agent.md",
+    ".github/agents/devsteps-R4-worker-refactor.agent.md",
+    ".github/agents/devsteps-R4-worker-integtest.agent.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "BUG-081"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-457",
+      "TASK-456"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "consistency",
+    "workflow"
+  ],
+  "commits": [],
+  "metadata": {}
+}

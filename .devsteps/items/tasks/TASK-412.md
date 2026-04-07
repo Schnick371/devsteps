@@ -1,0 +1,3 @@
+STORY-026 was written with DECISION-NNN prefix in mind. STORY-145 uses ADR-NNN. The existing docs/architecture/ uses ADR-NNN convention already (adr-007-docs-map-format.md). Recommendation from SPIKE-046 research: standardise on ADR-NNN (3-char prefix, industry standard, matches existing file naming). Update STORY-026 acceptance criteria to use ADR-NNN. Rationale: ADR-NNN is shorter, matches community practice, and matches the existing file convention already in use.
+
+**Result (2026-04-05):** Updated STORY-026 with ID Scheme Update section noting ADR-NNN standardization. Confirmed existing docs/architecture/adr-007-docs-map-format.md already uses the correct convention. No code changes needed — this was a backlog harmonization task."

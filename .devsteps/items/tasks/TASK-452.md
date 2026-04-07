@@ -1,0 +1,1 @@
+Gate-reviewer finding from STORY-239: the doc guard added in validateScrumHierarchy() and validateWaterfallHierarchy() in packages/shared/src/core/validation.ts is untested. Create validation.test.ts covering: doc+implements returns invalid with documents suggestion, doc+documents returns valid, doc+tested-by returns valid. Both Scrum and Waterfall methodology paths.

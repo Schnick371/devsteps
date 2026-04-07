@@ -1,0 +1,43 @@
+{
+  "id": "TASK-378",
+  "type": "task",
+  "category": "general",
+  "title": "`DocIndex.ts` — Phase 1 file-level lookup (code → doc section)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-02T23:21:36.637Z",
+  "updated": "2026-04-03T13:13:35.215Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/docs/DocIndex.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "SPIKE-039"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-394"
+    ],
+    "depends-on": [
+      "STORY-233"
+    ],
+    "required-by": [
+      "TASK-379"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "code-navigation",
+    "doc-type",
+    "extension",
+    "phase-1"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,39 @@
+{
+  "id": "TASK-442",
+  "type": "task",
+  "category": "general",
+  "title": "Validate naming composition matrix and double-prefix guard",
+  "status": "planned",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T22:38:47.033Z",
+  "updated": "2026-04-04T22:46:48.051Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools",
+    "packages/shared/src"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-245"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "TASK-434"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "tool-naming",
+    "guard"
+  ],
+  "commits": [],
+  "metadata": {}
+}

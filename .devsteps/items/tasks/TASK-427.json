@@ -1,0 +1,35 @@
+{
+  "id": "TASK-427",
+  "type": "task",
+  "category": "general",
+  "title": "Inject DEVSTEPS_WORKSPACE env var in all transport paths",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T21:27:12.721Z",
+  "updated": "2026-04-04T21:27:19.320Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/mcpServerManager.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-243"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "workspace-root"
+  ],
+  "commits": [],
+  "metadata": {}
+}

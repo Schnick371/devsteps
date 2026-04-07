@@ -1,0 +1,41 @@
+{
+  "id": "TASK-457",
+  "type": "task",
+  "category": "general",
+  "title": "Normalize Guardrails and Explicit Consent Gates",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T23:02:50.289Z",
+  "updated": "2026-04-07T07:11:48.475Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/copilot-instructions.md",
+    ".github/instructions/devsteps-agent-protocol.instructions.md",
+    ".github/instructions/devsteps-commit-format.instructions.md",
+    ".github/agents/devsteps-R0-coord.agent.md",
+    ".github/agents/devsteps-R0-coord-sprint.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-247"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-458"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "safety",
+    "governance"
+  ],
+  "commits": [],
+  "metadata": {}
+}

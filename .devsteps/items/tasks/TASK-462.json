@@ -1,0 +1,41 @@
+{
+  "id": "TASK-462",
+  "type": "task",
+  "category": "general",
+  "title": "Define Release Safety Checkpoint for Instruction Changes",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T23:03:00.834Z",
+  "updated": "2026-04-07T06:43:55.611Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "README.md",
+    "TESTING.md",
+    "CONTRIBUTING.md",
+    "docs/architecture/",
+    ".github/instructions/"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-247"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [
+      "TASK-461"
+    ],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "release",
+    "safety"
+  ],
+  "commits": [],
+  "metadata": {}
+}

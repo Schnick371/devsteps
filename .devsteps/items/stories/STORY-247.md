@@ -1,0 +1,1 @@
+Implement migration auf Hybrid Policy. Ergebnis: konsistente ownership semantics in instructions/prompts/agents, mit minimal breakage und nachvollziehbarer rollout order.

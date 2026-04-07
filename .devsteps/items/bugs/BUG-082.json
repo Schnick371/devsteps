@@ -1,0 +1,36 @@
+{
+  "id": "BUG-082",
+  "type": "bug",
+  "category": "general",
+  "title": "Fix CLI Integration Baseline for Policy-Driven Flows",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T23:02:50.291Z",
+  "updated": "2026-04-07T06:43:55.611Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "tests/integration/cli/waterfall-hierarchy.bats"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "TASK-461"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "quality",
+    "tests",
+    "cli"
+  ],
+  "commits": [],
+  "metadata": {}
+}

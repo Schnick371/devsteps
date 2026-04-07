@@ -1,0 +1,39 @@
+{
+  "id": "TASK-440",
+  "type": "task",
+  "category": "general",
+  "title": "T1: DocFrontmatterSchema Zod discriminated union in packages/shared/src/schemas/docs.ts",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T22:08:03.618Z",
+  "updated": "2026-04-04T22:39:59.731Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/docs.ts",
+    "packages/shared/src/schemas/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-242"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "zod",
+    "schema",
+    "diataxis",
+    "doc-type",
+    "shared"
+  ],
+  "commits": [],
+  "metadata": {}
+}

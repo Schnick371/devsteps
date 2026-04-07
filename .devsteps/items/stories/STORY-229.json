@@ -1,0 +1,41 @@
+{
+  "id": "STORY-229",
+  "type": "story",
+  "category": "general",
+  "title": "`DocCodeLensProvider` — inline `📄 §3.2 · Architecture` doc navigation annotations",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-02T23:21:36.642Z",
+  "updated": "2026-04-03T11:50:19.903Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/providers/DocCodeLensProvider.ts",
+    "packages/extension/package.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-039"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "TASK-381"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "code-navigation",
+    "doc-type",
+    "extension",
+    "codelens",
+    "phase-1"
+  ],
+  "commits": [],
+  "metadata": {}
+}

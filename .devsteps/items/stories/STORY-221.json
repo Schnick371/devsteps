@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Create docs-map.ts module in packages/shared with YAML dep, read/write/append/rebuild-shadow API for docs-map.yaml",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-02T15:09:07.906Z",
-  "updated": "2026-04-02T19:36:20.173Z",
+  "updated": "2026-04-02T19:53:18.912Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/docs-map.ts",

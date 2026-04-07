@@ -1,0 +1,38 @@
+{
+  "id": "STORY-237",
+  "type": "story",
+  "category": "general",
+  "title": "feat: Diataxis Copilot context delivery — instructions file + MCP prompts",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T13:28:06.981Z",
+  "updated": "2026-04-04T23:04:56.600Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-398"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-043",
+      "STORY-242"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "diataxis",
+    "copilot-context",
+    "instructions",
+    "mcp-prompts"
+  ],
+  "commits": [],
+  "metadata": {}
+}

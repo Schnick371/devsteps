@@ -1,0 +1,3 @@
+The Welcome View (shown before a .devsteps project is initialized) mentions the MCP server but does not tell users they can start a Copilot Agent session using `@devsteps` or the `devsteps-R0-coord` agent mode. A one-line hint should be added so new users discover this entry point immediately.
+
+**Affected files:** `packages/extension/package.json` — `viewsWelcome.contents`Implemented: Welcome View 2-line AI-setup hint added (thinking=medium, /dev, devsteps-R0-coord). Part of feat(extension): 45bf776.

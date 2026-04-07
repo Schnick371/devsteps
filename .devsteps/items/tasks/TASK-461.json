@@ -1,0 +1,39 @@
+{
+  "id": "TASK-461",
+  "type": "task",
+  "category": "general",
+  "title": "Add Regression Tests for Guardrails and Consent",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T23:03:00.833Z",
+  "updated": "2026-04-07T06:43:55.611Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "tests/integration/cli/",
+    "packages/shared/src/core/validation.test.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-247"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "TASK-462"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "tests",
+    "regression",
+    "safety"
+  ],
+  "commits": [],
+  "metadata": {}
+}

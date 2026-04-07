@@ -1,0 +1,35 @@
+{
+  "id": "TASK-394",
+  "type": "task",
+  "category": "general",
+  "title": "Update TASK-378 description: loadItemsByType approach, remove TASK-377 dependency",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T11:49:43.921Z",
+  "updated": "2026-04-03T13:14:35.975Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-378",
+      "SPIKE-041"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "task-update",
+    "backlog-hygiene"
+  ],
+  "commits": [],
+  "metadata": {}
+}

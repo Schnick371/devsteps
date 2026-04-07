@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2025-11-27T16:50:03.926Z",
-  "updated": "2026-02-28T02:12:42.972Z",
+  "updated": "2026-04-04T22:39:59.533Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/types",
@@ -31,7 +31,9 @@
       "STORY-032",
       "STORY-033",
       "STORY-034",
-      "STORY-176"
+      "STORY-176",
+      "STORY-242",
+      "STORY-244"
     ],
     "tested-by": [],
     "tests": [],
@@ -40,7 +42,8 @@
     "relates-to": [
       "EPIC-023",
       "EPIC-024",
-      "EPIC-031"
+      "EPIC-031",
+      "SPIKE-046"
     ],
     "depends-on": [],
     "required-by": [],

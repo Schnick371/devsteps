@@ -1,0 +1,3 @@
+Before any prompt/agent files are modified, create a tagged git commit on the current state of all .github/ instruction files. This serves as the rollback point if the HYBRID migration introduces regressions in agent behaviour. Define rollback trigger criteria (e.g. agent-driven wrong-branch commits, missing Implements footer rate increase, release-safety incidents) and document them in CONTRIBUTING.md.
+
+Affected paths: .github/copilot-instructions.md, .github/prompts/, .github/agents/, .github/instructions/

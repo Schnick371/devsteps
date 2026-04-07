@@ -1,0 +1,35 @@
+{
+  "id": "STORY-239",
+  "type": "story",
+  "category": "general",
+  "title": "Path C: Activate doc item type for immediate ADR-as-doc support",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T13:14:26.036Z",
+  "updated": "2026-04-04T21:51:42.609Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-145"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "path-c",
+    "quickwin",
+    "doc",
+    "adr"
+  ],
+  "commits": [],
+  "metadata": {}
+}

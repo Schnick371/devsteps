@@ -1,0 +1,41 @@
+{
+  "id": "STORY-234",
+  "type": "story",
+  "category": "general",
+  "title": "DOC item creation tooling: devsteps add --type doc with Zod metadata validation",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T11:49:57.648Z",
+  "updated": "2026-04-03T11:50:52.166Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/types/",
+    "packages/cli/src/",
+    "packages/mcp-server/src/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-041"
+    ],
+    "depends-on": [
+      "TASK-391"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "tooling",
+    "metadata",
+    "zod"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,36 @@
+{
+  "id": "TASK-400",
+  "type": "task",
+  "category": "general",
+  "title": "test: heuristicClassify unit tests — 9 pattern cases",
+  "status": "planned",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T13:28:06.986Z",
+  "updated": "2026-04-03T13:28:42.525Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-236"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-043"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "diataxis",
+    "testing",
+    "docs-import"
+  ],
+  "commits": [],
+  "metadata": {}
+}

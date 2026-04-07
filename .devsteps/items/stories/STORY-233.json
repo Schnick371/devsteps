@@ -1,0 +1,47 @@
+{
+  "id": "STORY-233",
+  "type": "story",
+  "category": "general",
+  "title": "Migrate docs-map from YAML nested tree to JSON adjacency list (ADR-007)",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-03T09:19:45.955Z",
+  "updated": "2026-04-03T09:38:48.383Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/types/docs-map.ts",
+    "packages/shared/src/core/docs-map.ts",
+    "packages/shared/package.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-388",
+      "TASK-389",
+      "TASK-390",
+      "TASK-387"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "STORY-223",
+      "TASK-377",
+      "STORY-222",
+      "TASK-378"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "docs-map",
+    "adr-007",
+    "shared",
+    "schema"
+  ],
+  "commits": [],
+  "metadata": {}
+}

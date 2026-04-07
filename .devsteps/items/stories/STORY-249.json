@@ -1,0 +1,37 @@
+{
+  "id": "STORY-249",
+  "type": "story",
+  "category": "general",
+  "title": "Implement doc frontmatter contract and composed export normalization",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T23:05:57.664Z",
+  "updated": "2026-04-04T23:05:57.664Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared",
+    "packages/mcp-server",
+    "packages/cli"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spike-060",
+    "docs",
+    "frontmatter",
+    "export"
+  ],
+  "commits": [],
+  "metadata": {}
+}

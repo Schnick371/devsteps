@@ -1,0 +1,32 @@
+{
+  "id": "SPIKE-054",
+  "type": "spike",
+  "category": "general",
+  "title": "Evaluate MCP Server Instructions capability for DevSteps",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-04-04T22:29:45.392Z",
+  "updated": "2026-04-04T22:29:45.392Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research",
+    "mcp",
+    "dx"
+  ],
+  "commits": [],
+  "metadata": {}
+}

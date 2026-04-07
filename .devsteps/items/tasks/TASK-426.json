@@ -1,0 +1,36 @@
+{
+  "id": "TASK-426",
+  "type": "task",
+  "category": "general",
+  "title": "Marketplace E2E verification test",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T21:27:12.720Z",
+  "updated": "2026-04-04T21:27:19.319Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "tests"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-243"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "testing",
+    "mcp",
+    "marketplace"
+  ],
+  "commits": [],
+  "metadata": {}
+}

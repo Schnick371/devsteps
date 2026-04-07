@@ -1,0 +1,39 @@
+{
+  "id": "SPIKE-039",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: Code-to-Doc Navigation — Symbol → TSD Documentation Section via VS Code Reference Sidebar",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T22:39:24.821Z",
+  "updated": "2026-04-02T23:21:52.454Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-381"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-230"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "tsd",
+    "code-navigation",
+    "reference-provider",
+    "vs-code",
+    "research"
+  ],
+  "commits": [],
+  "metadata": {}
+}

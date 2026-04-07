@@ -1,0 +1,38 @@
+{
+  "id": "TASK-404",
+  "type": "task",
+  "category": "general",
+  "title": "feat: ImportSession schema + session utility (read/write/validate token)",
+  "status": "planned",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T19:22:43.682Z",
+  "updated": "2026-04-03T19:23:17.392Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-238"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "TASK-410"
+    ],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-044"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "docs-import",
+    "mcp-dialog",
+    "session"
+  ],
+  "commits": [],
+  "metadata": {}
+}

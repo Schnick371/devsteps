@@ -1,0 +1,3 @@
+Update CONTRIBUTING.md, docs/architecture/git-strategy.md, and any README sections that currently describe the old agent-owned branch/merge workflow. Replace with the HYBRID ownership model: agent provides advisory hints and consent-gate command blocks, user executes branch/merge/push/tag operations. Cross-link to the ADR produced by the companion task.
+
+Affected paths: CONTRIBUTING.md, docs/architecture/, README.md, .github/instructions/

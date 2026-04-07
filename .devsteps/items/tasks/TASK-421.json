@@ -1,0 +1,40 @@
+{
+  "id": "TASK-421",
+  "type": "task",
+  "category": "general",
+  "title": "Health-Endpoint: copilotFiles-Staleness-Check mit 60s TTL-Cache",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T20:50:56.548Z",
+  "updated": "2026-04-04T20:51:32.730Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/health.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-241"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-419",
+      "TASK-420"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "copilot-files",
+    "health",
+    "mcp-server",
+    "observability"
+  ],
+  "commits": [],
+  "metadata": {}
+}

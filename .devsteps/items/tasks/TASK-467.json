@@ -1,0 +1,36 @@
+{
+  "id": "TASK-467",
+  "type": "task",
+  "category": "general",
+  "title": "Introduce docs migration compatibility mode",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T23:05:19.428Z",
+  "updated": "2026-04-04T23:05:19.428Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared",
+    "packages/cli",
+    "packages/mcp-server"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spike-060",
+    "migration",
+    "compatibility"
+  ],
+  "commits": [],
+  "metadata": {}
+}

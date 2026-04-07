@@ -1,0 +1,40 @@
+{
+  "id": "TASK-429",
+  "type": "task",
+  "category": "general",
+  "title": "T2: stripFrontmatter() + parseFrontmatter() utilities in packages/shared/src/utils/frontmatter.ts",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T21:27:16.450Z",
+  "updated": "2026-04-04T22:40:01.609Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/utils/frontmatter.ts",
+    "packages/shared/src/utils/index.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-242"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-449"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "frontmatter",
+    "utils",
+    "pure-regex",
+    "no-new-deps"
+  ],
+  "commits": [],
+  "metadata": {}
+}

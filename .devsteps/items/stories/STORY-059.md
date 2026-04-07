@@ -177,4 +177,5 @@ function generateDeeplink(): string {
 - Clear setup instructions
 - Working configuration in all IDEs
 - Users can complete setup in <5 minutes
-- Troubleshooting guide resolves common issues
+- Troubleshooting guide resolves common issues## Rescope (April 2026)
+Original scope covered all platforms. Now only Cursor/Windsurf gap is relevant — VS Code marketplace distribution solved via extension-contributed MCP.

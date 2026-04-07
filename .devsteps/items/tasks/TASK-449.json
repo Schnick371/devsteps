@@ -1,0 +1,43 @@
+{
+  "id": "TASK-449",
+  "type": "task",
+  "category": "general",
+  "title": "T7: Update export handler — strip frontmatter from descriptions + heading_offset_mode param",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T22:39:29.567Z",
+  "updated": "2026-04-04T22:40:01.609Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/export.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-244"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-429"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "export",
+    "mcp",
+    "heading-normalization",
+    "frontmatter"
+  ],
+  "commits": [],
+  "metadata": {}
+}

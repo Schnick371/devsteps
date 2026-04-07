@@ -1,0 +1,34 @@
+{
+  "id": "TASK-412",
+  "type": "task",
+  "category": "general",
+  "title": "Resolve ID scheme conflict: STORY-026 uses DECISION-NNN, STORY-145 uses ADR-NNN — standardise to ADR-NNN",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T13:14:52.641Z",
+  "updated": "2026-04-04T22:38:33.863Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-145"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "id-scheme",
+    "adr",
+    "naming-convention"
+  ],
+  "commits": [],
+  "metadata": {}
+}

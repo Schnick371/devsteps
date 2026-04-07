@@ -1,0 +1,42 @@
+{
+  "id": "TASK-445",
+  "type": "task",
+  "category": "general",
+  "title": "T3: Update add.ts default template to inject frontmatter stub for doc item type",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T22:39:28.802Z",
+  "updated": "2026-04-04T22:40:00.154Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/add.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-242"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "add",
+    "template",
+    "frontmatter",
+    "doc-type",
+    "core"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,38 @@
+{
+  "id": "TASK-380",
+  "type": "task",
+  "category": "general",
+  "title": "Extension test infra: `@vscode/test-electron` setup + provider contract tests",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T23:21:36.657Z",
+  "updated": "2026-04-02T23:21:45.458Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/package.json",
+    "packages/extension/src/__tests__/"
+  ],
+  "linked_items": {
+    "implements": [
+      "SPIKE-039"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "testing",
+    "extension",
+    "code-navigation",
+    "phase-1"
+  ],
+  "commits": [],
+  "metadata": {}
+}

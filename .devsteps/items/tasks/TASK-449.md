@@ -1,0 +1,1 @@
+Update export handler to strip frontmatter before embedding and add heading_offset_mode (auto|manual|none) plus heading_offset behavior for auto/manual modes.

@@ -1,0 +1,37 @@
+{
+  "id": "TASK-436",
+  "type": "task",
+  "category": "general",
+  "title": "T6: adjustHeadingLevels(content, offset) utility in packages/shared/src/utils/heading-shift.ts",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T21:27:54.853Z",
+  "updated": "2026-04-04T21:27:54.853Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/utils/heading-shift.ts",
+    "packages/shared/src/utils/index.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "heading-normalization",
+    "utils",
+    "state-machine",
+    "export",
+    "doc-type"
+  ],
+  "commits": [],
+  "metadata": {}
+}

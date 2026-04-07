@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Add devsteps_ prefix to all MCP tool names",
-  "status": "draft",
+  "status": "obsolete",
   "eisenhower": "urgent-important",
   "created": "2026-02-24T07:05:26.896Z",
-  "updated": "2026-02-24T07:06:12.489Z",
+  "updated": "2026-04-04T22:38:52.805Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/tools/crud.ts",
@@ -27,11 +27,15 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "STORY-245"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
-    "superseded-by": []
+    "superseded-by": [
+      "STORY-245"
+    ]
   },
   "tags": [
     "mcp-server",

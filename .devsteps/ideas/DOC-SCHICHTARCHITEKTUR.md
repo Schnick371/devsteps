@@ -68,7 +68,7 @@ Die bisherige Lupe (L1/L2/L3 = getrennte Dateien) löst das für den Deployment-
 Ein Tiefenstrukturiertes Dokument (`TSD`) ist ein Markdown-Dokument, das:
 1. **Alle Inhaltsebenen** in einer Datei enthält (H1 bis Hn)
 2. Inhalt einer Ebene ist **vollständig innerhalb** seines übergeordneten Abschnitts enthalten
-3. Ein **Strukturmanifest** (`docs-map.yaml`) definiert die Hierarchie und Positionsnummern
+3. Ein **Strukturmanifest** (`docs-map.json`) definiert die Hierarchie als JSON Adjacency List
 4. Ein **Viewer-Filter** (Fokustiefe-Regler) blendet Ebenen ein oder aus
 
 ### 3.2 Ebenenstruktur
@@ -104,48 +104,55 @@ Detailstufe N (Funktionsebene)
 
 > Diese Regel verhindert "Informationsexplosion" — man sieht immer genau das, was man braucht.
 
-### 3.3 Stückliste (BOM): `docs-map.yaml`
+### 3.3 Stückliste (BOM): `docs-map.json`
 
-Das Strukturmanifest ist die **SSOT** für die Dokumentenhierarchie:
+Das Strukturmanifest ist die **SSOT** für die Dokumentenhierarchie.
+Format: **JSON Adjacency List** — konsistent mit `.devsteps/index/*.json`.
+Begründung: [DOC-ARCHITECTURE-BOM.md](DOC-ARCHITECTURE-BOM.md) (ADR-007).
 
-```yaml
-# .devsteps/docs-map.yaml — Documentation Structure Manifest
-# Alle doc_ids beziehen sich auf Frontmatter in Documentation/*.md
-version: "1.0.0"
-title: "Remarc Deployment Automation — Documentation Architecture"
-root:
-  - id: "ARCH-001"
-    doc_id: "deployment-lifecycle"
-    title: "Deployment System"
-    level: 1
-    position: "1"
-    children:
-      - id: "ARCH-001-01"
-        doc_id: "deployment-phase1-bootstrap-guide"
-        title: "Phase 1: Bootstrap"
-        level: 2
-        position: "1.1"
-        devsteps_item: "STORY-361"        # Optionale Work-Item-Verknüpfung
-        children:
-          - id: "ARCH-001-01-01"
-            doc_id: null                  # kein eigenes Dokument
-            title: "PS5.1 Bootstrap-Kompatibilität"
-            source_ref: "ps51-bootstrap-compatibility-matrix"
-            level: 3
-            position: "1.1.1"
-      - id: "ARCH-001-02"
-        doc_id: "deployment-phase2-init"
-        title: "Phase 2: Init (Infrastructure)"
-        level: 2
-        position: "1.2"
-        children: []
+```json
+{
+  "version": "1.1.0",
+  "title": "Remarc Deployment Automation — Documentation Map",
+  "nodes": [
+    {
+      "id": "ARCH-001",
+      "doc_id": "deployment-lifecycle",
+      "parent_id": null,
+      "order": 100,
+      "title": "Deployment System"
+    },
+    {
+      "id": "ARCH-001-P1",
+      "doc_id": "deployment-phase1-bootstrap-guide",
+      "parent_id": "ARCH-001",
+      "order": 20,
+      "title": "Phase 1: Bootstrap",
+      "devsteps_item": "STORY-361"
+    },
+    {
+      "id": "ARCH-001-P1-COMPAT",
+      "doc_id": "ps51-bootstrap-compatibility-matrix",
+      "parent_id": "ARCH-001-P1",
+      "order": 10,
+      "title": "PS5.1 Bootstrap-Kompatibilität"
+    },
+    {
+      "id": "ARCH-001-P2",
+      "doc_id": "deployment-phase2-init",
+      "parent_id": "ARCH-001",
+      "order": 30,
+      "title": "Phase 2: Init (Infrastructure)"
+    }
+  ]
+}
 ```
 
-**Positionsnummern:**
-- `1` = Hauptkapitel (H1-Ebene)
-- `1.1`, `1.2` = Unterkapitel (H2-Ebene)
-- `1.1.1` = Abschnitt (H3-Ebene)
-- `1.1.1.1` = Detail-Abschnitt (H4-Ebene, Funktionsebene)
+**Schlüsseleigenschaften der Adjacency List:**
+- `id` = stabiler semantischer Identifier (niemals positional numeriert)
+- `parent_id` = zeigt auf Parent-Knoten — frei änderbar ohne ID-Bruch
+- `order` = Gap-Nummerierung (10, 20, 30...) — Einfügen mit `order=15` ohne Renumerierung
+- Anzeigeposition (`1.1`, `1.2.1`) wird zur Laufzeit aus dem Baum berechnet, **nie gespeichert**
 
 ### 3.4 Verhältnis TSD ↔ aktuellem Lupe-Konzept
 
@@ -282,7 +289,7 @@ Wenn eine Funktion in ein anderes Modul verschoben wird (z.B. `Get-SiteEnvironme
 
 1. **BOM-Position** bleibt gleich wenn logische Zugehörigkeit gleich bleibt
    - Oder: BOM-Position wird verschoben (z.B. `1.3.2` → `2.1.4`)
-2. **`docs-map.yaml`** wird aktualisiert (neue `parent`-Referenz)
+2. **`docs-map.json`** wird aktualisiert (neuer Eintrag mit `parent_id`)
 3. **`doc_id`** der Datei bleibt gleich (verhindert broken links)
 4. **`supersedes` / `superseded-by`** wenn das Modul selbst deprecated wird
 
@@ -292,23 +299,23 @@ Wenn eine Funktion in ein anderes Modul verschoben wird (z.B. `Get-SiteEnvironme
 
 ### Phase A: Manifest (sofort möglich)
 
-- Erstelle `.devsteps/docs-map.yaml` mit der aktuellen Struktur (15–20 Docs)
+- Erstelle `.devsteps/docs-map.json` mit der aktuellen Struktur (15–20 Docs)
 - Nutze bestehende `doc_id` Werte aus Frontmatter
 - Vergib `ARCH-NNN` Positionsnummern
 - Kein Code nötig — nur YAML
 
-> **Deliverable:** `.devsteps/docs-map.yaml` — Navigation und BOM in einem
+> **Deliverable:** `.devsteps/docs-map.json` — Navigation und BOM in einem (JSON Adjacency List)
 
 ### Phase B: Lens Integration (nach SPIKE-027)
 
-- `Build-DocLens.ps1` liest `docs-map.yaml` als Hierarchie-Quelle
+- `Build-DocLens.ps1` liest `docs-map.json` als Hierarchie-Quelle
 - Generiert Lens-Views pro Detailstufe (ephemer, `.devsteps/lens/`)
 - Export: "Stufe 1 View" = nur L1-Docs, "Stufe 3 View" = L3-Details
 
 ### Phase C: VS Code Feature (längerfristig)
 
 - Extension: Fokustiefe-Regler im Markdown Preview
-- Reads: `docs-map.yaml` für Kontext
+- Reads: `docs-map.json` für Kontext
 - Feature: Inline Work-Item-Embedding via MCP `mcp_devsteps_get`
 
 ---
@@ -317,7 +324,7 @@ Wenn eine Funktion in ein anderes Modul verschoben wird (z.B. `Get-SiteEnvironme
 
 | Constraint | Typ | Beschreibung |
 |---|---|---|
-| CC-1 | Hard | `docs-map.yaml` in `.devsteps/` — nie direkt bearbeiten, nur via `worker-meta-hierarchy` oder Prompts |
+| CC-1 | Hard | `docs-map.json` in `.devsteps/` — nie direkt bearbeiten, nur via `worker-meta-hierarchy` oder Prompts |
 | CC-2 | Hard | BOM-Positionsnummern (ARCH-NNN) sind STABIL — wenn ein Doc verschoben wird, muss BOM-Position mit angepasst werden |
 | CC-3 | Hard | Eingebettete Work-Item-Boxen werden nie committed — nur ephemer im Viewer |
 | SC-1 | Soft | Tiefe ≤ 5 empfohlen — tiefere Strukturen werden schwer navigierbar |
@@ -336,16 +343,16 @@ Wenn eine Funktion in ein anderes Modul verschoben wird (z.B. `Get-SiteEnvironme
 |---|---|---|
 | L0/L1/L2/L3 Lupe (Zoom-Ebenen per Datei) | DOC-ARCHITECTURE.md ADR-006 | ✅ Bestehend — ergänzt TSD für Einstiegspunkte |
 | `doc`-Item-Typ in DevSteps | DOC-ARCHITECTURE.md ADR-002 | ✅ Geplant — TSD nutzt `DOC-NNN` IDs wenn verfügbar |
-| Lens-Views (ephemere Projektionen) | DOC-ARCHITECTURE.md ADR-004 | ✅ Bestehend — TSD nutzt `docs-map.yaml` als Lens-Quelle |
+| Lens-Views (ephemere Projektionen) | DOC-ARCHITECTURE.md ADR-004 | ✅ Bestehend — TSD nutzt `docs-map.json` als Lens-Quelle |
 | Schichtdokumentation (TSD, dieses Dokument) | Hier | 🆕 Neu — BOM + Fokustiefe-Konzept |
 
 ---
 
 ## 10. Nächste Schritte
 
-1. **JETZT:** Erstelle `.devsteps/docs-map.yaml` mit Phase 1-4 Deployment-Docs (Proof of Concept)
+1. **JETZT:** ✅ `.devsteps/docs-map.json` erstellt (JSON Adjacency List, Phase 1-4 Deployment-Docs)
 2. **SPIKE-027 abgeschlossen:** `doc`-Item-Typ → vergib `DOC-NNN` IDs für Hauptdocs
-3. **Später:** `Build-DocLens.ps1` mit `docs-map.yaml` Integration
+3. **Später:** `Build-DocLens.ps1` mit `docs-map.json` Integration
 4. **Feature Branch:** Fokustiefe-Regler Prototyp in Remarc Extension
 
 ---

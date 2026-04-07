@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-02T15:09:54.470Z",
-  "updated": "2026-04-02T15:11:20.030Z",
+  "updated": "2026-04-02T23:58:28.348Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/extension.ts"
@@ -23,7 +23,9 @@
     ],
     "depends-on": [],
     "required-by": [
-      "STORY-226"
+      "STORY-226",
+      "STORY-229",
+      "TASK-385"
     ],
     "supersedes": [],
     "superseded-by": []

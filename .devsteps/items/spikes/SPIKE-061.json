@@ -1,0 +1,42 @@
+{
+  "id": "SPIKE-061",
+  "type": "spike",
+  "category": "general",
+  "title": "GIT Instruction Ownership Matrix (Hybrid Policy)",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T23:02:50.284Z",
+  "updated": "2026-04-07T07:11:29.081Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/copilot-instructions.md",
+    ".github/instructions/",
+    ".github/prompts/",
+    ".github/agents/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "STORY-247"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-485"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research",
+    "git",
+    "governance",
+    "copilot"
+  ],
+  "commits": [],
+  "metadata": {}
+}

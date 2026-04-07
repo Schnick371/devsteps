@@ -23,4 +23,9 @@ Prefix every `name` field in each tool definition with `devsteps_`.
 - [ ] Agent/instruction files referencing tool names are updated
 - [ ] Build passes (`npm run build`)
 - [ ] BATS integration tests pass
-- [ ] CHANGELOG updated (breaking change)
+- [ ] CHANGELOG updated (breaking change)## Rescope (April 2026)
+Original intent was aesthetic renaming. Actual problem: MCP tool name collision across servers. When our 'search' tool is activated in tool picker, GitHub search and Google search also activate. Rescoped to: evaluate server-side tool name prefixing strategy. See new Story 'Resolve MCP tool name collision' for structured approach.
+
+This story is superseded by the new Tool Name Collision story.
+
+Archival defer note (planning-2026-04-05): this story remains deferred/obsolete. Execution path is redirected to STORY-245; no direct implementation should proceed on STORY-120.

@@ -1,0 +1,39 @@
+{
+  "id": "TASK-381",
+  "type": "task",
+  "category": "general",
+  "title": "Smoke test: `markdown.showPreviewToSide` + `#anchor` fragment navigation",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T23:21:36.660Z",
+  "updated": "2026-04-02T23:22:00.408Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "tmp/SPIKE-039-anchor-smoke-test.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "SPIKE-039"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-229"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "testing",
+    "extension",
+    "smoke-test",
+    "code-navigation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

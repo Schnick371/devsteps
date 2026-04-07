@@ -1,0 +1,28 @@
+{
+  "id": "TASK-453",
+  "type": "task",
+  "category": "general",
+  "title": "TEMP-IGNORE",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T22:48:19.706Z",
+  "updated": "2026-04-04T22:48:19.706Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T15:34:16.783Z",
-  "updated": "2026-02-23T22:40:33.859Z",
+  "updated": "2026-04-04T21:26:08.247Z",
   "author": "thomas.hertel@devsteps.dev",
   "affected_paths": [
     "packages/vscode-extension/"
@@ -54,7 +54,9 @@
       "SPIKE-004",
       "TASK-050",
       "EPIC-008",
-      "EPIC-009"
+      "EPIC-009",
+      "TASK-422",
+      "TASK-424"
     ],
     "depends-on": [
       "STORY-001"

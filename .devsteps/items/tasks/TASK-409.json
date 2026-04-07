@@ -1,0 +1,38 @@
+{
+  "id": "TASK-409",
+  "type": "task",
+  "category": "general",
+  "title": "feat: MCP tool devsteps_docs_bom_commit — DOC Items + DocsMapDocument update",
+  "status": "planned",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T19:22:43.690Z",
+  "updated": "2026-04-03T19:23:17.394Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-238"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [
+      "TASK-408"
+    ],
+    "relates-to": [
+      "SPIKE-044"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "docs-import",
+    "mcp-dialog",
+    "bom"
+  ],
+  "commits": [],
+  "metadata": {}
+}

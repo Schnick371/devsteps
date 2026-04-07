@@ -1,0 +1,37 @@
+{
+  "id": "TASK-393",
+  "type": "task",
+  "category": "general",
+  "title": "Patch complete-cleanup.sh and devsteps cleanup to preserve promoted research files",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-03T11:49:33.891Z",
+  "updated": "2026-04-03T13:14:31.803Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "scripts/complete-cleanup.sh"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-041"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "research-preservation",
+    "cleanup",
+    "tooling"
+  ],
+  "commits": [],
+  "metadata": {}
+}

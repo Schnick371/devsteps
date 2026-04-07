@@ -1,0 +1,43 @@
+{
+  "id": "BUG-075",
+  "type": "bug",
+  "category": "general",
+  "title": "Fix 7 DOC ItemType infrastructure defects preventing DOC item creation",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-03T11:48:55.930Z",
+  "updated": "2026-04-03T12:26:16.103Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/types/index-refs.types.ts",
+    "packages/shared/src/utils/index.ts",
+    "packages/shared/src/core/list.ts",
+    "packages/mcp-server/src/handlers/init.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-041"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "STORY-234"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "index-architecture",
+    "bug",
+    "infrastructure",
+    "crash"
+  ],
+  "commits": [],
+  "metadata": {}
+}

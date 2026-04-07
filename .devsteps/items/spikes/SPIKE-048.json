@@ -1,0 +1,33 @@
+{
+  "id": "SPIKE-048",
+  "type": "spike",
+  "category": "general",
+  "title": "Research: Revisionen für Work-Item-Dokumente (MD-Dateien) — Git-MCP vs. Custom CoW",
+  "status": "done",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-04-04T15:05:42.336Z",
+  "updated": "2026-04-04T16:22:05.731Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-417",
+      "TASK-418"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "revision-md-001"
+  ],
+  "commits": [],
+  "metadata": {}
+}

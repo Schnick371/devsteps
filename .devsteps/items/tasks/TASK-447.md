@@ -1,0 +1,1 @@
+Add comprehensive unit tests for schema + frontmatter utilities with at least 39 total cases across docs.test.ts and frontmatter.test.ts.

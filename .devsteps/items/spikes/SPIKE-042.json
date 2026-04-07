@@ -1,0 +1,34 @@
+{
+  "id": "SPIKE-042",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: keywords?: string[] metadata field for all item types — search quality improvement",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T12:20:21.008Z",
+  "updated": "2026-04-03T12:20:21.008Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "keywords",
+    "search",
+    "metadata",
+    "index-architecture",
+    "research"
+  ],
+  "commits": [],
+  "metadata": {}
+}

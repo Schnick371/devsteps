@@ -1,0 +1,40 @@
+{
+  "id": "TASK-482",
+  "type": "task",
+  "category": "general",
+  "title": "Prepare rollback snapshot before HYBRID policy migration",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-07T06:42:24.504Z",
+  "updated": "2026-04-07T07:11:29.082Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/copilot-instructions.md",
+    ".github/prompts/",
+    ".github/agents/",
+    ".github/instructions/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "TASK-456"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "rollback",
+    "safety",
+    "git",
+    "migrations"
+  ],
+  "commits": [],
+  "metadata": {}
+}

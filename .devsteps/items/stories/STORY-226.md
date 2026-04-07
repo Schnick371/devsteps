@@ -1,1 +1,4 @@
 markdown-it plugin that scans HTML token stream for <!-- devsteps:embed STORY-364 --> HTML comment patterns and replaces them with <div class="devsteps-embed" data-item-id="STORY-364">[embedded card]</div> placeholder divs. The card content is read synchronously from the item cache (Map from STORY-225). If the item is not in cache, renders a "loading..." placeholder. The previewScript (STORY-226) can then enhance the rendered card with interactive elements. Pattern: markdown.markdownItPlugins = true in package.json (TASK-375); plugin registered via VS Code's API contribution point. Phase C. Depends on STORY-225 (item cache) and TASK-375 (manifest entry).
+
+---
+**SCOPE UPDATE (SPIKE-040):** embedPlugin.ts must include `::: story`, `::: task`, `::: spike`, `::: code-example` container type rendering as specified in SPIKE-040.

@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-01-12T07:17:07.492Z",
-  "updated": "2026-01-12T07:19:07.896Z",
+  "updated": "2026-04-04T13:15:17.793Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/types",
@@ -24,7 +24,8 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "EPIC-010"
+      "EPIC-010",
+      "SPIKE-046"
     ],
     "depends-on": [],
     "required-by": [],

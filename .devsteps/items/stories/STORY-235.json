@@ -1,0 +1,33 @@
+{
+  "id": "STORY-235",
+  "type": "story",
+  "category": "general",
+  "title": "Seed initial DOC items for docs/ tree after DOC infrastructure is fixed",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T12:20:08.773Z",
+  "updated": "2026-04-03T12:20:08.773Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "doc-seeding",
+    "search-discoverability",
+    "ai-agents"
+  ],
+  "commits": [],
+  "metadata": {}
+}

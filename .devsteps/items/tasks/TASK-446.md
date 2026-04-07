@@ -1,0 +1,1 @@
+Update MCP handlers: get returns parsed frontmatter for doc items; update validates doc frontmatter with DocFrontmatterSchema.safeParse and emits frontmatter_warnings without blocking updates.

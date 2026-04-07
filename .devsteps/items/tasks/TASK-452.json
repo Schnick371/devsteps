@@ -1,0 +1,34 @@
+{
+  "id": "TASK-452",
+  "type": "task",
+  "category": "general",
+  "title": "Add validation.test.ts for doc type hierarchy guards",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T22:47:42.008Z",
+  "updated": "2026-04-04T22:51:23.187Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "test,doc,validation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

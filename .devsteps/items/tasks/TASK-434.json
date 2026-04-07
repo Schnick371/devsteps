@@ -1,0 +1,43 @@
+{
+  "id": "TASK-434",
+  "type": "task",
+  "category": "general",
+  "title": "Refactor tool names if prefix strategy chosen",
+  "status": "blocked",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T21:27:51.536Z",
+  "updated": "2026-04-04T22:40:57.801Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools",
+    "packages/shared/src",
+    ".github/agents",
+    ".github/instructions"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-245"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [
+      "TASK-443",
+      "TASK-444",
+      "TASK-442"
+    ],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "tool-naming",
+    "refactor"
+  ],
+  "commits": [],
+  "metadata": {}
+}

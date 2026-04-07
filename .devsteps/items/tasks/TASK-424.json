@@ -1,0 +1,37 @@
+{
+  "id": "TASK-424",
+  "type": "task",
+  "category": "general",
+  "title": "Add Copilot chat mode hint to Welcome View (before project init)",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T21:26:01.919Z",
+  "updated": "2026-04-04T21:36:30.457Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/package.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-003"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "ux",
+    "onboarding",
+    "welcome-view"
+  ],
+  "commits": [],
+  "metadata": {}
+}

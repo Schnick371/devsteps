@@ -1,0 +1,42 @@
+{
+  "id": "TASK-450",
+  "type": "task",
+  "category": "general",
+  "title": "T8: Wire CLI exportCommand stub to exportHandler + add --heading-mode flag",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T22:39:29.752Z",
+  "updated": "2026-04-04T22:40:01.077Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/search-commands.ts",
+    "biome.json"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-244"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "cli",
+    "export",
+    "stub-fix",
+    "heading-normalization"
+  ],
+  "commits": [],
+  "metadata": {}
+}

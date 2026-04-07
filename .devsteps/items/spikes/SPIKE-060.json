@@ -1,0 +1,39 @@
+{
+  "id": "SPIKE-060",
+  "type": "spike",
+  "category": "general",
+  "title": "Research: YAML frontmatter standard for doc items + heading-level normalization on export",
+  "status": "in-progress",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T22:41:03.752Z",
+  "updated": "2026-04-04T22:41:08.001Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared",
+    "packages/cli",
+    "packages/mcp-server",
+    "docs"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research",
+    "documentation",
+    "frontmatter",
+    "export",
+    "diataxis"
+  ],
+  "commits": [],
+  "metadata": {}
+}

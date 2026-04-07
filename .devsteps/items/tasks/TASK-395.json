@@ -1,0 +1,37 @@
+{
+  "id": "TASK-395",
+  "type": "task",
+  "category": "general",
+  "title": "Document DOC item governance and research file promotion in devsteps-usage instructions",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T11:50:09.169Z",
+  "updated": "2026-04-03T11:50:52.166Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/instructions/devsteps-devsteps-usage.instructions.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-041"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "documentation",
+    "instructions",
+    "governance"
+  ],
+  "commits": [],
+  "metadata": {}
+}

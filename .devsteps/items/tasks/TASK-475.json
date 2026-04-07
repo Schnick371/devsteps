@@ -1,0 +1,34 @@
+{
+  "id": "TASK-475",
+  "type": "task",
+  "category": "general",
+  "title": "Replace CLI export stub with shared composition path",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T23:06:12.210Z",
+  "updated": "2026-04-04T23:06:12.210Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spike-060",
+    "cli",
+    "export-parity"
+  ],
+  "commits": [],
+  "metadata": {}
+}

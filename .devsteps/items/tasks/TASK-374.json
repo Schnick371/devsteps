@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Refactor mcp-server ITEM_TYPE_ENUM → derive from ItemType.options (eliminates 4 hardcoded duplicate sites)",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-02T13:37:46.621Z",
-  "updated": "2026-04-02T13:38:56.565Z",
+  "updated": "2026-04-04T21:21:54.903Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/tools/system.ts",

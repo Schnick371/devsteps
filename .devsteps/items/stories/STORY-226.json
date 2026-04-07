@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-02T15:09:54.473Z",
-  "updated": "2026-04-02T15:11:27.483Z",
+  "updated": "2026-04-02T23:58:46.150Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/preview/embedPlugin.ts"

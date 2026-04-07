@@ -1,0 +1,54 @@
+{
+  "id": "STORY-242",
+  "type": "story",
+  "category": "general",
+  "title": "feat: YAML frontmatter schema + utilities for DOC item .md files",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T21:26:45.927Z",
+  "updated": "2026-04-04T22:40:02.144Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/docs.ts",
+    "packages/shared/src/utils/frontmatter.ts",
+    "packages/shared/src/core/add.ts",
+    "packages/mcp-server/src/tools/"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-010"
+    ],
+    "implemented-by": [
+      "TASK-440",
+      "TASK-429",
+      "TASK-445",
+      "TASK-446",
+      "TASK-447"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-236",
+      "STORY-237",
+      "SPIKE-043"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "STORY-244"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "frontmatter",
+    "yaml",
+    "diataxis",
+    "doc-type",
+    "shared",
+    "zod"
+  ],
+  "commits": [],
+  "metadata": {}
+}

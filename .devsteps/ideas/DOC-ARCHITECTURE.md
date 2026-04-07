@@ -132,6 +132,7 @@ Aus `analyst-context` Mandaten (TASK-999-Analyse):
 |-------|-----|--------|
 | README.md (Documentation/) | reference | ✅ Frontmatter vorhanden |
 | DOC-SCHICHTARCHITEKTUR.md | explanation | ✅ Frontmatter vorhanden — Neu: BOM/TSD-Konzept |
+| DOC-ARCHITECTURE-BOM.md | explanation | ✅ Frontmatter vorhanden — Neu: ADR-007 JSON Adjacency List |
 | DEPLOYMENT-PHASE1-BOOTSTRAP.md | how-to | ✅ Frontmatter vorhanden |
 | DEPLOYMENT-PHASE2-INIT.md | how-to | ✅ Frontmatter vorhanden |
 | DEPLOYMENT-PHASE3-INSTALL.md | how-to | ✅ Frontmatter vorhanden |

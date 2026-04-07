@@ -3,10 +3,10 @@
   "type": "story",
   "category": "refactoring",
   "title": "Migrate MCP Server Code to Extension Package",
-  "status": "blocked",
+  "status": "obsolete",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T16:31:48.140Z",
-  "updated": "2025-12-05T08:51:40.268Z",
+  "updated": "2026-04-04T21:26:12.256Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

@@ -1,0 +1,42 @@
+{
+  "id": "STORY-240",
+  "type": "story",
+  "category": "general",
+  "title": "feat(shared): 3 description-spezifische Felder in ItemMetadata — description_hash, description_updated, description_edit_count",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T15:07:12.855Z",
+  "updated": "2026-04-04T16:22:05.732Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/schemas/index.ts",
+    "packages/shared/src/core/update.ts",
+    "packages/shared/src/core/add.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "TASK-418"
+    ],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-048"
+    ],
+    "depends-on": [
+      "BUG-079"
+    ],
+    "required-by": [
+      "TASK-417"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "revision-md-001"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,44 @@
+{
+  "id": "STORY-247",
+  "type": "story",
+  "category": "general",
+  "title": "Migrate to Hybrid Git Ownership Policy",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T23:02:50.288Z",
+  "updated": "2026-04-07T06:43:18.622Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/copilot-instructions.md",
+    ".github/prompts/",
+    ".github/agents/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-458",
+      "TASK-462",
+      "TASK-461",
+      "TASK-485",
+      "TASK-486"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [
+      "SPIKE-061"
+    ],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "policy",
+    "git",
+    "ai-agents"
+  ],
+  "commits": [],
+  "metadata": {}
+}

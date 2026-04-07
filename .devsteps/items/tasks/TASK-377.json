@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-02T15:10:36.764Z",
-  "updated": "2026-04-02T15:11:20.029Z",
+  "updated": "2026-04-03T11:50:37.829Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/docs-map.ts",
@@ -22,7 +22,9 @@
     "relates-to": [
       "SPIKE-036"
     ],
-    "depends-on": [],
+    "depends-on": [
+      "STORY-233"
+    ],
     "required-by": [],
     "supersedes": [],
     "superseded-by": []

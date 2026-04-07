@@ -1,0 +1,39 @@
+{
+  "id": "TASK-384",
+  "type": "task",
+  "category": "general",
+  "title": "Add `doc_subtype` + `generated` fields to `DocsMapNode` schema (Extended Diataxis taxonomy)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T23:57:13.690Z",
+  "updated": "2026-04-02T23:58:12.119Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/types/docs-map.ts",
+    "packages/shared/src/core/docs-map.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "SPIKE-040"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "tsd",
+    "diataxis",
+    "schema",
+    "docs-map"
+  ],
+  "commits": [],
+  "metadata": {}
+}

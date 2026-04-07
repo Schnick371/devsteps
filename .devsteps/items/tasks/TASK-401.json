@@ -1,0 +1,37 @@
+{
+  "id": "TASK-401",
+  "type": "task",
+  "category": "general",
+  "title": "ADR-001: heuristicClassify uses scoring vector, not binary decision table",
+  "status": "planned",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T18:29:13.381Z",
+  "updated": "2026-04-03T18:30:13.168Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-236",
+      "SPIKE-043"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "adr",
+    "diataxis",
+    "docs-import",
+    "architecture",
+    "doc-type-pending"
+  ],
+  "commits": [],
+  "metadata": {}
+}

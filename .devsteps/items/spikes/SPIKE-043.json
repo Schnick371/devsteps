@@ -1,0 +1,40 @@
+{
+  "id": "SPIKE-043",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: Diataxis-aware docs import, Copilot context delivery, and docs onboarding UX for existing projects",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T12:47:41.385Z",
+  "updated": "2026-04-04T22:40:02.144Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-400",
+      "TASK-401",
+      "TASK-402",
+      "TASK-403",
+      "STORY-242"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "diataxis",
+    "docs-import",
+    "copilot-context",
+    "doc-type",
+    "research"
+  ],
+  "commits": [],
+  "metadata": {}
+}

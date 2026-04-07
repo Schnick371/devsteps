@@ -1,0 +1,32 @@
+{
+  "id": "TASK-468",
+  "type": "task",
+  "category": "general",
+  "title": "Resolve baseline delta-gate failures before SPIKE-060 implementation",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T23:05:19.429Z",
+  "updated": "2026-04-04T23:05:19.429Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spike-060",
+    "delta-gate",
+    "ci"
+  ],
+  "commits": [],
+  "metadata": {}
+}

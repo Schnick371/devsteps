@@ -19,4 +19,4 @@ Search all `.github/**/*.md` and `packages/**/.github/**/*.md` for patterns like
 
 The agent file syntax `devsteps/search` uses path notation, not underscore. After rename the tool names become `devsteps_search` (with underscore). The path convention in agent files is separate and may or may not need updating depending on which MCP invocation style is used.
 
-Verify against instruction in `.github/instructions/devsteps-devsteps-usage.instructions.md`.
+Verify against instruction in `.github/instructions/devsteps-devsteps-usage.instructions.md`.Cancelled: parent STORY-120 is obsolete. Superseded by STORY-245.

@@ -1,0 +1,41 @@
+{
+  "id": "STORY-230",
+  "type": "story",
+  "category": "general",
+  "title": "`DocHoverProvider` — hover popup with doc excerpt + \"View Documentation\" link",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T23:21:36.652Z",
+  "updated": "2026-04-03T11:50:19.904Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/providers/DocHoverProvider.ts",
+    "packages/extension/src/extension.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-039"
+    ],
+    "depends-on": [
+      "TASK-378"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "code-navigation",
+    "doc-type",
+    "extension",
+    "hover",
+    "phase-1"
+  ],
+  "commits": [],
+  "metadata": {}
+}

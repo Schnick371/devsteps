@@ -1,0 +1,38 @@
+{
+  "id": "TASK-392",
+  "type": "task",
+  "category": "general",
+  "title": "Add missing doc type test coverage: index, list, counter, and prefix unit tests",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-03T11:49:20.993Z",
+  "updated": "2026-04-03T13:14:27.599Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-041"
+    ],
+    "depends-on": [
+      "BUG-075"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "testing",
+    "index-architecture"
+  ],
+  "commits": [],
+  "metadata": {}
+}

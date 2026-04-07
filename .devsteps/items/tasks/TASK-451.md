@@ -1,0 +1,1 @@
+Add heading-shift unit coverage (>=27 cases) plus tests/integration/export.bats with >=3 integration cases for export behavior and heading mode.

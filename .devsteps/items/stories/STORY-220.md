@@ -22,3 +22,6 @@ Users can view a documentation file at a specific depth level:
 - "Lupe" is acceptable team shorthand only
 
 See SPIKE-036 for full implementation pattern details.
+
+---
+**SCOPE UPDATE (SPIKE-040):** This story is repurposed to implement `devsteps-item://` TextDocumentContentProvider for previewing DevSteps items in Markdown preview. The original TSD depth view scope has been superseded by STORY-227 (previewScripts) per SPIKE-036 ADR-S2-01.

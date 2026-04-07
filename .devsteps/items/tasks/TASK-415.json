@@ -1,0 +1,32 @@
+{
+  "id": "TASK-415",
+  "type": "task",
+  "category": "general",
+  "title": "docs(install): Git-MCP-Server Konfigurationsbeispiel für DevSteps-Benutzer",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-04-04T15:07:22.432Z",
+  "updated": "2026-04-04T16:22:05.732Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-048"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "revision-md-001"
+  ],
+  "commits": [],
+  "metadata": {}
+}

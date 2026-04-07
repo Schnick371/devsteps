@@ -1,0 +1,35 @@
+{
+  "id": "SPIKE-047",
+  "type": "spike",
+  "category": "general",
+  "title": "Evaluate MCP ADR Analysis Server integration (modelcontextprotocol/servers)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T13:14:26.039Z",
+  "updated": "2026-04-04T13:15:17.796Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "SPIKE-046"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "mcp",
+    "adr-analysis-server",
+    "ecosystem",
+    "research"
+  ],
+  "commits": [],
+  "metadata": {}
+}

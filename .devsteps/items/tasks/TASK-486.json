@@ -1,0 +1,40 @@
+{
+  "id": "TASK-486",
+  "type": "task",
+  "category": "general",
+  "title": "Update CONTRIBUTING and architecture docs for new ownership model",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-07T06:43:04.736Z",
+  "updated": "2026-04-07T06:43:55.611Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "CONTRIBUTING.md",
+    "docs/architecture/git-strategy.md",
+    "README.md",
+    ".github/instructions/"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-247"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "docs",
+    "governance",
+    "contributing",
+    "architecture"
+  ],
+  "commits": [],
+  "metadata": {}
+}

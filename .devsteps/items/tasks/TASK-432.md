@@ -1,0 +1,1 @@
+Test whether VS Code's automatic FQN namespacing (mcp_<server>_<tool>) resolves the collision in Agent Mode. Document behavior in Tool Picker vs Agent Mode vs CLI.

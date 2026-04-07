@@ -1,0 +1,36 @@
+{
+  "id": "TASK-397",
+  "type": "task",
+  "category": "general",
+  "title": "docs: create .github/instructions/devsteps-diataxis.instructions.md",
+  "status": "planned",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T13:28:06.984Z",
+  "updated": "2026-04-03T13:28:42.524Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-237"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-043"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "diataxis",
+    "copilot-context",
+    "instructions"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,33 @@
+{
+  "id": "TASK-413",
+  "type": "task",
+  "category": "general",
+  "title": "Add MADR 4.0 auto-template to devsteps add --type doc for ADR items",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T13:14:52.642Z",
+  "updated": "2026-04-04T22:43:57.792Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "template",
+    "madr",
+    "doc",
+    "quality"
+  ],
+  "commits": [],
+  "metadata": {}
+}

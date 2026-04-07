@@ -1,0 +1,28 @@
+{
+  "id": "SPIKE-051",
+  "type": "spike",
+  "category": "general",
+  "title": "TEMP PLACEHOLDER - should fail?",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T22:21:24.894Z",
+  "updated": "2026-04-04T22:21:24.894Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [],
+  "commits": [],
+  "metadata": {}
+}

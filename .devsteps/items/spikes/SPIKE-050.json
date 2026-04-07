@@ -1,0 +1,36 @@
+{
+  "id": "SPIKE-050",
+  "type": "spike",
+  "category": "general",
+  "title": "v1.113 Bridging + ESM Bundle Pattern ADR",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-04-04T21:28:07.509Z",
+  "updated": "2026-04-04T21:28:12.690Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "docs/architecture"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-015"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research",
+    "architecture",
+    "mcp"
+  ],
+  "commits": [],
+  "metadata": {}
+}

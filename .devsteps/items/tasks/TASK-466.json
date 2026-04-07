@@ -1,0 +1,32 @@
+{
+  "id": "TASK-466",
+  "type": "task",
+  "category": "general",
+  "title": "Add fixture matrix for frontmatter stripping and strict heading-shift",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T23:05:19.427Z",
+  "updated": "2026-04-04T23:05:19.427Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "spike-060",
+    "tests",
+    "quality"
+  ],
+  "commits": [],
+  "metadata": {}
+}

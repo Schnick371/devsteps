@@ -1,0 +1,38 @@
+{
+  "id": "SPIKE-045",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: Documentation BOM — Production-Quality Architecture (Schema, Lifecycle, AI Integration, Failure Modes)",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T12:45:39.968Z",
+  "updated": "2026-04-04T13:20:06.944Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "bom",
+    "diataxis",
+    "documentation",
+    "schema-design",
+    "json",
+    "yaml",
+    "ai-integration",
+    "architecture",
+    "research"
+  ],
+  "commits": [],
+  "metadata": {}
+}

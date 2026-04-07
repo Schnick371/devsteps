@@ -1,0 +1,44 @@
+{
+  "id": "TASK-419",
+  "type": "task",
+  "category": "general",
+  "title": "Fix CLI Init: extendExistingAgents + packageVersion + sha256-Dedup",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T20:50:36.468Z",
+  "updated": "2026-04-04T20:51:27.532Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/init.ts",
+    "packages/mcp-server/src/handlers/init.ts",
+    "packages/shared/src/utils/init-helpers.ts",
+    "packages/shared/src/utils/update-copilot-files.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-241"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "TASK-420"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-421"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "copilot-files",
+    "init",
+    "cli",
+    "refactor"
+  ],
+  "commits": [],
+  "metadata": {}
+}

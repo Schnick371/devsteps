@@ -170,3 +170,15 @@ Negative:
 - **Heise Article:** "Evolutionäre Architektur in dynamischen Umfeldern" (2025)
 - **Microsoft Azure ADR format**
 - **AWS Prescriptive Guidance ADR process**
+
+---
+
+## ID Scheme Update (2026-04-05, TASK-412)
+
+**DECISION-NNN → ADR-NNN** — Standardized per SPIKE-046 research:
+- `DECISION-NNN` prefix replaced with `ADR-NNN` throughout
+- Rationale: ADR-NNN is shorter, matches industry standard (MADR, adr-tools), matches existing `docs/architecture/adr-*.md` naming convention
+- Affects: CLI command output example (`Created DECISION-001` → `Created ADR-001`), template title format
+- STORY-145 already uses ADR-NNN — no conflict remaining
+
+Note: `devsteps add decision` CLI command is superseded by `devsteps add --type doc` (SPIKE-046 Path C). ADRs are now DOC items with MADR-compatible templates."

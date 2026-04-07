@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-02T15:09:30.097Z",
-  "updated": "2026-04-02T15:11:27.483Z",
+  "updated": "2026-04-03T09:21:52.103Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/tools/doc-depth-query.ts",
@@ -23,7 +23,8 @@
       "SPIKE-036"
     ],
     "depends-on": [
-      "STORY-221"
+      "STORY-221",
+      "STORY-233"
     ],
     "required-by": [],
     "supersedes": [],

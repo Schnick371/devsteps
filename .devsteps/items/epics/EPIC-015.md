@@ -69,4 +69,9 @@ Transform DevSteps extension to match GitLens/GitKraken's proven zero-configurat
 2. **Phase 2**: Build System Transformation
 3. **Phase 3**: Extension Integration
 4. **Phase 4**: Testing & Validation
-5. **Phase 5**: Documentation & Deployment
+5. **Phase 5**: Documentation & Deployment## Update (April 2026)
+Original plan (Dec 2025, GitLens Architecture Model) largely complete. HTTP MCP server runs in-process. Extension registers as McpServerDefinitionProvider. Key remaining gaps:
+1. 13+ Spider Web tools not registered in HTTP MCP path
+2. Tool name collision across MCP servers (generic names: search, list, add)
+3. VSIX packaging verification needed
+4. Workspace root env var not consistent across transport paths

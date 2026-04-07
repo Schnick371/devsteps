@@ -1,0 +1,41 @@
+{
+  "id": "STORY-231",
+  "type": "story",
+  "category": "general",
+  "title": "`embedPlugin.ts` — markdown-it callout box renderer for `::: story`, `::: task`, `::: spike`, `::: code-example`",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T23:58:04.068Z",
+  "updated": "2026-04-02T23:58:35.531Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/preview/embedPlugin.ts",
+    "packages/extension/package.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-040"
+    ],
+    "depends-on": [
+      "BUG-074"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "callout-box",
+    "markdown",
+    "doc-type",
+    "phase-c"
+  ],
+  "commits": [],
+  "metadata": {}
+}

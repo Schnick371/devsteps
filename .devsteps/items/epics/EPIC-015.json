@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2025-12-03T16:29:37.594Z",
-  "updated": "2026-02-24T07:06:12.489Z",
+  "updated": "2026-04-04T22:33:36.324Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -19,7 +19,12 @@
       "STORY-059",
       "STORY-060",
       "STORY-061",
-      "STORY-120"
+      "STORY-120",
+      "STORY-243",
+      "STORY-245",
+      "SPIKE-050",
+      "SPIKE-059",
+      "STORY-246"
     ],
     "tested-by": [],
     "tests": [],

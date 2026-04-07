@@ -1,0 +1,36 @@
+{
+  "id": "SPIKE-046",
+  "type": "spike",
+  "category": "general",
+  "title": "ADR Integration Research — Should DevSteps Add an ADR Item Type?",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T13:12:23.494Z",
+  "updated": "2026-04-04T13:15:17.796Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "SPIKE-047"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "adr",
+    "knowledge-management",
+    "research",
+    "architecture",
+    "decision-record"
+  ],
+  "commits": [],
+  "metadata": {}
+}

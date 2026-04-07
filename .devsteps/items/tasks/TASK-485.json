@@ -1,0 +1,39 @@
+{
+  "id": "TASK-485",
+  "type": "task",
+  "category": "general",
+  "title": "Record ADR for Hybrid Git Ownership decision",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-07T06:43:04.735Z",
+  "updated": "2026-04-07T06:43:55.611Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "docs/architecture/",
+    "docs/research/",
+    "README.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-247"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "adr",
+    "architecture",
+    "decision",
+    "documentation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

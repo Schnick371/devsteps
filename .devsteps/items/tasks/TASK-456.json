@@ -1,0 +1,54 @@
+{
+  "id": "TASK-456",
+  "type": "task",
+  "category": "general",
+  "title": "Remove Command-Level Git Choreography from Prompts/Agents",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T23:02:50.288Z",
+  "updated": "2026-04-07T07:11:48.473Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/copilot-instructions.md",
+    ".github/prompts/devsteps-20-start-work.prompt.md",
+    ".github/prompts/devsteps-30-rapid-cycle.prompt.md",
+    ".github/prompts/devsteps-48-refactor.prompt.md",
+    ".github/prompts/devsteps-49-rename.prompt.md",
+    ".github/prompts/devsteps-50-git-cleanup.prompt.md",
+    ".github/prompts/devsteps-60-release-next.prompt.md",
+    ".github/prompts/devsteps-70-release.prompt.md",
+    ".github/agents/devsteps-R0-coord.agent.md",
+    ".github/agents/devsteps-R0-coord-sprint.agent.md",
+    ".github/agents/devsteps-R4-worker-coder.agent.md",
+    ".github/agents/devsteps-R4-worker-tester.agent.md",
+    ".github/agents/devsteps-R4-worker-documenter.agent.md",
+    ".github/agents/devsteps-R4-worker-refactor.agent.md",
+    ".github/agents/devsteps-R4-worker-integtest.agent.md"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-247"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [
+      "TASK-482"
+    ],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-458"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cleanup",
+    "prompts",
+    "agents"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,33 @@
+{
+  "id": "SPIKE-056",
+  "type": "spike",
+  "category": "general",
+  "title": "Evaluate MCP Sandboxing impact on DevSteps (Windows gap)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T22:30:29.107Z",
+  "updated": "2026-04-04T22:30:29.107Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research",
+    "mcp",
+    "security",
+    "cross-platform"
+  ],
+  "commits": [],
+  "metadata": {}
+}

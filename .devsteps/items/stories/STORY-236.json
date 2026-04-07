@@ -1,0 +1,45 @@
+{
+  "id": "STORY-236",
+  "type": "story",
+  "category": "general",
+  "title": "feat: devsteps docs import CLI command with Diataxis heuristic classification",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T13:28:06.976Z",
+  "updated": "2026-04-04T23:02:25.317Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-396"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-043",
+      "TASK-401",
+      "TASK-402",
+      "TASK-403",
+      "STORY-242"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "TASK-399"
+    ],
+    "supersedes": [],
+    "superseded-by": [
+      "STORY-238"
+    ]
+  },
+  "tags": [
+    "diataxis",
+    "docs-import",
+    "cli",
+    "doc-type"
+  ],
+  "commits": [],
+  "metadata": {}
+}

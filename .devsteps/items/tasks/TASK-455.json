@@ -1,0 +1,34 @@
+{
+  "id": "TASK-455",
+  "type": "task",
+  "category": "general",
+  "title": "Repair corrupt by-status draft index entry (DOC-002) and harden batch update path",
+  "status": "planned",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T22:56:11.952Z",
+  "updated": "2026-04-04T22:56:22.001Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-245"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "index-integrity",
+    "batch-update",
+    "bug-prevention"
+  ],
+  "commits": [],
+  "metadata": {}
+}

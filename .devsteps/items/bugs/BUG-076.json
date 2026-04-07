@@ -1,0 +1,35 @@
+{
+  "id": "BUG-076",
+  "type": "bug",
+  "category": "general",
+  "title": "doc type registered in Zod schema but missing from .devsteps/config.json item_types",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T13:14:00.828Z",
+  "updated": "2026-04-04T21:21:54.903Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "BUG-078"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "bug",
+    "doc",
+    "config",
+    "schema-desync"
+  ],
+  "commits": [],
+  "metadata": {}
+}

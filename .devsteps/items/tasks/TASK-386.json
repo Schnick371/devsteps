@@ -1,0 +1,42 @@
+{
+  "id": "TASK-386",
+  "type": "task",
+  "category": "general",
+  "title": "`embedsCache.ts` — pre-render `.devsteps/index/embeds-cache.json` at extension activate + FSW invalidation",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T23:57:37.022Z",
+  "updated": "2026-04-02T23:58:35.531Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/docs/embedsCache.ts",
+    "packages/extension/src/extension.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "SPIKE-040"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "BUG-074"
+    ],
+    "required-by": [
+      "STORY-231"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "callout-box",
+    "embeds-cache",
+    "doc-type"
+  ],
+  "commits": [],
+  "metadata": {}
+}

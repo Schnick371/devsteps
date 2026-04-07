@@ -3,10 +3,10 @@
   "type": "task",
   "category": "extension",
   "title": "Add MCP server health monitoring and logging",
-  "status": "draft",
+  "status": "cancelled",
   "eisenhower": "not-urgent-important",
   "created": "2025-12-03T17:58:31.456Z",
-  "updated": "2025-12-03T17:59:06.484Z",
+  "updated": "2026-04-04T21:26:29.867Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

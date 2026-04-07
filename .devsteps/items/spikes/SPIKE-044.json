@@ -1,0 +1,39 @@
+{
+  "id": "SPIKE-044",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: Server-Directed Dialog via MCP Tool Chaining — Docs Import Workflow Design",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T19:07:09.418Z",
+  "updated": "2026-04-03T19:23:17.394Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-238",
+      "TASK-404",
+      "TASK-410"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "docs-import",
+    "mcp-dialog",
+    "tool-chaining",
+    "diataxis",
+    "bom",
+    "architecture"
+  ],
+  "commits": [],
+  "metadata": {}
+}

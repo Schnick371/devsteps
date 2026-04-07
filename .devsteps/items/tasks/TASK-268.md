@@ -39,4 +39,4 @@ In each tool definition file, update every `name:` field to add the `devsteps_` 
 - `'write_escalation'` → `'devsteps_write_escalation'`
 
 ## Note
-`server.ts` routing uses `tool.name` dynamically via `Map` — no changes needed there.
+`server.ts` routing uses `tool.name` dynamically via `Map` — no changes needed there.Cancelled: parent STORY-120 is obsolete. Superseded by STORY-245.

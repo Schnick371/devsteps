@@ -1,0 +1,40 @@
+{
+  "id": "TASK-391",
+  "type": "task",
+  "category": "general",
+  "title": "Migration: create items/docs/, docs.json index, and DOC counter for existing projects",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-03T11:49:10.737Z",
+  "updated": "2026-04-03T13:14:09.285Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/items/",
+    ".devsteps/index/by-type/",
+    ".devsteps/index/counters.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-041"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "STORY-234"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "migration",
+    "index-architecture"
+  ],
+  "commits": [],
+  "metadata": {}
+}

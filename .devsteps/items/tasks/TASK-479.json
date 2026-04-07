@@ -1,0 +1,33 @@
+{
+  "id": "TASK-479",
+  "type": "task",
+  "category": "general",
+  "title": "Prepare rollback snapshot before HYBRID policy migration",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-07T06:41:37.626Z",
+  "updated": "2026-04-07T06:41:37.626Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "rollback",
+    "safety",
+    "git",
+    "migrations"
+  ],
+  "commits": [],
+  "metadata": {}
+}

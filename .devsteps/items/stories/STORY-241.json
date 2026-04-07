@@ -1,0 +1,47 @@
+{
+  "id": "STORY-241",
+  "type": "story",
+  "category": "general",
+  "title": "Copilot-Datei-Distribution: Init-Parität, packageVersion, Health-Staleness, Tests",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T20:50:26.800Z",
+  "updated": "2026-04-04T20:51:37.141Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/init.ts",
+    "packages/mcp-server/src/handlers/init.ts",
+    "packages/mcp-server/src/handlers/health.ts",
+    "packages/shared/src/utils/init-helpers.ts",
+    "packages/shared/src/utils/update-copilot-files.ts",
+    "packages/shared/src/utils/backup-github-files.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-012"
+    ],
+    "implemented-by": [
+      "TASK-419",
+      "TASK-420",
+      "TASK-421"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "copilot-files",
+    "init",
+    "health",
+    "testing",
+    "dx"
+  ],
+  "commits": [],
+  "metadata": {}
+}

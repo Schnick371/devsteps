@@ -1,0 +1,38 @@
+{
+  "id": "STORY-238",
+  "type": "story",
+  "category": "general",
+  "title": "feat: server-directed MCP dialog for docs import — 5-tool chain with session tokens",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T19:22:11.192Z",
+  "updated": "2026-04-05T17:52:27.347Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-044"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [
+      "STORY-236"
+    ],
+    "superseded-by": []
+  },
+  "tags": [
+    "docs-import",
+    "mcp-dialog",
+    "tool-chaining",
+    "diataxis",
+    "bom"
+  ],
+  "commits": [],
+  "metadata": {}
+}

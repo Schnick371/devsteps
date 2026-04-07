@@ -156,4 +156,5 @@ try {
 - Zero-configuration activation
 - Server starts in <1 second
 - 100% registration success rate
-- Clear error messages on failure
+- Clear error messages on failure## Completion Note
+ACceptance criteria ~80% met. STORY-061 blockade removed (STORY-061 is done). HTTP MCP transport implemented in EPIC-029. Remaining gaps covered by new stories.

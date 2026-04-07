@@ -1,3 +1,3 @@
 The mcp-server has a manually maintained ITEM_TYPE_ENUM array that duplicates the source-of-truth in packages/shared/src/constants/index.ts. This caused a Phase 1 hard stop (HS-1 variant). Fix: replace all 4 hardcoded type-list sites in mcp-server/tools/system.ts and mcp-server/tools/crud.ts with ItemType.options (Zod enum .options property already exported from shared).
 
-This makes future type additions zero-diff in mcp-server. Can be shipped as part of Phase 1 or as a standalone cleanup.
+This makes future type additions zero-diff in mcp-server. Can be shipped as part of Phase 1 or as a standalone cleanup.All hardcoded enum arrays in system.ts + crud.ts replaced with Zod .options. Commit 6a70ff3.

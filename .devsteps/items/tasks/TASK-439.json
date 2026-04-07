@@ -1,0 +1,37 @@
+{
+  "id": "TASK-439",
+  "type": "task",
+  "category": "general",
+  "title": "T9: Unit + integration tests for heading normalizer and export CLI",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T21:28:27.243Z",
+  "updated": "2026-04-04T21:28:27.243Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/utils/heading-shift.test.ts",
+    "tests/integration/export.bats"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "tests",
+    "unit",
+    "bats",
+    "heading-normalization",
+    "export"
+  ],
+  "commits": [],
+  "metadata": {}
+}

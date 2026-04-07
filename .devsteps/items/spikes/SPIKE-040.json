@@ -1,0 +1,43 @@
+{
+  "id": "SPIKE-040",
+  "type": "spike",
+  "category": "general",
+  "title": "SPIKE: Documentation Architecture II — Story Callout Boxes, Doc Subtypes, Research Preservation & Diataxis-Aligned Classification",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-02T23:23:50.649Z",
+  "updated": "2026-04-02T23:58:28.348Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "TASK-384",
+      "TASK-386"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "BUG-074",
+      "STORY-231",
+      "STORY-232"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "doc-type",
+    "tsd",
+    "diataxis",
+    "research-preservation",
+    "callout-box",
+    "doc-taxonomy",
+    "documentation-architecture"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,33 @@
+{
+  "id": "TASK-389",
+  "type": "task",
+  "category": "general",
+  "title": "Fix STORY-223 description: remove docs-map.yaml format references",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T09:21:08.861Z",
+  "updated": "2026-04-03T09:35:41.444Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-233"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "docs-map",
+    "description-fix"
+  ],
+  "commits": [],
+  "metadata": {}
+}

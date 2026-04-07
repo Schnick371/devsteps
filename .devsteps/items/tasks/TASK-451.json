@@ -1,0 +1,43 @@
+{
+  "id": "TASK-451",
+  "type": "task",
+  "category": "general",
+  "title": "T9: Tests for adjustHeadingLevels() — ≥30 unit cases + export.bats BATS integration tests",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T22:39:29.964Z",
+  "updated": "2026-04-04T22:40:01.262Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/utils/heading-shift.test.ts",
+    "tests/integration/export.bats"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-244"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "tests",
+    "unit",
+    "bats",
+    "heading-normalization",
+    "export"
+  ],
+  "commits": [],
+  "metadata": {}
+}

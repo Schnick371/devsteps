@@ -1,0 +1,36 @@
+{
+  "id": "BUG-079",
+  "type": "bug",
+  "category": "general",
+  "title": "update.ts: WRITE-ORDER BUG — JSON wird vor MD geschrieben; description_hash würde alten Inhalt hashen",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T15:06:56.732Z",
+  "updated": "2026-04-04T16:22:36.671Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/update.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-048"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "STORY-240"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "revision-md-001"
+  ],
+  "commits": [],
+  "metadata": {}
+}

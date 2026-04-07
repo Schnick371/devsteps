@@ -1,0 +1,36 @@
+{
+  "id": "TASK-425",
+  "type": "task",
+  "category": "general",
+  "title": "Verify VSIX packaging includes MCP server bundle",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T21:27:12.719Z",
+  "updated": "2026-04-04T21:27:19.319Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/.vscodeignore",
+    "packages/extension/package.json"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-243"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "packaging",
+    "mcp"
+  ],
+  "commits": [],
+  "metadata": {}
+}

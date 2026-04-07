@@ -1,0 +1,42 @@
+{
+  "id": "BUG-074",
+  "type": "bug",
+  "category": "general",
+  "title": "BUG: `onLanguage:markdown` missing from extension activationEvents — Phase C markdown contributions silently inactive",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-02T23:56:52.886Z",
+  "updated": "2026-04-04T22:37:32.942Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/package.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-040",
+      "TASK-375"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "TASK-386",
+      "STORY-231"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "markdown",
+    "activation",
+    "phase-c",
+    "silent-bug"
+  ],
+  "commits": [],
+  "metadata": {}
+}

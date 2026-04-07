@@ -1,0 +1,34 @@
+{
+  "id": "TASK-388",
+  "type": "task",
+  "category": "general",
+  "title": "Fix STORY-222 description: DocsMapRoot type bug + remove YAML references",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T09:20:56.750Z",
+  "updated": "2026-04-03T09:35:41.287Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-233"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "docs-map",
+    "description-fix",
+    "bug"
+  ],
+  "commits": [],
+  "metadata": {}
+}

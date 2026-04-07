@@ -1,0 +1,39 @@
+{
+  "id": "BUG-081",
+  "type": "bug",
+  "category": "general",
+  "title": "Fix Lint Baseline for Policy Corpus",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-04T23:02:50.291Z",
+  "updated": "2026-04-07T06:43:55.611Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".github/copilot-instructions.md",
+    ".github/instructions/",
+    ".github/prompts/",
+    ".github/agents/",
+    "packages/shared/src/core/docs-map.test.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [
+      "BUG-082"
+    ],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "quality",
+    "lint"
+  ],
+  "commits": [],
+  "metadata": {}
+}

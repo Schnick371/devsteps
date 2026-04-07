@@ -1,0 +1,35 @@
+{
+  "id": "TASK-438",
+  "type": "task",
+  "category": "general",
+  "title": "T8: Wire CLI exportCommand stub to actual exportHandler",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-04T21:28:14.009Z",
+  "updated": "2026-04-04T21:28:14.009Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/cli/src/commands/search-commands.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "cli",
+    "export",
+    "stub-wire",
+    "heading-mode"
+  ],
+  "commits": [],
+  "metadata": {}
+}

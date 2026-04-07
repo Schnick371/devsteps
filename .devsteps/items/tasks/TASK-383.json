@@ -1,0 +1,41 @@
+{
+  "id": "TASK-383",
+  "type": "task",
+  "category": "general",
+  "title": "Migrate 28+ research output files from `tmp/` to `docs/research/{item_id}/` archive",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-02T23:57:13.689Z",
+  "updated": "2026-04-02T23:58:35.534Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "tmp/",
+    "docs/research/"
+  ],
+  "linked_items": {
+    "implements": [
+      "SPIKE-040"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-382"
+    ],
+    "required-by": [
+      "STORY-232"
+    ],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "research-preservation",
+    "migration",
+    "docs"
+  ],
+  "commits": [],
+  "metadata": {}
+}

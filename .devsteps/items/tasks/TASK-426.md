@@ -1,0 +1,1 @@
+After Marketplace install, MCP server must appear under 'MCP SERVERS - INSTALLED'. Create manual test script + document verification steps.

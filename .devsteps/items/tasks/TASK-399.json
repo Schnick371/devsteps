@@ -1,0 +1,36 @@
+{
+  "id": "TASK-399",
+  "type": "task",
+  "category": "general",
+  "title": "feat: devsteps init --import-docs flag integration",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T13:28:06.985Z",
+  "updated": "2026-04-05T18:17:28.468Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-043"
+    ],
+    "depends-on": [
+      "STORY-236"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "diataxis",
+    "docs-import",
+    "cli"
+  ],
+  "commits": [],
+  "metadata": {}
+}

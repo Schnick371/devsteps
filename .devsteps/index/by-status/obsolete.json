@@ -1,8 +1,12 @@
 {
   "category": "obsolete",
   "items": [
+    "STORY-058",
     "STORY-076",
+    "STORY-120",
     "TASK-075",
+    "TASK-081",
+    "TASK-085",
     "TASK-166",
     "TASK-192",
     "TASK-193",
@@ -12,13 +16,9 @@
     "TASK-197",
     "BUG-016",
     "BUG-018",
-    "TASK-085",
     "BUG-037",
-    "TASK-081",
-    "SPIKE-017",
     "SPIKE-015",
-    "STORY-058",
-    "STORY-120"
+    "SPIKE-017"
   ],
-  "updated": "2026-04-04T21:28:21.506Z"
+  "updated": "2026-04-04T23:05:59.567Z"
 }

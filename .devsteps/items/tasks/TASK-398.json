@@ -1,0 +1,37 @@
+{
+  "id": "TASK-398",
+  "type": "task",
+  "category": "general",
+  "title": "feat: add 4 Diataxis MCP prompts to mcp-server prompts handler",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-03T13:28:06.984Z",
+  "updated": "2026-04-04T23:04:56.452Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-237"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-043",
+      "TASK-402"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "diataxis",
+    "mcp-prompts",
+    "copilot-context"
+  ],
+  "commits": [],
+  "metadata": {}
+}

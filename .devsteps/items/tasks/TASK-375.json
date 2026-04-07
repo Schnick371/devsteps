@@ -6,7 +6,7 @@
   "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-02T15:09:07.901Z",
-  "updated": "2026-04-02T19:37:29.909Z",
+  "updated": "2026-04-02T23:58:59.302Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/package.json"
@@ -19,7 +19,8 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "SPIKE-036"
+      "SPIKE-036",
+      "BUG-074"
     ],
     "depends-on": [],
     "required-by": [
