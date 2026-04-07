@@ -332,7 +332,13 @@ export function validateRelationConflict(
     const existingIsHierarchy = isHierarchyRelation(existingType);
 
     // Block: both hierarchy types to same target
+    // Exception: blocks/blocked-by coexists with implements (separate semantics — blocking status vs. parent hierarchy)
     if (newIsHierarchy && existingIsHierarchy) {
+      const blockTypes = new Set(['blocks', 'blocked-by']);
+      const isBlocksWithImplements =
+        (blockTypes.has(newRelationType) || blockTypes.has(existingType)) &&
+        !blockTypes.has(newRelationType) !== !blockTypes.has(existingType);
+      if (isBlocksWithImplements) continue;
       return {
         valid: false,
         error: `Cannot add "${newRelationType}" to ${targetId} — already has hierarchy relation "${existingType}" to same target`,
