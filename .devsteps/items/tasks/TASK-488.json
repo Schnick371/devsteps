@@ -1,0 +1,40 @@
+{
+  "id": "TASK-488",
+  "type": "task",
+  "category": "general",
+  "title": "Add eisenhower quadrant filter to TreeView FilterState (parity with CLI --priority and MCP list)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-07T13:19:26.723Z",
+  "updated": "2026-04-07T13:19:48.684Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/treeView/types.ts",
+    "packages/extension/src/commands/filters.ts",
+    "packages/extension/src/treeView/devstepsTreeDataProvider.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-003"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "treeview",
+    "filter",
+    "eisenhower",
+    "parity"
+  ],
+  "commits": [],
+  "metadata": {}
+}

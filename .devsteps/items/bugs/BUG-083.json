@@ -1,0 +1,41 @@
+{
+  "id": "BUG-083",
+  "type": "bug",
+  "category": "general",
+  "title": "Extension flat view: doc and test items missing — methodologyDetector has no cross-cutting section",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-07T13:18:59.018Z",
+  "updated": "2026-04-07T13:19:35.321Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/treeView/utils/methodologyDetector.ts",
+    "packages/extension/src/treeView/utils/flatViewBuilder.ts",
+    "packages/extension/src/treeView/nodes/methodologySectionNode.ts",
+    "packages/extension/src/treeView/devstepsTreeDataProvider.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-490"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "treeview",
+    "flat-view",
+    "doc-type",
+    "cross-cutting"
+  ],
+  "commits": [],
+  "metadata": {}
+}

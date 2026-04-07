@@ -1,0 +1,40 @@
+{
+  "id": "TASK-489",
+  "type": "task",
+  "category": "general",
+  "title": "Add assignee filter to TreeView FilterState (parity with CLI --assignee and MCP list)",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-04-07T13:19:26.725Z",
+  "updated": "2026-04-07T13:19:48.685Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/treeView/types.ts",
+    "packages/extension/src/commands/filters.ts",
+    "packages/extension/src/treeView/devstepsTreeDataProvider.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-003"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": []
+  },
+  "tags": [
+    "extension",
+    "treeview",
+    "filter",
+    "assignee",
+    "parity"
+  ],
+  "commits": [],
+  "metadata": {}
+}

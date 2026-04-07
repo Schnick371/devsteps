@@ -1,12 +1,12 @@
 {
-  "id": "BUG-072",
-  "type": "bug",
+  "id": "TASK-487",
+  "type": "task",
   "category": "general",
-  "title": "SILENT: treeView/utils/itemLoader.ts returns null for DOC-NNN items (regex excludes DOC prefix)",
+  "title": "Close BUG-072: verify itemLoader DOC regex fix + add unit test DOC-NNN → type:doc",
   "status": "draft",
-  "eisenhower": "urgent-important",
-  "created": "2026-04-02T13:36:22.639Z",
-  "updated": "2026-04-07T13:19:48.686Z",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-07T13:19:26.717Z",
+  "updated": "2026-04-07T13:19:48.685Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/treeView/utils/itemLoader.ts"
@@ -19,8 +19,7 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "SPIKE-036",
-      "TASK-487"
+      "BUG-072"
     ],
     "depends-on": [],
     "required-by": [],
@@ -28,10 +27,10 @@
     "superseded-by": []
   },
   "tags": [
-    "doc-type",
     "extension",
-    "treeview",
-    "silent-bug"
+    "doc-type",
+    "cleanup",
+    "testing"
   ],
   "commits": [],
   "metadata": {}
