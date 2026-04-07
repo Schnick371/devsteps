@@ -56,11 +56,11 @@ DevSteps is the primary work-tracking system. NEVER edit `.devsteps/` directly �
 1. Check backlog: `mcp_devsteps_list` / `mcp_devsteps_search` (avoid duplicates)
 2. Create **primary** item if none exists: `mcp_devsteps_add` _(bootstrap only — coord's sole permitted direct `add`)_
 3. Set status `in-progress`: `mcp_devsteps_update`
-4. Create branch: `git checkout -b story/<ID>`
+4. 💡 Suggest: `git checkout -b story/<ID>` (user executes)
 5. Dispatch analysis (Ring 1 → Ring 2 → Ring 3 → Ring 4 → Ring 5)
-6. After Gate-PASS: `git merge --no-ff` → delete branch
+6. After Gate-PASS: 💡 Suggest: `git merge --no-ff <branch>` then delete branch (user executes)
 7. Set status `done`: `mcp_devsteps_update` + `append_description` with result
-8. Commit with `Implements: <ID>` footer
+8. Prepare commit message with `Implements: <ID>` footer; 💡 suggest `git commit` (user executes)
 
 > **Delegation boundary (I-11):** coord calls `mcp_devsteps_add` ONLY in step 2 for the primary item. All follow-up items MUST be delegated to `worker-devsteps`. All `mcp_devsteps_link` calls MUST be delegated to `worker-devsteps`.
 
@@ -84,6 +84,12 @@ DevSteps is the primary work-tracking system. NEVER edit `.devsteps/` directly �
 | **DevSteps files** | NEVER edit `.devsteps/` directly — MCP tools only |
 | **Commits** | Conventional Commits MANDATORY |
 | **Status** | NEVER skip a status step in DevSteps |
+| **Git writes** | Agents output `💡 Git:` advisory hints — user executes branch/commit/merge/push/tag |
+| **Implements footer** | `Implements: <ID>` MANDATORY in every commit — agents prepare message; user commits |
+| **No main commit** | NEVER prepare a commit targeting `main` directly — warn if user is on `main` |
+| **Remote safety** | WARN before suggesting `git push origin` (public remote) during development |
+
+> **Full git governance policy:** See `.github/instructions/devsteps-git-ownership.instructions.md` for the complete Hybrid Git Ownership Policy, advisory hint format, and agent read-only permissions.
 
 ## Entry Point Routing
 
