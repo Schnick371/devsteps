@@ -1,0 +1,37 @@
+{
+  "id": "DOC-052",
+  "type": "doc",
+  "category": "general",
+  "title": "Doc Items als Copilot-Wissensquelle",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T21:53:07.580Z",
+  "updated": "2026-04-09T18:36:50.005Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/items/docs/DOC-052.json",
+    ".devsteps/items/docs/DOC-052.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "h2,copilot,doc-items,explanation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

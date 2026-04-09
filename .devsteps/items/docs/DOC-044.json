@@ -1,0 +1,37 @@
+{
+  "id": "DOC-044",
+  "type": "doc",
+  "category": "general",
+  "title": "Inhalt der DOC BOM — ARCH-NNN Schema und Verwaltung",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T21:53:06.200Z",
+  "updated": "2026-04-09T18:36:48.304Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/items/docs/DOC-044.json",
+    ".devsteps/items/docs/DOC-044.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "h3,bom,schema,reference"
+  ],
+  "commits": [],
+  "metadata": {}
+}

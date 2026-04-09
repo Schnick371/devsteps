@@ -1,0 +1,34 @@
+{
+  "id": "DOC-033",
+  "type": "doc",
+  "category": "general",
+  "title": "Spike — Untersuchungen und PoCs",
+  "status": "obsolete",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T21:51:57.103Z",
+  "updated": "2026-04-08T21:52:27.112Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "h2,spike,item-type"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,34 @@
+{
+  "id": "DOC-036",
+  "type": "doc",
+  "category": "general",
+  "title": "Task — Atomare Umsetzungsschritte",
+  "status": "obsolete",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T21:52:06.444Z",
+  "updated": "2026-04-08T21:52:27.548Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "h2,task,item-type"
+  ],
+  "commits": [],
+  "metadata": {}
+}

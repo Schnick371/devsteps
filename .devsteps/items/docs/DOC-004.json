@@ -1,0 +1,37 @@
+{
+  "id": "DOC-004",
+  "type": "doc",
+  "category": "general",
+  "title": "Die DevSteps Item-Typen",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T21:50:41.732Z",
+  "updated": "2026-04-09T18:36:43.904Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/items/docs/DOC-004.json",
+    ".devsteps/items/docs/DOC-004.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "h1,item-types,devsteps-reference"
+  ],
+  "commits": [],
+  "metadata": {}
+}
