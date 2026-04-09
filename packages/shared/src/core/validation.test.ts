@@ -17,9 +17,47 @@ function makeItem(id: string, type: string): WorkItem {
 
 describe('validation — doc type guards', () => {
   const docItem = makeItem('DOC-001', ITEM_TYPE.DOC);
+  const docItem2 = makeItem('DOC-002', ITEM_TYPE.DOC);
   const epicItem = makeItem('EPIC-001', ITEM_TYPE.EPIC);
   const storyItem = makeItem('STORY-001', ITEM_TYPE.STORY);
   const taskItem = makeItem('TASK-001', ITEM_TYPE.TASK);
+
+  describe('doc → doc link guard (BUG-089)', () => {
+    it('rejects doc → doc via documents in Scrum', () => {
+      const result = validateRelationship(docItem, docItem2, RELATIONSHIP_TYPE.DOCUMENTS, METHODOLOGY.SCRUM);
+      expect(result.valid).toBe(false);
+      expect(result.error).toContain('Doc-to-doc');
+      expect(result.suggestion).toContain('BOM');
+    });
+
+    it('rejects doc → doc via documented-by in Scrum', () => {
+      const result = validateRelationship(docItem, docItem2, RELATIONSHIP_TYPE.DOCUMENTED_BY, METHODOLOGY.SCRUM);
+      expect(result.valid).toBe(false);
+      expect(result.error).toContain('Doc-to-doc');
+    });
+
+    it('rejects doc → doc via documents in Waterfall', () => {
+      const result = validateRelationship(docItem, docItem2, RELATIONSHIP_TYPE.DOCUMENTS, METHODOLOGY.WATERFALL);
+      expect(result.valid).toBe(false);
+      expect(result.error).toContain('Doc-to-doc');
+    });
+
+    it('rejects doc → doc via documents in Hybrid', () => {
+      const result = validateRelationship(docItem, docItem2, RELATIONSHIP_TYPE.DOCUMENTS, METHODOLOGY.HYBRID);
+      expect(result.valid).toBe(false);
+      expect(result.error).toContain('Doc-to-doc');
+    });
+
+    it('still allows doc → story via documents (valid)', () => {
+      const result = validateRelationship(docItem, storyItem, RELATIONSHIP_TYPE.DOCUMENTS, METHODOLOGY.SCRUM);
+      expect(result.valid).toBe(true);
+    });
+
+    it('still allows story → doc via documented-by (valid)', () => {
+      const result = validateRelationship(storyItem, docItem, RELATIONSHIP_TYPE.DOCUMENTED_BY, METHODOLOGY.SCRUM);
+      expect(result.valid).toBe(true);
+    });
+  });
 
   describe('Scrum methodology', () => {
     const methodology = METHODOLOGY.SCRUM;

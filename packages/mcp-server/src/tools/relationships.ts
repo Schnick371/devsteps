@@ -28,7 +28,7 @@ const RELATION_TYPE_ENUM = [
 export const linkTool: Tool = {
   name: 'link',
   description:
-    'Create a relationship between two items. HIERARCHY RULES (implements): Scrum: Epic→Story|Spike, Story→Task, Bug→Task, Spike→Task. Story→Bug (blocks). Waterfall: Requirement→Feature|Spike, Feature→Task, Bug→Task, Spike→Task. Feature→Bug (blocks). FLEXIBLE (always allowed): relates-to, blocks, depends-on, tested-by, supersedes.',
+    'Create a relationship between two items. HIERARCHY RULES (implements): Scrum: Epic→Story|Spike, Story→Task, Bug→Task, Spike→Task. Story→Bug (blocks). Waterfall: Requirement→Feature|Spike, Feature→Task, Bug→Task, Spike→Task. Feature→Bug (blocks). FLEXIBLE (always allowed): relates-to, blocks, depends-on, tested-by, supersedes. NOTE: documents/documented-by links between two doc items are rejected — use BOM structure (parent_id in docs-map.json) for doc-to-doc hierarchy instead.',
   inputSchema: {
     type: 'object',
     properties: {

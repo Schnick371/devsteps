@@ -44,6 +44,20 @@ export function validateRelationship(
   relationType: string,
   methodology: Methodology
 ): ValidationResult {
+  // Doc → doc via documents/documented-by is forbidden — BOM is the only valid doc-to-doc structure
+  if (
+    (relationType === 'documents' || relationType === 'documented-by') &&
+    source.type === ITEM_TYPE.DOC &&
+    target.type === ITEM_TYPE.DOC
+  ) {
+    return {
+      valid: false,
+      error: 'Doc-to-doc links via documents/documented-by are not allowed',
+      suggestion:
+        'Use docs-map.json BOM structure (parent_id) for doc-to-doc relationships. Run devsteps_docs_bom_commit to establish doc-to-doc hierarchy.',
+    };
+  }
+
   // Flexible relationships always allowed
   if (isFlexibleRelation(relationType)) {
     return { valid: true };
