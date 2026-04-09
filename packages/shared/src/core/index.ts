@@ -54,6 +54,7 @@ export {
   writeDocsMap,
 } from './docs-map.js';
 export { type GetItemResult, getItem } from './get.js';
+export { validateWorkspacePath } from './path-guard.js';
 export {
   type ClassificationResult,
   DIATAXIS_TYPES,
