@@ -1,0 +1,42 @@
+{
+  "id": "DOC-059",
+  "type": "doc",
+  "category": "general",
+  "title": "Content Fragment Hierarchy — H-Level Mapping and Structure Rules",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T10:09:08.358Z",
+  "updated": "2026-04-09T18:36:50.385Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/items/docs/DOC-059.json",
+    ".devsteps/items/docs/DOC-059.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "h2",
+    "doc",
+    "content-fragment",
+    "h-level-schema",
+    "bom",
+    "hierarchy"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,37 @@
+{
+  "id": "DOC-047",
+  "type": "doc",
+  "category": "general",
+  "title": "Spider Web Tools — Mandate, Analyse, Eskalation",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T21:53:06.719Z",
+  "updated": "2026-04-09T18:36:48.953Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/items/docs/DOC-047.json",
+    ".devsteps/items/docs/DOC-047.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "h2,mcp,spider-web-tools,reference"
+  ],
+  "commits": [],
+  "metadata": {}
+}

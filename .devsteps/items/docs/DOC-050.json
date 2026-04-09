@@ -1,0 +1,37 @@
+{
+  "id": "DOC-050",
+  "type": "doc",
+  "category": "general",
+  "title": "Dispatch Prompt Format und Invarianten",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T21:53:07.235Z",
+  "updated": "2026-04-09T18:36:49.595Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/items/docs/DOC-050.json",
+    ".devsteps/items/docs/DOC-050.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "h2,spider-web,dispatch,reference"
+  ],
+  "commits": [],
+  "metadata": {}
+}

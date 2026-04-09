@@ -1,0 +1,37 @@
+{
+  "id": "DOC-028",
+  "type": "doc",
+  "category": "general",
+  "title": "Doc Item — Content Fragment in the DevSteps Documentation Graph",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T21:51:47.670Z",
+  "updated": "2026-04-09T18:36:47.227Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/items/docs/DOC-028.json",
+    ".devsteps/items/docs/DOC-028.md"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "h2,doc,item-type,devsteps-reference"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,34 @@
+{
+  "id": "DOC-056",
+  "type": "doc",
+  "category": "general",
+  "title": "Verknuepfen von Doc Items mit anderen Items",
+  "status": "obsolete",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T21:53:28.201Z",
+  "updated": "2026-04-08T21:55:08.788Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "h3,doc-item,linking"
+  ],
+  "commits": [],
+  "metadata": {}
+}
