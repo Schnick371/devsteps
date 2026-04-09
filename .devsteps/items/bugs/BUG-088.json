@@ -1,18 +1,16 @@
 {
-  "id": "BUG-083",
+  "id": "BUG-088",
   "type": "bug",
   "category": "general",
-  "title": "Extension flat view: doc and test items missing — methodologyDetector has no cross-cutting section",
-  "status": "done",
+  "title": "methodologyDetector.ts: no cycle guard → self/circular implements link causes stack overflow + silent flat view crash",
+  "status": "draft",
   "eisenhower": "urgent-important",
-  "created": "2026-04-07T13:18:59.018Z",
+  "created": "2026-04-09T08:31:06.274Z",
   "updated": "2026-04-09T08:31:23.936Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/treeView/utils/methodologyDetector.ts",
-    "packages/extension/src/treeView/utils/flatViewBuilder.ts",
-    "packages/extension/src/treeView/nodes/methodologySectionNode.ts",
-    "packages/extension/src/treeView/devstepsTreeDataProvider.ts"
+    "packages/extension/src/treeView/utils/methodologyDetector.test.ts"
   ],
   "linked_items": {
     "implements": [],
@@ -22,21 +20,23 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "TASK-490",
-      "EPIC-003",
-      "BUG-088"
+      "BUG-083"
     ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
-    "superseded-by": []
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
   },
   "tags": [
     "extension",
     "treeview",
-    "flat-view",
-    "doc-type",
-    "cross-cutting"
+    "methodology-detector",
+    "cycle-detection",
+    "defensive-coding"
   ],
   "commits": [],
   "metadata": {}

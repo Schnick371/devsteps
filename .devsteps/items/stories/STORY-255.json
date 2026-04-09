@@ -1,0 +1,47 @@
+{
+  "id": "STORY-255",
+  "type": "story",
+  "category": "general",
+  "title": "Health Check: validate .devsteps data integrity — detect circular links, orphaned indexes, type mismatches",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T08:31:06.276Z",
+  "updated": "2026-04-09T08:31:23.936Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/doctor.ts",
+    "packages/cli/src/commands/doctor.ts",
+    "packages/mcp-server/src/tools/doctor.ts",
+    "packages/extension/src/extension.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-003"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "health-check",
+    "doctor",
+    "data-integrity",
+    "extension",
+    "cli",
+    "mcp",
+    "defensive-coding"
+  ],
+  "commits": [],
+  "metadata": {}
+}

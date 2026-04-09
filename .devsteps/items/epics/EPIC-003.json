@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2025-11-23T15:34:16.783Z",
-  "updated": "2026-04-07T13:19:48.685Z",
+  "updated": "2026-04-09T08:31:23.936Z",
   "author": "thomas.hertel@devsteps.dev",
   "affected_paths": [
     "packages/vscode-extension/"
@@ -44,7 +44,8 @@
       "STORY-048",
       "STORY-055",
       "STORY-115",
-      "BUG-083"
+      "BUG-083",
+      "STORY-255"
     ],
     "tested-by": [],
     "tests": [],
@@ -58,7 +59,8 @@
       "EPIC-009",
       "TASK-422",
       "TASK-424",
-      "TASK-489"
+      "TASK-489",
+      "TASK-487"
     ],
     "depends-on": [
       "STORY-001"

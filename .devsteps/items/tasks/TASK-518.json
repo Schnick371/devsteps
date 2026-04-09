@@ -1,0 +1,42 @@
+{
+  "id": "TASK-518",
+  "type": "task",
+  "category": "general",
+  "title": "Fix corrupted data: BUG-032 self-implements link causes methodologyDetector stack overflow",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-09T08:31:06.261Z",
+  "updated": "2026-04-09T08:31:23.935Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/items/bugs/BUG-032.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "BUG-083"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "extension",
+    "data-corruption",
+    "flat-view",
+    "health-check",
+    "critical"
+  ],
+  "commits": [],
+  "metadata": {}
+}
