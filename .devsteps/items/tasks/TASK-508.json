@@ -1,0 +1,42 @@
+{
+  "id": "TASK-508",
+  "type": "task",
+  "category": "general",
+  "title": "ADR-S2-12 Root-ARCH-NNN Konvention dokumentieren (Format, Vergabe, reserved IDs)",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-04-08T22:53:11.676Z",
+  "updated": "2026-04-08T22:59:24.014Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "docs/"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "TASK-493",
+      "EPIC-043"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "ADR-S2-12",
+    "documentation",
+    "ARCH-NNN",
+    "convention"
+  ],
+  "commits": [],
+  "metadata": {}
+}

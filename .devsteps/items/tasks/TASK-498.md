@@ -1,0 +1,1 @@
+Legt `handlers/devsteps_docs_map_write.ts` an (Default-Export, nutzt `writeDocsMap` aus shared, validiert ARCH-NNN-Format vor Write). Legt `tools/docs-map.ts` als neue Datei für BOM-Map-Tool-Definitionen an. Registriert `docsMapWriteTool` in `tools/index.ts` und `server.ts`. Response: `{ success, arch_ids_written, shadow_path }`.

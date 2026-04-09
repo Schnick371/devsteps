@@ -1,0 +1,1 @@
+Implementiert Handler für `devsteps_docs_map_add_node`: Args `{ id?: string, parent_id?: string, title: string, order: number, doc_id?: string, devsteps_items?: string[] }`. Wenn `id` nicht übergeben wird → `nextArchId()` aufrufen. Delegiert an `upsertDocsMapNode`. Ergänzt Tool-Definition in `docs-map.ts`. Response: `{ success, id, parent_id }`.

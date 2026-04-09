@@ -1,0 +1,44 @@
+{
+  "id": "STORY-252",
+  "type": "story",
+  "category": "general",
+  "title": "devsteps_doc_read_content: MCP-Tool zum Lesen von DOC-Item-Vollinhalt",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T22:00:42.480Z",
+  "updated": "2026-04-09T07:49:11.998Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-043"
+    ],
+    "implemented-by": [
+      "TASK-503",
+      "TASK-504",
+      "TASK-509"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "docs-pipeline",
+    "mcp-tools",
+    "copilot",
+    "doc-content",
+    "read"
+  ],
+  "commits": [],
+  "metadata": {}
+}

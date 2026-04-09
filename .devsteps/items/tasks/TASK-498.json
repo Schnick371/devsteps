@@ -1,0 +1,49 @@
+{
+  "id": "TASK-498",
+  "type": "task",
+  "category": "general",
+  "title": "Implement `devsteps_docs_map_write` Handler, Tool-Schema und server.ts-Registrierung",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T22:51:43.027Z",
+  "updated": "2026-04-08T22:56:07.669Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/devsteps_docs_map_write.ts",
+    "packages/mcp-server/src/tools/docs-map.ts",
+    "packages/mcp-server/src/tools/index.ts",
+    "packages/mcp-server/src/server.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-222"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-496"
+    ],
+    "required-by": [
+      "TASK-499",
+      "TASK-506"
+    ],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "docs-map",
+    "handler",
+    "mcp-tool",
+    "BOM"
+  ],
+  "commits": [],
+  "metadata": {}
+}

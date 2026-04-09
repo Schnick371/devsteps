@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-04-09T08:31:06.274Z",
-  "updated": "2026-04-09T08:31:23.936Z",
+  "updated": "2026-04-09T08:33:54.518Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/treeView/utils/methodologyDetector.ts",
@@ -20,7 +20,8 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "BUG-083"
+      "BUG-083",
+      "EPIC-003"
     ],
     "depends-on": [],
     "required-by": [],

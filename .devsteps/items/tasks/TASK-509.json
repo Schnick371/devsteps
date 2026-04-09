@@ -1,0 +1,38 @@
+{
+  "id": "TASK-509",
+  "type": "task",
+  "category": "general",
+  "title": "Migrate 58 DOC-items: affected_paths setzen",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-09T07:48:01.920Z",
+  "updated": "2026-04-09T18:37:30.339Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-252"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "doc-items",
+    "migration",
+    "fail-fast"
+  ],
+  "commits": [],
+  "metadata": {}
+}

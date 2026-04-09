@@ -1,0 +1,1 @@
+Extrahiert den bestehenden Path-Traversal-Guard aus `devsteps_docs_import.ts:32–36` in `packages/shared/src/core/path-guard.ts` als `validateWorkspacePath(input: string, workspaceRoot: string): string | null`. Null = Reject. Exportiert in `core/index.ts`. Muss vor STORY-252 und STORY-253 existieren — beide Handler haben user-supplied Pfade.

@@ -1,0 +1,45 @@
+{
+  "id": "TASK-494",
+  "type": "task",
+  "category": "general",
+  "title": "Extract `validateWorkspacePath(input, root)` as shared security utility in `path-guard.ts`",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-08T22:51:05.345Z",
+  "updated": "2026-04-08T22:55:57.964Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/path-guard.ts",
+    "packages/shared/src/core/index.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-043"
+    ],
+    "depends-on": [],
+    "required-by": [
+      "TASK-503",
+      "TASK-505"
+    ],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "security",
+    "path-traversal",
+    "OWASP",
+    "shared"
+  ],
+  "commits": [],
+  "metadata": {}
+}

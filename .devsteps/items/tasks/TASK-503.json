@@ -1,0 +1,46 @@
+{
+  "id": "TASK-503",
+  "type": "task",
+  "category": "general",
+  "title": "Implement `devsteps_doc_read_content` Handler mit dreistufigem Fallback-Mechanismus",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T22:52:26.182Z",
+  "updated": "2026-04-09T07:47:05.004Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/devsteps_doc_read_content.ts",
+    "packages/mcp-server/src/tools/docs-map.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-252"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-494"
+    ],
+    "required-by": [
+      "TASK-504"
+    ],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "doc-read",
+    "handler",
+    "3-tier-fallback",
+    "security"
+  ],
+  "commits": [],
+  "metadata": {}
+}

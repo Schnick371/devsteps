@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "general",
   "title": "SILENT: treeView/utils/itemLoader.ts returns null for DOC-NNN items (regex excludes DOC prefix)",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-04-02T13:36:22.639Z",
-  "updated": "2026-04-07T13:19:48.686Z",
+  "updated": "2026-04-07T13:52:50.768Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/treeView/utils/itemLoader.ts"

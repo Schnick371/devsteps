@@ -1,0 +1,38 @@
+{
+  "id": "TASK-515",
+  "type": "task",
+  "category": "general",
+  "title": "DOC-001 vs DOC-052 Duplikat klären und bereinigen",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-04-09T07:49:03.964Z",
+  "updated": "2026-04-09T07:49:03.964Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "doc-items",
+    "duplicates",
+    "cleanup",
+    "doc-001",
+    "doc-052"
+  ],
+  "commits": [],
+  "metadata": {}
+}

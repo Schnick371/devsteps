@@ -1,0 +1,45 @@
+{
+  "id": "TASK-507",
+  "type": "task",
+  "category": "general",
+  "title": "Register `devsteps_docs_scan_headings` und `devsteps_docs_assemble` in server.ts",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T22:53:01.410Z",
+  "updated": "2026-04-08T22:56:23.058Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/index.ts",
+    "packages/mcp-server/src/server.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-253"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-505",
+      "TASK-506"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "scan-headings",
+    "assemble",
+    "registration",
+    "server"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,49 @@
+{
+  "id": "TASK-501",
+  "type": "task",
+  "category": "general",
+  "title": "Implement `devsteps_docs_map_remove_node` und `devsteps_docs_map_link_items` Handler",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T22:52:07.219Z",
+  "updated": "2026-04-08T22:55:25.165Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/devsteps_docs_map_remove_node.ts",
+    "packages/mcp-server/src/handlers/devsteps_docs_map_link_items.ts",
+    "packages/mcp-server/src/tools/docs-map.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-251"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-495"
+    ],
+    "required-by": [
+      "TASK-502"
+    ],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "docs-map",
+    "handler",
+    "mcp-tool",
+    "BOM",
+    "remove-node",
+    "link-items"
+  ],
+  "commits": [],
+  "metadata": {}
+}

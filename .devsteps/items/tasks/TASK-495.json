@@ -1,0 +1,48 @@
+{
+  "id": "TASK-495",
+  "type": "task",
+  "category": "general",
+  "title": "Add `upsertDocsMapNode`, `removeDocsMapNode`, `patchDocsMapNodeItems` to `packages/shared/src/core/docs-map.ts`",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T22:51:14.300Z",
+  "updated": "2026-04-08T22:55:05.844Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/docs-map.ts",
+    "packages/shared/src/core/index.ts",
+    "packages/shared/src/core/docs-map.test.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-251"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-496"
+    ],
+    "required-by": [
+      "TASK-500",
+      "TASK-501"
+    ],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "docs-map",
+    "shared",
+    "BOM",
+    "CRUD"
+  ],
+  "commits": [],
+  "metadata": {}
+}

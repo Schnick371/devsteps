@@ -1,0 +1,36 @@
+{
+  "id": "TASK-513",
+  "type": "task",
+  "category": "general",
+  "title": "Agent-Instructions aktualisieren: doc + research ItemType Referenzen",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-04-09T07:48:34.874Z",
+  "updated": "2026-04-09T07:48:34.874Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "instructions",
+    "documentation",
+    "doc-items"
+  ],
+  "commits": [],
+  "metadata": {}
+}

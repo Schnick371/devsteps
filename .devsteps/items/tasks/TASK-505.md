@@ -1,0 +1,1 @@
+Handler für `devsteps_docs_scan_headings`: Args `{ path: string }`. Guard zuerst: `validateWorkspacePath(path, workspaceRoot)` — null → reject. Scannt Markdown-Datei auf `#`-Headings (H1–H4), gibt `{ headings: Array<{ level: number, text: string, line: number }> }` zurück. Beachte: Symlinks überspringen (analog `devsteps_docs_import.ts:32–36`).

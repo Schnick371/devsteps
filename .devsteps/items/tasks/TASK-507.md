@@ -1,0 +1,1 @@
+Re-Export beider neuer Tool-Definitionen in `tools/index.ts`. Eintrag im `setupTools()`-Block "Docs content + workflow" in `server.ts`. Sicherstellen, dass der Block kommentiert ist und die Zuordnung zu STORY-253 dokumentiert.

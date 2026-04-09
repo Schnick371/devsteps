@@ -1,0 +1,43 @@
+{
+  "id": "BUG-086",
+  "type": "bug",
+  "category": "general",
+  "title": "bom_commit schreibt Pfad-Slugs statt ARCH-NNN IDs — verletzt ADR-S2-12",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-08T22:50:56.568Z",
+  "updated": "2026-04-08T22:53:52.090Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/devsteps_docs_bom_commit.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-222"
+    ],
+    "implemented-by": [
+      "TASK-497"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "bom_commit",
+    "ARCH-NNN",
+    "id-format",
+    "ADR-S2-12"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,46 @@
+{
+  "id": "STORY-253",
+  "type": "story",
+  "category": "general",
+  "title": "7-Schritte-Dokumenten-Workflow vollständig via MCP-Tools unterstützen",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T22:01:19.389Z",
+  "updated": "2026-04-09T07:49:11.998Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-043"
+    ],
+    "implemented-by": [
+      "TASK-505",
+      "TASK-506",
+      "TASK-507",
+      "TASK-510"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "docs-pipeline",
+    "workflow",
+    "7-step",
+    "BOM",
+    "assembly",
+    "copilot"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,1 @@
+Implementiere fail-fast-Verhalten in `devsteps_docs_map_read`: wenn `affected_paths` leer ist, sofort `{ success: false, error: 'affected_paths not set on doc item DOC-NNN — run migrate-doc-affected-paths first' }` zurückgeben. Kein Fallback auf manuelle Suche.

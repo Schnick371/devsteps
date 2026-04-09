@@ -1,0 +1,44 @@
+{
+  "id": "STORY-258",
+  "type": "story",
+  "category": "general",
+  "title": "CLI: devsteps artifacts subcommand (status / clean / archive)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T18:36:30.180Z",
+  "updated": "2026-04-09T18:38:54.347Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-044"
+    ],
+    "implemented-by": [
+      "TASK-526"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "STORY-260"
+    ],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "cli",
+    "artifacts",
+    "cleanup",
+    "lifecycle",
+    "archive"
+  ],
+  "commits": [],
+  "metadata": {}
+}

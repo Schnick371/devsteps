@@ -1,0 +1,46 @@
+{
+  "id": "TASK-502",
+  "type": "task",
+  "category": "general",
+  "title": "Register STORY-251 BOM CRUD Tools in `tools/index.ts` und `server.ts`",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T22:52:16.062Z",
+  "updated": "2026-04-08T22:55:25.165Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/index.ts",
+    "packages/mcp-server/src/server.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-251"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-499",
+      "TASK-500",
+      "TASK-501"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "docs-map",
+    "server",
+    "registration",
+    "BOM"
+  ],
+  "commits": [],
+  "metadata": {}
+}

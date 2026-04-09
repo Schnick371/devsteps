@@ -1,0 +1,1 @@
+Implementiert `nextArchId(devstepsDir: string): string` in `docs-map.ts` (scannt `document.nodes`, gibt nächste freie `ARCH-NNN` zurück, format `ARCH-${String(n).padStart(3,'0')}`). Ergänzt `appendDocsMapNode` um Duplicate-ID-Check vor `push()`. Exportiert `nextArchId` in `core/index.ts`. Pflicht-Unit-Test: Collision-Szenario (2 parallele Aufrufe auf identischem Snapshot).

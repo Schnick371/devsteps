@@ -1,0 +1,47 @@
+{
+  "id": "STORY-251",
+  "type": "story",
+  "category": "general",
+  "title": "MCP-Tools für docs-map.json BOM-Verwaltung (ARCH-NNN Knoten)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T22:00:29.366Z",
+  "updated": "2026-04-09T07:49:11.998Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-043"
+    ],
+    "implemented-by": [
+      "TASK-495",
+      "TASK-499",
+      "TASK-500",
+      "TASK-501",
+      "TASK-502",
+      "TASK-511"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "docs-pipeline",
+    "BOM",
+    "docs-map",
+    "mcp-tools",
+    "ARCH"
+  ],
+  "commits": [],
+  "metadata": {}
+}

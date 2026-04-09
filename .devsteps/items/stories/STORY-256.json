@@ -1,0 +1,43 @@
+{
+  "id": "STORY-256",
+  "type": "story",
+  "category": "general",
+  "title": "Define Canonical Agent Output Protocol: naming, lifecycle, session dirs, TTL tiers",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T18:36:30.176Z",
+  "updated": "2026-04-09T18:38:54.348Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-044"
+    ],
+    "implemented-by": [
+      "TASK-521"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "STORY-262"
+    ],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "agent-protocol",
+    "documentation",
+    "specification",
+    "foundation"
+  ],
+  "commits": [],
+  "metadata": {}
+}

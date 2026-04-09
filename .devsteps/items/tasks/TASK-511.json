@@ -1,0 +1,39 @@
+{
+  "id": "TASK-511",
+  "type": "task",
+  "category": "general",
+  "title": "getNodeContext() + neighbor-Params in devsteps_docs_map_read",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T07:48:01.931Z",
+  "updated": "2026-04-09T07:49:11.998Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-251"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "bom-navigation",
+    "neighbor-query",
+    "docs-map",
+    "getNodeContext"
+  ],
+  "commits": [],
+  "metadata": {}
+}

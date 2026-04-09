@@ -1,0 +1,1 @@
+Erweitert ADR-S2-12 um: (1) Root-ARCH-000-Konvention (reserviert für Manifest-Root), (2) Vergabe-Algorithmus (`nextArchId` scannt Nodes, Math.max + 1, padStart 3), (3) Namespace-Trennung (`ARCH-NNN` vs `DOC-NNN`), (4) Restriction: ARCH-IDs dürfen nie in DevSteps `generateItemId()` eingebaut werden. Kein Blocker für Code-Tasks.

@@ -1,0 +1,44 @@
+{
+  "id": "STORY-259",
+  "type": "story",
+  "category": "general",
+  "title": "Migrate 2 git-tracked Research Briefs from tmp/ to docs/research/ + register as DOC items",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T18:36:30.181Z",
+  "updated": "2026-04-09T18:38:54.346Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-044"
+    ],
+    "implemented-by": [
+      "TASK-528"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-256"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "migration",
+    "research-briefs",
+    "doc-items",
+    "git",
+    "tmp"
+  ],
+  "commits": [],
+  "metadata": {}
+}

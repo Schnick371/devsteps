@@ -1,0 +1,40 @@
+{
+  "id": "TASK-526",
+  "type": "task",
+  "category": "general",
+  "title": "Implement devsteps artifacts archive <file> [--item-id <ID>]",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T18:37:31.194Z",
+  "updated": "2026-04-09T18:38:42.109Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-258"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "cli",
+    "artifacts",
+    "archive",
+    "doc-items",
+    "git-mv"
+  ],
+  "commits": [],
+  "metadata": {}
+}

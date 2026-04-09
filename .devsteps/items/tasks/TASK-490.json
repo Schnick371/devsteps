@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Add unit tests for getItemMethodology() — cover doc, test cross-cutting cases",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-07T13:19:26.726Z",
-  "updated": "2026-04-07T13:19:35.321Z",
+  "updated": "2026-04-07T14:04:14.413Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/treeView/utils/methodologyDetector.test.ts"

@@ -1,0 +1,40 @@
+{
+  "id": "TASK-530",
+  "type": "task",
+  "category": "general",
+  "title": "Write 4 BATS integration tests for devsteps artifacts subcommand",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T18:37:31.199Z",
+  "updated": "2026-04-09T18:38:42.111Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-260"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "testing",
+    "bats",
+    "cli",
+    "artifacts",
+    "integration"
+  ],
+  "commits": [],
+  "metadata": {}
+}

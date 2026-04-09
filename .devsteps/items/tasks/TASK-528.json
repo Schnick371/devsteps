@@ -1,0 +1,40 @@
+{
+  "id": "TASK-528",
+  "type": "task",
+  "category": "general",
+  "title": "Migrate SPIKE-044-MCPDialog-Research-Brief.md → docs/research/ + create DOC item",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T18:37:31.196Z",
+  "updated": "2026-04-09T18:38:42.110Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-259"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "migration",
+    "doc-items",
+    "spike-044",
+    "mcp-dialog",
+    "research-brief"
+  ],
+  "commits": [],
+  "metadata": {}
+}

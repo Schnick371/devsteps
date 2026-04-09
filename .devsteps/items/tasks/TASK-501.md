@@ -1,0 +1,1 @@
+`devsteps_docs_map_remove_node`: Args `{ id: string }`. Delegiert an `removeDocsMapNode`. Returnt `{ success, removed_ids[] }` (Node + alle Kinder). `devsteps_docs_map_link_items`: Args `{ arch_id: string, item_ids: string[], mode: 'replace' | 'append' }`. Delegiert an `patchDocsMapNodeItems`. Beide Tool-Definitionen in `docs-map.ts` ergänzen.

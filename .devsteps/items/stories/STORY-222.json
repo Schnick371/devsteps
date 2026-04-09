@@ -6,15 +6,21 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-02T15:09:30.095Z",
-  "updated": "2026-04-03T09:21:52.103Z",
+  "updated": "2026-04-08T22:54:01.450Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/tools/docs-map-write.ts",
     "packages/mcp-server/src/index.ts"
   ],
   "linked_items": {
-    "implements": [],
-    "implemented-by": [],
+    "implements": [
+      "EPIC-043"
+    ],
+    "implemented-by": [
+      "BUG-086",
+      "TASK-496",
+      "TASK-498"
+    ],
     "tested-by": [],
     "tests": [],
     "blocks": [],

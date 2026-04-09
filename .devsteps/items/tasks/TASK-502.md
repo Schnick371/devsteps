@@ -1,0 +1,1 @@
+Ergänzt Re-Export in `tools/index.ts` für alle STORY-251-Tools (`docsMapReadTool`, `docsMapAddNodeTool`, `docsMapRemoveNodeTool`, `docsMapLinkItemsTool`). Fügt alle 4 Tools zum `setupTools()`-Array in `server.ts` hinzu (Block: "Docs BOM Map CRUD"). Beachte: `docsMapWriteTool` wurde bereits von S222-T3 registriert.

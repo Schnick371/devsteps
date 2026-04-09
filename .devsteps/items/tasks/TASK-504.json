@@ -1,0 +1,45 @@
+{
+  "id": "TASK-504",
+  "type": "task",
+  "category": "general",
+  "title": "Register `devsteps_doc_read_content` Tool in server.ts + schreibe Integration-Test",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T22:52:34.539Z",
+  "updated": "2026-04-08T22:55:46.417Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/tools/index.ts",
+    "packages/mcp-server/src/server.ts",
+    "packages/mcp-server/src/handlers/devsteps_doc_read_content.test.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-252"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-503"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "doc-read",
+    "registration",
+    "integration-test",
+    "security"
+  ],
+  "commits": [],
+  "metadata": {}
+}

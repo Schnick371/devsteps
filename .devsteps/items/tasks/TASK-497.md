@@ -1,0 +1,1 @@
+Ersetzt alle 3 `id: slug`-Zuweisungen in den split/accept/rewrite-Zweigen durch `id: nextArchId(devstepsDir)`. Importiert `nextArchId` aus `@schnick371/devsteps-shared`. Setzt `depends-on: TASK-496` (nextArchId) voraus. Schreibt 1 Integration-Test: bom_commit zwei mal aufrufen, zweiter Node bekommt inkrementierte ARCH-ID.

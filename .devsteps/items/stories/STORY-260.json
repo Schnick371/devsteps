@@ -1,0 +1,45 @@
+{
+  "id": "STORY-260",
+  "type": "story",
+  "category": "general",
+  "title": "Test Coverage: handleWriteAnalysisReport unit tests + devsteps artifacts BATS tests",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T18:36:30.182Z",
+  "updated": "2026-04-09T18:38:54.347Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-044"
+    ],
+    "implemented-by": [
+      "TASK-530"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-258"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "testing",
+    "unit-tests",
+    "bats",
+    "coverage",
+    "write-analysis-report",
+    "artifacts"
+  ],
+  "commits": [],
+  "metadata": {}
+}

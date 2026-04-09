@@ -1,0 +1,1 @@
+Legt `handlers/devsteps_docs_map_read.ts` an (liest `docs-map.json` via `readDocsMap`, gibt `{ version, nodes, total_nodes }` zurück). Ergänzt `docsMapReadTool`-Definition in der bereits von S222-T3 angelegten `tools/docs-map.ts`. Tool-Parameter: optional `max_depth: number` (default unbeschränkt), `include_orphans: boolean` (default false).

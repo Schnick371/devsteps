@@ -1,0 +1,1 @@
+Liefert die technische Infrastruktur für den vollständigen Docs-Pipeline-Workflow: BOM-Verwaltung via `docs-map.json` (ARCH-NNN CRUD), DOC-Item-Vollinhalt-Zugriff und `docs_assemble`-Tool für den 7-Schritte-Dokumenten-Workflow. Baut auf STORY-219 (DOC-ItemType), STORY-221 (docs-map.ts), STORY-233 (ADR-007 JSON-Migration) und STORY-238 (Import-Workflow) auf.

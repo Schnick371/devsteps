@@ -1,0 +1,39 @@
+{
+  "id": "BUG-091",
+  "type": "bug",
+  "category": "general",
+  "title": "flatViewBuilder.ts: config.methodology undefined — should be config.settings.methodology (sections always show regardless of project type)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T18:36:45.997Z",
+  "updated": "2026-04-09T18:37:04.089Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-003"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "extension",
+    "flat-view",
+    "config",
+    "methodology"
+  ],
+  "commits": [],
+  "metadata": {}
+}

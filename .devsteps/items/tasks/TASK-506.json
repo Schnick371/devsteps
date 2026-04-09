@@ -1,0 +1,46 @@
+{
+  "id": "TASK-506",
+  "type": "task",
+  "category": "general",
+  "title": "Implement `devsteps_docs_assemble` Handler mit `max_nodes` + `include_content` Budget-Guard",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-08T22:52:53.813Z",
+  "updated": "2026-04-08T22:56:23.058Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/devsteps_docs_assemble.ts",
+    "packages/mcp-server/src/tools/docs-map.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-253"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-498"
+    ],
+    "required-by": [
+      "TASK-507"
+    ],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "assemble",
+    "handler",
+    "budget-cap",
+    "7-step-workflow"
+  ],
+  "commits": [],
+  "metadata": {}
+}

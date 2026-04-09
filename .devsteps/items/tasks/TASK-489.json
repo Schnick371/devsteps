@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Add assignee filter to TreeView FilterState (parity with CLI --assignee and MCP list)",
-  "status": "draft",
-  "eisenhower": "not-urgent-not-important",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
   "created": "2026-04-07T13:19:26.725Z",
-  "updated": "2026-04-07T13:19:48.685Z",
+  "updated": "2026-04-07T13:52:31.644Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/treeView/types.ts",

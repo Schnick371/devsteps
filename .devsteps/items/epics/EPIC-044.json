@@ -1,0 +1,40 @@
+{
+  "id": "EPIC-044",
+  "type": "epic",
+  "category": "general",
+  "title": "Agent Artifact Lifecycle — Formalize & Converge Spider Web Output Files",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T18:35:17.667Z",
+  "updated": "2026-04-09T18:38:26.575Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-262"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "agent-protocol",
+    "spider-web",
+    "artifacts",
+    "lifecycle",
+    "tmp"
+  ],
+  "commits": [],
+  "metadata": {}
+}

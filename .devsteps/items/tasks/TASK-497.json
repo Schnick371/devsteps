@@ -1,0 +1,43 @@
+{
+  "id": "TASK-497",
+  "type": "task",
+  "category": "general",
+  "title": "Fix `devsteps_docs_bom_commit.ts`: Pfad-Slugs durch `nextArchId()` ersetzen",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-08T22:51:32.115Z",
+  "updated": "2026-04-08T22:53:56.731Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/devsteps_docs_bom_commit.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "BUG-086"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "TASK-496"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "bom_commit",
+    "ARCH-NNN",
+    "bug-fix",
+    "ADR-S2-12"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -3,13 +3,14 @@
   "type": "task",
   "category": "general",
   "title": "Close BUG-072: verify itemLoader DOC regex fix + add unit test DOC-NNN → type:doc",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-07T13:19:26.717Z",
-  "updated": "2026-04-07T13:19:48.685Z",
+  "updated": "2026-04-07T13:52:31.642Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/extension/src/treeView/utils/itemLoader.ts"
+    "packages/extension/src/treeView/utils/itemLoader.ts",
+    "packages/extension/src/treeView/utils/itemLoader.test.ts"
   ],
   "linked_items": {
     "implements": [],
@@ -19,7 +20,8 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "BUG-072"
+      "BUG-072",
+      "EPIC-003"
     ],
     "depends-on": [],
     "required-by": [],

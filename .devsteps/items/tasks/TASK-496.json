@@ -1,0 +1,47 @@
+{
+  "id": "TASK-496",
+  "type": "task",
+  "category": "general",
+  "title": "Implement `nextArchId()` + duplicate-ID-guard in `packages/shared/src/core/docs-map.ts`",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-08T22:51:23.261Z",
+  "updated": "2026-04-08T22:54:33.037Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/shared/src/core/docs-map.ts",
+    "packages/shared/src/core/index.ts",
+    "packages/shared/src/core/docs-map.test.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "STORY-222"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "TASK-497",
+      "TASK-498",
+      "TASK-495"
+    ],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "nextArchId",
+    "docs-map",
+    "ARCH-NNN",
+    "duplicate-check"
+  ],
+  "commits": [],
+  "metadata": {}
+}

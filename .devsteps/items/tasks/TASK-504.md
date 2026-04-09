@@ -1,0 +1,1 @@
+Re-Export in `tools/index.ts`, Eintrag in `server.ts`. Integration-Test mit 3 Szenarios: (a) Item mit gültigem `affected_paths[0]`, (b) Item ohne `affected_paths` aber BOM-Node vorhanden, (c) Item ohne Pfad → graceful Error mit Hint. Test muss `success: false` bei Path-Traversal-Versuch assertieren.
