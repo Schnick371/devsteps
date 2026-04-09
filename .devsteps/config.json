@@ -35,96 +35,336 @@
       "scrum": {
         "name": "Agile/Scrum",
         "description": "Iterative development with user stories",
-        "root_types": ["epic"],
+        "root_types": [
+          "epic"
+        ],
         "levels": [
           {
             "level": 1,
-            "types": ["epic"],
+            "types": [
+              "epic"
+            ],
             "description": "Large initiatives spanning multiple sprints",
-            "can_contain": ["story", "spike", "bug"]
+            "can_contain": [
+              "story",
+              "spike",
+              "bug"
+            ]
           },
           {
             "level": 2,
-            "types": ["story", "spike", "bug"],
+            "types": [
+              "story",
+              "spike",
+              "bug"
+            ],
             "description": "User stories (features), research spikes (time-boxed investigations), and defects",
-            "can_contain": ["task"],
+            "can_contain": [
+              "task"
+            ],
             "note": "Spike is SAME LEVEL as Story, not under Story!"
           },
           {
             "level": 3,
-            "types": ["task"],
+            "types": [
+              "task"
+            ],
             "description": "Individual atomic work items for implementation",
             "can_contain": []
           }
         ],
         "validation_rules": {
           "allowed_links": [
-            { "from": "epic", "relation": "implemented-by", "to": ["story", "spike", "bug"] },
-            { "from": "story", "relation": "implements", "to": ["epic"] },
-            { "from": "story", "relation": "implemented-by", "to": ["task"] },
-            { "from": "spike", "relation": "implements", "to": ["epic"] },
-            { "from": "spike", "relation": "relates-to", "to": ["story", "task"] },
-            { "from": "spike", "relation": "required-by", "to": ["task"] },
-            { "from": "bug", "relation": "implements", "to": ["epic"] },
-            { "from": "task", "relation": "implements", "to": ["story", "spike", "bug"] },
-            { "from": "doc", "relation": "documents", "to": ["epic", "story", "task", "bug", "spike", "test"] }
+            {
+              "from": "epic",
+              "relation": "implemented-by",
+              "to": [
+                "story",
+                "spike",
+                "bug"
+              ]
+            },
+            {
+              "from": "story",
+              "relation": "implements",
+              "to": [
+                "epic"
+              ]
+            },
+            {
+              "from": "story",
+              "relation": "implemented-by",
+              "to": [
+                "task"
+              ]
+            },
+            {
+              "from": "spike",
+              "relation": "implements",
+              "to": [
+                "epic"
+              ]
+            },
+            {
+              "from": "spike",
+              "relation": "relates-to",
+              "to": [
+                "story",
+                "task"
+              ]
+            },
+            {
+              "from": "spike",
+              "relation": "required-by",
+              "to": [
+                "task"
+              ]
+            },
+            {
+              "from": "bug",
+              "relation": "implements",
+              "to": [
+                "epic"
+              ]
+            },
+            {
+              "from": "task",
+              "relation": "implements",
+              "to": [
+                "story",
+                "spike",
+                "bug"
+              ]
+            },
+            {
+              "from": "doc",
+              "relation": "documents",
+              "to": [
+                "epic",
+                "story",
+                "task",
+                "bug",
+                "spike",
+                "test"
+              ]
+            }
           ],
           "forbidden_links": [
-            { "from": "spike", "relation": "implements", "to": ["story"], "reason": "Spike is same level as Story, not under it!" },
-            { "from": "task", "relation": "implements", "to": ["epic"], "reason": "Task must go through Story/Spike/Bug" },
-            { "from": "epic", "relation": "implemented-by", "to": ["task"], "reason": "Epic cannot contain Tasks directly" },
-            { "from": "doc", "relation": "implements", "to": ["epic", "story", "task", "bug", "spike", "test"], "reason": "Doc is cross-cutting — use 'documents' relation, not 'implements'" }
+            {
+              "from": "spike",
+              "relation": "implements",
+              "to": [
+                "story"
+              ],
+              "reason": "Spike is same level as Story, not under it!"
+            },
+            {
+              "from": "task",
+              "relation": "implements",
+              "to": [
+                "epic"
+              ],
+              "reason": "Task must go through Story/Spike/Bug"
+            },
+            {
+              "from": "epic",
+              "relation": "implemented-by",
+              "to": [
+                "task"
+              ],
+              "reason": "Epic cannot contain Tasks directly"
+            },
+            {
+              "from": "doc",
+              "relation": "implements",
+              "to": [
+                "epic",
+                "story",
+                "task",
+                "bug",
+                "spike",
+                "test"
+              ],
+              "reason": "Doc is cross-cutting \u2014 use 'documents' relation, not 'implements'"
+            },
+            {
+              "from": "doc",
+              "relation": "documents",
+              "to": [
+                "doc"
+              ],
+              "reason": "Use BOM structure (parent_id in docs-map.json) for doc-to-doc relationships"
+            },
+            {
+              "from": "doc",
+              "relation": "documented-by",
+              "to": [
+                "doc"
+              ],
+              "reason": "Use BOM structure (parent_id in docs-map.json) for doc-to-doc relationships"
+            }
           ]
         }
       },
       "waterfall": {
         "name": "Waterfall/Sequential",
         "description": "Linear phase-based development",
-        "root_types": ["requirement"],
+        "root_types": [
+          "requirement"
+        ],
         "levels": [
           {
             "level": 1,
-            "types": ["requirement"],
+            "types": [
+              "requirement"
+            ],
             "description": "System requirements and specifications",
-            "can_contain": ["feature"]
+            "can_contain": [
+              "feature"
+            ]
           },
           {
             "level": 2,
-            "types": ["feature"],
+            "types": [
+              "feature"
+            ],
             "description": "Features to be implemented in design/implementation phases",
-            "can_contain": ["task", "spike", "bug"],
+            "can_contain": [
+              "task",
+              "spike",
+              "bug"
+            ],
             "note": "Spike used for research before implementation"
           },
           {
             "level": 3,
-            "types": ["task", "spike", "bug"],
+            "types": [
+              "task",
+              "spike",
+              "bug"
+            ],
             "description": "Individual work items, research spikes, and defects",
             "can_contain": []
           }
         ],
         "validation_rules": {
           "allowed_links": [
-            { "from": "requirement", "relation": "implemented-by", "to": ["feature"] },
-            { "from": "feature", "relation": "implements", "to": ["requirement"] },
-            { "from": "feature", "relation": "implemented-by", "to": ["task"] },
-            { "from": "feature", "relation": "relates-to", "to": ["spike"] },
-            { "from": "spike", "relation": "implements", "to": ["requirement", "feature"] },
-            { "from": "task", "relation": "implements", "to": ["feature"] },
-            { "from": "doc", "relation": "documents", "to": ["requirement", "feature", "task", "bug", "spike", "test"] }
+            {
+              "from": "requirement",
+              "relation": "implemented-by",
+              "to": [
+                "feature"
+              ]
+            },
+            {
+              "from": "feature",
+              "relation": "implements",
+              "to": [
+                "requirement"
+              ]
+            },
+            {
+              "from": "feature",
+              "relation": "implemented-by",
+              "to": [
+                "task"
+              ]
+            },
+            {
+              "from": "feature",
+              "relation": "relates-to",
+              "to": [
+                "spike"
+              ]
+            },
+            {
+              "from": "spike",
+              "relation": "implements",
+              "to": [
+                "requirement",
+                "feature"
+              ]
+            },
+            {
+              "from": "task",
+              "relation": "implements",
+              "to": [
+                "feature"
+              ]
+            },
+            {
+              "from": "doc",
+              "relation": "documents",
+              "to": [
+                "requirement",
+                "feature",
+                "task",
+                "bug",
+                "spike",
+                "test"
+              ]
+            }
           ],
           "forbidden_links": [
-            { "from": "task", "relation": "implements", "to": ["requirement"], "reason": "Task must go through Feature" }
+            {
+              "from": "task",
+              "relation": "implements",
+              "to": [
+                "requirement"
+              ],
+              "reason": "Task must go through Feature"
+            },
+            {
+              "from": "doc",
+              "relation": "documents",
+              "to": [
+                "doc"
+              ],
+              "reason": "Use BOM structure (parent_id in docs-map.json) for doc-to-doc relationships"
+            },
+            {
+              "from": "doc",
+              "relation": "documented-by",
+              "to": [
+                "doc"
+              ],
+              "reason": "Use BOM structure (parent_id in docs-map.json) for doc-to-doc relationships"
+            }
           ]
         }
       },
       "visualization": {
         "default_view": "both",
         "show_completed_by_default": true,
-        "grouping_options": ["type", "status", "priority", "eisenhower"],
+        "grouping_options": [
+          "type",
+          "status",
+          "priority",
+          "eisenhower"
+        ],
         "filter_options": {
-          "status": ["draft", "planned", "in-progress", "review", "done", "blocked", "cancelled", "obsolete"],
-          "priority": ["critical", "high", "medium", "low"],
-          "eisenhower": ["urgent-important", "not-urgent-important", "urgent-not-important", "not-urgent-not-important"]
+          "status": [
+            "draft",
+            "planned",
+            "in-progress",
+            "review",
+            "done",
+            "blocked",
+            "cancelled",
+            "obsolete"
+          ],
+          "priority": [
+            "critical",
+            "high",
+            "medium",
+            "low"
+          ],
+          "eisenhower": [
+            "urgent-important",
+            "not-urgent-important",
+            "urgent-not-important",
+            "not-urgent-not-important"
+          ]
         },
         "tree_display": {
           "scrum": {
