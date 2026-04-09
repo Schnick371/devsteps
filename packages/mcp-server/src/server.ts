@@ -29,6 +29,7 @@ import {
   addTool,
   archiveTool,
   contextTool,
+  docReadContentTool,
   docsBomCommitTool,
   docsBomStatusTool,
   docsClassifyConfirmTool,
@@ -76,6 +77,7 @@ export class DevStepsServer {
     const logger = getLogger();
     logger.info(
       {
+        server_version: packageJson.version,
         pid: process.pid,
         node_version: process.version,
         platform: process.platform,
@@ -120,6 +122,8 @@ export class DevStepsServer {
       docsBomStatusTool,
       docsBomCommitTool,
       docsNewTool,
+      // Docs content reading (STORY-252)
+      docReadContentTool,
       // Context Budget Protocol (CBP) Tier-3 analysis tools (EPIC-027)
       writeAnalysisReportTool,
       readAnalysisEnvelopeTool,
@@ -261,8 +265,10 @@ export class DevStepsServer {
       }
 
       try {
-        // Dynamic import for modular handler architecture
-        const handler = await import(`./handlers/${toolName}.js`);
+        // Dynamic import for modular handler architecture.
+        // Use new URL(..., import.meta.url) to bypass esbuild's virtual module
+        // resolver — forces Node.js to resolve from the filesystem at runtime.
+        const handler = await import(new URL(`./handlers/${toolName}.js`, import.meta.url).href);
         const handlerFn = handler.default || handler[`${toolName.replace('', '')}Handler`];
         const result = await shutdownManager.trackOperation(handlerFn(request.params.arguments));
         const duration = Date.now() - startTime;

@@ -7,6 +7,7 @@
  */
 
 import type { Request, Response } from 'express';
+import packageJson from '../package.json' with { type: 'json' };
 import { logger } from './logger.js';
 
 // We'll import the DevStepsServer class after refactoring index.ts
@@ -87,6 +88,7 @@ export async function startHttpMcpServer(
   const searchHandler = (await import('./handlers/search.js')).default;
   const statusHandler = (await import('./handlers/status.js')).default;
   const linkHandler = (await import('./handlers/link.js')).default;
+  const unlinkHandler = (await import('./handlers/unlink.js')).default;
   const archiveHandler = (await import('./handlers/archive.js')).default;
   const exportHandler = (await import('./handlers/export.js')).default;
   const purgeHandler = (await import('./handlers/purge.js')).default;
@@ -94,6 +96,31 @@ export async function startHttpMcpServer(
   const contextHandler = (await import('./handlers/context.js')).default;
   const metricsHandler = (await import('./handlers/metrics.js')).default;
   const healthHandler = (await import('./handlers/health.js')).default;
+  const updateCopilotFilesHandler = (await import('./handlers/update_copilot_files.js')).default;
+  const docsImportHandler = (await import('./handlers/devsteps_docs_import.js')).default;
+  const docsClassifyHandler = (await import('./handlers/devsteps_docs_classify.js')).default;
+  const docsClassifyConfirmHandler = (await import('./handlers/devsteps_docs_classify_confirm.js'))
+    .default;
+  const docsBomStatusHandler = (await import('./handlers/devsteps_docs_bom_status.js')).default;
+  const docsBomCommitHandler = (await import('./handlers/devsteps_docs_bom_commit.js')).default;
+  const docsNewHandler = (await import('./handlers/devsteps_docs_new.js')).default;
+  const docReadContentHandler = (await import('./handlers/devsteps_doc_read_content.js')).default;
+  const writeAnalysisReportHandler = (await import('./handlers/write_analysis_report.js')).default;
+  const readAnalysisEnvelopeHandler = (await import('./handlers/read_analysis_envelope.js'))
+    .default;
+  const writeVerdictHandler = (await import('./handlers/write_verdict.js')).default;
+  const writeSprintBriefHandler = (await import('./handlers/write_sprint_brief.js')).default;
+  const writeMandateResultHandler = (await import('./handlers/write_mandate_result.js')).default;
+  const readMandateResultsHandler = (await import('./handlers/read_mandate_results.js')).default;
+  const writeRejectionFeedbackHandler = (await import('./handlers/write_rejection_feedback.js'))
+    .default;
+  const writeIterationSignalHandler = (await import('./handlers/write_iteration_signal.js'))
+    .default;
+  const writeEscalationHandler = (await import('./handlers/write_escalation.js')).default;
+  const writeDispatchManifestHandler = (await import('./handlers/write_dispatch_manifest.js'))
+    .default;
+  const patchDispatchManifestHandler = (await import('./handlers/patch_dispatch_manifest.js'))
+    .default;
 
   // Map of tool name to handler (cast to expected type since handlers accept various args)
   // biome-ignore lint/suspicious/noExplicitAny: Handlers have varying argument types
@@ -106,6 +133,7 @@ export async function startHttpMcpServer(
     ['search', searchHandler],
     ['status', statusHandler],
     ['link', linkHandler],
+    ['unlink', unlinkHandler],
     ['archive', archiveHandler],
     ['export', exportHandler],
     ['purge', purgeHandler],
@@ -113,6 +141,25 @@ export async function startHttpMcpServer(
     ['context', contextHandler],
     ['metrics', metricsHandler],
     ['health-check', healthHandler],
+    ['update_copilot_files', updateCopilotFilesHandler],
+    ['devsteps_docs_import', docsImportHandler],
+    ['devsteps_docs_classify', docsClassifyHandler],
+    ['devsteps_docs_classify_confirm', docsClassifyConfirmHandler],
+    ['devsteps_docs_bom_status', docsBomStatusHandler],
+    ['devsteps_docs_bom_commit', docsBomCommitHandler],
+    ['devsteps_docs_new', docsNewHandler],
+    ['devsteps_doc_read_content', docReadContentHandler],
+    ['write_analysis_report', writeAnalysisReportHandler],
+    ['read_analysis_envelope', readAnalysisEnvelopeHandler],
+    ['write_verdict', writeVerdictHandler],
+    ['write_sprint_brief', writeSprintBriefHandler],
+    ['write_mandate_result', writeMandateResultHandler],
+    ['read_mandate_results', readMandateResultsHandler],
+    ['write_rejection_feedback', writeRejectionFeedbackHandler],
+    ['write_iteration_signal', writeIterationSignalHandler],
+    ['write_escalation', writeEscalationHandler],
+    ['write_dispatch_manifest', writeDispatchManifestHandler],
+    ['patch_dispatch_manifest', patchDispatchManifestHandler],
   ]);
 
   // All available tools
@@ -125,6 +172,7 @@ export async function startHttpMcpServer(
     tools.searchTool,
     tools.statusTool,
     tools.linkTool,
+    tools.unlinkTool,
     tools.archiveTool,
     tools.exportTool,
     tools.purgeTool,
@@ -132,6 +180,25 @@ export async function startHttpMcpServer(
     tools.contextTool,
     tools.metricsTool,
     tools.healthCheckTool,
+    tools.updateCopilotFilesTool,
+    tools.docsImportTool,
+    tools.docsClassifyTool,
+    tools.docsClassifyConfirmTool,
+    tools.docsBomStatusTool,
+    tools.docsBomCommitTool,
+    tools.docsNewTool,
+    tools.docReadContentTool,
+    tools.writeAnalysisReportTool,
+    tools.readAnalysisEnvelopeTool,
+    tools.writeVerdictTool,
+    tools.writeSprintBriefTool,
+    tools.writeMandateResultTool,
+    tools.readMandateResultsTool,
+    tools.writeRejectionFeedbackTool,
+    tools.writeIterationSignalTool,
+    tools.writeEscalationTool,
+    tools.writeDispatchManifestTool,
+    tools.patchDispatchManifestTool,
   ];
 
   /**
@@ -155,7 +222,7 @@ export async function startHttpMcpServer(
             },
             serverInfo: {
               name: 'devsteps-mcp-server',
-              version: '0.1.0',
+              version: packageJson.version,
             },
           },
         };
@@ -297,7 +364,7 @@ export async function startHttpMcpServer(
     res.status(200).json({
       status: 'healthy',
       transport: 'http',
-      version: '0.1.0',
+      version: packageJson.version,
       tools: allTools.length,
       uptime: Math.floor(process.uptime()),
       timestamp: new Date().toISOString(),

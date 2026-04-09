@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Extract `validateWorkspacePath(input, root)` as shared security utility in `path-guard.ts`",
-  "status": "draft",
+  "status": "in-progress",
   "eisenhower": "urgent-important",
   "created": "2026-04-08T22:51:05.345Z",
-  "updated": "2026-04-08T22:55:57.964Z",
+  "updated": "2026-04-09T19:01:08.251Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/path-guard.ts",

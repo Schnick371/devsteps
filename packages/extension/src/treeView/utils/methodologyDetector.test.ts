@@ -123,4 +123,22 @@ describe('getItemMethodology', () => {
       expect(getItemMethodology(bug, map)).toBe('scrum');
     });
   });
+
+  describe('cycle guard', () => {
+    it('returns scrum without crashing for a self-implements loop (BUG-088)', () => {
+      const bug = makeItem('BUG-032', 'bug', { implements: ['BUG-032'] });
+      const map = new Map([[bug.id, bug]]);
+      expect(getItemMethodology(bug, map)).toBe('scrum');
+    });
+
+    it('returns scrum without crashing for a mutual implements cycle (A→B→A)', () => {
+      const bugA = makeItem('BUG-A', 'bug', { implements: ['BUG-B'] });
+      const bugB = makeItem('BUG-B', 'bug', { implements: ['BUG-A'] });
+      const map = new Map([
+        [bugA.id, bugA],
+        [bugB.id, bugB],
+      ]);
+      expect(getItemMethodology(bugA, map)).toBe('scrum');
+    });
+  });
 });

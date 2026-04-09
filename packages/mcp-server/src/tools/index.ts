@@ -48,6 +48,8 @@ export {
   docsNewTool,
 } from './docs-import.js';
 
+export { docReadContentTool } from './docs-map.js';
+
 export {
   linkTool,
   traceTool,

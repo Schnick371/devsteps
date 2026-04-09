@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Implement `devsteps_doc_read_content` Handler mit dreistufigem Fallback-Mechanismus",
-  "status": "draft",
+  "status": "in-progress",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T22:52:26.182Z",
-  "updated": "2026-04-09T07:47:05.004Z",
+  "updated": "2026-04-09T19:01:08.253Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/handlers/devsteps_doc_read_content.ts",

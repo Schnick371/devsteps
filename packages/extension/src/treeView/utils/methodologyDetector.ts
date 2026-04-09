@@ -8,12 +8,20 @@
 import type { WorkItem } from '../types.js';
 
 /**
- * Detect methodology for a work item based on its type and parent relationships
+ * Detect methodology for a work item based on its type and parent relationships.
+ * The `visited` set guards against cycles in linked_items (e.g. self-implements loops).
  */
 export function getItemMethodology(
   item: WorkItem,
-  allItems: Map<string, WorkItem>
+  allItems: Map<string, WorkItem>,
+  visited: Set<string> = new Set()
 ): 'scrum' | 'waterfall' | 'cross-cutting' {
+  // Cycle guard: if we have already visited this item, stop recursion
+  if (visited.has(item.id)) {
+    return 'scrum';
+  }
+  visited.add(item.id);
+
   // Cross-cutting types: doc is always cross-cutting
   if (item.type === 'doc') {
     return 'cross-cutting';
@@ -35,7 +43,7 @@ export function getItemMethodology(
     const parentItem = allItems.get(parent);
     if (parentItem) {
       // Recursive check parent's methodology
-      return getItemMethodology(parentItem, allItems);
+      return getItemMethodology(parentItem, allItems, visited);
     }
   }
 
@@ -45,7 +53,7 @@ export function getItemMethodology(
     if (relatedItem) {
       const relatedItemData = allItems.get(relatedItem);
       if (relatedItemData) {
-        return getItemMethodology(relatedItemData, allItems);
+        return getItemMethodology(relatedItemData, allItems, visited);
       }
     }
   }
