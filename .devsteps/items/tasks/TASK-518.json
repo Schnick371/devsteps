@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Fix corrupted data: BUG-032 self-implements link causes methodologyDetector stack overflow",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-04-09T08:31:06.261Z",
-  "updated": "2026-04-09T08:33:54.518Z",
+  "updated": "2026-04-09T18:59:46.658Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".devsteps/items/bugs/BUG-032.json"

@@ -21,4 +21,6 @@ After the fix, the flat view restores immediately without extension restart.
 2. Reload VS Code extension → flat view should show all items including DOC items
 
 ## Affected Paths
-- .devsteps/items/bugs/BUG-032.json
+- .devsteps/items/bugs/BUG-032.json## Completed
+
+Removed self-referential `implements` link from BUG-032 via `mcp_devsteps_unlink`. The `implements: ["BUG-032"]` loop caused infinite recursion in `getItemMethodology()` → stack overflow → flat view silently returned `[]`. Fix verified: `BUG-032.linked_items.implements` is now `[]`.
