@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "general",
   "title": "flatViewBuilder.ts: config.methodology undefined — should be config.settings.methodology (sections always show regardless of project type)",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-09T18:36:45.997Z",
-  "updated": "2026-04-09T18:37:04.089Z",
+  "updated": "2026-04-09T19:02:45.901Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "general",
   "title": "methodologyDetector.ts: no cycle guard → self/circular implements link causes stack overflow + silent flat view crash",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-04-09T08:31:06.274Z",
-  "updated": "2026-04-09T08:33:54.518Z",
+  "updated": "2026-04-09T19:02:39.742Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/treeView/utils/methodologyDetector.ts",

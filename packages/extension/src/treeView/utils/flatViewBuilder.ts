@@ -99,7 +99,7 @@ export async function buildFlatSectionNodes(
 
   const sections: TreeNode[] = [];
 
-  if (scrumItems.length > 0 || config.methodology !== 'waterfall') {
+  if (scrumItems.length > 0 || (config.settings?.methodology ?? 'hybrid') !== 'waterfall') {
     sections.push(
       new MethodologySectionNode(
         'scrum',
@@ -110,7 +110,7 @@ export async function buildFlatSectionNodes(
     );
   }
 
-  if (waterfallItems.length > 0 || config.methodology !== 'scrum') {
+  if (waterfallItems.length > 0 || (config.settings?.methodology ?? 'hybrid') !== 'scrum') {
     sections.push(
       new MethodologySectionNode(
         'waterfall',
