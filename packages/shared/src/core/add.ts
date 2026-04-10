@@ -14,8 +14,8 @@ import type {
   ItemMetadata,
   ItemType,
 } from '../schemas/index.js';
-import { generateMadrTemplate, isMadrCandidate } from '../templates/madr.js';
 import { detectDiataxisType, generateDiataxisSkeleton } from '../templates/diataxis.js';
+import { generateMadrTemplate, isMadrCandidate } from '../templates/madr.js';
 import {
   generateItemId,
   getCurrentTimestamp,
@@ -119,7 +119,11 @@ export async function addItem(devstepsDir: string, args: AddItemArgs): Promise<A
   }
 
   // STORY-268: Auto-populate Diataxis skeleton for DOC items (when no MADR match)
-  if (args.type === 'doc' && !args.description && defaultDescription.includes('<!-- Add detailed')) {
+  if (
+    args.type === 'doc' &&
+    !args.description &&
+    defaultDescription.includes('<!-- Add detailed')
+  ) {
     const diataxisType = detectDiataxisType(args.tags || [], args.title);
     if (diataxisType) {
       defaultDescription = generateDiataxisSkeleton(args.title, diataxisType);

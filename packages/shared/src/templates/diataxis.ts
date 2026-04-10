@@ -24,7 +24,7 @@ const DIATAXIS_TITLE_PREFIXES: ReadonlyArray<[RegExp, DiataxisType]> = [
  */
 export function detectDiataxisType(
   tags: readonly string[],
-  title: string,
+  title: string
 ): DiataxisType | undefined {
   // 1. Check tags for exact Diataxis type match
   const diataxisTypes: ReadonlyArray<DiataxisType> = [

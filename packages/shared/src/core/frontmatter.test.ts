@@ -40,11 +40,11 @@ describe('extractFrontmatter', () => {
     const result = extractFrontmatter(content);
 
     expect(result.frontmatter).not.toBeNull();
-    expect(result.frontmatter!.diataxis).toBe('reference');
-    expect(result.frontmatter!.related_items).toEqual(['STORY-267', 'EPIC-010']);
-    expect(result.frontmatter!.status).toBe('approved');
-    expect(result.frontmatter!.author).toBe('the@devsteps.dev');
-    expect(result.frontmatter!.tags).toEqual(['security', 'rbcd']);
+    expect(result.frontmatter?.diataxis).toBe('reference');
+    expect(result.frontmatter?.related_items).toEqual(['STORY-267', 'EPIC-010']);
+    expect(result.frontmatter?.status).toBe('approved');
+    expect(result.frontmatter?.author).toBe('the@devsteps.dev');
+    expect(result.frontmatter?.tags).toEqual(['security', 'rbcd']);
     expect(result.body).toBe('# Kerberos RBCD\n\nContent here.');
     expect(result.warnings).toEqual([]);
   });
@@ -60,8 +60,8 @@ describe('extractFrontmatter', () => {
 
     const result = extractFrontmatter(content);
 
-    expect(result.frontmatter!.related_items).toEqual(['STORY-267', 'EPIC-010']);
-    expect(result.frontmatter!.tags).toEqual(['security', 'rbcd']);
+    expect(result.frontmatter?.related_items).toEqual(['STORY-267', 'EPIC-010']);
+    expect(result.frontmatter?.tags).toEqual(['security', 'rbcd']);
   });
 
   it('should handle empty arrays', () => {
@@ -69,8 +69,8 @@ describe('extractFrontmatter', () => {
 
     const result = extractFrontmatter(content);
 
-    expect(result.frontmatter!.related_items).toEqual([]);
-    expect(result.frontmatter!.tags).toEqual([]);
+    expect(result.frontmatter?.related_items).toEqual([]);
+    expect(result.frontmatter?.tags).toEqual([]);
   });
 
   it('should handle partial frontmatter (only some fields)', () => {
@@ -78,11 +78,11 @@ describe('extractFrontmatter', () => {
 
     const result = extractFrontmatter(content);
 
-    expect(result.frontmatter!.diataxis).toBe('tutorial');
-    expect(result.frontmatter!.related_items).toEqual([]);
-    expect(result.frontmatter!.status).toBeUndefined();
-    expect(result.frontmatter!.author).toBeUndefined();
-    expect(result.frontmatter!.tags).toEqual([]);
+    expect(result.frontmatter?.diataxis).toBe('tutorial');
+    expect(result.frontmatter?.related_items).toEqual([]);
+    expect(result.frontmatter?.status).toBeUndefined();
+    expect(result.frontmatter?.author).toBeUndefined();
+    expect(result.frontmatter?.tags).toEqual([]);
   });
 
   it('should throw on invalid YAML syntax', () => {
@@ -127,7 +127,7 @@ describe('extractFrontmatter', () => {
 
     const result = extractFrontmatter(content);
 
-    expect(result.frontmatter!.diataxis).toBe('reference');
+    expect(result.frontmatter?.diataxis).toBe('reference');
     expect(result.warnings).toHaveLength(2);
     expect(result.warnings[0].field).toBe('custom_field');
     expect(result.warnings[1].field).toBe('another_unknown');
@@ -144,7 +144,7 @@ describe('extractFrontmatter', () => {
     ]) {
       const content = [`---`, `diataxis: ${type}`, `---`, `# Title`].join('\n');
       const result = extractFrontmatter(content);
-      expect(result.frontmatter!.diataxis).toBe(type);
+      expect(result.frontmatter?.diataxis).toBe(type);
     }
   });
 
@@ -163,7 +163,7 @@ describe('extractFrontmatter', () => {
     for (const prefix of prefixes) {
       const content = [`---`, `related_items: [${prefix}-001]`, `---`, `# Title`].join('\n');
       const result = extractFrontmatter(content);
-      expect(result.frontmatter!.related_items).toEqual([`${prefix}-001`]);
+      expect(result.frontmatter?.related_items).toEqual([`${prefix}-001`]);
     }
   });
 
@@ -178,8 +178,8 @@ describe('extractFrontmatter', () => {
 
     const result = extractFrontmatter(content);
 
-    expect(result.frontmatter!.author).toBe('the@devsteps.dev');
-    expect(result.frontmatter!.diataxis).toBe('reference');
+    expect(result.frontmatter?.author).toBe('the@devsteps.dev');
+    expect(result.frontmatter?.diataxis).toBe('reference');
   });
 
   it('should skip comments in frontmatter', () => {
@@ -188,7 +188,7 @@ describe('extractFrontmatter', () => {
     );
 
     const result = extractFrontmatter(content);
-    expect(result.frontmatter!.diataxis).toBe('reference');
+    expect(result.frontmatter?.diataxis).toBe('reference');
   });
 });
 

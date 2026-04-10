@@ -53,15 +53,14 @@ export {
   rebuildDocsMapShadow,
   writeDocsMap,
 } from './docs-map.js';
-export { type GetItemResult, getItem } from './get.js';
 export {
-  DocFrontmatterSchema,
   type DocFrontmatter,
+  DocFrontmatterSchema,
   extractFrontmatter,
   type FrontmatterResult,
   type FrontmatterWarning,
 } from './frontmatter.js';
-export { validateWorkspacePath } from './path-guard.js';
+export { type GetItemResult, getItem } from './get.js';
 export {
   type ClassificationResult,
   DIATAXIS_TYPES,
@@ -95,6 +94,7 @@ export {
 export * from './index-refs.js';
 export { type LinkItemArgs, type LinkItemResult, linkItem } from './link.js';
 export { type ListItemsArgs, type ListItemsResult, listItems } from './list.js';
+export { validateWorkspacePath } from './path-guard.js';
 export {
   type UnlinkItemArgs,
   type UnlinkItemResult,

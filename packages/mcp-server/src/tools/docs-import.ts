@@ -152,4 +152,3 @@ export const docsBomCommitTool: Tool = {
     required: ['session_id', 'token'],
   },
 };
-
