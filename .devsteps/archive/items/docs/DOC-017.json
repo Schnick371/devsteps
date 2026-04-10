@@ -1,12 +1,12 @@
 {
-  "id": "DOC-054",
+  "id": "DOC-017",
   "type": "doc",
   "category": "general",
-  "title": "Inhalt eines Doc Items",
+  "title": "MCP Server \u2014 Werkzeugpalette",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:53:12.756Z",
-  "updated": "2026-04-08T21:55:08.429Z",
+  "created": "2026-04-08T21:50:54.281Z",
+  "updated": "2026-04-08T21:51:19.652Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,10 @@
     "documents": []
   },
   "tags": [
-    "h3,doc-item,fields"
+    "h1",
+    "mcp",
+    "tools",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

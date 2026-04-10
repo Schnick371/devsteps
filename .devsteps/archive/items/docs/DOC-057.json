@@ -1,12 +1,12 @@
 {
-  "id": "DOC-019",
+  "id": "DOC-057",
   "type": "doc",
   "category": "general",
-  "title": "VS Code Extension — Übersicht und Konfiguration",
+  "title": "Die DOC BOM",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:50:54.576Z",
-  "updated": "2026-04-08T21:51:19.942Z",
+  "created": "2026-04-08T21:53:34.930Z",
+  "updated": "2026-04-08T21:55:08.965Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,9 @@
     "documents": []
   },
   "tags": [
-    "h1,extension,vscode,devsteps-reference"
+    "h3",
+    "bom",
+    "explanation"
   ],
   "commits": [],
   "metadata": {}

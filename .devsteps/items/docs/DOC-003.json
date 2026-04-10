@@ -2,7 +2,7 @@
   "id": "DOC-003",
   "type": "doc",
   "category": "general",
-  "title": "Konzepte — Datenmodell und Grundbegriffe",
+  "title": "Konzepte \u2014 Datenmodell und Grundbegriffe",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:50:41.562Z",
@@ -30,7 +30,9 @@
     "documents": []
   },
   "tags": [
-    "h1,concepts,devsteps-reference"
+    "h1",
+    "concepts",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

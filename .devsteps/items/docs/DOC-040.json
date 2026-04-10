@@ -2,7 +2,7 @@
   "id": "DOC-040",
   "type": "doc",
   "category": "general",
-  "title": "Inhalt eines Doc Items — Felder und Metadaten",
+  "title": "Inhalt eines Doc Items \u2014 Felder und Metadaten",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:53:05.494Z",
@@ -30,7 +30,9 @@
     "documents": []
   },
   "tags": [
-    "h3,doc,item-fields"
+    "h3",
+    "doc",
+    "item-fields"
   ],
   "commits": [],
   "metadata": {}

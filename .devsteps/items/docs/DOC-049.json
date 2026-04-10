@@ -2,7 +2,7 @@
   "id": "DOC-049",
   "type": "doc",
   "category": "general",
-  "title": "Triage-Tiers — QUICK, STANDARD, FULL, COMPETITIVE",
+  "title": "Triage-Tiers \u2014 QUICK, STANDARD, FULL, COMPETITIVE",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:53:07.068Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h2,spider-web,triage,reference"
+    "h2",
+    "spider-web",
+    "triage",
+    "reference"
   ],
   "commits": [],
   "metadata": {}

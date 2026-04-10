@@ -1,12 +1,12 @@
 {
-  "id": "DOC-021",
+  "id": "DOC-030",
   "type": "doc",
   "category": "general",
-  "title": "Copilot-Integration und Doc-Item-Workflow",
+  "title": "Story \u2014 Funktionale Anforderungen",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:50:54.876Z",
-  "updated": "2026-04-08T21:51:20.235Z",
+  "created": "2026-04-08T21:51:56.597Z",
+  "updated": "2026-04-08T21:52:26.633Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,9 @@
     "documents": []
   },
   "tags": [
-    "h1,copilot,workflow,devsteps-reference"
+    "h2",
+    "story",
+    "item-type"
   ],
   "commits": [],
   "metadata": {}

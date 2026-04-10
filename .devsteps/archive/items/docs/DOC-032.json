@@ -1,12 +1,12 @@
 {
-  "id": "DOC-015",
+  "id": "DOC-032",
   "type": "doc",
   "category": "general",
-  "title": "Status-Lifecycle und Prioritäten",
+  "title": "Bug \u2014 Fehler und Korrekturen",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:50:53.967Z",
-  "updated": "2026-04-08T21:51:19.359Z",
+  "created": "2026-04-08T21:51:56.930Z",
+  "updated": "2026-04-08T21:52:26.963Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,9 @@
     "documents": []
   },
   "tags": [
-    "h1,lifecycle,eisenhower,devsteps-reference"
+    "h2",
+    "bug",
+    "item-type"
   ],
   "commits": [],
   "metadata": {}

@@ -8,4 +8,6 @@ Alle 26 obsoleten DOC-Items mit `mcp_devsteps_archive` archivieren. Archivierte 
 
 ## Voraussetzung
 
-Vor dem Archivieren prüfen: Gibt es verlinkte Items? Falls ja, Links zuerst bereinigen.
+Vor dem Archivieren prüfen: Gibt es verlinkte Items? Falls ja, Links zuerst bereinigen.## Resolution
+
+Archived 26 obsolete DOC items via `mcp_devsteps_archive`: DOC-013 through DOC-022, DOC-029 through DOC-039, DOC-054 through DOC-058.

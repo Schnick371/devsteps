@@ -2,7 +2,7 @@
   "id": "DOC-028",
   "type": "doc",
   "category": "general",
-  "title": "Doc Item — Content Fragment in the DevSteps Documentation Graph",
+  "title": "Doc Item \u2014 Content Fragment in the DevSteps Documentation Graph",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:51:47.670Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h2,doc,item-type,devsteps-reference"
+    "h2",
+    "doc",
+    "item-type",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

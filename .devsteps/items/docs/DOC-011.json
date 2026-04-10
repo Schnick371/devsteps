@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h1,copilot,workflow,devsteps-reference"
+    "h1",
+    "copilot",
+    "workflow",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

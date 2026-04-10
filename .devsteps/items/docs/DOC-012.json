@@ -2,7 +2,7 @@
   "id": "DOC-012",
   "type": "doc",
   "category": "general",
-  "title": "Entwickler-Guide — DevSteps im Team einsetzen",
+  "title": "Entwickler-Guide \u2014 DevSteps im Team einsetzen",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:50:43.166Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h1,developer-guide,tutorial,devsteps-reference"
+    "h1",
+    "developer-guide",
+    "tutorial",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

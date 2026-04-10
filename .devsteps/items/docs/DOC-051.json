@@ -2,7 +2,7 @@
   "id": "DOC-051",
   "type": "doc",
   "category": "general",
-  "title": "Entry Points — Prompt-Übersicht und Einsatzgebiet",
+  "title": "Entry Points \u2014 Prompt-\u00dcbersicht und Einsatzgebiet",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:53:07.412Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h2,copilot,prompts,reference"
+    "h2",
+    "copilot",
+    "prompts",
+    "reference"
   ],
   "commits": [],
   "metadata": {}

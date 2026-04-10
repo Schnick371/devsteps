@@ -2,7 +2,7 @@
   "id": "DOC-024",
   "type": "doc",
   "category": "general",
-  "title": "Story — Funktionale Anforderungen",
+  "title": "Story \u2014 Funktionale Anforderungen",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:51:47.031Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h2,story,item-type,devsteps-reference"
+    "h2",
+    "story",
+    "item-type",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

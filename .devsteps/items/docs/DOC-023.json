@@ -2,7 +2,7 @@
   "id": "DOC-023",
   "type": "doc",
   "category": "general",
-  "title": "Epic — Strategische Ziele und Epics",
+  "title": "Epic \u2014 Strategische Ziele und Epics",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:51:46.835Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h2,epic,item-type,devsteps-reference"
+    "h2",
+    "epic",
+    "item-type",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

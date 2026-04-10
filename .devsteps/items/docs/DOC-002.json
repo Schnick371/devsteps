@@ -2,7 +2,7 @@
   "id": "DOC-002",
   "type": "doc",
   "category": "general",
-  "title": "Überblick — Das DevSteps System",
+  "title": "\u00dcberblick \u2014 Das DevSteps System",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:50:13.769Z",
@@ -30,7 +30,9 @@
     "documents": []
   },
   "tags": [
-    "h1,overview,devsteps-reference"
+    "h1",
+    "overview",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

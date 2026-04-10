@@ -1,12 +1,12 @@
 {
-  "id": "DOC-038",
+  "id": "DOC-029",
   "type": "doc",
   "category": "general",
-  "title": "Spike — Untersuchungen und PoCs",
+  "title": "Epic \u2014 Strategische Ziele",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:52:06.778Z",
-  "updated": "2026-04-08T21:52:27.834Z",
+  "created": "2026-04-08T21:51:56.425Z",
+  "updated": "2026-04-08T21:52:26.467Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,9 @@
     "documents": []
   },
   "tags": [
-    "h2,spike,item-type"
+    "h2",
+    "epic",
+    "item-type"
   ],
   "commits": [],
   "metadata": {}

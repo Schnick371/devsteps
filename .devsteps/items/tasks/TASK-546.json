@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "26 obsolete DOC-Items archivieren",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-not-important",
   "created": "2026-04-10T12:13:06.176Z",
-  "updated": "2026-04-10T12:13:06.176Z",
+  "updated": "2026-04-10T12:28:32.370Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".devsteps/items/docs/"

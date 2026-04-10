@@ -2,7 +2,7 @@
   "id": "DOC-047",
   "type": "doc",
   "category": "general",
-  "title": "Spider Web Tools — Mandate, Analyse, Eskalation",
+  "title": "Spider Web Tools \u2014 Mandate, Analyse, Eskalation",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:53:06.719Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h2,mcp,spider-web-tools,reference"
+    "h2",
+    "mcp",
+    "spider-web-tools",
+    "reference"
   ],
   "commits": [],
   "metadata": {}

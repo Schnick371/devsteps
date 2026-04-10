@@ -1,12 +1,12 @@
 {
-  "id": "DOC-029",
+  "id": "DOC-021",
   "type": "doc",
   "category": "general",
-  "title": "Epic — Strategische Ziele",
+  "title": "Copilot-Integration und Doc-Item-Workflow",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:51:56.425Z",
-  "updated": "2026-04-08T21:52:26.467Z",
+  "created": "2026-04-08T21:50:54.876Z",
+  "updated": "2026-04-08T21:51:20.235Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,10 @@
     "documents": []
   },
   "tags": [
-    "h2,epic,item-type"
+    "h1",
+    "copilot",
+    "workflow",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

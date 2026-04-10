@@ -2,7 +2,7 @@
   "id": "DOC-045",
   "type": "doc",
   "category": "general",
-  "title": "CRUD-Tools — add, get, list, update, search",
+  "title": "CRUD-Tools \u2014 add, get, list, update, search",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:53:06.371Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h2,mcp,crud,reference"
+    "h2",
+    "mcp",
+    "crud",
+    "reference"
   ],
   "commits": [],
   "metadata": {}

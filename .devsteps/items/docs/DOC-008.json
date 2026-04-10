@@ -30,7 +30,9 @@
     "documents": []
   },
   "tags": [
-    "h1,cli,devsteps-reference"
+    "h1",
+    "cli",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

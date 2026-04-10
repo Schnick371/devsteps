@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "general",
   "title": "DOC-001–058: Tags als Komma-String statt Array-Elemente gespeichert",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-10T12:11:53.414Z",
-  "updated": "2026-04-10T12:11:53.414Z",
+  "updated": "2026-04-10T12:28:32.374Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".devsteps/items/docs/"

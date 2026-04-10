@@ -1,12 +1,12 @@
 {
-  "id": "DOC-013",
+  "id": "DOC-054",
   "type": "doc",
   "category": "general",
-  "title": "Konzepte — Datenmodell und Grundbegriffe",
+  "title": "Inhalt eines Doc Items",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:50:53.640Z",
-  "updated": "2026-04-08T21:51:19.056Z",
+  "created": "2026-04-08T21:53:12.756Z",
+  "updated": "2026-04-08T21:55:08.429Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,9 @@
     "documents": []
   },
   "tags": [
-    "h1,concepts,devsteps-reference"
+    "h3",
+    "doc-item",
+    "fields"
   ],
   "commits": [],
   "metadata": {}

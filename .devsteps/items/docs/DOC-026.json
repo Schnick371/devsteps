@@ -2,7 +2,7 @@
   "id": "DOC-026",
   "type": "doc",
   "category": "general",
-  "title": "Bug — Fehler und Korrekturen",
+  "title": "Bug \u2014 Fehler und Korrekturen",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:51:47.348Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h2,bug,item-type,devsteps-reference"
+    "h2",
+    "bug",
+    "item-type",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

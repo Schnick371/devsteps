@@ -59,4 +59,18 @@ tags:
 - [ ] Warnung bei unbekannten Feldern
 - [ ] `devsteps_docs_new` nutzt Frontmatter beim Ingestion Mode
 - [ ] `devsteps_doc_read_content` gibt Frontmatter-Daten zurück
-- [ ] ≥6 Unit Tests: kein Frontmatter, valides Frontmatter, ungültiges YAML, ungültige Werte, unbekannte Felder, leere Felder
+- [ ] ≥6 Unit Tests: kein Frontmatter, valides Frontmatter, ungültiges YAML, ungültige Werte, unbekannte Felder, leere Felder## Implementation
+
+### New files:
+- `packages/shared/src/core/frontmatter.ts` — `extractFrontmatter()` function + Zod schema (`DocFrontmatterSchema`)
+- `packages/shared/src/core/frontmatter.test.ts` — 18 unit tests
+
+### Modified files:
+- `packages/shared/src/core/index.ts` — barrel export for frontmatter module
+- `packages/mcp-server/src/handlers/devsteps_doc_read_content.ts` — integrates frontmatter extraction (diataxis from frontmatter overrides tag heuristic)
+
+### Features:
+- Optional YAML frontmatter with fields: diataxis, related_items, status, author, tags
+- Strict validation: invalid YAML → Error, invalid values → Error, unknown fields → Warning
+- Minimal YAML parser (no external dependency) supporting scalars, inline arrays, block arrays
+- All 18 tests passing

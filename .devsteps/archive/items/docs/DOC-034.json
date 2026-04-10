@@ -1,12 +1,12 @@
 {
-  "id": "DOC-039",
+  "id": "DOC-034",
   "type": "doc",
   "category": "general",
-  "title": "Doc Item — Dokumentation als First-Class-Bürger",
+  "title": "Doc Item \u2014 Dokumentation als First-Class-B\u00fcrger",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:52:06.950Z",
-  "updated": "2026-04-08T21:52:27.977Z",
+  "created": "2026-04-08T21:51:57.273Z",
+  "updated": "2026-04-08T21:52:27.255Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,9 @@
     "documents": []
   },
   "tags": [
-    "h2,doc,item-type"
+    "h2",
+    "doc",
+    "item-type"
   ],
   "commits": [],
   "metadata": {}

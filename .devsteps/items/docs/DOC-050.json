@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h2,spider-web,dispatch,reference"
+    "h2",
+    "spider-web",
+    "dispatch",
+    "reference"
   ],
   "commits": [],
   "metadata": {}

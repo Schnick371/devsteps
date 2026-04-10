@@ -1,12 +1,12 @@
 {
-  "id": "DOC-033",
+  "id": "DOC-020",
   "type": "doc",
   "category": "general",
-  "title": "Spike — Untersuchungen und PoCs",
+  "title": "Spider Web \u2014 Agenten-Protokoll",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:51:57.103Z",
-  "updated": "2026-04-08T21:52:27.112Z",
+  "created": "2026-04-08T21:50:54.728Z",
+  "updated": "2026-04-08T21:51:20.085Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,10 @@
     "documents": []
   },
   "tags": [
-    "h2,spike,item-type"
+    "h1",
+    "spider-web",
+    "agents",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

@@ -2,7 +2,7 @@
   "id": "DOC-007",
   "type": "doc",
   "category": "general",
-  "title": "MCP Server — Werkzeugpalette",
+  "title": "MCP Server \u2014 Werkzeugpalette",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:50:42.260Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h1,mcp,tools,devsteps-reference"
+    "h1",
+    "mcp",
+    "tools",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

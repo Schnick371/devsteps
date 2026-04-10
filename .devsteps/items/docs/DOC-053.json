@@ -2,7 +2,7 @@
   "id": "DOC-053",
   "type": "doc",
   "category": "general",
-  "title": "7-Schritt Doc-Item-Workflow — Referenz",
+  "title": "7-Schritt Doc-Item-Workflow \u2014 Referenz",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:53:07.754Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h2,copilot,doc-workflow,how-to"
+    "h2",
+    "copilot",
+    "doc-workflow",
+    "how-to"
   ],
   "commits": [],
   "metadata": {}

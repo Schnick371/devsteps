@@ -30,7 +30,12 @@
     "documents": []
   },
   "tags": [
-    "adr,decision,path-c,accepted,madr,spike-046"
+    "adr",
+    "decision",
+    "path-c",
+    "accepted",
+    "madr",
+    "spike-046"
   ],
   "commits": [],
   "metadata": {}

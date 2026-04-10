@@ -2,7 +2,7 @@
   "id": "DOC-048",
   "type": "doc",
   "category": "general",
-  "title": "Ring-Struktur — R0 bis R5 und Agenten-Übersicht",
+  "title": "Ring-Struktur \u2014 R0 bis R5 und Agenten-\u00dcbersicht",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:53:06.896Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h2,spider-web,rings,reference"
+    "h2",
+    "spider-web",
+    "rings",
+    "reference"
   ],
   "commits": [],
   "metadata": {}

@@ -2,7 +2,7 @@
   "id": "DOC-005",
   "type": "doc",
   "category": "general",
-  "title": "Status-Lifecycle und Prioritäten",
+  "title": "Status-Lifecycle und Priorit\u00e4ten",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:50:41.902Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h1,lifecycle,eisenhower,devsteps-reference"
+    "h1",
+    "lifecycle",
+    "eisenhower",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

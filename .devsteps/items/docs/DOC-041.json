@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h3,doc,create,how-to"
+    "h3",
+    "doc",
+    "create",
+    "how-to"
   ],
   "commits": [],
   "metadata": {}

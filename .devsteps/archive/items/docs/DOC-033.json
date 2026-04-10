@@ -1,12 +1,12 @@
 {
-  "id": "DOC-055",
+  "id": "DOC-033",
   "type": "doc",
   "category": "general",
-  "title": "Anlegen eines Doc Items",
+  "title": "Spike \u2014 Untersuchungen und PoCs",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:53:20.838Z",
-  "updated": "2026-04-08T21:55:08.619Z",
+  "created": "2026-04-08T21:51:57.103Z",
+  "updated": "2026-04-08T21:52:27.112Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,9 @@
     "documents": []
   },
   "tags": [
-    "h3,doc-item,how-to"
+    "h2",
+    "spike",
+    "item-type"
   ],
   "commits": [],
   "metadata": {}

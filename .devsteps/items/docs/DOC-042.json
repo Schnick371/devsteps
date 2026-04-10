@@ -2,7 +2,7 @@
   "id": "DOC-042",
   "type": "doc",
   "category": "general",
-  "title": "Verknüpfen von Doc Items mit anderen Items",
+  "title": "Verkn\u00fcpfen von Doc Items mit anderen Items",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:53:05.846Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h3,doc,linking,how-to"
+    "h3",
+    "doc",
+    "linking",
+    "how-to"
   ],
   "commits": [],
   "metadata": {}

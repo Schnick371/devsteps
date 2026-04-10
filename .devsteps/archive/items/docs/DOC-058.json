@@ -1,12 +1,12 @@
 {
-  "id": "DOC-014",
+  "id": "DOC-058",
   "type": "doc",
   "category": "general",
-  "title": "Die DevSteps Item-Typen",
+  "title": "Inhalt der DOC BOM",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:50:53.818Z",
-  "updated": "2026-04-08T21:51:19.203Z",
+  "created": "2026-04-08T21:53:42.849Z",
+  "updated": "2026-04-08T21:55:09.143Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,10 @@
     "documents": []
   },
   "tags": [
-    "h1,item-types,devsteps-reference"
+    "h3",
+    "bom",
+    "schema",
+    "reference"
   ],
   "commits": [],
   "metadata": {}

@@ -6,7 +6,7 @@
  * Creates metadata JSON, description Markdown, and updates distributed index.
  */
 
-import { existsSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type {
   DevStepsConfig,
@@ -102,6 +102,7 @@ export async function addItem(devstepsDir: string, args: AddItemArgs): Promise<A
 
   // Save metadata
   const itemDir = join(devstepsDir, typeFolder);
+  mkdirSync(itemDir, { recursive: true });
   const metadataPath = join(itemDir, `${itemId}.json`);
   const descriptionPath = join(itemDir, `${itemId}.md`);
 

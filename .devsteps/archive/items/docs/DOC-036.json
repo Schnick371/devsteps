@@ -1,12 +1,12 @@
 {
-  "id": "DOC-034",
+  "id": "DOC-036",
   "type": "doc",
   "category": "general",
-  "title": "Doc Item — Dokumentation als First-Class-Bürger",
+  "title": "Task \u2014 Atomare Umsetzungsschritte",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:51:57.273Z",
-  "updated": "2026-04-08T21:52:27.255Z",
+  "created": "2026-04-08T21:52:06.444Z",
+  "updated": "2026-04-08T21:52:27.548Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,9 @@
     "documents": []
   },
   "tags": [
-    "h2,doc,item-type"
+    "h2",
+    "task",
+    "item-type"
   ],
   "commits": [],
   "metadata": {}

@@ -2,7 +2,7 @@
   "id": "DOC-009",
   "type": "doc",
   "category": "general",
-  "title": "VS Code Extension — Übersicht und Konfiguration",
+  "title": "VS Code Extension \u2014 \u00dcbersicht und Konfiguration",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:50:42.642Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h1,extension,vscode,devsteps-reference"
+    "h1",
+    "extension",
+    "vscode",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

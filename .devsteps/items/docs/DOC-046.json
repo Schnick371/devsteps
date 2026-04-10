@@ -2,7 +2,7 @@
   "id": "DOC-046",
   "type": "doc",
   "category": "general",
-  "title": "Docs-Pipeline — Import, Klassifikation, BOM-Commit",
+  "title": "Docs-Pipeline \u2014 Import, Klassifikation, BOM-Commit",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:53:06.543Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h2,mcp,docs-pipeline,reference"
+    "h2",
+    "mcp",
+    "docs-pipeline",
+    "reference"
   ],
   "commits": [],
   "metadata": {}

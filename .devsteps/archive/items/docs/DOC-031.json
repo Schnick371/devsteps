@@ -1,12 +1,12 @@
 {
-  "id": "DOC-056",
+  "id": "DOC-031",
   "type": "doc",
   "category": "general",
-  "title": "Verknuepfen von Doc Items mit anderen Items",
+  "title": "Task \u2014 Atomare Umsetzungsschritte",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:53:28.201Z",
-  "updated": "2026-04-08T21:55:08.788Z",
+  "created": "2026-04-08T21:51:56.768Z",
+  "updated": "2026-04-08T21:52:26.807Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,9 @@
     "documents": []
   },
   "tags": [
-    "h3,doc-item,linking"
+    "h2",
+    "task",
+    "item-type"
   ],
   "commits": [],
   "metadata": {}

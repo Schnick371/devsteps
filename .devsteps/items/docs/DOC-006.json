@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h1,relations,hierarchy,devsteps-reference"
+    "h1",
+    "relations",
+    "hierarchy",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

@@ -54,6 +54,13 @@ export {
   writeDocsMap,
 } from './docs-map.js';
 export { type GetItemResult, getItem } from './get.js';
+export {
+  DocFrontmatterSchema,
+  type DocFrontmatter,
+  extractFrontmatter,
+  type FrontmatterResult,
+  type FrontmatterWarning,
+} from './frontmatter.js';
 export { validateWorkspacePath } from './path-guard.js';
 export {
   type ClassificationResult,

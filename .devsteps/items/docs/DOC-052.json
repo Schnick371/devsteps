@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h2,copilot,doc-items,explanation"
+    "h2",
+    "copilot",
+    "doc-items",
+    "explanation"
   ],
   "commits": [],
   "metadata": {}

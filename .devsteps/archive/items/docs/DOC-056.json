@@ -1,12 +1,12 @@
 {
-  "id": "DOC-032",
+  "id": "DOC-056",
   "type": "doc",
   "category": "general",
-  "title": "Bug — Fehler und Korrekturen",
+  "title": "Verknuepfen von Doc Items mit anderen Items",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:51:56.930Z",
-  "updated": "2026-04-08T21:52:26.963Z",
+  "created": "2026-04-08T21:53:28.201Z",
+  "updated": "2026-04-08T21:55:08.788Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,9 @@
     "documents": []
   },
   "tags": [
-    "h2,bug,item-type"
+    "h3",
+    "doc-item",
+    "linking"
   ],
   "commits": [],
   "metadata": {}

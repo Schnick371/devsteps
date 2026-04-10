@@ -1,12 +1,12 @@
 {
-  "id": "DOC-036",
+  "id": "DOC-015",
   "type": "doc",
   "category": "general",
-  "title": "Task — Atomare Umsetzungsschritte",
+  "title": "Status-Lifecycle und Priorit\u00e4ten",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:52:06.444Z",
-  "updated": "2026-04-08T21:52:27.548Z",
+  "created": "2026-04-08T21:50:53.967Z",
+  "updated": "2026-04-08T21:51:19.359Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,10 @@
     "documents": []
   },
   "tags": [
-    "h2,task,item-type"
+    "h1",
+    "lifecycle",
+    "eisenhower",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

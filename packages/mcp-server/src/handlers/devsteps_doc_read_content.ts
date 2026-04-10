@@ -18,6 +18,7 @@ import { join } from 'node:path';
 import {
   DIATAXIS_TYPES,
   type DiataxisType,
+  extractFrontmatter,
   getItem,
   validateWorkspacePath,
 } from '@schnick371/devsteps-shared';
@@ -124,17 +125,36 @@ export default async function devstepsDocReadContentHandler(args: Record<string,
     }
   }
 
-  const headings = extractHeadings(content);
-  const word_count = countWords(content);
-  const diataxis_type = diataxisTypeFromTags(metadata.tags ?? []);
+  // Extract frontmatter if present (STORY-278)
+  let frontmatter = null;
+  let frontmatterWarnings: { field: string; message: string }[] = [];
+  let bodyContent = content;
+  try {
+    const fm = extractFrontmatter(content);
+    frontmatter = fm.frontmatter;
+    frontmatterWarnings = fm.warnings;
+    bodyContent = fm.body;
+  } catch (err) {
+    return {
+      success: false,
+      error: `Frontmatter error in ${id}: ${err instanceof Error ? err.message : String(err)}`,
+    };
+  }
+
+  const headings = extractHeadings(bodyContent);
+  const word_count = countWords(bodyContent);
+  // Frontmatter diataxis overrides tag-based heuristic
+  const diataxis_type = frontmatter?.diataxis ?? diataxisTypeFromTags(metadata.tags ?? []);
 
   return {
     success: true,
     id: metadata.id,
     title: metadata.title,
     diataxis_type,
-    content,
+    content: bodyContent,
     word_count,
     headings,
+    frontmatter,
+    frontmatter_warnings: frontmatterWarnings.length > 0 ? frontmatterWarnings : undefined,
   };
 }

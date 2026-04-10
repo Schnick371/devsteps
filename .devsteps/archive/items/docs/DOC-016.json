@@ -1,12 +1,12 @@
 {
-  "id": "DOC-058",
+  "id": "DOC-016",
   "type": "doc",
   "category": "general",
-  "title": "Inhalt der DOC BOM",
+  "title": "Beziehungstypen und Item-Hierarchie",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:53:42.849Z",
-  "updated": "2026-04-08T21:55:09.143Z",
+  "created": "2026-04-08T21:50:54.125Z",
+  "updated": "2026-04-08T21:51:19.514Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,10 @@
     "documents": []
   },
   "tags": [
-    "h3,bom,schema,reference"
+    "h1",
+    "relations",
+    "hierarchy",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

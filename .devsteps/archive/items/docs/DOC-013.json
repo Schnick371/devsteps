@@ -1,12 +1,12 @@
 {
-  "id": "DOC-030",
+  "id": "DOC-013",
   "type": "doc",
   "category": "general",
-  "title": "Story — Funktionale Anforderungen",
+  "title": "Konzepte \u2014 Datenmodell und Grundbegriffe",
   "status": "obsolete",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-08T21:51:56.597Z",
-  "updated": "2026-04-08T21:52:26.633Z",
+  "created": "2026-04-08T21:50:53.640Z",
+  "updated": "2026-04-08T21:51:19.056Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -27,7 +27,9 @@
     "documents": []
   },
   "tags": [
-    "h2,story,item-type"
+    "h1",
+    "concepts",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}

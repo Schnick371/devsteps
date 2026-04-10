@@ -2,7 +2,7 @@
   "id": "DOC-044",
   "type": "doc",
   "category": "general",
-  "title": "Inhalt der DOC BOM — ARCH-NNN Schema und Verwaltung",
+  "title": "Inhalt der DOC BOM \u2014 ARCH-NNN Schema und Verwaltung",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:53:06.200Z",
@@ -30,7 +30,10 @@
     "documents": []
   },
   "tags": [
-    "h3,bom,schema,reference"
+    "h3",
+    "bom",
+    "schema",
+    "reference"
   ],
   "commits": [],
   "metadata": {}

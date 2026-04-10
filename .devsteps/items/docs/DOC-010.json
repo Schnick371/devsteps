@@ -2,7 +2,7 @@
   "id": "DOC-010",
   "type": "doc",
   "category": "general",
-  "title": "Spider Web — Agenten-Protokoll",
+  "title": "Spider Web \u2014 Agenten-Protokoll",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T21:50:42.818Z",
@@ -30,7 +30,11 @@
     "documents": []
   },
   "tags": [
-    "h1,spider-web,agents,architecture,devsteps-reference"
+    "h1",
+    "spider-web",
+    "agents",
+    "architecture",
+    "devsteps-reference"
   ],
   "commits": [],
   "metadata": {}
