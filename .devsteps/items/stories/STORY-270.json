@@ -1,0 +1,46 @@
+{
+  "id": "STORY-270",
+  "type": "story",
+  "category": "general",
+  "title": "Tests: Docs Import Dialog Chain (7 handlers, zero coverage)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-10T09:31:06.907Z",
+  "updated": "2026-04-10T09:31:06.907Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/devsteps_docs_import.ts",
+    "packages/mcp-server/src/handlers/devsteps_docs_classify.ts",
+    "packages/mcp-server/src/handlers/devsteps_docs_classify_confirm.ts",
+    "packages/mcp-server/src/handlers/devsteps_docs_bom_status.ts",
+    "packages/mcp-server/src/handlers/devsteps_docs_bom_commit.ts",
+    "packages/mcp-server/src/handlers/devsteps_docs_new.ts",
+    "packages/mcp-server/src/handlers/devsteps_doc_read_content.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "tests",
+    "docs-pipeline",
+    "mcp-handlers",
+    "coverage",
+    "quality"
+  ],
+  "commits": [],
+  "metadata": {}
+}

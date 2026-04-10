@@ -1,0 +1,40 @@
+{
+  "id": "STORY-271",
+  "type": "story",
+  "category": "general",
+  "title": "Decompose McpServerManager God-class (583 lines → 3 classes)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-10T09:31:23.029Z",
+  "updated": "2026-04-10T09:31:23.029Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/mcpServerManager.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "refactor",
+    "extension",
+    "god-class",
+    "architecture",
+    "srp"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,41 @@
+{
+  "id": "STORY-272",
+  "type": "story",
+  "category": "general",
+  "title": "Unified handler dispatch registry — eliminate server.ts/http-server.ts duplication",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-10T09:31:40.458Z",
+  "updated": "2026-04-10T09:31:40.458Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/server.ts",
+    "packages/mcp-server/src/http-server.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "architecture",
+    "refactor",
+    "mcp-server",
+    "maintenance",
+    "dry"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,44 @@
+{
+  "id": "STORY-269",
+  "type": "story",
+  "category": "general",
+  "title": "Tests: Spider Web Protocol Handlers (5 handlers, zero coverage)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-10T09:30:52.800Z",
+  "updated": "2026-04-10T09:30:52.800Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/mcp-server/src/handlers/write_analysis_report.ts",
+    "packages/mcp-server/src/handlers/write_dispatch_manifest.ts",
+    "packages/mcp-server/src/handlers/read_mandate_results.ts",
+    "packages/mcp-server/src/handlers/read_analysis_envelope.ts",
+    "packages/mcp-server/src/handlers/write_mandate_result.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "tests",
+    "spider-web",
+    "mcp-handlers",
+    "coverage",
+    "quality"
+  ],
+  "commits": [],
+  "metadata": {}
+}
