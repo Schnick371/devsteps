@@ -279,7 +279,8 @@ export class DevStepsTreeDataProvider implements vscode.TreeDataProvider<TreeNod
   }
 
   isFiltersActive(): boolean {
-    const { statuses, priorities, types, tags, eisenhower, assignees, searchQuery } = this.filterState;
+    const { statuses, priorities, types, tags, eisenhower, assignees, searchQuery } =
+      this.filterState;
     return (
       statuses.length > 0 ||
       priorities.length > 0 ||

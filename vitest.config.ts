@@ -6,9 +6,6 @@ export default defineConfig({
     include: ['packages/*/src/**/*.test.ts'],
     exclude: ['**/node_modules/**', '**/dist/**', '**/build/**'],
 
-    // Run tests in parallel for speed
-    threads: true,
-
     // Reasonable timeout for tests
     testTimeout: 10000,
   },

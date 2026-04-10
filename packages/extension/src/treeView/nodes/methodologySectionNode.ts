@@ -26,7 +26,11 @@ export class MethodologySectionNode extends TreeNode {
     );
 
     const iconMap = { scrum: '🌲', waterfall: '🏗️', 'cross-cutting': '🔗' };
-    const labelMap = { scrum: 'Scrum Items', waterfall: 'Waterfall Items', 'cross-cutting': 'Cross-Cutting Items' };
+    const labelMap = {
+      scrum: 'Scrum Items',
+      waterfall: 'Waterfall Items',
+      'cross-cutting': 'Cross-Cutting Items',
+    };
     const icon = iconMap[this.methodology];
     const label = labelMap[this.methodology];
 
@@ -53,7 +57,13 @@ export class MethodologySectionNode extends TreeNode {
       .sort(([typeA], [typeB]) => typeA.localeCompare(typeB))
       .map(([type, items]) => {
         const isExpanded = this.expandedGroups.has(`${this.methodology}-${type}`);
-        return new TypeGroupNode(type, items.length, items, isExpanded, this.methodology);
+        return new TypeGroupNode(
+          type,
+          items.length,
+          items,
+          isExpanded,
+          this.methodology === 'cross-cutting' ? undefined : this.methodology
+        );
       });
   }
 

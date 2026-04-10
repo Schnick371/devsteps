@@ -6,16 +6,22 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-04-10T08:59:37.938Z",
-  "updated": "2026-04-10T09:03:48.507Z",
+  "updated": "2026-04-10T09:26:56.107Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
-    "implements": [],
-    "implemented-by": [],
+    "implements": [
+      "EPIC-010"
+    ],
+    "implemented-by": [
+      "TASK-537"
+    ],
     "tested-by": [],
     "tests": [],
     "blocks": [],
-    "blocked-by": [],
+    "blocked-by": [
+      "STORY-267"
+    ],
     "relates-to": [
       "SPIKE-063"
     ],

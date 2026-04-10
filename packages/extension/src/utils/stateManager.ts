@@ -36,6 +36,8 @@ export class TreeViewStateManager {
       priorities: [],
       types: [],
       tags: [],
+      eisenhower: [],
+      assignees: [],
       searchQuery: '',
       hideDone: false,
       hideRelatesTo: false,

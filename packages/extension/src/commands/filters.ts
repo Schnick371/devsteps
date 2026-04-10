@@ -101,7 +101,10 @@ export function registerFilterCommands(
             value: 'not-urgent-not-important',
           },
         ],
-        { canPickMany: true, placeHolder: 'Select Eisenhower quadrants to show (multiple selection)' }
+        {
+          canPickMany: true,
+          placeHolder: 'Select Eisenhower quadrants to show (multiple selection)',
+        }
       );
       if (!selected || !checkDevStepsInitialized(treeDataProvider)) return;
       treeDataProvider.setEisenhowerFilter(selected.map((s) => s.value));

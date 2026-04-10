@@ -24,37 +24,67 @@ describe('validation — doc type guards', () => {
 
   describe('doc → doc link guard (BUG-089)', () => {
     it('rejects doc → doc via documents in Scrum', () => {
-      const result = validateRelationship(docItem, docItem2, RELATIONSHIP_TYPE.DOCUMENTS, METHODOLOGY.SCRUM);
+      const result = validateRelationship(
+        docItem,
+        docItem2,
+        RELATIONSHIP_TYPE.DOCUMENTS,
+        METHODOLOGY.SCRUM
+      );
       expect(result.valid).toBe(false);
       expect(result.error).toContain('Doc-to-doc');
       expect(result.suggestion).toContain('BOM');
     });
 
     it('rejects doc → doc via documented-by in Scrum', () => {
-      const result = validateRelationship(docItem, docItem2, RELATIONSHIP_TYPE.DOCUMENTED_BY, METHODOLOGY.SCRUM);
+      const result = validateRelationship(
+        docItem,
+        docItem2,
+        RELATIONSHIP_TYPE.DOCUMENTED_BY,
+        METHODOLOGY.SCRUM
+      );
       expect(result.valid).toBe(false);
       expect(result.error).toContain('Doc-to-doc');
     });
 
     it('rejects doc → doc via documents in Waterfall', () => {
-      const result = validateRelationship(docItem, docItem2, RELATIONSHIP_TYPE.DOCUMENTS, METHODOLOGY.WATERFALL);
+      const result = validateRelationship(
+        docItem,
+        docItem2,
+        RELATIONSHIP_TYPE.DOCUMENTS,
+        METHODOLOGY.WATERFALL
+      );
       expect(result.valid).toBe(false);
       expect(result.error).toContain('Doc-to-doc');
     });
 
     it('rejects doc → doc via documents in Hybrid', () => {
-      const result = validateRelationship(docItem, docItem2, RELATIONSHIP_TYPE.DOCUMENTS, METHODOLOGY.HYBRID);
+      const result = validateRelationship(
+        docItem,
+        docItem2,
+        RELATIONSHIP_TYPE.DOCUMENTS,
+        METHODOLOGY.HYBRID
+      );
       expect(result.valid).toBe(false);
       expect(result.error).toContain('Doc-to-doc');
     });
 
     it('still allows doc → story via documents (valid)', () => {
-      const result = validateRelationship(docItem, storyItem, RELATIONSHIP_TYPE.DOCUMENTS, METHODOLOGY.SCRUM);
+      const result = validateRelationship(
+        docItem,
+        storyItem,
+        RELATIONSHIP_TYPE.DOCUMENTS,
+        METHODOLOGY.SCRUM
+      );
       expect(result.valid).toBe(true);
     });
 
     it('still allows story → doc via documented-by (valid)', () => {
-      const result = validateRelationship(storyItem, docItem, RELATIONSHIP_TYPE.DOCUMENTED_BY, METHODOLOGY.SCRUM);
+      const result = validateRelationship(
+        storyItem,
+        docItem,
+        RELATIONSHIP_TYPE.DOCUMENTED_BY,
+        METHODOLOGY.SCRUM
+      );
       expect(result.valid).toBe(true);
     });
   });

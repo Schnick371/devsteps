@@ -6,11 +6,13 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-04-10T09:01:08.109Z",
-  "updated": "2026-04-10T09:01:08.109Z",
+  "updated": "2026-04-10T09:26:08.462Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
-    "implements": [],
+    "implements": [
+      "STORY-267"
+    ],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],

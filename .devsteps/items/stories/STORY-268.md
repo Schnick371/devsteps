@@ -86,3 +86,21 @@ Input (authored):          Stored in doc-item:    Assembled (BOM pos=3):
 - [ ] `split_at_level` defaults to 1 (H1 boundary = one doc-item per H1 block)
 - [ ] Ingested content stored with original heading levels unchanged
 - [ ] Tool description documents the "always H1" authoring convention
+
+## CORRECTION — split_at_level type and default (2026-04-10 audit)
+
+The parameter block above incorrectly defines `split_at_level?: 2 | 3`.
+
+**Corrected definition:**
+```typescript
+split_at_level?: 1 | 2 | 3   // default: 1 (H1 boundary)
+```
+
+Since authors always write documents starting at H1, the default split boundary is H1. Each H1 block becomes one doc-item containing all subordinate H2/H3/H4/H5/code content unchanged.
+
+**Use cases:**
+- `split_at_level: 1` (default) — one H1 block = one doc-item. Normal case for all authored docs.
+- `split_at_level: 2` — one H2 block = one doc-item. For reference docs with many small H2 chapters.
+- `split_at_level: 3` — one H3 block = one doc-item. Only for legacy docs that were already structured at H3 level (e.g., the RBCD example before correction).
+
+AC update: `split_at_level` must accept 1, 2, and 3; default is 1.
