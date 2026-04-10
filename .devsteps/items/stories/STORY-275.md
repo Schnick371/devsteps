@@ -48,4 +48,4 @@ Fragment at BOM level 3 (authored as H1):
 - [ ] Heading normalization formula documented with example
 - [ ] Placeholder handling (assemble with TODOs) documented
 - [ ] depends-on STORY-268 (ingestion) + TASK-436 (adjustHeadingLevels) + TASK-437 (exportHandler)
-- [ ] Entry Point Routing table entry added to copilot-instructions.md
+- [ ] Entry Point Routing table entry added to copilot-instructions.mdDone: devsteps-59-doc-assemble.prompt.md created — BOM tree traversal + H1 heading normalization (offset = bom_level − 1, hard cap H6). Gated on TASK-436 + TASK-437.

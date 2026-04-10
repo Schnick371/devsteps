@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "T4: Update copilot-instructions.md — doc type description + authoring convention",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-04-10T09:26:47.886Z",
-  "updated": "2026-04-10T10:36:57.747Z",
+  "updated": "2026-04-10T12:16:48.004Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

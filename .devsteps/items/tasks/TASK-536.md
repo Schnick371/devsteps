@@ -10,4 +10,4 @@ NEW: \"H1/H2 = Diataxis type / chapter (document root). H3 = content fragment bo
 
 Also update the BOM tree example if present.
 
-Affected: `.devsteps/items/docs/DOC-028.json` + `.devsteps/items/docs/DOC-028.md` (via `mcp_devsteps_update`)
+Affected: `.devsteps/items/docs/DOC-028.json` + `.devsteps/items/docs/DOC-028.md` (via `mcp_devsteps_update`)Done: DOC-028 updated — removed old 'each heading level = separate doc item' model. Now reflects H1-block authoring invariant: one doc item = one H1 block, BOM assembler shifts levels at export.

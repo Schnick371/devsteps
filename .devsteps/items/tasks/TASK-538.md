@@ -23,4 +23,4 @@ Also update the authoring convention comment if present: "Write documents starti
 ## Acceptance Criteria
 - [ ] `doc` type row no longer mentions H4 as separate item
 - [ ] "always H1" authoring convention visible in the table or as a note below the Item Types table
-- [ ] Both file copies updated (root + mcp-server if present)
+- [ ] Both file copies updated (root + mcp-server if present)Done: copilot-instructions.md `doc` type description updated — removed old H1=Diataxis/H2=chapter/H3=section/H4=subsection mapping. Now reflects H1-block authoring invariant with BOM-offset assembly.

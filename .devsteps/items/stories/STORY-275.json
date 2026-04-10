@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Create devsteps-59-doc-assemble.prompt.md — trigger BOM assembly with H-level normalization",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-10T09:43:13.985Z",
-  "updated": "2026-04-10T10:35:16.171Z",
+  "updated": "2026-04-10T12:17:18.277Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

@@ -68,4 +68,4 @@ Hard cap at H6 — never produces H7+.
 - BOM stores heading level implicitly via `parent_id` depth
 - Assembly computes offset per fragment, applies `adjustHeadingLevels`
 
-**What this story must clarify in tool description:** "Write your document starting with `# Title`. DevSteps automatically adjusts heading levels when assembling the full document."
+**What this story must clarify in tool description:** "Write your document starting with `# Title`. DevSteps automatically adjusts heading levels when assembling the full document."Done: H1-block granularity model fully rolled out. DOC-059, DOC-028, and copilot-instructions.md updated. BOM assembly invariant established: authors write H1, assembler shifts to output level via offset = bom_level − 1.

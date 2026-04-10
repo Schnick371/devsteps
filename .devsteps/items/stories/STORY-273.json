@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Create devsteps-57-doc-review.prompt.md — BOM coverage scan + gap detection + placeholder items",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-10T09:43:13.984Z",
-  "updated": "2026-04-10T10:35:16.170Z",
+  "updated": "2026-04-10T12:17:02.238Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

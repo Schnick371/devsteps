@@ -45,7 +45,7 @@ DevSteps is the primary work-tracking system. NEVER edit `.devsteps/` directly �
 | `spike`       | Investigation / PoC                  | all              |
 | `feature`     | New functionality                    | Waterfall/Hybrid |
 | `requirement` | Requirement                          | Waterfall/Hybrid |
-| `doc`         | Wissensknoten / **Content Fragment**: a section of a documentation document (H1=Diataxis type, H2=chapter, H3=section, H4=subsection) bidirectionally linked to backlog items. Cross-cutting — outside the Epic hierarchy. Relations: `documents` / `documented-by`. Inhalt im `description`-Feld (vollständiges Markdown). | all |
+| `doc`         | Wissensknoten / **Content Fragment**: one H1 content block in a documentation document — authors ALWAYS write `# Title` (H1), assembler shifts heading levels via `offset = bom_level − 1` at export time. H2–H5 sub-headings within a fragment are prose content, NOT separate doc items. Cross-cutting — outside the Epic hierarchy. Relations: `documents` / `documented-by`. Inhalt im `description`-Feld (vollständiges Markdown). | all |
 | `test`        | Test specification or test case — cross-cutting like `doc`. Links to items under test via `tests` / `tested-by` relations. | all |
 
 ### Status Flow

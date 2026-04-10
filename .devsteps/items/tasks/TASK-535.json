@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "T1: Update DOC-059 — H3-block granularity model (remove H4/H5 as separate items)",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-04-10T09:01:08.104Z",
-  "updated": "2026-04-10T10:36:57.745Z",
+  "updated": "2026-04-10T12:16:32.949Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

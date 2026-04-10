@@ -49,4 +49,4 @@ Uses `devsteps-R4-worker-doc-gap` (new — see STORY-276) for placeholder item c
 - [ ] Coverage scan covers: MCP tools, CLI commands, agent protocol, data model
 - [ ] Placeholder creation with `gap` + `placeholder` tags
 - [ ] Coverage report format documented
-- [ ] Entry Point Routing table entry added to copilot-instructions.md
+- [ ] Entry Point Routing table entry added to copilot-instructions.mdDone: devsteps-57-doc-review.prompt.md created — dispatches worker-doc-gap to map doc items against project subsystem × Diataxis matrix. Supports scope filtering + dry_run mode.

@@ -34,4 +34,4 @@ A comprehensive documentation import prompt — the primary entry point for conv
 - [ ] Mode A (directory), Mode B (single file), Mode C (inline) all documented
 - [ ] Frontmatter auto-detection rules documented
 - [ ] Duplicate-avoidance: checks existing BOM before creating
-- [ ] Entry Point Routing table entry added to copilot-instructions.md
+- [ ] Entry Point Routing table entry added to copilot-instructions.mdDone: devsteps-58-doc-import.prompt.md created — supports 3 modes: A (directory scan via 5-tool chain), B (single file via devsteps_docs_new), C (inline content_markdown). Modes B+C gated on STORY-268 completion.
