@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "devsteps_docs_new — document ingestion mode (content_markdown parameter)",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-04-10T08:59:37.938Z",
-  "updated": "2026-04-10T13:18:41.126Z",
+  "updated": "2026-04-10T13:24:19.222Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

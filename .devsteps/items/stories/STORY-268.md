@@ -105,3 +105,12 @@ Since authors always write documents starting at H1, the default split boundary 
 - `split_at_level: 3` — one H3 block = one doc-item. Only for legacy docs that were already structured at H3 level (e.g., the RBCD example before correction).
 
 AC update: `split_at_level` must accept 1, 2, and 3; default is 1.
+
+## Ergebnis (2026-04-10)
+
+- `devsteps_docs_new` MCP-Tool komplett entfernt (Handler, Tool-Definition, Server-Registration)
+- `generateSkeleton()` → `packages/shared/src/templates/diataxis.ts` mit `generateDiataxisSkeleton()` + `detectDiataxisType()`
+- `addItem()` in `add.ts` erkennt Diataxis-Type aus Tags/Titel und generiert Skeleton automatisch
+- `addTool` Beschreibung aktualisiert (Diataxis-Skeleton-Dokumentation)
+- STORY-250 → obsolete, STORY-274 → aktualisiert (Mode B/C nutzen `add`)
+- Commit: `8543daf`"

@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "T3: parseDocumentFragments + extractFrontmatter pure functions in packages/shared",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-04-10T09:26:47.880Z",
-  "updated": "2026-04-10T09:26:56.107Z",
+  "updated": "2026-04-10T13:24:14.794Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

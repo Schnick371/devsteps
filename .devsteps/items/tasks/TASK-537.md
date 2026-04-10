@@ -21,3 +21,8 @@ Re-export both from `packages/shared/src/core/index.ts`.
 - [ ] `extractFrontmatter` handles: valid frontmatter, no frontmatter, malformed YAML (returns `meta: {}` without throwing)
 - [ ] File ≤ 100 lines; zero new dependencies (js-yaml already present)
 - [ ] ≥10 unit tests covering all edge cases
+
+## Status Update (2026-04-10)
+
+- `extractFrontmatter()` → ERLEDIGT via STORY-278 (`packages/shared/src/core/frontmatter.ts`)
+- `parseDocumentFragments()` → nach STORY-268 Reframing nicht mehr Teil dieser Story (docs_new eliminiert). parseDocumentFragments wird für die Import-Chain (STORY-274 Mode B/C) benötigt, aber als eigene Task unter STORY-274 oder EPIC-010."
