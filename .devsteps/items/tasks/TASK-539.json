@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Update REGISTRY.md + copilot-instructions.md — prompt numbering convention + doc-system entries",
-  "status": "draft",
+  "status": "review",
   "eisenhower": "urgent-important",
   "created": "2026-04-10T09:43:13.981Z",
-  "updated": "2026-04-10T09:43:33.818Z",
+  "updated": "2026-04-10T10:31:02.845Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

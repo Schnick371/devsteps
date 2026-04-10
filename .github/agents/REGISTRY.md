@@ -168,6 +168,7 @@ Exec Conductors receive **only `report_path` + `item_id`** from coord and return
 | `devsteps-R4-worker-guide-writer`      | Guide file updates                                |
 | `devsteps-R4-worker-build-diagnostics` | Build/test failure diagnosis                      |
 | `devsteps-R4-worker-workspace`         | New project/package scaffolding (Ring 4 pre-impl) |
+| `devsteps-R4-worker-doc-gap`           | Doc coverage gap detection + placeholder creation  |
 
 All workers receive **only `report_path` + `item_id`** — never raw findings pasted in prompt.
 
@@ -227,3 +228,34 @@ accessible when dispatched programmatically by their parent tier agent.
 
 _Protocol details: [AGENT-DISPATCH-PROTOCOL.md](./AGENT-DISPATCH-PROTOCOL.md)_  
 _Agent naming: `devsteps-{role}-{name}.agent.md` where role ∈ {coord, analyst, aspect, exec, gate, worker}_
+
+---
+
+## Prompt Numbering Convention
+
+Prompts follow a numeric range assignment. Ranges reserved per functional zone:
+
+| Range | Purpose |
+| ----- | ------- |
+| `01` | Session init (`devsteps-01-project-context`) |
+| `05–15` | Discovery — research, planning, meta-hierarchy |
+| `20–25` | Execution — start work, review |
+| `30–45` | Iterative workflows — rapid cycle, guide cycle, sprint, classify |
+| `48–59` | Maintenance & documentation — refactor, rename, git, doc workflows |
+| `60–70` | Release — pre-release, production release |
+| `80` | Workspace health / Ishikawa root-cause analysis |
+| `90` | Reserved (was project-context, now free) |
+| `95–98` | Meta — backlog hygiene, adapt Copilot files |
+
+**Doc-system prompts (48–59 range):**
+
+| Prompt | Purpose |
+| ------ | ------- |
+| `devsteps-48-refactor` | Structural refactoring |
+| `devsteps-49-rename` | Naming convention enforcement |
+| `devsteps-50-git-cleanup` | Git branch cleanup |
+| `devsteps-55-investigate` | Git forensics (analyst-archaeology) |
+| `devsteps-56-context-sync` | Document project context |
+| `devsteps-57-doc-review` | BOM coverage scan + gap detection (→ worker-doc-gap) |
+| `devsteps-58-doc-import` | Import workspace docs → doc items (3 modes) |
+| `devsteps-59-doc-assemble` | Assemble BOM tree → full document with heading normalization |

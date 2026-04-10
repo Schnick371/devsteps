@@ -106,6 +106,9 @@ DevSteps is the primary work-tracking system. NEVER edit `.devsteps/` directly â
 | Classify backlog items        | `devsteps-45-classify-items`  | coord               |
 | Assign meta-hierarchy (initiative/theme) | `devsteps-15-meta-hierarchy` | coord          |
 | Document context              | `devsteps-56-context-sync`    | coord               |
+| Review doc coverage / find gaps | `devsteps-57-doc-review`    | coord               |
+| Import workspace docs â†’ doc items | `devsteps-58-doc-import`  | coord               |
+| Assemble full document from BOM | `devsteps-59-doc-assemble`  | coord               |
 | Pre-release                   | `devsteps-60-release-next`    | coord               |
 | Production release            | `devsteps-70-release`         | coord               |
 | Workspace Health / Root Cause | `devsteps-80-ishikawa`        | coord-ishikawa      |
