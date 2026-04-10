@@ -15,6 +15,7 @@ import type {
   ItemType,
 } from '../schemas/index.js';
 import { generateMadrTemplate, isMadrCandidate } from '../templates/madr.js';
+import { detectDiataxisType, generateDiataxisSkeleton } from '../templates/diataxis.js';
 import {
   generateItemId,
   getCurrentTimestamp,
@@ -115,6 +116,14 @@ export async function addItem(devstepsDir: string, args: AddItemArgs): Promise<A
   // TASK-413: Auto-populate MADR 4.0 template for ADR-type DOC items
   if (args.type === 'doc' && !args.description && isMadrCandidate(args.tags || [], args.title)) {
     defaultDescription = generateMadrTemplate(itemId, args.title, now.split('T')[0]);
+  }
+
+  // STORY-268: Auto-populate Diataxis skeleton for DOC items (when no MADR match)
+  if (args.type === 'doc' && !args.description && defaultDescription.includes('<!-- Add detailed')) {
+    const diataxisType = detectDiataxisType(args.tags || [], args.title);
+    if (diataxisType) {
+      defaultDescription = generateDiataxisSkeleton(args.title, diataxisType);
+    }
   }
 
   const description = normalizeMarkdown(args.description || defaultDescription);

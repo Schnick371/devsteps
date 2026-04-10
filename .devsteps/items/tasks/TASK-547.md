@@ -30,3 +30,7 @@ Diese Task MUSS nach STORY-268 und STORY-278 implementiert werden (erst implemen
 - [ ] copilot-instructions.md doc/test Beschreibungen aktualisiert## Partial Resolution
 
 Updated copilot-instructions.md (doc: frontmatter support note, test: generic CRUD + link clarification), addTool description (cross-cutting types), docReadContentTool description (frontmatter in response). Remaining: STORY-268 (Ingestion Mode) must be done before docsNewTool and CLI help updates.
+
+## Update post STORY-268 Reframing
+
+`docsNewTool` wurde ENTFERNT (nicht nur aktualisiert). Punkt 2 (docsNewTool description) entfällt. Stattdessen: `addTool` description erwähnen, dass doc-Items mit Diataxis-Tags automatisch Skeleton erhalten."

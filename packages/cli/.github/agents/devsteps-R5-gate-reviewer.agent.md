@@ -1,8 +1,7 @@
 ---
 description: "gate-reviewer — quality gate, mandate-type=review, dispatches quality-subagent, runs bounded Review-Fix loop via write_rejection_feedback + write_iteration_signal"
 model: "Claude Sonnet 4.6"
-tools:
-  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false
 ---
 

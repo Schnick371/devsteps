@@ -1,8 +1,7 @@
 ---
 description: "Quality Analyst - defines the observable behavior surface: what must be tested, documented, and validated for this change to be trustworthy"
 model: "Claude Sonnet 4.6"
-tools:
-  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 
 user-invocable: false
 ---

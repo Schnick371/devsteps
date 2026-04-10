@@ -6,7 +6,7 @@
   "status": "in-progress",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-10T12:13:06.179Z",
-  "updated": "2026-04-10T12:39:46.841Z",
+  "updated": "2026-04-10T13:21:39.710Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/tools/crud.ts",

@@ -2,8 +2,7 @@
 agent: "devsteps-R0-coord"
 model: "Claude Sonnet 4.6"
 description: "Execute production release workflow - version bump, CHANGELOG, build, npm publish, and git tagging"
-tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 ---
 
 # 🚀 Release Workflow — Parallel Subagent Orchestration

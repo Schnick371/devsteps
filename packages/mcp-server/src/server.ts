@@ -35,7 +35,6 @@ import {
   docsClassifyConfirmTool,
   docsClassifyTool,
   docsImportTool,
-  docsNewTool,
   exportTool,
   getTool,
   healthCheckTool,
@@ -121,7 +120,6 @@ export class DevStepsServer {
       docsClassifyConfirmTool,
       docsBomStatusTool,
       docsBomCommitTool,
-      docsNewTool,
       // Docs content reading (STORY-252)
       docReadContentTool,
       // Context Budget Protocol (CBP) Tier-3 analysis tools (EPIC-027)

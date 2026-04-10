@@ -2,8 +2,7 @@
 agent: "devsteps-R0-coord-ishikawa"
 model: "Claude Sonnet 4.6"
 description: "Workspace health analysis — Ishikawa root cause analysis, coord dispatches bone analysts + aspect agents across 6 dimensions"
-tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 ---
 
 # 🐟 Ishikawa — Workspace Health Analysis

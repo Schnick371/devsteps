@@ -1,8 +1,7 @@
 ---
 description: "Constraint Analyst - surfaces risks, blockers, and hidden prerequisites that could derail naive implementation"
 model: "Claude Sonnet 4.6"
-tools:
-  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 
 user-invocable: false
 ---

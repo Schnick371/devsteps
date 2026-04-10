@@ -1,8 +1,7 @@
 ---
 description: "Quality deep analyst mandate-type=quality, validates correctness + completeness via parallel dispatch with bounded Review-Fix loop"
 model: "Claude Sonnet 4.6"
-tools:
-  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false
 ---
 

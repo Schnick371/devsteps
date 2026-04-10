@@ -103,7 +103,7 @@ export async function startHttpMcpServer(
     .default;
   const docsBomStatusHandler = (await import('./handlers/devsteps_docs_bom_status.js')).default;
   const docsBomCommitHandler = (await import('./handlers/devsteps_docs_bom_commit.js')).default;
-  const docsNewHandler = (await import('./handlers/devsteps_docs_new.js')).default;
+  // devsteps_docs_new removed in STORY-268 — Diataxis skeletons now in addItem()
   const docReadContentHandler = (await import('./handlers/devsteps_doc_read_content.js')).default;
   const writeAnalysisReportHandler = (await import('./handlers/write_analysis_report.js')).default;
   const readAnalysisEnvelopeHandler = (await import('./handlers/read_analysis_envelope.js'))
@@ -147,7 +147,6 @@ export async function startHttpMcpServer(
     ['devsteps_docs_classify_confirm', docsClassifyConfirmHandler],
     ['devsteps_docs_bom_status', docsBomStatusHandler],
     ['devsteps_docs_bom_commit', docsBomCommitHandler],
-    ['devsteps_docs_new', docsNewHandler],
     ['devsteps_doc_read_content', docReadContentHandler],
     ['write_analysis_report', writeAnalysisReportHandler],
     ['read_analysis_envelope', readAnalysisEnvelopeHandler],
@@ -186,7 +185,6 @@ export async function startHttpMcpServer(
     tools.docsClassifyConfirmTool,
     tools.docsBomStatusTool,
     tools.docsBomCommitTool,
-    tools.docsNewTool,
     tools.docReadContentTool,
     tools.writeAnalysisReportTool,
     tools.readAnalysisEnvelopeTool,

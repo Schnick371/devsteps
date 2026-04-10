@@ -1,8 +1,13 @@
 ---
-description: Exec Implementation Conductor — writes, verifies, and commits implementation code. Dispatched by coord after exec-planner MandateResult. NEVER called directly by user.
+description: Exec Implementation Conductor — writes, verifies, and commits implementation code. Dispatches worker-coder/workspace/build-diagnostics/refactor. NEVER called directly by user.
 model: "Claude Sonnet 4.6"
-tools:
-  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+dispatch_role: conductor
+agents:
+  - devsteps-R4-worker-coder
+  - devsteps-R4-worker-workspace
+  - devsteps-R4-worker-build-diagnostics
+  - devsteps-R4-worker-refactor
 user-invocable: false
 ---
 
@@ -14,10 +19,10 @@ user-invocable: false
 
 | Field               | Value                                                                   |
 | ------------------- | ----------------------------------------------------------------------- |
-| **Role**            | Implementer (`exec`) — writes code directly · Leaf Node                 |
+| **Role**            | Implementer (`exec`) — writes code directly · **Conductor**               |
 | **Mandate type**    | `implementation`                                                        |
 | **Dispatched by**   | coord (`devsteps-R0-coord`), coord-sprint via `runSubagent`             |
-| **Dispatches**      | NONE — Leaf Node, NEVER uses `runSubagent`                              |
+| **Dispatches**      | `worker-coder`, `worker-workspace`, `worker-build-diagnostics`, `worker-refactor` (via `runSubagent`) |
 | **Input**           | `report_path` of exec-planner MandateResult + `item_id` + `triage_tier` |
 | **Returns**         | `{ report_path, verdict, confidence }` via `write_mandate_result`       |
 | **coord reads via** | `read_mandate_results(item_ids)`                                        |

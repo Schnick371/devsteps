@@ -1,8 +1,7 @@
 ---
 description: "Assigns initiative/theme labels from groups.json to DevSteps items — top-down governed vocabulary, cascade from Epic to children"
 model: Claude Sonnet 4.6
-tools:
-  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false
 ---
 

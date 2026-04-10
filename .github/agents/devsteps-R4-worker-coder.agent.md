@@ -1,8 +1,7 @@
 ---
 description: "Coder worker — writes and commits implementation code based on the Planner MandateResult. Leaf Node of the Spider Web Dispatch architecture."
 model: "Claude Sonnet 4.6"
-tools:
-  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false
 ---
 

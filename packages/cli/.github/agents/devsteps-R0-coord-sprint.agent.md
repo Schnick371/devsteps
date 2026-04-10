@@ -1,8 +1,7 @@
 ---
 description: "Autonomous sprint executor — multi-item backlog, dispatches all agents directly (Spider Web), reads only MandateResults via read_mandate_results"
 model: "Claude Sonnet 4.6"
-tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 agents:
   - devsteps-R1-debug
   - devsteps-R2-debug

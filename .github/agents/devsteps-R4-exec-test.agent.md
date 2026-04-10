@@ -1,7 +1,6 @@
 ---
 description: Exec Test Conductor — writes, executes, and verifies tests. Dispatches worker-tester/worker-integtest/worker-test. NEVER called directly by user.
-tools:
-  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 model: "Claude Sonnet 4.6"
 dispatch_role: conductor
 agents:

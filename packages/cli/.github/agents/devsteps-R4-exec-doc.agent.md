@@ -1,8 +1,11 @@
 ---
-description: Exec Documentation — writes, updates, and verifies documentation for implemented changes. Dispatched by coord on FULL triage tier after exec-impl MandateResult. NEVER called directly by user.
-tools:
-  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+description: Exec Documentation Conductor — writes, updates, and verifies docs for implemented changes. Dispatches worker-documenter/worker-guide-writer. NEVER called directly by user.
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 model: "Claude Sonnet 4.6"
+dispatch_role: conductor
+agents:
+  - devsteps-R4-worker-documenter
+  - devsteps-R4-worker-guide-writer
 user-invocable: false
 ---
 
@@ -14,10 +17,10 @@ user-invocable: false
 
 | Field               | Value                                                                                                           |
 | ------------------- | --------------------------------------------------------------------------------------------------------------- |
-| **Role**            | Documentation Writer (`exec`) — writes docs directly · Leaf Node                                                |
+| **Role**            | Documentation Writer (`exec`) — writes docs · **Conductor**                                                    |
 | **Mandate type**    | `documentation`                                                                                                 |
 | **Dispatched by**   | coord (`devsteps-R0-coord`), coord-sprint via `runSubagent` (FULL triage tier only)                             |
-| **Dispatches**      | NONE — Leaf Node, NEVER uses `runSubagent`                                                                      |
+| **Dispatches**      | `worker-documenter`, `worker-guide-writer` (via `runSubagent`)                                                  |
 | **Input**           | `report_path` of exec-impl MandateResult + optionally analyst-quality MandateResult + `item_id` + `triage_tier` |
 | **Returns**         | `{ report_path, verdict, confidence }` via `write_mandate_result`                                               |
 | **coord reads via** | `read_mandate_results(item_ids)`                                                                                |

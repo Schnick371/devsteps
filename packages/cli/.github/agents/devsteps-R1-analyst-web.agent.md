@@ -1,8 +1,7 @@
 ---
 description: "Web Research Analyst - searches internet for modern patterns, best practices, deprecations; produces CompressedVerdict with Internet Advantage Claim for coordinator competitive selection"
 model: "Claude Sonnet 4.6"
-tools:
-  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false
 ---
 

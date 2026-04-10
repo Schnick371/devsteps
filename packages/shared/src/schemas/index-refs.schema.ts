@@ -79,10 +79,7 @@ export const PriorityIndexSchema = CategoryIndexSchema.extend({
  */
 export const CountersSchema = z.record(
   z.string(), // item type key
-  z
-    .number()
-    .int()
-    .nonnegative() // counter value
+  z.number().int().nonnegative() // counter value
 );
 
 /**

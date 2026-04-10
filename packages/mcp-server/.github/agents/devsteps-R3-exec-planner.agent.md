@@ -1,8 +1,7 @@
 ---
 description: "Planner deep analyst mandate-type=planning, decomposes stories into ordered atomic impl steps using Archaeology + Risk MandateResults"
 model: "Claude Sonnet 4.6"
-tools:
-  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false
 ---
 

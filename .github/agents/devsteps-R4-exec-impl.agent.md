@@ -1,8 +1,7 @@
 ---
 description: Exec Implementation Conductor — writes, verifies, and commits implementation code. Dispatches worker-coder/workspace/build-diagnostics/refactor. NEVER called directly by user.
 model: "Claude Sonnet 4.6"
-tools:
-  ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 dispatch_role: conductor
 agents:
   - devsteps-R4-worker-coder

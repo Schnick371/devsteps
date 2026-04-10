@@ -1,7 +1,7 @@
 ---
 description: "Archaeology deep analyst mandate-type=archaeology, builds complete picture of how an area works today via parallel aspect dispatch"
 model: "Claude Sonnet 4.6"
-tools: ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false
 ---
 

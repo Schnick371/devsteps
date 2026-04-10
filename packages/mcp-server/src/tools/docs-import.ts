@@ -2,9 +2,10 @@
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
  *
- * MCP Tool definitions — docs import dialog chain (5 tools + devsteps_docs_new).
+ * MCP Tool definitions — docs import dialog chain (5 tools).
  *
- * @see STORY-238 SPIKE-044
+ * devsteps_docs_new was removed in STORY-268 — Diataxis skeleton generation
+ * is now integrated into the generic `add` command via addItem() in shared.
  */
 
 import type { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -152,27 +153,3 @@ export const docsBomCommitTool: Tool = {
   },
 };
 
-export const docsNewTool: Tool = {
-  name: 'devsteps_docs_new',
-  description:
-    'Create a new documentation file with Diataxis type enforcement. Generates a skeleton with the correct structure for the chosen type.',
-  inputSchema: {
-    type: 'object',
-    properties: {
-      title: {
-        type: 'string',
-        description: 'Document title',
-      },
-      diataxis_type: {
-        type: 'string',
-        enum: ['tutorial', 'how-to', 'reference', 'explanation', 'architecture', 'research'],
-        description: 'Diataxis type for the new document',
-      },
-      output_path: {
-        type: 'string',
-        description: 'Output path relative to workspace root (e.g. "docs/how-to-add-tool.md")',
-      },
-    },
-    required: ['title', 'diataxis_type', 'output_path'],
-  },
-};

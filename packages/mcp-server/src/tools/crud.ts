@@ -46,7 +46,7 @@ export const initTool: Tool = {
 export const addTool: Tool = {
   name: 'add',
   description:
-    "Add a new item to the devsteps. Item types depend on methodology: Scrum (epic/story/task/bug/spike/test), Waterfall (requirement/feature/task/bug/test), Hybrid (all types). 'doc' and 'test' are cross-cutting types available in all methodologies — doc for documentation fragments, test for test specifications. Creates both JSON metadata and Markdown description files.\n\nStatus defaults to 'draft'. Standard progression: draft → planned → in-progress → review → done",
+    "Add a new item to the devsteps. Item types depend on methodology: Scrum (epic/story/task/bug/spike/test), Waterfall (requirement/feature/task/bug/test), Hybrid (all types). 'doc' and 'test' are cross-cutting types available in all methodologies — doc for documentation fragments, test for test specifications. Creates both JSON metadata and Markdown description files.\n\nFor doc items: Diataxis skeleton is auto-generated when tags contain a Diataxis type (tutorial, how-to, reference, explanation, architecture, research) or title starts with 'Tutorial:', 'How to', 'Reference:', 'ADR:', 'Research:'. ADR-tagged docs get a MADR 4.0 template. Frontmatter (diataxis, related_items, status, author, tags) in description is extracted at read-time.\n\nStatus defaults to 'draft'. Standard progression: draft → planned → in-progress → review → done",
   inputSchema: {
     type: 'object',
     properties: {
