@@ -1,18 +1,18 @@
 {
-  "id": "TASK-538",
+  "id": "TASK-546",
   "type": "task",
   "category": "general",
-  "title": "T4: Update copilot-instructions.md — doc type description + authoring convention",
-  "status": "in-progress",
-  "eisenhower": "urgent-important",
-  "created": "2026-04-10T09:26:47.886Z",
-  "updated": "2026-04-10T10:36:57.747Z",
+  "title": "26 obsolete DOC-Items archivieren",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-04-10T12:13:06.176Z",
+  "updated": "2026-04-10T12:13:06.176Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [],
+  "affected_paths": [
+    ".devsteps/items/docs/"
+  ],
   "linked_items": {
-    "implements": [
-      "STORY-267"
-    ],
+    "implements": [],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
@@ -29,10 +29,10 @@
     "documents": []
   },
   "tags": [
-    "copilot-instructions",
-    "doc-model",
-    "schema-revision",
-    "authoring-convention"
+    "doc-items",
+    "archivierung",
+    "data-hygiene",
+    "obsolete"
   ],
   "commits": [],
   "metadata": {}

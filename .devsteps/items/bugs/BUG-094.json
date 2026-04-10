@@ -1,18 +1,18 @@
 {
-  "id": "TASK-538",
-  "type": "task",
+  "id": "BUG-094",
+  "type": "bug",
   "category": "general",
-  "title": "T4: Update copilot-instructions.md — doc type description + authoring convention",
-  "status": "in-progress",
+  "title": "add.ts: mkdirSync fehlt vor writeFileSync — ENOENT bei neuem Type-Verzeichnis",
+  "status": "draft",
   "eisenhower": "urgent-important",
-  "created": "2026-04-10T09:26:47.886Z",
-  "updated": "2026-04-10T10:36:57.747Z",
+  "created": "2026-04-10T12:11:36.947Z",
+  "updated": "2026-04-10T12:11:36.947Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [],
+  "affected_paths": [
+    "packages/shared/src/core/add.ts"
+  ],
   "linked_items": {
-    "implements": [
-      "STORY-267"
-    ],
+    "implements": [],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
@@ -29,10 +29,11 @@
     "documents": []
   },
   "tags": [
-    "copilot-instructions",
-    "doc-model",
-    "schema-revision",
-    "authoring-convention"
+    "bug",
+    "add",
+    "mkdirSync",
+    "resilience",
+    "defensive-coding"
   ],
   "commits": [],
   "metadata": {}

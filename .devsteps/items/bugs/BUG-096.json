@@ -1,0 +1,43 @@
+{
+  "id": "BUG-096",
+  "type": "bug",
+  "category": "general",
+  "title": "BOM Schema/Data Mismatch: devsteps_items vs devsteps_item, DOC-NNN vs Slugs",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-10T12:12:12.270Z",
+  "updated": "2026-04-10T12:13:22.823Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    ".devsteps/docs-map.schema.json",
+    ".devsteps/ideas/docs-map.json"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-268"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "bom",
+    "schema",
+    "docs-map",
+    "data-integrity",
+    "doc-system"
+  ],
+  "commits": [],
+  "metadata": {}
+}

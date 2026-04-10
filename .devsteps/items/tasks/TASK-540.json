@@ -1,18 +1,16 @@
 {
-  "id": "TASK-538",
+  "id": "TASK-540",
   "type": "task",
   "category": "general",
-  "title": "T4: Update copilot-instructions.md — doc type description + authoring convention",
-  "status": "in-progress",
+  "title": "Add CI check: prompt numbering and mirror parity across root/cli/mcp-server .github trees",
+  "status": "draft",
   "eisenhower": "urgent-important",
-  "created": "2026-04-10T09:26:47.886Z",
-  "updated": "2026-04-10T10:36:57.747Z",
+  "created": "2026-04-10T10:41:42.417Z",
+  "updated": "2026-04-10T10:41:52.928Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
-    "implements": [
-      "STORY-267"
-    ],
+    "implements": [],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
@@ -29,10 +27,10 @@
     "documents": []
   },
   "tags": [
-    "copilot-instructions",
-    "doc-model",
-    "schema-revision",
-    "authoring-convention"
+    "ci",
+    "copilot-files",
+    "numbering",
+    "drift-prevention"
   ],
   "commits": [],
   "metadata": {}

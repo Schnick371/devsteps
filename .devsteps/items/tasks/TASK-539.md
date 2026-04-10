@@ -23,4 +23,9 @@ The 57-58-59 slots are claimed for the doc system but currently empty. The 90 sl
 - [ ] `copilot-instructions.md` Entry Point Routing table updated: `devsteps-01-project-context` (already done), + 3 new doc-system rows
 - [ ] `REGISTRY.md` includes the numbering convention table (ranges 01–98) as reference for future additions
 - [ ] REGISTRY.md lists new doc-system prompts (57, 58, 59)
-- [ ] No prompt uses number 90 (it is reserved-free for future use)
+- [ ] No prompt uses number 90 (it is reserved-free for future use)## Result
+
+- REGISTRY.md: added worker-doc-gap row to workers table; added Prompt Numbering Convention section with range table (01, 05-15, 20-25, 30-45, 48-59, 60-70, 80, 90, 95-98) and doc-system slot detail table.
+- copilot-instructions.md: added 3 new Entry Point Routing rows for devsteps-57/58/59.
+
+Committed in `8a3d4f4`."

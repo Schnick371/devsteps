@@ -1,18 +1,16 @@
 {
-  "id": "TASK-538",
+  "id": "TASK-545",
   "type": "task",
   "category": "general",
-  "title": "T4: Update copilot-instructions.md — doc type description + authoring convention",
-  "status": "in-progress",
-  "eisenhower": "urgent-important",
-  "created": "2026-04-10T09:26:47.886Z",
-  "updated": "2026-04-10T10:36:57.747Z",
+  "title": "x",
+  "status": "obsolete",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-10T10:43:27.543Z",
+  "updated": "2026-04-10T10:43:35.988Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
-    "implements": [
-      "STORY-267"
-    ],
+    "implements": [],
     "implemented-by": [],
     "tested-by": [],
     "tests": [],
@@ -28,12 +26,7 @@
     "documented-by": [],
     "documents": []
   },
-  "tags": [
-    "copilot-instructions",
-    "doc-model",
-    "schema-revision",
-    "authoring-convention"
-  ],
+  "tags": [],
   "commits": [],
   "metadata": {}
 }

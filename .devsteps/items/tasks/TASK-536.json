@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "T2: Update DOC-028 — remove \"each heading level is a separate doc item\"",
-  "status": "draft",
+  "status": "in-progress",
   "eisenhower": "urgent-important",
   "created": "2026-04-10T09:01:08.109Z",
-  "updated": "2026-04-10T09:26:08.462Z",
+  "updated": "2026-04-10T10:36:57.746Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

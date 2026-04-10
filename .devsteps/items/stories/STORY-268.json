@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-04-10T08:59:37.938Z",
-  "updated": "2026-04-10T09:43:33.818Z",
+  "updated": "2026-04-10T12:13:22.823Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -23,11 +23,14 @@
       "STORY-267"
     ],
     "relates-to": [
-      "SPIKE-063"
+      "SPIKE-063",
+      "STORY-278",
+      "BUG-096"
     ],
     "depends-on": [],
     "required-by": [
-      "STORY-274"
+      "STORY-274",
+      "TASK-547"
     ],
     "supersedes": [
       "STORY-250"
