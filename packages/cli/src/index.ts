@@ -64,7 +64,7 @@ program
 // Add item
 program
   .command('add')
-  .description('Add a new item (epic, story, task, requirement, feature, bug, spike, test, doc)')
+  .description('Add a new item (epic, story, task, requirement, feature, bug, spike, test, doc). Doc items with Diataxis tags or title prefixes (Tutorial:, How to, Reference:, ADR:, Research:) get auto-generated skeletons.')
   .argument('<type>', 'Item type: epic|story|task|req|feat|bug|spike|test|doc')
   .argument('<title>', 'Item title')
   .option('-d, --description <text>', 'Item description')

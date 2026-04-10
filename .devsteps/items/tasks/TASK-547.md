@@ -34,3 +34,12 @@ Updated copilot-instructions.md (doc: frontmatter support note, test: generic CR
 ## Update post STORY-268 Reframing
 
 `docsNewTool` wurde ENTFERNT (nicht nur aktualisiert). Punkt 2 (docsNewTool description) entfällt. Stattdessen: `addTool` description erwähnen, dass doc-Items mit Diataxis-Tags automatisch Skeleton erhalten."
+
+## Abgeschlossen (2026-04-10)
+
+Alle Punkte erledigt:
+1. ✅ `addTool` description: doc/test cross-cutting + Diataxis-Skeleton-Doku
+2. ✅ `docsNewTool`: ENTFERNT (STORY-268)
+3. ✅ `docReadContentTool`: Frontmatter in Response dokumentiert
+4. ✅ CLI `add` Beschreibung: Diataxis-Skeleton-Hinweis
+5. ✅ copilot-instructions.md: doc/test Beschreibungen aktualisiert"

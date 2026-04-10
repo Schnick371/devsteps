@@ -9,16 +9,14 @@ tools:
 # 📥 Doc Import — Workspace → Doc Items
 
 > Imports existing documentation into DevSteps `doc` items.
->
-> **⚠️ Mode B + C** (single file / inline) require STORY-268 (`devsteps_docs_new` ingestion mode) to be implemented. If not yet done, only Mode A is available.
 
 ## Mode Selection
 
 | Mode | Trigger | Tool chain |
 | ---- | ------- | ---------- |
 | **A — Directory scan** | `--dir <path>` or user provides folder | `devsteps_docs_classify` → `classify_confirm` → `devsteps_docs_import` → `bom_status` → `bom_commit` |
-| **B — Single file** | `--file <path>` or user provides one file | Read file → `devsteps_docs_new` with `content_markdown` |
-| **C — Inline content** | User pastes markdown in chat | `devsteps_docs_new` with `content_markdown` directly |
+| **B — Single file** | `--file <path>` or user provides one file | Read file → `devsteps add type=doc` with content as description |
+| **C — Inline content** | User pastes markdown in chat | `devsteps add type=doc` with content as description directly |
 
 ## Mode A — Directory Scan (5-Tool Chain)
 
@@ -32,23 +30,24 @@ Step 5: devsteps_docs_bom_commit      — commit BOM structure
 
 **Step 2 always pauses.** Show classification table with detected Diataxis type per file and ask user to confirm before creating items.
 
-## Mode B + C — Single File / Inline (`devsteps_docs_new` ingestion)
+## Mode B + C — Single File / Inline (via generic `add`)
 
-1. If Mode B: read file from `affected_paths`, extract title from first `# Heading`
-2. Auto-detect Diataxis type (use `heuristicClassify` if no frontmatter `diataxis_type`)
+1. If Mode B: read file content, extract title from first `# Heading`
+2. Auto-detect Diataxis type (use `heuristicClassify` if no frontmatter `diataxis`)
 3. Confirm detection with user if confidence < 0.7
-4. Call `devsteps_docs_new`:
+4. For bulk splitting: use `parseDocumentFragments(content, splitLevel)` to split at heading boundaries, then call `add` per fragment
+5. For single doc: call `devsteps add`:
 
 ```json
 {
-  "diataxis_type": "<detected>",
-  "title":         "<H1 from content>",
-  "content_markdown": "<full markdown>",
-  "split_at_level": 1
+  "type": "doc",
+  "title": "<H1 from content>",
+  "description": "<full markdown content>",
+  "tags": ["<diataxis-type>"]
 }
 ```
 
-`split_at_level: 1` = one doc item per H1 block (default authoring invariant).
+Tags containing a Diataxis type (tutorial, how-to, reference, explanation, architecture, research) trigger automatic skeleton generation when no description is provided. With description, content is stored as-is.
 
 ## Frontmatter Handling
 
