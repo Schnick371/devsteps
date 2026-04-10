@@ -1,0 +1,42 @@
+{
+  "id": "STORY-275",
+  "type": "story",
+  "category": "general",
+  "title": "Create devsteps-59-doc-assemble.prompt.md — trigger BOM assembly with H-level normalization",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-10T09:43:13.985Z",
+  "updated": "2026-04-10T09:43:33.817Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-010"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-268"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "doc-system",
+    "doc-assemble",
+    "prompt",
+    "heading-normalization",
+    "bom"
+  ],
+  "commits": [],
+  "metadata": {}
+}

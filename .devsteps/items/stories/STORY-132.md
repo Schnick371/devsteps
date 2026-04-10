@@ -22,7 +22,7 @@
 ### `devsteps-40-sprint.prompt.md` (Sprint-Start)  
 - Expliziter "Session-Context from Log" Schritt als erster Punkt nach Branch-Check
 
-### `devsteps-90-project-context.prompt.md` (Kontext-Laden)
+### `devsteps-01-project-context.prompt.md` (Kontext-Laden)
 - Falls `PROJECT-LOG.md` existiert: als letzten Schritt laden (narrativer Kontext ergänzt strukturellen)
 - Alternativ: nur "days since last entry" als Staleness-Signal
 
@@ -32,4 +32,4 @@
 2. `devsteps-25-review`: Log-Write-Option nach Review eingebaut
 3. `devsteps-30-rapid-cycle`: Bug-Loop-Detection (prüft Log auf bekannte Bug-Patterns) + compact Log-Write nach Abschluss
 4. `devsteps-40-sprint`: "Session-Context from Log" als expliziter erster Schritt
-5. `devsteps-90-project-context`: PROJECT-LOG.md in Ladeprotokoll integriert (nach README.md, optional)
+5. `devsteps-01-project-context`: PROJECT-LOG.md in Ladeprotokoll integriert (nach README.md, optional)

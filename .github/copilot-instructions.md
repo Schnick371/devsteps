@@ -109,7 +109,7 @@ DevSteps is the primary work-tracking system. NEVER edit `.devsteps/` directly â
 | Pre-release                   | `devsteps-60-release-next`    | coord               |
 | Production release            | `devsteps-70-release`         | coord               |
 | Workspace Health / Root Cause | `devsteps-80-ishikawa`        | coord-ishikawa      |
-| Load context                  | `devsteps-90-project-context` | coord               |
+| Load context                  | `devsteps-01-project-context` | coord               |
 | Adapt project Copilot files   | `devsteps-98-adapt-project-copilot-files` | coord          |
 | Solo (no runSubagent)         | direct                                    | coord-solo     |
 | Create agent file             | `/create-agent` (VS Code built-in)        | â€”              |

@@ -1,11 +1,11 @@
 {
-  "id": "STORY-268",
+  "id": "STORY-273",
   "type": "story",
   "category": "general",
-  "title": "devsteps_docs_new — document ingestion mode (content_markdown parameter)",
+  "title": "Create devsteps-57-doc-review.prompt.md — BOM coverage scan + gap detection + placeholder items",
   "status": "draft",
-  "eisenhower": "urgent-important",
-  "created": "2026-04-10T08:59:37.938Z",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-10T09:43:13.984Z",
   "updated": "2026-04-10T09:43:33.818Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
@@ -14,24 +14,16 @@
       "EPIC-010"
     ],
     "implemented-by": [
-      "TASK-537"
+      "TASK-539"
     ],
     "tested-by": [],
     "tests": [],
     "blocks": [],
-    "blocked-by": [
-      "STORY-267"
-    ],
-    "relates-to": [
-      "SPIKE-063"
-    ],
+    "blocked-by": [],
+    "relates-to": [],
     "depends-on": [],
-    "required-by": [
-      "STORY-274"
-    ],
-    "supersedes": [
-      "STORY-250"
-    ],
+    "required-by": [],
+    "supersedes": [],
     "superseded-by": [],
     "canonical-for": [],
     "derived-from": [],
@@ -39,12 +31,11 @@
     "documents": []
   },
   "tags": [
-    "devsteps_docs_new",
-    "ingestion",
-    "content-fragment",
-    "docs-pipeline",
-    "parser",
-    "markdown-splitter"
+    "doc-system",
+    "doc-review",
+    "gap-analysis",
+    "prompt",
+    "coverage"
   ],
   "commits": [],
   "metadata": {}

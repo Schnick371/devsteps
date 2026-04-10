@@ -10,7 +10,7 @@
   "author": "the@devsteps.dev",
   "affected_paths": [
     ".github/prompts/devsteps-40-sprint.prompt.md",
-    ".github/prompts/devsteps-90-project-context.prompt.md"
+    ".github/prompts/devsteps-01-project-context.prompt.md"
   ],
   "linked_items": {
     "implements": [

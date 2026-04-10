@@ -1,0 +1,42 @@
+{
+  "id": "STORY-274",
+  "type": "story",
+  "category": "general",
+  "title": "Create devsteps-58-doc-import.prompt.md — workspace doc import (3 modes: dir / file / inline)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-10T09:43:13.985Z",
+  "updated": "2026-04-10T09:43:33.818Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-010"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-268"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "doc-system",
+    "doc-import",
+    "prompt",
+    "ingestion",
+    "5-tool-chain"
+  ],
+  "commits": [],
+  "metadata": {}
+}
