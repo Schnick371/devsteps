@@ -244,6 +244,34 @@ This loads the current project context and confirms the MCP server is connected.
 - [MCP Server Reference](./packages/mcp-server/README.md) — AI integration tools
 - [Testing Guide](./TESTING.md) — How to test the extension
 
+## 🗺️ Visual Architecture
+
+### Development Thread — AI-Driven Task Tracking
+
+The development thread shows how work items flow from idea to production across three parallel tracks: the item lifecycle (devsteps-driven), AI execution (AI-powered), and quality governance (quality-driven). Diagonal connections represent the traceability thread — every commit, test result, and gate decision links back to the originating work item.
+
+![Development Thread](./docs/architecture/devsteps-digital-thread.svg)
+
+### Spider Web Dispatch — Spinnennetz Architecture
+
+The agent dispatch protocol is modeled as a radar chart / Spinnennetz: `coord` sits at the centre (Ring 0) and dispatches all agents directly outward. Concentric rings represent execution phases; radial spokes represent knowledge domains (Code, Tests, Docs, Risk, Research, Work Items, Errors). Analysts (Ring 1) and Aspects (Ring 2) fire in parallel; the Planner (Ring 3), Execution agents (Ring 4), and Gate reviewer (Ring 5) fire sequentially.
+
+![Spider Web Dispatch](./docs/architecture/devsteps-spiderweb.svg)
+
+### Ishikawa Health Check — 6-Bone Dispatch (coord-ishikawa)
+
+The `coord-ishikawa` coordinator implements a cause-effect analysis on workspace health. Starting from an observed symptom (fish head, right), it dispatches 6 bone analysts in 2 parallel rounds across the spine: Code/Structure, Tests, and Environment (Round 1); Docs, Process, and Cross-cutting (Round 2). Each bone yields a weighted `🔴 HIGH / 🟡 MEDIUM / 🟢 LOW` signal-strength score.
+
+![Ishikawa Health Check](./docs/architecture/devsteps-ishikawa.svg)
+
+### Fish-net Mesh Architecture _(Concept — Not Yet Implemented)_
+
+A planned evolution beyond the Spider Web: agents are arranged in a hexagonal lattice where every node has direct peer-to-peer channels to its neighbours. Analysts can share findings laterally within Ring 1 without routing through `coord`; aspects can coordinate directly with execution agents. `coord` becomes a lightweight coordinator node rather than the sole communication hub.
+
+![Fish-net Mesh Architecture](./docs/architecture/devsteps-fishnet.svg)
+
+---
+
 ## 🏗️ Project Structure
 
 ```

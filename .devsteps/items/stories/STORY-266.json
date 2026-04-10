@@ -1,0 +1,50 @@
+{
+  "id": "STORY-266",
+  "type": "story",
+  "category": "general",
+  "title": "Technical document aesthetic refactor — VS Code token compliance and codicon headings",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T19:17:54.373Z",
+  "updated": "2026-04-09T19:18:41.356Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/renderers/burndownRenderer.ts",
+    "packages/extension/src/webview/renderers/traceabilityRenderer.ts",
+    "packages/extension/src/webview/dashboardPanel.ts",
+    "packages/extension/media/dashboard.css"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-040"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "story",
+    "dashboard",
+    "aesthetic",
+    "design",
+    "css",
+    "codicons",
+    "theme",
+    "ux",
+    "webview",
+    "extension"
+  ],
+  "commits": [],
+  "metadata": {}
+}

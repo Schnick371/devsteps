@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 985"
+     font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+
+  <!-- Background -->
+  <rect width="1000" height="985" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="60" y="33" font-size="22" font-weight="bold" fill="#0d9488">Spider Web Dispatch — Spinnennetz Architecture</text>
+
+  <!-- ===== RING BACKGROUND CIRCLES (cx=500, cy=540) ===== -->
+  <circle cx="500" cy="540" r="145" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+  <circle cx="500" cy="540" r="220" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+  <circle cx="500" cy="540" r="275" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+  <circle cx="500" cy="540" r="345" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+  <circle cx="500" cy="540" r="420" fill="none" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- ===== DOMAIN SPOKES (r=55 to r=445) ===== -->
+  <!-- Code (270°) -->
+  <line x1="500" y1="485" x2="500" y2="95"   stroke="#e2e8f0" stroke-width="1"/>
+  <!-- Tests (321.43°) -->
+  <line x1="543" y1="506" x2="848" y2="263"  stroke="#e2e8f0" stroke-width="1"/>
+  <!-- Docs (12.86°) -->
+  <line x1="554" y1="552" x2="934" y2="639"  stroke="#e2e8f0" stroke-width="1"/>
+  <!-- Errors (64.29°) -->
+  <line x1="524" y1="590" x2="693" y2="941"  stroke="#e2e8f0" stroke-width="1"/>
+  <!-- Work Items (115.71°) -->
+  <line x1="476" y1="590" x2="307" y2="941"  stroke="#e2e8f0" stroke-width="1"/>
+  <!-- Research (167.14°) -->
+  <line x1="446" y1="552" x2="66"  y2="639"  stroke="#e2e8f0" stroke-width="1"/>
+  <!-- Risk (218.57°) -->
+  <line x1="457" y1="506" x2="152" y2="263"  stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- ===== DOMAIN LABELS (r=470) ===== -->
+  <text x="500" y="70"  text-anchor="middle" font-size="12" font-weight="600" fill="#475569">Code</text>
+  <text x="867" y="252" text-anchor="middle" font-size="12" font-weight="600" fill="#475569">Tests</text>
+  <text x="958" y="650" text-anchor="middle" font-size="12" font-weight="600" fill="#475569">Docs</text>
+  <text x="704" y="968" text-anchor="middle" font-size="12" font-weight="600" fill="#475569">Errors</text>
+  <text x="296" y="968" text-anchor="middle" font-size="12" font-weight="600" fill="#475569">Work Items</text>
+  <text x="42"  y="650" text-anchor="middle" font-size="12" font-weight="600" fill="#475569">Research</text>
+  <text x="133" y="252" text-anchor="middle" font-size="12" font-weight="600" fill="#475569">Risk</text>
+
+  <!-- ===== RING 5: gate-reviewer ===== -->
+  <!-- gate-reviewer (270°, r=420) -->
+  <circle cx="500" cy="120" r="13" fill="#15803d"/>
+  <text x="500" y="98"  text-anchor="middle" font-size="9" fill="#15803d" font-weight="600">gate-reviewer</text>
+
+  <!-- ===== RING 4: exec agents ===== -->
+  <!-- exec-impl (255°, r=345) -->
+  <circle cx="411" cy="207" r="10" fill="#1d4ed8"/>
+  <text x="404" y="181" text-anchor="middle" font-size="9" fill="#1d4ed8" font-weight="600">exec-impl</text>
+  <!-- exec-test (285°, r=345) -->
+  <circle cx="589" cy="207" r="10" fill="#1d4ed8"/>
+  <text x="596" y="181" text-anchor="middle" font-size="9" fill="#1d4ed8" font-weight="600">exec-test</text>
+  <!-- exec-doc (321.43°, r=345) -->
+  <circle cx="770" cy="325" r="10" fill="#1d4ed8"/>
+  <text x="793" y="308" text-anchor="start" font-size="9" fill="#1d4ed8" font-weight="600">exec-doc</text>
+
+  <!-- ===== RING 3: exec-planner ===== -->
+  <!-- exec-planner (270°, r=275) -->
+  <circle cx="500" cy="265" r="11" fill="#d97706"/>
+  <text x="500" y="245" text-anchor="middle" font-size="9" fill="#d97706" font-weight="600">exec-planner</text>
+
+  <!-- ===== RING 2: aspect agents ===== -->
+  <!-- aspect-constraints (270°, r=220) -->
+  <circle cx="500" cy="320" r="9" fill="#0891b2"/>
+  <text x="500" y="294" text-anchor="middle" font-size="9" fill="#0891b2" font-weight="600">constraints</text>
+  <!-- aspect-impact (342°, r=220) -->
+  <circle cx="709" cy="472" r="9" fill="#0891b2"/>
+  <text x="734" y="465" text-anchor="start" font-size="9" fill="#0891b2" font-weight="600">impact</text>
+  <!-- aspect-quality (54°, r=220) -->
+  <circle cx="629" cy="718" r="9" fill="#0891b2"/>
+  <text x="645" y="739" text-anchor="start" font-size="9" fill="#0891b2" font-weight="600">quality</text>
+  <!-- aspect-staleness (126°, r=220) -->
+  <circle cx="371" cy="718" r="9" fill="#0891b2"/>
+  <text x="355" y="739" text-anchor="end" font-size="9" fill="#0891b2" font-weight="600">staleness</text>
+  <!-- aspect-integration (198°, r=220) -->
+  <circle cx="291" cy="472" r="9" fill="#0891b2"/>
+  <text x="266" y="465" text-anchor="end" font-size="9" fill="#0891b2" font-weight="600">integration</text>
+
+  <!-- ===== RING 1: analyst agents ===== -->
+  <!-- analyst-context (270°, r=145) -->
+  <circle cx="500" cy="395" r="9" fill="#0d9488"/>
+  <text x="500" y="372" text-anchor="middle" font-size="9" fill="#0d9488" font-weight="600">context</text>
+  <!-- analyst-internal (321.43°, r=145) -->
+  <circle cx="613" cy="450" r="9" fill="#0d9488"/>
+  <text x="631" y="435" text-anchor="start" font-size="9" fill="#0d9488" font-weight="600">internal</text>
+  <!-- analyst-risk (12.86°, r=145) -->
+  <circle cx="641" cy="572" r="9" fill="#0d9488"/>
+  <text x="664" y="577" text-anchor="start" font-size="9" fill="#0d9488" font-weight="600">risk</text>
+  <!-- analyst-quality (64.29°, r=145) -->
+  <circle cx="563" cy="671" r="9" fill="#0d9488"/>
+  <text x="573" y="691" text-anchor="middle" font-size="9" fill="#0d9488" font-weight="600">quality</text>
+  <!-- analyst-archaeology (115.71°, r=145) -->
+  <circle cx="437" cy="671" r="9" fill="#0d9488"/>
+  <text x="427" y="691" text-anchor="middle" font-size="9" fill="#0d9488" font-weight="600">archaeology</text>
+  <!-- analyst-research (167.14°, r=145) -->
+  <circle cx="359" cy="572" r="9" fill="#0d9488"/>
+  <text x="336" y="577" text-anchor="end" font-size="9" fill="#0d9488" font-weight="600">research</text>
+  <!-- analyst-web (218.57°, r=145) -->
+  <circle cx="387" cy="450" r="9" fill="#0d9488"/>
+  <text x="369" y="435" text-anchor="end" font-size="9" fill="#0d9488" font-weight="600">web</text>
+
+  <!-- ===== RING 0: coord (center) ===== -->
+  <circle cx="500" cy="540" r="48" fill="#1e3a5f"/>
+  <text x="500" y="536" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">coord</text>
+  <text x="500" y="553" text-anchor="middle" font-size="10" fill="#93c5fd">Ring 0</text>
+
+  <!-- ===== LEGEND BOX ===== -->
+  <rect x="748" y="696" width="232" height="246" rx="6" ry="6"
+        fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="760" y="720" font-size="11" font-weight="bold" fill="#475569">Ring Structure</text>
+
+  <!-- Ring 0 -->
+  <circle cx="772" cy="745" r="7" fill="#1e3a5f"/>
+  <text x="786" y="750" font-size="11" fill="#1e3a5f">Ring 0 — coord (hub)</text>
+  <!-- Ring 1 -->
+  <circle cx="772" cy="773" r="7" fill="#0d9488"/>
+  <text x="786" y="778" font-size="11" fill="#0d9488">Ring 1 — Analysts (parallel)</text>
+  <!-- Ring 2 -->
+  <circle cx="772" cy="801" r="7" fill="#0891b2"/>
+  <text x="786" y="806" font-size="11" fill="#0891b2">Ring 2 — Aspects (parallel)</text>
+  <!-- Ring 3 -->
+  <circle cx="772" cy="829" r="7" fill="#d97706"/>
+  <text x="786" y="834" font-size="11" fill="#d97706">Ring 3 — Planner</text>
+  <!-- Ring 4 -->
+  <circle cx="772" cy="857" r="7" fill="#1d4ed8"/>
+  <text x="786" y="862" font-size="11" fill="#1d4ed8">Ring 4 — Execution</text>
+  <!-- Ring 5 -->
+  <circle cx="772" cy="885" r="7" fill="#15803d"/>
+  <text x="786" y="890" font-size="11" fill="#15803d">Ring 5 — Gate (blocking)</text>
+
+  <!-- Dispatch arrows -->
+  <line x1="760" y1="908" x2="760" y2="930" stroke="#94a3b8" stroke-width="1"/>
+  <text x="768" y="920" font-size="10" fill="#94a3b8">Rings fire outward;</text>
+  <text x="768" y="933" font-size="10" fill="#94a3b8">R1 + R2 in parallel.</text>
+
+</svg>

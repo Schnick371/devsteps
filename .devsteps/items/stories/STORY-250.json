@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-08T22:00:13.170Z",
-  "updated": "2026-04-09T10:13:55.964Z",
+  "updated": "2026-04-10T09:03:36.535Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -20,7 +20,9 @@
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
-    "superseded-by": [],
+    "superseded-by": [
+      "STORY-268"
+    ],
     "canonical-for": [],
     "derived-from": [],
     "documented-by": [],

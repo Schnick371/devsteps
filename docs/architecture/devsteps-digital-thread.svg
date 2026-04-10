@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 570"
+     font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+
+  <!-- Background -->
+  <rect width="1300" height="570" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="60" y="46" font-size="22" font-weight="bold" fill="#0d9488">Development Thread — AI-Driven Task Tracking</text>
+
+  <!-- ===== BOUNDING RECT (dashed, like reference image) ===== -->
+  <rect x="90" y="190" width="1120" height="280" fill="none"
+        stroke="#cbd5e1" stroke-width="1" stroke-dasharray="7,5"/>
+
+  <!-- ===== TRACK LINES ===== -->
+  <!-- Top track (teal) -->
+  <line x1="90"  y1="190" x2="1210" y2="190"
+        stroke="#0d9488" stroke-width="1.5" stroke-dasharray="8,5"/>
+  <!-- Middle track (blue) -->
+  <line x1="450" y1="330" x2="1010" y2="330"
+        stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="8,5"/>
+  <!-- Bottom track (purple) -->
+  <line x1="270" y1="470" x2="1210" y2="470"
+        stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="8,5"/>
+
+  <!-- ===== VERTICAL CONNECTORS ===== -->
+  <line x1="270"  y1="190" x2="270"  y2="470"  stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5,4"/>
+  <line x1="450"  y1="190" x2="450"  y2="330"  stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5,4"/>
+  <line x1="630"  y1="190" x2="630"  y2="470"  stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5,4"/>
+  <line x1="810"  y1="190" x2="810"  y2="470"  stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5,4"/>
+  <line x1="1010" y1="190" x2="1010" y2="330"  stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5,4"/>
+  <line x1="1210" y1="190" x2="1210" y2="470"  stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5,4"/>
+
+  <!-- ===== DIAGONAL CONNECTORS (traceability threads) ===== -->
+  <!-- Planning (450,190) → Risk Analysis (270,470) -->
+  <line x1="450" y1="190" x2="270" y2="470"
+        stroke="#64748b" stroke-width="1.5" stroke-dasharray="9,5"/>
+  <!-- Documentation (1010,330) → Audit Trail (1210,470) -->
+  <line x1="1010" y1="330" x2="1210" y2="470"
+        stroke="#64748b" stroke-width="1.5" stroke-dasharray="9,5"/>
+
+  <!-- ===== TOP TRACK NODES (labels ABOVE) ===== -->
+
+  <!-- Idea & Backlog (90, 190) -->
+  <text x="90"  y="132" text-anchor="middle" font-size="10" fill="#0d9488">backlog-driven</text>
+  <text x="90"  y="149" text-anchor="middle" font-size="13" font-weight="bold" fill="#0d9488">Idea &amp;</text>
+  <text x="90"  y="164" text-anchor="middle" font-size="13" font-weight="bold" fill="#0d9488">Backlog</text>
+  <circle cx="90"  cy="190" r="11" fill="#0d9488"/>
+
+  <!-- Work Items (270, 190) -->
+  <text x="270" y="132" text-anchor="middle" font-size="10" fill="#0d9488">devsteps-driven</text>
+  <text x="270" y="152" text-anchor="middle" font-size="13" font-weight="bold" fill="#0d9488">Work Items</text>
+  <circle cx="270" cy="190" r="11" fill="#0d9488"/>
+
+  <!-- Planning (450, 190) -->
+  <text x="450" y="132" text-anchor="middle" font-size="10" fill="#0d9488">AI-powered</text>
+  <text x="450" y="152" text-anchor="middle" font-size="13" font-weight="bold" fill="#0d9488">Planning</text>
+  <circle cx="450" cy="190" r="11" fill="#0d9488"/>
+
+  <!-- Implementation (630, 190) -->
+  <text x="630" y="132" text-anchor="middle" font-size="10" fill="#0d9488">AI-powered</text>
+  <text x="630" y="152" text-anchor="middle" font-size="13" font-weight="bold" fill="#0d9488">Implementation</text>
+  <circle cx="630" cy="190" r="11" fill="#0d9488"/>
+
+  <!-- Review (810, 190) -->
+  <text x="810" y="132" text-anchor="middle" font-size="10" fill="#0d9488">AI-powered</text>
+  <text x="810" y="152" text-anchor="middle" font-size="13" font-weight="bold" fill="#0d9488">Review</text>
+  <circle cx="810" cy="190" r="11" fill="#0d9488"/>
+
+  <!-- Release (1010, 190) -->
+  <text x="1010" y="132" text-anchor="middle" font-size="10" fill="#0d9488">AI-powered</text>
+  <text x="1010" y="152" text-anchor="middle" font-size="13" font-weight="bold" fill="#0d9488">Release</text>
+  <circle cx="1010" cy="190" r="11" fill="#0d9488"/>
+
+  <!-- Production (1210, 190) -->
+  <text x="1210" y="132" text-anchor="middle" font-size="10" fill="#0d9488">devsteps-driven</text>
+  <text x="1210" y="152" text-anchor="middle" font-size="13" font-weight="bold" fill="#0d9488">Production</text>
+  <circle cx="1210" cy="190" r="11" fill="#0d9488"/>
+
+  <!-- ===== MIDDLE TRACK NODES (labels BELOW) ===== -->
+
+  <!-- Context Analysis (450, 330) -->
+  <circle cx="450"  cy="330" r="11" fill="#1d4ed8"/>
+  <text x="450"  y="357" text-anchor="middle" font-size="10" fill="#1d4ed8">AI-powered</text>
+  <text x="450"  y="372" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">Context</text>
+  <text x="450"  y="387" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">Analysis</text>
+
+  <!-- Code &amp; Tests (630, 330) -->
+  <circle cx="630"  cy="330" r="11" fill="#1d4ed8"/>
+  <text x="630"  y="357" text-anchor="middle" font-size="10" fill="#1d4ed8">AI-powered</text>
+  <text x="630"  y="375" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">Code &amp; Tests</text>
+
+  <!-- Test Execution (810, 330) -->
+  <circle cx="810"  cy="330" r="11" fill="#1d4ed8"/>
+  <text x="810"  y="357" text-anchor="middle" font-size="10" fill="#1d4ed8">AI-powered</text>
+  <text x="810"  y="372" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">Test</text>
+  <text x="810"  y="387" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">Execution</text>
+
+  <!-- Documentation (1010, 330) -->
+  <circle cx="1010" cy="330" r="11" fill="#1d4ed8"/>
+  <text x="1010" y="357" text-anchor="middle" font-size="10" fill="#1d4ed8">AI-powered</text>
+  <text x="1010" y="375" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">Documentation</text>
+
+  <!-- ===== BOTTOM TRACK NODES (labels BELOW) ===== -->
+
+  <!-- Risk Analysis (270, 470) -->
+  <circle cx="270"  cy="470" r="11" fill="#7c3aed"/>
+  <text x="270"  y="497" text-anchor="middle" font-size="10" fill="#7c3aed">quality-driven</text>
+  <text x="270"  y="514" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c3aed">Risk Analysis</text>
+
+  <!-- Commit Tracing (630, 470) -->
+  <circle cx="630"  cy="470" r="11" fill="#7c3aed"/>
+  <text x="630"  y="497" text-anchor="middle" font-size="10" fill="#7c3aed">quality-driven</text>
+  <text x="630"  y="514" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c3aed">Commit Tracing</text>
+
+  <!-- Gate Review (810, 470) -->
+  <circle cx="810"  cy="470" r="11" fill="#7c3aed"/>
+  <text x="810"  y="497" text-anchor="middle" font-size="10" fill="#7c3aed">quality-driven</text>
+  <text x="810"  y="514" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c3aed">Gate Review</text>
+
+  <!-- Audit Trail (1210, 470) -->
+  <circle cx="1210" cy="470" r="11" fill="#7c3aed"/>
+  <text x="1210" y="497" text-anchor="middle" font-size="10" fill="#7c3aed">quality-driven</text>
+  <text x="1210" y="514" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c3aed">Audit Trail</text>
+
+</svg>

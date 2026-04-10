@@ -53,6 +53,11 @@ const mcpServerBuildOptions = {
   logLevel: 'info',
   mainFields: ['module', 'main'],
   conditions: ['node'],
+  // CJS interop: some bundled dependencies use dynamic require() which is not
+  // supported in native ESM. Inject a createRequire shim so they work.
+  banner: {
+    js: `import { createRequire } from 'module'; const require = createRequire(import.meta.url);`,
+  },
 };
 
 async function buildExtension() {

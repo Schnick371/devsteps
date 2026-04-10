@@ -1,0 +1,47 @@
+{
+  "id": "STORY-264",
+  "type": "story",
+  "category": "general",
+  "title": "Work Items dedicated dashboard tab with type/status/Eisenhower filters",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T19:17:20.225Z",
+  "updated": "2026-04-09T19:18:46.869Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/dashboardPanel.ts",
+    "packages/extension/src/webview/renderers/statsRenderer.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-040"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "STORY-263"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "story",
+    "dashboard",
+    "items-list",
+    "work-items",
+    "ux",
+    "webview",
+    "extension"
+  ],
+  "commits": [],
+  "metadata": {}
+}

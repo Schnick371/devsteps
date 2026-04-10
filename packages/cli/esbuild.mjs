@@ -26,7 +26,14 @@ await esbuild.build({
   format: 'cjs',
   outfile: 'dist/index.cjs',
   banner: {
-    js: '#!/usr/bin/env node\n',
+    // import.meta polyfill: the source code resolves paths as dist/commands/<file>, going 2 levels up
+    // to reach the CLI package root. In the CJS bundle the actual file is dist/index.cjs (1 level
+    // below root), so we fake the url to be dist/commands/bundle.cjs to preserve the same depth.
+    js: '#!/usr/bin/env node\nvar __importMeta = {url: require("url").pathToFileURL(require("path").join(__dirname, "commands", "_bundle.cjs")).href};\n',
+  },
+  // Fix: import.meta is unavailable in CJS format — define it via banner-injected __importMeta
+  define: {
+    'import.meta': '__importMeta',
   },
   // External: None - bundle everything except Node.js built-ins (auto-detected by platform: 'node')
   minify: false,

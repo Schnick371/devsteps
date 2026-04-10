@@ -59,6 +59,15 @@ const opts = program.opts<CliOptions>();
 // Configure logger with CLI options
 configureLogger({ level: opts.logLevel, file: opts.logFile });
 
+// Pre-release builds write a plain text warning line to stderr so VS Code's [warning] label
+// is semantically correct ("this is a next/pre-release channel, not a stable release").
+// Stable releases omit this line — version is available via the mcp_devsteps_status tool.
+const isPreRelease = packageJson.version.includes('-');
+if (isPreRelease) {
+  process.stderr.write(`DevSteps MCP Server v${packageJson.version} [pre-release]\n`);
+}
+getLogger().info({ node: process.version }, `DevSteps MCP Server v${packageJson.version} starting`);
+
 // Auto-migrate index if needed (before server starts)
 try {
   const { join } = await import('node:path');

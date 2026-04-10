@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Commit uncommitted .devsteps index files left dirty after April 7 planning session",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-09T18:36:45.993Z",
-  "updated": "2026-04-09T18:37:04.089Z",
+  "updated": "2026-04-09T19:06:15.721Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

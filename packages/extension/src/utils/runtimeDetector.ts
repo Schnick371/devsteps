@@ -149,7 +149,7 @@ async function getCommandVersion(command: string): Promise<string | undefined> {
  * @returns MCP runtime configuration
  */
 export async function detectMcpRuntime(
-  bundledServerPath?: string,
+  _bundledServerPath?: string,
   mcpPackage = '@schnick371/devsteps-mcp-server'
 ): Promise<McpRuntimeConfig> {
   // Check all runtimes in parallel
@@ -159,7 +159,7 @@ export async function detectMcpRuntime(
     checkCommand('npm'),
   ]);
 
-  // Strategy 1: npx (preferred)
+  // Strategy 1: npx (preferred — loads @schnick371/devsteps-mcp-server from npm)
   if (npxInfo.available) {
     return {
       strategy: 'npx',
@@ -169,17 +169,9 @@ export async function detectMcpRuntime(
     };
   }
 
-  // Strategy 2: node with bundled server
-  if (nodeInfo.available && bundledServerPath) {
-    return {
-      strategy: 'node',
-      command: 'node',
-      args: [bundledServerPath],
-      diagnostics: { npx: npxInfo, node: nodeInfo, npm: npmInfo },
-    };
-  }
-
-  // Strategy 3: No runtime available
+  // Strategy 2: No runtime available (node-only without npx cannot start stdio server)
+  // Note: dist/mcp-server.js is an HTTP server bundle, not a stdio server —
+  // running it with `node` would silently fail in stdio mode.
   return {
     strategy: 'none',
     error: buildErrorMessage(npxInfo, nodeInfo, npmInfo),

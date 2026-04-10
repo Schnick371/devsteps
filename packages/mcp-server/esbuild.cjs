@@ -23,7 +23,8 @@ const buildOptions = {
     'node:*',
   ],
   banner: {
-    js: '// DevSteps MCP Server - bundled for VS Code Extension Host',
+    // createRequire polyfill: allows bundled CJS code to use require() in ESM context
+    js: "import {createRequire} from 'node:module';const require=createRequire(import.meta.url);\n// DevSteps MCP Server - bundled for VS Code Extension Host",
   },
   // Ignore warnings for intentional patterns
   logOverride: {

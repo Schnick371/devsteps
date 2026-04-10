@@ -1,0 +1,37 @@
+{
+  "id": "TASK-535",
+  "type": "task",
+  "category": "general",
+  "title": "T1: Update DOC-059 — H3-block granularity model (remove H4/H5 as separate items)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-10T09:01:08.104Z",
+  "updated": "2026-04-10T09:01:08.104Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "doc-059",
+    "granularity",
+    "bom",
+    "schema-revision"
+  ],
+  "commits": [],
+  "metadata": {}
+}

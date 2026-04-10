@@ -1,0 +1,43 @@
+{
+  "id": "BUG-093",
+  "type": "bug",
+  "category": "general",
+  "title": "Fix orphaned postSpiderEvent webview client handler (STORY-206 contract)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-09T19:16:34.666Z",
+  "updated": "2026-04-09T19:18:16.016Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/dashboardPanel.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-040"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "bug",
+    "webview",
+    "spider-web",
+    "hooks",
+    "dashboard",
+    "extension"
+  ],
+  "commits": [],
+  "metadata": {}
+}

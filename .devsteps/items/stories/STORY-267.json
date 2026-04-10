@@ -1,0 +1,41 @@
+{
+  "id": "STORY-267",
+  "type": "story",
+  "category": "general",
+  "title": "Revise Content Fragment granularity — H3-block as doc-item retrieval unit",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-10T08:59:37.927Z",
+  "updated": "2026-04-10T09:03:48.507Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "SPIKE-063"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "content-fragment",
+    "granularity",
+    "doc-model",
+    "bom",
+    "schema-revision",
+    "rag"
+  ],
+  "commits": [],
+  "metadata": {}
+}

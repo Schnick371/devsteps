@@ -1,0 +1,52 @@
+{
+  "id": "STORY-265",
+  "type": "story",
+  "category": "general",
+  "title": "Epic Progress Accordion in Project Burndown tab — SVG mini-charts per epic",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-09T19:17:37.337Z",
+  "updated": "2026-04-09T19:18:58.404Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/dataProviders/epicBurndownProvider.ts",
+    "packages/extension/src/webview/renderers/epicBurndownRenderer.ts",
+    "packages/extension/src/webview/dashboardPanel.ts"
+  ],
+  "linked_items": {
+    "implements": [
+      "EPIC-040"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [
+      "BUG-092",
+      "STORY-263"
+    ],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "story",
+    "dashboard",
+    "burndown",
+    "epics",
+    "epic-progress",
+    "svg",
+    "accordion",
+    "ux",
+    "webview",
+    "extension"
+  ],
+  "commits": [],
+  "metadata": {}
+}

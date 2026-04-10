@@ -1,17 +1,12 @@
 {
   "servers": {
-    // Active during development (no installed VSIX — extension not auto-starting the server).
+    // Active during development -- uses the globally installed binary (patched via patch-windows.sh / npm link).
     // The extension detects this entry and skips its own auto-registration (no duplicate).
-    // ${workspaceFolder} is expanded by VS Code — no hardcoded absolute paths.
+    // ${workspaceFolder} is expanded by VS Code -- no hardcoded absolute paths.
     "devsteps": {
       "type": "stdio",
-      "command": "npx",
-      "args": [
-        "-y",
-        "--package=@schnick371/devsteps-mcp-server@next",
-        "devsteps-mcp",
-        "${workspaceFolder}"
-      ],
+      "command": "devsteps-mcp-server",
+      "args": ["${workspaceFolder}", "--log-level", "warn"],
       "env": {}
     }
   }

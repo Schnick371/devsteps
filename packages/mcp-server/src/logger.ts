@@ -8,6 +8,7 @@
 
 import type { Logger } from 'pino';
 import pino from 'pino';
+import packageJson from '../package.json' with { type: 'json' };
 
 let loggerInstance: Logger;
 
@@ -49,7 +50,7 @@ export function configureLogger(options: { level?: string; file?: string } = {})
     // Base fields for all log entries
     base: {
       service: 'devsteps-mcp-server',
-      version: '0.1.0',
+      version: packageJson.version,
     },
 
     // Serialize errors properly
@@ -58,7 +59,17 @@ export function configureLogger(options: { level?: string; file?: string } = {})
     },
   };
 
-  loggerInstance = pino(config);
+  // If already initialized and no destination change, mutate level in-place so that
+  // all modules holding a reference to the exported `logger` constant see the update.
+  if (loggerInstance && !options.file) {
+    loggerInstance.level = level;
+    return loggerInstance;
+  }
+
+  // Write to file if specified; otherwise write to stderr.
+  // stdout is reserved for JSON-RPC protocol messages in stdio MCP mode.
+  // Passing process.stderr directly avoids pino worker threads (safe in bundled context).
+  loggerInstance = options.file ? pino(config) : pino(config, process.stderr);
   return loggerInstance;
 }
 

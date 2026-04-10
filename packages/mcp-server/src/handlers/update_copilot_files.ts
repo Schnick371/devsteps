@@ -6,19 +6,16 @@
  * Updates devsteps-managed GitHub Copilot files in the workspace.
  */
 
-import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { updateCopilotFiles } from '@schnick371/devsteps-shared';
+import packageJson from '../../package.json' with { type: 'json' };
 import { getWorkspacePath } from '../workspace.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 // dist/handlers/ → package root (two levels up)
 const packageRoot = join(__dirname, '..', '..');
-const packageJson = JSON.parse(readFileSync(join(packageRoot, 'package.json'), 'utf8')) as {
-  version: string;
-};
 
 export default async function updateCopilotFilesHandler(args: {
   dry_run?: boolean;

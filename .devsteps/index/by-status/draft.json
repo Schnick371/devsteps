@@ -508,7 +508,6 @@
     "STORY-260",
     "STORY-261",
     "STORY-262",
-    "TASK-519",
     "TASK-520",
     "TASK-521",
     "TASK-522",
@@ -522,7 +521,19 @@
     "TASK-530",
     "TASK-531",
     "TASK-532",
-    "TASK-533"
+    "TASK-533",
+    "BUG-092",
+    "BUG-093",
+    "TASK-534",
+    "STORY-263",
+    "STORY-264",
+    "STORY-265",
+    "STORY-266",
+    "SPIKE-063",
+    "STORY-267",
+    "STORY-268",
+    "TASK-535",
+    "TASK-536"
   ],
-  "updated": "2026-04-09T19:02:45.903Z"
+  "updated": "2026-04-10T09:01:08.110Z"
 }

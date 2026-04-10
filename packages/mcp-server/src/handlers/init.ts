@@ -20,14 +20,12 @@ import {
   type Methodology,
   writeSetupMd,
 } from '@schnick371/devsteps-shared';
+import packageJson from '../../package.json' with { type: 'json' };
 import { getWorkspacePath } from '../workspace.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const packageRoot = join(__dirname, '..', '..');
-const packageJson = JSON.parse(readFileSync(join(packageRoot, 'package.json'), 'utf8')) as {
-  version: string;
-};
 
 /**
  * Initialize a new devsteps project

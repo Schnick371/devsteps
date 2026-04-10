@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1220 640"
+     font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+
+  <!-- Background -->
+  <rect width="1220" height="640" fill="#ffffff"/>
+
+  <!-- Title row -->
+  <text x="40" y="38" font-size="20" font-weight="bold" fill="#0f766e">Ishikawa Health Check — 6-Bone Dispatch (coord-ishikawa)</text>
+  <text x="40" y="56" font-size="11" fill="#64748b">Cause-effect analysis: from observed symptom (head, right) back to root causes (bones, left). coord dispatches 6 bone analysts in 2 rounds.</text>
+
+  <!-- ===== SPINE ===== -->
+  <line x1="150" y1="320" x2="1060" y2="320" stroke="#0f766e" stroke-width="3"/>
+
+  <!-- ===== FISH TAIL (left) ===== -->
+  <line x1="150" y1="320" x2="78" y2="248" stroke="#0f766e" stroke-width="2.5"/>
+  <line x1="150" y1="320" x2="78" y2="392" stroke="#0f766e" stroke-width="2.5"/>
+
+  <!-- ===== FISH HEAD (right) ===== -->
+  <polygon points="1060,258 1128,320 1060,382" fill="#0f766e" fill-opacity="0.15" stroke="#0f766e" stroke-width="2"/>
+  <!-- Eye -->
+  <circle cx="1078" cy="295" r="7" fill="#0f766e" fill-opacity="0.5"/>
+  <!-- Effect label -->
+  <text x="1073" y="327" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f766e">Workspace</text>
+  <text x="1073" y="342" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f766e">Health</text>
+  <text x="1073" y="356" text-anchor="middle" font-size="9" fill="#64748b">Symptom / Effect</text>
+
+  <!-- ===== ROUND BADGES ===== -->
+  <rect x="40" y="70" width="70" height="20" rx="4" fill="#0d9488"/>
+  <text x="75" y="84" text-anchor="middle" font-size="10" fill="white" font-weight="bold">Round 1</text>
+
+  <rect x="40" y="540" width="70" height="20" rx="4" fill="#7c3aed"/>
+  <text x="75" y="554" text-anchor="middle" font-size="10" fill="white" font-weight="bold">Round 2</text>
+
+  <!-- ===== TOP BONES (Round 1 — teal) ===== -->
+
+  <!-- BONE 1: Code / Structure — analyst-archaeology -->
+  <line x1="280" y1="320" x2="140" y2="140" stroke="#0d9488" stroke-width="2"/>
+  <!-- sub-bones -->
+  <line x1="189" y1="203" x2="221" y2="178" stroke="#0d9488" stroke-width="1.5"/>
+  <line x1="231" y1="257" x2="263" y2="232" stroke="#0d9488" stroke-width="1.5"/>
+  <!-- spine connection dot -->
+  <circle cx="280" cy="320" r="5" fill="#0d9488"/>
+  <!-- tip label block -->
+  <text x="140" y="110" text-anchor="middle" font-size="11" font-weight="bold" fill="#0d9488">Code / Structure</text>
+  <text x="140" y="125" text-anchor="middle" font-size="9" fill="#475569">analyst-archaeology</text>
+  <text x="140" y="138" text-anchor="middle" font-size="8" fill="#94a3b8">complexity · smells · dead code</text>
+
+  <!-- BONE 2: Tests — analyst-quality -->
+  <line x1="500" y1="320" x2="360" y2="140" stroke="#0d9488" stroke-width="2"/>
+  <line x1="409" y1="203" x2="441" y2="178" stroke="#0d9488" stroke-width="1.5"/>
+  <line x1="451" y1="257" x2="483" y2="232" stroke="#0d9488" stroke-width="1.5"/>
+  <circle cx="500" cy="320" r="5" fill="#0d9488"/>
+  <text x="360" y="110" text-anchor="middle" font-size="11" font-weight="bold" fill="#0d9488">Tests</text>
+  <text x="360" y="125" text-anchor="middle" font-size="9" fill="#475569">analyst-quality</text>
+  <text x="360" y="138" text-anchor="middle" font-size="8" fill="#94a3b8">coverage · flaky · critical path</text>
+
+  <!-- BONE 3: Environment — analyst-risk -->
+  <line x1="720" y1="320" x2="580" y2="140" stroke="#0d9488" stroke-width="2"/>
+  <line x1="629" y1="203" x2="661" y2="178" stroke="#0d9488" stroke-width="1.5"/>
+  <line x1="671" y1="257" x2="703" y2="232" stroke="#0d9488" stroke-width="1.5"/>
+  <circle cx="720" cy="320" r="5" fill="#0d9488"/>
+  <text x="580" y="110" text-anchor="middle" font-size="11" font-weight="bold" fill="#0d9488">Environment</text>
+  <text x="580" y="125" text-anchor="middle" font-size="9" fill="#475569">analyst-risk</text>
+  <text x="580" y="138" text-anchor="middle" font-size="8" fill="#94a3b8">deps · CVEs · CI/CD health</text>
+
+  <!-- ===== BOTTOM BONES (Round 2 — purple) ===== -->
+
+  <!-- BONE 4: Docs — aspect-staleness -->
+  <line x1="360" y1="320" x2="220" y2="500" stroke="#7c3aed" stroke-width="2"/>
+  <line x1="311" y1="383" x2="343" y2="408" stroke="#7c3aed" stroke-width="1.5"/>
+  <line x1="269" y1="437" x2="301" y2="462" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="360" cy="320" r="5" fill="#7c3aed"/>
+  <text x="220" y="522" text-anchor="middle" font-size="11" font-weight="bold" fill="#7c3aed">Docs</text>
+  <text x="220" y="537" text-anchor="middle" font-size="9" fill="#475569">aspect-staleness</text>
+  <text x="220" y="550" text-anchor="middle" font-size="8" fill="#94a3b8">README · ADRs · onboarding</text>
+
+  <!-- BONE 5: Process — analyst-context -->
+  <line x1="580" y1="320" x2="440" y2="500" stroke="#7c3aed" stroke-width="2"/>
+  <line x1="531" y1="383" x2="563" y2="408" stroke="#7c3aed" stroke-width="1.5"/>
+  <line x1="489" y1="437" x2="521" y2="462" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="580" cy="320" r="5" fill="#7c3aed"/>
+  <text x="440" y="522" text-anchor="middle" font-size="11" font-weight="bold" fill="#7c3aed">Process</text>
+  <text x="440" y="537" text-anchor="middle" font-size="9" fill="#475569">analyst-context</text>
+  <text x="440" y="550" text-anchor="middle" font-size="8" fill="#94a3b8">backlog · commits · branches</text>
+
+  <!-- BONE 6: Cross-cutting — aspect agents -->
+  <line x1="800" y1="320" x2="660" y2="500" stroke="#7c3aed" stroke-width="2"/>
+  <line x1="751" y1="383" x2="783" y2="408" stroke="#7c3aed" stroke-width="1.5"/>
+  <line x1="709" y1="437" x2="741" y2="462" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="800" cy="320" r="5" fill="#7c3aed"/>
+  <text x="660" y="522" text-anchor="middle" font-size="11" font-weight="bold" fill="#7c3aed">Cross-cutting</text>
+  <text x="660" y="537" text-anchor="middle" font-size="9" fill="#475569">aspect-constraints · impact · integration · quality</text>
+  <text x="660" y="550" text-anchor="middle" font-size="8" fill="#94a3b8">scoped constraints, impact radius, seams</text>
+
+  <!-- ===== SPINE MIDPOINT DOT (coord) ===== -->
+  <circle cx="620" cy="320" r="9" fill="#1e3a5f"/>
+  <text x="620" y="308" text-anchor="middle" font-size="8" fill="#1e3a5f">coord-ishikawa</text>
+
+  <!-- ===== LEGEND ===== -->
+  <rect x="920" y="70" width="280" height="168" rx="6" ry="6"
+        fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="932" y="92" font-size="11" font-weight="bold" fill="#475569">Dispatch Protocol</text>
+  <!-- Round 1 -->
+  <rect x="932" y="104" width="12" height="12" rx="2" fill="#0d9488"/>
+  <text x="950" y="114" font-size="10" fill="#0d9488">Round 1 (parallel):</text>
+  <text x="950" y="127" font-size="9" fill="#475569">  analyst-archaeology (Code)</text>
+  <text x="950" y="139" font-size="9" fill="#475569">  analyst-quality (Tests)</text>
+  <text x="950" y="151" font-size="9" fill="#475569">  analyst-risk (Environment)</text>
+  <!-- Round 2 -->
+  <rect x="932" y="158" width="12" height="12" rx="2" fill="#7c3aed"/>
+  <text x="950" y="168" font-size="10" fill="#7c3aed">Round 2 (parallel — after R1):</text>
+  <text x="950" y="181" font-size="9" fill="#475569">  aspect-staleness (Docs)</text>
+  <text x="950" y="193" font-size="9" fill="#475569">  analyst-context (Process)</text>
+  <text x="950" y="205" font-size="9" fill="#475569">  aspect-{constraints·impact·integration·quality}</text>
+
+  <!-- Current indicator -->
+  <rect x="920" y="250" width="280" height="34" rx="4" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="932" y="263" font-size="10" font-weight="bold" fill="#15803d">✓ Currently Implemented</text>
+  <text x="932" y="277" font-size="9" fill="#15803d">Specialized workspace health coordinator</text>
+
+</svg>

@@ -6,7 +6,7 @@
   "status": "draft",
   "eisenhower": "urgent-important",
   "created": "2026-03-05T10:51:22.639Z",
-  "updated": "2026-03-05T10:51:22.639Z",
+  "updated": "2026-04-09T19:18:05.796Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -16,7 +16,9 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [],
+    "relates-to": [
+      "EPIC-040"
+    ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],

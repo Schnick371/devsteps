@@ -47,6 +47,22 @@
       "dependsOrder": "sequence"
     },
     {
+      "label": "🚀 Build, Package & Install (WSL2 + Windows)",
+      "type": "shell",
+      "command": "set -euo pipefail && npm run build:ordered && cd packages/extension && npm run package && cd ../.. && VSIX=$(ls -t packages/extension/*.vsix | head -1) && echo '' && echo '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━' && echo '📦 VSIX ready:' && echo \"  WSL2 path : $VSIX\" && echo \"  Windows   : $(wslpath -w \"$PWD/$VSIX\" 2>/dev/null || echo 'wslpath not available')\" && echo '' && echo '🔧 Patching Windows npm globals + installing VS Code extension...' && bash scripts/patch-windows.sh && echo '' && echo '✅ Done. To install in Windows VS Code:' && echo '   Extensions → ⋯ → Install from VSIX...' && echo \"   → $(wslpath -w \"$PWD/$VSIX\" 2>/dev/null || echo $VSIX)\"",
+      "group": "build",
+      "problemMatcher": ["$tsc"],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "dependsOrder": "sequence"
+    },
+    {
       "label": "👀 Watch All",
       "type": "shell",
       "command": "npm run dev",

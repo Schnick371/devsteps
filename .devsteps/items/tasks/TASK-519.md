@@ -18,4 +18,6 @@ Verify no unintended files are staged before committing.
 ## Affected Paths
 - .devsteps/index/
 - .devsteps/items/bugs/BUG-037.json
-- .devsteps/items/bugs/BUG-072.json
+- .devsteps/items/bugs/BUG-072.json## Completed
+
+Committed `.devsteps/` index files and TASK-494/TASK-503 done status updates from prior sessions. 6 files changed (by-status indexes + TASK-494.json/.md + TASK-503.json/.md).

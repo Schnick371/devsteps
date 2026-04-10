@@ -1,0 +1,44 @@
+{
+  "id": "TASK-534",
+  "type": "task",
+  "category": "general",
+  "title": "Rename Sprint Burndown to Project Burndown and fix completion date logic",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-09T19:16:46.826Z",
+  "updated": "2026-04-09T19:18:21.610Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [
+    "packages/extension/src/webview/dashboardPanel.ts",
+    "packages/extension/src/webview/dataProviders/burndownProvider.ts"
+  ],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-040"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "task",
+    "dashboard",
+    "burndown",
+    "ux",
+    "webview",
+    "extension"
+  ],
+  "commits": [],
+  "metadata": {}
+}
