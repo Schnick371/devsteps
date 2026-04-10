@@ -27,4 +27,6 @@ Diese Task MUSS nach STORY-268 und STORY-278 implementiert werden (erst implemen
 
 - [ ] Alle MCP Tool descriptions korrekt und vollständig
 - [ ] CLI help texts aktualisiert
-- [ ] copilot-instructions.md doc/test Beschreibungen aktualisiert
+- [ ] copilot-instructions.md doc/test Beschreibungen aktualisiert## Partial Resolution
+
+Updated copilot-instructions.md (doc: frontmatter support note, test: generic CRUD + link clarification), addTool description (cross-cutting types), docReadContentTool description (frontmatter in response). Remaining: STORY-268 (Ingestion Mode) must be done before docsNewTool and CLI help updates.

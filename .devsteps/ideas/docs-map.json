@@ -12,7 +12,8 @@
       "parent_id": null,
       "order": 100,
       "title": "Deployment System (4-Phasen-Modell)",
-      "description": "Überblick über das Vier-Phasen-Deployment-Modell"
+      "description": "Überblick über das Vier-Phasen-Deployment-Modell",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-001-QR",
@@ -20,7 +21,8 @@
       "parent_id": "ARCH-001",
       "order": 10,
       "title": "Schnellreferenz: Alle Phasen",
-      "description": "TUI-Befehle, Funktionsindex, Voraussetzungen"
+      "description": "TUI-Befehle, Funktionsindex, Voraussetzungen",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-001-P1",
@@ -28,7 +30,9 @@
       "parent_id": "ARCH-001",
       "order": 20,
       "title": "Phase 1: Bootstrap",
-      "devsteps_item": "STORY-361",
+      "devsteps_items": [
+        "STORY-361"
+      ],
       "description": "PS7-Installation, Bootstrap-EXE, Auto-Distribute"
     },
     {
@@ -36,14 +40,16 @@
       "doc_id": "ps51-bootstrap-compatibility-matrix",
       "parent_id": "ARCH-001-P1",
       "order": 10,
-      "title": "PS5.1 Kompatibilitätsmatrix"
+      "title": "PS5.1 Kompatibilitätsmatrix",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-001-P1-EXE",
       "doc_id": "self-extracting-installer",
       "parent_id": "ARCH-001-P1",
       "order": 20,
-      "title": "Self-Extracting Installer (EXE)"
+      "title": "Self-Extracting Installer (EXE)",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-001-P2",
@@ -51,21 +57,24 @@
       "parent_id": "ARCH-001",
       "order": 30,
       "title": "Phase 2: Init (Infrastructure)",
-      "description": "WinRM, SMB-Shares, Docker, ArcModules"
+      "description": "WinRM, SMB-Shares, Docker, ArcModules",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-001-P2-PS7",
       "doc_id": "ps7-remote-enforcement",
       "parent_id": "ARCH-001-P2",
       "order": 10,
-      "title": "PS7 Remote-Enforcement-Regel"
+      "title": "PS7 Remote-Enforcement-Regel",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-001-P2-RMG",
       "doc_id": "remote-management-guide",
       "parent_id": "ARCH-001-P2",
       "order": 20,
-      "title": "Remote Management Guide"
+      "title": "Remote Management Guide",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-001-P3",
@@ -73,7 +82,8 @@
       "parent_id": "ARCH-001",
       "order": 40,
       "title": "Phase 3: Install (Software)",
-      "description": "Software-Installation aus SE.json"
+      "description": "Software-Installation aus SE.json",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-001-P4",
@@ -81,7 +91,8 @@
       "parent_id": "ARCH-001",
       "order": 50,
       "title": "Phase 4: Deploy TC",
-      "description": "TC-Konfiguration via Deployment Center Quick Deploy"
+      "description": "TC-Konfiguration via Deployment Center Quick Deploy",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-002",
@@ -89,7 +100,8 @@
       "parent_id": null,
       "order": 200,
       "title": "Modul-System",
-      "description": "PS5.1/PS7-Vertrag, Modul-Bereitstellungsstrategie"
+      "description": "PS5.1/PS7-Vertrag, Modul-Bereitstellungsstrategie",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-002-NODES",
@@ -97,7 +109,8 @@
       "parent_id": "ARCH-002",
       "order": 10,
       "title": "Node Types",
-      "description": "Rollendefinitionen (Primary, Secondary, Client, External)"
+      "description": "Rollendefinitionen (Primary, Secondary, Client, External)",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-003",
@@ -105,7 +118,8 @@
       "parent_id": null,
       "order": 300,
       "title": "Workspace-Konfiguration",
-      "description": "REMARC_WORKSPACE_FILE, Workspace-Pfade, Multi-Root-Workspace"
+      "description": "REMARC_WORKSPACE_FILE, Workspace-Pfade, Multi-Root-Workspace",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-004",
@@ -113,7 +127,8 @@
       "parent_id": null,
       "order": 400,
       "title": "Backup & Transfer",
-      "description": "Backup-Typen, Config-Sync, Transfer-Pakete"
+      "description": "Backup-Typen, Config-Sync, Transfer-Pakete",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-099",
@@ -121,21 +136,24 @@
       "parent_id": null,
       "order": 9900,
       "title": "Dokumentations-Governance",
-      "description": "DOC-ARCHITECTURE, DOC-SCHICHTARCHITEKTUR, Frontmatter-Schema"
+      "description": "DOC-ARCHITECTURE, DOC-SCHICHTARCHITEKTUR, Frontmatter-Schema",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-099-SCHICHT",
       "doc_id": "doc-schichtarchitektur",
       "parent_id": "ARCH-099",
       "order": 10,
-      "title": "Schichtdokumentation-Konzept"
+      "title": "Schichtdokumentation-Konzept",
+      "devsteps_items": []
     },
     {
       "id": "ARCH-099-BOM",
       "doc_id": "doc-architecture-bom",
       "parent_id": "ARCH-099",
       "order": 20,
-      "title": "BOM-Manifest: JSON vs. YAML und Anti-Fragile Nummerierung"
+      "title": "BOM-Manifest: JSON vs. YAML und Anti-Fragile Nummerierung",
+      "devsteps_items": []
     }
   ]
 }

@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "YAML Frontmatter Schema für doc-Item .md Dateien (Parsing + Validierung + Fehlerbehandlung)",
-  "status": "review",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-10T12:12:41.575Z",
-  "updated": "2026-04-10T12:28:32.372Z",
+  "updated": "2026-04-10T12:36:14.772Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared/src/core/",

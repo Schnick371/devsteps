@@ -1,16 +1,17 @@
 {
-  "id": "BUG-096",
-  "type": "bug",
+  "id": "STORY-279",
+  "type": "story",
   "category": "general",
-  "title": "BOM Schema/Data Mismatch: devsteps_items vs devsteps_item, DOC-NNN vs Slugs",
-  "status": "done",
+  "title": "Extension BOM-View: docs-map.json TreeView-Integration für Dokumenthierarchie",
+  "status": "draft",
   "eisenhower": "not-urgent-important",
-  "created": "2026-04-10T12:12:12.270Z",
-  "updated": "2026-04-10T12:38:01.675Z",
+  "created": "2026-04-10T12:36:43.515Z",
+  "updated": "2026-04-10T12:36:49.060Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    ".devsteps/docs-map.schema.json",
-    ".devsteps/ideas/docs-map.json"
+    "packages/extension/src/treeView/",
+    "packages/extension/src/commands/",
+    "packages/shared/src/core/docs-map.ts"
   ],
   "linked_items": {
     "implements": [],
@@ -19,13 +20,11 @@
     "tests": [],
     "blocks": [],
     "blocked-by": [],
-    "relates-to": [
-      "STORY-268"
+    "relates-to": [],
+    "depends-on": [
+      "BUG-096"
     ],
-    "depends-on": [],
-    "required-by": [
-      "STORY-279"
-    ],
+    "required-by": [],
     "supersedes": [],
     "superseded-by": [],
     "canonical-for": [],
@@ -34,10 +33,10 @@
     "documents": []
   },
   "tags": [
+    "extension",
     "bom",
-    "schema",
     "docs-map",
-    "data-integrity",
+    "treeview",
     "doc-system"
   ],
   "commits": [],
