@@ -17,7 +17,7 @@ All Copilot agents follow the **Spinnennetz / Radar Chart model**: concentric ri
 | 1 — Analysis    | `analyst-*` — Read-only Research (standard: `context·internal·risk`; FULL adds `quality·archaeology·web`; COMPETITIVE adds `research·web`) | Parallel fan-out | simultaneously  |
 | 2 — Validation  | `aspect-*` — Cross-Validation with Ring 1 results                                             | Parallel fan-out | AFTER Ring 1    |
 | 3 — Planning    | `exec-planner` — reads Ring 1+2 results                                                       | Sequential       | AFTER Ring 2    |
-| 4 — Execution   | **Conductors:** `exec-impl`, `exec-test`, `exec-doc` (each dispatches its `worker-*`); **Workers:** `worker-*` dispatched by conductors NOT coord (incl. `worker-workspace` for new projects, dispatched by coord) | Sequential       | AFTER Ring 3    |
+| 4 — Execution   | **Conductors** (`dispatch_role: conductor`): `exec-impl`, `exec-test`, `exec-doc` — each dispatches its designated worker pool via `runSubagent`; **Workers** (`dispatch_role: leaf`): `worker-*` dispatched by conductors (primary) or coord directly; `worker-workspace` (new projects, coord-dispatched first) | Sequential       | AFTER Ring 3    |
 | 5 — Gate        | `gate-reviewer` — QA blocker PASS/FAIL                                                        | Blocking         | AFTER Ring 4    |
 
 > **VS Code Constraint**: `runSubagent` does not support nesting. `coord-*` dispatches EVERYTHING directly. No non-coord agent may call `runSubagent` — all are Leaf Nodes.
@@ -77,7 +77,7 @@ DevSteps is the primary work-tracking system. NEVER edit `.devsteps/` directly �
 | **Parallel fan-out** | All agents in the same ring fire in ONE simultaneous call — never sequential |
 | **Scope-split fan-out** | coord MAY dispatch multiple instances of the same analyst type with non-overlapping scope partitions — see ADP §1 I-13 for write-path constraints |
 | **Ring ordering** | Ring 2 fires AFTER Ring 1 completes — pass MandateResult `report_path` as `upstream_paths` |
-| **Nesting** | Non-coord agents NEVER call `runSubagent` — all are Leaf Nodes |
+| **Nesting** | Non-conductor, non-coord agents (`dispatch_role: leaf`) NEVER call `runSubagent`. Conductors (exec-impl, exec-test, exec-doc) may ONLY dispatch their designated `agents:` frontmatter list |
 | **MandateResults** | Read via `mcp_devsteps_read_mandate_results` (archaeology/risk/quality/research) OR `mcp_devsteps_read_analysis_envelope` (context/internal/web) — iterate `.results[]`. Pass `expected_agent_names` for quorum tracking. |
 | **new package** | Dispatch `worker-workspace` FIRST (before `exec-impl`) |
 | **runSubagent off** | → `devsteps-R0-coord-solo`, inform user |

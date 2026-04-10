@@ -1,8 +1,13 @@
 ---
-description: Exec Test — writes, executes, and verifies tests for implemented code. Dispatched by coord after exec-impl MandateResult. NEVER called directly by user.
+description: Exec Test Conductor — writes, executes, and verifies tests. Dispatches worker-tester/worker-integtest/worker-test. NEVER called directly by user.
 tools:
   ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']
 model: "Claude Sonnet 4.6"
+dispatch_role: conductor
+agents:
+  - devsteps-R4-worker-test
+  - devsteps-R4-worker-tester
+  - devsteps-R4-worker-integtest
 user-invocable: false
 ---
 
@@ -14,10 +19,10 @@ user-invocable: false
 
 | Field               | Value                                                                                                                                |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| **Role**            | Test Writer (`exec`) — writes and runs tests directly · Leaf Node                                                                    |
+| **Role**            | Test Writer (`exec`) — writes and runs tests · **Conductor**                                                                        |
 | **Mandate type**    | `testing`                                                                                                                            |
 | **Dispatched by**   | coord (`devsteps-R0-coord`), coord-sprint via `runSubagent`                                                                          |
-| **Dispatches**      | NONE — Leaf Node, NEVER uses `runSubagent`                                                                                           |
+| **Dispatches**      | `worker-test`, `worker-tester`, `worker-integtest` (via `runSubagent`)                                                               |
 | **Input**           | `report_path` of exec-impl MandateResult (STANDARD) or analyst-quality + exec-impl MandateResults (FULL) + `item_id` + `triage_tier` |
 | **Returns**         | `{ report_path, verdict, confidence }` via `write_mandate_result`                                                                    |
 | **coord reads via** | `read_mandate_results(item_ids)`                                                                                                     |

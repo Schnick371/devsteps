@@ -24,6 +24,8 @@ description: "YAML frontmatter headers specification and best practices for GitH
 - `description`: Brief agent purpose (shown in chat placeholder)
 - `model`: AI model specification
 - `tools`: Available tools for this agent
+- `dispatch_role` *(optional)*: `coordinator` (Ring 0 coord-* only) | `conductor` (exec-impl, exec-test, exec-doc) | `leaf` (default — all others). Only `coordinator` and `conductor` may call `runSubagent`.
+- `agents` *(conductor only)*: Explicit list of worker agents this conductor is permitted to dispatch via `runSubagent`. MUST be provided when `dispatch_role: conductor`.
 
 **Tool Selection Guidelines**:
 
