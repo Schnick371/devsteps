@@ -148,54 +148,97 @@ export class DashboardPanel {
       <link href="${styleUri}" rel="stylesheet">
       <title>DevSteps Dashboard</title>
     </head>
-    <body>
+    <body data-active-view="overview">
       <div class="dashboard">
         <header>
-          <h1>📊 DevSteps Dashboard</h1>
+          <h1>DevSteps Dashboard</h1>
+          <nav class="tab-bar" role="tablist">
+            <button class="tab-btn" data-view="overview" role="tab" aria-selected="true">Overview</button>
+            <button class="tab-btn" data-view="work-items" role="tab" aria-selected="false">Work Items</button>
+            <button class="tab-btn" data-view="progress" role="tab" aria-selected="false">Progress</button>
+            <button class="tab-btn" data-view="traceability" role="tab" aria-selected="false">Traceability</button>
+            <button class="tab-btn" data-view="timeline" role="tab" aria-selected="false">Timeline</button>
+          </nav>
         </header>
 
-        <!-- Statistics Cards -->
-        <section class="stats-grid">
-          ${renderStatsCards(stats)}
-        </section>
+        <!-- Tab: Overview -->
+        <div class="view-panel" data-view="overview" role="tabpanel">
+          <section class="stats-grid">
+            ${renderStatsCards(stats)}
+          </section>
+          <section class="eisenhower-section">
+            ${renderEisenhowerMatrix(eisenhower)}
+          </section>
+        </div>
 
-        <!-- Eisenhower Matrix -->
-        <section class="eisenhower-section">
-          ${renderEisenhowerMatrix(eisenhower)}
-        </section>
+        <!-- Tab: Work Items (placeholder — STORY-264) -->
+        <div class="view-panel" data-view="work-items" role="tabpanel">
+          <section class="work-items-section">
+            <h2>Work Items</h2>
+            <p class="placeholder-text">Work Items view coming soon (STORY-264).</p>
+          </section>
+        </div>
 
-        <!-- Burndown Chart -->
-        <section class="burndown-section">
-          <h2>📉 Project Burndown</h2>
-          <canvas id="burndownChart" width="800" height="300"></canvas>
-        </section>
+        <!-- Tab: Progress -->
+        <div class="view-panel" data-view="progress" role="tabpanel">
+          <section class="burndown-section">
+            <h2>Project Burndown</h2>
+            <canvas id="burndownChart" width="800" height="300"></canvas>
+          </section>
+        </div>
 
-        <!-- Traceability Graph -->
-        <section class="traceability-section">
-          <h2>🕸️ Traceability Graph</h2>
-          ${
-            traceability.displayedNodes &&
-            traceability.totalItems &&
-            traceability.displayedNodes < traceability.totalItems
-              ? `<div class="info-banner">
-                 <span class="info-icon">ℹ️</span>
-                 Showing ${traceability.displayedNodes} of ${traceability.totalItems} items (top connections only).
-                 <span class="info-hint">For performance, large projects display most-connected items.</span>
-               </div>`
-              : ''
-          }
-          <div id="traceabilityGraph"></div>
-        </section>
+        <!-- Tab: Traceability -->
+        <div class="view-panel" data-view="traceability" role="tabpanel">
+          <section class="traceability-section">
+            <h2>Traceability Graph</h2>
+            ${
+              traceability.displayedNodes &&
+              traceability.totalItems &&
+              traceability.displayedNodes < traceability.totalItems
+                ? `<div class="info-banner">
+                   <span class="info-icon">ℹ️</span>
+                   Showing ${traceability.displayedNodes} of ${traceability.totalItems} items (top connections only).
+                   <span class="info-hint">For performance, large projects display most-connected items.</span>
+                 </div>`
+                : ''
+            }
+            <div id="traceabilityGraph"></div>
+          </section>
+        </div>
 
-        <!-- Timeline -->
-        <section class="timeline-section">
-          ${renderTimeline(timeline)}
-        </section>
+        <!-- Tab: Timeline -->
+        <div class="view-panel" data-view="timeline" role="tabpanel">
+          <section class="timeline-section">
+            ${renderTimeline(timeline)}
+          </section>
+        </div>
       </div>
 
       <script nonce="${nonce}">
         const vscode = acquireVsCodeApi();
-        
+
+        // Tab navigation — CSS view-toggle via data-active-view attribute
+        (function() {
+          const tabBtns = document.querySelectorAll('.tab-btn');
+          const savedState = vscode.getState();
+          const initialView = savedState && savedState.activeView ? savedState.activeView : 'overview';
+
+          function switchTab(viewId) {
+            document.body.setAttribute('data-active-view', viewId);
+            tabBtns.forEach(btn => {
+              btn.setAttribute('aria-selected', btn.dataset.view === viewId ? 'true' : 'false');
+            });
+            vscode.setState({ ...vscode.getState(), activeView: viewId });
+          }
+
+          tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => switchTab(btn.dataset.view));
+          });
+
+          // Restore saved tab
+          switchTab(initialView);
+        })();
+
         ${getBurndownChartScript(burndown)}
         ${getTraceabilityGraphScript(traceability)}
 

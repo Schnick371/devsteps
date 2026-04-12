@@ -398,6 +398,57 @@ header h1 {
   }
 }
 
+/* ===== Tab Navigation ===== */
+.tab-bar {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--card-border);
+  margin-top: 12px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size, 13px);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.tab-btn[aria-selected="true"] {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent-blue);
+  font-weight: 600;
+}
+
+/* ===== View Panel Toggle ===== */
+.view-panel {
+  display: none;
+}
+
+body[data-active-view="overview"] .view-panel[data-view="overview"],
+body[data-active-view="work-items"] .view-panel[data-view="work-items"],
+body[data-active-view="progress"] .view-panel[data-view="progress"],
+body[data-active-view="traceability"] .view-panel[data-view="traceability"],
+body[data-active-view="timeline"] .view-panel[data-view="timeline"] {
+  display: block;
+}
+
+/* Placeholder for future tabs */
+.placeholder-text {
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 40px 0;
+  text-align: center;
+}
+
 /* Scrollbar Styling */
 .quadrant::-webkit-scrollbar,
 .timeline::-webkit-scrollbar {
