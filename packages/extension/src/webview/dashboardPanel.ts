@@ -166,7 +166,7 @@ export class DashboardPanel {
 
         <!-- Burndown Chart -->
         <section class="burndown-section">
-          <h2>📉 Sprint Burndown</h2>
+          <h2>📉 Project Burndown</h2>
           <canvas id="burndownChart" width="800" height="300"></canvas>
         </section>
 

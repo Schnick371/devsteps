@@ -16,7 +16,7 @@
 ### 📊 Interactive Dashboard
 - **Project Statistics**: Real-time counts by type, status, priority, Eisenhower quadrant
 - **Eisenhower Matrix**: 4-quadrant view (Urgent/Important categorization)
-- **Sprint Burndown Chart**: Track progress with ideal vs actual burndown
+- **Project Burndown Chart**: Track progress with ideal vs actual burndown
 - **Traceability Graph**: Force-directed visualization of item relationships
 - **Activity Timeline**: Recent updates at a glance
 - **Performance Optimized**: Handles 10K+ items with <2s load time (design target)

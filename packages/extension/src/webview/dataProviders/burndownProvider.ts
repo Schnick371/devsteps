@@ -2,7 +2,7 @@
  * Copyright © 2025 Thomas Hertel (the@devsteps.dev)
  * Licensed under the Apache License, Version 2.0
  *
- * Burndown Chart Data Provider - Sprint progress tracking
+ * Burndown Chart Data Provider - Project progress tracking
  */
 
 import { type DevStepsIndex, STATUS } from '@schnick371/devsteps-shared';
@@ -48,6 +48,10 @@ function calculateBurndownPoints(
   const total = items.length;
 
   items.forEach((item) => {
+    // APPROXIMATION: item.updated is used as completion date because there is
+    // no dedicated completed_at field yet. This may shift the burndown curve if
+    // a done item is edited (e.g. tags, description). A future schema migration
+    // should add a completed_at timestamp to ItemMetadata.
     if (item.status === STATUS.DONE && item.updated) {
       const date = new Date(item.updated).toISOString().split('T')[0];
       tasksByDate[date] = (tasksByDate[date] || 0) + 1;
