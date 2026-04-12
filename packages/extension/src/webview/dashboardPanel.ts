@@ -7,11 +7,8 @@
  */
 
 import * as path from 'node:path';
-import { type DevStepsIndex, listItems } from '@schnick371/devsteps-shared';
+import { type ListItemEntry, listItems } from '@schnick371/devsteps-shared';
 import * as vscode from 'vscode';
-
-// Type alias for list items
-type ListItem = DevStepsIndex['items'][number];
 
 import type { SpiderEvent } from '@schnick371/devsteps-shared';
 import { type BurndownData, getBurndownData } from './dataProviders/burndownProvider.js';
@@ -114,14 +111,14 @@ export class DashboardPanel {
    * Load all DevSteps data once for dashboard rendering.
    * PERFORMANCE: Eliminates 5× redundant listItems() calls.
    */
-  private async loadAllData(): Promise<{ allItems: ListItem[]; tasks: ListItem[] }> {
+  private async loadAllData(): Promise<{ allItems: ListItemEntry[]; tasks: ListItemEntry[] }> {
     const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
     if (!workspaceFolder) {
       return { allItems: [], tasks: [] };
     }
 
     const devstepsPath = path.join(workspaceFolder.uri.fsPath, '.devsteps');
-    const result = await listItems(devstepsPath);
+    const result = await listItems(devstepsPath, { includeLinkedItems: true });
     const allItems = result.items;
     const tasks = allItems.filter((item) => item.type === 'task');
 
@@ -134,7 +131,7 @@ export class DashboardPanel {
     eisenhower: EisenhowerData,
     burndown: BurndownData,
     traceability: TraceabilityData,
-    timeline: ListItem[]
+    timeline: ListItemEntry[]
   ): string {
     const styleUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, 'media', 'dashboard.css')
