@@ -208,6 +208,14 @@ export class DashboardPanel {
             });
           });
         });
+
+        // Listen for spider events from extension host (STORY-206 contract)
+        window.addEventListener('message', (event) => {
+          const message = event.data;
+          if (message.command === 'spiderEvent') {
+            console.log('[DevSteps] Spider event received:', message.event);
+          }
+        });
       </script>
     </body>
     </html>`;
