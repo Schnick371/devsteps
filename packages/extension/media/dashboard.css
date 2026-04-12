@@ -548,6 +548,95 @@ body[data-active-view="timeline"] .view-panel[data-view="timeline"] {
   white-space: nowrap;
 }
 
+/* ===== Epic Progress Accordion ===== */
+.epic-progress-section {
+  margin-top: 24px;
+}
+
+.epic-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.epic-burndown {
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  background: var(--card-bg);
+}
+
+.epic-burndown summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--vscode-font-size, 13px);
+}
+
+.epic-burndown summary::-webkit-details-marker {
+  display: none;
+}
+
+.epic-burndown summary::before {
+  content: '▶';
+  font-size: 10px;
+  color: var(--text-secondary);
+  transition: transform 0.15s;
+}
+
+.epic-burndown[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.epic-summary-id {
+  font-family: var(--vscode-editor-font-family, monospace);
+  color: var(--accent-blue);
+  white-space: nowrap;
+}
+
+.epic-summary-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.epic-summary-count {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.epic-detail {
+  padding: 8px 12px 12px 28px;
+}
+
+.epic-progress-bar {
+  margin-bottom: 8px;
+  overflow: visible;
+}
+
+.epic-children {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.epic-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.epic-child:hover {
+  background: var(--vscode-list-hoverBackground, rgba(128,128,128,0.1));
+}
+
 /* Scrollbar Styling */
 .quadrant::-webkit-scrollbar,
 .timeline::-webkit-scrollbar {

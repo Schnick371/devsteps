@@ -13,6 +13,10 @@ import * as vscode from 'vscode';
 import type { SpiderEvent } from '@schnick371/devsteps-shared';
 import { type BurndownData, getBurndownData } from './dataProviders/burndownProvider.js';
 import { type EisenhowerData, getEisenhowerData } from './dataProviders/eisenhowerProvider.js';
+import {
+  type EpicProgress,
+  getEpicProgressData,
+} from './dataProviders/epicBurndownProvider.js';
 // Data Providers
 import { getProjectStats, type ProjectStats } from './dataProviders/statsProvider.js';
 import { getTimelineData } from './dataProviders/timelineProvider.js';
@@ -22,6 +26,7 @@ import {
 } from './dataProviders/traceabilityProvider.js';
 import { getBurndownChartScript } from './renderers/burndownRenderer.js';
 import { renderEisenhowerMatrix } from './renderers/eisenhowerRenderer.js';
+import { renderEpicAccordion } from './renderers/epicBurndownRenderer.js';
 // Renderers
 import { renderStatsCards } from './renderers/statsRenderer.js';
 import { renderTimeline } from './renderers/timelineRenderer.js';
@@ -91,6 +96,7 @@ export class DashboardPanel {
       const burndownData = getBurndownData(tasks);
       const traceabilityData = getTraceabilityData(allItems);
       const timelineData = getTimelineData(allItems);
+      const epicProgressData = getEpicProgressData(allItems);
 
       this._panel.webview.html = this._getHtmlForWebview(
         webview,
@@ -99,7 +105,8 @@ export class DashboardPanel {
         burndownData,
         traceabilityData,
         timelineData,
-        allItems
+        allItems,
+        epicProgressData
       );
     } catch (error) {
       vscode.window.showErrorMessage(
@@ -133,7 +140,8 @@ export class DashboardPanel {
     burndown: BurndownData,
     traceability: TraceabilityData,
     timeline: ListItemEntry[],
-    allItems: ListItemEntry[]
+    allItems: ListItemEntry[],
+    epicProgress: EpicProgress[]
   ): string {
     const styleUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, 'media', 'dashboard.css')
@@ -198,6 +206,10 @@ export class DashboardPanel {
           <section class="burndown-section">
             <h2>Project Burndown</h2>
             <canvas id="burndownChart" width="800" height="300"></canvas>
+          </section>
+          <section class="epic-progress-section">
+            <h2>Epic Progress</h2>
+            ${renderEpicAccordion(epicProgress)}
           </section>
         </div>
 
