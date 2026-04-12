@@ -9,14 +9,75 @@
  */
 
 import { join } from 'node:path';
+import { readFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import {
   addItem,
   appendDocsMapNode,
   type DocsMapNode,
+  extractFrontmatter,
+  getItem,
+  linkItem,
   validateSession,
   writeSession,
 } from '@schnick371/devsteps-shared';
 import { getWorkspacePath } from '../workspace.js';
+
+/**
+ * Extract related_items from file frontmatter and create `implements` links.
+ * Warn-and-continue: unresolved IDs produce warnings, never abort.
+ *
+ * @returns Array of warning strings for unresolved item IDs
+ */
+async function autoLinkRelatedItems(
+  devstepsDir: string,
+  workspaceRoot: string,
+  filePath: string,
+  docItemId: string
+): Promise<string[]> {
+  const absolutePath = join(workspaceRoot, filePath);
+  if (!existsSync(absolutePath)) return [];
+
+  let content: string;
+  try {
+    content = await readFile(absolutePath, 'utf-8');
+  } catch {
+    return [];
+  }
+
+  let relatedItems: string[] = [];
+  try {
+    const { frontmatter } = extractFrontmatter(content);
+    relatedItems = frontmatter?.related_items ?? [];
+  } catch {
+    // Frontmatter parse error — skip auto-linking for this file silently
+    return [];
+  }
+
+  if (relatedItems.length === 0) return [];
+
+  const warnings: string[] = [];
+  for (const relatedId of relatedItems) {
+    try {
+      await getItem(devstepsDir, relatedId);
+    } catch {
+      warnings.push(`related_items entry '${relatedId}' not found — link skipped`);
+      continue;
+    }
+    try {
+      await linkItem(devstepsDir, {
+        sourceId: docItemId,
+        relationType: 'documents',
+        targetId: relatedId,
+      });
+    } catch (err) {
+      warnings.push(
+        `Failed to link '${docItemId}' → '${relatedId}': ${err instanceof Error ? err.message : String(err)}`
+      );
+    }
+  }
+  return warnings;
+}
 
 export default async function devstepsDocsBomCommitHandler(args: Record<string, unknown>) {
   const workspaceRoot = getWorkspacePath();
@@ -48,6 +109,7 @@ export default async function devstepsDocsBomCommitHandler(args: Record<string, 
   const toCreate = session.classified.filter((c) => c.decision !== 'skip');
   const docItems: string[] = [];
   const errors: Array<{ path: string; reason: string }> = [];
+  const warnings: string[] = [];
   let bomNodesAdded = 0;
 
   if (dryRun) {
@@ -86,6 +148,15 @@ export default async function devstepsDocsBomCommitHandler(args: Record<string, 
           });
           docItems.push(result.itemId);
 
+          // Auto-link related_items from split source file frontmatter
+          const splitWarnings = await autoLinkRelatedItems(
+            devstepsDir,
+            workspaceRoot,
+            entry.path,
+            result.itemId
+          );
+          warnings.push(...splitWarnings);
+
           const node: DocsMapNode = {
             id: slug,
             doc_id: result.itemId,
@@ -112,6 +183,15 @@ export default async function devstepsDocsBomCommitHandler(args: Record<string, 
         });
         docItems.push(result.itemId);
 
+        // Auto-link related_items from file frontmatter
+        const acceptWarnings = await autoLinkRelatedItems(
+          devstepsDir,
+          workspaceRoot,
+          entry.path,
+          result.itemId
+        );
+        warnings.push(...acceptWarnings);
+
         const node: DocsMapNode = {
           id: slug,
           doc_id: result.itemId,
@@ -137,6 +217,15 @@ export default async function devstepsDocsBomCommitHandler(args: Record<string, 
           affected_paths: [entry.path],
         });
         docItems.push(result.itemId);
+
+        // Auto-link related_items from file frontmatter
+        const rewriteWarnings = await autoLinkRelatedItems(
+          devstepsDir,
+          workspaceRoot,
+          entry.path,
+          result.itemId
+        );
+        warnings.push(...rewriteWarnings);
       }
     } catch (err) {
       errors.push({
@@ -156,6 +245,7 @@ export default async function devstepsDocsBomCommitHandler(args: Record<string, 
     bom_nodes_added: bomNodesAdded,
     skipped: session.classified.length - toCreate.length,
     errors,
+    warnings,
     doc_items: docItems,
     dry_run: false,
     next_steps: [
