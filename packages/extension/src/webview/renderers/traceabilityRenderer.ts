@@ -86,7 +86,7 @@ export function getTraceabilityGraphScript(traceability: TraceabilityData): stri
         circle.setAttribute('cx', node.x);
         circle.setAttribute('cy', node.y);
         circle.setAttribute('r', '8');
-        circle.setAttribute('fill', node.status === STATUS.DONE ? '#4caf50' : '#2196f3');
+        circle.setAttribute('fill', node.status === 'done' ? 'var(--vscode-charts-green)' : 'var(--vscode-charts-blue)');
         circle.setAttribute('data-item-id', node.id);
         circle.style.cursor = 'pointer';
         svg.appendChild(circle);

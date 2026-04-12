@@ -16,7 +16,7 @@ type ListItem = DevStepsIndex['items'][number];
  */
 export function renderTimeline(timeline: ListItem[]): string {
   return `
-    <h2>📅 Recent Activity</h2>
+    <h2>Recent Activity</h2>
     <div class="timeline">
       ${timeline
         .map(

@@ -40,7 +40,7 @@ export function renderEisenhowerMatrix(eisenhower: EisenhowerData): string {
   `;
 
   return `
-    <h2>🔥 Eisenhower Priority Matrix</h2>
+    <h2>Eisenhower Priority Matrix</h2>
     <div class="matrix-grid">
       ${renderQuadrant('Q1', 'Do First (Urgent & Important)', eisenhower.Q1)}
       ${renderQuadrant('Q2', 'Schedule (Important)', eisenhower.Q2)}
