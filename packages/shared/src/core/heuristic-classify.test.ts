@@ -6,7 +6,13 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { DIATAXIS_TYPES, heuristicClassify, MIXED_THRESHOLD } from './heuristic-classify.js';
+import {
+  DIATAXIS_TYPES,
+  heuristicClassify,
+  MIXED_THRESHOLD,
+  SUBHEADING_RATIO_THRESHOLD,
+  TABLE_RATIO_THRESHOLD,
+} from './heuristic-classify.js';
 
 describe('heuristicClassify', () => {
   describe('path-based signals', () => {
@@ -143,5 +149,114 @@ In contrast to the previous version...`;
 describe('MIXED_THRESHOLD', () => {
   it('is 0.4', () => {
     expect(MIXED_THRESHOLD).toBe(0.4);
+  });
+});
+
+describe('SUBHEADING_RATIO_THRESHOLD', () => {
+  it('is 0.08', () => {
+    expect(SUBHEADING_RATIO_THRESHOLD).toBe(0.08);
+  });
+});
+
+describe('TABLE_RATIO_THRESHOLD', () => {
+  it('is 0.25', () => {
+    expect(TABLE_RATIO_THRESHOLD).toBe(0.25);
+  });
+});
+
+describe('heuristicClassify — structural signals (TASK-549)', () => {
+  it('boosts explanation score for fragments with rich H2/H3 subheading density', () => {
+    // 4 H2 subheadings in a 20-line fragment → subHeadingRatio ~ 0.2 > 0.08
+    const excerpt = `# Understanding DevSteps
+
+## Why We Built This
+The idea behind DevSteps is structured workflow.
+
+## Core Concepts
+In contrast to simple lists, DevSteps models dependencies.
+
+## Background
+The reason for this is traceability in AI-assisted development.
+
+## Motivation
+History shows that context loss is the main bottleneck.
+
+Some additional prose here about the design.`;
+    const baseline = heuristicClassify('# No subheadings\n\nJust some text without headings.');
+    const result = heuristicClassify(excerpt);
+    expect(result.scores.explanation).toBeGreaterThan(baseline.scores.explanation);
+  });
+
+  it('boosts reference score for fragments with high table density (>25% table lines)', () => {
+    // Build a fragment with >25% table lines
+    const tableRows = Array.from(
+      { length: 10 },
+      (_, i) => `| option-${i} | string | default-${i} | no |`
+    ).join('\n');
+    const excerpt = `# CLI Options\n\n| Flag | Type | Default | Required |\n|------|------|---------|----------|\n${tableRows}`;
+    const result = heuristicClassify(excerpt);
+    expect(result.scores.reference).toBeGreaterThanOrEqual(result.scores.tutorial);
+    expect(result.scores.reference).toBeGreaterThanOrEqual(result.scores['how-to']);
+  });
+
+  it('boosts reference score for flat structure (single H1, no sub-headings) with tables', () => {
+    const excerpt = [
+      '# Quick Reference',
+      '',
+      '| Command | Description |',
+      '|---------|-------------|',
+      '| init    | Init project |',
+      '| add     | Add item    |',
+      '| list    | List items  |',
+      '| status  | Show status |',
+      '| update  | Update item |',
+    ].join('\n');
+    const result = heuristicClassify(excerpt);
+    // Should have boosted reference (flat + tables > 15%)
+    expect(result.scores.reference).toBeGreaterThan(0);
+  });
+});
+
+describe('heuristicClassify — Scrum-context boost (STORY-293)', () => {
+  it('boosts how-to score for German Scrum user story in story_title', () => {
+    const excerpt = `# Gerät einschalten\n\nSchritt 1: Drücken Sie den Einschaltknopf.\nSchritt 2: Warten Sie auf die Initialisierung.`;
+    const withoutCtx = heuristicClassify(excerpt);
+    const withCtx = heuristicClassify(excerpt, undefined, {
+      story_title: 'Als Endnutzer möchte ich das Gerät einschalten',
+    });
+    expect(withCtx.scores['how-to']).toBeGreaterThan(withoutCtx.scores['how-to']);
+  });
+
+  it('boosts reference score for Hardware-Schnittstellen Epic title', () => {
+    const excerpt = `# API Details\n\nParameter list for the hardware interface.`;
+    const withoutCtx = heuristicClassify(excerpt);
+    const withCtx = heuristicClassify(excerpt, undefined, {
+      epic_title: 'Hardware-Schnittstellen API Referenz',
+    });
+    expect(withCtx.scores.reference).toBeGreaterThan(withoutCtx.scores.reference);
+  });
+
+  it('returns identical scores when context is absent (zero regression)', () => {
+    const excerpt = `# Getting Started\n\n## How to configure\nRun the setup command.`;
+    const without = heuristicClassify(excerpt, 'docs/guide.md');
+    const withUndefined = heuristicClassify(excerpt, 'docs/guide.md', undefined);
+    expect(withUndefined.scores).toEqual(without.scores);
+    expect(withUndefined.winner).toBe(without.winner);
+  });
+
+  it('boosts explanation score for "architektur" / overview context', () => {
+    const excerpt = `# System Design\n\nThis document explains the system.`;
+    const withCtx = heuristicClassify(excerpt, undefined, {
+      epic_title: 'Systemarchitektur und Konzept Hintergrund',
+    });
+    expect(withCtx.scores.explanation).toBeGreaterThan(0);
+  });
+
+  it('boosts how-to score for English user-story pattern "as a user i want to"', () => {
+    const excerpt = `# Configure notifications\n\nFollow these steps.`;
+    const withCtx = heuristicClassify(excerpt, undefined, {
+      story_title: 'As a user I want to configure notifications',
+    });
+    expect(withCtx.scores['how-to']).toBeGreaterThan(0);
   });
 });
