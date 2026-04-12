@@ -9,7 +9,13 @@
  */
 
 import { join } from 'node:path';
-import { heuristicClassify, validateSession, writeSession } from '@schnick371/devsteps-shared';
+import {
+  getItem,
+  type HeuristicContext,
+  heuristicClassify,
+  validateSession,
+  writeSession,
+} from '@schnick371/devsteps-shared';
 import { getWorkspacePath } from '../workspace.js';
 
 export default async function devstepsDocsClassifyHandler(args: Record<string, unknown>) {
@@ -34,8 +40,28 @@ export default async function devstepsDocsClassifyHandler(args: Record<string, u
     };
   }
 
+  // Build Scrum context from args (optional — caller may omit)
+  let context: HeuristicContext | undefined;
+  const ctxArg = args.context as Record<string, unknown> | undefined;
+  if (ctxArg) {
+    context = {
+      epic_title: ctxArg.epic_title as string | undefined,
+      story_title: ctxArg.story_title as string | undefined,
+      epic_tags: ctxArg.epic_tags as string[] | undefined,
+    };
+  } else if (args.related_item_id) {
+    // Convenience: if related_item_id is passed, lazily fetch its title and Epic chain
+    try {
+      const relatedId = args.related_item_id as string;
+      const { metadata } = await getItem(devstepsDir, relatedId);
+      context = { story_title: metadata.title, epic_tags: metadata.tags };
+    } catch {
+      // Not fatal — proceed without context
+    }
+  }
+
   // Classify
-  const result = heuristicClassify(excerpt, filePath);
+  const result = heuristicClassify(excerpt, filePath, context);
   const { scores, winner, confidence, mixed, secondType } = result;
 
   // Build signals list

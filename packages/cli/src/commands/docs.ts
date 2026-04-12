@@ -143,6 +143,7 @@ export async function docsImportCommand(
       return {
         absolutePath: f,
         relativePath: relative(resolvedPath, f),
+        // context omitted at CLI call site — Scrum context not available without item ID
         classification: heuristicClassify(excerpt, f),
       };
     });
