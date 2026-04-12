@@ -66,8 +66,11 @@ export {
   DIATAXIS_TYPES,
   type DiataxisType,
   heuristicClassify,
+  type HeuristicContext,
   MIXED_THRESHOLD,
   type ScoreVector,
+  SUBHEADING_RATIO_THRESHOLD,
+  TABLE_RATIO_THRESHOLD,
 } from './heuristic-classify.js';
 export {
   type ClassifiedEntry,
@@ -93,7 +96,7 @@ export {
 // Refs-style index operations
 export * from './index-refs.js';
 export { type LinkItemArgs, type LinkItemResult, linkItem } from './link.js';
-export { type ListItemsArgs, type ListItemsResult, listItems } from './list.js';
+export { type ListItemEntry, type ListItemsArgs, type ListItemsResult, listItems } from './list.js';
 export { validateWorkspacePath } from './path-guard.js';
 export {
   type UnlinkItemArgs,

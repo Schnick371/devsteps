@@ -125,7 +125,7 @@
           {
             "id": "devsteps.gettingStarted.dashboard",
             "title": "View Your Project Dashboard",
-            "description": "Open the interactive dashboard for statistics, an Eisenhower matrix, sprint burndown, and traceability graph.\n\n[Show Dashboard](command:devsteps.showDashboard)",
+            "description": "Open the interactive dashboard for statistics, an Eisenhower matrix, project burndown, and traceability graph.\n\n[Show Dashboard](command:devsteps.showDashboard)",
             "media": {
               "altText": "DevSteps interactive dashboard",
               "image": "resources/icons/devsteps-icon.svg"

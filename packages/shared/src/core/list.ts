@@ -33,11 +33,16 @@ export interface ListItemsArgs {
   tags?: string[];
   limit?: number;
   archived?: boolean;
+  includeLinkedItems?: boolean;
 }
+
+export type ListItemEntry = DevStepsIndex['items'][number] & {
+  linked_items?: Record<string, string[]>;
+};
 
 export interface ListItemsResult {
   count: number;
-  items: DevStepsIndex['items'];
+  items: ListItemEntry[];
 }
 
 /**
@@ -190,6 +195,9 @@ export async function listItems(
         tags: metadata.tags,
         eisenhower: metadata.eisenhower,
         updated: metadata.updated,
+        ...(args.includeLinkedItems && metadata.linked_items
+          ? { linked_items: metadata.linked_items as Record<string, string[]> }
+          : {}),
       };
     } catch {
       return null;
@@ -240,6 +248,7 @@ export async function listItems(
       status: i.status,
       eisenhower: i.eisenhower,
       updated: i.updated,
+      ...(i.linked_items ? { linked_items: i.linked_items as Record<string, string[]> } : {}),
     })),
   };
 }

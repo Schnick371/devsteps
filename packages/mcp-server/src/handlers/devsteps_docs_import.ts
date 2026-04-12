@@ -12,8 +12,10 @@ import { readFile, stat } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import {
   createSession,
+  extractFrontmatter,
   findActiveSession,
   generateSessionToken,
+  getItem,
   type ImportSessionFile,
 } from '@schnick371/devsteps-shared';
 import { getWorkspacePath } from '../workspace.js';
@@ -127,11 +129,40 @@ export default async function devstepsDocsImportHandler(args: Record<string, unk
 
   const { session, token } = await createSession(devstepsDir, scanPath, files);
 
+  // Validate related_items from frontmatter — warn on unresolved IDs (STORY-292)
+  const warnings: string[] = [];
+  for (const file of files) {
+    const fullFilePath = resolve(workspaceRoot, file.path);
+    let content: string;
+    try {
+      content = await readFile(fullFilePath, 'utf-8');
+    } catch {
+      continue;
+    }
+    let relatedItems: string[] = [];
+    try {
+      const { frontmatter } = extractFrontmatter(content);
+      relatedItems = frontmatter?.related_items ?? [];
+    } catch {
+      continue;
+    }
+    for (const itemId of relatedItems) {
+      try {
+        await getItem(devstepsDir, itemId);
+      } catch {
+        warnings.push(
+          `${file.path}: related_items entry '${itemId}' not found — link will be skipped at commit`
+        );
+      }
+    }
+  }
+
   return {
     success: true,
     session_id: session.session_id,
     token,
     files,
+    warnings: warnings.length > 0 ? warnings : undefined,
     summary: {
       total_files: files.length,
       total_size_bytes: files.reduce((sum, f) => sum + f.size_bytes, 0),
