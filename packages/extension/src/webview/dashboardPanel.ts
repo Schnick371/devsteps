@@ -98,7 +98,8 @@ export class DashboardPanel {
         eisenhowerData,
         burndownData,
         traceabilityData,
-        timelineData
+        timelineData,
+        allItems
       );
     } catch (error) {
       vscode.window.showErrorMessage(
@@ -131,7 +132,8 @@ export class DashboardPanel {
     eisenhower: EisenhowerData,
     burndown: BurndownData,
     traceability: TraceabilityData,
-    timeline: ListItemEntry[]
+    timeline: ListItemEntry[],
+    allItems: ListItemEntry[]
   ): string {
     const styleUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, 'media', 'dashboard.css')
@@ -171,11 +173,23 @@ export class DashboardPanel {
           </section>
         </div>
 
-        <!-- Tab: Work Items (placeholder — STORY-264) -->
+        <!-- Tab: Work Items -->
         <div class="view-panel" data-view="work-items" role="tabpanel">
           <section class="work-items-section">
             <h2>Work Items</h2>
-            <p class="placeholder-text">Work Items view coming soon (STORY-264).</p>
+            <div class="wi-filter-bar">
+              <select id="wi-filter-type" aria-label="Filter by type">
+                <option value="">All Types</option>
+              </select>
+              <select id="wi-filter-status" aria-label="Filter by status">
+                <option value="">All Status</option>
+              </select>
+              <select id="wi-filter-eisenhower" aria-label="Filter by priority">
+                <option value="">All Priority</option>
+              </select>
+              <span id="wi-count" class="wi-count"></span>
+            </div>
+            <div id="wi-table-container"></div>
           </section>
         </div>
 
@@ -241,6 +255,71 @@ export class DashboardPanel {
 
         ${getBurndownChartScript(burndown)}
         ${getTraceabilityGraphScript(traceability)}
+
+        // Work Items tab — client-side filter + list (STORY-264)
+        (function() {
+          const allItems = ${JSON.stringify(
+            allItems.map((i) => ({
+              id: i.id,
+              type: i.type,
+              title: i.title,
+              status: i.status,
+              eisenhower: i.eisenhower,
+            }))
+          )};
+
+          const filterType = document.getElementById('wi-filter-type');
+          const filterStatus = document.getElementById('wi-filter-status');
+          const filterEisenhower = document.getElementById('wi-filter-eisenhower');
+          const countEl = document.getElementById('wi-count');
+          const container = document.getElementById('wi-table-container');
+
+          // Populate filter options from data
+          const types = [...new Set(allItems.map(i => i.type))].sort();
+          const statuses = [...new Set(allItems.map(i => i.status))].sort();
+          const priorities = [...new Set(allItems.map(i => i.eisenhower))].sort();
+          types.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; filterType.appendChild(o); });
+          statuses.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; filterStatus.appendChild(o); });
+          priorities.forEach(p => { const o = document.createElement('option'); o.value = p; o.textContent = p; filterEisenhower.appendChild(o); });
+
+          function render() {
+            const t = filterType.value;
+            const s = filterStatus.value;
+            const e = filterEisenhower.value;
+            const filtered = allItems.filter(i =>
+              (!t || i.type === t) && (!s || i.status === s) && (!e || i.eisenhower === e)
+            );
+            countEl.textContent = filtered.length + ' of ' + allItems.length + ' items';
+            if (filtered.length === 0) {
+              container.innerHTML = '<p class="placeholder-text">No items match the selected filters.</p>';
+              return;
+            }
+            const rows = filtered.map(i =>
+              '<tr class="wi-row" data-item-id="' + i.id + '">' +
+              '<td class="wi-id">' + i.id + '</td>' +
+              '<td class="wi-title">' + i.title + '</td>' +
+              '<td><span class="wi-badge wi-type-' + i.type + '">' + i.type + '</span></td>' +
+              '<td><span class="wi-badge wi-status-' + i.status + '">' + i.status + '</span></td>' +
+              '<td class="wi-eisenhower">' + i.eisenhower + '</td>' +
+              '</tr>'
+            ).join('');
+            container.innerHTML =
+              '<table class="wi-table"><thead><tr>' +
+              '<th>ID</th><th>Title</th><th>Type</th><th>Status</th><th>Priority</th>' +
+              '</tr></thead><tbody>' + rows + '</tbody></table>';
+            // Attach click handlers
+            container.querySelectorAll('.wi-row').forEach(row => {
+              row.addEventListener('click', () => {
+                vscode.postMessage({ command: 'openItem', itemId: row.dataset.itemId });
+              });
+            });
+          }
+
+          filterType.addEventListener('change', render);
+          filterStatus.addEventListener('change', render);
+          filterEisenhower.addEventListener('change', render);
+          render();
+        })();
 
         // Click handlers
         document.querySelectorAll('[data-item-id]').forEach(el => {

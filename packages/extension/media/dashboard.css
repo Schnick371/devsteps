@@ -449,6 +449,105 @@ body[data-active-view="timeline"] .view-panel[data-view="timeline"] {
   text-align: center;
 }
 
+/* ===== Work Items Tab ===== */
+.wi-filter-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.wi-filter-bar select {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size, 13px);
+}
+
+.wi-count {
+  margin-left: auto;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.wi-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--vscode-font-size, 13px);
+}
+
+.wi-table th {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--card-border);
+  color: var(--text-secondary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.wi-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--vscode-widget-border, rgba(128,128,128,0.2));
+}
+
+.wi-row {
+  cursor: pointer;
+}
+
+.wi-row:hover {
+  background: var(--vscode-list-hoverBackground, rgba(128,128,128,0.1));
+}
+
+.wi-id {
+  font-family: var(--vscode-editor-font-family, monospace);
+  white-space: nowrap;
+  color: var(--accent-blue);
+}
+
+.wi-title {
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wi-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.wi-type-epic { background: var(--vscode-charts-purple, #a855f7); color: #fff; }
+.wi-type-story { background: var(--vscode-charts-blue, #3b82f6); color: #fff; }
+.wi-type-task { background: var(--vscode-charts-green, #22c55e); color: #fff; }
+.wi-type-bug { background: var(--vscode-charts-red, #ef4444); color: #fff; }
+.wi-type-spike { background: var(--vscode-charts-yellow, #eab308); color: #000; }
+.wi-type-doc { background: var(--vscode-charts-orange, #f97316); color: #fff; }
+.wi-type-test { background: var(--vscode-charts-green, #22c55e); color: #fff; }
+.wi-type-feature { background: var(--vscode-charts-blue, #3b82f6); color: #fff; }
+.wi-type-requirement { background: var(--vscode-charts-purple, #a855f7); color: #fff; }
+
+.wi-status-done { background: var(--vscode-charts-green, #22c55e); color: #fff; }
+.wi-status-in-progress { background: var(--vscode-charts-blue, #3b82f6); color: #fff; }
+.wi-status-blocked { background: var(--vscode-charts-red, #ef4444); color: #fff; }
+.wi-status-draft { background: var(--vscode-badge-background, #6b7280); color: var(--vscode-badge-foreground, #fff); }
+.wi-status-planned { background: var(--vscode-charts-yellow, #eab308); color: #000; }
+.wi-status-review { background: var(--vscode-charts-orange, #f97316); color: #fff; }
+.wi-status-obsolete { background: var(--vscode-badge-background, #6b7280); color: var(--vscode-badge-foreground, #fff); opacity: 0.6; }
+.wi-status-cancelled { background: var(--vscode-badge-background, #6b7280); color: var(--vscode-badge-foreground, #fff); opacity: 0.6; }
+
+.wi-eisenhower {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
 /* Scrollbar Styling */
 .quadrant::-webkit-scrollbar,
 .timeline::-webkit-scrollbar {
