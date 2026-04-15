@@ -45,7 +45,7 @@ Docs ───┼─ ─ ─ ─ ─ ─ ─ ─┼─── Tests
 | 1    | **Analysis**         | `analyst-*`                            | parallel fan-out     | MandateResults (~800 tok)     |
 | 2    | **Cross-Validation** | `aspect-*`                             | parallel fan-out     | CompressedVerdicts (~150 tok) |
 | 3    | **Planning**         | `exec-planner`                         | sequential           | ordered implementation plan   |
-| 4    | **Execution**        | `exec-impl`, `exec-test`, `exec-doc` (self-sufficient leaf nodes); `worker-*` dispatched by coord directly for specific work types | sequential           | code / tests / docs committed |
+| 4    | **Execution**        | **Conductors** (`dispatch_role: conductor`): `exec-impl`, `exec-test`, `exec-doc` — each dispatches its designated worker pool; **Workers** (`dispatch_role: leaf`): `worker-*` dispatched by conductors (primary) or coord directly | sequential           | code / tests / docs committed |
 | 5    | **Quality Gate**     | `gate-reviewer`                        | sequential, blocking | PASS / FAIL / ESCALATE        |
 
 Rings are **mandatory steps** — you cannot skip Ring 1 to go to Ring 4 except at QUICK triage.
@@ -68,7 +68,7 @@ Like a radar chart, each spoke (domain) can be **weighted differently per task**
 
 > **Read mechanism:** `analyst-archaeology`, `analyst-risk`, `analyst-quality`, `analyst-research` → `write_mandate_result` → read via `read_mandate_results`. `analyst-context`, `analyst-internal`, `analyst-web` → `write_analysis_report` → read via `read_analysis_envelope(report_path)`. Coord MUST call both mechanisms after Ring 1 completes.
 
-> All Ring 4 agents are **Leaf Nodes** dispatched by coord directly. `exec-impl/test/doc` are self-sufficient — they read planner MandateResults, write code/tests/docs, and commit. Workers (`worker-coder`, `worker-tester`, etc.) are dispatched by coord for specific work types (QUICK triage, refactor stories, work-item updates).
+> **Ring 4 dispatch authority:** `exec-impl`, `exec-test`, `exec-doc` are **Conductors** (`dispatch_role: conductor`) — they dispatch their designated workers via `#runSubagent`. All `worker-*` agents are **Leaf Nodes** (`dispatch_role: leaf`) — they NEVER dispatch further. Workers (`worker-coder`, `worker-tester`, etc.) are dispatched by conductors (primary path) or by coord directly for specific work types (QUICK triage, refactor, work-item updates).
 
 > **⚠️ Errors spoke:** The **Errors** domain (`get_errors` / `#problems` panel) currently maps to `worker-build-diagnostics`. A dedicated `analyst-errors` agent is planned — it runs `get_errors` first, scans the Problems panel, and produces a MandateResult scoped to the error set before any implementation work begins. It can be activated directly from the `devsteps-30-rapid-cycle` prompt via `#get_errors`.
 
@@ -83,10 +83,10 @@ Archaeology:  Code █████████  Risk ██████  Researc
 
 coord reads the incoming task and tilts the radar chart — dispatching more agents on the heavy spokes, fewer on the light ones.
 
-**Flat 2-Tier Architecture:** coord (Ring 0) dispatches ALL agents directly — there is no nested dispatch.  
-→ All non-coord agents are **Leaf Nodes** — they NEVER call `#runSubagent`.  
-→ All agents appear in `agents:` list of coord only — no cross-agent `agents:` references.  
-→ Non-coord agents do NOT have `'agent'` in their tools list — structural enforcement of leaf-node behavior.
+**Dispatch Model (depth-2):** coord (Ring 0) dispatches all Ring 1–4 agents. Ring 4 Conductors (`exec-impl/test/doc`) dispatch their designated workers — maximum nesting depth is 2.  
+→ `worker-*` agents are **Leaf Nodes** — they NEVER call `#runSubagent`.  
+→ Conductors appear in `agents:` list of coord; workers appear only in the conductor's `agents:` list.  
+→ Workers do NOT have `'agent'` in tools — structural enforcement of leaf-node behavior.
 
 ### Context Propagation Model (CIS — Context-Isolated Subagents)
 
