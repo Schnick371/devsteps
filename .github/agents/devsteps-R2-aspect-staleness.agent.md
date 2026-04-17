@@ -1,6 +1,6 @@
 ---
 description: "Staleness Analyst - validates that the work item description still matches codebase reality, detecting drift since the item was written"
-model: "Claude Sonnet 4.6"
+model: "GPT-5 mini"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false

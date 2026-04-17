@@ -1,6 +1,6 @@
 ---
 description: "Build/test diagnostics — build helper (RESOLVE phase), categorizes build failures and recommends targeted fix or escalation. Dispatched by exec-impl and exec-test in RESOLVE phase only."
-model: "Claude Sonnet 4.6"
+model: "Raptor mini (Preview)"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false

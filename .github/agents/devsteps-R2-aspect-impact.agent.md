@@ -1,6 +1,6 @@
 ---
 description: "Impact Analyst - discovers what breaks, ripples, or silently changes beyond the stated scope of a task"
-model: "Claude Sonnet 4.6"
+model: "GPT-5 mini"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 

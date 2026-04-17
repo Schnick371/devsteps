@@ -2,7 +2,7 @@
 description: Exec Implementation Conductor — orchestrates workers to write, verify, and commit implementation code. Dispatched by coord after exec-planner MandateResult. NEVER called directly by user.
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
-model: "Claude Sonnet 4.6"
+model: "GPT-5 mini"
 agents:
   - devsteps-R4-worker-impl
   - devsteps-R1-analyst-web

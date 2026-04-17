@@ -2,7 +2,7 @@
 description: Exec Documentation Conductor — orchestrates workers to write, update, and verify documentation for implemented changes. Dispatched by coord on FULL triage tier after exec-impl (and optionally exec-test) MandateResults. NEVER called directly by user.
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
-model: "Claude Sonnet 4.6"
+model: "GPT-5 mini"
 agents:
   - devsteps-R4-worker-doc
   - devsteps-R2-aspect-staleness
