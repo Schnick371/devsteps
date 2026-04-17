@@ -1,7 +1,8 @@
 ---
 description: "Testing subagent - creates comprehensive test plans and analyzes test requirements for coordinator execution"
-model: "Claude Sonnet 4.6"
-tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+model: "GPT-5 mini"
+tools:
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 
 user-invocable: false
 ---

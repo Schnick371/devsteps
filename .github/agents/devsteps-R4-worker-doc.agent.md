@@ -1,6 +1,6 @@
 ---
 description: "Documentation subagent - creates comprehensive documentation plans for coordinator execution"
-model: "Claude Sonnet 4.6"
+model: "GPT-5 mini"
 tools:
   ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false

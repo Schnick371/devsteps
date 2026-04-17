@@ -1,8 +1,8 @@
 ---
-description: Exec Documentation Conductor — writes, updates, and verifies docs for implemented changes. Dispatches worker-documenter/worker-guide-writer. NEVER called directly by user.
-tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
-model: "Claude Sonnet 4.6"
-dispatch_role: conductor
+description: Exec Documentation Conductor — orchestrates workers to write, update, and verify documentation for implemented changes. Dispatched by coord on FULL triage tier after exec-impl (and optionally exec-test) MandateResults. NEVER called directly by user.
+tools:
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+model: "GPT-5 mini"
 agents:
   - devsteps-R4-worker-documenter
   - devsteps-R4-worker-guide-writer

@@ -1,8 +1,8 @@
 ---
-description: Exec Implementation Conductor — writes, verifies, and commits implementation code. Dispatches worker-coder/workspace/build-diagnostics/refactor. NEVER called directly by user.
-model: "Claude Sonnet 4.6"
-tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
-dispatch_role: conductor
+description: Exec Implementation Conductor — orchestrates workers to write, verify, and commit implementation code. Dispatched by coord after exec-planner MandateResult. NEVER called directly by user.
+tools:
+  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+model: "GPT-5 mini"
 agents:
   - devsteps-R4-worker-coder
   - devsteps-R4-worker-workspace
