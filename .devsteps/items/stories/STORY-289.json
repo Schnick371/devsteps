@@ -1,0 +1,39 @@
+{
+  "id": "STORY-289",
+  "type": "story",
+  "category": "general",
+  "title": "Change propagation: dirty-bit for transcluding items when Reference atom changes",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-04-11T00:49:52.239Z",
+  "updated": "2026-04-11T01:09:13.548Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-046"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "knowledge-os",
+    "change-propagation",
+    "staleness",
+    "dirty-bit"
+  ],
+  "commits": [],
+  "metadata": {}
+}

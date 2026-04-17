@@ -1,0 +1,39 @@
+{
+  "id": "SPIKE-065",
+  "type": "spike",
+  "category": "general",
+  "title": "Research: Post-hoc investigation prompt landscape, Q&A cycles, sub-agent topology, and source-ref metadata",
+  "status": "in-progress",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-12T13:21:49.223Z",
+  "updated": "2026-04-12T13:21:54.903Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "research",
+    "prompts",
+    "agents",
+    "ishikawa",
+    "Q&A",
+    "sub-agent-topology"
+  ],
+  "commits": [],
+  "metadata": {}
+}

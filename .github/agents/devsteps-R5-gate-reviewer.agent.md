@@ -106,4 +106,4 @@ confidence: 0.0–1.0
 
 ---
 
-_References: [devsteps-25-review.prompt.md](../prompts/devsteps-25-review.prompt.md) · [devsteps-code-standards.instructions.md](../instructions/devsteps-code-standards.instructions.md)_
+_References: [devsteps-60-review.prompt.md](../prompts/devsteps-60-review.prompt.md) · [devsteps-code-standards.instructions.md](../instructions/devsteps-code-standards.instructions.md)_

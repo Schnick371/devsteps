@@ -1,0 +1,40 @@
+{
+  "id": "TASK-549",
+  "type": "task",
+  "category": "general",
+  "title": "Heading-depth structural heuristics in heuristicClassify()",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-11T01:09:13.553Z",
+  "updated": "2026-04-12T13:24:29.466Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-286"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "heuristic",
+    "classification",
+    "diataxis",
+    "ccms",
+    "doc-system"
+  ],
+  "commits": [],
+  "metadata": {}
+}

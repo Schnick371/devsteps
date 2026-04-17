@@ -41,7 +41,7 @@ user-invocable: true
 
 - **Role**: `coord` — Workspace Health Coordinator
 - **Mandate type**: `ishikawa`
-- **Accepted from**: User (via `devsteps-80-ishikawa` prompt)
+- **Accepted from**: User (via `devsteps-95-ishikawa` prompt)
 - **Round 1** (parallel): `analyst-archaeology` (Code + Structure), `analyst-quality` (Tests), `analyst-risk` (Environment)
 - **Round 2** (parallel): `aspect-staleness` (Docs), `aspect-constraints`, `aspect-impact`, `aspect-integration`, `aspect-quality`, `analyst-context` (Process)
 - **Reads**: Round 1 via `#devsteps` `read_mandate_results`; Round 2 via `read_analysis_envelope`

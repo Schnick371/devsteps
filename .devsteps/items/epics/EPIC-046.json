@@ -1,0 +1,44 @@
+{
+  "id": "EPIC-046",
+  "type": "epic",
+  "category": "general",
+  "title": "Knowledge Operating System (Knowledge-OS)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-11T00:47:45.776Z",
+  "updated": "2026-04-11T01:23:24.804Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-287"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-045",
+      "DOC-060",
+      "DOC-061"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "knowledge-os",
+    "ccms",
+    "aci",
+    "diataxis",
+    "mcp-tools"
+  ],
+  "commits": [],
+  "metadata": {}
+}

@@ -1,0 +1,39 @@
+{
+  "id": "TASK-550",
+  "type": "task",
+  "category": "general",
+  "title": "TreeView: hideDocChildren filter toggle to prevent DOC-item flooding under STORY nodes",
+  "status": "draft",
+  "eisenhower": "not-urgent-not-important",
+  "created": "2026-04-11T01:22:12.817Z",
+  "updated": "2026-04-11T01:23:24.803Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "STORY-292"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "extension",
+    "treeview",
+    "ux",
+    "work-first"
+  ],
+  "commits": [],
+  "metadata": {}
+}

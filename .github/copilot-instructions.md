@@ -91,29 +91,27 @@ DevSteps is the primary work-tracking system. NEVER edit `.devsteps/` directly �
 
 | Situation                     | Prompt                        | Agent               |
 | ----------------------------- | ----------------------------- | ------------------- |
-| Plan work                     | `devsteps-10-plan-work`       | coord               |
-| Implement single item         | `devsteps-20-start-work`      | coord               |
-| Conduct review                | `devsteps-25-review`          | gate-reviewer       |
-| Iterative Kanban cycle        | `devsteps-30-rapid-cycle`     | coord               |
-| Guide-driven Full Spider Web  | `devsteps-35-guide-cycle`     | coord               |
-| Multi-item sprint             | `devsteps-40-sprint`          | coord-sprint        |
-| Deep research & best practices | `devsteps-05-research`       | coord               |
-| Git forensics                 | `devsteps-55-investigate`     | analyst-archaeology |
-| Git cleanup                   | `devsteps-50-git-cleanup`     | coord               |
-| Structural refactoring        | `devsteps-48-refactor`        | coord               |
-| Naming convention enforcement | `devsteps-49-rename`          | coord               |
-| Backlog hygiene               | `devsteps-95-item-cleanup`    | coord               |
-| Classify backlog items        | `devsteps-45-classify-items`  | coord               |
-| Assign meta-hierarchy (initiative/theme) | `devsteps-15-meta-hierarchy` | coord          |
-| Document context              | `devsteps-56-context-sync`    | coord               |
-| Review doc coverage / find gaps | `devsteps-57-doc-review`    | coord               |
-| Import workspace docs → doc items | `devsteps-58-doc-import`  | coord               |
-| Assemble full document from BOM | `devsteps-59-doc-assemble`  | coord               |
-| Pre-release                   | `devsteps-60-release-next`    | coord               |
-| Production release            | `devsteps-70-release`         | coord               |
-| Workspace Health / Root Cause | `devsteps-80-ishikawa`        | coord-ishikawa      |
-| Load context                  | `devsteps-01-project-context` | coord               |
-| Adapt project Copilot files   | `devsteps-98-adapt-project-copilot-files` | coord          |
+| Craft prompt for new Copilot  | `devsteps-00-create-direct-prompt` | coord          |
+| Load context                  | `devsteps-10-project-context` | coord               |
+| Deep research & best practices | `devsteps-20-research`       | coord               |
+| Git forensics                 | `devsteps-25-investigate`     | analyst-archaeology |
+| Plan work                     | `devsteps-30-plan-work`       | coord               |
+| Assign meta-hierarchy (initiative/theme) | `devsteps-35-meta-hierarchy` | coord          |
+| Implement single item         | `devsteps-40-start-work`      | coord               |
+| Multi-item sprint             | `devsteps-45-sprint`          | coord-sprint        |
+| Iterative Kanban cycle        | `devsteps-50-rapid-cycle`     | coord               |
+| Guide-driven Full Spider Web  | `devsteps-55-guide-cycle`     | coord               |
+| Conduct review                | `devsteps-60-review`          | gate-reviewer       |
+| Structural refactoring        | `devsteps-65-refactor`        | coord               |
+| Naming convention enforcement | `devsteps-68-rename`          | coord               |
+| Documentation (review/import/assemble/sync) | `devsteps-70-docs` | coord          |
+| Git cleanup                   | `devsteps-80-git-cleanup`     | coord               |
+| Classify backlog items        | `devsteps-85-classify-items`  | coord               |
+| Backlog hygiene               | `devsteps-90-item-cleanup`    | coord               |
+| Workspace Health / Root Cause | `devsteps-95-ishikawa`        | coord-ishikawa      |
+| Adapt project Copilot files   | `devsteps-adapt-project-copilot-files` | coord          |
+| Pre-release                   | `project_release-next`        | coord               |
+| Production release            | `project_release`             | coord               |
 | Solo (no runSubagent)         | direct                                    | coord-solo     |
 | Create agent file             | `/create-agent` (VS Code built-in)        | —              |
 | Create instruction file       | `/create-instruction` (VS Code built-in)  | —              |

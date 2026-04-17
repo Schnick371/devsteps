@@ -45,4 +45,4 @@ devsteps trace <ID>                  # Show relationships
 
 ---
 
-**Workflow details:** See [REGISTRY.md](../agents/REGISTRY.md), [devsteps-10-plan-work.prompt.md](../prompts/devsteps-10-plan-work.prompt.md), [devsteps-20-start-work.prompt.md](../prompts/devsteps-20-start-work.prompt.md)
+**Workflow details:** See [REGISTRY.md](../agents/REGISTRY.md), [devsteps-30-plan-work.prompt.md](../prompts/devsteps-30-plan-work.prompt.md), [devsteps-40-start-work.prompt.md](../prompts/devsteps-40-start-work.prompt.md)

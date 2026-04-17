@@ -28,7 +28,7 @@ Activate **Standard MPD** in kanban mode. Follow the MPD protocol from your agen
 | Situation                                     | Mode                          | Ring 1 — analysts                                                               | Ring 2 — aspects (after Ring 1)                                                |
 | --------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | Task is clearly defined, no strategy question | **STANDARD MPD**              | `analyst-context` + `analyst-internal` + `analyst-risk`                         | `aspect-constraints` + `aspect-impact`                                         |
-| FULL tier (schema/cross-pkg change)           | **FULL MPD**                  | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` |
+| FULL tier (schema/cross-pkg change)           | **FULL MPD**                  | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` + `aspect-naming` |
 | Task asks "which approach/pattern/library"    | **Competitive Mode**          | `analyst-research` + `analyst-internal` + `analyst-web` + `analyst-context`     | `aspect-constraints` + `aspect-staleness`                                      |
 | New tooling/library AND install-overhead risk | **Competitive + constraints** | `analyst-research` + `analyst-internal` + `analyst-web` + `analyst-context`     | `aspect-constraints` + `aspect-staleness` + `aspect-integration`               |
 | Single-file formatting / typo ONLY            | **QUICK — skip R1+R2**        | (skip)                                                                          | (skip)                                                                         |
@@ -39,7 +39,7 @@ Activate **Standard MPD** in kanban mode. Follow the MPD protocol from your agen
 
 **Aspect agents** (dispatched directly by coord alongside exec):
 
-- `aspect-impact` · `aspect-constraints` · `aspect-quality` · `aspect-staleness` · `aspect-integration`
+- `aspect-impact` · `aspect-constraints` · `aspect-quality` · `aspect-staleness` · `aspect-integration` · `aspect-naming`
 
 **Domain analysts** (dispatched by coord for targeted research):
 

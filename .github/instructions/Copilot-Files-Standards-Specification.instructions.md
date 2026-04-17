@@ -134,7 +134,8 @@ Violation of this boundary breaks the Spider Web autonomy model and leaks intern
 **DevSteps Standard:** All files use `devsteps-` prefix (lowercase-with-hyphens)
 
 - **Instructions**: `devsteps-<subject>-<topic>.instructions.md`
-- **Prompts**: `devsteps-<number>-<action>.prompt.md`
+- **Prompts (user-facing)**: `devsteps-<number>-<action>.prompt.md` — numbered, appear in normal prompt selection
+- **Prompts (internal/ops)**: `devsteps-<action>.prompt.md` — no number, signals DevSteps-internal use only (e.g. release workflows)
 - **Agents**: `devsteps-<role>.agent.md` (persona, not action verb)
 
 ## ApplyTo Patterns

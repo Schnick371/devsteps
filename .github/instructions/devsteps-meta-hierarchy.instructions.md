@@ -45,7 +45,7 @@ An item carries at most ONE `initiative` value but MAY carry any number of `clus
 ## Governed Vocabulary: `.devsteps/groups.json`
 
 The file `.devsteps/groups.json` is the **single source of truth** for permitted `initiative`
-values. It is maintained by humans via the `devsteps-15-meta-hierarchy` prompt workflow and
+values. It is maintained by humans via the `devsteps-35-meta-hierarchy` prompt workflow and
 read by the `worker-meta-hierarchy` agent before every assignment operation.
 
 Each entry in `groups.json` contains: a machine-readable slug (kebab-case), a human-readable
@@ -67,7 +67,7 @@ optional owner and color fields. Only `active` entries may be assigned to items.
 
 ## Assignment Invariants
 
-1. **Prompt-only assignment:** Initiative values MUST be assigned via the `devsteps-15-meta-hierarchy`
+1. **Prompt-only assignment:** Initiative values MUST be assigned via the `devsteps-35-meta-hierarchy`
    prompt. The `devsteps add` command and `mcp_devsteps_add` tool NEVER set `initiative` automatically.
 
 2. **Vocab-first enforcement:** An `initiative` slug MUST exist in `groups.json` before it is
@@ -85,7 +85,7 @@ The TreeView "Group by Initiative" view is meaningful only when sufficient cover
 - **≥50% of Epics assigned** — view renders normally; no warning shown
 - **30–49% of Epics assigned** — yellow warning badge on the Initiatives root node
 - **<30% of Epics assigned** — red warning decoration with tooltip recommending
-  `devsteps-15-meta-hierarchy` to increase coverage
+  `devsteps-35-meta-hierarchy` to increase coverage
 
 ---
 

@@ -12,7 +12,7 @@ user-invocable: false
 | Property | Value |
 |---|---|
 | Tier | Ring 4 — Worker |
-| Dispatcher | `coord` via `devsteps-15-meta-hierarchy` prompt |
+| Dispatcher | `coord` via `devsteps-35-meta-hierarchy` prompt |
 | Returns | MandateResult written to `.devsteps/cbp/<sprint_id>/worker-meta-hierarchy.result.json` |
 | May call runSubagent | **false** |
 | May create/delete items | **false** |

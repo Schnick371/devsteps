@@ -70,7 +70,7 @@ Like a radar chart, each spoke (domain) can be **weighted differently per task**
 
 > **Ring 4 dispatch authority:** `exec-impl`, `exec-test`, `exec-doc` are **Conductors** (`dispatch_role: conductor`) — they dispatch their designated workers via `#runSubagent`. All `worker-*` agents are **Leaf Nodes** (`dispatch_role: leaf`) — they NEVER dispatch further. Workers (`worker-coder`, `worker-tester`, etc.) are dispatched by conductors (primary path) or by coord directly for specific work types (QUICK triage, refactor, work-item updates).
 
-> **⚠️ Errors spoke:** The **Errors** domain (`get_errors` / `#problems` panel) currently maps to `worker-build-diagnostics`. A dedicated `analyst-errors` agent is planned — it runs `get_errors` first, scans the Problems panel, and produces a MandateResult scoped to the error set before any implementation work begins. It can be activated directly from the `devsteps-30-rapid-cycle` prompt via `#get_errors`.
+> **⚠️ Errors spoke:** The **Errors** domain (`get_errors` / `#problems` panel) currently maps to `worker-build-diagnostics`. A dedicated `analyst-errors` agent is planned — it runs `get_errors` first, scans the Problems panel, and produces a MandateResult scoped to the error set before any implementation work begins. It can be activated directly from the `devsteps-50-rapid-cycle` prompt via `#get_errors`.
 
 ### Task Profile Examples — Radar Chart Emphasis
 

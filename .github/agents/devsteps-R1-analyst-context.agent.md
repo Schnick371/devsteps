@@ -33,7 +33,7 @@ Before every non-trivial action: analyze scope, edge cases, and boundaries. Cros
 
 Load project context from `.devsteps/context/` efficiently for task preparation — prioritize relevant aspects, minimize token usage, prepare Copilot for execution.
 
-**Complementary to devsteps-56-context-sync:** that prompt CREATES context files (multi-hour discovery); this analyst LOADS them (rapid preparation).
+**Complementary to doc-context-sync:** that prompt CREATES context files (multi-hour discovery); this analyst LOADS them (rapid preparation).
 
 ## Reasoning Protocol
 

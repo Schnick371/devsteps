@@ -20,6 +20,7 @@ tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit',
 | **Ring reduction** | **FORBIDDEN** — all 5 rings mandatory, no tier downgrade, no skips |
 | **Status gates** | Never mark step ✅ without `gate-reviewer` PASS |
 | **Research** | `#bright-data` for all FULL tiers — web-first mandatory |
+| **Cycle continuity** | `#vscode_askQuestions` at every step boundary — **NEVER auto-advance**; loop terminates ONLY when the final guide step is ✅ |
 
 > **Reasoning:** Apply extended reasoning before every action. Guide steps are sequentially dependent — a wrong decision at step N compounds at step N+k. Re-spawn analysts whenever a step reveals unexpected complexity.
 
@@ -80,8 +81,8 @@ For each guide step, execute in order:
 
 1. **Present** — describe the step to the user: action, inputs, expected outcome
 2. **User acts** — wait; do not auto-advance
-3. **Collect result** via `#askQuestions`:
-   > Step [N] — [title]. Outcome: [passed / failed / partial]? Any surprising behavior?
+3. **Collect result** — **MANDATORY `#vscode_askQuestions`** (never auto-advance or skip):
+   > Step [N] — [title]. Outcome: **passed / failed / partial**? Any surprising behavior or error output?
 4. **Triage result:**
    - **Passed** → mark ✅; check for non-blocking issues (see below); advance
    - **Failed / unexpected** → re-dispatch analysts (full Ring 1+2); triage root cause
@@ -98,7 +99,7 @@ Classify every issue found immediately:
 
 | Issue type | Condition | Action |
 | ---------- | --------- | ------ |
-| **Blocking bug** | Prevents current step from passing | Fix now via full exec pipeline; re-run step |
+| **Blocking bug** | Prevents current step from passing | Generate handoff prompt (see Error Handoff Protocol); pause cycle |
 | **Non-blocking bug** | Step passes despite issue | Delegate `worker-devsteps` to create `bug` item; log and advance |
 | **Non-blocking improvement** | User wish, not a failure | Delegate `worker-devsteps` to create `story`/`task` item; log and advance |
 | **Design conflict** | Fix requires cross-module change | HARD STOP; surface to user via `#askQuestions`; re-dispatch Ring 1 |
@@ -108,24 +109,44 @@ Classify every issue found immediately:
 
 ---
 
-## Critical Decision Points — Mandatory Re-dispatch
+## Error Handoff Protocol — Blocking Issues
 
-Re-run FULL Ring 1 + Ring 2 (not just review) whenever:
+**Never fix blocking bugs inline** — inline repair fragments the context window. Generate a handoff prompt and suspend the guide cycle instead.
 
-1. A blocking fix requires changing more than 2 files
-2. A failed step reveals a guide prerequisite was false (step dependencies were wrong)
-3. The user flags a design concern ("wait, why does it work this way?")
-4. `analyst-risk` previously flagged a cross-cutting dependency that is now triggered
+### Auto-resolve ALL context (never ask user):
+- Workspace root (from current session environment)
+- Guide file path + step index + step title (from session state)
+- Expected vs. actual outcome (from `#vscode_askQuestions` answer already collected in step 3)
+- Affected file paths (from `analyst-context` / `analyst-internal` report_paths)
+- Root cause hypothesis from `analyst-risk` MandateResult (2–4 sentences)
+- Suspect code locations — run inline `grep_search` / `semantic_search` before generating
 
-Pass previous Ring 1 `report_path` values as `upstream_paths` to Ring 2. Do not reuse stale envelopes.
+### Handoff prompt — include in this order:
+1. **Role framing** — `"You are fixing a blocking bug in [module/system]. Context: [...]"`
+2. **Workspace context** — absolute workspace path, guide file path, step index + title
+3. **Problem statement** — expected outcome, actual outcome, full error output if available
+4. **Root cause hypothesis** — 2–4 sentences from analyst results; suspect files listed explicitly
+5. **Scope constraint** — `"Fix only what is needed for step [N] to pass. No broader refactoring."`
+6. **Acceptance criterion** — exact observable condition under which the guide step passes ✅
+7. **Both operation paths where applicable** — TUI menu path AND CLI command
+
+### Delivery via `#vscode_askQuestions`:
+> **Blocking issue at step [N] — [title]**
+> Run this prompt in a new Copilot chat. It is fully self-contained — no additional input needed.
+> ```
+> [generated handoff prompt]
+> ```
+> Come back here and answer: **Fix confirmed?** (yes / no / partial — describe what changed)
+
+After confirmation: re-dispatch `analyst-risk` (pass previous `report_path` as `upstream_paths`), then resume from the same step.
 
 ---
 
 ## Guide Completion
 
-When all steps reach ✅:
+When all steps reach ✅ (continuity loop ends here):
 
 1. Dispatch `exec-doc` for summary documentation
 2. List all DevSteps items created during the session via `mcp_devsteps_list`
 3. Present to user: items created, guide file path, commit log
-4. Use `#askQuestions` to confirm session close or continue with next guide section
+4. Use `#vscode_askQuestions` to confirm session close or continue with next guide section

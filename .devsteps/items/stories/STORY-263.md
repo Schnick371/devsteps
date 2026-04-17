@@ -27,3 +27,10 @@ Single WebviewPanel HTML init: all tab content is rendered into the DOM on first
 - packages/extension/media/dashboard.css — tab bar + view-toggle CSS
 
 Source: analysis-constraints C-1, S1 (VS Code UX Guidelines), S2 (dual esbuild guide), analyst-research §3.1.
+
+## Result
+- 5-tab architecture: Overview, Work Items, Progress, Traceability, Timeline
+- CSS-only view switching via `data-active-view` attribute (CSP-safe)
+- `vscode.getState()/setState()` for tab persistence across webview refreshes
+- ARIA `tablist/tab/tabpanel` roles for accessibility
+- Commit: d676347

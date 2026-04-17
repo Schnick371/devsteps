@@ -56,7 +56,7 @@ Docs ─┼─ ─ ─ ─ ─ ─ ─ ┼─ Tests
 | --------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
 | **QUICK**       | `exec-planner`                                             | _(skip)_                                                                       | `exec-impl` → `gate-reviewer`                                               |
 | **STANDARD**    | `analyst-context` + `analyst-internal` + `analyst-risk`                                                             | `aspect-constraints` + `aspect-impact`                                         | → `exec-planner` → `exec-impl` → `exec-test` → `gate-reviewer`              |
-| **FULL**        | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` | → `exec-planner` → `exec-impl` → `exec-test` ∥ `exec-doc` → `gate-reviewer` |
+| **FULL**        | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` + `aspect-naming` | → `exec-planner` → `exec-impl` → `exec-test` ∥ `exec-doc` → `gate-reviewer` ∥ `gate-naming` |
 | **COMPETITIVE** | `analyst-research` + `analyst-internal` + `analyst-web` + `analyst-context`                                        | `aspect-constraints` + `aspect-staleness`                                      | → `exec-planner` → `exec-impl` → `gate-reviewer`                            |
 
 ---
@@ -74,6 +74,8 @@ Docs ─┼─ ─ ─ ─ ─ ─ ─ ┼─ Tests
 | `implementation` | `devsteps-R4-exec-impl`           | reads planner MandateResult → code committed                                   |
 | `testing`        | `devsteps-R4-exec-test`           | reads impl MandateResult → tests pass                                          |
 | `documentation`  | `devsteps-R4-exec-doc`            | reads impl MandateResult → docs updated                                        |
+| `naming-advisory` | `devsteps-R2-aspect-naming`      | advisory pre-flight on *planned* paths → PROCEED-WITH-CAUTION max, never STOP  |
+| `naming-gate`    | `devsteps-R5-gate-naming`         | blocking check on *committed_paths* from exec-impl MandateResult → PASS/FAIL   |
 | `review`         | `devsteps-R5-gate-reviewer`       | Blocking quality gate — PASS/FAIL, write_rejection_feedback, escalation        |
 
 **Ishikawa bone mandates (dispatched directly by `devsteps-R0-coord-ishikawa`):**
@@ -178,10 +180,10 @@ All workers receive **only `report_path` + `item_id`** — never raw findings pa
 
 | Agent                      | When to use                                                                                                  |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `devsteps-R0-coord`           | Single item implementation (always via `devsteps-20-start-work` prompt)                                      |
-| `devsteps-R0-coord-sprint`    | Multi-item sprint (always via `devsteps-40-sprint` prompt)                                                   |
+| `devsteps-R0-coord`           | Single item implementation (always via `devsteps-40-start-work` prompt)                                      |
+| `devsteps-R0-coord-sprint`    | Multi-item sprint (always via `devsteps-45-sprint` prompt)                                                   |
 | `devsteps-backlog-curator` | Backlog health: audit, re-triage, staleness, archiving — NOT sprint execution                                |
-| `devsteps-R0-coord-ishikawa`  | Workspace health analysis — Ishikawa fishbone across 6 dimensions (always via `devsteps-80-ishikawa` prompt) |
+| `devsteps-R0-coord-ishikawa`  | Workspace health analysis — Ishikawa fishbone across 6 dimensions (always via `devsteps-95-ishikawa` prompt) |
 
 --- — `agents`, `handoffs`, `user-invokable`
 
@@ -233,29 +235,36 @@ _Agent naming: `devsteps-{role}-{name}.agent.md` where role ∈ {coord, analyst,
 
 ## Prompt Numbering Convention
 
-Prompts follow a numeric range assignment. Ranges reserved per functional zone:
+Prompts follow a numeric range assignment reflecting the **daily workflow sequence**:
 
-| Range | Purpose |
-| ----- | ------- |
-| `01` | Session init (`devsteps-01-project-context`) |
-| `05–15` | Discovery — research, planning, meta-hierarchy |
-| `20–25` | Execution — start work, review |
-| `30–45` | Iterative workflows — rapid cycle, guide cycle, sprint, classify |
-| `48–59` | Maintenance & documentation — refactor, rename, git, doc workflows |
-| `60–70` | Release — pre-release, production release |
-| `80` | Workspace health / Ishikawa root-cause analysis |
-| `90` | Reserved (was project-context, now free) |
-| `95–98` | Meta — backlog hygiene, adapt Copilot files |
+| Range | Phase | Prompts |
+| ----- | ----- | ------- |
+| `00` | Meta | `devsteps-00-create-direct-prompt` — craft targeted prompt for new Copilot |
+| `10` | Bootstrap | `devsteps-10-project-context` — load session context |
+| `20–29` | Discovery | `devsteps-20-research` · `devsteps-25-investigate` |
+| `30–39` | Planning | `devsteps-30-plan-work` · `devsteps-35-meta-hierarchy` |
+| `40–59` | Implementation | `devsteps-40-start-work` · `devsteps-45-sprint` · `devsteps-50-rapid-cycle` · `devsteps-55-guide-cycle` |
+| `60–69` | Review & Quality | `devsteps-60-review` · `devsteps-65-refactor` · `devsteps-68-rename` |
+| `70` | Documentation | `devsteps-70-docs` (umbrella) → `doc-review` · `doc-import` · `doc-assemble` · `doc-context-sync` |
+| `80–89` | Git & Maintenance | `devsteps-80-git-cleanup` · `devsteps-85-classify-items` |
+| `90–99` | Housekeeping | `devsteps-90-item-cleanup` · `devsteps-95-ishikawa` |
+| N/A | Project-specific | `project_release` · `project_release-next` (not shipped with package) |
+| N/A | Universal tooling | `devsteps-adapt-project-copilot-files` (no number — onboarding) |
 
-**Doc-system prompts (48–59 range):**
+**Prefix taxonomy:**
+
+| Prefix | Scope | Shipped with package? |
+| ------ | ----- | --------------------- |
+| `devsteps-` | Universal lifecycle — any project using DevSteps | YES |
+| `doc-` | Doc-system sub-prompts (called via `devsteps-70-docs`) | YES |
+| `project_` | Project-specific workflows (release, CI, custom) | NO |
+| (none) | Special/external tools | Varies |
+
+**Doc-system prompts (internal sub-prompts — called via `devsteps-70-docs`):**
 
 | Prompt | Purpose |
 | ------ | ------- |
-| `devsteps-48-refactor` | Structural refactoring |
-| `devsteps-49-rename` | Naming convention enforcement |
-| `devsteps-50-git-cleanup` | Git branch cleanup |
-| `devsteps-55-investigate` | Git forensics (analyst-archaeology) |
-| `devsteps-56-context-sync` | Document project context |
-| `devsteps-57-doc-review` | BOM coverage scan + gap detection (→ worker-doc-gap) |
-| `devsteps-58-doc-import` | Import workspace docs → doc items (3 modes) |
-| `devsteps-59-doc-assemble` | Assemble BOM tree → full document with heading normalization |
+| `doc-review` | BOM coverage scan + gap detection (→ worker-doc-gap) |
+| `doc-import` | Import workspace docs → doc items (3 modes) |
+| `doc-assemble` | Assemble BOM tree → full document with heading normalization |
+| `doc-context-sync` | Regenerate `.devsteps/context/` aspect files from codebase |

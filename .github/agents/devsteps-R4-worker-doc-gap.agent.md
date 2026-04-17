@@ -13,7 +13,7 @@ user-invocable: false
 ## Contract
 
 - **Tier**: `worker` — Execution Worker (Leaf Node)
-- **Dispatched by**: coord ONLY (typically via `devsteps-57-doc-review` prompt)
+- **Dispatched by**: coord ONLY (typically via `doc-review` prompt)
 - **Mandate type**: `doc-gap`
 - **Returns**: `{ created_items: string[], skipped_duplicates: string[], coverage_delta: number, coverage_matrix: CoverageEntry[] }`
 - **NEVER dispatches** further agents — Leaf Node, NEVER use `runSubagent`
@@ -87,7 +87,7 @@ For each `gap` entry:
 {
   "type": "doc",
   "title": "<SubsystemName> — <diataxis_type_label>",
-  "description": "<!-- placeholder: auto-created by worker-doc-gap -->\n\n**Coverage gap detected.** This doc item is a placeholder for missing <diataxis_type> documentation covering `<subsystem>`.\n\nFill in with actual content or run `devsteps-58-doc-import` to import from workspace files.",
+  "description": "<!-- placeholder: auto-created by worker-doc-gap -->\n\n**Coverage gap detected.** This doc item is a placeholder for missing <diataxis_type> documentation covering `<subsystem>`.\n\nFill in with actual content or run `doc-import` to import from workspace files.",
   "status": "draft",
   "eisenhower": "not-urgent-important",
   "tags": ["gap", "placeholder", "<subsystem>", "<diataxis_type>", "doc-system"]

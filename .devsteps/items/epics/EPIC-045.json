@@ -1,0 +1,42 @@
+{
+  "id": "EPIC-045",
+  "type": "epic",
+  "category": "general",
+  "title": "CCMS Diataxis Compliance Layer",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-11T00:29:05.864Z",
+  "updated": "2026-04-11T00:50:07.042Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-280",
+      "STORY-283"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-046"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "diataxis",
+    "ccms",
+    "doc-system",
+    "ai-ux"
+  ],
+  "commits": [],
+  "metadata": {}
+}

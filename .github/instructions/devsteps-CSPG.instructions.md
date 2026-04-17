@@ -87,3 +87,4 @@ When exec-planner cannot determine the correct approach without human input:
 - Overview display is MANDATORY before any `#askQuestions` call
 - Multiple-choice options MUST be included for every decision with >1 viable path
 - Coord NEVER asks in free-form chat outside a gate — always structured table + `#askQuestions`
+- **Guide-cycle per-step Q&A** (devsteps-55-guide-cycle) is a distinct mechanism — NOT a CSPG gate. It has its own continuity loop with mandatory `#vscode_askQuestions` at every step. Blocking issues generate handoff prompts; see the guide-cycle prompt for the full protocol.

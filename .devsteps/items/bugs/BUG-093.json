@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "general",
   "title": "Fix orphaned postSpiderEvent webview client handler (STORY-206 contract)",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-04-09T19:16:34.666Z",
-  "updated": "2026-04-09T19:18:16.016Z",
+  "updated": "2026-04-12T13:21:41.983Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/webview/dashboardPanel.ts"

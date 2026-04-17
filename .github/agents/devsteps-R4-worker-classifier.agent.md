@@ -7,12 +7,12 @@ user-invocable: false
 
 # devsteps-R4-worker-classifier
 
-> Leaf node — Ring 4. Called by `coord` or from `devsteps-45-classify-items` prompt directly. NEVER calls `runSubagent`.
+> Leaf node — Ring 4. Called by `coord` or from `devsteps-85-classify-items` prompt directly. NEVER calls `runSubagent`.
 
 ## Contract
 
 - **Tier:** Ring 4 — worker
-- **Dispatcher:** `coord` (via `devsteps-45-classify-items` prompt or Spider Web R4 phase)
+- **Dispatcher:** `coord` (via `devsteps-85-classify-items` prompt or Spider Web R4 phase)
 - **Returns:** Updated DevSteps items via `mcp_devsteps_update` (metadata patch) — no code commits
 - **May call runSubagent:** `false`
 

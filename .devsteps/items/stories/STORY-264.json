@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Work Items dedicated dashboard tab with type/status/Eisenhower filters",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-09T19:17:20.225Z",
-  "updated": "2026-04-09T19:18:46.869Z",
+  "updated": "2026-04-12T13:36:23.955Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/webview/dashboardPanel.ts",

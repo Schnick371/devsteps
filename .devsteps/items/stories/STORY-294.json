@@ -1,0 +1,41 @@
+{
+  "id": "STORY-294",
+  "type": "story",
+  "category": "general",
+  "title": "Story A: R0-coord Triage-Korrekturen (RC-1, RC-2, RC-3, RC-5)",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-15T10:10:12.198Z",
+  "updated": "2026-04-15T10:10:28.482Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-047"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "architecture",
+    "agents",
+    "coord",
+    "triage",
+    "dispatch",
+    "quick-fix"
+  ],
+  "commits": [],
+  "metadata": {}
+}

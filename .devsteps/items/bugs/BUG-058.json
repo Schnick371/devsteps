@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "general",
   "title": "Fix STATUS.DONE ReferenceError crash in traceabilityRenderer.ts",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-03-05T10:51:22.639Z",
-  "updated": "2026-04-09T19:18:05.796Z",
+  "updated": "2026-04-12T13:05:01.361Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

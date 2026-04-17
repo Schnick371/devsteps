@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Tab Navigation Architecture — single HTML skeleton with CSS view-toggle for dashboard",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-04-09T19:17:06.176Z",
-  "updated": "2026-04-09T19:18:58.404Z",
+  "updated": "2026-04-12T13:33:46.146Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/webview/dashboardPanel.ts",

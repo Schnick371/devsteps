@@ -118,7 +118,7 @@ Beyond taxonomy, the following complementary methods are available:
 
 ## Classifier Invariants
 
-- Classification is NEVER applied automatically at item creation — triggered by `devsteps-45-classify-items` only
+- Classification is NEVER applied automatically at item creation — triggered by `devsteps-85-classify-items` only
 - Classification does NOT change item `status`, `type`, or `eisenhower` values
 - The `worker-classifier` is a Ring-4 leaf node — it NEVER calls `runSubagent`
 - Unclassified items remain valid; classify in batches or on-demand

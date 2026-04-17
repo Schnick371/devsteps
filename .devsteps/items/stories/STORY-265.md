@@ -21,3 +21,13 @@ Add expandable Epic-level progress charts to the "Progress" tab (Project Burndow
 - Epics with zero linked tasks: show "No tasks linked" placeholder
 
 Source: analyst-research §3.2 (S3, S4, S9), analyst-risk R4, analysis-constraints, analysis-integration.
+
+## Result
+- New `epicBurndownProvider.ts` — extracts per-epic child items via `linked_items.implements`
+- New `epicBurndownRenderer.ts` — SVG progress bar + `<details>` accordion
+- Integrated in Progress tab below Project Burndown chart
+- SVG horizontal bar (not Canvas — avoids 16-context Chromium limit)
+- Child items listed with status badges, click-to-open
+- Epics sorted by completion percentage descending
+- Epics with zero linked items show placeholder text
+- Commit: 9664dd3

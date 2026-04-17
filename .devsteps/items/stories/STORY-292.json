@@ -1,0 +1,41 @@
+{
+  "id": "STORY-292",
+  "type": "story",
+  "category": "general",
+  "title": "Auto-link: related_items frontmatter → DOC item links at import / bom_commit",
+  "status": "done",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-11T01:22:02.818Z",
+  "updated": "2026-04-12T13:24:29.467Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [
+      "STORY-293"
+    ],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "ccms",
+    "doc-system",
+    "work-first",
+    "semantic-anchor",
+    "frontmatter",
+    "auto-link"
+  ],
+  "commits": [],
+  "metadata": {}
+}

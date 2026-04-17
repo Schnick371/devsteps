@@ -28,3 +28,12 @@ VS Code codicon font must be referenced in media/ (copy from node_modules/@vscod
 After changes: grep for any remaining hardcoded hex in the entire packages/extension/src/webview/ and packages/extension/media/ directories. All must be replaced.
 
 Source: analyst-quality §3, analyst-research §3.3, S5 (GitHub Primer), S6 (VS Code 1.109 token req), S7, S8.
+
+## Result
+- Replaced all hardcoded hex colors in burndownRenderer (4 occurrences → getComputedStyle + fallback)
+- Replaced hardcoded hex in traceabilityRenderer (1 occurrence → var() tokens)
+- Removed emoji icons from stat cards (📊🔄✅🚫), Eisenhower heading (🔥), timeline heading (📅)
+- Typography: h1 28→18px, stat-value 36→24px (IDE-aligned)
+- Removed webapp hover translateY(-2px) + box-shadow, replaced with border-color transition
+- All remaining hex in CSS are proper var(--vscode-*, hex) fallbacks
+- Commit: d0e4999

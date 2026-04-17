@@ -3,10 +3,10 @@
   "type": "bug",
   "category": "general",
   "title": "Fix traceability graph showing zero edges due to missing linked_items in index",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-04-09T19:16:23.148Z",
-  "updated": "2026-04-09T19:18:52.976Z",
+  "updated": "2026-04-12T13:20:38.359Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/webview/dataProviders/traceabilityProvider.ts"

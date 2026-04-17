@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Technical document aesthetic refactor — VS Code token compliance and codicon headings",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-09T19:17:54.373Z",
-  "updated": "2026-04-09T19:18:41.356Z",
+  "updated": "2026-04-12T13:42:03.869Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/webview/renderers/burndownRenderer.ts",

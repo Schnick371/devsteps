@@ -1,0 +1,41 @@
+{
+  "id": "DOC-061",
+  "type": "doc",
+  "category": "general",
+  "title": "Work-First Authoring: linking doc fragments to DevSteps tasks",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-11T01:22:53.500Z",
+  "updated": "2026-04-11T01:23:24.804Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "EPIC-046"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "work-first",
+    "semantic-anchor",
+    "how-to",
+    "authoring",
+    "ccms",
+    "doc-system"
+  ],
+  "commits": [],
+  "metadata": {}
+}

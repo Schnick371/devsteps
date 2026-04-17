@@ -10,3 +10,6 @@ Source: analyst-quality §2, S3 (ScrumDay India burnup article), analyst-researc
 - Section heading reads "Project Burndown"
 - Burndown curve only advances when status === 'done'
 - Comment in provider documents the approximation
+
+## Resolution (2026-04-12)
+Renamed heading, package.json desc, README to 'Project Burndown'. Added approximation comment for item.updated usage. Commit: 1b303d1.

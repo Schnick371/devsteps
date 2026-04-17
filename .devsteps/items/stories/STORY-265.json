@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Epic Progress Accordion in Project Burndown tab — SVG mini-charts per epic",
-  "status": "draft",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-09T19:17:37.337Z",
-  "updated": "2026-04-09T19:18:58.404Z",
+  "updated": "2026-04-12T13:38:50.397Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension/src/webview/dataProviders/epicBurndownProvider.ts",
