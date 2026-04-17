@@ -57,10 +57,16 @@ description: "YAML frontmatter headers specification and best practices for GitH
 
 ## Model Selection
 
-- `'GPT-5 mini'` - Simple tasks
-- `'Grok Code Fast 1 (Preview) (copilot)'` - Short files (<250 lines), speed-critical
-- `'Claude Sonnet 4.6'` - Complex prompts, advanced workflows
+- `'Raptor mini (Preview)'` - Trivial tasks: CRUD operations, taxonomy/label assignment, build-failure classification
+- `'GPT-5 mini'` - Structured/pattern-following tasks: doc writing, test writing, plan creation, context loading, aspect cross-validation, conductor orchestration
+- `'Grok Code Fast 1 (Preview) (copilot)'` - Short files (<250 lines), speed-critical single-file edits
+- `'Claude Sonnet 4.6'` - Complex reasoning: code writing, risk/quality analysis, orchestration, planning, quality gates
 - `'Gemini 3 Pro (Preview)'` - Long files (>500 lines), deep reasoning
+
+**Spider Web Ring-Based Assignment (token cost optimisation):**
+- Ring 0 (coord), Ring 1 (archaeology/risk/quality/research/web), Ring 3 (planner), Ring 5 (gate): `Claude Sonnet 4.6`
+- Ring 2 (aspects), Ring 4 exec-conductors, Ring 4 doc/test/guide/workspace/context workers: `GPT-5 mini`
+- Ring 4 CRUD workers (devsteps, classifier, meta-hierarchy, build-diagnostics): `Raptor mini (Preview)`
 
 ## Content Guidelines
 

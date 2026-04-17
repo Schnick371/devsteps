@@ -1,6 +1,6 @@
 ---
 description: "Internal Code Analyst - analyzes existing codebase patterns without internet access; produces CompressedVerdict envelope for coordinator competitive selection"
-model: "Claude Sonnet 4.6"
+model: "GPT-5 mini"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false

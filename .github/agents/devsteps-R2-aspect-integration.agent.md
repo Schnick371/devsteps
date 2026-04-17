@@ -1,6 +1,6 @@
 ---
 description: "Integration Analyst - finds cross-package, cross-process, and cross-boundary coordination requirements implied by a task but not stated"
-model: "Claude Sonnet 4.6"
+model: "GPT-5 mini"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 
