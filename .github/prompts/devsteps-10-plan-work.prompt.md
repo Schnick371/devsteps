@@ -24,6 +24,10 @@ tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit',
 1. **Understand intent** — use `#askQuestions` before ANY dispatch:
    > Core problem? Constraints, known pitfalls? Existing Epic/Story to attach to?
 2. **Dispatch R1 in parallel:** `devsteps-R1-analyst-context` (what's the current state?) + `devsteps-R1-analyst-internal` (code patterns?) + `devsteps-R1-analyst-risk` (what could go wrong?)
+2b. **Tier promotion check** — Before dispatching R2, evaluate:
+    - If item description mentions >300 lines, >10 files, schema changes, or `packages/shared`: promote to FULL
+    - At FULL: add `devsteps-R1-analyst-quality` + `devsteps-R1-analyst-archaeology` to R1 set (re-dispatch if R1 already fired); R2 expands to `aspect-constraints + aspect-impact + aspect-staleness + aspect-quality`
+    - If pre-scan (Step 0.5 equivalent) identifies >5 files: promote STANDARD → FULL
 3. **Dispatch R2 in parallel (after R1):** `devsteps-R2-aspect-constraints` + `devsteps-R2-aspect-impact` — pass R1 `report_path` as `upstream_paths`
 4. **Dispatch R3:** `devsteps-R3-exec-planner` — reads R1+R2, proposes item structure (hierarchy, priority, affected_paths)
 5. **Pre-Create Summary Gate** — BEFORE dispatching R4, display a structured summary for every planned item. Do NOT dispatch R4 until the user approves.

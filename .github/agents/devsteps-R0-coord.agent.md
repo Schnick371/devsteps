@@ -1,7 +1,7 @@
 ---
 description: "DevSteps Coordinator — dispatches all agents (analyst/aspect/exec/gate/worker) directly via Spider Web pattern, reads MandateResults via read_mandate_results"
 model: "Claude Sonnet 4.6"
-tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo', 'github/*']
 agents:
   - devsteps-R1-debug
   - devsteps-R2-debug
@@ -74,16 +74,16 @@ Orchestrate single-item implementation via analyst mandate dispatch. **NEVER rea
 
 Call `mcp_devsteps_status` before any dispatch. If it fails → STOP immediately, report MCP unavailable.
 
-### Step 0.5: Pre-Scan (FULL tier only)
-Run ≤3 targeted searches on affected_paths. Select ≤8 most-relevant file paths. Append `Relevant files: {path1, ...}` to every Ring 1, Ring 2, and Ring 3 DPF dispatch. Skip at QUICK/STANDARD.
+### Step 0.5: Pre-Scan (STANDARD+)
+Run ≤3 targeted searches on affected_paths. Select ≤8 most-relevant file paths. Append `Relevant files: {path1, ...}` to every Ring 1, Ring 2, and Ring 3 DPF dispatch. Skip at QUICK. At STANDARD: if pre-scan identifies >5 files, auto-promote to FULL.
 
 ### Step 1: Triage → Ring Dispatch
 
 | Tier        | Triggers                               | Ring 1 — analysts (parallel)                                                                                      | Ring 2 — aspects (parallel, after Ring 1)                                      | Ring 3–5                                                                    |
 | ----------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| QUICK       | Single-file, isolated, full tests      | _(skip)_                                                                                                          | _(skip)_                                                                       | `exec-planner` → `exec-impl` → `gate-reviewer`                              |
-| STANDARD    | Cross-file, shared module, API surface | `analyst-context` + `analyst-internal` + `analyst-risk`                                                           | `aspect-constraints` + `aspect-impact`                                         | → `exec-planner` → `exec-impl` → `exec-test` → `gate-reviewer`              |
-| FULL        | Schema change, cross-package, CRITICAL | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` | → `exec-planner` → `exec-impl` → `exec-test` ∥ `exec-doc` → `gate-reviewer` |
+| QUICK       | whitespace / typo ONLY — no logic, no structure change | _(skip)_                                                                                                          | _(skip)_                                                                       | `exec-planner` → `exec-impl` → `gate-reviewer`                              |
+| STANDARD    | Cross-file, shared module, API surface | `analyst-context` + `analyst-internal` + `analyst-risk`                                                           | `aspect-constraints` + `aspect-impact` + `aspect-staleness`                    | → `exec-planner` → `exec-impl` → `exec-test` → `gate-reviewer`              |
+| FULL        | Schema change, cross-package, CRITICAL, >300 lines changed, >10 files, or any packages/shared change | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` | → `exec-planner` → `exec-impl` → `exec-test` ∥ `exec-doc` → `gate-reviewer` |
 | COMPETITIVE | "Which approach/pattern?" in item      | `analyst-research` + `analyst-internal` + `analyst-web` + `analyst-context`                                       | `aspect-constraints` + `aspect-staleness`                                      | → `exec-planner` → `exec-impl` → `gate-reviewer`                            |
 
 > **`analyst-archaeology`** dispatched at FULL tier or when git history analysis is needed (reverts, blame, recent structural changes). Not needed for standard code changes.
