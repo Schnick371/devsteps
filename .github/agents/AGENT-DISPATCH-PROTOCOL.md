@@ -291,7 +291,7 @@ When using **scope-split fan-out** (multiple instances of the same analyst type)
 
 **Models:** Claude Sonnet 4.6 (default), Claude Opus 4.6 (quality-critical paths)  
 **tools:** `['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']`  
-**Note:** Non-coord agents do NOT have `'agent'` in tools — Leaf Nodes cannot dispatch.  
+**Note:** Tier-2 analyst (`analyst-*`) and Tier-3 aspect (`aspect-*`) agents are Leaf Nodes (`dispatch_role: leaf`) — they do NOT have `'agent'` in tools and NEVER call `runSubagent`. Conductors (`exec-impl`, `exec-test`, `exec-doc`) are NOT Leaf Nodes; they have `dispatch_role: conductor` and dispatch their designated worker pools. See §0 Ring table.  
 **`handoffs:`** must be empty in all non-coord agent YAML files — non-coord never hands off to another non-coord.
 
 ### Phase 1: MAP (Internal — no sub-dispatch)
@@ -386,7 +386,7 @@ Exceeding the ceiling is permitted if still within the bright-data search limit.
 
 **Models:** Claude Sonnet 4.6 (default), Claude Opus 4.6 (quality, staleness)  
 **tools:** `['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']`  
-**CRITICAL:** All non-coord agents (aspects, workers, exec, analysts) do NOT have `'agent'` in tools — Leaf Nodes, cannot dispatch.  
+**CRITICAL:** Aspect (`aspect-*`), worker (`worker-*`), analyst (`analyst-*`), and gate (`gate-*`) agents are Leaf Nodes (`dispatch_role: leaf`) — they do NOT have `'agent'` in tools and NEVER call `runSubagent`. Exception: Conductors (`exec-impl`, `exec-test`, `exec-doc`, `dispatch_role: conductor`) dispatch their designated worker pools. See §0 Ring table for the full conductor model.  
 **Dispatched by:** coord ONLY (Hub-and-Spoke Ring 2)
 
 ### Aspect Types

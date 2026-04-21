@@ -20,7 +20,7 @@ All Copilot agents follow the **Spinnennetz / Radar Chart model**: concentric ri
 | 4 — Execution   | **Conductors** (`dispatch_role: conductor`): `exec-impl`, `exec-test`, `exec-doc` — each dispatches its designated worker pool via `runSubagent`; **Workers** (`dispatch_role: leaf`): `worker-*` dispatched by conductors (primary) or coord directly; `worker-workspace` (new projects, coord-dispatched first) | Sequential       | AFTER Ring 3    |
 | 5 — Gate        | `gate-reviewer` — QA blocker PASS/FAIL                                                        | Blocking         | AFTER Ring 4    |
 
-> **VS Code Constraint**: `runSubagent` does not support nesting. `coord-*` dispatches EVERYTHING directly. No non-coord agent may call `runSubagent` — all are Leaf Nodes.
+> **VS Code Constraint (1.109+)**: `runSubagent` supports nesting up to depth 5. `coord-*` dispatches all Ring 1–5 agents directly in the current model. Conductors (`dispatch_role: conductor`) dispatch their designated worker pools. Ring-coordinator agents (`dispatch_role: ring-coordinator`, future Story B) will absorb per-ring dispatch. Analysts, aspects, workers, and gate agents remain Leaf Nodes (`dispatch_role: leaf`) and NEVER call `runSubagent`.
 > **Ring 2** fires via coord directly (not the analysts), AFTER Ring 1 MandateResults are available. Ring 1 `report_path` values are passed as `upstream_paths`.
 > **Read split (Ring 1):** `archaeology·risk·quality·research` → `read_mandate_results`; `context·internal·web` → `read_analysis_envelope(report_path)` — these write `write_analysis_report`, not `write_mandate_result`.
 > **Background Agents** (VS Code 1.109+, stable): Agents can run without an open chat window, persist across sessions, and use the same tools. Long-running exec-impl/exec-test tasks benefit from background execution.
@@ -117,6 +117,7 @@ DevSteps is the primary work-tracking system. NEVER edit `.devsteps/` directly �
 | Solo (no runSubagent)         | direct                                    | coord-solo     |
 | Create agent file             | `/create-agent` (VS Code built-in)        | —              |
 | Create instruction file       | `/create-instruction` (VS Code built-in)  | —              |
+| Create prompt file            | `/create-prompt` (VS Code built-in)       | —              |
 | Create skill file             | `/create-skill` (VS Code built-in)        | —              |
 
 
