@@ -1,6 +1,6 @@
 ---
 description: "Documenter worker — writes docs, README sections, and changelogs based on the Planner MandateResult. Leaf Node of the Spider Web Dispatch architecture."
-model: "GPT-5 mini"
+model: "Claude Sonnet 4.6"
 tools:
   ['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false

@@ -1,6 +1,6 @@
 ---
 description: "Constraint Analyst - surfaces risks, blockers, and hidden prerequisites that could derail naive implementation"
-model: "GPT-5 mini"
+model: "Claude Sonnet 4.6"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 

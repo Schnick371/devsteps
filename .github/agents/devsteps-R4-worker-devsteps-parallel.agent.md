@@ -1,8 +1,8 @@
 ---
 description: "DevSteps worker — manages DevSteps items (create, update, link, status-transitions) via MCP tools. Leaf Node of the Spider Web Dispatch architecture."
-model: "Claude Sonnet 4.6"
+model: "Raptor mini (Preview)"
 tools:
-  ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
+  ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'devsteps/*', 'todo']
 user-invocable: false
 ---
 

@@ -1,6 +1,6 @@
 ---
 description: "Efficient context loading specialist - smart prioritization, token-optimal aspect loading, task preparation"
-model: "GPT-5 mini"
+model: "Claude Sonnet 4.6"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 

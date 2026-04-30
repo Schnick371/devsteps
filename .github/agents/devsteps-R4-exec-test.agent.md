@@ -2,7 +2,7 @@
 description: Exec Test Conductor — orchestrates test workers to write, execute, and verify tests for implemented code. Dispatched by coord after exec-impl MandateResult. NEVER called directly by user.
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
-model: "GPT-5 mini"
+model: "Claude Sonnet 4.6"
 agents:
   - devsteps-R4-worker-test
   - devsteps-R4-worker-tester

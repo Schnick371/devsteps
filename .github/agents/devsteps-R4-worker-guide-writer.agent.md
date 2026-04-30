@@ -1,6 +1,6 @@
 ---
 description: "Guide-Writer worker — updates AITK-Tools-Guide-Dev.md and other guide files from coord mandates. Only agent authorized to write guide files."
-model: "GPT-5 mini"
+model: "Claude Sonnet 4.6"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false

@@ -1,6 +1,6 @@
 ---
 description: "Tester worker — writes unit tests based on the Planner MandateResult. Runs tests and commits. Leaf Node of the Spider Web Dispatch architecture."
-model: "GPT-5 mini"
+model: "Claude Sonnet 4.6"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false
