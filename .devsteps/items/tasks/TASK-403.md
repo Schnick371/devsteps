@@ -16,3 +16,6 @@ Senior architect proposed: each Diataxis type has its own hierarchy; at render t
 - MkDocs version constraint: pin MkDocs <2.0 (MkDocs 2.0 Feb 2026 breaks Material for MkDocs)
 - Composite documents must be split BEFORE import (or flagged per ADR-002)
 - DevSteps extensions (architecture, research) become their own nav tabs
+
+---
+**Done 2026-05-11**: ADR file created at `docs/architecture/adr-003-composite-docs-nav-tabs.md`. Status: Accepted. Implements: TASK-403.

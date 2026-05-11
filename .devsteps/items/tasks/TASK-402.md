@@ -18,3 +18,6 @@ Mixed-type classification is delegated to Copilot via MCP prompt:
 - Requires Copilot + MCP server (not usable in pure CLI-only mode)
 - `--override key=value` flag must be added to docs import command (TASK-396 update)
 - classification_signals stored in metadata enables future split without re-scan
+
+---
+**Done 2026-05-11**: ADR file created at `docs/architecture/adr-002-mixed-type-mcp-prompt.md`. Status: Accepted. Implements: TASK-402.

@@ -3,12 +3,14 @@
   "type": "task",
   "category": "general",
   "title": "ADR-003: Composite docs rendered as nav.tabs chapters (MkDocs Material)",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-03T18:29:44.888Z",
-  "updated": "2026-04-03T18:30:21.912Z",
+  "updated": "2026-05-11T20:16:26.009Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [],
+  "affected_paths": [
+    "docs/architecture/adr-003-composite-docs-nav-tabs.md"
+  ],
   "linked_items": {
     "implements": [],
     "implemented-by": [],

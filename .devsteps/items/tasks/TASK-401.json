@@ -3,12 +3,14 @@
   "type": "task",
   "category": "general",
   "title": "ADR-001: heuristicClassify uses scoring vector, not binary decision table",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-03T18:29:13.381Z",
-  "updated": "2026-04-03T18:30:13.168Z",
+  "updated": "2026-05-11T20:16:26.007Z",
   "author": "the@devsteps.dev",
-  "affected_paths": [],
+  "affected_paths": [
+    "docs/architecture/adr-001-heuristic-classify-scoring.md"
+  ],
   "linked_items": {
     "implements": [],
     "implemented-by": [],

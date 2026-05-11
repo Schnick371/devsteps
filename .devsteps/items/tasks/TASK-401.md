@@ -18,3 +18,6 @@ heuristicClassify(entry) returns a SCORE VECTOR per document:
 - heuristicClassify is a pure function (testable without filesystem)
 - TASK-400 (unit tests) must be updated to test score vectors
 - Threshold 0.4 may need tuning after first real-world import run
+
+---
+**Done 2026-05-11**: ADR file created at `docs/architecture/adr-001-heuristic-classify-scoring.md`. Status: Accepted. Implements: TASK-401.
