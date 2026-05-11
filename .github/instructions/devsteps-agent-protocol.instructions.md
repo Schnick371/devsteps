@@ -35,10 +35,10 @@ Docs ─┼─ Ring 3: exec-planner ──────────────�
 | ---- | ---------------- | ------------------------------------------------------------------------------------------------- | --------------------- |
 | 0    | Hub              | `coord-*`                                                                                         | dispatch + synthesis  |
 | 1    | Analysis         | `analyst-archaeology`, `analyst-risk`, `analyst-research`, `analyst-quality`, `analyst-context`, `analyst-internal`, `analyst-web` | Parallel fan-out      |
-| 2    | Cross-Validation | `aspect-impact`, `aspect-constraints`, `aspect-quality`, `aspect-staleness`, `aspect-integration` | Parallel fan-out      |
+| 2    | Cross-Validation | `aspect-impact`, `aspect-constraints`, `aspect-quality`, `aspect-staleness`, `aspect-integration`, `aspect-naming` | Parallel fan-out      |
 | 3    | Planning         | `exec-planner` (reads Ring 1+2 results)                                                           | Sequential            |
 | 4    | Execution        | **Conductors** (`dispatch_role: conductor`): `exec-impl` → `exec-test` ∧ `exec-doc` — each dispatches its designated worker pool via `runSubagent`; **Workers** (`dispatch_role: leaf`): `worker-*` dispatched by conductors (primary) or coord directly; `worker-workspace` (new projects, coord-dispatched first) | Sequential / parallel |
-| 5    | Quality Gate     | `gate-reviewer` (blocking PASS/FAIL)                                                              | Sequential            |
+| 5    | Quality Gate     | `gate-reviewer` (blocking PASS/FAIL) · `gate-naming` (FULL tier, blocking naming check on committed files) | Sequential / parallel |
 
 ### Triage → Dispatch Mapping
 
@@ -46,7 +46,7 @@ Docs ─┼─ Ring 3: exec-planner ──────────────�
 | ----------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
 | QUICK       | _(whitespace / typo ONLY — no logic, no structure change)_                                                        | _(skip)_                                                                       | → direct `exec-impl` → `gate-reviewer`                                      |
 | STANDARD    | `analyst-context` + `analyst-internal` + `analyst-risk`                                                           | `aspect-constraints` + `aspect-impact`                                         | → `exec-planner` → `exec-impl` → `exec-test` → `gate-reviewer`              |
-| FULL        | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` | → `exec-planner` → `exec-impl` → `exec-test` ∥ `exec-doc` → `gate-reviewer` |
+| FULL        | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` + `aspect-naming` | → `exec-planner` → `exec-impl` → `exec-test` ∥ `exec-doc` → `gate-reviewer` ∥ `gate-naming` |
 | COMPETITIVE | `analyst-research` + `analyst-internal` + `analyst-web` + `analyst-context`                                       | `aspect-constraints` + `aspect-staleness`                                      | → `exec-planner` → `exec-impl` → `gate-reviewer`                            |
 
 > **Read split:** `archaeology·risk·quality·research` → `read_mandate_results(item_ids)` · `context·internal·web` → `read_analysis_envelope(report_path)` (these write `write_analysis_report`)
@@ -58,7 +58,7 @@ Docs ─┼─ Ring 3: exec-planner ──────────────�
 
 1. **coord dispatches Ring 1–4 agents directly** — at most depth-2 nesting (coord → conductor → worker). coord dispatches analysts, aspects, exec-planner, and conductors. Conductors dispatch their designated worker pools. Workers never dispatch further.
 2. **Dispatch role governs `runSubagent` access** — `dispatch_role: coordinator` (Ring 0 coord-*) has full authority. `dispatch_role: conductor` (exec-impl, exec-test, exec-doc) may ONLY dispatch agents in their `agents:` frontmatter list. `dispatch_role: leaf` (default for all others) NEVER calls `runSubagent`.
-3. **Same-phase dispatches fire simultaneously** — ALL `runSubagent` calls for the same ring in ONE tool-call batch (single response turn). Waiting between calls = SEQUENTIAL = FORBIDDEN (I-8).
+3. **Same-phase dispatches fire simultaneously** — never sequential when independent
 4. **coord reads results by mechanism** — `read_mandate_results(item_ids)` for `archaeology/risk/quality/research`; `read_analysis_envelope(report_path)` for `context/internal/web`. Never raw envelopes.
 5. **Communication is structured paths only** — never paste findings in chat
 6. **Ring 2 fires AFTER Ring 1 completes** — aspects are cross-validators; pass Ring 1 `report_path` values as `upstream_paths`
@@ -130,6 +130,9 @@ Fallback to CLI only if explicitly authorized by user.
 | Clarification rounds (CSPG)   | 1              | `write_escalation`         |
 | Conflict resolution (analyst) | 2              | Caveated synthesis         |
 | Aspect parallel dispatches    | 10             | Split into batches         |
+| Guide-cycle continuity        | Until final ✅  | `write_escalation` if guide file missing |
+
+---
 
 ## DevSteps MCP — Tool Reference
 

@@ -59,16 +59,10 @@ description: "YAML frontmatter headers specification and best practices for GitH
 
 ## Model Selection
 
-- `'Raptor mini (Preview)'` - Trivial tasks: CRUD operations, taxonomy/label assignment, build-failure classification
-- `'GPT-5 mini'` - Structured/pattern-following tasks: doc writing, test writing, plan creation, context loading, aspect cross-validation, conductor orchestration
-- `'Grok Code Fast 1 (Preview) (copilot)'` - Short files (<250 lines), speed-critical single-file edits
-- `'Claude Sonnet 4.6'` - Complex reasoning: code writing, risk/quality analysis, orchestration, planning, quality gates
+- `'GPT-5 mini'` - Simple tasks
+- `'GPT-5 mini'` - Short files (<250 lines), speed-critical
+- `'Claude Sonnet 4.6'` - Complex prompts, advanced workflows
 - `'Gemini 3 Pro (Preview)'` - Long files (>500 lines), deep reasoning
-
-**Spider Web Ring-Based Assignment (token cost optimisation):**
-- Ring 0 (coord), Ring 1 (archaeology/risk/quality/research/web), Ring 3 (planner), Ring 5 (gate): `Claude Sonnet 4.6`
-- Ring 2 (aspects), Ring 4 exec-conductors, Ring 4 doc/test/guide/workspace/context workers: `GPT-5 mini`
-- Ring 4 CRUD workers (devsteps, classifier, meta-hierarchy, build-diagnostics): `Raptor mini (Preview)`
 
 ## Content Guidelines
 
@@ -140,7 +134,8 @@ Violation of this boundary breaks the Spider Web autonomy model and leaks intern
 **DevSteps Standard:** All files use `devsteps-` prefix (lowercase-with-hyphens)
 
 - **Instructions**: `devsteps-<subject>-<topic>.instructions.md`
-- **Prompts**: `devsteps-<number>-<action>.prompt.md`
+- **Prompts (user-facing)**: `devsteps-<number>-<action>.prompt.md` — numbered, appear in normal prompt selection
+- **Prompts (internal/ops)**: `devsteps-<action>.prompt.md` — no number, signals DevSteps-internal use only (e.g. release workflows)
 - **Agents**: `devsteps-<role>.agent.md` (persona, not action verb)
 
 ## ApplyTo Patterns

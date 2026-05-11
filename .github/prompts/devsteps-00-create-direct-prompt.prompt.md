@@ -49,14 +49,7 @@ This becomes **Layer 5** in the preflight. Compress to ≤3 sentences.
 
 Ambiguous signal → default STANDARD; note assumption in output.
 
-**FULL / COMPETITIVE tier:** run `#bright-data` research for technology-specific patterns before generating output.
-
-**Research Documentation Rule (MANDATORY when you did research this session):**
-Log every finding as either:
-- `[✅ COORD-VERIFIED]` — you confirmed it via code read or web source with URL
-- `[🔍 NEEDS-VERIFY]` — plausible but untested / from training data only
-
-This becomes **Layer 6** in the preflight. Keeps compact (bullets, no prose excerpts).
+**FULL / COMPETITIVE tier:** run `#bright-data` research for technology-specific patterns before generating output. Subagent `analyst-web` will continue this in the target session.
 
 ---
 
@@ -100,22 +93,6 @@ Include in every generated prompt:
 
 **Layer 5 (always):** compressed session state from Step 0.5 — branch, active item, recent changes, known blockers
 
-**Layer 6 — Research Seed (ONLY when coord did research this session):**
-Compress pre-computed findings into max 10 bullets. Tag each:
-- `[✅ COORD-VERIFIED <source>]` — confirmed via code/file read or web URL
-- `[🔍 NEEDS-VERIFY]` — inference or training-data only
-
-Always append the verification mandate (never omit):
-```
-## Verification Mandate
-The following pre-verified findings are included as seed context to avoid redundant research.
-Web-verify items tagged [🔍 NEEDS-VERIFY] via bright-data BEFORE acting on them.
-[✅ COORD-VERIFIED] items should be spot-checked for staleness if >1 release-cycle old.
-```
-
-**Context economy rule:** Research Seed must stay under 15 lines. If findings exceed this,
-summarize into themes. Never paste raw code or full web excerpts into the seed — cite file:line.
-
 ---
 
 ## Step 4 — Self-Review Before Output
@@ -148,20 +125,11 @@ Output as a **fenced `text` block** in chat (user pastes into new Copilot chat):
 - Ring 2 fires AFTER Ring 1 — never skip or merge rings
 - Conventional Commits: type(scope): subject + Implements: <ID>
 
-## Research Seed  ← INCLUDE ONLY when coord did research; OMIT for QUICK / no-research tasks
-<!-- Max 10 bullets. [✅ COORD-VERIFIED <file:line or URL>] or [🔍 NEEDS-VERIFY] -->
-- [✅ COORD-VERIFIED path/file.ps1:42] Finding X works via mechanism Y
-- [🔍 NEEDS-VERIFY] Library Z may have deprecated API A in v3+
-
-## Verification Mandate  ← ALWAYS include when Research Seed is present
-Use bright-data to cross-check [🔍 NEEDS-VERIFY] items above before acting on them.
-[✅] items are coord-verified but spot-check for staleness if >1 release-cycle old.
-
 ## Task
-[Self-contained task description — 2–5 sentences. A new Copilot with zero prior context must be able to execute this without clarification questions.]
+[Self-contained task description — 2–5 sentences. A new Copilot with zero prior context must execute this without clarification questions.]
 ```
 
-For QUICK tier: omit Critical Rules and Research Seed.
+For QUICK tier: omit Critical Rules unless `runSubagent_available` is unknown.
 
 ---
 
@@ -177,7 +145,6 @@ After every generated prompt, use `#vscode_askQuestions`:
 > C) Issue found in generated prompt — [describe]
 > D) Fix a missing resource before using the prompt
 > E) Nothing new — I'll use the prompt now
-
 Apply A–D autonomously, then ask again.
 
 **The cycle ends only when the user closes the chat.**
