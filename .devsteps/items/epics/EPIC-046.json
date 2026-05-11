@@ -1,0 +1,39 @@
+{
+  "id": "EPIC-046",
+  "type": "epic",
+  "category": "general",
+  "title": "Diataxis BOM/Handbook Capabilities — close gaps surfaced by external sprint post-mortem",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-30T12:36:49.895Z",
+  "updated": "2026-04-30T12:39:57.777Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-292"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "diataxis",
+    "docs-bom",
+    "mcp-server",
+    "post-mortem"
+  ],
+  "commits": [],
+  "metadata": {}
+}

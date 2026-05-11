@@ -1,0 +1,39 @@
+{
+  "id": "STORY-293",
+  "type": "story",
+  "category": "general",
+  "title": "Compress R0-coord.agent.md from 186 lines to ≤150 lines",
+  "status": "planned",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-05-11T13:04:18.073Z",
+  "updated": "2026-05-11T13:04:33.311Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-045"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "architecture",
+    "token-efficiency",
+    "agents",
+    "vscode-1118"
+  ],
+  "commits": [],
+  "metadata": {}
+}

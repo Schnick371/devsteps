@@ -1,0 +1,40 @@
+{
+  "id": "STORY-282",
+  "type": "story",
+  "category": "general",
+  "title": "Story C: routing_verdict Schema Extension + MandateResult Update",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-21T20:38:55.049Z",
+  "updated": "2026-04-21T20:39:54.000Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-045"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "spider-web",
+    "schema",
+    "routing_verdict",
+    "shared",
+    "EPIC-045"
+  ],
+  "commits": [],
+  "metadata": {}
+}

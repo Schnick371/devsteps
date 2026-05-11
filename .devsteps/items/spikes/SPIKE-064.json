@@ -1,0 +1,43 @@
+{
+  "id": "SPIKE-064",
+  "type": "spike",
+  "category": "general",
+  "title": "Empirical validation of allowInvocationsFromSubagents conductor model via OTel tracing",
+  "status": "planned",
+  "eisenhower": "urgent-important",
+  "created": "2026-05-11T13:04:18.084Z",
+  "updated": "2026-05-11T13:04:33.313Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-045"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [
+      "STORY-281"
+    ],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "spike",
+    "vscode-1119",
+    "agents",
+    "conductor",
+    "otel",
+    "token-efficiency"
+  ],
+  "commits": [],
+  "metadata": {}
+}

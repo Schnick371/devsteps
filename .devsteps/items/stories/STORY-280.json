@@ -1,0 +1,41 @@
+{
+  "id": "STORY-280",
+  "type": "story",
+  "category": "general",
+  "title": "Story A: R0-coord Triage-Korrekturen (P1–P5) + stale-fix pre-req commit",
+  "status": "done",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-21T06:38:53.493Z",
+  "updated": "2026-04-21T07:30:11.429Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-045"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "story-a",
+    "triage",
+    "r0-coord",
+    "stale-fix",
+    "ring-coordinator",
+    "spider-web"
+  ],
+  "commits": [],
+  "metadata": {}
+}

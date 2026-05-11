@@ -1,0 +1,44 @@
+{
+  "id": "EPIC-045",
+  "type": "epic",
+  "category": "general",
+  "title": "Spider Web Ring-Coordinator Architecture (Phase 1 + 2)",
+  "status": "draft",
+  "eisenhower": "urgent-important",
+  "created": "2026-04-21T06:38:26.982Z",
+  "updated": "2026-05-11T13:04:28.414Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [],
+    "implemented-by": [
+      "STORY-280",
+      "STORY-281",
+      "STORY-282",
+      "STORY-283",
+      "STORY-295"
+    ],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "spider-web",
+    "architecture",
+    "ring-coordinator",
+    "agents",
+    "dispatch-protocol"
+  ],
+  "commits": [],
+  "metadata": {}
+}

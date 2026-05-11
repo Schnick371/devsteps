@@ -1,0 +1,39 @@
+{
+  "id": "STORY-286",
+  "type": "story",
+  "category": "general",
+  "title": "Add `mcp_devsteps_docs_bom_add_node` MCP tool — incremental tree-building during authoring",
+  "status": "draft",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-04-30T12:37:47.690Z",
+  "updated": "2026-04-30T12:39:57.775Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-046"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "diataxis",
+    "docs-bom",
+    "mcp-server",
+    "tool-new"
+  ],
+  "commits": [],
+  "metadata": {}
+}

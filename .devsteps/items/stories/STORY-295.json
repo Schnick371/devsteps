@@ -1,0 +1,39 @@
+{
+  "id": "STORY-295",
+  "type": "story",
+  "category": "general",
+  "title": "Document user-invocable and disable-model-invocation properties in Copilot-Files-Standards-Specification",
+  "status": "planned",
+  "eisenhower": "not-urgent-important",
+  "created": "2026-05-11T13:04:18.087Z",
+  "updated": "2026-05-11T13:04:33.314Z",
+  "author": "the@devsteps.dev",
+  "affected_paths": [],
+  "linked_items": {
+    "implements": [
+      "EPIC-045"
+    ],
+    "implemented-by": [],
+    "tested-by": [],
+    "tests": [],
+    "blocks": [],
+    "blocked-by": [],
+    "relates-to": [],
+    "depends-on": [],
+    "required-by": [],
+    "supersedes": [],
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
+  },
+  "tags": [
+    "documentation",
+    "agents",
+    "security",
+    "specifications"
+  ],
+  "commits": [],
+  "metadata": {}
+}
