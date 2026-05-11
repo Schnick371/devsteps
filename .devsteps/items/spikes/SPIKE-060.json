@@ -3,10 +3,10 @@
   "type": "spike",
   "category": "general",
   "title": "Research: YAML frontmatter standard for doc items + heading-level normalization on export",
-  "status": "in-progress",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-04T22:41:03.752Z",
-  "updated": "2026-04-04T22:41:08.001Z",
+  "updated": "2026-05-11T22:25:22.002Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/shared",

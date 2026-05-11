@@ -3,10 +3,10 @@
   "type": "spike",
   "category": "general",
   "title": "Research: Local GPU + VS Code AI Toolkit Agent Inspector",
-  "status": "review",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-03-08T09:15:48.959Z",
-  "updated": "2026-03-08T09:51:25.735Z",
+  "updated": "2026-05-11T22:25:22.003Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
