@@ -39,6 +39,12 @@ export const writeAnalysisReportTool: Tool = {
           full_analysis: { type: 'string', description: 'Full markdown analysis text' },
           affected_files: { type: 'array', items: { type: 'string' } },
           recommendations: { type: 'array', items: { type: 'string' } },
+          scope_shard: {
+            type: 'string',
+            description:
+              'Optional shard suffix (alphanumeric/underscore/hyphen, max 32) for scope-split fan-out per ADP I-13. ' +
+              'Prevents collision when multiple analysts of the same aspect run in parallel against non-overlapping scope partitions.',
+          },
         },
         required: ['task_id', 'aspect', 'analyst', 'created', 'envelope', 'full_analysis'],
       },
@@ -61,6 +67,12 @@ export const readAnalysisEnvelopeTool: Tool = {
         type: 'string',
         enum: ASPECT_ENUM,
         description: 'Which aspect agent report to read (required)',
+      },
+      scope_shard: {
+        type: 'string',
+        description:
+          'Optional shard suffix matching the one used at write time (alphanumeric/underscore/hyphen, max 32). ' +
+          'Required when reading sharded reports written via scope-split fan-out per ADP I-13.',
       },
     },
     required: ['task_id', 'aspect'],

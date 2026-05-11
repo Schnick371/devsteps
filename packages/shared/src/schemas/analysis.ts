@@ -106,6 +106,17 @@ export const AnalysisBriefingSchema = z.object({
   affected_files: z.array(z.string()).default([]),
   /** Prioritized action recommendations */
   recommendations: z.array(z.string()).default([]),
+  /**
+   * Optional shard suffix for parallel scope-split fan-out (per ADP I-13).
+   * When present, appended to the report filename to prevent collision when multiple
+   * analysts of the same aspect run in parallel against non-overlapping scope partitions.
+   * Path: `.devsteps/analysis/[task_id]/[aspect]-[scope_shard]-report.json`
+   */
+  scope_shard: z
+    .string()
+    .regex(/^[a-zA-Z0-9_-]+$/, 'scope_shard may contain only alphanumeric, underscore, and hyphen')
+    .max(32)
+    .optional(),
   /** Schema version for forward compatibility */
   schema_version: z.literal('1.0').default('1.0'),
 });

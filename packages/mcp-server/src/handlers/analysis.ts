@@ -68,7 +68,8 @@ export async function handleWriteAnalysisReport(
   const analysisDir = getAnalysisDir(briefing.task_id);
   mkdirSync(analysisDir, { recursive: true });
 
-  const fileName = `${briefing.aspect}-report.json`;
+  const shardSuffix = briefing.scope_shard ? `-${briefing.scope_shard}` : '';
+  const fileName = `${briefing.aspect}${shardSuffix}-report.json`;
   const filePath = join(analysisDir, fileName);
   atomicWriteJson(filePath, briefing);
 
@@ -95,16 +96,22 @@ export async function handleReadAnalysisEnvelope(
 ): Promise<{ content: Array<{ type: 'text'; text: string }> }> {
   const taskId = args.task_id as string;
   const aspect = args.aspect as string;
+  const scopeShard = args.scope_shard as string | undefined;
 
   if (!taskId || !aspect) {
     throw new Error('task_id and aspect are required');
   }
-
-  const filePath = join(getAnalysisDir(taskId), `${aspect}-report.json`);
-  if (!existsSync(filePath)) {
+  if (scopeShard !== undefined && !/^[a-zA-Z0-9_-]{1,32}$/.test(scopeShard)) {
     throw new Error(
-      `Analysis report not found: .devsteps/analysis/${taskId}/${aspect}-report.json`
+      'scope_shard may contain only alphanumeric, underscore, and hyphen (max 32 chars)'
     );
+  }
+
+  const shardSuffix = scopeShard ? `-${scopeShard}` : '';
+  const fileName = `${aspect}${shardSuffix}-report.json`;
+  const filePath = join(getAnalysisDir(taskId), fileName);
+  if (!existsSync(filePath)) {
+    throw new Error(`Analysis report not found: .devsteps/analysis/${taskId}/${fileName}`);
   }
 
   const raw = JSON.parse(readFileSync(filePath, 'utf-8'));
