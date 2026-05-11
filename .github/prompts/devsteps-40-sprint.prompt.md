@@ -1,6 +1,6 @@
 ---
 agent: "devsteps-R0-coord-sprint"
-model: "Claude Opus 4.6"
+model: "Claude Opus 4.7"
 description: "Multi-hour autonomous sprint — pre-sprint archaeology, risk-based MPD per item, all analyst/exec/gate agents, bright-data web research, Playwright browser automation, blocking reviewer"
 tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 ---
@@ -31,6 +31,7 @@ The agent classifies the session automatically:
 - **Multi-item / backlog** → full sprint: pre-flight → analyst mandate dispatch per item → quality gates → adaptive replanning
 - **Spike** → archaeology + research, no impl until direction set
 - **Review** → reviewer directly
+- **Documentation sprint** → applies `sdevsteps-diataxis-sprint` skill: `analyst-diataxis` in Ring 1, `exec-doc-diataxis` conductor in Ring 4 (4× author workers + BOM worker)
 
 ## Pre-Sprint Clarification (session start only — then fully autonomous)
 

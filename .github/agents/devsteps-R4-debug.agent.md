@@ -1,6 +1,6 @@
 ---
 description: "DEBUG — Ring 4 dump agent. Writes all received dispatch data verbatim to tmp/debug/ as Markdown, then writes a stub MandateResult. Remove from R0 agents list after inspection."
-model: "Claude Sonnet 4.6"
+model: "Claude Haiku 4.5"
 tools: ['edit', 'devsteps/*']
 user-invocable: false
 ---

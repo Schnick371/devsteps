@@ -50,8 +50,11 @@ user-invocable: false
 
 ### Phase 3: Commit
 
+Before staging, run `/ongoing-requirements` on changed PowerShell files to confirm R1–R4 compliance.
+
 ```bash
-git add <affected_paths>
+# Filter out Install/** before staging — Install/ is ephemeral; only Config/{Company}/Install/ is committed
+git add <affected_paths_excluding_Install/>
 git commit -m "feat(<scope>): <subject>
 
 Implements: <item_id>"
@@ -64,6 +67,7 @@ Implements: <item_id>"
 - **NEVER** call `#runSubagent` — Leaf Node
 - **NEVER** write test files — that is `worker-tester`
 - **NEVER** write files outside `affected_paths`
+- **NEVER** `git add` any path under `Install/` — Install/ is ephemeral working copy; only `Config/{Company}/Install/` snapshots are committed
 - **NEVER** commit to the `main` branch — feature branch only
 - **NEVER** breaking changes without explicit `!` notation in commit
 - **NEVER** edit `.devsteps/` directly — MCP tools only

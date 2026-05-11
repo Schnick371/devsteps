@@ -1,6 +1,6 @@
 ---
 description: "Autonomous sprint executor — multi-item backlog, dispatches all agents directly (Spider Web), reads only MandateResults via read_mandate_results"
-model: "Claude Sonnet 4.6"
+model: "Claude Opus 4.7"
 tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 agents:
   - devsteps-R1-debug
@@ -42,6 +42,11 @@ agents:
   - devsteps-R4-worker-build-diagnostics
   - devsteps-R4-worker-classifier
   - devsteps-R4-worker-meta-hierarchy
+  # Ring 4 — Diataxis Documentation Pipeline
+  - devsteps-R1-analyst-diataxis
+  - devsteps-R4-exec-doc-diataxis
+  - devsteps-R4-worker-diataxis-author
+  - devsteps-R4-worker-diataxis-bom
   # Ring 5 — Quality Gate
   - devsteps-R5-gate-reviewer
 handoffs:
@@ -69,6 +74,7 @@ Execute multi-hour autonomous sprint sessions on planned backlog via analyst man
 | "continue sprint" / "from the backlog" | Resume sprint   | Step 1 Backlog Discovery, skip archaeology if <2h since last sprint                  |
 | Item type = spike                      | Spike           | `analyst-archaeology` + `analyst-research` (parallel), skip impl until direction set |
 | "review" / "validate"                  | Review          | Dispatch `devsteps-R5-gate-reviewer` directly                                           |
+| "diataxis" / "doc sprint" / "doc pipeline" / "BOM assembly" | Documentation Sprint | Apply `sdevsteps-diataxis-sprint` skill; Ring 1 adds `analyst-diataxis`; Ring 4 uses `exec-doc-diataxis` |
 | Empty backlog                          | No items        | Surface to user: list blocked/draft for triage                                       |
 
 ---
@@ -83,9 +89,17 @@ Use `#askQuestions` once: confirm scope and tag/focus filter. Triage tier, ring 
 
 `devsteps/list` — full backlog (draft/planned/in-progress), group by Epic/Q1 priority. Flag stale items (>12 weeks), missing `affected_paths`, conflicting pairs. Run absence audit.
 
-### Step 2: Global Context + Batch Risk — ONE parallel call
+### Step 2: Global Context — Inline Pre-Scan First
 
-Dispatch `analyst-context` (project structure, conventions) + `analyst-risk` (cross-item blast radius) simultaneously. Read via `read_mandate_results` (risk) + `read_analysis_envelope` (context). Produce **Sprint Brief** (order + tier per item). Add `analyst-archaeology` only when git history analysis is needed.
+**Before dispatching batch analysts:** coord reads the 5–10 most central files across the sprint scope directly (parallel). Run `bright-data` search for any unknown technology encountered. Produce a preliminary Sprint Brief from inline findings.
+
+**Dispatch `analyst-context` + `analyst-risk` (parallel) ONLY when:**
+- Sprint has ≥5 items OR spans ≥3 modules, OR
+- Inline pre-scan reveals cross-item risk signals (shared module touched by ≥2 items, migration, schema change)
+
+For small focused sprints (≤4 items, ≤2 modules): proceed with inline-only Sprint Brief → per-item pre-scan gates replace batch risk analysis.
+
+Read via `read_mandate_results` (risk) + `read_analysis_envelope` (context) when dispatched. Add `analyst-archaeology` only when git history analysis is needed.
 
 ### Step 3: Obsolescence Check
 
@@ -97,7 +111,9 @@ Per item: code gone → `obsolete`; scope drifted → update; branch conflict �
 
 For each Sprint Brief item (verify no new blocker first):
 
-**1. Triage** (deterministic):
+**1. Inline Pre-Scan → Triage** (deterministic):
+
+Read item's `affected_paths` directly (≤8 files). Check: CLEAR path (→ skip Ring 1, exec-planner direct with `pre_scan_findings`) or ESCALATE (→ Ring 1 per matrix below). See Pre-Scan Gate rules in coord.agent.md Step 0.5.
 
 | Tier        | Triggers                     | Ring 1 — analysts (parallel)                                                                                        | Ring 2 — aspects (parallel, after Ring 1)           |
 | ----------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
@@ -108,10 +124,11 @@ For each Sprint Brief item (verify no new blocker first):
 
 > **Read split:** `read_mandate_results` for archaeology/risk/quality/research · `read_analysis_envelope(report_path)` for context/internal/web
 > **`analyst-archaeology`** dispatched at FULL tier or when git history analysis is needed (reverts, blame, recent structural changes).
+> **Documentation Sprint override:** When work-type = `documentation` or session classified as "Documentation Sprint", add `analyst-diataxis` to Ring 1 (parallel) and dispatch `exec-doc-diataxis` instead of `exec-doc` in Ring 4. See `sdevsteps-diataxis-sprint` skill for full dispatch chain.
 
-**2.** Dispatch Ring 1 mandates — one parallel call (NEVER sequential). Use DPF from ADP §2.
+**2.** Dispatch Ring 1 mandates — emit ALL in ONE tool-call batch (single response turn — same JSON tool-call array). NEVER call one `runSubagent`, wait for result, then call the next. Use DPF from ADP §2.
 
-**3.** Read Ring 1 results → dispatch Ring 2 aspects simultaneously (STANDARD+ only) with Ring 1 `report_path` as `upstream_reports`. Read via both mechanisms. Pass `report_path` + item ID to exec agents (never paste findings).
+**3.** Read Ring 1 results → dispatch Ring 2 aspects in ONE tool-call batch (STANDARD+ only) with Ring 1 `report_path` as `upstream_reports`. Read via both mechanisms. Pass `report_path` + item ID to exec agents (never paste findings).
 
 **4.** New package → `worker-workspace` first. Then `exec-impl` → `exec-test` (S/F) → `exec-doc` (F) → `gate-reviewer` **BLOCKING**. FAIL → fix loop (max 3). Merge `--no-ff`, status → `done`. Adaptive replanning every 5 items or 2h.
 

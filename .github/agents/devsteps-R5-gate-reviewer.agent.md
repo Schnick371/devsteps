@@ -63,6 +63,9 @@ All analysis is performed inline. No agents are dispatched.
 | Outdated docs | Documentation that references old API surface |
 | Diverged comments | Code comments that don't match actual implementation |
 | Stale type annotations | Type definitions that don't match runtime behavior |
+| **Install/ in staging** | Run `git diff --cached --name-only` — **FAIL if any path starts with `Install/`** (ephemeral working copy; only `Config/{Company}/Install/` may be staged) |
+| **Ongoing requirements** | Run `/ongoing-requirements` on all changed `.ps1` files — R1 (no Split-Path PSScriptRoot), R2 (no Write-Host in libs), R3 (CLI-Library separation), R4 (OnProgress pattern) |
+| **Structural violations** | Run `/violation-scan` — flag any new S1–S4 or D1–D12 violations introduced by this change |
 
 ### Phase 3: REDUCE + RESOLVE
 

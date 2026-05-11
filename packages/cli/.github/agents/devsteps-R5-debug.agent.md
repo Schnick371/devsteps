@@ -1,6 +1,6 @@
 ---
 description: "DEBUG — Ring 5 dump agent. Writes all received dispatch data verbatim to tmp/debug/ as Markdown, writes a stub verdict (PASS). Remove from R0 agents list after inspection."
-model: "GPT-5 mini"
+model: "Claude Sonnet 4.6"
 tools: ['edit', 'devsteps/*']
 user-invocable: false
 ---

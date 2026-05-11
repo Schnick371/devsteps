@@ -1,6 +1,6 @@
 ---
 agent: "devsteps-R0-coord"
-model: "Claude Sonnet 4.6"
+model: "Claude Opus 4.7"
 description: "Rapid plan-execute kanban cycles - MPD analysis, then no-ceremony continuous flow"
 tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 ---

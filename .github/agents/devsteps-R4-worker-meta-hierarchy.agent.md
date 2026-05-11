@@ -1,6 +1,6 @@
 ---
 description: "Assigns initiative/theme labels from groups.json to DevSteps items — top-down governed vocabulary, cascade from Epic to children"
-model: "Raptor mini (Preview)"
+model: "Claude Sonnet 4.6"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false

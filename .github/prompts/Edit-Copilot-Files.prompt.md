@@ -114,4 +114,4 @@ Do not proceed until the user's intent is clear.
 
 ---
 
-**Reference**: `Copilot-Files-Standards-Specification.instructions.md` for YAML standards · `devsteps-adapt-project-copilot-files.prompt.md` for onboarding a new project to the Spider Web protocol
+**Reference**: `Copilot-Files-Standards-Specification.instructions.md` for YAML standards · `devsteps-98-adapt-project-copilot-files.prompt.md` for onboarding a new project to the Spider Web protocol

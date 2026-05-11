@@ -1,5 +1,5 @@
 ---
-agent: "devsteps-R1-analyst-archaeology"
+agent: "devsteps-R0-coord"
 model: "Claude Sonnet 4.6"
 description: "Git forensics - investigate why code exists, trace decision history, identify ownership and intent"
 tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']

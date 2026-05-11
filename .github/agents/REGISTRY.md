@@ -56,8 +56,9 @@ Docs ─┼─ ─ ─ ─ ─ ─ ─ ┼─ Tests
 | --------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
 | **QUICK**       | `exec-planner`                                             | _(skip)_                                                                       | `exec-impl` → `gate-reviewer`                                               |
 | **STANDARD**    | `analyst-context` + `analyst-internal` + `analyst-risk`                                                             | `aspect-constraints` + `aspect-impact`                                         | → `exec-planner` → `exec-impl` → `exec-test` → `gate-reviewer`              |
-| **FULL**        | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` + `aspect-naming` | → `exec-planner` → `exec-impl` → `exec-test` ∥ `exec-doc` → `gate-reviewer` ∥ `gate-naming` |
+| **FULL**        | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` | → `exec-planner` → `exec-impl` → `exec-test` ∥ `exec-doc` → `gate-reviewer` |
 | **COMPETITIVE** | `analyst-research` + `analyst-internal` + `analyst-web` + `analyst-context`                                        | `aspect-constraints` + `aspect-staleness`                                      | → `exec-planner` → `exec-impl` → `gate-reviewer`                            |
+| **DOC SPRINT**  | `analyst-context` + `analyst-internal` + `analyst-diataxis`                                                        | `aspect-constraints` + `aspect-impact`                                         | → `exec-planner` → `exec-doc-diataxis` → `gate-reviewer`                    |
 
 ---
 
@@ -74,8 +75,7 @@ Docs ─┼─ ─ ─ ─ ─ ─ ─ ┼─ Tests
 | `implementation` | `devsteps-R4-exec-impl`           | reads planner MandateResult → code committed                                   |
 | `testing`        | `devsteps-R4-exec-test`           | reads impl MandateResult → tests pass                                          |
 | `documentation`  | `devsteps-R4-exec-doc`            | reads impl MandateResult → docs updated                                        |
-| `naming-advisory` | `devsteps-R2-aspect-naming`      | advisory pre-flight on *planned* paths → PROCEED-WITH-CAUTION max, never STOP  |
-| `naming-gate`    | `devsteps-R5-gate-naming`         | blocking check on *committed_paths* from exec-impl MandateResult → PASS/FAIL   |
+| `diataxis-documentation` | `devsteps-R4-exec-doc-diataxis` | dispatches 4× `worker-diataxis-author` (parallel) + `worker-diataxis-bom` (sequential); `analyst-diataxis` at Ring 1; see `sdevsteps-diataxis-sprint` skill |
 | `review`         | `devsteps-R5-gate-reviewer`       | Blocking quality gate — PASS/FAIL, write_rejection_feedback, escalation        |
 
 **Ishikawa bone mandates (dispatched directly by `devsteps-R0-coord-ishikawa`):**

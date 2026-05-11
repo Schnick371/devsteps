@@ -1,5 +1,5 @@
 ---
-applyTo: "docs/**/*.md,.devsteps/docs/**"
+applyTo: "docs/**/*.md,.devsteps/docs/**,.github/agents/**,.github/prompts/**"
 description: "Diataxis documentation framework rules for doc authoring and classification"
 ---
 

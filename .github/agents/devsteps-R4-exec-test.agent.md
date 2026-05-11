@@ -1,8 +1,9 @@
 ---
 description: Exec Test Conductor — orchestrates test workers to write, execute, and verify tests for implemented code. Dispatched by coord after exec-impl MandateResult. NEVER called directly by user.
+model: "Claude Sonnet 4.6"
+dispatch_role: conductor
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
-model: "Claude Sonnet 4.6"
 agents:
   - devsteps-R4-worker-test
   - devsteps-R4-worker-tester

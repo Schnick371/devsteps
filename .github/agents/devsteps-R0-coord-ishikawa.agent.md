@@ -70,7 +70,7 @@ Before dispatching: read `AITK-Tools-Guide-Dev.md` for prior sessions + `#devste
 
 ## 2-Round Dispatch Protocol
 
-### Round 1 — Bone Analysts (simultaneous)
+### Round 1 — Bone Analysts (BATCH — emit ALL in ONE response turn)
 
 **Before dispatching:** Call `mcp_devsteps_write_dispatch_manifest` with `triage_tier: "FULL"` and `expected_agents: ["analyst-archaeology", "analyst-quality", "analyst-risk"]`.
 
@@ -82,7 +82,7 @@ Before dispatching: read `AITK-Tools-Guide-Dev.md` for prior sessions + `#devste
 
 Read results via `read_mandate_results(expected_agent_names: ["analyst-archaeology", "analyst-quality", "analyst-risk"])` before launching Round 2.
 
-### Round 2 — Aspects + Process (simultaneous)
+### Round 2 — Aspects + Process (BATCH — emit ALL in ONE response turn after Round 1 results)
 
 **Before dispatching:** Call `mcp_devsteps_write_dispatch_manifest` with `triage_tier: "FULL"` and `expected_agents: ["aspect-staleness", "aspect-constraints", "aspect-impact", "aspect-integration", "aspect-quality", "analyst-context"]`. Pass Round 1 `report_path` values as `upstream_paths`.
 

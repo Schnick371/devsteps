@@ -1,8 +1,9 @@
 ---
 description: Exec Implementation Conductor — orchestrates workers to write, verify, and commit implementation code. Dispatched by coord after exec-planner MandateResult. NEVER called directly by user.
+model: "Claude Sonnet 4.6"
+dispatch_role: conductor
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
-model: "Claude Sonnet 4.6"
 agents:
   - devsteps-R4-worker-coder
   - devsteps-R4-worker-workspace
@@ -74,7 +75,7 @@ Maximum 2 RESOLVE rounds. If unresolved → mark `escalation_reason`, set `verdi
 
 ### Phase 4: SYNTHESIZE (Write MandateResult)
 
-1. **Commit:** Stage and commit all changed files with Conventional Commits format: `feat(scope): subject` + `Implements: <ID>` footer.
+1. **Commit:** Stage and commit all changed files with Conventional Commits format: `feat(scope): subject` + `Implements: <ID>` footer. **NEVER stage `Install/**` paths** — filter them from `affected_paths` before `git add` (Install/ is ephemeral working copy; only `Config/{Company}/Install/` is committed).
 2. Call `write_mandate_result`: `type: implementation`, `findings` (changed files, git hash), `recommendations` (for exec-test/exec-doc), `verdict` (DONE|BLOCKED|ESCALATED), `confidence` (0.0–1.0).
 3. Return to coord in chat: **ONLY** `{ report_path, verdict, confidence }`.
 
