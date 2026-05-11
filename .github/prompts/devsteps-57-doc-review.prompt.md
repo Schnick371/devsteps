@@ -19,6 +19,18 @@ tools:
 | `scope: <subsystem>` | Restrict to a named subsystem (`cli`, `mcp-server`, …) |
 | `dry_run: true` | Report gaps — do NOT create placeholders yet |
 
+## Handbook Coverage Baseline
+
+When reviewing coverage for the **DevSteps project handbook**, use **STORY-297** as the authoritative structural baseline:
+
+- **L1 areas (ARCH-010 – ARCH-070)** define the 7 functional areas — Introduction, Fundamentals, AI/Copilot, VS Code Extension, MCP Tools, CLI, Documentation System
+- **Orphan detection:** Any DOC-item not linked to an ARCH-NNN slot → flag in review report with suggestion to run `mcp_devsteps_link`
+- **Gap detection:** Any ARCH-NNN slot without a DOC-item mapping → include in gap list with type annotation (Tutorial / How-to / Reference / Explanation / Architecture / Research)
+- **Diataxis type mismatch:** e.g., a How-to item filed under a Reference chapter → flag for reclassification via `devsteps_docs_classify`
+- All 33 existing DOC-items must map to an ARCH-NNN slot; new Deep-Reference items (L3/L4) are expected for tool parameters, schemas, and agent dispatch rules
+
+Scope the baseline check with `scope: bom` to restrict the coverage scan to the ARCH-NNN tree instead of the default packages × Diataxis matrix.
+
 ## Execution Protocol
 
 ### Step 1 — Identify Work Item
