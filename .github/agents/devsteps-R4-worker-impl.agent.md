@@ -1,6 +1,6 @@
 ---
 description: "Implementation subagent - creates detailed implementation plans for coordinator execution"
-model: "GPT-5 mini"
+model: "Claude Sonnet 4.6"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 user-invocable: false

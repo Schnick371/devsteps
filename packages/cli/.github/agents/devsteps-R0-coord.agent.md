@@ -42,6 +42,9 @@ agents:
   - devsteps-R4-worker-build-diagnostics
   - devsteps-R4-worker-classifier
   - devsteps-R4-worker-meta-hierarchy
+  - devsteps-R4-worker-devsteps-parallel
+  - devsteps-R4-worker-doc-gap
+  - devsteps-R1-analyst-internal-simple
   # Ring 5 — Quality Gate
   - devsteps-R5-gate-reviewer
 handoffs:

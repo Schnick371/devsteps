@@ -1,6 +1,6 @@
 ---
 description: "Quality Analyst - defines the observable behavior surface: what must be tested, documented, and validated for this change to be trustworthy"
-model: "GPT-5 mini"
+model: "Claude Sonnet 4.6"
 tools:
   ['vscode', 'execute', 'read', 'agent', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 
