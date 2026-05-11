@@ -3,10 +3,10 @@
   "type": "spike",
   "category": "general",
   "title": "Empirical validation of allowInvocationsFromSubagents conductor model via OTel tracing",
-  "status": "planned",
+  "status": "review",
   "eisenhower": "urgent-important",
   "created": "2026-05-11T13:04:18.084Z",
-  "updated": "2026-05-11T13:04:33.313Z",
+  "updated": "2026-05-11T22:28:49.364Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
