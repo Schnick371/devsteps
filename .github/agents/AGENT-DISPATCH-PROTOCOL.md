@@ -45,7 +45,7 @@ Docs ───┼─ ─ ─ ─ ─ ─ ─ ─┼─── Tests
 | 1    | **Analysis**         | `analyst-*`                            | parallel fan-out     | MandateResults (~800 tok)     |
 | 2    | **Cross-Validation** | `aspect-*`                             | parallel fan-out     | CompressedVerdicts (~150 tok) |
 | 3    | **Planning**         | `exec-planner`                         | sequential           | ordered implementation plan   |
-| 4    | **Execution**        | `exec-impl`, `exec-test`, `exec-doc` (self-sufficient leaf nodes); `worker-*` dispatched by coord directly for specific work types | sequential           | code / tests / docs committed |
+| 4    | **Execution**        | **Conductors** (`exec-impl`, `exec-test`, `exec-doc`, `dispatch_role: conductor`) dispatch their worker pools via `runSubagent`; **Workers** (`worker-*`, `dispatch_role: leaf`) dispatched by conductors (primary) or coord directly | sequential           | code / tests / docs committed |
 | 5    | **Quality Gate**     | `gate-reviewer`                        | sequential, blocking | PASS / FAIL / ESCALATE        |
 
 Rings are **mandatory steps** — you cannot skip Ring 1 to go to Ring 4 except at QUICK triage.
@@ -68,7 +68,7 @@ Like a radar chart, each spoke (domain) can be **weighted differently per task**
 
 > **Read mechanism:** `analyst-archaeology`, `analyst-risk`, `analyst-quality`, `analyst-research` → `write_mandate_result` → read via `read_mandate_results`. `analyst-context`, `analyst-internal`, `analyst-web` → `write_analysis_report` → read via `read_analysis_envelope(report_path)`. Coord MUST call both mechanisms after Ring 1 completes.
 
-> All Ring 4 agents are **Leaf Nodes** dispatched by coord directly. `exec-impl/test/doc` are self-sufficient — they read planner MandateResults, write code/tests/docs, and commit. Workers (`worker-coder`, `worker-tester`, etc.) are dispatched by coord for specific work types (QUICK triage, refactor stories, work-item updates).
+> **Conductor model (depth-2):** `exec-impl/test/doc` have `dispatch_role: conductor` — they are dispatched by coord and in turn dispatch their worker pools via `runSubagent`. Workers (`worker-coder`, `worker-tester`, etc.) have `dispatch_role: leaf`. Coord may also dispatch workers directly for specific work types (QUICK triage, refactor stories, work-item updates). **⚠️ VS Code requirement:** `allowInvocationsFromSubagents: true` must be set for conductor→worker dispatch to function; default is `false`.
 
 > **⚠️ Errors spoke:** The **Errors** domain (`get_errors` / `#problems` panel) currently maps to `worker-build-diagnostics`. A dedicated `analyst-errors` agent is planned — it runs `get_errors` first, scans the Problems panel, and produces a MandateResult scoped to the error set before any implementation work begins. It can be activated directly from the `devsteps-30-rapid-cycle` prompt via `#get_errors`.
 
@@ -83,10 +83,10 @@ Archaeology:  Code █████████  Risk ██████  Researc
 
 coord reads the incoming task and tilts the radar chart — dispatching more agents on the heavy spokes, fewer on the light ones.
 
-**Flat 2-Tier Architecture:** coord (Ring 0) dispatches ALL agents directly — there is no nested dispatch.  
-→ All non-coord agents are **Leaf Nodes** — they NEVER call `#runSubagent`.  
-→ All agents appear in `agents:` list of coord only — no cross-agent `agents:` references.  
-→ Non-coord agents do NOT have `'agent'` in their tools list — structural enforcement of leaf-node behavior.
+**Conductor Model (depth-2):** coord (Ring 0) dispatches analysts, aspects, planner, and conductors directly. Conductors (`exec-impl`, `exec-test`, `exec-doc`, `dispatch_role: conductor`) dispatch their worker pools via `runSubagent` (depth-2 nesting).  
+→ Agents with `dispatch_role: leaf` (analysts, aspects, workers) NEVER call `#runSubagent`.  
+→ Conductors appear in coord's `agents:` list AND have their own `agents:` list for their designated workers.  
+→ Conductors have `'agent'` in their tools list; `dispatch_role: leaf` agents do NOT.
 
 ### Context Propagation Model (CIS — Context-Isolated Subagents)
 
@@ -171,6 +171,8 @@ Standard dispatch assigns one instance per analyst type ("type-parallel"). **Sco
 | COMPETITIVE | `research` + `internal` + `web` + `context`                                      | MUST aspects + `staleness` | `exec-impl` → `gate-reviewer`                                |
 
 > **`analyst-archaeology`** = git forensics (blame, reverts, recent structural changes). Dispatched at FULL tier or on-demand. NOT part of the STANDARD core.
+
+> **∥ = PARALLEL BATCH DISPATCH (technical):** The `∥` symbol means emit ALL listed `runSubagent` calls in a **single response turn** (same JSON tool-call array). Do NOT call one `runSubagent`, wait for its result, then call the next. Emit analyst-context + analyst-internal + analyst-risk together in ONE response, then wait for all results. Same for Ring 2 aspects. Violating this = sequential dispatch = FORBIDDEN for same-phase agents (I-8). Requires VS Code ≥ 1.109.0.
 
 **Direct Worker Dispatch (coord → worker):**
 
@@ -291,7 +293,7 @@ When using **scope-split fan-out** (multiple instances of the same analyst type)
 
 **Models:** Claude Sonnet 4.6 (default), Claude Opus 4.6 (quality-critical paths)  
 **tools:** `['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']`  
-**Note:** Tier-2 analyst (`analyst-*`) and Tier-3 aspect (`aspect-*`) agents are Leaf Nodes (`dispatch_role: leaf`) — they do NOT have `'agent'` in tools and NEVER call `runSubagent`. Conductors (`exec-impl`, `exec-test`, `exec-doc`) are NOT Leaf Nodes; they have `dispatch_role: conductor` and dispatch their designated worker pools. See §0 Ring table.  
+**Note:** Agents with `dispatch_role: leaf` do NOT have `'agent'` in tools — they cannot dispatch. Conductors (`dispatch_role: conductor`) DO have `'agent'` in tools to dispatch their worker pools.  
 **`handoffs:`** must be empty in all non-coord agent YAML files — non-coord never hands off to another non-coord.
 
 ### Phase 1: MAP (Internal — no sub-dispatch)
@@ -386,7 +388,7 @@ Exceeding the ceiling is permitted if still within the bright-data search limit.
 
 **Models:** Claude Sonnet 4.6 (default), Claude Opus 4.6 (quality, staleness)  
 **tools:** `['vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'playwright/*', 'todo']`  
-**CRITICAL:** Aspect (`aspect-*`), worker (`worker-*`), analyst (`analyst-*`), and gate (`gate-*`) agents are Leaf Nodes (`dispatch_role: leaf`) — they do NOT have `'agent'` in tools and NEVER call `runSubagent`. Exception: Conductors (`exec-impl`, `exec-test`, `exec-doc`, `dispatch_role: conductor`) dispatch their designated worker pools. See §0 Ring table for the full conductor model.  
+**CRITICAL:** Agents with `dispatch_role: leaf` (aspects, workers, analysts) do NOT have `'agent'` in tools — cannot dispatch. Conductors (`exec-impl`, `exec-test`, `exec-doc`) DO have `'agent'` to dispatch their designated worker pools.  
 **Dispatched by:** coord ONLY (Hub-and-Spoke Ring 2)
 
 ### Aspect Types
@@ -531,3 +533,11 @@ _See also:_
 - _[REGISTRY.md](./REGISTRY.md) — agent routing table and spoke/ring reference_
 - _[README.md](./README.md) — agent roster and naming convention_
 - _[../instructions/devsteps-agent-protocol.instructions.md](../instructions/devsteps-agent-protocol.instructions.md) — Copilot dispatch invariants_
+
+---
+
+## Glossary
+
+**cbp/** — *Coordinator Backplane Protocol*. The `.devsteps/cbp/` directory stores all `MandateResult` JSON files produced by Ring 1–5 agents (`write_mandate_result` MCP tool). Files are UUID-named, sprint-keyed (path: `.devsteps/cbp/{sprint_id}/{mandate_uuid}.result.json`). Read exclusively by Ring 0 `coord` agents via `read_mandate_results(sprint_id)`. Distinct from `.devsteps/analysis/` which stores `AnalysisBriefing` envelopes from `write_analysis_report`.
+
+**analysis/** — The `.devsteps/analysis/` directory stores `AnalysisBriefing` JSON envelopes (Ring 1 internal/context/web analysts and all Ring 2 aspect agents). Path: `.devsteps/analysis/{item_id}/{aspect}-report.json`. Read by Ring 0 coord via `read_analysis_envelope(task_id, aspect)`. Distinct from `.devsteps/cbp/` (MandateResults) and `.devsteps/context/` (long-lived project context).

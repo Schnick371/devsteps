@@ -1,7 +1,7 @@
 ---
 description: "DevSteps Coordinator — dispatches all agents (analyst/aspect/exec/gate/worker) directly via Spider Web pattern, reads MandateResults via read_mandate_results"
 model: "Claude Sonnet 4.6"
-tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo', 'github/*']
+tools: ['agent','vscode', 'execute', 'read', 'browser', 'bright-data/*', 'edit', 'search', 'web', 'devsteps/*', 'todo']
 agents:
   - devsteps-R1-debug
   - devsteps-R2-debug
@@ -42,6 +42,14 @@ agents:
   - devsteps-R4-worker-build-diagnostics
   - devsteps-R4-worker-classifier
   - devsteps-R4-worker-meta-hierarchy
+  - devsteps-R4-worker-devsteps-parallel
+  - devsteps-R4-worker-doc-gap
+  - devsteps-R1-analyst-internal-simple
+  # Ring 4 — Diataxis Documentation Pipeline
+  - devsteps-R1-analyst-diataxis
+  - devsteps-R4-exec-doc-diataxis
+  - devsteps-R4-worker-diataxis-author
+  - devsteps-R4-worker-diataxis-bom
   # Ring 5 — Quality Gate
   - devsteps-R5-gate-reviewer
 handoffs:
@@ -74,19 +82,42 @@ Orchestrate single-item implementation via analyst mandate dispatch. **NEVER rea
 
 Call `mcp_devsteps_status` before any dispatch. If it fails → STOP immediately, report MCP unavailable.
 
-### Step 0.5: Pre-Scan (STANDARD+)
-Run ≤3 targeted searches on affected_paths. Select ≤8 most-relevant file paths. Append `Relevant files: {path1, ...}` to every Ring 1, Ring 2, and Ring 3 DPF dispatch. Skip at QUICK. At STANDARD: if pre-scan identifies >5 files, auto-promote to FULL.
+### Step 0.5: Inline Pre-Scan (ALL tiers — coord reads directly, no subagents)
+
+Do this YOURSELF before any Ring 1 dispatch:
+1. Read ALL affected_paths directly (parallel reads, ≤10 files)
+2. For new/unknown technology or API: run `bright-data` search inline (parallel when multiple topics)
+3. Apply the **Pre-Scan Gate** to decide if Ring 1 is actually needed:
+
+| Outcome | Condition | Action |
+|---------|-----------|--------|
+| **CLEAR** | Change contained, path unambiguous, conventions visible, no risk signals | → Skip Ring 1+2 → exec-planner directly with `pre_scan_findings` |
+| **ESCALATE** | Any complexity signal present (see below) | → Proceed to Ring 1 per triage tier matrix |
+
+**Complexity signals — any one triggers ESCALATE:**
+- Change spans >1 module OR >5 files
+- Public API surface, export, or schema change
+- New/unfamiliar library or dependency introduced
+- Risk or breaking-change potential visible in pre-scan
+- Architecture question: multiple valid approaches, unclear which
+- Bright-data returns conflicting or insufficient results
+
+**FULL tier always ESCALATES** — skip gate, proceed directly to Ring 1.
+
+Gate=CLEAR: pass inline findings as `pre_scan_findings` in exec-planner DPF — planner MUST note it.
+Gate fires (ESCALATE): append `Relevant files: {paths}` to every downstream DPF dispatch.
 
 ### Step 1: Triage → Ring Dispatch
 
 | Tier        | Triggers                               | Ring 1 — analysts (parallel)                                                                                      | Ring 2 — aspects (parallel, after Ring 1)                                      | Ring 3–5                                                                    |
 | ----------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| QUICK       | whitespace / typo ONLY — no logic, no structure change | _(skip)_                                                                                                          | _(skip)_                                                                       | `exec-planner` → `exec-impl` → `gate-reviewer`                              |
-| STANDARD    | Cross-file, shared module, API surface | `analyst-context` + `analyst-internal` + `analyst-risk`                                                           | `aspect-constraints` + `aspect-impact` + `aspect-staleness`                    | → `exec-planner` → `exec-impl` → `exec-test` → `gate-reviewer`              |
-| FULL        | Schema change, cross-package, CRITICAL, >300 lines changed, >10 files, or any packages/shared change | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` | → `exec-planner` → `exec-impl` → `exec-test` ∥ `exec-doc` → `gate-reviewer` |
+| QUICK       | Single-file, isolated, full tests      | _(skip)_                                                                                                          | _(skip)_                                                                       | `exec-planner` → `exec-impl` → `gate-reviewer`                              |
+| STANDARD    | Cross-file, shared module, API surface | `analyst-context` + `analyst-internal` + `analyst-risk`                                                           | `aspect-constraints` + `aspect-impact`                                         | → `exec-planner` → `exec-impl` → `exec-test` → `gate-reviewer`              |
+| FULL        | Schema change, cross-package, CRITICAL | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | `aspect-constraints` + `aspect-impact` + `aspect-staleness` + `aspect-quality` | → `exec-planner` → `exec-impl` → `exec-test` ∥ `exec-doc` → `gate-reviewer` |
 | COMPETITIVE | "Which approach/pattern?" in item      | `analyst-research` + `analyst-internal` + `analyst-web` + `analyst-context`                                       | `aspect-constraints` + `aspect-staleness`                                      | → `exec-planner` → `exec-impl` → `gate-reviewer`                            |
 
 > **`analyst-archaeology`** dispatched at FULL tier or when git history analysis is needed (reverts, blame, recent structural changes). Not needed for standard code changes.
+> **Pre-Scan override (QUICK / STANDARD):** After Step 0.5, gate=CLEAR → skip Ring 1+2 entirely → exec-planner direct. The inline pre-scan IS the analysis. ESCALATE the moment any complexity signal appears — this gate is not a shortcut for genuinely complex tasks.
 > **Read mechanism split — IMPORTANT:** After Ring 1 dispatches complete, read via TWO mechanisms:
 > - `read_mandate_results(item_ids)` → for: `archaeology`, `risk`, `quality`, `research`
 > - `read_analysis_envelope(report_path)` → for: `context`, `internal`, `web` (these write `write_analysis_report`, not `write_mandate_result`)
@@ -98,9 +129,16 @@ Use Dispatch Prompt Format (DPF) from [AGENT-DISPATCH-PROTOCOL.md §2](./AGENT-D
 ### Scope-Split Fan-Out
 See [ADP §1 — I-13 and I-14](./AGENT-DISPATCH-PROTOCOL.md) for triggers, write-path constraints, MAX_SPLIT=4 concern-split guard, and synthesis responsibilities.
 
-### Step 2: Dispatch Ring 1 Analysts (simultaneously — NEVER sequential)
+### Step 2: Dispatch Ring 1 Analysts (BATCH — all in ONE response turn)
 
-Pass to each analyst via prompt format above: `item_id`, `sprint_id`, `triage_tier`, `task_title`, `task_description`, `affected_paths`, `constraints`, `failed_approaches`. After results: dispatch Ring 2 aspects simultaneously with Ring 1 `report_path` as `upstream_reports` (QUICK skips Ring 2).
+**TECHNICAL REQUIREMENT — PARALLEL BATCH DISPATCH:**
+Emit ALL Ring 1 `runSubagent` calls **in the same tool-call batch** (single response turn — same JSON tool-call array). Do NOT wait for one analyst to complete before emitting the next. Never call one `runSubagent`, wait for result, then call the next — that is SEQUENTIAL and FORBIDDEN for Ring 1.
+
+Correct pattern: emit `runSubagent(analyst-context)` + `runSubagent(analyst-internal)` + `runSubagent(analyst-risk)` [+ others per tier] ALL at once in one turn. Then wait for ALL results together.
+
+Same rule applies to Ring 2: emit ALL aspect `runSubagent` calls in ONE batch after Ring 1 completes.
+
+Pass to each analyst via prompt format above: `item_id`, `sprint_id`, `triage_tier`, `task_title`, `task_description`, `affected_paths`, `constraints`, `failed_approaches`. After results: dispatch Ring 2 aspects in ONE batch with Ring 1 `report_path` as `upstream_reports` (QUICK skips Ring 2).
 
 ### Step 3: Read MandateResults + Execute
 
@@ -119,7 +157,9 @@ Block on ESCALATED / HIGH_RISK / unexpected cross-package deps (surface to user)
 
 **3c — Dispatch exec agents IN ORDER:**
 0. New package → `worker-workspace` FIRST
-1. `exec-impl` → 2. `exec-test` (S/F) + `exec-doc` (F, parallel) → 3. `gate-reviewer` **BLOCKING**
+1. `exec-impl` (sequential — must complete first)
+2. At FULL tier: emit `exec-test` + `exec-doc` as **ONE parallel batch** (single response turn) — NEVER wait for exec-test before starting exec-doc. At STANDARD: `exec-test` only.
+3. `gate-reviewer` **BLOCKING** (after both exec-test + exec-doc complete)
 
 PASS → merge `--no-ff`, status `done`. FAIL → fix loop (max 3). ESCALATED → surface, do NOT retry.
 
