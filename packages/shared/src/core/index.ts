@@ -66,11 +66,8 @@ export {
   DIATAXIS_TYPES,
   type DiataxisType,
   heuristicClassify,
-  type HeuristicContext,
   MIXED_THRESHOLD,
   type ScoreVector,
-  SUBHEADING_RATIO_THRESHOLD,
-  TABLE_RATIO_THRESHOLD,
 } from './heuristic-classify.js';
 export {
   type ClassifiedEntry,
