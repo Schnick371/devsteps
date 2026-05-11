@@ -26,6 +26,18 @@ description: "YAML frontmatter headers specification and best practices for GitH
 - `tools`: Available tools for this agent
 - `dispatch_role` *(optional)*: `coordinator` (Ring 0 coord-* only) | `conductor` (exec-impl, exec-test, exec-doc) | `leaf` (default — all others). Only `coordinator` and `conductor` may call `runSubagent`.
 - `agents` *(conductor only)*: Explicit list of worker agents this conductor is permitted to dispatch via `runSubagent`. MUST be provided when `dispatch_role: conductor`.
+- `user-invocable` *(default `false`)*: When `true`, the agent appears in the user-facing `@agent` selector and may be invoked directly. **MANDATORY `false`** for all `leaf` and `conductor` agents — only the bounded coordinator allowlist may set `true` (`coord`, `coord-sprint`, `coord-ishikawa`, `coord-solo`, `backlog-curator`). Enforced by the `USER_INVOKABLE_AGENTS` allowlist test.
+- `disable-model-invocation` *(optional, default `false`)*: When `true`, the agent cannot be auto-invoked by model reasoning — only via explicit dispatch tools. Use for human-only escalation gates and irreversible operations (e.g. release, destructive cleanup).
+
+## Security & Invocation Control
+
+| Dispatch Role | `user-invocable`     | `runSubagent` | Notes                                                          |
+| ------------- | -------------------- | ------------- | -------------------------------------------------------------- |
+| coordinator   | `true` (allowlist) / `false` | yes   | Only Ring 0 `coord-*`; allowlist enforced by tests             |
+| conductor     | `false` (mandatory)  | restricted    | May only dispatch agents in own `agents:` list (exec-impl/test/doc) |
+| leaf          | `false` (mandatory)  | no            | All other agents — analysts, aspects, workers, gates           |
+
+New agents MUST set `user-invocable: false` unless added to the coordinator allowlist via a deliberate, reviewed change to the test fixture.
 
 **Tool Selection Guidelines**:
 
