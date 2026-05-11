@@ -148,6 +148,23 @@ export const docsBomCommitTool: Tool = {
         description:
           'If true, compute and return what would be created without writing (default: false)',
       },
+      hierarchy: {
+        type: 'object',
+        description:
+          'Optional map of file path → { parent_id, level } for placing BOM nodes in the tree. ' +
+          'parent_id: ARCH-NNN of the parent node, or null for root nodes. ' +
+          'level: numeric BOM depth (0 = root, 1 = L1, …). ' +
+          'Entries are keyed by the same path used in the classify session. ' +
+          'Files not present in this map default to parent_id: null (root placement).',
+        additionalProperties: {
+          type: 'object',
+          properties: {
+            parent_id: { type: ['string', 'null'], description: 'ARCH-NNN parent, or null' },
+            level: { type: 'number', description: 'BOM depth (0-based)' },
+          },
+          required: ['parent_id'],
+        },
+      },
     },
     required: ['session_id', 'token'],
   },

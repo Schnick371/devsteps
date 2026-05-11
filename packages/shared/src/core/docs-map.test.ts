@@ -186,6 +186,46 @@ describe('appendDocsMapNode', () => {
     const child = doc.nodes.find((n) => n.id === 'ARCH-001-P1');
     expect(child?.parent_id).toBe('ARCH-001');
   });
+  it('builds a 3-level hierarchy: L0 root → two L1 children → one L2 grandchild', () => {
+    // L0 root
+    const root = appendDocsMapNode(
+      devstepsDir,
+      null,
+      makeNode({ id: 'ARCH-001', parent_id: null, order: 10 })
+    );
+    expect(root).toBe(true);
+
+    // L1 children
+    const l1a = appendDocsMapNode(
+      devstepsDir,
+      'ARCH-001',
+      makeNode({ id: 'ARCH-010', parent_id: 'ARCH-001', order: 10 })
+    );
+    const l1b = appendDocsMapNode(
+      devstepsDir,
+      'ARCH-001',
+      makeNode({ id: 'ARCH-020', parent_id: 'ARCH-001', order: 20 })
+    );
+    expect(l1a).toBe(true);
+    expect(l1b).toBe(true);
+
+    // L2 grandchild under ARCH-010
+    const l2 = appendDocsMapNode(
+      devstepsDir,
+      'ARCH-010',
+      makeNode({ id: 'ARCH-011', parent_id: 'ARCH-010', order: 10 })
+    );
+    expect(l2).toBe(true);
+
+    const doc = readDocsMap(devstepsDir);
+    expect(doc.nodes).toHaveLength(4);
+
+    const byId = Object.fromEntries(doc.nodes.map((n) => [n.id, n]));
+    expect(byId['ARCH-001'].parent_id).toBeNull();
+    expect(byId['ARCH-010'].parent_id).toBe('ARCH-001');
+    expect(byId['ARCH-020'].parent_id).toBe('ARCH-001');
+    expect(byId['ARCH-011'].parent_id).toBe('ARCH-010');
+  });
 });
 
 // ─── rebuildDocsMapShadow ─────────────────────────────────────────────────────

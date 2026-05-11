@@ -85,6 +85,10 @@ export default async function devstepsDocsBomCommitHandler(args: Record<string, 
   const sessionId = args.session_id as string;
   const token = args.token as string;
   const dryRun = (args.dry_run as boolean) ?? false;
+  const hierarchy = (args.hierarchy ?? {}) as Record<
+    string,
+    { parent_id: string | null; level?: number }
+  >;
 
   const validation = await validateSession(devstepsDir, sessionId, token);
   if ('error' in validation) {
@@ -157,15 +161,17 @@ export default async function devstepsDocsBomCommitHandler(args: Record<string, 
           );
           warnings.push(...splitWarnings);
 
+          const splitHierarchyEntry = hierarchy[entry.path];
+          const splitParentId = splitHierarchyEntry?.parent_id ?? null;
           const node: DocsMapNode = {
             id: slug,
             doc_id: result.itemId,
-            parent_id: null,
+            parent_id: splitParentId,
             order: bomNodesAdded * 10,
             title,
             devsteps_items: [result.itemId],
           };
-          appendDocsMapNode(devstepsDir, null, node);
+          appendDocsMapNode(devstepsDir, splitParentId, node);
           bomNodesAdded++;
         }
       } else if (entry.decision === 'accept' && entry.diataxis_type) {
@@ -192,15 +198,17 @@ export default async function devstepsDocsBomCommitHandler(args: Record<string, 
         );
         warnings.push(...acceptWarnings);
 
+        const acceptHierarchyEntry = hierarchy[entry.path];
+        const acceptParentId = acceptHierarchyEntry?.parent_id ?? null;
         const node: DocsMapNode = {
           id: slug,
           doc_id: result.itemId,
-          parent_id: null,
+          parent_id: acceptParentId,
           order: bomNodesAdded * 10,
           title,
           devsteps_items: [result.itemId],
         };
-        appendDocsMapNode(devstepsDir, null, node);
+        appendDocsMapNode(devstepsDir, acceptParentId, node);
         bomNodesAdded++;
       } else if (entry.decision === 'rewrite') {
         // Create a DOC item for rewrite tracking
