@@ -82,3 +82,7 @@ Governed vocabulary (domain, subdomain Enums) needs a `classification-schema.jso
 
 ### Status
 Design fully specified. Implementation deferred — other features have higher urgency. When resuming: implement `audience` facet, freetext `topic`, `by-domain` + `by-topic` indexes, admin vocab file.
+
+
+---
+**Closed 2026-05-11 (sprint review pass)**: Design is fully delivered (instruction file, prompt, classifier agent, taxonomy, facets, ICM analogy, schema specification, 20 validation paths). Implementation work (Zod schema, indexes, admin vocab, migration helper) was explicitly deferred in the original delivery. Split out into a new follow-up STORY for runtime implementation. See linked follow-up story.

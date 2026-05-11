@@ -1,11 +1,11 @@
 {
-  "id": "STORY-197",
+  "id": "STORY-296",
   "type": "story",
   "category": "general",
-  "title": "Item Classification System — hierarchical taxonomy and faceted structuring for DevSteps backlog",
-  "status": "done",
+  "title": "Item Classification — schema, indexes, and admin vocab implementation",
+  "status": "draft",
   "eisenhower": "not-urgent-important",
-  "created": "2026-03-05T14:08:21.818Z",
+  "created": "2026-05-11T20:21:05.805Z",
   "updated": "2026-05-11T20:21:27.231Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
@@ -17,20 +17,23 @@
     "blocks": [],
     "blocked-by": [],
     "relates-to": [
-      "SPIKE-024",
-      "STORY-296"
+      "STORY-197"
     ],
     "depends-on": [],
     "required-by": [],
     "supersedes": [],
-    "superseded-by": []
+    "superseded-by": [],
+    "canonical-for": [],
+    "derived-from": [],
+    "documented-by": [],
+    "documents": []
   },
   "tags": [
     "classification",
     "taxonomy",
-    "ai-retrieval",
-    "backlog-structure",
-    "copilot-files"
+    "schema",
+    "implementation",
+    "follow-up"
   ],
   "commits": [],
   "metadata": {}
