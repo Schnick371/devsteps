@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Repair corrupt by-status draft index entry (DOC-002) and harden batch update path",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-04-04T22:56:11.952Z",
-  "updated": "2026-04-04T22:56:22.001Z",
+  "updated": "2026-05-11T20:08:43.167Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

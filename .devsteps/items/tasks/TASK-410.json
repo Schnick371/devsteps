@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "feat: MCP tool devsteps_docs_new — creation-time Diataxis enforcement",
-  "status": "planned",
+  "status": "obsolete",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-03T19:22:43.691Z",
-  "updated": "2026-04-09T18:35:04.938Z",
+  "updated": "2026-05-11T20:07:36.987Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
@@ -34,5 +34,6 @@
     "mcp-dialog"
   ],
   "commits": [],
-  "metadata": {}
+  "metadata": {},
+  "superseded_by": "STORY-268"
 }

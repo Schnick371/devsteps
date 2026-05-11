@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "feat: MCP tool devsteps_docs_classify — ScoreVector + MIXED detection",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-03T19:22:43.689Z",
-  "updated": "2026-04-09T18:30:55.242Z",
+  "updated": "2026-05-11T20:07:36.999Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

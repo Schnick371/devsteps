@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "docs: create .github/instructions/devsteps-diataxis.instructions.md",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-03T13:28:06.984Z",
-  "updated": "2026-04-03T13:28:42.524Z",
+  "updated": "2026-05-11T20:07:36.994Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {

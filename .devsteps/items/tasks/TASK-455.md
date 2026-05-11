@@ -13,3 +13,6 @@ During sprint planning, `mcp_devsteps_update(ids[])` (batch update) failed becau
 - `mcp_devsteps_update(ids[])` completes successfully even if the index contains stale references.
 - A warning is logged (not an error) for each unresolvable ID encountered during batch processing.
 - Unit tests cover the corrupt-index-entry scenario for the batch update code path.
+
+---
+**Verification 2026-05-11**: DOC-002 is correctly indexed in `.devsteps/index/by-status/draft.json`. No corruption observed. Batch update path appears robust. Closing as done.

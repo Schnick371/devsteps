@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Compress R0-coord.agent.md from 186 lines to ≤150 lines",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-05-11T13:04:18.073Z",
-  "updated": "2026-05-11T13:04:33.311Z",
+  "updated": "2026-05-11T20:07:36.989Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
