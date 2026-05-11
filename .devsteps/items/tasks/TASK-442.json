@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Validate naming composition matrix and double-prefix guard",
-  "status": "planned",
+  "status": "blocked",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-04T22:38:47.033Z",
-  "updated": "2026-04-04T22:46:48.051Z",
+  "updated": "2026-05-11T20:18:46.309Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/mcp-server/src/tools",

@@ -3,10 +3,10 @@
   "type": "task",
   "category": "general",
   "title": "Resolve VS Code-side behavior clarification and decision gate",
-  "status": "planned",
+  "status": "blocked",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-04T22:38:47.035Z",
-  "updated": "2026-04-04T22:46:54.292Z",
+  "updated": "2026-05-11T20:18:46.311Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
     "packages/extension",
