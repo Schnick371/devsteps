@@ -83,10 +83,10 @@ export function getBurndownChartScript(burndown: BurndownData): string {
       }
       
       // Draw ideal line (dashed)
-      plotLine(ideal, '#4caf50', true);
+      plotLine(ideal, getComputedStyle(document.body).getPropertyValue('--vscode-charts-green').trim() || '#4caf50', true);
       
       // Draw actual line (solid)
-      plotLine(actual, '#2196f3', false);
+      plotLine(actual, getComputedStyle(document.body).getPropertyValue('--vscode-charts-blue').trim() || '#2196f3', false);
       
       // Draw legend
       ctx.fillStyle = 'var(--vscode-editor-foreground, #ccc)';
@@ -94,7 +94,7 @@ export function getBurndownChartScript(burndown: BurndownData): string {
       ctx.fillText('— Ideal', width - 100, 20);
       ctx.fillText('— Actual', width - 100, 35);
       
-      ctx.strokeStyle = '#4caf50';
+      ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--vscode-charts-green').trim() || '#4caf50';
       ctx.setLineDash([5, 5]);
       ctx.beginPath();
       ctx.moveTo(width - 120, 16);
@@ -102,7 +102,7 @@ export function getBurndownChartScript(burndown: BurndownData): string {
       ctx.stroke();
       
       ctx.setLineDash([]);
-      ctx.strokeStyle = '#2196f3';
+      ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--vscode-charts-blue').trim() || '#2196f3';
       ctx.beginPath();
       ctx.moveTo(width - 120, 31);
       ctx.lineTo(width - 105, 31);
