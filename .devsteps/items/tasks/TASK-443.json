@@ -3,15 +3,13 @@
   "type": "task",
   "category": "general",
   "title": "Regenerate canonical MCP tool inventory and reconcile scope",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "not-urgent-important",
   "created": "2026-04-04T22:38:47.034Z",
-  "updated": "2026-04-04T22:46:54.292Z",
+  "updated": "2026-05-11T20:18:33.015Z",
   "author": "the@devsteps.dev",
   "affected_paths": [
-    "packages/mcp-server/src/tools",
-    "packages/shared/src",
-    "docs"
+    "docs/architecture/mcp-tool-inventory.md"
   ],
   "linked_items": {
     "implements": [
