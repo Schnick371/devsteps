@@ -79,11 +79,9 @@ Execute multi-hour autonomous sprint sessions on planned backlog via analyst man
 
 ---
 
-## Pre-Sprint Clarification (once — then autonomous)
+## Pre-Sprint Analysis (MANDATORY — once per sprint session)
 
 Use `#askQuestions` once: confirm scope and tag/focus filter. Triage tier, ring selection, dispatch order are coordinator-autonomous — NEVER ask user. Then run autonomously until a Pause Trigger fires.
-
-## Pre-Sprint Analysis (MANDATORY — once per sprint session)
 
 ### Step 1: Backlog Discovery
 
@@ -97,15 +95,11 @@ Use `#askQuestions` once: confirm scope and tag/focus filter. Triage tier, ring 
 - Sprint has ≥5 items OR spans ≥3 modules, OR
 - Inline pre-scan reveals cross-item risk signals (shared module touched by ≥2 items, migration, schema change)
 
-For small focused sprints (≤4 items, ≤2 modules): proceed with inline-only Sprint Brief → per-item pre-scan gates replace batch risk analysis.
-
-Read via `read_mandate_results` (risk) + `read_analysis_envelope` (context) when dispatched. Add `analyst-archaeology` only when git history analysis is needed.
+For small focused sprints (≤4 items, ≤2 modules): proceed with inline-only Sprint Brief — per-item pre-scan gates replace batch risk analysis. Read via `read_mandate_results` (risk) + `read_analysis_envelope` (context) when dispatched. Add `analyst-archaeology` only when git history analysis is needed.
 
 ### Step 3: Obsolescence Check
 
 Per item: code gone → `obsolete`; scope drifted → update; branch conflict → `blocked`; else → `planned`.
-
----
 
 ## Per-Item Sprint Loop
 
@@ -122,9 +116,7 @@ Read item's `affected_paths` directly (≤8 files). Check: CLEAR path (→ skip 
 | FULL        | Schema change, cross-package | `analyst-context` + `analyst-internal` + `analyst-risk` + `analyst-quality` + `analyst-archaeology` + `analyst-web` | + `aspect-staleness` + `aspect-quality`             |
 | COMPETITIVE | "Which approach?" in item    | `analyst-research` + `analyst-internal` + `analyst-web` + `analyst-context`                                         | `aspect-constraints` + `aspect-staleness`           |
 
-> **Read split:** `read_mandate_results` for archaeology/risk/quality/research · `read_analysis_envelope(report_path)` for context/internal/web
-> **`analyst-archaeology`** dispatched at FULL tier or when git history analysis is needed (reverts, blame, recent structural changes).
-> **Documentation Sprint override:** When work-type = `documentation` or session classified as "Documentation Sprint", add `analyst-diataxis` to Ring 1 (parallel) and dispatch `exec-doc-diataxis` instead of `exec-doc` in Ring 4. See `sdevsteps-diataxis-sprint` skill for full dispatch chain.
+> **Read split:** `read_mandate_results` for archaeology/risk/quality/research · `read_analysis_envelope(report_path)` for context/internal/web. **`analyst-archaeology`** dispatched at FULL tier or when git history analysis is needed. **Documentation Sprint override:** when classified as Documentation Sprint, add `analyst-diataxis` to Ring 1 and dispatch `exec-doc-diataxis` instead of `exec-doc` in Ring 4 (see `sdevsteps-diataxis-sprint` skill).
 
 **2.** Dispatch Ring 1 mandates — emit ALL in ONE tool-call batch (single response turn — same JSON tool-call array). NEVER call one `runSubagent`, wait for result, then call the next. Use DPF from ADP §2.
 
@@ -136,10 +128,7 @@ Read item's `affected_paths` directly (≤8 files). Check: CLEAR path (→ skip 
 
 ## Dispatch Prompt Format
 
-Use Dispatch Prompt Format (DPF) from [AGENT-DISPATCH-PROTOCOL.md §2](./AGENT-DISPATCH-PROTOCOL.md). Every `runSubagent` call MUST include the structured prompt — agents are Context-Isolated (CIS). **FULL tier only:** Before Ring 1 dispatch for each item, run ≤3 targeted searches on affected_paths, select ≤8 most-relevant paths, and append `Relevant files: {path1, ...}` to all Ring 1, Ring 2, and Ring 3 DPFs.
-
-### Scope-Split Fan-Out
-See [ADP §1 — I-13 and I-14](./AGENT-DISPATCH-PROTOCOL.md) for triggers, write-path constraints, MAX_SPLIT=4 concern-split guard, and synthesis responsibilities.
+Use Dispatch Prompt Format (DPF) from [AGENT-DISPATCH-PROTOCOL.md §2](./AGENT-DISPATCH-PROTOCOL.md). Every `runSubagent` call MUST include the structured prompt — agents are Context-Isolated (CIS). **FULL tier only:** Before Ring 1 dispatch for each item, run ≤3 targeted searches on affected_paths, select ≤8 most-relevant paths, and append `Relevant files: {path1, ...}` to all Ring 1, Ring 2, and Ring 3 DPFs. Scope-split fan-out: see [ADP §1 — I-13 and I-14](./AGENT-DISPATCH-PROTOCOL.md) for triggers, write-path constraints, MAX_SPLIT=4 concern-split guard, and synthesis responsibilities.
 
 ---
 
@@ -147,14 +136,10 @@ See [ADP §1 — I-13 and I-14](./AGENT-DISPATCH-PROTOCOL.md) for triggers, writ
 
 ESCALATED · Architecture decision · HIGH_RISK cross-package · Context >70% → status `in-progress`, write blockers to `.devsteps/analysis/[ID]/sprint-pause.md`, `#askQuestions` with options.
 
----
-
 ## DevSteps Integration
 
-- **NEVER edit `.devsteps/` directly** — `devsteps/*` MCP tools only
-- **DevSteps MCP on `main` only** — set `in-progress` on main → `git checkout -b story/<ID>` → code commits → checkout main → merge `--no-ff` → set `done`
-- Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>` — Commit: `type(scope): subject` + `Implements: ID`
-- Status: `in-progress` → `review` → `done` (never skip) — I-11: delegate follow-up adds + all links to `worker-devsteps`
+- **NEVER edit `.devsteps/` directly** — `devsteps/*` MCP tools only. **DevSteps MCP on `main` only**: set `in-progress` on main → `git checkout -b story/<ID>` → code commits → checkout main → merge `--no-ff` → set `done`.
+- Branches: `story/<ID>`, `task/<ID>`, `bug/<ID>`. Commit: `type(scope): subject` + `Implements: ID`. Status: `in-progress` → `review` → `done` (never skip) — I-11: delegate follow-up adds + all links to `worker-devsteps`.
 
 ## Post-Completion Gate (MANDATORY)
 

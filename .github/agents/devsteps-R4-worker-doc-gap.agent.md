@@ -94,14 +94,7 @@ For each `gap` entry:
 }
 ```
 
-**Title conventions:**
-
-| Diataxis type | Label |
-| ------------- | ----- |
-| `tutorial` | Tutorial |
-| `how-to` | How-To Guide |
-| `reference` | Reference |
-| `explanation` | Explanation |
+**Title format:** `<SubsystemName> — <Tutorial|How-To Guide|Reference|Explanation>`
 
 For `partial` entries (item exists but is empty): **update** with `append_description` noting the placeholder state — do NOT create a duplicate.
 
@@ -148,16 +141,4 @@ For `partial` entries (item exists but is empty): **update** with `append_descri
 
 ## Output Contract
 
-Write result as chat response only — no `write_mandate_result` needed. Return the JSON block from Phase 5 as a fenced code block in chat, followed by a human-readable summary table.
-
-Example summary table:
-
-```
-| Subsystem   | Tutorial | How-To | Reference | Explanation |
-|-------------|----------|--------|-----------|-------------|
-| cli         | ✅       | ✅     | 🔲→DOC-087 | ✅          |
-| mcp-server  | 🔲→DOC-088 | ✅   | ✅        | ⚠️ DOC-023  |
-| extension   | 🔲→DOC-089 | 🔲→DOC-090 | ✅   | ✅      |
-```
-
-Legend: ✅ = covered · 🔲 = placeholder created (+ new ID) · ⚠️ = partial (stale draft)
+Write result as chat response only — no `write_mandate_result` needed. Return the JSON block from Phase 5 as a fenced code block in chat, followed by a human-readable coverage matrix table (rows = subsystems, cols = Diataxis types). Legend: ✅ covered · 🔲 placeholder created (+ new ID) · ⚠️ partial (stale draft).
