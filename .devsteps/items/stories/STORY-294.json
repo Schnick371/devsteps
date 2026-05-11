@@ -3,10 +3,10 @@
   "type": "story",
   "category": "general",
   "title": "Add optional scope_shard field to write_analysis_report MCP schema",
-  "status": "planned",
+  "status": "done",
   "eisenhower": "urgent-important",
   "created": "2026-05-11T13:04:18.083Z",
-  "updated": "2026-05-11T13:04:33.312Z",
+  "updated": "2026-05-11T13:39:54.531Z",
   "author": "the@devsteps.dev",
   "affected_paths": [],
   "linked_items": {
