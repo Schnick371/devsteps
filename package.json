@@ -5,9 +5,6 @@
   "private": true,
   "packageManager": "pnpm@10.9.0",
   "type": "module",
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
     "build": "pnpm -r run build",
     "build:ordered": "pnpm --filter @schnick371/devsteps-shared run build && pnpm --filter @schnick371/devsteps-cli run build && pnpm --filter @schnick371/devsteps-mcp-server run build && pnpm --filter devsteps run build",
@@ -22,7 +19,7 @@
     "package:mcp": "mkdir -p dist/mcp && cd packages/mcp-server && pnpm pack --pack-destination ../../dist/mcp",
     "package:extension": "mkdir -p dist/extension && cd packages/extension && pnpm run package && mv *.vsix ../../dist/extension/",
     "package:extension:next": "mkdir -p dist/extension && cd packages/extension && pnpm run package:next && mv *prerelease.vsix ../../dist/extension/ 2>/dev/null; mv *.vsix ../../dist/extension/ 2>/dev/null || true",
-    "package:all": "pnpm run build:ordered && pnpm run package:mcp && pnpm run package:extension && mkdir -p dist && cp INSTALL.md dist/ && cp README.md dist/ && echo '✅ Distribution packages ready in dist/'",
+    "package:all": "pnpm run build:ordered && pnpm run package:mcp && pnpm run package:extension && mkdir -p dist && cp INSTALL.md dist/ && cp README.md dist/ && echo '\u2705 Distribution packages ready in dist/'",
     "migrate:index": "tsx scripts/migrate-index.ts",
     "rollback:index": "tsx scripts/rollback-index.ts"
   },
