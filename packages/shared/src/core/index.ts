@@ -82,6 +82,7 @@ export {
   type SplitEntry,
   validateSession,
   validateSessionToken,
+  withSessionLock,
   writeSession,
 } from './import-session.js';
 // Index rebuild operations
