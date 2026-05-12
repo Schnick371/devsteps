@@ -14,6 +14,7 @@ import {
   type DiataxisType,
   type SplitEntry,
   validateSession,
+  withSessionLock,
   writeSession,
 } from '@schnick371/devsteps-shared';
 import { getWorkspacePath } from '../workspace.js';
@@ -46,77 +47,87 @@ export default async function devstepsDocsClassifyConfirmHandler(args: Record<st
     }
   }
 
-  const validation = await validateSession(devstepsDir, sessionId, token);
-  if ('error' in validation) {
-    return { success: false, error: validation.error };
+  // Auth validation (outside lock — token check only, no state mutation)
+  const authCheck = await validateSession(devstepsDir, sessionId, token);
+  if ('error' in authCheck) {
+    return { success: false, error: authCheck.error };
   }
-  const session = validation.session;
 
-  // Idempotency: if already confirmed, return current state
-  const existing = session.classified.find((c) => c.path === filePath);
-  if (existing) {
+  // Serialise concurrent read-modify-write on the session file
+  return withSessionLock(devstepsDir, sessionId, async () => {
+    // Re-read inside the lock to get the latest state
+    const validation = await validateSession(devstepsDir, sessionId, token);
+    if ('error' in validation) {
+      return { success: false, error: validation.error };
+    }
+    const session = validation.session;
+
+    // Idempotency: if already confirmed, return current state
+    const existing = session.classified.find((c) => c.path === filePath);
+    if (existing) {
+      return {
+        success: true,
+        path: filePath,
+        decision: existing.decision,
+        pending_count: session.pending.length,
+        classified_count: session.classified.length,
+        next_steps:
+          session.pending.length > 0
+            ? [
+                `${session.pending.length} file(s) remaining. Continue with devsteps_docs_classify for the next file: ${session.pending[0]} — use the same session_id and token.`,
+              ]
+            : [
+                'All files classified. Review the session with devsteps_docs_bom_status (session_id, token), then finalise with devsteps_docs_bom_commit.',
+              ],
+      };
+    }
+
+    // Record decision
+    const entry: ClassifiedEntry = {
+      path: filePath,
+      decision,
+      diataxis_type: diataxisType,
+      scores: {
+        tutorial: 0,
+        'how-to': 0,
+        reference: 0,
+        explanation: 0,
+        architecture: 0,
+        research: 0,
+      },
+      mixed: false,
+      splits,
+    };
+    session.classified.push(entry);
+
+    // Remove from pending
+    session.pending = session.pending.filter((p) => p !== filePath);
+
+    // Update status
+    if (session.pending.length === 0) {
+      session.status = 'review';
+    }
+
+    await writeSession(devstepsDir, session);
+
+    const nextSteps: string[] = [];
+    if (session.pending.length > 0) {
+      nextSteps.push(
+        `${session.pending.length} file(s) remaining. Continue with devsteps_docs_classify for the next file: ${session.pending[0]} — use the same session_id and token.`
+      );
+    } else {
+      nextSteps.push(
+        'All files classified. Review the session with devsteps_docs_bom_status (session_id, token), then finalise with devsteps_docs_bom_commit.'
+      );
+    }
+
     return {
       success: true,
       path: filePath,
-      decision: existing.decision,
+      decision,
       pending_count: session.pending.length,
       classified_count: session.classified.length,
-      next_steps:
-        session.pending.length > 0
-          ? [
-              `${session.pending.length} file(s) remaining. Continue with devsteps_docs_classify for the next file: ${session.pending[0]} — use the same session_id and token.`,
-            ]
-          : [
-              'All files classified. Review the session with devsteps_docs_bom_status (session_id, token), then finalise with devsteps_docs_bom_commit.',
-            ],
+      next_steps: nextSteps,
     };
-  }
-
-  // Record decision
-  const entry: ClassifiedEntry = {
-    path: filePath,
-    decision,
-    diataxis_type: diataxisType,
-    scores: {
-      tutorial: 0,
-      'how-to': 0,
-      reference: 0,
-      explanation: 0,
-      architecture: 0,
-      research: 0,
-    },
-    mixed: false,
-    splits,
-  };
-  session.classified.push(entry);
-
-  // Remove from pending
-  session.pending = session.pending.filter((p) => p !== filePath);
-
-  // Update status
-  if (session.pending.length === 0) {
-    session.status = 'review';
-  }
-
-  await writeSession(devstepsDir, session);
-
-  const nextSteps: string[] = [];
-  if (session.pending.length > 0) {
-    nextSteps.push(
-      `${session.pending.length} file(s) remaining. Continue with devsteps_docs_classify for the next file: ${session.pending[0]} — use the same session_id and token.`
-    );
-  } else {
-    nextSteps.push(
-      'All files classified. Review the session with devsteps_docs_bom_status (session_id, token), then finalise with devsteps_docs_bom_commit.'
-    );
-  }
-
-  return {
-    success: true,
-    path: filePath,
-    decision,
-    pending_count: session.pending.length,
-    classified_count: session.classified.length,
-    next_steps: nextSteps,
-  };
+  });
 }

@@ -19,6 +19,7 @@ import {
   readSession,
   validateSession,
   validateSessionToken,
+  withSessionLock,
   writeSession,
 } from './import-session.js';
 
@@ -191,6 +192,57 @@ describe('import-session', () => {
       await writeSession(devstepsDir, session);
       const result = await validateSession(devstepsDir, session.session_id, token);
       expect('error' in result).toBe(true);
+    });
+  });
+
+  describe('withSessionLock', () => {
+    it('serialises concurrent read-modify-write — all entries survive', async () => {
+      const files: ImportSessionFile[] = [
+        { path: 'a.md', excerpt: '', size_bytes: 0, last_modified: '' },
+        { path: 'b.md', excerpt: '', size_bytes: 0, last_modified: '' },
+        { path: 'c.md', excerpt: '', size_bytes: 0, last_modified: '' },
+      ];
+      const { session, token } = await createSession(devstepsDir, 'docs', files);
+      const { session_id } = session;
+
+      // Fire 3 concurrent classify ops on the same session
+      await Promise.all(
+        files.map((f) =>
+          withSessionLock(devstepsDir, session_id, async () => {
+            const s = (await readSession(devstepsDir, session_id))!;
+            s.classified.push({
+              path: f.path,
+              decision: 'accept',
+              diataxis_type: 'explanation',
+              scores: { tutorial: 0, 'how-to': 0, reference: 0, explanation: 1, architecture: 0, research: 0 },
+              mixed: false,
+            });
+            s.pending = s.pending.filter((p) => p !== f.path);
+            await writeSession(devstepsDir, s);
+          })
+        )
+      );
+
+      const final = (await readSession(devstepsDir, session_id))!;
+      const classifiedPaths = final.classified.map((c) => c.path).sort();
+      expect(classifiedPaths).toEqual(['a.md', 'b.md', 'c.md']);
+      expect(final.pending).toHaveLength(0);
+    });
+
+    it('releases lock even when the callback throws', async () => {
+      const { session } = await createSession(devstepsDir, 'docs', []);
+      const { session_id } = session;
+
+      await expect(
+        withSessionLock(devstepsDir, session_id, async () => {
+          throw new Error('callback failure');
+        })
+      ).rejects.toThrow('callback failure');
+
+      // Lock must be released — a second call must succeed without timing out
+      await expect(
+        withSessionLock(devstepsDir, session_id, async () => 'ok')
+      ).resolves.toBe('ok');
     });
   });
 });

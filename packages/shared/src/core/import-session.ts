@@ -9,7 +9,7 @@
  */
 
 import { createHmac, randomUUID, timingSafeEqual } from 'node:crypto';
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { constants, mkdir, open, readdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import type { DiataxisType, ScoreVector } from './heuristic-classify.js';
 
@@ -131,6 +131,67 @@ export async function writeSession(devstepsDir: string, session: ImportSession):
     JSON.stringify(session, null, 2),
     'utf-8'
   );
+}
+
+// ── Session locking ─────────────────────────────────────
+
+function lockPath(devstepsDir: string, sessionId: string): string {
+  return sessionPath(devstepsDir, sessionId).replace(/\.json$/, '.lock');
+}
+
+async function acquireLock(
+  path: string,
+  maxWaitMs = 2000,
+  retryIntervalMs = 50
+): Promise<() => Promise<void>> {
+  const deadline = Date.now() + maxWaitMs;
+  for (;;) {
+    try {
+      const fd = await open(path, constants.O_WRONLY | constants.O_CREAT | constants.O_EXCL);
+      await fd.close();
+      return async () => {
+        try {
+          await unlink(path);
+        } catch {
+          // ignore: lock file already removed
+        }
+      };
+    } catch (err) {
+      if ((err as NodeJS.ErrnoException).code !== 'EEXIST') throw err;
+      if (Date.now() >= deadline) {
+        throw new Error(`Could not acquire session lock at ${path} within ${maxWaitMs}ms`);
+      }
+      await new Promise<void>((resolve) => setTimeout(resolve, retryIntervalMs));
+    }
+  }
+}
+
+/**
+ * Serialise concurrent read-modify-write operations on a session file.
+ *
+ * Acquires an exclusive `.lock` file alongside the session JSON. Inside the
+ * callback the session is re-read from disk (so the caller sees mutations
+ * applied by the previous lock holder) and the callback writes any changes
+ * via `writeSession`. The lock is released in a `finally` block.
+ *
+ * @example
+ * await withSessionLock(devstepsDir, sessionId, async () => {
+ *   const session = (await readSession(devstepsDir, sessionId))!;
+ *   session.classified.push(entry);
+ *   await writeSession(devstepsDir, session);
+ * });
+ */
+export async function withSessionLock<T>(
+  devstepsDir: string,
+  sessionId: string,
+  fn: () => Promise<T>
+): Promise<T> {
+  const release = await acquireLock(lockPath(devstepsDir, sessionId));
+  try {
+    return await fn();
+  } finally {
+    await release();
+  }
 }
 
 export async function findActiveSession(
