@@ -24,7 +24,7 @@
     "rollback:index": "tsx scripts/rollback-index.ts"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.7",
+    "@biomejs/biome": "^2.4.15",
     "@types/node": "^24.10.1",
     "bats": "^1.11.0",
     "bats-assert": "^2.1.0",
